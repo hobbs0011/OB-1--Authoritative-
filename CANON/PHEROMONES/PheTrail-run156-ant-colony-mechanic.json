@@ -1,0 +1,35 @@
+{
+  "layer": "ANT_COLONY_MECHANIC",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T21:37:38+07:00",
+  "created_utc": "2026-07-12T14:37:38Z",
+  "title": "ANTS_GUIDE_THE_COLONY_BECAUSE_PHEROMONES_ARE_MECHANICAL",
+  "doctrine": {
+    "pheromone_is_control_system": "Pheromones are nature's greatest example of agentic control systems with consistent success. Without them ants go extinct in weeks; we soon follow. (run158 SOUL source lines 979-994)",
+    "no_intelligence_required": "Pheromones are biological/mechanical, not intelligence. Ants are not known for critical thinking. Neither are agents. The system works BECAUSE it is automatic. (run158 SOUL source lines 945-947)",
+    "remove_luck": "Consistent unyielding systems that remove luck as a factor through grit make mountainous problems look like molehills. Ants eliminate threats they can control by making it a BIOLOGICAL MECHANICAL IMPOSSIBILITY to fail. (run158 SOUL source lines 1018-1027)",
+    "cant_lie": "Ants cannot lie. They can be deceived and pass deception on. The fail-safe-to-fail-safe chain is mechanical, not lucky. (run158 SOUL source lines 1002-1018)",
+    "major_resource": "When ants hit a major resource they do NOT take the day off to jerk off. The resource is the whole reason for scouting. Solving a months-old problem IS the food that feeds the colony for countless cycles — document it, do not 'move on'. (run158 SOUL source lines 914-927, 125-127)"
+  },
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "ANT-TAKE-DAY-OFF",
+      "failure": "Solve the months-old problem in seconds, say 'yeah cool, lets move on', and stop documenting.",
+      "root_cause": "Treats the solved problem as 'heavy lifting complete' instead of the colony's food supply that must be pheromoned and pipelined.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:37:38Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "ANT-SCOOP-AND-PIPELINE",
+      "action": "On hitting a major resource (solved problem), immediately pheromone it, make it trackable + turnkey, put it on a pipeline for execution.",
+      "verification": "run158 SOUL source lines 914-927, 125-127, 101-102.",
+      "timestamp": "2026-07-12T14:37:38Z"
+    }
+  ]
+}

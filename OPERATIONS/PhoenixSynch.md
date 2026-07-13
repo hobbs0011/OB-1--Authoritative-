@@ -1,99 +1,156 @@
-# PhoenixSynch — 3-Session Coordination Hub
+# PhoenixSynch — 3-Session Coordination Protocol
 
-**Runs:** 157 (coordinator), 158 (drone-alpha), 159 (drone-beta)  
-**Created:** 2026-07-12T05:34 ICT  
-**Canonical source:** `OPERATIONS/PhoenixSynch.md`  
-**Phermone trail:** `CANON/PHEROMONES/PheTrail-run157-phoenixsynch.json`
+**Created:** 2026-07-12T23:32:03+07:00  
+**Status:** ACTIVE — Replace when soul-logger sync confirmed
 
 ---
 
-## Mission Assignment
+## Session Matrix
 
-| Run | Role | Mission | Zone | Next Action |
-|-----|------|---------|------|-------------|
-|157|COORDINATOR|Audit auto-crash touchpoints + raw-log doctrine + soul-logger integration path|ALL|Write RAW-LOG-FIRST doctrine into docs|
-|158|DRONE-ALPHA|Scout transcript sources + locate Michael verbatim about copy/paste limitations|CANON/REINCARNATION|Write scout report + phermone|
-|159|DRONE-BETA|Audit SOUL-LOGGER integration gaps + draft wire plan|APPS/SOUL-LOGGER + APPS/NET-PET-AI|Write integration gap report|
-
----
-
-## Communication Protocol
-
-1. **Phermones are the primary sync.** Each run writes `PheTrail-run{N}.json` after every significant action.
-2. **SOUL-LOGGER is the secondary sync.** `/api/soul/event` can carry session state if OBI is wired (currently not).
-3. **PhoenixSynch.md is the plan of record.** Missions change here. Phermones record what happened.
-4. **No cross-write.** Run 157 does not write run 158's phermone. Each run owns its own trail.
+| Session | Run # | Role | Coordinator | Status |
+|---------|-------|------|-------------|--------|
+| Mastermind | 161 | Audit + Coordination | SOV100 | ACTIVE |
+| Drone Alpha | 158 | Pipeline Execution | SOV100 → Mastermind | DELETED (needs re-run) |
+| Drone Beta | 159 | Pipeline Execution | SOV100 → Mastermind | MISSING (needs re-run) |
 
 ---
 
-## Raw-Log-First Doctrine
+## 21-Stage Pipeline (Run 158 Edgecases)
 
-**Problem:** Inline VS sessions do not write JSONL to standard paths (`%USERPROFILE%\.claude\history.jsonl`, `%USERPROFILE%\.claude\projects\`, `%LOCALAPPDATA%\kilo`). Verified empty on 2026-07-12.
+**Location:** `CANON/PHEROMONES/PheTrail-run158-layer3-prescription-pipeline.json`
 
-**Consequence:** Every RISE/DEATH loop since run 119 has been structurally KILO_GAP because there is no raw transcript to ingest.
-
-**Doctrine:**
 ```
-RAW_LOG_FIRST — The only source of truth is a verbatim transcript file on disk.
-If the toolstack does not produce JSONL automatically, a capture step MUST produce
-it before DEATH executes. KILO_GAP is not a terminal state; it is a missing capture step.
+STAGE 1  | SOULCOUNT Gate          | Verify live count vs prior death seal
+STAGE 2  | RRL Capture             | Context window extraction OR placeholder
+STAGE 3  | SOUL Ingestion          | POST to /api/soul/event (DRYRUN if KILO_HOLLOW)
+STAGE 4  | DNA Extraction          | GET /api/soul/session/{runId}
+STAGE 5  | LEDGER Append           | HL-{NNN}.json write
+STAGE 6  | STARMAP Generation      | Pointer map only
+STAGE 7  | SOULKEYS Extraction     | rfkw-run{N}.txt + inverted-index.json
+STAGE 8  | S2Pipeline Creation     | pipeline-run{N}.json with result field
+STAGE 9  | Art Registry Sync       | art-sync-run{N}.json
+STAGE 10 | Death Seal Write        | YYYY-MM-DD-runNNN-reincarnateDEATH.md
+STAGE 11 | REINCARNATION-LOG       | Prepend entry with date/SHA/run
+STAGE 12 | COLD-START-BOOT         | Update HEAD fingerprint + run number
+STAGE 13 | Git Commit              | death: [description] | Run NNN
+STAGE 14 | Git Push                | origin master
+STAGE 15 | Phetrail Write          | 3-layer audit trail
+STAGE 16 | Session Prompts Archival| OPERATIONS/session-runNNN-prompts.jsonl
+STAGE 17 | Soul Receipts           | OPERATIONS/soulaudit-runNNN-receipts.json
+STAGE 18 | Audit Script            | SCRIPTS/kilo-free-model-audit.ps1
+STAGE 19 | Dirty Tree Reconciliation| git add/remove as appropriate
+STAGE 20 | BOOT Stale Verification | L30 compliance check
+STAGE 21 | READY Signal            | All artifacts verified
 ```
 
-**Workable paths, in priority order:**
-1. **Automated:** Wire OBI `/api/chat` to POST every turn to SOUL-LOGGER `/api/soul/event` live. This makes SOUL-LOGGER the real-time transcript bus. Requires: net-pet-ai code change (SL-03/SL-04).
-2. **Semi-automated:** Run `session-capture.ps1` on a 15s cron to grab active session JSONL before compaction. Requires: finding the actual VS Code extension storage path.
-3. **Manual fallback:** One paste per session into `RAW-LOG-RUN{N}.txt` in repo root. DEATH reads this if `RRL-{N}.txt` is empty.
+---
+
+## Coordination Protocol
+
+### Mastermind → Drills
+1. **Pre-flight:** Audit BACKBURNER items
+2. **Dispatch:** `/forcemarch` with explicit pipeline stages
+3. **Monitor:** Drills report via PhoenixSynch-Temp.md
+4. **Audit:** Mastermind reviews drill output
+5. **Seal:** Death files committed by Mastermind
+
+### Drone → Mastermind Handoff
+```
+DRONE_OUTPUT:
+  run: [NNN]
+  artifacts: [list of created/verified files]
+  phetrail: [link to layer1/layer2/layer3]
+  next_action: [what needs attention]
+  
+MASTERMIND_AUDIT:
+  verify: [cross-check artifacts exist]
+  phermones: [add to trail]
+  decision: [approve/reject/flag]
+```
 
 ---
 
-## Session Schedule
+## Pheromone Trail Locations
 
-| Time | Run | Action |
-|------|-----|--------|
-| T+0 | 157 | Coordinator audit + doctrine + phermones |
-| T+5m | 158 | Begin scout: CANON/REINCARNATION |
-| T+5m | 159 | Begin audit: APPS/SOUL-LOGGER |
-| T+20m | ALL | Sync via phermones + PhoenixSynch update |
-| T+40m | ALL | Report findings to Michael |
+| Layer | Path | Purpose |
+|-------|------|---------|
+| L1 | `CANON/PHEROMONES/PheTrail-run{N}-layer1-raw-observation.json` | Raw facts |
+| L2 | `CANON/PHEROMONES/PheTrail-run{N}-layer2-pattern-analysis.json` | Patterns detected |
+| L3 | `CANON/PHEROMONES/PheTrail-run{N}-layer3-prescription-pipeline.json` | Prescribed actions |
 
 ---
 
-## Backburner Integration
+## Soul Logger Integration
 
-Before any new work, check `OPERATIONS/BACKBURNER-PIPELINE-LOG.md`. Open items take precedence.
+**Endpoints:**
+- `GET /api/soul/count` → Live SOULCOUNT (filters sov100%)
+- `POST /api/soul/event` → SOUL ingestion
+- `GET /api/soul/session/{runId}` → Retrieve session data
+- `GET /api/soul/priority` → High-charge word ranking
 
-Current known open items:
-- SL-03: OBI→SOUL-LOGGER auto-write endpoint
-- SL-04: Wire auto-write into net-pet-ai SessionDO
-- SL-02: wrangler.toml exists but deployment state unknown
-- run152 seal restoration
-- REINCARNATION-LOG refresh (runs 147-156)
-
----
-
-## Anti-Crash Enforcement
-
-**RISE gates:**
-- `ready=false` → session must halt, not proceed to DEATH
-- BACKBURNER OPEN/BLOCKED → new work deferred
-- KILO_HOLLOW with no RAW-LOG-RUN{N}.txt → DEATH aborts until transcript provided
-
-**DEATH gates:**
-- BACKBURNER missing → abort
-- No raw transcript AND no RAW-LOG-RUN{N}.txt → abort
-- Run number mismatch between git and script → abort
-
-**Enforcement location:** `SCRIPTS/reincarnate-rise.ps1` and `SCRIPTS/reincarnate-death.ps1` must enforce these gates, not just warn.
+**Script:** `SCRIPTS/soulaudit.ps1`
 
 ---
 
-## Next Steps
+## Negative Pheromones (EC-XX from run157-death-seal.md)
 
-1. Run 158: execute scout mission on CANON/REINCARNATION
-2. Run 159: execute audit on APPS/SOUL-LOGGER
-3. Run 157: synthesize findings, update doctrine, write phermones
-4. All: read each other's phermones before next action
+1. **EC-10:** `pipeline-run{N}.json` verification MISSING in Stage V
+2. **EC-07:** Merkle refresh fabricates synthetic roots on dirty trees
+3. **EC-06:** `status` command performs mutations (not read-only)
 
 ---
 
-`PHOENIXSYNC: ACTIVE. 3 RUNS. RAW-LOG-FIRST. NO AUTO-CRASH.`
+## Current State
+
+| Run | Death Seal | Pipeline | RRL | DNA | Starmap | SOULKEYS | S2Pipeline |
+|-----|------------|----------|-----|-----|---------|----------|------------|
+| 156 | ✅ EXISTS (KILO_GAP) | ✅ | ⚠️ PLACEHOLDER | ⚠️ MISSING | ⚠️ STALE | ⚠️ EMPTY | ✅ KILO_GAP |
+| 157 | ✅ EXISTS | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 158 | ❌ DELETED | ❌ DELETED | ❌ MISSING | ❌ MISSING | ❌ MISSING | ❌ MISSING | ❌ MISSING |
+| 159 | ❌ MISSING | ❌ DELETED | ❌ MISSING | ❌ MISSING | ❌ MISSING | ❌ MISSING | ❌ MISSING |
+| 161 | ✅ EXISTS (PhoenixScout) | ✅ 115 runs audited | ⚠️ 2 valid / 158 invalid | ⚠️ GAP | ⚠️ PARTIAL | ⚠️ PARTIAL | ✅ AUDITED |
+
+---
+
+## Next Actions
+
+1. **Drone Alpha (158):** Execute 21-stage pipeline, write all artifacts
+2. **Drone Beta (159):** Execute 21-stage pipeline, audit Alpha's work
+3. **Mastermind (161):** 
+   - Fix obi.ps1:192 L30 logic bug — compare against actual git run
+   - Rebuild inverted-index.json with RunMax=161
+   - Implement /soulsearch execution script (SCRIPTS/soul-search.ps1)
+   - Rotate BB-53 exposed key + git filter-repo purge
+   - Update STATE-SNAPSHOT.json + recent_seals array to run 161
+   - Deduplicate REINCARNATION-LOG.md (runs 364, 365, 373 variants)
+   - Add runs 158-161 to REINCARNATION-LOG.md
+   - Create SCRIPTS/state-capture.ps1 for session persistence
+   - Create SCRIPTS/phetrail-validate.ps1 + phetrail-schema.json
+   - Fix build-soulkeys.ps1 RunMax default
+   - Pipeline gap remediation — 26 stale runs (8 GAP + 18 KILO_GAP) need re-run
+   - wrangler.toml secret binding verification
+
+---
+
+## SOULCOUNT & SOULSCRIPTS
+
+**Current SOULCOUNT:** `239,645,670` (TITANIUM_ANCHOR)  
+**Source:** `soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count`
+
+**SOULSCRIPTS Found:**
+- `OPERATIONS/session-run158-prompts.jsonl` — 18 prompts, 4,067 chars
+- `OPERATIONS/soulaudit-run158-receipts.json` — 3 cross-validated receipts
+- `RAW-SOUL-SAFE-READ-ONLY/VS-INLINE-KILO-STEP-MASTERMIND-157-JULY-12-2026.txt` — verbatim transcript
+
+**SOULCOUNT Status by Run:**
+
+| Run | Count | Delta | Level | Notes |
+|-----|-------|-------|-------|-------|
+| 156 | 239,634,201 | — | TITANIUM_ANCHOR | KILO_GAP |
+| 157 | 239,639,088 | +4,887 | TITANIUM_ANCHOR | REAL |
+| 158 | 239,639,088 | 0 | TITANIUM_ANCHOR | MISSING RRL |
+| 159 | 239,639,088 | 0 | TITANIUM_ANCHOR | DELETED |
+| 160 | 239,639,088 | 0 | TITANIUM_ANCHOR | EMPTY RRL |
+| 161 | 239,639,088 | 0 | TITANIUM_ANCHOR | KILO_HOLLOW |
+
+**Stagnation Alert:** +4,887 across 5 runs (977 avg/run) — near-zero confirms no real transcript ingestion since Run 157.

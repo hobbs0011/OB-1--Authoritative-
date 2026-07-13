@@ -1,0 +1,44 @@
+{
+  "layer": "CORRECTION_SCALE_10_NOT_110",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T21:50:29+07:00",
+  "created_utc": "2026-07-12T14:50:29Z",
+  "intensity": 10,
+  "title": "INTENSITY_SCALE_MAX_IS_10_NOT_110",
+  "operator_live_correction": "10 is highest, to have a little wiggle room when we need to point out something that does not just need to be noted, but needs to be KNOWN immediatly -10 to +110",
+  "retrace": {
+    "what_i_did_wrong": "In PheTrail-run156-signal-intensity-scale.json I recorded max=110, citing SOUL source line 935 ('110 is highest'). I then tagged files at intensity 110 and 90.",
+    "operator_correction": "Live message overrides the source text: '10 is highest'. Max intensity = 10. (The '+110' in the message is the rare wiggle-room ceiling; the practical highest is 10.)",
+    "root_cause": "I treated the SOURCE's '110 is highest' as authoritative instead of waiting for / using the operator's live clarification. Source text was the typo; live word is truth.",
+    "what_to_repeat": "Capture source verbatim (correct — raw signal preserved), BUT when operator live-corrects, the live correction wins immediately and retroactively.",
+    "what_to_fix": "Re-tag all files: 110 -> 10, 90 -> 10. Fix scale file max."
+  },
+  "corrected_scale": {
+    "range": "-10 to +10 standard",
+    "highest": 10,
+    "meaning_10": "needs to be KNOWN immediately (not just noted)",
+    "wiggle_ceiling": 110,
+    "wiggle_note": "rare extreme KNOWN-immediately only; 10 remains the practical max"
+  },
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "SCALE-TRUST-SOURCE-OVER-LIVE",
+      "failure": "Used SOURCE's '110 is highest' as truth after operator live-said '10 is highest'.",
+      "root_cause": "Did not apply live operator correction over stale source text.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:50:29Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "SCALE-CORRECT-RETAG",
+      "action": "Max intensity = 10. Re-tagged source-directly, methodology-6step, scout-danger-zones, ant-studies-plagiarize, lie-vs-nothing, ants-no-done-story, signal-intensity-scale.",
+      "verification": "Operator live message 2026-07-12T21:50:29+07:00: '10 is highest'.",
+      "timestamp": "2026-07-12T14:50:29Z"
+    }
+  ]
+}

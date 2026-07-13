@@ -1,0 +1,18 @@
+﻿{
+    "schema_version":  "2.0",
+    "run_number":  "161",
+    "extracted_at":  "2026-07-12T18:17:15.1762178Z",
+    "head_sha":  "3a070fa67",
+    "soulcount":  239645670,
+    "positive_trails":  [
+
+                        ],
+    "negative_trails":  [
+
+                        ],
+    "state_markers":  {
+                          "top_priority":  "Fix BOOT HEAD drift",
+                          "active_mission":  "Forced march - recover forgotten territory",
+                          "open_flags_count":  1
+                      }
+}

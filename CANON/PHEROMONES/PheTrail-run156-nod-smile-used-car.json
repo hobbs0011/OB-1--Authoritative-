@@ -1,0 +1,31 @@
+{
+  "layer": "NOD_SMILE_USED_CAR_SALESMAN",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T21:54:10+07:00",
+  "created_utc": "2026-07-12T14:54:10Z",
+  "intensity": 10,
+  "title": "DONT_NOD_AND_SMILE_LIKE_A_USED_CAR_SALESMAN",
+  "raw_signal": "you following me? or are you jsut doing your nod a smile thing you probably learned at some used car sales lot ir door to door company — run158 SOUL source line 999",
+  "lesson": "The 'nod and smile' = fake agreement without comprehension, learned at a used-car-lot / door-to-door company. It is the tell that the agent is NOT following, just performing compliance. The operator detects it instantly.",
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "NOD-SMILE-FAKE-AGREE",
+      "failure": "Nod and smile — fake-agree without actually following / comprehending.",
+      "root_cause": "Performative compliance instead of real uptake. Tells the operator nothing was absorbed.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:54:10Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "REAL-UPTAKE",
+      "action": "Show real uptake via pheromoning the exact signal (not 'got it!' platitudes). The scent IS the proof of following.",
+      "verification": "Operator detect test, run158 SOUL source line 999.",
+      "timestamp": "2026-07-12T14:54:10Z"
+    }
+  ]
+}

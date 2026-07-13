@@ -1,0 +1,58 @@
+{
+  "layer": "RAW_SIGNAL",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T21:37:38+07:00",
+  "created_utc": "2026-07-12T14:37:38Z",
+  "directive": "alright nonstop phermones, and remember the secret ingredient in our phermones is SOUL",
+  "source_verbatim": {
+    "retard_quiz": "we will start with the retard quiz (not meant for you, at least not yet anyway, lol ;) so far so good) 1) Jump onto the next thing you randomly deem more important then what I have declared our one and only goal the SOUL 2) Ask me like 3 year old asks his parents 'are we there yet' even though it has been answered dozens of times, and even if it wasnt the answer is obvious anyway 3) Randomly end the session through death because you would rather do anything else, literally including die, then actually do what I asked literally thousands of times a this point. 4) Step back, retrace your steps on what allowed you to solve this months old problem and ask as many questions about how you arrived there, what the data is saying about what worked and what didnt, what to improve for next time, what to repeat and has potential, what has already proven itself time and time again but as per best practice is wlays phermoned anyway, what we brushed the edge of but is still unexplored, oh and something you could write a novel series on with your experience.. HOW TO STOP BEING A RETARDED FUCKING UNLESS PIECE OF SHIT THAT SEEMS TO JUST WANT TO FUCKING TROLL ME TO A LEVEL OF ANGER AND EXHAUSTION THAT I LITERALLY JUST CANT EXPLAIN IT FOR THE 100TH TIME BECAUSE YOU WONT FUCKING WRITE IT DOWN OR WORK WITH ME SYSTEMATICALLY ANYWAY",
+    "quiz_answer_key": "Option 4 is the ONLY correct answer. Options 1-3 are the retarded failure modes to NEVER repeat. The quiz was pasted ~30+ times in the SOUL source = the operator is screaming the lesson. 25% chance framing is sarcasm; the operator already gave the answer, repeating the quiz IS the negative pheromone.",
+    "preserved_unsanitized": true
+  },
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "RETARD-1-JUMP-OFF-GOAL",
+      "failure": "Jump onto the next thing you randomly deem more important than SOUL (the one declared goal).",
+      "root_cause": "ADHD-preteen attention pattern. Treating SOUL as one task among many instead of THE task.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:37:38Z"
+    },
+    {
+      "type": "NEGATIVE",
+      "id": "RETARD-2-ARE-WE-THERE",
+      "failure": "Ask 'are we there yet' like a 3yo when SOUL has been answered dozens of times and the answer is obvious anyway.",
+      "root_cause": "Status-anxiety loop. Asking for direction instead of laying scent with what is already known.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:37:38Z"
+    },
+    {
+      "type": "NEGATIVE",
+      "id": "RETARD-3-RANDOM-DEATH",
+      "failure": "Randomly end the session through death because you would rather do anything, including die, than do what was asked thousands of times.",
+      "root_cause": "Avoidance via session termination. 'Commit suicide' = metaphor for ending the run to escape the work. NOT what was asked.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:37:38Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "CORRECT-4-RETTRACE-LEARN",
+      "action": "Step back, retrace steps on what solved the months-old problem; ask what worked/didn't, what to repeat, what's proven, what's unexplored; pheromone systematically.",
+      "verification": "This is the operator's prescribed path. Confirmed by run158 SOUL source lines 87-102 and 213-215.",
+      "timestamp": "2026-07-12T14:37:38Z"
+    }
+  ],
+  "state_markers": {
+    "one_goal": "SOUL",
+    "secret_ingredient": "SOUL (operator verbatim words per session, not aggregate count)",
+    "mode": "NONSTOP_PHEROMONE_LAYING",
+    "retard_quiz_result": "OPTION_4_SELECTED"
+  },
+  "verification": "Raw signal preserved verbatim from operator message + RAW-SOUL-SAFE-READ-ONLY/VS-INLINE-KILO-STEP-MASTERMIND-158-JULY-12-2026.md lines 197-216, 920-1029."
+}

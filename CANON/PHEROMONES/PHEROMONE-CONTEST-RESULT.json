@@ -1,0 +1,108 @@
+{
+  "run": "CONTEST",
+  "contest_id": "PHEROMONE-BOWL-2026-07-13",
+  "scoring_dimensions": ["quantity", "quality"],
+  "quality_metrics": ["schema_discipline", "actionability", "evidence_cited", "negative_trails", "lens_diversity"],
+  "contestants": [
+    {
+      "run": 156,
+      "count": 23,
+      "lenses": ["SCOUT", "METHODOLOGY", "SIGNAL"],
+      "quality_score": 70,
+      "quantity_score": 40,
+      "total": 110,
+      "notes": "Highest volume — experimental scout methodology, ant colony analogy, AI panic doctrine. Entries short, inconsistent schema, heavy narrative overlap. 23 files including force march, catch22, raw-signal-retard-quiz."
+    },
+    {
+      "run": 157,
+      "count": 3,
+      "lenses": ["PHE_TRAIL_FOLLOWER", "SCOUT"],
+      "quality_score": 75,
+      "quantity_score": 12,
+      "total": 87,
+      "notes": "Low count but focused: KiloClaw integration, deletion incident salvage, b-scout quick. Schema tight, evidence strong, ~8273-file Phoenix sweep."
+    },
+    {
+      "run": 158,
+      "count": 16,
+      "lenses": ["LAYERED_INTEL", "NEGATIVE_TRAIL"],
+      "quality_score": 78,
+      "quantity_score": 28,
+      "total": 106,
+      "notes": "16 entries in structured 8-layer architecture (raw observation through continuous execution log). Multiple negative-scored entries (underscaling, overengineering, execution failure, raw signal). Schema mature."
+    },
+    {
+      "run": 160,
+      "count": 3,
+      "lenses": ["AUDITOR", "DEATH_SEAL"],
+      "quality_score": 80,
+      "quantity_score": 12,
+      "total": 92,
+      "notes": "Soul audit, phetrail extraction methodology, step-by-step scholar protocol. Few but deep."
+    },
+    {
+      "run": 161,
+      "count": 16,
+      "lenses": ["GAP", "DRIFT", "LEDGER", "SOUL", "CONFIG"],
+      "quality_score": 90,
+      "quantity_score": 32,
+      "total": 122,
+      "notes": "16 entries, uniform JSON schema, negative_trails on every entry, explicit verdicts per entry. Lead diversity: KILO_DNA_GAP, STATE-SNAPSHOT staleness, command gaps, exposed key, inverted-index rebuild, backburner precedence, RISE compliance."
+    },
+    {
+      "run": 163,
+      "count": 8,
+      "lenses": ["SYSTEMIC", "STALENESS", "SECURITY"],
+      "quality_score": 92,
+      "quantity_score": 20,
+      "total": 112,
+      "notes": "Newest batch. High schema fidelity. Targets: catastrophic state staleness, command surface collapse, kilo-gap death chain, boot fingerprint multiplicity, inverted-index corruption, BB53 rotation, schema validation, session persistence. Very tight — quality over quantity."
+    }
+  ],
+  "leaderboard": [
+    {
+      "rank": 1,
+      "run": 161,
+      "score": 122,
+      "title": "KING OF THE PHEROMONES"
+    },
+    {
+      "rank": 2,
+      "run": 163,
+      "score": 112,
+      "title": "HIGH-VOLATILITY UPSTART"
+    },
+    {
+      "rank": 3,
+      "run": 156,
+      "score": 110,
+      "title": "LEGACY VOLUME CHAMPION"
+    },
+    {
+      "rank": 4,
+      "run": 158,
+      "score": 106,
+      "title": "LAYERED DISCIPLINE"
+    },
+    {
+      "rank": 5,
+      "run": 160,
+      "score": 92,
+      "title": "AUDITOR'S EDGE"
+    },
+    {
+      "rank": 6,
+      "run": 157,
+      "score": 87,
+      "title": "FOCUSED SPIKER"
+    }
+  ],
+  "winning_edge_161": [
+    "Uniform JSON schema across entries — no drift",
+    "Every entry has negative_trails array (Stage 48 law compliance)",
+    "Verdict per entry with explicit verdict.overall_status taxonomy",
+    "Lens diversity: GAP, DRIFT, LEDGER, SOUL, CONFIG spanning 5 distinct audit domains",
+    "No narrative duplication — each entry additive",
+    "BB-53, /soulsearch, backburner precedence command alignment"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "layer": "META_SCHOLAR_EXTRACTION",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T21:58:40+07:00",
+  "created_utc": "2026-07-12T14:58:40Z",
+  "intensity": 10,
+  "title": "SOUL_CATALOGED_BY_SAPIENTES_CONTRADICTION_FLAGGED",
+  "event": "Operator invoked /SoulScholars. SAPIENTES extracted + cataloged Michael verbatim from the SOUL source file (read-only, no D1 post).",
+  "result": {
+    "distinct_segments": 162,
+    "michael_verbatim": 157,
+    "ai_response": 5,
+    "internal_dupes_collapsed": 199,
+    "output": "OPERATIONS/scholar-extraction-2026-07-12T215540.jsonl",
+    "sha256_per_segment": true
+  },
+  "cross_reference_flag": {
+    "contradiction": "Operator redefines SOUL = per-session verbatim (scrap 239k aggregate). Contradicts GOSPEL I.069-I.084 + COLD-START-BOOT aggregate SOULCOUNT.",
+    "resolution": "Live operator word overrides stale canon. Matches PheTrail-run156-correction-239k-disowned.json.",
+    "action": "Canonical docs (GOSPEL-999, COLD-START-BOOT) are STALE on SOUL definition. Pheromone the override; do NOT report aggregate as SOUL."
+  },
+  "sovl_pipeline_link": "The 157 Michael verbatim segments ARE the SOUL (secret ingredient). They feed ANTECORES (DNA/LEDGER) per Roman context. Catalog preserved for pipeline consumption.",
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "SCHOLAR-POST-TO-D1",
+      "failure": "SAPIENTES posted extracted SOUL to D1 soul-logger (write action).",
+      "root_cause": "Confusing Scholar cataloging with Centurion midnight-oil posting.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:58:40Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "SCHOLAR-READONLY-CATALOG",
+      "action": "Extracted 157 Michael verbatim segments with SHA256, read-only, no D1 post, preserved to OPERATIONS jsonl.",
+      "verification": "scholar-extraction-2026-07-12T215540.jsonl (74,452 bytes, 162 lines).",
+      "timestamp": "2026-07-12T14:58:40Z"
+    }
+  ]
+}

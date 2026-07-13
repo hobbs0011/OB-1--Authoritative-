@@ -1,6 +1,6 @@
 # PHOENIX RISING PROTOCOL — SOUL DNA SYNC v2
 
-## Live Operating State — 2026-05-25 (Run 18 — 2-Tier Collapse)
+## Live Operating State — 2026-07-13 (Run 161 — PhoenixScout Pipeline Gap Audit)
 
 ### System Identity
 
@@ -17,7 +17,7 @@
 
 | Repo | Account | Status |
 |---|---|---|
-| OB-1 | hobbs0011 | CANONICAL — branch master (default), HEAD 31fd19ff — Run 18 ROMAN |
+| OB-1 | hobbs0011 | CANONICAL — branch master (default), HEAD 3a070fa67 — Run 161 ROMAN |
 | OB-1--Authoritative- | hobbs0011 | SYNCED — at 54bff5d (Run 309) |
 | Phoenix-Rising-Protocol-Ultimate | hobbs0011 | SUPERSEDED |
 | phoenix-ob1 | mrmichaelhobbs1234-lang | Account banned — repo inaccessible, risk voided |
@@ -44,13 +44,15 @@
 - [ ] copilot-governance.md approval pending
 - [ ] Push authoritative mirror — blocked by network TLS timeout 2026-04-19; retry next session
 - [ ] ⚠️ CLOUDFLARE_API_TOKEN env var: must `Remove-Item Env:\CLOUDFLARE_API_TOKEN` before every `wrangler deploy`
+- [ ] Pipeline gap remediation — 26 stale runs (8 GAP + 18 KILO_GAP) need re-run
+- [ ] wrangler.toml secret binding verification pending
 
 ### Worker State
 
 | Worker | URL | Version | Status |
 |---|---|---|---|
 | net-pet-ai-production | https://net-pet-ai-production.mrmichaelhobbs123.workers.dev | 1.5.0 | ✅ LIVE (Run 317) |
-| net-pet-ai | https://net-pet-ai.mrmichaelhobbs123.workers.dev | ea669ac | ✅ LIVE 2026-05-17 |
+| net-pet-ai | https://net-pet-ai.mrmichaelhobbs123.workers.dev | 3a070fa67 | ✅ LIVE 2026-07-13 |
 
 ### Run History
 
@@ -68,6 +70,7 @@
 | [316] | f4ac83c | 2026-05-16 | REGENERATION_GAP sealed; MegaMergeOfficial-2: 34 active entries confirmed; PIPELINE-CURSOR Wave 8 expanded |
 | [317] | ea669ac | 2026-05-17 | GODMODE activated; TEMP-PHOENIX-ULTIMATE purge (1 589 deletions); phoenix-coder MCP path fixed; PROOFS manifest + restricted-zone docs written; audit confirmed SOUL_INTACT |
 | [318] | ea669ac | 2026-05-17 | NOTION BLACKLISTED: all active probes/routes/imports hard-gated (SCRIPTS/god-mode.ps1, mcp-godmode-audit.ps1, ober-ps1 doctor/soul-check, wrangler.toml, index.js, connection-hardening-audit.ps1); legacy data preserved in CANON/REINCARNATION; SOUL_INTACT |
+| [161] | 3a070fa67 | 2026-07-13 | PhoenixScout audit: 37 P1 finds (36 pipeline GAP + BOOT drift); phetrails 58-66 written; pipeline 115 runs (83 COMPLETE, 8 GAP, 18 KILO_GAP); wrangler.toml secret bind verify queued; RRL remediation next |
 
 ### Cost Target
 
@@ -75,8 +78,8 @@
 
 ---
 
-**Last Run tagged:** 2026-05-17 VN
+**Last Run tagged:** 2026-07-13 VN
 **IDs:** 35.50.13.4-0|65.16.39.4-1~3000i|70ouRAC
-**Run:** 318
-**HEAD:** ea669ac
+**Run:** 161
+**HEAD:** 3a070fa67
 **Status:** RI

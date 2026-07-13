@@ -1,0 +1,39 @@
+{
+  "run": 161,
+  "role": "PHOENIX_SCOUT",
+  "mission": "STATE-SNAPSHOT.json staleness audit — 16 runs behind current HEAD",
+  "lens": "DRIFT",
+  "created_at": "2026-07-13T00:45:30+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "state_snapshot": {
+      "file": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json",
+      "run_current": 145,
+      "head_sha": "4b34f2ad",
+      "updated_at": "2026-07-01T03:59:44+00:00",
+      "age_hours": 290.5,
+      "gap_runs": 16
+    },
+    "actual_state": {
+      "current_run": 161,
+      "head_sha": "3a070fa67",
+      "last_death": "3a070fa67 death: Run 160 KILO_GAP"
+    },
+    "drift": {
+      "run_delta": 16,
+      "sha_delta": "4b34f2ad → 3a070fa67",
+      "staleness_hours": 290.5,
+      "l30_fires": true
+    }
+  },
+  "verdict": {
+    "overall_status": "STALE_CRITICAL",
+    "l30_trigger": "BOOT_FILE_AGE_SWEEP fires at ANY mismatch",
+    "required_action": "Update STATE-SNAPSHOT.json to run 161, head 3a070fa67"
+  },
+  "negative_trails": [
+    "STATE-SNAPSHOT.json not updated during runs 146-161",
+    "L30 law violated — boot file age sweep not executed",
+    "Recent seals array not maintained"
+  ]
+}

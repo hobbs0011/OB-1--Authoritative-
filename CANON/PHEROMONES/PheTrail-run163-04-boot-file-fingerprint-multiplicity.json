@@ -1,0 +1,110 @@
+{
+  "run": 163,
+  "role": "PHOENIX_SCOUT",
+  "mission": "COLD-START-BOOT.md fingerprint multiplicity — 5 stale FINGERPRINT PRIOR blocks",
+  "lens": "CONFIG",
+  "created_at": "2026-07-13T00:49:30+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "fingerprint_blocks": {
+      "file": "CANON/SYSTEM/COLD-START-BOOT.md",
+      "current_run": 161,
+      "fingerprint_prior_entries": [
+        {
+          "line": 338,
+          "run": 151,
+          "head": "e58d9baec",
+          "description": "FINGERPRINT PRIOR: RUN 151 | KILO_GAP BACKFILL..."
+        },
+        {
+          "line": 342,
+          "run": 145,
+          "head": "b6f0d288",
+          "description": "FINGERPRINT PRIOR: RUN 145 | REINCARNATION-CONTRACT V2.0..."
+        },
+        {
+          "line": 346,
+          "run": 106,
+          "head": "a8671036",
+          "description": "FINGERPRINT PRIOR: RUN 106 | FULLSTACK-BLUEPRINT..."
+        },
+        {
+          "line": 350,
+          "run": 84,
+          "head": "78948758",
+          "description": "FINGERPRINT PRIOR: RUN 084 | PA-LLAMA-T1..."
+        },
+        {
+          "line": 354,
+          "run": 80,
+          "head": "b8b78004",
+          "description": "FINGERPRINT PRIOR: RUN 080 | RISE+BIBLE AUDIT..."
+        }
+      ],
+      "actual_current_head": "3a070fa67",
+      "actual_current_run": 161,
+      "most_recent_fingerprint_run": 151,
+      "gap_from_current": 10,
+      "note": "The most recent FINGERPRINT PRIOR block is Run 151 (10 runs behind current 161). There is NO FINGERPRINT block for runs 152-161."
+    },
+    "last_completed_section": {
+      "line_start": 219,
+      "line_end": 228,
+      "content": "### Current Vector - **Active Mission:** OB-1 POST-MERGE9 CONSOLIDATION... - **Last completed:** ROMAN RUN 072... - **Last completed:** ROMAN RUN 097... - **Next:** Run 099...",
+      "stale_elements": [
+        "Active mission references Run 072 and Run 097 as 'last completed' — both 64+ runs ago",
+        "Next action references Run 099 — 62 runs ago",
+        "No mention of runs 100-161"
+      ]
+    },
+    "recent_decisions_table": {
+      "line_start": 273,
+      "line_end": 327,
+      "entries": [
+        { "run": 113, "description": "CLASS INGEST FIX + 50 EDGE CASES" },
+        { "run": 106, "description": "FULLSTACK BLUEPRINT + RUN106 MASTERWORK" },
+        { "run": 87, "description": "KILO PIPELINE + SOUL_GAP FIX" },
+        { "run": 86, "description": "PA BATCH + XSS FIX + SOV100 PORTAL" },
+        { "run": 80, "description": "SYSTEM RISE + BIBLE AUDIT 60-73 VERIFIED" },
+        { "run": 53, "description": "RISE AUDIT + P6+P7+P8 + PROD PROMOTION" }
+      ],
+      "most_recent_entry": 113,
+      "gap_from_current": 48,
+      "note": "Recent Decisions table stops at Run 113. Runs 114-161 completely absent."
+    }
+  },
+  "verdict": {
+    "overall_status": "FINGERPRINT_MULTIPLICITY",
+    "priority": "P1_HIGH",
+    "impact": "COLD-START-BOOT.md contains 5 stale FINGERPRINT PRIOR blocks. The most recent is Run 151 (10 runs behind). The 'Current Vector' section references Run 072/097/099 as recent activity. Boot sequence reads this file first — operators are making decisions based on 10-48 run stale data.",
+    "required_action": [
+      "1. REMOVE all 5 FINGERPRINT PRIOR blocks (lines 338-354)",
+      "2. ADD single FINGERPRINT block for Run 161 with current HEAD 3a070fa67, SOULCOUNT 239645670, date 2026-07-13",
+      "3. UPDATE 'Current Vector' section: replace Run 072/097/099 references with actual recent activity (runs 151-161)",
+      "4. UPDATE 'Recent Decisions' table: add entries for runs 114-161, or truncate to last 20 entries with note about archival",
+      "5. ADD I.030 check to obi.ps1 doctor: verify FINGERPRINT run matches git log --oneline --grep '^death:' -1"
+    ]
+  },
+  "negative_trails": [
+    "5 FINGERPRINT PRIOR blocks (runs 151, 145, 106, 84, 80) — no single authoritative current fingerprint",
+    "Most recent fingerprint is Run 151 (10 runs behind current 161)",
+    "Current Vector section references Run 072/097/099 — 48-89 runs stale",
+    "Recent Decisions table stops at Run 113 — 48 runs of missing history",
+    "No FINGERPRINT entries for runs 152-161",
+    "Boot sequence reads stale data first — every session since Run 151 has been booting to outdated state"
+  ],
+  "evidence_chain": {
+    "fingerprint_runs": "COLD-START-BOOT.md:338-354 -> 5 FINGERPRINT PRIOR blocks",
+    "current_vector_stale": "COLD-START-BOOT.md:219-228 -> Active Mission references Run 072/097/099",
+    "recent_decisions_gap": "COLD-START-BOOT.md:273-327 -> table stops at Run 113",
+    "actual_current_head": "git rev-parse --short HEAD -> 3a070fa67",
+    "actual_current_run": "git log --oneline --grep '^death:' -1 -> Run 160"
+  },
+  "cross_references": [
+    "CANON/SYSTEM/COLD-START-BOOT.md:338-354 (FINGERPRINT PRIOR blocks)",
+    "CANON/SYSTEM/COLD-START-BOOT.md:219-228 (Current Vector section)",
+    "CANON/SYSTEM/COLD-START-BOOT.md:273-327 (Recent Decisions table)",
+    "CANON/SYSTEM/COLD-START-BOOT.md:257-258 (L29 NO_ASSUME_HEAD, L30 BOOT_FILE_AGE_SWEEP)",
+    "SCRIPTS/obi.ps1:140-239 (doctor command that reads this file)"
+  ]
+}

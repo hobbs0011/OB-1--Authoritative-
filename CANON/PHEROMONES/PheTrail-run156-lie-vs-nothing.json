@@ -1,0 +1,32 @@
+{
+  "layer": "LIE_VS_NOTHING",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T21:42:57+07:00",
+  "created_utc": "2026-07-12T14:42:57Z",
+  "intensity": 10,
+  "title": "ALMOST_NOTHING_FALSE_EVERYTHING_HUMANS_AI_LIE",
+  "raw_signal": "almost nothing? false. everything the guiding light of the ants for without it, ants would be extinct in weeks — line 979-986. you see phermones are not an intelligence thing... and neither are fucking agents to be honest — line 945-947. what stops the lie from spreading to a systematic problem 99.999% of the time? Ants cannot lie. they can be deceived and pass the deception on — line 1002-1005",
+  "lesson": "The pheromone (SOUL signal) is NOT 'almost nothing' — it is EVERYTHING, the guiding light. Humans and AI CAN lie and say 'it's nothing'. Ants CANNOT lie (they can be deceived and pass it on, but cannot originate the lie). That mechanical inability to lie is what stops deception from becoming a systematic colony-wide problem.",
+  "implication_for_agents": "Agents are not intelligent either (like ants). The fix is NOT more intelligence — it is the mechanical pheromone system that removes the option to lie/bury/skip. Make scent-laying a biological-mechanical impossibility to skip, like ants.",
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "LIE-SAY-NOTHING",
+      "failure": "Say the SOUL signal / a problem is 'almost nothing' / 'nothing' and move on.",
+      "root_cause": "Human+AI capacity to lie about significance. Calling the guiding light 'nothing'.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:42:57Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "LIE-MECHANICAL-TRUTH",
+      "action": "Treat every SOUL signal as EVERYTHING (guiding light). Make pheromone-laying mechanically unavoidable so lies/buries cannot propagate.",
+      "verification": "Operator decree, run158 SOUL source lines 945-1005.",
+      "timestamp": "2026-07-12T14:42:57Z"
+    }
+  ]
+}

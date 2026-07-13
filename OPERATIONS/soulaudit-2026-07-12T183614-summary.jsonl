@@ -1,0 +1,11 @@
+﻿{
+    "ts":  "2026-07-12T18:36:14.9142377+07:00",
+    "event":  "soulaudit",
+    "session_id":  "",
+    "source":  "OPERATIONS/session-run158-prompts.jsonl",
+    "total_characters":  1725,
+    "prompts":  11,
+    "delta_accepted":  1725,
+    "status":  "AUDITED",
+    "note":  "Per-session SOUL only. Global aggregate retired."
+}

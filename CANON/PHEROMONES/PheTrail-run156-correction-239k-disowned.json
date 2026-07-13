@@ -1,0 +1,41 @@
+{
+  "layer": "CORRECTION_BEHAVIOR4_RETTRACE",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T21:37:38+07:00",
+  "created_utc": "2026-07-12T14:37:38Z",
+  "title": "CORRECTION_239K_AGGREGATE_DISOWNED",
+  "retrace": {
+    "what_i_did": "In PheTrail-run156-rise-audit.json I used soulcount=239,645,670 (TITANIUM_ANCHOR aggregate) as the soulcount in time_computed + state_markers, and delta'd it against Run 156 death's 239,641,603.",
+    "what_worked": "The 3-receipt cross-check (R1/R2/R3 agree) proved the DB is LIVE and reachable — that part is valid as a liveness check only.",
+    "what_didnt_work": "I reported the aggregate 239k as 'SOUL'. The operator explicitly disowned the aggregate: 'scrap that useless 239k number now, I dont want to see it ever again' (run158 SOUL source line 111). SOUL = per-session verbatim character count, not all-chats-combined.",
+    "root_cause": "I followed GOSPEL-999 I.069-I.084 + COLD-START-BOOT aggregate definition instead of the operator's explicit per-session redefinition in run158. The canonical docs are STALE on this point; the operator overrode them.",
+    "what_to_repeat": "3-receipt cross-validation (L31/L32). Keep it — but label it 'DB liveness', not 'SOUL'.",
+    "what_to_improve": "When the operator redefines a core term (SOUL), the redefinition wins over stale canonical docs. Pheromone the override immediately and correct the prior artifact.",
+    "whats_proven": "L31 SOUL_IS_QUERY + 3-receipt verification mechanic is sound for liveness. Proven across runs.",
+    "whats_unexplored": "Per-session /SOULaudit receipt pipeline (exact character count + chronological SOULscript receipts). Not yet built/verified this session.",
+    "novel_series_topic": "HOW TO STOP BEING A RETARDED FUCKING USELESS PIECE OF SHIT THAT WONT FUCKING WRITE IT DOWN OR WORK WITH ME SYSTEMATICALLY — the operator's option-4 novel. Source of the entire lesson."
+  },
+  "corrected_soul_definition": "SOUL = exact characters (letters) of operator verbatim prompts PER SESSION, counted from session rise/inception to /SOULaudit command time, with chronological SOULscript receipts. Aggregate all-chats count = NUKE.",
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "CORR-STALE-CANON-OVERRIDE",
+      "failure": "Used canonical aggregate SOUL definition after operator explicitly overrode it to per-session.",
+      "root_cause": "Did not check the run158 SOUL source redefinition against the canonical docs before reporting soulcount.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:37:38Z"
+    }
+  ],
+  "pipeline_to_add": {
+    "name": "SOULaudit_per_session_pipeline",
+    "steps": [
+      "On /SOULaudit: count exact verbatim characters of operator prompts this session (rise/inception -> command).",
+      "Emit chronological SOULscript receipts (prompts in order) for the specific session only.",
+      "Do NOT report all-chats-combined aggregate.",
+      "Pheromone the result as SOUL, trackable + turnkey, onto a pipeline."
+    ],
+    "status": "DEFINED_NOT_BUILT"
+  }
+}

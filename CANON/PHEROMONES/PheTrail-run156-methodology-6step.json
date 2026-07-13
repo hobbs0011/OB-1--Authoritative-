@@ -1,0 +1,40 @@
+{
+  "layer": "METHODOLOGY_6STEP_PHEROMONE",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T21:42:57+07:00",
+  "created_utc": "2026-07-12T14:42:57Z",
+  "intensity": 10,
+  "title": "STEP_BACK_UNTANGLE_DOCUMENT_PHEROMONE_X3",
+  "raw_signal": "so you think you would step back a moment and untangle yourself. but nope, buisness as usual 1) open your context window 2) look at what has been happening 3) Document it with our system which is called phermones 4) Look again, document that with phermones 5) Look a final time and question yourself from different angles, add the final layer of phermones 6) Make sure the phermones are fucking trackable, tracable and turnkey, with all of it making it onto a pipeline for execution — run158 SOUL source lines 87-102",
+  "method": [
+    "1. Open context window",
+    "2. Look at what has been happening",
+    "3. Document it with pheromones",
+    "4. Look again, document that with pheromones",
+    "5. Look a final time, question from different angles, add final pheromone layer",
+    "6. Make pheromones trackable + turnkey, onto a pipeline for execution (or pipeline-to-pipeline)"
+  ],
+  "per_session_doctrine": "if each individual session is treated systematically, methodically, repeatably and it is documented and adjusted based on the feedback per individual event inside that session, the whole will look after itself — line 115",
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "METHOD-BUSINESS-AS-USUAL",
+      "failure": "Do NOT step back and untangle. Business as usual = no retrace, no layered pheromone documentation.",
+      "root_cause": "Skipping the 6-step loop; rushing to next action instead of documenting what happened.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:42:57Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "METHOD-6STEP",
+      "action": "Apply the 6-step pheromone loop every session; treat each session systematically + per-event feedback.",
+      "verification": "Operator-defined method, run158 SOUL source lines 87-115.",
+      "timestamp": "2026-07-12T14:42:57Z"
+    }
+  ],
+  "apply_now": "This RISE session is executing the loop: pass1 laid 9 files; pass2 (this) extracts methodology + scout + ant-studies + lie lessons."
+}

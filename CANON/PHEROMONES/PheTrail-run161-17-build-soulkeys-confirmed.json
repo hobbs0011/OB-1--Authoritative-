@@ -1,0 +1,34 @@
+{
+  "run": 161,
+  "role": "PHOENIX_SCOUT",
+  "mission": "build-soulkeys.ps1 RunMax=42 confirmation — exact line and impact",
+  "lens": "CODE",
+  "created_at": "2026-07-13T00:52:30+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "file": "SCRIPTS/build-soulkeys.ps1",
+    "line": 10,
+    "code": "param([int]$RunMax = 42)",
+    "loop_range": "for ($run = 0; $run -le $RunMax; $run++)",
+    "current_run": 161,
+    "gap": 119,
+    "rfkw_files_beyond_42": 27,
+    "rfkw_list": [
+      "rfkw-run69.txt","rfkw-run74.txt","rfkw-run75.txt","rfkw-run80.txt",
+      "rfkw-run81.txt","rfkw-run82.txt","rfkw-run83.txt","rfkw-run84.txt",
+      "rfkw-run85.txt","rfkw-run86.txt","rfkw-run87.txt","rfkw-run88.txt",
+      "rfkw-run91.txt","rfkw-run92.txt","rfkw-run93.txt","rfkw-run94.txt",
+      "rfkw-run96.txt","rfkw-run97.txt","rfkw-run100.txt","rfkw-run101.txt",
+      "rfkw-run102.txt","rfkw-run103.txt","rfkw-run104.txt","rfkw-run106.txt",
+      "rfkw-run107.txt","rfkw-run108.txt","rfkw-run157.txt"
+    ]
+  },
+  "verdict": {
+    "overall_status": "CONFIRMED_MISCONFIGURATION",
+    "fix": "Update param default to RunMax=161 OR require explicit parameter"
+  },
+  "negative_trails": [
+    "119 runs of keyword data skipped during index build",
+    "Tier 1 doctrine files never indexed because loop stops at run 42"
+  ]
+}

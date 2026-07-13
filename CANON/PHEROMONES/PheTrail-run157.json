@@ -1,0 +1,102 @@
+{
+  "schema_version": "2.1",
+  "run_number": "157",
+  "stage": "kiloclaw-telegram-integration",
+  "extracted_at": "2026-07-12T23:45:00+07:00",
+  "forcemarch_ts": "20260712-234500",
+  "head_sha": "ae79c905a",
+  "soulcount": 239645670,
+  "payload": {
+    "ok": true,
+    "artifacts_created": [
+      "SCRIPTS/kiloclaw-integration-pipeline.ps1",
+      "SCRIPTS/telegram-command-router.ps1",
+      "CANON/SYSTEM/KILOCLAW-STANDARD.md",
+      "OPERATIONS/kiloclaw-telegram-reconnect-prep.md",
+      "CANON/PHEROMONES/PheTrail-run157.json"
+    ],
+    "artifacts_modified": [
+      "CANON/SYSTEM/COLD-START-BOOT.md"
+    ],
+    "positive_trails": [
+      {
+        "artifact": "SCRIPTS/telegram-command-router.ps1",
+        "action": "Created standalone Telegram command router using bot token directly against Telegram API",
+        "verification": "getMe returned username=Phoenix_Centurion_Bot, sendMessage path reachable",
+        "timestamp": "2026-07-12T23:37:15+07:00"
+      },
+      {
+        "artifact": "CANON/SYSTEM/KILOCLAW-STANDARD.md",
+        "action": "Wrote canonical KiloClaw SOP with architecture, model fallback chain, integration points, failure protocols",
+        "verification": "File exists, 240+ lines, references verified against Run 10 death seal",
+        "timestamp": "2026-07-12T23:38:00+07:00"
+      },
+      {
+        "artifact": "OPERATIONS/kiloclaw-telegram-reconnect-prep.md",
+        "action": "Documented 5-step Telegram reconnection sequence with verification checklist",
+        "verification": "Steps align with Run 10 death seal §7 open questions and §8 unfinished actions",
+        "timestamp": "2026-07-12T23:39:00+07:00"
+      },
+      {
+        "artifact": "CANON/SYSTEM/COLD-START-BOOT.md",
+        "action": "Updated Identity + Current Vector with KiloClaw Dashboard, Pipeline, and SOP as standard components",
+        "verification": "KiloClaw lines present after Soul Logger entry, boot file readable",
+        "timestamp": "2026-07-12T23:40:00+07:00"
+      },
+      {
+        "artifact": "CANON/PHEROMONES/PheTrail-run157.json",
+        "action": "Wrote this phetrail with git-derived run number, zero-pad, schema_version 2.1",
+        "verification": "JSON valid, run_number matches git death log run 156 + 1",
+        "timestamp": "2026-07-12T23:45:00+07:00"
+      }
+    ],
+    "negative_trails": [
+      {
+        "artifact": "CANON/SYSTEM/COLD-START-BOOT.md",
+        "failure": "File locked by another process during inline edit",
+        "root_cause": "Set-Content failed with IOException — likely open in editor or git",
+        "decay_days": 180,
+        "timestamp": "2026-07-12T23:20:00+07:00"
+      },
+      {
+        "artifact": "SCRIPTS/kiloclaw-integration-pipeline.ps1",
+        "failure": "Parser error before first execution",
+        "root_cause": "Box-drawing characters in comment banners caused PowerShell parse failure",
+        "decay_days": 180,
+        "timestamp": "2026-07-12T23:22:00+07:00"
+      },
+      {
+        "artifact": "KiloClaw Dashboard Telegram config",
+        "failure": "Dashboard returns 401 Unauthorized",
+        "root_cause": "Michael has not yet pasted bot token into KiloClaw dashboard Settings → Telegram",
+        "decay_days": 180,
+        "timestamp": "2026-07-12T23:41:00+07:00"
+      },
+      {
+        "artifact": "Local OpenClaw Gateway",
+        "failure": "Port 18789 connection refused",
+        "root_cause": "Local OpenClaw gateway daemon not running",
+        "decay_days": 180,
+        "timestamp": "2026-07-12T23:41:00+07:00"
+      },
+      {
+        "artifact": ".claude/settings.json",
+        "failure": "MCP wiring missing",
+        "root_cause": "No openclaw server entry in mcpServers",
+        "decay_days": 180,
+        "timestamp": "2026-07-12T23:41:00+07:00"
+      }
+    ],
+    "state_markers": {
+      "active_mission": "Merge KiloClaw into standard operating procedure and prepare Telegram reconnection",
+      "open_flags_count": 5,
+      "top_priority": "Michael configures KiloClaw dashboard Telegram bot token",
+      "head_sha": "ae79c905a",
+      "soulcount": 239645670,
+      "bot_username": "@Phoenix_Centurion_Bot",
+      "kiloclaw_url": "https://i-a947dc7776e34f8d86d7fc3c24d694b9.kiloclaw.ai",
+      "kiloclaw_port": 18789,
+      "default_model": "kilo-auto/free"
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": "2.1",
+  "run_number": "157",
+  "stage": "phoenix-scout-quick",
+  "extracted_at": "2026-07-12T23:58:43+07:00",
+  "forcemarch_ts": "20260712-235843",
+  "head_sha": "ae79c905a",
+  "soulcount": 239645670,
+  "payload": {
+    "ok": true,
+    "zones": [
+      "CANON/SYSTEM",
+      ".kilo/command",
+      ".kilo/skills",
+      "SCRIPTS",
+      "OPERATIONS"
+    ],
+    "files_scanned": 8273,
+    "finds": 400,
+    "p1_critical": 0,
+    "p2_high": 215,
+    "p3_medium": 185,
+    "breakdown": {
+      "SOUL": 120,
+      "DRIFT": 95,
+      "CONFIG": 9,
+      "GAP": 176,
+      "VAULT": 0
+    },
+    "report": "OPERATIONS/phoenix-scout-2026-07-12T235843.jsonl",
+    "kiloclaw_specific_finds": [
+      {
+        "file": "CANON/SYSTEM/KILOCLAW-STANDARD.md",
+        "type": "GAP",
+        "status": "ORPHAN",
+        "detail": "References OpenClaw install paths that do not exist on disk"
+      },
+      {
+        "file": ".kilo/command/PAA.md",
+        "type": "CONFIG",
+        "status": "STALE",
+        "detail": "Tier definitions missing canonical provider mapping"
+      },
+      {
+        "file": "OPERATIONS/phetrail-kiloclaw-*.md",
+        "type": "GAP",
+        "status": "ORPHAN",
+        "detail": "Multiple OpenClaw paths referenced but missing"
+      }
+    ],
+    "negative_trails": [
+      "COLD-START-BOOT.md contains multiple stale HEAD references not matching git log -1",
+      "KILOCLAW-STANDARD.md documents OpenClaw paths that do not exist on current machine",
+      "PAA.md tier definitions missing canonical provider mapping (deepseek/claude/gemini/groq/cerebras/kilo-auto)"
+    ],
+    "positive_trails": [
+      "Scanned 8273 files across 5 zones in under 3 minutes using Select-String optimization",
+      "Identified 120 raw SOUL blockquotes that have never been ingested into D1",
+      "Identified 95 DRIFT findings across boot/docs with stale HEAD references",
+      "Identified 176 GAP findings, many from KiloClaw phetrails referencing historical OpenClaw paths"
+    ],
+    "learned": [
+      "Drift shape: boot/docs reference stale SHA; source of truth is git log -1",
+      "Tier configs require 5-tier canon per DISPATCH.md",
+      "Dead cross-repo paths detected; may be historical or moved",
+      "Legacy domains indicate archival references that may need migration",
+      "KiloClaw phetrails from Run 10 reference OpenClaw paths that were never materialized on this machine"
+    ]
+  }
+}

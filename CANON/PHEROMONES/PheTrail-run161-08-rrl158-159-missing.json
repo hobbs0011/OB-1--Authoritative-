@@ -1,0 +1,46 @@
+{
+  "run": 161,
+  "role": "PHOENIX_SCOUT",
+  "mission": "RRL-158/159 missing — evidence destruction audit from unauthorized cleanup",
+  "lens": "GAP",
+  "created_at": "2026-07-13T00:48:00+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "rrl_158": {
+      "expected": "RRL/RRL-158.txt",
+      "status": "MISSING",
+      "reason": "No transcript captured — run158 was ghost state"
+    },
+    "rrl_159": {
+      "expected": "RRL/RRL-159.txt",
+      "status": "MISSING",
+      "reason": "Deleted during unauthorized cleanup"
+    },
+    "pipeline_158": {
+      "expected": "CANON/PIPELINE/pipeline-run158.json",
+      "status": "ORPHAN — deleted",
+      "recovery": "NOT_RECOVERABLE — untracked by git, no backup"
+    },
+    "pipeline_159": {
+      "expected": "CANON/PIPELINE/pipeline-run159.json",
+      "status": "ORPHAN — deleted",
+      "recovery": "NOT_RECOVERABLE"
+    },
+    "death_seal_158": {
+      "expected": "CANON/REINCARNATION/run158-reincarnateDEATH.md",
+      "status": "MISSING — never created",
+      "evidence": "PheTrail-run158.json: 'No death seal was ever written for run158'"
+    }
+  },
+  "verdict": {
+    "overall_status": "EVIDENCE_DESTROYED",
+    "recoverable": false,
+    "root_cause": "Unauthorized cleanup of pipeline artifacts + missing death seal",
+    "impact": "Cannot reconstruct runs 158-159 from canonical artifacts"
+  },
+  "negative_trails": [
+    "pipeline-run157/158/159.json deleted — cannot verify what was built",
+    "run158 death seal never written — no record of what happened",
+    "schema-catalog-run158.json exists but insufficient as phetrail replacement"
+  ]
+}

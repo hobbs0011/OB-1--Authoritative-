@@ -1,0 +1,40 @@
+{
+  "run": 161,
+  "role": "PHOENIX_SCOUT",
+  "mission": "/soulsearch command doc exists but execution script MISSING — naming inconsistency",
+  "lens": "CONFIG",
+  "created_at": "2026-07-13T00:53:30+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "command_doc": {
+      "file": ".kilo/command/SoulSearch.md",
+      "exists": true,
+      "case": "Mixed case (SoulSearch.md)",
+      "backburner_reference": ".kilo/command/soulsearch.md (lowercase)",
+      "windows_case_insensitive": true,
+      "content_length": 13,
+      "references_script": "SCRIPTS/soul-search.ps1"
+    },
+    "execution_script": {
+      "file": "SCRIPTS/soulsearch.ps1",
+      "exists": false,
+      "glob_match": "No files matched SCRIPTS/soulsearch*"
+    },
+    "script_reference_mismatch": {
+      "doc_says": "SCRIPTS/soul-search.ps1 (hyphen)",
+      "backburner_says": "SCRIPTS/soulsearch.ps1 (no hyphen)",
+      "neither_exists": true
+    }
+  },
+  "verdict": {
+    "overall_status": "PARTIAL_IMPLEMENTATION",
+    "doc_exists": true,
+    "script_missing": true,
+    "priority": "HIGH"
+  },
+  "negative_trails": [
+    "Command documented but not executable — silent failure if invoked",
+    "Script reference inconsistency: soul-search.ps1 (hyphen) vs soulsearch.ps1 (no hyphen)",
+    "BB-NEW directive from 2026-06-13 still unactioned"
+  ]
+}

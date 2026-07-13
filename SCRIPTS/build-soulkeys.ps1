@@ -7,7 +7,7 @@ Outputs:
   CANON/SOUL-KEYWORDS/soulkeys-manifest.json (run-level metadata)
 #>
 
-param([int]$RunMax = 42)
+param([int]$RunMax = 161)
 
 $ErrorActionPreference = 'Stop'
 Set-Location -Path 'D:\OB-1-CANONICAL'

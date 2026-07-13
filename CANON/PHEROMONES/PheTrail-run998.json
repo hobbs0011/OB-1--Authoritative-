@@ -1,0 +1,47 @@
+{
+  "schema_version": "2.1",
+  "run_number": "999",
+  "stage": "kiloclaw-telegram-router",
+  "extracted_at": "2026-07-12T23:37:15+07:00",
+  "forcemarch_ts": "20260712-233715",
+  "head_sha": "ae79c905a",
+  "soulcount": 239645670,
+  "payload": {
+    "ok": true,
+    "artifacts_created": [
+      "SCRIPTS/telegram-command-router.ps1"
+    ],
+    "artifacts_modified": [
+      "SCRIPTS/kiloclaw-integration-pipeline.ps1"
+    ],
+    "objective": "Create free Telegram interface without dependency on KiloClaw dashboard auth",
+    "status": "TESTED — bot valid, dashboard 401, local gateway down, MCP unwired",
+    "evidence": {
+      "bot_token_valid": true,
+      "bot_username": "@Phoenix_Centurion_Bot",
+      "dashboard_reachable": false,
+      "dashboard_http_status": 401,
+      "local_gateway_running": false,
+      "local_gateway_port": 18789,
+      "mcp_wired": false
+    },
+    "negative_trails": [
+      "KiloClaw dashboard returns 401 Unauthorized — cannot complete dashboard-side Telegram config without Michael auth",
+      "Local OpenClaw gateway not running on port 18789",
+      "MCP wiring missing in .claude/settings.json",
+      "Main kiloclaw-integration-pipeline.ps1 has parser error from box-drawing characters in comments"
+    ],
+    "positive_trails": [
+      "Telegram bot token validated via getMe — bot is alive",
+      "Created standalone telegram-command-router.ps1 that bypasses dashboard and talks directly to Telegram API",
+      "Confirmed free-path works: bot API reachable without KiloClaw dashboard",
+      "Command router designed for status/help/scout/fingerprint/process/verify/garrison/telegram-reconnect"
+    ],
+    "next_actions": [
+      "Fix parser error in kiloclaw-integration-pipeline.ps1",
+      "Register bot webhook or polling loop for production use",
+      "Wire MCP in .claude/settings.json",
+      "Start local OpenClaw gateway if needed"
+    ]
+  }
+}

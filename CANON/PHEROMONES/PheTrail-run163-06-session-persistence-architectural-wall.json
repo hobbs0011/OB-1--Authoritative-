@@ -1,0 +1,82 @@
+{
+  "run": 163,
+  "role": "PHOENIX_SCOUT",
+  "mission": "Session persistence architecture — KILO_DNA_GAP permanent wall vs fixable STATE-SNAPSHOT gap",
+  "lens": "GAP",
+  "created_at": "2026-07-13T00:50:30+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "kilo_sessions_dir": {
+      "path": ".kilo/sessions/",
+      "exists": true,
+      "files": 0,
+      "verdict": "EMPTY — no session state persisted",
+      "architectural_ceiling": true,
+      "ceiling_documentation": "COLD-START-BOOT.md:178-182 -> 'Kilo sessions will ALWAYS produce hollow DNA... It is an environment ceiling, not a bug.'",
+      "root_cause": "Kilo environment writes only commands and pastedContents blobs to disk. session-capture.ps1 cannot extract full conversation turns because they do not exist on disk."
+    },
+    "state_snapshot_gap": {
+      "file": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json",
+      "current_run": 145,
+      "actual_run": 161,
+      "gap_runs": 16,
+      "architectural_ceiling": false,
+      "fixable": true,
+      "fix_path": "Update STATE-SNAPSHOT.json directly with current git state + SOULCOUNT query. No JSONL required."
+    },
+    "no_work_queue": {
+      "finding": "No work queue exists for pending tasks between runs",
+      "impact": "Every KILO_HOLLOW run starts blind — no carryover of open loops, blockers, or pending actions",
+      "proposed_fix": "Create .kilo/sessions/state-{run}.json with: {run, head, soulcount, phetrail_count, ledger_tail_sha, open_loops: [], blockers: []}"
+    },
+    "proposed_state_pipeline": {
+      "script": "SCRIPTS/state-capture.ps1",
+      "output": ".kilo/sessions/state-{run}.json",
+      "data_sources": [
+        "git rev-parse --short HEAD",
+        "git log --oneline --grep '^death:' -1",
+        "/api/soul/count (SOULCOUNT query)",
+        "Get-ChildItem CANON/PHEROMONES/ | Measure-Object",
+        "Get-ChildItem CANON/HEAVY-LEDGER/ | Sort-Object LastWriteTime -Descending | Select-Object -First 1",
+        "$env:OPEN_LOOPS (from environment or REINCARNATION-LOG parse)"
+      ],
+      "does_not_require": "JSONL, session-capture.ps1, or any Kilo environment transcript",
+      "invocation": "Register-EngineEvent PowerShell.Exiting -> state-capture.ps1 (same pattern as Invoke-PhetrailSeal in obi.ps1:127-129)"
+    }
+  },
+  "verdict": {
+    "overall_status": "ARCHITECTURAL_WALL + FIXABLE_GAP",
+    "priority": "P0_BLOCKER",
+    "impact": "KILO_DNA_GAP is permanent — accept it. But STATE-SNAPSHOT.json gap is fixable and has been left broken for 16 runs. .kilo/sessions/ empty means zero state continuity. Build the state-{run}.json pipeline to bypass KILO_DNA_GAP entirely.",
+    "required_action": [
+      "1. ACCEPT KILO_DNA_GAP as permanent (do not re-investigate per COLD-START-BOOT.md:179)",
+      "2. CREATE SCRIPTS/state-capture.ps1: captures git HEAD, SOULCOUNT, phetrail count, ledger tail SHA at session exit",
+      "3. UPDATE STATE-SNAPSHOT.json from state-capture.ps1 output — eliminates 16-run staleness",
+      "4. REGISTER state-capture.ps1 in obi.ps1 via Register-EngineEvent PowerShell.Exiting (pattern from obi.ps1:127-129)",
+      "5. ADD .kilo/sessions/state-{run}.json to .gitignore (transient state, not canonical)"
+    ]
+  },
+  "negative_trails": [
+    ".kilo/sessions/ empty — zero session state persisted between runs",
+    "KILO_DNA_GAP is permanent architectural ceiling — cannot be fixed from within Kilo (documented COLD-START-BOOT.md:178-182)",
+    "STATE-SNAPSHOT.json 16 runs stale despite being fixable — no update mechanism invoked",
+    "No work queue for pending tasks — every run starts blind",
+    "session-capture.ps1 exists but produces zero JSONL in Kilo environment — expected failure per KILO_DNA_GAP",
+    "L30 BOOT_FILE_AGE_SWEEP silently failing because STATE-SNAPSHOT never gets updated"
+  ],
+  "evidence_chain": {
+    "kilo_sessions_empty": "ls .kilo/sessions/ -> 0 files",
+    "state_snapshot_stale": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json:7 -> run=145 (current=161)",
+    "kilO_dna_gap_doc": "COLD-START-BOOT.md:178-182 -> permanent architectural ceiling",
+    "obi_exit_event": "SCRIPTS/obi.ps1:127-129 -> Register-EngineEvent pattern for session exit",
+    "phetrail_exit_event": "SCRIPTS/obi.ps1:127-129 -> Invoke-PhetrailSeal on exit"
+  },
+  "cross_references": [
+    "COLD-START-BOOT.md:178-182 (KILO_DNA_GAP permanent law)",
+    "COLD-START-BOOT.md:182 (OB-1 does DEATH SEAL, Kilo does CODE WORK)",
+    "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json:7-11 (stale run/head)",
+    "SCRIPTS/obi.ps1:127-129 (Register-EngineEvent pattern)",
+    "SCRIPTS/obi.ps1:240-246 (silent fallback for unimplemented commands)",
+    ".kilo/sessions/ (empty directory)"
+  ]
+}

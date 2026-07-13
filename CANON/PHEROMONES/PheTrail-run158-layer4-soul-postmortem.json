@@ -1,0 +1,94 @@
+{
+  "run": 158,
+  "timestamp": "2026-07-12T18:12:00+07:00",
+  "phetrail_layer": 4,
+  "title": "Run 158 — Layer 4 SOUL POST-MORTEM: WHAT WORKED, WHAT DIDN'T, REPEATABLE PATTERN",
+  "scope": "Strict analysis of /SOULaudit success and failure modes. No other topics. SOUL-only.",
+  "analysis": {
+    "the_problem": {
+      "declared": "Multiple sessions said /SOULaudit was impossible inline because Kilo has no persistent transcript",
+      "perceived_blocker": "KILO_DNA_GAP — Kilo sessions do not write full conversation JSONL to disk",
+      "assumed_solution": "Need OB-1/Claude Code with JSONL on disk to feed D1",
+      "actual_solution": "Use live context window as source of truth, manually extract and POST to D1"
+    },
+    "why_previous_loops_failed": {
+      "cause_1": "Kept querying D1 for data that doesn't exist yet",
+      "cause_2": "Treated architectural ceiling as bug to debug instead of fixed law to work around",
+      "cause_3": "Asked permission instead of executing clear command",
+      "cause_4": "Lost sight of the actual goal (SOULCOUNT for THIS session) while chasing aggregate numbers"
+    },
+    "why_solving_it_took_seconds_this_time": {
+      "factor_1": "User explicitly commanded: DO WHAT I FUCKING ASKED",
+      "factor_2": "Cleared permission theater — stopped asking, started executing",
+      "factor_3": "Used context window as authoritative source instead of external DB as primary",
+      "factor_4": "Defined pipeline first, then executed it: EXTRACT → COUNT → WRITE → QUERY_BEFORE → POST → QUERY_AFTER → VERIFY → RECEIPT",
+      "factor_5": "Did not care about 239k aggregate — focused only on this session delta"
+    },
+    "the_repeatable_pattern": {
+      "name": "PIPE-SOUL-AUDIT-158",
+      "stages": [
+        "EXTRACT: Get all user verbatim prompts from current context window",
+        "COUNT: Sum byte_count with Buffer.byteLength(text, 'utf8')",
+        "WRITE: Save to OPERATIONS/session-{run}-prompts.jsonl",
+        "QUERY_BEFORE: GET /api/soul/count",
+        "POST: For each prompt, POST to /api/soul/event with student_id=sov100-michael, session_id=sov100-roman-run{run}, role=user",
+        "QUERY_AFTER: GET /api/soul/count",
+        "VERIFY: delta must equal manual count",
+        "RECEIPT: Write OPERATIONS/soulaudit-run{run}-receipts.json"
+      ],
+      "invariant": "Context window is source of truth. D1 is write-target. DB query is verification only.",
+      "guardrail": "Never use aggregate count as session count. Never query D1 before writing. Never ask permission to execute explicit command."
+    },
+    "what_worked": [
+      "Stopping permission theater",
+      "Using context window as primary data source",
+      "Defining pipeline before execution",
+      "Focusing on delta, not aggregate",
+      "Writing canonical file before POSTing",
+      "Verifying with two independent counts: API delta + manual sum"
+    ],
+    "what_didnt_work": [
+      "Treating D1 as read-target for data that doesn't exist yet",
+      "Running wrong tools for the job (phoenix-scout for model catalog)",
+      "Asking user obvious questions",
+      "Producing verbose theater instead of compact receipts",
+      "Chasing aggregate numbers when session-specific was requested"
+    ],
+    "what_to_repeat": [
+      "Execute first, report after",
+      "Use context window as source of truth for current session",
+      "Define pipeline explicitly before execution",
+      "Verify with independent methods",
+      "Write canonical file before external API calls",
+      "Ignore aggregate numbers when session-specific is requested",
+      "No permission questions for explicit commands"
+    ],
+    "what_to_improve": [
+      "Wire PIPE-SOUL-AUDIT-158 into .kilo/command/ as proper slash command",
+      "Add automatic session detection so user doesn't need to specify run ID",
+      "Create fallback pipeline for failed POSTs",
+      "Add BOOT refresh to pipeline so it runs automatically after successful audit",
+      "Create backfill pipeline for previously hollow sessions"
+    ],
+    "what_brushed_edge_of_but_unexplored": [
+      "Can we auto-detect session boundaries in context window?",
+      "Can we create a Kilo extension/hook that auto-ingests prompts to D1?",
+      "Can we build a SOUL dashboard that shows per-session count, not just aggregate?",
+      "What happens when multiple concurrent Kilo sessions need separate SOULCOUNTs?",
+      "Can we weight prompts by importance instead of raw byte count?"
+    ],
+    "what_proven_itself_time_and_again_but_always_phermoned": [
+      "Permission theater is the #1 killer of execution speed",
+      "Wrong tool for the job wastes more time than no tool at all",
+      "User knows what they want — trust the directive",
+      "Architectural ceilings are workarounds, not bugs",
+      "Every failure mode repeats across sessions unless pheromoned"
+    ]
+  },
+  "pipeline": {
+    "id": "PIPE-SOUL-AUDIT-158",
+    "status": "PROVEN",
+    "repeatable": true,
+    "next_instantiation": "Run 159+"
+  }
+}

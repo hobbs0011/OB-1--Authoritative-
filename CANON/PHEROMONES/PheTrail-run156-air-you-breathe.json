@@ -1,0 +1,41 @@
+{
+  "layer": "DOCTRINE_AIR_YOU_BREATHE",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T22:23:05+07:00",
+  "created_utc": "2026-07-12T15:23:05Z",
+  "intensity": 10,
+  "title": "PHEROMONES_FACTOR_OUT_LUCK_AIR_YOU_BREATHE",
+  "raw_signal": "phermones are the most honest way to build a system possible, that's why it can factor our luck entirely, because it is not a few guidelines here and there, or even strict rules.. it is the air you breath, not a suggestion, or a rule that is mandatory in word, but cannot compare to the rule of breathing in the end — operator live 2026-07-12T22:22",
+  "doctrine": {
+    "most_honest_method": "Pheromones are the most honest way to build a system possible.",
+    "factors_out_luck": "It removes luck entirely BECAUSE it is not guidelines, not even strict rules — it is the air you breathe.",
+    "not_a_rule": "Not a suggestion. Not a 'mandatory in word' rule that cannot compare to the rule of breathing. Breathing is unavoidable; the phetrail must be equally unavoidable."
+  },
+  "sdd_cross_reference": {
+    "SDD_0": "The phetrail is not a rule. The phetrail is the air. Not a policy/guideline/mandate. The atomic medium in which all colony action occurs.",
+    "L_PHE_0c": "Structural impossibilities, not probabilistic defenses. Environment must enforce constraints as mechanical facts, not 'should'.",
+    "SDD_0_3": "Unyielding not easy. Phase 1 (explicit, fought) -> Phase 2 (automatic) -> Phase 3 (unstoppable = the air)."
+  },
+  "session_capstone": "This is the resolution of the entire Round 1 arc: audit found gaps -> catalogued SOUL -> plagiarized the ant mold (stigmergy/pheromone) -> supply health showed drift -> forcemarch showed blind spots -> discipline doctrine (jarring builds discipline) -> and now: the phetrail as the air you breathe is the END STATE that factors out luck. Strict rules get circumvented under pressure (luck returns). Mechanical emission that cannot be skipped = luck removed.",
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "AIR-TREAT-AS-RULE",
+      "failure": "Treat pheromones as a guideline or a 'mandatory in word' rule that can be skipped when convenient.",
+      "root_cause": "That reintroduces luck (the thing the system exists to remove). Rules are circumventable; breathing is not.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T15:23:05Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "AIR-MECHANICAL-IMPOSSIBILITY",
+      "action": "Target state: emission is as unavoidable as breathing — mechanical impossibility to skip, not a rule to obey. This is what factors out luck.",
+      "verification": "Operator capstone 2026-07-12T22:22 + SDD §0 / L-PHE-0c / §0.3.",
+      "timestamp": "2026-07-12T15:23:05Z"
+    }
+  ]
+}

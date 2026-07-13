@@ -1,0 +1,97 @@
+{
+  "run": 163,
+  "role": "PHOENIX_SCOUT",
+  "mission": "PheTrail schema validation gap — inconsistent enforcement across trail files",
+  "lens": "PHEROMONE",
+  "created_at": "2026-07-13T00:51:30+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "files_audited": [
+      "CANON/PHEROMONES/PheTrail-run161-02-soul-doctrine-gap.json",
+      "CANON/PHEROMONES/PheTrail-run161-06-soulsearch-missing.json",
+      "CANON/PHEROMONES/PheTrail-run161-07-bb53-exposed-key.json",
+      "CANON/PHEROMONES/PheTrail-run161-09-inverted-index-rebuild.json"
+    ],
+    "schema_compliance": {
+      "schema_version": {
+        "present_in": ["PheTrail-run161-02"],
+        "missing_in": ["PheTrail-run161-06", "PheTrail-run161-07", "PheTrail-run161-09"],
+        "compliance_pct": 25,
+        "law": "I.053 PheTrail schema_version is mandatory — field present and current"
+      },
+      "negative_trails_array": {
+        "present_in": ["PheTrail-run161-02", "PheTrail-run161-06", "PheTrail-run161-07", "PheTrail-run161-09"],
+        "compliance_pct": 100
+      },
+      "negative_trail_count": {
+        "present_in": ["PheTrail-run161-02"],
+        "missing_in": ["PheTrail-run161-06", "PheTrail-run161-07", "PheTrail-run161-09"],
+        "compliance_pct": 25
+      },
+      "verdict_overall_status": {
+        "present_in": ["PheTrail-run161-02", "PheTrail-run161-06", "PheTrail-run161-07", "PheTrail-run161-09"],
+        "compliance_pct": 100
+      },
+      "required_action_field": {
+        "present_in": ["PheTrail-run161-06", "PheTrail-run161-07"],
+        "missing_in": ["PheTrail-run161-02", "PheTrail-run161-09"],
+        "compliance_pct": 50
+      }
+    },
+    "validation_gap": {
+      "finding": "No phetrail-validate.ps1 or schema enforcement script exists",
+      "impact": "Schema drift is undetected. Invalid or incomplete phetrail files can be committed without error.",
+      "proposed_validation": [
+        "schema_version must be present and match current version (2.0)",
+        "negative_trails must be non-empty array",
+        "verdict.overall_status must be present",
+        "verdict.priority must be present",
+        "required_action or next_action must be present",
+        "evidence_chain must be present for all findings",
+        "cross_references must be present and point to existing files"
+      ]
+    },
+    "write_phetrail_entry_gap": {
+      "file": "SCRIPTS/obi.ps1",
+      "function": "Write-PhetrailEntry",
+      "lines": "38-70",
+      "finding": "Write-PhetrailEntry does not enforce schema_version or required fields. It writes whatever is passed to it.",
+      "risk": "Caller can omit schema_version, required_action, or evidence_chain without detection"
+    }
+  },
+  "verdict": {
+    "overall_status": "SCHEMA_ENFORCEMENT_MISSING",
+    "priority": "P2_MEDIUM",
+    "impact": "25% of audited Run 161 phetrail files lack schema_version. No validation script catches omissions. Schema drift undermines trail reliability for downstream consumers (RISE audit, DEATH seal, DNA registry).",
+    "required_action": [
+      "1. CREATE CANON/PHEROMONES/phetrail-schema.json — enforce version 2.0 with all required fields",
+      "2. CREATE SCRIPTS/phetrail-validate.ps1 — reads phetrail JSON, validates against schema, exits 1 on failure",
+      "3. UPDATE Write-PhetrailEntry in SCRIPTS/obi.ps1:38-70 to include schema_version: '2.0' and required fields by default",
+      "4. ADD phetrail-validate.ps1 to obi.ps1 doctor command (line 140+) as a validation step",
+      "5. BACKFILL missing schema_version in existing Run 161 phetrail files (06, 07, 09)"
+    ]
+  },
+  "negative_trails": [
+    "schema_version missing in 75% of audited Run 161 phetrail files (06, 07, 09)",
+    "No phetrail-validate.ps1 exists to enforce schema compliance",
+    "Write-PhetrailEntry function (obi.ps1:38-70) does not set schema_version by default",
+    "evidence_chain and cross_references missing in some files — auditability gap",
+    "I.053 law (schema_version mandatory) violated in 3 of 4 audited files"
+  ],
+  "evidence_chain": {
+    "schema_version_02": "CANON/PHEROMONES/PheTrail-run161-02-soul-doctrine-gap.json -> has schema_version",
+    "schema_version_06": "CANON/PHEROMONES/PheTrail-run161-06-soulsearch-missing.json -> NO schema_version",
+    "schema_version_07": "CANON/PHEROMONES/PheTrail-run161-07-bb53-exposed-key.json -> NO schema_version",
+    "schema_version_09": "CANON/PHEROMONES/PheTrail-run161-09-inverted-index-rebuild.json -> NO schema_version",
+    "write_function": "SCRIPTS/obi.ps1:38-70 -> Write-PhetrailEntry does not set schema_version",
+    "i053_law": "COLD-START-BOOT.md:64 -> 'PheTrail schema_version is mandatory — field present and current'"
+  },
+  "cross_references": [
+    "COLD-START-BOOT.md:64 (I.053 schema_version mandatory)",
+    "COLD-START-BOOT.md:52 (I.052 PheTrails are operational memory trail)",
+    "SCRIPTS/obi.ps1:38-70 (Write-PhetrailEntry function)",
+    "SCRIPTS/obi.ps1:140-239 (doctor command — validation target)",
+    "CANON/PHEROMONES/PheTrail-run161-02-soul-doctrine-gap.json (compliant example)",
+    "CANON/PHEROMONES/PheTrail-run161-06-soulsearch-missing.json (non-compliant)"
+  ]
+}

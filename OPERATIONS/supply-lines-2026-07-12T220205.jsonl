@@ -1,0 +1,8 @@
+﻿{"ts":"2026-07-12T22:02:06.3592958+07:00","cmd":"HEALTH-GATE","status":"OK","message":"Supply chain open","payload":null}
+{"ts":"2026-07-12T22:05:38.3414718+07:00","cmd":"STAGE-I","status":"OK","message":"Scout complete","payload":"{\"lens\":\"all\",\"scoutLens\":\"all\",\"zone\":\"CANON/\"}"}
+{"ts":"2026-07-12T22:05:39.1161764+07:00","cmd":"SESSION","status":"OK","message":"Resolved test-338-rise for sov100","payload":"{\"student_id\":\"sov100\",\"session_id\":\"test-338-rise\"}"}
+{"ts":"2026-07-12T22:05:39.6612482+07:00","cmd":"STAGE-II","status":"ERR","message":"crunch/bible failed: The remote server returned an error: (500) Internal Server Error.","payload":null}
+{"ts":"2026-07-12T22:05:40.0617021+07:00","cmd":"STAGE-II","status":"ERR","message":"crunch/themes failed: The remote server returned an error: (500) Internal Server Error.","payload":null}
+{"ts":"2026-07-12T22:05:41.9644861+07:00","cmd":"STAGE-III","status":"OK","message":"skeleton/SSM","payload":"{\"ok\":true,\"keywords\":[],\"session_id\":\"test-338-rise\"}"}
+{"ts":"2026-07-12T22:05:42.4050311+07:00","cmd":"STAGE-IV","status":"OK","message":"truth score=0 achieved=True","payload":"{\"truth_id\":\"b1e475d0-eb58-4208-b463-8a2688d0dff2\",\"session_id\":\"test-338-rise\",\"consensus_score\":0,\"consensus_achieved\":true,\"model_a_score\":0,\"model_b_score\":0,\"agreed_directives\":[],\"key_phrases\":[],\"generated_at\":\"2026-07-12T15:05:43.186Z\",\"stage\":\"AGMEN-NOVISSIMUM-TRUTH\"}"}
+{"ts":"2026-07-12T22:05:42.4095224+07:00","cmd":"STAGE-IV","status":"ERR","message":"Truth consensus too low","payload":null}

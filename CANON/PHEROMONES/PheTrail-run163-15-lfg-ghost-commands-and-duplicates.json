@@ -1,0 +1,82 @@
+{
+  "run": 163,
+  "role": "PHOENIX_SCOUT",
+  "mission": "LFG command list contains ghost commands and duplicates — rebirthe (never existed), reincarnate (no file), souldna (duplicate)",
+  "lens": "CONFIG",
+  "created_at": "2026-07-13T00:56:00+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "lfg_line_35": {
+      "file": ".kilo/skills/LegionnaireFieldGuide.md",
+      "line": 35,
+      "raw_list": "forcemarch, phetrails, PhoenixScout, reincarnatedeath, reincarnaterise, rebirthe, supplylines, souldna, soulscholars, souldna, soulcap, supersaiyan, ssm, ledger, dnaREGISTRY, doctor, gateway, Centurion-Code, debug, audit, halt, sync, summarize, status, stabilize, report, reincarnate, help, checker, PCClaw, pcc-law, PCCloud, PAA, ob1-scout-mission, obinet-reliability, netpet-preflight, netpet-observability, layer6-deploy-pipeline, layer6-kv-perf, run105-pipeline, run106-p10-fix, test-pipeline-gauntlet"
+    },
+    "ghost_commands": [
+      {
+        "name": "rebirthe",
+        "in_lfg": true,
+        "file_exists": false,
+        "git_history": "No commits found for 'rebirthe' or 'rebirth'",
+        "likely_origin": "Typo for 'reincarnate' or 'rebirth' — never implemented",
+        "note": "Listed as command but no rebirthe.md exists and no git history references it"
+      },
+      {
+        "name": "reincarnate",
+        "in_lfg": true,
+        "file_exists": false,
+        "file_expected": ".kilo/command/reincarnate.md",
+        "actual_files": ["reincarnaterise.md", "reincarnatedeath.md"],
+        "note": "reincarnate.md does not exist. LFG likely meant reincarnaterise or reincarnatedeath."
+      }
+    ],
+    "duplicates": [
+      {
+        "name": "souldna",
+        "positions": [8, 10],
+        "context": "souldna, soulscholars, souldna, soulcap",
+        "note": "souldna appears twice in the list. Likely one should be soulscholars or another command."
+      }
+    ],
+    "count_verification": {
+      "lfg_claimed": 40,
+      "items_in_list": 42,
+      "unique_items": 41,
+      "duplicates": 1,
+      "ghosts": 2,
+      "actual_existing_files": 47,
+      "actual_command_docs": "~30",
+      "discrepancy": "LFG claims 40 but list has 42 items with 2 ghosts and 1 duplicate"
+    }
+  },
+  "verdict": {
+    "overall_status": "GHOST_COMMANDS_AND_LIST_CORRUPTION",
+    "priority": "P2_MEDIUM",
+    "impact": "LFG line 35 contains 2 ghost commands (rebirthe, reincarnate) and 1 duplicate (souldna). The list claims 40 commands but actually has 42 items. This makes LFG an unreliable source of truth for command taxonomy.",
+    "required_action": [
+      "1. REMOVE 'rebirthe' from LFG line 35 — ghost command, never existed",
+      "2. REPLACE 'reincarnate' with 'reincarnaterise' or 'reincarnatedeath' in LFG line 35 — reincarnate.md does not exist",
+      "3. REMOVE duplicate 'souldna' from LFG line 35",
+      "4. RECOUNT: Verify actual command count matches LFG claim of 40",
+      "5. ADD validation: obi.ps1 doctor should verify every command in LFG list has a matching .kilo/command/{name}.md file"
+    ]
+  },
+  "negative_trails": [
+    "rebirthe — ghost command listed in LFG but never existed as file or git commit",
+    "reincarnate — listed in LFG but no reincarnate.md file exists",
+    "souldna appears twice in LFG line 35 list — duplicate entry",
+    "LFG claims 40 commands but list contains 42 items with 2 ghosts and 1 duplicate",
+    "No validation that LFG command list matches actual .kilo/command/ directory contents"
+  ],
+  "evidence_chain": {
+    "lfg_list": ".kilo/skills/LegionnaireFieldGuide.md:35 -> full command list",
+    "ghost_rebirthe": "git log --oneline --all --grep='rebirthe' -> (no output); ls .kilo/command/rebirthe.md -> NOT FOUND",
+    "ghost_reincarnate": "ls .kilo/command/reincarnate.md -> NOT FOUND; ls .kilo/command/reincarnaterise.md -> EXISTS; ls .kilo/command/reincarnatedeath.md -> EXISTS",
+    "duplicate_souldna": ".kilo/skills/LegionnaireFieldGuide.md:35 -> 'souldna' appears twice in list"
+  },
+  "cross_references": [
+    ".kilo/skills/LegionnaireFieldGuide.md:35 (corrupted command list)",
+    ".kilo/command/ (47 files — actual command docs)",
+    "SCRIPTS/obi.ps1:2 (ValidateSet — 22 commands)",
+    "CANON/PHEROMONES/PheTrail-run163-14-lfg-40-commands-taxonomy-inconsistent.json (parent finding)"
+  ]
+}

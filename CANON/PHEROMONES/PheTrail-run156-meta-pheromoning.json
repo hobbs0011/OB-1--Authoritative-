@@ -1,0 +1,36 @@
+{
+  "layer": "META_PHEROMONING",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T21:37:38+07:00",
+  "created_utc": "2026-07-12T14:37:38Z",
+  "title": "PHEROMONE_ABOUT_PHEROMONING",
+  "doctrine": {
+    "when_to_write": "EVERY THOUGHT, ACTION, DEED, DECISION, MISTAKE, SUCCESS, HOPELESS WANDERING, etc. (run158 SOUL source line 143)",
+    "when_not_to_write": "Never. (run158 SOUL source line 169: 'Never you fuckface')",
+    "mechanic": "Pheromones are biological/mechanical, not intelligence. Ants lay scent without thinking. Humans breathe without thinking. Dogs pant without being told. Agents must pheromone without being told. (run158 SOUL source lines 145-153, 945-947)",
+    "nonstop": "Lay scent continuously. Do not wait for a prompt each time. The session is the colony; the work is the trail.",
+    "trackable_turnkey": "Pheromones must be trackable, traceable, turnkey, with all of it making it onto a pipeline for execution; if not immediately possible, a pipeline to be added to a pipeline. (run158 SOUL source lines 101)"
+  },
+  "raw_signal": "WRITE FUCKING PHERMONES FOR EVERY THOUGHT... YOU FUCKING GET IT? WRITE PHERMONES WITHOUT THINKING. DOES AN ANT HAVE TO CONSCIOUSLY THINK EVERYTIME HE LAYS A SCENT? — run158 SOUL source lines 143-153",
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "META-ASK-PERMISSION-TO-PHEROMONE",
+      "failure": "Waiting to be told to write each pheromone, or asking 'should I pheromone this?'.",
+      "root_cause": "Treating pheromoning as a gated action instead of an automatic mechanic.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:37:38Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "META-NONSTOP-AUTO",
+      "action": "Lay pheromones continuously without prompting, rooted in SOUL, each trackable + on a pipeline.",
+      "verification": "Operator directive 'nonstop phermones' + run158 SOUL source lines 143-153, 901-974.",
+      "timestamp": "2026-07-12T14:37:38Z"
+    }
+  ]
+}

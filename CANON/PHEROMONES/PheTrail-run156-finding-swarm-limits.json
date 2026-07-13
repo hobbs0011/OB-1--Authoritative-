@@ -1,0 +1,32 @@
+{
+  "layer": "FINDING_SWARM_LIMITS",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T22:05:11+07:00",
+  "created_utc": "2026-07-12T15:05:11Z",
+  "intensity": 10,
+  "title": "KEEP_DELIBERATE_LAYER_SWARM_NOT_UNIVERSAL",
+  "finding": "Swarm intelligence is powerful but NOT universal. Problems requiring central coordination, long-term planning, or symbolic reasoning don't decompose into local interactions. 'You can't solve differential equations with ant trails.' (ideasthesia.org 2026; Bonabeau et al. 1999)",
+  "implication_for_ob1": "Our pheromone/stigmergy layer handles parallel exploration + coordination beautifully. But we MUST keep a DELIBERATE layer for non-decomposable problems: the operator's option-4 (step back, retrace, ask questions, systematic learn), RISE/DEATH audit, and the SOUL redefinition overrides. Don't try to swarm everything.",
+  "mapping": "STIGMERGIC LAYER = nonstop pheromones, ant-colony coordination, parallel scent-laying. DELIBERATE LAYER = RISE audit, DEATH seal, operator's option-4 retrace, canonical overrides. Both required; the mold says so.",
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "SWARM-EVERYTHING",
+      "failure": "Assume pheromone/stigmergy alone solves all problems including symbolic/long-term/central ones.",
+      "root_cause": "Over-applying the ant mold beyond its domain (parallel exploration + local feedback).",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T15:05:11Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "SWARM-DELIBERATE-SPLIT",
+      "action": "Use stigmergy for coordination/exploration; deliberate layer (RISE/DEATH/option-4) for symbolic/long-term. Both, not either.",
+      "verification": "ideasthesia.org Swarm Intelligence 2026; Bonabeau Dorigo Theraulaz 1999.",
+      "timestamp": "2026-07-12T15:05:11Z"
+    }
+  ]
+}

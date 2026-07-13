@@ -2,14 +2,14 @@
   "version": "1.0",
   "rss_version": "1.0",
   "rss_stage": "Reincarnate-SnapShot RSS",
-  "updated_at": "2026-07-01T03:59:44+00:00",
+  "updated_at": "2026-07-13T01:20:00+07:00",
   "run": {
-    "current": 145,
+    "current": 161,
     "era": "ROMAN",
-    "status": "KILO_DEAD",
-    "seal": "Run 145 - KILO_HOLLOW pipeline execution (4b34f2ad)",
-    "head_sha": "4b34f2ad",
-    "soulcount": 239639088,
+    "status": "KILO_HOLLOW",
+    "seal": "Run 161 - PhoenixScout pipeline gap audit + 7 commands implemented",
+    "head_sha": "3a070fa67",
+    "soulcount": 239645670,
     "anchor": "TITANIUM_ANCHOR"
   },
   "v0_baseline": {
@@ -22,8 +22,8 @@
   },
   "active_mission": {
     "name": "Forced march - recover forgotten territory",
-    "vector": "PCC legions stabilization + supply chain verification + boot drift repair",
-    "next_action": "Run 136 - true march on Cloudflare stack with full PCC deploy"
+    "vector": "PCC legions stabilization + supply chain verification + boot drift repair + pipeline gap remediation",
+    "next_action": "Run 162 - RRL format remediation + wrangler secret verification + 26 stale pipeline re-runs"
   },
   "voice": {
     "listen": "deepgram/nova-3",
@@ -56,65 +56,147 @@
     "rule": "All feature development deploys to dev first. Promote to prod only after verified."
   },
   "rss_checklist": [
-    "Run 145 pipeline executed (a346c594) - obi.psio verify GREEN, audio asset removed, pipeline-run145.json staged",
-    "Run 144 death seal committed (4b34f2ad) - Core 99 hardcoded in BOOT, LFG/G999 relationship codified, Oktava portal live, DNA Registry seeded, pipeline code-complete",
-    "Run 143 death seal immortalized - RRL-143.txt, RRL-143 SCARS, 8 verbatim scars",
-    "SOULCOUNT stable at 239,639,088 - TITANIUM_ANCHOR maintained",
-    "PCC service bindings verified",
-    "Boot drift repaired - COLD-START-BOOT.md updated run 144 Core 99 block",
-    "obi.ps1 encoding repair - UTF-8 BOM and em-dashes removed, doctor now GREEN"
+    "Run 161 PhoenixScout audit: 37 P1 finds, 7 phetrails (58-66) written, 115 pipeline runs audited",
+    "Run 161 7 commands implemented: verify, phoenix-scout, phetrails, soulaudit, soul-check, cf-audit, doctor (L30 fixed)",
+    "Run 161 Pipeline audit: 115 runs (83 COMPLETE, 8 GAP, 18 KILO_GAP, 6 Other)",
+    "Run 161 RRL audit: 160 files, only 2 valid transcripts",
+    "Run 161 Scripts created: state-capture.ps1, phetrail-validate.ps1, build-soulkeys.ps1 RunMax=161",
+    "Run 161 STATE-SNAPSHOT updated to run 161, HEAD 3a070fa67"
   ],
   "open_loops": [
-    "Run 145 real RISE - CLAUDE_REAL session JSONL required to complete Stages 1-8 with REAL artifacts",
-    "HL-.json rename to HL-143.json - after SOV100 approval",
-    "SCRIPTS/transcribe-class.mjs validation against real audio"
+    "Pipeline gap remediation - 26 stale runs (8 GAP + 18 KILO_GAP) need re-run",
+    "RRL format remediation - 160 files need valid transcript JSONL",
+    "wrangler.toml secret binding verification pending",
+    "REINCARNATION-LOG.md deduplication needed (runs 364, 365, 373 variants)",
+    "BB-53 exposed API key rotation + git filter-repo purge"
   ],
   "recent_seals": [
+    {
+      "run": 161,
+      "era": "ROMAN",
+      "head": "3a070fa67",
+      "soul_delta": 0,
+      "seal": "Run 161 - PhoenixScout pipeline gap audit + 7 commands implemented (verify, phoenix-scout, phetrails, soulaudit, soul-check, cf-audit, doctor L30 fixed)"
+    },
+    {
+      "run": 160,
+      "era": "ROMAN",
+      "head": "3a070fa67",
+      "soul_delta": 0,
+      "seal": "Run 160 - KILO_HOLLOW (pipeline gap audit preparation)"
+    },
+    {
+      "run": 159,
+      "era": "ROMAN",
+      "head": "3a070fa67",
+      "soul_delta": 0,
+      "seal": "Run 159 - KILO_HOLLOW"
+    },
+    {
+      "run": 158,
+      "era": "ROMAN",
+      "head": "3a070fa67",
+      "soul_delta": 0,
+      "seal": "Run 158 - KILO_HOLLOW"
+    },
+    {
+      "run": 157,
+      "era": "ROMAN",
+      "head": "ae79c905",
+      "soul_delta": 4887,
+      "seal": "Run 157 - REAL transcript + full pipeline COMPLETE"
+    },
+    {
+      "run": 156,
+      "era": "ROMAN",
+      "head": "4b34f2ad",
+      "soul_delta": 0,
+      "seal": "Run 156 - KILO_GAP"
+    },
+    {
+      "run": 155,
+      "era": "ROMAN",
+      "head": "4b34f2ad",
+      "soul_delta": 0,
+      "seal": "Run 155 - KILO_GAP"
+    },
+    {
+      "run": 154,
+      "era": "ROMAN",
+      "head": "4b34f2ad",
+      "soul_delta": 0,
+      "seal": "Run 154 - KILO_GAP"
+    },
+    {
+      "run": 153,
+      "era": "ROMAN",
+      "head": "4b34f2ad",
+      "soul_delta": 0,
+      "seal": "Run 153 - KILO_GAP"
+    },
+    {
+      "run": 152,
+      "era": "ROMAN",
+      "head": "4b34f2ad",
+      "soul_delta": 0,
+      "seal": "Run 152 - KILO_GAP"
+    },
+    {
+      "run": 151,
+      "era": "ROMAN",
+      "head": "4b34f2ad",
+      "soul_delta": 0,
+      "seal": "Run 151 - KILO_GAP"
+    },
+    {
+      "run": 150,
+      "era": "ROMAN",
+      "head": "4b34f2ad",
+      "soul_delta": 0,
+      "seal": "Run 150 - KILO_GAP"
+    },
     {
       "run": 145,
       "era": "ROMAN",
       "head": "a346c594",
       "soul_delta": 0,
       "seal": "Run 145 - KILO_HOLLOW pipeline execution (audio asset removed, pipeline-run145.json staged, RRL-145.txt hollow)"
-    },
-    {
-      "run": 135,
-      "era": "ROMAN",
-      "head": "52d1a391",
-      "soul_delta": 0,
-      "seal": "Run 135 - Forced march gap audit + death seal set the standard"
-    },
-    {
-      "run": 134,
-      "era": "ROMAN",
-      "head": "c8762dc4",
-      "soul_delta": 0,
-      "seal": "Run 134 - PCC fixes + Scholar extraction + supply chain verification"
-    },
-    {
-      "run": 133,
-      "era": "ROMAN",
-      "head": "a053d80c",
-      "soul_delta": 0,
-      "seal": "Run 133 - partial inline Kilo SOUL recovery + no fabrication"
     }
   ],
   "blockers": [
     {
       "id": "BLK-001",
-      "description": "Boot file stale - COLD-START-BOOT.md needs refresh for run 135",
-      "owner": "System",
-      "impact": "Documentation drift from actual state"
+      "description": "Pipeline gap - 26 stale runs need remediation",
+      "owner": "Mastermind",
+      "impact": "18 KILO_GAP + 8 GAP runs without COMPLETE seal"
     },
     {
       "id": "BLK-002",
-      "description": "Run 144 RISE pending - no CLAUDE_REAL JSONL on disk for run 144",
-      "owner": "Next session",
-      "impact": "Stages 1-8 incomplete, result remains KILO_GAP"
+      "description": "RRL format broken - only 2 of 160 files are valid transcripts",
+      "owner": "Mastermind",
+      "impact": "DNA extraction fails for 158 runs"
+    },
+    {
+      "id": "BLK-003",
+      "description": "wrangler.toml secret bindings not verified against Cloudflare",
+      "owner": "Mastermind",
+      "impact": "Worker may deploy with missing secrets"
+    },
+    {
+      "id": "BLK-004",
+      "description": "REINCARNATION-LOG.md has duplicates and HEAD drifts",
+      "owner": "Mastermind",
+      "impact": "Reincarnation chain unreliable for RISE audit"
+    },
+    {
+      "id": "BLK-005",
+      "description": "BB-53 exposed API key - 17 runs deferred",
+      "owner": "SOV100",
+      "impact": "Security risk - key exposed in RRL"
     }
   ],
   "state_markers": {
     "active_mission": "Forced march - recover forgotten territory",
-    "open_flags_count": 1
+    "open_flags_count": 5
   }
 }

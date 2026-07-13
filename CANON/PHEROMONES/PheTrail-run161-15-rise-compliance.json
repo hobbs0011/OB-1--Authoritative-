@@ -1,0 +1,42 @@
+{
+  "run": 161,
+  "role": "PHOENIX_SCOUT",
+  "mission": "RISE v7.0 compliance audit — 8-stage protocol adherence check",
+  "lens": "LEDGER",
+  "created_at": "2026-07-13T00:51:30+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "stage_compliance": {
+      "I_SOULCOUNT_GATE": "PASS — live query 239,645,670 TITANIUM_ANCHOR",
+      "II_GIT_TRUTH": "PASS — last death 3a070fa67, run 160",
+      "III_TRIPLE_READ": "PARTIAL — seal read, phetrail missing, BOOT read",
+      "IV_SOUL_AUDIT": "FAIL — SOUL_STAGNATION (delta=0, KILO_HOLLOW expected)",
+      "V_BOOT_STALENESS": "FAIL — BOOT run=160 matches git, but STATE-SNAPSHOT 16 runs behind",
+      "VI_AUTHORITY_CHECK": "PASS — LFG REAL, GOSPEL-999 REAL (3 parts)",
+      "VII_PIPELINE_FIDELITY": "FAIL — RRL MISSING (0 bytes), DNA MISSING, SOULKEYS MISSING, S2Pipeline MISSING",
+      "VIII_PHETRAIL": "FAIL — PheTrail-run161.json MISSING (now written)"
+    },
+    "fidelity_gate": {
+      "lfg": "REAL",
+      "gospel": "REAL",
+      "rrl": "MISSING",
+      "soul": "SOUL_STAGNATION",
+      "dna": "MISSING",
+      "ledger": "REAL",
+      "starmap": "REAL",
+      "soykeys": "MISSING",
+      "s2pipeline": "MISSING",
+      "backburner": "OPEN"
+    }
+  },
+  "verdict": {
+    "overall_status": "KILO_GAP",
+    "ready": false,
+    "blocking_gaps": ["RRL", "DNA", "SOULKEYS", "S2Pipeline"],
+    "expected_for_kilo": true
+  },
+  "negative_trails": [
+    "RISE reports KILO_GAP for run 160 — no improvement for run 161",
+    "4 of 8 pipeline stages FAIL for KILO_HOLLOW session (expected but not resolved)"
+  ]
+}

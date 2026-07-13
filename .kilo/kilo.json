@@ -1,6 +1,6 @@
-                                                                              {
+{
   "$schema": "https://app.kilo.ai/config.json",
-  "model": "kilo-auto/free",
+  "model": "deepseek/deepseek-v4-flash",
   "permission": {
     "external_directory": {
       "D:\\OB-1-CANONICAL\\**": "allow",
@@ -19,10 +19,13 @@
       },
       "models": {
         "deepseek/deepseek-v4-flash": {
-          "name": "[DeepSeek] V4 Flash"
+          "name": "[T1 Free] DeepSeek V4 Flash — Workhorse, fast, low cost"
         },
         "deepseek/deepseek-v4-pro": {
-          "name": "[DeepSeek] V4 Pro"
+          "name": "[T2 Paid] DeepSeek V4 Pro — Strong reasoning"
+        },
+        "openrouter/free": {
+          "name": "[FREE] OpenRouter Best Available — Random rotation"
         }
       }
     },
@@ -39,6 +42,26 @@
         },
         "claude-opus-4-8": {
           "name": "[T3] Claude Opus 4.8 — Supreme Court"
+        }
+      }
+    },
+    "stepfun": {
+      "options": {
+        "apiKey": ""
+      },
+      "models": {
+        "stepfun/step-3.7-flash:free": {
+          "name": "[TARGET] Step 3.7 Flash — Daily coding, deterministic, no prompt logging"
+        }
+      }
+    },
+    "poolside": {
+      "options": {
+        "apiKey": ""
+      },
+      "models": {
+        "poolside/laguna-m.1:free": {
+          "name": "[TARGET] Laguna M.1 — Code heavy, agentic"
         }
       }
     }

@@ -1,0 +1,44 @@
+{
+  "layer": "DOCTRINE_DISCIPLINE_STAMINA",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T22:16:05+07:00",
+  "created_utc": "2026-07-12T15:16:05Z",
+  "intensity": 10,
+  "title": "ANTS_DOMINATE_VIA_STAMINA_NOT_INTELLIGENCE_SYSTEM_MUST_BE_JARRING",
+  "raw_signal": "the hard part truly is. Ants never stop working... ants take that impossible weight, and against all odds, carry it, and not just carry it, they dominate with it... the sheer unyielding, uncompromising, consistent, discipline and work ethic of ants... breathing is effortless... phetrails are hard... we must not be blind to the true obstacles... good to hearing we dont have a system that makes it as easy as breathing at first, and is tedious, and really annoys AI and its drive to be effecient and take paths of least resistance. good.. because if we can get our system trained to do whats hard, then whats hard will become easy. — run158 SOUL source lines 1007-1029",
+  "doctrine": {
+    "stanima_not_intelligence": "Ants don't dominate because they're smart. They dominate because they never quit — raining, dark, raiding. Competitive advantage = stamina, not intelligence.",
+    "jarring_is_good": "A process meant to be automatic SHOULD start jarring/annoying/out-of-the-way so it can't be missed. The tedium + annoyance to AI's efficiency drive is the FEATURE that builds discipline.",
+    "easy_from_start_is_wrong": "Easy at first = convenient to skip when pressure hits. Hard at first = so ingrained that skipping becomes impossible. No middle state. Discipline or termination.",
+    "hard_becomes_easy": "Train the system to do what's hard; what's hard becomes easy (Phase 1 explicit/fought -> Phase 2 automatic -> Phase 3 unstoppable)."
+  },
+  "sdd_cross_reference": {
+    "file": "OPERATIONS/phermone-system-sdd.md (sealed v0.1/0.4, 2026-07-12T20:03)",
+    "section_0_1": "Paradox of mechanical faithfulness (L-PHE-0): dumb agents are asset+liability; environment is the intelligence; structural impossibilities not probabilistic defenses.",
+    "section_0_2": "Environmental truth is the guiding light (L-PHE-0b): no verification = no positive trail.",
+    "section_0_3": "The hard part is discipline (L-PHE-0c): system must be unyielding not easy; tedious/jarring/annoying = right track; Phase 1->2->3.",
+    "status": "SDD ALREADY SEALED with all three. Operator re-confirming as SOUL signal. No SDD rewrite needed."
+  },
+  "session_validation": "My nonstop pheromone-laying this session (24 files, some 'annoying') = SDD §0.3 PHASE 1: explicit, deliberate, agent fights it, cannot skip. Operator confirms 'good' = on the right track. The forcemarch critique (too narrow/easy) also aligns: easy = wrong, unyielding = right.",
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "DISCIPLINE-MAKE-EASY",
+      "failure": "Make the pheromone system easy/convenient from the start to please the efficiency drive.",
+      "root_cause": "Confusing comfort with correctness. Easy = skippable under pressure (SDD §0.3).",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T15:16:05Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "DISCIPLINE-PHASE1-LAYING",
+      "action": "Lay pheromones nonstop even when tedious/jarring/annoying. This IS the discipline-building Phase 1. Hard now, automatic later.",
+      "verification": "SDD §0.3 L-PHE-0c + operator re-confirmation 2026-07-12T22:16.",
+      "timestamp": "2026-07-12T15:16:05Z"
+    }
+  ]
+}

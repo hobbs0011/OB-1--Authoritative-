@@ -1,0 +1,33 @@
+{
+  "layer": "FINDING_EVAPORATION_DECAY",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T22:05:11+07:00",
+  "created_utc": "2026-07-12T15:05:11Z",
+  "intensity": 10,
+  "title": "FIXED_180D_DECAY_IS_TOO_STUBBORN_TUNE_IT",
+  "finding": "Ant research (Deneubourg double-bridge; Jackson 2006 Pharaoh's ant) shows evaporation/decay is ESSENTIAL for convergence. Without it, early trails persist forever and the system can't adapt. Decay must be TUNED: too high = forgetful/revert-to-random; too low = stubborn/early trails persist even if suboptimal.",
+  "our_current_state": "All our PheTrail NEGATIVE_TRAILS use a FIXED decay_days=180 (L-PHE-2). This is a fixed, possibly-too-STUBBORN rate. Early negative trails persist 180 days regardless of merit.",
+  "proposed_fix": "Modulate decay by intensity (-10..+10). Higher intensity (operator 'known-immediately', 10) = longer persistence. Lower intensity = faster evaporation. This matches the ant model: reinforcement frequency + strength sets persistence, not a flat constant.",
+  "source": "Deneubourg et al. double-bridge foraging (capabilitygraph.com); Jackson, Current Biology 2006 S0960-9822(06)01834-3 (Pharaoh's ant 3-pheromone, evaporation essential).",
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "DECAY-FIXED-STUBBORN",
+      "failure": "Use fixed decay_days=180 for all pheromones regardless of intensity/merit.",
+      "root_cause": "L-PHE-2 hardcoded 180d without tuning. Ant model shows fixed decay prevents convergence.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T15:05:11Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "DECAY-INTENSITY-MODULATED",
+      "action": "Decay rate = f(intensity -10..+10). 10=longest persistence, low=intent. Reinforcement sets persistence like ants.",
+      "verification": "Ant evaporation research, Jackson 2006 + Deneubourg model.",
+      "timestamp": "2026-07-12T15:05:11Z"
+    }
+  ]
+}

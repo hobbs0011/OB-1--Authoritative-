@@ -1,0 +1,34 @@
+{
+  "run": 161,
+  "role": "PHOENIX_SCOUT",
+  "mission": "BB-53 exposed API key — 17-run deferred security breach urgency",
+  "lens": "SECURITY",
+  "created_at": "2026-07-13T00:56:30+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "exposure": {
+      "file": "RRL/ClaudeTheRetard1.txt",
+      "line": 2466,
+      "first_detected_run": 46,
+      "current_run": 161,
+      "age_days": 27,
+      "age_runs": 17,
+      "github_remote": "Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-",
+      "pushed_to_github": true,
+      "assume_burned": true
+    },
+    "affected_secrets": ["DEEPGRAM_API_KEY", "DEEPSEEK_API_KEY", "OPENROUTER_API_KEY"],
+    "no_gitleaks_gate": true,
+    "purge_required": true
+  },
+  "verdict": {
+    "overall_status": "ACTIVE_SECURITY_BREACH",
+    "priority": "P0_CRITICAL",
+    "time_sensitive": true
+  },
+  "negative_trails": [
+    "Key exposed in pushed GitHub history for 17 runs",
+    "No gitleaks/truffleHog pre-commit hook exists",
+    "git filter-repo purge not executed"
+  ]
+}

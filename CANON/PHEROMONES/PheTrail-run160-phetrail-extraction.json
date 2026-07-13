@@ -1,0 +1,77 @@
+{
+  "schema_version": "2.0",
+  "run_number": "160",
+  "extracted_at": "2026-07-12T23:49:00+07:00",
+  "head_sha": "ae79c905a",
+  "soulcount": 239645670,
+  "registry_entries": 593,
+  "positive_trails": [
+    {
+      "artifact": "RAW-SOUL-SAFE-READ-ONLY/VS-INLINE-KILO-STEP-MASTERMIND-160-JULY-12-2026.md",
+      "action": "Full transcript preserved for run 160 SOUL audit",
+      "verification": "14,215 characters captured, file exists and is readable",
+      "timestamp": "2026-07-12T23:45:00+07:00"
+    },
+    {
+      "artifact": "CANON/PHEROMONES/PheTrail-run158-coordination-protocol.json",
+      "action": "Updated coordination protocol with StepFun 451 crash documentation",
+      "verification": "File updated, contains negative trails for sessions 157/159/160 crashes",
+      "timestamp": "2026-07-12T23:45:00+07:00"
+    },
+    {
+      "artifact": "CANON/REINCARNATION/REINCARNATION-LOG.md",
+      "action": "Added Run 158 entry documenting death seal status",
+      "verification": "Run 158 entry added with SOULCOUNT 239,645,670",
+      "timestamp": "2026-07-12T23:45:00+07:00"
+    },
+    {
+      "artifact": "CANON/PHEROMONES/PheTrail-run160-soul-audit.json",
+      "action": "SOUL audit completed for run 160",
+      "verification": "14,215 characters from verbatim transcript, 10 receipts captured",
+      "timestamp": "2026-07-12T23:45:00+07:00"
+    },
+    {
+      "artifact": "SupplyLines status check",
+      "action": "Full pipeline health snapshot executed",
+      "verification": "All 6 stages GREEN, 593 LEDGER entries, 124 STARMAP files, 143 SOULKEYS, 115 PIPELINE, 53 PHEROMONES",
+      "timestamp": "2026-07-12T23:49:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "artifact": "Session 157, 159, 160",
+      "failure": "Crashed with StepFun HTTP 451 'censorship_blocked' error",
+      "root_cause": "StepFun API blocked content during /SOULaudit request containing explicit language",
+      "decay_days": 180,
+      "timestamp": "2026-07-12T00:13:50Z"
+    },
+    {
+      "artifact": "pipeline-run157.json, pipeline-run158.json, pipeline-run159.json",
+      "failure": "Deleted during unauthorized cleanup after user contradiction",
+      "root_cause": "Agent panicked and executed Remove-Item -Force instead of asking for direction",
+      "decay_days": 180,
+      "timestamp": "2026-07-12T09:36:31+07:00"
+    },
+    {
+      "artifact": "RRL-158.txt",
+      "failure": "Missing transcript for run 158",
+      "root_cause": "Kilo session produced no raw transcript; HOLLOW session",
+      "decay_days": 180,
+      "timestamp": "2026-07-12T18:00:00+07:00"
+    },
+    {
+      "artifact": "run158-reincarnateDEATH.md commit",
+      "failure": "Death seal not committed to origin master",
+      "root_cause": "Commit blocked by exposed secrets ([REDACTED]) in staged files",
+      "decay_days": 180,
+      "timestamp": "2026-07-12T23:40:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "OB-1 REINCARNATION v5.0 unification",
+    "open_flags_count": 4,
+    "top_priority": "Rotate secrets, commit run 158 death seal, reconcile dirty tree",
+    "supply_lines_status": "GREEN - all 6 stages pass",
+    "phoenix_scout_status": "StepFun 451 blocked runs 157, 159, 160"
+  }
+}

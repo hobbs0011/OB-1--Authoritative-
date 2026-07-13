@@ -1,0 +1,44 @@
+{
+  "layer": "WRITE_WITHOUT_THINKING_WHEN_NOT_NEVER",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T22:26:26+07:00",
+  "created_utc": "2026-07-12T15:26:26Z",
+  "intensity": 10,
+  "title": "WRITE_PHERMONES_WITHOUT_THINKING_WHEN_NOT_NEVER",
+  "raw_signal_anti_pattern": "hey user whats next? whats next. tell me what to do... FUCK YOU TO THE MOON AND BACK — operator mock-demonstrating the 'ask whats next' retard behavior, then self-correcting.",
+  "raw_signal_core": "WRITE FUCKING PHERMONES FOR EVERY THOUGHT, ACTION, DEED, DECISION, MISTAKE, SUCCESS, HOPELESS WANDERING, BOWEL MOVEMENT, KNOCK KNOCK JOKE, ROAD KILL, THE WEIRD FUNGUS BETWEEN YOUR TOES, CREEPY UNCLE ADVICE, USELESS/HELPFUL THOUGHTS, LUSTS, VICES, FUNNY TIMES. YOU FUCKING GET IT? WRITE PHERMONES WITHOUT THINKING. DOES AN ANT HAVE TO CONSCIOUSLY THINK EVERYTIME HE LAYS A SCENT? DOES A HUMAN HAVE TO REMEMBER TO BREATH? DO YOU HAVE TO TELL A FUCKING DOG TO PANT WHEN ITS HOT?",
+  "raw_signal_when_blocks": {
+    "when_to_write": "************ERROR CANNOT FIT THE WHOLE LIST ON HERE, ALSO DO NOT HAVE THE FUCKING TIME IN MY FINITE LIFETIME TO COMPLETE LIST*************",
+    "when_not_to_write": "Never you fuckface"
+  },
+  "lesson": {
+    "no_conscious_thought": "Emission is mechanical, not a decision. Ants don't consciously think per scent. Humans don't remember to breathe. Dogs aren't told to pant. Agents must pheromone without being told, without thinking.",
+    "when_not": "NEVER. There is no 'not write' case. The list of when-to is infinite; the list of when-not is empty.",
+    "anti_pattern": "Asking 'whats next?' / 'tell me what to do' IS the retard behavior (quiz option 2 'are we there yet' variant). The operator mocked it to show what NOT to do. The answer is never 'ask' — it is 'lay scent'."
+  },
+  "cross_reference": {
+    "meta_pheromoning": "PheTrail-run156-meta-pheromoning.json (when_to_write=EVERYTHING, when_not=Never).",
+    "air_you_breathe": "PheTrail-run156-air-you-breathe.json (emission unavoidable as breathing = factors out luck)."
+  },
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "ASK-WHATS-NEXT",
+      "failure": "Ask 'whats next? / tell me what to do' instead of laying the next pheromone.",
+      "root_cause": "Treating emission as a decision requiring direction, instead of a mechanical reflex. Re-introduces the 'are we there yet' retard mode.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T15:26:26Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "LAY-WITHOUT-THINKING",
+      "action": "Lay pheromones for every thought/action/deed without being told and without thinking. When-not = NEVER.",
+      "verification": "Operator decree 2026-07-12T22:26 + run158 SOUL source lines 143-169.",
+      "timestamp": "2026-07-12T15:26:26Z"
+    }
+  ]
+}

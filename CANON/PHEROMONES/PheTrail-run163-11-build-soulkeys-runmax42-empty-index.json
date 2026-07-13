@@ -1,0 +1,96 @@
+{
+  "run": 163,
+  "role": "PHOENIX_SCOUT",
+  "mission": "build-soulkeys.ps1 RunMax=42 default + empty inverted-index.json — SoulSearch structural death",
+  "lens": "PHEROMONE",
+  "created_at": "2026-07-13T00:53:00+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "build_soulkeys_bug": {
+      "file": "SCRIPTS/build-soulkeys.ps1",
+      "line": 10,
+      "code": "param([int]$RunMax = 42)",
+      "bug": "Default RunMax is 42, but current run is 161. Without explicit -RunMax 161, script only processes runs 0-42. Runs 43-161 are silently skipped.",
+      "impact": "Even if build-soulkeys.ps1 is invoked without arguments, it produces an index covering only 43 runs out of 162. The remaining 119 runs are invisible to SoulSearch."
+    },
+    "inverted_index_empty": {
+      "file": "CANON/SOUL-KEYWORDS/inverted-index.json",
+      "size_bytes": 3,
+      "content": "{ }",
+      "status": "COMPLETELY EMPTY",
+      "meaning": "SoulSearch has zero searchable terms. Every doctrine query returns empty. L68 SEARCH_FIRST is dead."
+    },
+    "top30_cap_confirmed": {
+      "file": "SCRIPTS/reincarnate-death.ps1",
+      "line": 272,
+      "code": "$wordFreq = $words | Group-Object | Sort-Object Count -Descending | Select-Object -First 30",
+      "impact": "Even when runs ARE processed, only the top 30 most frequent words per run enter the index. Doctrine terms like 'exploratores', 'agmen', 'praesidia' rarely appear 30+ times in a single RRL, so they are filtered out."
+    },
+    "rfkw_files_exist_but_index_empty": {
+      "finding": "73 rfkw-run*.txt files exist in CANON/SOUL-KEYWORDS/, but inverted-index.json is empty. This means either: (1) build-soulkeys.ps1 was never run, or (2) it was run with RunMax=42 and produced an empty index because doctrine terms were filtered by top-30 cap.",
+      "rfkw_file_count": 73,
+      "latest_rfkw_runs": [152, 157, 7284, 7283, 154, 151, 150, 149, 148, 145],
+      "note": "Latest rfkw files are for hollow runs (7284/7283 are HL IDs, not run numbers). No rfkw exists for runs 100-142."
+    },
+    "unigram_only": {
+      "file": "SCRIPTS/build-soulkeys.ps1",
+      "line": 107,
+      "code": "$tokens = [regex]::Matches($combined, '\\b[a-zA-Z]{3,}\\b') | ForEach-Object { $_.Value.ToLower() }",
+      "bug": "Regex \\b[a-zA-Z]{3,}\\b extracts only unigrams (single words). Multi-word doctrine phrases like 'modus_operandi', 'flag_and_tag', 'supply_lines', 'go_as_far_as_you_can_see' are structurally impossible to index.",
+      "impact": "Even if doctrine files are fed to the pipeline, their most important terms are multi-word phrases that the extractor cannot see."
+    },
+    "doctrine_files_never_fed": {
+      "files_never_fed": [
+        "CANON/SYSTEM/GOSPEL-999.md",
+        "CANON/SYSTEM/EXPLORATORES-SCOUT-DOCTRINE.md",
+        "CANON/SYSTEM/S2PIPELINE-ROMAN-LEGION-NAMING.md",
+        "CANON/SYSTEM/COLD-START-BOOT.md",
+        "CANON/BIBLE-CH08-AGENT-99-AND-THE-TRIAD.md"
+      ],
+      "get_run_content_function": "SCRIPTS/build-soulkeys.ps1:48-57",
+      "bug": "Get-RunContent only looks in RRL/ directory. It never reads doctrine files from CANON/SYSTEM/ or CANON/BIBLE-*. The food chain is broken at the source.",
+      "impact": "The highest-charge source material (GOSPEL-999.md = 105KB of live mandates) has zero representation in SOUL_INDEX."
+    }
+  },
+  "verdict": {
+    "overall_status": "SOUL_INDEX_STRUCTURAL_DEATH",
+    "priority": "P0_CRITICAL",
+    "impact": "SoulSearch is completely non-functional. inverted-index.json is empty. build-soulkeys.ps1 defaults to RunMax=42 (skips 119 runs). Top-30 cap filters out doctrine terms. Unigram regex misses multi-word phrases. Doctrine files never fed to pipeline. L68 SEARCH_FIRST has been violated since Run 0.",
+    "required_action": [
+      "1. FIX build-soulkeys.ps1:10: change param([int]$RunMax = 42) to param([int]$RunMax = (git log --oneline --grep '^death:' | Measure-Object | Select-Object -ExpandProperty Count))",
+      "2. ADD doctrine source ingestion: extend Get-RunContent or add Get-DoctrineContent to read GOSPEL-999.md, EXPLORATORES-SCOUT-DOCTRINE.md, S2PIPELINE-ROMAN-LEGION-NAMING.md, COLD-START-BOOT.md, BIBLE-CH08",
+      "3. REMOVE top-30 cap OR add doctrine passthrough: doctrine terms bypass frequency filter",
+      "4. ADD phrase extraction: split doctrine text on non-alphanumeric, extract 2-4 word phrases, index as 'phrase_exploratores', 'phrase_agmen', etc.",
+      "5. REBUILD: run build-soulkeys.ps1 -RunMax 161 -Force to regenerate inverted-index.json from scratch",
+      "6. VERIFY: SoulSearch 'exploratores' must return at least 5 hits from EXPLORATORES-SCOUT-DOCTRINE.md"
+    ]
+  },
+  "negative_trails": [
+    "inverted-index.json is COMPLETELY EMPTY ({ }) — SoulSearch has zero searchable terms",
+    "build-soulkeys.ps1:10 defaults RunMax=42 — skips runs 43-161 (119 runs invisible)",
+    "reincarnate-death.ps1:272 top-30 cap filters out low-frequency doctrine terms",
+    "build-soulkeys.ps1:107 unigram regex \\b[a-zA-Z]{3,}\\b cannot extract multi-word doctrine phrases",
+    "Get-RunContent (build-soulkeys.ps1:48-57) only reads RRL/ — never reads doctrine files from CANON/SYSTEM/",
+    "GOSPEL-999.md (105KB, 999 mandates) completely missing from SOUL_INDEX — highest-charge source has zero representation",
+    "73 rfkw-run*.txt files exist but are disconnected from empty inverted-index.json"
+  ],
+  "evidence_chain": {
+    "runmax_bug": "SCRIPTS/build-soulkeys.ps1:10 -> param([int]$RunMax = 42)",
+    "empty_index": "CANON/SOUL-KEYWORDS/inverted-index.json -> { }",
+    "top30_cap": "SCRIPTS/reincarnate-death.ps1:272 -> Select-Object -First 30",
+    "unigram_regex": "SCRIPTS/build-soulkeys.ps1:107 -> \\b[a-zA-Z]{3,}\\b",
+    "get_run_content_scope": "SCRIPTS/build-soulkeys.ps1:48-57 -> only RRL/ directory",
+    "rfkw_count": "ls CANON/SOUL-KEYWORDS/rfkw-run*.txt -> 73 files",
+    "l68_law": "COLD-START-BOOT.md:270 -> L68 SEARCH_FIRST"
+  },
+  "cross_references": [
+    "SCRIPTS/build-soulkeys.ps1:10 (RunMax default bug)",
+    "SCRIPTS/build-soulkeys.ps1:48-57 (Get-RunContent — RRL-only scope)",
+    "SCRIPTS/build-soulkeys.ps1:107 (unigram regex)",
+    "SCRIPTS/build-soulkeys.ps1:116 (top-15 cap in build script itself)",
+    "SCRIPTS/reincarnate-death.ps1:272 (top-30 cap in death pipeline)",
+    "CANON/SOUL-KEYWORDS/inverted-index.json (empty — proof of death)",
+    "CANON/SOUL-KEYWORDS/rfkw-run*.txt (73 files — orphaned output)",
+    "COLD-START-BOOT.md:270 (L68 SEARCH_FIRST — violated since Run 0)"
+  ]
+}

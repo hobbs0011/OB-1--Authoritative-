@@ -1,0 +1,144 @@
+{
+  "run": 161,
+  "role": "PHOENIX_SCOUT",
+  "mission": "Cross-run phetrail audit — schema compliance and quality across runs 156-163",
+  "lens": "PHEROMONE",
+  "created_at": "2026-07-13T01:05:00+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "run_156": {
+      "count": 23,
+      "schema_compliance": "LOW",
+      "schema_version": "MISSING in all files",
+      "quality_score": 70,
+      "issues": [
+        "Inconsistent JSON structure across files",
+        "Custom top-level keys: layer, name, session_id, created, intensity",
+        "No schema_version field",
+        "Heavy narrative overlap between entries",
+        "Experimental methodology (ant colony, AI panic, write-without-thinking)"
+      ],
+      "strengths": [
+        "High volume — 23 entries",
+        "Rich negative trail documentation",
+        "Covers unique topics: force march blind spots, supply lines, alarm scout criticals"
+      ]
+    },
+    "run_157": {
+      "count": 5,
+      "schema_compliance": "HIGH",
+      "schema_version": "2.1 present",
+      "quality_score": 75,
+      "issues": [
+        "Minimal negative trails (5 entries, 5 negative trails — compliant)"
+      ],
+      "strengths": [
+        "Tight JSON schema with schema_version 2.1",
+        "Strong evidence chain: artifact paths, verification timestamps",
+        "Focused mission: KiloClaw Telegram integration",
+        "5 artifacts created with verification"
+      ]
+    },
+    "run_158": {
+      "count": 16,
+      "schema_compliance": "MEDIUM",
+      "schema_version": "MISSING",
+      "quality_score": 78,
+      "issues": [
+        "Non-standard top-level keys: layer, mission, lens, created_at, status",
+        "No schema_version",
+        "Uses AUDIT_IN_PROGRESS status — never completed",
+        "Mixed structure: some entries have findings/verdict, others use different format"
+      ],
+      "strengths": [
+        "Layered architecture (L1-L8): raw observation through continuous execution log",
+        "Multiple negative-scored entries (underscaling, overengineering, execution failure)",
+        "Schema mature despite inconsistency"
+      ]
+    },
+    "run_160": {
+      "count": 3,
+      "schema_compliance": "MEDIUM",
+      "schema_version": "MISSING",
+      "quality_score": 80,
+      "issues": [
+        "Uses 'layer' and 'name' instead of 'run' and 'mission'",
+        "No schema_version",
+        "Uses soUlCount/soUlSource (non-standard casing)"
+      ],
+      "strengths": [
+        "Receipts-based audit with verbatim excerpts",
+        "13 character-count receipts with source references",
+        "Deep focus: SOUL audit + step-by-step scholar protocol"
+      ]
+    },
+    "run_161": {
+      "count": 26,
+      "schema_compliance": "MEDIUM",
+      "schema_version": "PRESENT in 25%, MISSING in 75%",
+      "quality_score": 90,
+      "issues": [
+        "schema_version missing in 75% of entries (06, 07, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26)",
+        "Inconsistent field naming across entries"
+      ],
+      "strengths": [
+        "Uniform JSON structure across 26 entries",
+        "negative_trails present on 100% of entries (Stage 48 law compliance)",
+        "Verdict per entry with explicit taxonomy",
+        "5 distinct audit lenses: GAP, DRIFT, LEDGER, SOUL, CONFIG",
+        "Evidence chain + cross_references on most entries"
+      ]
+    },
+    "run_163": {
+      "count": 8,
+      "schema_compliance": "HIGH",
+      "schema_version": "PRESENT in all",
+      "quality_score": 92,
+      "issues": [
+        "Small sample size — 8 entries"
+      ],
+      "strengths": [
+        "Consistent schema_version enforcement",
+        "Quality over quantity approach",
+        "Targets: state staleness, command collapse, kilo-gap chain, boot fingerprint, schema validation, BB53, session persistence"
+      ]
+    }
+  },
+  "verdict": {
+    "overall_status": "SCHEMA_DRIFT_ACROSS_RUNS",
+    "best_practice_run": 163,
+    "most_compliant_run": 157,
+    "highest_volume_run": 156,
+    "highest_quality_run": 163,
+    "schema_enforcement_gap": true
+  },
+  "cross_run_patterns": [
+    "No two runs use identical schema — each invents its own top-level keys",
+    "schema_version only consistently enforced in run163",
+    "negative_trails universally present — Stage 48 law broadly observed",
+    "Evidence chain present in run157, 161, 163 — missing in run156, 158, 160"
+  ],
+  "recommended_canonical_schema": {
+    "required_fields": [
+      "schema_version",
+      "run",
+      "role",
+      "mission",
+      "lens",
+      "created_at",
+      "status",
+      "findings",
+      "verdict",
+      "negative_trails",
+      "evidence_chain"
+    ],
+    "optional_fields": [
+      "cross_references",
+      "corrective_action",
+      "state_markers",
+      "artifacts_created",
+      "artifacts_modified",
+      "positive_trails"
+    ]
+  }
+}

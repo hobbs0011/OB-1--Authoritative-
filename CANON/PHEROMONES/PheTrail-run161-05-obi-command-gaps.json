@@ -1,0 +1,34 @@
+{
+  "run": 161,
+  "role": "PHOENIX_SCOUT",
+  "mission": "obi.ps1 command wiring audit — only doctor command implemented in Phase 1",
+  "lens": "CONFIG",
+  "created_at": "2026-07-13T00:46:00+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "implemented_commands": [
+      "doctor"
+    ],
+    "placeholder_commands": [
+      "verify", "dev", "mcp-audit", "soul-check", "cf-audit",
+      "phoenix-queue", "phoenix-status", "phoenix-alpha", "phoenix-beta",
+      "phoenix-gamma", "phoenix-delta", "phoenix-omega", "pcc-law",
+      "phoenix-scout", "forcemarch", "supply-lines", "reincarnateDeath",
+      "legion-garrison", "phetrails", "soulscholars", "soulaudit",
+      "kilo-free-models"
+    ],
+    "code_location": "SCRIPTS/obi.ps1:240-245",
+    "fallback_behavior": "Write-PhetrailEntry neutral → Write-Host NOT IMPLEMENTED → exit 0"
+  },
+  "verdict": {
+    "overall_status": "COMMAND_GAP",
+    "implemented_pct": 4.5,
+    "missing_pct": 95.5,
+    "impact": "All coordination commands are non-functional in current Phase 1"
+  },
+  "negative_trails": [
+    "Only 1 of 22 commands wired — 95.5% command surface area is placeholder",
+    "Commands like forcemarch, supply-lines, phoenix-scout are documented but not executable",
+    "No error thrown for unimplemented commands — silent failure"
+  ]
+}

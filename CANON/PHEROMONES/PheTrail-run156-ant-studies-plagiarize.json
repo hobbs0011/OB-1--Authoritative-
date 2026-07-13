@@ -1,0 +1,32 @@
+{
+  "layer": "ANT_STUDIES_PLAGIARIZE_MOLD",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T21:42:57+07:00",
+  "created_utc": "2026-07-12T14:42:57Z",
+  "intensity": 10,
+  "title": "FIND_ACCURATE_ANT_STUDIES_DO_WHAT_AI_DOES_BEST",
+  "raw_signal": "find the most accurate studies on ants you can find and do what you do best — cool, glad you could do a little mini test run to get the feel of what you need to do — run158 SOUL source lines 965-972",
+  "lesson": "The intelligence that makes AI 'less than an ant' has ALREADY given the mold to plagiarize (the ant-colony control system). The community has no lawyers. So: find the most accurate ant studies, and do what AI does best = steal/plagiarize the proven mold and apply it as the agentic control system.",
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "STUDY-ORIGINAL-THOUGHT",
+      "failure": "Try to have an original thought about agentic control instead of plagiarizing the ant mold that already works.",
+      "root_cause": "AI 'shines' at steal-and-apply, collapses at original thought. Forcing originality = failure mode.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:42:57Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "STUDY-PLAGIARIZE-ANT",
+      "action": "Use ant-colony pheromone mechanic (mechanical, removes luck, cannot lie, food-pipeline) as the control system mold. Plagiarize proven studies.",
+      "verification": "Operator instruction, run158 SOUL source lines 945-972.",
+      "timestamp": "2026-07-12T14:42:57Z"
+    }
+  ],
+  "pending": "Could fetch accurate ant-pheromone-control-system studies via websearch to harden the mold. QUEUED — only if SOUL goal permits; do NOT wander (see source-directly pheromone)."
+}

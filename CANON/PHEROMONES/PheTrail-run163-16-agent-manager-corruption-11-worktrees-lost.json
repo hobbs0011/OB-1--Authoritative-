@@ -1,0 +1,97 @@
+{
+  "run": 163,
+  "role": "PHOENIX_SCOUT",
+  "mission": ".kilo/agent-manager.json corruption event — 11 worktrees and 16 sessions lost",
+  "lens": "GAP",
+  "created_at": "2026-07-13T00:56:30+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "corruption_event": {
+      "corrupt_file": ".kilo/agent-manager.json.corrupt-2026-07-12T14-41-36-439Z",
+      "corruption_timestamp": "2026-07-12T14:41:36+07:00",
+      "current_file": ".kilo/agent-manager.json",
+      "current_worktrees": 1,
+      "current_sessions": 0,
+      "corrupt_worktrees": 12,
+      "corrupt_sessions": 16,
+      "worktrees_lost": 11,
+      "sessions_lost": 16
+    },
+    "corrupt_file_worktrees": [
+      {"id": "wt-1779119852551-1", "branch": "debonair-fuel", "created": "2026-05-18", "path": ".kilo/worktrees/debonair-fuel"},
+      {"id": "wt-1779184561847-1", "branch": "groovy-baritone", "created": "2026-05-19", "path": ".kilo/worktrees/groovy-baritone"},
+      {"id": "wt-1779184577719-2", "branch": "nosy-ethernet", "created": "2026-05-19", "path": ".kilo/worktrees/nosy-ethernet"},
+      {"id": "wt-1779255375021-1", "branch": "boiled-gopher", "created": "2026-05-20", "path": ".kilo/worktrees/boiled-gopher"},
+      {"id": "wt-1779255471410-2", "branch": "hypnotic-form", "created": "2026-05-20", "path": ".kilo/worktrees/hypnotic-form"},
+      {"id": "wt-1779288239339-1", "branch": "towering-planet", "created": "2026-05-20", "path": ".kilo/worktrees/towering-planet"},
+      {"id": "wt-1779333276956-1", "branch": "free-dentist", "created": "2026-05-21", "path": ".kilo/worktrees/free-dentist"},
+      {"id": "wt-1779658462828-1", "branch": "iron-bugle", "created": "2026-05-24", "path": ".kilo/worktrees/iron-bugle"},
+      {"id": "wt-1781703724352-2", "branch": "sparkling-clementine", "created": "2026-06-17", "path": ".kilo/worktrees/sparkling-clementine"},
+      {"id": "wt-1781706053320-1", "branch": "zealous-grasshopper", "created": "2026-06-17", "path": ".kilo/worktrees/zealous-grasshopper"},
+      {"id": "wt-1781728845911-1", "branch": "catnip-snowboard", "created": "2026-06-17", "path": ".kilo/worktrees/catnip-snowboard"},
+      {"id": "wt-1781766014428-1", "branch": "raspy-mustard", "created": "2026-06-18", "path": ".kilo/worktrees/raspy-mustard"}
+    ],
+    "current_file_worktree": {
+      "id": "wt-1783867297030-1",
+      "branch": "remarkable-droplet",
+      "parentBranch": "master",
+      "path": ".kilo/worktrees/remarkable-droplet",
+      "createdAt": "2026-07-01T05:51:26.091Z",
+      "note": "Only surviving worktree. Branch 'canon' in corrupt file vs 'master' in current."
+    },
+    "corrupt_file_sessions": [
+      "ses_1c4312111ffe7MdI33K9oWquyR (debonair-fuel)",
+      "ses_1c055e071ffeYnteuye8iaJsJn (groovy-baritone)",
+      "ses_1c055ba24ffeuZi3IfM6tfCfdv (nosy-ethernet)",
+      "ses_1bc50cd3bffeD5wnTLuYz08bP4 (hypnotic-form)",
+      "ses_1b9d0f5abffejUerMbZ0i3w4Fu (no worktree)",
+      "ses_1b9970bc0ffegkF1EmMTOG8LaZ (no worktree)",
+      "ses_1b778958cffeb8p0xag6eLbF1c (free-dentist)",
+      "ses_1a416c237ffe8AqrSrA6SvQhuD (iron-bugle)",
+      "ses_15f84c45cffeWcbjslJnAIwsWX (no worktree)",
+      "ses_15e95241bfferg0Odl6EpRzjV5 (no worktree)",
+      "ses_15cbb450bffe6Zvj1mz4AZJOtg (no worktree)",
+      "ses_15a9764afffeWLPhZFQNCqxcXK (no worktree)",
+      "ses_159c84666ffe1Je7Q07GFlPFID (no worktree)",
+      "ses_155c2996effeRogKqwF5ytvnB7 (no worktree)",
+      "ses_154f66eadffe1SmQgJ2Q4ibgXR (no worktree)"
+    ],
+    "worktree_directories": {
+      "expected_from_corrupt": [".kilo/worktrees/debonair-fuel", ".kilo/worktrees/groovy-baritone", ".kilo/worktrees/nosy-ethernet", ".kilo/worktrees/boiled-gopher", ".kilo/worktrees/hypnotic-form", ".kilo/worktrees/towering-planet", ".kilo/worktrees/free-dentist", ".kilo/worktrees/iron-bugle", ".kilo/worktrees/sparkling-clementine", ".kilo/worktrees/zealous-grasshopper", ".kilo/worktrees/catnip-snowboard", ".kilo/worktrees/raspy-mustard"],
+      "note": "Need to verify if these directories still exist on disk"
+    }
+  },
+  "verdict": {
+    "overall_status": "AGENT_MANAGER_STATE_CORRUPTION",
+    "priority": "P0_CRITICAL",
+    "impact": "agent-manager.json was corrupted on 2026-07-12T14:41:36. The corrupt backup shows 12 worktrees and 16 sessions existed before corruption. Current file has 1 worktree and 0 sessions. 11 worktrees and 16 sessions were lost. If the worktree directories still exist, they are orphaned — Agent Manager cannot see them.",
+    "required_action": [
+      "1. VERIFY: Check if .kilo/worktrees/* directories still exist on disk",
+      "2. RECOVER: If directories exist, restore agent-manager.json from corrupt backup or rebuild from disk state",
+      "3. REBUILD: If directories do NOT exist, rebuild agent-manager.json from actual .kilo/worktrees/ contents",
+      "4. SYNC: Ensure agent-manager.json matches actual git worktrees (L37 .kilo/agent-manager.json tracks worktree state — paths must match actual worktrees)",
+      "5. VALIDATE: Add obi.ps1 doctor check for agent-manager.json consistency"
+    ]
+  },
+  "negative_trails": [
+    "agent-manager.json.corrupt-2026-07-12T14-41-36-439Z exists — corruption event on 2026-07-12",
+    "Current agent-manager.json has 1 worktree, 0 sessions",
+    "Corrupt backup has 12 worktrees, 16 sessions",
+    "11 worktrees and 16 sessions lost in corruption",
+    "No automatic backup/recovery mechanism for agent-manager.json",
+    "L37 law violated: '.kilo/agent-manager.json tracks worktree state — paths must match actual worktrees'"
+  ],
+  "evidence_chain": {
+    "corrupt_file": ".kilo/agent-manager.json.corrupt-2026-07-12T14-41-36-439Z -> 12 worktrees, 16 sessions",
+    "current_file": ".kilo/agent-manager.json -> 1 worktree, 0 sessions",
+    "corruption_timestamp": "filename timestamp: 2026-07-12T14-41:36",
+    "l37_law": "COLD-START-BOOT.md:37 -> '.kilo/agent-manager.json tracks worktree state — paths must match actual worktrees'"
+  },
+  "cross_references": [
+    ".kilo/agent-manager.json (current — 1 worktree, 0 sessions)",
+    ".kilo/agent-manager.json.corrupt-2026-07-12T14-41-36-439Z (backup — 12 worktrees, 16 sessions)",
+    ".kilo/worktrees/ (directory — need to verify actual contents)",
+    "COLD-START-BOOT.md:37 (L37 — agent-manager.json must match actual worktrees)",
+    "CANON/PHEROMONES/PheTrail-run163-06-session-persistence-architectural-wall.json (session persistence finding)"
+  ]
+}

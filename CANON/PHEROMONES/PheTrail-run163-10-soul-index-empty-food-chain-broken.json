@@ -1,0 +1,109 @@
+{
+  "run": 163,
+  "role": "PHOENIX_SCOUT",
+  "mission": "SOUL_INDEX empty + rfkw extractor blindspots — SoulSearch blind since Roman naming ratified",
+  "lens": "PHEROMONE",
+  "created_at": "2026-07-13T00:52:30+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "soulsearch_operational_status": {
+      "tool": "soul-search.ps1 / SoulSearch.md",
+      "index_file": "CANON/SOUL-KEYWORDS/inverted-index.json",
+      "status": "FUNCTIONAL BUT STARVED",
+      "root_cause": "SOUL_INDEX is empty for doctrine vocabulary. rfkw extractor has structural blindspots.",
+      "law_violated": "L68 SEARCH_FIRST — 'when asked where anything is, SoulSearch (/SoulSearch <term>) is the FIRST tool touched. Never grep the archive first.'"
+    },
+    "rfkw_extractor_blindspots": {
+      "file": "CANON/SOUL-KEYWORDS/inverted-index.json",
+      "blindspot_1": {
+        "name": "Top-30 frequency cap",
+        "description": "Doctrine terms may not reach top 30 frequency in RRL source files, so they never enter the index",
+        "evidence": "PheTrail-run161-02-soul-doctrine-gap.json -> 'Top 30 cap — doctrine terms may not reach top 30 frequency'"
+      },
+      "blindspot_2": {
+        "name": "Unigram-only extraction",
+        "description": "Multi-word doctrine phrases structurally impossible to index: modus_operandi, flag_and_tag, supply_lines, go_as_far_as_you_can_see, roman_legion",
+        "evidence": "PheTrail-run161-02-soul-doctrine-gap.json -> 'Unigram only — multi-word phrases structurally impossible'"
+      },
+      "blindspot_3": {
+        "name": "RRL-only source",
+        "description": "Doctrine files (GOSPEL-999.md, EXPLORATORES-SCOUT-DOCTRINE.md, S2PIPELINE-ROMAN-LEGION-NAMING.md, COLD-START-BOOT.md) never fed to pipeline",
+        "evidence": "PheTrail-run161-02-soul-doctrine-gap.json -> 'RRL-only source — doctrine files never fed to pipeline'"
+      }
+    },
+    "missing_doctrine_vocabulary": {
+      "tier_1_unindexed": [
+        "exploratores",
+        "speculatores",
+        "agmen",
+        "praesidia",
+        "limitanei",
+        "comitatenses",
+        "veterani"
+      ],
+      "tier_2_unindexed": [
+        "modus_operandi",
+        "flag_and_tag",
+        "supply_lines",
+        "teachability",
+        "go_as_far_as_you_can_see",
+        "horizon_principle"
+      ],
+      "tier_3_unindexed": [
+        "drones",
+        "roman_legion",
+        "soul_is_query",
+        "commit_dont_hold",
+        "simulation_path_law",
+        "pre_code_doc_gate",
+        "require_correlation_id"
+      ]
+    },
+    "index_food_chain": {
+      "current": "RRL-only -> rfkw extractor -> inverted-index.json",
+      "broken_links": [
+        "GOSPEL-999.md (105KB, 999 mandates) never fed to rfkw",
+        "EXPLORATORES-SCOUT-DOCTRINE.md never fed to rfkw",
+        "S2PIPELINE-ROMAN-LEGION-NAMING.md never fed to rfkw",
+        "COLD-START-BOOT.md never fed to rfkw",
+        "BIBLE-CH08-AGENT-99-AND-THE-TRIAD.md never fed to rfkw"
+      ],
+      "result": "SoulSearch on any doctrine term returns zero hits. Legion has been marching blind since Run 0."
+    }
+  },
+  "verdict": {
+    "overall_status": "SOUL_INDEX_FOOD_CHAIN_BROKEN",
+    "priority": "P0_SYSTEMIC",
+    "impact": "SoulSearch returns nothing on doctrine-level queries. L68 SEARCH_FIRST is violated at every boot. The legion has been marching blind through every doctrine query since Roman naming was ratified. Not because the tool broke — because the food chain above it was never connected.",
+    "required_action": [
+      "1. INGEST Tier 1 doctrine files into SOUL_INDEX: GOSPEL-999.md, EXPLORATORES-SCOUT-DOCTRINE.md, S2PIPELINE-ROMAN-LEGION-NAMING.md, COLD-START-BOOT.md, BIBLE-CH08-AGENT-99-AND-THE-TRIAD.md",
+      "2. FIX rfkw extractor: remove top-30 cap OR add doctrine source passthrough that bypasses cap",
+      "2. ADD phrase extraction for multi-word doctrine terms (modus_operandi, flag_and_tag, supply_lines, go_as_far_as_you_can_see)",
+      "3. REBUILD inverted-index.json with correct RunMax (current run 163, not 42)",
+      "4. ADD L68 enforcement to obi.ps1 doctor: verify inverted-index.json contains at least 100 doctrine terms"
+    ]
+  },
+  "negative_trails": [
+    "SOUL_INDEX empty for doctrine vocabulary — SoulSearch blind to all Roman doctrine terms",
+    "rfkw extractor top-30 cap filters out low-frequency doctrine terms before they reach index",
+    "rfkw extractor unigram-only design makes multi-word doctrine phrases structurally impossible to index",
+    "GOSPEL-999.md (105KB, 999 mandates) never fed to rfkw pipeline — highest-charge source completely missing",
+    "L68 SEARCH_FIRST violated at every boot since Run 0 — legion marching blind",
+    "SoulSearch works for indexed terms (scouts, drones, phoenix) but fails for doctrine (exploratores, agmen, praesidia)"
+  ],
+  "evidence_chain": {
+    "soulsearch_law": "COLD-START-BOOT.md:270 -> 'L68 SEARCH_FIRST — when asked where anything is, SoulSearch (/SoulSearch <term>) is the FIRST tool touched'",
+    "rfkw_blindspot_top30": "CANON/PHEROMONES/PheTrail-run161-02-soul-doctrine-gap.json -> 'Top 30 cap — doctrine terms may not reach top 30 frequency'",
+    "rfkw_blindspot_unigram": "CANON/PHEROMONES/PheTrail-run161-02-soul-doctrine-gap.json -> 'Unigram only — multi-word phrases structurally impossible'",
+    "rfkw_blindspot_source": "CANON/PHEROMONES/PheTrail-run161-02-soul-doctrine-gap.json -> 'RRL-only source — doctrine files never fed to pipeline'",
+    "tier1_targets": "CANON/PHEROMONES/PheTrail-run161-02-soul-doctrine-gap.json:63-70 -> tier_1_ingest_targets list"
+  },
+  "cross_references": [
+    "COLD-START-BOOT.md:270 (L68 SEARCH_FIRST)",
+    "COLD-START-BOOT.md:64 (I.053 PheTrail schema_version mandatory)",
+    "CANON/PHEROMONES/PheTrail-run161-02-soul-doctrine-gap.json (root cause analysis)",
+    "CANON/SOUL-KEYWORDS/inverted-index.json (target for rebuild)",
+    "CANON/SYSTEM/GOSPEL-999.md (Tier 1 ingest target — never fed to rfkw)",
+    "CANON/SYSTEM/EXPLORATORES-SCOUT-DOCTRINE.md (Tier 1 ingest target)"
+  ]
+}

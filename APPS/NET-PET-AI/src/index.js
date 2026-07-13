@@ -12,6 +12,7 @@ import { queryLessons, writeProgress, queryProgress, syncStudentProgress, writeS
 import { sendZaloMessage, checkAndEscalate, runEscalationSweep, getAccountabilityLinks } from './zalo.js';
 import { generatePosts, routePost, buildInsightPost } from './growth-engine.js';
 import { calculateVirality, calculateConversion, generateVariants, evaluateExperiment, extractPattern, optimizeHook, mutatePrompt, runLearningLoop } from './virality.js';
+import { runColonyLoop, depositFromBreakthrough, getTrailMap, selectAction } from './ant-colony.js';
 import { getStudentRoute, getModulePrompt, createSnapshot, storeSnapshot, rehydrate } from './star-map.js';
 import { computeNextReview, buildVocabContext, generateVocabId } from './vocab-srs.js';
 import { LedgerDO, PetDO, CommandDO, MemoryDO } from './durable_objects.js';
@@ -722,6 +723,13 @@ export default {
           })
           .catch(err => console.log(`[CRON] Soul priority error: ${err.message}`))
       );
+      // ANT COLONY: evaporate neglected trails, seed defaults — mechanical, automatic
+      try {
+        const colony = await runColonyLoop(env);
+        console.log(`[CRON] Ant colony loop: ${JSON.stringify(colony)}`);
+      } catch (err) {
+        console.log(`[CRON] Ant colony loop error: ${err.message}`);
+      }
     }
 
     // Escalation sweep runs every 6 hours (0, 6, 12, 18 UTC)
@@ -808,6 +816,19 @@ async function handleAPI(path, request, env, url) {
   // Block U: GET /api/admin/audit — recent audit log entries
   if (path === "/api/admin/audit" && method === "GET") {
     return handleAdminAudit(env, url);
+  }
+
+  // ANT COLONY: POST /api/admin/colony/loop — trigger evaporate + seed (gated by upstream /api/admin/* checkAdminKey)
+  if (path === "/api/admin/colony/loop" && method === "POST") {
+    const report = await runColonyLoop(env);
+    return addCors(json({ ok: true, report }), request);
+  }
+
+  // ANT COLONY: GET /api/admin/colony/map?segment=th_sound — view the pheromone map (gated)
+  if (path === "/api/admin/colony/map" && method === "GET") {
+    const segment = url.searchParams.get("segment") || undefined;
+    const map = await getTrailMap(env, segment);
+    return addCors(json({ ok: true, segment: segment || "ALL", trails: map }), request);
   }
 
   // B2B: GET /api/admin/student-activity — employer-facing practice frequency (gated by upstream /api/admin/* checkAdminKey)
@@ -1495,6 +1516,10 @@ const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionH
           }
           const updatedMem = { ...mem, breakthroughs, struggles, last_session_ts: Date.now(), ...(topic ? { last_topic: topic } : {}) };
           env.STUDENT_MEMORY.put(`mem:${studentId}`, JSON.stringify(updatedMem)).catch(() => {});
+          // ANT COLONY: each breakthrough deposits a pheromone trail for its domain — mechanical, no decision
+          for (const b of breakthroughs) {
+            depositFromBreakthrough(env, b, 2).catch(() => {});
+          }
         } catch (_) {}
       }
 

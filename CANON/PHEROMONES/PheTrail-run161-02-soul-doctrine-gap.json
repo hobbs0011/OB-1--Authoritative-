@@ -1,0 +1,85 @@
+{
+  "run": 161,
+  "role": "PHOENIX_SCOUT",
+  "mission": "Phase 0 A-Z SOUL Recovery — Doctrine vocabulary gap analysis",
+  "lens": "PHEROMONE",
+  "created_at": "2026-07-13T00:25:00+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "index_status": {
+      "indexed": {
+        "scouts": "count: 2",
+        "drones": "referenced in 10 locations",
+        "phoenix": "indexed 3+ times with high weight",
+        "agent99": "indexed multiple times, core system term",
+        "phermone": "indexed, appears in COLD-START-BOOT.md and multiple phetrail files"
+      },
+      "missing_doctrine": {
+        "exploratores": "referenced in run105-pipeline.md - Roman Legion Stage I (Scouts)",
+        "speculatores": "referenced in run105-pipeline.md - deep audit spies",
+        "agmen": "referenced in run105-pipeline.md - Main Body",
+        "praesidia": "referenced in run105-pipeline.md - Garrison",
+        "limitanei": "referenced in run105-pipeline.md - Frontier Shield",
+        "comitatenses": "referenced in run105-pipeline.md - front line",
+        "veterani": "referenced in run105-pipeline.md - experienced troops"
+      },
+      "missing_operating_doctrine": {
+        "modus_operandi": "multi-word phrase - unigram extractor blindspot",
+        "flag_and_tag": "multi-word phrase - unigram extractor blindspot",
+        "supply_lines": "multi-word phrase - unigram extractor blindspot",
+        "teachability": "doctrine term - not in top 30 per run",
+        "go_as_far_as_you_can_see": "multi-word phrase - structurally impossible",
+        "horizon_principle": "doctrine term - not indexed"
+      },
+      "missing_foundational": {
+        "drones": "exists but needs verification",
+        "roman_legion": "multi-word phrase - structurally impossible"
+      }
+    },
+    "unanswered_questions": [
+      "What are the 4 stages of learning? (asked 06/12/2026 01:09:51)",
+      "What specific scout missions need to be defined for B, C, E, F, H? (06/12/2026 00:17:54)",
+      "What are the exact voice file paths to process with Deepgram? (06/11/2026 22:38:58)",
+      "What is the email used for the soul-logger? (06/11/2026 23:40:08)",
+      "Where is the art arsenal and what needs to be done with it? (06/12/2026 00:20:23)",
+      "What specific market research on human sources is required? (06/12/2026 00:28:04)"
+    ],
+    "mysteries": [
+      "Why did B and C runs stall despite appearing complete? (implied blockage)",
+      "What caused the 'FULL SYSTEM FREEZE'? (06/12/2026 01:09:51)",
+      "Is the SOUL contamination from Run 109 repeated in subsequent sessions?",
+      "What is the actual blueprint for the 3-phase A-Z deployment?",
+      "Where are the gaps in the pheromone trails that connect the empire?"
+    ],
+    "root_cause": {
+      "inverted_index_empty": "build-soulkeys.ps1 defaults to RunMax=42, but doctrine terms appear in later runs (run105, run116, etc.)",
+      "rfkw_extractor_blindspots": [
+        "Top 30 cap — doctrine terms may not reach top 30 frequency",
+        "Unigram only — multi-word phrases structurally impossible",
+        "RRL-only source — doctrine files (EXPLORATORES-SCOUT-DOCTRINE.md, S2PIPELINE-ROMAN-LEGION-NAMING.md) never fed to pipeline"
+      ],
+      "structural_gap": "SOUL_INDEX = empty (0 doctrine fragments) from Run 0 to current"
+    },
+    "tier_1_ingest_targets": [
+      "CANON/SYSTEM/GOSPEL-999.md + Parts 2 & 3 — 105KB, 999 live mandates, SOV100 sealed",
+      "CANON/BIBLE-CH08-AGENT-99-AND-THE-TRIAD.md — agent identity root, Triad architecture",
+      "CANON/SYSTEM/EXPLORATORES-SCOUT-DOCTRINE.md — scouting doctrine, Horizon Principle",
+      "CANON/SYSTEM/S2PIPELINE-ROMAN-LEGION-NAMING.md — 6-force structure, naming evolution",
+      "CANON/BIBLE-CH14-THE-CLOSING-DECLARATION.md — 'Go as far as you can see' ×2",
+      "CANON/BIBLE-CH16-THE-NUCLEAR-HARVEST-PIPELINE.md — 'Go as far as you can see' ×2"
+    ]
+  },
+  "verdict": {
+    "overall_status": "INDEX_FOOD_CHAIN_BROKEN",
+    "open_gaps": 19,
+    "critical_gaps": 7,
+    "structural_issues": 3,
+    "next_action": "Ingest Tier 1 doctrine files into SOUL_INDEX. Rebuild inverted-index.json with correct RunMax. Add phrase extraction for multi-word doctrine terms."
+  },
+  "learned": {
+    "routing": "SoulSearch returns nothing on doctrine-level queries because SOUL_INDEX is empty. The legion has been marching blind through every doctrine query since the Roman naming was ratified.",
+    "implementation": "Need to: (1) Update build-soulkeys.ps1 RunMax to 161+, (2) Add phrase extraction for multi-word terms, (3) Feed doctrine files to pipeline, (4) Rebuild inverted-index.json",
+    "phoenix_scout_upgrade": "Role upgraded to PHE_TRAIL_FOLLOWER. Next scout should verify inverted-index.json rebuild and check if doctrine terms are now indexed."
+  },
+  "negative_trail_count": 0
+}

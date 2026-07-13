@@ -1,0 +1,65 @@
+{
+  "layer": "ALARM_SCOUT_CRITICALS",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T22:09:40+07:00",
+  "created_utc": "2026-07-12T15:09:40Z",
+  "intensity": 10,
+  "title": "ALARM_PHEROMONE_SCOUT_FOUND_412_P1_CRITICAL",
+  "scout_report": "OPERATIONS/phoenix-scout-2026-07-12T220206.jsonl",
+  "alarm_summary": {
+    "total_finds": 17934,
+    "P1_critical": 412,
+    "P2_high": 17522,
+    "P1_by_type": "DRIFT=376, PIPELINE=36",
+    "P2_breakdown": "SOUL=14128, LEDGER=260, DRIFT=447, CONFIG=4, GAP=3059, PIPELINE=36"
+  },
+  "headline_criticals": [
+    { "file": "CANON/SYSTEM/COLD-START-BOOT.md", "hits": 32, "type": "DRIFT/STALE", "detail": "BOOT references stale SHA 06d9ded3 != current HEAD ae79c905a (Run 156). Cross-validates RISE audit finding." },
+    { "file": "CANON/SOUL/BIBLE-OF-THE-SYSTEM.json", "hits": 89, "type": "DRIFT", "detail": "BIBLE drift flagged" },
+    { "file": "CANON/SOUL/EXTRACT/dna-run79.json", "hits": 141, "type": "DRIFT", "detail": "DNA extract drift (largest single cluster)" },
+    { "file": "CANON/SOUL/EXTRACT/dna-run68.json", "hits": 26, "type": "DRIFT" },
+    { "file": "CANON/SOUL/EXTRACT/dna-run86.json", "hits": 17, "type": "DRIFT" },
+    { "file": "CANON/PIPELINE/pipeline-run*.json", "hits": 36, "type": "PIPELINE", "detail": "36 pipeline artifacts flagged P1" }
+  ],
+  "scout_lesson": "Scout pulses BOOT HEAD on every scan — drift is a pheromone, not cleanup. (per scout learned file)",
+  "alarm_action": "LAY ALARM PHEROMONE (scout-warn). Caesar executes scouts who find danger and do not warn — so warn. The 412 P1 + 3059 GAP + 447 DRIFT are the colony's known danger zones. Recruit operator attention before any further march.",
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "SCOUT-BOOT-STALE-HEAD",
+      "failure": "COLD-START-BOOT.md references HEAD 06d9ded3 while git HEAD is ae79c905a (Run 156).",
+      "root_cause": "Boot not refreshed after Run 156 KILO_GAP death. L30 BOOT_FILE_AGE_SWEEP should fire.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T15:09:40Z"
+    },
+    {
+      "type": "NEGATIVE",
+      "id": "SCOUT-BIBLE-DRIFT",
+      "failure": "BIBLE-OF-THE-SYSTEM.json drift (89 P1 hits).",
+      "root_cause": "BIBLE not re-synced after recent runs.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T15:09:40Z"
+    },
+    {
+      "type": "NEGATIVE",
+      "id": "SCOUT-DNA-DRIFT-CLUSTER",
+      "failure": "dna-run79/68/86 + others DRIFT (141/26/17 hits).",
+      "root_cause": "DNA extracts stale vs current schema/HEAD.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T15:09:40Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "SCOUT-COMPLETE",
+      "action": "Phoenix Scout scanned 3928 files, surfaced 17934 findings with priority/type/learned/next. Trace laid.",
+      "verification": "OPERATIONS/phoenix-scout-2026-07-12T220206.jsonl (17934 lines).",
+      "timestamp": "2026-07-12T15:09:40Z"
+    }
+  ]
+}

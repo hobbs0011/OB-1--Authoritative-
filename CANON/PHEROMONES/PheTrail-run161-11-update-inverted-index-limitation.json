@@ -1,0 +1,33 @@
+{
+  "run": 161,
+  "role": "PHOENIX_SCOUT",
+  "mission": "update-inverted-index.ps1 ADDS-only behavior audit",
+  "lens": "CONFIG",
+  "created_at": "2026-07-13T00:49:30+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "script": "SCRIPTS/update-inverted-index.ps1",
+    "behavior": "ADDS keywords only — never rebuilds from scratch",
+    "code_location": "Lines 42-55: foreach loop adds missing keywords",
+    "limitation": "Cannot remove stale keywords, cannot rebuild index from rfkw files",
+    "keywords_added": [
+      "roblox", "survive", "brainrot", "zombie", "wave",
+      "train", "survival", "enemy", "weapon", "prestige",
+      "gacha", "battlepass", "gamepass", "pet", "aura",
+      "guild", "day99", "rizz", "skibidi", "sigma",
+      "ohio", "3d", "asset", "manifest", "roblox-studio",
+      "robux", "crate", "boss", "day", "wave-survival"
+    ],
+    "run_target": 142
+  },
+  "verdict": {
+    "overall_status": "SCRIPT_LIMITATION",
+    "impact": "Index corruption over time — stale terms never removed",
+    "required": "Rebuild script that regenerates index from rfkw files + doctrine sources"
+  },
+  "negative_trails": [
+    "ADDS-only script accumulates garbage over time",
+    "No delete/rebuild path exists",
+    "Misses entire doctrine vocabulary because it only adds hardcoded list"
+  ]
+}

@@ -14,31 +14,52 @@ try {
   exit 1
 }
 
+$root = $response
+if ($response.PSObject.Properties.Name -contains 'data' -and $response.data -is [System.Collections.IEnumerable]) {
+  $root = $response.data
+}
+
 $freeModels = @()
 $autoTiers = @()
 $totalModels = 0
 
-foreach ($entry in $response.PSObject.Properties) {
+foreach ($entry in $root) {
   $totalModels++
-  $id = $entry.Name
-  $meta = $entry.Value
+  $id = $entry.id
+  $meta = $entry
 
-  $provider = $meta.provider
-  if (-not $provider) { $provider = $meta.owned_by }
-  if (-not $provider) { $provider = 'unknown' }
-
-  $pricing = $meta.pricing
-  $input = 0
-  $output = 0
-  if ($pricing) {
-    $input = [double]$pricing.prompt
-    $output = [double]$pricing.completion
-    if (-not $input -and $pricing.input) { $input = [double]$pricing.input }
-    if (-not $output -and $pricing.output) { $output = [double]$pricing.output }
+  $provider = $meta.opencode.ai_sdk_provider
+  if (-not $provider) { $provider = $meta.opencode.provider }
+  if (-not $provider) {
+    $parts = $id -split '/'
+    $provider = if ($parts.Length -gt 1) { $parts[0] } else { 'unknown' }
   }
 
+  $pricing = $meta.pricing
+  $promptRaw = $pricing.prompt
+  $completionRaw = $pricing.completion
+
+  $promptStr = if ($promptRaw -is [System.Collections.IEnumerable] -and -not ($promptRaw -is [string])) {
+    ($promptRaw | Select-Object -First 1)
+  } else {
+    [string]$promptRaw
+  }
+
+  $completionStr = if ($completionRaw -is [System.Collections.IEnumerable] -and -not ($completionRaw -is [string])) {
+    ($completionRaw | Select-Object -First 1)
+  } else {
+    [string]$completionRaw
+  }
+
+  $input = 0
+  $output = 0
+  if ($promptStr) { $input = [double]$promptStr }
+  if ($completionStr) { $output = [double]$completionStr }
+
   $isFree = $false
-  if ($input -eq 0 -and $output -eq 0) {
+  if ($meta.isFree -eq $true) {
+    $isFree = $true
+  } elseif ($input -eq 0 -and $output -eq 0) {
     $isFree = $true
   }
 
@@ -61,7 +82,7 @@ foreach ($entry in $response.PSObject.Properties) {
 }
 
 $report = [ordered]@{
-  timestamp = (Get-Date).ToISOString()
+  timestamp = (Get-Date).ToString('o')
   endpoint = $ENDPOINT
   summary = [ordered]@{
     total_models = $totalModels

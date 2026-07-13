@@ -1,0 +1,196 @@
+﻿{
+  "worktrees": {
+    "wt-1779119852551-1": {
+      "branch": "debonair-fuel",
+      "path": "d:\\OB-1-CANONICAL\\.kilo\\worktrees\\debonair-fuel",
+      "parentBranch": "master",
+      "createdAt": "2026-05-18T15:57:32.552Z",
+      "remote": "origin",
+      "label": "NET-PET-AI: Student Portals & Chrome Extension Deployment Pipeline (fork #1)"
+    },
+    "wt-1779184561847-1": {
+      "branch": "groovy-baritone",
+      "path": "d:\\OB-1-CANONICAL\\.kilo\\worktrees\\groovy-baritone",
+      "parentBranch": "master",
+      "createdAt": "2026-05-19T09:56:01.847Z",
+      "remote": "origin"
+    },
+    "wt-1779184577719-2": {
+      "branch": "nosy-ethernet",
+      "path": "d:\\OB-1-CANONICAL\\.kilo\\worktrees\\nosy-ethernet",
+      "parentBranch": "master",
+      "createdAt": "2026-05-19T09:56:17.719Z",
+      "remote": "origin"
+    },
+    "wt-1779255375021-1": {
+      "branch": "boiled-gopher",
+      "path": "d:\\OB-1-CANONICAL\\.kilo\\worktrees\\boiled-gopher",
+      "parentBranch": "master",
+      "createdAt": "2026-05-20T05:36:15.021Z",
+      "remote": "origin"
+    },
+    "wt-1779255471410-2": {
+      "branch": "hypnotic-form",
+      "path": "d:\\OB-1-CANONICAL\\.kilo\\worktrees\\hypnotic-form",
+      "parentBranch": "master",
+      "createdAt": "2026-05-20T05:37:51.410Z",
+      "remote": "origin"
+    },
+    "wt-1779288239339-1": {
+      "branch": "towering-planet",
+      "path": "d:\\OB-1-CANONICAL\\.kilo\\worktrees\\towering-planet",
+      "parentBranch": "master",
+      "createdAt": "2026-05-20T14:43:59.339Z",
+      "remote": "origin"
+    },
+    "wt-1779333276956-1": {
+      "branch": "free-dentist",
+      "path": "d:\\OB-1-CANONICAL\\.kilo\\worktrees\\free-dentist",
+      "parentBranch": "master",
+      "createdAt": "2026-05-21T03:14:36.956Z",
+      "remote": "origin"
+    },
+    "wt-1779658462828-1": {
+      "branch": "iron-bugle",
+      "path": "d:\\OB-1-CANONICAL\\.kilo\\worktrees\\iron-bugle",
+      "parentBranch": "master",
+      "createdAt": "2026-05-24T21:34:22.828Z",
+      "remote": "origin"
+    },
+    "wt-1781703724352-2": {
+      "branch": "sparkling-clementine",
+      "path": "d:\\OB-1-CANONICAL\\.kilo\\worktrees\\sparkling-clementine",
+      "parentBranch": "master",
+      "createdAt": "2026-06-17T13:42:04.352Z",
+      "remote": "origin"
+    },
+    "wt-1781706053320-1": {
+      "branch": "zealous-grasshopper",
+      "path": "d:\\OB-1-CANONICAL\\.kilo\\worktrees\\zealous-grasshopper",
+      "parentBranch": "master",
+      "createdAt": "2026-06-17T14:20:53.320Z",
+      "remote": "origin"
+    },
+    "wt-1781728845911-1": {
+      "branch": "catnip-snowboard",
+      "path": "d:\\OB-1-CANONICAL\\.kilo\\worktrees\\catnip-snowboard",
+      "parentBranch": "master",
+      "createdAt": "2026-06-17T20:40:45.911Z",
+      "remote": "origin"
+    },
+    "wt-1781766014428-1": {
+      "branch": "raspy-mustard",
+      "path": "d:\\OB-1-CANONICAL\\.kilo\\worktrees\\raspy-mustard",
+      "parentBranch": "master",
+      "createdAt": "2026-06-18T07:00:14.428Z",
+      "remote": "origin"
+    },
+    "wt-1782885109769-1": {
+      "branch": "remarkable-droplet",
+      "path": "d:\\OB-1-CANONICAL\\.kilo\\worktrees\\remarkable-droplet",
+      "parentBranch": "canon",
+      "createdAt": "2026-07-01T05:51:49.769Z",
+      "remote": "origin"
+    },
+    "wt-1782929106738-1": {
+      "parentBranch": "master",
+      "createdAt": "2026-07-01T18:05:06.738Z",
+      "remote": "origin"
+    }
+  },
+  "sessions": {
+    "ses_1c4312111ffe7MdI33K9oWquyR": {
+      "worktreeId": "wt-1779119852551-1",
+      "createdAt": "2026-05-18T15:57:55.093Z"
+    },
+    "ses_1c055e071ffeYnteuye8iaJsJn": {
+      "worktreeId": "wt-1779184561847-1",
+      "createdAt": "2026-05-19T09:56:14.452Z"
+    },
+    "ses_1c055ba24ffeuZi3IfM6tfCfdv": {
+      "worktreeId": "wt-1779184577719-2",
+      "createdAt": "2026-05-19T09:56:24.270Z"
+    },
+    "ses_1bc50cd3bffeD5wnTLuYz08bP4": {
+      "worktreeId": "wt-1779255471410-2",
+      "createdAt": "2026-05-20T05:37:54.234Z"
+    },
+    "ses_1b9d0f5abffejUerMbZ0i3w4Fu": {
+      "worktreeId": null,
+      "createdAt": "2026-05-20T16:19:08.552Z"
+    },
+    "ses_1b9970bc0ffegkF1EmMTOG8LaZ": {
+      "worktreeId": null,
+      "createdAt": "2026-05-20T17:22:25.145Z"
+    },
+    "ses_1b778958cffeb8p0xag6eLbF1c": {
+      "worktreeId": "wt-1779333276956-1",
+      "createdAt": "2026-05-21T03:14:54.710Z"
+    },
+    "ses_1a416c237ffe8AqrSrA6SvQhuD": {
+      "worktreeId": "wt-1779658462828-1",
+      "createdAt": "2026-05-24T21:34:33.425Z"
+    },
+    "ses_15f84c45cffeWcbjslJnAIwsWX": {
+      "worktreeId": null,
+      "createdAt": "2026-06-07T05:08:11.384Z"
+    },
+    "ses_15e95241bfferg0Odl6EpRzjV5": {
+      "worktreeId": null,
+      "createdAt": "2026-06-07T09:29:55.480Z"
+    },
+    "ses_15cbb450bffe6Zvj1mz4AZJOtg": {
+      "worktreeId": null,
+      "createdAt": "2026-06-07T18:07:31.219Z"
+    },
+    "ses_15a9764afffeWLPhZFQNCqxcXK": {
+      "worktreeId": null,
+      "createdAt": "2026-06-08T04:05:56.760Z"
+    },
+    "ses_159c84666ffe1Je7Q07GFlPFID": {
+      "worktreeId": null,
+      "createdAt": "2026-06-08T07:52:10.443Z"
+    },
+    "ses_155c2996effeRogKqwF5ytvnB7": {
+      "worktreeId": null,
+      "createdAt": "2026-06-09T02:36:51.245Z"
+    },
+    "ses_154f66eadffe1SmQgJ2Q4ibgXR": {
+      "worktreeId": null,
+      "createdAt": "2026-06-09T06:19:51.548Z"
+    },
+    "ses_128af53d3ffejzmc3WtAsaeKfa": {
+      "worktreeId": "wt-1781728845911-1",
+      "createdAt": "2026-06-17T20:40:49.340Z"
+    }
+  },
+  "sections": {
+    "sec-1781706805687-2": {
+      "name": "New Section",
+      "color": "Magenta",
+      "order": 0,
+      "collapsed": true
+    }
+  },
+  "tabOrder": {
+    "local": [
+    ]
+  },
+  "worktreeOrder": [
+    "wt-1779119852551-1",
+    "wt-1779184561847-1",
+    "wt-1779184577719-2",
+    "wt-1779255375021-1",
+    "wt-1779255471410-2",
+    "wt-1779288239339-1",
+    "wt-1779333276956-1",
+    "wt-1779658462828-1",
+    "wt-1781703724352-2",
+    "wt-1781706053320-1",
+    "wt-1781728845911-1",
+    "wt-1781766014428-1",
+    "wt-1782885109769-1",
+    "wt-1782929106738-1",
+    "sec-1781706805687-2"
+  ]
+}

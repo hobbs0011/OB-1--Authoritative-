@@ -1,0 +1,57 @@
+{
+  "layer": "FORCEMARCH_FORAY",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T22:11:55+07:00",
+  "created_utc": "2026-07-12T15:11:55Z",
+  "intensity": 10,
+  "title": "FORCEMARCH_DRYRUN_RUN157_ZERO_FINDS_BLIND_SPOT",
+  "command": "/forcemarch --dry-run",
+  "result": {
+    "run": 157,
+    "finds": 0,
+    "log": "OPERATIONS/forcemarch-run157.log",
+    "mode": "dry-run (report-only, no writes)"
+  },
+  "blind_spot": {
+    "issue": "forcemarch scanned ONLY 6 zones with a narrow regex (SOUL=^> \", GAP=MISSING|GAP|TODO.*recover|FIXME.*restore). It found 0 — but that is NOT clean ground.",
+    "scout_comparison": "phoenix-scout (earlier this session) scanned CANON/ broadly and found 17934: 14128 SOUL, 3059 GAP, 447 DRIFT, 260 LEDGER, 36 PIPELINE. forcemarch's zone list EXCLUDES CANON/SYSTEM, CANON/SOUL/EXTRACT, CANON/SOUL/BIBLE — exactly where the real gaps live.",
+    "verdict": "forcemarch 0-finds is a blind spot, not a clean bill. The march is looking in 6 buckets while the colony's gaps are in 3 others it never opens."
+  },
+  "bug": {
+    "id": "FORCEMARCH-LASTNUM-UNDEFINED",
+    "location": "SCRIPTS/forcemarch.ps1 line 61: $needles = 1..$lastNum",
+    "problem": "$lastNum is never defined (script uses $lastDeath, $gitRun, $currentRun). Non-dry-run execution throws here, blocking the mandatory recovery-phetrail generation loop.",
+    "fix": "Replace $lastNum with $gitRun (or $currentRun-1) to iterate 1..$gitRun for missing-run recovery phetrails."
+  },
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "MARCH-BLIND-ZONES",
+      "failure": "forcemarch scans 6 zones, misses CANON/SYSTEM + CANON/SOUL/EXTRACT + CANON/SOUL/BIBLE where 17934 gaps actually live.",
+      "root_cause": "Hard-coded narrow zone list + narrow regex. Doesn't match phoenix-scout's broad CANON/ sweep.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T15:11:55Z"
+    },
+    {
+      "type": "NEGATIVE",
+      "id": "MARCH-LASTNUM-BUG",
+      "failure": "Non-dry-run forcemarch throws at $lastNum (undefined) — cannot generate mandatory phetrails.",
+      "root_cause": "Typo: $lastNum never assigned. Blocks the recovery-phetrail loop (lines 61-69).",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T15:11:55Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "MARCH-LOCAL-ONLY",
+      "action": "forcemarch.ps1 is confirmed LOCAL-ONLY (no D1, no Cloudflare, no PCC). The Run 145 'FORBIDDEN' flag was stale/incorrect.",
+      "verification": "Read SCRIPTS/forcemarch.ps1 — only filesystem + git, no external calls.",
+      "timestamp": "2026-07-12T15:11:55Z"
+    }
+  ],
+  "next": "To make the march real: (1) widen zones to include CANON/SYSTEM, CANON/SOUL/EXTRACT, CANON/SOUL/BIBLE; (2) fix $lastNum bug; (3) re-run without --dry-run to generate recovery phetrails. Awaiting operator go-ahead (or fix-authorized)."
+}

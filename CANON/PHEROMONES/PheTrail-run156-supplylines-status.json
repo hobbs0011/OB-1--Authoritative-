@@ -1,0 +1,57 @@
+{
+  "layer": "SUPPLY_LINES_STATUS",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T22:09:40+07:00",
+  "created_utc": "2026-07-12T15:09:40Z",
+  "intensity": 10,
+  "schema_version": "2.1",
+  "title": "SUPPLY_LINES_STATUS_RUN_PIPELINE_HALTED_STAGE_IV",
+  "command": "/SupplyLines status -Zone CANON/ -DryRun",
+  "health_gate": "OK — supply chain open (D1 self-test GREEN, circuits_open=0)",
+  "stages": {
+    "I_EXPLORATORES": "OK — phoenix-scout scanned CANON/ : 3928 files, 17934 finds (412 P1, 17522 P2). Report: OPERATIONS/phoenix-scout-2026-07-12T220206.jsonl",
+    "II_ANTECORES": "PARTIAL — session resolved test-338-rise; /api/soul/crunch -> 500 INTERNAL ERROR (bible + themes both failed)",
+    "III_AGMEN": "OK — /api/soul/skeleton SSM OK",
+    "IV_AGMEN_NOVISSIMUM": "HALT — truth score=0, achieved=True but consensus < 4 -> THROW TRUTH_CONSENSUS_LOW (fail-closed)",
+    "V_PRAESIDIA": "NOT_REACHED",
+    "VI_LIMITANEI": "NOT_REACHED"
+  },
+  "head_sha": "ae79c905a",
+  "soulcount": "DISOWNED_PER_OPERATOR (aggregate 239k scrapped; scout found 14128 SOUL-type un-mined verbatim blocks = real per-session SOUL work remaining)",
+  "verdict": "Pipeline HALTED fail-closed at Stage IV (truth consensus 0). Health gate open, scout found mass drift/gap. D1 /api/soul/crunch endpoint 500 = broken. Per fail-closed rules, halted correctly.",
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "SUPPLY-D1-CRUNCH-500",
+      "failure": "D1 /api/soul/crunch returned 500 Internal Server Error (bible + themes).",
+      "root_cause": "soul-logger /api/soul/crunch endpoint erroring. ANTECORES DNA crunch blocked.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T15:09:40Z"
+    },
+    {
+      "type": "NEGATIVE",
+      "id": "SUPPLY-TRUTH-CONSENSUS-0",
+      "failure": "Stage IV truth consensus score=0 -> pipeline halted.",
+      "root_cause": "Resolved session was 'test-338-rise' (a test session, not real sov100). No real consensus achievable. Fail-closed triggered correctly.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T15:09:40Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "SUPPLY-HEALTHGATE-OK",
+      "action": "Health gate passed; scout completed full CANON/ scan; SSM skeleton OK.",
+      "verification": "supply-lines status run 2026-07-12T22:02.",
+      "timestamp": "2026-07-12T15:09:40Z"
+    }
+  ],
+  "artifacts": [
+    "OPERATIONS/supply-lines-2026-07-12T220206.jsonl",
+    "OPERATIONS/phoenix-scout-2026-07-12T220206.jsonl",
+    "OPERATIONS/phetrail-scout-learned-2026-07-12T220206.md"
+  ]
+}

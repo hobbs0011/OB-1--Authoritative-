@@ -1,0 +1,95 @@
+{
+  "run": 163,
+  "role": "PHOENIX_SCOUT",
+  "mission": "LegionnaireFieldGuide.md claims 40 canonical commands — actual count, duplicates, and missing docs",
+  "lens": "CONFIG",
+  "created_at": "2026-07-13T00:55:30+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "lfg_claim": {
+      "file": ".kilo/skills/LegionnaireFieldGuide.md",
+      "line": 16,
+      "claim": "CANONICAL COMMANDS (40)",
+      "line_35_list": "forcemarch, phetrails, PhoenixScout, reincarnatedeath, reincarnaterise, rebirthe, supplylines, souldna, soulscholars, souldna, soulcap, supersaiyan, ssm, ledger, dnaREGISTRY, doctor, gateway, Centurion-Code, debug, audit, halt, sync, summarize, status, stabilize, report, reincarnate, help, checker, PCClaw, pcc-law, PCCloud, PAA, ob1-scout-mission, obinet-reliability, netpet-preflight, netpet-observability, layer6-deploy-pipeline, layer6-kv-perf, run105-pipeline, run106-p10-fix, test-pipeline-gauntlet"
+    },
+    "actual_file_count": {
+      "directory": ".kilo/command/",
+      "total_files": 47,
+      "unique_basenames": 47,
+      "command_docs_estimate": "~30 (rest are blueprints/specs)"
+    },
+    "discrepancies": {
+      "duplicates_in_lfg": [
+        "souldna appears twice in line 35 list (positions 8 and 10)"
+      ],
+      "missing_from_directory": [
+        "rebirthe — listed in LFG line 35 but NO rebirthe.md in .kilo/command/"
+      ],
+      "in_directory_but_not_in_lfg": [
+        "SoulSearch.md — exists in .kilo/command/ but NOT in LFG list",
+        "soulaudit.md — exists in .kilo/command/ but NOT in LFG list",
+        "kilo-free-models.md — exists in .kilo/command/ but NOT in LFG list",
+        "reincarnatedeath.md — exists but LFG lists 'reincarnatedeath' (lowercase, no hyphen)"
+      ],
+      "case_mismatches": [
+        "LFG: PhoenixScout | File: PhoenixScout.md | obi.ps1: phoenix-scout",
+        "LFG: Centurion-Code | File: Centurion-Code.md | obi.ps1: NOT DECLARED",
+        "LFG: PCClaw | File: PCClaw.md | obi.ps1: NOT DECLARED",
+        "LFG: PAA | File: PAA.md | obi.ps1: NOT DECLARED",
+        "LFG: PCCloud | File: PCCloud.md | obi.ps1: NOT DECLARED",
+        "LFG: dnaREGISTRY | File: dnaREGISTRY.md | obi.ps1: NOT DECLARED",
+        "LFG: ssm | File: ssm.md | obi.ps1: NOT DECLARED"
+      ]
+    },
+    "count_analysis": {
+      "lfg_claimed": 40,
+      "lfg_actual_unique": 41,
+      "lfg_duplicates": 1,
+      "lfg_missing_files": 1,
+      "directory_total": 47,
+      "directory_command_docs": "~30",
+      "directory_blueprints": "~17",
+      "obi_ps1_declared": 22,
+      "obi_ps1_implemented": 1,
+      "gap_lfg_to_obi": "LFG claims 40 commands, obi.ps1 declares 22 — 18 commands undocumented in obi.ps1"
+    }
+  },
+  "verdict": {
+    "overall_status": "COMMAND_TAXONOMY_INCONSISTENT",
+    "priority": "P1_HIGH",
+    "impact": "Three sources of truth (LegionnaireFieldGuide.md, .kilo/command/ directory, SCRIPTS/obi.ps1) describe different command sets. LFG claims 40 commands but lists 41 with duplicates. 1 command (rebirthe) is listed but missing. 3 existing docs (SoulSearch, soulaudit, kilo-free-models) are not in LFG. obi.ps1 only declares 22 of the 40. This makes the command surface unknowable without reading all three sources.",
+    "required_action": [
+      "1. MAKE LegionnaireFieldGuide.md line 35 authoritative: deduplicate, add missing commands, remove extras",
+      "2. ADD rebirthe.md to .kilo/command/ OR remove from LFG list",
+      "3. ADD SoulSearch.md, soulaudit.md, kilo-free-models.md to LFG list",
+      "4. UPDATE obi.ps1 ValidateSet to match LFG canonical list (or shrink LFG to match obi.ps1 — decision required)",
+      "5. STANDARDIZE naming: all command docs should use lowercase-with-hyphens to match obi.ps1 pattern",
+      "6. ADD validation: obi.ps1 doctor should verify .kilo/command/ matches LFG list"
+    ]
+  },
+  "negative_trails": [
+    "LFG claims 40 commands but list contains 41 items with 1 duplicate (souldna)",
+    "rebirthe command listed in LFG but no rebirthe.md file exists in .kilo/command/",
+    "SoulSearch.md, soulaudit.md, kilo-free-models.md exist in .kilo/command/ but NOT in LFG list",
+    "obi.ps1 declares 22 commands vs LFG's 40 — 18 commands undocumented in obi.ps1",
+    "Case mismatches between LFG (PhoenixScout, Centurion-Code), files (PhoenixScout.md, Centurion-Code.md), and obi.ps1 (phoenix-scout)",
+    "No single source of truth for command taxonomy — three sources contradict each other"
+  ],
+  "evidence_chain": {
+    "lfg_40_claim": ".kilo/skills/LegionnaireFieldGuide.md:16 -> 'CANONICAL COMMANDS (40)'",
+    "lfg_list": ".kilo/skills/LegionnaireFieldGuide.md:35 -> full command list with duplicates",
+    "duplicate_souldna": ".kilo/skills/LegionnaireFieldGuide.md:35 -> 'souldna' appears twice",
+    "missing_rebirthe": ".kilo/command/rebirthe.md -> NOT FOUND",
+    "missing_soulsearch_in_lfg": ".kilo/command/SoulSearch.md exists but not in LFG line 35",
+    "obi_22_declared": "SCRIPTS/obi.ps1:2 -> ValidateSet with 22 commands",
+    "directory_47_files": ".kilo/command/ -> 47 total files"
+  },
+  "cross_references": [
+    ".kilo/skills/LegionnaireFieldGuide.md:16 (40 commands claim)",
+    ".kilo/skills/LegionnaireFieldGuide.md:35 (full list with duplicates)",
+    ".kilo/command/ (47 files — actual command docs)",
+    "SCRIPTS/obi.ps1:2 (ValidateSet — 22 commands)",
+    "SCRIPTS/obi.ps1:136-138 (Phase 1 header — doctor only)",
+    "CANON/PHEROMONES/PheTrail-run163-09-command-doc-surface-mismatch.json (previous finding)"
+  ]
+}

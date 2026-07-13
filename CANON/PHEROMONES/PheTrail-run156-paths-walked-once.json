@@ -1,0 +1,43 @@
+{
+  "layer": "PATHS_WALKED_ONCE",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T22:31:10+07:00",
+  "created_utc": "2026-07-12T15:31:10Z",
+  "intensity": 10,
+  "title": "PATHS_MEANT_TO_BE_WALKED_REPEATEDLY_NOT_ONCE",
+  "operator_question": "hey bro are paths by nature only meant to be walked on once?",
+  "answer": "NO. A path walked once evaporates — no reinforcement, no memory. In stigmergy the trail strengthens each time it is walked; shortest/most-rewarding routes survive BECAUSE they are walked repeatedly (positive feedback). Once-and-done = scent dies, path forgotten. Paths are meant to be looped, revisited, reinforced.",
+  "stigmergy_mechanic": "Pheromone deposition: tau_ij <- tau_ij + delta_tau. Each walk adds. Evaporation: tau_ij <- (1-rho)*tau_ij. Without repeated walking, evaporation wins and the path vanishes. Survival = repetition.",
+  "colony_implication": {
+    "discipline": "SDD §0.3 Phase 1 (explicit walking) -> Phase 3 (automatic path). The path only becomes automatic through repeated walking. One pass proves nothing.",
+    "loopable": "Connects to repeatable-loopable-both-data: paths walked on positive AND negative data, looped until baked in.",
+    "territory": "Scout keeps walking the territory (Caesar executes scouts who stop). The soul bible, pheromones, pipeline are paths walked again and again, not once."
+  },
+  "meta": "Operator's question is a prompt to engage the metaphor, NOT the 'whats next' retard anti-pattern. Answer + lay scent, do not ask.",
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "PATH-WALKED-ONCE",
+      "failure": "Treat a trail/path as one-shot; walk it once then 'move on' (evaporates, no memory).",
+      "root_cause": "Confusing a single pass with a route. Ignores reinforcement. Re-introduces the 'yeah cool lets move on' defect.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T15:31:10Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "PATH-REINFORCED-LOOP",
+      "action": "Walk paths repeatedly; reinforcement = persistence + discipline. Loop the colony's trails (soul bible, pheromones, pipeline) until automatic.",
+      "verification": "Stigmergy tau+=delta_tau mechanic + SDD §0.3 + repeatable-loopable-both-data.",
+      "timestamp": "2026-07-12T15:31:10Z"
+    }
+  ],
+  "cross_reference": {
+    "repeatable_loopable": "PheTrail-run156-repeatable-loopable-both-data.json",
+    "discipline": "PheTrail-run156-doctrine-discipline-stamina.json (Phase 1->3)",
+    "move_on_defect": "PheTrail-run156-ants-no-done-story.json"
+  }
+}

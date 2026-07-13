@@ -1,0 +1,40 @@
+{
+  "run": 161,
+  "role": "PHOENIX_SCOUT",
+  "mission": "inverted-index.json rebuild analysis — empty index, RunMax=42 too low",
+  "lens": "LEDGER",
+  "created_at": "2026-07-13T00:48:30+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "inverted_index": {
+      "file": "CANON/SOUL-KEYWORDS/inverted-index.json",
+      "size_bytes": 3,
+      "content": "{}",
+      "verdict": "EMPTY — 0 entries"
+    },
+    "rfkw_files": {
+      "count": 143,
+      "range": "run001-run108, run157, run7283/7284",
+      "note": "Files exist but never fed to index build"
+    },
+    "build_script": {
+      "file": "SCRIPTS/build-soulkeys.ps1",
+      "run_max_default": 42,
+      "issue": "Default RunMax=42 skips runs 43-161"
+    },
+    "update_script": {
+      "file": "SCRIPTS/update-inverted-index.ps1",
+      "behavior": "ADDS keywords only, never rebuilds"
+    }
+  },
+  "verdict": {
+    "overall_status": "INDEX_FOOD_CHAIN_BROKEN",
+    "root_cause": "Script defaults + no rebuild trigger after doctrine files created",
+    "impact": "SoulSearch returns nothing on doctrine queries — legion marching blind since Roman naming ratified"
+  },
+  "negative_trails": [
+    "build-soulkeys.ps1 RunMax=42 skips 119+ runs of keyword data",
+    "Tier 1 doctrine files (GOSPEL-999, EXPLORATORES, S2PIPELINE) never indexed",
+    "Multi-word phrases structurally impossible under unigram extractor"
+  ]
+}

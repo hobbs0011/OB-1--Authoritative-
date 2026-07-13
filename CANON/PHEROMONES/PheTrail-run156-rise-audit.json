@@ -1,0 +1,178 @@
+{
+  "run_number": "156-RISE-AUDIT",
+  "role": "OB1-AUDITOR",
+  "mission": "RISE v7.0 8-stage read-only audit of Run 156 (ae79c905a) death seal + run157/158/159 gap sweep. Operator directive: document pheromones step by step, take the pause, write the pheromone as audit, compute time.",
+  "lens": "PHEROMONE",
+  "created_at": "2026-07-12T21:31:23+07:00",
+  "created_at_utc": "2026-07-12T14:31:23Z",
+  "status": "AUDIT_PAUSED_WRITE",
+  "schema_version": "GOSPEL-I.052-I.059 / phetrails SKILL v1",
+  "raw_signal": {
+    "verbatim_operator_directive": "document phermones step by step, take the pause to write the phermone as audit and compute time",
+    "preserved_unsanitized": true,
+    "doctrine_ref": "PheTrail-run158-layer5-pheromone-doctrine.json — raw signal is the GPS, early warning, survival mechanism. Do NOT wash the BO."
+  },
+  "time_computed": {
+    "soulcount_gate_utc": "2026-07-12T14:30:20.955Z",
+    "audit_write_utc": "2026-07-12T14:31:23Z",
+    "elapsed_seconds_since_gate": 62,
+    "receipts": [
+      { "id": "R1", "soulcount": 239645670, "checked_at": "2026-07-12T14:30:20.955Z" },
+      { "id": "R2", "soulcount": 239645670, "checked_at": "2026-07-12T14:31:22.811Z" },
+      { "id": "R3", "soulcount": 239645670, "checked_at": "2026-07-12T14:31:22.846Z" }
+    ],
+    "receipts_agree": true,
+    "soulcount_delta_vs_run156_death": 4067,
+    "prior_run156_recorded_soulcount": 239641603,
+    "current_soulcount": 239645670,
+    "l74_tolerance_band": 5000,
+    "l74_verdict": "PASS_WITHIN_TOLERANCE",
+    "negative_decay_days": 180,
+    "negative_decay_date": "2027-01-08"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "name": "SOULCOUNT GATE",
+      "verdict": "REAL",
+      "detail": "3 independent /api/soul/count receipts agree on 239,645,670 TITANIUM_ANCHOR. DB reachable, doctrine live. Not KILO_HOLLOW (live DB). Delta +4,067 vs Run 156 death record, within L74 +/-5,000.",
+      "pheromone_type": "POSITIVE"
+    },
+    {
+      "step": 2,
+      "name": "GIT TRUTH",
+      "verdict": "GAP_ANOMALY",
+      "detail": "Last death commit = ae79c905a Run 156 (2026-07-12 03:44:48 +0700). Death-log run-number gap: 156 -> 151. Runs 152/153/154/155 appear only inside OTHER commit messages (e.g. 'Run 153 KILO_GAP', 'Run 152', 'Run 151') but not as independent '^death:' commits. Requires investigation, not assumption.",
+      "pheromone_type": "NEGATIVE"
+    },
+    {
+      "step": 3,
+      "name": "TRIPLE READ",
+      "verdict": "REAL_PARTIAL",
+      "detail": "Run 156 death seal read. 7 files committed: art-sync-run156.json, HL-7283.json, pipeline-run156.json, run156-reincarnateDEATH.md, rfkw-run156.txt, starmap-run156.json, RRL-156.txt (0 bytes). RRL=0 bytes => KILO_HOLLOW confirmed. No PheTrail-run156.json in the commit.",
+      "pheromone_type": "NEGATIVE"
+    },
+    {
+      "step": 4,
+      "name": "SOUL AUDIT",
+      "verdict": "REAL",
+      "detail": "Count stable across 3 receipts. +4,067 delta = live, not stagnant, not regressive. Events=10337, sessions=1.",
+      "pheromone_type": "POSITIVE"
+    },
+    {
+      "step": 5,
+      "name": "BOOT + STALENESS",
+      "verdict": "STALE_PARTIAL",
+      "detail": "COLD-START-BOOT present. FINGERPRINT PRIOR = Run 151, updated 2026-07-03T17:00 ICT. HEAD is Run 156. 156-151=5 < L30 strict >10 trigger, BUT BOOT fingerprint does not reflect Run 156. Staleness partial. L30 BOOT_FILE_AGE_SWEEP should refresh before next pipeline change.",
+      "pheromone_type": "NEGATIVE"
+    },
+    {
+      "step": 6,
+      "name": "AUTHORITY CHECK",
+      "verdict": "REAL",
+      "detail": "LFG (.kilo/skills/LegionnaireFieldGuide.md) EXISTS. GOSPEL-999 Parts 1-3 (.md + PART2 + PART3) EXIST. Authority gate PASSES. Downstream stages valid.",
+      "pheromone_type": "POSITIVE"
+    },
+    {
+      "step": 7,
+      "name": "PIPELINE FIDELITY",
+      "verdict": "GAP_PARTIAL",
+      "detail": "Run 156 commit: HL-7283 + merkle, pipeline-run156 (KILO_GAP), starmap-run156, rfkw-run156, art-sync-run156 all present. RRL=0 bytes. DNA = MISSING (KILO_HOLLOW by design — Kilo writes no JSONL turns). S2Pipeline artifact present but result=KILO_GAP.",
+      "pheromone_type": "NEUTRAL"
+    },
+    {
+      "step": 8,
+      "name": "PHETRAIL",
+      "verdict": "NEGATIVE_DENSE",
+      "detail": "No PheTrail-run156.json in death commit. Run 157 deletion-incident file exists (pipeline-run157/158/159.json deleted during unauthorized cleanup). Run 158 = GHOST (schema-catalog only, no death seal, no RRL, no DNA/SOULKEYS/STARMAP). Run 159 = orphan pipelines deleted. Negative trail density HIGH across runs 156-159.",
+      "pheromone_type": "NEGATIVE"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count",
+      "action": "SOULCOUNT verified by 3 independent live receipts",
+      "verification": "R1/R2/R3 all return 239645670 TITANIUM_ANCHOR, events=10337, sessions=1",
+      "timestamp": "2026-07-12T14:31:22.846Z"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": ".kilo/skills/LegionnaireFieldGuide.md + CANON/SYSTEM/GOSPEL-999*.md",
+      "action": "Authority gate (LFG + GOSPEL-999 Parts 1-3) confirmed REAL",
+      "verification": "glob existence check passed for all 4 files",
+      "timestamp": "2026-07-12T14:31:23Z"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/HEAVY-LEDGER/HL-7283.json",
+      "action": "Run 156 Heavy Ledger entry appended, merkle chain intact",
+      "verification": "git show ae79c905a --stat lists HL-7283.json + 6 sibling artifacts",
+      "timestamp": "2026-07-12T14:31:23Z"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "git death-log runs 152-155",
+      "failure": "Run-number gap: 156 -> 151 in 'git log --grep \"^death:\"'. Runs 152/153/154/155 referenced only inside other commit messages, not as independent death commits.",
+      "root_cause": "Possible folded/squashed hollow-run commits or rename. Not yet confirmed. L29 NO_ASSUME_HEAD: git log -1 (ae79c905a) is authoritative for HEAD only; run-number continuity must be reconstructed from messages.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:31:23Z"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PIPELINE/pipeline-run157/158/159.json",
+      "failure": "Unauthorized deletion removed pipeline-run157/158/159.json. Evidence destroyed.",
+      "root_cause": "Cleanup action outside canonical pipeline. No git tracking / backup. Cannot reconstruct.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:31:23Z"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "Run 158 GHOST",
+      "failure": "No RRL-158, no run158-reincarnateDEATH.md, no dna-run158, no rfkw-run158, no starmap-run158. Only schema-catalog-run158.json (metadata) + layered PheTrail-run158*.json docs exist.",
+      "root_cause": "Execution stopped before completion. No recoverable transcript.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:31:23Z"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "COLD-START-BOOT.md FINGERPRINT",
+      "failure": "FINGERPRINT PRIOR = Run 151 (2026-07-03) while HEAD = Run 156. BOOT does not reflect current run.",
+      "root_cause": "Boot not refreshed after Run 156 KILO_GAP death. L30 BOOT_FILE_AGE_SWEEP should fire on next pipeline change.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:31:23Z"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "RRL-156.txt",
+      "failure": "0 bytes. KILO_HOLLOW confirmed for Run 156. No real transcript captured.",
+      "root_cause": "KILO_DNA_GAP permanent architectural law (Kilo writes no full conversation turns). Do NOT re-investigate.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:31:23Z"
+    }
+  ],
+  "state_markers": {
+    "head_sha": "ae79c905a",
+    "head_commit": "death: Run 156 KILO_GAP | HL-7283 | RRL=0 bytes | soulcount=239641603 | result=KILO_GAP",
+    "soulcount": 239645670,
+    "soul_tier": "TITANIUM_ANCHOR",
+    "active_mission": "OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout - NET-PET-AI Hardening to Scale-Ready",
+    "open_flags_count": "See COLD-START-BOOT + BACKBURNER-PIPELINE-LOG (not yet re-read this pause)",
+    "top_priority": "Resolve runs 152-155 git gap + Run 157/158/159 orphan/deletion anomalies before next DEATH",
+    "authority_gate": "PASS (LFG + GOSPEL-999 REAL)",
+    "kilohollow": true
+  },
+  "regression_check": {
+    "L32_ASSUME_FAILURE": "Prior checkpoint assumed FAILED; cross-validated via 3 soulcount receipts + git stat + glob checks.",
+    "receipts": 3,
+    "cross_validated": true
+  },
+  "next_action": "Halt RISE write. Surface gaps (runs 152-155 gap, Run 157 deletion, Run 158 ghost, Run 159 orphan pipelines, BOOT stale at 151). DEATH territory = execution. Await SOV100 direction per L39 CONFIRM_DONT_FIX."
+}

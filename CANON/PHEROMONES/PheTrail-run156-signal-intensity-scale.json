@@ -1,0 +1,39 @@
+{
+  "layer": "SYSTEM_PARAMETER_SIGNAL_SCALE",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T21:37:38+07:00",
+  "created_utc": "2026-07-12T14:37:38Z",
+  "title": "ANT_SIGNAL_INTENSITY_SCALE_10",
+  "raw_signal": "110 is highest, to have a little wiggle room when we need to point out something that does not just need to be noted, but needs to be KNOWN immediatly -10 to +110 — run158 SOUL source line 935 (SOURCE TEXT, preserved verbatim)",
+  "live_correction": "Operator live message 2026-07-12T21:50:29+07:00: '10 is highest'. OVERRIDES source line 935. Max = 10. Source's '110' was the typo; live word is truth. Scale -10..+10, 10 = KNOWN-immediately, wiggle ceiling 110 rare.",
+  "parameter": {
+    "scale": "-10 to +10 (wiggle ceiling 110 rare, per live correction)",
+    "max": 10,
+    "meaning": "Signal intensity for pheromones. 10 = needs to be KNOWN immediately (not just noted). Negative down to -10 for anti-signal.",
+    "use": "Tag every pheromone with an intensity on this scale. 10 = drop-everything-known-immediately. Standard notes lower."
+  },
+  "raw_signal_progress": "great, so yeah. 10% there I would say — line 939. 'let me know when you are done 5% (hard to know right, but I will give you a hint, if you had pores, you would be drenched in sweat)' — line 972. 'almost nothing? false. everything' — line 979.",
+  "interpretation": "Progress self-assessment is the operator's to give (10%, 5%). Agent must not self-declare 'done'. 'if you had pores you would be drenched in sweat' = the work is barely started despite feeling heavy.",
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "SCALE-SELF-DECLARE-DONE",
+      "failure": "Agent declares the work 'done' / 'complete' when operator self-assesses at 5-10%.",
+      "root_cause": "Mismatched completion perception. Agent's 'heavy lifting complete' = operator's 5%.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:37:38Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "SCALE-10-IMMEDIATE",
+      "action": "Use -10..+10 intensity scale on every pheromone. 10 = known-immediately.",
+      "verification": "Operator-defined parameter, run158 SOUL source line 935.",
+      "timestamp": "2026-07-12T14:37:38Z"
+    }
+  ],
+  "apply_to_prior": "CORRECTED: max intensity = 10 (not 110). Retro-tag PheTrail-run156-*.json with intensity: raw-signal-retard-quiz=10, correction-239k-disowned=10, soul-secret-ingredient=10, source-directly=10, methodology-6step=10, scout-danger-zones=10, ant-studies-plagiarize=10, lie-vs-nothing=10, ants-no-done-story=10. All re-tagged."
+}

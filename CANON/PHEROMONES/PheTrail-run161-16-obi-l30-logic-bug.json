@@ -1,0 +1,48 @@
+{
+  "run": 161,
+  "role": "PHOENIX_SCOUT",
+  "mission": "obi.ps1 L30 logic bug confirmation — STATE-SNAPSHOT staleness undetected for 16 runs",
+  "lens": "CODE",
+  "created_at": "2026-07-13T00:52:00+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "file": "SCRIPTS/obi.ps1",
+    "line": 192,
+    "code": "$stateOk = ($snapshotRun -eq $rssRun) -and ($snapshotRun -gt 0) -and ($stateStaleness -lt 24)",
+    "logic_bug": "Both snapshotRun and rssRun are loaded from STATE-SNAPSHOT.json. If both are stale but equal, equality check PASSES. Snapshot staleness is never compared to actual current run from git.",
+    "current_staleness": {
+      "snapshot_run": 145,
+      "rss_run": 145,
+      "actual_run": 161,
+      "delta_runs": 16,
+      "age_hours": 290.5,
+      "staleness_check": "$stateStaleness -lt 24 → 290.5 < 24 → FALSE (would fail if reached)"
+    },
+    "silent_failure_chain": [
+      "runs 146-161: STATE-SNAPSHOT.json never updated",
+      "recent_seals[0].run = 145 (frozen)",
+      "snapshotRun = 145 (frozen)",
+      "145 == 145 → passes equality check",
+      "stateStaleness not checked because equality already passed",
+      "L30 BOOT_FILE_AGE_SWEEP: silent no-op for 16 consecutive runs"
+    ],
+    "impact": "All boot health checks since run 146 reported GREEN despite operating on 16-run-old state snapshot"
+  },
+  "verdict": {
+    "overall_status": "CONFIRMED_LOGIC_BUG",
+    "priority": "P0_BLOCKER",
+    "fix_required": "Replace equality check with comparison to actual current run from git log --grep '^death:' -1"
+  },
+  "negative_trails": [
+    "L30 BOOT_FILE_AGE_SWEEP silent-failure confirmed in code",
+    "290.5 hours of stale state without detection",
+    "Any CI/automation relying on obi.ps1 doctor received false GREEN"
+  ],
+  "evidence_chain": {
+    "obi_line_192": "SCRIPTS/obi.ps1:192 -> ($snapshotRun -eq $rssRun)",
+    "obi_staleness_branch": "SCRIPTS/obi.ps1:186-188 -> $stateStaleness = ($now - $snapshotUpdated).TotalHours",
+    "git_authority": "L29 NO_ASSUME_HEAD -> git log --grep '^death:' -1 is authoritative",
+    "state_snapshot_run": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json:7 -> 'current': 145",
+    "state_snapshot_rss": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json:89 -> recent_seals[0].run = 145"
+  }
+}

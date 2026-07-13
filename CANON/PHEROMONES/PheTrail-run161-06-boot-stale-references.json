@@ -1,0 +1,59 @@
+{
+  "run": 161,
+  "role": "PHOENIX_SCOUT",
+  "mission": "COLD-START-BOOT.md stale run reference audit",
+  "lens": "DRIFT",
+  "created_at": "2026-07-13T00:46:30+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "stale_references": [
+      {
+        "line": 282,
+        "reference": "Run 052",
+        "current": 161,
+        "delta": 109
+      },
+      {
+        "line": 284,
+        "reference": "Run 041",
+        "current": 161,
+        "delta": 120
+      },
+      {
+        "line": 310,
+        "reference": "Run 113",
+        "current": 161,
+        "delta": 48
+      },
+      {
+        "line": 338,
+        "reference": "Run 122",
+        "current": 161,
+        "delta": 39
+      },
+      {
+        "line": 355,
+        "reference": "Run 127",
+        "current": 161,
+        "delta": 34
+      }
+    ],
+    "boot_file": {
+      "path": "CANON/SYSTEM/COLD-START-BOOT.md",
+      "size_kb": 45,
+      "last_line": 444
+    }
+  },
+  "verdict": {
+    "overall_status": "STALE_MULTIPLE",
+    "oldest_reference": "Run 041 (120 runs behind)",
+    "newest_reference": "Run 127 (34 runs behind)",
+    "l30_fires": true,
+    "impact": "Boot file contains historical references but no current run context for runs 128-161"
+  },
+  "negative_trails": [
+    "COLD-START-BOOT.md not updated during runs 128-161",
+    "FINGERPRINT at bottom likely stale",
+    "Active mission section may not reflect current vector"
+  ]
+}

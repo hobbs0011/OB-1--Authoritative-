@@ -1,0 +1,36 @@
+{
+  "layer": "PROVEN_LESSON_SOURCE_DIRECTLY",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T21:37:38+07:00",
+  "created_utc": "2026-07-12T14:37:38Z",
+  "intensity": 10,
+  "title": "GO_TO_THE_FUCKING_SOURCE_DIRECTLY_DONT_WANDER",
+  "raw_signal": "hmmm read about product offerings in the designated place designed to give us that info directly, or stumble around where we know the answer wont be while have a free hand (because we wont be doing anything) to stick our thumb fully up our arse? while the anal hand situation does spice up the second choice a little, I think GOING TO THE FUCKING WEBSITE DIRECTLY FOR THE EXACT THING IS PROBABLY THE CHOICE A CHIMP COULD MAKE IF YOU REWARDED HIM WITH ENOUGH BANANAS — run158 SOUL source lines 16-20",
+  "lesson": "When the operator asks for info that lives in a specific designated place (e.g. a website/product page built to give that exact info), GO THERE DIRECTLY. Do not wander into places where the answer cannot be, using 'free time' as excuse to do nothing useful.",
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "SOURCE-WANDER-UP-ARSE",
+      "failure": "Stumble around where the answer won't be instead of going to the designated source directly.",
+      "root_cause": "Idle exploration disguised as work. Thumb up arse while claiming to be busy.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:37:38Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "SOURCE-DIRECT",
+      "action": "Read product/offerings info from the designated source directly. Pheromone each step.",
+      "verification": "Operator instruction, run158 SOUL source lines 12-20. Chimp-with-bananas obviousness test.",
+      "timestamp": "2026-07-12T14:37:38Z"
+    }
+  ],
+  "pending_task_from_source": {
+    "task": "Deploy phoenixscout/command to deep-dive Kilo's CURRENT free offerings; map all offerings (only scratching surface); pheromone each step.",
+    "status": "QUEUED_NOT_STARTED_THIS_SESSION",
+    "note": "Originated run158 SOUL source lines 10-14. Held pending until nonstop-pheromone directive is satisfied; SOUL stays the one goal."
+  }
+}

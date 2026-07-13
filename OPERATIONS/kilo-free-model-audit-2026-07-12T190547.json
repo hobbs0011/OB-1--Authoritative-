@@ -1,0 +1,242 @@
+﻿{
+    "timestamp":  "2026-07-12T19:05:48.1307239+07:00",
+    "endpoint":  "https://api.kilo.ai/api/gateway/models",
+    "summary":  {
+                    "total_models":  340,
+                    "free_count":  13,
+                    "auto_tiers":  5
+                },
+    "free_models":  [
+                        {
+                            "id":  "kilo-auto/free",
+                            "provider":  "kilo-auto",
+                            "context_length":  256000,
+                            "capabilities":  [
+                                                 null
+                                             ],
+                            "pricing":  {
+                                            "prompt":  "0",
+                                            "completion":  "0",
+                                            "input_cache_read":  "0",
+                                            "input_cache_write":  "0",
+                                            "request":  "0",
+                                            "image":  "0",
+                                            "web_search":  "0",
+                                            "internal_reasoning":  "0"
+                                        }
+                        },
+                        {
+                            "id":  "tencent/hy3:free",
+                            "provider":  "tencent",
+                            "context_length":  262144,
+                            "capabilities":  [
+                                                 null
+                                             ],
+                            "pricing":  {
+                                            "prompt":  "0",
+                                            "completion":  "0",
+                                            "discount":  0
+                                        }
+                        },
+                        {
+                            "id":  "stepfun/step-3.7-flash:free",
+                            "provider":  "stepfun",
+                            "context_length":  262144,
+                            "capabilities":  [
+                                                 null
+                                             ],
+                            "pricing":  {
+                                            "prompt":  "0.000000000000",
+                                            "completion":  "0.000000000000",
+                                            "request":  "0",
+                                            "image":  "0",
+                                            "web_search":  "0",
+                                            "internal_reasoning":  "0",
+                                            "input_cache_read":  "0.000000000000"
+                                        }
+                        },
+                        {
+                            "id":  "poolside/laguna-xs-2.1:free",
+                            "provider":  "poolside",
+                            "context_length":  262144,
+                            "capabilities":  [
+                                                 null
+                                             ],
+                            "pricing":  {
+                                            "prompt":  "0",
+                                            "completion":  "0",
+                                            "discount":  0
+                                        }
+                        },
+                        {
+                            "id":  "cohere/north-mini-code:free",
+                            "provider":  "cohere",
+                            "context_length":  256000,
+                            "capabilities":  [
+                                                 null
+                                             ],
+                            "pricing":  {
+                                            "prompt":  "0",
+                                            "completion":  "0",
+                                            "discount":  0
+                                        }
+                        },
+                        {
+                            "id":  "nvidia/nemotron-3.5-content-safety:free",
+                            "provider":  "nvidia",
+                            "context_length":  128000,
+                            "capabilities":  [
+                                                 null
+                                             ],
+                            "pricing":  {
+                                            "prompt":  "0",
+                                            "completion":  "0",
+                                            "discount":  0
+                                        }
+                        },
+                        {
+                            "id":  "nvidia/nemotron-3-ultra-550b-a55b:free",
+                            "provider":  "nvidia",
+                            "context_length":  1000000,
+                            "capabilities":  [
+                                                 null
+                                             ],
+                            "pricing":  {
+                                            "prompt":  "0",
+                                            "completion":  "0",
+                                            "discount":  0
+                                        }
+                        },
+                        {
+                            "id":  "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+                            "provider":  "nvidia",
+                            "context_length":  256000,
+                            "capabilities":  [
+                                                 null
+                                             ],
+                            "pricing":  {
+                                            "prompt":  "0",
+                                            "completion":  "0",
+                                            "discount":  0
+                                        }
+                        },
+                        {
+                            "id":  "poolside/laguna-m.1:free",
+                            "provider":  "poolside",
+                            "context_length":  262144,
+                            "capabilities":  [
+                                                 null
+                                             ],
+                            "pricing":  {
+                                            "prompt":  "0",
+                                            "completion":  "0",
+                                            "discount":  0
+                                        }
+                        },
+                        {
+                            "id":  "google/lyria-3-pro-preview",
+                            "provider":  "google",
+                            "context_length":  1048576,
+                            "capabilities":  [
+                                                 null
+                                             ],
+                            "pricing":  {
+                                            "prompt":  "0",
+                                            "completion":  "0",
+                                            "discount":  0
+                                        }
+                        },
+                        {
+                            "id":  "google/lyria-3-clip-preview",
+                            "provider":  "google",
+                            "context_length":  1048576,
+                            "capabilities":  [
+                                                 null
+                                             ],
+                            "pricing":  {
+                                            "prompt":  "0",
+                                            "completion":  "0",
+                                            "discount":  0
+                                        }
+                        },
+                        {
+                            "id":  "nvidia/nemotron-3-super-120b-a12b:free",
+                            "provider":  "nvidia",
+                            "context_length":  1000000,
+                            "capabilities":  [
+                                                 null
+                                             ],
+                            "pricing":  {
+                                            "prompt":  "0",
+                                            "completion":  "0",
+                                            "discount":  0
+                                        }
+                        },
+                        {
+                            "id":  "openrouter/free",
+                            "provider":  "openrouter",
+                            "context_length":  200000,
+                            "capabilities":  [
+                                                 null
+                                             ],
+                            "pricing":  {
+                                            "prompt":  "0",
+                                            "completion":  "0"
+                                        }
+                        }
+                    ],
+    "auto_tiers":  [
+                       {
+                           "id":  "kilo-auto/frontier",
+                           "provider":  "anthropic",
+                           "description":  ""
+                       },
+                       {
+                           "id":  "kilo-auto/balanced",
+                           "provider":  "kilo-auto",
+                           "description":  ""
+                       },
+                       {
+                           "id":  "kilo-auto/efficient",
+                           "provider":  "kilo-auto",
+                           "description":  ""
+                       },
+                       {
+                           "id":  "kilo-auto/free",
+                           "provider":  "kilo-auto",
+                           "description":  ""
+                       },
+                       {
+                           "id":  "kilo-auto/small",
+                           "provider":  "kilo-auto",
+                           "description":  ""
+                       }
+                   ],
+    "decision_matrix":  [
+                            {
+                                "need":  "Consistency/reproducibility",
+                                "pick":  "stepfun/step-3.7-flash:free",
+                                "why":  "Fixed model, predictable output"
+                            },
+                            {
+                                "need":  "Best available free now",
+                                "pick":  "kilo-auto/free",
+                                "why":  "Server picks strongest candidate per session"
+                            },
+                            {
+                                "need":  "Code-specific tasks",
+                                "pick":  "poolside/laguna-m.1:free",
+                                "why":  "Purpose-built for code"
+                            },
+                            {
+                                "need":  "Avoid prompt logging",
+                                "pick":  "Avoid Auto Free + NVIDIA",
+                                "why":  "Data handling warning applies"
+                            },
+                            {
+                                "need":  "High-volume automation",
+                                "pick":  "Monitor kilo.ai/models live",
+                                "why":  "Free models rotate; need live view"
+                            }
+                        ]
+}

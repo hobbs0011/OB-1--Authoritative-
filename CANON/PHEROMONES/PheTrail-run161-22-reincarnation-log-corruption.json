@@ -1,0 +1,35 @@
+{
+  "run": 161,
+  "role": "PHOENIX_SCOUT",
+  "mission": "REINCARNATION-LOG.md table corruption — duplicates, HEAD drift, missing runs",
+  "lens": "LEDGER",
+  "created_at": "2026-07-13T00:55:00+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "file": "CANON/REINCARNATION/REINCARNATION-LOG.md",
+    "duplicates": [
+      { "run": 365, "lines": [103, 107], "head": "5daf3d4" },
+      { "run": 364, "lines": [105, 108], "head": "6bda057" }
+    ],
+    "variants": [
+      { "run": 373, "variants": ["373","373a","373b","373c"], "lines": [85,89,90,91] }
+    ],
+    "head_mismatches": [
+      { "run": 146, "log_head": "b6f0d288", "actual_head": "3a070fa67" },
+      { "run": 157, "log_head": "ae79c905a", "actual_head": "3a070fa67" },
+      { "run": 158, "log_head": "ae79c905a", "actual_head": "3a070fa67" }
+    ],
+    "missing_runs": [159, 160, 161],
+    "last_updated": "2026-07-12T04:33 ICT (Run 157)"
+  },
+  "verdict": {
+    "overall_status": "TABLE_CORRUPTION",
+    "priority": "P1_HIGH"
+  },
+  "negative_trails": [
+    "Run 365 and 364 each appear twice",
+    "Run 373 fragmented into 4 sub-entries",
+    "HEAD references stale across table",
+    "Runs 159-161 missing entirely"
+  ]
+}

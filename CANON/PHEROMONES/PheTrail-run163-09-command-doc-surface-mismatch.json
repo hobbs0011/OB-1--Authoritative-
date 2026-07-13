@@ -1,0 +1,109 @@
+{
+  "run": 163,
+  "role": "PHOENIX_SCOUT",
+  "mission": ".kilo/command/ doc surface audit — 47 files present but 14 of 22 obi.ps1 commands missing or case-mismatched",
+  "lens": "CONFIG",
+  "created_at": "2026-07-13T00:52:00+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "obi_command_declaration": {
+      "file": "SCRIPTS/obi.ps1",
+      "line": 2,
+      "total_commands": 22,
+      "commands": [
+        "doctor","verify","dev","mcp-audit","soul-check","cf-audit",
+        "phoenix-queue","phoenix-status","phoenix-alpha","phoenix-beta",
+        "phoenix-gamma","phoenix-delta","phoenix-omega","pcc-law",
+        "phoenix-scout","forcemarch","supply-lines","reincarnateDeath",
+        "legion-garrison","phetrails","soulscholars","soulaudit","kilo-free-models"
+      ]
+    },
+    "command_doc_audit": {
+      "directory": ".kilo/command/",
+      "total_files": 47,
+      "matching_docs": [
+        {"command": "doctor", "file": "doctor.md", "case_match": true},
+        {"command": "pcc-law", "file": "pcc-law.md", "case_match": true},
+        {"command": "forcemarch", "file": "forcemarch.md", "case_match": true},
+        {"command": "supply-lines", "file": "supplylines.md", "case_match": true},
+        {"command": "phetrails", "file": "phetrails.md", "case_match": true},
+        {"command": "soulscholars", "file": "soulscholars.md", "case_match": true},
+        {"command": "soulaudit", "file": "soulaudit.md", "case_match": true},
+        {"command": "kilo-free-models", "file": "kilo-free-models.md", "case_match": true}
+      ],
+      "case_mismatch_docs": [
+        {"command": "phoenix-scout", "declared": "phoenix-scout", "actual": "PhoenixScout.md", "issue": "Case mismatch — Linux/macOS CI will fail to load doc"},
+        {"command": "reincarnateDeath", "declared": "reincarnateDeath", "actual": "reincarnatedeath.md", "issue": "Case mismatch — Linux/macOS CI will fail to load doc"},
+        {"command": "soulsearch", "declared": "soulsearch", "actual": "SoulSearch.md", "issue": "Case mismatch — command not in obi.ps1 ValidateSet but doc exists"}
+      ],
+      "missing_docs": [
+        "verify",
+        "dev",
+        "mcp-audit",
+        "soul-check",
+        "cf-audit",
+        "phoenix-queue",
+        "phoenix-status",
+        "phoenix-alpha",
+        "phoenix-beta",
+        "phoenix-gamma",
+        "phoenix-delta",
+        "phoenix-omega",
+        "legion-garrison"
+      ]
+    },
+    "case_sensitivity_risk": {
+      "finding": "PhoenixScout.md and reincarnatedeath.md use PascalCase/camelCase filenames that differ from obi.ps1 ValidateSet declarations",
+      "risk": "On Linux/macOS CI runners (case-sensitive filesystems), .kilo/command/PhoenixScout.md will NOT match lookup for 'phoenix-scout'. Same for reincarnatedeath.md vs 'reincarnateDeath'.",
+      "current_os": "Windows (case-insensitive) — bug masked locally",
+      "ci_impact": "Any CI job that reads .kilo/command/{$Command}.md will fail for these 2 commands"
+    },
+    "orphan_docs": {
+      "finding": "47 files in .kilo/command/ but only 8 match obi.ps1 ValidateSet. Remaining 39 are blueprint/spec/audit docs, not command docs.",
+      "examples": [
+        "run105-pipeline.md — blueprint, not command",
+        "run106-p10-fix-blueprint.md — blueprint, not command",
+        "obinet-reliability-blueprint.md — blueprint, not command",
+        "layer6-kv-perf.md — layer-specific doc, not command",
+        "class-preflight-6pm.md — one-off doc, not command"
+      ],
+      "impact": "No enforcement that .kilo/command/ contains only command docs. Directory is mixed-purpose."
+    }
+  },
+  "verdict": {
+    "overall_status": "COMMAND_DOC_SURFACE_MISMATCH",
+    "priority": "P1_HIGH",
+    "impact": "obi.ps1 declares 22 commands. Only 8 have matching lowercase docs. 2 have case mismatches that will break on Linux CI. 13 have no docs at all. This means the command surface is functionally broken for 59% of declared commands.",
+    "required_action": [
+      "1. RENAME PhoenixScout.md -> phoenix-scout.md (lowercase with hyphen)",
+      "2. RENAME reincarnatedeath.md -> reincarnate-death.md (match obi.ps1 'reincarnateDeath' or change obi.ps1 to match filename)",
+      "3. CREATE missing docs: verify.md, dev.md, mcp-audit.md, soul-check.md, cf-audit.md, phoenix-queue.md, phoenix-status.md, phoenix-alpha.md, phoenix-beta.md, phoenix-gamma.md, phoenix-delta.md, phoenix-omega.md, legion-garrison.md",
+      "4. ADD obi.ps1 doctor check: verify every command in ValidateSet has a matching .kilo/command/{$Command.ToLower()}.md file",
+      "5. MOVE 39 non-command docs to .kilo/blueprints/ or OPERATIONS/ to separate command docs from specs"
+    ]
+  },
+  "negative_trails": [
+    "22 commands declared in obi.ps1 ValidateSet but only 8 have matching lowercase docs",
+    "PhoenixScout.md case mismatch — breaks Linux/macOS CI",
+    "reincarnatedeath.md case mismatch — breaks Linux/macOS CI",
+    "13 commands have no docs at all (verify, dev, mcp-audit, soul-check, cf-audit, phoenix-queue, phoenix-status, phoenix-alpha/beta/gamma/delta/omega, legion-garrison)",
+    "39 non-command docs polluting .kilo/command/ directory",
+    "No obi.ps1 doctor check for command-doc surface completeness"
+  ],
+  "evidence_chain": {
+    "obi_validate_set": "SCRIPTS/obi.ps1:2 -> ValidateSet with 22 commands",
+    "matching_docs": ".kilo/command/ -> doctor.md, pcc-law.md, forcemarch.md, supplylines.md, phetrails.md, soulscholars.md, soulaudit.md, kilo-free-models.md",
+    "case_mismatch_phoenix": ".kilo/command/PhoenixScout.md vs obi.ps1 'phoenix-scout'",
+    "case_mismatch_death": ".kilo/command/reincarnatedeath.md vs obi.ps1 'reincarnateDeath'",
+    "missing_verify": ".kilo/command/verify.md -> NOT FOUND",
+    "missing_dev": ".kilo/command/dev.md -> NOT FOUND",
+    "orphan_count": ".kilo/command/ -> 47 total files, 39 non-command"
+  },
+  "cross_references": [
+    "SCRIPTS/obi.ps1:2 (command ValidateSet)",
+    "SCRIPTS/obi.ps1:136-138 (Phase 1 header — doctor only)",
+    "SCRIPTS/obi.ps1:240-246 (silent fallback)",
+    ".kilo/command/ (47 files — mixed command docs and blueprints)",
+    "COLD-START-BOOT.md:258 (L30 BOOT_FILE_AGE_SWEEP — boot reads these docs)"
+  ]
+}

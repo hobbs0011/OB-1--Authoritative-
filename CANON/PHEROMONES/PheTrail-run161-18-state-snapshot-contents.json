@@ -1,0 +1,36 @@
+{
+  "run": 161,
+  "role": "PHOENIX_SCOUT",
+  "mission": "STATE-SNAPSHOT.json contents audit — exact stale fields confirmed",
+  "lens": "DRIFT",
+  "created_at": "2026-07-13T00:53:00+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "file": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json",
+    "stale_fields": {
+      "run.current": 145,
+      "head_sha": "4b34f2ad",
+      "updated_at": "2026-07-01T03:59:44+00:00",
+      "recent_seals[0].run": 145,
+      "recent_seals[0].head": "a346c594"
+    },
+    "actual_values": {
+      "current_run": 161,
+      "head_sha": "3a070fa67",
+      "last_death": "3a070fa67 death: Run 160 KILO_GAP",
+      "run_delta": 16,
+      "sha_delta": "4b34f2ad -> 3a070fa67",
+      "age_hours": 290.5
+    },
+    "rss_array_missing": [146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161],
+    "l30_trigger": "BOOT_FILE_AGE_SWEEP silent-fail due to equality bug in obi.ps1:192"
+  },
+  "verdict": {
+    "overall_status": "CONFIRMED_STALE",
+    "priority": "P0_BLOCKER"
+  },
+  "negative_trails": [
+    "16 missing seal entries in recent_seals array",
+    "290.5 hours stale with L30 silent failure"
+  ]
+}

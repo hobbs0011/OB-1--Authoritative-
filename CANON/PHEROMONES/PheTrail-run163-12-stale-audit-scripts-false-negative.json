@@ -1,0 +1,81 @@
+{
+  "run": 163,
+  "role": "PHOENIX_SCOUT",
+  "mission": "analyze-commands.ps1 and check-survivors.ps1 are structurally broken — false DEAD output masks real command state",
+  "lens": "CONFIG",
+  "created_at": "2026-07-13T00:54:00+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "stale_scripts": {
+      "analyze_commands": {
+        "file": "SCRIPTS/analyze-commands.ps1",
+        "bug": "Looks for `switch ($Command) { ... }` block in obi.ps1 (line 6). Current obi.ps1 uses `if/else`, not switch. Script produces empty IMPLEMENTED list.",
+        "output": "IMPLEMENTED (0): DECLARED BUT NOT IMPLEMENTED (47): [all 47 docs listed]",
+        "false_negative": "Reports 0 implemented when 22 commands are declared in ValidateSet and 1 is implemented in if/else"
+      },
+      "check_survivors": {
+        "file": "SCRIPTS/check-survivors.ps1",
+        "bug": "Looks for commands in switch block (line 8-16). Current obi.ps1 has no switch block. Script marks all 47 docs as DEAD.",
+        "output": "audit : DEAD, Centurion-Code : DEAD, ... (all 47 DEAD)",
+        "false_negative": "Reports all 47 docs DEAD when 8 have matching docs and 1 is actually implemented"
+      }
+    },
+    "obi_ps1_structure": {
+      "file": "SCRIPTS/obi.ps1",
+      "current_structure": "if ($Command -eq 'doctor') { ... } else { Write-Host 'NOT IMPLEMENTED'; exit 0 }",
+      "switch_block_present": false,
+      "line_with_validateSet": 2,
+      "line_with_doctor_impl": 140,
+      "line_with_fallback": 240
+    },
+    "historical_switch": {
+      "evidence": "git show 9d8911043:SCRIPTS/obi.ps1 | Select-String 'switch ($Command)' -> FOUND",
+      "conclusion": "obi.ps1 was refactored from switch to if/else at some point. analyze-commands.ps1 and check-survivors.ps1 were never updated to match the new structure."
+    },
+    "real_command_state": {
+      "total_declared": 22,
+      "implemented": 1,
+      "declared_but_unimplemented": 21,
+      "docs_matching_declared": 8,
+      "docs_case_mismatched": 2,
+      "docs_missing": 13,
+      "orphan_docs": 39
+    }
+  },
+  "verdict": {
+    "overall_status": "TOOLING_STALE_FALSE_NEGATIVE",
+    "priority": "P2_MEDIUM",
+    "impact": "analyze-commands.ps1 and check-survivors.ps1 produce misleading output claiming zero commands are implemented and all 47 docs are DEAD. Anyone relying on these scripts for command surface audits gets false negatives. The scripts need to be updated to match current obi.ps1 structure.",
+    "required_action": [
+      "1. UPDATE analyze-commands.ps1: replace switch-block detection with if/else detection. Parse ValidateSet for declared commands, parse if/else for implemented commands.",
+      "2. UPDATE check-survivors.ps1: replace switch-block detection with ValidateSet matching. Mark docs as IMPLEMENTED if basename matches any declared command.",
+      "3. ADD case-insensitive matching: 'PhoenixScout.md' should match 'phoenix-scout' declaration",
+      "4. ADD implementation depth check: verify that matched docs have corresponding if/else or function implementation, not just file existence",
+      "5. RUN both scripts and verify output matches real state: 1 implemented, 21 declared-but-unimplemented, 8 matching docs, 2 case-mismatched, 13 missing"
+    ]
+  },
+  "negative_trails": [
+    "analyze-commands.ps1 reports IMPLEMENTED (0) — false negative, doctor command is implemented",
+    "check-survivors.ps1 reports all 47 docs DEAD — false negative, 8 docs have matching declarations",
+    "Both scripts look for `switch ($Command)` block that was removed from obi.ps1 during refactoring",
+    "Scripts were never updated after obi.ps1 switched from switch to if/else structure",
+    "Any CI or audit relying on these scripts gets completely wrong command surface picture"
+  ],
+  "evidence_chain": {
+    "analyze_output": "powershell -File SCRIPTS/analyze-commands.ps1 -> IMPLEMENTED (0): DECLARED BUT NOT IMPLEMENTED (47):",
+    "check_survivors_output": "powershell -File SCRIPTS/check-survivors.ps1 -> audit : DEAD, Centurion-Code : DEAD, ...",
+    "obi_no_switch": "SCRIPTS/obi.ps1 -> grep 'switch' -> no matches",
+    "obi_has_validateSet": "SCRIPTS/obi.ps1:2 -> [ValidateSet('doctor','verify',...)]",
+    "obi_has_if_else": "SCRIPTS/obi.ps1:140 -> if ($Command -eq 'doctor')",
+    "obi_has_fallback": "SCRIPTS/obi.ps1:240 -> else { Write-Host 'NOT IMPLEMENTED'; exit 0 }",
+    "historical_switch": "git show 9d8911043:SCRIPTS/obi.ps1 | Select-String 'switch ($Command)' -> FOUND"
+  },
+  "cross_references": [
+    "SCRIPTS/analyze-commands.ps1:6 (broken switch detection)",
+    "SCRIPTS/check-survivors.ps1:8-16 (broken switch detection)",
+    "SCRIPTS/obi.ps1:2 (ValidateSet with 22 commands)",
+    "SCRIPTS/obi.ps1:140-239 (doctor implementation)",
+    "SCRIPTS/obi.ps1:240-246 (silent fallback)",
+    "git show 9d8911043:SCRIPTS/obi.ps1 (historical switch block)"
+  ]
+}

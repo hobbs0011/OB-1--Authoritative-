@@ -1,0 +1,39 @@
+{
+  "run": 161,
+  "role": "PHOENIX_SCOUT",
+  "mission": "Session persistence gap — no state captured between KILO_HOLLOW runs",
+  "lens": "GAP",
+  "created_at": "2026-07-13T00:45:00+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "kilo_sessions_dir": {
+      "path": ".kilo/sessions/",
+      "exists": true,
+      "files": 0,
+      "verdict": "EMPTY — no session state persisted"
+    },
+    "session_capture": {
+      "script": "SCRIPTS/session-capture.ps1",
+      "kilo_support": false,
+      "reason": "KILO_DNA_GAP — zero JSONL produced by Kilo environment",
+      "fallback": "history.jsonl copy (last resort)"
+    },
+    "state_snapshot": {
+      "file": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json",
+      "run_current": 145,
+      "head_sha": "4b34f2ad",
+      "gap_runs": 16,
+      "stale": true
+    }
+  },
+  "verdict": {
+    "overall_status": "SESSION_PERSISTENCE_BROKEN",
+    "impact": "All KILO_HOLLOW runs since 145 have zero state continuity",
+    "required_fix": "Build .kilo/sessions/state-{run}.json pipeline"
+  },
+  "negative_trails": [
+    "KILO_DNA_GAP is permanent architectural ceiling — cannot be fixed from within Kilo",
+    "STATE-SNAPSHOT.json 16 runs behind — L30 BOOT_FILE_AGE_SWEEP has been failing silently",
+    "No work queue exists for pending tasks between runs"
+  ]
+}

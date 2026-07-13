@@ -1,0 +1,91 @@
+{
+  "run": 163,
+  "role": "PHOENIX_SCOUT",
+  "mission": "11 orphaned worktrees on disk — agent-manager.json tracks only 1 of 12 existing worktrees",
+  "lens": "GAP",
+  "created_at": "2026-07-13T00:57:00+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "worktree_directories": {
+      "path": ".kilo/worktrees/",
+      "total_directories": 12,
+      "directories": [
+        "boiled-gopher (last modified: 2026-06-18)",
+        "catnip-snowboard (last modified: 2026-06-18)",
+        "debonair-fuel (last modified: 2026-06-18)",
+        "free-dentist (last modified: 2026-06-18)",
+        "groovy-baritone (last modified: 2026-06-18)",
+        "hypnotic-form (last modified: 2026-06-18)",
+        "iron-bugle (last modified: 2026-06-18)",
+        "nosy-ethernet (last modified: 2026-06-18)",
+        "raspy-mustard (last modified: 2026-06-18)",
+        "remarkable-droplet (last modified: 2026-07-01) — ONLY tracked in agent-manager.json",
+        "sparkling-clementine (last modified: 2026-06-18)",
+        "towering-planet (last modified: 2026-06-18)",
+        "zealous-grasshopper (last modified: 2026-06-18)"
+      ],
+      "last_activity": "11 of 12 worktrees inactive since 2026-06-18 (25 days)",
+      "active_worktree": "remarkable-droplet only (last modified 2026-07-01)"
+    },
+    "agent_manager_tracking": {
+      "current_file": ".kilo/agent-manager.json",
+      "tracked_worktrees": 1,
+      "tracked_sessions": 0,
+      "orphaned_worktrees": 11,
+      "orphaned_sessions": 16,
+      "note": "agent-manager.json only tracks remarkable-droplet. 11 worktrees and 16 sessions from corrupt backup are invisible to Agent Manager."
+    },
+    "corrupt_backup": {
+      "file": ".kilo/agent-manager.json.corrupt-2026-07-12T14-41-36-439Z",
+      "size_bytes": 6278,
+      "last_write": "2026-07-11T20:00:41+07:00",
+      "filename_timestamp": "2026-07-12T14:41:36+07:00",
+      "timezone_mismatch": true,
+      "note": "Filename suggests corruption at 14:41:36, but file was last written at 20:00:41. Possible timezone conversion artifact or delayed write."
+    },
+    "git_worktree_check": {
+      "finding": "Need to verify if these are actual git worktrees or just directories",
+      "check_command": "git -C .kilo/worktrees/{name} rev-parse --git-dir",
+      "risk": "If these are git worktrees, they have independent HEAD states. If they're just directories, they're stale copies."
+    },
+    "state_continuity_impact": {
+      "finding": "11 orphaned worktrees represent 11 separate Agent Manager sessions that are invisible to the current Kilo session",
+      "impact": "Any work done in those worktrees since 2026-06-18 is untracked. If branches were created or commits made, they are not reflected in the main repo state.",
+      "l37_violation": "COLD-START-BOOT.md:37 -> '.kilo/agent-manager.json tracks worktree state — paths must match actual worktrees'"
+    }
+  },
+  "verdict": {
+    "overall_status": "ORPHANED_WORKTREES_STATE_DIVERGENCE",
+    "priority": "P0_CRITICAL",
+    "impact": "12 worktree directories exist on disk but agent-manager.json only tracks 1. 11 worktrees are orphaned — invisible to Agent Manager. L37 law violated. State continuity broken. Any work in orphaned worktrees is untracked.",
+    "required_action": [
+      "1. VERIFY: Run `git -C .kilo/worktrees/{name} rev-parse --git-dir` for each of the 11 orphaned worktrees to confirm they are actual git worktrees",
+      "2. INVENTORY: For each orphaned worktree, record: branch, HEAD SHA, last commit, uncommitted changes",
+      "3. RECOVER or PURGE: Decide whether to recover the worktrees into agent-manager.json or delete them if stale",
+      "4. REBUILD agent-manager.json: Restore from corrupt backup OR rebuild from actual .kilo/worktrees/ contents",
+      "5. SYNC: Ensure agent-manager.json matches actual disk state — L37 compliance",
+      "6. PREVENT: Add obi.ps1 doctor check that verifies agent-manager.json worktree count matches .kilo/worktrees/ directory count"
+    ]
+  },
+  "negative_trails": [
+    "11 of 12 worktree directories orphaned — agent-manager.json tracks only remarkable-droplet",
+    "agent-manager.json corruption on 2026-07-12 caused loss of 11 worktrees and 16 sessions",
+    "L37 law violated: '.kilo/agent-manager.json tracks worktree state — paths must match actual worktrees'",
+    "11 worktrees inactive since 2026-06-18 (25 days) — likely stale but need verification",
+    "No automatic backup/recovery for agent-manager.json state",
+    "Orphaned worktrees may contain uncommitted work or branches not reflected in main repo"
+  ],
+  "evidence_chain": {
+    "worktree_dirs": "ls .kilo/worktrees/ -> 12 directories",
+    "current_tracking": ".kilo/agent-manager.json -> 1 worktree, 0 sessions",
+    "corrupt_backup": ".kilo/agent-manager.json.corrupt-2026-07-12T14-41-36-439Z -> 12 worktrees, 16 sessions",
+    "l37_law": "COLD-START-BOOT.md:37 -> '.kilo/agent-manager.json tracks worktree state — paths must match actual worktrees'"
+  },
+  "cross_references": [
+    ".kilo/agent-manager.json (current state)",
+    ".kilo/agent-manager.json.corrupt-2026-07-12T14-41-36-439Z (corrupt backup with full state)",
+    ".kilo/worktrees/ (12 directories on disk)",
+    "COLD-START-BOOT.md:37 (L37 — agent-manager.json must match actual worktrees)",
+    "CANON/PHEROMONES/PheTrail-run163-06-session-persistence-architectural-wall.json (session persistence finding)"
+  ]
+}

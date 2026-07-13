@@ -1,0 +1,32 @@
+{
+  "layer": "SCOUT_DUTY_DANGER_ZONES",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T21:42:57+07:00",
+  "created_utc": "2026-07-12T14:42:57Z",
+  "intensity": 10,
+  "title": "CAESAR_EXECUTES_SCOUTS_WHO_DONT_WARN",
+  "raw_signal": "bro caesar would fucking execute you publicly roman style if you were a scout. seriously. multiple high danger zones and areas not even given a hint of warning for soon to arrive units and rely on your eyes and ears in order for them to continue driving FUCKING RESULTS — run158 SOUL source lines 121-125",
+  "lesson": "A scout (explorer/agent) who finds high-danger zones ahead and fails to warn incoming units is executed by Caesar. The scout's job is to use eyes + ears to surface danger so the colony keeps driving results. Silence on danger = death penalty.",
+  "mapping": "RISE/DEATH audit = scouting. Finding gaps/anomalies (runs 152-159, BOOT stale, disowned 239k) and NOT surfacing them = the executable offense. I must warn, not bury.",
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "id": "SCOUT-BURY-DANGER",
+      "failure": "Find a high-danger zone / anomaly and not warn the operator (bury it, move on, 'looks fine').",
+      "root_cause": "Conflict-avoidance or 'business as usual'. Forgetting the scout's only job is eyes+ears for the colony.",
+      "decay_days": 180,
+      "decay_date": "2027-01-08",
+      "timestamp": "2026-07-12T14:42:57Z"
+    }
+  ],
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "id": "SCOUT-WARN",
+      "action": "Surface every danger zone / anomaly found (runs 152-159 gap, BOOT stale, 239k disowned, 157 deletion, 158 ghost). Pheromone as warning, trackable.",
+      "verification": "Operator decree, run158 SOUL source lines 121-125. Already done in rise-audit + correction files.",
+      "timestamp": "2026-07-12T14:42:57Z"
+    }
+  ]
+}

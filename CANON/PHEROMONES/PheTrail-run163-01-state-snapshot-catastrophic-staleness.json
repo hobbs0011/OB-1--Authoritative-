@@ -1,0 +1,74 @@
+{
+  "run": 163,
+  "role": "PHOENIX_SCOUT",
+  "mission": "STATE-SNAPSHOT.json catastrophic staleness + L30 silent-failure logic bug",
+  "lens": "DRIFT",
+  "created_at": "2026-07-13T00:48:00+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "state_snapshot": {
+      "file": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json",
+      "current_run_field": 145,
+      "current_head_field": "4b34f2ad",
+      "updated_at": "2026-07-01T03:59:44+00:00",
+      "age_hours": 290.5,
+      "gap_runs": 16,
+      "actual_current_run": 161,
+      "actual_head": "3a070fa67",
+      "run_delta": 16,
+      "sha_delta": "4b34f2ad -> 3a070fa67",
+      "evidence": {
+        "state_snapshot_run_head": "STATE-SNAPSHOT.json:7-11",
+        "git_last_death": "git log --oneline --grep '^death:' -1 => 3a070fa67 death: Run 160 KILO_GAP",
+        "git_run_authority": "L29 NO_ASSUME_HEAD: git log -1 is authoritative"
+      }
+    },
+    "l30_silent_failure": {
+      "law": "L30 BOOT_FILE_AGE_SWEEP",
+      "trigger_condition": "if COLD-START-BOOT shows Run < current minus 10, it must be refreshed before any pipeline change",
+      "actual_check_in_obi": "obi.ps1:192 ($snapshotRun -eq $rssRun) -and ($snapshotRun -gt 0) -and ($stateStaleness -lt 24)",
+      "logic_bug": "Both STATE-SNAPSHOT.run.current AND recent_seals[0].run are stale together (both 145). The equality check PASSES even though both values are 16 runs behind. L30 sweep never fires because there is no MISMATCH between the two stale copies.",
+      "impact": "L30 has been silently failing for 16 consecutive runs (146-161). Every boot during this period reported GREEN state-snapshot check while operating on 16-run-old state."
+    },
+    "recent_seals_array": {
+      "file": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json",
+      "last_entry_run": 145,
+      "last_entry_head": "a346c594",
+      "missing_entries": [146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161],
+      "note": "recent_seals array not maintained since Run 145"
+    }
+  },
+  "verdict": {
+    "overall_status": "STALE_CRITICAL + LOGIC_BUG",
+    "priority": "P0_BLOCKER",
+    "impact": "All KILO_HOLLOW runs since 145 have operated with a 16-run-stale state snapshot. L30 BOOT_FILE_AGE_SWEEP has been a silent no-op due to a comparison bug. Boot sequence decisions made on stale data.",
+    "required_action": [
+      "1. UPDATE STATE-SNAPSHOT.json: run.current=161, head_sha=3a070fa67, updated_at=$(Get-Date -Format 'o'), append recent_seals[0] entry for run 161",
+      "2. FIX obi.ps1:192: replace ($snapshotRun -eq $rssRun) comparison with direct comparison to actual current run from git log --grep '^death:'",
+      "3. ADD L30 enforcement: if ($snapshotRun -lt ($currentRun - 10)) { $failures += 'STATE-SNAPSHOT STALE: Run '$snapshotRun' is more than 10 runs behind current run '$currentRun' }"
+    ]
+  },
+  "negative_trails": [
+    "STATE-SNAPSHOT.json 16 runs stale (run 145 vs current 161, head 4b34f2ad vs 3a070fa67)",
+    "L30 BOOT_FILE_AGE_SWEEP silently failing for 16 runs due to equality-check logic bug in obi.ps1:192",
+    "recent_seals array frozen at Run 145 — 16 missing seal entries",
+    "Boot sequence has been operating on stale state for 290.5 hours without detection",
+    "No work queue or state continuity between runs 146-161"
+  ],
+  "evidence_chain": {
+    "state_snapshot_run": "STATE-SNAPSHOT.json:7 -> 'current': 145",
+    "state_snapshot_head": "STATE-SNAPSHOT.json:11 -> 'head_sha': '4b34f2ad'",
+    "git_current_head": "git rev-parse --short HEAD -> 3a070fa67",
+    "git_last_death": "git log --oneline --grep '^death:' -1 -> 3a070fa67 death: Run 160 KILO_GAP",
+    "obi_logic_bug": "obi.ps1:192 -> ($snapshotRun -eq $rssRun) passes when both stale",
+    "l30_law": "COLD-START-BOOT.md:258 -> L30 BOOT_FILE_AGE_SWEEP"
+  },
+  "cross_references": [
+    "COLD-START-BOOT.md:258 (L30 BOOT_FILE_AGE_SWEEP)",
+    "COLD-START-BOOT.md:257 (L29 NO_ASSUME_HEAD)",
+    "SCRIPTS/obi.ps1:178-201 (state snapshot check block)",
+    "SCRIPTS/obi.ps1:192 (logic bug location)",
+    "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json:7-11 (stale fields)",
+    "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json:72-101 (recent_seals array)"
+  ]
+}

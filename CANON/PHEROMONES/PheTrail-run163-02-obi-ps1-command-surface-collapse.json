@@ -1,0 +1,81 @@
+{
+  "run": 163,
+  "role": "PHOENIX_SCOUT",
+  "mission": "obi.ps1 command surface collapse — 95.5% silent-failure anti-pattern",
+  "lens": "CONFIG",
+  "created_at": "2026-07-13T00:48:30+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "command_audit": {
+      "total_commands": 22,
+      "implemented": 1,
+      "placeholder": 21,
+      "implemented_pct": 4.5,
+      "missing_pct": 95.5,
+      "implemented_commands": ["doctor"],
+      "placeholder_commands": [
+        "verify","dev","mcp-audit","soul-check","cf-audit",
+        "phoenix-queue","phoenix-status","phoenix-alpha","phoenix-beta",
+        "phoenix-gamma","phoenix-delta","phoenix-omega","pcc-law",
+        "phoenix-scout","forcemarch","supply-lines","reincarnateDeath",
+        "legion-garrison","phetrails","soulscholars","soulaudit","kilo-free-models"
+      ]
+    },
+    "silent_failure_code_path": {
+      "file": "SCRIPTS/obi.ps1",
+      "lines": "240-246",
+      "code": "else { Write-PhetrailEntry -Type 'neutral' -Artifact 'obi:$Command' -Action 'attempted $Command (not yet implemented in Phase 1)'; Write-Host 'NOT IMPLEMENTED IN PHASE 1: $Command' -ForegroundColor Yellow; Write-Host 'Only doctor is wired for mechanical emission in this phase.' -ForegroundColor Yellow; Write-Host 'Trail written. Command not executed. See handoff-pipeline-round1.md for next pipes.' -ForegroundColor Cyan; exit 0 }",
+      "mechanism": "Unimplemented commands write a NEUTRAL phetrail entry, print yellow text, and exit 0. No error thrown. CI/automation sees success. The command appears functional but produces zero effect.",
+      "danger": "Automation scripts calling obi.ps1 verify or obi.ps1 forcemarch will receive exit 0 and assume success. No failure signal propagates."
+    },
+    "implementation_gaps": {
+      "verify": "Referenced in AGENTS.md as validation command, but only stub exists",
+      "dev": "Expected to deploy to net-pet-ai-dev worker, but unimplemented",
+      "forcemarch": "Documented in COLD-START-BOOT.md:224 as next action for Run 099, still not wired",
+      "supply-lines": "Referenced in multiple phetrails as autonomous pipeline command, missing",
+      "phoenix-scout": "Referenced in COLD-START-BOOT.md:260-261 as L28 MARSHAL_RUNS_FIRST, missing",
+      "reincarnateDeath": "Death protocol command, missing from obi.ps1 despite being core workflow"
+    },
+    "evidence": {
+      "phase1_header": "SCRIPTS/obi.ps1:136-138 -> 'PHASE 1: ONE MECHANICAL EMISSION — doctor command ONLY'",
+      "doctor_only": "SCRIPTS/obi.ps1:140 -> if ($Command -eq 'doctor')",
+      "fallback": "SCRIPTS/obi.ps1:240 -> else block for all other commands"
+    }
+  },
+  "verdict": {
+    "overall_status": "COMMAND_SURFACE_COLLAPSE",
+    "priority": "P1_HIGH",
+    "impact": "21 of 22 documented commands are non-functional. Any automation, CI pipeline, or operator workflow relying on these commands receives false GREEN signals. This violates the 'Build don't scout' active principle.",
+    "required_action": [
+      "1. IMMEDIATE: Replace exit 0 in obi.ps1:245 with throw 'COMMAND_NOT_IMPLEMENTED: $Command — see .kilo/command/$($Command.ToLower()).md' to prevent silent automation failures",
+      "2. SHORT-TERM: Implement verify command (wrangler deploy --dry-run + vitest + obi.ps1 doctor)",
+      "3. MEDIUM-TERM: Implement dev command (wrangler deploy --config wrangler.dev.toml)",
+      "4. LONG-TERM: Implement forcemarch, supply-lines, phoenix-scout per their canonical .kilo/command/*.md specs"
+    ]
+  },
+  "negative_trails": [
+    "21 of 22 commands produce exit 0 with zero effect — automation blind spot",
+    "No error thrown for unimplemented commands — silent failure violates L55 COMMIT_DONT_HOLD (every verified feature must be real)",
+    "verify command missing despite being referenced in AGENTS.md validation commands",
+    "forcemarch documented in COLD-START-BOOT.md:224 as next action for Run 099, still unwired after 64 runs",
+    "supply-lines referenced in multiple phetrails as autonomous pipeline but missing from obi.ps1",
+    "reincarnateDeath missing from obi.ps1 despite being core death-protocol command"
+  ],
+  "evidence_chain": {
+    "command_param_block": "SCRIPTS/obi.ps1:2 -> ValidateSet with 22 commands",
+    "phase1_header": "SCRIPTS/obi.ps1:136 -> 'doctor command ONLY'",
+    "doctor_implementation": "SCRIPTS/obi.ps1:140 -> if ($Command -eq 'doctor')",
+    "silent_fallback": "SCRIPTS/obi.ps1:240-246 -> else block with exit 0",
+    "agents_validate_ref": "AGENTS.md -> 'pwsh -File SCRIPTS/obi.ps1 verify' listed as validation command",
+    "coldboot_forcemarch": "COLD-START-BOOT.md:224 -> 'Next: Run 099 — forcemarch...'"
+  },
+  "cross_references": [
+    "SCRIPTS/obi.ps1:2 (command ValidateSet)",
+    "SCRIPTS/obi.ps1:136-138 (Phase 1 header)",
+    "SCRIPTS/obi.ps1:140-239 (doctor implementation)",
+    "SCRIPTS/obi.ps1:240-246 (silent fallback)",
+    "AGENTS.md (validation commands section)",
+    "COLD-START-BOOT.md:224 (forcemarch next action)",
+    ".kilo/command/ (22 command docs expected)"
+  ]
+}

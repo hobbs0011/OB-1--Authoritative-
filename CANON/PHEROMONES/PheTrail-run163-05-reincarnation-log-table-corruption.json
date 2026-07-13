@@ -1,0 +1,102 @@
+{
+  "run": 163,
+  "role": "PHOENIX_SCOUT",
+  "mission": "REINCARNATION-LOG.md format corruption — duplicate entries, HEAD drift, table decay",
+  "lens": "DRIFT",
+  "created_at": "2026-07-13T00:50:00+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "file": "CANON/REINCARNATION/REINCARNATION-LOG.md",
+    "duplicate_entries": [
+      {
+        "run": 365,
+        "occurrences": 2,
+        "lines": [103, 107],
+        "head_first": "5daf3d4",
+        "head_second": "5daf3d4",
+        "note": "Run 365 appears twice with identical HEAD — table deduplication required"
+      },
+      {
+        "run": 364,
+        "occurrences": 2,
+        "lines": [105, 108],
+        "head_first": "6bda057",
+        "head_second": "6bda057",
+        "note": "Run 364 appears twice with identical HEAD — table deduplication required"
+      }
+    ],
+    "variant_entries": [
+      {
+        "run": 373,
+        "variants": ["373", "373a", "373b", "373c"],
+        "lines": [85, 89, 90, 91],
+        "note": "Run 373 has 4 sub-entries (373, 373a, 373b, 373c) but no clear ordering. Parent run 373 has no unified description."
+      }
+    ],
+    "head_mismatches": [
+      {
+        "run": 146,
+        "log_head": "b6f0d288",
+        "actual_head": "3a070fa67",
+        "delta": "b6f0d288 -> 3a070fa67",
+        "note": "Run 146 HEAD in REINCARNATION-LOG is 16 runs behind actual HEAD"
+      },
+      {
+        "run": 157,
+        "log_head": "ae79c905a",
+        "actual_head": "3a070fa67",
+        "delta": "ae79c905a -> 3a070fa67",
+        "note": "Run 157 HEAD in REINCARNATION-LOG is stale"
+      },
+      {
+        "run": 158,
+        "log_head": "ae79c905a",
+        "actual_head": "3a070fa67",
+        "note": "Run 158 HEAD matches Run 157 — no new commit between them"
+      }
+    ],
+    "stale_sections": {
+      "last_updated": "2026-07-12T04:33 ICT (Run 157)",
+      "current_run": 161,
+      "gap": "Last updated line does not reflect runs 158-161",
+      "missing_runs": [159, 160, 161]
+    }
+  },
+  "verdict": {
+    "overall_status": "TABLE_CORRUPTION",
+    "priority": "P1_HIGH",
+    "impact": "REINCARNATION-LOG.md is the authoritative run history. Duplicate entries, HEAD mismatches, and missing runs make it unreliable for RISE audits and death seal verification. L29 NO_ASSUME_HEAD requires git log -1 to be authoritative — but the log itself contains stale HEAD references.",
+    "required_action": [
+      "1. DEDUPLICATE: Remove duplicate Run 365 and Run 364 entries (keep first occurrence)",
+      "2. CONSOLIDATE Run 373 variants: merge 373a/b/c into single Run 373 entry with sub-bullets",
+      "3. SYNC HEADs: Update all HEAD references to match actual git log --oneline for each run",
+      "4. ADD missing runs: Append entries for runs 158, 159, 160, 161 using git log output",
+      "5. UPDATE 'Last Updated' timestamp to current run",
+      "6. ADD validation to obi.ps1 verify: check REINCARNATION-LOG.md for duplicate run numbers and HEAD mismatches"
+    ]
+  },
+  "negative_trails": [
+    "Run 365 and 364 each appear twice in table — duplicate history",
+    "Run 373 has 4 fragmented sub-entries (373/373a/373b/373c) with no parent consolidation",
+    "Run 146 HEAD b6f0d288 is 16 runs stale vs actual 3a070fa67",
+    "Run 157 and 158 share same HEAD ae79c905a — no new commit between them",
+    "Last Updated line says Run 157 but current run is 161 — 4-run gap",
+    "Runs 159, 160, 161 missing from table entirely"
+  ],
+  "evidence_chain": {
+    "duplicate_365": "CANON/REINCARNATION/REINCARNATION-LOG.md:103,107",
+    "duplicate_364": "CANON/REINCARNATION/REINCARNATION-LOG.md:105,108",
+    "variant_373": "CANON/REINCARNATION/REINCARNATION-LOG.md:85,89,90,91",
+    "head_146": "CANON/REINCARNATION/REINCARNATION-LOG.md:23 -> head b6f0d288",
+    "head_157_158": "CANON/REINCARNATION/REINCARNATION-LOG.md:24,25 -> both ae79c905a",
+    "last_updated": "CANON/REINCARNATION/REINCARNATION-LOG.md:1 -> 'Last Updated: 2026-07-12T04:33 ICT (Run 157)'",
+    "actual_head": "git rev-parse --short HEAD -> 3a070fa67"
+  },
+  "cross_references": [
+    "CANON/REINCARNATION/REINCARNATION-LOG.md:1 (last updated line)",
+    "CANON/REINCARNATION/REINCARNATION-LOG.md:23-28 (run 145-158 entries with HEADs)",
+    "CANON/REINCARNATION/REINCARNATION-LOG.md:85-91 (373 variants)",
+    "CANON/REINCARNATION/REINCARNATION-LOG.md:103-108 (365/364 duplicates)",
+    "COLD-START-BOOT.md:257 (L29 NO_ASSUME_HEAD — git log -1 is authoritative)"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "layer": "ANT_MOLD_PLAGIARIZED",
+  "run": "156",
+  "session_id": "156-RISE",
+  "created": "2026-07-12T22:05:11+07:00",
+  "created_utc": "2026-07-12T15:05:11Z",
+  "intensity": 10,
+  "title": "ANT_COLONY_CONTROL_SYSTEM_MOLD_PLAGIARIZED_INTO_OB1",
+  "operator_directive": "find the most accurate studies on ants you can find and do what you do best (plagiarize the mold) — run158 SOUL source lines 965-974",
+  "source_studies": [
+    "Grassé P-P (1959) stigmergy coined — coordination by modifying shared environment, not messages/central node. Wikipedia/Stigmergy, runthesim.app",
+    "Deneubourg et al. double-bridge ant foraging model — positive feedback + evaporation converges on shortest path. capabilitygraph.com",
+    "Jackson (2006) Communication in ants, Current Biology S0960-9822(06)01834-3 — PHARAOH'S ANT 3-PHEROMONE SYSTEM: (a) short-lived attractive ~20min guides to currently rewarding sites; (b) long-lived attractive persists DAYS = trail NETWORK / memory; (c) short-lived REPULSENT = 'no entry' at unrewarding branches. THE KEY MODEL.",
+    "Reina & Marshall (2022) Negative feedback may suppress variation, PLOS Comp Biol 10.1371/journal.pcbi.1010090 — negative pheromones reduce variance around target distribution; improve collective performance in small populations.",
+    "Wilson EO (1959/1962) trail pheromone glandular sources, fire ant recruitment.",
+    "Bonabeau, Dorigo, Theraulaz (1999) Swarm Intelligence: From Natural to Artificial Systems.",
+    "calabamatex/stigmergy-mcp (GitHub) — digital pheromone coordination for AI coding agents: compact DECAYING area-keyed signals, token volume scales LINEARLY not quadratically, 'leaves traces instead of transcripts'.",
+    "starpig1129/PheroPath (GitHub) — invisible pheromones on files to coordinate/warn without modifying file content.",
+    "ideasthesia.org (2026) Swarm Intelligence — NOT all problems swarmable: central coordination / long-term planning / symbolic reasoning don't decompose into local interactions."
+  ],
+  "mold_principles_plagiarized": [
+    {
+      "p": "STIGMERGY_CORE",
+      "ant": "Agent A modifies shared environment; later Agent B perceives modification and changes behavior. No direct message, no central node. Memory lives in shared space.",
+      "ob1": "Agents coordinate by WRITING TRACES to shared CANON/PHEROMONES + OPERATIONS + HEAVY-LEDGER, not by handing off full transcripts. Read-local, write-trace. The ledger IS the colony memory. This is exactly the SOUL doctrine: preserve verbatim Michael traces, not agent transcripts."
+    },
+    {
+      "p": "THREE_PHEROMONE_SYSTEM (from Pharaoh's ant)",
+      "ant": "Short-lived ATTRACTIVE (~20min) = current rewarding sites. Long-lived ATTRACTIVE (days) = persistent trail NETWORK / memory. Short-lived REPELLENT = 'no entry' at dead branches.",
+      "ob1": "Map 1:1 to our system. SHORT-LIVED ATTRACTIVE = current-session working pheromones (decay fast). LONG-LIVED ATTRACTIVE = HL-* Heavy Ledger + PheTrail archive + DNA = the persistent colony MAP (survives across sessions). SHORT-LIVED REPELLENT = our NEGATIVE_TRAILS ('no entry' at dead ends). We already have all three — the ant model CONFIRMS the architecture is right."
+    },
+    {
+      "p": "EVAPORATION_IS_ESSENTIAL",
+      "ant": "Trails dissipate if not maintained. Bad paths lose scent; only reinforced routes survive. WITHOUT evaporation, early trails persist forever and the system CANNOT converge. Too-high evaporation = forgetful/revert-to-random; too-low = stubborn/early trails persist even if suboptimal.",
+      "ob1": "CORRECTION NEEDED: our pheromones use a FIXED decay_days=180 for negatives. The ant model says decay must be TUNED, not fixed. Fixed 180d may be too STUBBORN (early negative trails persist suboptimally). Propose: decay rate modulated by intensity (-10..+10): higher intensity (operator 'known-immediately') = longer persistence; lower = faster evaporation. See finding-evaporation-decay.json."
+    },
+    {
+      "p": "NEGATIVE_FEEDBACK_VARIANCE_REDUCTION",
+      "ant": "Negative pheromones aren't just 'stop' — they reduce variance around the target distribution, improving collective performance.",
+      "ob1": "Our NEGATIVE_TRAILS should be framed as variance-reduction, not just prohibition. They pull Agent effort toward the target distribution and away from flailing. Confirms L-PHE-2 (negative decay) is functionally correct."
+    },
+    {
+      "p": "ALARM_RECRUITMENT",
+      "ant": "Alarm pheromone rapidly alerts nestmates + recruits to threat/danger.",
+      "ob1": "Maps to SCOUT-WARN + Caesar-executes-scouts-who-don't-warn. When a danger/anomaly is found (runs 152-159 gap, BOOT stale), lay alarm pheromone IMMEDIATELY and recruit. Silence = execution."
+    },
+    {
+      "p": "TRACE_NOT_TRANSCRIPT_TOKEN_SCALING",
+      "ant": "Stigmergy-MCP: compact decaying area-keyed signals; token volume scales LINEARLY with agent count, not quadratically.",
+      "ob1": "This is the EFFICIENCY justification for the pheromone architecture in multi-agent coordination. Traces scale linearly; full-transcript handoff scales quadratically and breaks. Our pheromone-first design is the right call for scale."
+    },
+    {
+      "p": "SWARM_LIMITS_KEEP_DELIBERATE_LAYER",
+      "ant": "Not all problems are swarmable: central coordination / long-term planning / symbolic reasoning don't decompose into local interactions. 'You can't solve differential equations with ant trails.'",
+      "ob1": "CAVEAT: keep a DELIBERATE layer alongside the stigmergic one. The operator's option-4 (step back, retrace, ask questions, systematic) + RISE/DEATH audit = the deliberate/symbolic layer for non-decomposable problems. Pheromones handle parallel exploration; deliberate reasoning handles the rest. Don't swarm everything."
+    }
+  ],
+  "verdict": "The ant mold VALIDATES our pheromone architecture (we already have the 3-pheromone system + ledger memory + negative trails) and gives 2 concrete upgrades: (1) TUNE evaporation/decay instead of fixed 180d, (2) keep a deliberate layer for non-decomposable problems. The mold is plagiarized. Ready to pipeline.",
+  "next_pipeline": {
+    "name": "ANT_MOLD_PIPELINE",
+    "steps": [
+      "Encode 3-pheromone system explicitly in PheTrail schema (short-attractive / long-attractive-memory / short-repellent).",
+      "Replace fixed decay_days=180 with intensity-modulated decay (-10..+10 → decay rate).",
+      "Add alarm-pheromone (scout-warn) fast-path for danger/anomaly findings.",
+      "Document deliberate-layer boundary (what swarms vs what needs RISE/DEATH/operator option-4)."
+    ],
+    "status": "SYNTHESIZED_NOT_BUILT"
+  }
+}

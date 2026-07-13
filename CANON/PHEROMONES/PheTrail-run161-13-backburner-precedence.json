@@ -1,0 +1,61 @@
+{
+  "run": 161,
+  "role": "PHOENIX_SCOUT",
+  "mission": "BACKBURNER-PIPELINE-LOG.md precedence audit — OPEN items blocking new work",
+  "lens": "DRIFT",
+  "created_at": "2026-07-13T00:50:30+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "total_items": 62,
+    "open": 5,
+    "in_progress": 1,
+    "blocked": 0,
+    "deferred": 8,
+    "done": 48,
+    "open_items": [
+      {
+        "id": "BB-53",
+        "priority": "HIGH",
+        "status": "DEFERRED",
+        "issue": "EXPOSED PLAINTEXT API KEY in RRL",
+        "time_sensitive": true
+      },
+      {
+        "id": "BB-55",
+        "priority": "MEDIUM",
+        "status": "OPEN",
+        "issue": "P0-02 Funnel Browser Test",
+        "blocker": "Michael action required"
+      },
+      {
+        "id": "BB-63",
+        "priority": "LOW",
+        "status": "OPEN",
+        "issue": "Bible Update Runs 80-85"
+      },
+      {
+        "id": "BB-NEW",
+        "priority": "HIGH",
+        "status": "OPEN",
+        "issue": "PHETRAIL STRENGTH SCORING directive (Run 120)"
+      },
+      {
+        "id": "/soulsearch",
+        "priority": "HIGH",
+        "status": "MISSING",
+        "issue": "Command station not implemented"
+      }
+    ]
+  },
+  "verdict": {
+    "overall_status": "PRECEDENCE_ACTIVE",
+    "new_work_blocked": true,
+    "highest_priority": "BB-53 (exposed key)",
+    "contract_reference": "REINCARNATION-CONTRACT.md §6 Backburner Precedence"
+  },
+  "negative_trails": [
+    "5 OPEN items — no new implementation thread may be opened",
+    "BB-53 deferred 17 runs — security risk accumulating",
+    "/soulsearch missing 27 days — directive unactioned"
+  ]
+}
