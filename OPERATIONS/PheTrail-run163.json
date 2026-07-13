@@ -1,0 +1,25 @@
+﻿{
+    "schema_version":  "2.0",
+    "run_number":  "163",
+    "seal_type":  "auto-exit",
+    "extracted_at":  "2026-07-13T09:45:06.4271231+07:00",
+    "head_sha":  "348b08aa9",
+    "session_id":  "d1fd036d27ff",
+    "soulcount":  null,
+    "registry_entries":  0,
+    "positive_trails":  [
+
+                        ],
+    "negative_trails":  [
+
+                        ],
+    "state_markers":  {
+                          "active_mission":  "OB-1 REINCARNATION phetrail mechanical emission Phase 1",
+                          "open_flags_count":  0,
+                          "top_priority":  "one mechanical emission that cannot be skipped",
+                          "session_trail_count":  27,
+                          "session_positive":  18,
+                          "session_negative":  2,
+                          "session_neutral":  7
+                      }
+}

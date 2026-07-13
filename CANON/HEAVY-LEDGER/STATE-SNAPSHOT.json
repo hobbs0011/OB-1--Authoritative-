@@ -3,14 +3,12 @@
   "rss_version": "1.0",
   "rss_stage": "Reincarnate-SnapShot RSS",
   "updated_at": "2026-07-13T01:20:00+07:00",
-  "run": {
-    "current": 161,
+"run": {
+    "current": 162,
     "era": "ROMAN",
     "status": "KILO_HOLLOW",
-    "seal": "Run 161 - PhoenixScout pipeline gap audit + 7 commands implemented",
-    "head_sha": "3a070fa67",
-    "soulcount": 239645670,
-    "anchor": "TITANIUM_ANCHOR"
+    "seal": "Run 162 - Mechanical emission + death seal committed",
+    "head_sha": "348b08aa9"
   },
   "v0_baseline": {
     "git_tag": "v0",
@@ -56,21 +54,30 @@
     "rule": "All feature development deploys to dev first. Promote to prod only after verified."
   },
   "rss_checklist": [
+    "Run 163 PhoenixScout: 20 P1 DRIFT finds (stale HEAD refs), auto-seal PheTrail-run163",
+    "Run 162 Death seal committed: HL-7290, starmap-run162, pipeline-run162, art-sync-run162",
     "Run 161 PhoenixScout audit: 37 P1 finds, 7 phetrails (58-66) written, 115 pipeline runs audited",
     "Run 161 7 commands implemented: verify, phoenix-scout, phetrails, soulaudit, soul-check, cf-audit, doctor (L30 fixed)",
     "Run 161 Pipeline audit: 115 runs (83 COMPLETE, 8 GAP, 18 KILO_GAP, 6 Other)",
     "Run 161 RRL audit: 160 files, only 2 valid transcripts",
-    "Run 161 Scripts created: state-capture.ps1, phetrail-validate.ps1, build-soulkeys.ps1 RunMax=161",
-    "Run 161 STATE-SNAPSHOT updated to run 161, HEAD 3a070fa67"
+    "Run 161 Scripts created: state-capture.ps1, phetrail-validate.ps1, build-soulkeys.ps1 RunMax=161"
   ],
   "open_loops": [
     "Pipeline gap remediation - 26 stale runs (8 GAP + 18 KILO_GAP) need re-run",
-    "RRL format remediation - 160 files need valid transcript JSONL",
+    "RRL format remediation - 161 files need valid transcript JSONL",
     "wrangler.toml secret binding verification pending",
     "REINCARNATION-LOG.md deduplication needed (runs 364, 365, 373 variants)",
-    "BB-53 exposed API key rotation + git filter-repo purge"
+    "BB-53 exposed API key rotation + git filter-repo purge",
+    "STATE-SNAPSHOT staleness - 163 not yet recorded"
   ],
   "recent_seals": [
+    {
+      "run": 162,
+      "era": "ROMAN",
+      "head": "348b08aa9",
+      "soul_delta": 0,
+      "seal": "Run 162 - Mechanical emission + death seal committed"
+    },
     {
       "run": 161,
       "era": "ROMAN",
