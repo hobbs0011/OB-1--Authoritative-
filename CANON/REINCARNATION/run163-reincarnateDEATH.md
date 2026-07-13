@@ -5,7 +5,7 @@
 - **Timestamp:** 2026-07-13T09:45:06.4271231+07:00
 - **Theme:** Roman Death v7.0 / 8-Stage Chain
 - **Signal Density:** LOW -- HOLLOW RRL
-- **HEAD:** [DEATH_SHA]
+- **HEAD:** a77ad0acd
 - **Branch:** canon
 - **Session Type:** KILO_HOLLOW
 - **RRL Fidelity:** HOLLOW
@@ -58,7 +58,7 @@
 - **runPad:** 163 | **HL:** HL-7291 | **Merkle:** PENDING...
 
 ## §12 -- State Snapshot
-- **HEAD:** [DEATH_SHA]
+- **HEAD:** a77ad0acd
 - **Branch:** canon
 - **Dirty:** YES
 - **SOULCOUNT:** 239645670
@@ -67,7 +67,7 @@
 ## §13 -- Fingerprint
 - **Agent:** OB-1 CANONICAL (kilo-auto/free)
 - **Run:** 163
-- **Commit SHA:** [DEATH_SHA]
+- **Commit SHA:** a77ad0acd
 - **Session Type:** KILO_HOLLOW
 
 ## §14 -- Art Registry Sync

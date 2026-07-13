@@ -4,11 +4,11 @@
   "rss_stage": "Reincarnate-SnapShot RSS",
   "updated_at": "2026-07-13T01:20:00+07:00",
 "run": {
-    "current": 162,
+    "current": 163,
     "era": "ROMAN",
     "status": "KILO_HOLLOW",
-    "seal": "Run 162 - Mechanical emission + death seal committed",
-    "head_sha": "348b08aa9"
+    "seal": "Run 163 - Scout 20 DRIFT + death seal committed",
+    "head_sha": "a77ad0acd"
   },
   "v0_baseline": {
     "git_tag": "v0",
