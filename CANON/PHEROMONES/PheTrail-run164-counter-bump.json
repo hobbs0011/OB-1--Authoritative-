@@ -1,0 +1,24 @@
+{
+  "schema_version": "2.0",
+  "run_number": "164",
+  "extracted_at": "2026-07-13T10:06:11+07:00",
+  "head_sha": "d1012e145",
+  "soulcount": 239645670,
+  "registry_entries": 0,
+  "positive_trails": [],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "commit:d5f81bb5a",
+      "failure": "Run 164 death commit is a counter bump with no artifacts, no phetrails, no RRL, no starmap, no pipeline",
+      "root_cause": "Run 164 sealed via `death: run 164 (counter bump for 166)` without mechanical emission or stage outputs; pheromone layer absent",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T10:06:11+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Mastermind audit — conductor of the orchestra",
+    "open_flags_count": 1,
+    "top_priority": "Wait for 166 landing, then audit full deposit field"
+  }
+}

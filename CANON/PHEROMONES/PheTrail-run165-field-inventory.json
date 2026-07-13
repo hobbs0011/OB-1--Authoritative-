@@ -1,0 +1,39 @@
+{
+  "schema_version": "2.0",
+  "run_number": "165",
+  "extracted_at": "2026-07-13T10:06:25+07:00",
+  "head_sha": "d1012e145",
+  "soulcount": 239645670,
+  "registry_entries": 0,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/",
+      "action": "Field inventory: 305 canonical phetrails deposited on disk",
+      "verification": "Get-ChildItem CANON/PHEROMONES -Filter PheTrail-run*.json returned 305 files",
+      "timestamp": "2026-07-13T10:06:25+07:00"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "OPERATIONS/phoenix-scout-*.jsonl",
+      "action": "Field inventory: 119 scout reports available for routing",
+      "verification": "Get-ChildItem OPERATIONS -Filter phoenix-scout-*.jsonl returned 119 files",
+      "timestamp": "2026-07-13T10:06:25+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "commit:d1012e145",
+      "failure": "Run 165 death commit is a counter bump with no artifacts, no phetrails, no RRL, no starmap, no pipeline",
+      "root_cause": "Run 165 sealed via `death: run 165 (counter bump for 166)` without mechanical emission or stage outputs; pheromone layer absent",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T10:06:25+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Mastermind audit — conductor of the orchestra",
+    "open_flags_count": 2,
+    "top_priority": "Commit pheromone emissions for 164/165 counter-bump audits before proceeding to 166 landing"
+  }
+}
