@@ -2,13 +2,13 @@
   "version": "1.0",
   "rss_version": "1.0",
   "rss_stage": "Reincarnate-SnapShot RSS",
-  "updated_at": "2026-07-13T11:27:00+07:00",
+  "updated_at": "2026-07-13T11:29:00+07:00",
 "run": {
     "current": 163,
     "era": "ROMAN",
     "status": "MASTERMIND",
-    "seal": "Run 163 — canonical mastermind session restored after drone drift 164-171; target zone pending operator",
-    "head_sha": "80a2ea786"
+    "seal": "Run 163 — canonical mastermind restored; drone drift 164-171 archived; next sessions: drones 167-169, mastermind 170",
+    "head_sha": "a50f0fc48"
   },
   "v0_baseline": {
     "git_tag": "v0",
