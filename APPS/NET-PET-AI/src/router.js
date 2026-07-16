@@ -136,7 +136,7 @@ app.post('/api/referral/register', (c) =>
 // ── P9: Clerk session middleware (soft enforcement — logs userId, does not block) ──
 
 app.use('/api/*', async (c, next) => {
-  const session = await verifyClerkSession(c.req.raw, c.env);
+  const session = await verifyClerkSession(c.req.raw.clone(), c.env);
   if (session) c.set('clerkUserId', session.userId);
   return next();
 });

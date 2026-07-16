@@ -74,7 +74,7 @@
             <a href="QUAN-career">Career</a>
             <a href="QUAN-transcripts">Transcripts</a>
             <a href="QUAN-action-plan">Action Plan</a>
-            <a href="/magic-chat?studentId=quan-nguyen" class="nav-coach">🗣️ Chat với OBI</a>
+            <a href="/magic-chat?studentId=quan-bluetech" class="nav-coach">🗣️ Chat với OBI</a>
         </div>
         <button class="nav-logout" id="logoutBtn">Logout</button>
     </nav>
@@ -118,7 +118,7 @@
         <div class="mission-card" id="missionCard">
             <div class="mission-label">🎯 TODAY'S MISSION</div>
             <div class="mission-text" id="missionText">Loading your mission...</div>
-            <a href="/magic-chat?studentId=quan-nguyen" class="mission-btn" id="missionBtn">🗣️ Talk to OBI Now</a>
+            <a href="/magic-chat?studentId=quan-bluetech" class="mission-btn" id="missionBtn">🗣️ Talk to OBI Now</a>
         </div>
 
         <div id="goals-widget" class="content-card" style="margin-bottom:16px;display:none"><div class="card-label">MY GOAL</div><div id="goals-content"></div></div>
@@ -189,7 +189,7 @@
         const PHONICS_COLORS = ['#a855f7','#3b82f6','#22c55e','#eab308','#f97316','#ef4444','#f59e0b'];
         async function loadPhonics() {
             try {
-                const r = await fetch('/api/phonics/progress?studentId=quan-nguyen');
+                const r = await fetch('/api/phonics/progress?studentId=quan-bluetech');
                 const d = await r.json();
                 const color = PHONICS_COLORS[d.current_group - 1];
                 const badge = document.getElementById('phonicsGroupBadge');
@@ -212,7 +212,7 @@
             } catch(e) {}
         }
         async function advancePhonics() {
-            const r = await fetch('/api/phonics/advance',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({studentId:'quan-nguyen'})});
+            const r = await fetch('/api/phonics/advance',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({studentId:'quan-bluetech'})});
             const d = await r.json();
             if (d.advanced) loadPhonics();
         }
@@ -321,7 +321,7 @@
         <div class="content-card">
             <div class="card-label">Quick Access</div>
             <div class="quick-links-grid">
-                <a href="/magic-chat?studentId=quan-nguyen" class="quick-link-card primary-link"><span class="ql-icon">🗣️</span><div class="ql-label">Chat with OBI</div><div class="ql-sub">Start speaking now</div></a>
+                <a href="/magic-chat?studentId=quan-bluetech" class="quick-link-card primary-link"><span class="ql-icon">🗣️</span><div class="ql-label">Chat with OBI</div><div class="ql-sub">Start speaking now</div></a>
                 <a href="QUAN-transcripts" class="quick-link-card"><span class="ql-icon">📋</span><div class="ql-label">Transcripts</div><div class="ql-sub">Review past sessions</div></a>
                 <a href="QUAN-action-plan" class="quick-link-card"><span class="ql-icon">🎯</span><div class="ql-label">Action Plan</div><div class="ql-sub">Your weekly goals</div></a>
             </div>
@@ -337,7 +337,7 @@
 
     <script>
         const AUTH_KEY = 'quanquang_quan_auth';
-        const STUDENT_ID = 'quan-nguyen';
+        const STUDENT_ID = 'quan-bluetech';
         const API = 'https://net.mrmichaelhobbs123.workers.dev';
         const PARENT_AUTH_KEY = 'quanquang_auth';
 
@@ -533,7 +533,7 @@
 
     <script>
         (function() {
-            var SB_STUDENT_ID = 'quan-nguyen';
+            var SB_STUDENT_ID = 'quan-bluetech';
             var SB_API = 'https://net.mrmichaelhobbs123.workers.dev';
 
             function sbRender(data, due) {
@@ -618,7 +618,7 @@
 
         async function loadGoals() {
             try {
-                const r = await fetch('/api/student/goals?studentId=quan-nguyen');
+                const r = await fetch('/api/student/goals?studentId=quan-bluetech');
                 const d = await r.json();
                 if (!d.goalsSet) return;
                 const el = document.getElementById('goals-widget');
@@ -637,7 +637,7 @@
 
         async function loadForecast() {
             try {
-                const r = await fetch(`/api/student/forecast/quan-nguyen`);
+                const r = await fetch(`/api/student/forecast/quan-bluetech`);
                 const d = await r.json();
                 if (!d.graduationDate) return;
                 const el = document.getElementById('forecast-widget');
@@ -658,8 +658,8 @@
         async function loadWeeklyWidget() {
             try {
                 const [fRes, sRes] = await Promise.all([
-                    fetch(`/api/student/forecast/quan-nguyen`).then(r => r.ok ? r.json() : null).catch(() => null),
-                    fetch(`/api/student/streak/quan-nguyen`).then(r => r.ok ? r.json() : null).catch(() => null),
+                    fetch(`/api/student/forecast/quan-bluetech`).then(r => r.ok ? r.json() : null).catch(() => null),
+                    fetch(`/api/student/streak/quan-bluetech`).then(r => r.ok ? r.json() : null).catch(() => null),
                 ]);
                 if (!fRes && !sRes) return;
                 const widget = document.getElementById('weekly-widget');
@@ -725,8 +725,8 @@
             if (!el) return;
             try {
                 const [streakRes, vocabRes] = await Promise.all([
-                    fetch('https://net.mrmichaelhobbs123.workers.dev/api/student/streak/quan-nguyen').then(r => r.ok ? r.json() : null).catch(() => null),
-                    fetch('https://net.mrmichaelhobbs123.workers.dev/api/vocab/due?studentId=quan-nguyen').then(r => r.ok ? r.json() : null).catch(() => null)
+                    fetch('https://net.mrmichaelhobbs123.workers.dev/api/student/streak/quan-bluetech').then(r => r.ok ? r.json() : null).catch(() => null),
+                    fetch('https://net.mrmichaelhobbs123.workers.dev/api/vocab/due?studentId=quan-bluetech').then(r => r.ok ? r.json() : null).catch(() => null)
                 ]);
                 const status = streakRes?.todayStatus || 'unknown';
                 const dueCount = vocabRes?.count || 0;
@@ -808,7 +808,7 @@
         // ── Daily Work Log ─────────────────────────────────────────────────────
         (function() {
             const WL_API = 'https://net.mrmichaelhobbs123.workers.dev';
-            const WL_STUDENT = 'quan-nguyen';
+            const WL_STUDENT = 'quan-bluetech';
             const listEl = document.getElementById('wlList');
             const statusEl = document.getElementById('wlStatus');
             const cardEl = document.getElementById('workLogCard');
@@ -902,7 +902,7 @@
             const overlay = document.getElementById('chatOverlay');
             const frame = document.getElementById('chatFrame');
             const closeBtn = document.getElementById('chatCloseBtn');
-            const STUDENT = 'quan-nguyen';
+            const STUDENT = 'quan-bluetech';
             const CHAT_BASE = '/magic-chat.html?studentId=' + encodeURIComponent(STUDENT);
 
             function openChat(mode) {
@@ -939,7 +939,7 @@
             const statusEl = document.getElementById('taskStatus');
             if (!listEl || !widget) return;
             try {
-                const r = await fetch('/api/tasks/current?studentId=quan-nguyen');
+                const r = await fetch('/api/tasks/current?studentId=quan-bluetech');
                 const d = await r.json();
                 if (!d.ok || !d.tasks.length) {
                     widget.style.display = 'none';
@@ -963,7 +963,7 @@
         window.logTask = async function(taskId) {
             const statusEl = document.getElementById('taskStatus');
             try {
-                const r = await fetch('/api/tasks/log', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ studentId: 'quan-nguyen', taskId, completed: true, minutesSpent: 20, date: new Date().toISOString().slice(0,10) }) });
+                const r = await fetch('/api/tasks/log', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ studentId: 'quan-bluetech', taskId, completed: true, minutesSpent: 20, date: new Date().toISOString().slice(0,10) }) });
                 const d = await r.json();
                 if (d.ok) {
                     statusEl.textContent = 'Logged ✓';
@@ -983,7 +983,7 @@
     <!-- Magic Chat Overlay -->
     <div id="chatOverlay">
         <button id="chatCloseBtn">✕ CLOSE CHAT</button>
-        <iframe id="chatFrame" src="/magic-chat.html?studentId=quan-nguyen" allow="microphone; autoplay; clipboard-write"></iframe>
+        <iframe id="chatFrame" src="/magic-chat.html?studentId=quan-bluetech" allow="microphone; autoplay; clipboard-write"></iframe>
     </div>
 
 </body>

@@ -157,8 +157,13 @@ function validateStudentId(studentId) {
 // Operator (sov100-*) and test IDs are always allowed.
 // ⚠️ UPDATE THIS LIST when onboarding or offboarding students.
 const ACTIVE_STUDENT_ROSTER = new Set([
-  'mai-tram-bluetech',
   'huong-bluetech',
+  'mai-tram-bluetech',
+  'quy-bluetech',
+  'lam-bluetech',
+  'quan-bluetech',
+  'quang-bluetech',
+  'minh-bluetech',
   // test / warm-up IDs
   'sov100-test-magic',
   'keep-warm-ping',

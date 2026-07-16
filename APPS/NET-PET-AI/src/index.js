@@ -1917,6 +1917,36 @@ const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionH
     return addCors(json({ ok: true }), request);
   }
 
+  // ── Student PIN Auth (KV-backed, SHA-256 hashed, group-aware) ────────────
+  // POST /api/student/checkpin — { studentId, pin, groupCode? } → { ok, studentId, isGroup }
+  if (path === "/api/student/checkpin" && method === "POST") {
+    const { studentId, pin, groupCode } = await request.json();
+    if (!pin) return addCors(json({ error: "pin required" }, 400), request);
+    if (!studentId && !groupCode) return addCors(json({ error: "studentId or groupCode required" }, 400), request);
+    const cleanStudentId = studentId ? String(studentId).toLowerCase().trim() : "";
+    const cleanGroupCode = groupCode ? String(groupCode).toUpperCase().replace(/[^A-Z0-9_]/g, "") : "";
+    const idCheck = cleanStudentId ? validateStudentId(cleanStudentId) : { valid: true };
+    if (!idCheck.valid) return addCors(json({ error: idCheck.error }, 400), request);
+    const pinHash = await computeHash(pin);
+    let matchedStudentId = cleanStudentId;
+    let isGroup = false;
+    if (cleanStudentId) {
+      const stored = await env.NET_PET_KV.get(`student_pin_${cleanStudentId}`);
+      if (stored && pinHash === stored) {
+        return addCors(json({ ok: true, studentId: cleanStudentId, isGroup: false }), request);
+      }
+    }
+    if (cleanGroupCode) {
+      const groupPin = await env.NET_PET_KV.get(`group_pin_${cleanGroupCode}`);
+      if (groupPin && pinHash === groupPin) {
+        matchedStudentId = cleanStudentId || "";
+        isGroup = true;
+        return addCors(json({ ok: true, studentId: matchedStudentId, isGroup: true, groupCode: cleanGroupCode }), request);
+      }
+    }
+    return addCors(json({ ok: false, error: "Invalid PIN" }, 401), request);
+  }
+
   // ── P10: Student Data Deletion (admin-gated) ────────────────────────────
   if (path === "/api/admin/student/delete" && method === "DELETE") {
     const adminBlock = await checkAdminKey(request, env);
@@ -4453,18 +4483,23 @@ async function handleOnboarding(body, env) {
   const studentToken = Array.from(new Uint8Array(sig)).map(b => b.toString(16).padStart(2, "0")).join("");
 
   // Block V: Known student portal map — return portal_url for direct redirect after onboarding
+  // Normalized IDs: {name}-{group}. Legacy aliases mapped for backward compat.
   const portalMap = {
-    'quy-bluetech': '/student/quy-bluetech',
-    'huong-bluetech': '/student/huong-bluetech',
-    'mai-tram': '/student/mai-tram',
-    'lam-bluetech': '/lam-portal.html?studentId=lam-bluetech',
-    'quan-nguyen': '/quan-portal.html?studentId=quan-nguyen',
-    'quang-nguyen': '/quang-portal.html?studentId=quang-nguyen',
-    'minh-private': '/student/minh-private'
+    'quy-bluetech': '/quy-portal.html?studentId=quy-bluetech',
+    'huong-bluetech': '/huong-portal.html?studentId=huong-bluetech',
+    'mai-tram-bluetech': '/mai-tram-portal.html?studentId=mai-tram-bluetech',
+    'mai-tram': '/mai-tram-portal.html?studentId=mai-tram-bluetech',
+    'quan-bluetech': '/quan-portal.html?studentId=quan-bluetech',
+    'quan-nguyen': '/quan-portal.html?studentId=quan-bluetech',
+    'quang-bluetech': '/quang-portal.html?studentId=quang-bluetech',
+    'quang-nguyen': '/quang-portal.html?studentId=quang-bluetech',
+    'minh-bluetech': '/minh-portal.html?studentId=minh-bluetech',
+    'minh-private': '/minh-portal.html?studentId=minh-bluetech'
   };
-  const portal_url = portalMap[studentId] || null;
+  const canonicalStudentId = portalMap[studentId] ? studentId.toLowerCase() : studentId;
+  const portal_url = portalMap[canonicalStudentId] || null;
   const resData = { ok: true, portal_url };
-  return json({ ...resData, studentId, studentToken, redirect: "/magic-chat.html?studentId=" + encodeURIComponent(studentId) + "&taster=1" });
+  return json({ ...resData, studentId: canonicalStudentId, studentToken, redirect: "/magic-chat.html?studentId=" + encodeURIComponent(canonicalStudentId) + "&taster=1" });
 }
 
 // ── Memory (mutable scratch — Ledger is the permanent record) ────────────────
