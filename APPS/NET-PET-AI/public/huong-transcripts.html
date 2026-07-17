@@ -77,6 +77,11 @@ h2::before{content:'';display:block;width:24px;height:2px;background:var(--purpl
     <p style="color:var(--dim);line-height:1.75;font-size:1.05rem;margin-bottom:16px;">Reading your own spoken English forces a different kind of reflection than listening to yourself. The grammar errors and vocabulary choices that are invisible in real-time conversation become immediately visible in text.</p>
     <p style="color:var(--dim);line-height:1.75;font-size:1.05rem;">We use transcripts as a mirror: not to create self-consciousness, but to build awareness of specific patterns that appear repeatedly. Repetition in errors means a pattern to target. Improvement in transcripts means the drill is working.</p>
   </section>
+  <section class="card" id="sessionCard">
+    <h2>📋 July 13 — BlueTech Class</h2>
+    <div id="sessionMeta"></div>
+    <div id="sessionTranscript"></div>
+  </section>
 </div>
 <!-- STREAK BADGE -->
 <div id="streak-badge" style="display:none;"></div>
@@ -93,5 +98,19 @@ h2::before{content:'';display:block;width:24px;height:2px;background:var(--purpl
 </script>
 <script>function logout(){localStorage.removeItem('huong_auth');window.location.href='huong-portal';}</script>
 <script src="/assets/brand/system-marks/global-brand-shelf.js"></script>
+<script>
+fetch('/huong-bluetech-20260713-transcript.json').then(r=>r.json()).then(d=>{
+  const m=document.getElementById('sessionMeta');
+  m.innerHTML='<div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;color:var(--dim);font-size:0.95rem;">'
+    +'<span>🗣️ <strong>'+d.student_utterances+'</strong> utterances</span>'
+    +'<span>⏱️ <strong>'+Math.round(d.student_speaking_seconds/60)+'</strong> min speaking</span>'
+    +'<span>👤 Teacher: <strong>'+d.teacher+'</strong></span></div>'
+    +'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">'
+    +d.topics.map(t=>'<span style="background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.2);border-radius:20px;padding:4px 14px;font-size:0.82rem;color:var(--purple);">'+t+'</span>').join('')+'</div>';
+  const t=document.getElementById('sessionTranscript');
+  t.innerHTML='<div style="max-height:500px;overflow-y:auto;background:rgba(0,0,0,0.2);border-radius:12px;padding:20px;font-size:0.92rem;line-height:1.7;color:var(--dim);white-space:pre-wrap;">'+d.full_text+'</div>'
+    +'<p style="margin-top:12px;color:var(--dim);font-size:0.82rem;"><a href="/huong-bluetech-20260713-transcript.json" style="color:var(--purple);text-decoration:underline;">Download raw JSON</a></p>';
+}).catch(()=>{document.getElementById('sessionCard').style.display='none';});
+</script>
 </body>
 </html>
