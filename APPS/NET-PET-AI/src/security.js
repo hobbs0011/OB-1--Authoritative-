@@ -41,10 +41,21 @@ async function checkRateLimit(ip, kv) {
   }
 
   const key = `rl:${ip}`;
-  const raw = await kv.get(key);
-  const record = raw
-    ? JSON.parse(raw)
-    : { count: 0, resetAt: now + SECURITY.RATE_LIMIT.windowMs, blocked: false, blockUntil: 0 };
+  let raw;
+  try {
+    raw = await kv.get(key);
+  } catch {
+    console.warn('RATELIMIT kv.get failed — falling back to in-memory');
+    return _checkRateLimitInMemory(ip, now);
+  }
+
+  let record;
+  try {
+    record = raw ? JSON.parse(raw) : { count: 0, resetAt: now + SECURITY.RATE_LIMIT.windowMs, blocked: false, blockUntil: 0 };
+  } catch {
+    console.warn('RATELIMIT JSON parse failed — falling back to in-memory');
+    return _checkRateLimitInMemory(ip, now);
+  }
 
   if (record.blocked && record.blockUntil > now) {
     return { allowed: false, remaining: 0, resetAt: record.blockUntil, reason: 'rate_limit_blocked' };
@@ -60,12 +71,20 @@ async function checkRateLimit(ip, kv) {
   if (record.count >= SECURITY.RATE_LIMIT.maxRequests) {
     record.blocked = true;
     record.blockUntil = now + SECURITY.RATE_LIMIT.blockDuration;
-    await kv.put(key, JSON.stringify(record), { expirationTtl: Math.ceil(SECURITY.RATE_LIMIT.blockDuration / 1000) });
+    try {
+      await kv.put(key, JSON.stringify(record), { expirationTtl: Math.ceil(SECURITY.RATE_LIMIT.blockDuration / 1000) });
+    } catch {
+      console.warn('RATELIMIT kv.put failed — continuing without persistent block');
+    }
     return { allowed: false, remaining: 0, resetAt: record.blockUntil, reason: 'rate_limit_exceeded' };
   }
 
   record.count++;
-  await kv.put(key, JSON.stringify(record), { expirationTtl: Math.ceil(SECURITY.RATE_LIMIT.windowMs / 1000) });
+  try {
+    await kv.put(key, JSON.stringify(record), { expirationTtl: Math.ceil(SECURITY.RATE_LIMIT.windowMs / 1000) });
+  } catch {
+    console.warn('RATELIMIT kv.put failed — continuing without persistent state');
+  }
   return { allowed: true, remaining: SECURITY.RATE_LIMIT.maxRequests - record.count, resetAt: record.resetAt };
 }
 
