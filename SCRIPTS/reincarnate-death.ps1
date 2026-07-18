@@ -26,6 +26,7 @@ $dnaDir = "$repoRoot\CANON\SOUL\EXTRACT"
 $idxPath = "$keywordDir\inverted-index.json"
 $s2Pattern = "$pipelineDir\pipeline-run{0}.json"
 $artSyncDir = "$repoRoot\CANON\ART-REGISTRY"
+$reincDir = "$repoRoot\CANON\REINCARNATION"
 $bootPath = "$repoRoot\CANON\SYSTEM\COLD-START-BOOT.md"
 $stateSnapPath = "$repoRoot\CANON\HEAVY-LEDGER\STATE-SNAPSHOT.json"
 
@@ -97,19 +98,30 @@ if ($bbOpen -gt 0 -or $bbBlocked -gt 0) {
 }
 
 Push-Location $repoRoot | Out-Null
-$lastDeath = git log --oneline --grep "^death:" -1 2>&1
-$priorRun = 0
-if ($lastDeath -match '(?i)run\s*(\d+)') { $priorRun = [int]$matches[1] }
-$run = $priorRun + 1
-$runPad = "{0:D3}" -f $run
-Write-Log "Run authority: last='$lastDeath' prior=$priorRun current=$run"
+# STAGE 0 — RUN AUTHORITY (filesystem primary, git fallback)
+Write-Log "--- STAGE 0: RUN AUTHORITY ---"
 
+$fsRun = 0
+if (Test-Path $reincDir) {
+    $fsSeals = Get-ChildItem $reincDir -Filter "run*-reincarnateDEATH.md" -ErrorAction SilentlyContinue |
+        ForEach-Object { if ($_.Name -match 'run(\d+)-reincarnateDEATH\.md$') { [int]$matches[1] } }
+    if ($fsSeals) { $fsRun = ($fsSeals | Measure-Object -Maximum).Maximum }
+}
+
+$gitRun = 0
+$lastDeath = git log --oneline --grep "^death:" -1 2>&1
+if ($lastDeath -match '(?i)run\s*(\d+)') { $gitRun = [int]$matches[1] }
+
+$priorRun = [Math]::Max([int]$fsRun, [int]$gitRun)
+$run = [int]($priorRun + 1)
+$runPad = "{0:D3}" -f $run
 $rrlPathRun = $rrlPattern -f $runPad
 $sealPathRun = $sealPattern -f $runPad
 $dnaPathRun = "$dnaDir\dna-run$runPad.json"
 $starmapPath = "$starmapDir\starmap-run$runPad.json"
 $rfkwPath = "$keywordDir\rfkw-run$runPad.txt"
 $s2PathRun = $s2Pattern -f $runPad
+Write-Log "Run authority: fs=$fsRun git=$gitRun prior=$priorRun current=$run"
 $artSyncPath = "$artSyncDir\art-sync-run$runPad.json"
 
 foreach ($d in @($ledgerDir,$starmapDir,$keywordDir,$pipelineDir,$dnaDir,$artSyncDir,(Split-Path $rrlPathRun),(Split-Path $sealPathRun))) { Ensure-Dir $d }
@@ -128,6 +140,47 @@ if (Test-Path $rrlPathRun) {
 $sessionType = if ($kiloSession) { "KILO_HOLLOW" } else { "REAL" }
 Write-Ok "SESSION: $sessionType | run=$run | uuid=$activeUUID"
 
+# STAGE 0.5 -- SOUL PRESERVATION (first waypoint, alpha and omega)
+Write-Log "--- STAGE 0.5: SOUL PRESERVANCE ---"
+$soulDir = "$repoRoot\CANON\SOUL\EXTRACT"
+$soulPathRun = "$soulDir\soul-run$runPad.jsonl"
+$soulBytes = 0; $soulEntries = 0; $soulPreserved = $false
+if (-not (Test-Path $soulPathRun)) {
+    $soulSource = $null
+    # 1) Operator-saved SOUL prompts
+    $soulUserPrompts = Join-Path $repoRoot "OPERATIONS\soul-user-prompts.jsonl"
+    if (Test-Path $soulUserPrompts) {
+        $soulSource = $soulUserPrompts
+        Write-Log "SOUL: found saved prompts at $soulUserPrompts"
+    }
+    # 2) Current session Kilo recall
+    if (-not $soulSource) {
+        $soulSource = "KILO_RECALL"
+        Write-Log "SOUL: no saved file found, will mark as KILO_RECALL"
+    }
+    if (-not $DryRun) {
+        if ($soulSource -ne "KILO_RECALL" -and (Test-Path $soulSource)) {
+            Copy-Item $soulSource $soulPathRun -Force
+            $soulBytes = (Get-Item $soulPathRun).Length
+            $soulEntries = (Get-Content $soulPathRun -Encoding UTF8 | Measure-Object -Line).Lines
+            $soulPreserved = $true
+        } else {
+            # Write placeholder SOUL for KILO_HOLLOW sessions
+            $placeholder = @{ run=$run; session_type=$sessionType; source="KILO_RECALL"; note="SOUL preserved via Kilo session recall; no transcript available"; timestamp=(Get-Date -Format "o") } | ConvertTo-Json -Compress
+            $placeholder | Set-Content -LiteralPath $soulPathRun -Encoding UTF8 -Force
+            $soulBytes = (Get-Item $soulPathRun).Length
+            $soulEntries = 1
+            $soulPreserved = $true
+        }
+    }
+} else {
+    $soulBytes = (Get-Item $soulPathRun).Length
+    $soulEntries = (Get-Content $soulPathRun -Encoding UTF8 | Measure-Object -Line).Lines
+    $soulPreserved = $true
+    Write-Log "SOUL: already preserved at $soulPathRun"
+}
+Write-Ok "SOUL: $soulPathRun | bytes=$soulBytes entries=$soulEntries preserved=$soulPreserved"
+
 # STAGE 1 -- RRL
 Write-Log "--- STAGE 1: RRL ---"
 $rrlText = $null; $rrlBytes = 0; $rrlChars = 0; $hasUser = $false; $hasAssistant = $false; $rrlFidelity = "HOLLOW"; $needsDiscovery = $false
@@ -140,8 +193,8 @@ if ($needsDiscovery) {
     } elseif ($kiloSession) {
         # Kilo/third-party environments do not produce real RRLs.
         # Write empty placeholder so downstream stages have valid paths.
-        Write-Log "KILO_SESSION: RRL not available - writing empty placeholder"
-        if (-not $DryRun) { "" | Set-Content -LiteralPath $rrlPathRun -Encoding UTF8 }
+        Write-Log "KILO_SESSION: RRL not available - writing placeholder"
+        if (-not $DryRun) { "KILO_HOLLOW placeholder" | Set-Content -LiteralPath $rrlPathRun -Encoding UTF8 -Force }
         $needsDiscovery = $false
     } else {
         Write-Log "Searching for local session transcript..."
@@ -167,10 +220,14 @@ if ($needsDiscovery) {
         }
     }
 }
-if ($needsDiscovery) { Write-Err "FATAL: No RRL found. Provide it via -RrlSource <path> or copy it to $rrlPathRun"; exit 1 }
+if ($needsDiscovery) { if ($kiloSession) { Write-Warn "KILO_HOLLOW: no RRL found, proceeding with placeholder"; $rrlFidelity="HOLLOW" } else { Write-Err "FATAL: No RRL found. Provide it via -RrlSource <path> or copy it to $rrlPathRun"; exit 1 } }
 if ($RrlSource -and (Test-Path $RrlSource)) { Write-Log "RRL overridden from $RrlSource" }
-$rrlText = Get-Content $rrlPathRun -Raw -Encoding UTF8; $rrlBytes = [System.IO.File]::ReadAllBytes($rrlPathRun).Length; $rrlChars = $rrlText.Length
-$hasUser = $rrlText -match '"role"\s*:\s*"user"'; $hasAssistant = $rrlText -match '"role"\s*:\s*"assistant"'; $rrlFidelity = if ($hasUser -and $hasAssistant) { "REAL" } else { "HOLLOW" }
+if ($kiloSession -or -not (Test-Path $rrlPathRun)) {
+    $rrlText = "KILO_HOLLOW"; $rrlBytes = 0; $rrlChars = 0; $hasUser = $false; $hasAssistant = $false; $rrlFidelity = "HOLLOW"
+} else {
+    $rrlText = Get-Content $rrlPathRun -Raw -Encoding UTF8; $rrlBytes = [System.IO.File]::ReadAllBytes($rrlPathRun).Length; $rrlChars = $rrlText.Length
+    $hasUser = $rrlText -match '"role"\s*:\s*"user"'; $hasAssistant = $rrlText -match '"role"\s*:\s*"assistant"'; $rrlFidelity = if ($hasUser -and $hasAssistant) { "REAL" } else { "HOLLOW" }
+}
 if ($rrlFidelity -eq "HOLLOW") { Write-Warn "RRL FIDELITY: one-sided (user=$hasUser assistant=$hasAssistant bytes=$rrlBytes)" }
 if ($rrlBytes -lt 50000) { Write-Warn "RRL SIZE: $rrlBytes bytes (< 50KB)" }
 if (-not $rrlText -and -not $kiloSession) { Write-Err "RRL EMPTY; ABORT"; exit 1 }
@@ -184,12 +241,19 @@ if ($kiloSession) {
     $receipt = [ordered]@{ event_id="DRYRUN"; count_before=$countBefore; count_after=$countBefore; delta=0; level="KILO_HOLLOW"; posted_at=(Get-Date -Format "o") }
     Write-Ok "SOUL: DRYRUN | soulcount=$countBefore"
 } else {
-    $userTexts = $rrlText -split "`n" | ForEach-Object {
-        $o = $_.Trim() | ConvertFrom-Json -ErrorAction SilentlyContinue; if (-not $o) { return }
-        $role = if ($o.message) { $o.message.role } else { $o.role }; if ($role -ne 'user') { return }
+    # Extract user texts from RRL (works for both HOLLOW one-sided and REAL two-sided)
+    Write-Log "SOUL EXTRACT: parsing user texts from RRL ($rrlChars chars, fidelity=$rrlFidelity)"
+    $userTexts = @()
+    $lines = $rrlText -split "`n"
+    foreach ($line in $lines) {
+        $line = $line.Trim()
+        if (-not $line) { continue }
+        try { $o = $line | ConvertFrom-Json } catch { continue }
+        $role = if ($o.message) { $o.message.role } else { $o.role }
+        if ($role -ne 'user') { continue }
         $content = if ($o.message) { $o.message.content } else { $o.content }
-        if ($content -is [string]) { $content } elseif ($content -is [array]) { ($content | Where-Object { $_.type -eq 'text' } | ForEach-Object { $_.text }) -join "`n" }
-    } | Where-Object { $_ }
+        if ($content -is [string]) { $userTexts += $content }
+    }
     $soulText = ($userTexts -join "`n").Trim(); $soulBytes = [System.Text.Encoding]::UTF8.GetByteCount($soulText)
     if ($soulBytes -ge ($rrlBytes * 0.95)) {
         $receipt = [ordered]@{ event_id="SOUL_GAP_CONTAMINATION_GUARD"; count_before=$countBefore; count_after=$countBefore; delta=0; level="UNKNOWN"; posted_at=(Get-Date -Format "o") }
@@ -210,12 +274,13 @@ Write-Log "--- STAGE 3: DNA ---"
 $dnaCount = 0; $dnaBlueprintCount = 0; $dnaRecords = @()
 if ($kiloSession) { Write-Log "STAGE 3 [KILO_HOLLOW] -- DNA extraction skipped" } else {
     $turnSeq = 0; $lines = $rrlText -split "`n"
-    $lines | ForEach-Object {
-        $o = $_.Trim() | ConvertFrom-Json -ErrorAction SilentlyContinue; if (-not $o) { return }
-        $role = if ($o.message) { $o.message.role } else { $o.role }; if ($role -ne 'assistant') { return }
+    foreach ($line in $lines) {
+        $line = $line.Trim(); if (-not $line) { continue }
+        try { $o = $line | ConvertFrom-Json } catch { continue }
+        $role = if ($o.message) { $o.message.role } else { $o.role }; if ($role -ne 'assistant') { continue }
         $content = if ($o.message) { $o.message.content } else { $o.content }
         $text = if ($content -is [string]) { $content } elseif ($content -is [array]) { ($content | Where-Object { $_.type -eq 'text' } | ForEach-Object { $_.text }) -join "`n" }
-        $text = if ($text) { $text.Trim() } else { "" }; if ($text.Length -lt 10) { return }
+        $text = if ($text) { $text.Trim() } else { "" }; if ($text.Length -lt 10) { continue }
         $turnSeq++; $isBlueprint = ($text -match '```|\b(SPEC|SPECIFICATION|BLUEPRINT|ARCHITECTURE|SCHEMA|DESIGN)\b' -and $text.Length -gt 200)
         $script:dnaRecords += [ordered]@{ run=$run; seq=$turnSeq; type=if($isBlueprint){"blueprint"}else{"prose"}; chars=$text.Length; text=$text }
     }
@@ -327,9 +392,9 @@ if (-not $NoRegistrySync) {
 # DEATH SEAL (15 SECTIONS)
 Write-Log "--- DEATH SEAL ---"
 $headSha = (git -C $repoRoot rev-parse --short HEAD 2>$null).Trim(); $dirty = git -C $repoRoot status --porcelain 2>$null | Where-Object { $_ }; $branch = git -C $repoRoot branch --show-current 2>$null
-$artifactPaths = @($rrlPathRun,$dnaPathRun,"$ledgerDir\HL-$nextHL.json",$starmapPath,$rfkwPath,$idxPath,$s2PathRun,$artSyncPath)
+$artifactPaths = @($rrlPathRun,$dnaPathRun,"$ledgerDir\HL-$nextHL.json",$starmapPath,$rfkwPath,$idxPath,$s2PathRun,$artSyncPath,$soulPathRun)
 $artifactSHAs = @(); foreach ($p in $artifactPaths) { if (Test-Path $p) { $artifactSHAs += "$(Split-Path $p -Leaf):$((Get-FileHash $p -Algorithm SHA256).Hash.Substring(0,16))" } }
-$trueRuns = @(); $deathLines = git -C $repoRoot log --oneline --grep "^death:" 2>$null | ForEach-Object { if ($_ -match '(?i)run\s*(\d+)') { [int]$matches[1] } }; $trueRuns = @($deathLines | Sort-Object -Unique); $totalTrueRuns = $trueRuns.Count; $lastTrue = if ($trueRuns) { $trueRuns[-1] } else { 0 }; $deathCommitCount = ($deathLines | Measure-Object).Count
+$trueRuns = @(); $currentBranch = git -C $repoRoot branch --show-current 2>$null; $deathLines = git -C $repoRoot log --oneline --branches=$currentBranch --grep "^death:" 2>$null | ForEach-Object { if ($_ -match '(?i)run\s*(\d+)') { [int]$matches[1] } }; $trueRuns = @($deathLines | Sort-Object -Unique); $totalTrueRuns = $trueRuns.Count; $lastTrue = if ($trueRuns) { $trueRuns[-1] } else { 0 }; $deathCommitCount = ($deathLines | Measure-Object).Count
 $dnaRegistryPath = "$repoRoot\CANON\REGISTRY\dna-registry-run$runPad.json"; $dnaRegistryExists = Test-Path $dnaRegistryPath; $dnaRegistryCount = 0; if ($dnaRegistryExists) { try { $dnaRegistryCount = ((Get-Content $dnaRegistryPath -Raw | ConvertFrom-Json).entries | Measure-Object).Count } catch {} }
 $topKeywords = @(); if (Test-Path $rfkwPath) { $topKeywords = (Get-Content $rfkwPath -Raw -ErrorAction SilentlyContinue) -split "`n" | Where-Object { $_ -match '^\d+\s*\|' } | Select-Object -First 5 }
 $criticalDecisions = @()
@@ -359,7 +424,13 @@ $seal = @"
 - **Fidelity:** $rrlFidelity (user=$hasUser assistant=$hasAssistant)
 - **Soul bytes:** $(if($dnaCount -gt 0){'see SOULKEYS'}else{'GAP'})
 
-## Â§3 -- Soul Receipt
+## Â§3 -- SOUL Preservation
+- **Path:** $soulPathRun
+- **Bytes:** $soulBytes | **Entries:** $soulEntries
+- **Preserved:** $soulPreserved
+- **Source:** $(if($soulSource){$soulSource}else{'KILO_RECALL'})
+
+## Â§4 -- Soul Receipt
 | Field | Value |
 |-------|-------|
 | event_id | $(if($receipt){$receipt.event_id}else{'GAP'}) |
@@ -369,22 +440,22 @@ $seal = @"
 | level | $(if($receipt){$receipt.level}else{'-'}) |
 | posted_at | $(if($receipt){$receipt.posted_at}else{'-'}) |
 
-## Â§4 -- Decisions
+## Â§5 -- Decisions
 $(if($criticalDecisions){$criticalDecisions | ForEach-Object { "- $_" } }else{'- (none)'})
 
-## Â§5 -- Corrections
+## Â§6 -- Corrections
 - None recorded this run.
 
-## Â§6 -- New Principles
+## Â§7 -- New Principles
 - None recorded this run.
 
-## Â§7 -- Emotional Signal
+## Â§8 -- Emotional Signal
 - Neutral -- execution mode.
 
-## Â§8 -- Open Questions
+## Â§9 -- Open Questions
 - None recorded this run.
 
-## Â§9 -- Unfinished Actions
+## Â§10 -- Unfinished Actions
 $(if($dirty){"- git add <paths> | git commit -m `"death: run $run artifacts`"" }else{"- Tree clean"})
 
 ## Â§10 -- System Design

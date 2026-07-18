@@ -1,12 +1,12 @@
 ﻿{
-    "run":  177,
-    "updated_at":  "2026-07-18T18:33:09.8746670+07:00",
-    "head":  "2f17eff8e",
+    "run":  180,
+    "updated_at":  "2026-07-18T22:45:39.4978152+07:00",
+    "head":  "3f52bb5e9",
     "branch":  "canon",
     "rrl_fidelity":  "HOLLOW",
-    "soulcount":  239645670,
+    "soulcount":  239646210,
     "dna_blueprint_count":  0,
-    "ledger_id":  "HL-7309",
+    "ledger_id":  "HL-7312",
     "s2pipeline_result":  "KILO_GAP",
-    "registry_synced":  0
+    "registry_synced":  3
 }

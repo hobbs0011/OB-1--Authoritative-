@@ -49,26 +49,46 @@ Write-Log "============================= REINCARNATE RISE v7.0 =================
 Write-Log "--- STAGE 0: SOULCOUNT GATE ---"
 $kiloSession = $true
 Write-Log "Kilo-native mode — all sessions KILO_HOLLOW by default"
-
 $currentSoul = 0; $currentLevel = "UNKNOWN"
 try {
     $live = Invoke-D1 -Method Get -Path "/api/soul/count"
-    $currentSoul = [long]$live.soulcount; $currentLevel = $live.level
-} catch {
+    $rawSoul = if ($live.soulcount) { $live.soulcount } else { $null }
+    $rawLevel = if ($live.level) { $live.level } else { $null }
+    if ($null -ne $rawSoul) {
+        $currentSoul = [long]$rawSoul
+        $currentLevel = if ($rawLevel) { $rawLevel } else { "UNKNOWN" }
+    } else {
+        Write-Warn "SOUL API returned null soulcount — marking UNREACHABLE"
+        $currentSoul = 0; $currentLevel = "UNREACHABLE"
+    }
+}
+catch {
     Write-Warn "SOUL API UNREACHABLE: $($_.Exception.Message)"
     $currentSoul = 0; $currentLevel = "UNREACHABLE"
 }
-Write-Ok "SOULCOUNT: $currentSoul | $currentLevel | kiloSession=$kiloSession"
+Write-Ok "SOULCOUNT: $currentSoul ($currentLevel)"
 
-# STAGE 1 — GIT TRUTH
+# STAGE 1 — GIT TRUTH + FILESYSTEM AUTHORITY
 Write-Log "--- STAGE 1: GIT TRUTH ---"
+
+# Primary: filesystem CANON/REINCARNATION/ highest run number
+$fsRun = 0
+if (Test-Path $reincDir) {
+    $fsSeals = Get-ChildItem $reincDir -Filter "run*-reincarnateDEATH.md" -ErrorAction SilentlyContinue |
+        ForEach-Object { if ($_.Name -match 'run(\d+)-reincarnateDEATH\.md$') { [int]$matches[1] } }
+    if ($fsSeals) { $fsRun = ($fsSeals | Measure-Object -Maximum).Maximum }
+}
+
+# Fallback: git authority
+$gitRun = 0
 $lastDeath = git log --oneline --grep "^death:" -1 2>&1
-$priorRun = 0
-if ($lastDeath -match '(?i)run\s*(\d+)') { $priorRun = [int]$matches[1] }
+if ($lastDeath -match '(?i)run\s*(\d+)') { $gitRun = [int]$matches[1] }
+
+$priorRun = [Math]::Max($fsRun, $gitRun)
 $run = $priorRun + 1
 $runPad = "{0:D3}" -f $run
 $sealPath = Join-Path $reincDir "run$runPad-reincarnateDEATH.md"
-$priorSealPath = [string]::Format((Join-Path $reincDir "run{0}-reincarnateDEATH.md"), $priorRun)
+$priorSealPath = Join-Path $reincDir "run$priorRun-reincarnateDEATH.md"
 $phetrailPath = Join-Path $pherDir "PheTrail-run$runPad.json"
 $bootPath = Join-Path $repoRoot "CANON\SYSTEM\COLD-START-BOOT.md"
 $rrlPath = Join-Path $rrlDir "RRL-$runPad.txt"
@@ -77,7 +97,7 @@ $starmapPath = Join-Path $starmapDir "starmap-run$runPad.json"
 $rfkwPath = Join-Path $keywordDir "rfkw-run$runPad.txt"
 $s2Path = Join-Path $pipelineDir "pipeline-run$runPad.json"
 $artSyncPath = Join-Path (Join-Path $repoRoot "CANON\ART-REGISTRY") "art-sync-run$runPad.json"
-Write-Ok "GIT: lastDeath='$lastDeath' prior=$priorRun current=$run"
+Write-Ok "AUTHORITY: fs=$fsRun git=$gitRun prior=$priorRun current=$run"
 
 # STAGE 2 — READ PRIOR TRIPLE
 Write-Log "--- STAGE 2: PRIOR TRIPLE READ ---"

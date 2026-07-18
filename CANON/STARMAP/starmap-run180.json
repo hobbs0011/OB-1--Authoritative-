@@ -1,0 +1,11 @@
+﻿{
+    "run":  180,
+    "rrl_path":  "D:\\OB-1-CANONICAL\\RRL\\RRL-180.txt",
+    "ledger_id":  "HL-7312",
+    "soul_turn_ids":  "",
+    "dna_turn_ids":  "",
+    "blueprint_locations":  "",
+    "char_count":  0,
+    "merkle_hash":  "EC6BDFC1C0E7F5050B8C0968D48E9CBBA1AFAE04D72EEC2F1D0723A0327835D9",
+    "created_at":  "2026-07-18T22:45:35.2528933+07:00"
+}
