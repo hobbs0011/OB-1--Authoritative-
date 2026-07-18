@@ -1,12 +1,12 @@
 ﻿{
-    "run":  183,
-    "updated_at":  "2026-07-19T03:02:50.6937497+07:00",
-    "head":  "6e6f150fb",
+    "run":  182,
+    "updated_at":  "2026-07-19T05:16:54.5377391+07:00",
+    "head":  "010a5e6eb",
     "branch":  "canon",
-    "rrl_fidelity":  "HOLLOW",
-    "soulcount":  239646210,
-    "dna_blueprint_count":  0,
-    "ledger_id":  "HL-7315",
-    "s2pipeline_result":  "KILO_GAP",
-    "registry_synced":  3
+    "rrl_fidelity":  "REAL",
+    "soulcount":  239697209,
+    "dna_blueprint_count":  3,
+    "ledger_id":  "HL-7314",
+    "s2pipeline_result":  "COMPLETE",
+    "registry_synced":  2
 }
