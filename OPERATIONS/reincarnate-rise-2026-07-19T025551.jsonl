@@ -1,0 +1,40 @@
+﻿{
+    "ts":  "2026-07-19T02:55:52.1173837+07:00",
+    "event":  "reincarnateRise",
+    "version":  "v7.0",
+    "run":  182,
+    "prior_run":  181,
+    "head_sha":  "6e6f150fb",
+    "session_type":  "KILO_HOLLOW",
+    "soulcount":  null,
+    "soul_level":  null,
+    "soul_delta":  -239646210,
+    "soul_drift_pct":  -100,
+    "soul_verdict":  "SOUL_REGRESSION",
+    "prior_soulcount":  239646210,
+    "active_mission":  "** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout â€” NET-PET-AI Hardening to Scale-Ready",
+    "open_flags":  0,
+    "boot_run_git":  181,
+    "boot_run_file":  0,
+    "boot_stale":  false,
+    "fidelity":  {
+                     "s2pipeline":  "REAL",
+                     "backburner":  "OPEN",
+                     "ledger":  "REAL",
+                     "soul":  "SOUL_REGRESSION",
+                     "dna":  "MISSING",
+                     "rrl":  "MISSING",
+                     "lfg":  "REAL",
+                     "gospel":  "REAL",
+                     "starmap":  "REAL",
+                     "soykeys":  "REAL"
+                 },
+    "backburner_open":  1,
+    "backburner_blocked":  0,
+    "phetrail_negative_trails":  0,
+    "highest_priority_gap":  "RRL: MISSING",
+    "next_action":  "Resume BACKBURNER items first (OPEN=1 BLOCKED=0)",
+    "ready":  false
+}
+[02:55:52] OK: REPORT: D:\OB-1-CANONICAL\OPERATIONS\reincarnate-rise-2026-07-19T025551.jsonl | run=182 verdict=SOUL_REGRESSION ready=False
+[02:55:52] BACKFILL: run180 -> count=239646210

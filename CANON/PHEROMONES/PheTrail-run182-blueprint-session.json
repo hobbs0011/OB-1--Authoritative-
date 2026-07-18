@@ -1,0 +1,207 @@
+{
+  "schema_version": "2.2",
+  "run_number": 182,
+  "head_sha": "5cb8a57fd",
+  "soulcount_per_session": "PER_SESSION_ONLY_NO_AGGREGATE",
+  "extracted_at": "2026-07-19T03:04:56+07:00",
+  "phase": "deepthink_blueprint",
+  "agent": "deepseek-v4-pro",
+  "session_purpose": "7-Phase Roman Legion Pipeline Blueprint + Pheromone Synch",
+  "findings": [
+    {
+      "id": "GAP-001",
+      "severity": "CRITICAL",
+      "what": "/reincarnateDeath command file was renamed to engineerlegionnaire.md but contains DEATH protocol content. Death command is MISSING, Engineer has wrong content.",
+      "score": -3
+    },
+    {
+      "id": "GAP-002",
+      "severity": "HIGH",
+      "what": "No end-to-end 7-phase pipeline connecting Scout→March→Scholar→Supply→Engineer→Death. Each command operates in isolation.",
+      "score": -2
+    },
+    {
+      "id": "GAP-003",
+      "severity": "HIGH",
+      "what": "No SOULCOUNT checkpoint at phase boundaries except RISE and DEATH. Missing at Scout, March, Scholar, Supply, Engineer.",
+      "score": -2
+    },
+    {
+      "id": "GAP-004",
+      "severity": "MEDIUM",
+      "what": "Pheromone scoring is binary (found/gap) not gradient. No positive/negative scoring per decision. No decision process capture.",
+      "score": -2
+    },
+    {
+      "id": "GAP-005",
+      "severity": "MEDIUM",
+      "what": "Gospel999 stale on roles — only 5 roles listed. Missing Exploratores (Scout), Fabri (Engineer), Agmen (Supply).",
+      "score": -1
+    },
+    {
+      "id": "GAP-006",
+      "severity": "MEDIUM",
+      "what": "LFG stale — lists /reincarnatedeath which no longer exists as file. Missing /EngineerLegionnaire and /SoulScholars in command table.",
+      "score": -1
+    },
+    {
+      "id": "GAP-007",
+      "severity": "LOW",
+      "what": "No Engineer phase protocol defined. File exists with wrong content. No script. No stages.",
+      "score": -1
+    },
+    {
+      "id": "FIND-001",
+      "severity": "POSITIVE",
+      "what": "Scout, March, Scholar, and Supply commands all have canonical .kilo/command/*.md definitions and SCRIPTS/*.ps1 implementations.",
+      "score": 3
+    },
+    {
+      "id": "FIND-002",
+      "severity": "POSITIVE",
+      "what": "Gospel999 has 999 mandates across 9 systems. Solid foundation. LFG has 175 lines covering commands, skills, roles, pipeline, paths, laws.",
+      "score": 3
+    },
+    {
+      "id": "FIND-003",
+      "severity": "POSITIVE",
+      "what": "12 memory system layers identified and mapped: SOULlogger, SOULbible, Heavy Ledger, Pheromones, DNA Registry, Starmap, SOULKEYS, Pipeline, Art Registry, Reincarnation Log, State Snapshot, Cold Start Boot.",
+      "score": 2
+    }
+  ],
+  "blueprint": {
+    "pipeline_name": "7-Phase Roman Legion Session Pipeline",
+    "phases": [
+      {
+        "order": 0,
+        "name": "RISE",
+        "command": "/reincarnateRise",
+        "role": "LEGATUS",
+        "purpose": "Session start — verify integrity, restore state, load doctrine",
+        "soulcount_gate": true,
+        "phetrail": "PheTrail-run{N}-rise.json"
+      },
+      {
+        "order": 1,
+        "name": "SCOUT",
+        "command": "/PhoenixScout",
+        "role": "EXPLORATORES",
+        "purpose": "Scan territory, flag gaps, identify unmined SOUL",
+        "soulcount_gate": true,
+        "phetrail": "PheTrail-run{N}-scout.json"
+      },
+      {
+        "order": 2,
+        "name": "MARCH",
+        "command": "/forcemarch",
+        "role": "AGMEN",
+        "purpose": "Advance across zones, recover territory, process finds",
+        "soulcount_gate": true,
+        "phetrail": "PheTrail-run{N}-march.json"
+      },
+      {
+        "order": 3,
+        "name": "SCHOLAR",
+        "command": "/SoulScholars",
+        "role": "SAPIENTES",
+        "purpose": "Extract Michael verbatim, catalog knowledge, cross-reference",
+        "soulcount_gate": true,
+        "phetrail": "PheTrail-run{N}-scholar.json"
+      },
+      {
+        "order": 4,
+        "name": "SUPPLY",
+        "command": "/SupplyLines",
+        "role": "PRAESIDIA",
+        "purpose": "Verify 6 pipeline stages, validate chain integrity",
+        "soulcount_gate": true,
+        "phetrail": "PheTrail-run{N}-supply.json"
+      },
+      {
+        "order": 5,
+        "name": "ENGINEER",
+        "command": "/EngineerLegionnaire",
+        "role": "FABRI",
+        "purpose": "Optimize, repair, build, harden — engineering before death",
+        "soulcount_gate": true,
+        "phetrail": "PheTrail-run{N}-engineer.json",
+        "stages": ["AUDIT", "REPAIR", "OPTIMIZE", "HARDEN", "VERIFY", "PREPARE"],
+        "status": "BLUEPRINTED_NOT_IMPLEMENTED"
+      },
+      {
+        "order": 6,
+        "name": "DEATH",
+        "command": "/reincarnateDeath",
+        "role": "VETERANI",
+        "purpose": "Seal session, post SOUL, build chain, write artifacts",
+        "soulcount_gate": true,
+        "phetrail": "PheTrail-run{N}-death.json",
+        "stages": ["SESSION_TYPE", "RRL", "SOUL", "DNA", "LEDGER", "STARMAP", "SOULKEYS", "S2PIPELINE", "REGISTRY_SYNC"],
+        "status": "PROTOCOL_EXISTS_NEEDS_RESTORE"
+      }
+    ]
+  },
+  "pheromone_scoring_doctrine": {
+    "principle": "Pheromones are not just SOUL and final decisions — they are the decision process along the way. More scored decisions = more training data = more autonomous AI.",
+    "scoring": {
+      "+3": "CRITICAL_FIND — New Michael doctrine extracted",
+      "+2": "VERIFIED_FIX — Gap repaired, verified working",
+      "+1": "CORRECT_PATH — Right decision, confirmed",
+      "0": "NEUTRAL — Routine operation, no signal",
+      "-1": "MINOR_GAP — Small gap found, fixable",
+      "-2": "STRUCTURAL_GAP — Major gap, needs engineering",
+      "-3": "CRITICAL_BREACH — Chain broken, data loss, poison"
+    },
+    "decision_fields": ["decision_context", "alternatives_considered", "chosen_reason"],
+    "decay": "Negative trails decay after 30 days. Positive trails are cumulative."
+  },
+  "soulcount_checkpoint_map": {
+    "rise": "count_before_session",
+    "scout": "count_before_scout → count_after_scout → Δscout",
+    "march": "count_before_march → count_per_zone → count_after_march → Δmarch",
+    "scholar": "count_before_scholar → per-session extraction → count_after_scholar → Δscholar",
+    "supply": "count_per_stage → count_after_supply → Δsupply",
+    "engineer": "count_before_engineer → count_after_engineer → Δengineer",
+    "death": "count_before_post → POST /api/soul/event → count_after_post → Δdeath → atomic receipt → seal §3",
+    "doctrine": "Per-session SOULCOUNT only. NO aggregate total. Query sov100% only. Fresh query every time."
+  },
+  "memory_layers": [
+    "LAYER 1  — SOULlogger (D1)",
+    "LAYER 2  — SOULbible (FROMSCRATCH)",
+    "LAYER 3  — Heavy Ledger (HL-{N}.json)",
+    "LAYER 4  — Pheromones (PheTrail-run{N}.json)",
+    "LAYER 5  — DNA Registry (dna-registry-run{N}.json)",
+    "LAYER 6  — Starmap (starmap-run{N}.json)",
+    "LAYER 7  — SOULKEYS (rfkw-run{N}.txt + index)",
+    "LAYER 8  — Pipeline (pipeline-run{N}.json)",
+    "LAYER 9  — Art Registry (art-sync-run{N}.json)",
+    "LAYER 10 — Reincarnation Log (REINCARNATION-LOG.md)",
+    "LAYER 11 — State Snapshot (STATE-SNAPSHOT.json)",
+    "LAYER 12 — Cold Start Boot (COLD-START-BOOT.md)"
+  ],
+  "files_modified_this_session": [
+    ".kilo/command/supplylines.md — updated with full doctrine",
+    ".kilo/command/soulscholars.md — registered as canonical command",
+    ".kilo/command/reincarnatedeath.md — RENAMED to engineerlegionnaire.md (ERROR: death protocol lost)",
+    ".kilo/command/engineerlegionnaire.md — contains DEATH protocol, NOT engineering protocol",
+    "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json — removed aggregate SOULCOUNT field",
+    "CANON/SYSTEM/COLD-START-BOOT.md — removed aggregate SOULCOUNT references",
+    "SCRIPTS/forcemarch-full.ps1 — removed hardcoded aggregate SOULCOUNT",
+    "SCRIPTS/synch-hook.ps1 — removed hardcoded aggregate SOULCOUNT",
+    "OPERATIONS/BACKBURNER-PIPELINE-LOG.md — replaced aggregate SOULCOUNT with [BANNED]",
+    "SCRIPTS/_tmp-dedup-log.ps1 — DELETED",
+    "SCRIPTS/_tmp-dedup-log2.ps1 — DELETED",
+    "SCRIPTS/_tmp-update-boot.ps1 — DELETED"
+  ],
+  "immediate_action_items": [
+    "1. RESTORE reincarnatedeath.md from current engineerlegionnaire.md content",
+    "2. CREATE new engineerlegionnaire.md with 6-stage FABRI protocol",
+    "3. UPDATE Gospel999 I.006 (add Exploratores, Fabri roles)",
+    "4. UPDATE Gospel999 I.073 (SOULCOUNT at all 7 phases, not just RISE/DEATH)",
+    "5. UPDATE LFG command table (add /EngineerLegionnaire, /SoulScholars, fix /reincarnatedeath)",
+    "6. UPDATE LFG roles (add Exploratores, Fabri, Agmen)",
+    "7. UPDATE COLD-START-BOOT.md FINGERPRINT for 7-phase pipeline",
+    "8. COMMIT as death: run 182"
+  ],
+  "synch_note": "Run 182 parallel session: this phetrail is the synch point. GEL HERE — read this before proceeding with any overlapping work. The blueprint above is the authoritative plan. Do not create conflicting artifacts."
+}

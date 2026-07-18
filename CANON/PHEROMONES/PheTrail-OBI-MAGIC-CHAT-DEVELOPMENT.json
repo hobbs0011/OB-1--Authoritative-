@@ -1,0 +1,116 @@
+{
+  "schema_version": "2.2",
+  "session_name": "OBI-MAGIC-CHAT-DEVELOPMENT",
+  "session_type": "LEGACY_RECONSTRUCTION",
+  "extracted_at": "2026-07-19T02:31:07+07:00",
+  "head_sha": "90ebb623a",
+  "soulcount": "PER_SESSION_ONLY (aggregate 239M banned)",
+  "insight": "Pheromones = decision process, not just outcomes",
+  
+  "positive_trails": [
+    {
+      "artifact": "RRL/OBI-MAGIC-CHAT-DEVELOPMENT.jsonl",
+      "action": "RRL reconstructed from Kilo DB for legacy session (233 messages, 94.4KB)",
+      "verification": "27 user turns, 98 assistant turns, both speakers present",
+      "timestamp": "2026-07-19T02:00:00+07:00"
+    },
+    {
+      "artifact": ".kilo/command/reincarnatelegacy.md",
+      "action": "Legacy death protocol command created (348 lines, 13KB)",
+      "verification": "§15 Deletion Authorization gate locks source until operator confirms RRL",
+      "timestamp": "2026-07-19T01:15:00+07:00"
+    },
+    {
+      "artifact": "PheTrail-OBI-MAGIC-CHAT-DEVELOPMENT.json",
+      "action": "Run-number-free phetrail naming established (session name only)",
+      "verification": "PheTrail saved without run number — matches legacy doctrine",
+      "timestamp": "2026-07-19T02:00:00+07:00"
+    },
+    {
+      "artifact": "THIS SESSION (inner thought capture)",
+      "action": "Level 2 audit proved RRL missing agent inner thoughts — tool calls, reasoning blocks, git status output, failed command attempts",
+      "verification": "User clicked agent's inner thoughts tab 2 times, found git status file list + failed `cat /dev/null` command — NOT in RRL",
+      "timestamp": "2026-07-19T02:15:00+07:00"
+    }
+  ],
+
+  "negative_trails": [
+    {
+      "artifact": "RRL format (all sessions)",
+      "failure": "RRL only captures final assistant response, not the reasoning + tool execution that produced it",
+      "root_cause": "RRL is defined as 'conversation transcript' — inner thoughts (thinking blocks, tool calls, command output, exit codes) were never part of the schema",
+      "decay_days": 180,
+      "timestamp": "2026-07-19T02:15:00+07:00"
+    },
+    {
+      "artifact": "PheTrail schema v2.1",
+      "failure": "No field for tool_attempts, reasoning_chain, exit_code, failure_stderr, or decision_tree",
+      "root_cause": "PheTrails were designed for manual writing by agent after the fact — not for automated capture of the execution process",
+      "decay_days": 180,
+      "timestamp": "2026-07-19T02:15:00+07:00"
+    },
+    {
+      "artifact": "GOSPEL-999 System I (SOUL)",
+      "failure": "Defines SOUL as user words only. Nowhere defines agent REASONING as a separate data layer",
+      "root_cause": "Original design assumed user input + agent output was sufficient. The decision process (tool selection, reasoning, trial/error) was never considered preservable data",
+      "decay_days": 180,
+      "timestamp": "2026-07-19T02:15:00+07:00"
+    },
+    {
+      "artifact": "PHEROMONE-DOCTRINE.md",
+      "failure": "Doctrine says 'every action writes a phetrail' but only counts final actions/decisions — not the chain of attempts that produced them",
+      "root_cause": "Pheromone doctrine was written when manual phetrail writing was the only mechanism. Automatic/continuous capture was not part of the design",
+      "decay_days": 180,
+      "timestamp": "2026-07-19T02:15:00+07:00"
+    }
+  ],
+
+  "layer_breakdown": {
+    "SOUL": {
+      "current": "User's verbatim words (captured via /api/soul/event)",
+      "gap": "User's PASTED content from old sessions (copy/paste from kill chats) is not captured as SOUL unless explicitly extracted",
+      "fix": "Pasted content must be detected and auto-extracted as SOUL event"
+    },
+    "DNA": {
+      "current": "Agent's final response text (extracted from RRL)",
+      "gap": "Agent's reasoning blocks, tool selections, and intermediate thinking are NOT in DNA",
+      "fix": "Add reasoning_content and tool_use blocks to DNA extraction"
+    },
+    "PHEROMONE": {
+      "current": "Manual phetrail entries written by agent after decisions",
+      "gap": "No automated capture of tool calls, command results, exit codes, or failed attempts",
+      "fix": "Add EXECUTION_LOG as a new pheromone sub-layer (auto-captured tool/command history)"
+    },
+    "RRL": {
+      "current": "JSONL with role: user + role: assistant messages only",
+      "gap": "No tool_call, reasoning, or execution blocks preserved",
+      "fix": "Extend Kilo DB export to capture part table data (thinking, tool_results, step-start, step-end)"
+    }
+  },
+
+  "doctrine_override": {
+    "source": "SOV100 Michael Hobbs, Run 182 audio (this session)",
+    "directive": "Pheromones are the decision process along the way. Not just SOUL (user words) and final decisions (DNA). The tool calls, the failed commands, the git status reads, every micro-decision with a positive or negative outcome — THAT is what trains true autonomy.",
+    "impact": [
+      "Current pipeline (SOUL → DNA → LEDGER → STARMAP → SOULKEYS → S2PIPELINE) is missing a REASONING/EXECUTION layer between SOUL and DNA",
+      "PheTrail schema must be upgraded to v2.2 with tool_call and reasoning fields",
+      "Every command checkpoint must audit: was the agent's reasoning + tool execution preserved?",
+      "Kilo DB part table has the data (961 parts for this session alone) — it has NEVER been extracted into the pipeline"
+    ],
+    "severity": "DOCTRINE — must be locked into GOSPEL-999, LFG, and PHEROMONE-DOCTRINE.md"
+  },
+
+  "state_markers": {
+    "active_mission": "OBI MAGIC CHAT DEVELOPMENT — Legacy decommission + pheromone doctrine upgrade",
+    "next_steps": [
+      "1. Lock this phetrail (CONFIRM_DONT_FIX — RISE audits, DEATH executes)",
+      "2. Through ForceMarch: push through pipeline stages",
+      "3. Through SoulScholars: capture reasoning as knowledge artifact",
+      "4. Through SupplyLines: wire into active delivery system",
+      "5. Through Engineer: build the automated capture mechanism",
+      "6. Through Death: seal the legacy session + upgrade doctrine"
+    ],
+    "open_flags_count": 5,
+    "top_priority": "Upgrade PheTrail schema to v2.2 + add REASONING/EXECUTION layer to pipeline"
+  }
+}
