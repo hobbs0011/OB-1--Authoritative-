@@ -1,0 +1,44 @@
+{
+  "schema_version": "2.0",
+  "run_number": "168",
+  "extracted_at": "2026-07-13T12:15:00+07:00",
+  "head_sha": "c87ad905d",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "mission_directive": "Pheromone mapping of everything — territory awareness cycle",
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "signal": +110,
+      "artifact": "CANON/PHEROMONES/ — all phetrail JSON",
+      "action": "Run 168 dedicated to mapping every phetrail, BB entry, open_loop, and artifact to territory map",
+      "verification": "PheTrail-run162 cross-run schema audit produced 60+ focused trails; Run 168 continues the sweep",
+      "timestamp": "2026-07-13T12:15:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "signal": -10,
+      "artifact": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json:65-72",
+      "failure": "18 KILO_GAP + 8 GAP pipeline runs remain unaddressed — colony energy going to gaps not to territory mapping",
+      "root_cause": "Run 161 audit identified 26 stale pipeline runs; no re-runs executed since",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T12:15:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "signal": -10,
+      "artifact": "CANON/SOUL-KEYWORDS/inverted-index.json",
+      "failure": "SOULKEYS inverted-index.json is empty — pheromone index not populated — colony cannot search its own memory",
+      "root_cause": "Build-soulkeys.ps1 or build step not run; kek256 index never rebuilt after Run 054",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T12:15:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Territory mapping — pheromone sweep of entire colony",
+    "open_flags_count": 2,
+    "top_priority": "Produce full territory map: every BB entry, every phetrail, every artifact, every chamber, every egg"
+  }
+}

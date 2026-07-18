@@ -1,18 +1,3 @@
-## Claude Custom Chatmode (Cline extension dropdown)
-
-Registered in `~/.claude/settings.json` → `chatModes.Claude`:
-
-| Field | Value |
-|-------|-------|
-| **agentName** | `OB-1 Claude Sonnet 4.5` |
-| **description** | `Claude Sonnet 4.5 — dedicated Anthropic instance carrying run316 OB-1 canonical ledger context. Use for deep audits, final rulings, and reincarnation decisions.` |
-| **roleDefinition** | `You are Claude — the dedicated Anthropic Sonnet 4.5 model instance, wired to the run316 canonical OB-1 ledger context. Always reference AGENTS.md and the Regeneration roadmap before any deep run. MARSHAL_RUNS_FIRST · NO_ASSUME_HEAD · BOOT_FILE_AGE_SWEEP active.` |
-
-Set up simply: `swicth to Claude`.
-
-> **File:** `%APPDATA%\Code\User\globalStorage\saoudrizwan.claude-dev\settings\cline_mcp_settings.json`  
-> Authentication: `~/.claude/.credentials.json` (OAuth session — `sk-ant-oat01…`, subscription: **Pro**, TL;DR: `claude-sonnet-4-20250514`)
-
 ## Canonical Lane
 
 Use the repo root as the single control plane.

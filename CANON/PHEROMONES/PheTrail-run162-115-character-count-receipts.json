@@ -1,0 +1,32 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T04:54:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-27-cross-run-schema-audit.json",
+      "action": "Cross-run schema audit identified 13 character-count receipts strength",
+      "verification": "PheTrail-run161-27-cross-run-schema-audit.json: '13 character-count receipts with source references in run160'",
+      "timestamp": "2026-07-13T04:54:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run160*.json (3 files)",
+      "failure": "Run 160 character-count receipts not linked to verification",
+      "root_cause": "Run 160 has 13 character-count receipts with source references but no verification field linking to actual state",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T04:54:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "Character-count receipts verification linking for run 160"
+  }
+}

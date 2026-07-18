@@ -1,0 +1,7 @@
+{
+  "ts": "2026-07-13T15:50:42+07:00",
+  "event": "user_command",
+  "command": "RECORD PHEROMONES AND DO NOTHING ELSE",
+  "context": "Operator explicitly halted further work after repeated failures to stop searching and start writing. Prior session capture placeholder written to OPERATIONS/session-capture.jsonl. No further action authorized.",
+  "status": "HALTED"
+}

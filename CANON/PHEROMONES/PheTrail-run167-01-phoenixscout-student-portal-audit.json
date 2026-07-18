@@ -1,0 +1,230 @@
+{
+  "run": 167,
+  "lane": "BB-HATCHERY-02",
+  "name": "Student Portal Development — Full Territory Audit",
+  "created_at": "2026-07-13T12:30:00+07:00",
+  "verdict": "SCOUT_COMPLETE",
+  "phase": "PhoenixScout",
+  "zone": "APPS/NET-PET-AI/public + OPERATIONS/NET-STUDENTS + OPERATIONS/CLASS-INTEL",
+  "summary": "Initial map/audit of all live portals, legacy portals, active students, class recordings, transcripts, and related territory. 9 P1 CRITICAL, 6 P2 HIGH, 4 P3 MEDIUM findings.",
+  "findings": {
+    "P1_CRITICAL": [
+      {
+        "id": "P1-001",
+        "title": "Lam portal suite incomplete",
+        "evidence": "lam-portal.html exists. NO lam-profile.html, lam-transcripts.html, lam-methodology.html, lam-career.html, lam-action-plan.html",
+        "impact": "Student portal partially functional — no profile, transcripts, or career pages"
+      },
+      {
+        "id": "P1-002",
+        "title": "Minh has no portal HTML",
+        "evidence": "No minh-portal.html in public/. Only minh-profile.html, minh-methodology.html, minh-action-plan.html, minh-transcripts.html",
+        "impact": "minh-private student cannot access portal via standard route"
+      },
+      {
+        "id": "P1-003",
+        "title": "Quy portal suite incomplete",
+        "evidence": "quy-portal.html, quy-profile.html, quy-methodology.html, quy-career.html, quy-transcripts.html exist. MISSING quy-action-plan.html, quy-gospel444.html",
+        "impact": "Incomplete portal experience for Quy"
+      },
+      {
+        "id": "P1-004",
+        "title": "Quan/Quang portal suites incomplete",
+        "evidence": "quan-portal.html, quan-profile.html, quan-methodology.html, quan-transcripts.html exist. MISSING quan-action-plan.html, quan-career.html. Same for Quang.",
+        "impact": "Incomplete portal experience for Quan and Quang"
+      },
+      {
+        "id": "P1-005",
+        "title": "Portal routing inconsistency",
+        "evidence": "4 students via /student/{id} (huong, mai-tram, quy, minh). 3 students via direct HTML (lam, quan, quang). Inconsistent pattern.",
+        "impact": "Architecture drift — suggests incomplete migration or ad-hoc additions"
+      },
+      {
+        "id": "P1-006",
+        "title": "Deactivated portals confusion",
+        "evidence": "quan-portal.html and quang-portal.html exist in BOTH public/ (live, 66KB) AND public/deactivated/ (old, 52-54KB). minh-parent-portal.html only in deactivated.",
+        "impact": "Canonical source unclear. Risk of serving stale content."
+      },
+      {
+        "id": "P1-007",
+        "title": "VAULT data gap — only Mai Tram has recordings",
+        "evidence": "VAULT manifests: huong=[], lam=[], quan=[], quang=[], quy=[]. Only mai-tram-bluetech has 2 recordings (general + phonics, ~2.9MB each). 2026-04-17 consolidation report says 46 recordings found, 2 moved to vault, 44 unresolved.",
+        "impact": "Voice archive mostly empty. 44 recordings from April 2026 still unresolved."
+      },
+      {
+        "id": "P1-008",
+        "title": "Active students missing from VAULT",
+        "evidence": "NET-STUDENTS/README.md lists Timmy, Tracy, Dan as active students. No VAULT entries for them.",
+        "impact": "No recording vault, no manifest, no student profile in VAULT system"
+      },
+      {
+        "id": "P1-009",
+        "title": "STUDENT-PORTAL-DEV.md stale",
+        "evidence": "Last updated 2026-05-30 (Run 25). 13+ days old. Does not reflect current portal state (missing lam, minh portal status, deactivated portals, etc).",
+        "impact": "Operational context out of date. Risk of working from stale docs."
+      }
+    ],
+    "P2_HIGH": [
+      {
+        "id": "P2-001",
+        "title": "No class intel for 4 students",
+        "evidence": "CLASS-INTEL has sessions for: Mai Tram (June 10, June 28), Huong (June 11), Class10 (June 29). NO intel for Quy, Lam, Quan, Quang, Minh.",
+        "impact": "No transcript, vocab, methodology, or gameplan for majority of students"
+      },
+      {
+        "id": "P2-002",
+        "title": "Oktava system isolated",
+        "evidence": "oktava-login/ has separate index, classroom, employer portals. run143-raw-transcript.txt and transcript.txt present. NOT in student portal map. NOT in VAULT.",
+        "impact": "Oktava class data disconnected from main student portal system"
+      },
+      {
+        "id": "P2-003",
+        "title": "Parent portal orphaned",
+        "evidence": "parent-quan-quang/index.html exists. No clear integration with main portal system or student map.",
+        "impact": "Parent portal may be unreachable or unmaintained"
+      },
+      {
+        "id": "P2-004",
+        "title": "Chat route mismatch",
+        "evidence": "Portal map redirects to /magic-chat.html?studentId=... after onboarding. No chat.html in public/ (only magic-chat.html).",
+        "impact": "Potential broken redirect if code references chat.html"
+      },
+      {
+        "id": "P2-005",
+        "title": "Student ID naming drift",
+        "evidence": "Portal map: lam-bluetech, mai-tram, minh-private. VAULT: lam-prospect, mai-tram-bluetech. README: lam-prospect, mai-tram-bluetech. STUDENT-PORTAL-DEV.md: lam-bluetech, mai-tram-bluetech.",
+        "impact": "Identity inconsistency — same student referenced by multiple IDs"
+      },
+      {
+        "id": "P2-006",
+        "title": "Deactivated portals lack documentation",
+        "evidence": "No explanation in STUDENT-PORTAL-DEV.md or elsewhere for why minh-parent-portal.html, quan-portal.html, quang-portal.html were deactivated.",
+        "impact": "Unknown if deactivation is intentional or accidental"
+      }
+    ],
+    "P3_MEDIUM": [
+      {
+        "id": "P3-001",
+        "title": "No centralized student roster in code",
+        "evidence": "Student data scattered across KV (student_profile_*), VAULT manifests, markdown files, and HTML. No single source of truth.",
+        "impact": "Difficult to maintain consistency across systems"
+      },
+      {
+        "id": "P3-002",
+        "title": "Audio clips outside repo",
+        "evidence": "Minh's processed clips in D:\\OB-1-CANONICAL\\minh-clips\\ not in repo. STUDENT-PORTAL-DEV.md references them but they're untracked.",
+        "impact": "Audio assets not version-controlled"
+      },
+      {
+        "id": "P3-003",
+        "title": "Duplicate transcript files",
+        "evidence": "mai-tram-transcripts.json exists in both OPERATIONS/ and OPERATIONS/OPERATIONS/ (typo directory).",
+        "impact": "Duplicate data — unclear which is canonical"
+      },
+      {
+        "id": "P3-004",
+        "title": "No portal navigation audit",
+        "evidence": "Unclear if all portal pages are reachable from main navigation or if some are orphaned.",
+        "impact": "Some portal pages may be unreachable by users"
+      }
+    ]
+  },
+  "territory_map": {
+    "live_portals": [
+      "huong-portal.html",
+      "mai-tram-portal.html",
+      "quy-portal.html",
+      "lam-portal.html",
+      "quan-portal.html",
+      "quang-portal.html",
+      "bluetech-portal.html",
+      "employer-portal.html",
+      "sov100-portal.html",
+      "test-portal.html"
+    ],
+    "deactivated_portals": [
+      "minh-parent-portal.html",
+      "quan-portal.html (old)",
+      "quang-portal.html (old)"
+    ],
+    "student_routes": {
+      "/student/huong-bluetech": "huong-bluetech.html",
+      "/student/mai-tram": "mai-tram.html",
+      "/student/quy-bluetech": "quy-bluetech.html",
+      "/student/minh-private": "minh-private.html",
+      "/lam-portal.html?studentId=lam-bluetech": "lam-portal.html",
+      "/quan-portal.html?studentId=quan-nguyen": "quan-portal.html",
+      "/quang-portal.html?studentId=quang-nguyen": "quang-portal.html"
+    },
+    "profile_pages": [
+      "huong-profile.html",
+      "mai-tram-profile.html",
+      "quy-profile.html",
+      "quan-profile.html",
+      "quang-profile.html",
+      "minh-profile.html"
+    ],
+    "transcript_pages": [
+      "huong-transcripts.html",
+      "mai-tram-transcripts.html",
+      "quy-transcripts.html",
+      "quan-transcripts.html",
+      "quang-transcripts.html",
+      "minh-transcripts.html"
+    ],
+    "methodology_pages": [
+      "huong-methodology.html",
+      "mai-tram-methodology.html",
+      "quy-methodology.html",
+      "quan-methodology.html",
+      "quang-methodology.html",
+      "minh-methodology.html"
+    ],
+    "career_pages": [
+      "huong-career.html",
+      "mai-tram-career.html",
+      "quy-career.html"
+    ],
+    "action_plan_pages": [
+      "huong-action-plan.html",
+      "mai-tram-action-plan.html",
+      "quy-action-plan.html",
+      "quan-action-plan.html",
+      "quang-action-plan.html",
+      "minh-action-plan.html"
+    ],
+    "class_intel": [
+      "2026-06-10-mai-tram",
+      "2026-06-11-huong",
+      "2026-06-28-mai-tram",
+      "2026-06-29-class10"
+    ],
+    "vault_students": [
+      "huong-bluetech",
+      "lam-prospect",
+      "mai-tram-bluetech",
+      "quan-nguyen",
+      "quang-nguyen",
+      "quy-bluetech"
+    ],
+    "vault_recordings": {
+      "huong-bluetech": 0,
+      "lam-prospect": 0,
+      "mai-tram-bluetech": 2,
+      "quan-nguyen": 0,
+      "quang-nguyen": 0,
+      "quy-bluetech": 0
+    },
+    "active_students_readme": [
+      "Mai Tram",
+      "Nguyễn Thị Thu Quy",
+      "Timmy",
+      "Tracy",
+      "Dan",
+      "Quan Nguyen",
+      "Quang Nguyen",
+      "BlueTech Staff"
+    ]
+  },
+  "next_action": "Remediation required: (1) Complete Lam portal suite (profile, transcripts, methodology, career, action-plan). (2) Create minh-portal.html or update portal map. (3) Add action-plan and career pages for Quan/Quang. (4) Resolve deactivated portal duplication. (5) Investigate 44 unresolved recordings from 2026-04-17 consolidation. (6) Update STUDENT-PORTAL-DEV.md. (7) Add class intel for missing students."
+}

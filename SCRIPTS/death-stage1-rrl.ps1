@@ -1,4 +1,8 @@
-$repo = "D:\OB-1-CANONICAL"
+# death-stage1-rrl.ps1 — DECOMMISSIONED 2026-07-18
+# Historical RRL capture script for Run 75. Used ~/.claude/ paths.
+# Claude is decommissioned. This script is kept for historical reference.
+Write-Host "death-stage1-rrl.ps1: DECOMMISSIONED — Claude is dead. Use /RRLcapture for Kilo-native RRL."
+exit 1
 $rrlPath = "$repo\RRL\RRL-75.txt"
 
 if (-not (Test-Path $rrlPath)) {

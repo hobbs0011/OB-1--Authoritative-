@@ -1,0 +1,23 @@
+﻿[13:30:03] =============================
+[13:30:03] REINCARNATE DEATH v7.0
+[13:30:03] =============================
+[13:30:03] OK: AUTHORITY: LFG + GOSPEL-999 verified
+[13:30:03] WARN: BACKBURNER PRECEDENCE: open=18 blocked=0 in_progress=2
+[13:30:03] WARN: Backburner items exist. New work is deferred until backburner is cleared or Michael explicitly overrides.
+[13:30:03] Run authority: last='1649e6614 death: run 164 BLUEPRINT-02 portal cleanup + router request.clone() fix' prior=164 current=165
+[13:30:03] --- STAGE 0: Session Type Detection ---
+[13:30:03] WARN: history.jsonl not found
+[13:30:03] WARN: No activeUUID -> KILO (fail-safe)
+[13:30:03] OK: SESSION: KILO_HOLLOW | run=165 | uuid=
+[13:30:03] --- STAGE 1: RRL ---
+[13:30:03] WARN: RRL HOLLOW: 5 bytes
+[13:30:03] Using provided -RrlSource: OPERATIONS\CLASS-INTEL\voice-260713-180332-transcript.json
+[13:30:03] RRL overridden from OPERATIONS\CLASS-INTEL\voice-260713-180332-transcript.json
+[13:30:04] WARN: RRL FIDELITY: one-sided (user=False assistant=False bytes=11520948)
+[13:30:04] OK: RRL: D:\OB-1-CANONICAL\RRL\RRL-165.txt | 11520948 bytes (11520945 chars) fidelity=HOLLOW
+[13:30:04] --- STAGE 2: SOUL ---
+[13:30:05] OK: SOUL: DRYRUN | soulcount=239645670
+[13:30:05] --- STAGE 3: DNA ---
+[13:30:05] STAGE 3 [KILO_HOLLOW] -- DNA extraction skipped
+[13:30:05] --- STAGE 4: LEDGER ---
+[13:30:06] ERR: IDEMPOTENCY ABORT -- run 165 already sealed

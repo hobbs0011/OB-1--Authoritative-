@@ -1,0 +1,37 @@
+{
+  "schema_version": "2.0",
+  "run_number": "167",
+  "extracted_at": "2026-07-13T12:33:00+07:00",
+  "head_sha": "c87ad905d",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "correction_entry": {
+    "type": "NEGATIVE",
+    "signal": -10,
+    "artifact": "CANON/PHEROMONES/PheTrail-run167-student-portal-mapping.json",
+    "failure": "Run 167 was incorrectly described as 'territory mapping' in assistant output when it is actually BB-HATCHERY-02 Student Portal Development",
+    "root_cause": "Assistant conflated egg assignments in summary message. 167=Student Portal Dev, 168/169=Pheromone mapping. Assistant described 167 as 'territory mapping' — wrong egg.",
+    "when": "2026-07-13T12:30 ICT",
+    "where": "assistant message after BB-HATCHERY-02 update",
+    "why": "context confusion between Hatchery eggs and territory mapping scope",
+    "how_detected": "user correction: 'wrong. 167 is student portals'",
+    "how_fixed": "Reconfirmed BB-HATCHERY-02 = Student Portal Development (+75). 168/169 remain territory mapping. No file changes needed — phetrail description was correct, only assistant's verbal summary was wrong.",
+    "decay_days": 180,
+    "timestamp": "2026-07-13T12:33:00+07:00"
+  },
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "signal": +75,
+      "artifact": "OPERATIONS/BACKBURNER-PIPELINE-LOG.md — BB-HATCHERY-02",
+      "action": "Run 167 correctly assigned to Student Portal Development territory mapping",
+      "verification": "BB-HATCHERY-02 SIGNAL +75, Chamber Wing B — Product, status IN-PROGRESS",
+      "timestamp": "2026-07-13T12:33:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "BB-HATCHERY-02 Student Portal Development — initial mapping",
+    "open_flags_count": 1,
+    "top_priority": "Map all live portals, legacy portals, active students, class recordings, transcripts"
+  }
+}

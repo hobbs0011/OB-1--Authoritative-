@@ -1,0 +1,40 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T03:16:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-08-rrl158-159-missing.json",
+      "action": "RRL158-159 missing documented",
+      "verification": "PheTrail-run161-08-rrl158-159-missing.json exists with missing RRL findings",
+      "timestamp": "2026-07-13T03:16:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "OPERATIONS/phetrail-2026-06-13T1830-death121.jsonl",
+      "failure": "RRL158-159 missing from transcript corpus",
+      "root_cause": "Run 161 phetrail documented missing RRL158-159; no recovery in Run 162 plan",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:16:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json:62",
+      "failure": "RRL audit found only 2 valid transcripts out of 160 files",
+      "root_cause": "STATE-SNAPSHOT.json line 62: 'Run 161 RRL audit: 160 files, only 2 valid transcripts'; no remediation in Run 162 plan",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:16:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "RRL158-159 recovery + 160-file transcript format remediation"
+  }
+}

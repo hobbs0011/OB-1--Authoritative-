@@ -15,33 +15,17 @@
   "provider": {
     "openrouter": {
       "options": {
-        "apiKey": "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"
+        "apiKey": "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"
       },
       "models": {
         "deepseek/deepseek-v4-flash": {
-          "name": "[T1 Free] DeepSeek V4 Flash — Workhorse, fast, low cost"
+          "name": "[OB1-T1] DeepSeek V4 Flash — Workhorse"
         },
         "deepseek/deepseek-v4-pro": {
-          "name": "[T2 Paid] DeepSeek V4 Pro — Strong reasoning"
+          "name": "[OB1-T2] DeepSeek V4 Pro — Strong reasoning"
         },
         "openrouter/free": {
           "name": "[FREE] OpenRouter Best Available — Random rotation"
-        }
-      }
-    },
-    "anthropic": {
-      "options": {
-        "apiKey": "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"
-      },
-      "models": {
-        "claude-haiku-4-5": {
-          "name": "[T1] Claude Haiku 4.5 — Scouts / Fast"
-        },
-        "claude-sonnet-4-6": {
-          "name": "[T2] Claude Sonnet 4.6 — Workhorse"
-        },
-        "claude-opus-4-8": {
-          "name": "[T3] Claude Opus 4.8 — Supreme Court"
         }
       }
     },
@@ -51,7 +35,7 @@
       },
       "models": {
         "stepfun/step-3.7-flash:free": {
-          "name": "[TARGET] Step 3.7 Flash — Daily coding, deterministic, no prompt logging"
+          "name": "[FREE] Step 3.7 Flash — Deterministic daily coding"
         }
       }
     },
@@ -61,10 +45,21 @@
       },
       "models": {
         "poolside/laguna-m.1:free": {
-          "name": "[TARGET] Laguna M.1 — Code heavy, agentic"
+          "name": "[FREE] Laguna M.1 — Code heavy, agentic"
         }
       }
     }
   },
-  "snapshot": false
+  "snapshot": false,
+  "mcp": {
+    "firebase": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "firebase-tools@14.15.2",
+        "experimental:mcp"
+      ]
+    }
+  }
 }

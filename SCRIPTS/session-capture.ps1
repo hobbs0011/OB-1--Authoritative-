@@ -1,12 +1,8 @@
-# session-capture.ps1 - Auto-fires on Claude session stop
-# THE FIX: Copy JSONL verbatim. Pipeline handles extraction. No parsing here.
-# DO NOT DELETE - wired in stop hook
-#
-# CRITICAL CHANGE (2026-06-05): Use ACTIVE SESSION UUID as source of truth.
-# Previous behavior: Sort JSONL files by LastWriteTime descending, pick first.
-# PROBLEM: Wrong file picked when multiple sessions recently active.
-# NEW behavior: Read active session UUID from history.jsonl, match exact UUID.
-# This ensures ONLY the current session's transcript is captured.
+# session-capture.ps1 — DECOMMISSIONED 2026-07-18
+# This script was wired to Claude Code's ~/.claude/ history.jsonl + JSONL paths.
+# Claude is decommissioned. Kilo stores sessions in SQLite (kilo.db), not JSONL.
+# Use /RRLcapture (RRLcapture.md) for Kilo-native session capture.
+# Keep this file for historical reference — do not execute.
 
 $ErrorActionPreference = "Continue"
 $repo      = "D:\OB-1-CANONICAL"

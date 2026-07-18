@@ -41,7 +41,7 @@ Tier 1 scope: single-file, clear spec, no cross-file dependencies
 
 **HARD GATE:**
 - Tier 1 match â†’ STOP. Call Phoenix-Architecti (PA). Do NOT handle inline.
-- Tier 2 match â†’ STOP. Call PA with `"tier":2`. Opus 4.7 for final rulings only.
+- Tier 2 match â†’ STOP. Call PA with `"tier":2`. DeepSeek V4 Pro for final rulings only.
 
 Always print before executing:
 `DISPATCH → [TIER 1 | TIER 2] — <one-line reason>`
@@ -65,7 +65,7 @@ Post-call:
 - Run `node --check <file>` for JS/TS
 - Failure â†’ retry once â†’ if still fails â†’ escalate to Tier 2
 
-### TIER 2 â€” PA / Claude Opus 4.8
+### TIER 2 â€” PA / DeepSeek V4 Pro
 **Triggers**: final rulings / irreversible decisions / ledger audits / doctrine changes / arbitration  
 **Scope**: ONLY for decisions that cannot be reversed or require highest-intelligence cross-validation
 

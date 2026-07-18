@@ -1,0 +1,40 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T03:25:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-12-kilo-dna-gap-law.json",
+      "action": "KILO DNA gap law documented",
+      "verification": "PheTrail-run161-12-kilo-dna-gap-law.json exists with gap law findings",
+      "timestamp": "2026-07-13T03:25:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/Dna-REGISTRY/registry-index.json",
+      "failure": "Registry has only 1 entry — severely underpopulated",
+      "root_cause": "L-PHE-5 requires cross-check against registry; 160+ phetrail files and 23+ kiloclaw artifacts but only 1 registry entry",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:25:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-12-kilo-dna-gap-law.json",
+      "failure": "DNA gap law documented but registry not expanded",
+      "root_cause": "Run 161 documented registry gap but no corrective action in Run 162 plan",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:25:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "Registry-index.json expansion to cover all artifacts"
+  }
+}

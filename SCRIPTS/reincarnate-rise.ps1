@@ -44,25 +44,11 @@ function Invoke-D1 {
 
 Push-Location $repoRoot | Out-Null
 
-# STAGE 0 — SOULCOUNT GATE
+# STAGE 0 — SOULCOUNT GATE (Kilo-native)
 Write-Log "============================= REINCARNATE RISE v7.0 ============================="
 Write-Log "--- STAGE 0: SOULCOUNT GATE ---"
-$kiloSession = $false; $activeUUID = $null
-$historyPath = Join-Path $env:USERPROFILE ".claude\history.jsonl"
-$claudeDir = Join-Path $env:USERPROFILE ".claude\projects\d--OB-1-CANONICAL"
-if (Test-Path $historyPath) {
-    try {
-        $lines = [System.IO.File]::ReadAllLines($historyPath)
-        if ($lines.Count -gt 0) {
-            $lastLine = $lines[-1]
-            if ($lastLine -match '"sessionId"\s*:\s*"([^"]+)"') { $activeUUID = $matches[1] }
-        }
-    } catch { Write-Warn "history.jsonl unreadable" }
-} else { Write-Warn "history.jsonl not found" }
-
-if ($activeUUID) {
-    if (-not (Test-Path "$claudeDir\$activeUUID.jsonl")) { Write-Warn "No Claude JSONL -> KILO_HOLLOW"; $kiloSession = $true }
-} else { Write-Warn "No activeUUID -> KILO_HOLLOW (fail-safe)"; $kiloSession = $true }
+$kiloSession = $true
+Write-Log "Kilo-native mode — all sessions KILO_HOLLOW by default"
 
 $currentSoul = 0; $currentLevel = "UNKNOWN"
 try {
@@ -251,7 +237,7 @@ $report = [ordered]@{
     run = $run
     prior_run = $priorRun
     head_sha = (git rev-parse --short HEAD 2>$null).Trim()
-    session_type = if ($kiloSession) { "KILO_HOLLOW" } else { "CLAUDE_REAL" }
+    session_type = "KILO_HOLLOW"
     soulcount = $currentSoul
     soul_level = $currentLevel
     soul_delta = $delta
@@ -279,7 +265,7 @@ $report = [ordered]@{
     backburner_blocked = $bbBlockedCount
     phetrail_negative_trails = $negativeCount
     highest_priority_gap = $highestPriority
-    next_action = if ($bbOpenCount -gt 0 -or $bbBlockedCount -gt 0) { "Resume BACKBURNER items first (OPEN=$bbOpenCount BLOCKED=$bbBlockedCount)" } elseif ($kiloSession) { "Await CLAUDE_REAL session JSONL for REAL pipeline" } elseif ($rrlFidelity -eq "MISSING") { "Create RRL-$runPad.txt" } else { "Verify prior DEATH seal and continue" }
+    next_action = if ($bbOpenCount -gt 0 -or $bbBlockedCount -gt 0) { "Resume BACKBURNER items first (OPEN=$bbOpenCount BLOCKED=$bbBlockedCount)" } elseif ($rrlFidelity -eq "MISSING") { "Create RRL-$runPad.txt" } else { "Verify prior DEATH seal and continue" }
     ready = (-not $kiloSession -and $rrlFidelity -ne "MISSING" -and $bbOpenCount -eq 0 -and $bbBlockedCount -eq 0)
 }
 

@@ -87,7 +87,7 @@ $s2Path       = "$pipelineDir\pipeline-run$runPad.json"
 
 ## STAGE 0 — SESSION TYPE DETECTION (Kilo guard)
 
-**Run before Stage 1.** Non-Claude/current-provider sessions often lack an on-disk transcript. Without this
+**Run before Stage 1.** Non-DeepSeek/Kilo sessions often lack an on-disk transcript. Without this
 gate, Stage 1 can enter discovery with nothing real to grab. This stage detects whether a verified local
 transcript already exists, and whether the current run is provider-recorded or hollow.
 
@@ -209,7 +209,7 @@ if ($kiloSession) {
 
 $countBefore = (Invoke-RestMethod "$D1/api/soul/count").soulcount
 
-# Extract user turns — Claude Code JSONL envelope: role at $obj.message.role, content at $obj.message.content[].text
+# Extract user turns — JSONL envelope: role at $obj.message.role, content at $obj.message.content[].text
 $userTexts = $rrlText -split "`n" | ForEach-Object {
     $o = $_.Trim() | ConvertFrom-Json -ErrorAction SilentlyContinue
     if (-not $o) { return }
@@ -278,7 +278,7 @@ if ($kiloSession) {
 $turnSeq    = 0
 $lines      = $rrlText -split "`n"
 
-# Parse assistant turns — Claude Code JSONL envelope: role at $obj.message.role
+# Parse assistant turns — JSONL envelope: role at $obj.message.role
 # Walk content[].type=='text' only — explicitly skip 'thinking' blocks
 $lines | ForEach-Object {
     $o = $_.Trim() | ConvertFrom-Json -ErrorAction SilentlyContinue

@@ -114,31 +114,16 @@ $artSyncPath = "$artSyncDir\art-sync-run$runPad.json"
 
 foreach ($d in @($ledgerDir,$starmapDir,$keywordDir,$pipelineDir,$dnaDir,$artSyncDir,(Split-Path $rrlPathRun),(Split-Path $sealPathRun))) { Ensure-Dir $d }
 
-# STAGE 0 -- Session Type Detection (provider-neutral)
+# STAGE 0 -- Session Type Detection (Kilo-native)
 Write-Log "--- STAGE 0: Session Type Detection ---"
-$kiloSession = $false; $activeUUID = $null
-$historyPath = Join-Path $env:USERPROFILE ".claude\history.jsonl"
-$claudeDir   = Join-Path $env:USERPROFILE ".claude\projects\d--OB-1-CANONICAL"
-if (Test-Path $historyPath) {
-    try {
-        $lines = [System.IO.File]::ReadAllLines($historyPath)
-        if ($lines.Count -gt 0) {
-            $lastLine = $lines[-1]
-            if ($lastLine -match '"sessionId"\s*:\s*"([^"]+)"') { $activeUUID = $matches[1] }
-        }
-    } catch { Write-Warn "history.jsonl unreadable" }
-} else { Write-Warn "history.jsonl not found" }
-
-if ($activeUUID) {
-    if (-not (Test-Path "$claudeDir\$activeUUID.jsonl")) { Write-Warn "No local transcript JSONL -> KILO"; $kiloSession = $true }
-} else { Write-Warn "No activeUUID -> KILO (fail-safe)"; $kiloSession = $true }
-
-if (-not $kiloSession -and (Test-Path $rrlPathRun)) {
+$kiloSession = $true; $activeUUID = $null
+Write-Log "Kilo-native mode — all sessions treated as KILO_HOLLOW unless RRL file exists"
+if (Test-Path $rrlPathRun) {
     $priorPad = "{0:D3}" -f ($run - 1); $priorRrl = $rrlPattern -f $priorPad
     if ((Test-Path $priorRrl)) {
         $h1 = (Get-FileHash $rrlPathRun -Algorithm SHA256).Hash; $h2 = (Get-FileHash $priorRrl -Algorithm SHA256).Hash
-        if ($h1 -eq $h2) { Write-Warn "RRL recycled -> KILO"; $kiloSession = $true }
-    }
+        if ($h1 -eq $h2) { Write-Warn "RRL recycled -> KILO"; $kiloSession = $true } else { $kiloSession = $false }
+    } else { $kiloSession = $false }
 }
 $sessionType = if ($kiloSession) { "KILO_HOLLOW" } else { "REAL" }
 Write-Ok "SESSION: $sessionType | run=$run | uuid=$activeUUID"
@@ -268,17 +253,38 @@ Write-Ok "STARMAP: $starmapPath"
 # STAGE 6 -- SOULKEYS
 Write-Log "--- STAGE 6: SOULKEYS ---"
 $combinedText = $rrlText; if ($dnaCount -gt 0) { $combinedText += "`n" + ($dnaRecords | ForEach-Object { $_.text }) -join "`n" }
-$words = $combinedText -split '\s+' | Where-Object { $_.Length -gt 4 } | Where-Object { $_ -notmatch '^(the|and|for|are|but|not|you|all|can|had|her|was|one|our|out|has|have|been|were|they|will|would|could|should|about|there|their|which|what|when|make|like|just|some|more|than|also|very|much|many|into|over|been|being|through|where|after|before|because|against|between|without|within|along|follow|coming|think|know|take|come|make|look|want|give|work|time|year|good|them|would|could|other|about|which|their|there|first|would|these|those|under|should|after|where|since|still|every|being|great|where|place|found|sound|below|seen|enough|while|both|show|those|taken|might|long|down|part|same|back|call|hand|high|last|next|left|turn|move|live|believe|happen|bring|write|provide|sit|stand|lose|pay|meet|include|continue|set|learn|change|lead|understand|watch|follow|stop|create|speak|read|allow|add|spend|grow|open|walk|win|offer|remember|love|consider|appear|buy|wait|serve|die|send|expect|build|stay|fall|cut|reach|kill|remain|suggest|raise|pass|sell|require|report|decide|pull|develop|return|explain|hope|describe|decide|share|provide|cover|fall|catch|draw|choose|wish|teach|test|wear|supply|shut|hold|push|close|deal|fill|break|support|record|cut|heat|watch|raise|reach|fly|land|cancel|graduate|enroll|register|complete|submit|assign|grade|assess|evaluate|review|approve|reject|confirm|notify|alert|remind|schedule|book|reserve|request|order|purchase|pay|charge|refund|invoice|receipt|transaction|payment|deposit|withdraw|transfer|balance|account|statement|ledger|audit|compliance|regulation|policy|contract|agreement|terms|conditions|liability|warranty|dispute|resolution|arbitration|mediation|escalate|appeal|petition|claim|evidence|document|certificate|attest|verify|validate|authenticate|authorize|deprecate|obsolete|retire|decommission|archive|purge|delete|destroy|shred|encrypt|decrypt|cipher|hash|salt|key|cert|token|session|cookie|cache|queue|buffer|stream|socket|pipe|channel|bandwidth|latency|throughput|capacity|quota|limit|threshold|rate|pace|burst|flow|routing|dispatch|deliver|notify|trigger|fire|emit|broadcast|cast|scatter|gather|collect|aggregate|summarize|compress|decompress|encode|decode|serialize|deserialize|parse|tokenize|lemmatize|stem|inflect|conjugate|decline|compare|diff|patch|merge|split|join|union|intersect|subtract|complement|normalize|denormalize|flatten|nest|wrap|unwrap|bundle|unbundle|package|unpackage|container|image|snapshot|backup|restore|migrate|upgrade|downgrade|rollback|revert|reset|refresh|reboot|restart|shutdown|startup|initialize|configure|setup|install|uninstall|deploy|undeploy|provision|deprovision|allocate|deallocate|reserve|release|lock|unlock|acquire|surrender|claim|relinquish|assign|reassign|delegate|proxy|forward|redirect|relay|translate|transform|convert|adapt|evolve|iterate|increment|decrement|advance|retreat|proceed|abort|terminate|kill|cease|halt|pause|resume|continue|persist)$' }
+if ($combinedText.Length -gt 200000) { $combinedText = $combinedText.Substring(0,200000); Write-Warn "SOULKEYS: capped combinedText to 200KB for stack safety" }
+$stopWordList = @('the','and','for','are','but','not','you','all','can','had','her','was','one','our','out','has','have','been','were','they','will','would','could','should','about','there','their','which','what','when','make','like','just','some','more','than','also','very','much','many','into','over','been','being','through','where','after','before','because','against','between','without','within','along','follow','coming','think','know','take','come','make','look','want','give','work','time','year','good','them','would','could','other','about','which','their','there','first','would','these','those','under','should','after','where','since','still','every','being','great','where','place','found','sound','below','seen','enough','while','both','show','those','taken','might','long','down','part','same','back','call','hand','high','last','next','left','turn','move','live','believe','happen','bring','write','provide','sit','stand','lose','pay','meet','include','continue','set','learn','change','lead','understand','watch','follow','stop','create','speak','read','allow','add','spend','grow','open','walk','win','offer','remember','love','consider','appear','buy','wait','serve','die','send','expect','build','stay','fall','cut','reach','kill','remain','suggest','raise','pass','sell','require','report','decide','pull','develop','return','explain','hope','describe','decide','share','provide','cover','fall','catch','draw','choose','wish','teach','test','wear','supply','shut','hold','push','close','deal','fill','break','support','record','cut','heat','watch','raise','reach','fly','land','cancel','graduate','enroll','register','complete','submit','assign','grade','assess','evaluate','review','approve','reject','confirm','notify','alert','remind','schedule','book','reserve','request','order','purchase','pay','charge','refund','invoice','receipt','transaction','payment','deposit','withdraw','transfer','balance','account','statement','ledger','audit','compliance','regulation','policy','contract','agreement','terms','conditions','liability','warranty','dispute','resolution','arbitration','mediation','escalate','appeal','petition','claim','evidence','document','certificate','attest','verify','validate','authenticate','authorize','deprecate','obsolete','retire','decommission','archive','purge','delete','destroy','shred','encrypt','decrypt','cipher','hash','salt','key','cert','token','session','cookie','cache','queue','buffer','stream','socket','pipe','channel','bandwidth','latency')
+$stopWordsHash = [System.Collections.Generic.HashSet[string]]$stopWordList
+$words = $combinedText -split '\s+' | Where-Object { $_.Length -gt 4 } | Where-Object { -not $stopWordsHash.Contains($_.ToLower()) }
 $wordFreq = $words | Group-Object | Sort-Object Count -Descending | Select-Object -First 30
 if (-not $DryRun) { $wordFreq | ForEach-Object { "$($_.Count) | $($_.Name)" } | Set-Content $rfkwPath -Encoding UTF8 }
-$inverted = Read-Json $idxPath; if (-not $inverted) { $inverted = @{} }
-$alreadyDone = @{}; if ($inverted) { $inverted.PSObject.Properties | ForEach-Object { $term=$_.Name; $val=$_.Value; if ($val -is [System.Collections.ICollection]) { foreach ($e in $val) { if ($e.run -eq $run) { $alreadyDone[$term] = $true } } } elseif ($val -and $val.run -eq $run) { $alreadyDone[$term] = $true } } }
+$inverted = @{}
+if (Test-Path $idxPath) {
+    try {
+        $json = Get-Content $idxPath -Raw -Encoding UTF8
+        $dict = $json | ConvertFrom-Json
+        if ($dict -is [System.Collections.IDictionary]) {
+            foreach ($k in $dict.Keys) { $inverted[$k] = $dict[$k] }
+        }
+    } catch { $inverted = @{} }
+}
+$alreadyDone = @{}
+foreach ($term in $inverted.Keys) {
+    $val = $inverted[$term]
+    if ($val -is [System.Collections.ICollection]) {
+        foreach ($e in $val) { if ($e.run -eq $run) { $alreadyDone[$term] = $true; break } }
+    } elseif ($val -and $val.run -eq $run) { $alreadyDone[$term] = $true }
+}
 foreach ($kw in $wordFreq) {
     $term = $kw.Name.Trim().ToLower(); $weight = [int]$kw.Count; if ($alreadyDone.ContainsKey($term)) { continue }
     $entry = [ordered]@{ run=$run; category="soul+key"; weight=$weight }
     if ($inverted.ContainsKey($term)) { $existing = $inverted[$term]; if ($existing -is [System.Collections.ICollection]) { $existing += $entry } else { $inverted[$term] = @($existing; $entry) } } else { $inverted[$term] = $entry }
 }
-if (-not $DryRun) { Write-Json $idxPath $inverted }
+if (-not $DryRun) {
+    $out = @{}; foreach ($k in $inverted.Keys) { $out[$k] = $inverted[$k] }
+    $out | ConvertTo-Json -Depth 5 | Set-Content $idxPath -Encoding UTF8
+}
 Write-Ok "SOULKEYS: $($inverted.Count) terms | $rfkwPath"
 
 # STAGE 7 -- S2Pipeline

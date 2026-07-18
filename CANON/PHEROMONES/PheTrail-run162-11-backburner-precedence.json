@@ -1,0 +1,40 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T03:10:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-13-backburner-precedence.json",
+      "action": "Backburner precedence documented",
+      "verification": "PheTrail-run161-13-backburner-precedence.json exists with backburner analysis",
+      "timestamp": "2026-07-13T03:10:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "OPERATIONS/BACKBURNER-PIPELINE-LOG.md",
+      "failure": "Backburner pipeline has precedence conflicts",
+      "root_cause": "Run 161 phetrail identified precedence conflicts but no resolution in Run 162 execution plan",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:10:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-14-phetrail-strength-scoring.json",
+      "failure": "Strength scoring directive unactioned for 27 days",
+      "root_cause": "Run 120 directive required strength field in phetrail schema; Run 161 phetrail documents 27-day gap without implementation",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:10:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "Backburner precedence resolution + phetrail strength scoring implementation"
+  }
+}

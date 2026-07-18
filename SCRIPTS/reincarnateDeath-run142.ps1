@@ -33,39 +33,9 @@ foreach ($d in @($ledgerDir, $starmapDir, $pipelineDir, $dnaDir, $artRegistryDir
     if (-not (Test-Path $d)) { New-Item -ItemType Directory -Path $d -Force | Out-Null }
 }
 
-# STAGE 0 — SESSION TYPE DETECTION
-$historyPath = "$env:USERPROFILE\.claude\history.jsonl"
-$claudeDir   = "$env:USERPROFILE\.claude\projects\d--OB-1-CANONICAL"
-$kiloSession = $false
-$activeUUID  = $null
-
-if (Test-Path $historyPath) {
-    try {
-        $lastLine = [System.IO.File]::ReadAllLines($historyPath)[-1]
-        if ($lastLine -match '"sessionId"\s*:\s*"([^"]+)"') { $activeUUID = $matches[1] }
-    } catch {}
-}
-
-if ($activeUUID) {
-    if (-not (Test-Path "$claudeDir\$activeUUID.jsonl")) {
-        $kiloSession = $true
-    }
-} else {
-    $kiloSession = $true
-}
-
-if (-not $kiloSession -and (Test-Path $rrlPath)) {
-    $priorPad = '{0:D3}' -f ($run - 1)
-    $priorRrl = "$repo\RRL\RRL-$priorPad.txt"
-    if ((Test-Path $priorRrl)) {
-        $h1 = (Get-FileHash $rrlPath -Algorithm SHA256).Hash
-        $h2 = (Get-FileHash $priorRrl -Algorithm SHA256).Hash
-        if ($h1 -eq $h2) { $kiloSession = $true }
-    }
-}
-
-$sessionType = if ($kiloSession) { 'KILO_HOLLOW' } else { 'CLAUDE_REAL' }
-Write-Host "STAGE 0 OK SESSION: $sessionType | run=$run | uuid=$activeUUID"
+# STAGE 0 — SESSION TYPE DETECTION (Kilo-native)
+$kiloSession = $true
+Write-Host "STAGE 0 OK SESSION: KILO_HOLLOW (Kilo-native, Claude decommissioned)"
 
 # STAGE 1 — RRL
 if (-not (Test-Path $rrlPath)) {

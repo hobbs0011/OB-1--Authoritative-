@@ -1,0 +1,16 @@
+﻿{
+    "hl_id":  "HL-7299",
+    "session_id":  "sov100-roman-run164",
+    "rrl_source":  "D:\\OB-1-CANONICAL\\RRL\\RRL-164.txt",
+    "char_count":  162359,
+    "byte_count":  165937,
+    "soul_hash":  "E17CE3097B20C47047AC1303B006B0825E93266DA50438C9169AD924A8145783",
+    "dna_hash":  "DNA_GAP",
+    "dna_blueprint_count":  0,
+    "merkle_parent":  "8F24B8F86A30E357819FD029A7ED28CE3F3E76C3262DF3CEC5CC8FEE65A5855B",
+    "merkle_hash":  "889B5116141B7671B1698F0ECCF15CD2E6E466F381895B68671C0468D7C1DA45",
+    "sealed_at":  "2026-07-14T01:35:02.1603701+07:00",
+    "sov100":  true,
+    "run":  164,
+    "result":  "HOLLOW"
+}

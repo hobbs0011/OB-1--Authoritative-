@@ -1,11 +1,9 @@
-# soul-watcher.ps1 — Run at session START. Keep running in background.
-# Watches active Claude session JSONL, posts Michael's words to soul-archive in real-time.
-# Protects against mid-session compaction wiping context.
-#
-# Usage: pwsh -File SCRIPTS/soul-watcher.ps1
-# Or background: Start-Job { pwsh -File D:\OB-1-CANONICAL\SCRIPTS\soul-watcher.ps1 }
-
-$projectDir = "C:\Users\mrmic\.claude\projects\d--OB-1-CANONICAL"
+# soul-watcher.ps1 — DECOMMISSIONED 2026-07-18
+# Watched active Claude session JSONL at ~/.claude/projects/ — no longer exists.
+# Claude is decommissioned. The soul-logger D1 endpoint handles all SOUL capture.
+# Keep this file for historical reference — do not execute.
+Write-Host "soul-watcher.ps1: DECOMMISSIONED — Claude is dead. SOUL capture is D1-native."
+exit 1
 $soulUrl    = "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/event"
 $stamp      = (Get-Date).ToString('yyyyMMdd-HHmmss')
 $dnaUrl     = "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status"

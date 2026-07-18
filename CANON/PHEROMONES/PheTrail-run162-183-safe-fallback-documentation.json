@@ -1,0 +1,48 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T06:02:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-27-cross-run-schema-audit.json",
+      "action": "Cross-run schema audit identified safe fallback strength",
+      "verification": "PheTrail-run161-27-cross-run-schema-audit.json: 'Safe fallback documented in run157'",
+      "timestamp": "2026-07-13T06:02:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run156*.json (23 files)",
+      "failure": "Run 156 lacks safe fallback documentation",
+      "root_cause": "Run 156 phetrail files do not document safe fallback for mid-session breadcrumbs",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T06:02:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run158*.json (16 files)",
+      "failure": "Run 158 lacks safe fallback documentation",
+      "root_cause": "Run 158 phetrail files do not document safe fallback",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T06:02:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run160*.json (3 files)",
+      "failure": "Run 160 lacks safe fallback documentation",
+      "root_cause": "Run 160 phetrail files do not document safe fallback",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T06:02:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "Safe fallback documentation for runs 156, 158, 160"
+  }
+}

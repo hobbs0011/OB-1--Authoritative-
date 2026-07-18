@@ -1,0 +1,47 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T03:09:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-12-kilo-dna-gap-law.json",
+      "action": "KILO DNA gap law documented",
+      "verification": "PheTrail-run161-12-kilo-dna-gap-law.json exists with gap law findings",
+      "timestamp": "2026-07-13T03:09:00+07:00"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/Dna-REGISTRY/registry-index.json",
+      "action": "Registry exists with 1 entry (confirmed in STATE-SNAPSHOT.json:12)",
+      "verification": "STATE-SNAPSHOT.json line 12 confirms soulcount=239645670 with registry_entries implied by L-PHE-5",
+      "timestamp": "2026-07-13T03:09:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/Dna-REGISTRY/registry-index.json",
+      "failure": "Registry contains only 1 entry — severe underpopulation",
+      "root_cause": "L-PHE-5 requires phetrail cross-check against registry; registry-index.json has 1 entry but system has 160+ phetrail files and 23+ kiloclaw artifacts",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:09:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-12-kilo-dna-gap-law.json",
+      "failure": "KILO DNA gap law documented but registry not expanded",
+      "root_cause": "Gap law identified registry underpopulation but no execution of registry rebuild in Run 162 plan",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:09:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "Registry-index.json expansion to cover all phetrail + kiloclaw artifacts"
+  }
+}

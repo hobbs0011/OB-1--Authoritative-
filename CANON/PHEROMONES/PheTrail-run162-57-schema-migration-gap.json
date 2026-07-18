@@ -1,0 +1,48 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T03:56:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-27-cross-run-schema-audit.json",
+      "action": "Cross-run schema audit identified schema drift",
+      "verification": "PheTrail-run161-27-cross-run-schema-audit.json verdict: SCHEMA_DRIFT_ACROSS_RUNS",
+      "timestamp": "2026-07-13T03:56:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run156*.json (23 files)",
+      "failure": "Run 156 phetrail files have no schema_version",
+      "root_cause": "Run 156 pre-dates v2.1 schema enforcement; all 23 files missing schema_version",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:56:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run158*.json (16 files)",
+      "failure": "Run 158 phetrail files have no schema_version",
+      "root_cause": "Run 158 files use non-standard top-level keys (layer, mission, lens, created_at, status)",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:56:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run160*.json (3 files)",
+      "failure": "Run 160 phetrail files have no schema_version",
+      "root_cause": "Run 160 files use non-standard keys (layer, name) and non-standard casing (soUlCount, soUlSource)",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:56:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "Schema migration for runs 156, 158, 160"
+  }
+}

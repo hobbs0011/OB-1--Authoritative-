@@ -1,0 +1,32 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T03:51:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-24-schema-validation-gap.json",
+      "action": "Schema validation gap documented",
+      "verification": "PheTrail-run161-24-schema-validation-gap.json exists with gap findings",
+      "timestamp": "2026-07-13T03:51:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "SCRIPTS/phetrail-validate.ps1",
+      "failure": "Schema validation script AutoFix not implemented",
+      "root_cause": "phetrail-validate.ps1 L83-84: 'Auto-fix not yet implemented'",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:51:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "phetrail-validate.ps1 AutoFix implementation"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T03:37:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-10-build-soulkeys-runmax.json",
+      "action": "Build soulkeys RunMax=161 documented",
+      "verification": "PheTrail-run161-10-build-soulkeys-runmax.json exists with RunMax=161",
+      "timestamp": "2026-07-13T03:37:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "SCRIPTS/build-soulkeys.ps1",
+      "failure": "build-soulkeys.ps1 RunMax may not be idempotent",
+      "root_cause": "RunMax set to 161 but no idempotency check; re-run could duplicate entries",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:37:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "Verify build-soulkeys.ps1 idempotency"
+  }
+}

@@ -35,11 +35,10 @@ export async function handleMagicChat(request, env) {
     const timeoutMs = Number(env.CHAT_TIMEOUT_MS || 20000);
     let responseText = "";
     switch (provider) {
-      case "claude": responseText = await routeToClaude(message, env, timeoutMs); break;
       case "gpt": responseText = await routeToOpenAI(message, env, timeoutMs); break;
       case "gemini": responseText = await routeToGemini(message, env, timeoutMs); break;
       case "perplexity": responseText = await routeToPerplexity(message, env, timeoutMs); break;
-      default: provider = "claude"; responseText = await routeToClaude(message, env, timeoutMs);
+      default: provider = "deepseek"; responseText = await routeToDeepSeek(message, env, timeoutMs);
     }
     console.log("MAGIC_CHAT_EVENT", JSON.stringify({ session_id, provider, intent: intent.type, message_len: message.length, response_len: responseText.length, ts: Date.now() }));
     return withCors(json({ ok: true, response: responseText, provider, intent: intent.type, session_id }), corsH);
@@ -78,11 +77,11 @@ async function readJsonLimited(request, maxBytes) {
 
 function classifyIntent(message) {
   const msg = message.toLowerCase();
-  if (/\b(audit|verify|validate|check|drift|forensic)\b/.test(msg)) return { provider: "claude", type: "audit" };
+  if (/\b(audit|verify|validate|check|drift|forensic)\b/.test(msg)) return { provider: "deepseek", type: "audit" };
   if (/\b(code|build|generate|script|function|refactor)\b/.test(msg)) return { provider: "gpt", type: "build" };
   if (/\b(search|research|find|lookup)\b/.test(msg)) return { provider: "perplexity", type: "research" };
   if (/\b(idea|creative|design|brainstorm)\b/.test(msg)) return { provider: "gemini", type: "creative" };
-  return { provider: "claude", type: "general" };
+  return { provider: "deepseek", type: "general" };
 }
 
 function fetchWithTimeout(url, init, timeoutMs) {
@@ -91,18 +90,19 @@ function fetchWithTimeout(url, init, timeoutMs) {
   return fetch(url, { ...init, signal: ctrl.signal }).finally(() => clearTimeout(t));
 }
 
-async function routeToClaude(message, env, timeoutMs) {
-  if (!env.ANTHROPIC_API_KEY) throw new Error("ANTHROPIC_KEY_MISSING");
-  const r = await fetchWithTimeout("https://api.anthropic.com/v1/messages", {
+// routeToClaude — DECOMMISSIONED 2026-07-18
+
+async function routeToDeepSeek(message, env, timeoutMs) {
+  if (!env.DEEPSEEK_API_KEY) throw new Error("DEEPSEEK_KEY_MISSING");
+  const r = await fetchWithTimeout("https://api.deepseek.com/v1/chat/completions", {
     method: "POST",
-    headers: { "Content-Type": "application/json", "x-api-key": env.ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01" },
-    body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 1024, messages: [{ role: "user", content: message }] })
+    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${env.DEEPSEEK_API_KEY}` },
+    body: JSON.stringify({ model: "deepseek-v4-flash", messages: [{ role: "user", content: message }], max_tokens: 2048 })
   }, timeoutMs);
   const data = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error("ANTHROPIC_UPSTREAM_ERROR: " + JSON.stringify(data));
-  const blocks = Array.isArray(data.content) ? data.content : [];
-  const text = blocks.filter(b => b?.type === "text" && typeof b.text === "string").map(b => b.text).join("").trim();
-  if (!text) throw new Error("ANTHROPIC_EMPTY");
+  if (!r.ok) throw new Error("DEEPSEEK_UPSTREAM_ERROR: " + JSON.stringify(data));
+  const text = data?.choices?.[0]?.message?.content;
+  if (typeof text !== "string" || !text.trim()) throw new Error("DEEPSEEK_EMPTY");
   return text;
 }
 

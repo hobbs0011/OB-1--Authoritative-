@@ -1,0 +1,23 @@
+=== DNA LOG — 2026-06-01T01:25:27Z ===
+HEAD   : a88720e1 ops: Run 36 ΓÇö SHA substituted in COLD-START-BOOT + death seal (13a68324)
+Branch : master
+
+PHOENIX-ARCHITECTI STATUS:
+{"drone":"phoenix-architecti","version":"0.0.3","status":"LIVE","tiers":{"t1":"Dialagram-QwenMax ✓ (STRICT — no fallback)","t10":"Fallback cascade: Cerebras-120B ✓→Groq ✓→CF-Qwen","t2":"DeepSeek Flash (deepseek-chat) ✓","t3":"DeepSeek Pro (deepseek-reasoner) ✓","t4":"Claude Opus 4.8 ✓"},"endpoints":{"proxy":"/v1/chat/completions (OpenAI-compat, Kilo-ready)","code":"/api/code","mission":"/api/mission","crunch":"/api/crunch"},"gateway":"direct API","recenttasks":[{"id":"PC-1780277086575-1IVZRZ","tasktype":"code_t10","taskinput":"Boot synthesis for OB1 RISE. Given COLD-START-BOOT, git log, and git status in context: (1) extract run number, (2) active vector/mission, (3) top 3 blockers, (4) top 2 leverage opportunities Michael is doing manually that an agent should handle, (5) immediate NEXT action (specific, not vague). Return structured output for the RISE report.","createdat":"2026-06-01 01:24:46"},{"id":"MR-1780272045427-1711","tasktype":"mission","taskinput":"[{\"read\":\"CLAUDE.md\",\"task\":\"Verify this file says 2-tier dispatch system (T1=Qwen, T2=Opus). If correct reply: VERIFIED 2-TIER OK. If stale reply: DRIFT DETECTED — [what is wrong].\",\"write\":null}]","createdat":"2026-06-01 00:00:49"},{"id":"MR-1780250445941-ULTA","tasktype":"mission","taskinput":"[{\"read\":\"CLAUDE.md\",\"task\":\"Verify this file says 2-tier dispatch system (T1=Qwen, T2=Opus). If correct reply: VERIFIED 2-TIER OK. If stale reply: DRIFT DETECTED — [what is wrong].\",\"write\":null}]","createdat":"2026-05-31 18:01:07"},{"id":"PC-1780246378649-O5P3RG","tasktype":"code_t1","taskinput":"Boot synthesis for OB1 RISE. Given COLD-START-BOOT, git log, and git status in context: (1) extract run number, (2) active vector/mission, (3) top 3 blockers, (4) top 2 leverage opportunities Michael is doing manually that an agent should handle, (5) immediate NEXT action (specific, not vague). Return structured output for the RISE report.","createdat":"2026-05-31 16:52:58"},{"id":"PC-1780245874037-KIW4BA","tasktype":"code_t10","taskinput":"Update CANON/SYSTEM/COLD-START-BOOT.md for Run 36 completion. Changes needed: (1) Line 2: Change 'Run 35' to 'Run 36' and update timestamp to '2026-05-31T23:45 ICT', (2) FINGERPRINT line: update to 'RUN 36 | NET PHONICS SYSTEM + OBI MODE FIX | SOUL 64,727,297 TITANIUM_ANCHOR | HEAD 7eb4c603 | BOOT UPDATED 2026-05-31T23:45 ICT', (3) Last completed section: add Run 36 entry: | **36** | **NET PHONICS SYSTEM + OBI MODE FIX** — Mode selection bug fixed (currentMode not passed to token). NET Phonics 7-group system designed: SATNIP/DRUMBLE/HOGFEZ/WYVEX/CHUSHANG/BEEHIVE/OYSTER locked. JP refs stripped. NET-PHONICS-SYSTEM.md created. phonics-drills.js rewritten. Per-student tracking pending. SOUL 64,727,297 TITANIUM_ANCHOR. HEAD 7eb4c603. | Return only changed lines as labeled patch blocks.","createdat":"2026-05-31 16:44:34"}]}
+
+PCC CONTEXT:
+UNREACHABLE
+
+TIER DISPATCH:
+T1 : phoenix-architecti tier=1 — Dialagram Qwen 3.7 Max
+T10: phoenix-architecti tier=10 — Cerebras→Groq→CF-Qwen fallback cascade
+T2 : phoenix-architecti tier=2 — Claude Opus 4.8 (final rulings only)
+Kilo: direct Dialagram/Qwen or PA cascade via kilo.json
+
+SECURITY CONSTRAINTS:
+- DO NOT REMOVE CLOUDFLARE_API_TOKEN before deploy
+- GAP-8 FROZEN: never touch net-pet-ai-production v1.6.2
+- NOTION BLACKLISTED
+- lam portal BB-07: DO NOT BUILD without explicit direction
+- Secrets restore: pwsh SCRIPTS/set-pa-secrets.ps1
+- SOULCOUNT: 907872 TITANIUM_ANCHOR

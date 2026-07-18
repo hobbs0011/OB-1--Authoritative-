@@ -1,0 +1,47 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T03:07:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-21-boot-fingerprint-multiplicity.json",
+      "action": "Boot fingerprint multiplicity documented",
+      "verification": "PheTrail-run161-21-boot-fingerprint-multiplicity.json exists with boot file analysis",
+      "timestamp": "2026-07-13T03:07:00+07:00"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-06-boot-stale-references.json",
+      "action": "Boot stale references documented",
+      "verification": "PheTrail-run161-06-boot-stale-references.json exists with stale reference findings",
+      "timestamp": "2026-07-13T03:07:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/SYSTEM/COLD-START-BOOT.md",
+      "failure": "Boot fingerprint multiplicity — multiple boot files reference different states",
+      "root_cause": "COLD-START-BOOT.md, CANON/REINCARNATION/COLD-START-BOOT.md, REINCARNATION/COLD-START-BOOT.md exist but have inconsistent state references",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:07:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/SYSTEM/REINCARNATION-BOOT-CHECK.md",
+      "failure": "Boot checklist references stale paths",
+      "root_cause": "REINCARNATION-BOOT-CHECK.md references paths that may not exist or have moved in canonical structure",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:07:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "Boot file consolidation + stale reference repair"
+  }
+}

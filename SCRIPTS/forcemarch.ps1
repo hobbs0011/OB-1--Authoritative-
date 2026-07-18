@@ -58,7 +58,8 @@ Safe-Write $log $logTxt
 
 if (-not $DryRun) {
     # Create recovery phetrail for any runs that might be missing from heuristic scan
-    $needles = 1..$lastNum
+    # Use gitRun as the authoritative last run, scan 1 to gitRun
+    $needles = 1..$gitRun
     foreach ($r in $needles) {
         $rp = "{0:D3}" -f $r
         $pt = Join-Path $repo "CANON/PHEROMONES/PheTrail-run$rp.json"

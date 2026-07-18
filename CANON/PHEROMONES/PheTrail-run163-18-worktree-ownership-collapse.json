@@ -1,0 +1,90 @@
+{
+  "run": 163,
+  "role": "PHOENIX_SCOUT",
+  "mission": "12 of 13 worktrees have empty branch/HEAD + dubious ownership — worktree state collapse",
+  "lens": "GAP",
+  "created_at": "2026-07-13T00:58:00+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "worktree_audit": {
+      "total_directories": 13,
+      "valid_worktrees": 1,
+      "broken_worktrees": 12,
+      "breakdown": {
+        "detached_no_branch": 9,
+        "duplicate_branch": 3,
+        "healthy": 1
+      }
+    },
+    "detached_worktrees": {
+      "directories": ["boiled-gopher", "catnip-snowboard", "debonair-fuel", "free-dentist", "groovy-baritone", "hypnotic-form", "iron-bugle", "nosy-ethernet", "raspy-mustard"],
+      "branch": "",
+      "head": "",
+      "dirty": 0,
+      "last_write": "2026-06-18",
+      "status": "DETACHED/BROKEN — no git state accessible"
+    },
+    "duplicate_worktrees": {
+      "directories": ["sparkling-clementine", "towering-planet", "zealous-grasshopper"],
+      "branch": "remarkable-droplet",
+      "head": "a808f6ad1",
+      "dirty": 0,
+      "last_write": "2026-06-18",
+      "note": "All three share branch+HEAD with remarkable-droplet. Likely clones/copies, not independent worktrees."
+    },
+    "healthy_worktree": {
+      "directory": "remarkable-droplet",
+      "branch": "remarkable-droplet",
+      "head": "a808f6ad1",
+      "dirty": 1,
+      "last_write": "2026-07-01",
+      "dirty_files": [".kilo/package-lock.json"],
+      "note": "Only tracked worktree. Has 1 uncommitted change."
+    },
+    "dubious_ownership": {
+      "error": "fatal: detected dubious ownership in repository",
+      "worktree_owner": "S-1-5-21-23002035-2115523900-3690897368-1001",
+      "current_user": "PHOENIX-RISING/mrmic (S-1-5-21-1418307762-3903047541-656857488-1001)",
+      "affected_worktrees": ["boiled-gopher", "catnip-snowboard", "debonair-fuel", "free-dentist", "groovy-baritone", "hypnotic-form", "iron-bugle", "nosy-ethernet", "raspy-mustard"],
+      "fix": "git config --global --add safe.directory D:/OB-1-CANONICAL/.kilo/worktrees/{name}",
+      "impact": "Git commands fail on 9 worktrees due to Windows user mismatch. This is likely the root cause of the corruption event."
+    }
+  },
+  "verdict": {
+    "overall_status": "WORKTREE_OWNERSHIP_COLLAPSE",
+    "priority": "P0_CRITICAL",
+    "impact": "12 of 13 worktrees are broken: 9 have empty git state (detached/no branch) due to dubious ownership errors, and 3 are duplicate clones of remarkable-droplet. Only remarkable-droplet is functional. The corruption event on 2026-07-12 was likely caused by a Windows user/permission change that broke git access to 12 worktrees.",
+    "required_action": [
+      "1. FIX ownership: Run `git config --global --add safe.directory D:/OB-1-CANONICAL/.kilo/worktrees/*` to restore git access",
+      "2. VERIFY: After fixing ownership, re-run worktree audit to get actual branch/HEAD/dirty state",
+      "3. PURGE duplicates: Remove or merge sparkling-clementine, towering-planet, zealous-grasshopper (all clone of remarkable-droplet)",
+      "4. REPAIR or PURGE detached: For the 9 detached worktrees, decide whether to repair (if they contain needed work) or remove",
+      "5. RESTORE agent-manager.json: Rebuild from actual .kilo/worktrees/ state after repair",
+      "6. PREVENT: Add obi.ps1 doctor check that verifies all worktrees in .kilo/worktrees/ are accessible via git"
+    ]
+  },
+  "negative_trails": [
+    "9 worktrees have empty branch/HEAD — git commands fail due to dubious ownership",
+    "3 worktrees are duplicate clones of remarkable-droplet — wasted space, potential confusion",
+    "Only 1 of 13 worktrees is healthy (remarkable-droplet)",
+    "Dubious ownership error: worktrees created by different Windows user (S-1-5-21-23002035...) vs current user (PHOENIX-RISING/mrmic)",
+    "Corruption event on 2026-07-12 likely caused by Windows user/permission change",
+    "L37 law violated: '.kilo/agent-manager.json tracks worktree state — paths must match actual worktrees'"
+  ],
+  "evidence_chain": {
+    "worktree_count": "ls .kilo/worktrees/ -> 13 directories",
+    "git_worktree_list": "git worktree list --porcelain -> 13 worktrees registered",
+    "detected_branches": "git -C .kilo/worktrees/{name} branch --show-current -> 9 return empty, 3 return 'remarkable-droplet', 1 returns 'remarkable-droplet'",
+    "detected_heads": "git -C .kilo/worktrees/{name} rev-parse --short HEAD -> 9 fail (dubious ownership), 3 return a808f6ad1, 1 returns a808f6ad1",
+    "dubious_ownership_error": "git -C .kilo/worktrees/boiled-gopher rev-parse -> 'fatal: detected dubious ownership'",
+    "owner_mismatch": "Error shows owner=S-1-5-21-23002035-2115523900-3690897368-1001, current=PHOENIX-RISING/mrmic",
+    "dirty_remarkable": "git -C .kilo/worktrees/remarkable-droplet status -> 'M .kilo/package-lock.json'"
+  },
+  "cross_references": [
+    ".kilo/worktrees/ (13 directories)",
+    "git worktree list --porcelain (13 registered worktrees)",
+    ".kilo/agent-manager.json (tracks only 1 worktree)",
+    ".kilo/agent-manager.json.corrupt-2026-07-12T14-41-36-439Z (corrupt backup with 12 worktrees)",
+    "COLD-START-BOOT.md:37 (L37 — agent-manager.json must match actual worktrees)"
+  ]
+}

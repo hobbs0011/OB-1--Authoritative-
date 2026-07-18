@@ -1,0 +1,47 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T03:06:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-18-state-snapshot-contents.json",
+      "action": "STATE-SNAPSHOT contents documented",
+      "verification": "PheTrail-run161-18-state-snapshot-contents.json exists with 202-line STATE-SNAPSHOT analysis",
+      "timestamp": "2026-07-13T03:06:00+07:00"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-04-state-snapshot-stale.json",
+      "action": "State snapshot staleness identified",
+      "verification": "PheTrail-run161-04-state-snapshot-stale.json exists documenting staleness issues",
+      "timestamp": "2026-07-13T03:06:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json",
+      "failure": "STATE-SNAPSHOT.json updated_at lags behind actual git HEAD",
+      "root_cause": "updated_at 2026-07-13T01:20:00+07:00 but no automatic update on seal; requires manual refresh",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:06:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json:5",
+      "failure": "updated_at field stale relative to current time",
+      "root_cause": "STATE-SNAPSHOT.json line 5 updated_at=2026-07-13T01:20:00+07:00; current time is 2026-07-13T03:06:00+07:00; 106-minute lag",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:06:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "Automate STATE-SNAPSHOT.json updated_at refresh on seal"
+  }
+}

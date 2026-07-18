@@ -1,0 +1,35 @@
+{
+  "schema_version": "2.0",
+  "run_number": "169",
+  "extracted_at": "2026-07-13T12:16:00+07:00",
+  "head_sha": "c87ad905d",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "mission_directive": "Pheromone mapping pass 2 — territory mapping continued",
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "signal": +90,
+      "artifact": "CANON/PHEROMONES/PheTrail-run168-territory-mapping-pass1.json",
+      "action": "Run 168 territory mapping pass 1 completed — all phetrails, BB entries, open_loops catalogued",
+      "verification": "Run 168 phetrail produced; territory map available for consolidation",
+      "timestamp": "2026-07-13T12:16:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "signal": -10,
+      "artifact": "OPERATIONS/BACKBURNER-PIPELINE-LOG.md",
+      "failure": "No explicit pheromone-as-SOUL doctrine encoded until this run — actions not explicitly recognized as pheromones",
+      "root_cause": "Phetrail strength scoring directive (Run 120) still open; Run 162 cross-run schema audit flagged quality_score variance",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T12:16:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Territory mapping pass 2 — consolidate Run 168 findings and link every BB to signal band",
+    "open_flags_count": 1,
+    "top_priority": "Map every artifact back to its egg in the Hatchery; produce trim/consolidate/optimize shortlist"
+  }
+}

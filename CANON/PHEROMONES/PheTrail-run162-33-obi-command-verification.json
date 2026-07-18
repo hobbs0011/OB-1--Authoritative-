@@ -1,0 +1,32 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T03:32:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-05-obi-command-gaps.json",
+      "action": "OBI command gaps documented",
+      "verification": "PheTrail-run161-05-obi-command-gaps.json exists with OBI command gap findings",
+      "timestamp": "2026-07-13T03:32:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "SCRIPTS/obi.ps1",
+      "failure": "OBI command gaps documented but not resolved",
+      "root_cause": "Run 161 documented OBI command gaps but no completion verification in Run 162 plan",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:32:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "OBI command completion verification"
+  }
+}

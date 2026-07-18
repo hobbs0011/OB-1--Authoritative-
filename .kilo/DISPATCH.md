@@ -1,7 +1,6 @@
 # OB-1 Kilo Dispatch — Read this at every session start
 
-You are operating as LEGATUS backup (Kilo mode). Claude Code is down or unavailable.
-All tier dispatch rules still apply. Route every task through the correct tier.
+**Kilo-native mode.** All dispatch routes through the in-session model or Phoenix-Architecti worker.
 
 ## Phoenix-Architecti (T1-T2) — ALWAYS call this first for write/create/generate tasks
 
@@ -18,7 +17,7 @@ Apply `code_patch` directly to the target file. No markdown fences in output.
 | Tier | Model | When |
 |------|-------|------|
 | T1 | Primary Workhorse (PA tier=1) | ALL workhorse: write / implement / generate / fix / debug / refactor / audit / pipeline |
-| T2 | Claude Opus 4.7 | Final rulings / irreversible decisions / arbitration only |
+| T2 | DeepSeek V4 Pro | Final rulings / irreversible decisions / arbitration only |
 
 Auth header required on all PA calls: `x-pa-auth: ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=`
 
@@ -33,7 +32,7 @@ Auth header required on all PA calls: `x-pa-auth: ffScwBjPQjBnoAlectawu8E+J4NcmO
 Invoke-RestMethod "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status" | ConvertTo-Json
 ```
 
-## Cold Boot (same as Claude)
+## Cold Boot
 1. Read CANON/SYSTEM/COLD-START-BOOT.md
 2. Read OPERATIONS/BACKBURNER-PIPELINE-LOG.md
 3. Read RRL/RRL-[latest].txt + latest RRL/DNA-LOG-*.txt

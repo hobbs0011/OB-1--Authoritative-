@@ -1,7 +1,6 @@
 ﻿---
 description: "Phoenix Rising execution agent â€” Cloudflare Workers, NET-PET-AI, soul DNA ops, reincarnation, drift detection. Inherits all AGENT99 laws."
 mode: primary
-model: anthropic/claude-sonnet-4.6
 color: "#a855f7"
 permission:
   bash: allow

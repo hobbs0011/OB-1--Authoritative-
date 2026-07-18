@@ -1,0 +1,55 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T03:03:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json:58-65",
+      "action": "Run 161 rss_checklist documented 115 pipeline runs audited",
+      "verification": "STATE-SNAPSHOT.json line 61: 'Run 161 Pipeline audit: 115 runs (83 COMPLETE, 8 GAP, 18 KILO_GAP, 6 Other)'",
+      "timestamp": "2026-07-13T03:03:00+07:00"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json:67",
+      "action": "26 stale pipeline runs identified for re-run",
+      "verification": "STATE-SNAPSHOT.json line 67: 'Pipeline gap remediation - 26 stale runs (8 GAP + 18 KILO_GAP) need re-run'",
+      "timestamp": "2026-07-13T03:03:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json:61",
+      "failure": "18 KILO_GAP pipeline runs unaddressed since Run 161",
+      "root_cause": "Run 161 audit identified 18 KILO_GAP runs; no re-run execution recorded in STATE-SNAPSHOT open_loops",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:03:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json:67",
+      "failure": "8 GAP pipeline runs unaddressed since Run 161",
+      "root_cause": "Run 161 audit identified 8 GAP runs; no re-run execution recorded in STATE-SNAPSHOT open_loops",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:03:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json:67",
+      "failure": "26 stale pipeline runs total — zero re-runs executed",
+      "root_cause": "No agent assigned to execute pipeline gap remediation; next_action references it but no execution evidence",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:03:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "Execute 26 stale pipeline re-runs (8 GAP + 18 KILO_GAP)"
+  }
+}

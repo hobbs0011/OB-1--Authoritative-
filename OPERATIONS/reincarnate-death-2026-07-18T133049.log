@@ -1,0 +1,38 @@
+﻿[13:30:49] =============================
+[13:30:49] REINCARNATE DEATH v7.0
+[13:30:49] =============================
+[13:30:49] OK: AUTHORITY: LFG + GOSPEL-999 verified
+[13:30:49] WARN: BACKBURNER PRECEDENCE: open=18 blocked=0 in_progress=2
+[13:30:49] WARN: Backburner items exist. New work is deferred until backburner is cleared or Michael explicitly overrides.
+[13:30:49] Run authority: last='1649e6614 death: run 164 BLUEPRINT-02 portal cleanup + router request.clone() fix' prior=164 current=165
+[13:30:49] --- STAGE 0: Session Type Detection ---
+[13:30:49] WARN: history.jsonl not found
+[13:30:49] WARN: No activeUUID -> KILO (fail-safe)
+[13:30:49] OK: SESSION: KILO_HOLLOW | run=165 | uuid=
+[13:30:49] --- STAGE 1: RRL ---
+[13:30:49] Using provided -RrlSource: OPERATIONS\CLASS-INTEL\voice-260713-180332-transcript.json
+[13:30:49] RRL overridden from OPERATIONS\CLASS-INTEL\voice-260713-180332-transcript.json
+[13:30:49] WARN: RRL FIDELITY: one-sided (user=False assistant=False bytes=11520948)
+[13:30:49] OK: RRL: D:\OB-1-CANONICAL\RRL\RRL-165.txt | 11520948 bytes (11520945 chars) fidelity=HOLLOW
+[13:30:49] --- STAGE 2: SOUL ---
+[13:30:50] OK: SOUL: DRYRUN | soulcount=239645670
+[13:30:50] --- STAGE 3: DNA ---
+[13:30:50] STAGE 3 [KILO_HOLLOW] -- DNA extraction skipped
+[13:30:50] --- STAGE 4: LEDGER ---
+[13:30:51] WARN: IDEMPOTENCY WARN: run 165 already sealed
+[13:30:51] OK: LEDGER: HL-7306 | parent=9A05DAB13E9D98F10569E29786468B0631882BB86F6AD9F18CE798AD2628E7EB | soul=E3DB8CFE9463D546... | dna=DNA_GAP...
+[13:30:51] --- STAGE 5: STARMAP ---
+[13:30:51] OK: STARMAP: D:\OB-1-CANONICAL\CANON\STARMAP\starmap-run165.json
+[13:30:51] --- STAGE 6: SOULKEYS ---
+[13:30:51] WARN: SOULKEYS: capped combinedText to 200KB for stack safety
+[13:30:52] OK: SOULKEYS: 30 terms | D:\OB-1-CANONICAL\CANON\SOUL-KEYWORDS\rfkw-run165.txt
+[13:30:52] --- STAGE 7: S2Pipeline ---
+[13:30:52] OK: S2Pipeline: D:\OB-1-CANONICAL\CANON\PIPELINE\pipeline-run165.json | result=KILO_GAP
+[13:30:52] --- STAGE 8: REGISTRY SYNC ---
+[13:31:07] OK: REGISTRY_SYNC: 10 pieces -> D:\OB-1-CANONICAL\CANON\ART-REGISTRY\art-sync-run165.json
+[13:31:07] --- DEATH SEAL ---
+[13:31:08] OK: DEATH SEAL: D:\OB-1-CANONICAL\CANON\REINCARNATION\run165-reincarnateDEATH.md
+[13:31:08] OK: STATE-SNAPSHOT updated
+[13:31:08] =============================
+[13:31:08] DEATH COMPLETE: run=165 result=KILO_GAP
+[13:31:08] =============================

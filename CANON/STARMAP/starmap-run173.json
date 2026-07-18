@@ -1,0 +1,12 @@
+{
+    "run": 173,
+    "rrl_path": "RRL/RRL-173.txt",
+    "ledger_id": "HL-7305",
+    "soul_turn_ids": "",
+    "dna_turn_ids": "",
+    "blueprint_locations": "",
+    "char_count": 2871,
+    "merkle_hash": "9A05DAB13E9D98F10569E29786468B0631882BB86F6AD9F18CE798AD2628E7EB",
+    "created_at": "2026-07-18T03:21:20.8159473+07:00",
+    "result": "KILO_GAP"
+}

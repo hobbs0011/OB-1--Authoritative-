@@ -1,0 +1,48 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T04:38:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-27-cross-run-schema-audit.json",
+      "action": "Cross-run schema audit identified layer field gaps",
+      "verification": "PheTrail-run161-27-cross-run-schema-audit.json: 'layer present in run156, 158, 160 — missing in run157, 161, 163'",
+      "timestamp": "2026-07-13T04:38:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run157*.json (5 files)",
+      "failure": "Run 157 phetrail files lack layer field",
+      "root_cause": "Run 157 uses tight JSON schema without layer field",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T04:38:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161*.json (26 files)",
+      "failure": "Run 161 phetrail files lack layer field",
+      "root_cause": "Run 161 uses structured schema without layer field",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T04:38:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run163*.json (8 files)",
+      "failure": "Run 163 phetrail files lack layer field",
+      "root_cause": "Run 163 uses structured schema without layer field",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T04:38:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "Layer field standardization across all runs"
+  }
+}

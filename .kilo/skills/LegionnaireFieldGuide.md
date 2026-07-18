@@ -55,7 +55,7 @@ All commands are defined in `.kilo/command/`:
 | Stage | File Pattern | Command |
 |-------|--------------|---------|
 | 0 | SESSION TYPE DETECTION | auto-trigger |
-| 1 | RRL | ~/.claude/projects/**/*.jsonl |
+| 1 | RRL | RRL/RRL-{N}.txt (Kilo DB export) |
 | 2 | SOUL | /api/soul/event → soul-logger |
 | 3 | DNA | CANON/SOUL/EXTRACT/dna-run{N}.json |
 | 4 | LEDGER | CANON/HEAVY-LEDGER/HL-{NNN}.json |

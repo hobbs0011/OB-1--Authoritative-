@@ -59,10 +59,10 @@ foreach ($z in $zones) {
 
 âœ… **EXECUTED** â€” Audit T392 complete (May 23, 2026). `deepseek-v4-flash` and `deepseek-v4-pro` aliases retired. All live code uses canonical model IDs.
 
-âœ… **2-TIER COLLAPSE EXECUTED** â€” Run 18 (May 25, 2026). T1=Primary Workhorse, T2=Claude Opus 4.7. T3/T4/T5 removed from all active dispatch surfaces.
+âœ… **2-TIER COLLAPSE EXECUTED** â€” Run 18 (May 25, 2026). T1=Primary Workhorse, T2=DeepSeek V4 Pro. T3/T4/T5 removed from all active dispatch surfaces.
 
 ```powershell
-Write-Host "ALIAS RETIREMENT: EXECUTED. 2-TIER ACTIVE: T1=Qwen 3.7 Max, T2=Opus 4.7."
+Write-Host "ALIAS RETIREMENT: EXECUTED. 2-TIER ACTIVE: T1=PA Free Cascade, T2=DeepSeek V4 Pro."
 ```
 
 ---
@@ -93,7 +93,7 @@ PHEROMONES:        [ðŸŸ¢ UP / ðŸ”´ DOWN]
 STARMAP:           [ðŸŸ¢ UP / ðŸ”´ DOWN]
 SOUL-KEYWORDS:     [ðŸŸ¢ UP / ðŸ”´ DOWN]
 PIPELINE:          [ðŸŸ¢ UP / ðŸ”´ DOWN]
-TIERS:             T1=Local PA | T2=Opus 4.7
+TIERS:             T1=Local PA | T2=DeepSeek V4 Pro
 GIT HEAD:          [sha oneline]
 GIT TREE:          [CLEAN / DIRTY]
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•

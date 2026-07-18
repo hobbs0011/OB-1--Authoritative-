@@ -1,0 +1,40 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T03:15:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-19-soulsearch-doc-but-no-script.json",
+      "action": "Soulsearch doc-but-no-script gap documented",
+      "verification": "PheTrail-run161-19-soulsearch-doc-but-no-script.json exists with gap findings",
+      "timestamp": "2026-07-13T03:15:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "SCRIPTS/soulsearch.ps1",
+      "failure": "Soulsearch documented but script missing",
+      "root_cause": "Run 161 phetrail documented soulsearch as 'doc but no script'; no script created in Run 162 plan",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:15:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-19-soulsearch-doc-but-no-script.json",
+      "failure": "Soulsearch gap unresolved",
+      "root_cause": "Doc exists but no implementation; Run 162 plan does not address",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:15:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "Soulsearch script implementation from existing doc"
+  }
+}

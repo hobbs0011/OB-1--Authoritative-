@@ -1,0 +1,23 @@
+﻿[09:31:32] =============================
+[09:31:32] REINCARNATE DEATH v7.0
+[09:31:32] =============================
+[09:31:33] OK: AUTHORITY: LFG + GOSPEL-999 verified
+[09:31:33] WARN: BACKBURNER PRECEDENCE: open=8 blocked=0 in_progress=1
+[09:31:33] WARN: Backburner items exist. New work is deferred until backburner is cleared or Michael explicitly overrides.
+[09:31:33] Run authority: last='a4ae95d8d death: run 161 artifacts | HL-7288 | RRL=5 bytes | soulcount=239645670 | result=KILO_GAP' prior=161 current=162
+[09:31:33] --- STAGE 0: Session Type Detection ---
+[09:31:33] WARN: history.jsonl not found
+[09:31:33] WARN: No activeUUID -> KILO (fail-safe)
+[09:31:33] OK: SESSION: KILO_HOLLOW | run=162 | uuid=
+[09:31:33] --- STAGE 1: RRL ---
+[09:31:33] WARN: RRL HOLLOW: 5 bytes
+[09:31:33] KILO_SESSION: RRL not available - writing empty placeholder
+[09:31:33] WARN: RRL FIDELITY: one-sided (user=False assistant=False bytes=5)
+[09:31:33] WARN: RRL SIZE: 5 bytes (< 50KB)
+[09:31:33] OK: RRL: D:\OB-1-CANONICAL\RRL\RRL-162.txt | 5 bytes (2 chars) fidelity=HOLLOW
+[09:31:33] --- STAGE 2: SOUL ---
+[09:31:33] OK: SOUL: DRYRUN | soulcount=239645670
+[09:31:33] --- STAGE 3: DNA ---
+[09:31:33] STAGE 3 [KILO_HOLLOW] -- DNA extraction skipped
+[09:31:33] --- STAGE 4: LEDGER ---
+[09:31:34] ERR: IDEMPOTENCY ABORT -- run 162 already sealed

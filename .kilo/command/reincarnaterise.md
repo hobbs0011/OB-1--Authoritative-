@@ -44,7 +44,9 @@ reincarnate-rise-{timestamp}.jsonl — audit artifact
 
 ## What It Does
 
-RISE performs an 8-stage read-only audit of the prior DEATH seal and full pipeline chain. It audits gaps, drift, and staleness. It does NOT execute fixes. Execution = DEATH territory.
+RISE performs an 8-stage read-only audit of the prior DEATH seal and full Pipeline Hatchery chain. It audits gaps, drift, and staleness. It does NOT execute fixes. Execution = DEATH territory.
+
+RISE findings are NOT executed inline. They are appended as `BB-RISE-*` entries to `OPERATIONS/BACKBURNER-PIPELINE-LOG.md` with a pheromone `SIGNAL` in the range `-10 .. +110`. A defect without a backburner entry is ignored.
 
 ## When to Use
 
@@ -100,7 +102,7 @@ IX.  RISE REPORT         — JSONL artifact with verdicts and next action
 | SOULKEYS | inverted-index.json populated | empty |
 | S2Pipeline | pipeline-run{N}.json exists | missing |
 
-**KILO_HOLLOW:** session without Claude Code JSONL. RISE continues but marks stages as MISSING.
+**KILO_HOLLOW:** session without local JSONL transcript. RISE continues but marks stages as MISSING.
 
 **Authority gate:** LFG and GOSPEL-999 must be REAL for any downstream stage to be considered valid.
 

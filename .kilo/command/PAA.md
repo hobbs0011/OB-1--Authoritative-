@@ -1,12 +1,12 @@
 ---
-description: Phoenix Architecti Agents — 2-tier dispatch. T1=Primary Workhorse, T2=Opus 4.7. Prefix task with [T1]-[T2] to select tier.
+description: Phoenix Architecti Agents — 2-tier dispatch. T1=Primary Workhorse, T2=DeepSeek V4 Pro. Prefix task with [T1]-[T2] to select tier.
 agent: AGENT99
 ---
 Purpose: Route task to the correct PA tier model via the Phoenix-Architecti CF worker.
 
 Tier table:
 - T1: Primary Workhorse (PA tier=1) — ALL workhorse tasks (write, implement, generate, fix, debug, refactor, audit, pipeline)
-- T2: Claude Opus 4.7 — Final rulings, irreversible decisions, arbitration only
+- T2: DeepSeek V4 Pro — Final rulings, irreversible decisions, arbitration only
 
 Flow:
 1. Parse tier from argument prefix [T1]-[T2] — default T1 if none specified

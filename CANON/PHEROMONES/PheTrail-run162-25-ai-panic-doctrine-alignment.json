@@ -1,0 +1,32 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T03:24:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run156-air-you-breathe.json",
+      "action": "Air you breathe phetrail documented",
+      "verification": "PheTrail-run156-air-you-breathe.json exists with environmental context",
+      "timestamp": "2026-07-13T03:24:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run156-ai-panic-no-emotions.json",
+      "failure": "AI panic no emotions content may be misaligned with doctrine",
+      "root_cause": "Run 156 phetrail documents AI panic without emotional context; may violate L55 COMMIT_DONT_HOLD",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:24:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "AI panic doctrine alignment review"
+  }
+}

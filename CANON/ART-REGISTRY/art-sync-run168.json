@@ -1,0 +1,41 @@
+﻿{
+    "run":  168,
+    "ledger_id":  "HL-7294",
+    "merkle_short":  "9245CACF0B4B15FE",
+    "starmap_file":  "starmap-run168.json",
+    "keywords_file":  "rfkw-run168.txt",
+    "keywords_used":  [
+
+                      ],
+    "pieces_synced":  3,
+    "pieces":  [
+                   {
+                       "id":  "ART-1780547160670-TBAE",
+                       "title":  "WAKE UP THE TIGER",
+                       "url":  null,
+                       "keywords":  [
+
+                                    ],
+                       "title_hit":  true
+                   },
+                   {
+                       "id":  "ART-1780547001008-30ZF",
+                       "title":  "The Obsolete Model",
+                       "url":  null,
+                       "keywords":  [
+
+                                    ],
+                       "title_hit":  true
+                   },
+                   {
+                       "id":  "ART-1780502471217-V612",
+                       "title":  "The Empire Blueprint",
+                       "url":  null,
+                       "keywords":  [
+
+                                    ],
+                       "title_hit":  true
+                   }
+               ],
+    "executed_at":  "2026-07-13T11:21:26.2000167+07:00"
+}

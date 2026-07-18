@@ -1,0 +1,35 @@
+{
+  "schema_version": "2.0",
+  "run_number": "167",
+  "extracted_at": "2026-07-13T12:15:00+07:00",
+  "head_sha": "c87ad905d",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "mission_directive": "BB-HATCHERY-02 — Student Portal Development mapping/audit",
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "signal": +75,
+      "artifact": "OPERATIONS/BACKBURNER-PIPELINE-LOG.md — BB-HATCHERY-02",
+      "action": "Run 167 dedicated to Student Portal Development mapping and audit",
+      "verification": "BB-HATCHERY-02 SIGNAL +75, Chamber Wing B — Product",
+      "timestamp": "2026-07-13T12:15:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "signal": -10,
+      "artifact": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json:66",
+      "failure": "Portal formula not yet consolidated — drift backlog in open_loops",
+      "root_cause": "Run 161 audit found 37 P1 issues in portal files; no single consolidated portal formula captured yet",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T12:15:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "BB-HATCHERY-02 Student Portal Development — initial mapping",
+    "open_flags_count": 1,
+    "top_priority": "Map all live portals (Huong, Mai Tram, Quy, Quan, Quang, Minh) against gold-standard formula"
+  }
+}

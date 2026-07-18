@@ -1,0 +1,35 @@
+﻿[14:06:32] =============================
+[14:06:32] REINCARNATE DEATH v7.0
+[14:06:32] =============================
+[14:06:32] OK: AUTHORITY: LFG + GOSPEL-999 verified
+[14:06:32] WARN: BACKBURNER PRECEDENCE: open=18 blocked=0 in_progress=2
+[14:06:32] WARN: Backburner items exist. New work is deferred until backburner is cleared or Michael explicitly overrides.
+[14:06:32] Run authority: last='ff5bbf6ea death: run 174 — NET-PET-AI worker diagnostic + transcript extraction procedure v2.0' prior=174 current=175
+[14:06:32] --- STAGE 0: Session Type Detection ---
+[14:06:32] Kilo-native mode — all sessions treated as KILO_HOLLOW unless RRL file exists
+[14:06:32] OK: SESSION: KILO_HOLLOW | run=175 | uuid=
+[14:06:32] --- STAGE 1: RRL ---
+[14:06:32] KILO_SESSION: RRL not available - writing empty placeholder
+[14:06:32] WARN: RRL FIDELITY: one-sided (user=False assistant=False bytes=5)
+[14:06:32] WARN: RRL SIZE: 5 bytes (< 50KB)
+[14:06:32] OK: RRL: D:\OB-1-CANONICAL\RRL\RRL-175.txt | 5 bytes (2 chars) fidelity=HOLLOW
+[14:06:32] --- STAGE 2: SOUL ---
+[14:06:33] OK: SOUL: DRYRUN | soulcount=239645670
+[14:06:33] --- STAGE 3: DNA ---
+[14:06:33] STAGE 3 [KILO_HOLLOW] -- DNA extraction skipped
+[14:06:33] --- STAGE 4: LEDGER ---
+[14:06:34] OK: LEDGER: HL-7307 | parent=964DB1A3387932A209FA48268A3DBED0F8C5302968962D2401A731E3A71C06DC | soul=7EB70257593DA06F... | dna=DNA_GAP...
+[14:06:34] --- STAGE 5: STARMAP ---
+[14:06:34] OK: STARMAP: D:\OB-1-CANONICAL\CANON\STARMAP\starmap-run175.json
+[14:06:34] --- STAGE 6: SOULKEYS ---
+[14:06:34] OK: SOULKEYS: 0 terms | D:\OB-1-CANONICAL\CANON\SOUL-KEYWORDS\rfkw-run175.txt
+[14:06:34] --- STAGE 7: S2Pipeline ---
+[14:06:34] OK: S2Pipeline: D:\OB-1-CANONICAL\CANON\PIPELINE\pipeline-run175.json | result=KILO_GAP
+[14:06:34] --- STAGE 8: REGISTRY SYNC ---
+[14:06:38] OK: REGISTRY_SYNC: 3 pieces -> D:\OB-1-CANONICAL\CANON\ART-REGISTRY\art-sync-run175.json
+[14:06:38] --- DEATH SEAL ---
+[14:06:38] OK: DEATH SEAL: D:\OB-1-CANONICAL\CANON\REINCARNATION\run175-reincarnateDEATH.md
+[14:06:38] OK: STATE-SNAPSHOT updated
+[14:06:38] =============================
+[14:06:38] DEATH COMPLETE: run=175 result=KILO_GAP
+[14:06:38] =============================

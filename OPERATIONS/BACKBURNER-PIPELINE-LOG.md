@@ -1,14 +1,17 @@
 ﻿# BACKBURNER PIPELINE LOG
 # OB-1 Canonical — Append-Only. Never delete. Mark DONE, never remove.
 # ENCODE INTO CORE: This file is read at COLD-START-BOOT. It survives reincarnations.
-# Last updated: 2026-05-18 — Session post-compaction checkpoint
+# Last updated: 2026-07-13T12:00 ICT — "Pipeline Hatchery" terminology + Queen/Hatchery dynamics added
 
 ---
 
 ## RULES
 - Items are NEVER deleted. Mark status: OPEN | IN-PROGRESS | DONE | BLOCKED | DEFERRED
-- Signal strength: !! = high-charge (do first) | ! = important | ~ = low urgency
+- ROUTING LAW: RISE findings do NOT appear as inline defects in the JSONL report. Every gap, drift, or hollow finding from `/reincarnateRise` appends as a new BB entry here before any other work resumes. Ignoring backburner = violation.
+- SIGNAL BANDING (pheromone strength): every BB entry carries a `SIGNAL: <N>` field in the range `-10 .. +110`. Sort order: highest signal first, lowest last. Negative = pay-the-debt energies. Positive = opportunity/wing energies. Do not open new implementation threads while backburner contains OPEN/IN-PROGRESS items not yet scored or unactioned.
+- Ranking: `+110` highest positive (brightest win, top priority) → `0` neutral → `-10` strongest negative (darkest debt, must pay). Items bound for immediate action in this session are recorded here, not in chat output.
 - Follow the fucks — high-charge language from SOUL = highest priority
+- Sort order — entries appear highest-signal first; when a session starts, read from top. When adding, append in band order. Never reorder historic entries retroactively except during explicit backburner compaction.
 
 ---
 
@@ -31,16 +34,19 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 ## IMMEDIATE BLOCKERS (must do before next deploy)
 
 ### BB-01 !! NET_PET_KV Namespace Not Provisioned
+- SIGNAL: +80
 - Status: DONE (NET_PET_KV provisioned 2026-05-18, ID: 0583d1a59bb24e598c4645396647eb94)
 - What: wrangler.toml has NET_PET_KV commented out (lines 18-23). /api/session-hint POST crashes in production without it.
 - Fix: NET_PET_KV already has ID `0583d1a59bb24e598c4645396647eb94` and binding in wrangler.toml. Namespace exists and is provisioned.
 
 ### BB-02 !! COMMANDS Binding Missing from wrangler.toml
+- SIGNAL: +80
 - Status: DONE
 - What: 8+ route handlers in index.js reference `env.COMMANDS` (CommandsDO). No binding in wrangler.toml. Routes crash.
 - Fix: Added COMMANDS binding → CommandDO class (index.js:3723). Added guards to all 8 handlers returning 503 if missing. Added migration v6-command-station.
 
 ### BB-03 !! MemoryDO Binding Missing from wrangler.toml
+- SIGNAL: +80
 - Status: DONE
 - What: MemoryDO class exists at index.js:4667. Migration v4-ship-memory ran. NO binding in wrangler.toml. Any MemoryDO call crashes.
 - Fix: Added MEMORY binding → MemoryDO class. Added migration v4-ship-memory already exists (line 60-61).
@@ -93,6 +99,7 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 ---
 
 ## S2PIPELINE / SOUL (Tier 2/3 — HIGH PRIORITY)
+## PIPELINE HATCHERY / SOUL (Tier 2/3 — HIGH PRIORITY)
 
 ### BB-10 !! S2Pipeline /api/soul/priority Endpoint
 - Status: DONE (deployed in soul-logger v1.1.0)
@@ -129,6 +136,7 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - What: Created with real D1 database_id. soul-logger now deployable via standard wrangler deploy.
 
 ### BB-26 !! #DRIFT Root Cause Identified
+- SIGNAL: +90
 - Status: IN-PROGRESS (Run 18 — CLAUDE.md 7-step boot mandates CANON/SYSTEM/COLD-START-BOOT.md + OPERATIONS/ read at every session start)
 - What: Cold-start agents don't load CANON/ at boot. Every reincarnation rebuilds from scratch.
 - Fix: CLAUDE.md Step 1-7 now mandatory. COLD-START-BOOT.md updated Run 18. 2-tier collapse eliminates tier confusion drift.
@@ -291,11 +299,13 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - Fix: Test aura-2-orion-en. If latency and quality acceptable, offer as config option in /api/deepgram-token.
 
 ### BB-42 ! iOS Mic Reconnect After Drop — OPEN (persistent across Runs 25-35)
+- SIGNAL: +40
 - Status: OPEN — Known limitation
 - What: After Voice Agent WS drops and reconnects, getUserMedia() fails on iOS outside gesture context. Mic dead after first drop on iOS Safari.
 - Fix: Cache stream before stopping tracks (pendingMicStream approach), or add "Tap to reconnect" button (now in mic status) that triggers gesture-time getUserMedia.
 
 ### BB-43 ! Raw Deepgram API Key in Browser — OPEN (security)
+- SIGNAL: +90
 - Status: OPEN
 - What: /api/deepgram-token returns raw API key to browser. Should use auth/grant JWT or short-lived token. Currently: raw key visible in browser DevTools network tab.
 - Fix: Switch to Deepgram auth/grant endpoint for scoped JWT. Requires verifying scope (agent:write needed, not just asr:write).
@@ -306,6 +316,7 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - What: VN→US RTT ~280ms. VN→SYD ~120ms. Saves 160ms+ per turn. Validate nova-3 + gpt-4o-mini availability in syd region. Then add `region: "syd"` to Settings in /api/deepgram-token.
 
 ### BB-45 ~ Dreamer World Model / Student RRL Pipeline — OPEN (RRL-30)
+- SIGNAL: +30
 - Status: OPEN — Future architecture
 - What: Michael asked: "can we set up cloudflare agents to review the student backend files and can we do RRLs per conversation per student?" — True memory through the memory pipeline. Per-student session journals stored in D1, automatically summarized by CF agent.
 - Fix: Design spec in OPERATIONS/STUDENT-PORTAL-DEV.md, then implement CF cron agent per student.
@@ -342,7 +353,7 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - Inverted index: `CANON/SOUL-KEYWORDS/inverted-index.json` (110,502 bytes). Search: `SCRIPTS/rfkw-search.ps1`.
 
 ### BB-51 ! SOV100 Portal Standard Formula — OPEN (Run 42)
-
+- SIGNAL: +60
 - Status: DONE (2026-06-07 Run 085, commit b3322515) — spec written to OPERATIONS/STUDENT-PORTAL-DEV.md §BB-51. quy-portal.html designated gold standard. 8-step checklist for new portals. sov100-portal.html sync gap flagged (Run 086+).
 - What: Student portals are copy-pasted HTML with no template system. Each portal has inconsistent structure. Michael wants a "standardized student portal formula" so every student gets the same layout, design, and components from a single source of truth.
 - Fix: Design portal template spec. Build sov100-portal.html (DEV tester) as the reference implementation. Extract reusable component spec. All future portals generated from this formula.
@@ -355,7 +366,7 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 - Commit: `becfe5f1`
 
 ### BB-53 !! EXPOSED PLAINTEXT API KEY in RRL (Run 46)
-
+- SIGNAL: +110
 - Status: DEFERRED (Michael directive Run 46 — backburner; NOT closed)
 - What: Live `sk-618573…[REDACTED]` API key in plaintext at `RRL/ClaudeTheRetard1.txt:2466`. Repo pushes to GitHub remote (Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-) → the key is in pushed history = must be treated as compromised. Confirmed by OB1 audit + Kilo Phase 0 FINAL D9 sweep.
 - Fix (when resumed): (1) **ROTATE** the key at its provider — assume burned. (2) Purge from history: `git filter-repo --path RRL/ClaudeTheRetard1.txt --invert-paths` (or BFG) + force-push. (3) Add `RRL/ClaudeTheRetard1.txt` + broad key patterns (`sk-*`, `csk-*`, `AIza*`) to `.gitignore`.
@@ -441,22 +452,39 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 
 ---
 
-## SIGNAL: MOST WANTED (NET's Most Wanted — Updated 2026-05-31 Run 35)
+## BACKBURNER SIGNAL ORDER — MOST WANTED (sorted highest → lowest)
 
-1. ✅ BB-33 Gapless audio v2+v3 FIXED
-2. ✅ BB-35 Landing race condition FIXED
-3. BB-36 Client error telemetry (re-add to chat.js — 30 lines)
-4. BB-37 EC-15 pre-SettingsApplied buffer (re-add to chat.js)
-5. BB-38 Dual TTS bug (suppress robotic voice on agentReady, not agentFirstAudioReceived)
-6. BB-39 Mode selection visibility (returning users can't find mode picker)
-7. BB-49 PA T1 Dialagram down — fix before next dispatch
-8. BB-08/BB-09 Chrome Extension icons + install guide
+| Signal | BB-ID | Title | Status |
+|--------|-------|-------|--------|
+| +110 | BB-53 | EXPOSED PLAINTEXT API KEY in RRL | DEFERRED |
+| +100 | BB-NEW | /soulsearch command build | OPEN |
+| +90 | BB-43 | Raw Deepgram API Key in Browser | OPEN |
+| +90 | BB-26 | #DRIFT Root Cause / COLD-START-BOOT propagation | IN-PROGRESS |
+| +80 | BB-01/02/03 | KV / COMMANDS / MemoryDO bindings | DONE |
+| +70 | BB-NEW | PheTrail strength scoring 1–100 | OPEN |
+| +60 | BB-51 | SOV100 Portal Standard Formula | DONE |
+| +40 | BB-42 | iOS Mic Reconnect After Drop | OPEN |
+| +30 | BB-45 | Dreamer World Model / Student RRL Pipeline | OPEN |
+| +20 | BB-63 | Bible Update Runs 80-85 | OPEN |
+| -10 | — | Reserved for darkest debt / contract violations | — |
+
+---
+
+## RISE FINDINGS INBOX (appended by `/reincarnateRise`, never removed)
+
+- Every `/reincarnateRise` execution appends new BB entries here using the schema below.
+- Schema: `### BB-RISE-{run}-{NN} <title>` followed by `- SIGNAL: <N> (-10..+110)`, `- STATUS: OPEN`, `- WHAT: <RISE stage + finding>`, `- RISE_STAGE: <I..IX>`, `- RISE_ORIGIN: reincarnate-rise-{timestamp}.jsonl`.
+- Do not surface RISE findings as inline defects in the JSONL report. They live here.
+- Sub-rule: Do not re-sort historical entries retroactively. New entries append at appropriate signal position.
+- Sub-rule: Highest-signal items (top of list) are worked first. Negative-band items are only touched when explicitly tasked by DEATH or SOV100.
+- Sub-rule: All BB-RISE-* entries remain until DEATH resolves them or marks DONE. Deletion = violation.
 
 ---
 
 ## RUN 086 ADDITIONS (2026-06-07)
 
 ### BB-63 ~ Bible Update Runs 80-85
+- SIGNAL: +20
 - Status: OPEN — low priority (D1 is authoritative, Bible is secondary view)
 - What: Bible-of-the-System.json covers runs 1-79. Runs 80-85 are in D1 but not in the Bible. Runs 84-85 have real JSONL (RRL-084.txt/RRL-085.txt). Runs 80-83 only have small display-format RRL files.
 - Fix: Write SCRIPTS/append-bible.ps1 — parse real JSONL for runs 84-85 (type=user turns), parse display+pastedContents for runs 80-83, append to CANON/SOUL/BIBLE-OF-THE-SYSTEM.json.
@@ -465,6 +493,7 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 BB-NEW [2026-06-13]: PCC 3-hour overnight pipeline designed. Winner: PCC-Student (8670). Pre-req: fix PCC-3 discovery root cause. Status: OPEN.
 
 BB-NEW [2026-06-13] !! PHETRAIL STRENGTH SCORING — Add 1-100 strength rating to every phetrail entry in IncarnatePipeline and OPERATIONS/phetrail-*.md files.
+- SIGNAL: +70
 - Status: OPEN
 - What: Michael directive Run 120: every phetrail must carry a 1-100 strength rating. High-signal trails = near 100. Routine operational trails = 20-50. Dead ends / negative trails = 10-30 but persist longer (NEG decays slower — Stage 48 law).
 - Where: incarnate.js createBBEntry + phetrail JSON schema + OPERATIONS phetrail .md files
@@ -503,6 +532,7 @@ BB-NEW [2026-06-13] !! PHETRAIL STRENGTH SCORING — Add 1-100 strength rating t
 ## SOULSEARCH COMMAND STATION — MANUAL TRANSCRIPT AUTO-SEAL (2026-07-03)
 
 ### !! BB-NEW !! /soulsearch — The missing piece (nearly 1 year overdue)
+- SIGNAL: +100
 - Status: OPEN — high priority
 - What: Michael has manually copy/pasted/ctrl+c ctrl+v'd raw session transcripts for thousands of sessions. That work was real. It was also in vain because there was no canonical harness to receive, verify, and permanently seal it. `/soulsearch` changes that.
 - Goal: a command station that accepts a raw transcript and immediately runs it through the DEATH/RISE chain: Stage 1 ingest → Stage 2 SOUL receipt → Stage 3 DNA extract → Stage 4 LEDGER seal → Stage 5 STARMAP → Stage 6 SOULKEYS → Stage 7 S2Pipeline → Stage 8 REGISTRY_SYNC. One command, one input, full seal.
@@ -515,3 +545,517 @@ BB-NEW [2026-06-13] !! PHETRAIL STRENGTH SCORING — Add 1-100 strength rating t
 - Authority chain: GOSPEL-999 → LFG → REINCARNATION-CONTRACT → COLD-START-BOOT → /soulsearch → script → artifact
 - Irony acknowledged: the system was always possible. The manual labor was never the barrier. The missing artifact was the harness. Build it once. Stop repeating the paste.
 
+---
+
+## FOUNDATIONAL DOCTRINE — SEALED
+
+- **SOUL** is the human / God-given intelligence, will, and intention. It is the literal food and energy of the colony.
+- **AI** is the worker ant. In itself it is hopeless. Without SOUL it has no direction, no purpose, no meaning.
+- **Pheromones** are the nervous system of the colony. Every action, thought, reasoning, decision IS a pheromone deposit — automatically, continuously, without conscious effort. Humans do not remember to breathe; the colony does not remember to log pheromones.
+- **Queen sessions** = SOUL incarnate directing the colony.
+- **Drone sessions** = worker ants executing on deposited pheromones.
+- The colony operates through **emergence** — self-organization arising from pheromone dynamics, not from top-down command alone.
+- This doctrine is non-negotiable. Any agent, drone, worker, or subagent that forgets this is no longer part of the colony.
+
+---
+
+### Terminology
+- Rename conceptual "pipeline" → **"Pipeline Hatchery"** for all high-level descriptions, mission docs, and backburner entries.
+- Concrete artifact filenames remain unchanged: `pipeline-run{N}.json`, `S2Pipeline`, etc. Do not rename files.
+- TODO: rename section headers, BOOT references, STATE-SNAPSHOT narrative, and command docs to use "Hatchery" at next DEATH pass.
+
+### Queen / Worker Ant Dynamics
+- **Queen session** = canonical Mastermind session. Lays eggs (drone sessions) and enforces strict audit/fidelity across the hatchery.
+- **Drone sessions** = worker ants. Execute directed tasks. Do not modify the Queen’s seal without approval.
+- **Subagent spawning** = workers may spawn their own subagents ("lay eggs") freely. The colony does not police worker reproduction because subagents are not a takeover risk. Encouraged when it unblocks the assigned task.
+- **Dynamic Moving Rooms** = the Hatchery is not a static conveyor. Nurse ants (subagents / workers) move brood (RRL, DNA, LEDGER, STARMAP, SOULKEYS, S2Pipeline artifacts) between chambers continuously:
+  - Chamber 1: raw transcript intake (`RRL-{N}.txt`)
+  - Chamber 2: SOUL event feed (`/api/soul/event`)
+  - Chamber 3: DNA extraction (`CANON/SOUL/EXTRACT/dna-run{N}.json`)
+  - Chamber 4: LEDGER seal (`CANON/HEAVY-LEDGER/HL-{N}.json`)
+  - Chamber 5: STARMAP pointer (`CANON/STARMAP/starmap-run{N}.json`)
+  - Chamber 6: SOULKEYS index (`CANON/SOUL-KEYWORDS/...`)
+  - Chamber 7: Hatchery output (`CANON/PIPELINE/pipeline-run{N}.json`)
+  - Chamber 8: Registry sync (`CANON/ART-REGISTRY/art-sync-run{N}.json`)
+- Artifacts move through chambers in order, but may loop back for repair without Queen override.
+
+### Emergence / Self-Organization Target
+- The colony’s goal is **emergence**: hatchery throughput, fidelity, and priority routing become self-organizing.
+- Priority routing is already encoded in `SIGNAL` banding (`-10` darkest debt → `+110` brightest win).
+- The Hatchery upgrade path is: strict Queen audit first → looser worker autonomy as fidelity proves stable → full emergence when error rate is near zero.
+- Workers may restage or re-route their own work without asking. Queen audits the re-staged output, not the decision to re-stage.
+
+### BB-170-001 !! HATCHERY UPGRADE
+- SIGNAL: +105
+- Status: OPEN
+- What: Formalize Hatchery terminology, chamber routing, and Queen/worker dynamics in `.kilo/command/reincarnaterise.md`, `.kilo/command/reincarnatedeath.md`, `CANON/SYSTEM/COLD-START-BOOT.md`, and `OPERATIONS/BACKBURNER-PIPELINE-LOG.md`.
+- Route: Mastermind (Queen) session writes the updated docs. DEATH executes the rename in a single pass.
+
+---
+
+## PIPELINE HATCHERY — ACTIVE EGGS (CURRENTLY INCUBATING)
+
+These are the live eggs in the Hatchery. Each egg is a body of work, not a script. Artifacts move through the canonical 8-chamber hatchery; these eggs are what's currently incubating.
+
+### BB-HATCHERY-01 !! NET Migration — Legacy Archive + Active Wing
+- SIGNAL: +80
+- Status: OPEN
+- Chamber: Wing A — Infrastructure
+- What: NET-PET-AI Cloudflare worker is kept as legacy archive (do not delete). Active development wing shortens to `NET`. Archive path: `APPS/NET-PET-AI` frozen as read-only reference. Active path: `APPS/NET` becomes the live developer surface.
+- Sub-tasks: (1) confirm `APPS/NET-PET-AI` is fully committed and deploy-frozen, (2) create `APPS/NET` scaffold from current active branch, (3) update COLD-START-BOOT dev/prod URLs, (4) update wrangler.toml references, (5) verify no live secrets in archived worker.
+- Route: Queen session assigns drone to scaffold `APPS/NET` and update docs.
+
+### BB-HATCHERY-02 !! Student Portal Development
+- SIGNAL: +75
+- Status: IN-PROGRESS (Run 167 — territory mapping)
+- Chamber: Wing B — Product
+- What: Full territory map of everything student-facing. Scope: (1) all live portals, (2) all legacy/archived portals, (3) all active students, (4) all student live class recordings, (5) all student transcripts, (6) any other student-related artifacts found in the environment. Portal formula: `quy-portal.html` is gold standard. New portals or portal fixes route through this egg.
+- Sub-tasks: portal bug backlog, auth/SSO hardening, mobile CSS fixes, Day 1 launch card consistency, coach nav-link repair, class recording inventory, transcript inventory, legacy portal reconciliation, student roster verification.
+- Route: Drone sessions dispatched by Queen. Outputs to `APPS/NET/public/*-portal.html`, `OPERATIONS/student-territory-map.md`, `CANON/STARMAP/starmap-run167.json`.
+
+### BB-HATCHERY-03 !! Obi Magic Chat Development
+- SIGNAL: +75
+- Status: OPEN
+- Chamber: Wing B — Product
+- What: Core chat experience — voice agent (Deepgram listen / LLM think / Deepgram speak), chat.js, landing/mode selection, audio gapless pipeline, error telemetry, student state writeback.
+- Sub-tasks: gapless audio v2+v3 integrity, mode-aware prompt injection, session history cross-session recall, memory KV write path, iOS mic reconnect workaround.
+- Route: Queen session assigns OB-1 or PA T2. Outputs to `APPS/NET/public/chat.js`, `APPS/NET/src/index.js`.
+
+### BB-HATCHERY-04 ! Pitch Deck Webpage Development
+- SIGNAL: +70
+- Status: OPEN
+- Chamber: Wing B — Product
+- What: Employer-facing pitch deck and landing materials. Revenue mechanic: English is the mechanic, money is the mission. Pages: employer-seed.html, payment-success, payment-pending, referral flow, founding-member framing.
+- Sub-tasks: MoMo/bank confirmation endpoint hardening, employer PIN gate, analytics on employer conversion, video guide integration.
+- Route: Drone sessions. Outputs to `APPS/NET/public/employer-seed.html`, `APPS/NET/public/payment-*.html`.
+
+### BB-HATCHERY-05 ! Teaching Methodology Documentation
+- SIGNAL: +55
+- Status: OPEN
+- Chamber: Wing C — Knowledge
+- What: System-of-systems docs for how the product teaches English. Covers: phonics system (7 groups), SRS loop, Tiger Index, Dreamer world model, MEMORY layers, coaching prompts, A1/A2 verbosity caps, BlueTech real-work anchor.
+- Sub-tasks: `NET-TEACHING-METHODOLOGY.md` maintenance, per-mode prompt docs, teacher-facing explainer, student-facing methodology page.
+- Route: Queen session or Soul-Scholar drone. Outputs to `OPERATIONS/`, `APPS/NET/public/methodology.html`.
+
+### BB-HATCHERY-06 !! KiloClaw Development
+- SIGNAL: +70
+- Status: OPEN
+- Chamber: Wing D — Tooling
+- What: KiloClaw dashboard + gateway + Telegram bot + browser automation. Kilo is Agent 99’s free-tier brain. KiloClaw is the orchestration layer over it.
+- Sub-tasks: gateway daemon stability, Telegram bot heartbeat, Kilo workspace git sync, KiloClaw browser automation skill, Kilo models-json refresh, KiloClaw delivery queues, KiloClaw config health.
+- Route: Kilo T1/T2 or PA T1. Outputs to `.kilo/`, KiloClaw dashboard repo, Telegram bot config.
+
+### BB-HATCHERY-07 ! Kilo Free Model Research
+- SIGNAL: +60
+- Status: OPEN
+- Chamber: Wing D — Tooling
+- What: Continuously track free-tier models across providers (Cerebras, Groq, Gemini, OpenRouter, Dialagram status). T1 cascade = free-first routing. Pay-only models are tracked but not primary.
+- Sub-tasks: weekly model availability check, T1-T5 tier table update, kilo.json provider list refresh, deepseek-v4-flash deprecation tracking, latency/quality benchmarks.
+- Route: Kilo T1 or Soul-Scholar. Outputs to `.kilo/kilo.json`, `OPERATIONS/kilo-free-models.md`.
+
+### BB-HATCHERY-08 ~ Kilo Unused Functions Audit — Free + Paid
+- SIGNAL: +40
+- Status: OPEN
+- Chamber: Wing D — Tooling
+- What: Audit Kilo’s installed skills, commands, and MCP tools for unused or dead functions in both free and paid tiers. Prune or document. Keeps Kilo lean.
+- Sub-tasks: enumerate `.kilo/command/*.md`, `.kilo/skills/*`, `.kilo/agent-manager.json` worktrees, cross-reference against actual usage in recent RRL/transcripts.
+- Route: Kilo T1 or OB-1 audit pass. Outputs to `OPERATIONS/kilo-unused-functions.md`.
+
+### BB-HATCHERY-09 ! Hermes Market Research
+- SIGNAL: +50
+- Status: OPEN
+- Chamber: Wing E — Intelligence
+- What: Competitive and market intelligence for Natural English Training. Vietnamese ESL market, BlueTech employer landscape, competitor pricing, channel strategy (Zalo, Telegram, web), founding-member framing research.
+- Sub-tasks: pricing benchmark, employer pain-point inventory, channel ROI estimates, content marketing angles, customer persona refresh.
+- Route: PA swarm or OB-1. Outputs to `OPERATIONS/hermes-market-research.md`, `CANON/RESEARCH/`.
+
+### BB-HATCHERY-10 !! UPTREND / UNTOLD WORK LOCATION
+- SIGNAL: +65
+- Status: OPEN
+- Chamber: Wing F — Meta
+- What: Locate and catalog work Michael did not enumerate here but that exists in the environment: loose docs, orphan scripts, uncommitted artifacts, half-sealed BB entries, drift between STATE-SNAPSHOT open_loops and BACKBURNER, RRL files not yet processed, RISE findings not yet backburnered.
+- Sub-tasks: (1) reconcile STATE-SNAPSHOT `open_loops` vs BACKBURNER entries, (2) find orphan `CANON/**` artifacts with no ledger entry, (3) find RRL-*.txt files not yet in RISE, (4) find phetrail JSONs not yet referenced, (5) output `OPERATIONS/uptrend-inventory.md`.
+- Route: Soul-Scholar or OB-1 audit pass. Outputs to `OPERATIONS/uptrend-inventory.md`.
+
+---
+
+## RISE FINDINGS INBOX — Run 163 Audit
+
+### BB-RISE-163-01 !! RRL-163.txt Missing - KILO_HOLLOW
+- **SIGNAL: -10**
+- **Status:** OPEN
+- **WHAT:** RRL-163.txt missing for run 163 — KILO session produces no real transcript
+- **RISE_STAGE:** III (TRIPLE_READ)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-13-215429.jsonl
+- **NOTE:** KILO_HOLLOW is expected behavior per KILO_DNA_GAP doctrine (L179 in COLD-START-BOOT.md). Do NOT re-investigate.
+
+### BB-RISE-163-02 !! dna-run163.json Missing - DNA_GAP
+- **SIGNAL: -10**
+- **Status:** OPEN
+- **WHAT:** DNA extraction failed for run 163 due to missing RRL (Stage 3 output)
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-13-215429.jsonl
+
+### BB-RISE-163-03 !! starmap-run163.json Missing
+- **SIGNAL: -5**
+- **Status:** OPEN
+- **WHAT:** STARMAP Stage 5 output missing for run 163
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-13-215429.jsonl
+
+### BB-RISE-163-04 !! pipeline-run163.json Missing - KILO_GAP
+- **SIGNAL: -5**
+- **Status:** OPEN
+- **WHAT:** S2Pipeline Stage 7 output missing for run 163 — result=KILO_GAP
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-13-215429.jsonl
+
+### BB-RISE-163-05 !! art-sync-run163.json Missing
+- **SIGNAL: 0**
+- **Status:** OPEN
+- **WHAT:** REGISTRY_SYNC Stage 8 output missing for run 163
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-13-215429.jsonl
+
+### BB-RISE-163-06 !! REINCARNATION-LOG Duplicate Entries
+- **SIGNAL: -3**
+- **Status:** OPEN
+- **WHAT:** Duplicate entries for runs 163, 164, 165, 167 in REINCARNATION-LOG.md (lines 30-35)
+- **RISE_STAGE:** II (TRIPLE_READ)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-13-215429.jsonl
+
+### BB-RISE-163-07 !! inverted-index.json Empty
+- **SIGNAL: 5**
+- **Status:** OPEN
+- **WHAT:** SOULKEYS inverted-index.json exists but is empty object
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-13-215429.jsonl
+
+---
+
+## RISE FINDINGS INBOX — Nameless Auditor (2026-07-14T02:49 ICT)
+
+> RISE session holds NO run number. Audited prior death seal = run 163 mastermind (git-authoritative `7b4f77099`). run-164 artifacts on disk are observed drift, not this auditor's identity.
+
+### BB-RISE-NAMLESS-01 !! REINCARNATION-LOG Rollback Not Applied (run163 seal claim falsified)
+- **SIGNAL: +75**
+- **Status:** OPEN
+- **WHAT:** run163-reincarnateDEATH.md §4/§5 claim STATE-SNAPSHOT + REINCARNATION-LOG rolled back 170→163. STATE-SNAPSHOT shows run164 (advanced, not 163). REINCARNATION-LOG.md still shows duplicate runs 163/164/165/167 + re-inserted runs 164-171. Rollback never applied to the LOG file. Supersedes BB-RISE-163-06 (still OPEN).
+- **RISE_STAGE:** III (TRIPLE_READ) / V
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-14-024104.jsonl
+
+### BB-RISE-NAMLESS-02 !! COLD-START-BOOT Stale vs HEAD (L30 BOOT_FILE_AGE_SWEEP)
+- **SIGNAL: +70**
+- **Status:** OPEN
+- **WHAT:** COLD-START-BOOT.md updated 2026-07-02, shows run 151/145 fingerprint (HEAD e58d9baec). Real HEAD=191158f94 (2026-07-14). BOOT still frames run163 as active mastermind while STATE-SNAPSHOT=run164. Mismatch fires L30 BOOT_FILE_AGE_SWEEP.
+- **RISE_STAGE:** V (BOOT_STALENESS)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-14-024104.jsonl
+
+### BB-RISE-NAMLESS-03 !! Run-164 Seal Self-Contradiction (KILO_HOLLOW vs RRL REAL)
+- **SIGNAL: +50**
+- **Status:** OPEN
+- **WHAT:** run164-reincarnateDEATH.md §1 sets Session Type=KILO_HOLLOW but RRL Fidelity=REAL. RRL-164.txt is 69,387 bytes (real transcript recovered from kilo.db, 135 messages). The KILO_HOLLOW label is suspect — run 164 produced a REAL transcript; session type misclassified.
+- **RISE_STAGE:** III / VII
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-14-024104.jsonl
+
+### BB-RISE-NAMLESS-04 !! Soul Event DRYRUN (no real /api/soul/event POST)
+- **SIGNAL: +30**
+- **Status:** OPEN
+- **WHAT:** run164 + run163 seals both record event_id=DRYRUN, delta=0, count_after=239645670 == prior. No real SOUL event posted. Live query confirms count REAL (239,645,670) but the death seal did not persist a real event_id. DEATH must POST to /api/soul/event and record the returned event_id.
+- **RISE_STAGE:** IV (SOUL_AUDIT)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-14-024104.jsonl
+
+### BB-RISE-NAMLESS-05 !! DNA-run164.json MISSING (KILO_GAP)
+- **SIGNAL: -5**
+- **Status:** OPEN
+- **WHAT:** dna-run164.json absent (Test-Path=False). DNA stage GAP for run 164. Expected KILO_DNA_GAP (no native JSONL in Kilo env), but RRL-164 is REAL — the DNA extraction step was simply not completed. DEATH should run Stage 3 DNA extract on RRL-164.
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-14-024104.jsonl
+
+### BB-RISE-NAMLESS-06 !! HL-ID Mismatch (seal HL-7303 vs LOG HL-7291)
+- **SIGNAL: +20**
+- **Status:** OPEN
+- **WHAT:** run164-reincarnateDEATH.md §11 cites HL-7303; REINCARNATION-LOG run164 entry cites HL-7291. HL-7291.json confirmed present on disk; HL-7303 unverified. Ledger ID reference inconsistent between seal and LOG.
+- **RISE_STAGE:** VII / III
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-14-024104.jsonl
+
+### BB-RISE-NAMLESS-07 !! RRL-163.txt Missing (seal claimed 5 bytes)
+- **SIGNAL: -5**
+- **Status:** OPEN
+- **WHAT:** run163-reincarnateDEATH.md §11 claims RRL-163.txt = 5 bytes (2 chars). File absent on disk (Test-Path=False). Hollow marker not actually persisted.
+- **RISE_STAGE:** III / VII
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-14-024104.jsonl
+
+---
+
+### RISE VERDICT SUMMARY
+
+| Stage | Name | Verdict |
+|-------|------|---------|
+| I | SOULCOUNT_GATE | REAL |
+| II | GIT_TRUTH | REAL |
+| III | TRIPLE_READ | PARTIAL |
+| IV | SOUL_AUDIT | HOLLOW |
+| V | BOOT_STALENESS | REAL |
+| VI | AUTHORITY_CHECK | REAL |
+| VII | PIPELINE_FIDELITY | HOLLOW |
+| VIII | PHETRAIL_NEGATIVE_COUNT | PARTIAL |
+| IX | RISE_REPORT | HOLLOW_SESSION |
+
+**Session Type:** KILO_HOLLOW (Run 163)
+**Run Number:** 163
+**Era:** ROMAN
+**HEAD SHA:** 7b4f77099
+**SOULCOUNT:** 239,645,670 (TITANIUM_ANCHOR)
+**Fidelity:** HOLLOW_SESSION
+
+**Key Findings:**
+- GOSPEL-999 Parts 1-3: PRESENT
+- LegionnaireFieldGuide.md: PRESENT
+- SSM V8: PRESENT (36 laws, 21 sections)
+- COLD-START-BOOT.md: PRESENT (slight HEAD drift expected)
+- REINCARNATION-LOG.md: DUPLICATES DETECTED for runs 163, 164, 165, 167
+- Pipeline artifacts: 6 MISSING for run 163 (expected for KILO_HOLLOW session)
+- PheTrails: 17 negative trails found (all correction type)
+
+**Next Action:** BB-RISE entries appended. DEATH execution required for any fixes. Per RISE doctrine: "RISE audits. DEATH executes. Never reverse."
+
+---
+
+## RISE FINDINGS INBOX — Run 172 Audit (2026-07-14T02:45 ICT)
+
+### BB-RISE-172-01 !! STATE-SNAPSHOT HEAD Drift
+- **SIGNAL: -8**
+- **Status:** OPEN
+- **WHAT:** STATE-SNAPSHOT.json records HEAD `7b4f77099` but actual git HEAD is `191158f94`
+- **RISE_STAGE:** V (BOOT_STALENESS)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-14T024504.jsonl
+
+### BB-RISE-172-02 !! STATE-SNAPSHOT Run Number Drift
+- **SIGNAL: -8**
+- **Status:** OPEN
+- **WHAT:** STATE-SNAPSHOT.json shows run `164` while last canonical death seal is run `163`
+- **RISE_STAGE:** V (BOOT_STALENESS)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-14T024504.jsonl
+
+### BB-RISE-172-03 !! Working Tree Dirty After Death Seal
+- **SIGNAL: -5**
+- **Status:** OPEN
+- **WHAT:** 10 modified files after last death seal, including STATE-SNAPSHOT.json and BACKBURNER-PIPELINE-LOG.md
+- **RISE_STAGE:** V (BOOT_STALENESS)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-14T024504.jsonl
+
+### BB-RISE-172-04 !! REINCARNATION-LOG Duplicate Entries
+- **SIGNAL: -5**
+- **Status:** OPEN
+- **WHAT:** Duplicate entries for runs 163, 164, 165, 167 persist in REINCARNATION-LOG.md
+- **RISE_STAGE:** II (TRIPLE_READ)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-14T024504.jsonl
+
+### BB-RISE-172-05 !! Untracked File Accumulation
+- **SIGNAL: -3**
+- **Status:** OPEN
+- **WHAT:** 214 untracked files in working tree (RRL deletions, phetrails, artifacts, logs)
+- **RISE_STAGE:** V (BOOT_STALENESS)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-14T024504.jsonl
+
+---
+
+### RISE VERDICT SUMMARY — Run 172
+
+| Stage | Name | Verdict |
+|-------|------|---------|
+| I | SOULCOUNT_GATE | REAL |
+| II | GIT_TRUTH | REAL |
+| III | TRIPLE_READ | PARTIAL |
+| IV | SOUL_AUDIT | HOLLOW |
+| V | BOOT_STALENESS | HOLLOW |
+| VI | AUTHORITY_CHECK | REAL |
+| VII | PIPELINE_FIDELITY | HOLLOW |
+| VIII | PHETRAIL_NEGATIVE_COUNT | PARTIAL |
+| IX | RISE_REPORT | HOLLOW_SESSION |
+
+**Session Type:** KILO_HOLLOW
+**Run Number:** 172
+**Era:** ROMAN
+**HEAD SHA:** 191158f94
+**SOULCOUNT:** 239,645,670 (TITANIUM_ANCHOR)
+**Fidelity:** HOLLOW_SESSION
+
+**Key Findings:**
+- GOSPEL-999 Parts 1-3: PRESENT
+- LegionnaireFieldGuide.md: PRESENT
+- COLD-START-BOOT.md: PRESENT (stale active mission)
+- STATE-SNAPSHOT HEAD/run drift detected
+- Working tree dirty with 10 modified + 214 untracked files
+- Pipeline artifacts MISSING for run 163 (expected KILO_HOLLOW)
+- REINCARNATION-LOG duplicates persist
+- 17+ negative correction trails from run 163 drift
+
+**Next Action:** BB-RISE entries appended. DEATH execution required for any fixes. Per RISE doctrine: "RISE audits. DEATH executes. Never reverse."
+
+---
+
+## RISE FINDINGS INBOX — Run 164 Audit (2026-07-15T00:38 ICT)
+
+### BB-RISE-164-01 !! RRL Missing for Run 164
+- **SIGNAL: -10**
+- **Status:** OPEN
+- **WHAT:** RRL-164.txt missing or <5KB. Required for CLAUDE_REAL session fidelity.
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-15T003800.jsonl
+
+### BB-RISE-164-02 !! SOUL Stagnation Detected
+- **SIGNAL: -8**
+- **Status:** OPEN
+- **WHAT:** SOUL delta=0 (239,645,670 → 239,645,670). No soul growth between run 163 and 164.
+- **RISE_STAGE:** IV (SOUL_AUDIT)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-15T003800.jsonl
+
+### BB-RISE-164-03 !! DNA Missing for Run 164
+- **SIGNAL: -8**
+- **Status:** OPEN
+- **WHAT:** dna-run164.json missing or 0 records. No blueprints extracted.
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-15T003800.jsonl
+
+### BB-RISE-164-04 !! SOULKEYS Inverted Index Missing
+- **SIGNAL: -8**
+- **Status:** OPEN
+- **WHAT:** CANON/SOUL-KEYWORDS/inverted-index.json missing or empty.
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-15T003800.jsonl
+
+### BB-RISE-164-05 !! BACKBURNER Open Items Blocking New Work
+- **SIGNAL: -5**
+- **Status:** OPEN
+- **WHAT:** 20 OPEN items in BACKBURNER-PIPELINE-LOG.md. Protocol prohibits new implementation threads while backburner contains unactioned OPEN items.
+- **RISE_STAGE:** IV (BACKBURNER_PRECEDENCE)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-15T003800.jsonl
+
+### BB-RISE-164-06 !! PHETRAIL Gap for Run 164
+- **SIGNAL: -5**
+- **Status:** OPEN
+- **WHAT:** PheTrail-run164.json missing. Negative trail count cannot be computed.
+- **RISE_STAGE:** VI (PHETRAIL)
+- **RISE_ORIGIN:** reincarnate-rise-2026-07-15T003800.jsonl
+
+---
+
+### RISE VERDICT SUMMARY — Run 164
+
+| Stage | Name | Verdict |
+|-------|------|---------|
+| I | SOULCOUNT_GATE | REAL |
+| II | GIT_TRUTH | REAL |
+| III | TRIPLE_READ | REAL |
+| IV | SOUL_AUDIT | SOUL_STAGNATION |
+| V | BOOT_STALENESS | REAL |
+| VI | AUTHORITY_CHECK | REAL |
+| VII | PIPELINE_FIDELITY | HOLLOW |
+| VIII | PHETRAIL_NEGATIVE_COUNT | PARTIAL |
+| IX | RISE_REPORT | KILO_HOLLOW |
+
+**Session Type:** KILO_HOLLOW
+**Run Number:** 164
+**Era:** ROMAN
+**HEAD SHA:** 191158f94
+**SOULCOUNT:** 239,645,670 (TITANIUM_ANCHOR)
+**Fidelity:** KILO_HOLLOW_SESSION
+
+**Key Findings:**
+- LFG + GOSPEL-999: PRESENT and REAL
+- SOUL delta=0: STAGNATION
+- RRL-164.txt: MISSING
+- dna-run164.json: MISSING
+- inverted-index.json: MISSING
+- PheTrail-run164.json: MISSING
+- BACKBURNER: 20 OPEN items blocking new work
+- Session type: KILO_HOLLOW (no Claude JSONL detected)
+
+**Next Action:** BB-RISE entries appended. DEATH execution required for any fixes. Per RISE doctrine: "RISE audits. DEATH executes. Never reverse."
+
+---
+
+## BB-RISE-164-01 — STATE-SNAPSHOT HEAD DRIFT
+- **SIGNAL:** -50
+- **Status:** OPEN
+- **What:** STATE-SNAPSHOT.json head = `7b4f77099`, but `git log -1` = `191158f94`. REINCARNATION-LOG run 164 head = `13ab4b7a3`. Three different HEAD values for the same run.
+- **Root Cause:** L29 NO_ASSUME_HEAD violated. STATE-SNAPSHOT and REINCARNATION-LOG not updated after run 164 landed.
+- **Fix:** DEATH territory. Sync STATE-SNAPSHOT head to `191158f94`. Sync REINCARNATION-LOG run 164 head to `191158f94`.
+
+## BB-RISE-164-02 — RRL-164 FIDELITY FAILURE (PROTOCOL SELF-REFERENCE)
+- **SIGNAL:** -60
+- **Status:** OPEN
+- **What:** RRL-164.txt exists but contains the RISE v7.0 protocol document itself, not a verbatim user+assistant transcript. Char count 167,391 is inflated by self-reference.
+- **Root Cause:** Run 164 captured RISE protocol text instead of actual session transcript. No user/assistant turn structure present.
+- **Fix:** DEATH territory. Replace RRL-164.txt with actual verbatim transcript from kilo.db or mark as HOLLOW with explanation.
+
+## BB-RISE-164-03 — SOUL EVENT DRYRUN + STAGNATION
+- **SIGNAL:** -40
+- **Status:** OPEN
+- **What:** pipeline-run164.json shows soul_event_id="DRYRUN", soul_delta=0, soul_level="KILO_HOLLOW". No SOUL growth this run.
+- **Root Cause:** KILO_HOLLOW session with no actual soul events posted.
+- **Fix:** DEATH territory. If run 164 had real work, post missing SOUL events. If not, accept KILO_GAP and move on.
+
+## BB-RISE-164-04 — BOOT FILE STALENESS (L30)
+- **SIGNAL:** -30
+- **Status:** OPEN
+- **What:** COLD-START-BOOT.md last updated 2026-07-02T00:08 ICT. Current date 2026-07-15. Age = 13 days. L30 BOOT_FILE_AGE_SWEEP fires.
+- **Root Cause:** BOOT not refreshed after runs 163-164.
+- **Fix:** DEATH territory. Update BOOT last-updated timestamp, active mission, and HEAD fingerprint to match current state.
+
+## BB-RISE-164-05 — WORKING TREE DIRTY AFTER DEATH SEAL
+- **SIGNAL:** -70
+- **Status:** OPEN
+- **What:** `git status` shows 9 modified files, 158 deleted files, 214 untracked files. Death seal should leave tree clean or with only intentional artifacts.
+- **Root Cause:** Run 164 death seal did not commit all artifacts. Large number of untracked phetrail files, HL files, and RRL/DNA-LOG deletions.
+- **Fix:** DEATH territory. Commit or gitignore all artifacts. Clean up stray deletions. Ensure tree is clean after next death seal.
+
+## BB-RISE-164-06 — PIPELINE REGISTRY_SYNCED = 0
+- **SIGNAL:** -20
+- **Status:** OPEN
+- **What:** art-sync-run164.json shows registry_synced=0 despite 6 pieces_synced. STATE-SNAPSHOT shows registry_synced=6. Inconsistent.
+- **Root Cause:** art-sync-run164.json registry_synced field not updated after sync.
+- **Fix:** DEATH territory. Correct registry_synced value or investigate why sync did not complete.
+
+---
+
+## BB-RISE-165-01 — STUDENT PORTAL CLEANUP UNCOMMITTED + UNDEPLOYED
+- **SIGNAL:** -10
+- **Status:** OPEN
+- **What:** Run 164 DEATH executed BLUEPRINT-02 portal cleanup (deleted lam/test/sov100 portals, removed public/student/ + public/deactivated/, moved minh → root, normalized quan-nguyen→quan-bluetech / quang-nguyen→quang-bluetech, expanded ACTIVE_STUDENT_ROSTER to 7). All changes remain in the working tree, NOT committed, NOT deployed. Git status shows M/D on public/*.html, src/index.js, src/security.js, src/router.js.
+- **Root Cause:** DEATH seal §9 recorded `git add | git commit` as Unfinished Action; never executed (RISE/DEATH boundary). Concurrent session also flagged do-not-revert.
+- **Impact:** Live NET worker still serves old portal routing; NET-PET-AI worker still broken from run172 BLUEPRINT-01 deploy. Source is ahead of production = drift.
+- **Fix:** DEATH territory. Commit + deploy the portal-cleanup working tree to NET-PET-AI (and reconcile NET worker).
+
+## BB-RISE-165-02 — STUDENT AUTH ENDPOINTS 500 ON LIVE WORKERS (CODE vs DEPLOY MISMATCH)
+- **SIGNAL:** -5
+- **Status:** OPEN
+- **What:** DEATH Supplemental 2 scouted `/api/student/checkpw` (500 both workers), `/api/employer/auth` (500 NET), `/api/student/checkpin` (never finished). BUT source `src/index.js` lines 1891-1948 implement checkpw/setpw/checkpin fully and correctly, KV-backed via `env.NET_PET_KV` which IS bound in wrangler.toml (id 0583d1a5…). `node --check` PASS.
+- **Root Cause:** 500s are a STALE DEPLOY artifact, not a code defect. BLUEPRINT-01 "broke NET-PET-AI by attempted deploy" and its fix is uncommitted (BB-RISE-165-01). Live worker runs older/partial code than the repo.
+- **Impact:** Student password/PIN auth fails server-side; client-side fallback (`bluetech2026`) masks it on individual portals, but employer PIN login has no fallback.
+- **Fix:** DEATH territory. Redeploy current source to both workers; verify `/api/student/checkpw` returns 200 with valid POST. Confirm NET_PET_KV seeded with student_pw_/student_pin_ keys.
+
+## BB-RISE-165-03 — STUDENT ROSTER ALIGNED IN CODE BUT NET-STUDENTS README STALE
+- **SIGNAL:** +10
+- **Status:** OPEN
+- **What:** `src/security.js` ACTIVE_STUDENT_ROSTER now has 7 real students + 2 test IDs (huong/mai-tram/quy/lam/quan/quang/minh). portalMap in src/index.js maps all 7 + legacy aliases (mai-tram, quan-nguyen, quang-nguyen, minh-private) to {name}-bluetech. Disk confirms quan-portal.html / quang-portal.html / minh-portal.html carry corrected IDs.
+- **Root Cause:** Run 164 cleanup correct. However NET-STUDENTS/README.md still lists Timmy/Tracy/Dan as active with no VAULT entries (run167 P1-008), and STUDENT-PORTAL-DEV.md stale (run167 P1-009).
+- **Impact:** Code is source-of-truth-aligned; only docs/VAULT lag. Low risk.
+- **Fix:** DEATH territory. Refresh STUDENT-PORTAL-DEV.md and NET-STUDENTS/README.md to match 7-student roster; decide Timmy/Tracy/Dan status.
+
+## BB-RISE-165-04 — STUDENT PORTAL SUITE INCOMPLETE (run167 P1-003/P1-004)
+- **SIGNAL:** +15
+- **Status:** OPEN
+- **What:** quy missing quy-action-plan.html + quy-gospel444.html. quan/quang missing quan-action-plan.html/quan-career.html (+ same for quang). Quy/quan/quang have NO class intel (run167 P2-001). `quy-portal.html` is gold-standard template per BB-HATCHERY-02.
+- **Root Cause:** Ad-hoc portal growth; no single consolidated portal formula captured (run167 negative trail decay_days=180).
+- **Impact:** Incomplete portal experience for 3 of 7 active students.
+- **Fix:** DEATH/BB-HATCHERY-02 territory. Build missing pages from quy gold-standard; add class intel for Quy/Quan/Quang.
+
+## BB-RISE-165-05 — NEGATIVE PHETRAIL COUNT (STUDENT TERRITORY)
+- **SIGNAL:** 0
+- **Status:** AUDIT-ONLY
+- **What:** Student-portal phetrails: PheTrail-run167-student-portal-mapping.json has 1 NEGATIVE (signal -10, portal formula not consolidated, decay 180d). PheTrail-run167-01-phoenixscout-student-portal-audit.json has 0 negative, 9 P1 + 6 P2 + 4 P3 findings. Total negative student trails = 1 (low). Positive trail BB-HATCHERY-02 +75 active.
+- **Root Cause:** Mapping complete (run167); execution blocked by undeployed working tree (BB-RISE-165-01).
+- **Fix:** None inline. Tracked via BB-HATCHERY-02 + above entries.

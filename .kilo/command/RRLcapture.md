@@ -1,5 +1,5 @@
 ---
-description: "Capture current Kilo session transcript from kilo.db and write RRL-{run}.txt. Replaces dead Claude Code session-capture.ps1."
+description: "Capture current Kilo session transcript from kilo.db and write RRL-{run}.txt."
 agent: AGENT99
 ---
 

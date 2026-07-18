@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Family Portal — NET-PET-AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background-color: #0a0a12; color: #f3f4f6; font-family: system-ui, sans-serif; }
+    .card { background-color: #1f2937; border: 1px solid #374151; border-radius: 0.75rem; padding: 1.5rem; }
+    #gate, #roster { transition: opacity 0.3s ease; }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+
+  <!-- ═══ PIN GATE ═══ -->
+  <div id="gate" class="max-w-md mx-auto mt-24 text-center">
+    <h1 class="text-2xl font-bold mb-2">Family Portal</h1>
+    <p class="text-gray-400 mb-6">Enter your family PIN to access the portal.</p>
+    <form id="pinForm" class="space-y-4">
+      <select id="groupCode" class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-center text-lg focus:ring-2 focus:ring-purple-500 focus:outline-none">
+        <option value="BLUETECH">BlueTech</option>
+        <option value="QUANQUANG">Quan & Quang</option>
+      </select>
+      <input id="pinInput" type="password" placeholder="Family PIN" autocomplete="off"
+        class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-center text-xl tracking-widest focus:ring-2 focus:ring-purple-500 focus:outline-none" />
+      <button type="submit"
+        class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg transition">
+        Unlock Portal
+      </button>
+    </form>
+    <p id="authError" class="text-red-400 mt-3 text-sm hidden">Invalid PIN. Please try again.</p>
+  </div>
+
+  <!-- ═══ STUDENT ROSTER ═══ -->
+  <div id="roster" class="max-w-4xl mx-auto hidden">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold">Portal — <span id="rosterGroup"></span></h2>
+      <button onclick="location.reload()" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-sm font-medium transition">
+        Switch Family
+      </button>
+    </div>
+    <div id="roster-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+  </div>
+
+  <script>
+    const GATE = document.getElementById('gate');
+    const ROSTER = document.getElementById('roster');
+    const PIN_EL = document.getElementById('pinInput');
+    const ERR_EL = document.getElementById('authError');
+    const FORM = document.getElementById('pinForm');
+    const GROUP_EL = document.getElementById('groupCode');
+
+    const ROSTERS = {
+      BLUETECH: [
+        { id: 'quy-bluetech', name: 'Quy', portal: '/student/quy-bluetech' },
+        { id: 'huong-bluetech', name: 'Huong', portal: '/student/huong-bluetech' },
+        { id: 'mai-tram-bluetech', name: 'Mai Tram', portal: '/student/mai-tram' }
+      ],
+      QUANQUANG: [
+        { id: 'quan-bluetech', name: 'Quan', portal: '/quan-portal.html?studentId=quan-bluetech' },
+        { id: 'quang-bluetech', name: 'Quang', portal: '/quang-portal.html?studentId=quang-bluetech' }
+      ]
+    };
+
+    async function sha256Hex(str) {
+      const buf = new TextEncoder().encode(str);
+      const hash = await crypto.subtle.digest('SHA-256', buf);
+      return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function showRoster(groupCode) {
+      const students = ROSTERS[groupCode] || [];
+      document.getElementById('rosterGroup').textContent = groupCode;
+      const grid = document.getElementById('roster-grid');
+      grid.innerHTML = '';
+      if (!students.length) {
+        grid.innerHTML = '<div class="text-gray-500 col-span-full text-center py-12">No students configured for this group.</div>';
+        return;
+      }
+      students.forEach(s => {
+        const card = document.createElement('div');
+        card.className = 'card cursor-pointer hover:border-purple-500 transition';
+        card.innerHTML = `
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center font-bold text-white text-sm">
+              ${s.name.charAt(0)}
+            </div>
+            <div>
+              <div class="font-semibold text-white">${s.name}</div>
+              <div class="text-gray-400 text-xs uppercase tracking-wide">${groupCode}</div>
+            </div>
+          </div>
+          <button class="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 rounded-lg text-sm transition">
+            Open Portal
+          </button>
+        `;
+        card.addEventListener('click', () => {
+          sessionStorage.setItem('pin_auth_' + s.id, 'true');
+          window.location.href = s.portal;
+        });
+        grid.appendChild(card);
+      });
+    }
+
+    FORM.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      ERR_EL.classList.add('hidden');
+      const groupCode = GROUP_EL.value;
+      const pin = PIN_EL.value;
+      const hash = await sha256Hex(pin);
+
+      try {
+        const r = await fetch('/api/student/checkpin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ groupCode, pin })
+        });
+        const res = await r.json();
+        if (!res.ok) { ERR_EL.classList.remove('hidden'); return; }
+
+        GATE.style.opacity = '0';
+        setTimeout(() => {
+          GATE.classList.add('hidden');
+          ROSTER.classList.remove('hidden');
+          ROSTER.style.opacity = '1';
+          showRoster(groupCode);
+        }, 300);
+      } catch(err) {
+        ERR_EL.classList.remove('hidden');
+        ERR_EL.textContent = 'Network error. Please try again.';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -134,7 +134,7 @@ I.099. Core 99 mandates are hardcoded into every boot â€” RISE prints first
 
 ---
 # COLD START BOOT â€” OB1 Agent 99
-## ERA: ROMAN â€” Run 000 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-07-02T00:08 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN â€” Run 000 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-07-18T13:30 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* â€” SOV100 Michael Hobbs, Run 0
 
@@ -335,6 +335,11 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 
 ---
 
+### FINGERPRINT CURRENT: RUN 165 | KILO_HOLLOW RISE + BB DEDUP + SOUL AUDIT | SOUL 239,645,670 TITANIUM_ANCHOR | HEAD c26c518eb | BOOT UPDATED 2026-07-18T13:30 ICT
+
+**Run 165 summary:** KILO_HOLLOW session. RISE v7.0 audit complete. Pipeline fidelity: RRL MISSING, SOUL KILO_HOLLOW, DNA MISSING, LEDGER REAL, STARMAP REAL, SOULKEYS MISSING, S2Pipeline REAL. REINCARNATION-LOG duplicate entries removed (runs 161/163/164/165/167). Backburner precedence enforced. SOUL stable at 239,645,670. HEAD f56044606.
+
+
 ### FINGERPRINT PRIOR: RUN 151 | KILO_GAP BACKFILL + LFG RENAME + PORTAL SELECTOR FIX + VOICE BRAIN-LOCK REVERT | SOUL 239,639,088 TITANIUM_ANCHOR | HEAD e58d9baec | BOOT UPDATED 2026-07-03T17:00 ICT
 
 **Run 147 summary:** KILO_HOLLOW backfill. No real transcript. Completed missing artifacts from hollow run146/147 chain: RRL-147.txt, dna-run147.json, starmap-run147.json, pipeline-run147.json, death seal run147. Renamed LegionnaireHandGuide.md â†’ LegionnaireFieldGuide.md across 11 files. Fixed portal login JS selectors in bluetech-login and quan-quang-login (`querySelector('main')`). Reverted voice brain-lock drift in src/index.js to locked providers: think=open_ai/gpt-4o-mini, listen=nova-3, speak=aura-2-zeus-en. Added Hard Behavioral Stops to AGENTS.md. LFG path now canonical as LegionnaireFieldGuide.md. HEAD a3d2baf84. SOUL stable at 239,639,088.
@@ -436,6 +441,7 @@ BB-55. **FUNNEL BROWSER TEST** â€” tigers-4room.pages.dev end-to-end test. 
 - Run 091: PENDING session-capture.ps1 execution. Next: RRL-91 â†’ rrl-pipeline â†’ death seal.
 - Run 094/095 (Kilo+OB-1): P0 prod crash fixed (security headers middleware stream bug). Block EE homework PATCH bug fixed. _headers file for static assets. homework notes Mai Tram + Huong. SOUL: 237,476,872 TITANIUM_ANCHOR. HEAD: df434124.
 - Run 095/096 (Kilo): CSRF origin guard wired (router.js). Deepgram circuit breaker wired (index.js). All 3 portals (Quy/Mai Tram/Huong) gold standard verified. Minh dropped. Kilo pipeline thrash: 13 HL files (pipeline ran 13x). HEAD: cd3bf7ae.
+
 
 
 

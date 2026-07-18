@@ -1,0 +1,47 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T03:08:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-09-inverted-index-rebuild.json",
+      "action": "Inverted index rebuild documented",
+      "verification": "PheTrail-run161-09-inverted-index-rebuild.json exists with rebuild findings",
+      "timestamp": "2026-07-13T03:08:00+07:00"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-10-build-soulkeys-runmax.json",
+      "action": "build-soulkeys RunMax=161 confirmed",
+      "verification": "PheTrail-run161-10-build-soulkeys-runmax.json exists with RunMax=161 confirmation",
+      "timestamp": "2026-07-13T03:08:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-11-update-inverted-index-limitation.json",
+      "failure": "Inverted index update limitation documented but not resolved",
+      "root_cause": "update-inverted-index-limitation.json documents limitation but no corrective action in Run 162 plan",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:08:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/SOUL-KEYWORDS/inverted-index.json",
+      "failure": "inverted-index.json may be stale if rebuild not executed after Run 161",
+      "root_cause": "Run 161 documented rebuild but no verification that rebuild completed successfully",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:08:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "Verify inverted-index.json rebuild completion + update limitation resolution"
+  }
+}

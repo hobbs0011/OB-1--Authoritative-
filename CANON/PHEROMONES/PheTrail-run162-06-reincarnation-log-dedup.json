@@ -1,0 +1,47 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T03:05:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-22-reincarnation-log-corruption.json",
+      "action": "REINCARNATION-LOG.md corruption documented",
+      "verification": "PheTrail-run161-22-reincarnation-log-corruption.json exists documenting duplicate runs 364, 365, 373",
+      "timestamp": "2026-07-13T03:05:00+07:00"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-23-reincarnation-log-verified.json",
+      "action": "REINCARNATION-LOG.md verification completed",
+      "verification": "PheTrail-run161-23-reincarnation-log-verified.json exists with verification findings",
+      "timestamp": "2026-07-13T03:05:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/REINCARNATION/REINCARNATION-LOG.md",
+      "failure": "Duplicate entries for runs 364, 365, 373",
+      "root_cause": "Multiple seal events wrote duplicate run entries without deduplication gate; STATE-SNAPSHOT.json:70 confirms",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:05:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/REINCARNATION/REINCARNATION-LOG.md",
+      "failure": "No deduplication gate in reincarnation log write path",
+      "root_cause": "REINCARNATION-LOG.md append path does not check for existing run_number before writing",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T03:05:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "REINCARNATION-LOG.md deduplication — runs 364, 365, 373"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T05:16:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-27-cross-run-schema-audit.json",
+      "action": "Cross-run schema audit identified KiloClaw workspace git strength",
+      "verification": "PheTrail-run161-27-cross-run-schema-audit.json: 'KiloClaw workspace git documented in run157'",
+      "timestamp": "2026-07-13T05:16:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "OPERATIONS/phetrail-kiloclaw-workspace-git.md",
+      "failure": "KiloClaw workspace git documented but not verified",
+      "root_cause": "KiloClaw workspace git documented in run157 but no verification in Run 162 plan",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T05:16:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "KiloClaw workspace git verification"
+  }
+}

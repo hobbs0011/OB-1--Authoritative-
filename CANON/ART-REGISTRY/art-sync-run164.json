@@ -1,41 +1,97 @@
 ﻿{
     "run":  164,
-    "ledger_id":  "HL-7291",
-    "merkle_short":  "8BB711550259D38F",
+    "ledger_id":  "HL-7303",
+    "merkle_short":  "9A6FC4F9587F824B",
     "starmap_file":  "starmap-run164.json",
     "keywords_file":  "rfkw-run164.txt",
     "keywords_used":  [
-
+                          "stage",
+                          "death",
+                          "write-host",
+                          "(-not",
+                          "assistant",
+                          "\"stage",
+                          "missing",
+                          "(test-path",
+                          "never",
+                          "[ordered]@{",
+                          "files",
+                          "where-object",
+                          "transcript",
+                          "foreach-object",
+                          "```powershell",
+                          "registry",
+                          "scout",
+                          "jsonl",
+                          "verbatim",
+                          "phase",
+                          "$rrlpath",
+                          "extraction",
+                          "pipeline",
+                          "convertto-json",
+                          "═══════════════════════════════════════════",
+                          "empty",
+                          "command",
+                          "starmap",
+                          "michael",
+                          "turns"
                       ],
-    "pieces_synced":  3,
+    "pieces_synced":  6,
     "pieces":  [
                    {
-                       "id":  "ART-1780547160670-TBAE",
-                       "title":  "WAKE UP THE TIGER",
-                       "url":  null,
+                       "id":  "ART-1780548352010-5NMK",
+                       "title":  "Phoenix Pages â Benchmark 3: Drone Deep Dive",
+                       "url":  "codex_preview/PHOENIX_PAGES/page_07.png",
                        "keywords":  [
-
+                                        "extraction"
                                     ],
-                       "title_hit":  true
+                       "title_hit":  false
                    },
                    {
-                       "id":  "ART-1780547001008-30ZF",
-                       "title":  "The Obsolete Model",
-                       "url":  null,
+                       "id":  "ART-1780548343466-OGXZ",
+                       "title":  "Phoenix Pages â Kinetic Gates: The 5 Benchmarks",
+                       "url":  "codex_preview/PHOENIX_PAGES/page_01.png",
                        "keywords":  [
-
+                                        "command"
                                     ],
-                       "title_hit":  true
+                       "title_hit":  false
                    },
                    {
-                       "id":  "ART-1780502471217-V612",
-                       "title":  "The Empire Blueprint",
-                       "url":  null,
+                       "id":  "ART-1780538363957-LNWV",
+                       "title":  "STP p03 â The Translate-in-Head Delay (Snowman Freeze)",
+                       "url":  "local:d:/OB-1-CANONICAL/CANON/PROTOCOLS/Sovereign_Tiger_Protocol.pdf#page=3",
                        "keywords":  [
-
+                                        "pipeline"
                                     ],
-                       "title_hit":  true
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780530099910-XM96",
+                       "title":  "NET Dossier p03 â Cognitive Bottleneck / Snowman Freeze",
+                       "url":  "local:D:/Downloads/dossier-pages/page-03.png",
+                       "keywords":  [
+                                        "pipeline"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780527419422-NUFN",
+                       "title":  "Michael Hobbs Headshot â Wide",
+                       "url":  "local:D:/Downloads/Telegram Desktop/output_9gmjtb.png",
+                       "keywords":  [
+                                        "michael"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780527418015-4GUT",
+                       "title":  "Michael Hobbs Headshot â Square",
+                       "url":  "local:D:/Downloads/Telegram Desktop/output_5pbeb1.png",
+                       "keywords":  [
+                                        "michael"
+                                    ],
+                       "title_hit":  false
                    }
                ],
-    "executed_at":  "2026-07-13T09:48:28.1620398+07:00"
+    "executed_at":  "2026-07-14T01:40:50.4739100+07:00"
 }

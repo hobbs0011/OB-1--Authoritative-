@@ -1,0 +1,48 @@
+{
+  "schema_version": "2.0",
+  "run_number": "162",
+  "extracted_at": "2026-07-13T04:22:00+07:00",
+  "head_sha": "3a070fa67",
+  "soulcount": 239645670,
+  "registry_entries": 1,
+  "positive_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run161-27-cross-run-schema-audit.json",
+      "action": "Cross-run schema audit identified recommended canonical schema",
+      "verification": "PheTrail-run161-27-cross-run-schema-audit.json: recommended_canonical_schema with 6 required + 7 optional fields",
+      "timestamp": "2026-07-13T04:22:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run156*.json (23 files)",
+      "failure": "Run 156 does not follow recommended canonical schema",
+      "root_cause": "Run 156 invented its own schema; does not include recommended fields (schema_version, run, role, mission, lens, created_at, status, findings, verdict, negative_trails, evidence_chain)",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T04:22:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run158*.json (16 files)",
+      "failure": "Run 158 does not follow recommended canonical schema",
+      "root_cause": "Run 158 invented its own schema; does not include recommended fields",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T04:22:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/PHEROMONES/PheTrail-run160*.json (3 files)",
+      "failure": "Run 160 does not follow recommended canonical schema",
+      "root_cause": "Run 160 invented its own schema; does not include recommended fields",
+      "decay_days": 180,
+      "timestamp": "2026-07-13T04:22:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory",
+    "open_flags_count": 7,
+    "top_priority": "Recommended canonical schema adoption for runs 156, 158, 160"
+  }
+}

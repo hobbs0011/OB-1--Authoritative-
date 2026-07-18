@@ -28,25 +28,8 @@ async function callOpenAI(url, key, model, messages, extraHeaders = {}) {
   return data.choices?.[0]?.message?.content ?? null;
 }
 __name(callOpenAI, "callOpenAI");
-async function callAnthropic(env, messages) {
-  const systemMsg = messages.find((m) => m.role === "system")?.content || SYSTEM_PROMPT;
-  const userMsgs = messages.filter((m) => m.role !== "system");
-  const url = env.AIGATEWAYURL ? env.AIGATEWAYURL.replace(/\/$/, "") + "/anthropic/v1/messages" : "https://api.anthropic.com/v1/messages";
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": env.ANTHROPIC_API_KEY,
-      "anthropic-version": "2023-06-01",
-      ...env.CF_GATEWAY_TOKEN ? { "cf-aig-authorization": "Bearer " + env.CF_GATEWAY_TOKEN } : {}
-    },
-    body: JSON.stringify({ model: "claude-opus-4-20250514", max_tokens: 8192, system: systemMsg, messages: userMsgs })
-  });
-  if (!res.ok) throw new Error("Anthropic " + res.status + ": " + await res.text());
-  const data = await res.json();
-  return data.content?.[0]?.text ?? null;
-}
-__name(callAnthropic, "callAnthropic");
+// callAnthropic — DECOMMISSIONED 2026-07-18
+// Replaced by DeepSeek V4 Pro (tier 3) for equivalent capability.
 async function callGemini(env, messages) {
   const combined = messages.map((m) => m.content).join("\n\n");
   const url = env.AIGATEWAYURL ? env.AIGATEWAYURL.replace(/\/$/, "") + "/google-ai-studio/v1/models/gemini-3.5-flash:generateContent?key=" + env.GEMINI_API_KEY : "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=" + env.GEMINI_API_KEY;
@@ -66,7 +49,7 @@ __name(callGemini, "callGemini");
 async function callTier(env, tier, messages) {
   const gwBase = env.AIGATEWAYURL?.replace(/\/$/, "");
   const gwHeaders = env.CF_GATEWAY_TOKEN ? { "cf-aig-authorization": "Bearer " + env.CF_GATEWAY_TOKEN } : {};
-  if (tier >= 5 && env.ANTHROPIC_API_KEY) return callAnthropic(env, messages);
+  // T5 (Claude Opus) — DECOMMISSIONED 2026-07-18
   if (tier >= 4 && env.GEMINI_API_KEY) return callGemini(env, messages);
   if (tier >= 3 && env.DEEPSEEK_API_KEY) {
     return callOpenAI("https://api.deepseek.com/v1/chat/completions", env.DEEPSEEK_API_KEY, "deepseek-v4-pro", messages);
@@ -167,7 +150,7 @@ async function handleStatus(env) {
       t2: env.DEEPSEEK_API_KEY ? "deepseek-v4-flash \u2713" : "NO KEY",
       t3: env.DEEPSEEK_API_KEY ? "deepseek-v4-pro \u2713" : "NO KEY",
       t4: env.GEMINI_API_KEY ? "gemini-3.5-flash \u2713" : "NO KEY",
-      t5: env.ANTHROPIC_API_KEY ? "claude-opus-4-20250514 \u2713" : "NO KEY"
+      t5: "DECOMMISSIONED 2026-07-18"
     },
     gateway: env.AIGATEWAYURL ? "CF AI Gateway \u2713" : "direct API",
     recenttasks: recent
