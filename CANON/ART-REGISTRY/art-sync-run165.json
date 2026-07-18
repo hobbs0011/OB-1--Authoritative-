@@ -1,11 +1,133 @@
-{
-    "run": 165,
-    "ledger_id": "HL-7292",
-    "merkle_short": "CB26161BE11E4327",
-    "starmap_file": "starmap-run165.json",
-    "keywords_file": "rfkw-run165.txt",
-    "keywords_used": [],
-    "pieces_synced": 0,
-    "pieces": [],
-    "executed_at": "2026-07-13T09:48:20.0000000+07:00"
+﻿{
+    "run":  165,
+    "ledger_id":  "HL-7306",
+    "merkle_short":  "964DB1A3387932A2",
+    "starmap_file":  "starmap-run165.json",
+    "keywords_file":  "rfkw-run165.txt",
+    "keywords_used":  [
+                          "\"confidence\":",
+                          "\"end\":",
+                          "\"speaker_confidence\":",
+                          "\"speaker\":",
+                          "\"start\":",
+                          "\"word\":",
+                          "\"punctuated_word\":",
+                          "yeah.",
+                          "like,",
+                          "it\\u0027s",
+                          "you\\u0027re",
+                          "don\\u0027t",
+                          "i\\u0027m",
+                          "okay.",
+                          "right?",
+                          "mhmm.",
+                          "that\\u0027s",
+                          "vietnamese",
+                          "consistent",
+                          "insult",
+                          "0.79119104,",
+                          "sore.",
+                          "people",
+                          "little",
+                          "never",
+                          "something",
+                          "know?",
+                          "he\\u0027s",
+                          "yeah?",
+                          "asshole."
+                      ],
+    "pieces_synced":  10,
+    "pieces":  [
+                   {
+                       "id":  "ART-1780548091484-V9S5",
+                       "title":  "Tiger Dossier Slide 06 â Lá»i Sá»ng 1 Giá» (1-Hour Lifestyle Vietnamese)",
+                       "url":  "ASSETS/dossier/tiger-dossier/slide-06.webp",
+                       "keywords":  [
+                                        "vietnamese"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780548090137-P6CG",
+                       "title":  "Tiger Dossier Slide 05 â Lá»£i Tháº¿ Cáº¡nh Tranh Tuyá»t Äá»i 2026 (Unbeatable Advantage)",
+                       "url":  "ASSETS/dossier/tiger-dossier/slide-05.webp",
+                       "keywords":  [
+                                        "vietnamese"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780548088836-SX3N",
+                       "title":  "Tiger Dossier Slide 04 â Ngá»«ng Dá»ch Tháº§m, Báº¯t Äáº§u Hiá»u (Stop Translating, Start Understanding)",
+                       "url":  "ASSETS/dossier/tiger-dossier/slide-04.webp",
+                       "keywords":  [
+                                        "vietnamese"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780548087511-1SS1",
+                       "title":  "Tiger Dossier Slide 03 â Há»i Chá»©ng Sá»£i XÃ­ch Voi (Elephant Chain Syndrome)",
+                       "url":  "ASSETS/dossier/tiger-dossier/slide-03.webp",
+                       "keywords":  [
+                                        "vietnamese"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780548085958-JVRL",
+                       "title":  "Tiger Dossier Slide 02 â CÄn Bá»nh Cháº¿ Äá» Chuá»t (Mouse Mode Disease)",
+                       "url":  "ASSETS/dossier/tiger-dossier/slide-02.webp",
+                       "keywords":  [
+                                        "vietnamese"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780547764686-WKEQ",
+                       "title":  "The Tiger Dossier â Lakeview City Vietnamese",
+                       "url":  "ASSETS/dossier/covers/the-tiger-dossier.webp",
+                       "keywords":  [
+                                        "vietnamese"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780547635508-SGJH",
+                       "title":  "Break the Chains: Mouse to Tiger Transformation â Bilingual",
+                       "url":  "CANON/ARTWORK/unnamed-art-11.png",
+                       "keywords":  [
+                                        "vietnamese"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780547625880-WYG5",
+                       "title":  "NET: From Mouse to Tiger â Bilingual Infographic",
+                       "url":  "CANON/ARTWORK/unnamed-art-03.png",
+                       "keywords":  [
+                                        "vietnamese"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780546993683-AS0F",
+                       "title":  "The Engine",
+                       "url":  "THE_TIGER_ENGINE.pdf",
+                       "keywords":  [
+
+                                    ],
+                       "title_hit":  true
+                   },
+                   {
+                       "id":  "ART-1780527311341-E7DB",
+                       "title":  "Wake Up The Tiger - Bilingual Blueprint",
+                       "url":  "local:D:/Downloads/unnamed (5).png",
+                       "keywords":  [
+                                        "vietnamese"
+                                    ],
+                       "title_hit":  false
+                   }
+               ],
+    "executed_at":  "2026-07-18T13:30:51.5258565+07:00"
 }
