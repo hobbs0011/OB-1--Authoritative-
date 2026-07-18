@@ -36,7 +36,7 @@
 - None recorded this run.
 
 ## Â§6 -- New Principles
-- None recorded this run.
+- **Class recordings ARE valid RRL sources** — Deepgram transcription JSON with diarization (utterances + speaker labels) is acceptable as verbatim transcript when representing live class sessions. Future DEATH runs may accept transcription files as RRL.
 
 ## Â§7 -- Emotional Signal
 - Neutral -- execution mode.
