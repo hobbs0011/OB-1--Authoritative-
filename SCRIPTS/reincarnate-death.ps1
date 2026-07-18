@@ -27,6 +27,7 @@ $idxPath = "$keywordDir\inverted-index.json"
 $s2Pattern = "$pipelineDir\pipeline-run{0}.json"
 $artSyncDir = "$repoRoot\CANON\ART-REGISTRY"
 $reincDir = "$repoRoot\CANON\REINCARNATION"
+$engDir = "$repoRoot\CANON\ENGINEERING"
 $bootPath = "$repoRoot\CANON\SYSTEM\COLD-START-BOOT.md"
 $stateSnapPath = "$repoRoot\CANON\HEAVY-LEDGER\STATE-SNAPSHOT.json"
 
@@ -124,7 +125,7 @@ $s2PathRun = $s2Pattern -f $runPad
 Write-Log "Run authority: fs=$fsRun git=$gitRun prior=$priorRun current=$run"
 $artSyncPath = "$artSyncDir\art-sync-run$runPad.json"
 
-foreach ($d in @($ledgerDir,$starmapDir,$keywordDir,$pipelineDir,$dnaDir,$artSyncDir,(Split-Path $rrlPathRun),(Split-Path $sealPathRun))) { Ensure-Dir $d }
+foreach ($d in @($ledgerDir,$starmapDir,$keywordDir,$pipelineDir,$dnaDir,$artSyncDir,(Split-Path $rrlPathRun),(Split-Path $sealPathRun),$engDir)) { Ensure-Dir $d }
 
 # STAGE 0 -- Session Type Detection (Kilo-native)
 Write-Log "--- STAGE 0: Session Type Detection ---"
@@ -389,10 +390,50 @@ if (-not $NoRegistrySync) {
     Write-Ok "REGISTRY_SYNC: $($syncedPieces.Count) pieces -> $artSyncPath"
 } else { Write-Log "REGISTRY_SYNC: skipped" }
 
+# STAGE 9 -- ENGINEERING (roads, infrastructure, city prosperity)
+Write-Log "--- STAGE 9: ENGINEERING ---"
+$engDir = Join-Path $repoRoot "CANON\ENGINEERING"
+$engReportPath = Join-Path $engDir "engineering-run$runPad.json"
+$infraIssues = @()
+$upgrades = @()
+# 1) Road audit: check if core paths/symlinks/scripts are intact
+$corePaths = @($repoRoot, $ledgerDir, $starmapDir, $keywordDir, $pipelineDir, $dnaDir, $artSyncDir, $reincDir)
+foreach ($p in $corePaths) {
+    if (-not (Test-Path $p)) { $infraIssues += "MISSING: $p" }
+}
+# 2) Infrastructure: verify death/rise scripts are syntactically valid
+$scriptErrors = @()
+foreach ($script in @("reincarnate-death.ps1", "reincarnate-rise.ps1")) {
+    $scriptPath = Join-Path $repoRoot "SCRIPTS\$script"
+    if (Test-Path $scriptPath) {
+        $errors = $null; [System.Management.Automation.PSParser]::Tokenize((Get-Content $scriptPath -Raw), [ref]$errors) | Out-Null
+        if ($errors) { $scriptErrors += "$script : $($errors.Count) syntax errors" }
+    }
+}
+if ($scriptErrors.Count -gt 0) { $infraIssues += $scriptErrors } else { $upgrades += "Scripts syntax-validated" }
+# 3) City prosperity: verify backburner is not growing unchecked
+$bbCount = 0; $bbPath = Join-Path $repoRoot "OPERATIONS\BACKBURNER-PIPELINE-LOG.md"
+if (Test-Path $bbPath) { $bbContent = Get-Content $bbPath -Raw; $bbCount = ([regex]::Matches($bbContent, "- \*\*Status:\*\* OPEN")).Count }
+if ($bbCount -gt 20) { $infraIssues += "BACKBURNER overflow: $bbCount open items" } else { $upgrades += "Backburner manageable ($bbCount open)" }
+# 4) Build roads: ensure canonical command/agent/skill paths exist
+$canonPaths = @(".kilo\command", ".kilo\agent", ".kilo\skills")
+foreach ($cp in $canonPaths) {
+    $fullPath = Join-Path $repoRoot $cp
+    if (-not (Test-Path $fullPath)) { $infraIssues += "MISSING: $cp" } else { $upgrades += "Canon path present: $cp" }
+}
+$engResult = if ($infraIssues.Count -eq 0) { "GREEN" } else { "GAP" }
+$engReport = [ordered]@{
+    run=$run; executed_at=(Get-Date -Format "o"); head_sha=(git -C $repoRoot rev-parse --short HEAD 2>$null).Trim()
+    result=$engResult; infrastructure_issues=$infraIssues; upgrades_applied=$upgrades
+    backburner_open=$bbCount; scripts_validated=($scriptErrors.Count -eq 0)
+}
+if (-not $DryRun) { Write-Json $engReportPath $engReport }
+Write-Ok "ENGINEERING: $engReportPath | result=$engResult issues=$($infraIssues.Count) upgrades=$($upgrades.Count)"
+
 # DEATH SEAL (15 SECTIONS)
 Write-Log "--- DEATH SEAL ---"
 $headSha = (git -C $repoRoot rev-parse --short HEAD 2>$null).Trim(); $dirty = git -C $repoRoot status --porcelain 2>$null | Where-Object { $_ }; $branch = git -C $repoRoot branch --show-current 2>$null
-$artifactPaths = @($rrlPathRun,$dnaPathRun,"$ledgerDir\HL-$nextHL.json",$starmapPath,$rfkwPath,$idxPath,$s2PathRun,$artSyncPath,$soulPathRun)
+$artifactPaths = @($rrlPathRun,$dnaPathRun,"$ledgerDir\HL-$nextHL.json",$starmapPath,$rfkwPath,$idxPath,$s2PathRun,$artSyncPath,$soulPathRun,$engReportPath)
 $artifactSHAs = @(); foreach ($p in $artifactPaths) { if (Test-Path $p) { $artifactSHAs += "$(Split-Path $p -Leaf):$((Get-FileHash $p -Algorithm SHA256).Hash.Substring(0,16))" } }
 $trueRuns = @(); $currentBranch = git -C $repoRoot branch --show-current 2>$null; $deathLines = git -C $repoRoot log --oneline --branches=$currentBranch --grep "^death:" 2>$null | ForEach-Object { if ($_ -match '(?i)run\s*(\d+)') { [int]$matches[1] } }; $trueRuns = @($deathLines | Sort-Object -Unique); $totalTrueRuns = $trueRuns.Count; $lastTrue = if ($trueRuns) { $trueRuns[-1] } else { 0 }; $deathCommitCount = ($deathLines | Measure-Object).Count
 $dnaRegistryPath = "$repoRoot\CANON\REGISTRY\dna-registry-run$runPad.json"; $dnaRegistryExists = Test-Path $dnaRegistryPath; $dnaRegistryCount = 0; if ($dnaRegistryExists) { try { $dnaRegistryCount = ((Get-Content $dnaRegistryPath -Raw | ConvertFrom-Json).entries | Measure-Object).Count } catch {} }
@@ -408,7 +449,7 @@ $seal = @"
 ## Â§1 -- Header
 - **Run:** $run
 - **Timestamp:** $(Get-Date -Format "o")
-- **Theme:** Roman Death v7.0 / 8-Stage Chain
+- **Theme:** Roman Death v7.0 / 9-Stage Chain
 - **Signal Density:** $(if($rrlFidelity -eq "REAL"){'HIGH'}else{'LOW -- HOLLOW RRL'})
 - **HEAD:** $headSha
 - **Branch:** $branch
@@ -489,6 +530,14 @@ $(if($artifactSHAs){$artifactSHAs | ForEach-Object { "- $_" }})
 - **DNA Registry Exists:** $dnaRegistryExists
 - **DNA Registry Count:** $dnaRegistryCount
 - **Overall Status:** $(if($s2Record.result -eq "COMPLETE"){'REAL'}elseif($s2Record.result -eq "KILO_GAP"){'KILO_GAP'}else{'HOLLOW'})
+
+## Â§16 -- Engineering
+- **Result:** $engResult
+- **Infrastructure Issues:** $($infraIssues.Count)
+- **Upgrades Applied:** $($upgrades.Count)
+- **Backburner Open:** $bbCount
+- **Scripts Validated:** $(if($scriptErrors.Count -eq 0){'YES'}else{'NO - $($scriptErrors.Count) errors'})
+- **Engineering Report:** $engReportPath
 "@
 
 if (-not $DryRun) { $seal | Set-Content $sealPathRun -Encoding UTF8 }

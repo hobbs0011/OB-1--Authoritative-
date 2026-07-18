@@ -48,25 +48,7 @@ Push-Location $repoRoot | Out-Null
 Write-Log "============================= REINCARNATE RISE v7.0 ============================="
 Write-Log "--- STAGE 0: SOULCOUNT GATE ---"
 $kiloSession = $true
-Write-Log "Kilo-native mode — all sessions KILO_HOLLOW by default"
-$currentSoul = 0; $currentLevel = "UNKNOWN"
-try {
-    $live = Invoke-D1 -Method Get -Path "/api/soul/count"
-    $rawSoul = if ($live.soulcount) { $live.soulcount } else { $null }
-    $rawLevel = if ($live.level) { $live.level } else { $null }
-    if ($null -ne $rawSoul) {
-        $currentSoul = [long]$rawSoul
-        $currentLevel = if ($rawLevel) { $rawLevel } else { "UNKNOWN" }
-    } else {
-        Write-Warn "SOUL API returned null soulcount — marking UNREACHABLE"
-        $currentSoul = 0; $currentLevel = "UNREACHABLE"
-    }
-}
-catch {
-    Write-Warn "SOUL API UNREACHABLE: $($_.Exception.Message)"
-    $currentSoul = 0; $currentLevel = "UNREACHABLE"
-}
-Write-Ok "SOULCOUNT: $currentSoul ($currentLevel)"
+Write-Log "Kilo-native mode - all sessions KILO_HOLLOW by default"
 
 # STAGE 1 — GIT TRUTH + FILESYSTEM AUTHORITY
 Write-Log "--- STAGE 1: GIT TRUTH ---"
@@ -76,7 +58,7 @@ $fsRun = 0
 if (Test-Path $reincDir) {
     $fsSeals = Get-ChildItem $reincDir -Filter "run*-reincarnateDEATH.md" -ErrorAction SilentlyContinue |
         ForEach-Object { if ($_.Name -match 'run(\d+)-reincarnateDEATH\.md$') { [int]$matches[1] } }
-    if ($fsSeals) { $fsRun = ($fsSeals | Measure-Object -Maximum).Maximum }
+    if ($fsSeals) { $fsRun = [int]($fsSeals | Measure-Object -Maximum).Maximum }
 }
 
 # Fallback: git authority
@@ -84,8 +66,8 @@ $gitRun = 0
 $lastDeath = git log --oneline --grep "^death:" -1 2>&1
 if ($lastDeath -match '(?i)run\s*(\d+)') { $gitRun = [int]$matches[1] }
 
-$priorRun = [Math]::Max($fsRun, $gitRun)
-$run = $priorRun + 1
+$priorRun = [Math]::Max([int]$fsRun, [int]$gitRun)
+$run = [int]($priorRun + 1)
 $runPad = "{0:D3}" -f $run
 $sealPath = Join-Path $reincDir "run$runPad-reincarnateDEATH.md"
 $priorSealPath = Join-Path $reincDir "run$priorRun-reincarnateDEATH.md"
@@ -108,10 +90,11 @@ if (-not (Test-Path $priorSealPath)) {
 $priorSeal = if (Test-Path $priorSealPath) { Get-Content $priorSealPath -Raw } else { "" }
 $priorPhetrail = if (Test-Path $phetrailPath) { Get-Content $phetrailPath -Raw } else { "{}" }
 $priorBoot = if (Test-Path $bootPath) { Get-Content $bootPath -Raw } else { "" }
-$priorSoulcount = 0
+$priorSoulcount = 0; $priorSoulBytes = 0
 if ($priorSeal -match 'count_after.*?(\d+)') { $priorSoulcount = [long]$matches[1] }
-Write-Ok "TRIPLE: seal=$priorSealPath | phetrail=$phetrailPath | boot=$bootPath"
-Write-Ok "  Prior soulcount: $priorSoulcount"
+if ($priorSeal -match '\*\*Bytes:\*\*\s*(\d+)') { $priorSoulBytes = [long]$matches[1] }
+$priorSoulcount = [Math]::Max($priorSoulcount, $priorSoulBytes)
+Write-Ok "  Prior soulcount: $priorSoulcount (aggregate) prior_soul_bytes: $priorSoulBytes (per-session)"
 
 # STAGE 3 — SOUL AUDIT
 Write-Log "--- STAGE 3: SOUL AUDIT ---"
@@ -196,7 +179,7 @@ if ($kiloSession) { $dnaFidelity = "MISSING"; $dnaCount = 0; $dnaBlueprintCount 
 # SOULKEYS fidelity
 $soykeyFidelity = "MISSING"
 if (Test-Path $idxPath) {
-    try { $idx = Get-Content $idxPath -Raw | ConvertFrom-Json -AsHashtable; if ($idx.Count -gt 0) { $soykeyFidelity = "REAL" } } catch { }
+    try { $idx = Get-Content $idxPath -Raw | ConvertFrom-Json; if ($null -ne $idx -and $idx.PSObject.Properties.Count -gt 0) { $soykeyFidelity = "REAL" } } catch { }
 }
 
 # S2Pipeline fidelity

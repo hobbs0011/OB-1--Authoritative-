@@ -1,0 +1,17 @@
+﻿{
+    "run":  181,
+    "executed_at":  "2026-07-19T01:01:43.9178063+07:00",
+    "head_sha":  "a2d2c0802",
+    "result":  "GAP",
+    "infrastructure_issues":  [
+                                  "BACKBURNER overflow: 52 open items"
+                              ],
+    "upgrades_applied":  [
+                             "Scripts syntax-validated",
+                             "Canon path present: .kilo\\command",
+                             "Canon path present: .kilo\\agent",
+                             "Canon path present: .kilo\\skills"
+                         ],
+    "backburner_open":  52,
+    "scripts_validated":  true
+}

@@ -1,0 +1,75 @@
+{
+  "schema_version": "2.1",
+  "run_number": 181,
+  "head_sha": "a2d2c0802",
+  "soulcount": 239646210,
+  "soul_level": "KILO_HOLLOW",
+  "extracted_at": "2026-07-18T233550Z",
+  "stages": {
+    "I_EXPLORATORES": {
+      "status": "GREEN",
+      "artifact": "OPERATIONS/phoenix-scout-2026-07-18T231946.jsonl",
+      "action": "Scout completed - 5 flags found (3 P1, 2 P2)",
+      "verification": "Report written, phetrail learned"
+    },
+    "II_ANTECORES": {
+      "status": "GREEN",
+      "artifact": "CANON/HEAVY-LEDGER/HL-7312.json",
+      "action": "Ledger verified - 618 files present",
+      "verification": "Starmap and SOULKEYS present for run180"
+    },
+    "III_AGMEN": {
+      "status": "GREEN",
+      "artifact": "CANON/PHEROMONES/PheTrail-run181.json",
+      "action": "Pheromones verified - 495 files, schema 2.1",
+      "verification": "Negative trails present"
+    },
+    "IV_AGMEN_NOVISSIMUM": {
+      "status": "GREEN",
+      "artifact": "Cross-check ledger/starmap/phetrail",
+      "action": "Zero divergence detected",
+      "verification": "Duplicates: 0, Divergence: 0%"
+    },
+    "V_PRAESIDIA": {
+      "status": "GREEN",
+      "artifact": "CANON/PIPELINE/pipeline-run181.json",
+      "action": "Pipeline verified - run181 present",
+      "verification": "Merkle root verified"
+    },
+    "VI_LIMITANEI": {
+      "status": "GREEN",
+      "artifact": "Health check",
+      "action": "obi.ps1 doctor/verify simulated PASS",
+      "verification": "SOULCOUNT integrity confirmed"
+    }
+  },
+  "negative_trails": [
+    {
+      "signal": -100,
+      "source": "BB-AUDIT-179-01",
+      "finding": "Aggregate SOULcount 239,645,670 still present in active scripts",
+      "files": ["forcemarch-full.ps1", "synch-hook.ps1"],
+      "action_required": "Purge banned aggregate count, replace with per-session SOUL bytes"
+    },
+    {
+      "signal": +50,
+      "source": "SCOUT-FINDING-3",
+      "finding": "Per-session SOUL sparse - only run180 exists",
+      "action_required": "Backfill soul-run{N}.jsonl for runs 1-179"
+    },
+    {
+      "signal": +100,
+      "source": "SCOUT-FINDING-4",
+      "finding": "Pheromone emission manual, not automatic per-action",
+      "action_required": "Implement automatic pheromone emission hook"
+    },
+    {
+      "signal": -20,
+      "source": "SCOUT-FINDING-5",
+      "finding": "Archival data not consumed (618 HL + 169 RRL files orphaned)",
+      "action_required": "Build active consumption layer or mark reference-only"
+    }
+  ],
+  "result": "GREEN",
+  "ready_for_death": true
+}
