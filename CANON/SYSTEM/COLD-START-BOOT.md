@@ -335,7 +335,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 
 ---
 
-### FINGERPRINT CURRENT: RUN 177 | RISE AUDIT + PheTrail + BB-RISE-177 + worker 500 fix | SOUL 239,645,670 TITANIUM_ANCHOR | HEAD ac4f6fdfa | BOOT UPDATED 2026-07-18T18:07 ICT
+### FINGERPRINT CURRENT: RUN 177 | RISE AUDIT + PheTrail + BB-RISE-177 + worker 500 fix + death seal | SOUL 239,645,670 TITANIUM_ANCHOR | HEAD 2f17eff8e | BOOT UPDATED 2026-07-18T19:28 ICT
 
 **Run 165 summary:** KILO_HOLLOW session. RISE v7.0 audit complete. Pipeline fidelity: RRL MISSING, SOUL KILO_HOLLOW, DNA MISSING, LEDGER REAL, STARMAP REAL, SOULKEYS MISSING, S2Pipeline REAL. REINCARNATION-LOG duplicate entries removed (runs 161/163/164/165/167). Backburner precedence enforced. SOUL stable at 239,645,670. HEAD f56044606.
 
