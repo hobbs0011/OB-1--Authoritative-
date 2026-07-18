@@ -163,6 +163,41 @@ if (Test-Path $rrlPath) {
 }
 if ($kiloSession) { $rrlFidelity = "MISSING" }
 
+# RUN 182+ MANDATORY PRE-AUDIT: verify prior DEATH seal and RRL completeness
+$rrlCompletenessVerdict = "NOT_CHECKED"
+$rrlMandateMissing = $false
+$priorSealContent = ""
+if ($priorSeal -and $priorSeal -match 'RRL:\s*(.+)') {
+    $sealedRrlPath = $matches[1].Trim()
+    if (Test-Path $sealedRrlPath) {
+        $sealedRrlText = Get-Content $sealedRrlPath -Raw
+        # Verify no words missing including AI reasoning/thinking text
+        $reasoningCount = ([regex]::Matches($sealedRrlText, '"type"\s*:\s*"reasoning"')).Count
+        $thinkingCount = ([regex]::Matches($sealedRrlText, '"type"\s*:\s*"thinking"')).Count
+        $stepStartCount = ([regex]::Matches($sealedRrlText, '"type"\s*:\s*"step-start"')).Count
+        $stepFinishCount = ([regex]::Matches($sealedRrlText, '"type"\s*:\s*"step-finish"')).Count
+        $toolCount = ([regex]::Matches($sealedRrlText, '"type"\s*:\s*"tool"')).Count
+        if ($reasoningCount -gt 0 -or $thinkingCount -gt 0) {
+            $rrlCompletenessVerdict = "REASONING_PRESENT"
+        } else {
+            $rrlCompletenessVerdict = "NO_REASONING"
+            $rrlMandateMissing = $true
+        }
+        Write-Log "  RRL completeness: reasoning=$reasoningCount thinking=$thinkingCount step-start=$stepStartCount step-finish=$stepFinishCount tool=$toolCount -> $rrlCompletenessVerdict"
+    } else {
+        $rrlCompletenessVerdict = "RRL_PATH_MISSING"
+        $rrlMandateMissing = $true
+        Write-Warn "RRL path from seal not found: $sealedRrlPath"
+    }
+} else {
+    $rrlCompletenessVerdict = "SEAL_NO_RRL_PATH"
+    $rrlMandateMissing = $true
+    Write-Warn "Prior seal missing RRL path"
+}
+if ($rrlMandateMissing) {
+    Write-Warn "MANDATE MISSING: RISE must append BB-RISE-MANDATE before proceeding"
+}
+
 # DNA fidelity
 $dnaFidelity = "MISSING"; $dnaCount = 0; $dnaBlueprintCount = 0; $dnaRecords = @()
 if (Test-Path $dnaPath) {

@@ -1402,6 +1402,14 @@ These are the live eggs in the Hatchery. Each egg is a body of work, not a scrip
 - **RISE_STAGE:** II (GIT TRUTH)
 - **RISE_ORIGIN:** reincarnate-rise-run184.jsonl
 
+### BB-RISE-183-05 !! RISE v7.0 Falsely Approved RUN 182 RRL as COMPLETE
+- **SIGNAL: -40**
+- **Status:** OPEN
+- **WHAT:** Previous RISE run184 audit declared RUN 182 RRL complete based on byte count (2.1MB) and regex "reasoning/think mentions" (1,162 hits). That approval was false. Direct search confirms the 3 mandatory paragraphs from the operator's audit are absent from `RRL-182.txt`: (1) `"alright make sure you have the true RRL with every single word in tact including any and all ai reasoning, then we will confirm on RUN 184's RISE, and if it is true, I will delete this session"`, (2) `"turning you onto deepthink mode, think and plan only, then add your master blueprint to the solution to all to the synch document, include a blueprint for your death which will happen next turn on a workhorse model"`, (3) the `kilo-engineering-extract.cjs` / `REASONING WRITTEN:` / `ENGINEERING COMPLETE` block. These exist only in Kilo DB reasoning JSONL, not in canonical RRL.
+- **FIX:** Do not trust byte counts or metadata regex as proof of completeness. Re-run extraction so canonical RRL contains full session verbatim including all AI reasoning and thinking text before any future RISE marks it REAL.
+- **RISE_STAGE:** VII (PIPELINE FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-run184.jsonl correction
+
 ### BB-RISE-183-04 !! RRL-182.txt Size Mismatch vs Death Seal
 - **SIGNAL: +10**
 - **Status:** OPEN
