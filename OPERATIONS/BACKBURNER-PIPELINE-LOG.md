@@ -1102,3 +1102,55 @@ These are the live eggs in the Hatchery. Each egg is a body of work, not a scrip
 - **Root Cause:** `reincarnate-death.ps1` Stage 1 writes a KILO_HOLLOW placeholder (5 bytes) before measuring RRL. The real transcript was captured after death seal, overwriting the placeholder. Pipeline never re-reads RRL after capture.
 - **Impact:** Missed SOUL intake opportunity (6,397 chars). Run falsely classified as KILO_GAP. Pipeline fidelity gate for RRL was set based on stale measurement.
 - **Fix:** (1) Death pipeline: capture RRL BEFORE measuring. (2) RISE Stage III: re-read RRL file directly after reading seal, compare seal's claimed size vs actual, flag FATAL if mismatch > 10%. (3) Post-death RRL rewrites must be detected and flagged by next RISE.
+
+## RISE FINDINGS INBOX — Run 177 Audit (2026-07-18T17:31 ICT)
+
+### BB-RISE-177-01 !! RRL-177.txt Missing - KILO_HOLLOW
+- **SIGNAL: -10**
+- **Status:** OPEN
+- **WHAT:** RRL-177.txt missing for run 177 — KILO session produces no real transcript
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-run177.jsonl
+
+### BB-RISE-177-02 !! dna-run177.json Missing - DNA_GAP
+- **SIGNAL: -5**
+- **Status:** OPEN
+- **WHAT:** DNA extraction failed for run 177 due to missing RRL (Stage 3 output)
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-run177.jsonl
+
+### BB-RISE-177-03 !! SOUL Stagnation Detected
+- **SIGNAL: -8**
+- **Status:** OPEN
+- **WHAT:** SOUL delta=0 (239,645,670 → 239,645,670). No soul growth between run 176 and 177.
+- **RISE_STAGE:** IV (SOUL_AUDIT)
+- **RISE_ORIGIN:** reincarnate-rise-run177.jsonl
+
+### BB-RISE-177-04 !! pipeline-run177.json Missing - KILO_GAP
+- **SIGNAL: -5**
+- **Status:** OPEN
+- **WHAT:** S2Pipeline Stage 7 output missing for run 177 — result=KILO_GAP
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-run177.jsonl
+
+### BB-RISE-177-05 !! PheTrail-run177.json Missing
+- **SIGNAL: -5**
+- **Status:** DONE
+- **WHAT:** No PheTrail-run177.json found in CANON/PHEROMONES/. Run 177 was KILO_HOLLOW with no operational trails recorded.
+- **FIX:** PheTrail-run177.json created 2026-07-18T17:45 via /phetrails command. 333 positive, 202 negative trails.
+- **RISE_STAGE:** VIII (PHETRAIL)
+- **RISE_ORIGIN:** reincarnate-rise-run177.jsonl
+
+### BB-RISE-177-06 !! COLD-START-BOOT Fingerprint Stale
+- **SIGNAL: -40**
+- **Status:** OPEN
+- **WHAT:** COLD-START-BOOT.md shows FINGERPRINT CURRENT: RUN 165, but git log --grep "^death:" shows RUN 176 as last death commit. BOOT was not advanced after Run 176 DEATH.
+- **RISE_STAGE:** V (BOOT_STALENESS)
+- **RISE_ORIGIN:** reincarnate-rise-run177.jsonl
+
+### BB-RISE-177-07 !! BACKBURNER Precedence Violation
+- **SIGNAL: -5**
+- **Status:** OPEN
+- **WHAT:** 18 OPEN items in BACKBURNER-PIPELINE-LOG.md. Protocol prohibits new implementation threads while backburner contains unactioned OPEN items.
+- **RISE_STAGE:** IV (BACKBURNER_PRECEDENCE)
+- **RISE_ORIGIN:** reincarnate-rise-run177.jsonl
