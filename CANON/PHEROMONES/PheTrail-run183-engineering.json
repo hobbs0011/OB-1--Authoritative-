@@ -1,0 +1,29 @@
+{
+  "run": 183,
+  "status": "ENGINEERING_COMPLETE",
+  "executed_at": "2026-07-18T21:58:50.821Z",
+  "target_run": 182,
+  "sessions": [
+    "ses_1161a41d0ffepxyVzjs98ME1fJ",
+    "ses_0899b2c82ffe2PtNt3XBMEVv5V"
+  ],
+  "summary": {
+    "total_sessions": 2,
+    "total_parts": 2112,
+    "total_thinking": 0,
+    "total_tool_result": 0,
+    "total_reasoning": 407,
+    "total_tool": 615,
+    "total_step_start": 438,
+    "total_step_finish": 430,
+    "inner_thoughts_extracted": 1890,
+    "soulscript_entries": 70
+  },
+  "outputs": {
+    "engineering": "D:\\OB-1-CANONICAL\\CANON\\ENGINEERING\\engineering-run182.json",
+    "reasoning": [
+      "D:\\OB-1-CANONICAL\\CANON\\SOUL\\EXTRACT\\reasoning-run182-session-ses_1161.jsonl",
+      "D:\\OB-1-CANONICAL\\CANON\\SOUL\\EXTRACT\\reasoning-run182-session-ses_0899.jsonl"
+    ]
+  }
+}
