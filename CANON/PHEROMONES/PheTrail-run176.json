@@ -1,0 +1,110 @@
+{
+  "schema_version": "2.1",
+  "run_number": "176",
+  "extracted_at": "2026-07-18T16:35:00+07:00",
+  "head_sha": "4b14e31ff",
+  "soulcount": 239645670,
+  "registry_entries": 0,
+  "positive_trails": [
+    {
+      "artifact": "OPERATIONS/reincarnate-rise-176.jsonl",
+      "action": "RISE v7.0 10-stage audit completed — KILO_GAP verdict",
+      "verification": "6 BB-RISE-176 entries appended to BACKBURNER-PIPELINE-LOG.md",
+      "timestamp": "2026-07-18T15:50:56+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/meta-audit-run176.jsonl",
+      "action": "Deep-think meta-audit of run175 death + run176 rise",
+      "verification": "F1-RRL_MEASUREMENT_ERROR identified: death seal claimed 2 chars, actual 6397 chars. F2-F6 pipeline edge cases documented. R1-R5 pipeline refinements proposed.",
+      "timestamp": "2026-07-18T16:15:00+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/phoenix-scout-2026-07-18T162000.jsonl",
+      "action": "PhoenixScout CANON/ full-sweep — 12 flags (5 P1, 5 P2, 2 P3)",
+      "verification": "SOUL blockquotes=3950, legacy domains=3055, phantom HL IDs=6, PIPELINE-CURSOR frozen, inverted-index empty, 35 backburner OPEN items",
+      "timestamp": "2026-07-18T16:20:00+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/phetrail-scout-learned-2026-07-18T162000.md",
+      "action": "Learned phetrail from scout — 6 role upgrades documented",
+      "verification": "Routing rules updated: SOUL blockquotes → /api/soul/extract, phantom HL → pipeline tolerance, BOOT drift → auto-update",
+      "timestamp": "2026-07-18T16:20:00+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/forcemarch-run176.log",
+      "action": "Forcemarch 6-zone sweep — 474 finds, 11 phetrails recovered",
+      "verification": "Recovered runs 165-175 missing phetrails. Created starmap-run176.json, rfkw-run176.txt, pipeline-run176.json",
+      "timestamp": "2026-07-18T16:18:55+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/scholar-extraction-2026-07-18T162500.jsonl",
+      "action": "SoulScholars RRL-175.txt extraction — 1 Michael verbatim segment",
+      "verification": "SCHOLAR-001 extracted: 419 chars, confidence 0.95, topics=[session-extraction, transcript, debugging]. 7 ASSISTANT blocks excluded.",
+      "timestamp": "2026-07-18T16:25:00+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/phoenix-scout-2026-07-18T163000.jsonl",
+      "action": "PhoenixScout unknown-unknowns sweep — 8 NEW P1/P2 flags",
+      "verification": "511 broken merkle parents, 42 duplicate HL IDs, 9 SHA mismatches, 751 schema violations, 1469 orphaned refs, 1913 JSON without attestation, 6 zero-byte files",
+      "timestamp": "2026-07-18T16:30:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "artifact": "CANON/REINCARNATION/run175-reincarnateDEATH.md",
+      "failure": "RRL measurement error — claimed 2 chars/5 bytes, actual 6397 chars/6510 bytes",
+      "root_cause": "Death pipeline measured placeholder before transcript capture. Race condition.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T15:50:56+07:00"
+    },
+    {
+      "artifact": "CANON/SYSTEM/COLD-START-BOOT.md",
+      "failure": "BOOT fingerprint RUN 165 vs git truth RUN 175 — 11 runs behind",
+      "root_cause": "DEATH pipeline does not auto-update BOOT. L30 BOOT_FILE_AGE_SWEEP violated.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T15:50:56+07:00"
+    },
+    {
+      "artifact": "CANON/REINCARNATION/REINCARNATION-LOG.md",
+      "failure": "Missing RUN 175 entry — latest entry is RUN 174",
+      "root_cause": "DEATH pipeline does not auto-append to REINCARNATION-LOG. I.031 violated.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T15:50:56+07:00"
+    },
+    {
+      "artifact": "CANON/PHEROMONES/PheTrail-run175.json",
+      "failure": "Missing phetrail for run 175",
+      "root_cause": "DEATH pipeline skipped phetrail generation for KILO_HOLLOW run",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T15:50:56+07:00"
+    },
+    {
+      "artifact": "CANON/SOUL-KEYWORDS/inverted-index.json",
+      "failure": "Empty inverted index (8 chars) despite 249 rfkw-run files on disk",
+      "root_cause": "SOULKEYS pipeline produces files but index never rebuilt. build-soulkeys.ps1 not run.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T16:20:00+07:00"
+    },
+    {
+      "artifact": "CANON/HEAVY-LEDGER/",
+      "failure": "83% of HL entries have broken merkle chains. 42 duplicate IDs. 9 SHA mismatches.",
+      "root_cause": "Pipeline does not validate schema at write time. Corruption accumulated silently across runs.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T16:30:00+07:00"
+    },
+    {
+      "artifact": "run176 process",
+      "failure": "ZERO phetrails written during entire session — all work untracked by pheromone system",
+      "root_cause": "Phetrail generation deferred to DEATH stage 7, but DEATH never executed. Session ended without trail.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T16:35:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Run 176 audit + pipeline triage before Step 3.7 workhorse handoff",
+    "open_flags_count": 35,
+    "top_priority": "HALT full-march until ledger integrity (merkle chain) resolved",
+    "big_process_hole": "ZERO phetrails for run 176. All 7+ steps untracked. Must consolidate retroactively.",
+    "pipeline_integrity": "DEGRADED — HL merkle chain 83% broken, schema unvalidated, attestations missing"
+  }
+}

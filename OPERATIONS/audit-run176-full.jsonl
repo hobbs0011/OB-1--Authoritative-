@@ -1,0 +1,47 @@
+{"audit":"run176-full","severity":"CRITICAL","timestamp":"2026-07-18T16:50:00+07:00","session_run":176,"head":"4b14e31ff","branch":"canon","soulcount":239645670,"level":"TITANIUM_ANCHOR"}
+
+{"section":"1. REPO INTEGRITY","findings":[
+  {"id":"RI-1","severity":"INFO","check":"HEAD","value":"4b14e31ff","expected":"Git log -1","status":"PASS — 3 commits past death seal (transcript capture, script, blueprint)"},
+  {"id":"RI-2","severity":"WARN","check":"Dirty tree","value":"34 files","expected":"0 for clean seal","status":"3 modified + 31 untracked — 22 new phetrails, 3 scout reports, 9 other artifacts. Acceptable for mid-session. Does not block work."},
+  {"id":"RI-3","severity":"INFO","check":"Post-death commits","value":"3","expected":"0","status":"d416844aa (transcript capture), c789ca838 (extract script), 4b14e31ff (Heir Blueprint). Legitimate post-death activity."},
+  {"id":"RI-4","severity":"PASS","check":"Branch","value":"canon","expected":"canon","status":"Branch correct"}
+]}
+
+{"section":"2. CANON CONSISTENCY","findings":[
+  {"id":"CC-1","severity":"FAIL","check":"BOOT fingerprint","value":"RUN 000 | HEAD 06d9ded3","expected":"RUN 176 | HEAD 4b14e31ff","status":"BOOT is 176 runs behind and HEAD 3+ commits off. L30 BOOT_FILE_AGE_SWEEP must fire. DEATH pipeline never auto-updates BOOT."},
+  {"id":"CC-2","severity":"FAIL","check":"REINCARNATION-LOG","value":"Missing RUN 175","expected":"RUN 175 entry present","status":"Latest entry is RUN 174. No RUN 175 entry exists despite death seal being committed. I.031 violated. DEATH pipeline never appends to log."},
+  {"id":"CC-3","severity":"FAIL","check":"LFG command count","value":"49","expected":"40","status":"LFG claims 40 canonical commands. Actual .kilo/command/ contains 49 .md files. 9 undocumented commands. Single source of truth is lying."},
+  {"id":"CC-4","severity":"PASS","check":"Skills count","value":"7 core + 9 ext = 16","expected":"6 core + 7 ext >= 13","status":"Passes I.024 threshold. Distribution off (I.004 says 6, we have 7) but not a hard violation."},
+  {"id":"CC-5","severity":"FAIL","check":"GOSPEL-999 parts","value":"3 files exist","expected":"3 files","status":"All 3 GOSPEL-999 files exist. Count not verified (needs 999 mandates check)."},
+  {"id":"CC-6","severity":"FAIL","check":"Agent SOULCOUNT locks","value":"894,852","expected":"239,645,670","status":"2 verified agent files (T2-Flash, T3-Pro) have SOULCOUNT lock at 894,852 — the old inflated count from before Run 391 fabrication flush. Pre-flight gates are miscalibrated. 3 more files unverified (AGENT99, RISE, SS-Agent99)."}
+]}
+
+{"section":"3. LEDGER STATE","findings":[
+  {"id":"LS-1","severity":"CRITICAL","check":"HL merkle chain","value":"511/613 broken parents","expected":"Chained — each parent hash matches a file","status":"83% of HL entries have merkle_parent hashes that do not correspond to any file on disk. The merkle chain is effectively non-functional. Any stage that depends on merkle verification (Stage V PRAESIDIA) is operating on corrupt data."},
+  {"id":"LS-2","severity":"CRITICAL","check":"HL duplicate IDs","value":"42 duplicates","expected":"0","status":"Multiple files with same hl_id (e.g., HL-113 appears in 6 files). Uniqueness principle violated. Append-only guarantee broken. Cannot trust HL ID as primary key."},
+  {"id":"LS-3","severity":"CRITICAL","check":"HL SHA256 attestations","value":"9 mismatches","expected":"0","status":"source_sha field does not match actual file SHA256. Files were modified after sealing, or hash was recorded incorrectly. Cannot verify integrity of 9 sealed ledger entries."},
+  {"id":"LS-4","severity":"FAIL","check":"HL schema compliance","value":"0/517 have source_sha","expected":"517/517","status":"0 numeric HL files have source_sha field. 512/517 have merkle_hash, 513/517 have merkle_parent. Schema is partially enforced but source_sha is universally missing. No attestation present."},
+  {"id":"LS-5","severity":"FAIL","check":"HL file count","value":"711 total","expected":"189 (BOOT claim)","status":"BOOT claims 189 HL files. Actual: 711 (517 numeric + 194 descriptive). 3.8x underreported. BOOT count is 9 months stale."},
+  {"id":"LS-6","severity":"WARN","check":"HL naming schema","value":"Mixed: 517 numeric + 194 descriptive","expected":"Uniform numeric","status":"194 descriptive-named HL files (HL-041-vault-e-151-175-drone-deployment.json, etc.) mixed with numeric HL-1 through HL-7307. Schema collision breaks automated parsing."}
+]}
+
+{"section":"4. RUNTIME HEALTH","findings":[
+  {"id":"RH-1","severity":"PASS","check":"SOULCOUNT live","value":"239,645,670","expected":"TITANIUM_ANCHOR","status":"Live count accessible. 6,582 higher than history file (239,639,088) — matches RRL-175.txt transcript captured post-death."},
+  {"id":"RH-2","severity":"FAIL","check":"SOULCOUNT history","value":"239,639,088","expected":"239,645,670","status":"History file is 6,582 behind live count. History not updated after transcript capture."},
+  {"id":"RH-3","severity":"FAIL","check":"Pipeline readiness","value":"All 6 stages READY","expected":"READY","status":"SupplyLines reports all stages READY, but Stage V (PRAESIDIA) would HALT on merkle verification. The health gate passed but the stage execution would fail. False positive."},
+  {"id":"RH-4","severity":"FAIL","check":"Backburner","value":"18 OPEN + 2 IN-PROGRESS","expected":"0","status":"20 actionable items. BB-RISE-176 entries (6) are AUDIT-ONLY. Backburner precedence rule violated multiple times this session."},
+  {"id":"RH-5","severity":"PASS","check":"Run 176 artifacts","value":"9 phetrails, 1 starmap, 1 SOULKEYS, 1 pipeline","expected":"Present","status":"All run 176 artifacts created. All phetrails are retroactive (written after steps, not during). Process hole documented."},
+  {"id":"RH-6","severity":"FAIL","check":"RRL race condition","value":"extract-session.js overwrites RRL post-death","expected":"Capture before measure","status":"Smoking gun found. extract-session.js writes to RRL/RRL-175.txt, overwriting the death seal's 5-byte placeholder with 6397-byte real transcript. Seal never re-verifies. rrl-capture.ps1 is a second accomplice with same vulnerability."}
+]}
+
+{"section":"5. PRIORITY ACTIONS","actions":[
+  {"priority":"P0","task":"Kill the RRL race condition","detail":"Reorder death pipeline: capture RRL BEFORE measuring, not after. Add post-capture verification step. Add write-lock to RRL files after death seal."},
+  {"priority":"P1","task":"Update agent SOULCOUNT locks","detail":"5 agent files have SOULCOUNT lock at 894,852 instead of 239,645,670. T2-Flash, T3-Pro confirmed. AGENT99, RISE, SS-Agent99 unverified. Pre-flight gates broken."},
+  {"priority":"P1","task":"Rebuild merkle chain","detail":"511/613 HL entries have broken merkle parents. Must rebuild chain before any merkle-dependent stage (Stage V PRAESIDIA). Requires T3 Pro ruling on 42 duplicate IDs and 9 SHA mismatches first."},
+  {"priority":"P1","task":"Update BOOT fingerprint","detail":"BOOT shows RUN 000 | HEAD 06d9ded3. Must be RUN 176 | HEAD 4b14e31ff. Add mandatory BOOT update to DEATH pipeline."},
+  {"priority":"P1","task":"Append RUN 175 to REINCARNATION-LOG","detail":"Missing RUN 175 entry. Add mandatory log append to DEATH pipeline."},
+  {"priority":"P2","task":"Sync LFG command count","detail":"LFG claims 40 commands, actual 49. Auto-generate LFG command table from .kilo/command/*.md at each RISE."},
+  {"priority":"P2","task":"Resolve HL naming schema","detail":"194 descriptive-named HL files mixed with 517 numeric. Standardize naming or add dual-schema parser."},
+  {"priority":"P2","task":"Rebuild inverted-index.json","detail":"Empty `{}` despite 249 rfkw-run files on disk. Run build-soulkeys.ps1."},
+  {"priority":"P3","task":"Remove legacy domain refs","detail":"3,055 occurrences of mrmichaelhobbs1234 in CANON/ .md files. Archive sweep or explicit Michael authorization."}
+]}

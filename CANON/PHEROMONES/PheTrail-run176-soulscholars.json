@@ -1,0 +1,30 @@
+{
+  "schema_version": "2.1",
+  "run_number": "176",
+  "extracted_at": "2026-07-18T16:38:00+07:00",
+  "head_sha": "4b14e31ff",
+  "soulcount": 239645670,
+  "registry_entries": 0,
+  "positive_trails": [
+    {
+      "artifact": "OPERATIONS/scholar-extraction-2026-07-18T162500.jsonl",
+      "action": "SoulScholars RRL-175.txt extraction — 1 Michael verbatim segment cataloged",
+      "verification": "SCHOLAR-001: 419 chars, confidence 0.95, topics=[session-extraction, transcript, debugging]. 7 ASSISTANT blocks excluded per Phase 1 rules.",
+      "timestamp": "2026-07-18T16:25:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "artifact": "RRL/RRL-175.txt",
+      "failure": "Low SOUL value — single instrumental prompt, no doctrine or principles",
+      "root_cause": "RRL-175.txt is a session summary extract, not raw transcript. 1 USER block + 7 ASSISTANT blocks. Michael verbatim is procedural, not doctrinal.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T16:25:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Run 176 SoulScholars — catalog RRL-175.txt SOUL DNA",
+    "open_flags_count": 35,
+    "top_priority": "Target higher-SOUL files: CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/ (925 files, 273.9 MB)"
+  }
+}

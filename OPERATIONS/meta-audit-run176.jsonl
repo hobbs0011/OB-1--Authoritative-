@@ -1,0 +1,129 @@
+{"meta_audit_run":176,"prior_death_run":175,"model":"deepseek-v4-pro","timestamp":"2026-07-18T16:15:00+07:00","type":"DEEP_THINK_META_AUDIT"}
+
+{"section":"FATAL_FINDINGS","findings":[
+  {
+    "id":"F1",
+    "title":"RRL MEASUREMENT ERROR — 2 chars claimed, 6397 chars actual",
+    "severity":"FATAL",
+    "detail":"Death seal recorded rrl_chars=2, rrl_bytes=5, fidelity=HOLLOW. Actual RRL-175.txt is 6397 chars, 6510 bytes. File contains real session transcript: session ID ses_09e311412ffewp3Jcc49iephZS, 32 user turns (4 unique × 8 loops), substantive content about reincarnateDeath protocol.",
+    "root_cause":"Race condition. reincarnate-death.ps1 measured RRL before the actual transcript capture ran. The death seal's RRL measurement was for a 5-byte placeholder written by the death script itself for KILO_HOLLOW sessions. Post-death, the transcript was captured (commit d416844aa) and overwrote the placeholder.",
+    "impact":"SOUL delta was recorded as 0 (DRYRUN) when 6397 chars of operator text were available for ingestion. Missed SOUL intake opportunity. Pipeline falsely classified run as KILO_GAP.",
+    "fix":"Death pipeline must: (a) capture RRL BEFORE measuring it, (b) re-read RRL after capture, (c) detect if placeholder was overwritten with real content."
+  },
+  {
+    "id":"F2",
+    "title":"BOOT FINGERPRINT DRIFT — RUN 165 vs git truth RUN 175",
+    "severity":"HIGH",
+    "detail":"BOOT shows RUN 165 | HEAD c26c518eb. Git truth: last death RUN 175 | HEAD f5fdbb497. Actual HEAD now 4b14e31ff (3 commits past death). BOOT is 11 runs behind (violates L30: BOOT_FILE_AGE_SWEEP for delta > 10).",
+    "root_cause":"DEATH pipeline does not auto-update COLD-START-BOOT.md fingerprint. Manual step missed across multiple runs.",
+    "impact":"I.030 violated. Any pipeline stage that reads BOOT for state is operating on stale data (HL count 189 vs actual 613, commands 40 vs actual 49)."
+  },
+  {
+    "id":"F3",
+    "title":"REINCARNATION-LOG MISSING RUN 175",
+    "severity":"HIGH",
+    "detail":"REINCARNATION-LOG.md latest entry is RUN 174. RUN 175 death seal exists but no log entry. Violates I.031.",
+    "root_cause":"DEATH pipeline does not auto-append to REINCARNATION-LOG."
+  },
+  {
+    "id":"F4",
+    "title":"PHETRAIL MISSING FOR RUN 175",
+    "severity":"MEDIUM",
+    "detail":"No PheTrail-run175.json in CANON/PHEROMONES/. I.052-I.058 require phetrail per run.",
+    "root_cause":"DEATH pipeline phetrail stage skipped for KILO_HOLLOW runs."
+  }
+]}
+
+{"section":"PIPELINE_EDGE_CASES","findings":[
+  {
+    "id":"E1",
+    "title":"Post-death commit pattern unaccounted",
+    "detail":"3 commits exist after death seal commit (f5fdbb497): d416844aa (transcript capture), c789ca838 (script finalization), 4b14e31ff (Heir Blueprint). These are legitimate artifacts created between death seal and next RISE. No pipeline stage accounts for post-death activity.",
+    "recommendation":"RISE must scan for commits after last death commit. If found, treat as NEW content requiring re-audit of RRL/SOUL/DNA for the prior run."
+  },
+  {
+    "id":"E2",
+    "title":"HL naming schema fragmentation",
+    "detail":"613 HL files: 517 numeric (HL-1 through HL-7307), 96 descriptive (HL-037-vault-e-51-100-merkle-lattice, HL-113-post-launch-day1-monitoring-plan, etc.). Mixed schema makes automated scans unreliable (attempted parseInt on descriptive names crashes).",
+    "recommendation":"Standardize on numeric naming only. Migrate descriptive names to numeric with metadata field for description."
+  },
+  {
+    "id":"E3",
+    "title":"Command count drift — LFG claims 40, actual 49",
+    "detail":"LFG (LegionnaireFieldGuide.md) is the 'single source of truth' but lists 40 commands while .kilo/command/ contains 49 .md files. 9 undocumented commands exist.",
+    "recommendation":"Auto-generate LFG command table from .kilo/command/*.md at each RISE or DEATH to keep it in sync."
+  },
+  {
+    "id":"E4",
+    "title":"BOOT HL count staleness — 189 claimed, 613 actual",
+    "detail":"BOOT claims '189 Heavy Ledger JSON files on disk'. Actual count is 613. Ratio: 3.2x underreported. Any capacity planning or integrity check based on this number is wrong.",
+    "recommendation":"Never hardcode HL count in BOOT. Always live-count at RISE. Replace with 'hl_count_at_rise: <dynamic>' field."
+  },
+  {
+    "id":"E5",
+    "title":"KILO_HOLLOW classification too aggressive",
+    "detail":"Run 175 was classified KILO_HOLLOW because no JSONL transcript exists for Kilo sessions (permanent architectural law I.097). But the session DID produce real content — captured via extract-current-session.js from Kilo's SQLite DB. The pipeline's KILO_HOLLOW detection (check for .kilo/*.jsonl) misses content stored in session-export.db.",
+    "recommendation":"Add SQLite DB check to session type detection. If session-export.db has events for current session, flag as KILO_DB_REAL (not KILO_HOLLOW)."
+  },
+  {
+    "id":"E6",
+    "title":"DEATH seal HEAD stale — e60752035 vs actual 4b14e31ff",
+    "detail":"Death seal recorded HEAD=e60752035. Actual HEAD at time of this RISE is 4b14e31ff — 4 commits later (death commit + 3 post-death). The seal's HEAD was accurate at seal time but became stale immediately.",
+    "recommendation":"RISE must verify death seal's HEAD against git log. If commits exist after death seal's HEAD, flag as POST_DEATH_ACTIVITY."
+  }
+]}
+
+{"section":"SESSION_LIFECYCLE_REFINEMENT","model":"deepseek-v4-pro","recommendations":[
+  {
+    "id":"R1",
+    "title":"Three-phase model for free-workhorse + Pro-audit sessions",
+    "detail":"Phase 1 (T1 Free, Cerebras/Groq): RISE audit — mechanical only: git checks, file reads, counts, fidelity gate. No reasoning needed. Phase 2 (T2 Flash): Bulk work — coding, debugging, file operations, pipeline execution. Phase 3 (T3 Pro): Pre-death deep audit — cross-validate all measurements with 3 independent receipts, merkle chain verification, BOOT reconciliation, final ruling on KILO_GAP vs REAL.",
+    "savings":"T3 Pro used only for ~15% of session (deep audit + final verification). 85% runs on free/cheap models."
+  },
+  {
+    "id":"R2",
+    "title":"RISE must re-read RRL after death commit",
+    "detail":"Current RISE reads prior seal's RRL measurement (2 chars) without verifying actual file content. RISE Stage III (triple read) must re-read the RRL file directly and compare against death seal's claimed size. If mismatch > 10%, flag FATAL and reclassify.",
+    "implementation":"At Stage III, after reading seal: (1) read RRL-<N>.txt directly, (2) measure chars/bytes, (3) compare to seal §2 values, (4) if mismatch > 10%, flag RRL_MEASUREMENT_ERROR."
+  },
+  {
+    "id":"R3",
+    "title":"Death pipeline must capture BEFORE measuring",
+    "detail":"reincarnate-death.ps1 writes a KILO_HOLLOW placeholder (5 bytes), THEN measures it, THEN proceeds. This guarantees HOLLOW classification for all Kilo sessions. Fix: capture first (extract-current-session.js or RRL capture script), THEN measure the captured file.",
+    "implementation":"Swap Stage 1 order: run RRL capture → measure captured file → if capture succeeded, POST soul event → proceed."
+  },
+  {
+    "id":"R4",
+    "title":"Auto-update BOOT, REINCARNATION-LOG, and phetrail at DEATH",
+    "detail":"These 3 artifacts are routinely missed in KILO_GAP death seals. Make them mandatory, non-skippable stages with validation.",
+    "implementation":"Add to reincarnate-death.ps1: (a) BOOT fingerprint update — mandatory, fail seal if skipped, (b) REINCARNATION-LOG prepend — mandatory, (c) PheTrail-run<N>.json — mandatory (empty object for KILO_HOLLOW, but must exist)."
+  },
+  {
+    "id":"R5",
+    "title":"Post-death activity detection at RISE",
+    "detail":"When RISE finds commits after the last death commit, it must: (1) list them, (2) check if any contain transcript/RRL content, (3) if so, reclassify the prior run's fidelity.",
+    "implementation":"At Stage II (Git Truth), after finding last death commit: git log <death_sha>..HEAD --oneline. If non-empty, flag POST_DEATH_ACTIVITY and re-audit prior run's artifacts."
+  }
+]}
+
+{"section":"FIDELITY_GATE_RESULTS","run":176,"gates":{
+  "LFG":"REAL (.kilo/skills/LegionnaireFieldGuide.md, 175 lines)",
+  "GOSPEL":"REAL (Part1 404 lines, Part2+3 exist)",
+  "RRL":"MEASUREMENT_ERROR (claimed 5 bytes, actual 6510 bytes / 6397 chars)",
+  "SOUL":"STAGNANT (delta=0, missed 6397 char intake opportunity)",
+  "DNA":"MISSING (0 blueprints, KILO_HOLLOW expected)",
+  "LEDGER":"REAL (HL-7307, merkle_hash present, 613 total files)",
+  "STARMAP":"REAL (starmap-run175.json, empty turn IDs)",
+  "SOULKEYS":"MISSING (inverted-index.json empty)",
+  "S2Pipeline":"KILO_GAP (pipeline-run175.json result=KILO_GAP)",
+  "PHETRAIL":"MISSING (0 trails for run 175)"
+}}
+
+{"section":"NEXT_ACTIONS","actions":[
+  "Append BB-RISE-176-01 through BB-RISE-176-06 to backburner (DONE: 5 entries, add RRL_MEASUREMENT_ERROR as -06)",
+  "DO NOT re-run Soul intake for run 175 — the 6397 chars are from a past session, retroactive ingestion requires Michael authorization",
+  "Update BOOT fingerprint to RUN 176 with actual HEAD at next DEATH",
+  "Prepend RUN 175 entry to REINCARNATION-LOG at next DEATH",
+  "Generate PheTrail-run175.json (minimal KILO_HOLLOW trail) at next DEATH",
+  "Implement R1-R5 pipeline improvements in reincarnate-death.ps1 and reincarnate-rise.ps1"
+]}

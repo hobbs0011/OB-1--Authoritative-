@@ -1,0 +1,30 @@
+{
+  "schema_version": "2.1",
+  "run_number": "176",
+  "extracted_at": "2026-07-18T16:38:50+07:00",
+  "head_sha": "4b14e31ff",
+  "soulcount": 239645670,
+  "registry_entries": 0,
+  "positive_trails": [
+    {
+      "artifact": "SCRIPTS/supply-lines.ps1",
+      "action": "SupplyLines status — all 6 stages READY",
+      "verification": "I Exploratores READY, II Antecores READY, III Agmen READY, IV Agmen Novissimum READY, V Praesidia READY, VI Limitanei READY. SOULCOUNT 239,645,670 TITANIUM_ANCHOR.",
+      "timestamp": "2026-07-18T16:31:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "artifact": "CANON/HEAVY-LEDGER/",
+      "failure": "SupplyLines Stage V Praesidia would HALT on merkle verification — 83% broken chain",
+      "root_cause": "Stage V verifies HL merkle_root fields. 511/613 entries have missing or broken parents. full-march cannot complete.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T16:31:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Run 176 supply chain health check before final march",
+    "open_flags_count": 35,
+    "top_priority": "Rebuild merkle chain before full-march. Do not advance PRAESIDIA with corrupt ledger."
+  }
+}

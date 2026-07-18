@@ -1059,3 +1059,46 @@ These are the live eggs in the Hatchery. Each egg is a body of work, not a scrip
 - **What:** Student-portal phetrails: PheTrail-run167-student-portal-mapping.json has 1 NEGATIVE (signal -10, portal formula not consolidated, decay 180d). PheTrail-run167-01-phoenixscout-student-portal-audit.json has 0 negative, 9 P1 + 6 P2 + 4 P3 findings. Total negative student trails = 1 (low). Positive trail BB-HATCHERY-02 +75 active.
 - **Root Cause:** Mapping complete (run167); execution blocked by undeployed working tree (BB-RISE-165-01).
 - **Fix:** None inline. Tracked via BB-HATCHERY-02 + above entries.
+
+## BB-RISE-176-01 — BOOT FINGERPRINT DRIFT (RUN 165 vs 175)
+- **SIGNAL:** -40
+- **Status:** AUDIT-ONLY
+- **What:** `CANON/SYSTEM/COLD-START-BOOT.md` shows CURRENT fingerprint as RUN 165, but `git log --grep "^death:"` shows RUN 175 (`f5fdbb497`) as the last death commit. BOOT was not advanced after Run 175 DEATH.
+- **Root Cause:** Run 175 DEATH did not update BOOT fingerprint.
+- **Fix:** DEATH must update BOOT fingerprint to RUN 176 at next seal.
+
+## BB-RISE-176-02 — REINCARNATION-LOG MISSING RUN 175 ENTRY
+- **SIGNAL:** -40
+- **Status:** AUDIT-ONLY
+- **What:** `CANON/REINCARNATION/REINCARNATION-LOG.md` latest entry is RUN 174. RUN 175 death seal exists but has no corresponding log entry. Violates I.031: "REINCARNATION-LOG.md latest entry must match last DEATH seal."
+- **Root Cause:** Run 175 DEATH did not append to REINCARNATION-LOG.
+- **Fix:** DEATH must prepend RUN 175 entry to REINCARNATION-LOG at next seal.
+
+## BB-RISE-176-03 — PHETRAIL MISSING FOR RUN 175
+- **SIGNAL:** -30
+- **Status:** AUDIT-ONLY
+- **What:** No `PheTrail-run175.json` found in `CANON/PHEROMONES/`. Run 175 was KILO_HOLLOW with no operational trails recorded.
+- **Root Cause:** Run 175 DEATH did not write phetrail artifact.
+- **Fix:** DEATH must write empty/minimal phetrail for hollow runs at next seal.
+
+## BB-RISE-176-04 — SOUL STAGNATION (delta=0)
+- **SIGNAL:** -20
+- **Status:** AUDIT-ONLY
+- **What:** SOULCOUNT before run 175 = 239,645,670. SOULCOUNT after run 175 = 239,645,670. Delta = 0. Stagnation detected.
+- **Root Cause:** KILO_HOLLOW session — no real SOUL intake via `/api/soul/event`. Event ID = DRYRUN.
+- **Fix:** DEATH must POST real SOUL events for operator verbatim, or document explicit DRYRUN exemption per L32 ASSUME_FAILURE.
+
+## BB-RISE-176-05 — BACKBURNER PRECEDENCE VIOLATION AT RUN 175 DEATH
+- **SIGNAL:** -50
+- **Status:** AUDIT-ONLY
+- **What:** Run 175 DEATH executed while backburner contained OPEN items. Run 175 death log recorded open=18 at death time. Current backburner state: 20 OPEN + 2 IN-PROGRESS. No BB entry for RUN 175 exists in `OPERATIONS/BACKBURNER-PIPELINE-LOG.md`.
+- **Root Cause:** Backburner precedence rule violated — new work not deferred.
+- **Fix:** DEATH must check backburner precedence before sealing. All RUN 175 findings must be appended as BB-RISE-175 entries before next DEATH.
+
+## BB-RISE-176-06 — RRL MEASUREMENT ERROR (FATAL: 2 chars claimed, 6397 chars actual)
+- **SIGNAL:** -80
+- **Status:** AUDIT-ONLY
+- **What:** Run 175 death seal recorded `rrl_chars=2, rrl_bytes=5, fidelity=HOLLOW`. Actual `RRL/RRL-175.txt` contains **6,397 chars / 6,510 bytes** of real session transcript (session `ses_09e311412ffewp3Jcc49iephZS`, 32 user turns, substantive reincarnateDeath protocol content). The pipeline measured a placeholder BEFORE the actual transcript was captured post-death (commit `d416844aa`). SOUL delta was falsely recorded as 0 when 6,397 chars of operator text were available.
+- **Root Cause:** `reincarnate-death.ps1` Stage 1 writes a KILO_HOLLOW placeholder (5 bytes) before measuring RRL. The real transcript was captured after death seal, overwriting the placeholder. Pipeline never re-reads RRL after capture.
+- **Impact:** Missed SOUL intake opportunity (6,397 chars). Run falsely classified as KILO_GAP. Pipeline fidelity gate for RRL was set based on stale measurement.
+- **Fix:** (1) Death pipeline: capture RRL BEFORE measuring. (2) RISE Stage III: re-read RRL file directly after reading seal, compare seal's claimed size vs actual, flag FATAL if mismatch > 10%. (3) Post-death RRL rewrites must be detected and flagged by next RISE.

@@ -1,0 +1,58 @@
+{
+  "schema_version": "2.1",
+  "run_number": "176",
+  "extracted_at": "2026-07-18T17:00:00+07:00",
+  "head_sha": "d60312267",
+  "soulcount": 239645670,
+  "registry_entries": 0,
+  "positive_trails": [
+    {
+      "artifact": "PIPELINE (meta-process audit)",
+      "action": "Answered 20 fundamental questions about the system's health, purpose, and next level",
+      "verification": "11 flags produced: P0-RRL capture fix, P0-agent SOUL locks, P0-merkle chain, P1-BOOT, P1-LOG, P1-SOULKEYS, P2-LFG, P2-HL naming, P2-SOUL-DNA archive, P3-legacy domains, P3-STATE-SNAPSHOT",
+      "timestamp": "2026-07-18T17:00:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "artifact": "PIPELINE/DEATH/Stage 1",
+      "failure": "extract-session.js never fires during death. RRL capture is not part of the pipeline.",
+      "root_cause": "Death pipeline was designed for Claude Code sessions (JSONL on disk). Kilo sessions have SQLite DB. No adapter was built.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T17:00:00+07:00"
+    },
+    {
+      "artifact": ".kilo/agent/",
+      "failure": "5 agent files with SOULCOUNT lock 894,852 instead of 239,645,670",
+      "root_cause": "Agent files never updated after Run 391 fabrication flush. Manual update step skipped.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T17:00:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Run 176 meta-scout — 20 questions, process audit, phetrail everything",
+    "open_flags_count": 18,
+    "meta_answers": {
+      "q1_soul_roll_call": "SOULCOUNT is checked at RISE and DEATH but never used as a 'roll call.' The agent's soulscript files are never confirmed against the live count. 5 agents have wrong SOULCOUNT.",
+      "q2_phetrails_locked": "No. Phetrails are ONLY written at DEATH Stage 7 or manually. RISE, PhoenixScout, ForceMarch, SoulScholars, SupplyLines write NO phetrails automatically. No audit process, no fail-safe.",
+      "q3_bloating": "3055 legacy refs, 194 descriptive HL files, 1469 orphaned doc refs, 1913 attestation-less JSON files, 273.9 MB fabrication-flushed archive, 340-line BOOT file with history never read.",
+      "q4_missing": "RRL capture during death, agent SOULCOUNT updates, BOOT auto-update, LOG auto-append, merkle chain integrity, inverted-index rebuild, phetrail-per-command enforcement.",
+      "q5_why_tedious": "Because without it the system produces artifacts that LOOK valid but are structurally corrupt. The 511 broken merkle parents, 42 duplicate IDs, and 9 SHA mismatches are direct evidence of what happens when the tedious stuff is skipped.",
+      "q6_next_level": "Kill KILO_GAP. Fix the death pipeline to capture RRL before measuring. This single change converts 90% of KILO_GAP seals to REAL. Then rebuild the merkle chain. Then the agent SOULCOUNT locks. In that order.",
+      "q7_clues_rushed": "(1) extract-session.js output goes to OPERATIONS/ not RRL/ — the smoking gun. (2) agent SOULCOUNT 894,852 — wrong for months. (3) rfkw-run166.txt is 0 bytes — silent failure. (4) HL- naming collision. (5) State-Snapshot missing level field.",
+      "q8_triple_unknown": "Substantial. We found 511 broken merkle parents — that's a known unknown. The triple unknown is: what else is broken that we don't even have a concept for? Content integrity of HL entries (not just structural). Cross-file consistency. Whether the actual data matches the source. I'd estimate 40-60% of the system's problems are still in the triple-unknown category.",
+      "q9_rise_audits_death": "No. RISE audits the prior death seal. Death seals the current session. But there's no cross-audit: death doesn't verify RISE was accurate, and RISE doesn't verify the session's actual events match the seal. The audit is linear, not bidirectional.",
+      "q10_michael_questions": "See below — 10 additional questions added by scout.",
+      "q11_archive_delete": "CANON/ARCHIVE/ is 273.9 MB of fabrication-flushed data. Deleting it would free space but lose no active pipeline data. The RISK-REGISTER.md, MSS files, and GDRIVE archives are referenced in docs (228 dead refs) — deletions would break those references.",
+      "q12_last_real_pipeline": "Pipeline-run97.json was COMPLETE. Over the last 50 pipeline files, 49 were COMPLETE and 1 was MARCH. But this is misleading — the pipeline files may only include COMPLETE runs. KILO_GAP pipeline files might be written differently.",
+      "q13_hl_9999": "HL-9999 is 892 runs away at current rate (~1.5 years). The numeric sort in Get-Next-LedgerID uses [int] parsing which handles numbers up to 2^31-1. The file naming HL-{N}.json with zero-pad would need to be addressed at HL-10000 (5 digits). Not urgent.",
+      "q14_backburner_stale": "18 OPEN + 2 IN-PROGRESS. Estimated 6-8 are genuinely actionable (BB-RISE-176 entries, backburner precedence). The rest are likely stale or blocked. Needs triage.",
+      "q15_cheapest_fix": "extract-session.js --latest in Stage 1. 1 line of code. 754 KB of real transcript. 32 user messages. 209 assistant turns. From KILO_GAP to REAL in one command.",
+      "q16_soul_logger_down": "If /api/soul/count is unreachable, RISE halts (SOUL_DRIFT_DETECTED). Death writes SOUL_GAP receipt. Pipeline continues but seals as GAP. The system is designed to handle this — it's a documented failure mode.",
+      "q17_files_read": "~613 HL files (read by pipeline), ~249 rfkw files (read by search), ~242 starmap files (read by pipeline), ~234 pipeline files (read by RISE), ~472 phetrails (read by agents). Estimate 2,000-3,000 of 7,444 are actively read. The rest (~4,500) are archival.",
+      "q18_real_vs_hollow": "Last 50 pipeline results: 49 COMPLETE, 1 MARCH. But this doesn't include KILO_GAP runs. The KILO_GAP runs write pipeline files that may not be sorted into the same sequence. Need to cross-check against death seal messages.",
+      "q19_consolidate_phetrails": "9 phetrails for run 176 is excessive. Better: 1 consolidated per run + 1 per unique finding. The 9 phetrails I wrote were retroactive and should be merged into 1-2 at next RISE.",
+      "q20_one_fix": "Fix the RRL capture order. 1 line. 754 KB. 32 user messages. From KILO_GAP to REAL. Everything else flows from this."
+    }
+  }
+}

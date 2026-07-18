@@ -1,0 +1,177 @@
+﻿{
+    "run":  176,
+    "ledger_id":  "HL-7308",
+    "merkle_short":  "D55DCA9CB8996454",
+    "starmap_file":  "starmap-run176.json",
+    "keywords_file":  "rfkw-run176.txt",
+    "keywords_used":  [
+                          "check",
+                          "stage",
+                          "command",
+                          "error",
+                          "worker",
+                          "protocol",
+                          "issue",
+                          "legacy",
+                          "endpoint",
+                          "debugging",
+                          "pasted",
+                          "`/api/student/checkpin`",
+                          "original",
+                          "{\"role\":\"assistant\",\"text\":\"",
+                          "reincarnatedeath",
+                          "death",
+                          "empty",
+                          "`computehash`",
+                          "looking",
+                          "previous",
+                          "\\\\\\\"stage",
+                          "\\\\\\\"continue\\\\\\\"",
+                          "(-not",
+                          "continue.",
+                          "canonical",
+                          "there\u0027s",
+                          "execute",
+                          "never",
+                          "write-host"
+                      ],
+    "pieces_synced":  15,
+    "pieces":  [
+                   {
+                       "id":  "ART-1780549260396-8GVG",
+                       "title":  "GOSPEL 444 Protocol â Page 12",
+                       "url":  "protocols/gospel-444-protocol/page-12.png",
+                       "keywords":  [
+                                        "protocol"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780549259054-07SO",
+                       "title":  "GOSPEL 444 Protocol â Page 11",
+                       "url":  "protocols/gospel-444-protocol/page-11.png",
+                       "keywords":  [
+                                        "protocol"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780549257680-CUDA",
+                       "title":  "GOSPEL 444 Protocol â Page 10",
+                       "url":  "protocols/gospel-444-protocol/page-10.png",
+                       "keywords":  [
+                                        "protocol"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780549256297-E73M",
+                       "title":  "GOSPEL 444 Protocol â Page 09",
+                       "url":  "protocols/gospel-444-protocol/page-09.png",
+                       "keywords":  [
+                                        "protocol"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780549254947-0KK2",
+                       "title":  "GOSPEL 444 Protocol â Page 08",
+                       "url":  "protocols/gospel-444-protocol/page-08.png",
+                       "keywords":  [
+                                        "protocol"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780549253577-N36D",
+                       "title":  "GOSPEL 444 Protocol â Page 07",
+                       "url":  "protocols/gospel-444-protocol/page-07.png",
+                       "keywords":  [
+                                        "protocol"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780549252218-WUEZ",
+                       "title":  "GOSPEL 444 Protocol â Page 06",
+                       "url":  "protocols/gospel-444-protocol/page-06.png",
+                       "keywords":  [
+                                        "protocol"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780549250843-D1BZ",
+                       "title":  "GOSPEL 444 Protocol â Page 05",
+                       "url":  "protocols/gospel-444-protocol/page-05.png",
+                       "keywords":  [
+                                        "protocol"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780549249513-D8PM",
+                       "title":  "GOSPEL 444 Protocol â Page 04",
+                       "url":  "protocols/gospel-444-protocol/page-04.png",
+                       "keywords":  [
+                                        "protocol"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780549248145-75SE",
+                       "title":  "GOSPEL 444 Protocol â Page 03",
+                       "url":  "protocols/gospel-444-protocol/page-03.png",
+                       "keywords":  [
+                                        "protocol"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780549246789-Q9FX",
+                       "title":  "GOSPEL 444 Protocol â Page 02",
+                       "url":  "protocols/gospel-444-protocol/page-02.png",
+                       "keywords":  [
+                                        "protocol"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780549245174-12YK",
+                       "title":  "GOSPEL 444 Protocol â Page 01",
+                       "url":  "protocols/gospel-444-protocol/page-01.png",
+                       "keywords":  [
+                                        "protocol"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780548343466-OGXZ",
+                       "title":  "Phoenix Pages â Kinetic Gates: The 5 Benchmarks",
+                       "url":  "codex_preview/PHOENIX_PAGES/page_01.png",
+                       "keywords":  [
+                                        "command"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780547627291-NTKA",
+                       "title":  "The 45/15 Protocol: The 1-Hour Lifestyle",
+                       "url":  "CANON/ARTWORK/unnamed-art-04.png",
+                       "keywords":  [
+                                        "protocol"
+                                    ],
+                       "title_hit":  false
+                   },
+                   {
+                       "id":  "ART-1780547624521-V2TL",
+                       "title":  "The Phoenix Rising Protocol: Transmuting Mice into Tigers",
+                       "url":  "CANON/ARTWORK/unnamed-art-02.png",
+                       "keywords":  [
+                                        "protocol"
+                                    ],
+                       "title_hit":  false
+                   }
+               ],
+    "executed_at":  "2026-07-18T17:11:51.6546487+07:00"
+}

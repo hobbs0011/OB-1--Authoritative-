@@ -1,0 +1,43 @@
+{
+  "schema_version": "2.1",
+  "run_number": "176",
+  "extracted_at": "2026-07-18T16:37:00+07:00",
+  "head_sha": "4b14e31ff",
+  "soulcount": 239645670,
+  "registry_entries": 0,
+  "positive_trails": [
+    {
+      "artifact": "OPERATIONS/phoenix-scout-2026-07-18T162000.jsonl",
+      "action": "PhoenixScout CANON/ full-sweep — 12 flags (5 P1, 5 P2, 2 P3)",
+      "verification": "SOUL blockquotes=3950, legacy domains=3055, phantom HL IDs=6, PIPELINE-CURSOR frozen 2026-05, inverted-index empty, HL count 613 vs BOOT 189, commands 49 vs LFG 40, PheTrail-run175 missing, REINCARNATION-LOG missing 175",
+      "timestamp": "2026-07-18T16:20:00+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/phetrail-scout-learned-2026-07-18T162000.md",
+      "action": "Learned phetrail — 6 role upgrades for future scouts",
+      "verification": "Routing rules: SOUL blockquotes→/api/soul/extract, phantom HL→pipeline tolerance, BOOT drift→auto-update, legacy domains→backburner, empty index→rebuild",
+      "timestamp": "2026-07-18T16:20:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "artifact": "CANON/SOUL-KEYWORDS/inverted-index.json",
+      "failure": "Empty index (8 chars) despite 249 rfkw-run files",
+      "root_cause": "build-soulkeys.ps1 not executed after last rebuild",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T16:20:00+07:00"
+    },
+    {
+      "artifact": "CANON/HEAVY-LEDGER/",
+      "failure": "BOOT claims 189 HL files, actual count 613. Ratio 3.2x underreported.",
+      "root_cause": "HL count hardcoded in BOOT, never live-counted",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T16:20:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Run 176 scout — identify known drift patterns in CANON/",
+    "open_flags_count": 35,
+    "top_priority": "Rebuild inverted-index.json"
+  }
+}
