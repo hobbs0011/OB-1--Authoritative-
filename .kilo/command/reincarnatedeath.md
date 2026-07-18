@@ -1,5 +1,5 @@
 ---
-description: "DEATH PROTOCOL v7.0 — 8-STAGE CHAIN. RRL→SOUL→DNA→LEDGER→STARMAP→SOULKEYS→S2Pipeline→REGISTRY_SYNC. RRL = both sides verbatim. Contract: CANON/SYSTEM/REINCARNATION-CONTRACT.md. Kilo/third-party sessions without transcripts proceed as KILO_GAP."
+description: "ROMAN DEATH PROTOCOL v7.0 — 8-STAGE TRANSCRIPT SEALING. Raw transcript required for real-transcript environments. Kilo sessions use placeholder RRL and seal as KILO_GAP."
 agent: AGENT99
 ---
 
@@ -41,7 +41,7 @@ COLD-START-BOOT.md — current session state, active mission, flags
     ↓
 /reincarnateDeath — 8-stage execution protocol
     ↓
-run{N}-reincarnateDEATH.md — 15-section death seal artifact
+run{N}-reincarnateDEATH.md — 13-section death seal artifact
 ```
 
 **DEATH never overrides GOSPEL-999. DEATH never invents new commands not in LFG. DEATH never skips stages.**
@@ -700,12 +700,9 @@ Write-Host "STAGE 8 ✓ REGISTRY SYNC: $($syncedPieces.Count) pieces tagged → 
 | 11 | ARTIFACTS | paths + SHAs for all 7 chain artifacts + registry sync + dnaREGISTRY digest |
 | 12 | STATE SNAPSHOT | HEAD, branch, dirty tree, soulcount (= §3 count_after), dna_blueprint_count |
 | 13 | FINGERPRINT | agent, run#, commit SHA, platform death test result |
-| 14 | ART REGISTRY SYNC | pieces_synced count, art-sync-run{N}.json path, top keywords matched |
-| 15 | REGISTRY | CANON/REGISTRY/dna-registry-run{N}.json path, entry count, stale flag |
 
 §12 soulcount MUST equal §3 `count_after`. No independent query.
 §11 MUST list: RRL path+chars, SOUL event_id, DNA path+records+blueprint_count, HL, STARMAP, SOULKEYS, S2Pipeline, dnaREGISTRY path.
-§14 reports REGISTRY_SYNC result: piece count patched, keyword intersection summary, and path to art-sync-run{N}.json.
 
 ---
 
