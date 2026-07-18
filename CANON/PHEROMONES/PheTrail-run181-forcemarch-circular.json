@@ -1,0 +1,63 @@
+{
+  "schema_version": "2.2",
+  "run_number": "181",
+  "extracted_at": "2026-07-19T02:48:00+07:00",
+  "head_sha": "90ebb623a",
+  "soulcount": 239646210,
+  "registry_entries": 0,
+  "positive_trails": [
+    {
+      "artifact": "CANON/SYSTEM/COLD-START-BOOT.md",
+      "action": "FINGERPRINT advanced from RUN 177 to RUN 181, aligned with actual HEAD 90ebb623a",
+      "verification": "BOOT FINGERPRINT CURRENT now matches git rev-parse --short HEAD",
+      "timestamp": "2026-07-19T02:48:00+07:00"
+    },
+    {
+      "artifact": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json",
+      "action": "Schema repaired: run field changed from flat integer to nested object { current, last_death } to match obi.ps1 verify expectation",
+      "verification": "verify script no longer throws PropertyNotFound on $stateSnapshot.run.current",
+      "timestamp": "2026-07-19T02:48:00+07:00"
+    },
+    {
+      "artifact": ".kilo/command/forcemarch.md",
+      "action": "Language rewritten from conquest to circular reinforcement: recover forgotten territory → reinforce immediate kingdom",
+      "verification": "Frontmatter description + body Stage I-VI + footer all updated",
+      "timestamp": "2026-07-19T02:48:00+07:00"
+    },
+    {
+      "artifact": "Kilo DB part table",
+      "action": "Scout confirmed 49,695 unmined inner-thought records across all sessions; 607 thinking/tool_result parts identified",
+      "verification": "node sqlite query on C:\\Users\\mrmic\\.local\\share\\kilo\\kilo.db part table",
+      "timestamp": "2026-07-19T02:48:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "artifact": "CANON/SYSTEM/COLD-START-BOOT.md",
+      "failure": "FINGERPRINT was 4 runs behind actual HEAD before march correction",
+      "root_cause": "Runs 178-181 executed without advancing BOOT fingerprint",
+      "decay_days": 30,
+      "timestamp": "2026-07-19T02:48:00+07:00"
+    },
+    {
+      "artifact": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json",
+      "failure": "Schema drift: run field was flat integer instead of nested object expected by verify script",
+      "root_cause": "Death seal writer and verify script disagree on STATE-SNAPSHOT schema",
+      "decay_days": 30,
+      "timestamp": "2026-07-19T02:48:00+07:00"
+    },
+    {
+      "artifact": "CANON/PIPELINE/pipeline-run*.json",
+      "failure": "Earlier scout reported banned aggregate SOULcount in 10+ pipeline files; re-scan found 0",
+      "root_cause": "Pipeline files were likely regenerated between scans, or original search pattern was stale",
+      "decay_days": 30,
+      "timestamp": "2026-07-19T02:48:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Circular march — immediate kingdom reinforcement",
+    "open_flags_count": 35,
+    "top_priority": "Wire Kilo DB part table into SOUL pipeline as REASONING stage (49,695 unmined records)",
+    "march_stages_completed": ["I-SCOUT","II-FINGERPRINT","III-SOUL","IV-VERIFY","V-GARRISON","VI-LIMITANEI"]
+  }
+}

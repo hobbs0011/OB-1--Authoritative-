@@ -1,10 +1,12 @@
 ﻿{
-    "run":  181,
+    "run": {
+        "current": 182,
+        "last_death": 181
+    },
     "updated_at":  "2026-07-19T01:01:44.5087305+07:00",
     "head":  "a2d2c0802",
     "branch":  "canon",
     "rrl_fidelity":  "HOLLOW",
-    "soulcount":  239646210,
     "dna_blueprint_count":  0,
     "ledger_id":  "HL-7313",
     "s2pipeline_result":  "KILO_GAP",

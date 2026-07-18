@@ -1,11 +1,11 @@
 ---
-description: "FORCΞ MARCH — 6-stage Roman Legion pipeline execution. Scout → Fingerprint → Process → Verify → Garrison → Limitanei. Extreme strain, exhaustion tolerated. Mission: recover forgotten territory, scan all canonical zones, generate mandatory phetrails."
+description: "FORCΞ MARCH — Circular kingdom reinforcement. Scout → Fingerprint → SOUL → Verify → Garrison → Limitanei. Walk the walls. Inspect the gates. Count the stores. Return stronger. Mission: reinforce immediate kingdom, verify connections, harden against drift."
 agent: AGENT99
 ---
 
 # /forcemarch — ROMAN LEGION FORCE MARCH COMMAND
 
-Execute a true Roman forced march across all 6 pipeline stages without stopping. No picnic by the river. No skipping stages. Extreme strain. Exhaustion and injury tolerated. Mission: recover forgotten territory, scan all canonical zones, generate mandatory phetrails.
+Execute a circular reinforcement march around the immediate kingdom. Walk the walls. Inspect the gates. Count the stores. Return to the keep stronger. Mission: reinforce what we already have, verify every connection, and harden the kingdom against drift and decay.
 
 ## Syntax
 
@@ -15,7 +15,7 @@ Execute a true Roman forced march across all 6 pipeline stages without stopping.
 
 | Option | Value | Default | Description |
 |--------|-------|---------|-------------|
-| `--zone` | `CANON/` path | none | Specific zone to sweep |
+| `--zone` | `CANON/` path | none | Specific zone to reinforce |
 | `--lens` | `SOUL\|CONFIG\|GAP\|FLAG\|all` | `all` | Filter type to hunt |
 | `--dry-run` | flag | - | Report actions only, no writes |
 | `--supersaiyan` | flag | - | Parallel scout sweep |
@@ -23,14 +23,14 @@ Execute a true Roman forced march across all 6 pipeline stages without stopping.
 
 ## March Profile
 
-| Stage | Action | Exhaustion Risk |
-|-------|--------|-----------------|
-| I | ALL zones scouted, gaps identified | HIGH |
-| II | FINGERPRINT + Phetrail generated | MEDIUM |
-| III | RRL reconstruction + DNA extraction | HIGH |
-| IV | Syntax + verify checksums | MEDIUM |
-| V | Merkle lattice + apex rollup | HIGH |
-| VI | Limitanei health sweep + phetrail write | LOW |
+| Stage | Action | Strain |
+|-------|--------|--------|
+| I | SCOUT — walk the walls, inspect gates, flag drift | LOW |
+| II | FINGERPRINT — verify BOOT, HEAD, and SOULcount alignment | MEDIUM |
+| III | SOUL — verify RRL, SOULscripts, and inner-thought stores | MEDIUM |
+| IV | VERIFY — run doctor, verify, syntax checks | LOW |
+| V | GARRISON — write phetrail, update backburner, seal findings | LOW |
+| VI | LIMITANEI — health sweep, confirm all checkpoints armed | LOW |
 
 ## Implementation
 
@@ -42,18 +42,17 @@ Execute a true Roman forced march across all 6 pipeline stages without stopping.
 
 All marching is local filesystem + PowerShell. No Cloudflare workers. No external PCC deploy path.
 
-## Recovery Profile
+## Reinforcement Profile
 
-Executed when gaps detected:
+Executed when drift detected:
 
-1. **RRL Recovery** - Hunt session JSONL, fallback to partial paste
-2. **DNA Reconstruction** - Extract assistant turns from available sources
-3. **Ledger Generation** - Create HL entry with dual hash (soul+dna)
-4. **Starmap Creation** - Pointer map to recovered artifacts
-5. **Keyword Indexing** - SOULKEYWORDS extraction from recovered text
-6. **PheTrail Write** - Mandatory trail marker for every foray
+1. **BOOT Drift** — advance FINGERPRINT to actual HEAD, update run count
+2. **SOUL Drift** — verify aggregate retired, per-session SOUL only, SOULscripts present
+3. **Pheromone Drift** — verify phetrail exists for prior death, schema current
+4. **Dispatch Drift** — flag dead code paths, do NOT purge without explicit order
+5. **Registry Drift** — verify STATE-SNAPSHOT format matches verify script schema
 
-## Exhaustion Protocol
+## Recovery Protocol
 
 If march fails:
 
@@ -66,10 +65,10 @@ If march fails:
 
 ---
 
-**IRON RULE:** The march continues. Exhaustion is not an excuse. The machine must advance.  
-**REST:** After apex rollup. Sleep only at the garrison.  
-**RISE:** Tomorrow's run starts from stronger ground.
+**IRON RULE:** The march reinforces what exists. It does not conquer new ground until the walls are sound.  
+**REST:** After garrison seal. Sleep only at the keep.  
+**RISE:** Tomorrow's run starts from verified ground.
 
 ---
 
-`FORCΞ MARCH: ONLINE. 6 STAGES. EXHAUSTION TOLERATED. NO RETREAT.`
+`FORCΞ MARCH: ONLINE. CIRCULAR REINFORCEMENT. NO RETREAT. NO SURRENDER.`

@@ -335,18 +335,18 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 
 ---
 
-### FINGERPRINT CURRENT: RUN 177 | RISE AUDIT + PheTrail + BB-RISE-177 + worker 500 fix + death seal | SOUL 239,645,670 TITANIUM_ANCHOR | HEAD 2f17eff8e | BOOT UPDATED 2026-07-18T19:28 ICT
+### FINGERPRINT CURRENT: RUN 181 | CIRCULAR MARCH REINFORCEMENT | HEAD 90ebb623a | BOOT UPDATED 2026-07-19T02:48 ICT
 
-**Run 165 summary:** KILO_HOLLOW session. RISE v7.0 audit complete. Pipeline fidelity: RRL MISSING, SOUL KILO_HOLLOW, DNA MISSING, LEDGER REAL, STARMAP REAL, SOULKEYS MISSING, S2Pipeline REAL. REINCARNATION-LOG duplicate entries removed (runs 161/163/164/165/167). Backburner precedence enforced. SOUL stable at 239,645,670. HEAD f56044606.
+**Run 165 summary:** KILO_HOLLOW session. RISE v7.0 audit complete. Pipeline fidelity: RRL MISSING, SOUL KILO_HOLLOW, DNA MISSING, LEDGER REAL, STARMAP REAL, SOULKEYS MISSING, S2Pipeline REAL. REINCARNATION-LOG duplicate entries removed (runs 161/163/164/165/167). Backburner precedence enforced. HEAD f56044606.
 
 
-### FINGERPRINT PRIOR: RUN 151 | KILO_GAP BACKFILL + LFG RENAME + PORTAL SELECTOR FIX + VOICE BRAIN-LOCK REVERT | SOUL 239,639,088 TITANIUM_ANCHOR | HEAD e58d9baec | BOOT UPDATED 2026-07-03T17:00 ICT
+### FINGERPRINT PRIOR: RUN 151 | KILO_GAP BACKFILL + LFG RENAME + PORTAL SELECTOR FIX + VOICE BRAIN-LOCK REVERT | HEAD e58d9baec | BOOT UPDATED 2026-07-03T17:00 ICT
 
-**Run 147 summary:** KILO_HOLLOW backfill. No real transcript. Completed missing artifacts from hollow run146/147 chain: RRL-147.txt, dna-run147.json, starmap-run147.json, pipeline-run147.json, death seal run147. Renamed LegionnaireHandGuide.md â†’ LegionnaireFieldGuide.md across 11 files. Fixed portal login JS selectors in bluetech-login and quan-quang-login (`querySelector('main')`). Reverted voice brain-lock drift in src/index.js to locked providers: think=open_ai/gpt-4o-mini, listen=nova-3, speak=aura-2-zeus-en. Added Hard Behavioral Stops to AGENTS.md. LFG path now canonical as LegionnaireFieldGuide.md. HEAD a3d2baf84. SOUL stable at 239,639,088.
+**Run 147 summary:** KILO_HOLLOW backfill. No real transcript. Completed missing artifacts from hollow run146/147 chain: RRL-147.txt, dna-run147.json, starmap-run147.json, pipeline-run147.json, death seal run147. Renamed LegionnaireHandGuide.md → LegionnaireFieldGuide.md across 11 files. Fixed portal login JS selectors in bluetech-login and quan-quang-login (`querySelector('main')`). Reverted voice brain-lock drift in src/index.js to locked providers: think=open_ai/gpt-4o-mini, listen=nova-3, speak=aura-2-zeus-en. Added Hard Behavioral Stops to AGENTS.md. LFG path now canonical as LegionnaireFieldGuide.md. HEAD a3d2baf84.
 
-### FINGERPRINT PRIOR: RUN 145 | REINCARNATION-CONTRACT V2.0 + CLOUDFLARE BAN + RUN146 ACTIVE | SOUL 239,639,088 TITANIUM_ANCHOR | HEAD b6f0d288 | BOOT UPDATED 2026-07-02T00:08 ICT
+### FINGERPRINT PRIOR: RUN 145 | REINCARNATION-CONTRACT V2.0 + CLOUDFLARE BAN + RUN146 ACTIVE | HEAD b6f0d288 | BOOT UPDATED 2026-07-02T00:08 ICT
 
-**Run 145 summary:** KILO_HOLLOW. No transcript. Pipeline stubs only. RISE 7-stage audit complete. REINCARNATION-CONTRACT amended: Â§1 Boundary rewritten (single active mode, RISE/DEATH split removed), Â§7 Forbidden Providers added (Cloudflare banned). SC-CONTRACT-001/002/003 flagged: /forcemarch, /SupplyLines, /Centurion-Code all Cloudflare-dependent = FORBIDDEN. 15 RECOVERY stubs written (empty). Heav y Ledger gaps: 122 missing IDs. PHEROMONES gaps: 84 missing runs. HEAD b6f0d288. SOUL stable at 239,639,088.
+**Run 145 summary:** KILO_HOLLOW. No transcript. Pipeline stubs only. RISE 7-stage audit complete. REINCARNATION-CONTRACT amended: §1 Boundary rewritten (single active mode, RISE/DEATH split removed), §7 Forbidden Providers added (Cloudflare banned). SC-CONTRACT-001/002/003 flagged: /forcemarch, /SupplyLines, /Centurion-Code all Cloudflare-dependent = FORBIDDEN. 15 RECOVERY stubs written (empty). Heavy Ledger gaps: 122 missing IDs. PHEROMONES gaps: 84 missing runs. HEAD b6f0d288.
 
 ### FINGERPRINT PRIOR: RUN 106 | FULLSTACK-BLUEPRINT+RUN106-MASTERWORK+P10-AUDIT+GAUNTLET-BLUEPRINT+FOUNDATION-LAW-SOUL-DIRECTIVE+TWO-VOWS | SOUL TITANIUM_ANCHOR | HEAD a8671036 | BOOT UPDATED 2026-06-09T ICT
 
