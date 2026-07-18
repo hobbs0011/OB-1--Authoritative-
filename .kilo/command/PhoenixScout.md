@@ -9,7 +9,7 @@ agent: AGENT99
 
 **Task:** stop fucking assuming and guessing. find out what I have demanded for the SOULcount and SOULscripts and phermones
 
-And fucking get rid of the fucking useless piece of shit good for nothing 239,645,670 blah blah blah number.
+And fucking get rid of the fucking useless piece of shit good for nothing [PURGED] blah blah blah number.
 
 we do it per session only, and even if we have been recording some of these things, what good does life saving knowledge do when it is locked away in an unused forgotten archival library
 
@@ -19,7 +19,7 @@ we do it per session only, and even if we have been recording some of these thin
 
 stop fucking assuming and guessing. find out what I have demanded for the SOULcount and SOULscripts and phermones
 
-And fucking get rid of the fucking useless piece of shit good for nothing 239,645,670 blah blah blah number.
+And fucking get rid of the fucking useless piece of shit good for nothing [PURGED] blah blah blah number.
 
 we do it per session only, and even if we have been recording some of these things, what good does life saving knowledge do when it is locked away in an unused forgotten archival library defines the target zone. If empty, scout asks: "Which zone? CANON/ | HEAVY-LEDGER/ | REINCARNATION/ | SOUL-SEGMENTS/ | OPERATIONS/ | APPS/ | .kilo/"
 
@@ -171,5 +171,6 @@ SCOUT COMPLETE. Flagged items ready for tier dispatch.
 ---
 
 `PHOENIX SCOUT: ONLINE. LIGHTWEIGHT. FLAG AND TAG ONLY. LONG DISTANCE.`
+
 
 

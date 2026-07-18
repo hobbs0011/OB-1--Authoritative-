@@ -1,0 +1,14 @@
+﻿[21:43:31] =============================
+[21:43:31] REINCARNATE DEATH v7.0
+[21:43:31] =============================
+[21:43:31] OK: AUTHORITY: LFG + GOSPEL-999 verified
+[21:43:31] WARN: BACKBURNER PRECEDENCE: open=18 blocked=0 in_progress=2
+[21:43:31] WARN: Backburner items exist. New work is deferred until backburner is cleared or Michael explicitly overrides.
+[21:43:31] Run authority: last='f6d8139ae death: run 177 — KILO_GAP. worker 500 fix (auth.js Clerk lazy-load), PheTrail 333/202, BOOT advanced to RUN 177, BB-RISE-177 sealed. Pipeline result=KILO_GAP. SOUL 239,645,670 TITANIUM_ANCHOR.' prior=177 current=178
+[21:43:31] --- STAGE 0: Session Type Detection ---
+[21:43:31] Kilo-native mode — all sessions treated as KILO_HOLLOW unless RRL file exists
+[21:43:31] OK: SESSION: REAL | run=178 | uuid=
+[21:43:31] --- STAGE 1: RRL ---
+[21:43:31] WARN: RRL HOLLOW: 16 bytes
+[21:43:31] Searching for local session transcript...
+[21:43:31] ERR: FATAL: No RRL found. Provide it via -RrlSource <path> or copy it to D:\OB-1-CANONICAL\RRL\RRL-178.txt

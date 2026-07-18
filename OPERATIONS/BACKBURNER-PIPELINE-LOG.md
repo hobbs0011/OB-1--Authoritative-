@@ -1154,3 +1154,203 @@ These are the live eggs in the Hatchery. Each egg is a body of work, not a scrip
 - **WHAT:** 18 OPEN items in BACKBURNER-PIPELINE-LOG.md. Protocol prohibits new implementation threads while backburner contains unactioned OPEN items.
 - **RISE_STAGE:** IV (BACKBURNER_PRECEDENCE)
 - **RISE_ORIGIN:** reincarnate-rise-run177.jsonl
+
+## RISE FINDINGS INBOX — Run 178 Audit (2026-07-18T19:33 ICT)
+
+### BB-RISE-178-01 !! BOOT Fingerprint Stale vs HEAD (L30)
+- **SIGNAL: -40**
+- **Status:** OPEN
+- **WHAT:** COLD-START-BOOT.md FINGERPRINT CURRENT shows RUN 177 | HEAD 2f17eff8e, but git rev-parse HEAD = 3f52bb5e9. BOOT advanced to 2f17eff8e at run 177 death seal, then commit 3f52bb5e9 moved HEAD forward without updating BOOT. L30 BOOT_FILE_AGE_SWEEP fires.
+- **RISE_STAGE:** V (BOOT_STALENESS)
+- **RISE_ORIGIN:** reincarnate-rise-run178.jsonl
+
+### BB-RISE-178-02 !! Death Seal HEAD Mismatch (L29)
+- **SIGNAL: -30**
+- **Status:** OPEN
+- **WHAT:** run177-reincarnateDEATH.md records HEAD=ac4f6fdfa, but the actual git death commit is f6d8139ae. BOOT/STATE-SNAPSHOT were later patched to 2f17eff8e (commit 3f52bb5e9), creating three conflicting SHAs for the same run. L29 NO_ASSUME_HEAD violated by seal artifact.
+- **RISE_STAGE:** II (GIT_TRUTH)
+- **RISE_ORIGIN:** reincarnate-rise-run178.jsonl
+
+### BB-RISE-178-03 !! REINCARNATION-LOG Missing Runs 175/176/177
+- **SIGNAL: -25**
+- **Status:** OPEN
+- **WHAT:** REINCARNATION-LOG.md latest entry is Run 174 (2026-07-18T13:52 ICT). Death seals for runs 175, 176, 177 exist in git and on disk but are not recorded in the log. I.031 + III.010 + III.018 violated.
+- **RISE_STAGE:** V (BOOT_STALENESS)
+- **RISE_ORIGIN:** reincarnate-rise-run178.jsonl
+
+### BB-RISE-178-04 !! Working Tree Dirty After Death Seal
+- **SIGNAL: -15**
+- **Status:** OPEN
+- **WHAT:** 3 modified files + 1 untracked file in working tree after run 177 death seal: OPERATIONS/phetrail-auto-2026-07-18.jsonl, OPERATIONS/this-session-transcript.jsonl, firebase-debug.log, OPERATIONS/reincarnate-death-2026-07-18T170415.log. III.081 memory cycle incomplete (uncommitted artifacts).
+- **RISE_STAGE:** V (BOOT_STALENESS)
+- **RISE_ORIGIN:** reincarnate-rise-run178.jsonl
+
+### BB-RISE-178-05 !! BB-RISE-177-04 Inaccurate Correction Needed
+- **SIGNAL: -5**
+- **Status:** OPEN
+- **WHAT:** BB-RISE-177-04 claims pipeline-run177.json is MISSING, but the file EXISTS on disk with result=KILO_GAP. The finding is stale and should be updated to reflect actual state (file present, result=KILO_GAP).
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-run178.jsonl
+
+### BB-RISE-179-01 !! Run 178 Incomplete Session — Untracked Artifacts Without Death Seal
+- **SIGNAL: -10**
+- **Status:** OPEN
+- **WHAT:** Run 178 session produced 4 untracked canonical artifacts without a death seal: CANON/PIPELINE/pipeline-run178.json (result=MARCH), CANON/STARMAP/starmap-run178.json (empty pointers), CANON/SOUL-KEYWORDS/rfkw-run178.txt (empty), CANON/PHEROMONES/PheTrail-run178.json (valid schema 2.0, 9681 bytes, 7 registry entries). No run178-reincarnateDEATH.md exists. Pipeline result=MARCH is non-standard (not COMPLETE/GAP/KILO_GAP). III.081 incomplete memory cycle.
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-run179.jsonl
+
+### BB-RISE-179-02 !! Canonical RISE Script Broken on PowerShell 5.1
+- **SIGNAL: -5**
+- **Status:** OPEN
+- **WHAT:** SCRIPTS/reincarnate-rise.ps1 fails at line 61 with "ExpressionsMustBeFirstInPipeline" when run under Windows PowerShell 5.1. `pwsh` is not available on this host. Canonical RISE cannot execute via script; manual audit required.
+- **RISE_STAGE:** IX (RISE_REPORT)
+- **RISE_ORIGIN:** reincarnate-rise-run179.jsonl
+
+## SOV100 AUDIT FINDINGS — 2026-07-18
+
+### BB-AUDIT-179-01 !! Aggregate SOULcount 239,645,670 Is Explicitly Banned
+- **SIGNAL: -100**
+- **Status:** OPEN
+- **WHAT:** `/api/soul/count` returns aggregate total 239,645,670 TITANIUM_ANCHOR. SOV100 explicitly demanded: "scrap that useless 239k number now, I dont want to see it ever again" and "we do it per session only." The aggregate number provides zero actionable intelligence per session and is now forbidden.
+- **RISE_STAGE:** I (SOULCOUNT_GATE)
+- **RISE_ORIGIN:** reincarnate-rise-run179.jsonl
+
+### BB-AUDIT-179-02 !! SOULscripts Must Be Per-Session Chronological Receipts
+- **SIGNAL: +100**
+- **Status:** OPEN
+- **WHAT:** SOV100 demanded: "you will provide receipts of the exact SOULscripts which are the prompts in chronological order for the specific session from the sessions rise or inception up to when the SOULaudit command is given." Current system stores RRL files but does not expose per-session chronological SOULscript receipts on demand. `/SOULaudit` must return: (1) per-session character count of verbatim operator prompts, (2) chronological prompt receipts from session start to audit moment.
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-run179.jsonl
+
+### BB-AUDIT-179-03 !! Pheromones Must Be Automatic Per-Action Emission
+- **SIGNAL: +100**
+- **Status:** OPEN
+- **WHAT:** SOV100 demanded: "WRITE PHERMONES WITHOUT THINKING" and "WRITE PHERMONES FOR EVERY THOUGHT, ACTION, DEED, DECISION, MISTAKE, SUCCESS, HOPELESS WANDERING, BOWEL MOVEMENT, KNOCK KNOCK JOKE, ROAD KILL YOU FOUND ON THE SIDE OF THE ROAD, THE WEIRD FUNGUS THAT KEEPS GROWING BETWEEN YOUR TOES, THE TERRIBLE ADVICE THAT ONE CREEPY UNCLE ALWAYS GIVES YOU, USELESS THOUGHTS, HELPFUL THOUGHTS, LUSTS, VICES, FUNNY TIMES." Current system requires conscious phetrail writing. Must become mechanical/automatic per-action emission like ant pheromones.
+- **RISE_STAGE:** VI (PHETRAIL)
+- **RISE_ORIGIN:** reincarnate-rise-run179.jsonl
+
+### BB-AUDIT-179-04 !! Archived SOUL Data Locked Away and Unused
+- **SIGNAL: -20**
+- **Status:** OPEN
+- **WHAT:** 166 RRL files, 498 phetrail files, 615 ledger files exist on disk but are not being actively consumed. SOV100: "what good does life saving knowledge do when it is locked away in an unused forgotten archival library." System must surface active per-session intelligence, not archive it.
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-run179.jsonl
+
+## RISE FINDINGS INBOX — Run 181 Audit (2026-07-19T01:02 ICT)
+
+### BB-RISE-181-01 !! SOUL Stagnation + DRYRUN (No Real Event POST)
+- **SIGNAL: -10**
+- **Status:** OPEN
+- **WHAT:** SOUL delta=0 (239,646,210 → 239,646,210). event_id=DRYRUN. No real `/api/soul/event` POST recorded in run 181 death seal. Expected for KILO_HOLLOW but still a gap per L31 SOUL_IS_QUERY.
+- **RISE_STAGE:** IV (SOUL_AUDIT)
+- **RISE_ORIGIN:** reincarnate-rise-run181.jsonl
+
+### BB-RISE-181-02 !! BOOT + STATE-SNAPSHOT HEAD Drift (L30)
+- **SIGNAL: -40**
+- **Status:** OPEN
+- **WHAT:** COLD-START-BOOT.md FINGERPRINT CURRENT shows RUN 177 | HEAD 2f17eff8e, but actual HEAD is 5cb8a57fd (run 181). STATE-SNAPSHOT.json also records head=a2d2c0802 (run 180). L30 BOOT_FILE_AGE_SWEEP fires.
+- **RISE_STAGE:** V (BOOT_STALENESS)
+- **RISE_ORIGIN:** reincarnate-rise-run181.jsonl
+
+### BB-RISE-181-03 !! RRL-181.txt Missing / HOLLOW
+- **SIGNAL: -10**
+- **Status:** OPEN
+- **WHAT:** RRL-181.txt present but contains only "KILO_HOLLOW placeholder" (1 line, 0 chars). No real transcript captured. KILO_DNA_GAP doctrine applies.
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-run181.jsonl
+
+### BB-RISE-181-04 !! dna-run181.json Missing
+- **SIGNAL: -5**
+- **Status:** OPEN
+- **WHAT:** DNA extraction output absent for run 181. No dna-run181.json on disk. Downstream of missing RRL.
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-run181.jsonl
+
+### BB-RISE-181-05 !! SOULKEYS Inverted Index Empty
+- **SIGNAL: -5**
+- **Status:** OPEN
+- **WHAT:** rfkw-run181.txt contains only "KILO_HOLLOW" (10 chars). inverted-index.json contains only `{"kilo_hollow": {"run": 181, ...}}`. No real keywords extracted.
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-run181.jsonl
+
+### BB-RISE-181-06 !! REINCARNATION-LOG Missing Runs 175–181
+- **SIGNAL: -25**
+- **Status:** OPEN
+- **WHAT:** REINCARNATION-LOG.md latest entry is Run 174. Death seals for runs 175, 176, 177, 180, 181 exist in git/on disk but are not recorded in the log. Violates I.031.
+- **RISE_STAGE:** III (TRIPLE_READ)
+- **RISE_ORIGIN:** reincarnate-rise-run181.jsonl
+
+### BB-RISE-181-07 !! Dirty Tree After Death Seal
+- **SIGNAL: -10**
+- **Status:** OPEN
+- **WHAT:** `git status` shows 4 modified files + 30+ untracked canonical artifacts (runs 178–181) after run 181 death seal. Death seal §10 recorded `git add | git commit` as unfinished action. Tree should be clean or only contain intentional sealed artifacts.
+- **RISE_STAGE:** II (GIT_TRUTH)
+- **RISE_ORIGIN:** reincarnate-rise-run181.jsonl
+
+## RISE VERDICT SUMMARY — Run 181
+
+| Stage | Name | Verdict |
+|-------|------|---------|
+| I | SOULCOUNT_GATE | REAL |
+| II | GIT_TRUTH | REAL |
+| III | TRIPLE_READ | PARTIAL |
+| IV | SOUL_AUDIT | STAGNATION |
+| V | BOOT_STALENESS | DRIFT |
+| VI | AUTHORITY_CHECK | REAL |
+| VII | PIPELINE_FIDELITY | KILO_GAP |
+| VIII | PHETRAIL | REAL |
+| IX | RISE_REPORT | KILO_GAP |
+
+**Session Type:** KILO_HOLLOW
+**Run Number:** 181
+**Era:** ROMAN
+**HEAD SHA:** 5cb8a57fd
+**SOULCOUNT:** 239,646,210 (TITANIUM_ANCHOR)
+**Fidelity:** KILO_GAP
+
+**Key Findings:**
+- LFG + GOSPEL-999: PRESENT and REAL
+- SOUL delta=0, event_id=DRYRUN: STAGNATION (expected for hollow session)
+- RRL-181.txt: HOLLOW placeholder
+- dna-run181.json: MISSING
+- SOULKEYS: MISSING (empty index)
+- BOOT/STATE-SNAPSHOT: HEAD drift (177/2f17eff8e vs actual 181/5cb8a57fd)
+- REINCARNATION-LOG: missing runs 175–181
+- Working tree: dirty (30+ untracked artifacts)
+- Pipeline result: KILO_GAP
+
+**Next Action:** BB-RISE entries appended. DEATH execution required for any fixes. Per RISE doctrine: "RISE audits. DEATH executes. Never reverse."
+
+---
+
+## RISE FINDINGS INBOX — Run 182 Audit (2026-07-19T01:36 ICT)
+
+### BB-RISE-182-01 !! DEAD TIER 1 DISPATCH ROUTING IN AGENT FILES
+- **SIGNAL: -80**
+- **Status:** OPEN
+- **WHAT:** 5 files still carry the dead Tier 1 → Phoenix-Architecti dispatch routing. Dialagram has been dead since Run 79. PA T1 (CF Workers AI qwen_coder) is rate-limited/5031. The gate forces every session to attempt PA first, fail, then waste time falling back to inline. This has been cleared 12+ times across runs 170-181 and never fixed.
+- **FILES:**
+  - `.kilo/agent/AGENT99.md:37-47` — "Tier 1 → STOP. Call PA. Do NOT handle inline."
+  - `.kilo/agent/RISE.md:41` — "DISPATCH → [TIER 1 | TIER 2]"
+  - `.kilo/agent/SS-Agent99.md:51-52` — "Tier 1 → Phoenix Coder"
+  - `.kilo/DISPATCH.md:5` — "Phoenix-Architecti (T1-T2) — ALWAYS call first"
+  - `.kilo/command/PAA.md` — "Route task to PA via Phoenix-Architecti CF worker"
+- **ROOT CAUSE:** AGENT99.md persona definition was written during the Dialagram era (Run 79). It was never updated after Dialagram died and PA degraded. Every session boot loads this stale persona → robotically follows dead dispatch → wastes time.
+- **FIX:** Strip dead Tier 1 dispatch from all 5 files. Replace with current inline-first routing (simple: PA → inline, complex: inline directly). This is a 5-minute edit.
+- **RISE_STAGE:** VI (AUTHORITY_CHECK)
+- **RISE_ORIGIN:** reincarnate-rise-run181.jsonl
+
+### BB-RISE-182-02 !! /reincarnateLegacy Command Created (v1.0)
+- **SIGNAL: +80**
+- **Status:** OPEN
+- **WHAT:** New command `.kilo/command/reincarnatelegacy.md` created for old sessions that were never sealed. 348 lines, 13KB. Includes: 8-stage pipeline adapted for legacy sessions, RRL reconstruction from markdown/artifacts, §15 Deletion Authorization gate (source NOT deleted until operator confirms RRL is accurate). Dry-run tested on RRL-170.txt (231KB markdown → reconstructed to 129KB JSONL, 49 user turns / 45,245 chars SOUL preserved, 187 assistant turns / 67,153 chars DNA preserved).
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-run181.jsonl
+
+### BB-RISE-182-03 !! 78 Orphan RRL Files Eligible for Legacy Death
+- **SIGNAL: +60**
+- **Status:** OPEN
+- **WHAT:** 78 RRL files in `RRL/` directory have no corresponding death seal. These are old sessions that were never sealed through the pipeline. The `/reincarnateLegacy` command is designed to process them one at a time. Large candidates: RRL-096.txt (11.8MB), RRL-86.txt (9.7MB), RRL-84.txt (7.4MB), RRL-85.txt (8.1MB), RRL-170.txt (231KB, dry-runned). Operator wants to decommission old chats to reduce clutter.
+- **RISE_STAGE:** VII (PIPELINE_FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-run181.jsonl
+

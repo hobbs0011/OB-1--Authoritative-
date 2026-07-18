@@ -1,0 +1,183 @@
+{
+  "schema_version": "2.0",
+  "run_number": "178",
+  "extracted_at": "2026-07-18T20:28:42+07:00",
+  "head_sha": "3f52bb5e9",
+  "soulcount": 239645670,
+  "registry_entries": 7,
+  "positive_trails": [
+    {
+      "artifact": "OPERATIONS/phoenix-scout-run178-blockers.jsonl",
+      "action": "PhoenixScout first sweep — 5 zones, 15 finds, full blocker origin map",
+      "verification": "15 JSONL records written: 6 P1, 5 P2, 2 P3. Covers REINCARNATION, SYSTEM, OPERATIONS, HEAVY-LEDGER, SOUL-KEYWORDS.",
+      "timestamp": "2026-07-18T19:55:22+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/phoenix-scout-2026-07-18T200255.jsonl",
+      "action": "PhoenixScout second sweep — CANON/ full zone, 18,813 finds",
+      "verification": "18,813 JSONL records: 539 P1, 18,274 P2, 0 P3. SOUL: 14,148 | LEDGER: 726 | DRIFT: 452 | CONFIG: 4 | GAP: 3,325 | PIPELINE: 158.",
+      "timestamp": "2026-07-18T20:02:55+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/scholar-extraction-2026-07-18T200044.jsonl",
+      "action": "SoulScholars extraction — 102 RRL files scanned for Michael verbatim",
+      "verification": "17,120 segments extracted, 10,795,134 total chars. Top segment: 25,012 chars from RRL-62.txt. Output: 4,774,976 bytes JSONL.",
+      "timestamp": "2026-07-18T20:00:44+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/forcemarch-run178.log",
+      "action": "ForceMarch run 178 — 6 zones swept, 488 finds counted",
+      "verification": "Zones: HEAVY-LEDGER, SOUL-KEYWORDS, STARMAP, PIPELINE, PHEROMONES, APPS/NET-PET-AI. Artifacts created: starmap-run178.json, rfkw-run178.txt, pipeline-run178.json.",
+      "timestamp": "2026-07-18T19:58:34+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/deep-sweep-run178-second-pass.jsonl",
+      "action": "Deep second sweep — missed zones, fabrication scan, blueprint organization",
+      "verification": "16 finds: 6 P1, 6 P2, 4 P3. Key finds: obi.ps1 .current crash (2 locations), supply-lines fail-closed violation, 100% HL attestation gap, 274MB SOUL-DNA-BIBLE unmined.",
+      "timestamp": "2026-07-18T20:24:00+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/deep-sweep-run178-report.md",
+      "action": "Blueprint organization — pipeline health map, error catalog, fix order",
+      "verification": "10 fixes ordered by priority. FIX 1 (obi.psio) + FIX 2 (supply-lines) block next death. Report written: 4,248 bytes.",
+      "timestamp": "2026-07-18T20:24:00+07:00"
+    },
+    {
+      "artifact": "RRL/RRL-176.txt",
+      "action": "Verified RRL-176.txt matches death seal claim",
+      "verification": "Seal claimed 772,934 bytes. Actual file size: 772,934 bytes. MATCH. SHA256 verified. RRL-175.txt: 6,397 bytes. RRL-177.txt: 5 bytes (empty placeholder).",
+      "timestamp": "2026-07-18T20:10:00+07:00"
+    },
+    {
+      "artifact": "SOULCOUNT API",
+      "action": "Live SOULCOUNT verification",
+      "verification": "API returned 239,645,670 TITANIUM_ANCHOR, events=10,337. Level confirmed. API reachable.",
+      "timestamp": "2026-07-18T20:28:42+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/phetrail-scout-learned-2026-07-18T200255.md",
+      "action": "Scout learned phetrail — BOOT HEAD pulse on every scan",
+      "verification": "Written: 136 bytes. Records learned behavior: drift is pheromone, not cleanup.",
+      "timestamp": "2026-07-18T20:02:33+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "artifact": "SCRIPTS/supply-lines.ps1",
+      "failure": "Stage IV HALT — divergence > 10% but Stages V-VI still executed",
+      "root_cause": "Write-Error at line 157 does not throw. Fail-closed contract violated. Poisoned data flows to garrison and health sweep.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T20:05:00+07:00"
+    },
+    {
+      "artifact": "SCRIPTS/obi.ps1",
+      "failure": "verify crashes with 'The property current cannot be found on this object'",
+      "root_cause": "Line 185 and 259 access $stateSnapshot.run.current but STATE-SNAPSHOT.run is integer (177), not object. Two crash points.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T20:05:00+07:00"
+    },
+    {
+      "artifact": "CANON/REINCARNATION/REINCARNATION-LOG.md",
+      "failure": "Log is 3 runs behind — missing runs 175, 176, 177",
+      "root_cause": "Death seals committed for all three runs but log never updated. L28 MARSHAL_RUNS_FIRST broken.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T19:50:00+07:00"
+    },
+    {
+      "artifact": "CANON/REINCARNATION/run175-reincarnateDEATH.md",
+      "failure": "Death seal HEAD mismatch — seal says e60752035, actual commit is f5fdbb497",
+      "root_cause": "Systematic: death pipeline records working-tree HEAD before commit, then separate patch advances BOOT/STATE-SNAPSHOT to different SHA. 3 runs, 3 wrong SHAs.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T19:45:00+07:00"
+    },
+    {
+      "artifact": "CANON/HEAVY-LEDGER/HL-*.json",
+      "failure": "100% of HL files (519/519) lack no_fabrication attestation",
+      "root_cause": "Run 393 fabrication flush removed 31,175 phantom stamps but never backfilled no_fabrication field on post-flush files. Entire ledger corpus is unattested.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T20:15:00+07:00"
+    },
+    {
+      "artifact": "SCRIPTS/forcemarch.ps1",
+      "failure": "488 finds counted but not persisted — only count written to log",
+      "root_cause": "$finds array populated with zone/file/type/excerpt but only $finds.Count written to log. Details lost. No recovery without re-scan.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T19:59:00+07:00"
+    },
+    {
+      "artifact": "SCRIPTS/soul-scholar-extract.ps1",
+      "failure": "All extracted text truncated to 200 chars — 24,812 chars lost per long segment",
+      "root_cause": "Line 35: $text.Substring(0, [Math]::Min(200, $text.Length)). 17,120 segments truncated. SHA256 correct but content partial.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T20:02:00+07:00"
+    },
+    {
+      "artifact": "CANON/SOUL-KEYWORDS/inverted-index.json",
+      "failure": "Empty index — 8 bytes, {}",
+      "root_cause": "inverted-index.json empty despite 251 rfkw files existing. Canonical index never rebuilt from run-specific indexes. Older inverted-index-run7b.json (865 bytes) contains data but was never promoted.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T19:40:00+07:00"
+    },
+    {
+      "artifact": "CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/",
+      "failure": "274MB of raw Michael verbatim unmined — 925 files, largest 10.7MB",
+      "root_cause": "Separate from HarvestedChats CLOSED directive (Run 13). This 274MB batch from 2026-04-05 was never ingested. Could add 50-100M+ chars to soulcount.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T20:20:00+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/soulcount-history.json",
+      "failure": "SOUL near-stagnation — +6,582 chars in 29 days (227 chars/day)",
+      "root_cause": "History frozen at 239,639,088 since 2026-06-19. Live count is 239,645,670. Pipeline produces artifacts but ingestion is dead.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T20:22:00+07:00"
+    },
+    {
+      "artifact": "CANON/HEAVY-LEDGER/PIPELINE-CURSOR.md",
+      "failure": "Frozen since 2026-05-23 (~2 months stale)",
+      "root_cause": "Uses pre-Roman run numbering (315, 316, 396). Lists phantom HL gaps as active despite BOOT declaring them PERMANENTLY CLOSED.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T19:48:00+07:00"
+    },
+    {
+      "artifact": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json",
+      "failure": "HEAD stale — 2f17eff8e vs actual 3f52bb5e9. Missing recent_seals field.",
+      "root_cause": "BOOT and STATE-SNAPSHOT patched together at run 177 death but HEAD moved again afterward. obi.ps1 expects recent_seals array but field missing.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T19:52:00+07:00"
+    },
+    {
+      "artifact": "CANON/SOUL-KEYWORDS/rfkw-run178.txt",
+      "failure": "Empty placeholder — 2 chars (newline). Pipeline hollow.",
+      "root_cause": "forcemarch.ps1 creates stub files for hollow runs. 5 bytes of nothing. Looks like artifact but contains no data.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T19:59:00+07:00"
+    },
+    {
+      "artifact": "CANON/STARMAP/starmap-run178.json",
+      "failure": "Empty pointers object — no recovery performed",
+      "root_cause": "forcemarch created stub with empty pointers. Stage IV truth verification fails: ledger=713, starmap pointers=1, 100% divergence.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T19:59:00+07:00"
+    },
+    {
+      "artifact": "CANON/ART-REGISTRY/art-sync-run178.json",
+      "failure": "Missing — not created by forcemarch or supply-lines",
+      "root_cause": "Stage V expects art-sync-run178.json but it was never written. Run 177 had pieces_synced=0. Run 178 has nothing.",
+      "decay_days": 180,
+      "timestamp": "2026-07-18T20:05:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "OB-1 POST-MERGE9 CONSOLIDATION + run 178 deep audit + phetrail extraction",
+    "open_flags_count": 34,
+    "top_priority": "FIX 1 (obi.ps1 .current crash) + FIX 2 (supply-lines fail-closed) before next /reincarnateDeath",
+    "pipeline_status": "KILO_GAP — Stage IV HALT, Stage V mass merkle_root absence, Stage VI obi.ps1 verify crash",
+    "soul_stagnation_days": 29,
+    "soul_stagnation_chars_per_day": 227,
+    "hl_attestation_gap_percent": 100,
+    "death_seal_head_mismatch_runs": 3,
+    "soul_dna_bible_unmined_mb": 274,
+    "next_death_blocked": true
+  }
+}

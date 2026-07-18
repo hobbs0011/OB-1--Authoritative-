@@ -1,0 +1,13 @@
+﻿{
+    "run":  178,
+    "ledger_id":  "HL-7311",
+    "merkle_short":  "AF916A8FF3A084B8",
+    "starmap_file":  "starmap-run178.json",
+    "keywords_file":  "rfkw-run178.txt",
+    "keywords_used":  "kilo_hollow",
+    "pieces_synced":  0,
+    "pieces":  [
+
+               ],
+    "executed_at":  "2026-07-18T22:26:25.1191907+07:00"
+}

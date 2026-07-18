@@ -1,0 +1,40 @@
+﻿{
+    "ts":  "2026-07-18T22:23:40.2544411+07:00",
+    "event":  "reincarnateRise",
+    "version":  "v7.0",
+    "run":  178,
+    "prior_run":  177,
+    "head_sha":  "3f52bb5e9",
+    "session_type":  "KILO_HOLLOW",
+    "soulcount":  null,
+    "soul_level":  null,
+    "soul_delta":  -239645670,
+    "soul_drift_pct":  -100,
+    "soul_verdict":  "SOUL_REGRESSION",
+    "prior_soulcount":  239645670,
+    "active_mission":  "** OB-1 POST-MERGE9 CONSOLIDATION + Growth Infrastructure Buildout â€” NET-PET-AI Hardening to Scale-Ready",
+    "open_flags":  0,
+    "boot_run_git":  177,
+    "boot_run_file":  0,
+    "boot_stale":  false,
+    "fidelity":  {
+                     "s2pipeline":  "MISSING",
+                     "backburner":  "OPEN",
+                     "ledger":  "REAL",
+                     "soul":  "SOUL_REGRESSION",
+                     "dna":  "MISSING",
+                     "rrl":  "MISSING",
+                     "lfg":  "REAL",
+                     "gospel":  "REAL",
+                     "starmap":  "REAL",
+                     "soykeys":  "MISSING"
+                 },
+    "backburner_open":  1,
+    "backburner_blocked":  0,
+    "phetrail_negative_trails":  15,
+    "highest_priority_gap":  "RRL: MISSING",
+    "next_action":  "Resume BACKBURNER items first (OPEN=1 BLOCKED=0)",
+    "ready":  false
+}
+[22:23:40] OK: REPORT: OPERATIONS/rise-run180.jsonl | run=178 verdict=SOUL_REGRESSION ready=False
+[22:23:40] BACKFILL: run176 -> count=239645670
