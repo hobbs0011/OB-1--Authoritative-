@@ -97,7 +97,7 @@ $health = @{
     timestamp = $timestamp
     git_status = (git -C $repo status --short 2>$null)
     dirty = $false
-    soulcount = 239645670
+    soulcount = $null
     kilo_hollow = $true
 } | ConvertTo-Json -Depth 3
 $healthPath = Join-Path $ops "health-sweep-run$run.json"

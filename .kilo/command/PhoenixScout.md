@@ -1,5 +1,5 @@
 ﻿---
-description: "Lightweight T1 reconnaissance scout. Flag and tag unmined SOUL, phantom ledger entries, stale files, drift indicators across any target zone. Zero compute beyond identification — covers long distances fast. Outputs scout report to OPERATIONS/"
+description: PhoenixScout
 agent: AGENT99
 ---
 
@@ -133,6 +133,55 @@ SCOUT COMPLETE. Flagged items ready for tier dispatch.
 
 ---
 
+## SOULCOUNT Checkpoint
+
+```
+Before scan:  GET /api/soul/count → count_before_scout
+After scan:   GET /api/soul/count → count_after_scout
+Delta:        Δscout = count_after - count_before
+Log to:       phetrail + scout report
+```
+
+---
+
+## Pheromone Trail
+
+Every finding gets a scored trail entry:
+
+| Score | Label | Meaning |
+|-------|-------|---------|
+| +3 | CRITICAL_FIND | New Michael doctrine or unmined SOUL |
+| +2 | VERIFIED_FIX | Known gap confirmed repaired |
+| +1 | CORRECT_PATH | Expected state, no action needed |
+| 0 | NEUTRAL | Routine observation |
+| -1 | MINOR_GAP | Small gap, fixable in next phase |
+| -2 | STRUCTURAL_GAP | Major gap, needs engineering |
+| -3 | CRITICAL_BREACH | Chain broken, data loss, poison |
+
+Each trail entry includes:
+- `decision_context` — what was found and why it matters
+- `alternatives_considered` — what else was checked
+- `chosen_reason` — why this score was assigned
+- `artifact` — exact file path affected
+- `verification` — how the finding was confirmed
+
+---
+
+## Handoff to /forcemarch
+
+```
+SCOUT_COMPLETE:
+  run: [N]
+  zone: [scanned zone]
+  finds: [count]
+  phetrail: [path]
+  next: /forcemarch --zone [same zone]
+```
+
+**Do not advance to March until scout report is written and phetrail is scored.**
+
+---
+
 ## Rules
 
 - **Flag and tag ONLY.** Do NOT: extract, ingest, process, deploy, commit, push, or run any pipeline stage.
@@ -172,5 +221,4 @@ SCOUT COMPLETE. Flagged items ready for tier dispatch.
 
 `PHOENIX SCOUT: ONLINE. LIGHTWEIGHT. FLAG AND TAG ONLY. LONG DISTANCE.`
 
-
-
+gather as much info internally and externally (market research) as you can with a scout run, then we will give you some paid model deep think to come up with the solution in the following round.

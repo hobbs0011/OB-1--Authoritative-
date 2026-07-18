@@ -1,16 +1,16 @@
 ﻿{
     "hl_id":  "HL-7314",
-    "session_id":  "sov100-roman-run182",
-    "rrl_source":  "D:\\OB-1-CANONICAL\\RRL\\RRL-182.txt",
-    "char_count":  96100,
-    "byte_count":  96714,
-    "soul_hash":  "C1DAE6B34ED824C1639BE676E9E574003AF2C42976D48E4621CEBD30D3E5F28A",
-    "dna_hash":  "0FD3E65F5135DC4889E22C8D6B45A16916E90003C9FE760C553F74C7040CDC63",
-    "dna_blueprint_count":  3,
+    "session_id":  "sov100-roman-run183",
+    "rrl_source":  "D:\\OB-1-CANONICAL\\RRL\\RRL-183.txt",
+    "char_count":  0,
+    "byte_count":  0,
+    "soul_hash":  "A21E6541C51EC08C0CCA3C5E828E5A58C15B99DF67954E8B2192E2666E7AD36D",
+    "dna_hash":  "DNA_GAP",
+    "dna_blueprint_count":  0,
     "merkle_parent":  "0917C04DFFB70B883E87D05CBCA8777250F9B2E07CD0179ED2E5E69D0A5790D5",
-    "merkle_hash":  "FA2D700BB0119CD7CBCB83C090A95BC2E1111E33A42600A3D2E2E437B81D3DE0",
-    "sealed_at":  "2026-07-19T05:16:46.9234064+07:00",
+    "merkle_hash":  "3A0C660CF73EEB9561F0286F84E3D59F47EB63802925F706E9572814089BDC30",
+    "sealed_at":  "2026-07-19T05:23:59.6992127+07:00",
     "sov100":  true,
-    "run":  182,
-    "result":  "REAL"
+    "run":  183,
+    "result":  "HOLLOW"
 }

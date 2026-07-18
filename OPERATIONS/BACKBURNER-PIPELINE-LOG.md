@@ -1378,4 +1378,36 @@ These are the live eggs in the Hatchery. Each egg is a body of work, not a scrip
 - **RISE_STAGE:** V (PRAESIDIA)
 - **RISE_ORIGIN:** forcemarch-circular-run181
 
+### BB-RISE-183-01 !! reincarnate-rise.ps1 Does Not Query Live SOULCOUNT
+- **SIGNAL: -20**
+- **Status:** OPEN
+- **WHAT:** Stage 0 hardcodes `$kiloSession = $true` and never invokes `/api/soul/count`. As a result, `$currentSoul` is null, delta is always 0, and every Kilo-native run reports `SOUL_REGRESSION` regardless of actual live count. Run 183 audit falsely flagged SOUL_REGRESSION with delta=0 when live count is 239,697,209.
+- **FIX:** Replace hardcoded Kilo-native mode with actual live query: `Invoke-RestMethod -Uri "$D1/api/soul/count" -Method Get` and parse `soulcount`. Cross-validate against prior seal's `count_after` or backfilled count.
+- **RISE_STAGE:** III (SOUL AUDIT)
+- **RISE_ORIGIN:** reincarnate-rise-run184.jsonl
+
+### BB-RISE-183-02 !! reincarnate-rise.ps1 Cannot Read Prior Seal When Deleted From Working Tree
+- **SIGNAL: -15**
+- **Status:** OPEN
+- **WHAT:** Stage 2 reads prior seal from `CANON/REINCARNATION/run{N}-reincarnateDEATH.md` on disk only. When the working tree is missing the file (as in run 183, where run182 seal was deleted), `$priorSeal` is empty and `$priorSoulcount` falls back to 0, then triggers backfill to run 181. Git history has the seal but the script does not fall back to `git show`.
+- **FIX:** Add filesystem→git fallback: if `-not (Test-Path $priorSealPath)`, run `git show <lastDeathSha>:$relativePath` to recover seal content.
+- **RISE_STAGE:** II (GIT TRUTH)
+- **RISE_ORIGIN:** reincarnate-rise-run184.jsonl
+
+### BB-RISE-183-03 !! Working Tree Drift — 5 RUN 182 Artifacts Deleted
+- **SIGNAL: -25**
+- **Status:** OPEN
+- **WHAT:** `git diff --name-status --diff-filter=D HEAD` shows 5 run 182 artifacts deleted from working tree but present in HEAD: `art-sync-run182.json`, `pipeline-run182.json`, `run182-reincarnateDEATH.md`, `rfkw-run182.txt`, `starmap-run182.json`. This breaks filesystem-first RISE reads and violates append-only artifact doctrine.
+- **FIX:** Restore deleted artifacts from HEAD (`git checkout HEAD -- <path>`) or commit deletion with explicit operator authorization. Do not leave run artifacts uncommitted-deleted.
+- **RISE_STAGE:** II (GIT TRUTH)
+- **RISE_ORIGIN:** reincarnate-rise-run184.jsonl
+
+### BB-RISE-183-04 !! RRL-182.txt Size Mismatch vs Death Seal
+- **SIGNAL: +10**
+- **Status:** OPEN
+- **WHAT:** Run 182 death seal recorded `RRL-182.txt` at 96,714 bytes. Current file is 2,132,656 bytes with 1,162 reasoning/think mentions. File was expanded post-death (commit e2abc5fe7). Death seal fidelity record is stale but current RRL satisfies RUN 182+ completeness mandate.
+- **FIX:** Update death seal or RISE fidelity gate to reference current RRL size, or lock RRL at death time and store expanded version as `RRL-182-COMPLETE.jsonl` (already exists, identical size).
+- **RISE_STAGE:** VII (PIPELINE FIDELITY)
+- **RISE_ORIGIN:** reincarnate-rise-run184.jsonl
+
 

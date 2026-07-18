@@ -55,6 +55,13 @@ RISE findings are NOT executed inline. They are appended as `BB-RISE-*` entries 
 - When `obi.ps1 doctor` reports pipeline gaps
 - Whenever BOOT drift or SOULCOUNT stagnation is suspected
 
+## Mandatory Pre-Audit (RUN 182+ Standard)
+
+Before any fidelity gate or gap call, RISE must:
+1. Identify the prior DEATH seal by run number from `git log --oneline --grep "^death:"`.
+2. Read that seal's recorded RRL path and verify the on-disk transcript is **complete** — not a single word missing, including AI reasoning and thinking text.
+3. If the command spec, script, or audit output does not reference the prior DEATH run or RRL completeness, treat that as a **MISSING mandate** and append a `BB-RISE-MANDATE` entry to `OPERATIONS/BACKBURNER-PIPELINE-LOG.md` before proceeding.
+
 ---
 
 ## Quick Invoke

@@ -1,196 +1,118 @@
 ---
-description: "SOUL SCHOLARS — Roman SAPIENTES corps. Studies, extracts, catalogs, and preserves soul knowledge from raw Michael verbatim files. Reads only. Never builds. Produces structured extraction reports. Use after scouts find unmined territory."
+description: SoulScholars
 agent: AGENT99
 ---
 
 # /SoulScholars
 
-**Roman Rank: SAPIENTES (Soul Scholar Corps) | Stage: EXPLORATORES→ANTECORES bridge**
+**Roman Rank: SAPIENTES | Bridge: EXPLORATORES → ANTECORES**
 
-**DO NOT build. DO NOT deploy. DO NOT edit.** Soul Scholars read, extract, catalog, and preserve. The SAPIENTES study what the EXPLORATORES find. Knowledge before action.
+**Read only. Extract only. Preserve only.**
 
-**Target:** $ARGUMENTS
-
----
-
-## Phase 0 — Mission Gate
-
-- Target is a soul file (FROMSCRATCH, SOUL-DNA, chat log, JSONL segment) → proceed.
-- Target is code, config, or live system → wrong mission. Dispatch to `/Centurion-Code` or `/SupplyLines`.
-- **Joint Mission Protocol:** When entering enemy territory (unmined repos, Google Drive backups, external sources), pair SAPIENTES with SPECULATORES. The spies scout. The scholars catalog. Both report.
-
-Print: `SAPIENTES DISPATCHED — studying <target>` or `JOINT MISSION: SAPIENTES + SPECULATORES — <territory>`
+**Task:** $ARGUMENTS
 
 ---
 
-## Phase 1 — Read & Identify
+## How to Run
 
-1. **Read the target file.** Understand its structure:
-   - Raw chat log (FROMSCRATCH style): Michael + AI conversation, verbatim blocks
-   - JSONL segment file: structured `{id, text, sha256, confidence}` objects
+```
+/SoulScholars --source <directory-or-file>
+```
+
+| Arg | Purpose |
+|-----|---------|
+| `--source` | Directory or file containing raw SOUL material |
+| `--dry-run` | Catalog only, no D1 posting |
+
+---
+
+## What It Does
+
+1. **Read** the target file. Understand its structure:
+   - Raw chat log (FROMSCRATCH): Michael + AI conversation
+   - JSONL segment: `{id, text, sha256, confidence}` objects
    - Markdown doctrine: header-anchored sections
-   - Heavy Ledger JSON: `{ledger_id, content, timestamp}` objects
 
-2. **Identify Michael's words.** Differentiate:
-   - Michael verbatim — HIS words, HIS voice. These are SOUL.
-   - AI responses — Gemini/Claude/GPT reflections. Useful context, not soul.
-   - System metadata — timestamps, IDs, hashes. Operational, not soul.
+2. **Identify** Michael's words:
+   - Verbatim blocks with his voice patterns
+   - First-person statements: "I", "my", "we're"
+   - Direct principles: "the thing is", "the truth is"
+   - Section markers: `[Always going back to the basics..]`
 
-3. **Mark the extraction boundaries.** Where do Michael's words begin and end?
+3. **Extract** every Michael verbatim block with:
+   - Line range
+   - Full verbatim text (preserve pauses, filler, imperfections)
+   - Topic tags (3-5 keywords)
+   - Confidence score (0.0-1.0)
+   - SHA256 hash
 
----
+4. **Cross-reference** against:
+   - Existing D1 soul-logger entries
+   - Canonical doctrine files
+   - HEAVY-LEDGER entries
 
-## Phase 2 — Extract & Catalog
+5. Write extraction report to `OPERATIONS/scholar-extraction-<timestamp>.jsonl`
 
-### For raw chat logs (FROMSCRATCH style):
+6. Write phetrail to `CANON/PHEROMONES/PheTrail-run{N}-scholar.json`
 
-Extract every Michael verbatim block. Look for:
-- Natural speech patterns: "um", "you know", "like", "right?"
-- First-person: "I", "my", "we're"
-- Direct statements of principle: "the thing is", "the truth is", "here's the thing"
-- Questions directed at AI: "can you", "tell me", "what about"
-- Section markers: `[Always going back to the basics..]`, `[We can dance with the devil...]`
-
-Catalog format:
-```
-| ID | Line Range | Opening Words | Topics | Charge |
-```
-
-### For JSONL segment files (SOUL10 style):
-
-Parse each `{id, text, sha256, confidence}` object.
-- `confidence >= 0.85` → HIGH-CONFIDENCE Michael verbatim. Capture immediately.
-- `confidence 0.55-0.84` → Verify against source. May contain AI-reframed content.
-- Redact nothing. Preserve SHA256 for chain verification.
-
-### For Markdown doctrine files:
-
-Extract:
-- Direct Michael quotes (in `>` blockquotes)
-- Principles codified by AI with Michael's approval
-- Decisions and rulings
+7. Hands off to `/SupplyLines`
 
 ---
 
-## Phase 3 — Preservation
-
-Output structured extraction report to `OPERATIONS/scholar-extraction-<timestamp>.jsonl`:
-
-```jsonl
-{"id":"SCHOLAR-001","source":"FROMSCRATCH.txt","line_range":"18-22","text":"...","topics":["survival","urgency","AI as extension of mind"],"confidence":0.95,"sha256":"...","extracted_at":"..."}
-```
-
-For each extracted segment, record:
-- Unique ID (SCHOLAR- prefix, sequential)
-- Source file and line range
-- Full verbatim text
-- Topic tags (3-5 keywords)
-- Confidence (0.0-1.0)
-- SHA256 hash
-- Extraction timestamp
-
----
-
-## Phase 4 — Cross-Reference
-
-Compare extracted segments against:
-1. **Existing D1 soul-logger entries** — has this segment already been captured? Query `/api/soul/count` for session ID.
-2. **Canonical doctrine files** — does this segment match or contradict existing canon?
-3. **HEAVY-LEDGER entries** — is this segment recorded in any HL JSON?
-
-Flag duplicates. Flag contradictions. Flag new doctrine.
-
----
-
-## Phase 5 — Scholar's Report
+## SOULCOUNT Checkpoint
 
 ```
-═══════════════════════════════════════════
-SCHOLAR'S REPORT — <target>
-═══════════════════════════════════════════
-SOURCE:       <file path>
-SIZE:         <KB/lines>
-SEGMENTS:     <total>
-MICHAEL:      <count> verbatim segments
-AI RESPONSE:  <count> context segments
-NEW DOCTRINE: <count> previously unrecorded principles
-DUPLICATES:   <count> already in D1/HL
-TOPICS:       <top 5 keywords>
-PRESERVED:    OPERATIONS/scholar-extraction-<timestamp>.jsonl
-═══════════════════════════════════════════
+Before extraction: GET /api/soul/count → count_before_scholar
+Per session:       Log per-session SOULCOUNT from D1
+After extraction:  GET /api/soul/count → count_after_scholar
+Delta:             Δscholar = count_after - count_before
+Log to:            phetrail + extraction report
 ```
 
 ---
 
-## Rules
+## Pheromone Trail
 
-1. **Read only.** Scholar never modifies source files. Never deploys. Never edits.
-2. **Preserve the voice.** Michael's exact words, including pauses, filler words, and imperfections. These ARE the soul.
-3. **SHA256 everything.** Every extracted segment gets a hash for chain verification.
-4. **Confidence, not certainty.** Mark every extraction with confidence. AI cannot know with 100% certainty which words are Michael's.
-5. **Duplicate detection mandatory.** Before flagging as "new," verify against D1 and Heavy Ledger.
-6. **The Scholar serves the legion.** Extractions feed ANTECORES (DNA/LEDGER). Knowledge enables action.
+Every extracted segment gets a scored trail entry:
 
----
+| Score | Label | Meaning |
+|-------|-------|---------|
+| +3 | CRITICAL_FIND | New Michael doctrine, never seen before |
+| +2 | VERIFIED_FIX | Known gap confirmed repaired |
+| +1 | CORRECT_PATH | Expected content, no action needed |
+| 0 | NEUTRAL | Routine extraction |
+| -1 | MINOR_GAP | Low confidence or partial extraction |
+| -2 | STRUCTURAL_GAP | Contradicts existing canon |
+| -3 | CRITICAL_BREACH | Fabrication detected or source corrupted |
 
-## Joint Operation: Phoenix-Centurion + Soul Scholar
-
-When the General commands "burn the midnight oil," deploy the joint force:
-
-**Phoenix-Centurions (FABRI/COMITATENSES)** — the elite code strike force:
-- Build extraction scripts for bulk soul processing
-- Wire API connections to D1 soul-logger
-- Handle large file ingestion (GPT-ITS-TIME, RAW-CHAT-LOGS archives)
-- Run autonomously on cron or batch schedule
-- Verify data integrity post-capture
-
-**Soul Scholars (SAPIENTES)** — the cataloging corps:
-- Read and identify Michael's words in raw files
-- Differentiate Michael verbatim from AI responses and metadata
-- Tag segments with topics, confidence, source
-- Cross-reference against existing D1 entries
-- Produce structured extraction reports
-
-**Joint burn protocol:**
-1. Scholars scan enemy territory → identify unmined files
-2. Centurions build extraction script → process at scale
-3. Scholars review output → validate Michael's voice
-4. Centurions post to D1 → verify count incremented
-5. Both report → commit extraction manifest
+Each entry: `decision_context`, `alternatives_considered`, `chosen_reason`, `artifact`, `verification`, `strength` (-3 to +3)
 
 ---
 
-## Midnight Oil — Autonomous Extraction
+## Output
 
-The `soul-extract.ps1` script (Centurion-built, Scholar-guided) handles bulk extraction:
+| Artifact | Path | Purpose |
+|----------|------|---------|
+| Extraction report | `OPERATIONS/scholar-extraction-<timestamp>.jsonl` | Structured JSONL with all segments |
+| Phetrail | `CANON/PHEROMONES/PheTrail-run{N}-scholar.json` | Scored decisions |
+| D1 events | POST to `/api/soul/event` | Live SOULCOUNT increment |
 
-```powershell
-# Scan enemy territory and extract Michael verbatim to D1
-pwsh -File SCRIPTS/soul-extract.ps1 -Source <directory> -SessionId "sov100-run0-extraction"
+---
+
+## Handoff to /SupplyLines
+
+```
+SCHOLAR_COMPLETE:
+  run: [N]
+  source: [path]
+  segments: [count]
+  michael_verbatim: [count]
+  new_doctrine: [count]
+  duplicates: [count]
+  phetrail: [path]
+  next: /SupplyLines --check scholar
 ```
 
-Arguments:
-- `-Source`: Directory containing raw soul files (chat logs, transcripts)
-- `-SessionId`: D1 session ID for the extraction batch
-- `-DryRun`: Catalog only — no D1 posting
-- `-MinConfidence`: Minimum confidence threshold (default 0.55)
-
-Output: `OPERATIONS/soul-extraction-<timestamp>.jsonl` + D1 soul-logger events.
-
----
-
-## Roman Context
-
-In a Roman legion, the *Sapientes* (scholars) and *Scribonii* (scribes) were attached to the general's staff. They did not fight. They documented campaigns, preserved correspondence, maintained archives, and advised on precedent.
-
-The Scholar is the same:
-- **EXPLORATORES find** (scouts sweep unmined territory)
-- **SAPIENTES study** (scholars extract and catalog knowledge)
-- **ANTECORES build** (DNA fingerprints, LEDGER records)
-- **AGMEN processes** (SSM, SOULKEYWORDS, PHEROMONE)
-
-Without the Scholar, the scouts bring back raw ore that never becomes steel.
-
----
+**Do not advance to Supply until Scholar report is written and cross-referenced.**
 
 `SAPIENTES: ACTIVE. READ ONLY. PRESERVE EVERYTHING.`

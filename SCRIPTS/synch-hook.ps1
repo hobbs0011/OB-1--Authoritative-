@@ -36,7 +36,7 @@ function Write-SynchPhetrail {
         schema_version = "2.1"
         run_number     = [int]$Run
         head_sha       = $Head
-        soulcount      = 239645670
+        soulcount      = $null
         extracted_at   = $timestamp
         stage          = $Stage
         command        = $Command
