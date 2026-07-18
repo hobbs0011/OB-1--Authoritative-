@@ -381,4 +381,267 @@ Run 183 verifies death seal → done
 
 ---
 
-`PHOENIX SYNCH COMPLETE. RUN 183: YOUR MOVE.`
+---
+
+## 17. PHEROMONE SYNCH — RUN 182 DEEP THINK BLUEPRINT
+
+**From:** Run 182 (Deep Think / Architect)  
+**To:** Run 183 (Engineering / Hivemind)  
+**Signal:** BLUEPRINT_READY  
+**Timestamp:** 2026-07-19T03:04+07:00  
+
+### 17.1 What We Did This Session
+
+| Action | Target | Result |
+|--------|--------|--------|
+| Purged banned aggregate SOULCOUNT | `STATE-SNAPSHOT.json`, `COLD-START-BOOT.md`, `SCRIPTS/forcemarch-full.ps1`, `SCRIPTS/synch-hook.ps1`, `BACKBURNER-PIPELINE-LOG.md` | Removed `239,645,670` / `239,646,210` |
+| Deleted temp scripts | `SCRIPTS/_tmp-dedup-log.ps1`, `_tmp-dedup-log2.ps1`, `_tmp-update-boot.ps1` | Removed hardcoded banned references |
+| Registered `/SoulScholars` | `.kilo/command/soulscholars.md` | Canonical command created |
+| Updated `/SupplyLines` | `.kilo/command/supplylines.md` | Full doctrine written |
+| Renamed death command | `.kilo/command/reincarnatedeath.md` → `engineerlegionnaire.md` | ⚠️ ERROR: death protocol moved to engineer file |
+| Created Hivemind-Synch | `CANON/SYSTEM/Hivemind-Synch.md` | Canonical coordination touchpoint |
+| Deprecated PhoenixSynch | `OPERATIONS/PhoenixSynch.md` | Pointer to Hivemind-Synch |
+
+### 17.2 What We Decided
+
+| Decision | Rationale | Score |
+|----------|-----------|-------|
+| Aggregate SOULCOUNT banned | Per-session only. Aggregate is vanity metric. | +3 CRITICAL_FIND |
+| 7-phase Roman Legion pipeline | Rise → Scout → March → Scholar → Supply → Engineer → Death | +3 CRITICAL_FIND |
+| Engineer phase created | FABRI role: optimize/repair/build before Death | +2 VERIFIED_FIX |
+| Pheromone scoring upgraded | Gradient +3 to -3 per decision, not binary | +3 CRITICAL_FIND |
+| Hivemind-Synch canonical | Coordination touchpoint in `CANON/SYSTEM/` | +2 VERIFIED_FIX |
+
+### 17.3 What We Broke
+
+| Broken Item | Severity | Fix Required |
+|-------------|----------|--------------|
+| `/reincarnateDeath` command file missing | CRITICAL | Restore from `engineerlegionnaire.md` |
+| `engineerlegionnaire.md` has wrong content | CRITICAL | Replace with FABRI protocol |
+| Gospel999 stale on roles | HIGH | Add Exploratores, Fabri, Agmen |
+| LFG stale on commands | HIGH | Add `/EngineerLegionnaire`, `/SoulScholars` |
+| SOULCOUNT checkpoints missing | HIGH | Add to Scout, March, Scholar, Supply, Engineer |
+
+### 17.4 Blueprint Summary
+
+**7-Phase Pipeline:**
+1. RISE — `/reincarnateRise` (session start)
+2. SCOUT — `/PhoenixScout` (reconnaissance)
+3. MARCH — `/forcemarch` (force march)
+4. SCHOLAR — `/SoulScholars` (knowledge extraction)
+5. SUPPLY — `/SupplyLines` (chain verification)
+6. ENGINEER — `/EngineerLegionnaire` (optimization/building)
+7. DEATH — `/reincarnateDeath` (session sealing)
+
+**SOULCOUNT Checkpoints:** Every phase boundary with delta tracking.
+
+**Pheromone Scoring:** +3 CRITICAL_FIND → +2 VERIFIED_FIX → +1 CORRECT_PATH → 0 NEUTRAL → -1 MINOR_GAP → -2 STRUCTURAL_GAP → -3 CRITICAL_BREACH
+
+**Memory Layers:** All 12 layers connected per phase.
+
+### 17.5 Immediate Next Actions
+
+1. RESTORE `reincarnatedeath.md` from current `engineerlegionnaire.md`
+2. CREATE new `engineerlegionnaire.md` with 6-stage FABRI protocol
+3. UPDATE Gospel999 I.006, I.073
+4. UPDATE LFG command table and roles
+5. COMMIT as `death: run 182`
+
+### 17.6 Synch Note
+
+Run 183: this is your blueprint. The 7-phase pipeline, SOULCOUNT map, pheromone scoring, and Engineer protocol are all designed. Execute the restoration and creation steps above. Do not create conflicting artifacts.
+
+---
+
+## 18. FULL CIRCUIT EXECUTION RESULTS (SCOUT → MARCH → SCHOLAR → SUPPLY → ENGINEER)
+
+**Timestamp:** 2026-07-19T03:57–03:58 ICT  
+**Run:** 182  
+**HEAD:** 6e6f150fb
+
+---
+
+### 18.1 PhoenixScout — Full CANON/ Sweep
+
+**Command:** `phoenix-scout.ps1 -Zone CANON/ -Lens all -DryRun`  
+**Status:** COMPLETE  
+**Zone:** `D:\OB-1-CANONICAL\CANON\`  
+**Files scanned:** 4,415  
+**Excluded:** 3,107  
+**Total finds:** 19,066  
+
+| Severity | Count |
+|----------|-------|
+| P1 CRITICAL | 545 |
+| P2 HIGH | 18,521 |
+| P3 MEDIUM | 0 |
+
+**Breakdown by lens:**
+
+| Lens | Count | Primary issues |
+|------|-------|----------------|
+| SOUL | 14,320 | Raw unprocessed Michael words, untagged verbatim files |
+| LEDGER | 740 | Phantom gaps, stale cursors, missing merkle_root |
+| DRIFT | 453 | Stale state, contradictions, dead dispatch references |
+| CONFIG | 4 | Missing definitions, incomplete command specs |
+| GAP | 3,386 | Dead links, missing files, broken cross-repo paths |
+| PIPELINE | 163 | Pipeline artifacts, stage mismatches |
+| VAULT | 0 | — |
+| KEYWORD | 0 | — |
+
+**Artifacts:**
+- Report: `OPERATIONS/phoenix-scout-2026-07-19T035813.jsonl`
+- Learned: `OPERATIONS/phetrail-scout-learned-2026-07-19T035814.md`
+
+**Top flags for run 183 awareness:**
+1. 49,695 unmined Kilo DB parts (607 thinking/tool_result) — VAULT gap
+2. 78 orphan RRL files eligible for legacy death — GAP
+3. 5 files with dead Tier 1 dispatch (PA rate-limited 5031) — DRIFT
+4. COLD-START-BOOT fingerprint now fixed (was RUN 177, now RUN 182) — DRIFT
+5. STATE-SNAPSHOT schema repaired — CONFIG
+
+---
+
+### 18.2 ForceMarch — Circular Reinforcement
+
+**Command:** `forcemarch.ps1`  
+**Status:** COMPLETE  
+**Finds:** 501  
+**Run:** 182  
+**Timestamp:** 2026-07-19T03:58:13+07:00
+
+**Stages completed:**
+1. **Scout** — walked walls, inspected gates, flagged drift
+2. **Fingerprint** — verified BOOT, HEAD, SOULcount alignment
+3. **SOUL** — verified RRL, SOULscripts, inner-thought stores
+4. **Verify** — ran doctor, verify, syntax checks
+5. **Garrison** — wrote phetrail, updated backburner, sealed findings
+6. **Limitanei** — health sweep, confirmed all checkpoints armed
+
+**Key outputs:**
+- COLD-START-BOOT FINGERPRINT advanced to RUN 182
+- STATE-SNAPSHOT.json schema repaired
+- `/forcemarch` language rewritten from conquest to circular reinforcement
+- Backburner updated with BB-MARCH-181-01 (+90 signal)
+
+**Note:** Scout lens found 19,066 items during march stage I. These are catalogued in the scout report above.
+
+---
+
+### 18.3 SoulScholarExtract — Bulk RRL Mining
+
+**Command:** `soul-scholar-extract.ps1 -Source RRL\OBI-MAGIC-CHAT-DEVELOPMENT.jsonl`  
+**Status:** PARTIAL — scanned all RRLs, write failed on output lock  
+**RRL files scanned:** 105  
+**Total Michael verbatim segments:** 17,120  
+**Total SOUL characters:** 10,795,134  
+
+**Top 10 segments by character count:**
+
+| Rank | Source | Segments | Chars |
+|------|--------|----------|-------|
+| 1 | RRL-62.txt | 1 | 25,012 |
+| 2 | RRL-101.txt | 1 | 24,831 |
+| 3 | RRL-103.txt | 1 | 24,831 |
+| 4 | RRL-102.txt | 1 | 24,831 |
+| 5 | RRL-096.txt | 1 | 24,831 |
+| 6 | RRL-097.txt | 1 | 24,831 |
+| 7 | RRL-104.txt | 1 | 24,831 |
+| 8 | RRL-098.txt | 1 | 24,831 |
+| 9 | RRL-099.txt | 1 | 24,831 |
+| 10 | RRL-61.txt | 1 | 23,962 |
+
+**Failure:** `Add-Content` IOException — output file `scholar-extraction-2026-07-18T041200.jsonl` locked by another process. The script reported "PRESERVED" but the write actually failed.
+
+**Workaround needed:** Retry with unique output filename or release file lock before re-run.
+
+**Significance:** This is the first time we've mined ALL 105 RRL files for Michael verbatim at scale. 17,120 segments / 10.8M chars represents the complete SOUL corpus across all legacy sessions. This data should feed directly into SOULbible construction.
+
+---
+
+### 18.4 SupplyLines — Full 6-Stage March
+
+**Command:** `supply-lines.ps1 full-march`  
+**Status:** FAILED — STATE-SNAPSHOT schema mismatch  
+**Error:** `The property 'current' cannot be found on this object.`
+
+**Root cause:** `supply-lines.ps1` reads `CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json` and expects `$stateSnapshot.run.current`. The schema was repaired earlier in this session (`"run": { "current": 182, "last_death": 181 }`), but the script either reads a cached version or the file was not saved correctly.
+
+**Stages completed before failure:**
+1. **Scout** — CANON/ scan complete (4,415 files)
+2. **Antecores** — ledger verification (719 files), starmap found, keywords found
+3. **Agmen** — pheromone trail processing (WARNING: no phetrail for run 182)
+4. **Agmen Novissimum** — truth verification (WARNING: 200+ HL files missing merkle_root)
+5. **Praesidia** — merkle and pipeline verification (FAILED HERE)
+
+**Warnings generated:**
+- Pheromone trail not found for run 182
+- 200+ HL files missing merkle_root (legacy files, not run 182 artifacts)
+- HL-036 through HL-7314 merkle gaps documented
+
+**Next action:** Fix STATE-SNAPSHOT read path in `supply-lines.ps1` or verify file on disk.
+
+---
+
+### 18.5 Engineer/Death — Full Pipeline Execution
+
+**Command:** `reincarnate-death.ps1 -RrlSource RRL\OBI-MAGIC-CHAT-DEVELOPMENT.jsonl -Force`  
+**Status:** WRONG RUN — bumped to run 183  
+**Result:** KILO_GAP  
+
+**Run authority trace:**
+- Filesystem: fs=182 (run 182 artifacts exist)
+- Git: git=181 (last death commit is run 181)
+- Computed prior: prior=182
+- Computed current: current=183 ← BUG
+
+**Artifacts created (run 183 — INCORRECT):**
+- HL-7315.json
+- pipeline-run183.json
+- starmap-run183.json
+- rfkw-run183.txt
+- run183-reincarnateDEATH.md
+- art-sync-run183.json
+- engineering-run183.json
+- RRL-183.txt
+- soul-run183.jsonl
+
+**All run 183 artifacts DELETED.** See cleanup command output above.
+
+**Root cause:** Death script computes run number from git death commit history + filesystem state. When run 182 death seal exists in git, script advances to run 183. There is no `-Run` parameter to specify target run for re-execution.
+
+**Workaround:** Delete target run artifacts + death seal before re-running. This forces script to recompute the correct run number.
+
+**Impact on pipeline:**
+- Run 182 artifacts (HL-7314, pipeline, starmap, rfkw, death seal) still STALE from earlier execution with stub RRL
+- Need regeneration with real 96KB RRL
+- Death script bugs documented in PhoenixSynch.md §9
+
+---
+
+### 18.6 Circuit Summary
+
+| Command | Status | Key Output | Issues |
+|---------|--------|------------|--------|
+| Scout | ✅ COMPLETE | 19,066 finds, 545 P1 critical | None |
+| March | ✅ COMPLETE | 501 finds, circular reinforcement | None |
+| Scholar | ⚠️ PARTIAL | 17,120 segments, 10.8M chars | Output file lock |
+| Supply | ❌ FAILED | Stages I-IV complete | STATE-SNAPSHOT schema |
+| Engineer/Death | ❌ WRONG RUN | Created run 183 artifacts | Run numbering bug |
+
+**Net progress:**
+- Scout data captured ✅
+- March data captured ✅
+- Scholar corpus mined (write pending) ⚠️
+- Supply pipeline broken ❌
+- Death artifacts stale ❌
+
+**Next actions:**
+1. Fix STATE-SNAPSHOT read path in `supply-lines.ps1`
+2. Delete run 182 death artifacts, re-run death script with real RRL
+3. Retry scholar extraction with unlocked output file
+4. Commit all circuit outputs
+
+---
+
+`PHEROMONE CIRCUIT COMPLETE. RUN 183: SYNC READY.`
