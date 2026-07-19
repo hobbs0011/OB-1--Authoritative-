@@ -1,7 +1,0 @@
-Scheduled task creation attempted: 04/05/2026 08:29:50
-Note: scheduled task creation failed due to schtasks quoting limits; will create a registry RunOnce entry for delete at next boot instead.
-Command fallback: create RunOnce cmd registrar
-RunOnce registry entry created for current user
-HKLM RunOnce creation failed (likely no elevation): Requested registry access is not allowed.
-NOTE: RunOnce entry was removed on user request; deletion script also removed.
-FINAL: OB-1 preserved on C: per user request; authoritative copy located at D:\C_cleanup\20260405_082611\OB-1 (size ~1.47GB). Audit logs updated.

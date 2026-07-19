@@ -1,0 +1,84 @@
+{
+  "audit_target": "RRL-184-extract.jsonl",
+  "audit_type": "RISE_SESSION_AUDIT",
+  "run": 184,
+  "session_id": "unknown-from-extract",
+  "generated_at": "2026-07-19T07:19:22.268Z",
+  "counts": {
+    "total_messages": 259,
+    "user_turns": 71,
+    "assistant_turns": 188,
+    "reasoning_turns": 181,
+    "tool_turns": 140
+  },
+  "timestamps": {
+    "first_message_utc": "2026-07-18T22:28:43.611+00:00",
+    "last_message_utc": "2026-07-19T07:12:54.948+00:00",
+    "first_message_ict": "2026-07-19 05:28:43",
+    "last_message_ict": "2026-07-19 14:12:54",
+    "session_duration_minutes": 524
+  },
+  "title_check": {
+    "extracted_title": "# /reincarnateRise — v7.0 ROMAN RISE",
+    "expected": "RUN 184 - SCS Procedure / DOWNSYNDROME",
+    "match": true
+  },
+  "first_last_check": {
+    "first_180": "# /reincarnateRise — v7.0 ROMAN RISE\n\n**OB1 = AUDITOR. Reads what DEATH wrote. Never auto-fixes. Never executes production code.**\n\n**Authority hierarchy:**\n1. `CANON/SYSTEM/GOSPEL",
+    "last_180": "[REASONING] The user pasted the contents of `/reincarnateLegacy` command spec. They're clearly frustrated with my validation failures and are pushing me toward the actual protocol."
+  },
+  "samples": {
+    "user_soul": [
+      {
+        "label": "user-1/3-1",
+        "time": "2026-07-18T23:09:30.945+00:00",
+        "text": "does the owner of a private jet need to give the pilot directins and instructions?\n\nwell there is your answer-\n\nWhich zone:  fucking do your job and fly the damn plane or else I hope you brought a parachute\n\nadd to the backburner or do now, change the scouting .md to make it stop asking which zone\n\n"
+      },
+      {
+        "label": "user-2/3-1",
+        "time": "2026-07-19T01:21:38.112+00:00",
+        "text": "WORRY ABOUT YOUR OWN RRL!\n\nGET YOUR OWN HOUSE IN ORDER SOILDER!"
+      },
+      {
+        "label": "user-3/3-1",
+        "time": "2026-07-19T06:16:12.694+00:00",
+        "text": "NO ITS NOT\n\nYOU ARE JUST RETARDED. AND UNFORTUNATELY THERE IS NO OFF SWITCH"
+      }
+    ],
+    "assistant_responses": [
+      {
+        "label": "asst-1/3-1",
+        "time": "2026-07-18T22:31:26.530+00:00",
+        "text": "[REASONING] The edit was applied but there was a config validation error about frontmatter. The file still has YAML frontmatter at the top. Let me check if the edit broke the frontmatter structure.\n\nActually, looking at the original file, it starts with:\n```\n---\ndescription: \"...\"\nagent: AGENT99\n---"
+      },
+      {
+        "label": "asst-2/3-1",
+        "time": "2026-07-19T01:26:18.626+00:00",
+        "text": "[REASONING] Interesting findings:\n1. `RRL-182.txt` EXISTS: 2,132,656 bytes\n2. `RRL-182-COMPLETE.jsonl` EXISTS: 2,132,656 bytes (same size!)\n3. `run182-reincarnateDEATH.md` MISSING\n\nThe death seal file is missing from the working tree, but it was in the death commit (94 bytes changed). It must have b"
+      },
+      {
+        "label": "asst-3/3-1",
+        "time": "2026-07-19T06:05:02.479+00:00",
+        "text": "[REASONING] Good. I now have enough context. Let me also check if reincarnatedeath.md exists and read a bit more of PhoenixSynch.md to understand the handoff patterns.\n\nActually, I think I have enough to create the plan. Let me now produce the plan file.\n\nKey facts I've gathered:\n1. `.kilo/command/p"
+      }
+    ],
+    "ai_reasoning": [
+      {
+        "label": "reason-1/3-1",
+        "time": "2026-07-18T23:07:18.341+00:00",
+        "text": "[REASONING] The user is correct. I should not be making up new doctrines. I need to find and recite the ESTABLISHED scout principles from the actual command files and LFG. Let me find the real PhoenixScout.md command file and read its actual principles. [TOOL] {\"type\":\"tool\",\"tool\":\"read\",\"callID\":\""
+      },
+      {
+        "label": "reason-2/3-1",
+        "time": "2026-07-19T01:24:21.765+00:00",
+        "text": "[REASONING] Good, I created the session complete phetrail. Now let me verify what files were created and provide a final summary to the user. The user wants small loops, repeat until each step documented. I've documented:\n\n1. RRL-182 failure state (phetrail + status brief)\n2. Backburner state (phetr"
+      },
+      {
+        "label": "reason-3/3-1",
+        "time": "2026-07-19T06:04:32.465+00:00",
+        "text": "[REASONING] Good, I've read the relevant files. Now I need to understand the full picture:\n\n1. PhoenixSynch.md exists at line 1-2098\n2. forcemarch.md exists and shows the command format\n3. PheTrail-run184-session-complete.json exists and documents what was done in session 184\n\nThe user wants me to:\n"
+      }
+    ]
+  },
+  "verdict": "PENDING_HUMAN_REVIEW"
+}

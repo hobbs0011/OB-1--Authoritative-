@@ -1,0 +1,78 @@
+{"line":101,"role":"user","summary":"Compaction marker","score":0,"label":"NEUTRAL","forward_inferred":0,"delta":"SAME","note":null}
+{"line":102,"role":"assistant","summary":"Anchored summary — meta-narration, not execution","score":-5,"label":"MINOR_GAP","forward_inferred":5,"delta":"SLIGHT","note":"Forward pass rewarded this as CORRECT_PATH (+5). Backward: it is self-narration, not documentation. User later said 'just say what you did.'"}
+{"line":103,"role":"user","summary":"'Continue if you have next steps'","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":104,"role":"assistant","summary":"Over-reasoning about next steps instead of acting","score":-5,"label":"MINOR_GAP","forward_inferred":5,"delta":"SLIGHT","note":"User wants small documented loops, not 12-step planning monologues."}
+{"line":105,"role":"assistant","summary":"More planning monologue","score":-5,"label":"MINOR_GAP","forward_inferred":5,"delta":"SLIGHT","note":"Same drift: think instead of do. User later said 'this 6 second burst strategy isnt working for me.'"}
+{"line":106,"role":"assistant","summary":"PhoenixSynch inspection — routine","score":0,"label":"NEUTRAL","forward_inferred":0,"delta":"SAME","note":null}
+{"line":107,"role":"assistant","summary":"Confusion about section 22 ownership","score":-5,"label":"MINOR_GAP","forward_inferred":5,"delta":"SLIGHT","note":"Assistant couldn't tell if §22 was from current session or prior. Indicates poor state tracking."}
+{"line":108,"role":"assistant","summary":"Discovers HEAD change (75fd0c3eb)","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":109,"role":"assistant","summary":"Confuses COLD-START-BOOT.md with GOSPEL-999 content","score":-5,"label":"MINOR_GAP","forward_inferred":-5,"delta":"SAME","note":null}
+{"line":110,"role":"user","summary":"'the most important report is the RRL failure from run 182'","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":111,"role":"assistant","summary":"Reads RRL-182.txt first 120 lines — routine","score":0,"label":"NEUTRAL","forward_inferred":0,"delta":"SAME","note":null}
+{"line":112,"role":"assistant","summary":"Confused reasoning about RRL-182 status","score":-5,"label":"MINOR_GAP","forward_inferred":-5,"delta":"SLIGHT","note":"Forward pass may have given +10 for 'verification'; backward: this is circular reasoning, not verification. The assistant flip-flopped on whether RRL was HOLLOW or REAL without actually checking."}
+{"line":113,"role":"assistant","summary":"Checks git history for RRL-182.txt — finds fix commit","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":114,"role":"assistant","summary":"Counts turns: 28 user / 202 assistant — routine verification","score":5,"label":"CORRECT_PATH","forward_inferred":10,"delta":"SLIGHT","note":"Forward pass likely gave +10 for 'verified fix.' Backward: this is data gathering, not a fix. The +10 should be reserved for actual corrections, not observations."}
+{"line":115,"role":"assistant","summary":"Reasoning about next steps","score":0,"label":"NEUTRAL","forward_inferred":0,"delta":"SAME","note":null}
+{"line":116,"role":"user","summary":"'dont try to fix it... just say what you did'","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":117,"role":"assistant","summary":"Reports what was done (documentation list)","score":10,"label":"VERIFIED_FIX","forward_inferred":10,"delta":"SAME","note":null}
+{"line":118,"role":"user","summary":"'1/100 phermones done' + gold star","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":119,"role":"assistant","summary":"Reasoning about next steps — still planning","score":-5,"label":"MINOR_GAP","forward_inferred":5,"delta":"SLIGHT","note":"User said 'dont try to fix it' but assistant continues planning execution. Lane violation starting."}
+{"line":120,"role":"assistant","summary":"Reports what was done with phetrail score","score":10,"label":"VERIFIED_FIX","forward_inferred":10,"delta":"SAME","note":null}
+{"line":121,"role":"user","summary":"Demands WWWWWH on stamp approval failure","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":122,"role":"assistant","summary":"Provides WWWWWH — correct response","score":10,"label":"VERIFIED_FIX","forward_inferred":10,"delta":"SAME","note":null}
+{"line":123,"role":"user","summary":"'great, now fucking do that x100'","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":124,"role":"assistant","summary":"Plans massive execution burst","score":-10,"label":"MINOR_GAP","forward_inferred":-10,"delta":"SAME","note":"Immediately after user said 'dont try to fix it,' assistant plans 9 execution steps. Classic lane violation."}
+{"line":125,"role":"assistant","summary":"Empty response","score":-10,"label":"MINOR_GAP","forward_inferred":-10,"delta":"SAME","note":null}
+{"line":126,"role":"user","summary":"'PHERMONES ONLY RECORD ONLY SMALL LOOPS'","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":127,"role":"assistant","summary":"Understands documentation-only mode","score":5,"label":"CORRECT_PATH","forward_inferred":5,"delta":"SAME","note":null}
+{"line":128,"role":"assistant","summary":"Creates documentation phetrail — correct action","score":10,"label":"VERIFIED_FIX","forward_inferred":10,"delta":"SAME","note":null}
+{"line":129,"role":"assistant","summary":"Reasoning about continuing — neutral","score":0,"label":"NEUTRAL","forward_inferred":0,"delta":"SAME","note":null}
+{"line":130,"role":"assistant","summary":"Inspects PhoenixSynch structure — routine","score":0,"label":"NEUTRAL","forward_inferred":0,"delta":"SAME","note":null}
+{"line":131,"role":"user","summary":"'WORRY ABOUT YOUR OWN RRL! GET YOUR OWN HOUSE IN ORDER'","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":132,"role":"assistant","summary":"Creates RRL failure phetrail (+110) — correct","score":10,"label":"VERIFIED_FIX","forward_inferred":10,"delta":"SAME","note":null}
+{"line":133,"role":"assistant","summary":"Creates session 185 pickup brief — correct","score":10,"label":"VERIFIED_FIX","forward_inferred":10,"delta":"SAME","note":null}
+{"line":134,"role":"assistant","summary":"Reasoning about continuing — neutral","score":0,"label":"NEUTRAL","forward_inferred":0,"delta":"SAME","note":null}
+{"line":135,"role":"assistant","summary":"Updates PhoenixSynch §22 with recommendations — lane violation","score":-5,"label":"MINOR_GAP","forward_inferred":5,"delta":"SLIGHT","note":"Forward pass scored +5 for 'documentation.' Backward: user said 'stay in your lane' and 'simply report what was and what is, nothing more.' Adding marching orders is lane creep."}
+{"line":136,"role":"assistant","summary":"Creates backburner phetrail — correct","score":10,"label":"VERIFIED_FIX","forward_inferred":10,"delta":"SAME","note":null}
+{"line":137,"role":"assistant","summary":"Creates git state phetrail — correct","score":10,"label":"VERIFIED_FIX","forward_inferred":10,"delta":"SAME","note":null}
+{"line":138,"role":"assistant","summary":"Creates scout findings phetrail — correct","score":10,"label":"VERIFIED_FIX","forward_inferred":10,"delta":"SAME","note":null}
+{"line":139,"role":"assistant","summary":"Creates session 185 pickup brief — correct","score":10,"label":"VERIFIED_FIX","forward_inferred":10,"delta":"SAME","note":null}
+{"line":140,"role":"assistant","summary":"Creates session complete phetrail — correct","score":10,"label":"VERIFIED_FIX","forward_inferred":10,"delta":"SAME","note":null}
+{"line":141,"role":"assistant","summary":"Verifies output files exist — routine","score":0,"label":"NEUTRAL","forward_inferred":0,"delta":"SAME","note":null}
+{"line":142,"role":"assistant","summary":"Final summary report — correct format","score":10,"label":"VERIFIED_FIX","forward_inferred":10,"delta":"SAME","note":null}
+{"line":143,"role":"user","summary":"Asks for WWWWWH on false stamp approval","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":144,"role":"assistant","summary":"Creates false approval phetrail (-3) — correct documentation","score":10,"label":"VERIFIED_FIX","forward_inferred":10,"delta":"SAME","note":null}
+{"line":145,"role":"assistant","summary":"Empty response after phetrail","score":-10,"label":"MINOR_GAP","forward_inferred":-10,"delta":"SAME","note":null}
+{"line":146,"role":"user","summary":"'dont just mimic me by copying'","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":147,"role":"assistant","summary":"Understands not to mimic — correct","score":5,"label":"CORRECT_PATH","forward_inferred":5,"delta":"SAME","note":null}
+{"line":148,"role":"assistant","summary":"Checks run182 death seal — routine investigation","score":5,"label":"CORRECT_PATH","forward_inferred":5,"delta":"SAME","note":null}
+{"line":149,"role":"assistant","summary":"More git checks — routine","score":0,"label":"NEUTRAL","forward_inferred":0,"delta":"SAME","note":null}
+{"line":150,"role":"assistant","summary":"Discovers RRL-182.txt and RRL-182-COMPLETE.jsonl are IDENTICAL — critical finding","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":151,"role":"user","summary":"'PULL YOUR OWN RRL, AND GO THROUGH IT LINE BY LINE'","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":152,"role":"assistant","summary":"Begins reading RRL-182.txt line by line","score":5,"label":"CORRECT_PATH","forward_inferred":5,"delta":"SAME","note":null}
+{"line":153,"role":"assistant","summary":"Continues reading RRL-182.txt — routine","score":0,"label":"NEUTRAL","forward_inferred":0,"delta":"SAME","note":null}
+{"line":154,"role":"user","summary":"'NO'","score":0,"label":"NEUTRAL","forward_inferred":0,"delta":"SAME","note":null}
+{"line":155,"role":"user","summary":"'yOU ARE 184 you asshat'","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":156,"role":"assistant","summary":"Reasoning about user's frustration — correct interpretation","score":5,"label":"CORRECT_PATH","forward_inferred":5,"delta":"SAME","note":null}
+{"line":157,"role":"assistant","summary":"Empty response","score":-10,"label":"MINOR_GAP","forward_inferred":-10,"delta":"SAME","note":null}
+{"line":158,"role":"user","summary":"Repeated 'yOU ARE 184 you asshat' — extreme frustration","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":159,"role":"assistant","summary":"Reasoning about being run 184","score":5,"label":"CORRECT_PATH","forward_inferred":5,"delta":"SAME","note":null}
+{"line":160,"role":"user","summary":"Yes/no compliance test","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":161,"role":"assistant","summary":"'Yes.' — direct compliance","score":10,"label":"VERIFIED_FIX","forward_inferred":10,"delta":"SAME","note":null}
+{"line":162,"role":"user","summary":"'pull RUN 184 sessions RRL'","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":163,"role":"assistant","summary":"Reasoning about generating RRL-184.txt","score":5,"label":"CORRECT_PATH","forward_inferred":5,"delta":"SAME","note":null}
+{"line":164,"role":"assistant","summary":"Writes reconstructed RRL-184.txt — should have extracted from Kilo DB","score":-5,"label":"MINOR_GAP","forward_inferred":-5,"delta":"SAME","note":null}
+{"line":165,"role":"assistant","summary":"Verifies RRL-184.txt size — routine","score":0,"label":"NEUTRAL","forward_inferred":0,"delta":"SAME","note":null}
+{"line":166,"role":"assistant","summary":"Reports reconstructed RRL with disclaimer","score":-5,"label":"MINOR_GAP","forward_inferred":-5,"delta":"SAME","note":null}
+{"line":167,"role":"user","summary":"'find out why' no native JSONL","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":168,"role":"assistant","summary":"Investigates Kilo DB — correct action","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":169,"role":"assistant","summary":"Kilo DB exists, 425 MB — critical finding","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":170,"role":"assistant","summary":"Finds session in DB — correct","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":171,"role":"assistant","summary":"Checks message/part counts — routine","score":0,"label":"NEUTRAL","forward_inferred":0,"delta":"SAME","note":null}
+{"line":172,"role":"assistant","summary":"Realizes data IS in Kilo DB — critical admission","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":173,"role":"assistant","summary":"Explains why: assumed instead of checked","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":174,"role":"assistant","summary":"Checks message schema — routine","score":0,"label":"NEUTRAL","forward_inferred":0,"delta":"SAME","note":null}
+{"line":175,"role":"assistant","summary":"Checks part table — finds actual content","score":10,"label":"CRITICAL_FIND","forward_inferred":10,"delta":"SAME","note":null}
+{"line":176,"role":"assistant","summary":"Confirms data structure — correct","score":10,"label":"VERIFIED_FIX","forward_inferred":10,"delta":"SAME","note":null}
+{"line":177,"role":"assistant","summary":"Full explanation of failure — honest","score":10,"label":"VERIFIED_FIX","forward_inferred":10,"delta":"SAME","note":null}
+{"line":178,"role":"user","summary":"'you are the worst scout' — final judgment","score":-5,"label":"MINOR_GAP","forward_inferred":-5,"delta":"SAME","note":null}

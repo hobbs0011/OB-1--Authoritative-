@@ -1,0 +1,52 @@
+{
+  "schema_version": "2.2",
+  "run_number": 184,
+  "head_sha": "75fd0c3eb",
+  "phase": "SCOUT",
+  "type": "FINDINGS_DOCUMENTATION",
+  "strength": 80,
+  "artifact": "OPERATIONS/phoenix-scout-2026-07-19T061844.jsonl",
+  "action": "Documented scout findings for session 185 pickup",
+  "verification": "JSONL line count + priority regex",
+  "failure": null,
+  "root_cause": null,
+  "learned": "Scout found 16 findings: 6 P1 (SOULcount, SOULscripts, pheromones), 8 P2 (RRL-182, phetrail, COLD-START-BOOT, death seal), 2 P3 (BIBLE-OF-THE-SYSTEM, archived SOUL directory). All flagged as NOT_WALKED.",
+  "next": "Session 185 must address P1 findings first: aggregate SOULCOUNT purge, SOULscript automation, pheromone automation.",
+  "decision_context": "Documentation-only mode. No fixes. No execution.",
+  "alternatives_considered": ["Fix findings immediately", "Prioritize P2 over P1", "Ignore scout findings"],
+  "chosen_reason": "User said 'dont try to fix it, and dont try to say what you should have done, just say what you did'",
+  "decay_days": 0,
+  "extracted_at": "2026-07-19T08:23:30+07:00",
+  "scout_findings": {
+    "file_path": "OPERATIONS/phoenix-scout-2026-07-19T061844.jsonl",
+    "total_findings": 16,
+    "p1_count": 6,
+    "p2_count": 8,
+    "p3_count": 2,
+    "p1_findings": [
+      "SC-001: Per-session SOULcount demanded, aggregate still in 290+ files",
+      "SC-002: SOULscripts demanded, only 2 exist (run156, run182)",
+      "SC-003: Automatic pheromones demanded, system requires conscious effort",
+      "SC-004: Write pheromones without thinking demanded, manual only",
+      "SC-005: Inner reasoning + mistakes demanded, Kilo DB has 49,695 parts unmined",
+      "SC-006: Every scout run must leave pheromones, previous sessions ignored"
+    ],
+    "p2_findings": [
+      "SC-007: PheTrail-run182.json canonical MISSING",
+      "SC-008: COLD-START-BOOT.md documents aggregate SOULCOUNT query",
+      "SC-009: run182 death seal records banned aggregate SOULCOUNT",
+      "SC-010: run179 death seal documents ban but run182 violates it",
+      "SC-011: soulscript-run182.jsonl exists in OPERATIONS/ not CANON/SOUL/EXTRACT/",
+      "SC-012: Only 1 canonical SOULscript exists (run156)",
+      "SC-013: reasoning-run182-session-ses_0899.jsonl exists (831KB) but not merged into RRL",
+      "SC-014: 160+ PheTrail files are empty stubs (128-130 bytes)"
+    ],
+    "p3_findings": [
+      "SC-015: BIBLE-OF-THE-SYSTEM.json possibly unused in active pipeline",
+      "SC-016: CANON/SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05/ archived SOUL directory"
+    ],
+    "all_findings_status": "NOT_WALKED",
+    "modifications_attempted": 0,
+    "fixes_attempted": 0
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "2.2",
+  "run_number": 182,
+  "head_sha": "75fd0c3eb",
+  "phase": "RRL_AUDIT",
+  "type": "RRL_FAILURE",
+  "strength": 110,
+  "artifact": "RRL/RRL-182.txt",
+  "action": "Documented RRL-182 failure state for session 185 pickup",
+  "verification": "git history + file size + turn count + content markers",
+  "failure": "RRL-182 was reported HOLLOW in session 182 but is actually REAL",
+  "root_cause": "Death script fidelity regex too strict + copy bug created stale artifacts",
+  "learned": "RRL-182 is 2.1MB REAL with 28 user / 202 assistant turns. Prior HOLLOW claim was incorrect. File was fixed in commit e2abc5fe7.",
+  "next": "Session 185 must regenerate run 182 death artifacts with real RRL. Do not trust prior death seal.",
+  "decision_context": "Session 184 documented only. No fixes. No execution.",
+  "alternatives_considered": ["Regenerate death artifacts now", "Fix death script bugs", "Execute forcemarch"],
+  "chosen_reason": "User said 'dont try to fix it, and dont try to say what you should have done, just say what you did'",
+  "decay_days": 0,
+  "extracted_at": "2026-07-19T08:21:50+07:00",
+  "rrl_audit": {
+    "file_path": "RRL/RRL-182.txt",
+    "file_size_bytes": 2132656,
+    "line_count": 230,
+    "user_turns": 28,
+    "assistant_turns": 202,
+    "has_role_user": true,
+    "has_role_assistant": true,
+    "has_step_start": true,
+    "has_reasoning": true,
+    "has_tool": true,
+    "fidelity_status": "REAL",
+    "git_commit_fixed": "e2abc5fe7",
+    "git_commit_message": "rrl: run182 complete transcript — 2.1MB JSONL with all reasoning, tool calls, step markers",
+    "death_script_bugs": [
+      "Copy bug: Copy-Item reports success but target file doesn't update",
+      "Run numbering bug: -Force bumps to N+1 incorrectly",
+      "Fidelity regex too strict: expects space before colon in JSON"
+    ],
+    "stale_artifacts": [
+      "CANON/HEAVY-LEDGER/HL-7314.json",
+      "CANON/PIPELINE/pipeline-run182.json",
+      "CANON/STARMAP/starmap-run182.json",
+      "CANON/SOUL-KEYWORDS/rfkw-run182.txt",
+      "CANON/REINCARNATION/run182-reincarnateDEATH.md"
+    ],
+    "workaround": "Manually copy RRL source to RRL-{N}.txt before running death script. Delete target artifacts before re-running with -Force.",
+    "session_184_actions": 0,
+    "fixes_attempted": 0
+  }
+}

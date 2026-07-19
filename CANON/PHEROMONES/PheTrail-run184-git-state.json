@@ -1,0 +1,40 @@
+{
+  "schema_version": "2.2",
+  "run_number": 184,
+  "head_sha": "75fd0c3eb",
+  "phase": "GIT",
+  "type": "STATE_DOCUMENTATION",
+  "strength": 60,
+  "artifact": "git working tree",
+  "action": "Documented git state for session 185 pickup",
+  "verification": "git status + git log",
+  "failure": null,
+  "root_cause": null,
+  "learned": "Working tree has 3 modified files and 2 untracked files. No commits in session 184.",
+  "next": "Session 185 must commit all artifacts. No uncommitted changes should remain at DEATH.",
+  "decision_context": "Documentation-only mode. No execution. No fixes.",
+  "alternatives_considered": ["Commit now", "Stash changes", "Discard changes"],
+  "chosen_reason": "User said 'dont try to fix it, and dont try to say what you should have done, just say what you did'",
+  "decay_days": 0,
+  "extracted_at": "2026-07-19T08:23:00+07:00",
+  "git_state": {
+    "head_sha": "75fd0c3eb",
+    "head_message": "boot: advance FINGERPRINT to run 182 death seal (HEAD 3e62b1813) + secret cleanup",
+    "branch": "canon",
+    "modified_files": [
+      ".kilo/command/PhoenixScout.md",
+      "OPERATIONS/BACKBURNER-PIPELINE-LOG.md",
+      "OPERATIONS/PhoenixSynch.md"
+    ],
+    "untracked_files": [
+      "CANON/PHEROMONES/PheTrail-run184-documentation.json",
+      "OPERATIONS/phoenix-scout-2026-07-19T061844.jsonl"
+    ],
+    "last_death_commit": "3e62b1813",
+    "last_death_message": "death: run 182 seal + run 183 engineering handoff — pipeline ENGINEERED (dna=9), 54 files, Hivemind-Synch v2 sealed",
+    "rrl_fix_commit": "e2abc5fe7",
+    "rrl_fix_message": "rrl: run182 complete transcript — 2.1MB JSONL with all reasoning, tool calls, step markers",
+    "commits_in_session_184": 0,
+    "modifications_committed": 0
+  }
+}

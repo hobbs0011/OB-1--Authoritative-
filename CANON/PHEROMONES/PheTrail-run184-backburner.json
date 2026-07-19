@@ -1,0 +1,36 @@
+{
+  "schema_version": "2.2",
+  "run_number": 184,
+  "head_sha": "75fd0c3eb",
+  "phase": "BACKBURNER",
+  "type": "STATE_DOCUMENTATION",
+  "strength": 60,
+  "artifact": "OPERATIONS/BACKBURNER-PIPELINE-LOG.md",
+  "action": "Documented backburner state for session 185 pickup",
+  "verification": "line count + regex status count",
+  "failure": null,
+  "root_cause": null,
+  "learned": "Backburner has 1434 lines. 68 OPEN, 0 IN-PROGRESS, 2 DONE. No items were modified or closed in session 184.",
+  "next": "Session 185 must address OPEN items starting with highest SIGNAL (+110 BB-SCS-001, +90 BB-RISE-183-01/02/03)",
+  "decision_context": "Documentation-only mode. No execution. No fixes.",
+  "alternatives_considered": ["Close OPEN items", "Re-prioritize backburner", "Execute BB items"],
+  "chosen_reason": "User said 'dont try to fix it, and dont try to say what you should have done, just say what you did'",
+  "decay_days": 0,
+  "extracted_at": "2026-07-19T08:22:30+07:00",
+  "backburner_state": {
+    "file_path": "OPERATIONS/BACKBURNER-PIPELINE-LOG.md",
+    "total_lines": 1434,
+    "open_items": 68,
+    "in_progress_items": 0,
+    "done_items": 2,
+    "top_signal_items": [
+      "+110 BB-SCS-001: SCS doctrine documentation",
+      "+90 BB-RISE-183-01: reincarnate-rise.ps1 SOULCOUNT bug",
+      "+90 BB-RISE-183-02: /reincarnateLegacy command created",
+      "+90 BB-RISE-183-03: 78 orphan RRL files eligible for legacy death",
+      "+80 BB-01/02/03: KV / COMMANDS / MemoryDO bindings (DONE)"
+    ],
+    "modifications_attempted": 0,
+    "items_closed": 0
+  }
+}

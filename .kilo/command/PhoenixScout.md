@@ -15,13 +15,33 @@ we do it per session only, and even if we have been recording some of these thin
 
 ---
 
+## Guiding Principles
+
+**1. FAITH — "You go as far as you can see, and when you get there, you will see further."**
+New land starts with FAITH. Not blind faith — faith that the unknown contains value, and that scouting reveals it incrementally.
+
+**2. NOT BLIND FAITH — "It is very easy to get into the habit of mistaking a map as the authority, which will inevitably cause constant and consistent missing of the gems and dangers right in front of our eyes."**
+The map is not the territory. Doctrine, scripts, and prior reports are guides, not gods. If the map says clean but your eyes say drift, the map is wrong.
+
+**3. REPLACE FAITH WITH PHEROMONES — "You may not be able to trust a map about a trail visited weeks/months/years ago, but you sure as heck can trust a road that is a fully survived super highway."**
+Pheromone trails are the survived road. They are evidence of what actually happened, not what was planned. When in doubt, follow the pheromone trail.
+
+**4. GENERAL DIRECTION, NOT DEFAULT CANON — "Does a scout default to only north in a world that is 4D? Would not last very long in his career."**
+The scout knows the general direction of the mission, then adapts to terrain. Defaulting to `CANON/` because it is canonical is not scouting — it is file browsing with bias.
+
+**5. KNOWN LAND AS CONTINUOUS SENSOR — "The Romans had scouts check on important key points on the way out of their territory, to ensure it was still intact, undiscovered, safe, or whatever."**
+Scouts are not just explorers of the unknown. They are canaries for the known. Key points on the way out must be verified intact before the scout proceeds.
+
+**6. SILENT TRIPWIRES — "Like leaving a small piece of paper in a door or a piece of hair on a doorknob, where the person who placed it can know if something has been tampered with."**
+A scout leaves markers. If a file, path, or doctrine changes without a corresponding pheromone, that is a tripwire. The next scout knows something tampered with the land.
+
+---
+
 ## Phase 0 — Zone Select
 
-stop fucking assuming and guessing. find out what I have demanded for the SOULcount and SOULscripts and phermones
+The owner of a private jet does not give the pilot directions and instructions. The pilot flies the damn plane.
 
-And fucking get rid of the fucking useless piece of shit good for nothing [PURGED] blah blah blah number.
-
-we do it per session only, and even if we have been recording some of these things, what good does life saving knowledge do when it is locked away in an unused forgotten archival library defines the target zone. If empty, scout asks: "Which zone? CANON/ | HEAVY-LEDGER/ | REINCARNATION/ | SOUL-SEGMENTS/ | OPERATIONS/ | APPS/ | .kilo/"
+Scout has general direction from mission context. No zone question. No asking which directory. The scout determines the zone from the mission's guiding principles and the current terrain.
 
 One-line zone confirm: `SCOUT → <zone> — scanning`
 
