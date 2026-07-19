@@ -180,6 +180,7 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 | 2026-07-19T22:04 | soul-2026-07-19-canonical-consolidation | SOULSCHOLARS (Stage 4) | 8 | 2 | 1 | `CANON/SOUL/soul-2026-07-19-canonical-consolidation.md` |
 | 2026-07-19T22:05 | supply-2026-07-19-canonical-consolidation | SUPPLYLINES (Stage 5) | 4 | 2 | 1 | `CANON/SUPPLY/supply-2026-07-19-canonical-consolidation.md` |
 | 2026-07-19T22:06 | engineer-2026-07-19-canonical-consolidation | ENGINEERlegionnaire (Stage 6) | 4 | 2 | 1 | `CANON/ENGINEER/engineer-2026-07-19-canonical-consolidation.md` |
+| 2026-07-19T23:08 | canonical-consolidation-2026-07-19 | reincarnateDEATH (Stage 7) | 4 | 3 | 3 | `CANON/REINCARNATION/canonical-consolidation-2026-07-19-death.md` |
 
 *Rows are append-only. Never delete or modify prior rows. Stale rows are marked `[DEPRECATED]`, never removed.*
 
