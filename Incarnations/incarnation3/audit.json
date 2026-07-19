@@ -2,7 +2,6 @@
   "audit_target": "D:\\OB-1-CANONICAL\\Incarnations\\incarnation3\\RRL.txt",
   "audit_type": "SCS_RRL_AUDIT",
   "version": 3,
-  "run": 185,
   "incarnation": 3,
   "generated_at": "2026-07-19T17:23:06+07:00",
   "finalized_at": "2026-07-19T17:23:06+07:00",
@@ -43,15 +42,14 @@
   },
   "death_script_executed": {
     "script": "CANON/SCRIPTS/death.ps1",
-    "run": 185,
-    "rrl_path": "RRL/RRL-185.txt",
-    "pipeline": "CANON/REINCARNATION/pipeline-185.json",
-    "handoff": "CANON/REINCARNATION/handoff-185-to-186.json",
-    "seal": "CANON/REINCARNATION/run185-reincarnateDEATH.md"
+    "rrl_path": "RRL/Incarnation3.txt",
+    "pipeline": "CANON/REINCARNATION/pipeline-incarnation3.json",
+    "handoff": "CANON/REINCARNATION/handoff-incarnation3-to-incarnation4.json",
+    "seal": "CANON/REINCARNATION/incarnation3-reincarnateDEATH.md"
   },
   "working_tree_state": {
     "head": "7317b616c",
     "branch": "canon",
-    "clean": true
+    "clean": false
   }
 }
