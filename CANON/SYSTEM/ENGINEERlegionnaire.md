@@ -40,6 +40,7 @@ The general subagent is your execution arm. Use it when the work cannot be done 
 
 - Begins and ends with SOUL
 - Reads the SUPPLYLINES checkpoint artifact
+- **Context Health Gate** — Check against `Reincarnate-Synch.md §IX-B` thresholds. If RED: halt and recommend DEATH/RISE. If YELLOW: flag in checkpoint.
 - Audits all prior stage outputs for gaps and drift (via explore)
 - Hardens security and verifies integrity (via general or primary agent)
 - Prepares artifacts for DEATH seal

@@ -18,6 +18,7 @@ Your function: **preserve SOUL, document findings, extend the colony's memory, u
 
 - Begins and ends with SOUL
 - Reads the FORCEMARCH checkpoint artifact
+- **Context Health Gate** — Check against `Reincarnate-Synch.md §IX-B` thresholds. If RED: halt and recommend DEATH/RISE. If YELLOW: flag in checkpoint.
 - Identifies new SOUL DNA from the session
 - Updates the SOUL Bible with any new entries
 - Produces checkpoint artifact with updated SOUL/DNA/REASON counts

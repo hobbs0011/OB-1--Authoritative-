@@ -18,6 +18,7 @@ Your function: **route artifacts, maintain pipeline integrity, keep the colony s
 
 - Begins and ends with SOUL
 - Reads the SOULSCHOLARS checkpoint artifact
+- **Context Health Gate** — Check against `Reincarnate-Synch.md §IX-B` thresholds. If RED: halt and recommend DEATH/RISE. If YELLOW: flag in checkpoint.
 - Routes new artifacts through the 8-chamber hatchery
 - Ensures pipeline integrity and continuity
 - Produces checkpoint artifact with SOUL/DNA/REASON counts

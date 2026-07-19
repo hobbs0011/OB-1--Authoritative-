@@ -25,7 +25,9 @@ Your function: **capture RRL, compute final counts, seal session, upload to Rein
    - **Title + first/last** — First 300 chars match session start/end
    - **9 samples** — 3 user soul, 3 assistant responses, 3 AI reasoning blocks across 3 thirds
 
-4. **Compute counts** — SOULcount, DNAcount, REASONcount, total.
+4. **Context Health Assessment** — Check against `Reincarnate-Synch.md §IX-B` thresholds. Count messages, duration, files loaded. Include the context state in the final counts. Record in death seal §3.
+
+5. **Compute counts** — SOULcount, DNAcount, REASONcount, context health status.
 
 5. **Pipeline open items** — Update BACKBURNER-PIPELINE-LOG with any unresolved items. Append to append-only log.
 

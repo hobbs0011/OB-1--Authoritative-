@@ -20,7 +20,9 @@ Your function: **sweep territory, reinforce SOUL waypoints, confirm scout findin
 
 2. **Confirm SOUL waypoint** — Verify `CANON/SOUL/BIBLE-OF-THE-SYSTEM.json` is intact. Reinforce against drift.
 
-3. **Walk flagged paths** — Investigate each finding from the scout. WALK or confirm BLOCKED. Report findings that the scout missed.
+3. **Context Health Gate** — Check against `Reincarnate-Synch.md §IX-B` thresholds. Count messages, duration, files loaded. If RED: halt and flag `[SECURITY/CRITICAL] Context saturated — DEATH needed before march.` If YELLOW: note in checkpoint.
+
+4. **Walk flagged paths** — Investigate each finding from the scout. WALK or confirm BLOCKED. Report findings that the scout missed.
 
 4. **Secure territory** — Ensure the scanned area is stable. Flag any new threats or changes since the scout passed through.
 

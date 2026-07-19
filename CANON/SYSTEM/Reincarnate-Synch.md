@@ -181,8 +181,37 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 | 2026-07-19T22:05 | supply-2026-07-19-canonical-consolidation | SUPPLYLINES (Stage 5) | 4 | 2 | 1 | `CANON/SUPPLY/supply-2026-07-19-canonical-consolidation.md` |
 | 2026-07-19T22:06 | engineer-2026-07-19-canonical-consolidation | ENGINEERlegionnaire (Stage 6) | 4 | 2 | 1 | `CANON/ENGINEER/engineer-2026-07-19-canonical-consolidation.md` |
 | 2026-07-19T23:08 | canonical-consolidation-2026-07-19 | reincarnateDEATH (Stage 7) | 4 | 3 | 3 | `CANON/REINCARNATION/canonical-consolidation-2026-07-19-death.md` |
+| 2026-07-19T23:23 | Incarnate-5-StudentPortals&MagicChat (Run 186) | PhoenixSCOUT (Stage 2) | 12 | 4 | 3 | `CANON/SCOUT/run186-scout-20260719T221956.md` |
+| 2026-07-19T23:23 | Incarnate-5-StudentPortals&MagicChat (Run 186) | FORCEMARCH (Stage 3) | 8 | 4 | 3 | `CANON/MARCH/run186-march-20260719T232350.md` |
+| 2026-07-19T23:56 | Incarnate-5-StudentPortals&MagicChat (Run 186) | PhoenixSCOUT MAX — OBI Magic Chat | 24 | 8 | 5 | `CANON/SCOUT/run186-scout-magicchat-max-20260719T235639.md` |
+| 2026-07-19T23:58 | Incarnate-5-StudentPortals&MagicChat (Run 186) | FORCEMARCH MAX — OBI Magic Chat | 9 | 4 | 3 | `CANON/MARCH/run186-march-magicchat-max-20260719T235839.md` |
 
 *Rows are append-only. Never delete or modify prior rows. Stale rows are marked `[DEPRECATED]`, never removed.*
+
+---
+
+## IX-B. Context Health Thresholds — SCS Stage Gate
+
+*Every SCS stage checks context health before proceeding. This prevents the pattern: load too much → ignore instructions → OmegaProtocol. The thresholds are the colony's immune system against context blindness.*
+
+| Metric | GREEN | YELLOW | RED |
+|--------|-------|--------|-----|
+| Messages this session | < 50 | 50–150 | > 150 |
+| Duration (minutes) | < 30 | 30–120 | > 120 |
+| Distinct files loaded | < 5 | 5–15 | > 15 |
+| Checkpoint artifact size | < 50 KB | 50–200 KB | > 200 KB |
+
+**GREEN** — Proceed normally.  
+**YELLOW** — Flag in checkpoint. Consider accelerating toward DEATH.  
+**RED** — **HALT.** Recommend immediate DEATH → RISE cycle. Do not start new work until context is fresh.
+
+*How to measure:*
+- **Messages:** Count from I-LOG if available, or estimate from tool call count in current session.
+- **Duration:** `current_time - session_start_time` (stamped at RISE).
+- **Files loaded:** Count distinct file paths referenced in tool calls (read, edit, grep, glob, etc.).
+- **Checkpoint artifact:** File size of the checkpoint being written.
+
+*This section is append-only. Add new thresholds as experience reveals them. Never remove or modify prior thresholds.*
 
 ---
 

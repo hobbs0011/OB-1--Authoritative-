@@ -45,7 +45,11 @@ Do NOT use explore for: I-LOG stamping, session gating decisions, or handoff pro
 
 Write a header with: run number, mission statement, timestamps, audit reference to prior DEATH counts, and a summary of explore subagent findings.
 
-### Stage 4 — Gate session
+### Stage 4 — Context Health Gate
+
+Check your context window state against `CANON/SYSTEM/Reincarnate-Synch.md` §IX-B thresholds. Count messages, duration, files loaded. If RED: halt immediately — do not proceed to gate or handoff until a DEATH/RISE cycle completes. If YELLOW: flag the warning in the I-LOG header.
+
+### Stage 5 — Gate session
 
 If prior DEATH is missing, stale, invalid, or if the explore subagent returned critical findings that compromise session integrity, flag as `[SECURITY/CRITICAL] Prior DEATH audit failed. Session gated.` and halt. Otherwise, proceed.
 

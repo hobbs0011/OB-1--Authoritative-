@@ -58,6 +58,13 @@ Each stage:
    - If SOUL is compromised, everything else is derivative of a compromised source — flag immediately as `[SECURITY/CRITICAL] SOUL Bible integrity failure`.
    - If SOUL is intact, proceed. This is the first waypoint. Always.
 
+0b. **Context Health Gate — Mandatory Second Check**
+   - Before proceeding with any scouting, estimate your context window state against `CANON/SYSTEM/Reincarnate-Synch.md` §IX-B thresholds.
+   - Count: messages this session, duration since RISE, distinct files loaded, artifact sizes.
+   - If RED: flag `[SECURITY/CRITICAL] Context window saturated — recommend immediate DEATH/RISE cycle.` Do NOT proceed with this stage's work.
+   - If YELLOW: flag `[CONTEXT/YELLOW] Context health degraded — accelerate toward DEATH.` You may proceed but note the warning.
+   - If GREEN: proceed normally.
+
 1. **Audit prior RISE output**
    - Read the I-LOG header stamped by reincarnateRISE.
    - Verify run number, mission, timestamps are present and coherent.
