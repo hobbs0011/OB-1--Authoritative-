@@ -1,0 +1,18 @@
+{
+  "run": "186",
+  "session_id": "Incarnate-5-StudentPortals&MagicChat",
+  "timestamp": "2026-07-20T01:12:33+07:00",
+  "category": "REINCARNATION",
+  "soulcount": 45,
+  "dnacount": 12,
+  "reasoncount": 8,
+  "artifacts": [
+    "CANON/SCOUT/run186-scout-20260719T221956.md",
+    "CANON/SCOUT/run186-scout-magicchat-max-20260719T235639.md",
+    "CANON/MARCH/run186-march-20260719T232350.md",
+    "CANON/MARCH/run186-march-magicchat-max-20260719T235839.md",
+    "CANON/STARMAP/starmap-run186.json",
+    "CANON/SOUL-KEYWORDS/inverted-index.json"
+  ],
+  "status": "REBUILD-IN-PROGRESS"
+}

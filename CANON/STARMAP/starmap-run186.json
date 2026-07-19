@@ -1,0 +1,14 @@
+{
+  "run": "186",
+  "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-186.txt",
+  "ledger_id": "HL-7314",
+  "session_id": "Incarnate-5-StudentPortals&MagicChat",
+  "rrl_chars": 4149140,
+  "rrl_bytes": 4149140,
+  "soul_delta": 0,
+  "soul_event_id": "Incarnation5-Rebuild",
+  "dna_count": 0,
+  "blueprint_count": 0,
+  "sealed_at": "2026-07-20T01:12:33+07:00",
+  "merkle_hash": "REBUILD-PENDING"
+}

@@ -1,7 +1,62 @@
 ﻿{
-    "kilo_hollow":  {
-                        "run":  183,
-                        "category":  "soul+key",
-                        "weight":  1
-                    }
+    "magic-chat": {
+        "run": 186,
+        "category": "obi_magic_chat",
+        "weight": 10
+    },
+    "magic_chat": {
+        "run": 186,
+        "category": "obi_magic_chat",
+        "weight": 10
+    },
+    "MagicChat": {
+        "run": 186,
+        "category": "obi_magic_chat",
+        "weight": 10
+    },
+    "OBI Magic Chat": {
+        "run": 186,
+        "category": "obi_magic_chat",
+        "weight": 10
+    },
+    "voice-chat": {
+        "run": 186,
+        "category": "obi_magic_chat",
+        "weight": 8
+    },
+    "/api/magic-chat": {
+        "run": 186,
+        "category": "obi_magic_chat",
+        "weight": 9
+    },
+    "handleMagicChat": {
+        "run": 186,
+        "category": "obi_magic_chat",
+        "weight": 9
+    },
+    "student portal": {
+        "run": 186,
+        "category": "student_portal",
+        "weight": 8
+    },
+    "cloudflare worker": {
+        "run": 186,
+        "category": "cloudflare_worker",
+        "weight": 8
+    },
+    "net-pet-ai": {
+        "run": 186,
+        "category": "cloudflare_worker",
+        "weight": 7
+    },
+    "phoenix-empire-dev": {
+        "run": 186,
+        "category": "cloudflare_worker",
+        "weight": 7
+    },
+    "kilo_hollow": {
+        "run": 183,
+        "category": "soul+key",
+        "weight": 1
+    }
 }

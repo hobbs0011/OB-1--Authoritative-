@@ -75,7 +75,7 @@
       "mode": "full",
       "max_chars": 5000,
       "why": "Latest RRL + registry cross-link context for brand decisions and keyword lineage."
-    },
+    }
   },
   "task_types": {
     "netpetai": {

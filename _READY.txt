@@ -1,8 +1,0 @@
-
-# QUY-250 PHONICS PIPELINE
-**Source:** `Voice 260521_181606.txt`  
-**Program:** OB1 NET-PET-AI — English Phonics 44-Sound + Daily Practice Loop  
-**Total steps:** 250
-
-
-
