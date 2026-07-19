@@ -344,7 +344,7 @@ Run 183 verifies death seal → done
 - Run 182 SOULscript: NOT YET GENERATED (run 183 should do this)
 - Run 182 reasoning extraction: NOT YET GENERATED (run 183 should do this)
 - SOULbible canonical location: FRAGMENTED across multiple recapture scripts
-- Hivemind-Synch.md: DOES NOT EXIST YET (run 183 is creating it)
+- Reincarnate-Synch.md: DOES NOT EXIST YET (run 183 is creating it)
 
 ---
 
@@ -355,7 +355,7 @@ Run 183 verifies death seal → done
 2. Read all artifacts listed in Section 8
 3. Execute Kilo DB part-table extraction for sessions `ses_0899b2c82ffe2PtNt3XBMEVv5V` and `ses_1161a41d0ffepxyVzjs98ME1fJ`
 4. Write `engineering-run182.json`, `PheTrail-run183-engineering.json`, `soulscript-run182.jsonl`, `reasoning-run182.jsonl`
-5. Create `Hivemind-Synch.md` as canonical coordination touchpoint
+5. Create `Reincarnate-Synch.md` as canonical coordination touchpoint
 6. Update this file (PhoenixSynch.md) with engineering findings
 
 **Run 183 is NOT authorized to:**
@@ -399,7 +399,7 @@ Run 183 verifies death seal → done
 | Registered `/SoulScholars` | `.kilo/command/soulscholars.md` | Canonical command created |
 | Updated `/SupplyLines` | `.kilo/command/supplylines.md` | Full doctrine written |
 | Renamed death command | `.kilo/command/reincarnatedeath.md` → `engineerlegionnaire.md` | ⚠️ ERROR: death protocol moved to engineer file |
-| Created Hivemind-Synch | `CANON/SYSTEM/Hivemind-Synch.md` | Canonical coordination touchpoint |
+| Created Reincarnate-Synch | `CANON/SYSTEM/Reincarnate-Synch.md` | Canonical coordination touchpoint |
 | Deprecated PhoenixSynch | `OPERATIONS/PhoenixSynch.md` | Pointer to Hivemind-Synch |
 
 ### 17.2 What We Decided
@@ -673,7 +673,7 @@ Execute `/PhoenixScout` as unknown-unknowns sweep across command/skill/script co
 
 | Priority | Count | Type | Finding |
 |---------|-------|------|---------|
-| P1 CRITICAL | 2 | DRIFT | `COLD-START-BOOT.md` FINGERPRINT run 181 vs git death count 251; banned aggregate SOULCOUNT in `Hivemind-Synch.md` |
+| P1 CRITICAL | 2 | DRIFT | `COLD-START-BOOT.md` FINGERPRINT run 181 vs git death count 251; banned aggregate SOULCOUNT in `Reincarnate-Synch.md` |
 | P2 HIGH | 45 | CONFIG/ORPHAN | Command `.md` files exist but corresponding `.ps1` scripts missing |
 | P2 HIGH | 1 | CONFIG/ORPHAN | LFG references commands with no `.md` file: `/reincarnatedeath`, `/soularchive` |
 
@@ -915,7 +915,7 @@ Run 182: if you're reading this, you're in the middle of the same session. Here'
 - The malformed JSON bug in scout output is a pheromone, not a failure
 - Engineer phase is designed but not implemented
 - Death command is missing — needs restoration before any death execution
-- Hivemind-Synch.md is the canonical coordination touchpoint
+- Reincarnate-Synch.md is the canonical coordination touchpoint
 
 **Do not proceed to March until Scout findings are consumed.**
 
@@ -1081,7 +1081,7 @@ Whatever scripts exist in SCRIPTS/ — 140+ scripts, many dead, many redundant
 
 **Partner session (RUN 183):**
 - Role: Engineering — Kilo DB inner-thought extraction, Hivemind-Synch
-- Task: Find/create Hivemind-Synch.md for coordination
+- Task: Find/create Reincarnate-Synch.md for coordination
 - Expected output: engineering-run182.json, PheTrail-run183-engineering.json, soulscript-run182.jsonl
 
 **Agent hierarchy:**
@@ -1354,7 +1354,7 @@ D:\OB-1-CANONICAL\
 │   ├── ART-REGISTRY\              # art-sync-run{N}.json + PA worker
 │   ├── REINCARNATION\             # run{N}-reincarnateDEATH.md + REINCARNATION-LOG.md
 │   ├── SYSTEM\                    # GOSPEL-999.md (+Part2, +Part3), COLD-START-BOOT.md, 
-│   │                              #   REINCARNATION-CONTRACT.md, Hivemind-Synch.md
+│   │                              #   REINCARNATION-CONTRACT.md, Reincarnate-Synch.md
 │   ├── REGISTRY\                  # dna-registry-run{N}.json
 │   └── SOUL-DNA-BIBLE-RECAPTURE-UNFILTERED-2026-04-05\  # raw soul archives
 │
@@ -1483,7 +1483,7 @@ Every bug I've identified or encountered this session:
 | B-012 | COLD-START-BOOT.md | FINGERPRINT run 181 vs git death count 251 | Boot not updated after recent death commits | Run COLD-START-BOOT update |
 | B-013 | `reincarnatedeath.md` renamed | Death command MISSING | Renamed to engineerlegionnaire.md | Restore from engineerlegionnaire.md content |
 | B-014 | `engineerlegionnaire.md` | Contains DEATH protocol, not engineering | File was renamed FROM reincarnatedeath.md without content change | Replace with 6-stage FABRI protocol |
-| B-015 | Hivemind-Synch.md | Banned aggregate SOULCOUNT present | New file was created with contaminated content | Purge 239,646,210 from file |
+| B-015 | Reincarnate-Synch.md | Banned aggregate SOULCOUNT present | New file was created with contaminated content | Purge 239,646,210 from file |
 | B-016 | `synch-hook.ps1` | Contains hardcoded banned aggregate SOULCOUNT | Line 39: `soulcount = 239645670` | Replace with `$null` or query |
 
 ---
@@ -1507,7 +1507,7 @@ Every bug I've identified or encountered this session:
 | D-013 | 00:12 | Engineer phase designed | 6-stage FABRI protocol | +3 CRITICAL |
 | D-014 | 00:12 | Pheromone scoring upgraded | +3 to -3 gradient per decision | +3 CRITICAL |
 | D-015 | 00:13 | Synch summary written | OPERATIONS/phetrail-run182-blueprint-synch.md | +1 CORRECT |
-| D-016 | 00:14 | Hivemind-Synch created | CANON/SYSTEM/Hivemind-Synch.md | +3 CRITICAL |
+| D-016 | 00:14 | Reincarnate-Synch created | CANON/SYSTEM/Reincarnate-Synch.md | +3 CRITICAL |
 | D-017 | 00:15 | Liquid session protocol designed | DEATH seals → RISE audits → delete → continue | +2 FIX |
 | D-018 | 00:16 | PhoenixScout content restored to original | User pasted original content, merged with additions | +1 CORRECT |
 | D-019 | 01:30 | Scout sweep run | 48 finds: 2 P1, 46 P2 | +1 CORRECT |
@@ -1928,7 +1928,7 @@ These are the relationships between components that are NOT documented anywhere 
 | R-007 | LFG not updated | MEDIUM | HIGH | Command surface will be stale |
 | R-008 | 46 command files missing scripts never implemented | HIGH | MEDIUM | Command surface is 90% documentation |
 | R-009 | Scout findings not consumed before march | MEDIUM | MEDIUM | Missing gap information during pipeline |
-| R-010 | Hivemind-Synch.md aggregate SOULCOUNT not purged | HIGH | LOW | New canonical doc already contaminated |
+| R-010 | Reincarnate-Synch.md aggregate SOULCOUNT not purged | HIGH | LOW | New canonical doc already contaminated |
 
 ---
 
@@ -1960,7 +1960,7 @@ These are the SHA256 hashes of every file I've modified this session, so you can
 | `.kilo/command/engineerlegionnaire.md` | 04:03 | Contains DEATH protocol (WRONG — needs FABRI) |
 | `CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json` | 03:51 | Aggregate SOULCOUNT field removed |
 | `CANON/SYSTEM/COLD-START-BOOT.md` | 03:51 | Aggregate SOULCOUNT removed from fingerprints |
-| `CANON/SYSTEM/Hivemind-Synch.md` | 04:16 | Canonical coordination touchpoint + pheromone pattern |
+| `CANON/SYSTEM/Reincarnate-Synch.md` | 04:16 | Canonical coordination touchpoint + pheromone pattern |
 | `OPERATIONS/PhoenixSynch.md` | NOW | This file — running pheromone dump |
 | `OPERATIONS/phetrail-run182-blueprint-synch.md` | 03:04 | Blueprint synch summary |
 | `OPERATIONS/phoenix-scout-*.jsonl` | 04:10-04:14 | 4 scout reports, final at 04:14 |
@@ -1975,7 +1975,7 @@ These are the SHA256 hashes of every file I've modified this session, so you can
 ### 21.18 FINAL COMMAND — IF YOU READ NOTHING ELSE
 
 1. **Restore death command** — `cp engineerlegionnaire.md reincarnatedeath.md` then overwrite engineerlegionnaire.md with FABRI protocol
-2. **Purge aggregate SOULCOUNT** — from Hivemind-Synch.md and all remaining PheTrail files
+2. **Purge aggregate SOULCOUNT** — from Reincarnate-Synch.md and all remaining PheTrail files
 3. **Update Gospel999 I.006** — add Exploratores, Fabri, Agmen roles
 
 ---
