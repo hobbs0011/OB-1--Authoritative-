@@ -803,25 +803,80 @@ await env.DB.prepare('UPDATE soul_sessions SET prompt_count = prompt_count + 1 W
 
   // GET /api/soul/apex — STAGE V: PRAESIDIA — APEX ROLLUP (canonical consolidation / principia)
   if (method === 'GET' && path === '/api/soul/apex') {
+    // ... existing code ...
+  }
+
+  // POST /api/pheromone/deposit — continuous pheromone keylogger (BB-00)
+  if (method === 'POST' && path === '/api/pheromone/deposit') {
     try {
-      const studentId = url.searchParams.get('student_id') || 'sov100';
-      const limit = parseInt(url.searchParams.get('limit') || '5', 10);
-      const days = parseInt(url.searchParams.get('days') || '30', 10);
+      const body = await request.json();
+      const { session_id, run, stage, category, severity, path, finding, strength, soulcount, dnacount, reasoncount, checkpoint_artifact } = body;
+      if (!session_id || !stage || !finding) {
+        return jsonResponse({ error: 'session_id, stage, and finding are required' }, 400);
+      }
+      const id = generateUUID();
+      const ts = new Date().toISOString();
+      await env.DB.prepare(`
+        CREATE TABLE IF NOT EXISTS pheromone_deposits (
+          id TEXT PRIMARY KEY,
+          session_id TEXT NOT NULL,
+          run TEXT,
+          stage TEXT NOT NULL,
+          category TEXT,
+          severity TEXT,
+          path TEXT,
+          finding TEXT NOT NULL,
+          strength INTEGER DEFAULT 0,
+          soulcount INTEGER DEFAULT 0,
+          dnacount INTEGER DEFAULT 0,
+          reasoncount INTEGER DEFAULT 0,
+          checkpoint_artifact TEXT,
+          created_at TEXT NOT NULL
+        )
+      `).run();
+      await env.DB.prepare(`
+        INSERT INTO pheromone_deposits (id, session_id, run, stage, category, severity, path, finding, strength, soulcount, dnacount, reasoncount, checkpoint_artifact, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `).bind(id, session_id, run || null, stage, category || null, severity || null, path || null, finding, strength ?? 0, soulcount ?? 0, dnacount ?? 0, reasoncount ?? 0, checkpoint_artifact || null, ts).run();
+      ctx.waitUntil(appendToLedger(env, {
+        studentId: session_id.split('-')[0] || 'sov100',
+        eventType: 'pheromone_deposit',
+        data: { deposit_id: id, session_id, stage, category, severity, strength, soulcount, dnacount, reasoncount }
+      }));
+      return jsonResponse({ deposit_id: id, session_id, stage, created_at: ts }, 201);
+    } catch (err) {
+      return jsonResponse({ error: err.message }, 500);
+    }
+  }
+
+  // GET /api/pheromone/trends — query pheromone trends by stage/time
+  if (method === 'GET' && path === '/api/pheromone/trends') {
+    try {
+      const stageFilter = url.searchParams.get('stage') || null;
+      const days = parseInt(url.searchParams.get('days') || '7', 10);
       const cutoff = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
-      const { results: rawPrompts } = await env.DB.prepare('SELECT p.text, p.emotional_markers, p.session_id FROM soul_prompts p JOIN soul_sessions s ON p.session_id = s.session_id WHERE s.ingested_at >= ? ORDER BY s.ingested_at DESC LIMIT 100').bind(cutoff).all();
-      const scored = (rawPrompts || []).map(row => {
-        let markers = { caps_words: 0, exclamations: 0 };
-        try { if (row.emotional_markers) markers = JSON.parse(row.emotional_markers); } catch(e) {}
-        const score = (markers.caps_words * 3) + (markers.exclamations * 2) + (detectProfanity(row.text) * 10);
-        return { text: row.text, score, session_id: row.session_id };
-      }).sort((a, b) => b.score - a.score);
-      let topKeywords = [];
-      try { const { results: kw } = await env.DB.prepare('SELECT keyword, weight FROM soul_keywords WHERE student_id = ? ORDER BY weight DESC LIMIT 10').bind(studentId).all(); topKeywords = kw || []; } catch(e) {}
-      const topItems = scored.slice(0, limit);
-      const apexScore = topItems.length > 0 ? Math.round(topItems.reduce((s, i) => s + i.score, 0) / topItems.length) : 0;
-      ctx.waitUntil(appendToLedger(env, { studentId, eventType: 'soul_apex_rollup', data: { apex_score: apexScore, items_scored: scored.length, keywords: topKeywords.slice(0, 3).map(k => k.keyword) } }));
-      return jsonResponse({ student_id: studentId, apex_score: apexScore, soul_directives: topItems.map(i => ({ text: i.text.slice(0, 200), charge: i.score })), top_keywords: topKeywords, total_prompts_scanned: rawPrompts?.length || 0, generated_at: new Date().toISOString(), stage: 'PRAESIDIA-APEX' });
-    } catch (err) { return jsonResponse({ error: err.message }, 500); }
+      let query = 'SELECT stage, category, severity, strength, soulcount, dnacount, reasoncount, created_at FROM pheromone_deposits WHERE created_at >= ?';
+      const params = [cutoff];
+      if (stageFilter) { query += ' AND stage = ?'; params.push(stageFilter); }
+      query += ' ORDER BY created_at DESC LIMIT 500';
+      const { results } = await env.DB.prepare(query).bind(...params).all();
+      const aggregated = {};
+      for (const row of (results || [])) {
+        const key = row.stage;
+        if (!aggregated[key]) aggregated[key] = { stage: row.stage, deposits: 0, total_strength: 0, avg_strength: 0, soulcount: 0, dnacount: 0, reasoncount: 0 };
+        aggregated[key].deposits++;
+        aggregated[key].total_strength += row.strength || 0;
+        aggregated[key].soulcount += row.soulcount || 0;
+        aggregated[key].dnacount += row.dnacount || 0;
+        aggregated[key].reasoncount += row.reasoncount || 0;
+      }
+      for (const k of Object.keys(aggregated)) {
+        aggregated[k].avg_strength = Math.round((aggregated[k].total_strength / aggregated[k].deposits) * 100) / 100;
+      }
+      return jsonResponse({ trends: Object.values(aggregated), window_days: days, generated_at: new Date().toISOString(), total_deposits: results?.length || 0 });
+    } catch (err) {
+      return jsonResponse({ error: err.message }, 500);
+    }
   }
 
   return jsonResponse({
@@ -833,7 +888,8 @@ await env.DB.prepare('UPDATE soul_sessions SET prompt_count = prompt_count + 1 W
       'POST /api/soul/event', 'POST /api/soul/skeleton',
       'GET /api/soul/context/:studentId',
       'POST /api/soul/truth', 'POST /api/soul/shadow',
-      'GET /api/soul/merkle/:session_id', 'GET /api/soul/apex'
+      'GET /api/soul/merkle/:session_id', 'GET /api/soul/apex',
+      'POST /api/pheromone/deposit', 'GET /api/pheromone/trends'
     ]
   }, 404);
 }

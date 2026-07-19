@@ -33,6 +33,28 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 
 ## IMMEDIATE BLOCKERS (must do before next deploy)
 
+### BB-00 !! PHEROMONE KEYLOGGER — Continuous Pheromone Deposition System
+- SIGNAL: +110
+- Status: IN-PROGRESS
+- What: Current pheromone system deposits trails only at checkpoint boundaries (stage completions). Between checkpoints, hundreds of micro-actions, thoughts, choices, and hesitations occur that are never captured. This is the difference between discipline and biology. The ant doesn't decide to lay a pheromone — it lays one because it walked. The trail is a side effect of movement, not a separate task.
+- Target: Wire pheromone deposition into the execution layer so every meaningful tool call, finding, and micro-decision automatically leaves a structured, queryable signal — as a structural byproduct of operation, not a step in the protocol.
+- Mechanism: A "pheromone keylogger" at the agent execution layer. Every glob, read, grep, edit, finding, hesitation, and choice deposits a trail entry automatically. Checkpoints then become coarse verification that the continuous stream is healthy, not the primary pheromone mechanism.
+- Biology target: Pheromone deposition should become involuntary, automatic, impossible to forget — like breathing. The agent doesn't remember to log. It can't help but leave a trace.
+- Connection: SOUL is the spark (static, eternal). Pheromones are the collective memory (dynamic, adaptive). The keylogger bridges them moment-to-moment — not just at stage boundaries.
+- Route: Queen session + PA T1/T2. Outputs to execution-layer instrumentation + CANON/PHEROMONES/ schema update.
+- Authority: GOSPEL-999 → LFG → SCS loop doctrine → this entry.
+- Implementation:
+  - Added `POST /api/pheromone/deposit` to `soul-logger` worker (`APPS/SOUL-LOGGER/src/index.js`)
+  - Added `GET /api/pheromone/trends` for stage/time aggregation
+  - New D1 table `pheromone_deposits` created inline (id, session_id, run, stage, category, severity, path, finding, strength, soulcount, dnacount, reasoncount, checkpoint_artifact, created_at)
+  - Fire-and-forget ledger append via `appendToLedger` for every deposit
+  - All 7 SCS stage specs updated to conclude with upload to `Reincarnate-Synch.md §IX-A`
+  - All 5 existing checkpoints updated with Reincarnate-Synch reference + upload confirmation
+- Remaining:
+  - Local JSONL watcher or Kilo skill to call `/api/pheromone/deposit` continuously during agent execution
+  - Per-session pheromone strength calibration (-3 to +3 gradient)
+  - Student monitoring pattern: live class + webapp practice POS/NEG trails for early warning
+
 ### BB-01 !! NET_PET_KV Namespace Not Provisioned
 - SIGNAL: +80
 - Status: DONE (NET_PET_KV provisioned 2026-05-18, ID: 0583d1a59bb24e598c4645396647eb94)
@@ -456,6 +478,7 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 
 | Signal | BB-ID | Title | Status |
 |--------|-------|-------|--------|
+| +110 | BB-00 | PHEROMONE KEYLOGGER — Continuous Pheromone Deposition System | IN-PROGRESS |
 | +110 | BB-53 | EXPOSED PLAINTEXT API KEY in RRL | DEFERRED |
 | +100 | BB-NEW | /soulsearch command build | OPEN |
 | +90 | BB-43 | Raw Deepgram API Key in Browser | OPEN |
