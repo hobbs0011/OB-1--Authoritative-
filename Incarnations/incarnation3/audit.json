@@ -1,5 +1,5 @@
 {
-  "audit_target": "D:\\OB-1-CANONICAL\\Incarnations\\incarnation3\\RRL.txt",
+  "audit_target": "D:\\OB-1-CANONICAL\\Incarnations\\incarnation3\\Incarnate3- I-LOG Procedure.txt",
   "audit_type": "SCS_RRL_AUDIT",
   "version": 3,
   "incarnation": 3,
@@ -42,7 +42,7 @@
   },
   "death_script_executed": {
     "script": "CANON/SCRIPTS/death.ps1",
-    "rrl_path": "RRL/Incarnation3.txt",
+    "rrl_path": "RRL/Incarnate3- I-LOG Procedure.txt",
     "pipeline": "CANON/REINCARNATION/pipeline-incarnation3.json",
     "handoff": "CANON/REINCARNATION/handoff-incarnation3-to-incarnation4.json",
     "seal": "CANON/REINCARNATION/incarnation3-reincarnateDEATH.md"
