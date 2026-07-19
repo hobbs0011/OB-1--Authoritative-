@@ -1,0 +1,17 @@
+﻿{
+    "run":  "185",
+    "timestamp":  "2026-07-19T17:19:19.4044830+07:00",
+    "rrl":  "RRL\\RRL-185.txt",
+    "audit":  {
+                  "SOULcount":  25,
+                  "DNAcount":  92,
+                  "REASONcount":  89,
+                  "total":  117,
+                  "first_utc":  "2026-07-19T09:23:03.648Z",
+                  "last_utc":  "2026-07-19T10:18:04.762Z",
+                  "duration_min":  55
+              },
+    "open_items":  [
+
+                   ]
+}

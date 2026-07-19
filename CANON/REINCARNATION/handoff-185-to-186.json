@@ -1,0 +1,16 @@
+﻿{
+    "to_run":  186,
+    "from_run":  "185",
+    "timestamp":  "2026-07-19T17:19:19.4533129+07:00",
+    "rrl":  "RRL\\RRL-185.txt",
+    "audit":  {
+                  "SOULcount":  25,
+                  "DNAcount":  92,
+                  "REASONcount":  89,
+                  "total":  117,
+                  "first_utc":  "2026-07-19T09:23:03.648Z",
+                  "last_utc":  "2026-07-19T10:18:04.762Z",
+                  "duration_min":  55
+              },
+    "pipeline":  "CANON\\REINCARNATION\\pipeline-185.json"
+}
