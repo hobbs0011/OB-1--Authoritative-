@@ -1,7 +1,7 @@
 {
   "run": "186",
   "session_id": "Incarnate-5-StudentPortals&MagicChat",
-  "timestamp": "2026-07-20T01:12:33+07:00",
+  "timestamp": "2026-07-20T02:34:29+07:00",
   "category": "REINCARNATION",
   "soulcount": 45,
   "dnacount": 12,
@@ -14,5 +14,31 @@
     "CANON/STARMAP/starmap-run186.json",
     "CANON/SOUL-KEYWORDS/inverted-index.json"
   ],
-  "status": "REBUILD-IN-PROGRESS"
+  "rrl": {
+    "path": "D:\\OB-1-CANONICAL\\RRL\\RRL-186.txt",
+    "sha256": "3024F051705EEBC93BC3E182E8AFAE149CF1E792B7B9E2B1511AD0572971F7F4",
+    "bytes": 4149140
+  },
+  "starmap": {
+    "path": "D:\\OB-1-CANONICAL\\CANON\\STARMAP\\starmap-run186.json",
+    "merkle_hash": "3024F051705EEBC93BC3E182E8AFAE149CF1E792B7B9E2B1511AD0572971F7F4"
+  },
+  "keywords": {
+    "path": "D:\\OB-1-CANONICAL\\CANON\\SOUL-KEYWORDS\\inverted-index.json",
+    "entry_count": 17,
+    "top_terms": [
+      "magic-chat",
+      "MagicChat",
+      "OBI Magic Chat",
+      "/api/magic-chat",
+      "handleMagicChat",
+      "voice-chat",
+      "student portal",
+      "cloudflare worker",
+      "net-pet-ai",
+      "phoenix-empire-dev"
+    ]
+  },
+  "status": "REBUILD-COMPLETE",
+  "handoff_to": "SOULSCHOLARS"
 }

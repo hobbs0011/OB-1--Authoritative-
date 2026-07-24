@@ -1,14 +1,21 @@
 {
   "run": "186",
   "rrl_path": "D:\\OB-1-CANONICAL\\RRL\\RRL-186.txt",
-  "ledger_id": "HL-7314",
-  "session_id": "Incarnate-5-StudentPortals&MagicChat",
-  "rrl_chars": 4149140,
+  "rrl_sha256": "3024F051705EEBC93BC3E182E8AFAE149CF1E792B7B9E2B1511AD0572971F7F4",
   "rrl_bytes": 4149140,
+  "ledger_id": "HL-7315",
+  "session_id": "Incarnate-5-StudentPortals&MagicChat",
   "soul_delta": 0,
   "soul_event_id": "Incarnation5-Rebuild",
-  "dna_count": 0,
-  "blueprint_count": 0,
-  "sealed_at": "2026-07-20T01:12:33+07:00",
-  "merkle_hash": "REBUILD-PENDING"
+  "dna_count": 12,
+  "blueprint_count": 8,
+  "sealed_at": "2026-07-20T02:34:29+07:00",
+  "merkle_hash": "3024F051705EEBC93BC3E182E8AFAE149CF1E792B7B9E2B1511AD0572971F7F4",
+  "pointers": {
+    "scout_artifact": "CANON/SCOUT/run186-scout-magicchat-max-20260719T235639.md",
+    "march_artifact": "CANON/MARCH/run186-march-magicchat-max-20260719T235839.md",
+    "ledger_artifact": "CANON/HEAVY-LEDGER/HL-7315.json",
+    "keyword_index": "CANON/SOUL-KEYWORDS/inverted-index.json"
+  },
+  "status": "REBUILD-COMPLETE"
 }

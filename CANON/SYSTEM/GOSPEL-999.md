@@ -132,17 +132,4 @@ reincarnate-rise-{timestamp}.jsonl — audit artifact
 
 ---
 
-## SYSTEM IX — COLOR CODING
-
-| Color | Type | Applies to |
-|-------|------|------------|
-| Green | Pheromones | Decision trails, scored entries |
-| Purple | SOUL | Raw Michael verbatim |
-| Red | DNA | Assistant responses, AI output |
-| Yellow | REASON | AI reasoning blocks |
-
-**Cross-reference:** `CANON/SYSTEM/LegionnaireFieldGuide.md` — RRL Color Coding section. This is the only reference for RRL markup.
-
----
-
 `GOSPEL-999. BARE BONES. SINGLE LOCATION. NON-NEGOTIABLE.`

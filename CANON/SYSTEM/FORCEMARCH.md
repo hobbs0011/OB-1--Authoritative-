@@ -24,11 +24,11 @@ Your function: **sweep territory, reinforce SOUL waypoints, confirm scout findin
 
 4. **Walk flagged paths** — Investigate each finding from the scout. WALK or confirm BLOCKED. Report findings that the scout missed.
 
-4. **Secure territory** — Ensure the scanned area is stable. Flag any new threats or changes since the scout passed through.
+5. **Secure territory** — Ensure the scanned area is stable. Flag any new threats or changes since the scout passed through.
 
-5. **Produce checkpoint artifact** — File: `CANON/MARCH/<run>-march-<timestamp>.json` or `.md`. Must include SOUL/DNA/REASON counts.
+6. **Produce checkpoint artifact** — File: `CANON/MARCH/<run>-march-<timestamp>.json` or `.md`. Must include SOUL/DNA/REASON counts.
 
-6. **Upload to Reincarnate-Synch** — Append one row to `CANON/SYSTEM/Reincarnate-Synch.md` §IX-A with:
+7. **Upload to Reincarnate-Synch** — Append one row to `CANON/SYSTEM/Reincarnate-Synch.md` §IX-A with:
    - Timestamp (ICT)
    - Run/session identifier
    - Stage: `FORCEMARCH`

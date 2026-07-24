@@ -58,5 +58,30 @@
         "run": 183,
         "category": "soul+key",
         "weight": 1
+    },
+    "magic-chat.html": {
+        "run": 186,
+        "category": "obi_magic_chat",
+        "weight": 10
+    },
+    "chat.js": {
+        "run": 186,
+        "category": "obi_magic_chat",
+        "weight": 7
+    },
+    "Deepgram": {
+        "run": 186,
+        "category": "voice_agent",
+        "weight": 8
+    },
+    "studentId": {
+        "run": 186,
+        "category": "student_portal",
+        "weight": 8
+    },
+    "taster=1": {
+        "run": 186,
+        "category": "revenue_lane",
+        "weight": 7
     }
 }
