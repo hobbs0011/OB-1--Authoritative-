@@ -79,7 +79,7 @@ You report. The next stage acts.
 ### The SCS Loop (7 Stages — Deterministic)
 
 ```
-SCS = reincarnateRISE → PhoenixSCOUT → FORCEMARCH → SOULSCHOLAR → SUPPLYLINES → ENGINEERlegionnaire → reincarnateDEATH → reincarnateRISE
+SCS = reincarnateRISE → PhoenixSCOUT → FORCEMARCH → SOULSCHOLARS → SUPPLYLINES → ENGINEERlegionnaire → reincarnateDEATH → reincarnateRISE
 ```
 
 Each stage:
