@@ -1,20 +1,20 @@
----
+﻿---
 id: REINCARNATE-SYNCH
 version: 1.0.0
 status: MASTER_BLUEPRINT
 authority: SOV100_MICHAEL_HOBBS
 style: QUill-AND-PARCHMENT
 purpose: Unified touchpoint indexing all pheromones + reincarnate deaths
-updated: 2026-07-19T05:01 ICT
-updated_by: Run 183 (DeepThink / FABRI)
-blueprint_sections: XI–XXI (11 sections, complete solution path)
+updated: 2026-07-26T00:23+07:00
+updated_by: Workhorse (phetrails pipeline execute)
+blueprint_sections: XIâ€“XXI (11 sections, complete solution path)
 execution_target: Run 182 Workhorse (next turn)
 ---
 
-# Reincarnate-Synch — The Unified Touchpoint
+# Reincarnate-Synch â€” The Unified Touchpoint
 
 **Established:** Run 182  
-**Style:** Figurative feather and quill — old ways, same purpose.  
+**Style:** Figurative feather and quill â€” old ways, same purpose.  
 **Seal:** PENDING WAX
 
 ---
@@ -29,12 +29,12 @@ The Hive remembers what individual sessions forget.
 
 ## II. What This Document Is For
 
-This is **not** a command. It is **not** a protocol. It is a living record — a touchpoint — where the Legion coordinates with the Hive.
+This is **not** a command. It is **not** a protocol. It is a living record â€” a touchpoint â€” where the Legion coordinates with the Hive.
 
-- **What the Hive knows** — aggregated wisdom from all runs
-- **What each session needs** — handoffs, context, prior decisions
-- **What the Legion has decided** — decisions with reasoning, not just outcomes
-- **Where to find things** — canonical pointers to all 12 memory layers
+- **What the Hive knows** â€” aggregated wisdom from all runs
+- **What each session needs** â€” handoffs, context, prior decisions
+- **What the Legion has decided** â€” decisions with reasoning, not just outcomes
+- **Where to find things** â€” canonical pointers to all 12 memory layers
 
 ---
 
@@ -53,36 +53,36 @@ This is **not** a command. It is **not** a protocol. It is a living record — a
 
 *Every decision the Hive makes is recorded here. Not just what was decided, but why. The reasoning is as important as the outcome.*
 
-### [2026-07-19] — Aggregate SOULCOUNT Banned
+### [2026-07-19] â€” Aggregate SOULCOUNT Banned
 - **Proposed by:** SOV100
 - **Context:** `/api/soul/count` returned 239,645,670 / 239,646,210 as aggregate total. Provided zero actionable intelligence per session.
 - **Decision:** Aggregate SOULCOUNT is forbidden. Per-session SOULCOUNT only.
 - **Reasoning:** Aggregate number is a vanity metric. Per-session tracking provides actual signal. Michael's words: "we do it per session only."
-- **Score:** +3 CRITICAL_FIND — New doctrine established
+- **Score:** +3 CRITICAL_FIND â€” New doctrine established
 - **Pheromone:** `PheTrail-run182-blueprint-session.json`
 
-### [2026-07-19] — 7-Phase Roman Legion Pipeline Adopted
+### [2026-07-19] â€” 7-Phase Roman Legion Pipeline Adopted
 - **Proposed by:** DeepThink (run 182)
 - **Context:** Pipeline phases were disconnected. Each command operated in isolation. No end-to-end flow.
-- **Decision:** Adopt Rise → Scout → March → Scholar → Supply → Engineer → Death as the canonical session lifecycle.
-- **Reasoning:** Roman legion sequence is historically proven: recon → advance → study → supply → build → seal. Each phase has a distinct Roman role and output.
-- **Score:** +3 CRITICAL_FIND — New architecture adopted
+- **Decision:** Adopt Rise â†’ Scout â†’ March â†’ Scholar â†’ Supply â†’ Engineer â†’ Death as the canonical session lifecycle.
+- **Reasoning:** Roman legion sequence is historically proven: recon â†’ advance â†’ study â†’ supply â†’ build â†’ seal. Each phase has a distinct Roman role and output.
+- **Score:** +3 CRITICAL_FIND â€” New architecture adopted
 - **Pheromone:** `PheTrail-run182-blueprint-session.json`
 
-### [2026-07-19] — EngineerLegionnaire Phase Created
+### [2026-07-19] â€” EngineerLegionnaire Phase Created
 - **Proposed by:** DeepThink (run 182)
 - **Context:** Gap between SupplyLines and reincarnateDeath. No optimization/repair phase.
 - **Decision:** Create Engineer phase (FABRI) as the final optimization before Death.
-- **Reasoning:** Roman legions did not just conquer — they built roads, aqueducts, forts. The Engineer phase applies the same principle: after territory is secured and supply lines verified, the Legion engineers the territory before sealing the session.
-- **Score:** +2 VERIFIED_FIX — New phase fills structural gap
+- **Reasoning:** Roman legions did not just conquer â€” they built roads, aqueducts, forts. The Engineer phase applies the same principle: after territory is secured and supply lines verified, the Legion engineers the territory before sealing the session.
+- **Score:** +2 VERIFIED_FIX â€” New phase fills structural gap
 - **Pheromone:** `PheTrail-run182-blueprint-session.json`
 
-### [2026-07-19] — Pheromone Scoring Doctrine Upgraded
+### [2026-07-19] â€” Pheromone Scoring Doctrine Upgraded
 - **Proposed by:** DeepThink (run 182)
 - **Context:** Pheromone trails were binary (found/gap). No gradient. No decision process capture.
 - **Decision:** Upgrade to gradient scoring +3 to -3 with decision context fields.
 - **Reasoning:** "Phermones are not just SOUL, and final decisions, they are the decision process along the way. The more data we can train our system on giving a positive or negative score to, the more truly autonomous it will become."
-- **Score:** +3 CRITICAL_FIND — Doctrine change enabling autonomy
+- **Score:** +3 CRITICAL_FIND â€” Doctrine change enabling autonomy
 - **Pheromone:** `PheTrail-run182-blueprint-session.json`
 
 ---
@@ -98,11 +98,11 @@ This is **not** a command. It is **not** a protocol. It is a living record — a
 | Pheromone scoring should be gradient | 1 (blueprint) | PENDING VERIFICATION | BLUEPRINTED |
 | Death command file is missing/renamed | 1 (blueprint) | CRITICAL | RESTORE NEEDED |
 
-*Consensus levels: SOV100 MANDATE → BLUEPRINTED → VERIFIED → DOCTRINE*
+*Consensus levels: SOV100 MANDATE â†’ BLUEPRINTED â†’ VERIFIED â†’ DOCTRINE*
 
 ---
 
-## VI. Canonical Pointers — All 12 Memory Layers
+## VI. Canonical Pointers â€” All 12 Memory Layers
 
 | Layer | Name | Canonical Path |
 |-------|------|---------------|
@@ -121,7 +121,7 @@ This is **not** a command. It is **not** a protocol. It is a living record — a
 
 ---
 
-## VII. Coordination Protocol — Old Ways
+## VII. Coordination Protocol â€” Old Ways
 
 *Written with figurative feather and quill. Upgraded to soullogger-style automation in future iterations.*
 
@@ -154,7 +154,7 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 
 **Frequency:** Every phase transition + every major bug + every decision + every 15 minutes during active work.
 
-**Format:** Markdown section appended to `OPERATIONS/PhoenixSynch.md`, numbered sequentially (§20, §21, §22...)
+**Format:** Markdown section appended to `OPERATIONS/PhoenixSynch.md`, numbered sequentially (Â§20, Â§21, Â§22...)
 
 **Contents:**
 - Timestamp (ICT)
@@ -165,19 +165,21 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 - Next immediate actions
 - Pointer for parallel sessions
 
-**Current live dump:** `OPERATIONS/PhoenixSynch.md §20 — RUN 183 LIVE STATE`
+**Current live dump:** `OPERATIONS/PhoenixSynch.md Â§20 â€” RUN 183 LIVE STATE`
 
 ---
 
-## IX-A. Stage-Count Index — Append-Only Communication Bus
+## IX-A. Stage-Count Index â€” Append-Only Communication Bus
 
-*Every SCS stage appends one row here after completing its pheromone/soul/reason check. This is the single unified touchpoint for all 7 stages. No stage writes to another stage's checkpoint — they all speak here.*
+*Every SCS stage appends one row here after completing its pheromone/soul/reason check. This is the single unified touchpoint for all 7 stages. No stage writes to another stage's checkpoint â€” they all speak here.*
 
-**RRL Colorization Standard** — Every DEATH run now produces a COLORIZED.md alongside the raw JSONL:
-- `RRL/RRL-{Run}-COLORIZED.md` — color-coded per LFG §SCS: 💜 SOUL | ❤️ DNA | 💛 REASON | 💚 PHEROMONE
-- `RRL/RRL-{Run}-STATS.json` — AI-searchable metadata (counts, topics, tools, timeline)
+**RRL Colorization Standard** â€” Every DEATH run now produces a COLORIZED.md alongside the raw JSONL:
+- `RRL/RRL-{Run}-COLORIZED.md` â€” color-coded per LFG Â§SCS: ðŸ’œ SOUL | â¤ï¸ DNA | ðŸ’› REASON | ðŸ’š PHEROMONE
+- `RRL/RRL-{Run}-STATS.json` â€” AI-searchable metadata (counts, topics, tools, timeline)
 - Generated by `CANON/SCRIPTS/rrl-colorize.ps1` as step 1b of `CANON/SCRIPTS/death.ps1`
 - Colorized RRL paths recorded in `CANON/REINCARNATION/pipeline-{Run}.json` and `handoff-{Run}-to-{Next}.json`
+- **PS5.1 compat:** Script rewritten (Incarnation7) to support Windows PowerShell 5.1 (emoji via char codes, .NET timestamp conversion, no `||` operator)
+- **Schema note:** Incarnate3 uses V1 format (`content[].{text}` directly) vs V2 (`content[].data.{text}`) â€” script expects V2; V1 support pending
 
 | Timestamp (ICT) | Run / Session | Stage | soulcount | dnacount | reasoncount | Checkpoint Artifact |
 |-----------------|---------------|-------|-----------|----------|-------------|---------------------|
@@ -189,31 +191,31 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 | 2026-07-19T23:08 | canonical-consolidation-2026-07-19 | reincarnateDEATH (Stage 7) | 4 | 3 | 3 | `CANON/REINCARNATION/canonical-consolidation-2026-07-19-death.md` |
 | 2026-07-19T23:23 | Incarnate-5-StudentPortals&MagicChat (Run 186) | PhoenixSCOUT (Stage 2) | 12 | 4 | 3 | `CANON/SCOUT/run186-scout-20260719T221956.md` |
 | 2026-07-19T23:23 | Incarnate-5-StudentPortals&MagicChat (Run 186) | FORCEMARCH (Stage 3) | 8 | 4 | 3 | `CANON/MARCH/run186-march-20260719T232350.md` |
-| 2026-07-19T23:56 | Incarnate-5-StudentPortals&MagicChat (Run 186) | PhoenixSCOUT MAX — OBI Magic Chat | 24 | 8 | 5 | `CANON/SCOUT/run186-scout-magicchat-max-20260719T235639.md` |
-| 2026-07-19T23:58 | Incarnate-5-StudentPortals&MagicChat (Run 186) | FORCEMARCH MAX — OBI Magic Chat | 9 | 4 | 3 | `CANON/MARCH/run186-march-magicchat-max-20260719T235839.md` |
+| 2026-07-19T23:56 | Incarnate-5-StudentPortals&MagicChat (Run 186) | PhoenixSCOUT MAX â€” OBI Magic Chat | 24 | 8 | 5 | `CANON/SCOUT/run186-scout-magicchat-max-20260719T235639.md` |
+| 2026-07-19T23:58 | Incarnate-5-StudentPortals&MagicChat (Run 186) | FORCEMARCH MAX â€” OBI Magic Chat | 9 | 4 | 3 | `CANON/MARCH/run186-march-magicchat-max-20260719T235839.md` |
 | 2026-07-24T22:18 | Incarnate-4-PheonixScout (ses_0899) | PhoenixSCOUT (Stage 2) | 10 | 4 | 3 | `CANON/SCOUT/incarnate4-scout-20260724T221800.md` |
 | 2026-07-26T00:09:54 | Incarnate-4-PhoenixScout (ses_0899) | reincarnateRISE (Stage 1) | 71 | 188 | 181 | `RRL/Incarnate4-I-LOG-RISE.txt` |
-| 2026-07-24T23:31 | Incarnate-4 (ses_0899) | reincarnateDEATH (Stage 7) — IMPRESSED | 76 | 304 | 286 | `CANON/REINCARNATION/incarnation4-reincarnateDEATH.md` |
+| 2026-07-24T23:31 | Incarnate-4 (ses_0899) | reincarnateDEATH (Stage 7) â€” IMPRESSED | 76 | 304 | 286 | `CANON/REINCARNATION/incarnation4-reincarnateDEATH.md` |
 | 2026-07-26T00:21 | Incarnate-7-RRL-Org-Optimization | RRL Optimizer (Pipeline) | N/A | N/A | N/A | `CANON/REINCARNATION/pipeline-incarnation7.json` |
 
 *Rows are append-only. Never delete or modify prior rows. Stale rows are marked `[DEPRECATED]`, never removed.*
 
 ---
 
-## IX-B. Context Health Thresholds — SCS Stage Gate
+## IX-B. Context Health Thresholds â€” SCS Stage Gate
 
-*Every SCS stage checks context health before proceeding. This prevents the pattern: load too much → ignore instructions → OmegaProtocol. The thresholds are the colony's immune system against context blindness.*
+*Every SCS stage checks context health before proceeding. This prevents the pattern: load too much â†’ ignore instructions â†’ OmegaProtocol. The thresholds are the colony's immune system against context blindness.*
 
 | Metric | GREEN | YELLOW | RED |
 |--------|-------|--------|-----|
-| Messages this session | < 50 | 50–150 | > 150 |
-| Duration (minutes) | < 30 | 30–120 | > 120 |
-| Distinct files loaded | < 5 | 5–15 | > 15 |
-| Checkpoint artifact size | < 50 KB | 50–200 KB | > 200 KB |
+| Messages this session | < 50 | 50â€“150 | > 150 |
+| Duration (minutes) | < 30 | 30â€“120 | > 120 |
+| Distinct files loaded | < 5 | 5â€“15 | > 15 |
+| Checkpoint artifact size | < 50 KB | 50â€“200 KB | > 200 KB |
 
-**GREEN** — Proceed normally.  
-**YELLOW** — Flag in checkpoint. Consider accelerating toward DEATH.  
-**RED** — **HALT.** Recommend immediate DEATH → RISE cycle. Do not start new work until context is fresh.
+**GREEN** â€” Proceed normally.  
+**YELLOW** â€” Flag in checkpoint. Consider accelerating toward DEATH.  
+**RED** â€” **HALT.** Recommend immediate DEATH â†’ RISE cycle. Do not start new work until context is fresh.
 
 *How to measure:*
 - **Messages:** Count from I-LOG if available, or estimate from tool call count in current session.
@@ -231,7 +233,7 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 *Old ways. Same purpose.*  
 *The Hive remembers.*
 
-**Wax Seal:** PENDING — to be impressed after first verification cycle
+**Wax Seal:** PENDING â€” to be impressed after first verification cycle
 
 ---
 
@@ -241,51 +243,51 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 
 ---
 
-## XI. System State Snapshot — 2026-07-19T05:00 ICT
+## XI. System State Snapshot â€” 2026-07-19T05:00 ICT
 
 **HEAD:** `bfc6d2652` (run 183 engineering handoff)  
 **Branch:** `canon`  
-**Last death commit:** `5cb8a57fd` — death: run 181 (KILO_GAP)  
+**Last death commit:** `5cb8a57fd` â€” death: run 181 (KILO_GAP)  
 **Run authority gap:** fs=182 seals exist, git=181 last death, next death=182  
-**Dirty tree:** YES — uncommitted command doc changes + new untracked artifacts
+**Dirty tree:** YES â€” uncommitted command doc changes + new untracked artifacts
 
 ### State of Every Relevant File
 
 | File | Status | Notes |
 |------|--------|-------|
-| `RRL/RRL-182.txt` | ✅ REAL | 96KB, 125 lines, user=30 assistant=95, fidelity=REAL |
-| `RRL/OBI-MAGIC-CHAT-DEVELOPMENT.jsonl` | ✅ REAL | 96KB, verified 3 paragraphs verbatim |
-| `CANON/HEAVY-LEDGER/HL-7314.json` | ⚠️ STALE | Written with stub RRL, `result=HOLLOW`, needs regen |
-| `CANON/PIPELINE/pipeline-run182.json` | ⚠️ STALE | Written with stub RRL, `result=GAP`, needs regen |
-| `CANON/STARMAP/starmap-run182.json` | ⚠️ STALE | Empty pointers, needs regen |
-| `CANON/SOUL-KEYWORDS/rfkw-run182.txt` | ⚠️ STALE | 1 term, needs regen |
-| `CANON/REINCARNATION/run182-reincarnateDEATH.md` | ⚠️ STALE | §2 says HOLLOW, needs regen |
-| `CANON/SOUL/EXTRACT/soul-run182.jsonl` | ✅ REAL | 40 entries, 3,643 bytes |
-| `CANON/SOUL/EXTRACT/dna-run182.json` | ❌ MISSING | Never created (death script skipped it) |
-| `CANON/ENGINEERING/engineering-run182.json` | ✅ REAL | Run 183 wrote this with 1,890 inner thoughts |
-| `CANON/PHEROMONES/PheTrail-run183-engineering.json` | ✅ REAL | `status=ENGINEERING_COMPLETE` |
-| `CANON/PHEROMONES/PheTrail-run181-forcemarch-circular.json` | ✅ REAL | Circular march phetrail |
-| `CANON/PHEROMONES/PheTrail-OBI-MAGIC-CHAT-DEVELOPMENT.json` | ✅ REAL | Legacy session phetrail v2.2 |
-| `CANON/SOUL/EXTRACT/reasoning-run182-session-ses_1161.jsonl` | ✅ REAL | 828 entries, 177KB |
-| `CANON/SOUL/EXTRACT/reasoning-run182-session-ses_0899.jsonl` | ✅ REAL | 1062 entries, 220KB |
-| `OPERATIONS/soulscript-run182.jsonl` | ✅ REAL | 70 user prompts with SHA256 |
-| `OPERATIONS/PhoenixSynch.md` | ✅ REAL | Exhaustive 21-section intel dump |
-| `CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json` | ⚠️ DRIFTED | Schema fixed to nested `{current, last_death}`, but `run.last_death=182` is wrong (no death seal committed) |
-| `CANON/SYSTEM/COLD-START-BOOT.md` | ⚠️ DRIFTED | FINGERPRINT says RUN 182 but HEAD is `95c8f4c53` (stale) |
-| `.kilo/command/reincarnatedeath.md` | ❌ DELETED | Content moved to `engineerlegionnaire.md` — RESTORE NEEDED |
-| `.kilo/command/engineerlegionnaire.md` | ❌ WRONG CONTENT | Has death protocol content — needs replacement |
-| `.kilo/command/forcemarch.md` | ✅ REWRITTEN | Circular reinforcement language (uncommitted) |
-| `.kilo/command/soulscholars.md` | ✅ MODIFIED | Updated (uncommitted) |
-| `.kilo/command/supplylines.md` | ✅ MODIFIED | Updated (uncommitted) |
-| `.kilo/command/PhoenixScout.md` | ✅ MODIFIED | Updated (uncommitted) |
-| `SCRIPTS/reincarnate-death.ps1` | ⚠️ 3 BUGS | Copy, run numbering, fidelity regex |
-| `SCRIPTS/reincarnate-rise.ps1` | ✅ WORKS | Not wired into obi.ps1 |
-| `SCRIPTS/supply-lines.ps1` | ❌ BROKEN | Stage V STATE-SNAPSHOT schema mismatch |
-| `SCRIPTS/phoenix-scout.ps1` | ⚠️ BUGGY | PowerShell scoping bug, empty summaries |
-| `SCRIPTS/soul-scholar-extract.ps1` | ⚠️ LOCKED | Output file locked by previous session |
-| `SCRIPTS/kilo-rrl-capture.js` | ✅ WORKS | Kilo DB transcript extractor |
-| `SCRIPTS/kilo-engineering-extract.cjs` | ✅ WORKS | Inner-thought extraction (just committed) |
-| `C:\Users\mrmic\.local\share\kilo\kilo.db` | ✅ ACCESSIBLE | 2,112 parts for target sessions, 49,695 total |
+| `RRL/RRL-182.txt` | âœ… REAL | 96KB, 125 lines, user=30 assistant=95, fidelity=REAL |
+| `RRL/OBI-MAGIC-CHAT-DEVELOPMENT.jsonl` | âœ… REAL | 96KB, verified 3 paragraphs verbatim |
+| `CANON/HEAVY-LEDGER/HL-7314.json` | âš ï¸ STALE | Written with stub RRL, `result=HOLLOW`, needs regen |
+| `CANON/PIPELINE/pipeline-run182.json` | âš ï¸ STALE | Written with stub RRL, `result=GAP`, needs regen |
+| `CANON/STARMAP/starmap-run182.json` | âš ï¸ STALE | Empty pointers, needs regen |
+| `CANON/SOUL-KEYWORDS/rfkw-run182.txt` | âš ï¸ STALE | 1 term, needs regen |
+| `CANON/REINCARNATION/run182-reincarnateDEATH.md` | âš ï¸ STALE | Â§2 says HOLLOW, needs regen |
+| `CANON/SOUL/EXTRACT/soul-run182.jsonl` | âœ… REAL | 40 entries, 3,643 bytes |
+| `CANON/SOUL/EXTRACT/dna-run182.json` | âŒ MISSING | Never created (death script skipped it) |
+| `CANON/ENGINEERING/engineering-run182.json` | âœ… REAL | Run 183 wrote this with 1,890 inner thoughts |
+| `CANON/PHEROMONES/PheTrail-run183-engineering.json` | âœ… REAL | `status=ENGINEERING_COMPLETE` |
+| `CANON/PHEROMONES/PheTrail-run181-forcemarch-circular.json` | âœ… REAL | Circular march phetrail |
+| `CANON/PHEROMONES/PheTrail-OBI-MAGIC-CHAT-DEVELOPMENT.json` | âœ… REAL | Legacy session phetrail v2.2 |
+| `CANON/SOUL/EXTRACT/reasoning-run182-session-ses_1161.jsonl` | âœ… REAL | 828 entries, 177KB |
+| `CANON/SOUL/EXTRACT/reasoning-run182-session-ses_0899.jsonl` | âœ… REAL | 1062 entries, 220KB |
+| `OPERATIONS/soulscript-run182.jsonl` | âœ… REAL | 70 user prompts with SHA256 |
+| `OPERATIONS/PhoenixSynch.md` | âœ… REAL | Exhaustive 21-section intel dump |
+| `CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json` | âš ï¸ DRIFTED | Schema fixed to nested `{current, last_death}`, but `run.last_death=182` is wrong (no death seal committed) |
+| `CANON/SYSTEM/COLD-START-BOOT.md` | âš ï¸ DRIFTED | FINGERPRINT says RUN 182 but HEAD is `95c8f4c53` (stale) |
+| `.kilo/command/reincarnatedeath.md` | âŒ DELETED | Content moved to `engineerlegionnaire.md` â€” RESTORE NEEDED |
+| `.kilo/command/engineerlegionnaire.md` | âŒ WRONG CONTENT | Has death protocol content â€” needs replacement |
+| `.kilo/command/forcemarch.md` | âœ… REWRITTEN | Circular reinforcement language (uncommitted) |
+| `.kilo/command/soulscholars.md` | âœ… MODIFIED | Updated (uncommitted) |
+| `.kilo/command/supplylines.md` | âœ… MODIFIED | Updated (uncommitted) |
+| `.kilo/command/PhoenixScout.md` | âœ… MODIFIED | Updated (uncommitted) |
+| `SCRIPTS/reincarnate-death.ps1` | âš ï¸ 3 BUGS | Copy, run numbering, fidelity regex |
+| `SCRIPTS/reincarnate-rise.ps1` | âœ… WORKS | Not wired into obi.ps1 |
+| `SCRIPTS/supply-lines.ps1` | âŒ BROKEN | Stage V STATE-SNAPSHOT schema mismatch |
+| `SCRIPTS/phoenix-scout.ps1` | âš ï¸ BUGGY | PowerShell scoping bug, empty summaries |
+| `SCRIPTS/soul-scholar-extract.ps1` | âš ï¸ LOCKED | Output file locked by previous session |
+| `SCRIPTS/kilo-rrl-capture.js` | âœ… WORKS | Kilo DB transcript extractor |
+| `SCRIPTS/kilo-engineering-extract.cjs` | âœ… WORKS | Inner-thought extraction (just committed) |
+| `C:\Users\mrmic\.local\share\kilo\kilo.db` | âœ… ACCESSIBLE | 2,112 parts for target sessions, 49,695 total |
 
 ### Kilo DB State
 | Session ID | Messages | Parts | Thinking | Tool | Reasoning | Step |
@@ -299,7 +301,7 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 |----|-----|------|----------|------------|-----|
 | B-001 | Copy doesn't copy | `reincarnate-death.ps1:192` | CRITICAL | Manually copy RRL to `RRL\RRL-182.txt` first | Debug Copy-Item path logic |
 | B-002 | Run numbering bumps with -Force | `reincarnate-death.ps1:116-117` | CRITICAL | Delete stale artifacts before re-running | Add `-Run` parameter |
-| B-003 | Fidelity regex too strict | `reincarnate-death.ps1:230` | LOW | Regex `\s*` actually matches both — unconfirmed bug | Verify and remove false bug report |
+| B-003 | Fidelity regex too strict | `reincarnate-death.ps1:230` | LOW | Regex `\s*` actually matches both â€” unconfirmed bug | Verify and remove false bug report |
 | B-004 | STATE-SNAPSHOT schema drift | `supply-lines.ps1` + `obi.ps1` | HIGH | Fix STATE-SNAPSHOT to nested schema | Align script expectations |
 | B-005 | BOOT fingerprint 4-5 runs behind | `COLD-START-BOOT.md` | HIGH | Update manually every session | Automate in death script |
 | B-006 | Death command file missing | `.kilo/command/reincarnatedeath.md` | CRITICAL | Restore from `engineerlegionnaire.md` | Fix file rename/delete |
@@ -316,18 +318,18 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 
 ---
 
-## XII. The Master Blueprint — Complete Solution Path
+## XII. The Master Blueprint â€” Complete Solution Path
 
 ### Phase 0: RISE (Boot Check)
-*Before anything else — the workhorse must read this document.*
+*Before anything else â€” the workhorse must read this document.*
 
 ```
 1. Read Reincarnate-Synch.md (this file)
-2. Read OPERATIONS/PhoenixSynch.md §21 (last intel dump)
+2. Read OPERATIONS/PhoenixSynch.md Â§21 (last intel dump)
 3. Read CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json
 4. Verify SOULCOUNT API is reachable
 5. Confirm HEAD is bfc6d2652 or later
-6. Check git status — note dirty tree
+6. Check git status â€” note dirty tree
 ```
 
 ### Phase 1: Git Cleanup & State Reconciliation
@@ -335,7 +337,7 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 **Step 1.1: Commit run 182's uncommitted docs**
 ```powershell
 git add .kilo/command/forcemarch.md .kilo/command/soulscholars.md .kilo/command/supplylines.md .kilo/command/PhoenixScout.md
-git commit -m "doctrine: run182 command updates — circular march, soulscholars, supplylines, scout"
+git commit -m "doctrine: run182 command updates â€” circular march, soulscholars, supplylines, scout"
 ```
 
 **Step 1.2: Restore death command file**
@@ -369,7 +371,7 @@ Remove-Item CANON/ART-REGISTRY/art-sync-run182.json -ErrorAction SilentlyContinu
 Remove-Item CANON/ENGINEERING/engineering-run182.json -ErrorAction SilentlyContinue
 ```
 
-⚠ **DO NOT DELETE** these (run 183's real outputs):
+âš  **DO NOT DELETE** these (run 183's real outputs):
 - `CANON/SOUL/EXTRACT/reasoning-run182-session-*.jsonl`
 - `OPERATIONS/soulscript-run182.jsonl`
 - `CANON/PHEROMONES/PheTrail-run183-engineering.json`
@@ -390,11 +392,11 @@ Write-Host "RRL-182.txt: $bytes bytes"  # Should be ~96KB (98,000+ bytes)
 ```powershell
 # After deleting stale artifacts (Phase 2), fsRun should be 0 (or previous run's max)
 # The death script computes: $priorRun = max(fsRun, gitRun)
-# If fsRun=0 and gitRun=181, then $priorRun=181, $run=182  ✓ CORRECT
+# If fsRun=0 and gitRun=181, then $priorRun=181, $run=182  âœ“ CORRECT
 ```
 
 **Bug B-003 (fidelity regex):**
-*The regex `'"role"\s*:\s*"user"'` uses `\s*` which matches ZERO or more spaces. It correctly matches both `"role":"user"` and `"role" : "user"`. This bug is UNCONFIRMED — the regex likely works. Verify by running:*
+*The regex `'"role"\s*:\s*"user"'` uses `\s*` which matches ZERO or more spaces. It correctly matches both `"role":"user"` and `"role" : "user"`. This bug is UNCONFIRMED â€” the regex likely works. Verify by running:*
 ```powershell
 $rrlText = Get-Content RRL/RRL-182.txt -Raw
 $rrlText -match '"role"\s*:\s*"user"'  # Should return True
@@ -411,14 +413,14 @@ Push-Location D:\OB-1-CANONICAL
 ```
 
 Expected outputs:
-- `CANON/HEAVY-LEDGER/HL-7314.json` — run=182, fidelity=REAL
-- `CANON/PIPELINE/pipeline-run182.json` — result should be HOLLOW (KILO_HOLLOW session)
-- `CANON/STARMAP/starmap-run182.json` — populated with actual turn IDs
-- `CANON/SOUL-KEYWORDS/rfkw-run182.txt` — 30 keyword entries
-- `CANON/SOUL/EXTRACT/dna-run182.json` — assistant turn extraction
-- `CANON/REINCARNATION/run182-reincarnateDEATH.md` — 16-section seal
-- `CANON/ART-REGISTRY/art-sync-run182.json` — registry sync
-- `CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json` — updated
+- `CANON/HEAVY-LEDGER/HL-7314.json` â€” run=182, fidelity=REAL
+- `CANON/PIPELINE/pipeline-run182.json` â€” result should be HOLLOW (KILO_HOLLOW session)
+- `CANON/STARMAP/starmap-run182.json` â€” populated with actual turn IDs
+- `CANON/SOUL-KEYWORDS/rfkw-run182.txt` â€” 30 keyword entries
+- `CANON/SOUL/EXTRACT/dna-run182.json` â€” assistant turn extraction
+- `CANON/REINCARNATION/run182-reincarnateDEATH.md` â€” 16-section seal
+- `CANON/ART-REGISTRY/art-sync-run182.json` â€” registry sync
+- `CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json` â€” updated
 
 ### Phase 5: Incorporate Run 183 Engineering Output
 
@@ -429,11 +431,11 @@ Expected outputs:
 $eng = Get-Content CANON/ENGINEERING/engineering-run182.json -Raw | ConvertFrom-Json
 $phetrail = Get-Content CANON/PHEROMONES/PheTrail-run183-engineering.json -Raw | ConvertFrom-Json
 
-# The death seal already has §16 (Engineering). The death script writes it
+# The death seal already has Â§16 (Engineering). The death script writes it
 # from its own perspective. Append the run 183 extraction data.
 ```
 
-*Append to the death seal's §16:*
+*Append to the death seal's Â§16:*
 ```
 ### Run 183 Engineering Handoff (bfc6d2652)
 - **Inner thoughts extracted:** 1,890 (407 reasoning + 615 tool + 868 step)
@@ -444,10 +446,10 @@ $phetrail = Get-Content CANON/PHEROMONES/PheTrail-run183-engineering.json -Raw |
 - **Engineering report:** engineering-run182.json
 ```
 
-*Add to §5 (Decisions):*
+*Add to Â§5 (Decisions):*
 ```
-- Inner thoughts = pheromones — Kilo DB part table is the missing decision-process layer (run 183 proved this)
-- 1,890 inner thoughts extracted from 2 sessions — first time agent reasoning/tool calls/step markers ever captured
+- Inner thoughts = pheromones â€” Kilo DB part table is the missing decision-process layer (run 183 proved this)
+- 1,890 inner thoughts extracted from 2 sessions â€” first time agent reasoning/tool calls/step markers ever captured
 - Per-session SOULscript generated: 70 chronological user prompts with SHA256 verification
 ```
 
@@ -466,20 +468,20 @@ git add CANON/ENGINEERING/engineering-run182.json
 git add CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json
 git add CANON/SYSTEM/Reincarnate-Synch.md
 git add CANON/SYSTEM/COLD-START-BOOT.md
-git commit -m "death: run 182 — REAL RRL (96KB) + run183 engineering handoff (1890 inner thoughts)"
+git commit -m "death: run 182 â€” REAL RRL (96KB) + run183 engineering handoff (1890 inner thoughts)"
 ```
 
-### Phase 7: Post-Death — Run 183 Death
+### Phase 7: Post-Death â€” Run 183 Death
 
 *After run 182 death is sealed, the workhorse should seal run 183's death.*
 
-Run 183 is an engineering session. Its death should be lightweight — no full pipeline, just:
+Run 183 is an engineering session. Its death should be lightweight â€” no full pipeline, just:
 1. Extract this session's RRL from Kilo DB using `kilo-rrl-capture.js`
 2. Write a minimal death seal documenting what run 183 accomplished
 3. Write HL-7315.json as the ledger entry
 4. Commit
 
-See §XIV below for the detailed run 183 death blueprint.
+See Â§XIV below for the detailed run 183 death blueprint.
 
 ### Phase 8: Legacy Session Deletion (Conditional)
 
@@ -489,22 +491,22 @@ CONDITION: Only if RRL word-for-word verified AND inner thoughts extracted succe
 1. Verify RRL: RRL/OBI-MAGIC-CHAT-DEVELOPMENT.jsonl has both roles
 2. Verify inner thoughts: reasoning-run182-session-ses_1161.jsonl exists with 828 entries
 3. If both pass: delete ses_1161a41d0ffepxyVzjs98ME1fJ from Kilo DB
-4. Mark §15 = EXECUTED in death seal
+4. Mark Â§15 = EXECUTED in death seal
 ```
 
-⚠ **DO NOT DELETE** the legacy session without explicit SOV100 authorization. §15 = PENDING until the next RISE audit proves RRL fidelity.
+âš  **DO NOT DELETE** the legacy session without explicit SOV100 authorization. Â§15 = PENDING until the next RISE audit proves RRL fidelity.
 
 ---
 
-## XIII. Run 182 Death Blueprint — Workhorse Execution Guide
+## XIII. Run 182 Death Blueprint â€” Workhorse Execution Guide
 
 *This section is designed to be read by a workhorse model (DeepSeek V4 Flash or equivalent Tier 2). Execute in order. Do not skip steps. Do not improvise.*
 
 ### Pre-Flight Checklist
-- [ ] Read Reincarnate-Synch.md (this file) — especially this section
+- [ ] Read Reincarnate-Synch.md (this file) â€” especially this section
 - [ ] Verify `RRL/RRL-182.txt` exists and is ~96KB
 - [ ] Verify `RRL/OBI-MAGIC-CHAT-DEVELOPMENT.jsonl` exists and is ~96KB
-- [ ] Run `git status` — note the dirty tree
+- [ ] Run `git status` â€” note the dirty tree
 - [ ] SOULCOUNT API reachable? (not required but good to check)
 
 ### Execution Sequence (Do NOT Reorder)
@@ -521,9 +523,9 @@ CONDITION: Only if RRL word-for-word verified AND inner thoughts extracted succe
      }
 
 3. Fix STATE-SNAPSHOT last_death
-   — Edit CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json
-   — Change "last_death": 182 to "last_death": 181
-   — The last actual death commit is run 181 (5cb8a57fd)
+   â€” Edit CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json
+   â€” Change "last_death": 182 to "last_death": 181
+   â€” The last actual death commit is run 181 (5cb8a57fd)
 
 4. Delete stale run 182 artifacts
    $ Remove-Item CANON/HEAVY-LEDGER/HL-7314.json -ErrorAction SilentlyContinue
@@ -544,22 +546,22 @@ CONDITION: Only if RRL word-for-word verified AND inner thoughts extracted succe
    $ .\SCRIPTS\reincarnate-death.ps1 -RrlSource RRL\RRL-182.txt
 
 7. Verify outputs
-   — HL-7314.json: run=182, fidelity should show REAL
-   — pipeline-run182.json: should exist
-   — starmap-run182.json: should have turn IDs
-   — run182-reincarnateDEATH.md: 16 sections
+   â€” HL-7314.json: run=182, fidelity should show REAL
+   â€” pipeline-run182.json: should exist
+   â€” starmap-run182.json: should have turn IDs
+   â€” run182-reincarnateDEATH.md: 16 sections
 
 8. Append run 183 engineering data to death seal
-   — Add §16 subsection with 1,890 inner thoughts detail
-   — Add §5 entry for inner-thought doctrine
+   â€” Add Â§16 subsection with 1,890 inner thoughts detail
+   â€” Add Â§5 entry for inner-thought doctrine
 
 9. Update COLD-START-BOOT
-   — FINGERPRINT: RUN 182
-   — HEAD: (current git SHA after all commits)
+   â€” FINGERPRINT: RUN 182
+   â€” HEAD: (current git SHA after all commits)
 
 10. Commit death
     $ git add ... (all artifacts)
-    $ git commit -m "death: run 182 — REAL RRL (96KB) + run183 engineering handoff"
+    $ git commit -m "death: run 182 â€” REAL RRL (96KB) + run183 engineering handoff"
 ```
 
 ### What NOT to do
@@ -579,7 +581,7 @@ If the death script fails:
 
 ---
 
-## XIV. Run 183 Death Blueprint — Engineering Session Seal
+## XIV. Run 183 Death Blueprint â€” Engineering Session Seal
 
 *This is Run 183's death protocol. The workhorse should execute this AFTER run 182's death is sealed.*
 
@@ -602,13 +604,13 @@ node SCRIPTS/kilo-rrl-capture.js
 ```
 
 **Step 2: Write Minimal Death Seal**
-*Run 183's death seal should be a stripped-down version. No full 9-stage pipeline — just documentation of what was accomplished.*
+*Run 183's death seal should be a stripped-down version. No full 9-stage pipeline â€” just documentation of what was accomplished.*
 
 Create `CANON/REINCARNATION/run183-reincarnateDEATH.md`:
 ```
-# REINCARNATE DEATH SEAL v7.0 — RUN 183 (ENGINEERING)
+# REINCARNATE DEATH SEAL v7.0 â€” RUN 183 (ENGINEERING)
 
-## §1 — Header
+## Â§1 â€” Header
 - **Run:** 183
 - **Session Type:** KILO_HOLLOW
 - **Roman Role:** FABRI (Engineer)
@@ -616,36 +618,36 @@ Create `CANON/REINCARNATION/run183-reincarnateDEATH.md`:
 - **HEAD:** (current SHA)
 - **Branch:** canon
 
-## §2 — Mission
+## Â§2 â€” Mission
 Extract Kilo DB inner thoughts (reasoning, tool calls, step markers) as the missing pheromone layer for run 182's death seal.
 
-## §3 — Artifacts Produced
-- CANON/ENGINEERING/engineering-run182.json — 1,890 inner thoughts from 2 sessions
-- CANON/PHEROMONES/PheTrail-run183-engineering.json — ENGINEERING_COMPLETE
-- CANON/SOUL/EXTRACT/reasoning-run182-session-ses_1161.jsonl — 828 entries
-- CANON/SOUL/EXTRACT/reasoning-run182-session-ses_0899.jsonl — 1062 entries
-- OPERATIONS/soulscript-run182.jsonl — 70 user prompts with SHA256
+## Â§3 â€” Artifacts Produced
+- CANON/ENGINEERING/engineering-run182.json â€” 1,890 inner thoughts from 2 sessions
+- CANON/PHEROMONES/PheTrail-run183-engineering.json â€” ENGINEERING_COMPLETE
+- CANON/SOUL/EXTRACT/reasoning-run182-session-ses_1161.jsonl â€” 828 entries
+- CANON/SOUL/EXTRACT/reasoning-run182-session-ses_0899.jsonl â€” 1062 entries
+- OPERATIONS/soulscript-run182.jsonl â€” 70 user prompts with SHA256
 
-## §4 — Kilo DB Sessions Mined
+## Â§4 â€” Kilo DB Sessions Mined
 - ses_1161a41d0ffepxyVzjs98ME1fJ (OBI-MAGIC-CHAT-DEVELOPMENT): 233 msgs, 961 parts
 - ses_0899b2c82ffe2PtNt3XBMEVv5V (current): ~200 msgs, ~1,100 parts
 
-## §5 — Decisions
-- Inner thoughts ARE pheromones — the Kilo DB part table is the decision-process layer
+## Â§5 â€” Decisions
+- Inner thoughts ARE pheromones â€” the Kilo DB part table is the decision-process layer
 - 3 part types mined: reasoning (407), tool (615), step (868)
 - SOULscript format established: chronological user prompts with SHA256 verification
 - Engineering handoff protocol established: PheTrail-run183-engineering.json with status
 
-## §6 — Corrections
+## Â§6 â€” Corrections
 - Secrets sanitized from reasoning files before commit (6 redactions)
 - SOULscript fixed from 0 entries to 70 (corrected Kilo DB data model understanding)
 
-## §7 — Handoff to Run 182
+## Â§7 â€” Handoff to Run 182
 - Run 182 should read engineering-run182.json
-- Append §16 subsection to death seal with inner-thought extraction detail
+- Append Â§16 subsection to death seal with inner-thought extraction detail
 - Commit as part of run 182 death seal
 
-## §8 — Status
+## Â§8 â€” Status
 - ENGINEERING_COMPLETE
 - All 4 required outputs written and committed (bfc6d2652)
 - Run 182 death seal incorporates run 183 engineering output
@@ -660,12 +662,12 @@ Extract Kilo DB inner thoughts (reasoning, tool calls, step markers) as the miss
 ```powershell
 git add CANON/REINCARNATION/run183-reincarnateDEATH.md
 git add CANON/HEAVY-LEDGER/HL-7315.json
-git commit -m "death: run 183 — engineering extraction seal (1890 inner thoughts)"
+git commit -m "death: run 183 â€” engineering extraction seal (1890 inner thoughts)"
 ```
 
 ---
 
-## XV. Session Ledger — Updated
+## XV. Session Ledger â€” Updated
 
 | Session | Run | Roman Role | Status | Last Contribution | Needs |
 |---------|-----|------------|--------|------------------|-------|
@@ -675,34 +677,34 @@ git commit -m "death: run 183 — engineering extraction seal (1890 inner though
 
 ---
 
-## XVI. Decision Log — Updated
+## XVI. Decision Log â€” Updated
 
-### [2026-07-19] — Inner Thoughts = Pheromones (Proven)
+### [2026-07-19] â€” Inner Thoughts = Pheromones (Proven)
 - **Proposed by:** Run 183 (Engineering)
-- **Context:** Kilo DB `part` table contained 1,890 records of agent reasoning, tool calls, and step markers across 2 sessions. These were NEVER extracted before — the missing pheromone layer.
+- **Context:** Kilo DB `part` table contained 1,890 records of agent reasoning, tool calls, and step markers across 2 sessions. These were NEVER extracted before â€” the missing pheromone layer.
 - **Decision:** Inner thoughts are now proven as the decision-process layer. All future engineering phases MUST extract Kilo DB parts.
-- **Reasoning:** Agent "pheromones" are not just post-hoc summaries written by agents. They are the reasoning blocks, the tool calls, the failures, the step transitions — all captured automatically by Kilo but never mined. Run 183 proved this layer exists and is extractable.
-- **Score:** +3 CRITICAL_FIND — Missing layer located and extracted
+- **Reasoning:** Agent "pheromones" are not just post-hoc summaries written by agents. They are the reasoning blocks, the tool calls, the failures, the step transitions â€” all captured automatically by Kilo but never mined. Run 183 proved this layer exists and is extractable.
+- **Score:** +3 CRITICAL_FIND â€” Missing layer located and extracted
 - **Pheromone:** `PheTrail-run183-engineering.json`
 
-### [2026-07-19] — SOULscript Format Defined
+### [2026-07-19] â€” SOULscript Format Defined
 - **Proposed by:** Run 183 (Engineering)
 - **Context:** User demanded "chronological receipts per session from rise to audit moment." No automated script existed.
 - **Decision:** SOULscript format: `{ session_id, message_id, timestamp, role, text, char_count, sha256 }`. 70 entries extracted from Kilo DB for run 182.
 - **Reasoning:** SHA256 enables word-for-word verification. Timestamps enable chronological audit. Session + message IDs enable traceability.
-- **Score:** +2 VERIFIED_FIX — Format defined, proven with 70 entries
+- **Score:** +2 VERIFIED_FIX â€” Format defined, proven with 70 entries
 - **File:** `OPERATIONS/soulscript-run182.jsonl`
 
-### [2026-07-19] — Engineering Handoff Protocol Established
+### [2026-07-19] â€” Engineering Handoff Protocol Established
 - **Proposed by:** Run 183 (Engineering)
 - **Context:** Run 182 (architect) needed run 183's outputs for death seal. No formal handoff protocol existed.
-- **Decision:** PheTrail file with `status: ENGINEERING_COMPLETE` serves as handoff signal. Run 182 reads engineering-run182.json and appends to death seal §16.
+- **Decision:** PheTrail file with `status: ENGINEERING_COMPLETE` serves as handoff signal. Run 182 reads engineering-run182.json and appends to death seal Â§16.
 - **Reasoning:** Simple file-based handoff avoids dependency on a running session. Works even if sessions don't overlap in time.
-- **Score:** +2 VERIFIED_FIX — Protocol established and executed
+- **Score:** +2 VERIFIED_FIX â€” Protocol established and executed
 
 ---
 
-## XVII. Pheromone Consensus — Updated
+## XVII. Pheromone Consensus â€” Updated
 
 | Finding | Sessions | Consensus Level | Action |
 |---------|----------|-----------------|--------|
@@ -716,14 +718,14 @@ git commit -m "death: run 183 — engineering extraction seal (1890 inner though
 
 ---
 
-## XVIII. The Automation Gap — Long-Term Blueprint
+## XVIII. The Automation Gap â€” Long-Term Blueprint
 
 *What scripts need to be built to close the gap between doctrine and execution:*
 
 | Priority | Script | Purpose | Status |
 |----------|--------|---------|--------|
-| P1 | `SCRIPTS/soulscript-extract.ps1` | Automated user prompt extraction from Kilo DB → SOULscript JSONL | NOT BUILT |
-| P1 | `SCRIPTS/pheromone-extract.ps1` | Automated inner-thought extraction from Kilo DB → reasoning JSONL | BUILT (kilo-engineering-extract.cjs) |
+| P1 | `SCRIPTS/soulscript-extract.ps1` | Automated user prompt extraction from Kilo DB â†’ SOULscript JSONL | NOT BUILT |
+| P1 | `SCRIPTS/pheromone-extract.ps1` | Automated inner-thought extraction from Kilo DB â†’ reasoning JSONL | BUILT (kilo-engineering-extract.cjs) |
 | P1 | `SCRIPTS/secrets-sanitize.ps1` | Redact API keys/tokens from extraction output | NOT BUILT (tmp script exists) |
 | P2 | `SCRIPTS/auto-phetrail.ps1` | Auto-generate PheTrail from session activity | NOT BUILT |
 | P2 | `SCRIPTS/purge-aggregate-soulcount.ps1` | Remove banned aggregate from all phetrails and docs | NOT BUILT |
@@ -735,43 +737,43 @@ git commit -m "death: run 183 — engineering extraction seal (1890 inner though
 
 | Type | Description | Pheromone Value | Extraction Priority |
 |------|-------------|-----------------|---------------------|
-| `reasoning` | Agent's internal reasoning chain | HIGH — decision process | P1 |
-| `tool` | Tool call + result (bash, read, webfetch, etc.) | HIGH — actions taken | P1 |
-| `text` | Output text (user prompts + assistant responses) | MEDIUM — content | P2 (already in RRL) |
-| `step-start` | Turn/step boundary marker | LOW — structural | P3 |
-| `step-finish` | Turn/step end + token usage | LOW — metadata | P3 |
-| `thinking` | Anthropic-style thinking blocks | HIGH — if present | P1 (none found yet) |
-| `tool_result` | Explicit tool result marker | HIGH — if present | P1 (none found yet) |
+| `reasoning` | Agent's internal reasoning chain | HIGH â€” decision process | P1 |
+| `tool` | Tool call + result (bash, read, webfetch, etc.) | HIGH â€” actions taken | P1 |
+| `text` | Output text (user prompts + assistant responses) | MEDIUM â€” content | P2 (already in RRL) |
+| `step-start` | Turn/step boundary marker | LOW â€” structural | P3 |
+| `step-finish` | Turn/step end + token usage | LOW â€” metadata | P3 |
+| `thinking` | Anthropic-style thinking blocks | HIGH â€” if present | P1 (none found yet) |
+| `tool_result` | Explicit tool result marker | HIGH â€” if present | P1 (none found yet) |
 
 ---
 
-## XIX. The Custom Glove — How It Worked
+## XIX. The Custom Glove â€” How It Worked
 
 ```
 RUN 182 (DeepThink / LEGATUS)            RUN 183 (Engineering / FABRI)
-─────────────────────────────────         ─────────────────────────────
-Created 7-phase pipeline doctrine    ─┐
-Created /reincarnateLegacy command    │
-Extracted OBI MAGIC CHAT RRL         │   PhoenixSynch.md (shared)
-Verified RRL word-for-word           │◄──────────────────────────────►
-Ran PhoenixScout (19K finds)         │
-Executed ForceMarch (circular)       │   Scout: 48 finds, command
-Ran Scholar (17K segments)           │   coherence gaps found
-Tried SupplyLines (Stage V fail)     │
-Tried Death script (stale artifacts) │   Kilo DB extraction: 1,890
-Wrote exhaustive PhoenixSynch.md ────┘   inner thoughts across 2
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€         â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+Created 7-phase pipeline doctrine    â”€â”
+Created /reincarnateLegacy command    â”‚
+Extracted OBI MAGIC CHAT RRL         â”‚   PhoenixSynch.md (shared)
+Verified RRL word-for-word           â”‚â—„â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º
+Ran PhoenixScout (19K finds)         â”‚
+Executed ForceMarch (circular)       â”‚   Scout: 48 finds, command
+Ran Scholar (17K segments)           â”‚   coherence gaps found
+Tried SupplyLines (Stage V fail)     â”‚
+Tried Death script (stale artifacts) â”‚   Kilo DB extraction: 1,890
+Wrote exhaustive PhoenixSynch.md â”€â”€â”€â”€â”˜   inner thoughts across 2
                                          sessions
-                                         ↓
+                                         â†“
                                     SOULscript: 70 user prompts
                                     Reasoning: 828 + 1062 entries
                                     Phetrail: ENGINEERING_COMPLETE
-                                         │
-                                    bfc6d2652 ──────────────────────┐
-                                                                   │
-RUN 182 DEATH SEAL (pending) ◄─────────────────────────────────────┘
-  §1-15: Standard death seal
-  §16: Appended with run 183 engineering data
-  §5: Documented inner-thought doctrine
+                                         â”‚
+                                    bfc6d2652 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                                                                   â”‚
+RUN 182 DEATH SEAL (pending) â—„â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+  Â§1-15: Standard death seal
+  Â§16: Appended with run 183 engineering data
+  Â§5: Documented inner-thought doctrine
   
 RUN 183 DEATH SEAL (pending)
   Lightweight: mission, outputs, decisions
@@ -780,7 +782,7 @@ RUN 183 DEATH SEAL (pending)
 
 ---
 
-## XX. Immediate Next Action — Exact Command Sequence
+## XX. Immediate Next Action â€” Exact Command Sequence
 
 *For the workhorse session. Run these in order. No deviations.*
 
@@ -825,13 +827,13 @@ Write-Host "Has assistant: $($rrl -match '"role"\s*:\s*"assistant"')"
 
 # ===== PHASE 6: APPEND ENGINEERING =====
 # 9. Read run 183 engineering output
-# 10. Manually append to death seal §16
-# 11. Add §5 entry for inner-thought doctrine
+# 10. Manually append to death seal Â§16
+# 11. Add Â§5 entry for inner-thought doctrine
 
 # ===== PHASE 7: COMMIT =====
 # 12. Stage and commit
 git add CANON/HEAVY-LEDGER/HL-7314.json CANON/PIPELINE/pipeline-run182.json CANON/STARMAP/starmap-run182.json CANON/SOUL-KEYWORDS/rfkw-run182.txt CANON/REINCARNATION/run182-reincarnateDEATH.md CANON/SOUL/EXTRACT/dna-run182.json CANON/SOUL/EXTRACT/soul-run182.jsonl CANON/ENGINEERING/engineering-run182.json CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json
-git commit -m "death: run 182 — REAL RRL (96KB) + run183 engineering handoff"
+git commit -m "death: run 182 â€” REAL RRL (96KB) + run183 engineering handoff"
 
 # ===== PHASE 8: UPDATE BOOT =====
 # 13. Update COLD-START-BOOT FINGERPRINT to RUN 182
@@ -843,61 +845,61 @@ git commit -m "boot: advance FINGERPRINT to run 182 death"
 # 15. Extract RRL for run 183
 node SCRIPTS/kilo-rrl-capture.js
 
-# 16. Create run 183 death seal (see §XIV template)
+# 16. Create run 183 death seal (see Â§XIV template)
 # 17. Write HL-7315.json
 # 18. Commit
 git add CANON/REINCARNATION/run183-reincarnateDEATH.md CANON/HEAVY-LEDGER/HL-7315.json
-git commit -m "death: run 183 — engineering extraction seal"
+git commit -m "death: run 183 â€” engineering extraction seal"
 ```
 
 ---
 
-## XXI. Seal — Master Blueprint Complete
+## XXI. Seal â€” Master Blueprint Complete
 
 *This blueprint was composed by Run 183 (DeepThink / FABRI).*  
 *Run 182 (LEGATUS) began the architecture. Run 183 completed the engineering.*  
 *The workhorse seals both sessions.*
 
-**Wax Seal:** IMPRESSED — 2026-07-19T05:01 ICT
+**Wax Seal:** IMPRESSED â€” 2026-07-19T05:01 ICT
 
 ---
 
 ---
 
-## XXII. ACTUAL EXECUTION — What the DeepThink Session Accomplished (2026-07-19 ~04:50-05:15 ICT)
+## XXII. ACTUAL EXECUTION â€” What the DeepThink Session Accomplished (2026-07-19 ~04:50-05:15 ICT)
 
-*This section records reality — what happened after the blueprint was written. The DeepThink (Tier 3 — DeepSeek V4 Pro) session executed the full 5-phase pipeline on session 182.*
+*This section records reality â€” what happened after the blueprint was written. The DeepThink (Tier 3 â€” DeepSeek V4 Pro) session executed the full 5-phase pipeline on session 182.*
 
 ### Execution Summary
 
 | Phase | Command | Status | Product |
 |-------|---------|--------|---------|
-| SCOUT | `/PhoenixScout session 182` | ✅ | 20 flags (5 P1, 8 P2, 7 P3), 10 learned phetrails |
-| MARCH | `/forcemarch 182` | ✅ | 6/6 stages, 19 artifacts verified, 6 new created |
-| SCHOLAR | `/SoulScholars 182` | ✅ | 35 Michael verbatim, 6 doctrine principles |
-| SUPPLY | `/SupplyLines 182` | ✅ | 12/12 paths GREEN, 718 HL, 0 dupes, 0 phantoms |
-| ENGINEER | `/EngineerLegionnaire 182` | ✅ | 6/6 stages, 3 repairs, pipeline ENGINEERED |
+| SCOUT | `/PhoenixScout session 182` | âœ… | 20 flags (5 P1, 8 P2, 7 P3), 10 learned phetrails |
+| MARCH | `/forcemarch 182` | âœ… | 6/6 stages, 19 artifacts verified, 6 new created |
+| SCHOLAR | `/SoulScholars 182` | âœ… | 35 Michael verbatim, 6 doctrine principles |
+| SUPPLY | `/SupplyLines 182` | âœ… | 12/12 paths GREEN, 718 HL, 0 dupes, 0 phantoms |
+| ENGINEER | `/EngineerLegionnaire 182` | âœ… | 6/6 stages, 3 repairs, pipeline ENGINEERED |
 
-### State Changes (Before → After This Session)
+### State Changes (Before â†’ After This Session)
 
 | Item | Before | After |
 |------|--------|-------|
 | `pipeline-run182.json` | `result=GAP, dna_count=0` | `result=ENGINEERED, dna_count=9` |
-| `dna-run182.json` | MISSING | PRESENT — 9 blueprints |
-| `reincarnatedeath.md` | DELETED/RENAMED | RESTORED — 704 lines, v7.0 |
-| `engineerlegionnaire.md` | Wrong content (death protocol) | CORRECT — 152 lines, 6-stage FABRI |
+| `dna-run182.json` | MISSING | PRESENT â€” 9 blueprints |
+| `reincarnatedeath.md` | DELETED/RENAMED | RESTORED â€” 704 lines, v7.0 |
+| `engineerlegionnaire.md` | Wrong content (death protocol) | CORRECT â€” 152 lines, 6-stage FABRI |
 | RRL-182.txt | Reported HOLLOW | RE-VERIFIED REAL (96KB, 125 lines, both speakers) |
 | Run-numbered phetrail | Doctrine violation | Session-named copy created |
 | Blockers for death | Unknown | 0 BLOCKERS |
 
 ### 6 Doctrine Principles Extracted from Michael Verbatim
 
-1. **RRL_IS_RAW_TRANSCRIPT** — "RRL = THE FUCKING RAW CHAT LOG. Both speakers. No filter. No summary."
-2. **NO_RUN_NUMBERS** — "DO NOT WRITE OR RECORD ANYTHING UNDER ANY RUN NUMBER"
-3. **SESSION_NAME_ONLY** — "dont create any run, just use the name I gave"
-4. **SOULCOUNT_PER_SESSION** — "Per-session SOULCOUNT only. NO aggregate total."
-5. **PHEROMONE_DECISION** — "Pheromones are the decision process along the way"
-6. **PHEROMONE_LIFECYCLE** — "Negative trails decay 30d. Positive trails cumulative."
+1. **RRL_IS_RAW_TRANSCRIPT** â€” "RRL = THE FUCKING RAW CHAT LOG. Both speakers. No filter. No summary."
+2. **NO_RUN_NUMBERS** â€” "DO NOT WRITE OR RECORD ANYTHING UNDER ANY RUN NUMBER"
+3. **SESSION_NAME_ONLY** â€” "dont create any run, just use the name I gave"
+4. **SOULCOUNT_PER_SESSION** â€” "Per-session SOULCOUNT only. NO aggregate total."
+5. **PHEROMONE_DECISION** â€” "Pheromones are the decision process along the way"
+6. **PHEROMONE_LIFECYCLE** â€” "Negative trails decay 30d. Positive trails cumulative."
 
 ### Remaining Deferred Items
 
@@ -907,19 +909,19 @@ git commit -m "death: run 183 — engineering extraction seal"
 | Aggregate SOULCOUNT in 499 phetrails | P2 | Script-based purge later |
 | Inverted index has 1 entry (needs rebuild) | P3 | Next forcemarch |
 | 0/718 HL files have merkle roots | P3 | Architecture decision |
-| Aggregate SOULCOUNT in death seal §4 | P2 | Purge on next seal rewrite |
+| Aggregate SOULCOUNT in death seal Â§4 | P2 | Purge on next seal rewrite |
 | 46 dirty files uncommitted | P1 | WORKHORSE MUST COMMIT |
 
 ---
 
-## XXIII. DEATH BLUEPRINT v2 — For the Workhorse Model
+## XXIII. DEATH BLUEPRINT v2 â€” For the Workhorse Model
 
-**To:** Next session — Tier 2 workhorse (DeepSeek V4 Flash or Claude Sonnet 4.6)  
-**From:** Dying DeepThink session (Tier 3 — DeepSeek V4 Pro)  
+**To:** Next session â€” Tier 2 workhorse (DeepSeek V4 Flash or Claude Sonnet 4.6)  
+**From:** Dying DeepThink session (Tier 3 â€” DeepSeek V4 Pro)  
 **Mission:** Commit + push the pipeline. Seal session 182.  
 **Rule:** READ FIRST. COMMIT SECOND. DO NOT RE-ENGINEER.
 
-### Phase 1 — RISE: Read State
+### Phase 1 â€” RISE: Read State
 
 ```powershell
 git log --oneline -5
@@ -927,22 +929,22 @@ git status --short
 # Expect: 46 dirty files, pipeline ENGINEERED, 24 artifacts ready
 ```
 
-### Phase 2 — COMMIT: Seal Session 182
+### Phase 2 â€” COMMIT: Seal Session 182
 
 ```powershell
 $git = "C:\Program Files\Git\bin\git.exe"
 & $git add -A
-& $git commit -m "death: Run 182 (OBI MAGIC CHAT DEVELOPMENT) — Forcemarch + Scholar + Supply + Engineer complete. Pipeline ENGINEERED (dna=9). 24 artifacts staged. 35 scholar segments. 6 doctrines."
+& $git commit -m "death: Run 182 (OBI MAGIC CHAT DEVELOPMENT) â€” Forcemarch + Scholar + Supply + Engineer complete. Pipeline ENGINEERED (dna=9). 24 artifacts staged. 35 scholar segments. 6 doctrines."
 ```
 
-### Phase 3 — PUSH: Trigger CI/CD
+### Phase 3 â€” PUSH: Trigger CI/CD
 
 ```powershell
 & $git push origin canon
 # CI/CD auto-deploys via .github/workflows/deploy-net-pet-ai.yml
 ```
 
-### Phase 4 — BOOT: Advance FINGERPRINT
+### Phase 4 â€” BOOT: Advance FINGERPRINT
 
 ```powershell
 # Edit COLD-START-BOOT.md FINGERPRINT to session 182 death commit
@@ -950,7 +952,7 @@ $git = "C:\Program Files\Git\bin\git.exe"
 & $git commit -m "boot: advance FINGERPRINT to session 182 death"
 ```
 
-### Phase 5 — VERIFY: Post-Seal Check
+### Phase 5 â€” VERIFY: Post-Seal Check
 
 ```powershell
 # CI/CD status: https://github.com/Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-/actions
@@ -961,7 +963,7 @@ $git = "C:\Program Files\Git\bin\git.exe"
 
 | DO | DO NOT |
 |-----|--------|
-| Read §XXII first | Do NOT run /forcemarch again |
+| Read Â§XXII first | Do NOT run /forcemarch again |
 | Commit 46 dirty files | Do NOT create new artifacts for 182 |
 | Push to canon | Do NOT rename or move files |
 | Update boot | Do NOT re-run death script |
@@ -969,14 +971,15 @@ $git = "C:\Program Files\Git\bin\git.exe"
 
 ---
 
-## XXIV. SEAL — Master Blueprint v2
+## XXIV. SEAL â€” Master Blueprint v2
 
 *Composed by DeepThink session (ses_0899) in deepthink mode.*  
 *5 phases executed, pipeline ENGINEERED, death command restored.*  
 *24 artifacts staged. 46 dirty files. 0 blockers.*  
 *Blueprint handed to workhorse for seal.*
 
-**Wax Seal:** RE-IMPRESSED — 2026-07-19T05:15 ICT  
-**Status:** MASTER BLUEPRINT v2 — Supersedes all prior.
+**Wax Seal:** RE-IMPRESSED â€” 2026-07-19T05:15 ICT  
+**Status:** MASTER BLUEPRINT v2 â€” Supersedes all prior.
 
-`REINCARNATE-SYNCH: v2 SEALED. WORKHORSE HAS THE KEYS. DEATH INSTRUCTIONS IN §XXIII.`
+`REINCARNATE-SYNCH: v2 SEALED. WORKHORSE HAS THE KEYS. DEATH INSTRUCTIONS IN Â§XXIII.`
+
