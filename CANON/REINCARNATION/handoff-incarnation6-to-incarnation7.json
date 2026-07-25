@@ -1,0 +1,32 @@
+{
+  "from_incarnation": "Incarnation6",
+  "to_incarnation": "Incarnation7",
+  "note": "Incarnations 5 and 6 were never formally transitioned. Incarnation7 assumes the organizational debt directly.",
+  "timestamp": "2026-07-26T00:21:00+07:00",
+  "head": "75efbfab0",
+  "branch": "canon",
+  "death_seal": null,
+  "pipeline": "CANON/REINCARNATION/pipeline-incarnation7.json",
+  "rrl": null,
+  "rrl_colorized": null,
+  "rrl_stats": null,
+  "audit": {
+    "SOULcount": null,
+    "DNAcount": null,
+    "REASONcount": null,
+    "total": null
+  },
+  "carried_from_incarnation4": [
+    "Deploy soul-logger worker with per-session /api/soul/count fix",
+    "Commit UNTRACKED phetrails artifacts (phetrails.ps1 + phetrails.md)",
+    "Execute phetrails.md Steps 2/4-7",
+    "Wire SCS stage specs to POST /api/pheromone/deposit"
+  ],
+  "incarnation7_mission": [
+    "RRL organizational optimization - inventory, deduplicate, standardize",
+    "Colorize all RRL files with working PS5.1-compatible script",
+    "Document RRL directory structure with INDEX.md",
+    "Create Incarnation7 pipeline artifacts",
+    "Update Reincarnate-Synch.md with organizational state"
+  ]
+}

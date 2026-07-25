@@ -1,0 +1,175 @@
+﻿{
+    "parsed_lines":  380,
+    "processed_at":  "2026-07-26T00:21:10.1794161+07:00",
+    "source_file":  "RRL/Incarnate-4-PhoenixScout.txt",
+    "REASONcount":  286,
+    "top_topics":  [
+                       {
+                           "count":  357,
+                           "word":  "this"
+                       },
+                       {
+                           "count":  316,
+                           "word":  "agent"
+                       },
+                       {
+                           "count":  308,
+                           "word":  "that"
+                       },
+                       {
+                           "count":  303,
+                           "word":  "with"
+                       },
+                       {
+                           "count":  296,
+                           "word":  "user"
+                       },
+                       {
+                           "count":  237,
+                           "word":  "pheromone"
+                       },
+                       {
+                           "count":  235,
+                           "word":  "what"
+                       },
+                       {
+                           "count":  231,
+                           "word":  "should"
+                       },
+                       {
+                           "count":  222,
+                           "word":  "SOUL"
+                       },
+                       {
+                           "count":  210,
+                           "word":  "need"
+                       },
+                       {
+                           "count":  206,
+                           "word":  "from"
+                       },
+                       {
+                           "count":  193,
+                           "word":  "files"
+                       },
+                       {
+                           "count":  189,
+                           "word":  "Read"
+                       },
+                       {
+                           "count":  187,
+                           "word":  "update"
+                       },
+                       {
+                           "count":  176,
+                           "word":  "Scout"
+                       },
+                       {
+                           "count":  165,
+                           "word":  "they"
+                       },
+                       {
+                           "count":  164,
+                           "word":  "file"
+                       },
+                       {
+                           "count":  160,
+                           "word":  "check"
+                       },
+                       {
+                           "count":  156,
+                           "word":  "about"
+                       },
+                       {
+                           "count":  151,
+                           "word":  "Kilo"
+                       },
+                       {
+                           "count":  149,
+                           "word":  "just"
+                       },
+                       {
+                           "count":  145,
+                           "word":  "Stage"
+                       },
+                       {
+                           "count":  136,
+                           "word":  "session"
+                       },
+                       {
+                           "count":  135,
+                           "word":  "canonical"
+                       },
+                       {
+                           "count":  130,
+                           "word":  "Checkpoint"
+                       },
+                       {
+                           "count":  130,
+                           "word":  "existing"
+                       },
+                       {
+                           "count":  123,
+                           "word":  "current"
+                       },
+                       {
+                           "count":  122,
+                           "word":  "have"
+                       },
+                       {
+                           "count":  121,
+                           "word":  "death"
+                       },
+                       {
+                           "count":  120,
+                           "word":  "create"
+                       }
+                   ],
+    "DNAcount":  304,
+    "first_ts":  "2026-07-19T17:52:25.7440000+07:00",
+    "tool_calls":  246,
+    "lines":  380,
+    "PHEROMONEcount":  246,
+    "last_ts":  "2026-07-19T23:48:36.4530000+07:00",
+    "SOULcount":  76,
+    "total_chars":  383912,
+    "duration_min":  356.2,
+    "top_tools":  [
+                      {
+                          "count":  103,
+                          "tool":  "read"
+                      },
+                      {
+                          "count":  91,
+                          "tool":  "bash"
+                      },
+                      {
+                          "count":  70,
+                          "tool":  "edit"
+                      },
+                      {
+                          "count":  24,
+                          "tool":  "write"
+                      },
+                      {
+                          "count":  22,
+                          "tool":  "grep"
+                      },
+                      {
+                          "count":  21,
+                          "tool":  "glob"
+                      },
+                      {
+                          "count":  14,
+                          "tool":  "todowrite"
+                      },
+                      {
+                          "count":  9,
+                          "tool":  "task"
+                      },
+                      {
+                          "count":  1,
+                          "tool":  "skill"
+                      }
+                  ]
+}

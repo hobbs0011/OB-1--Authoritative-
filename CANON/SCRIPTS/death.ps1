@@ -15,6 +15,11 @@ $rrlDest = Join-Path $RrlDir "RRL-$Run.txt"
 Copy-Item $RrlSource $rrlDest -Force
 Write-Host "RRL preserved: $RrlSource -> $rrlDest ($((Get-Item $rrlDest).Length) bytes)"
 
+# 1b) RRL COLORIZED (LFG §SCS RRL COLOR CODING — purple/red/yellow/green)
+Write-Host "Colorizing: $rrlDest -> RRL/RRL-$Run-COLORIZED.md" -ForegroundColor Magenta
+$colorStats = & "$PSScriptRoot\rrl-colorize.ps1" -InputFile $rrlDest -StatsOnly
+Write-Host "COLORIZED: SOUL=$($colorStats.SOULcount) DNA=$($colorStats.DNAcount) REASON=$($colorStats.REASONcount) PHEROMONE=$($colorStats.PHEROMONEcount)" -ForegroundColor Green
+
 # 2) SCS AUDIT
 $audit = node -e "
 const fs = require('fs');
@@ -44,6 +49,8 @@ $pipeline = @{
   timestamp = (Get-Date -Format "o")
   open_items = @()
   rrl = $rrlDest
+  rrl_colorized = "RRL/RRL-$Run-COLORIZED.md"
+  rrl_stats = "RRL/RRL-$Run-STATS.json"
   audit = $auditObj
 }
 $pipeline | ConvertTo-Json -Depth 3 | Set-Content $pipePath -Encoding UTF8
@@ -57,6 +64,8 @@ $handoff = @{
   to_run = $nextRun
   timestamp = (Get-Date -Format "o")
   rrl = $rrlDest
+  rrl_colorized = "RRL/RRL-$Run-COLORIZED.md"
+  rrl_stats = "RRL/RRL-$Run-STATS.json"
   pipeline = $pipePath
   audit = $auditObj
 }

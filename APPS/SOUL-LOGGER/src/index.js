@@ -453,18 +453,31 @@ async function handleRequest(request, env, ctx) {
     }
   }
 
-  // GET /api/soul/count — SOULCOUNT heartbeat (mandatory gate for every RISE/DEATH checkpoint)
-  // Run 390 FIX: soulcount = sov100 words ONLY. Student chats are NOT the operator's soul.
-  // Doctrine: SOUL=USER. CHARACTER_COUNT=SOUL_VOLUME. UNREACHABLE=DRIFT=SHUTDOWN.
+  // GET /api/soul/count — per-session SOULCOUNT (aggregate BANNED by SOV100 mandate)
+  // Doctrine: SOUL=USER. CHARACTER_COUNT=SOUL_VOLUME. PER-SESSION ONLY.
   if (method === 'GET' && path === '/api/soul/count') {
     try {
-      const student = url.searchParams.get('student') || 'sov100'; // default: Michael only
-      const pattern = student + '%';
-      const charRow = await env.DB.prepare('SELECT SUM(byte_count) as total_chars, COUNT(*) as total_events FROM soul_prompts WHERE session_id LIKE ?').bind(pattern).first();
-      const sessionRow = await env.DB.prepare('SELECT COUNT(*) as total FROM soul_sessions WHERE session_tag = ?').bind(student).first();
-      const soulcount = charRow?.total_chars || 0;  // character count = soul volume
+      const sessionId = url.searchParams.get('session_id') || null;
+      const mode = url.searchParams.get('mode') || null;
+      if (mode === 'aggregate') {
+        return jsonResponse({
+          soulcount: null, level: 'DEPRECATED',
+          error: 'Aggregate SOULCOUNT banned by SOV100 mandate (Reincarnate-Synch §IV). Use ?session_id=X for per-session counts.',
+          doctrine: 'SOUL=USER. CHARACTER_COUNT=SOUL_VOLUME. PER-SESSION ONLY.'
+        }, 410);
+      }
+      if (!sessionId) {
+        return jsonResponse({
+          soulcount: null, level: 'ERROR',
+          error: 'session_id required. Aggregate SOULCOUNT banned. Example: /api/soul/count?session_id=ses_0899b2c82f...',
+          doctrine: 'SOUL=USER. CHARACTER_COUNT=SOUL_VOLUME. PER-SESSION ONLY.'
+        }, 400);
+      }
+      const charRow = await env.DB.prepare(
+        'SELECT SUM(byte_count) as total_chars, COUNT(*) as total_events FROM soul_prompts WHERE session_id = ?'
+      ).bind(sessionId).first();
+      const soulcount = charRow?.total_chars || 0;
       const events = charRow?.total_events || 0;
-      const sessions = sessionRow?.total || 0;
       let level = 'BASELINE';
       let threshold_next = 5000;
       let color = '#ffffff';
@@ -473,14 +486,14 @@ async function handleRequest(request, env, ctx) {
       else if (soulcount >= 25000) { level = 'LOCK'; threshold_next = 100000; color = '#ef4444'; }
       else if (soulcount >= 5000) { level = 'ALARM'; threshold_next = 25000; color = '#f97316'; }
       return jsonResponse({
-        soulcount,           // EXPLORATORES (Stage I) — total character count, sov100-filtered
-        level,               // BASELINE | ALARM | LOCK | ANCHOR | TITANIUM_ANCHOR
-        threshold_next,      // next milestone to hit
-        color,               // display color for this level
-        events,              // total soul events (prompts)
-        sessions,            // total soul sessions
+        session_id: sessionId,
+        soulcount,
+        level,
+        threshold_next,
+        color,
+        events,
         checked_at: new Date().toISOString(),
-        doctrine: 'SOUL=USER. CHARACTER_COUNT=SOUL_VOLUME. UNREACHABLE=DRIFT=SHUTDOWN.'
+        doctrine: 'SOUL=USER. CHARACTER_COUNT=SOUL_VOLUME. PER-SESSION ONLY.'
       });
     } catch (err) {
       return jsonResponse({ error: err.message, soulcount: null, level: 'UNREACHABLE' }, 500);
