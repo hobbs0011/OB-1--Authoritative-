@@ -1,0 +1,99 @@
+{
+  "source_file": "RTL-mai-tram-ielts-2026-07-22.txt",
+  "format": "RTL V1",
+  "speakers": {
+    "Mai_Tram": 156,
+    "Teacher": 158
+  },
+  "total_messages": 314,
+  "total_chars": 55047,
+  "total_words": 4884,
+  "duration_min": 45,
+  "first_ts": "2026-07-22T04:58:39.000Z",
+  "last_ts": "2026-07-22T05:43:26.000Z",
+  "audio_source": "Voice 260722_181051 (1).m4a",
+  "deepgram_model": "nova-2",
+  "diarization": "word-level (speaker 0=Mai Tram, speaker 1=Teacher)",
+  "top_topics": [
+    {
+      "word": "you",
+      "count": 197
+    },
+    {
+      "word": "the",
+      "count": 152
+    },
+    {
+      "word": "and",
+      "count": 141
+    },
+    {
+      "word": "yeah",
+      "count": 88
+    },
+    {
+      "word": "have",
+      "count": 60
+    },
+    {
+      "word": "like",
+      "count": 56
+    },
+    {
+      "word": "yes",
+      "count": 54
+    },
+    {
+      "word": "your",
+      "count": 50
+    },
+    {
+      "word": "for",
+      "count": 47
+    },
+    {
+      "word": "mhmm",
+      "count": 44
+    },
+    {
+      "word": "what",
+      "count": 42
+    },
+    {
+      "word": "that",
+      "count": 42
+    },
+    {
+      "word": "very",
+      "count": 42
+    },
+    {
+      "word": "one",
+      "count": 39
+    },
+    {
+      "word": "about",
+      "count": 38
+    },
+    {
+      "word": "just",
+      "count": 37
+    },
+    {
+      "word": "don",
+      "count": 37
+    },
+    {
+      "word": "because",
+      "count": 37
+    },
+    {
+      "word": "then",
+      "count": 34
+    },
+    {
+      "word": "can",
+      "count": 33
+    }
+  ]
+}

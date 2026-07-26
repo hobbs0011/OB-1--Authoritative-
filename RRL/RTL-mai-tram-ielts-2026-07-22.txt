@@ -1,0 +1,314 @@
+{"role":"user","time":1784696319000,"content":[{"type":"text","data":{"type":"text","text":"okay so your test is on august"}}]}
+{"role":"assistant","time":1784696323000,"content":[{"type":"text","data":{"type":"text","text":"yes"}}]}
+{"role":"user","time":1784696323000,"content":[{"type":"text","data":{"type":"text","text":"august what thirteenth august 13 okay so we have we have three weeks mhmm and you have explain the test again how many minutes for each"}}]}
+{"role":"assistant","time":1784696344000,"content":[{"type":"text","data":{"type":"text","text":"total mhmm it's for speaking it's about it's in ten or twelve ten to twelve minutes"}}]}
+{"role":"user","time":1784696354000,"content":[{"type":"text","data":{"type":"text","text":"ten to twelve minutes okay yes and how do they how do they break the ten to twelve minutes"}}]}
+{"role":"assistant","time":1784696360000,"content":[{"type":"text","data":{"type":"text","text":"it's background is about three minutes like two is three minutes and back back three is about four to five minutes"}}]}
+{"role":"user","time":1784696373000,"content":[{"type":"text","data":{"type":"text","text":"okay and part one is"}}]}
+{"role":"assistant","time":1784696376000,"content":[{"type":"text","data":{"type":"text","text":"is introduce and as as introduce the topic no no no introduce myself and my my church will will answer will give me some questions"}}]}
+{"role":"user","time":1784696398000,"content":[{"type":"text","data":{"type":"text","text":"okay do you know the topic ahead of time mhmm do you know the topic ahead of time"}}]}
+{"role":"assistant","time":1784696406000,"content":[{"type":"text","data":{"type":"text","text":"what"}}]}
+{"role":"user","time":1784696407000,"content":[{"type":"text","data":{"type":"text","text":"do you know the topic ahead"}}]}
+{"role":"assistant","time":1784696411000,"content":[{"type":"text","data":{"type":"text","text":"ahead"}}]}
+{"role":"user","time":1784696411000,"content":[{"type":"text","data":{"type":"text","text":"yeah before do you know the topic before the test"}}]}
+{"role":"assistant","time":1784696415000,"content":[{"type":"text","data":{"type":"text","text":"no okay"}}]}
+{"role":"user","time":1784696419000,"content":[{"type":"text","data":{"type":"text","text":"so today we can practice with the topic we chose"}}]}
+{"role":"assistant","time":1784696424000,"content":[{"type":"text","data":{"type":"text","text":"mhmm"}}]}
+{"role":"user","time":1784696424000,"content":[{"type":"text","data":{"type":"text","text":"but the next times i should not i should just give you the topic yes and then so you sit down for the test how long do you have to prepare how long do you have to prepare when they give you the topic"}}]}
+{"role":"assistant","time":1784696442000,"content":[{"type":"text","data":{"type":"text","text":"two hours"}}]}
+{"role":"user","time":1784696443000,"content":[{"type":"text","data":{"type":"text","text":"two hours mhmm so they give you the topic and you have two hours to prepare"}}]}
+{"role":"assistant","time":1784696448000,"content":[{"type":"text","data":{"type":"text","text":"you or my in in the for"}}]}
+{"role":"user","time":1784696451000,"content":[{"type":"text","data":{"type":"text","text":"the test yeah for the"}}]}
+{"role":"assistant","time":1784696452000,"content":[{"type":"text","data":{"type":"text","text":"test it's just in the ten or twelve minutes"}}]}
+{"role":"user","time":1784696457000,"content":[{"type":"text","data":{"type":"text","text":"to prepare"}}]}
+{"role":"assistant","time":1784696458000,"content":[{"type":"text","data":{"type":"text","text":"mhmm we have one minute to think and then speak with them the part one we will introduce myself i okay introduce myself and then they will ask"}}]}
+{"role":"user","time":1784696469000,"content":[{"type":"text","data":{"type":"text","text":"you always introduce yourself for part one"}}]}
+{"role":"assistant","time":1784696472000,"content":[{"type":"text","data":{"type":"text","text":"yes and then you ask some my habit or another"}}]}
+{"role":"user","time":1784696476000,"content":[{"type":"text","data":{"type":"text","text":"okay"}}]}
+{"role":"assistant","time":1784696478000,"content":[{"type":"text","data":{"type":"text","text":"back to them we will choose they will give three option about another topic or what and then i will choose one option in this and explain why i do this"}}]}
+{"role":"user","time":1784696495000,"content":[{"type":"text","data":{"type":"text","text":"so can you practice a little bit each day can you practice a little bit every day"}}]}
+{"role":"assistant","time":1784696504000,"content":[{"type":"text","data":{"type":"text","text":"yes but like"}}]}
+{"role":"user","time":1784696506000,"content":[{"type":"text","data":{"type":"text","text":"do you like a practice test each day for like twelve minutes can you do like a practice test every day for about twelve minutes"}}]}
+{"role":"assistant","time":1784696513000,"content":[{"type":"text","data":{"type":"text","text":"twelve minutes yeah what with like by myself"}}]}
+{"role":"user","time":1784696517000,"content":[{"type":"text","data":{"type":"text","text":"yeah and then record it"}}]}
+{"role":"assistant","time":1784696520000,"content":[{"type":"text","data":{"type":"text","text":"no not today is the first"}}]}
+{"role":"user","time":1784696523000,"content":[{"type":"text","data":{"type":"text","text":"yeah but after today"}}]}
+{"role":"assistant","time":1784696525000,"content":[{"type":"text","data":{"type":"text","text":"yes yes"}}]}
+{"role":"user","time":1784696525000,"content":[{"type":"text","data":{"type":"text","text":"practice every go home and then just do for fifteen minutes"}}]}
+{"role":"assistant","time":1784696530000,"content":[{"type":"text","data":{"type":"text","text":"yes"}}]}
+{"role":"user","time":1784696530000,"content":[{"type":"text","data":{"type":"text","text":"when you're home"}}]}
+{"role":"assistant","time":1784696531000,"content":[{"type":"text","data":{"type":"text","text":"yes"}}]}
+{"role":"user","time":1784696531000,"content":[{"type":"text","data":{"type":"text","text":"and then we can get you to record it"}}]}
+{"role":"assistant","time":1784696533000,"content":[{"type":"text","data":{"type":"text","text":"yes and then"}}]}
+{"role":"user","time":1784696535000,"content":[{"type":"text","data":{"type":"text","text":"you can send to me and then give you suggestions"}}]}
+{"role":"assistant","time":1784696538000,"content":[{"type":"text","data":{"type":"text","text":"yes battery battery they will have the topic and then about the environment or something and so i will make i will give my solution for for this"}}]}
+{"role":"user","time":1784696560000,"content":[{"type":"text","data":{"type":"text","text":"so do you have a minute to prepare about the questions about yourself part one mhmm they give you a minute to prepare"}}]}
+{"role":"assistant","time":1784696570000,"content":[{"type":"text","data":{"type":"text","text":"no question one is answer"}}]}
+{"role":"user","time":1784696572000,"content":[{"type":"text","data":{"type":"text","text":"no prepare"}}]}
+{"role":"assistant","time":1784696572000,"content":[{"type":"text","data":{"type":"text","text":"part two and part three will will i have time to prepare"}}]}
+{"role":"user","time":1784696577000,"content":[{"type":"text","data":{"type":"text","text":"about a minute"}}]}
+{"role":"assistant","time":1784696578000,"content":[{"type":"text","data":{"type":"text","text":"one or two minutes"}}]}
+{"role":"user","time":1784696582000,"content":[{"type":"text","data":{"type":"text","text":"and so when you prepare what do you do mhmm what do you do when you prepare"}}]}
+{"role":"assistant","time":1784696588000,"content":[{"type":"text","data":{"type":"text","text":"i prepare what yeah"}}]}
+{"role":"user","time":1784696589000,"content":[{"type":"text","data":{"type":"text","text":"you have a notebook"}}]}
+{"role":"assistant","time":1784696595000,"content":[{"type":"text","data":{"type":"text","text":"i don't know but i think it's a half"}}]}
+{"role":"user","time":1784696598000,"content":[{"type":"text","data":{"type":"text","text":"yep do you have a low book"}}]}
+{"role":"assistant","time":1784696600000,"content":[{"type":"text","data":{"type":"text","text":"yeah i'm not i'm putting this off it"}}]}
+{"role":"user","time":1784696607000,"content":[{"type":"text","data":{"type":"text","text":"when we study friday you bring your notebook mhmm when we study"}}]}
+{"role":"assistant","time":1784696614000,"content":[{"type":"text","data":{"type":"text","text":"and we bring my notebook"}}]}
+{"role":"user","time":1784696616000,"content":[{"type":"text","data":{"type":"text","text":"we miss i still owe three classes to bluetech i still owe three classes"}}]}
+{"role":"assistant","time":1784696627000,"content":[{"type":"text","data":{"type":"text","text":"to me i"}}]}
+{"role":"user","time":1784696630000,"content":[{"type":"text","data":{"type":"text","text":"i owe three classes to bluetech so maybe we can study on friday next three weeks mhmm and after we study on wednesday and friday next three weeks"}}]}
+{"role":"assistant","time":1784696647000,"content":[{"type":"text","data":{"type":"text","text":"three weeks i will learn with you"}}]}
+{"role":"user","time":1784696650000,"content":[{"type":"text","data":{"type":"text","text":"wednesday and friday"}}]}
+{"role":"assistant","time":1784696651000,"content":[{"type":"text","data":{"type":"text","text":"wednesday and friday yes"}}]}
+{"role":"user","time":1784696653000,"content":[{"type":"text","data":{"type":"text","text":"yes and then on the days you don't study you can practice for like fifteen twenty minutes"}}]}
+{"role":"assistant","time":1784696659000,"content":[{"type":"text","data":{"type":"text","text":"yes and then i will i will record"}}]}
+{"role":"user","time":1784696661000,"content":[{"type":"text","data":{"type":"text","text":"to you"}}]}
+{"role":"assistant","time":1784696661000,"content":[{"type":"text","data":{"type":"text","text":"yeah yes"}}]}
+{"role":"user","time":1784696663000,"content":[{"type":"text","data":{"type":"text","text":"i'll send you tonight i'll send you homework for tomorrow"}}]}
+{"role":"assistant","time":1784696669000,"content":[{"type":"text","data":{"type":"text","text":"yes i will show you they have the topic in this yeah"}}]}
+{"role":"user","time":1784696692000,"content":[{"type":"text","data":{"type":"text","text":"is that a link mhmm can you send me the link josebo yes before you forget can you send me that link"}}]}
+{"role":"assistant","time":1784696704000,"content":[{"type":"text","data":{"type":"text","text":"okay"}}]}
+{"role":"user","time":1784696705000,"content":[{"type":"text","data":{"type":"text","text":"then i can enter that to your homework how many numbers oh a lot of yeah no"}}]}
+{"role":"assistant","time":1784696736000,"content":[{"type":"text","data":{"type":"text","text":"it's half to being too be too i don't see"}}]}
+{"role":"user","time":1784696810000,"content":[{"type":"text","data":{"type":"text","text":"okay alright so part one yeah let's do the one i sent you yesterday for part one so how long do you have to speak for part one again at long yeah how long"}}]}
+{"role":"assistant","time":1784696836000,"content":[{"type":"text","data":{"type":"text","text":"three minutes"}}]}
+{"role":"user","time":1784696838000,"content":[{"type":"text","data":{"type":"text","text":"three minutes k yeah let's just practice part one a little while yep ready"}}]}
+{"role":"assistant","time":1784696846000,"content":[{"type":"text","data":{"type":"text","text":"mhmm"}}]}
+{"role":"user","time":1784696849000,"content":[{"type":"text","data":{"type":"text","text":"alright what subject do you find most interesting at university and why"}}]}
+{"role":"assistant","time":1784696856000,"content":[{"type":"text","data":{"type":"text","text":"the big one mhmm mhmm my subject i ever like in my university is math because i like because i like the the number and how the way the number missed the month and and understand"}}]}
+{"role":"user","time":1784696894000,"content":[{"type":"text","data":{"type":"text","text":"no overthinking simple simple and the teacher teacher teach me is very simple to understand it's very good and"}}]}
+{"role":"assistant","time":1784696924000,"content":[{"type":"text","data":{"type":"text","text":"this"}}]}
+{"role":"user","time":1784696929000,"content":[{"type":"text","data":{"type":"text","text":"is subject i i get a high score"}}]}
+{"role":"assistant","time":1784696938000,"content":[{"type":"text","data":{"type":"text","text":"tiptop tiptop tiptop please"}}]}
+{"role":"user","time":1784696945000,"content":[{"type":"text","data":{"type":"text","text":"in this picture"}}]}
+{"role":"assistant","time":1784696949000,"content":[{"type":"text","data":{"type":"text","text":"each one each one has to be so just for the notes she it was about one minute forty seconds so each one of these questions will be three minutes right no or is it one one minute per question"}}]}
+{"role":"user","time":1784696964000,"content":[{"type":"text","data":{"type":"text","text":"draw format"}}]}
+{"role":"assistant","time":1784696969000,"content":[{"type":"text","data":{"type":"text","text":"is there three questions six six questions"}}]}
+{"role":"user","time":1784696978000,"content":[{"type":"text","data":{"type":"text","text":"mhmm about what do you do in your free time okay can you"}}]}
+{"role":"assistant","time":1784696985000,"content":[{"type":"text","data":{"type":"text","text":"so there'll be random questions"}}]}
+{"role":"user","time":1784696987000,"content":[{"type":"text","data":{"type":"text","text":"yes can you talk about your family do you like live in the town or in the village why and is that what is"}}]}
+{"role":"assistant","time":1784697000000,"content":[{"type":"text","data":{"type":"text","text":"six questions"}}]}
+{"role":"user","time":1784697001000,"content":[{"type":"text","data":{"type":"text","text":"have the church know about me"}}]}
+{"role":"assistant","time":1784697004000,"content":[{"type":"text","data":{"type":"text","text":"okay six six questions"}}]}
+{"role":"user","time":1784697008000,"content":[{"type":"text","data":{"type":"text","text":"maybe"}}]}
+{"role":"assistant","time":1784697009000,"content":[{"type":"text","data":{"type":"text","text":"maybe mhmm what do you mean maybe"}}]}
+{"role":"user","time":1784697012000,"content":[{"type":"text","data":{"type":"text","text":"the question is this is maybe"}}]}
+{"role":"assistant","time":1784697016000,"content":[{"type":"text","data":{"type":"text","text":"up to six questions okay alright let me let me fix that one second"}}]}
+{"role":"user","time":1784697022000,"content":[{"type":"text","data":{"type":"text","text":"so in this i i i need to answer short and clear"}}]}
+{"role":"assistant","time":1784697034000,"content":[{"type":"text","data":{"type":"text","text":"mhmm yes yes you do"}}]}
+{"role":"user","time":1784697098000,"content":[{"type":"text","data":{"type":"text","text":"this is for pack one mhmm"}}]}
+{"role":"assistant","time":1784697131000,"content":[{"type":"text","data":{"type":"text","text":"so this is not necessarily this one is not about the time it's about you answering clearly mhmm okay but still three minutes k ready yes alright where is your hometown and what is it famous for"}}]}
+{"role":"user","time":1784697154000,"content":[{"type":"text","data":{"type":"text","text":"my home my hometown is in brooklyn and it has a beautiful beach and and the weather is very good it's have the name people will say my hometown is is also have the sunny and and windy my in my hometown it's very famous about trauma fruit because of this weather it's made the fruit have the the development very well okay and do you prefer living in a house or an apartment why"}}]}
+{"role":"assistant","time":1784697218000,"content":[{"type":"text","data":{"type":"text","text":"i think i like to live in the apartment because it's have many convenient in the floors it have the mini stop a mini mini stop and and it's have you have the security to protect me of the dangerous thing"}}]}
+{"role":"user","time":1784697246000,"content":[{"type":"text","data":{"type":"text","text":"mhmm alright and what changes have you seen in your local area over the past few years"}}]}
+{"role":"assistant","time":1784697254000,"content":[{"type":"text","data":{"type":"text","text":"can you ask again"}}]}
+{"role":"user","time":1784697256000,"content":[{"type":"text","data":{"type":"text","text":"what changes have you seen in your local area over the past few years"}}]}
+{"role":"assistant","time":1784697261000,"content":[{"type":"text","data":{"type":"text","text":"over the past few years local around me people around me"}}]}
+{"role":"user","time":1784697266000,"content":[{"type":"text","data":{"type":"text","text":"your local area yep"}}]}
+{"role":"assistant","time":1784697267000,"content":[{"type":"text","data":{"type":"text","text":"local area in what"}}]}
+{"role":"user","time":1784697274000,"content":[{"type":"text","data":{"type":"text","text":"your local area"}}]}
+{"role":"assistant","time":1784697279000,"content":[{"type":"text","data":{"type":"text","text":"my in my but i i concern that in in a hot city or in my home village"}}]}
+{"role":"user","time":1784697291000,"content":[{"type":"text","data":{"type":"text","text":"what's your local area no right now what's your local area"}}]}
+{"role":"assistant","time":1784697298000,"content":[{"type":"text","data":{"type":"text","text":"it's"}}]}
+{"role":"user","time":1784697298000,"content":[{"type":"text","data":{"type":"text","text":"not asking about five years ago it's not asking right now"}}]}
+{"role":"assistant","time":1784697303000,"content":[{"type":"text","data":{"type":"text","text":"the past three years but i'm in here i moved"}}]}
+{"role":"user","time":1784697311000,"content":[{"type":"text","data":{"type":"text","text":"the this is past few years"}}]}
+{"role":"assistant","time":1784697314000,"content":[{"type":"text","data":{"type":"text","text":"part three three years mhmm mhmm the rope then they yeah the rope is now compliant and they it's have more the the shock more sock for"}}]}
+{"role":"user","time":1784697342000,"content":[{"type":"text","data":{"type":"text","text":"okay alright so let's let's practice those again so where is your hometown and what is it famous for try again"}}]}
+{"role":"assistant","time":1784697356000,"content":[{"type":"text","data":{"type":"text","text":"my hometown is in romans and my hometown is in the north of country it's in the the north"}}]}
+{"role":"user","time":1784697369000,"content":[{"type":"text","data":{"type":"text","text":"vietnam north"}}]}
+{"role":"assistant","time":1784697370000,"content":[{"type":"text","data":{"type":"text","text":"of my country because i'm very famous about the common fruit because the weather here is very good for this fruit development it's windy and sunny"}}]}
+{"role":"user","time":1784697388000,"content":[{"type":"text","data":{"type":"text","text":"what's traveling fruit"}}]}
+{"role":"assistant","time":1784697391000,"content":[{"type":"text","data":{"type":"text","text":"travel fruit"}}]}
+{"role":"user","time":1784697391000,"content":[{"type":"text","data":{"type":"text","text":"oh dragon fruit"}}]}
+{"role":"assistant","time":1784697393000,"content":[{"type":"text","data":{"type":"text","text":"yes"}}]}
+{"role":"user","time":1784697394000,"content":[{"type":"text","data":{"type":"text","text":"very famous for dragon fruit yes yes it's very beautiful it's very beautiful"}}]}
+{"role":"assistant","time":1784697402000,"content":[{"type":"text","data":{"type":"text","text":"yes my hometown"}}]}
+{"role":"user","time":1784697404000,"content":[{"type":"text","data":{"type":"text","text":"yeah"}}]}
+{"role":"assistant","time":1784697405000,"content":[{"type":"text","data":{"type":"text","text":"yes my hometown have the beach the beach and the mountain"}}]}
+{"role":"user","time":1784697412000,"content":[{"type":"text","data":{"type":"text","text":"uh-huh mountain so first advice for you would be putting some emotion emotion"}}]}
+{"role":"assistant","time":1784697420000,"content":[{"type":"text","data":{"type":"text","text":"emotion mhmm what"}}]}
+{"role":"user","time":1784697422000,"content":[{"type":"text","data":{"type":"text","text":"like emotion emotion feeling"}}]}
+{"role":"assistant","time":1784697428000,"content":[{"type":"text","data":{"type":"text","text":"yeah from what"}}]}
+{"role":"user","time":1784697429000,"content":[{"type":"text","data":{"type":"text","text":"when you speak vietnamese they often speak english or they speak vietnamese with a lot of emotion mhmm but when they switch to english they get stuck in their logic brain oh and they they kinda sound very so flat"}}]}
+{"role":"assistant","time":1784697447000,"content":[{"type":"text","data":{"type":"text","text":"so i i so"}}]}
+{"role":"user","time":1784697450000,"content":[{"type":"text","data":{"type":"text","text":"speak speak more slowly yeah but speak with like feeling mhmm so oh my hometown to the north of vietnam it's very beautiful pause it's very it's a very beautiful i i recommend people come and see my hometown because it's very beautiful see that's more like strong yeah instead of just like you're reading from text mhmm yeah it's very beautiful i love my hometown not very much opportunity yeah unless you sell dragon fruit yeah because my my hometown is famous for dragon fruit but i don't live there because a lot more opportunity i would certainly"}}]}
+{"role":"assistant","time":1784697507000,"content":[{"type":"text","data":{"type":"text","text":"in saigon for me but if there was more opportunity in my hometown i would love to live there it's very beautiful high mountains beautiful water i recommend everyone go see my hometown it's so beautiful yeah so try to try to speak with more emotion this time yeah so where is your hometown what is it famous for"}}]}
+{"role":"user","time":1784697533000,"content":[{"type":"text","data":{"type":"text","text":"my hometown is in the province it's very beautiful and i love it very much it's have the dragon fruit here and the high mountain and the beautiful water"}}]}
+{"role":"assistant","time":1784697548000,"content":[{"type":"text","data":{"type":"text","text":"yes remember what is a what that was good that was good that was an improvement yeah okay because you're talking from your heart now mhmm you're moving from your brain to your heart"}}]}
+{"role":"user","time":1784697559000,"content":[{"type":"text","data":{"type":"text","text":"okay and you want to have a baby"}}]}
+{"role":"assistant","time":1784697576000,"content":[{"type":"text","data":{"type":"text","text":"yeah for part two and three yes i will"}}]}
+{"role":"user","time":1784697581000,"content":[{"type":"text","data":{"type":"text","text":"busy i'll difficult to meet"}}]}
+{"role":"assistant","time":1784697584000,"content":[{"type":"text","data":{"type":"text","text":"i'll send you the notes but for part one you wanna learn how to speak you won't have notes right part one no prepare"}}]}
+{"role":"user","time":1784697595000,"content":[{"type":"text","data":{"type":"text","text":"yeah"}}]}
+{"role":"assistant","time":1784697596000,"content":[{"type":"text","data":{"type":"text","text":"so when we practice we should no prepare yeah no prepare learn how to speak with no preparation because the test no preparation but part two and three i'll show you what i recommend for preparing for part two and part three but part one we should practice how the test is gonna be in the test no no prepare right"}}]}
+{"role":"user","time":1784697625000,"content":[{"type":"text","data":{"type":"text","text":"yes"}}]}
+{"role":"assistant","time":1784697625000,"content":[{"type":"text","data":{"type":"text","text":"so when you speak what you just did was improvement it's very beautiful right but use what what does a full stop mean a stop remember right yes just pause because they're asking you to speak concisely that means like don't don't don't like okay because you're nervous right mhmm you're nervous and in the test you'll be more nervous right so you wanna try to force your your habit of just pausing even when you feel nervous mhmm because when you pause it will relax you oh my my hometown is in the north vietnam in blah blah blah province pause it's it's very beautiful pause it's beautiful because of the high mountains beautiful amazing blue water pause yeah what it's famous for i'd say number one dragon fruit because of the the wind and the temperature so that is my hometown i recommend everyone go see it yep see pause pause one thought another thought because most most most people that'll go do that test are gonna be nervous like you right and so the the judge is gonna know number one be looking to see if you're speaking too fast and your your ideas are just right so you wanna break them up yes and that also that means you have to come up with less to say makes you seem more confident makes this makes you not have to say as much yeah you can say less you sound more confident sound more clear yeah because if you slow down you can just focus on your pronunciation more instead of just i'm nervous so let's try one more time and then we'll move on to a few different questions and then we'll practice a little bit on part two and part three so where is your hometown and what is it famous for"}}]}
+{"role":"user","time":1784697776000,"content":[{"type":"text","data":{"type":"text","text":"my hometown is big province is it in is it in the north"}}]}
+{"role":"assistant","time":1784697783000,"content":[{"type":"text","data":{"type":"text","text":"slower 30% slower yeah try again where is your hometown what is it famous for"}}]}
+{"role":"user","time":1784697787000,"content":[{"type":"text","data":{"type":"text","text":"my hometown is in vin thuy province it is in the north of vietnam i very love it because it's half the weather so"}}]}
+{"role":"assistant","time":1784697803000,"content":[{"type":"text","data":{"type":"text","text":"so beautiful"}}]}
+{"role":"user","time":1784697806000,"content":[{"type":"text","data":{"type":"text","text":"it's so beautiful it's very beautiful yeah so beautiful i love it there it's so beautiful"}}]}
+{"role":"assistant","time":1784697816000,"content":[{"type":"text","data":{"type":"text","text":"and this one is so beautiful"}}]}
+{"role":"user","time":1784697819000,"content":[{"type":"text","data":{"type":"text","text":"yeah and"}}]}
+{"role":"assistant","time":1784697820000,"content":[{"type":"text","data":{"type":"text","text":"it's had a family here"}}]}
+{"role":"user","time":1784697822000,"content":[{"type":"text","data":{"type":"text","text":"mhmm a lot of good memories"}}]}
+{"role":"assistant","time":1784697826000,"content":[{"type":"text","data":{"type":"text","text":"i i have a lot of"}}]}
+{"role":"user","time":1784697828000,"content":[{"type":"text","data":{"type":"text","text":"good memories"}}]}
+{"role":"assistant","time":1784697829000,"content":[{"type":"text","data":{"type":"text","text":"good memory in my hometown it's have very famous but the most famous in my hometown is dragon fruit because of the temperature here we'll make it the development very well and it's beautiful because it's have two mountain and beautiful beach here and you can come to my hometown to to what and you"}}]}
+{"role":"user","time":1784697863000,"content":[{"type":"text","data":{"type":"text","text":"i would recommend"}}]}
+{"role":"assistant","time":1784697865000,"content":[{"type":"text","data":{"type":"text","text":"i would recommend you to come to my hometown"}}]}
+{"role":"user","time":1784697868000,"content":[{"type":"text","data":{"type":"text","text":"to see it for yourself yeah"}}]}
+{"role":"assistant","time":1784697870000,"content":[{"type":"text","data":{"type":"text","text":"to see it for yourself"}}]}
+{"role":"user","time":1784697872000,"content":[{"type":"text","data":{"type":"text","text":"uh-huh uh-huh thank you alright i'll give you two more personal questions then we'll practice part two and part three what changes oh wait here i did that one is there anything you dislike about your neighborhood"}}]}
+{"role":"assistant","time":1784697887000,"content":[{"type":"text","data":{"type":"text","text":"my name what"}}]}
+{"role":"user","time":1784697888000,"content":[{"type":"text","data":{"type":"text","text":"is there anything you dislike"}}]}
+{"role":"assistant","time":1784697891000,"content":[{"type":"text","data":{"type":"text","text":"dislike"}}]}
+{"role":"user","time":1784697898000,"content":[{"type":"text","data":{"type":"text","text":"do you like your neighborhood yes or no don't think about it"}}]}
+{"role":"assistant","time":1784697903000,"content":[{"type":"text","data":{"type":"text","text":"my neighborhood"}}]}
+{"role":"user","time":1784697904000,"content":[{"type":"text","data":{"type":"text","text":"yeah do you like it yes or no"}}]}
+{"role":"assistant","time":1784697907000,"content":[{"type":"text","data":{"type":"text","text":"yes"}}]}
+{"role":"user","time":1784697907000,"content":[{"type":"text","data":{"type":"text","text":"okay so you can answer honest just answer from your heart to be honest i like my neighborhood but there are a few things i don't like for example blah blah blah and blah blah blah but as i mentioned i like my neighborhood so i don't have too much bad to say about it yeah it's true right you like your neighborhood you give it like seven out of 10 yeah you would give it like seven out of 10 seven seven out of 10 score you'd give a score seven out of 10"}}]}
+{"role":"assistant","time":1784697953000,"content":[{"type":"text","data":{"type":"text","text":"maybe"}}]}
+{"role":"user","time":1784697956000,"content":[{"type":"text","data":{"type":"text","text":"yeah you you like it mhmm yeah you don't love it so what are some things you don't like"}}]}
+{"role":"assistant","time":1784697967000,"content":[{"type":"text","data":{"type":"text","text":"i don't know i don't care"}}]}
+{"role":"user","time":1784697970000,"content":[{"type":"text","data":{"type":"text","text":"it's perfect you like it 10 out of 10 your neighbor it's perfect there's nothing wrong with it at all"}}]}
+{"role":"assistant","time":1784697981000,"content":[{"type":"text","data":{"type":"text","text":"is he so so it's"}}]}
+{"role":"user","time":1784697983000,"content":[{"type":"text","data":{"type":"text","text":"yeah okay so there are some things you don't like"}}]}
+{"role":"assistant","time":1784697987000,"content":[{"type":"text","data":{"type":"text","text":"no because i don't don't care about them so"}}]}
+{"role":"user","time":1784697990000,"content":[{"type":"text","data":{"type":"text","text":"i okay so just say that say that"}}]}
+{"role":"assistant","time":1784697995000,"content":[{"type":"text","data":{"type":"text","text":"i i just also i don't like or like about my neighborhood because i don't care about the monkey"}}]}
+{"role":"user","time":1784698006000,"content":[{"type":"text","data":{"type":"text","text":"k so you say my neighborhood is not perfect however i'm easygoing i'm easygoing i'm an easygoing person so"}}]}
+{"role":"assistant","time":1784698021000,"content":[{"type":"text","data":{"type":"text","text":"easygoing person yeah"}}]}
+{"role":"user","time":1784698023000,"content":[{"type":"text","data":{"type":"text","text":"you're easygoing i i don't care about bad things unless they're really bad but there's nothing really bad in my neighborhood so to be honest i have nothing bad to say on just be honest don't when you answer these questions better for your answer to be short and honest than long and trying to make something up so if you they ask you is there anything you dislike about your neighborhood the answer is no just just say that k is there anything you dislike about your neighborhood to be honest i'm a relaxed person i'm easygoing try that"}}]}
+{"role":"assistant","time":1784698072000,"content":[{"type":"text","data":{"type":"text","text":"in my honest i'm a in"}}]}
+{"role":"user","time":1784698075000,"content":[{"type":"text","data":{"type":"text","text":"my honest opinion"}}]}
+{"role":"assistant","time":1784698076000,"content":[{"type":"text","data":{"type":"text","text":"in my honest opinions uh-huh"}}]}
+{"role":"assistant","time":1784698079000,"content":[{"type":"text","data":{"type":"text","text":"i'm a really nice person"}}]}
+{"role":"assistant","time":1784698080000,"content":[{"type":"text","data":{"type":"text","text":"and this is something so i don't care about my neighborhood"}}]}
+{"role":"user","time":1784698088000,"content":[{"type":"text","data":{"type":"text","text":"there's nothing"}}]}
+{"role":"assistant","time":1784698089000,"content":[{"type":"text","data":{"type":"text","text":"there's nothing"}}]}
+{"role":"user","time":1784698091000,"content":[{"type":"text","data":{"type":"text","text":"bad bad i can't say"}}]}
+{"role":"assistant","time":1784698094000,"content":[{"type":"text","data":{"type":"text","text":"i can't say"}}]}
+{"role":"user","time":1784698095000,"content":[{"type":"text","data":{"type":"text","text":"about my neighborhood"}}]}
+{"role":"assistant","time":1784698097000,"content":[{"type":"text","data":{"type":"text","text":"about my neighborhood"}}]}
+{"role":"user","time":1784698098000,"content":[{"type":"text","data":{"type":"text","text":"i i think it's good"}}]}
+{"role":"assistant","time":1784698099000,"content":[{"type":"text","data":{"type":"text","text":"i think it's good"}}]}
+{"role":"assistant","time":1784698101000,"content":[{"type":"text","data":{"type":"text","text":"sorry i don't have anything bad to say"}}]}
+{"role":"user","time":1784698106000,"content":[{"type":"text","data":{"type":"text","text":"i like my neighborhood i like my neighbors"}}]}
+{"role":"assistant","time":1784698110000,"content":[{"type":"text","data":{"type":"text","text":"i like my neighborhood"}}]}
+{"role":"user","time":1784698111000,"content":[{"type":"text","data":{"type":"text","text":"yeah everyone's friendly"}}]}
+{"role":"assistant","time":1784698113000,"content":[{"type":"text","data":{"type":"text","text":"it's friendly"}}]}
+{"role":"user","time":1784698114000,"content":[{"type":"text","data":{"type":"text","text":"yeah not not noisy so i have no bad thing to say about my neighborhood yeah it's not vinhomes yeah it's not vinhomes i don't have the money for vinhomes but for the money my neighborhood good yeah just be honest yeah be honest try to speak from you know"}}]}
+{"role":"assistant","time":1784698141000,"content":[{"type":"text","data":{"type":"text","text":"you're not safe you don't want to make input there in iceland"}}]}
+{"role":"user","time":1784698145000,"content":[{"type":"text","data":{"type":"text","text":"yeah that's why i move up and let's do two"}}]}
+{"role":"assistant","time":1784698151000,"content":[{"type":"text","data":{"type":"text","text":"more"}}]}
+{"role":"user","time":1784698154000,"content":[{"type":"text","data":{"type":"text","text":"what is your major and why did you choose to study it"}}]}
+{"role":"assistant","time":1784698159000,"content":[{"type":"text","data":{"type":"text","text":"what's the major mhmm"}}]}
+{"role":"user","time":1784698162000,"content":[{"type":"text","data":{"type":"text","text":"why did you choose to study it"}}]}
+{"role":"assistant","time":1784698165000,"content":[{"type":"text","data":{"type":"text","text":"my major is the business business management"}}]}
+{"role":"user","time":1784698172000,"content":[{"type":"text","data":{"type":"text","text":"oh my major is business management"}}]}
+{"role":"assistant","time":1784698174000,"content":[{"type":"text","data":{"type":"text","text":"yep k and i chose them because in this in the past and it's more i like i like very much but i don't know how to how to choose the right the right majors and then my uncle he he helped me to choose and in the business management i will i i will i i i have to study more about the marketing the carbon and maybe flying chance and i will study more in this natures"}}]}
+{"role":"user","time":1784698238000,"content":[{"type":"text","data":{"type":"text","text":"but you still haven't told me why why why"}}]}
+{"role":"assistant","time":1784698245000,"content":[{"type":"text","data":{"type":"text","text":"because it's it meant me to to my my money in the future"}}]}
+{"role":"user","time":1784698253000,"content":[{"type":"text","data":{"type":"text","text":"yeah there's more opportunity mhmm yeah this major give me gives me more opportunity to make"}}]}
+{"role":"assistant","time":1784698267000,"content":[{"type":"text","data":{"type":"text","text":"this matter will give me more opportunity to make my money and"}}]}
+{"role":"user","time":1784698271000,"content":[{"type":"text","data":{"type":"text","text":"to make good money yeah to make a lot of money and i like money right"}}]}
+{"role":"assistant","time":1784698281000,"content":[{"type":"text","data":{"type":"text","text":"so answer is do you think it is negative no no it's true"}}]}
+{"role":"user","time":1784698288000,"content":[{"type":"text","data":{"type":"text","text":"everyone in vietnam likes money"}}]}
+{"role":"assistant","time":1784698290000,"content":[{"type":"text","data":{"type":"text","text":"oh okay really me too"}}]}
+{"role":"user","time":1784698292000,"content":[{"type":"text","data":{"type":"text","text":"everyone likes money i think if you can make the examiner laugh"}}]}
+{"role":"assistant","time":1784698301000,"content":[{"type":"text","data":{"type":"text","text":"if you okay right"}}]}
+{"role":"user","time":1784698302000,"content":[{"type":"text","data":{"type":"text","text":"if you make them laugh they're gonna give you a high score right yes right i chose my major because i want to make money because i like money your examiner might smile a little bit yeah honesty is funny alright and how much time do you usually spend on your hobbies each week and one suggestion i'll give you you can always start by saying good question yeah just pause good question"}}]}
+{"role":"assistant","time":1784698345000,"content":[{"type":"text","data":{"type":"text","text":"good questions my hobbies"}}]}
+{"role":"user","time":1784698348000,"content":[{"type":"text","data":{"type":"text","text":"i would say that"}}]}
+{"role":"assistant","time":1784698349000,"content":[{"type":"text","data":{"type":"text","text":"i would say"}}]}
+{"role":"user","time":1784698350000,"content":[{"type":"text","data":{"type":"text","text":"i would"}}]}
+{"role":"assistant","time":1784698351000,"content":[{"type":"text","data":{"type":"text","text":"i would i would"}}]}
+{"role":"user","time":1784698352000,"content":[{"type":"text","data":{"type":"text","text":"would would no would what i would"}}]}
+{"role":"assistant","time":1784698356000,"content":[{"type":"text","data":{"type":"text","text":"the view of you"}}]}
+{"role":"user","time":1784698358000,"content":[{"type":"text","data":{"type":"text","text":"uh-huh i would say"}}]}
+{"role":"assistant","time":1784698360000,"content":[{"type":"text","data":{"type":"text","text":"i will say"}}]}
+{"role":"user","time":1784698361000,"content":[{"type":"text","data":{"type":"text","text":"i think that"}}]}
+{"role":"assistant","time":1784698362000,"content":[{"type":"text","data":{"type":"text","text":"i think that"}}]}
+{"role":"user","time":1784698363000,"content":[{"type":"text","data":{"type":"text","text":"yeah it's like good question pause i think that and then you can repeat the question back the time i usually spend on my hobbies each week is mhmm yeah so you just you hear the question and you repeat the question back"}}]}
+{"role":"assistant","time":1784698386000,"content":[{"type":"text","data":{"type":"text","text":"yes"}}]}
+{"role":"user","time":1784698386000,"content":[{"type":"text","data":{"type":"text","text":"with the same vocabulary"}}]}
+{"role":"assistant","time":1784698388000,"content":[{"type":"text","data":{"type":"text","text":"yes"}}]}
+{"role":"user","time":1784698389000,"content":[{"type":"text","data":{"type":"text","text":"that sounds structured yes yeah and then you just say a few words after mhmm good question i would say that i usually spend about five hours on my hobbies each week my hobbies are blah blah blah blah blah and yep let's try again how much time do you usually spend on your hobbies each week"}}]}
+{"role":"assistant","time":1784698417000,"content":[{"type":"text","data":{"type":"text","text":"this is good questions i'm good i'm good"}}]}
+{"role":"user","time":1784698421000,"content":[{"type":"text","data":{"type":"text","text":"i would say that or i think that"}}]}
+{"role":"assistant","time":1784698423000,"content":[{"type":"text","data":{"type":"text","text":"i think that i spend five hour to"}}]}
+{"role":"user","time":1784698427000,"content":[{"type":"text","data":{"type":"text","text":"on"}}]}
+{"role":"assistant","time":1784698428000,"content":[{"type":"text","data":{"type":"text","text":"order my hobbies hobbies in this week"}}]}
+{"role":"user","time":1784698432000,"content":[{"type":"text","data":{"type":"text","text":"each week"}}]}
+{"role":"assistant","time":1784698433000,"content":[{"type":"text","data":{"type":"text","text":"each week"}}]}
+{"role":"user","time":1784698434000,"content":[{"type":"text","data":{"type":"text","text":"my hobbies are"}}]}
+{"role":"assistant","time":1784698436000,"content":[{"type":"text","data":{"type":"text","text":"my hobby are are swimming and playing bennington i spent time in when i i spend time this time to my college when with the end of work"}}]}
+{"role":"user","time":1784698457000,"content":[{"type":"text","data":{"type":"text","text":"at the end of my work"}}]}
+{"role":"assistant","time":1784698459000,"content":[{"type":"text","data":{"type":"text","text":"at the end of my work"}}]}
+{"role":"user","time":1784698461000,"content":[{"type":"text","data":{"type":"text","text":"i go swimming"}}]}
+{"role":"assistant","time":1784698463000,"content":[{"type":"text","data":{"type":"text","text":"at the end of my work i go swimming"}}]}
+{"role":"user","time":1784698466000,"content":[{"type":"text","data":{"type":"text","text":"it's and on the weekends at craig babington mhmm on weekends no after work after work"}}]}
+{"role":"assistant","time":1784698476000,"content":[{"type":"text","data":{"type":"text","text":"yes yes"}}]}
+{"role":"user","time":1784698476000,"content":[{"type":"text","data":{"type":"text","text":"i will go swimming or play badminton it helps me relax"}}]}
+{"role":"assistant","time":1784698484000,"content":[{"type":"text","data":{"type":"text","text":"after work i will go to badminton or swimming with my college it's make me relax"}}]}
+{"role":"user","time":1784698492000,"content":[{"type":"text","data":{"type":"text","text":"mhmm nice last one have you started any new hobbies recently"}}]}
+{"role":"assistant","time":1784698498000,"content":[{"type":"text","data":{"type":"text","text":"can you ask again"}}]}
+{"role":"user","time":1784698500000,"content":[{"type":"text","data":{"type":"text","text":"sure have you started any new hobbies recently"}}]}
+{"role":"assistant","time":1784698510000,"content":[{"type":"text","data":{"type":"text","text":"i don't understand yet"}}]}
+{"role":"user","time":1784698512000,"content":[{"type":"text","data":{"type":"text","text":"have you started any new hobbies recently"}}]}
+{"role":"assistant","time":1784698516000,"content":[{"type":"text","data":{"type":"text","text":"have i"}}]}
+{"role":"user","time":1784698517000,"content":[{"type":"text","data":{"type":"text","text":"started started started"}}]}
+{"role":"assistant","time":1784698523000,"content":[{"type":"text","data":{"type":"text","text":"have i started my new hobbies"}}]}
+{"role":"user","time":1784698525000,"content":[{"type":"text","data":{"type":"text","text":"any new hobbies"}}]}
+{"role":"assistant","time":1784698526000,"content":[{"type":"text","data":{"type":"text","text":"any new hobbies"}}]}
+{"role":"user","time":1784698529000,"content":[{"type":"text","data":{"type":"text","text":"yes or no"}}]}
+{"role":"assistant","time":1784698532000,"content":[{"type":"text","data":{"type":"text","text":"yes"}}]}
+{"role":"user","time":1784698533000,"content":[{"type":"text","data":{"type":"text","text":"okay what"}}]}
+{"role":"assistant","time":1784698535000,"content":[{"type":"text","data":{"type":"text","text":"i my new hobby is the light violin"}}]}
+{"role":"user","time":1784698540000,"content":[{"type":"text","data":{"type":"text","text":"oh okay"}}]}
+{"role":"assistant","time":1784698541000,"content":[{"type":"text","data":{"type":"text","text":"when i come to the centers the center i see the girl who wear a beautiful beautiful dress and then she's like the villain is very cold and i want to be her in the future"}}]}
+{"role":"user","time":1784698560000,"content":[{"type":"text","data":{"type":"text","text":"yeah and"}}]}
+{"role":"assistant","time":1784698561000,"content":[{"type":"text","data":{"type":"text","text":"i i decide when i have done all my and all my university and go and study it's in the past"}}]}
+{"role":"user","time":1784698572000,"content":[{"type":"text","data":{"type":"text","text":"oh so you haven't started it didn't say have have you started or what would you like to try in the future it says have you started any hobbies recently"}}]}
+{"role":"assistant","time":1784698586000,"content":[{"type":"text","data":{"type":"text","text":"what"}}]}
+{"role":"user","time":1784698587000,"content":[{"type":"text","data":{"type":"text","text":"have you started"}}]}
+{"role":"assistant","time":1784698588000,"content":[{"type":"text","data":{"type":"text","text":"have i've started"}}]}
+{"role":"user","time":1784698591000,"content":[{"type":"text","data":{"type":"text","text":"uh-huh"}}]}
+{"role":"assistant","time":1784698592000,"content":[{"type":"text","data":{"type":"text","text":"so i need to talk the time frame"}}]}
+{"role":"user","time":1784698596000,"content":[{"type":"text","data":{"type":"text","text":"right now"}}]}
+{"role":"assistant","time":1784698597000,"content":[{"type":"text","data":{"type":"text","text":"right now"}}]}
+{"role":"user","time":1784698598000,"content":[{"type":"text","data":{"type":"text","text":"mhmm have you started playing the violin yet no no okay so how do you answer that question how do you answer this question honestly no"}}]}
+{"role":"assistant","time":1784698613000,"content":[{"type":"text","data":{"type":"text","text":"no"}}]}
+{"role":"user","time":1784698614000,"content":[{"type":"text","data":{"type":"text","text":"i have not however however"}}]}
+{"role":"assistant","time":1784698619000,"content":[{"type":"text","data":{"type":"text","text":"however in my futures"}}]}
+{"role":"user","time":1784698623000,"content":[{"type":"text","data":{"type":"text","text":"i think i would like to play the violin mhmm because i saw a beautiful girl wearing a nice dress mhmm and i said oh it's very cool very cool i would like to do that but to be honest"}}]}
+{"role":"assistant","time":1784698638000,"content":[{"type":"text","data":{"type":"text","text":"but to be honest"}}]}
+{"role":"user","time":1784698640000,"content":[{"type":"text","data":{"type":"text","text":"i haven't begun or started any new hobbies yeah so just answer directly no i have not but i would love to play the violin in the future alright let's just for the last ten minutes we'll just keep doing i i think this week we'll just keep practicing the personal questions i think this week"}}]}
+{"role":"assistant","time":1784698667000,"content":[{"type":"text","data":{"type":"text","text":"this week"}}]}
+{"role":"user","time":1784698668000,"content":[{"type":"text","data":{"type":"text","text":"we keep practicing the personal questions"}}]}
+{"role":"assistant","time":1784698671000,"content":[{"type":"text","data":{"type":"text","text":"personal one"}}]}
+{"role":"user","time":1784698672000,"content":[{"type":"text","data":{"type":"text","text":"part one"}}]}
+{"role":"assistant","time":1784698673000,"content":[{"type":"text","data":{"type":"text","text":"yes"}}]}
+{"role":"user","time":1784698673000,"content":[{"type":"text","data":{"type":"text","text":"because no notes for you and you have to think from your"}}]}
+{"role":"assistant","time":1784698679000,"content":[{"type":"text","data":{"type":"text","text":"yes"}}]}
+{"role":"user","time":1784698680000,"content":[{"type":"text","data":{"type":"text","text":"yep this might be your most biggest challenge because no notes and you have to speak yeah"}}]}
+{"role":"assistant","time":1784698687000,"content":[{"type":"text","data":{"type":"text","text":"i would try"}}]}
+{"role":"user","time":1784698689000,"content":[{"type":"text","data":{"type":"text","text":"who do you spend the most time with on weekends"}}]}
+{"role":"assistant","time":1784698695000,"content":[{"type":"text","data":{"type":"text","text":"who"}}]}
+{"role":"user","time":1784698695000,"content":[{"type":"text","data":{"type":"text","text":"yeah who do you spend the most time with on weekends because my my friend is coming to her village mhmm and my roommate is two so in my cricket i just belong in the room it's very very boring"}}]}
+{"role":"assistant","time":1784698726000,"content":[{"type":"text","data":{"type":"text","text":"uh-huh nice nice good answer see honest yeah sometimes it's lonely because all my friends are my hometown or they leave on the weekends they leave me all alone in my my room then the judge will give her high score she low in yeah you you say something honest yes then the judge can feel that right but if you try to be very smart and speak quickly try to sound very smart on the personal questions it's not like connection but if you can say oh it's quite lonely actually on the weekends you know maybe they can feel that too you know because maybe they're in college as well and they're away from their hometown yeah so if you're honest maybe the judge can be like oh yeah i feel like that sometimes too yeah you know connection so an answering honestly and with emotions very boring that was very good yeah cause they can connect with that right i think a lot of people can connect with feeling lonely sometimes yeah how does your family usually celebrate birthdays or special occasions"}}]}
+{"role":"user","time":1784698808000,"content":[{"type":"text","data":{"type":"text","text":"can you ask again"}}]}
+{"role":"assistant","time":1784698809000,"content":[{"type":"text","data":{"type":"text","text":"sure how does your family usually celebrate birthdays or special occasions"}}]}
+{"role":"user","time":1784698817000,"content":[{"type":"text","data":{"type":"text","text":"special celebrate celebrate birthday"}}]}
+{"role":"assistant","time":1784698821000,"content":[{"type":"text","data":{"type":"text","text":"yeah or special occasions how does your family usually celebrate birthdays or special occasions oh please don't focus on the words you don't know yeah yeah so if it's talking about birthdays you don't celebrate yeah you know birthdays yeah you know special but you don't know one word and you go oh yeah how does your family celebrate special like birthdays or special yeah so if you if i just didn't say the word occasions you'd understand it but just because i had one word you don't understand you go occasions occasions occasions right and then you get stuck in your head right but you know how does your family celebrates birthdays or special"}}]}
+{"role":"user","time":1784698885000,"content":[{"type":"text","data":{"type":"text","text":"in my hallway in in my birthday or as a sample in my birthday yeah"}}]}
+{"role":"assistant","time":1784698891000,"content":[{"type":"text","data":{"type":"text","text":"sure talk about your birthday talk about if you just talk about your birthday"}}]}
+{"role":"user","time":1784698895000,"content":[{"type":"text","data":{"type":"text","text":"yes"}}]}
+{"role":"assistant","time":1784698895000,"content":[{"type":"text","data":{"type":"text","text":"that's better than freezing and and get and being like occasions oh no oh no"}}]}
+{"role":"user","time":1784698904000,"content":[{"type":"text","data":{"type":"text","text":"for example in my birthday my parents they my mother she cook by herself and then my brother he buy a cake and then we eat together"}}]}
+{"role":"assistant","time":1784698923000,"content":[{"type":"text","data":{"type":"text","text":"mhmm mhmm perfect good but you forgot one thing feeling yeah yeah you got a new feeling my mom my mom cooks these delicious food my mom she's the best i miss i miss her cooking yeah she cooks such yummy food yeah and then they get me a birthday cake and make me feel very lucky see feeling feeling yes you wanna talk about your feelings just like when you said boring before to be honest i don't spend much time because all my friends are in the hometown and my roommate goes back to their hometown on the weekends so i'm just in my room and kind of bored and lonely right i feel bored and lonely on the weekends right just feeling yes yeah and my birthdays so facts facts tell facts tell and stories sell yeah facts facts facts facts facts like like my mom my mom cooks for me and my family gets me a birthday cake right"}}]}
+{"role":"user","time":1784699006000,"content":[{"type":"text","data":{"type":"text","text":"not have a fact so i can sound when you story stories or emotion that's what sells emotions so you take the facts my mom my mom cooks food and my mom the best cook in the world yeah i i love my mom's cooking and she'll make me my favorite food right and my family gets me a nice birthday cake and makes me feel very special perfect right you see the difference between just saying my mom cooks for me and they get me a birthday cake on my birthday two my mom cooks for me and all her food is so yummy i love it very much very much so much pause and they get me a birthday cake and make me feel very special yeah feeling emotion yeah yes so we'll practice that this week and then next week we can add in parts two and three yes but just a quick advice and when you have like a minute or two minutes you just wanna write bullet points yeah yeah you only want to write like three to five words per bullet point you don't want to write when you know a sentence because then you're going to be stuck staring at your paper you wanna just have your reminder speak look at look eye contact yes yeah you don't wanna be you don't wanna hide behind your notes because then you don't have the connection so i'll send you i'll send you that tonight and then homework for tomorrow yes then we'll practice on friday mhmm and then give you a homework for saturday sunday monday tuesday yes yeah or only like twenty minutes a day or how however long you wanna practice but certainly i think you're very busy okay so i take saturday break yes i'm pretty sure okay"}}]}

@@ -21,6 +21,9 @@
 | `Incarnate3- I-LOG Procedure-STATS.json` | JSON | dynamic | N/A | Stat metadata |
 | `Incarnate4-I-LOG-RISE-COLORIZED.md` | Markdown | dynamic | N/A | Empty (not JSONL) |
 | `Incarnate4-I-LOG-RISE-STATS.json` | JSON | dynamic | N/A | Zero-count stats |
+| `RTL-mai-tram-ielts-2026-07-22.txt` | JSONL | 55,047 | RTL V1 | 🆕 RTL — Raw Transcript Log |
+| `RTL-mai-tram-ielts-2026-07-22-COLORIZED.md` | Markdown | dynamic | N/A | RTL colorized output |
+| `RTL-mai-tram-ielts-2026-07-22-STATS.json` | JSON | dynamic | N/A | RTL metadata |
 
 ## Schema Versions
 
