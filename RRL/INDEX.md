@@ -21,9 +21,9 @@
 | `Incarnate3- I-LOG Procedure-STATS.json` | JSON | dynamic | N/A | Stat metadata |
 | `Incarnate4-I-LOG-RISE-COLORIZED.md` | Markdown | dynamic | N/A | Empty (not JSONL) |
 | `Incarnate4-I-LOG-RISE-STATS.json` | JSON | dynamic | N/A | Zero-count stats |
-| `RTL-mai-tram-ielts-2026-07-22.txt` | JSONL | 55,047 | RTL V1 | 🆕 RTL — Raw Transcript Log |
-| `RTL-mai-tram-ielts-2026-07-22-COLORIZED.md` | Markdown | dynamic | N/A | RTL colorized output |
-| `RTL-mai-tram-ielts-2026-07-22-STATS.json` | JSON | dynamic | N/A | RTL metadata |
+| `RTL-mai-tram-2026-07-22.txt` | JSONL | 55,047 | RTL V1 | 🆕 RTL — Raw Transcript Log |
+| `RTL-mai-tram-2026-07-22-COLORIZED.md` | Markdown | dynamic | N/A | RTL colorized output |
+| `RTL-mai-tram-2026-07-22-STATS.json` | JSON | dynamic | N/A | RTL metadata |
 
 ## Schema Versions
 
@@ -52,3 +52,15 @@ The following files are byte-identical (4,149,140 bytes, same timestamp):
 - `RRL-186.txt`
 
 **Recommendation:** Keep only canonical `Incarnate-N-*.txt` naming. Replace duplicates with symlinks or consolidate.
+
+---
+
+## RTL (Raw Transcript Log)
+
+Audio transcriptions formatted as JSONL with speaker diarization. Unified transcriber at `.kilo/skills/rtl-transcriber/`.
+
+| File | Type | Student | Messages | Duration |
+|------|------|---------|----------|----------|
+| `Mai-Tram/RTL-mai-tram-2026-07-22.txt` | JSONL | Mai Tram | 314 | 45 min |
+| `Mai-Tram/RTL-mai-tram-2026-07-22-COLORIZED.md` | Markdown | — | — | — |
+| `Mai-Tram/RTL-mai-tram-2026-07-22-STATS.json` | JSON | — | — | — |
