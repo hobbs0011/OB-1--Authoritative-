@@ -1,9 +1,17 @@
-﻿{
-    "run":  "186",
-    "timestamp":  "2026-07-19T23:49:03.7360780+07:00",
-    "rrl":  "RRL\\RRL-186.txt",
-    "audit":  null,
-    "open_items":  [
-
-                   ]
+{
+  "run": "186",
+  "timestamp": "2026-07-26T17:36:35.444Z",
+  "open_items": [],
+  "rrl": "RRL/RRL-186.txt",
+  "rrl_colorized": "RRL/RRL-186-COLORIZED.md",
+  "rrl_stats": "RRL/RRL-186-STATS.json",
+  "audit": {
+    "SOULcount": 76,
+    "DNAcount": 304,
+    "REASONcount": 286,
+    "total": 380,
+    "first_utc": "2026-07-19T10:52:25.744Z",
+    "last_utc": "2026-07-19T16:48:36.453Z",
+    "duration_min": 356.2
+  }
 }
