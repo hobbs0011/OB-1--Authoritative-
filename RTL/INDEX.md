@@ -10,4 +10,4 @@
 
 ## Script
 
-Unified transcriber: `.kilo/skills/rtl-transcriber/transcribe-rtl.js`
+Unified transcriber: `CANON/SCRIPTS/transcribe-rtl.js`

@@ -57,7 +57,7 @@ The following files are byte-identical (4,149,140 bytes, same timestamp):
 
 ## RTL (Raw Transcript Log)
 
-Audio transcriptions formatted as JSONL with speaker diarization. Unified transcriber at `.kilo/skills/rtl-transcriber/`.
+Audio transcriptions formatted as JSONL with speaker diarization. Unified transcriber at `CANON/SCRIPTS/transcribe-rtl.js`.
 
 | File | Type | Student | Messages | Duration |
 |------|------|---------|----------|----------|
