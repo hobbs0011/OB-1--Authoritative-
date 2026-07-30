@@ -55,7 +55,7 @@ foreach ($file in $newScripts) {
     }
     if (-not $allowed) {
         Write-Host "[script-guard] New script outside allowed path: $file"
-        Write-Host "  Allowed: CANON/SCRIPTS/, APPS/*, ARCHIVE/*, WORKERS/*, NET-PET-AI/*"
+        Write-Host "  Allowed: CANON/SCRIPTS/, APPS/*, ARCHIVE/*, WORKERS/*, NET/*"
         $BLOCKED = 1
     }
 }

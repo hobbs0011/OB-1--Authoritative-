@@ -1,0 +1,49 @@
+name: Script Path Guard
+
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect rogue scripts
+        run: |
+          #!/usr/bin/env bash
+          set -euo pipefail
+          
+          # Allowed roots for executable scripts
+          ALLOWED="CANON/SCRIPTS|CANON/ARCHIVE|APPS|ARCHIVE|WORKERS|NET"
+          
+          # Find all executable script files currently tracked
+          ROGUES=$(git ls-files | grep -E '\.(ps1|sh|py|bat|cmd|mjs|cjs|js|ts)$' | grep -vE "^(${ALLOWED})" || true)
+          
+          if [ -n "$ROGUES" ]; then
+            echo "::error::Script path violation — executable scripts found outside CANON/SCRIPTS/ and app dirs:"
+            echo "$ROGUES" | sed 's/^/  /'
+            echo ""
+          echo "LFG rule: Only location for system scripts is CANON/SCRIPTS/"
+          echo "App code in APPS/, ARCHIVE/, WORKERS/ is grandfathered."
+            exit 1
+          fi
+          
+          echo "✅ Script path guard: clean"
+
+      - name: Check .kilo for executables
+        run: |
+          ROGUES=$(git ls-files | grep -E '^\.kilo/.*\.(js|mjs|cjs|ts)$' || true)
+          if [ -n "$ROGUES" ]; then
+            echo "::error::.kilo/ must never contain executable scripts:"
+            echo "$ROGUES" | sed 's/^/  /'
+            exit 1
+          fi
+          echo "✅ .kilo script guard: clean"
