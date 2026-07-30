@@ -165,7 +165,7 @@ for (let i = 0; i < parts.length; i++) {
 console.log(`  Total: ${allWords.length} words`);
 
 // ─── Step 3: Build ITL JSONL ────────────────────────────────────────────────
-console.log('Step 3/5: Building RTL JSONL...');
+console.log('Step 3/5: Building ITL JSONL...');
 
 const baseTime = recordDate.getTime();
 let messages = [];
@@ -237,7 +237,7 @@ for (const m of messages) {
 
 const stats = {
   source_file: `${baseName}.txt`,
-  format: 'RTL V1',
+  format: 'ITL V1',
   audio_source: audioName,
   audio_duration_sec: Math.round(audioDuration),
   student: studentName,
@@ -256,8 +256,8 @@ const stats = {
 fs.writeFileSync(`${outDir}/${baseName}-STATS.json`, JSON.stringify(stats, null, 2));
 
 // COLORIZED
-let c = `# RTL Colorized — ${studentName}\n\n`;
-c += `> **RTL (Raw Transcript Log)** — ${audioName}\n`;
+  let c = `# ITL Colorized — ${studentName}\n\n`;
+  c += `> **ITL (formerly RTL — Raw Transcript Log)** — ${audioName}\n`;
 c += `> 🗣️ ${studentName} | 🎙️ Teacher\n\n---\n\n`;
 c += `| Field | Value |\n|---|---|\n`;
 c += `| Source | ${baseName}.txt |\n`;
@@ -284,7 +284,7 @@ fs.writeFileSync(`${outDir}/${baseName}-COLORIZED.md`, c);
 console.log(`  Companion files written`);
 
 console.log(`\n══════════════════════════════════════`);
-console.log(`  ✅ RTL Complete`);
+console.log(`  ✅ ITL Complete`);
 console.log(`  Files in: ${outDir}/`);
 console.log(`  Script:   CANON/SCRIPTS/transcribe-rtl.js`);
 console.log(`  Message:  ${messages.length}`);

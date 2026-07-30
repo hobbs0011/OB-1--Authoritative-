@@ -1,0 +1,101 @@
+{
+  "source_file": "2026-07-30-huong-ITL.txt",
+  "format": "RTL V1",
+  "audio_source": "HuongJuly27.m4a",
+  "audio_duration_sec": 2997,
+  "student": "Huong",
+  "deepgram_model": "nova-2",
+  "diarization": "word-level",
+  "total_messages": 238,
+  "total_chars": 57232,
+  "total_words": 5986,
+  "duration_min": 50,
+  "first_ts": "2026-07-30T15:26:23.201Z",
+  "last_ts": "2026-07-30T16:16:16.851Z",
+  "speakers": {
+    "Huong": 4486,
+    "Teacher": 1177
+  },
+  "top_topics": [
+    {
+      "word": "you",
+      "count": 332
+    },
+    {
+      "word": "yeah",
+      "count": 209
+    },
+    {
+      "word": "like",
+      "count": 128
+    },
+    {
+      "word": "the",
+      "count": 109
+    },
+    {
+      "word": "and",
+      "count": 104
+    },
+    {
+      "word": "what",
+      "count": 88
+    },
+    {
+      "word": "they",
+      "count": 79
+    },
+    {
+      "word": "know",
+      "count": 66
+    },
+    {
+      "word": "that",
+      "count": 64
+    },
+    {
+      "word": "just",
+      "count": 57
+    },
+    {
+      "word": "not",
+      "count": 56
+    },
+    {
+      "word": "don",
+      "count": 55
+    },
+    {
+      "word": "she",
+      "count": 54
+    },
+    {
+      "word": "your",
+      "count": 44
+    },
+    {
+      "word": "say",
+      "count": 39
+    },
+    {
+      "word": "but",
+      "count": 38
+    },
+    {
+      "word": "are",
+      "count": 38
+    },
+    {
+      "word": "have",
+      "count": 36
+    },
+    {
+      "word": "can",
+      "count": 35
+    },
+    {
+      "word": "okay",
+      "count": 35
+    }
+  ]
+}
