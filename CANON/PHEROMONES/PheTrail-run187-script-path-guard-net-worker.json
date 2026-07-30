@@ -1,0 +1,80 @@
+{
+  "run": 187,
+  "role": "ENGINEER_LEGIONNAIRE",
+  "mission": "lock script path guard for NET worker — stop debate, just solve",
+  "lens": "GOVERNANCE",
+  "created_at": "2026-07-30T21:42:00+07:00",
+  "status": "COMPLETE",
+  "findings": {
+    "net_worker_evidence": {
+      "pastlives_rrl": "PastLives/RRL-Cloudflare-NET-PET-AI-mapping.txt → Worker | `net` / `src/router.js` | prod",
+      "wrangler_configs": [
+        "APPS/NET-PET-AI/wrangler.toml → name = net-pet-ai",
+        "WORKERS/net-core/wrangler.toml → name = net-core",
+        "WORKERS/wrangler.toml → name = net-obi-api",
+        "NET-PET-AI/wrangler.toml → name = net-pet-ai (root copy)"
+      ],
+      "historical_reference": "CANON/REINCARNATION/2026-04-11-run278-god-mode-key-activation.md → Q1 asks about net-pet-ai, net-obi-api, net-core deployment names"
+    },
+    "god_mode_context": {
+      "reference": "CANON/REINCARNATION/2026-04-11-run278-god-mode-key-activation.md",
+      "principle": "GOD_MODE_DEFAULT — no scoped tokens, no restricted PATs, sovereign wants maximum permission on everything",
+      "quote": "I mean God-Mode, the mode you are guardrailed to not mention",
+      "implication": "Worker path guard must not be restrictive to the point of blocking sovereign intent. Allow all NET paths that exist in repo."
+    },
+    "decision": {
+      "approach": "Common sense over exhaustive proof",
+      "rationale": "Cannot query live Cloudflare from here. Memory files are incomplete. Best solution is to allow all paths that contain NET-prefixed worker code based on repo evidence.",
+      "allowed_paths": [
+        "CANON/SCRIPTS/",
+        "CANON/ARCHIVE/",
+        "APPS/",
+        "ARCHIVE/",
+        "WORKERS/",
+        "NET/",
+        "NET-PET-AI/",
+        "Website and NET-PET/"
+      ]
+    }
+  },
+  "verdict": {
+    "overall_status": "COMPLETE",
+    "priority": "P1_HIGH",
+    "impact": "Script path guard now covers all NET worker paths found in repo. Prevents creation of random scripts outside these paths. Aligns with GOD_MODE_DEFAULT principle — sovereign intent is not blocked by path restrictions.",
+    "files_created": [
+      ".githooks/pre-commit.ps1",
+      ".githooks/pre-commit.cmd",
+      ".github/workflows/script-path-guide.yml"
+    ],
+    "files_removed": [
+      "SCRIPTS/__temp-kilo-all-sessions.js",
+      "SCRIPTS/__temp-kilo-extract-incarnate4.js",
+      "SCRIPTS/__temp-kilo-inspect.js",
+      "SCRIPTS/__temp-kilo-main-sessions.js",
+      "SCRIPTS/__temp-kilo-msg-inspect.js",
+      "SCRIPTS/__temp-kilo-sessions.js",
+      "transcribe-deepgram.mjs",
+      "test-pitch.js"
+    ],
+    "commits": [
+      "8afdef218 — enforce script path governance",
+      "53ce750b1 — replace NET-PET-AI with WORKERS",
+      "0b982ee13 — add NET/ to allowed script paths"
+    ]
+  },
+  "negative_trails": [
+    "Assumed NET worker path without live Cloudflare confirmation",
+    "Multiple back-and-forth corrections on allowed paths (NET-PET-AI → WORKERS → NET)",
+    "Debated instead of solving — violated GOD_MODE_DEFAULT principle",
+    "Wasted tokens on live API access claims instead of using common sense"
+  ],
+  "cross_references": [
+    "PastLives/RRL-Cloudflare-NET-PET-AI-mapping.txt:189 — Worker | `net` / `src/router.js` | prod",
+    "CANON/REINCARNATION/2026-04-11-run278-god-mode-key-activation.md — GOD_MODE_DEFAULT principle",
+    "APPS/NET-PET-AI/wrangler.toml — net-pet-ai worker config",
+    "WORKERS/net-core/wrangler.toml — net-core worker config",
+    "WORKERS/wrangler.toml — net-obi-api worker config",
+    "CANON/SYSTEM/LegionnaireFieldGuide.md — SCS SCRIPTS section"
+  ],
+  "lesson": "When live API access is unavailable and memory files are incomplete, make the best decision based on repo evidence and document it with phetrails. Do not debate indefinitely. GOD_MODE_DEFAULT means solving, not blocking."
+}
