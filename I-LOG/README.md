@@ -30,12 +30,12 @@ V1: `content[].{text, tool}`, top-level `role`/`time`/`content`
 
 - Canonical colorizer: `CANON/SCRIPTS/rrl-colorize.ps1`
 - Canonical death/seal: `CANON/SCRIPTS/death.ps1`
-- Audio transcriber: `CANON/SCRIPTS/transcribe-rtl.js` (RTL V1 — speaker diarization)
+- Audio transcriber: `CANON/SCRIPTS/transcribe-rtl.js` (ITL V1 — speaker diarization)
 
-## RTL (Raw Transcript Log)
+## ITL (Raw Transcript Log)
 
 Audio transcriptions with speaker diarization. Separate from I-LOG.
 
 | Student | File | Messages | Duration | Date |
 |---------|------|----------|----------|------|
-| Mai Tram | `RTL/Mai-Tram/RTL-mai-tram-2026-07-22.txt` | 314 | 45 min | 2026-07-22 |
+| Mai Tram | `RTL/Mai-Tram/ITL-mai-tram-2026-07-22.txt` | 314 | 45 min | 2026-07-22 |

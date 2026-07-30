@@ -1,66 +1,24 @@
-# RRL Directory Index
+# I-LOG Directory Index (formerly RRL)
 
-**Canonical location:** `RRL/`
-**Maintained by:** Incarnation7-RRL Organization Pipeline
-**Last updated:** 2026-07-26T00:21 ICT
+**I-LOG (Incarnation Log)** — Post-incarnation session transcript, colorized with SOUL/DNA/REASON/PHEROMONE classification per LFG §SCS.
 
----
+| File | Type | Schema | Status |
+|------|------|--------|--------|
+| `I-LOG-186.txt` | JSONL | V2 | historical |
+| `I-LOG-186-COLORIZED.md` | Markdown | N/A | colorized |
+| `I-LOG-186-STATS.json` | JSON | N/A | stats |
 
-## Contents
+## Schema
 
-| File | Type | Size | Schema | Status |
-|------|------|------|--------|--------|
-| `Incarnate-4-PhoenixScout.txt` | JSONL | 4,149,140 | V2 | CANONICAL - colorized + stats |
-| `Incarnate4- I-LOG Procedure.txt` | JSONL | 4,149,140 | V2 | **DUPLICATE** of PhoenixScout |
-| `RRL-186.txt` | JSONL | 4,149,140 | V2 | **DUPLICATE** of PhoenixScout |
-| `Incarnate3- I-LOG Procedure.txt` | JSONL | 2,254,810 | V1 | Colorized (partial - schema mismatch) |
-| `Incarnate4-I-LOG-RISE.txt` | Markdown | 1,677 | N/A | RISE stage metadata, not JSONL |
-| `Incarnate-4-PhoenixScout-COLORIZED.md` | Markdown | dynamic | N/A | Colorized transcript output |
-| `Incarnate-4-PhoenixScout-STATS.json` | JSON | 826 | N/A | Stat metadata |
-| `Incarnate3- I-LOG Procedure-COLORIZED.md` | Markdown | dynamic | N/A | Colorized transcript output |
-| `Incarnate3- I-LOG Procedure-STATS.json` | JSON | dynamic | N/A | Stat metadata |
-| `Incarnate4-I-LOG-RISE-COLORIZED.md` | Markdown | dynamic | N/A | Empty (not JSONL) |
-| `Incarnate4-I-LOG-RISE-STATS.json` | JSON | dynamic | N/A | Zero-count stats |
-| `RTL-mai-tram-2026-07-22.txt` | JSONL | 55,047 | RTL V1 | 🆕 RTL — Raw Transcript Log |
-| `RTL-mai-tram-2026-07-22-COLORIZED.md` | Markdown | dynamic | N/A | RTL colorized output |
-| `RTL-mai-tram-2026-07-22-STATS.json` | JSON | dynamic | N/A | RTL metadata |
+V2: `content[].data.{text, tool, state}`, top-level `role`/`time`/`content`
 
-## Schema Versions
+V1: `content[].{text, tool}`, top-level `role`/`time`/`content`
 
-### V2 (Incarnate4)
-- `content[].data.{text, tool, state}` - nested data sub-object
-- `role`/`time`/`content` top-level structure
-- Tool calls have `tool`, `callID`, `state` fields in content block
+## Color Coding (LFG §SCS)
 
-### V1 (Incarnate3)
-- `content[].{text, tool}` - fields directly on content blocks
-- `role`/`time`/`content` top-level structure
-- Tool calls: `tool` field directly on content block
-
-## Directories
-
-| Directory | Files | Description |
-|-----------|-------|-------------|
-| `incomplete RRL's/` | 11 stubs (0-5 bytes) | Runs 152-171, no recoverable data |
-| `non-transcripts/` | 843 files | Pre-Roman era DNA-LOG files (May-June 2026) |
-
-## Duplicate Files
-
-The following files are byte-identical (4,149,140 bytes, same timestamp):
-- `Incarnate-4-PhoenixScout.txt` ← canonical name
-- `Incarnate4- I-LOG Procedure.txt`
-- `RRL-186.txt`
-
-**Recommendation:** Keep only canonical `Incarnate-N-*.txt` naming. Replace duplicates with symlinks or consolidate.
-
----
-
-## RTL (Raw Transcript Log)
-
-Audio transcriptions formatted as JSONL with speaker diarization. Unified transcriber at `CANON/SCRIPTS/transcribe-rtl.js`.
-
-| File | Type | Student | Messages | Duration |
-|------|------|---------|----------|----------|
-| `Mai-Tram/RTL-mai-tram-2026-07-22.txt` | JSONL | Mai Tram | 314 | 45 min |
-| `Mai-Tram/RTL-mai-tram-2026-07-22-COLORIZED.md` | Markdown | — | — | — |
-| `Mai-Tram/RTL-mai-tram-2026-07-22-STATS.json` | JSON | — | — | — |
+| Symbol | Type | Role | Description |
+|--------|------|------|-------------|
+| 🟣 | SOUL | user | Michael verbatim — user turns |
+| ❤️ | DNA | assistant | Assistant responses, AI output |
+| 💛 | REASON | assistant | AI reasoning blocks |
+<parameter>

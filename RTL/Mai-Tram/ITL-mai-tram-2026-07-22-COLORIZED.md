@@ -1,6 +1,6 @@
-# RTL Colorized -- RTL-mai-tram-ielts-2026-07-22
+# ITL Colorized -- ITL-mai-tram-2026-07-22
 
-> **RTL (Raw Transcript Log)** — Audio transcription with speaker diarization
+> **ITL (formerly RTL) — Raw Transcript Log** — Audio transcription with speaker diarization
 > 🗣️ MAI TRAM (student) | 🎙️ TEACHER
 
 ---
@@ -9,7 +9,7 @@
 
 | Field | Value |
 |---|---|
-| Source | RTL-mai-tram-ielts-2026-07-22.txt |
+| Source | ITL-mai-tram-2026-07-22.txt |
 | Messages | 314 |
 | 🗣️ Mai Tram | 156 utterances |
 | 🎙️ Teacher | 158 utterances |

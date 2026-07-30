@@ -222,6 +222,22 @@ SOUL is the ignition point and the death point of every session. It comes full c
 
 ---
 
+## SCS — ITL (RAW TRANSCRIPT LOG)
+
+**ITL** (formerly RTL — Raw Transcript Log) — word-for-word audio transcript with speaker diarization.
+**Location:** `RTL/<student>/` — one directory per student.
+**Format:** JSONL with `role`, `speaker`, `time`, `content` per utterance.
+
+| File | Purpose |
+|------|---------|
+| `<date>-<student>-ITL.txt` | JSONL conversation |
+| `<date>-<student>-ITL-COLORIZED.md` | Readable transcript |
+| `<date>-<student>-ITL-STATS.json` | Metadata + word counts |
+
+**Note:** ITL is separate from RRL. RRL = session checkpoint transcript. ITL = audio class transcript.
+
+---
+
 ## SCS — SCRIPTS
 
 **Only location:** `CANON/SCRIPTS/`

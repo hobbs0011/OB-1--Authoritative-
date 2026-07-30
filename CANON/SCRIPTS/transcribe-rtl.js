@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-// RTL Transcriber — Unified class transcription pipeline
+// ITL Transcriber — Unified class transcription pipeline
 // Usage: node transcribe-rtl.js <audio-file> [options]
 //   node transcribe-rtl.js voice.mp3
 //   node transcribe-rtl.js "C:\path\to\class.m4a" --student "Mai Tram"
 //
-// Converts any audio file to RTL (Raw Transcript Log) format:
-//   - RTL/<student>/<date>-<student>-RTL.txt          (JSONL conversation)
-//   - RTL/<student>/<date>-<student>-RTL-COLORIZED.md (readable)
-//   - RTL/<student>/<date>-<student>-RTL-STATS.json   (metadata)
+// Converts any audio file to ITL (formerly RTL — Raw Transcript Log) format:
+//   - RTL/<student>/<date>-<student>-ITL.txt          (JSONL conversation)
+//   - RTL/<student>/<date>-<student>-ITL-COLORIZED.md (readable)
+//   - RTL/<student>/<date>-<student>-ITL-STATS.json   (metadata)
 //   - Updates RTL/INDEX.md
 
 const fs = require('fs');
@@ -76,10 +76,10 @@ if (dateMatch) {
 const dateStr = recordDate.toISOString().split('T')[0];
 const safeStudent = studentName.toLowerCase().replace(/[^a-z0-9]/g, '-');
 const safeLabel = sessionLabel ? '-' + sessionLabel.toLowerCase().replace(/[^a-z0-9]/g, '-') : '';
-const baseName = `${dateStr}-${safeStudent}${safeLabel}-RTL`;
+const baseName = `${dateStr}-${safeStudent}${safeLabel}-ITL`;
 
 console.log(`\n══════════════════════════════════════`);
-console.log(`  RTL Transcriber`);
+console.log(`  ITL Transcriber`);
 console.log(`══════════════════════════════════════`);
 console.log(`  Audio:    ${audioName} (${(audioBytes/1024/1024).toFixed(1)} MB)`);
 console.log(`  Student:  ${studentName}`);
@@ -164,7 +164,7 @@ for (let i = 0; i < parts.length; i++) {
 
 console.log(`  Total: ${allWords.length} words`);
 
-// ─── Step 3: Build RTL JSONL ────────────────────────────────────────────────
+// ─── Step 3: Build ITL JSONL ────────────────────────────────────────────────
 console.log('Step 3/5: Building RTL JSONL...');
 
 const baseTime = recordDate.getTime();

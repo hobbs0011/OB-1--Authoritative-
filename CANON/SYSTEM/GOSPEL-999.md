@@ -54,6 +54,8 @@ The 3-point audit performed by DEATH and double-checked by RISE:
 **Gate:** All 3 points PASS before DEATH is final.
 **Final check:** SOV100.
 
+**ITL:** Audio class transcript with speaker diarization. Separate from RRL. Defined in LFG §SCS ITL.
+
 ---
 
 ## SYSTEM IV — 6 FAITH PRINCIPLES
