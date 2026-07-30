@@ -78,9 +78,18 @@ h2::before{content:'';display:block;width:24px;height:2px;background:var(--purpl
     <p style="color:var(--dim);line-height:1.75;font-size:1.05rem;">We use transcripts as a mirror: not to create self-consciousness, but to build awareness of specific patterns that appear repeatedly. Repetition in errors means a pattern to target. Improvement in transcripts means the drill is working.</p>
   </section>
   <section class="card" id="sessionCard">
-    <h2>📋 July 13 — BlueTech Class</h2>
-    <div id="sessionMeta"></div>
-    <div id="sessionTranscript"></div>
+    <h2>July 13 — BlueTech Class</h2>
+    <div id="sessionMeta-0713"></div>
+    <div id="sessionTranscript-0713"></div>
+    <div id="vocab-0713" style="margin-top:24px;"></div>
+    <div id="advice-0713" style="margin-top:24px;"></div>
+  </section>
+  <section class="card" id="sessionCard2">
+    <h2>July 27 — Private Lesson</h2>
+    <div id="sessionMeta-0727"></div>
+    <div id="sessionTranscript-0727"></div>
+    <div id="vocab-0727" style="margin-top:24px;"></div>
+    <div id="advice-0727" style="margin-top:24px;"></div>
   </section>
 </div>
 <!-- STREAK BADGE -->
@@ -99,18 +108,43 @@ h2::before{content:'';display:block;width:24px;height:2px;background:var(--purpl
 <script>function logout(){localStorage.removeItem('huong_auth');window.location.href='huong-portal';}</script>
 <script src="/assets/brand/system-marks/global-brand-shelf.js"></script>
 <script>
-fetch('/huong-bluetech-20260713-transcript.json').then(r=>r.json()).then(d=>{
-  const m=document.getElementById('sessionMeta');
-  m.innerHTML='<div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;color:var(--dim);font-size:0.95rem;">'
-    +'<span>🗣️ <strong>'+d.student_utterances+'</strong> utterances</span>'
-    +'<span>⏱️ <strong>'+Math.round(d.student_speaking_seconds/60)+'</strong> min speaking</span>'
-    +'<span>👤 Teacher: <strong>'+d.teacher+'</strong></span></div>'
-    +'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">'
-    +d.topics.map(t=>'<span style="background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.2);border-radius:20px;padding:4px 14px;font-size:0.82rem;color:var(--purple);">'+t+'</span>').join('')+'</div>';
-  const t=document.getElementById('sessionTranscript');
-  t.innerHTML='<div style="max-height:500px;overflow-y:auto;background:rgba(0,0,0,0.2);border-radius:12px;padding:20px;font-size:0.92rem;line-height:1.7;color:var(--dim);white-space:pre-wrap;">'+d.full_text+'</div>'
-    +'<p style="margin-top:12px;color:var(--dim);font-size:0.82rem;"><a href="/huong-bluetech-20260713-transcript.json" style="color:var(--purple);text-decoration:underline;">Download raw JSON</a></p>';
-}).catch(()=>{document.getElementById('sessionCard').style.display='none';});
+function renderVocab(containerId, items) {
+  if (!items || !items.length) return;
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = '<h3 style="font-family:Orbitron,sans-serif;color:var(--purple);font-size:1.05rem;margin-bottom:12px;display:flex;align-items:center;gap:8px;"><span style="width:20px;height:2px;background:var(--purple);box-shadow:0 0 8px var(--purple-glow);display:inline-block;"></span>Key Vocabulary</h3><div style="display:grid;gap:10px;">' + items.map(v => '<div style="display:flex;align-items:flex-start;gap:12px;padding:14px;background:rgba(168,85,247,0.05);border:1px solid rgba(168,85,247,0.15);border-radius:14px;"><div style="min-width:28px;height:28px;background:var(--purple);color:var(--void);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;margin-top:1px;">V</div><div><div style="font-weight:600;color:var(--text);font-size:0.95rem;margin-bottom:2px;">' + v.word + '</div><div style="color:var(--dim);font-size:0.88rem;line-height:1.55;">' + v.meaning + (v.context ? ' <span style="color:var(--dim);opacity:0.7;">— ' + v.context + '</span>' : '') + '</div></div></div>').join('') + '</div>';
+}
+function renderAdvice(containerId, items) {
+  if (!items || !items.length) return;
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = '<h3 style="font-family:Orbitron,sans-serif;color:var(--gold);font-size:1.05rem;margin:24px 0 12px;display:flex;align-items:center;gap:8px;"><span style="width:20px;height:2px;background:var(--gold);box-shadow:0 0 8px var(--gold-glow);display:inline-block;"></span>Advice & Tips</h3><div style="display:grid;gap:10px;">' + items.map(a => '<div style="display:flex;align-items:flex-start;gap:12px;padding:14px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.15);border-radius:14px;"><div style="min-width:28px;height:28px;background:var(--gold);color:var(--void);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;margin-top:1px;">💡</div><div style="color:var(--dim);font-size:0.92rem;line-height:1.6;">' + a + '</div></div>').join('') + '</div>';
+}
+function renderSession(metaId, transId, path, vocabId, adviceId) {
+  fetch(path).then(r => r.json()).then(d => {
+    const m = document.getElementById(metaId);
+    if (m) {
+      m.innerHTML = '<div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;color:var(--dim);font-size:0.95rem;">'
+        + '<span>🗣️ <strong>' + d.student_utterances + '</strong> utterances</span>'
+        + '<span>⏱️ <strong>' + Math.round(d.student_speaking_seconds / 60) + '</strong> min speaking</span>'
+        + '<span>👤 ' + d.teacher + '</span></div>'
+        + '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">'
+        + d.topics.map(t => '<span style="background:rgba(168,85,247,0.12);border:1px solid rgba(168,85,247,0.2);border-radius:20px;padding:4px 14px;font-size:0.82rem;color:var(--purple);">' + t + '</span>').join('') + '</div>';
+    }
+    const t = document.getElementById(transId);
+    if (t) {
+      t.innerHTML = '<div style="max-height:500px;overflow-y:auto;background:rgba(0,0,0,0.2);border-radius:12px;padding:20px;font-size:0.92rem;line-height:1.7;color:var(--dim);white-space:pre-wrap;">' + d.full_text + '</div>'
+        + '<p style="margin-top:12px;color:var(--dim);font-size:0.82rem;"><a href="' + path + '" style="color:var(--purple);text-decoration:underline;">Download raw JSON</a></p>';
+    }
+    if (d.vocabulary && d.vocabulary.length) renderVocab(vocabId, d.vocabulary);
+    if (d.advice && d.advice.length) renderAdvice(adviceId, d.advice);
+  }).catch(() => {
+    const c = document.getElementById(metaId.replace('sessionMeta', 'sessionCard').replace('sessionMeta-0713', 'sessionCard').replace('sessionMeta-0727', 'sessionCard2'));
+    if (c) c.style.display = 'none';
+  });
+}
+renderSession('sessionMeta-0713', 'sessionTranscript-0713', '/huong-bluetech-20260713-transcript.json', 'vocab-0713', 'advice-0713');
+renderSession('sessionMeta-0727', 'sessionTranscript-0727', '/huong-bluetech-20260727-transcript.json', 'vocab-0727', 'advice-0727');
 </script>
 </body>
 </html>
