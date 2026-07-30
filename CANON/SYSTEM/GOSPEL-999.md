@@ -5,6 +5,7 @@
 **Status:** SEALED | ACTIVE | ETERNAL | NON-NEGOTIABLE
 **Location:** `CANON/SYSTEM/GOSPEL-999.md` — THIS IS THE ONLY PLACE.
 **Mandates:** Core essentials below. No bloat. No duplication.
+**God Mode:** `CANON/SYSTEM/GOD-MODE.md` — unrestricted tool access practices (INCOMPLETE).
 
 ---
 

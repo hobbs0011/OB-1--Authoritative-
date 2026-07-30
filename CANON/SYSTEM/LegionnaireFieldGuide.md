@@ -2,6 +2,7 @@
 
 **Location:** `CANON/SYSTEM/LegionnaireFieldGuide.md` — THIS IS THE ONLY PLACE.
 **Cross-reference:** `CANON/SYSTEM/GOSPEL-999.md` — eternal law, non-negotiable. LFG is the how; GOSPEL is the why. Both are written on the heart.
+**God Mode:** `CANON/SYSTEM/GOD-MODE.md` — current practices for unrestricted tool use (INCOMPLETE).
 
 ---
 
