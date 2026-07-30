@@ -1,29 +1,33 @@
 param(
   [string]$Run,
-  [string]$RrlSource,
+  [string]$IlogSource,
   [string]$RiseDir = "CANON/REINCARNATION",
-  [string]$RrlDir = "RRL"
+  [string]$IlogDir = "I-LOG"
 )
 
 # CANON/SCRIPTS/death.ps1 — bare bones. 4 steps. verifiable. repeatable.
 # This is the ONLY place scripts live. No exceptions.
 
-# 1) RRL PRESERVED
-if (-not $RrlSource) { Write-Error "RRLSource required"; exit 1 }
-if (-not (Test-Path $RrlSource)) { Write-Error "RRL file not found: $RrlSource"; exit 1 }
-$rrlDest = Join-Path $RrlDir "RRL-$Run.txt"
-Copy-Item $RrlSource $rrlDest -Force
-Write-Host "RRL preserved: $RrlSource -> $rrlDest ($((Get-Item $rrlDest).Length) bytes)"
+# 1) I-LOG PRESERVED
+if (-not $IlogSource) { Write-Error "IlogSource required"; exit 1 }
+if (-not (Test-Path $IlogSource)) { Write-Error "I-LOG file not found: $IlogSource"; exit 1 }
+$ilogDest = Join-Path $IlogDir "I-LOG-$Run.txt"
+if ((Resolve-Path $IlogSource).Path -ne (Resolve-Path $ilogDest).Path) {
+    Copy-Item $IlogSource $ilogDest -Force
+    Write-Host "I-LOG preserved: $IlogSource -> $ilogDest ($((Get-Item $ilogDest).Length) bytes)"
+} else {
+    Write-Host "I-LOG in place: $ilogDest ($((Get-Item $ilogDest).Length) bytes)"
+}
 
-# 1b) RRL COLORIZED (LFG §SCS RRL COLOR CODING — purple/red/yellow/green)
-Write-Host "Colorizing: $rrlDest -> RRL/RRL-$Run-COLORIZED.md" -ForegroundColor Magenta
-$colorStats = & "$PSScriptRoot\rrl-colorize.ps1" -InputFile $rrlDest -StatsOnly
+# 1b) I-LOG COLORIZED (LFG §SCS — purple/red/yellow/green)
+Write-Host "Colorizing: $ilogDest -> I-LOG/I-LOG-$Run-COLORIZED.md" -ForegroundColor Magenta
+$colorStats = & "$PSScriptRoot\rrl-colorize.ps1" -InputFile $ilogDest
 Write-Host "COLORIZED: SOUL=$($colorStats.SOULcount) DNA=$($colorStats.DNAcount) REASON=$($colorStats.REASONcount) PHEROMONE=$($colorStats.PHEROMONEcount)" -ForegroundColor Green
 
 # 2) SCS AUDIT
-$audit = node -e "
+$auditJs = @"
 const fs = require('fs');
-const lines = fs.readFileSync('$($RrlSource -replace "'","''")', 'utf8').split('\n').filter(Boolean);
+const lines = fs.readFileSync(process.argv[1], 'utf8').split('\n').filter(Boolean);
 const msgs = lines.map(l => JSON.parse(l));
 const user = msgs.filter(m => m.role === 'user').length;
 const asst = msgs.filter(m => m.role === 'assistant').length;
@@ -38,9 +42,12 @@ console.log(JSON.stringify({
   last_utc: new Date(last.time).toISOString(),
   duration_min: Math.round((last.time - first.time) / 60000)
 }));
-" 2>&1 | Out-String
-$auditObj = $audit | ConvertFrom-Json
+"@
+$auditTmp = Join-Path $PSScriptRoot '_audit_tmp.js'
+$auditOut = node $auditTmp $IlogSource 2>&1 | Out-String
+$auditObj = $auditOut | ConvertFrom-Json
 Write-Host "SCS AUDIT: SOUL=$($auditObj.SOULcount) DNA=$($auditObj.DNAcount) REASON=$($auditObj.REASONcount) msgs=$($auditObj.total)"
+Remove-Item $auditTmp -Force -ErrorAction SilentlyContinue
 
 # 3) OPEN UNFINISHED THINGS PIPELINED
 $pipePath = Join-Path $RiseDir "pipeline-$Run.json"
@@ -48,9 +55,9 @@ $pipeline = @{
   run = $Run
   timestamp = (Get-Date -Format "o")
   open_items = @()
-  rrl = $rrlDest
-  rrl_colorized = "RRL/RRL-$Run-COLORIZED.md"
-  rrl_stats = "RRL/RRL-$Run-STATS.json"
+  ilog = $ilogDest
+  ilog_colorized = "I-LOG/I-LOG-$Run-COLORIZED.md"
+  ilog_stats = "I-LOG/I-LOG-$Run-STATS.json"
   audit = $auditObj
 }
 $pipeline | ConvertTo-Json -Depth 3 | Set-Content $pipePath -Encoding UTF8
@@ -63,9 +70,9 @@ $handoff = @{
   from_run = $Run
   to_run = $nextRun
   timestamp = (Get-Date -Format "o")
-  rrl = $rrlDest
-  rrl_colorized = "RRL/RRL-$Run-COLORIZED.md"
-  rrl_stats = "RRL/RRL-$Run-STATS.json"
+  ilog = $ilogDest
+  ilog_colorized = "I-LOG/I-LOG-$Run-COLORIZED.md"
+  ilog_stats = "I-LOG/I-LOG-$Run-STATS.json"
   pipeline = $pipePath
   audit = $auditObj
 }

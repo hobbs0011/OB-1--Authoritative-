@@ -1,0 +1,19 @@
+﻿{
+    "run":  "8",
+    "ilog":  "I-LOG\\I-LOG-8.txt",
+    "timestamp":  "2026-07-30T22:13:23.4105172+07:00",
+    "ilog_colorized":  "I-LOG/I-LOG-8-COLORIZED.md",
+    "ilog_stats":  "I-LOG/I-LOG-8-STATS.json",
+    "audit":  {
+                  "SOULcount":  50,
+                  "DNAcount":  313,
+                  "REASONcount":  265,
+                  "total":  363,
+                  "first_utc":  "2026-07-24T16:33:34.500Z",
+                  "last_utc":  "2026-07-30T15:07:29.547Z",
+                  "duration_min":  8554
+              },
+    "open_items":  [
+
+                   ]
+}
