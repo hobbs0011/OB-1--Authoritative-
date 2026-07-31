@@ -1,0 +1,171 @@
+﻿{
+    "parsed_lines":  363,
+    "processed_at":  "2026-08-01T00:05:14.7301840+07:00",
+    "source_file":  "I-LOG\\I-LOG-187.txt",
+    "REASONcount":  265,
+    "top_topics":  [
+                       {
+                           "count":  352,
+                           "word":  "user"
+                       },
+                       {
+                           "count":  300,
+                           "word":  "this"
+                       },
+                       {
+                           "count":  272,
+                           "word":  "that"
+                       },
+                       {
+                           "count":  262,
+                           "word":  "bash"
+                       },
+                       {
+                           "count":  248,
+                           "word":  "check"
+                       },
+                       {
+                           "count":  243,
+                           "word":  "with"
+                       },
+                       {
+                           "count":  243,
+                           "word":  "script"
+                       },
+                       {
+                           "count":  233,
+                           "word":  "Worker"
+                       },
+                       {
+                           "count":  228,
+                           "word":  "should"
+                       },
+                       {
+                           "count":  204,
+                           "word":  "files"
+                       },
+                       {
+                           "count":  192,
+                           "word":  "I-LOG"
+                       },
+                       {
+                           "count":  181,
+                           "word":  "scripts"
+                       },
+                       {
+                           "count":  170,
+                           "word":  "need"
+                       },
+                       {
+                           "count":  170,
+                           "word":  "from"
+                       },
+                       {
+                           "count":  168,
+                           "word":  "Cloudflare"
+                       },
+                       {
+                           "count":  162,
+                           "word":  "just"
+                       },
+                       {
+                           "count":  162,
+                           "word":  "what"
+                       },
+                       {
+                           "count":  155,
+                           "word":  "file"
+                       },
+                       {
+                           "count":  152,
+                           "word":  "They"
+                       },
+                       {
+                           "count":  148,
+                           "word":  "session"
+                       },
+                       {
+                           "count":  138,
+                           "word":  "have"
+                       },
+                       {
+                           "count":  133,
+                           "word":  "path"
+                       },
+                       {
+                           "count":  122,
+                           "word":  "current"
+                       },
+                       {
+                           "count":  112,
+                           "word":  "also"
+                       },
+                       {
+                           "count":  108,
+                           "word":  "Actually"
+                       },
+                       {
+                           "count":  108,
+                           "word":  "might"
+                       },
+                       {
+                           "count":  106,
+                           "word":  "already"
+                       },
+                       {
+                           "count":  105,
+                           "word":  "looking"
+                       },
+                       {
+                           "count":  102,
+                           "word":  "want"
+                       },
+                       {
+                           "count":  100,
+                           "word":  "there"
+                       }
+                   ],
+    "DNAcount":  313,
+    "first_ts":  "2026-07-24T23:33:34.5000000+07:00",
+    "tool_calls":  283,
+    "lines":  363,
+    "PHEROMONEcount":  283,
+    "last_ts":  "2026-07-30T22:07:29.5470000+07:00",
+    "SOULcount":  50,
+    "total_chars":  285462,
+    "duration_min":  8553.9,
+    "top_tools":  [
+                      {
+                          "count":  232,
+                          "tool":  "bash"
+                      },
+                      {
+                          "count":  71,
+                          "tool":  "read"
+                      },
+                      {
+                          "count":  27,
+                          "tool":  "grep"
+                      },
+                      {
+                          "count":  24,
+                          "tool":  "edit"
+                      },
+                      {
+                          "count":  20,
+                          "tool":  "write"
+                      },
+                      {
+                          "count":  14,
+                          "tool":  "glob"
+                      },
+                      {
+                          "count":  4,
+                          "tool":  "todowrite"
+                      },
+                      {
+                          "count":  1,
+                          "tool":  "task"
+                      }
+                  ]
+}
