@@ -116,7 +116,7 @@ foreach ($line in $rawLines) {
             $entry.colorTag = 'PHEROMONE'
             $entry.emoji = $COLORS.PHEROMONE.emoji
             $entry.hasPhetrail = $true
-            $toolType = $data.tool
+            $toolType = $tool
             if ($toolType) {
                 if ($toolTypes.ContainsKey($toolType)) {
                     $toolTypes[$toolType]++
@@ -127,11 +127,11 @@ foreach ($line in $rawLines) {
         }
 
         $entry.blocks += $blockEntry
-        if ($blockText) {
-            $entry.text += $blockText.Substring(0, [Math]::Min($blockText.Length, 2000)) + ' '
-            $charTotal += $blockText.Length
+        if ($text) {
+            $entry.text += $text.Substring(0, [Math]::Min($text.Length, 2000)) + ' '
+            $charTotal += $text.Length
 
-            $blockText -split '\s+' | Where-Object { $_ -match '^[A-Z][A-Z0-9_/-]+$' -and $_.Length -gt 3 } | ForEach-Object {
+            $text -split '\s+' | Where-Object { $_ -match '^[A-Z][A-Z0-9_/-]+$' -and $_.Length -gt 3 } | ForEach-Object {
                 if ($topicWords.ContainsKey($_)) {
                     $topicWords[$_]++
                 } else {

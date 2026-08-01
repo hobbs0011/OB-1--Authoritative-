@@ -16,7 +16,7 @@
 | 💚 PHEROMONE | 79 |
 | Tool calls | 79 |
 | Duration | 55 min |
-| Total chars | 0 |
+| Total chars | 189803 |
 | First | 2026-07-19 16:23:03 |
 | Last | 2026-07-19 17:18:04 |
 
@@ -28,11 +28,46 @@ Top 30 signal words (capitalized tokens):
 
 | Token | Frequency |
 |-------|-----------|
+| that | 239 |
+| user | 231 |
+| they | 214 |
+| files | 209 |
+| from | 192 |
+| this | 191 |
+| delete | 188 |
+| models | 183 |
+| other | 179 |
+| deepseek | 149 |
+| check | 145 |
+| should | 144 |
+| Kilo | 130 |
+| canonical | 125 |
+| might | 124 |
+| script | 122 |
+| scripts | 118 |
+| free | 117 |
+| need | 116 |
+| There | 116 |
+| death | 115 |
+| with | 109 |
+| what | 108 |
+| only | 107 |
+| want | 106 |
+| looking | 104 |
+| flash | 102 |
+| said | 97 |
+| think | 87 |
+| model | 87 |
 
 Tool usage:
 
 | Tool | Count |
 |------|-------|
+| bash | 71 |
+| read | 36 |
+| glob | 34 |
+| grep | 11 |
+| agent_manager_models | 1 |
 
 ---
 
@@ -4185,5 +4220,5 @@ Let me write this extraction. tool: bash
 
 ---
 
-*Colorized by rrl-colorize.ps1 at 2026-08-02 01:45:51*
+*Colorized by rrl-colorize.ps1 at 2026-08-02 02:00:47*
 *LFG SCS RRL COLOR CODING: 💜 SOUL | ❤️ DNA | 💛 REASON | 💚 PHEROMONE*
