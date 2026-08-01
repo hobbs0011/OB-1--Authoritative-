@@ -82,22 +82,21 @@ foreach ($line in $rawLines) {
 
     foreach ($block in $contentBlocks) {
         $type = $block.type
-        $data = $block.data
-        if (-not $data) { continue }
-
-        $blockText = $data.text
-        if (-not $blockText -and $data.tool) { $blockText = "tool: $($data.tool)" }
+        $text = $block.text
+        $tool = $block.tool
+        $state = $block.state
+        if (-not $text -and $tool) { $text = "tool: $tool" }
 
         $blockEntry = @{
             type = $type
-            text = $blockText
-            tool = if ($data.tool) { $data.tool } else { $null }
-            state = if ($data.state) { $data.state } else { $null }
+            text = $text
+            tool = $tool
+            state = $state
         }
-        if ($data.state -and $data.state.output -and $data.state.output.length -gt 500) {
-            $blockEntry.output = $data.state.output.Substring(0, 500) + '...'
-        } elseif ($data.state -and $data.state.output) {
-            $blockEntry.output = $data.state.output
+        if ($state -and $state.output -and $state.output.length -gt 500) {
+            $blockEntry.output = $state.output.Substring(0, 500) + '...'
+        } elseif ($state -and $state.output) {
+            $blockEntry.output = $state.output
         } else {
             $blockEntry.output = $null
         }

@@ -1,0 +1,17 @@
+﻿{
+    "parsed_lines":  117,
+    "processed_at":  "2026-08-02T01:45:50.9653335+07:00",
+    "source_file":  "I-LOG\\I-LOG-3.txt",
+    "REASONcount":  89,
+    "top_topics":  null,
+    "DNAcount":  92,
+    "first_ts":  "2026-07-19T16:23:03.6480000+07:00",
+    "tool_calls":  79,
+    "lines":  117,
+    "PHEROMONEcount":  79,
+    "last_ts":  "2026-07-19T17:18:04.7620000+07:00",
+    "SOULcount":  25,
+    "total_chars":  0,
+    "duration_min":  55,
+    "top_tools":  null
+}

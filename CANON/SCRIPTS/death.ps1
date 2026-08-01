@@ -27,7 +27,7 @@ Write-Host "COLORIZED: SOUL=$($colorStats.SOULcount) DNA=$($colorStats.DNAcount)
 # 2) SCS AUDIT
 $auditJs = @"
 const fs = require('fs');
-const lines = fs.readFileSync(process.argv[1], 'utf8').split('\n').filter(Boolean);
+const lines = fs.readFileSync(process.argv[2], 'utf8').split('\n').filter(Boolean);
 const msgs = lines.map(l => JSON.parse(l));
 const user = msgs.filter(m => m.role === 'user').length;
 const asst = msgs.filter(m => m.role === 'assistant').length;
@@ -44,7 +44,8 @@ console.log(JSON.stringify({
 }));
 "@
 $auditTmp = Join-Path $PSScriptRoot '_audit_tmp.js'
-$auditOut = node $auditTmp $IlogSource 2>&1 | Out-String
+[System.IO.File]::WriteAllText($auditTmp, $auditJs, [System.Text.UTF8Encoding]::new($false))
+$auditOut = node $auditTmp $IlogSource 2>$null | Out-String
 $auditObj = $auditOut | ConvertFrom-Json
 Write-Host "SCS AUDIT: SOUL=$($auditObj.SOULcount) DNA=$($auditObj.DNAcount) REASON=$($auditObj.REASONcount) msgs=$($auditObj.total)"
 Remove-Item $auditTmp -Force -ErrorAction SilentlyContinue
