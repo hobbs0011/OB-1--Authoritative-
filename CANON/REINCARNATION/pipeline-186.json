@@ -1,17 +1,11 @@
-{
-  "run": "186",
-  "timestamp": "2026-07-26T17:36:35.444Z",
-  "open_items": [],
-  "rrl": "RRL/RRL-186.txt",
-  "rrl_colorized": "RRL/RRL-186-COLORIZED.md",
-  "rrl_stats": "RRL/RRL-186-STATS.json",
-  "audit": {
-    "SOULcount": 76,
-    "DNAcount": 304,
-    "REASONcount": 286,
-    "total": 380,
-    "first_utc": "2026-07-19T10:52:25.744Z",
-    "last_utc": "2026-07-19T16:48:36.453Z",
-    "duration_min": 356.2
-  }
+﻿{
+    "run":  "186",
+    "ilog":  "I-LOG\\I-LOG-186.txt",
+    "timestamp":  "2026-08-02T02:01:45.0102685+07:00",
+    "ilog_colorized":  "I-LOG/I-LOG-186-COLORIZED.md",
+    "ilog_stats":  "I-LOG/I-LOG-186-STATS.json",
+    "audit":  null,
+    "open_items":  [
+
+                   ]
 }
