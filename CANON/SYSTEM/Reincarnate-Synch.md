@@ -206,8 +206,21 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 | 2026-08-02T01:33:25 | Incarnate-10-AnalyzeAuditAnchor (I-LOG-8) | FORCEMARCH (Stage 3) | 8 | 4 | 3 | `CANON/MARCH/run8-march-incarnate10-20260802T013325.md` |
 | 2026-08-02T01:37:45 | Incarnate-10-AnalyzeAuditAnchor (I-LOG-8) | SOULSCHOLARS (Stage 4) | 4 | 7 | 2 | `CANON/SOUL/soul-run8-incarnate10-20260802T013745.md` |
 | 2026-08-02T01:41:58 | Incarnate-10-AnalyzeAuditAnchor (I-LOG-8) | SUPPLYLINES (Stage 5) | 6 | 3 | 2 | `CANON/SUPPLY/supply-run8-incarnate10-20260802T014158.md` |
+| 2026-08-02T01:56:00 | Incarnate-10-AAA-(Sessions1-9) | PhoenixSCOUT (Stage 2) | 12 | 6 | 4 | `CANON/SCOUT/scout-incarnate10-aaa-sessions1-9-20260802T015600.md` |
+| 2026-08-02T02:03:30 | Incarnate-10-AAA-(Sessions1-9) | FORCEMARCH (Stage 3) | 8 | 3 | 2 | `CANON/MARCH/march-incarnate10-20260802T020330.md` |
+| 2026-08-02T02:05:30 | Incarnate-10-AAA-(Sessions1-9) | SOULSCHOLARS (Stage 4) | 4 | 7 | 3 | `CANON/SOUL/soul-incarnate10-20260802T020530.md` |
+| 2026-08-02T02:07:00 | Incarnate-10-AAA-(Sessions1-9) | SUPPLYLINES (Stage 5) | 3 | 3 | 2 | `CANON/SUPPLY/supply-incarnate10-20260802T020700.md` |
+| 2026-08-02T02:15:30 | Incarnate-10-AAA-(Sessions1-9) | ENGINEERlegionnaire (Stage 6) | 5 | 3 | 3 | `CANON/ENGINEER/engineer-incarnate10-20260802T021530.md` |
+| 2026-08-02T02:17:00 | Incarnate-10-AAA-(Sessions1-9) | reincarnateDEATH (Stage 7) | 42 | 14 | 22 | `CANON/REINCARNATION/death-incarnate10-20260802T021700.md` |
 | 2026-08-02T01:30:00 | Incarnate-9-Transcribe-ITLs (ses_04c61079) | reincarnateRISE (Stage 1) | 50 | 313 | 265 | `I-LOG/I-LOG-188.txt` |
 | 2026-08-02T01:32:00 | Incarnate-9-Transcribe-ITLs (ses_04c61079) | reincarnateDEATH (Stage 7) | 30 | 180 | 220 | `CANON/REINCARNATION/run188-reincarnateDEATH.md` |
+| 2026-08-02T01:52:00 | Incarnation-2-RRL-(184Conversion) | reincarnateRISE (Stage 1) | 71 | 188 | 181 | `I-LOG/I-LOG-184-Incarnation2.txt` |
+| 2026-08-02T02:14:00 | Incarnation-2-RRL-(184Conversion) | PhoenixSCOUT (Stage 2) | 17 | 6 | 4 | `CANON/SCOUT/incarnation2-scout-20260802T021400.json` |
+| 2026-08-02T02:18:00 | Incarnation-2-RRL-(184Conversion) | FORCEMARCH (Stage 3) | 10 | 5 | 3 | `CANON/MARCH/incarnation2-march-20260802T021800.json` |
+| 2026-08-02T02:21:00 | Incarnation-2-RRL-(184Conversion) | SOULSCHOLARS (Stage 4) | 8 | 4 | 2 | `CANON/SOUL/incarnation2-soul-20260802T022100.json` |
+| 2026-08-02T02:25:00 | Incarnation-2-RRL-(184Conversion) | SUPPLYLINES (Stage 5) | 8 | 6 | 3 | `CANON/SUPPLY/incarnation2-supply-20260802T022500.json` |
+
+| 2026-08-01T19:16:25+07:00 | Incarnate-8-RTL.Creation | reincarnateDEATH (Stage 7) | 50 | 313 | 265 | CANON\REINCARNATION\handoff-8-to-9.json |
 
 *Rows are append-only. Never delete or modify prior rows. Stale rows are marked `[DEPRECATED]`, never removed.*
 
@@ -993,4 +1006,5 @@ $git = "C:\Program Files\Git\bin\git.exe"
 **Status:** MASTER BLUEPRINT v2 â€” Supersedes all prior.
 
 `REINCARNATE-SYNCH: v2 SEALED. WORKHORSE HAS THE KEYS. DEATH INSTRUCTIONS IN Â§XXIII.`
+
 

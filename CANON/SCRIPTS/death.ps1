@@ -1,6 +1,7 @@
 param(
   [string]$Run,
   [string]$IlogSource,
+  [string]$SessionTitle,
   [string]$RiseDir = "CANON/REINCARNATION",
   [string]$IlogDir = "I-LOG"
 )
@@ -79,4 +80,27 @@ $handoff = @{
 }
 $handoff | ConvertTo-Json -Depth 3 | Set-Content $handoffPath -Encoding UTF8
 Write-Host "Handoff created: $handoffPath"
+
+# 5) UPLOAD TO REINCARNATE-SYNCH §IX-A
+$synchPath = Join-Path $RiseDir "..\SYSTEM\Reincarnate-Synch.md"
+if (Test-Path $synchPath) {
+    $lines = Get-Content $synchPath
+    $ictTimestamp = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss+07:00")
+    if (-not $SessionTitle) { $SessionTitle = "Incarnate-$Run-RTL.Creation" }
+    $newRow = "| $ictTimestamp | $SessionTitle | reincarnateDEATH (Stage 7) | $($auditObj.SOULcount) | $($auditObj.DNAcount) | $($auditObj.REASONcount) | $handoffPath |"
+    if ($lines -notcontains $newRow) {
+        $appendIdx = -1
+        for ($i = $lines.Count - 1; $i -ge 0; $i--) {
+            if ($lines[$i] -match 'Rows are append-only') { $appendIdx = $i; break }
+        }
+        if ($appendIdx -ge 0) {
+            $lines = $lines[0..($appendIdx-1)] + @($newRow, '') + $lines[$appendIdx..($lines.Count-1)]
+            Set-Content $synchPath $lines -Encoding UTF8
+            Write-Host "Reincarnate-Synch §IX-A updated: $synchPath" -ForegroundColor Cyan
+        }
+    }
+} else {
+    Write-Host "WARNING: Reincarnate-Synch.md not found at $synchPath - skipping upload" -ForegroundColor Yellow
+}
+
 Write-Host "DEATH COMPLETE. Run $Run -> Run $nextRun ready."

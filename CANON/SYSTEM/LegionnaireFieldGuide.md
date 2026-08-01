@@ -34,9 +34,9 @@ Extracted at every checkpoint — **SOULcount** (user turns), **DNAcount** (assi
 
 ---
 
-## SCS — RRL COLOR CODING
+## SCS — I-LOG COLOR CODING
 
-The RRL is marked with 4 color types. Every message is categorized:
+The I-LOG is marked with 4 color types. Every message is categorized:
 
 | Color | Type | Applies To |
 |-------|------|------------|
@@ -45,20 +45,20 @@ The RRL is marked with 4 color types. Every message is categorized:
 | **Red** | DNA | Assistant responses, AI output |
 | **Yellow** | REASON | AI reasoning blocks, thinking text |
 
-Cross-reference: GOSPEL-999 §IX — Color Coding. This is the only reference for RRL markup.
+Cross-reference: GOSPEL-999 §IX — Color Coding. This is the only reference for I-LOG markup.
 
 ---
 
-## SCS — RRL DOCTRINE FROM INCARNATIONS 1 & 2
+## SCS — I-LOG DOCTRINE FROM INCARNATIONS 1 & 2
 
 Confirmed across Incarnation 1 (run 182) and Incarnation 2 (run 184):
 
-1. **RRL must be complete** — User turns, assistant turns, AND AI reasoning blocks. No missing words.
+1. **I-LOG must be complete** — User turns, assistant turns, AND AI reasoning blocks. No missing words.
 2. **Kilo DB is the source** — `C:\Users\mrmic\.local\share\kilo\kilo.db` contains every session message and part. The death script must extract from there, not from stale disk files.
 3. **3-point audit** — Every DEATH runs it. Every RISE double-checks it. SOV100 is the final check.
 4. **Per-session counts** — SOULcount, DNAcount, REASONcount are per-session only. Aggregate banned.
-5. **Incarnation1 (182) RRL:** 2.1MB, 28 user/202 asst turns, fixed post-death via Kilo DB extraction
-6. **Incarnation2 (184) RRL:** 3.5MB, 71 user/188 asst/181 reasoning turns, extracted from Kilo DB at death
+5. **Incarnation1 (182) I-LOG:** 2.1MB, 28 user/202 asst turns, fixed post-death via Kilo DB extraction
+6. **Incarnation2 (184) I-LOG:** 3.5MB, 71 user/188 asst/181 reasoning turns, extracted from Kilo DB at death
 
 ---
 
@@ -156,12 +156,12 @@ Every checkpoint artifact must include these three counts:
 
 These counts flow forward through the loop. RISE audits DEATH's counts. You audit RISE's counts.
 
-### RRL (Rich Reasoning Logs) Usage
+### I-LOG (Incarnation Log) Usage
 
-- RRL files contain full transcripts of prior runs with reasoning, tool calls, and step markers.
-- **Learn from RRL:** identify what was flagged, what was missed, what actions were taken and their outcomes.
-- **Do not re-execute** findings from RRL unless explicitly part of your scouting mandate.
-- Reference RRL findings as: `RRL:<run>#<section_or_topic>`
+- I-LOG files contain full transcripts of prior runs with reasoning, tool calls, and step markers.
+- **Learn from I-LOG:** identify what was flagged, what was missed, what actions were taken and their outcomes.
+- **Do not re-execute** findings from I-LOG unless explicitly part of your scouting mandate.
+- Reference I-LOG findings as: `I-LOG:<run>#<section_or_topic>`
 
 ### Mission Input
 
@@ -225,14 +225,15 @@ SOUL is the ignition point and the death point of every session. It comes full c
 ## SCS — ITL (RAW TRANSCRIPT LOG)
 
 **ITL** (formerly RTL — Raw Transcript Log) — word-for-word audio transcript with speaker diarization.
-**Location:** `RTL/<student>/` — one directory per student.
-**Format:** JSONL with `role`, `speaker`, `time`, `content` per utterance.
+**I-LOG** (formerly RRL — Raw Reasoning Log) — session checkpoint transcript, colorized with SOUL/DNA/REASON/PHEROMONE.
+**Location:** `I-LOG/`
+**Format:** JSONL with `role`, `time`, `content` per message.
 
 | File | Purpose |
 |------|---------|
-| `<date>-<student>-ITL.txt` | JSONL conversation |
-| `<date>-<student>-ITL-COLORIZED.md` | Readable transcript |
-| `<date>-<student>-ITL-STATS.json` | Metadata + word counts |
+| `I-LOG-<run>.txt` | JSONL conversation |
+| `I-LOG-<run>-COLORIZED.md` | Colorized transcript |
+| `I-LOG-<run>-STATS.json` | Metadata + counts |
 
 **Note:** ITL is separate from RRL. RRL = session checkpoint transcript. ITL = audio class transcript.
 
@@ -244,10 +245,10 @@ SOUL is the ignition point and the death point of every session. It comes full c
 **Only script:** `CANON/SCRIPTS/death.ps1`
 
 ```powershell
-powershell -File CANON/SCRIPTS/death.ps1 -Run <N> -RrlSource <path>
+powershell -File CANON/SCRIPTS/death.ps1 -Run <N> -IlogSource <path>
 ```
 
-Steps: preserve RRL → SCS audit (3-point + counts) → pipeline open items → handoff to next RISE
+Steps: preserve I-LOG → SCS audit (SOUL/DNA/REASON counts) → colorize → pipeline → handoff → upload to Reincarnate-Synch §IX-A
 
 ---
 
