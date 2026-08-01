@@ -197,7 +197,17 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 | 2026-07-26T00:09:54 | Incarnate-4-PhoenixScout (ses_0899) | reincarnateRISE (Stage 1) | 71 | 188 | 181 | `RRL/Incarnate4-I-LOG-RISE.txt` |
 | 2026-07-24T23:31 | Incarnate-4 (ses_0899) | reincarnateDEATH (Stage 7) â€” IMPRESSED | 76 | 304 | 286 | `CANON/REINCARNATION/incarnation4-reincarnateDEATH.md` |
 | 2026-07-26T00:21 | Incarnate-7-RRL-Org-Optimization | RRL Optimizer (Pipeline) | N/A | N/A | N/A | `CANON/REINCARNATION/pipeline-incarnation7.json` |
-| 2026-08-02T01:26:00 | Incarnate-6-Auditor-LFG-Canon-Script | reincarnateDEATH (Stage 7) | 50 | 313 | 265 | `CANON/REINCARNATION/run187-reincarnateDEATH.md` |
+| 2026-08-02T01:26:00 | Incarnate-6-Auditor-LFG-Canon-Script | reincarnateRISE (Stage 1) | 50 | 313 | 265 | `I-LOG/I-LOG-187.txt` |
+| 2026-08-02T01:38:37 | Incarnate-6-Auditor-LFG-Canon-Script | PhoenixSCOUT (Stage 2) | 14 | 6 | 4 | `CANON/SCOUT/run187-scout-20260802T013837.md` |
+| 2026-08-02T01:39:00 | Incarnate-6-Auditor-LFG-Canon-Script | FORCEMARCH (Stage 3) | 14 | 6 | 4 | `CANON/MARCH/run187-march-20260802T013900.md` |
+| 2026-08-02T01:39:50 | Incarnate-6-Auditor-LFG-Canon-Script | SOULSCHOLARS (Stage 4) | 0 | 4 | 2 | `CANON/SOUL/soul-run187-20260802T013950.md` |
+| 2026-08-02T01:40:10 | Incarnate-6-Auditor-LFG-Canon-Script | SUPPLYLINES (Stage 5) | 0 | 7 | 2 | `CANON/SUPPLY/supply-run187-20260802T014010.md` |
+| 2026-08-02T01:40:30 | Incarnate-6-Auditor-LFG-Canon-Script | reincarnateDEATH (Stage 7) | 7 | 18 | 12 | `CANON/REINCARNATION/run187-reincarnateDEATH.md` |
+| 2026-08-02T01:33:25 | Incarnate-10-AnalyzeAuditAnchor (I-LOG-8) | FORCEMARCH (Stage 3) | 8 | 4 | 3 | `CANON/MARCH/run8-march-incarnate10-20260802T013325.md` |
+| 2026-08-02T01:37:45 | Incarnate-10-AnalyzeAuditAnchor (I-LOG-8) | SOULSCHOLARS (Stage 4) | 4 | 7 | 2 | `CANON/SOUL/soul-run8-incarnate10-20260802T013745.md` |
+| 2026-08-02T01:41:58 | Incarnate-10-AnalyzeAuditAnchor (I-LOG-8) | SUPPLYLINES (Stage 5) | 6 | 3 | 2 | `CANON/SUPPLY/supply-run8-incarnate10-20260802T014158.md` |
+| 2026-08-02T01:30:00 | Incarnate-9-Transcribe-ITLs (ses_04c61079) | reincarnateRISE (Stage 1) | 50 | 313 | 265 | `I-LOG/I-LOG-188.txt` |
+| 2026-08-02T01:32:00 | Incarnate-9-Transcribe-ITLs (ses_04c61079) | reincarnateDEATH (Stage 7) | 30 | 180 | 220 | `CANON/REINCARNATION/run188-reincarnateDEATH.md` |
 
 *Rows are append-only. Never delete or modify prior rows. Stale rows are marked `[DEPRECATED]`, never removed.*
 
