@@ -1,0 +1,173 @@
+﻿{
+    "parsed_lines":  366,
+    "processed_at":  "2026-08-02T22:24:23.1723279+07:00",
+    "source_file":  "D:\\OB-1-CANONICAL\\I-LOG-UNAUDITED\\I-LOG-Incarnation1-IRL-182Conversion.txt",
+    "REASONcount":  304,
+    "top_topics":  [
+                       {
+                           "count":  660,
+                           "word":  "DEATH"
+                       },
+                       {
+                           "count":  539,
+                           "word":  "with"
+                       },
+                       {
+                           "count":  425,
+                           "word":  "user"
+                       },
+                       {
+                           "count":  414,
+                           "word":  "This"
+                       },
+                       {
+                           "count":  394,
+                           "word":  "from"
+                       },
+                       {
+                           "count":  385,
+                           "word":  "script"
+                       },
+                       {
+                           "count":  345,
+                           "word":  "that"
+                       },
+                       {
+                           "count":  340,
+                           "word":  "session"
+                       },
+                       {
+                           "count":  304,
+                           "word":  "check"
+                       },
+                       {
+                           "count":  283,
+                           "word":  "what"
+                       },
+                       {
+                           "count":  281,
+                           "word":  "need"
+                       },
+                       {
+                           "count":  261,
+                           "word":  "bash"
+                       },
+                       {
+                           "count":  241,
+                           "word":  "file"
+                       },
+                       {
+                           "count":  239,
+                           "word":  "should"
+                       },
+                       {
+                           "count":  228,
+                           "word":  "command"
+                       },
+                       {
+                           "count":  213,
+                           "word":  "files"
+                       },
+                       {
+                           "count":  206,
+                           "word":  "write"
+                       },
+                       {
+                           "count":  203,
+                           "word":  "seal"
+                       },
+                       {
+                           "count":  201,
+                           "word":  "REAL"
+                       },
+                       {
+                           "count":  198,
+                           "word":  "READ"
+                       },
+                       {
+                           "count":  197,
+                           "word":  "artifacts"
+                       },
+                       {
+                           "count":  192,
+                           "word":  "Then"
+                       },
+                       {
+                           "count":  188,
+                           "word":  "SOUL"
+                       },
+                       {
+                           "count":  186,
+                           "word":  "Kilo"
+                       },
+                       {
+                           "count":  177,
+                           "word":  "Pipeline"
+                       },
+                       {
+                           "count":  176,
+                           "word":  "They"
+                       },
+                       {
+                           "count":  173,
+                           "word":  "commit"
+                       },
+                       {
+                           "count":  162,
+                           "word":  "have"
+                       },
+                       {
+                           "count":  156,
+                           "word":  "scout"
+                       },
+                       {
+                           "count":  153,
+                           "word":  "looking"
+                       }
+                   ],
+    "DNAcount":  311,
+    "tool_calls":  277,
+    "lines":  366,
+    "PHEROMONEcount":  277,
+    "SOULcount":  55,
+    "total_chars":  530432,
+    "duration_min":  0,
+    "top_tools":  [
+                      {
+                          "count":  259,
+                          "tool":  "bash"
+                      },
+                      {
+                          "count":  90,
+                          "tool":  "read"
+                      },
+                      {
+                          "count":  42,
+                          "tool":  "glob"
+                      },
+                      {
+                          "count":  29,
+                          "tool":  "edit"
+                      },
+                      {
+                          "count":  23,
+                          "tool":  "grep"
+                      },
+                      {
+                          "count":  19,
+                          "tool":  "write"
+                      },
+                      {
+                          "count":  3,
+                          "tool":  "todowrite"
+                      },
+                      {
+                          "count":  1,
+                          "tool":  "skill"
+                      },
+                      {
+                          "count":  1,
+                          "tool":  "invalid"
+                      }
+                  ]
+}

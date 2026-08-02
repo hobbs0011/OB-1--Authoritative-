@@ -1,0 +1,34 @@
+﻿# SOUL-KEYWORDS for Incarnate-4-PhoenixScout-Portals-and-OBI-DEV
+# Extracted from: D:\OB-1-CANONICAL\I-LOG-UNAUDITED\I-LOG-Incarnate-4-PhoenixScout-Portals-and-OBI-DEV-STATS.json
+# SOULcount=55 DNAcount=311 REASONcount=304
+
+660 | DEATH
+539 | with
+425 | user
+414 | This
+394 | from
+385 | script
+345 | that
+340 | session
+304 | check
+283 | what
+281 | need
+261 | bash
+241 | file
+239 | should
+228 | command
+213 | files
+206 | write
+203 | seal
+201 | REAL
+198 | READ
+197 | artifacts
+192 | Then
+188 | SOUL
+186 | Kilo
+177 | Pipeline
+176 | They
+173 | commit
+162 | have
+156 | scout
+153 | looking

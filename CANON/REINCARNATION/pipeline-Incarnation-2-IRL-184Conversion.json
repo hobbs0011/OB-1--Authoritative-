@@ -2,7 +2,7 @@
     "run":  "184",
     "timestamp":  "2026-08-02T22:24:00+07:00",
     "irl":  "I-LOG-UNAUDITED/I-LOG-Incarnation-2-IRL-184Conversion.txt",
-    "audit":  null,
+    "audit":  {"stub": true, "size_bytes": 1805, "notes": "40-line stub — real RRL not available"},
     "open_items":  [],
     "notes": "I-LOG is a 40-line stub (not JSONL). Real RRL (3.5MB) not in workspace. COLORIZED and STATS generated from stub only (0 entries). Keywords cannot be extracted from stub."
 }

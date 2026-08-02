@@ -3,7 +3,7 @@
     "from_run":  "184",
     "timestamp":  "2026-08-02T22:24:00+07:00",
     "irl":  "I-LOG-UNAUDITED/I-LOG-Incarnation-2-IRL-184Conversion.txt",
-    "audit":  null,
-    "pipeline":  "CANON\\REINCARNATION\\pipeline-Incarnation-2-IRL-184Conversion.json",
+    "audit":  {"stub": true, "size_bytes": 1805, "notes": "40-line stub — real RRL not available"},
+    "pipeline":  "CANON/REINCARNATION/pipeline-Incarnation-2-IRL-184Conversion.json",
     "notes": "I-LOG is a 40-line stub (not JSONL). Real RRL (3.5MB) not in workspace. Cannot generate real COLORIZED/STATS or keywords until real IRL is available."
 }

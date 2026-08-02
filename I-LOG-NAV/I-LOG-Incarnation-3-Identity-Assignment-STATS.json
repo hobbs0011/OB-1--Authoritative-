@@ -1,0 +1,159 @@
+﻿{
+    "parsed_lines":  117,
+    "processed_at":  "2026-08-02T02:01:19.6522200+07:00",
+    "source_file":  "I-LOG\\I-LOG-3.txt",
+    "REASONcount":  89,
+    "top_topics":  [
+                       {
+                           "count":  239,
+                           "word":  "that"
+                       },
+                       {
+                           "count":  231,
+                           "word":  "user"
+                       },
+                       {
+                           "count":  214,
+                           "word":  "they"
+                       },
+                       {
+                           "count":  209,
+                           "word":  "files"
+                       },
+                       {
+                           "count":  192,
+                           "word":  "from"
+                       },
+                       {
+                           "count":  191,
+                           "word":  "this"
+                       },
+                       {
+                           "count":  188,
+                           "word":  "delete"
+                       },
+                       {
+                           "count":  183,
+                           "word":  "models"
+                       },
+                       {
+                           "count":  179,
+                           "word":  "other"
+                       },
+                       {
+                           "count":  149,
+                           "word":  "deepseek"
+                       },
+                       {
+                           "count":  145,
+                           "word":  "check"
+                       },
+                       {
+                           "count":  144,
+                           "word":  "should"
+                       },
+                       {
+                           "count":  130,
+                           "word":  "Kilo"
+                       },
+                       {
+                           "count":  125,
+                           "word":  "canonical"
+                       },
+                       {
+                           "count":  124,
+                           "word":  "might"
+                       },
+                       {
+                           "count":  122,
+                           "word":  "script"
+                       },
+                       {
+                           "count":  118,
+                           "word":  "scripts"
+                       },
+                       {
+                           "count":  117,
+                           "word":  "free"
+                       },
+                       {
+                           "count":  116,
+                           "word":  "need"
+                       },
+                       {
+                           "count":  116,
+                           "word":  "There"
+                       },
+                       {
+                           "count":  115,
+                           "word":  "death"
+                       },
+                       {
+                           "count":  109,
+                           "word":  "with"
+                       },
+                       {
+                           "count":  108,
+                           "word":  "what"
+                       },
+                       {
+                           "count":  107,
+                           "word":  "only"
+                       },
+                       {
+                           "count":  106,
+                           "word":  "want"
+                       },
+                       {
+                           "count":  104,
+                           "word":  "looking"
+                       },
+                       {
+                           "count":  102,
+                           "word":  "flash"
+                       },
+                       {
+                           "count":  97,
+                           "word":  "said"
+                       },
+                       {
+                           "count":  87,
+                           "word":  "think"
+                       },
+                       {
+                           "count":  87,
+                           "word":  "model"
+                       }
+                   ],
+    "DNAcount":  92,
+    "first_ts":  "2026-07-19T16:23:03.6480000+07:00",
+    "tool_calls":  79,
+    "lines":  117,
+    "PHEROMONEcount":  79,
+    "last_ts":  "2026-07-19T17:18:04.7620000+07:00",
+    "SOULcount":  25,
+    "total_chars":  189803,
+    "duration_min":  55,
+    "top_tools":  [
+                      {
+                          "count":  71,
+                          "tool":  "bash"
+                      },
+                      {
+                          "count":  36,
+                          "tool":  "read"
+                      },
+                      {
+                          "count":  34,
+                          "tool":  "glob"
+                      },
+                      {
+                          "count":  11,
+                          "tool":  "grep"
+                      },
+                      {
+                          "count":  1,
+                          "tool":  "agent_manager_models"
+                      }
+                  ]
+}
