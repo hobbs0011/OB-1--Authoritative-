@@ -1,0 +1,221 @@
+{
+  "audit": "Incarnate-5-AAA.STONE-(Sessions1-4) - 4-Point Audit",
+  "generated": "2026-08-02T22:24:00+07:00",
+  "auditor": "Incarnate-5-AAA.STONE-(Sessions1-4)",
+  "anchor_level": "Stone",
+  "sessions": [
+    {
+      "name": "Incarnation1-IRL-182Conversion",
+      "capture_audit": {
+        "ilog": true,
+        "ilog_size_bytes": 4912461,
+        "colorized": true,
+        "colorized_size_bytes": 203884,
+        "stats": true,
+        "stats_size_bytes": 5448,
+        "death_seal": true,
+        "death_seal_filename": "Incarnation1-IRL-182Conversion-reincarnateDEATH.md",
+        "pipeline": true,
+        "pipeline_filename": "pipeline-Incarnation1-IRL-182Conversion.json",
+        "handoff": true,
+        "handoff_filename": "handoff-Incarnation1-IRL-182Conversion-to-2.json"
+      },
+      "index_audit": {
+        "keywords": true,
+        "rfkw_file": "CANON/SOUL-KEYWORDS/rfkw-Incarnation1-IRL-182Conversion.txt",
+        "inverted_index_updated": true
+      },
+      "naming_audit": {
+        "ilog_filename": "I-LOG-Incarnation1-IRL-182Conversion.txt",
+        "ilog_header_session": null,
+        "death_seal_filename": "Incarnation1-IRL-182Conversion-reincarnateDEATH.md",
+        "death_seal_session": "Incarnation1-IRL-(182Conversion)",
+        "status": "PARTIAL — death seal renamed correctly. I-LOG has no explicit RISE header (raw JSONL only)."
+      },
+      "lost_souls_audit": {
+        "status": "SCANNED — 35 directives found",
+        "lost_souls_file": "CANON/LOSTSOULS/lostsouls-Incarnation1-IRL-182Conversion.md"
+      },
+      "gaps": [
+        "I-LOG has no explicit RISE header (raw JSONL only)"
+      ],
+      "promote_to_nav": true
+    },
+    {
+      "name": "Incarnation-2-IRL-184Conversion",
+      "capture_audit": {
+        "ilog": true,
+        "ilog_size_bytes": 1805,
+        "ilog_is_stub": true,
+        "colorized": true,
+        "colorized_size_bytes": 0,
+        "colorized_note": "Generated from stub (0 entries)",
+        "stats": true,
+        "stats_size_bytes": 5448,
+        "stats_note": "Generated from stub (0 entries)",
+        "death_seal": true,
+        "death_seal_filename": "Incarnation-2-IRL-184Conversion-reincarnateDEATH.md",
+        "pipeline": true,
+        "pipeline_filename": "pipeline-Incarnation-2-IRL-184Conversion.json",
+        "handoff": true,
+        "handoff_filename": "handoff-Incarnation-2-IRL-184Conversion-to-185.json"
+      },
+      "index_audit": {
+        "keywords": false,
+        "rfkw_file": null,
+        "inverted_index_updated": false,
+        "note": "Cannot extract keywords from 40-line stub I-LOG. Real RRL (3.5MB) not in workspace."
+      },
+      "naming_audit": {
+        "ilog_filename": "I-LOG-Incarnation-2-IRL-184Conversion.txt",
+        "ilog_header_session": "Incarnation-2-IRL-(184Conversion)",
+        "death_seal_filename": "Incarnation-2-IRL-184Conversion-reincarnateDEATH.md",
+        "death_seal_session": "Incarnation-2-IRL-(184Conversion)",
+        "status": "PARTIAL — I-LOG header has parens (184Conversion) but filename sanitized correctly. Death seal renamed correctly. Real IRL not in UNAUDITED."
+      },
+      "lost_souls_audit": {
+        "status": "NOT SCANNED — I-LOG is a 40-line stub (not JSONL). Real RRL (3.5MB) not in workspace."
+      },
+      "gaps": [
+        "I-LOG is a 40-line stub (not JSONL), not the real transcript",
+        "Real RRL (3.5MB) not in workspace — cannot generate real COLORIZED/STATS/keywords",
+        "Keywords cannot be extracted from stub",
+        "LostSouls scan not possible on stub",
+        "I-LOG has no explicit RISE header (stub format)"
+      ],
+      "promote_to_nav": false
+    },
+    {
+      "name": "Incarnation-3-Identity-Assignment",
+      "capture_audit": {
+        "ilog": true,
+        "ilog_size_bytes": 2254810,
+        "colorized": true,
+        "colorized_size_bytes": 203884,
+        "stats": true,
+        "stats_size_bytes": 5448,
+        "death_seal": true,
+        "death_seal_filename": "Incarnation-3-Identity-Assignment-reincarnateDEATH.md",
+        "pipeline": true,
+        "pipeline_filename": "pipeline-Incarnation-3-Identity-Assignment.json",
+        "handoff": true,
+        "handoff_filename": "handoff-Incarnation-3-Identity-Assignment-to-Incarnate-4-PhoenixScout-Portals-and-OBI-DEV.json"
+      },
+      "index_audit": {
+        "keywords": true,
+        "rfkw_file": "CANON/SOUL-KEYWORDS/rfkw-Incarnation-3-Identity-Assignment.txt",
+        "inverted_index_updated": true
+      },
+      "naming_audit": {
+        "ilog_filename": "I-LOG-Incarnation-3-Identity-Assignment.txt",
+        "ilog_header_session": null,
+        "death_seal_filename": "Incarnation-3-Identity-Assignment-reincarnateDEATH.md",
+        "death_seal_session": "Incarnation-3-Identity-Assignment",
+        "status": "PARTIAL — death seal renamed correctly; prior format mismatch corrected."
+      },
+      "lost_souls_audit": {
+        "status": "SCANNED — 13 directives found",
+        "lost_souls_file": "CANON/LOSTSOULS/lostsouls-Incarnation-3-Identity-Assignment.md"
+      },
+      "gaps": [
+        "I-LOG has no explicit RISE header (raw JSONL only)"
+      ],
+      "promote_to_nav": true
+    },
+    {
+      "name": "Incarnate-4-PhoenixScout-Portals-and-OBI-DEV",
+      "capture_audit": {
+        "ilog": true,
+        "ilog_size_bytes": 4913689,
+        "colorized": true,
+        "colorized_size_bytes": 551349,
+        "stats": true,
+        "stats_size_bytes": 5877,
+        "death_seal": true,
+        "death_seal_filename": "Incarnate-4-PhoenixScout-Portals-and-OBI-DEV-reincarnateDEATH.md",
+        "pipeline": true,
+        "pipeline_filename": "pipeline-Incarnate-4-PhoenixScout-Portals-and-OBI-DEV.json",
+        "handoff": true,
+        "handoff_filename": "handoff-Incarnate-4-PhoenixScout-Portals-and-OBI-DEV-to-Incarnate-5.json"
+      },
+      "index_audit": {
+        "keywords": true,
+        "rfkw_file": "CANON/SOUL-KEYWORDS/rfkw-Incarnate-4-PhoenixScout-Portals-and-OBI-DEV.txt",
+        "inverted_index_updated": true
+      },
+      "naming_audit": {
+        "ilog_filename": "I-LOG-Incarnate-4-PhoenixScout-Portals-and-OBI-DEV.txt",
+        "ilog_header_session": null,
+        "death_seal_filename": "Incarnate-4-PhoenixScout-Portals-and-OBI-DEV-reincarnateDEATH.md",
+        "death_seal_session": "Incarnate-4-PhoenixScout-Portals-and-OBI-DEV",
+        "status": "PARTIAL — death seal renamed correctly; prior format mismatch corrected."
+      },
+      "lost_souls_audit": {
+        "status": "SCANNED — 35 directives found",
+        "lost_souls_file": "CANON/LOSTSOULS/lostsouls-Incarnate-4-PhoenixScout-Portals-and-OBI-DEV.md"
+      },
+      "gaps": [
+        "I-LOG has no explicit RISE header (raw JSONL only)"
+      ],
+      "promote_to_nav": true
+    }
+  ],
+  "summary": {
+    "total_sessions": 4,
+    "promotable_now": 3,
+    "anchor_level": "Stone",
+    "naming_fixes_applied": [
+      "Incarnation1-IRL-182Conversion-reincarnateDEATH.md renamed from seal-incarnation1.jsonl.md",
+      "Incarnation-2-IRL-184Conversion-reincarnateDEATH.md renamed from incarnation2-reincarnateDEATH.md",
+      "Incarnation-3-Identity-Assignment-reincarnateDEATH.md renamed from incarnation3-reincarnateDEATH.md",
+      "Incarnate-4-PhoenixScout-Portals-and-OBI-DEV-reincarnateDEATH.md renamed from incarnation4-reincarnateDEATH.md",
+      "pipeline-184.json renamed to pipeline-Incarnation-2-IRL-184Conversion.json",
+      "pipeline-incarnation3.json renamed to pipeline-Incarnation-3-Identity-Assignment.json",
+      "pipeline-incarnation4.json renamed to pipeline-Incarnate-4-PhoenixScout-Portals-and-OBI-DEV.json",
+      "handoff-184-to-185.json renamed to handoff-Incarnation-2-IRL-184Conversion-to-185.json",
+      "handoff-incarnation3-to-incarnation4.json renamed to handoff-Incarnation-3-Identity-Assignment-to-Incarnate-4-PhoenixScout-Portals-and-OBI-DEV.json",
+      "handoff-incarnation4-to-incarnation5.json renamed to handoff-Incarnate-4-PhoenixScout-Portals-and-OBI-DEV-to-Incarnate-5.json",
+      "Created pipeline-Incarnation1-IRL-182Conversion.json",
+      "Created handoff-Incarnation1-IRL-182Conversion-to-2.json",
+      "Updated pipeline-Incarnation-2-IRL-184Conversion.json to point to UNAUDITED stub",
+      "Updated handoff-Incarnation-2-IRL-184Conversion-to-185.json to point to UNAUDITED stub"
+    ],
+    "fixes_applied_this_session": [
+      "Generated COLORIZED+STATS for Incarnation1 via rrl-colorize.ps1",
+      "Generated COLORIZED+STATS for Incarnation2 stub via rrl-colorize.ps1 (0 entries)",
+      "Created pipeline and handoff for Incarnation1",
+      "Updated Incarnation2 pipeline and handoff to point to I-LOG-UNAUDITED stub",
+      "Extracted keywords for Incarnation1 (30 keywords)",
+      "Extracted keywords for Incarnation3 (30 keywords)",
+      "Extracted keywords for Incarnate-4 (30 keywords)",
+      "Updated inverted-index.json with new keywords (62 total)",
+      "Scanned LostSouls for Incarnation1 (35 directives)",
+      "Scanned LostSouls for Incarnation3 (13 directives)",
+      "Scanned LostSouls for Incarnate-4 (35 directives)"
+    ],
+    "remaining_gaps": [
+      "Incarnation2: I-LOG is a 40-line stub — real RRL (3.5MB) not in workspace",
+      "Incarnation2: Cannot generate real COLORIZED/STATS without real IRL",
+      "Incarnation2: Keywords cannot be extracted from stub",
+      "Incarnation2: LostSouls cannot be scanned from stub",
+      "All sessions: I-LOG has no explicit RISE header (raw JSONL only) — accepted gap"
+    ],
+    "blockers_resolved": [
+      "BB-AAA-001: Keyword extraction — resolved for S1, S3, S4. S2 blocked by stub.",
+      "BB-AAA-002: COLORIZED+STATS — resolved for S1, S3, S4. S2 has empty COLORIZED/STATS from stub.",
+      "BB-AAA-003: Copy Incarnation2 real IRL — cannot resolve; real IRL not in workspace",
+      "BB-AAA-004: Create pipeline and handoff for Incarnation1 — RESOLVED",
+      "BB-AAA-005: LostSouls audit — resolved for S1, S3, S4. S2 blocked by stub."
+    ],
+    "blockers_remaining": [
+      "BB-AAA-003: Incarnation2 real IRL (3.5MB) not available in workspace — needs manual import from IRL/IRL-184.txt or Kilo DB"
+    ],
+    "required_before_full_promotion": [
+      "Obtain Incarnation2 real RRL (3.5MB) and copy to I-LOG-UNAUDITED/",
+      "Generate COLORIZED+STATS for Incarnation2 from real RRL",
+      "Extract keywords for Incarnation2",
+      "Scan LostSouls for Incarnation2",
+      "Then promote Incarnation2 to I-LOG-NAV/"
+    ]
+  }
+}

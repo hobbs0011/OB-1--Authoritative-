@@ -1,0 +1,24 @@
+{
+  "run": 188,
+  "session_name": "Incarnate-9-Transcribe-ITLs",
+  "session_id": "ses_04c61079bffe9Wtm3ngHYQDlOu",
+  "timestamp": "2026-08-02T01:32:00+07:00",
+  "ilog": "I-LOG/I-LOG-188.txt",
+  "ilog_colorized": "I-LOG/I-LOG-188-COLORIZED.md",
+  "ilog_stats": "I-LOG/I-LOG-188-STATS.json",
+  "death_seal": "CANON/REINCARNATION/run188-reincarnateDEATH.md",
+  "handoff_to": 189,
+  "audit": {
+    "SOULcount": 30,
+    "DNAcount": 180,
+    "REASONcount": 220,
+    "total": 430,
+    "duration_min": 2940,
+    "context_health": "YELLOW"
+  },
+  "open_items": [
+    "Extract full RRL from Kilo DB for exact counts",
+    "Build kilo-rrl-capture.js canonical script",
+    "Re-enable Huong portal auth after KV rate limit resets"
+  ]
+}

@@ -11,7 +11,7 @@
 
 I.001. Legionnaire Field Guide is the single source of truth for all agents.
 I.002. LFG authority chain: Commands â†’ Skills â†’ Workflows â†’ Laws.
-I.003. 40 canonical commands live in `.kilo/command/*.md`.
+I.003. Commands live in `CANON/SYSTEM/LegionnaireFieldGuide.md` — SCS All Agents table. No separate command directory.
 I.004. 6 core skills live in `.kilo/skills/`.
 I.005. 7 extended skills live in `.github/skills/`.
 I.006. Legion roles are immutable: Agent 100, Agent 99, Legionnaire, Centurion, Sapientes.
@@ -29,9 +29,9 @@ I.017. Stage 4 LEDGER appends to `CANON/HEAVY-LEDGER/HL-{NNN}.json` â€” nev
 I.018. Stage 5 STARMAP produces `CANON/STARMAP/starmap-run{N}.json` â€” pointer map only.
 I.019. Stage 6 SOULKEYS produces `rfkw-run{N}.txt` + `inverted-index.json`.
 I.020. Stage 7 S2PIPELINE outputs `pipeline-run{N}.json` â€” COMPLETE, GAP, or KILO_GAP.
-I.021. Stage 8 REGISTRY_SYNC outputs `art-sync-run{N}.json` and runs `run-dnaregistry.ps1`.
+I.021. Stage 8 REGISTRY_SYNC outputs `art-sync-run{N}.json` and runs `CANON/SCRIPTS/run-dnaregistry.ps1`.
 I.022. Canonical paths are binding: PHEROMONES, HEAVY-LEDGER, SOUL/EXTRACT, STARMAP, SOUL-KEYWORDS, PIPELINE, ART-REGISTRY.
-I.023. `.kilo/command/` holds 40 slash commands â€” YAML frontmatter required.
+I.023. Kilo commands are BANNED. Only location for scripts/commands: `CANON/SCRIPTS/` and `CANON/SYSTEM/LegionnaireFieldGuide.md`.
 I.024. `.kilo/skills/` + `.github/skills/` hold all skills â€” count â‰¥ 13.
 I.025. `.kilo/agent-manager.json` tracks worktree state â€” paths must match actual worktrees.
 I.026. Boot sequence: doctor â†’ STATE-SNAPSHOT â†’ BOOT-CHECKLIST â†’ commands â†’ skills â†’ .github/skills â†’ COLD-START-BOOT â†’ agent-manager.json.
@@ -46,7 +46,7 @@ I.034. Gospel999 is versioned â€” version field must increment.
 I.035. Gospel999 derives authority from SOV100 Michael Hobbs.
 I.036. Gospel999 has 999 mandates across 9 systems â€” count must equal 999.
 I.037. Systems: I=CORE+SOUL, II=DNA, III=LEDGER, IV=CODE, V=IDENTITY, VI=BUILD, VII=TEACHING, VIII=SECURITY, IX=AGENT OS.
-I.038. DNA Registry is the executable canonical scanner â€” `AWS/dnaREGISTRY/run-dnaregistry.ps1` must exist and execute.
+I.038. DNA Registry is the executable canonical scanner — `CANON/SCRIPTS/run-dnaregistry.ps1` must exist and execute.
 I.039. DNA Registry config at `AWS/dnaREGISTRY/config.json` â€” scan roots, stage map, 5 laws required.
 I.040. DNA Registry scans: CANON/, OPERATIONS/, APPS/, .kilo/, .github/, SCRIPTS/.
 I.041. DNA Registry outputs to `CANON/REGISTRY/dna-registry-run{N}.json` â€” valid JSON required.
@@ -106,7 +106,7 @@ I.094. The 8-stage pipeline is immutable in order â€” sequence never reorde
 I.095. Pheromone (Stage 5) is the highest-priority work signal â€” read before planning any session.
 I.096. Pipeline fidelity gate: REAL requires both sides present â€” HOLLOW never declared as REAL.
 I.097. KILO_HOLLOW sessions produce KILO_GAP â€” Kilo sessions do not abort on missing JSONL.
-I.098. Registry sync verify scan runs at RISE â€” `run-dnaregistry.ps1` executes before heavy pipeline.
+I.098. Registry sync verify scan runs at RISE — `CANON/SCRIPTS/run-dnaregistry.ps1` executes before heavy pipeline.
 I.099. Core 99 mandates are hardcoded into every boot â€” RISE prints first 99 mandates at session start.
 
 ---

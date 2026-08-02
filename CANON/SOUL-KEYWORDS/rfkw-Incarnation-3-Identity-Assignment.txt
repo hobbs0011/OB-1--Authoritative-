@@ -1,0 +1,34 @@
+﻿# SOUL-KEYWORDS for Incarnation-3-Identity-Assignment
+# Extracted from: D:\OB-1-CANONICAL\I-LOG-UNAUDITED\I-LOG-Incarnation-3-Identity-Assignment-STATS.json
+# SOULcount=25 DNAcount=92 REASONcount=89
+
+239 | that
+231 | user
+214 | they
+209 | files
+192 | from
+191 | this
+188 | delete
+183 | models
+179 | other
+149 | deepseek
+145 | check
+144 | should
+130 | Kilo
+125 | canonical
+124 | might
+122 | script
+118 | scripts
+117 | free
+116 | need
+116 | There
+115 | death
+109 | with
+108 | what
+107 | only
+106 | want
+104 | looking
+102 | flash
+97 | said
+87 | think
+87 | model

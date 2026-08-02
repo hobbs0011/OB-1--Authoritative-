@@ -1,0 +1,6 @@
+# Local dev secret template (do NOT commit real credentials)
+# Copy to `.dev.vars` and fill values locally.
+# Required keys:
+# - DEEPGRAM_API_KEY
+# - DEEPSEEK_API_KEY
+# - NOTION_API_KEY

@@ -1,0 +1,19 @@
+﻿{
+    "run":  "189",
+    "ilog":  "I-LOG\\I-LOG-189.txt",
+    "timestamp":  "2026-08-02T02:21:16.4943155+07:00",
+    "ilog_colorized":  "I-LOG/I-LOG-189-COLORIZED.md",
+    "ilog_stats":  "I-LOG/I-LOG-189-STATS.json",
+    "audit":  {
+                  "SOULcount":  1,
+                  "DNAcount":  7,
+                  "REASONcount":  3,
+                  "total":  8,
+                  "first_utc":  "2026-08-02T02:15:00.000Z",
+                  "last_utc":  "2026-08-02T02:17:00.000Z",
+                  "duration_min":  2
+              },
+    "open_items":  [
+
+                   ]
+}

@@ -1500,3 +1500,31 @@ These are the live eggs in the Hatchery. Each egg is a body of work, not a scrip
 - **RISE_ORIGIN:** run184-death-seal
 
 
+
+## STONE ANCHOR AUDIT BLOCKERS (2026-08-02)
+
+### BB-AAA-001 !! Keyword Extraction — ALL 4 Sessions (P1)
+- **SIGNAL:** +90
+- **Status:** OPEN
+- **What:** 0 of 4 Stone Anchor sessions have rfkw- files. inverted-index.json must be updated before any session promotes to NAV.
+
+### BB-AAA-002 !! COLORIZED+STATS Generation — Incarnation1 + Incarnation2 (P1)
+- **SIGNAL:** +70
+- **Status:** OPEN
+- **What:** Incarnation1 and Incarnation2 have raw I-LOG but no COLORIZED.md or STATS.json.
+
+### BB-AAA-003 !! Incarnation2 Real RRL Not in UNAUDITED (P1)
+- **SIGNAL:** +60
+- **Status:** OPEN
+- **What:** Incarnation2 I-LOG is a 1.8KB stub. Real transcript is RRL/RRL-184.txt (3.5MB). Must be copied to I-LOG-UNAUDITED/ before keyword extraction.
+
+### BB-AAA-004 !! Incarnation1 Pipeline + Handoff Missing (P2)
+- **SIGNAL:** +50
+- **Status:** OPEN
+- **What:** No pipeline-Incarnation1.json or handoff for Incarnation1. Must be created before promotion.
+
+### BB-AAA-005 !! LostSouls Audit — ALL 4 Sessions (P2)
+- **SIGNAL:** +40
+- **Status:** OPEN
+- **What:** No LostSouls scan performed for any of the 4 sessions. Must scan I-LOGs for unresolved directives and pipeline them.
+

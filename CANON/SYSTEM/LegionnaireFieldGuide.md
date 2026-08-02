@@ -222,18 +222,40 @@ SOUL is the ignition point and the death point of every session. It comes full c
 
 ---
 
+## SCS — AAA ANCHOR PROCEDURE
+
+**Runs:** Every 5 sessions (after sessions 4, 9, 14, etc.)
+**Spec:** `CANON/SYSTEM/AAA-ANCHOR-PROCEDURE.md`
+
+The AAA (Analyze Audit Anchor) is the **final verification gate** above standard RISE prior-check. Standard RISE is NOT the final check. AAA is.
+
+**4-Point Audit:**
+1. **Capture Audit** — Locate RISE+DEATH artifacts for each session. Verify full I-LOG capture. Cross-check SOUL/DNA/REASON counts across all artifacts.
+2. **Index Audit** — 100 top keywords/pheromones extracted per I-LOG. Inverted-index updated. rfkw- file present.
+3. **Naming Audit** — ONE NAME EVERYWHERE. I-LOG, death seal, pipeline, handoff, COLORIZED, STATS — all must use SOV100's exact session name. No exceptions.
+4. **LostSouls Audit** — Identify unpipelined directives from I-LOGs. Capture to `CANON/LOSTSOULS/`. Add to backburner.
+
+**Promotion:** After all 4 points pass → move I-LOG from UNAUDITED to NAV. No promotion = GAP documented.
+
+---
+
 ## SCS — ITL (RAW TRANSCRIPT LOG)
 
 **ITL** (formerly RTL — Raw Transcript Log) — word-for-word audio transcript with speaker diarization.
-**I-LOG** (formerly RRL — Raw Reasoning Log) — session checkpoint transcript, colorized with SOUL/DNA/REASON/PHEROMONE.
-**Location:** `I-LOG/`
+**I-LOG** (formerly RRL — Raw Reasoning Log) — session checkpoint transcript, colorized with 💜 SOUL / ❤️ DNA / 💛 REASON / 💚 PHEROMONE.
+**Location:** 3-folder hierarchy:
+  - `I-LOG-UNNAMED/` — live capture folder. Kilo auto-deposits raw session logs here. Unnamed, unaudited.
+  - `I-LOG-UNAUDITED/` — post-DEATH. Session has been named (RISE) and sealed (DEATH) but NOT AAA-audited.
+  - `I-LOG-NAV/` — Named Audited Verified. Passed AAA anchor session scrutiny. Canonical.
 **Format:** JSONL with `role`, `time`, `content` per message.
 
-| File | Purpose |
-|------|---------|
-| `I-LOG-<run>.txt` | JSONL conversation |
-| `I-LOG-<run>-COLORIZED.md` | Colorized transcript |
-| `I-LOG-<run>-STATS.json` | Metadata + counts |
+**AAA Anchor Protocol:** Every 5 sessions, an AAA (Analyze Audit Anchor) session audits the prior 4 I-LOGs from UNAUDITED, verifies pipeline/handoff/death consistency, and promotes to NAV. This is the FINAL verification gate above standard RISE prior-check.
+
+| File | Purpose | Location |
+|------|---------|----------|
+| `I-LOG-{name}.txt` | JSONL conversation | `I-LOG-UNNAMED/` (pre-RISE), `I-LOG-UNAUDITED/` (post-DEATH), `I-LOG-NAV/` (post-AAA) |
+| `I-LOG-{name}-COLORIZED.md` | Colorized transcript | Same folder as source I-LOG |
+| `I-LOG-{name}-STATS.json` | Metadata + counts | Same folder as source I-LOG |
 
 **Note:** ITL is separate from RRL. RRL = session checkpoint transcript. ITL = audio class transcript.
 
@@ -242,10 +264,19 @@ SOUL is the ignition point and the death point of every session. It comes full c
 ## SCS — SCRIPTS
 
 **Only location:** `CANON/SCRIPTS/`
-**Only script:** `CANON/SCRIPTS/death.ps1`
 
+| Script | Purpose |
+|--------|---------|
+| `CANON/SCRIPTS/death.ps1` | 3-step death pipeline: preserve I-LOG → SCS audit → colorize → pipeline → handoff |
+| `CANON/SCRIPTS/rrl-colorize.ps1` | Colorize raw JSONL RRL → COLORIZED.md + STATS.json |
+| `CANON/SCRIPTS/phetrails.ps1` | Pheromone trail deposition via POST /api/pheromone/deposit |
+| `CANON/SCRIPTS/execute-phetrails-pipeline.ps1` | Execute phetrails pipeline: stage + commit + deploy + verify |
+| `CANON/SCRIPTS/transcribe-rtl.js` | ITL transcriber: audio → JSONL transcript + COLORIZED + STATS |
+| `CANON/SCRIPTS/run-dnaregistry.ps1` | DNA Registry canonical scanner — outputs dna-registry-run{N}.json |
+
+**Invocation:**
 ```powershell
-powershell -File CANON/SCRIPTS/death.ps1 -Run <N> -IlogSource <path>
+powershell -File CANON/SCRIPTS/death.ps1 -SessionName "<name>" -IlogSource <path>
 ```
 
 Steps: preserve I-LOG → SCS audit (SOUL/DNA/REASON counts) → colorize → pipeline → handoff → upload to Reincarnate-Synch §IX-A

@@ -1,0 +1,85 @@
+{
+  "session": "Incarnate-10-AAA-(Sessions1-9)",
+  "target": "Full incarnation consolidation across all 9 prior sessions",
+  "created": "2026-08-02T02:21:00+07:00",
+  "pass": 2,
+  "pass_name": "PATTERN ANALYSIS — Cross-reference, drift detection, recurrence tracking",
+  "references": [
+    "PheTrail-incarnate10-pass1-raw-20260802T022000.json",
+    "PheTrail-incarnate10-aaa-sessions1-9-20260802T013932.json",
+    "death-incarnate10-20260802T021700.md"
+  ],
+  "patterns": [
+    {
+      "id": "P-001",
+      "name": "FALSE ALARM → CORRECTION LOOP",
+      "severity": "MEDIUM",
+      "description": "APPS/NET-PET-AI was flagged CRITICAL as governance break, then retracted when Incarnate-9's DEATH seal revealed intentional archive. The scout found the truth but the initial FORCEMARCH did not cross-reference the DEATH seal first.",
+      "recurrence_risk": "HIGH — multiple sessions operating in parallel without shared context",
+      "fix": "Before flagging governance breaks, check the most recent DEATH seal for context",
+      "pheromone_score": "-1 (false alarm cost) +2 (correction value)"
+    },
+    {
+      "id": "P-002",
+      "name": "PARALLEL SESSION OVERLAP",
+      "severity": "HIGH",
+      "description": "Incarnation3, Incarnate9, Incarnation1, Incarnation2, Incarnate5, Incarnate7 all executed while Incarnate-10 was running. Their outputs appeared as untracked files mid-session. No shared state coordination mechanism.",
+      "recurrence_risk": "CERTAIN — this is the operational model",
+      "fix": "Workhorse pipeline must be designed to absorb parallel session outputs. Reincarnate-Synch is the coordination mechanism — use it.",
+      "pheromone_score": "+2 (pattern identified, mechanism exists)"
+    },
+    {
+      "id": "P-003",
+      "name": "STUB RRL PROBLEM",
+      "severity": "HIGH",
+      "description": "Multiple I-LOG files are stubs (1-4KB) instead of real transcripts: Inc2 (1805B), Inc5/189 (1177B), Inc9/188 (3634B), Inc7/190 (2496B). Only 3 real transcripts: Inc1/186 (4.9MB), Inc3/3 (2.2MB), Inc8/8 (3.4MB). Stub RRLs inflate estimated counts without verification.",
+      "recurrence_risk": "HIGH — death.ps1 creates stubs when full RRL extraction unavailable",
+      "fix": "Build kilo-rrl-capture.js for proper RRL extraction. Flag stub files explicitly in DEATH seals.",
+      "pheromone_score": "-2 (data quality issue) +1 (recognized)"
+    },
+    {
+      "id": "P-004",
+      "name": "DUAL NAMING CONVENTION CHAOS",
+      "severity": "HIGH",
+      "description": "Pipelines use both run-numbered (pipeline-3.json) and incarnation-named (pipeline-incarnation3.json). Death seals use run184-reincarnateDEATH.md AND incarnation2-reincarnateDEATH.md. I-LOGs use I-LOG-184-Incarnation2.txt. Cross-referencing requires matching multiple naming schemes.",
+      "recurrence_risk": "ONGOING — no naming standard enforced",
+      "fix": "Standardize: run{N}- prefix for artifacts, I-LOG-{N}-{FriendlyName}.txt for transcripts, incarnation{N} for DEATH seals. Enforce via pre-commit hook or script.",
+      "pheromone_score": "-2 (fragmented naming increases cognitive load)"
+    },
+    {
+      "id": "P-005",
+      "name": "SCS PIPELINE CHAIN HOLES",
+      "severity": "MEDIUM",
+      "description": "Handoff chain: handoff-184→185 exists, but next is handoff-186→187. Run 185 has NO artifacts anywhere. Handoff-8→10 skips run 9 entirely. handoff-187→188 deleted from working tree.",
+      "recurrence_risk": "LOW — these are historical artifacts, not new problems",
+      "fix": "Backfill run 185 handoff as placeholder. Investigate run 9 gap. Restore or recreate handoff-187→188.",
+      "pheromone_score": "-1 (incomplete chain) +1 (documented)"
+    },
+    {
+      "id": "P-006",
+      "name": "CONTEXT SATURATION THRESHOLD",
+      "severity": "MEDIUM",
+      "description": "Incarnate-10-AAA session hit RED context health at ~22 files loaded / ~43 min duration. The SCS loop requires DEATH at this point, but consolidation required additional passes. The protocol halted productive work — each additional pass degraded accuracy.",
+      "recurrence_risk": "HIGH — AAA role requires extensive file loading",
+      "fix": "AAA role must plan for context saturation: compress scouting into tighter passes, or split AAA across 2 sessions. Consider DEATH at YELLOW threshold for AAA.",
+      "pheromone_score": "+2 (threshold proven, actionable fix identified)"
+    },
+    {
+      "id": "P-007",
+      "name": "WORKHORSE DELEGATION PATTERN",
+      "severity": "HIGH",
+      "description": "Established: Architect (AAA/AnalyzeAuditAnchor/Blueprint) designs pipeline. Workhorse executes commits, deploys, pushes. Boundary must be explicit — ambiguous delegation wastes turns. This session produced the first formal workhorse delegation blueprint.",
+      "recurrence_risk": "EXPECTED — this is the new operational model",
+      "fix": "Workhorse pipeline blueprint must be produced at every DEATH seal. Include exact commands.",
+      "pheromone_score": "+3 (new operational pattern established, proven)"
+    }
+  ],
+  "pattern_summary": {
+    "total_patterns": 7,
+    "critical": 0,
+    "high": 4,
+    "medium": 3,
+    "actionable_fixes": 7,
+    "pheromone_score_total": "+4 (net positive — patterns identified outweigh negative findings)"
+  }
+}

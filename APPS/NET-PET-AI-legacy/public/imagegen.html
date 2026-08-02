@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImageGen - NET-PET-AI</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #1a1a2e; color: #eee; min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { text-align: center; margin-bottom: 30px; color: #00d4ff; }
+        .prompt-box { background: #16213e; padding: 20px; border-radius: 12px; margin-bottom: 20px; }
+        textarea { width: 100%; padding: 15px; border: none; border-radius: 8px; background: #0f0f23; color: #fff; font-size: 16px; min-height: 100px; resize: vertical; }
+        textarea:focus { outline: 2px solid #00d4ff; }
+        .controls { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+        button { padding: 12px 24px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; transition: all 0.3s; }
+        .btn-generate { background: #00d4ff; color: #000; font-weight: bold; }
+        .btn-generate:hover { background: #00b8e6; }
+        .btn-generate:disabled { background: #555; cursor: not-allowed; }
+        .btn-clear { background: #e94560; color: #fff; }
+        .param { display: flex; flex-direction: column; gap: 5px; }
+        .param label { font-size: 12px; color: #888; }
+        .param input { padding: 8px; border-radius: 6px; border: 1px solid #333; background: #0f0f23; color: #fff; width: 100px; }
+        .result { background: #16213e; padding: 20px; border-radius: 12px; margin-top: 20px; text-align: center; }
+        .result img { max-width: 100%; border-radius: 8px; margin-top: 15px; }
+        .loading { display: none; color: #00d4ff; margin: 20px 0; }
+        .loading.active { display: block; }
+        .error { color: #e94560; margin-top: 15px; display: none; }
+        .error.active { display: block; }
+        .status { color: #888; font-size: 14px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🖼️ Image Generation</h1>
+        
+        <div class="prompt-box">
+            <textarea id="prompt" placeholder="Enter your prompt here... (e.g., 'a room with smiling people learning english')"></textarea>
+            <div class="controls">
+                <button class="btn-generate" id="generateBtn" onclick="generateImage()">Generate Image</button>
+                <button class="btn-clear" onclick="clearAll()">Clear</button>
+                <div class="param">
+                    <label>Steps</label>
+                    <input type="number" id="steps" value="25" min="1" max="150">
+                </div>
+                <div class="param">
+                    <label>Guidance</label>
+                    <input type="number" id="guidance" value="7.5" min="1" max="20" step="0.5">
+                </div>
+            </div>
+        </div>
+
+        <div class="status" id="status">Configure Vast.ai endpoint in settings to enable image generation.</div>
+
+        <div class="loading" id="loading">Generating your image... Please wait.</div>
+        <div class="error" id="error"></div>
+
+        <div class="result" id="result" style="display: none;">
+            <h3>Your Image:</h3>
+            <img id="resultImage" alt="Generated image">
+            <br>
+            <button class="btn-clear" onclick="downloadImage()">Download</button>
+        </div>
+    </div>
+
+    <script>
+        // Get API endpoint from URL params or use default
+        const urlParams = new URLSearchParams(window.location.search);
+        let API_URL = urlParams.get('api') || '/api/image';
+
+        async function generateImage() {
+            const prompt = document.getElementById('prompt').value.trim();
+            const steps = document.getElementById('steps').value;
+            const guidance = document.getElementById('guidance').value;
+            const loading = document.getElementById('loading');
+            const error = document.getElementById('error');
+            const result = document.getElementById('result');
+            const status = document.getElementById('status');
+
+            if (!prompt) {
+                error.textContent = 'Please enter a prompt!';
+                error.classList.add('active');
+                return;
+            }
+
+            error.classList.remove('active');
+            result.style.display = 'none';
+            loading.classList.add('active');
+            document.getElementById('generateBtn').disabled = true;
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt, steps, guidance })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                if (data.image) {
+                    document.getElementById('resultImage').src = `data:image/png;base64,${data.image}`;
+                    result.style.display = 'block';
+                    status.textContent = 'Image generated successfully!';
+                } else if (data.error) {
+                    throw new Error(data.error);
+                } else {
+                    throw new Error('No image in response');
+                }
+            } catch (err) {
+                error.textContent = err.message || 'Failed to generate image. Make sure the image server is running.';
+                error.classList.add('active');
+                status.textContent = 'Error: ' + err.message;
+            } finally {
+                loading.classList.remove('active');
+                document.getElementById('generateBtn').disabled = false;
+            }
+        }
+
+        function clearAll() {
+            document.getElementById('prompt').value = '';
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('error').classList.remove('active');
+            document.getElementById('status').textContent = 'Configure Vast.ai endpoint in settings to enable image generation.';
+        }
+
+        function downloadImage() {
+            const img = document.getElementById('resultImage');
+            const link = document.createElement('a');
+            link.download = 'generated-image.png';
+            link.href = img.src;
+            link.click();
+        }
+    </script>
+</body>
+</html>

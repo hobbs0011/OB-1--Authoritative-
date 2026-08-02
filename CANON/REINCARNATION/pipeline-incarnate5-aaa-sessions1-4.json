@@ -1,0 +1,30 @@
+{
+  "run": 191,
+  "session_name": "Incarnate-5-AAA-(Sessions1-4)",
+  "session_id": "ses_current",
+  "timestamp": "2026-08-02T04:04+07:00",
+  "ilog": "I-LOG-UNAUDITED/I-LOG-Incarnate-5-AAA-Sessions1-4.txt",
+  "ilog_colorized": "I-LOG-UNAUDITED/I-LOG-Incarnate-5-AAA-Sessions1-4-COLORIZED.md",
+  "ilog_stats": "I-LOG-UNAUDITED/I-LOG-Incarnate-5-AAA-Sessions1-4-STATS.json",
+  "death_seal": "CANON/REINCARNATION/Incarnate-5-AAA-Sessions1-4-reincarnateDEATH.md",
+  "handoff_to": 192,
+  "audit": {
+    "SOULcount": 0,
+    "DNAcount": 0,
+    "REASONcount": 0,
+    "PHEROMONEcount": 9,
+    "total": 0,
+    "duration_min": 131,
+    "context_health": "YELLOW"
+  },
+  "open_items": [
+    "COLD-START-BOOT.md fingerprint stale: RUN 182 | HEAD 3e62b1813 vs actual bfaa6d851",
+    "49 untracked files need review/commit/purge",
+    "pipeline-187.json still deleted — Incarnate6 pipeline gap persists",
+    "run188-reincarnateDEATH.md should be renamed to Incarnate-9-Transcribe-ITLS-reincarnateDEATH.md",
+    "pipeline-188.json, pipeline-189.json, pipeline-190.json use run numbers instead of session names",
+    "I-LOG-188.txt, I-LOG-189.txt, I-LOG-190.txt use run numbers instead of session names",
+    "Ant colony pheromone (APPS/NET-PET-AI-legacy/src/ant-colony.js) still uses D1 table pheromone_trails",
+    "/api/soul/count requires session_id — aggregate banned"
+  ]
+}

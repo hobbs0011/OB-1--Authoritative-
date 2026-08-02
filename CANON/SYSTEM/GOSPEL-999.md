@@ -28,6 +28,41 @@ The 7-stage deterministic loop. Each stage audits the previous and pushes turn-k
 
 ---
 
+## SYSTEM II — I-LOG FOLDER HIERARCHY (Eternal Canon)
+
+The I-LOG system uses a 3-folder hierarchy. No exceptions. No deviations.
+
+| Folder | Purpose | Stage |
+|--------|---------|-------|
+| `I-LOG-UNNAMED/` | Live capture. Kilo auto-deposits raw session logs here. | Pre-RISE |
+| `I-LOG-UNAUDITED/` | Post-DEATH. Named (RISE) + sealed (DEATH) but not AAA-audited. | Post-DEATH |
+| `I-LOG-NAV/` | Named Audited Verified. Passed AAA anchor session scrutiny. | Post-AAA |
+
+**AAA Anchor Protocol (System III):** Every 5 sessions, an AAA (Analyze Audit Anchor) session audits the prior 4 I-LOGs from UNAUDITED, verifies pipeline/handoff/death seal/SOUL/DNA/REASON/PHEROMONE consistency, and promotes to NAV. This is the FINAL verification gate — above and beyond standard RISE prior-check. The RISE prior-check is standard practice but is NOT the final check. Only AAA anchor sessions can promote to NAV.
+
+**AAA 4-Point Audit:** See `CANON/SYSTEM/AAA-ANCHOR-PROCEDURE.md` — full specification.
+
+**Anchor Hierarchy (System IV):**
+| Anchor | At Session | Scope |
+|--------|------------|-------|
+| Stone | 5 | Audits sessions 1-4. Single batch 4-point audit. |
+| Steel | 10 | Verifies Stone Anchor's work on 1-4. Audits sessions 6-9. Reviews group of 10 holistically. |
+| Titanium | 25 | Major audit of all 25 sessions and all 5 Stone Anchors. |
+| Phoenix | 50 | Full system audit of all 50 sessions, all anchors, all pipelines. |
+
+Each anchor verifies all anchors below it. Each anchor is the FINAL verification gate for its scope.
+1. **Capture Audit** — verify RISE+DEATH artifacts, full I-LOG capture, matching counts
+2. **Index Audit** — 100 top keywords/pheromones extracted, inverted-index updated
+3. **Naming Audit** — ONE NAME EVERYWHERE. Verify I-LOG, death seal, pipeline, handoff, COLORIZED, STATS all use SOV100's exact session name
+4. **LostSouls Audit** — identify unpipelined directives, capture to LOSTSOULS, add to backburner
+
+**Folder 0 (PastLives):** `PastLives/` — ancient RRLs from before the 3-folder system. NEVER DELETE. Maintained for historical reference.
+**Folder X (LostSouls):** `CANON/LOSTSOULS/` — unidentified raw logs. NEVER DELETE RAW LOGS. They take negligible space; losing them is costly.
+
+**All scripts, commands, and SCS checkpoints reference these 3 folders by name. No guessing. No I-LOG/ ambiguity.**
+
+---
+
 ## SYSTEM II — COUNTS
 
 Every SCS checkpoint audits these 3 counts from the RRL:
@@ -89,24 +124,22 @@ reincarnate-rise-{timestamp}.jsonl — audit artifact
 
 ## SYSTEM VI — CORE COMMANDS
 
-| Command | File | Purpose |
-|---------|------|---------|
-| `/reincarnateRise` | .kilo/command/reincarnaterise.md | Audit last DEATH |
-| `/PhoenixScout` | .kilo/command/PhoenixScout.md | Scouting mission |
-| `/forcemarch` | .kilo/command/forcemarch.md | 6-stage force march |
-| `/SoulScholars` | .kilo/command/soulscholars.md | SOUL/pheromone preservation |
-| `/supplylines` | .kilo/command/supplylines.md | Logistics and holding |
-| `/engineerlegionnaire` | .kilo/command/engineerlegionnaire.md | Innovation and improvement |
-| `/reincarnatedeath` | .kilo/command/reincarnatedeath.md | Capture RRL, seal session |
-
-**Full command reference:** `CANON/SYSTEM/LegionnaireFieldGuide.md` — SCS All Commands table. This is the only place for command definitions. GOSPEL-999 lists authority only.
+**Full command reference:** `CANON/SYSTEM/LegionnaireFieldGuide.md` — SCS All Agents table. This is the only place for command definitions. GOSPEL-999 lists authority only.
 
 ---
 
 ## SYSTEM VII — SCRIPTS
 
 **Only one location:** `CANON/SCRIPTS/` — no exceptions.
-**Canonical script:** `CANON/SCRIPTS/death.ps1` — 3 steps: preserve RRL, pipeline open items, handoff to RISE.
+
+| Script | Purpose |
+|--------|---------|
+| `CANON/SCRIPTS/death.ps1` | 3-step death pipeline: preserve I-LOG → SCS audit → colorize → pipeline → handoff |
+| `CANON/SCRIPTS/rrl-colorize.ps1` | Colorize raw JSONL RRL → COLORIZED.md + STATS.json |
+| `CANON/SCRIPTS/phetrails.ps1` | Pheromone trail deposition via POST /api/pheromone/deposit |
+| `CANON/SCRIPTS/execute-phetrails-pipeline.ps1` | Execute phetrails pipeline: stage + commit + deploy + verify |
+| `CANON/SCRIPTS/transcribe-rtl.js` | ITL transcriber: audio → JSONL transcript + COLORIZED + STATS |
+| `CANON/SCRIPTS/run-dnaregistry.ps1` | DNA Registry canonical scanner — outputs dna-registry-run{N}.json |
 
 ---
 

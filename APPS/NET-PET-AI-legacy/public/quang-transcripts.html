@@ -1,0 +1,490 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transcripts | QUANG PORTAL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a12;
+            --card: rgba(22, 22, 35, 0.85);
+            --purple: #a855f7;
+            --gold: #f59e0b;
+            --teal: #14b8a6;
+            --text: #f8fafc;
+            --dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--void);
+            color: var(--text);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Portal watermark */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(168, 85, 247, 0.04) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 70%, rgba(20, 184, 166, 0.03) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 50%, rgba(245, 158, 11, 0.02) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: 'QUANG';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(8rem, 20vw, 20rem);
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.015);
+            pointer-events: none;
+            z-index: 0;
+            letter-spacing: 0.15em;
+            white-space: nowrap;
+        }
+
+        /* Fixed top nav */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 10, 18, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .nav-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--purple);
+            letter-spacing: 0.06em;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-brand .icon-hex {
+            width: 28px;
+            height: 28px;
+            border: 2px solid var(--purple);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            background: rgba(168, 85, 247, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--dim);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            letter-spacing: 0.03em;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .nav-links a.active {
+            color: var(--teal);
+            background: rgba(20, 184, 166, 0.08);
+            border-bottom: 2px solid var(--teal);
+        }
+
+        .btn-logout {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #f87171;
+            background: rgba(248, 113, 113, 0.08);
+            border: 1px solid rgba(248, 113, 113, 0.25);
+            padding: 0.4rem 1.1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            letter-spacing: 0.04em;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-logout:hover {
+            background: rgba(248, 113, 113, 0.18);
+            border-color: rgba(248, 113, 113, 0.45);
+        }
+
+        /* Main content */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            padding-top: 80px;
+            padding-bottom: 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .page-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .page-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 2.2rem;
+            color: var(--text);
+            letter-spacing: 0.06em;
+            margin-bottom: 0.35rem;
+        }
+
+        .page-header .subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+            font-size: 1.05rem;
+            color: var(--dim);
+            letter-spacing: 0.04em;
+        }
+
+        /* Session cards */
+        .session-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.75rem 2rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            position: relative;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .session-card:hover {
+            border-color: rgba(20, 184, 166, 0.25);
+            box-shadow: 0 0 30px rgba(20, 184, 166, 0.04);
+        }
+
+        .session-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .session-number {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text);
+            letter-spacing: 0.05em;
+        }
+
+        .date-badge {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #0a0a12;
+            background: var(--teal);
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+        }
+
+        .session-format {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--gold);
+            letter-spacing: 0.03em;
+            margin-bottom: 0.85rem;
+        }
+
+        .session-section {
+            margin-bottom: 0.85rem;
+        }
+
+        .session-section-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: var(--purple);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.3rem;
+        }
+
+        .session-section p,
+        .session-section li {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.92rem;
+            color: var(--dim);
+            line-height: 1.65;
+        }
+
+        .session-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .session-section ul li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .session-section ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--teal);
+            font-size: 0.7rem;
+            top: 0.25rem;
+        }
+
+        .key-outcome {
+            background: rgba(20, 184, 166, 0.06);
+            border-left: 3px solid var(--teal);
+            padding: 0.7rem 1rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 0.5rem;
+        }
+
+        .key-outcome .session-section-label {
+            color: var(--teal);
+        }
+
+        .key-outcome p {
+            color: #cbd5e1;
+        }
+
+        .quote-block {
+            background: rgba(168, 85, 247, 0.05);
+            border-left: 3px solid var(--purple);
+            padding: 0.7rem 1rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: #cbd5e1;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        .soul-dna-badge {
+            display: inline-block;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: var(--gold);
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            padding: 0.25rem 0.65rem;
+            border-radius: 12px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 640px) {
+            .top-nav {
+                padding: 0 1rem;
+                height: auto;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                padding-top: 0.6rem;
+                padding-bottom: 0.6rem;
+            }
+            .nav-links {
+                gap: 0;
+            }
+            .nav-links a {
+                font-size: 0.78rem;
+                padding: 0.4rem 0.6rem;
+            }
+            .main-content {
+                padding-top: 110px;
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+            .page-header h1 {
+                font-size: 1.6rem;
+            }
+            .session-card {
+                padding: 1.25rem 1rem;
+            }
+            .session-card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Auth gate -->
+    <script>
+        if (localStorage.getItem('quang_auth') !== 'true') {
+            window.location.href = 'quang-portal.html';
+        }
+    </script>
+
+    <!-- Fixed top nav -->
+    <nav class="top-nav">
+        <a href="quang-portal.html" class="nav-brand">
+            <span class="icon-hex">⚡</span>
+            QUANG
+        </a>
+        <ul class="nav-links">
+            <li><a href="quang-portal.html">Dashboard</a></li>
+            <li><a href="quang-profile.html">Profile</a></li>
+            <li><a href="quang-methodology.html">Methodology</a></li>
+            <li><a href="quang-transcripts.html" class="active">Transcripts</a></li>
+            <li><a href="quang-action-plan.html">Action Plan</a></li>
+        </ul>
+        <button class="btn-logout" onclick="localStorage.removeItem('quang_auth');window.location.href='quang-portal.html';">LOGOUT</button>
+    </nav>
+
+    <!-- Main content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1>TRANSCRIPTS</h1>
+            <p class="subtitle">Session Records · Private Cohort</p>
+        </div>
+
+        <!-- Session 1 — 2026-04-10 -->
+        <article class="session-card">
+            <div class="session-card-header">
+                <span class="session-number">Session 1</span>
+                <span class="date-badge">2026-04-10</span>
+            </div>
+            <p class="session-format">GitHub Copilot Setup</p>
+            <div class="session-section">
+                <p class="session-section-label">Format</p>
+                <p>Private class — Quan + Quang (twin pair)</p>
+            </div>
+            <div class="session-section">
+                <p class="session-section-label">What Happened</p>
+                <p>Set up GitHub account. Signed up for Copilot Premium ($10/mo). Discussed splitting plan cost with Quan. Reviewed Copilot features: higher usage limits, AI model access.</p>
+            </div>
+            <div class="key-outcome">
+                <p class="session-section-label">Key Outcome</p>
+                <p>Quang now has GitHub + Copilot active for AI project work.</p>
+            </div>
+        </article>
+
+        <!-- Session 2 — 2026-03-30 -->
+        <article class="session-card">
+            <div class="session-card-header">
+                <span class="session-number">Session 2</span>
+                <span class="date-badge">2026-03-30</span>
+            </div>
+            <p class="session-format">Career Setup</p>
+            <div class="session-section">
+                <p class="session-section-label">Format</p>
+                <p>Private class — Quan + Quang (twin pair)</p>
+                <span class="soul-dna-badge">Soul DNA Level: HIGH</span>
+            </div>
+            <div class="session-section">
+                <p class="session-section-label">What Happened</p>
+                <p>Career setup session — LinkedIn, blog, website, AI headshots discussed. Quang to email matcha marketing project details to Michael. Notion free trial signed up. AI headshot service offered. Fiverr/Upwork discussion.</p>
+            </div>
+            <div class="session-section">
+                <p class="session-section-label">Key Quotes</p>
+                <div class="quote-block">
+                    'Every business has a website. What are you talking about? This is like 2026, bro.'
+                </div>
+                <div class="quote-block" style="margin-top:0.5rem;">
+                    'It doesn't matter — you are an intern — put it down — even if they didn't teach you anything, you are learning.'
+                </div>
+            </div>
+            <div class="session-section" style="margin-top:0.85rem;">
+                <p class="session-section-label">Action Items</p>
+                <ul>
+                    <li>Email matcha project to Michael</li>
+                    <li>Receive AI headshots</li>
+                    <li>LinkedIn + website setup</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Session 3 — Earlier Sessions 2024–2026 -->
+        <article class="session-card">
+            <div class="session-card-header">
+                <span class="session-number">Session 3</span>
+                <span class="date-badge">2024–2026</span>
+            </div>
+            <p class="session-format">Earlier Sessions · Strategic Laziness &amp; Phonics</p>
+            <div class="session-section">
+                <p class="session-section-label">Format</p>
+                <p>Gemini Live voice sessions</p>
+            </div>
+            <div class="session-section">
+                <p class="session-section-label">Key Moments</p>
+                <ul>
+                    <li>'She sells seashells by the seashore' — Quang's pronunciation triggered Korean language detection on Gemini.</li>
+                    <li>Michael: 'You suck. You're fired.' (to Gemini).</li>
+                    <li>Strategic Laziness discussion — Quang defined it as making to-do lists to find efficient ways to work.</li>
+                    <li>Michael pushed SPECIFICITY: 'I don't want you to repeat my words back to me.'</li>
+                </ul>
+            </div>
+            <div class="session-section">
+                <p class="session-section-label">All Metaphors</p>
+                <p>Sinking Ship, Ostrich vs Tiger, Train, Toilet Paper Parable.</p>
+            </div>
+        </article>
+    </main>
+
+    <script src="global-brand-shelf.js"></script>
+</body>
+</html>
+```

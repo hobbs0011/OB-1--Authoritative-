@@ -1,1 +1,0 @@
-export const countTokens=(t)=>t.length;export const trackUsage=(t,a)=>{const n=(t||'').length;return n;};export const getUsage=()=>({'total':0});export const resetUsage=()=>{};export default{countTokens,trackUsage,getUsage,resetUsage};

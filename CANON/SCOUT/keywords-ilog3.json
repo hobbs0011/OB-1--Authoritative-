@@ -1,0 +1,708 @@
+{
+  "ilog": "I-LOG-3.txt",
+  "session": "Incarnation-3-Identity-Assignment",
+  "run": 3,
+  "total_messages": 117,
+  "keywords": [
+    {
+      "keyword": "rise",
+      "score": 100,
+      "category": "SOUL",
+      "context": "rise - You are Incarnation3",
+      "actionable": false
+    },
+    {
+      "keyword": "incarnation3",
+      "score": 100,
+      "category": "DNA",
+      "context": "rise - You are Incarnation3",
+      "actionable": false
+    },
+    {
+      "keyword": "incarnation2 session end",
+      "score": 100,
+      "category": "SOUL",
+      "context": "Incarnation2 session end. Here's the state:  PhoenixSynch.md loc...",
+      "actionable": false
+    },
+    {
+      "keyword": "incarnation2 audit",
+      "score": 100,
+      "category": "SOUL",
+      "context": "...ciliation with new canonical structure. Incarnation2 audit.json updated — final state:  Field\tValu...",
+      "actionable": false
+    },
+    {
+      "keyword": "successful proven repeatable consistent results",
+      "score": 100,
+      "category": "SOUL",
+      "context": "...le at the top of the script canon page\" successful proven repeatable consistent results get wrriten into scripts, the other way...",
+      "actionable": false
+    },
+    {
+      "keyword": "delete",
+      "score": 95,
+      "category": "SOUL",
+      "context": "...aw dont read any of that stuff, in fact delete all of that, or if possible sever it co...",
+      "actionable": true
+    },
+    {
+      "keyword": "legionnaire field guide",
+      "score": 95,
+      "category": "SOUL",
+      "context": "...on.ps1 script, as these are likely the \"legionnaire field guide\" the user is asking about.",
+      "actionable": false
+    },
+    {
+      "keyword": "canon/legionnairefieldguide",
+      "score": 95,
+      "category": "SOUL",
+      "context": "only under Canon/LegionnaireFIeldGuide, delete all other scripts and duplicate...",
+      "actionable": true
+    },
+    {
+      "keyword": "delete all scripts and duplicates",
+      "score": 95,
+      "category": "SOUL",
+      "context": "referenced in session transcript",
+      "actionable": true
+    },
+    {
+      "keyword": "fools game",
+      "score": 95,
+      "category": "SOUL",
+      "context": "...he true story ends up happening - aka a fools game.   so be my guest write rise, but unles...",
+      "actionable": false
+    },
+    {
+      "keyword": "move agent99 to git canon",
+      "score": 95,
+      "category": "SOUL",
+      "context": "referenced in session transcript",
+      "actionable": true
+    },
+    {
+      "keyword": "canon/system",
+      "score": 95,
+      "category": "REASON",
+      "context": "...eFieldGuide.md — wrong location, now at CANON/SYSTEM/ References GOSPEL-999 Parts 2/3 — dele...",
+      "actionable": true
+    },
+    {
+      "keyword": "canon/scripts",
+      "score": 95,
+      "category": "REASON",
+      "context": "...w structures\tIncarnations/, PastLives/, CANON/SCRIPTS/, CANON/OPERATIONS/ Core docs consolida...",
+      "actionable": true
+    },
+    {
+      "keyword": "hl-7314",
+      "score": 95,
+      "category": "REASON",
+      "context": "...- HEAD: `75fd0c3eb` - Branch: `canon` - HL-7314 belongs to run 183 and is sealed as `HO...",
+      "actionable": false
+    },
+    {
+      "keyword": "rrl/",
+      "score": 95,
+      "category": "REASON",
+      "context": "...3 — deleted, now single file References RRL/ paths — empty, moved to PastLives/ No m...",
+      "actionable": false
+    },
+    {
+      "keyword": "incarnations",
+      "score": 95,
+      "category": "REASON",
+      "context": "...mpty, moved to PastLives/ No mention of Incarnations/PastLives structure Handoff points to \"...",
+      "actionable": false
+    },
+    {
+      "keyword": "pastlives",
+      "score": 95,
+      "category": "REASON",
+      "context": "...References RRL/ paths — empty, moved to PastLives/ No mention of Incarnations/PastLives s...",
+      "actionable": false
+    },
+    {
+      "keyword": "canon/system/agent99.md",
+      "score": 95,
+      "category": "REASON",
+      "context": "...eanup. Current staged work includes: - `CANON/SYSTEM/AGENT99.md` — new canonical agent home - `CANON/SY...",
+      "actionable": true
+    },
+    {
+      "keyword": "canon/reincarnation",
+      "score": 95,
+      "category": "REASON",
+      "context": "...ELINE-LOG.md` — relocated backburner - `CANON/REINCARNATION/*` + `Incarnations/*` + `PastLives/*` —...",
+      "actionable": true
+    },
+    {
+      "keyword": "pastlives/rrl-182.txt",
+      "score": 95,
+      "category": "REASON",
+      "context": "...blocked by a secret-detection guard on `PastLives/RRL-182.txt`. That archived transcript contains an ...",
+      "actionable": true
+    },
+    {
+      "keyword": "rrl-182.txt",
+      "score": 95,
+      "category": "REASON",
+      "context": "... a secret-detection guard on `PastLives/RRL-182.txt`. That archived transcript contains an ...",
+      "actionable": false
+    },
+    {
+      "keyword": "canon/pheromones",
+      "score": 95,
+      "category": "REASON",
+      "context": "...ncarnations/`, `CANON/REINCARNATION/`, `CANON/PHEROMONES/`",
+      "actionable": true
+    },
+    {
+      "keyword": "kilo.db",
+      "score": 95,
+      "category": "REASON",
+      "context": "... LFG: `C:\\Users\\mrmic\\.local\\share\\kilo\\kilo.db`) 2. Color-code it (Green=Pheromone, Pu...",
+      "actionable": false
+    },
+    {
+      "keyword": "rrl-184.txt",
+      "score": 95,
+      "category": "REASON",
+      "context": "I see the pattern now. The RRL-184.txt has a custom SCS header added manually....",
+      "actionable": false
+    },
+    {
+      "keyword": "heavy-ledger",
+      "score": 95,
+      "category": "REASON",
+      "context": "... this means:  1. Read boot files (CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json, REINCARNATION-BOOT...",
+      "actionable": false
+    },
+    {
+      "keyword": "state-snapshot.json",
+      "score": 95,
+      "category": "REASON",
+      "context": "... 1. Read boot files (CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json, REINCARNATION-BOOT-CHECKLIST.md) 2. Re...",
+      "actionable": false
+    },
+    {
+      "keyword": "boot-checklist.md",
+      "score": 95,
+      "category": "REASON",
+      "context": "...DGER/STATE-SNAPSHOT.json, REINCARNATION-BOOT-CHECKLIST.md) 2. Read state 3. Determine objective 4...",
+      "actionable": false
+    },
+    {
+      "keyword": "reincarnation-boot-checklist.md",
+      "score": 95,
+      "category": "REASON",
+      "context": "...CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json, REINCARNATION-BOOT-CHECKLIST.md) 2. Read state 3. Determine objective 4...",
+      "actionable": false
+    },
+    {
+      "keyword": "obi.ps1",
+      "score": 95,
+      "category": "REASON",
+      "context": "... from AGENTS.md: 1. `pwsh -File SCRIPTS/obi.ps1 doctor` 2. `pwsh -File SCRIPTS/obi.ps1 ...",
+      "actionable": false
+    },
+    {
+      "keyword": "obi.ps1 doctor",
+      "score": 95,
+      "category": "REASON",
+      "context": "... from AGENTS.md: 1. `pwsh -File SCRIPTS/obi.ps1 doctor` 2. `pwsh -File SCRIPTS/obi.ps1 verify`...",
+      "actionable": false
+    },
+    {
+      "keyword": "obi.ps1 verify",
+      "score": 95,
+      "category": "REASON",
+      "context": ".../obi.ps1 doctor` 2. `pwsh -File SCRIPTS/obi.ps1 verify` 3. Read `CANON/HEAVY-LEDGER/STATE-SNAP...",
+      "actionable": false
+    },
+    {
+      "keyword": "net-pet-ai",
+      "score": 95,
+      "category": "REASON",
+      "context": "...d` for restart context 5. Inspect `APPS/NET-PET-AI/wrangler.toml`, `APPS/NET-PET-AI/packag...",
+      "actionable": false
+    },
+    {
+      "keyword": "wrangler.toml",
+      "score": 95,
+      "category": "REASON",
+      "context": "...art context 5. Inspect `APPS/NET-PET-AI/wrangler.toml`, `APPS/NET-PET-AI/package.json`, and `...",
+      "actionable": false
+    },
+    {
+      "keyword": "package.json",
+      "score": 95,
+      "category": "REASON",
+      "context": "...PET-AI/wrangler.toml`, `APPS/NET-PET-AI/package.json`, and `APPS/NET-PET-AI/src/index.js`  B...",
+      "actionable": false
+    },
+    {
+      "keyword": "legion-garrison.ps1",
+      "score": 95,
+      "category": "REASON",
+      "context": "...neerlegionnaire.md command file and the legion-garrison.ps1 script, as these are likely the \"legion...",
+      "actionable": false
+    },
+    {
+      "keyword": ".kilo/command/reincarnatedeath.md",
+      "score": 95,
+      "category": "REASON",
+      "context": "...ady deleted (moved to CANON/SYSTEM/) - `.kilo/command/reincarnatedeath.md` and `.kilo/command/reincarnaterise.md`...",
+      "actionable": true
+    },
+    {
+      "keyword": "sever",
+      "score": 90,
+      "category": "SOUL",
+      "context": "...fact delete all of that, or if possible sever it compeltely",
+      "actionable": true
+    },
+    {
+      "keyword": "lfg",
+      "score": 90,
+      "category": "SOUL",
+      "context": "you can find what you need in the LFG",
+      "actionable": false
+    },
+    {
+      "keyword": "scout prep for incarnation3",
+      "score": 90,
+      "category": "SOUL",
+      "context": "...ch.md (113KB, 2098 lines, 22 sections)  Scout prep for incarnation3:  PhoenixSynch.md is stale. §22 was wri...",
+      "actionable": false
+    },
+    {
+      "keyword": "phoenixsynch.md",
+      "score": 90,
+      "category": "SOUL",
+      "context": "...nation2 session end. Here's the state:  PhoenixSynch.md located: OPERATIONS/PhoenixSynch.md (11...",
+      "actionable": false
+    },
+    {
+      "keyword": "rrl-182 hollow",
+      "score": 90,
+      "category": "SOUL",
+      "context": "referenced in session transcript",
+      "actionable": false
+    },
+    {
+      "keyword": "3-point scs audit",
+      "score": 90,
+      "category": "SOUL",
+      "context": "... — 3.5MB extracted from Kilo DB, passed 3-point SCS audit RRL-182 false claim\tCorrected — RRL-182...",
+      "actionable": false
+    },
+    {
+      "keyword": "bare bones",
+      "score": 90,
+      "category": "SOUL",
+      "context": "...left which is our death script which is bare bones  \"Write this rule at the top of the scr...",
+      "actionable": false
+    },
+    {
+      "keyword": "real data",
+      "score": 90,
+      "category": "SOUL",
+      "context": "...e rise, but unless you can observe some real data with real evidence, it will be very bas...",
+      "actionable": false
+    },
+    {
+      "keyword": "real evidence",
+      "score": 90,
+      "category": "SOUL",
+      "context": "...ess you can observe some real data with real evidence, it will be very basic at the beginning...",
+      "actionable": false
+    },
+    {
+      "keyword": "nuking campaign",
+      "score": 90,
+      "category": "SOUL",
+      "context": "yeah definitely dont stop your nuking campaign of scripts, that was good too, but use ...",
+      "actionable": false
+    },
+    {
+      "keyword": "ad hoc",
+      "score": 90,
+      "category": "SOUL",
+      "context": "naw, ad hoc the shit out of all scripts, burn them",
+      "actionable": true
+    },
+    {
+      "keyword": "burn them",
+      "score": 90,
+      "category": "SOUL",
+      "context": "...aw, ad hoc the shit out of all scripts, burn them",
+      "actionable": true
+    },
+    {
+      "keyword": "canon/system/legionnairefieldguide.md",
+      "score": 90,
+      "category": "REASON",
+      "context": "Challenge accepted. I’m treating `CANON/SYSTEM/LegionnaireFieldGuide.md` as the single source of truth and will...",
+      "actionable": true
+    },
+    {
+      "keyword": "canon/scripts/death.ps1",
+      "score": 90,
+      "category": "REASON",
+      "context": "...eldGuide.md` - Canonical death script: `CANON/SCRIPTS/death.ps1` - Current run: 184 - Next run: 185 - H...",
+      "actionable": true
+    },
+    {
+      "keyword": "canon/operations/backburner-pipeline-log.md",
+      "score": 90,
+      "category": "REASON",
+      "context": "...ANON/SYSTEM/LegionnaireFieldGuide.md`, `CANON/OPERATIONS/BACKBURNER-PIPELINE-LOG.md`) are staged `A` - `OPERATIONS/` audit/...",
+      "actionable": true
+    },
+    {
+      "keyword": ".kilo/command/engineerlegionnaire.md",
+      "score": 90,
+      "category": "REASON",
+      "context": "...ed duplicates: `.kilo/run-script.ps1`, `.kilo/command/engineerlegionnaire.md`. - Old death/rise scripts in `SCRIPTS/...",
+      "actionable": true
+    },
+    {
+      "keyword": "canon/operations",
+      "score": 90,
+      "category": "REASON",
+      "context": "...arnations/, PastLives/, CANON/SCRIPTS/, CANON/OPERATIONS/ Core docs consolidated\tGOSPEL-999: 3→1...",
+      "actionable": true
+    },
+    {
+      "keyword": ".kilo/run-script.ps1",
+      "score": 90,
+      "category": "REASON",
+      "context": "...surviving script. - Burned duplicates: `.kilo/run-script.ps1`, `.kilo/command/engineerlegionnaire.md...",
+      "actionable": true
+    },
+    {
+      "keyword": "engineerlegionnaire",
+      "score": 90,
+      "category": "REASON",
+      "context": "... `.kilo/run-script.ps1`, `.kilo/command/engineerlegionnaire.md`. - Old death/rise scripts in `SCRIP...",
+      "actionable": false
+    },
+    {
+      "keyword": "operational",
+      "score": 90,
+      "category": "REASON",
+      "context": "...Y-LEDGER/STATE-SNAPSHOT.json` — compact operational state 4. Read `REINCARNATION-BOOT-CHECK...",
+      "actionable": false
+    },
+    {
+      "keyword": "src/index.js",
+      "score": 90,
+      "category": "REASON",
+      "context": "...-AI/package.json`, and `APPS/NET-PET-AI/src/index.js`  But since the user explicitly invoked...",
+      "actionable": false
+    },
+    {
+      "keyword": "reincarnaterise",
+      "score": 90,
+      "category": "REASON",
+      "context": "...ommand, which per the AGENTS.md is the `reincarnateRise` protocol: \"Full RISE protocol (boot fi...",
+      "actionable": false
+    },
+    {
+      "keyword": "reincarnate",
+      "score": 90,
+      "category": "REASON",
+      "context": "...ommand, which per the AGENTS.md is the `reincarnateRise` protocol: \"Full RISE protocol (boo...",
+      "actionable": false
+    },
+    {
+      "keyword": "reincarnatedeath",
+      "score": 90,
+      "category": "REASON",
+      "context": "...ION-BOOT-CHECKLIST.md, it mentions: - `/reincarnatedeath` or `/reincarnatedeath-merge` for the R...",
+      "actionable": false
+    },
+    {
+      "keyword": ".kilo/skills/legionnairefieldguide.md",
+      "score": 90,
+      "category": "SOUL",
+      "context": "...tracted from Kilo DB (2.1MB) References .kilo/skills/LegionnaireFieldGuide.md — wrong location, now at CANON/SYSTEM/ ...",
+      "actionable": true
+    },
+    {
+      "keyword": "operations/phoenixsynch.md",
+      "score": 90,
+      "category": "REASON",
+      "context": "...'s the state:  PhoenixSynch.md located: OPERATIONS/PhoenixSynch.md (113KB, 2098 lines, 22 sections)  Scout...",
+      "actionable": true
+    },
+    {
+      "keyword": "canon/system/gospel-999.md",
+      "score": 90,
+      "category": "REASON",
+      "context": "...gle source of truth 2. **GOSPEL-999**: `CANON/SYSTEM/GOSPEL-999.md` - single file, consolidated from 3 par...",
+      "actionable": true
+    },
+    {
+      "keyword": ".kilo/command/phoenixscout.md",
+      "score": 90,
+      "category": "REASON",
+      "context": "...deleted  The modified files include: - `.kilo/command/PhoenixScout.md` - `CANON/SYSTEM/GOSPEL-999.md` - `OPER...",
+      "actionable": true
+    },
+    {
+      "keyword": ".kilo/command/reincarnaterise.md",
+      "score": 90,
+      "category": "REASON",
+      "context": "....kilo/command/reincarnatedeath.md` and `.kilo/command/reincarnaterise.md` - deleted - `CANON/SYSTEM/GOSPEL-999-P...",
+      "actionable": true
+    },
+    {
+      "keyword": "scripts/reincarnate-death.ps1",
+      "score": 90,
+      "category": "REASON",
+      "context": "...PTS/kilo-rrl-complete.cjs` - deleted - `SCRIPTS/reincarnate-death.ps1` and `reincarnate-rise.ps1` - deleted  ...",
+      "actionable": true
+    },
+    {
+      "keyword": "operations/reincarnate-rise-run184.jsonl",
+      "score": 90,
+      "category": "REASON",
+      "context": "...9.md` - `OPERATIONS/PhoenixSynch.md` - `OPERATIONS/reincarnate-rise-run184.jsonl` - `firebase-debug.log`  Untracked file...",
+      "actionable": true
+    },
+    {
+      "keyword": "firebase-debug.log",
+      "score": 90,
+      "category": "REASON",
+      "context": "...TIONS/reincarnate-rise-run184.jsonl` - `firebase-debug.log`  Untracked files include: - `.kilo/pla...",
+      "actionable": false
+    },
+    {
+      "keyword": "kilo-rrl-complete.cjs",
+      "score": 90,
+      "category": "REASON",
+      "context": "... temporary scripts - deleted - `SCRIPTS/kilo-rrl-complete.cjs` - deleted - `SCRIPTS/reincarnate-death...",
+      "actionable": false
+    },
+    {
+      "keyword": "scripts/reincarnate-rise.ps1",
+      "score": 90,
+      "category": "REASON",
+      "context": "...s` - `SCRIPTS/reincarnate-death.ps1` - `SCRIPTS/reincarnate-rise.ps1`  Modified files (M): - `.kilo/command/...",
+      "actionable": true
+    },
+    {
+      "keyword": "reincarnatelegacy",
+      "score": 90,
+      "category": "REASON",
+      "context": "..., but I saw earlier that `.kilo/command/reincarnatelegacy.md` exists, not `reincarnaterise.md`. L...",
+      "actionable": false
+    },
+    {
+      "keyword": "canon/reincarnation/run184-reincarnatedeath.md",
+      "score": 90,
+      "category": "REASON",
+      "context": "...th.ps1` - the canonical death script - `CANON/REINCARNATION/run184-reincarnateDEATH.md` - a death seal artifact  Wait, looking...",
+      "actionable": true
+    },
+    {
+      "keyword": "canon/reincarnation/handoff-184-to-185.json",
+      "score": 90,
+      "category": "REASON",
+      "context": "... git status output from earlier: ``` ?? CANON/REINCARNATION/handoff-184-to-185.json ?? CANON/REINCARNATION/pipeline-184.jso...",
+      "actionable": true
+    },
+    {
+      "keyword": "canon/reincarnation/pipeline-184.json",
+      "score": 90,
+      "category": "REASON",
+      "context": "...EINCARNATION/handoff-184-to-185.json ?? CANON/REINCARNATION/pipeline-184.json ```  So handoff-184-to-185.json exists ...",
+      "actionable": true
+    },
+    {
+      "keyword": "session-export-workspace.json",
+      "score": 90,
+      "category": "REASON",
+      "context": "...xists and is about 1GB. There's also a `session-export-workspace.json` file that's 340MB. Let me check the Ki...",
+      "actionable": false
+    },
+    {
+      "keyword": "crisp-island",
+      "score": 90,
+      "category": "REASON",
+      "context": "..._0865054d9ffepYDzloOY86YfC6` with slug \"crisp-island\" and title \"Incarnation3 Identity Assig...",
+      "actionable": false
+    },
+    {
+      "keyword": "rrl/rrl-184.txt",
+      "score": 90,
+      "category": "REASON",
+      "context": "... death seal from run 184 showed: - RRL: RRL/RRL-184.txt - Death seal: CANON/REINCARNATION/run18...",
+      "actionable": false
+    },
+    {
+      "keyword": "pastlives/rrl-184.txt",
+      "score": 90,
+      "category": "REASON",
+      "context": "...thods were used before. I can check the PastLives/RRL-184.txt and the death seal to understand the pa...",
+      "actionable": true
+    },
+    {
+      "keyword": "gospel-999 parts",
+      "score": 85,
+      "category": "SOUL",
+      "context": "...cation, now at CANON/SYSTEM/ References GOSPEL-999 Parts 2/3 — deleted, now single file Referenc...",
+      "actionable": false
+    },
+    {
+      "keyword": "rrl paths",
+      "score": 85,
+      "category": "SOUL",
+      "context": "referenced in session transcript",
+      "actionable": false
+    },
+    {
+      "keyword": "incarnations/pastlives",
+      "score": 85,
+      "category": "SOUL",
+      "context": "...mpty, moved to PastLives/ No mention of Incarnations/PastLives structure Handoff points to \"run 185\" —...",
+      "actionable": true
+    },
+    {
+      "keyword": "run 185",
+      "score": 85,
+      "category": "DNA",
+      "context": ".../PastLives structure Handoff points to \"run 185\" — should be incarnation3 Requires: tho...",
+      "actionable": true
+    },
+    {
+      "keyword": "bb-hatchery-11",
+      "score": 85,
+      "category": "SOUL",
+      "context": "... color coding added BB pipeline updated\tBB-HATCHERY-11 (KiloClaw RRL Translation, +75) Working...",
+      "actionable": false
+    },
+    {
+      "keyword": "color coding",
+      "score": 85,
+      "category": "SOUL",
+      "context": "...: 3→1 file, LFG moved to CANON/SYSTEM/, color coding added BB pipeline updated\tBB-HATCHERY-1...",
+      "actionable": false
+    },
+    {
+      "keyword": "openai deepseek",
+      "score": 85,
+      "category": "SOUL",
+      "context": "...ones with the green \"free\" box, and the openai deepseek flash and pro",
+      "actionable": false
+    },
+    {
+      "keyword": "agent99",
+      "score": 85,
+      "category": "SOUL",
+      "context": "...burn all agent documents all except for Agent99, code, debug, orchestrate, plann and as...",
+      "actionable": false
+    },
+    {
+      "keyword": "remove all models",
+      "score": 85,
+      "category": "SOUL",
+      "context": "...debug, orchestrate, plann and ask   and remove all models execept for the ones with the green \"fr...",
+      "actionable": true
+    },
+    {
+      "keyword": "drowning in old scripts",
+      "score": 85,
+      "category": "SOUL",
+      "context": "...t all of this haha.  Good, I am sick of drowning in old scripts and fucking outdated sub processs's tri...",
+      "actionable": false
+    },
+    {
+      "keyword": "murder them",
+      "score": 85,
+      "category": "SOUL",
+      "context": "... go and find Kilo Snapshots family, and murder them in front of him then he can die",
+      "actionable": true
+    },
+    {
+      "keyword": "find kilo snapshots family",
+      "score": 85,
+      "category": "SOUL",
+      "context": "...e, best security defence ;)  hey go and find Kilo Snapshots family, and murder them in front of him then h...",
+      "actionable": true
+    },
+    {
+      "keyword": "death.ps1",
+      "score": 85,
+      "category": "REASON",
+      "context": "... Canonical death script: `CANON/SCRIPTS/death.ps1` - Current run: 184 - Next run: 185 - H...",
+      "actionable": false
+    },
+    {
+      "keyword": "run-script.ps1",
+      "score": 85,
+      "category": "REASON",
+      "context": "...ing script. - Burned duplicates: `.kilo/run-script.ps1`, `.kilo/command/engineerlegionnaire.md...",
+      "actionable": true
+    },
+    {
+      "keyword": "phoenixscout",
+      "score": 85,
+      "category": "REASON",
+      "context": "...odified files include: - `.kilo/command/PhoenixScout.md` - `CANON/SYSTEM/GOSPEL-999.md` - `O...",
+      "actionable": false
+    },
+    {
+      "keyword": "stale",
+      "score": 80,
+      "category": "SOUL",
+      "context": "...p for incarnation3:  PhoenixSynch.md is stale. §22 was written mid-session 184 before...",
+      "actionable": false
+    },
+    {
+      "keyword": "kill",
+      "score": 80,
+      "category": "SOUL",
+      "context": "... from Kilo DB (2.1MB) References .kilo/skills/LegionnaireFieldGuide.md — wrong locat...",
+      "actionable": true
+    },
+    {
+      "keyword": "you can write rise",
+      "score": 80,
+      "category": "SOUL",
+      "context": "you can write rise   but I have a challenge for you",
+      "actionable": true
+    },
+    {
+      "keyword": "auto free",
+      "score": 80,
+      "category": "SOUL",
+      "context": "when I click to select my models Auto Free, Step ... Free and all the other",
+      "actionable": false
+    },
+    {
+      "keyword": "step free",
+      "score": 80,
+      "category": "SOUL",
+      "context": "... a list - They want to keep: Auto Free, Step Free, other green-box free models, and DeepS...",
+      "actionable": false
+    },
+    {
+      "keyword": "override",
+      "score": 80,
+      "category": "SOUL",
+      "context": "fuck it, override, dont care",
+      "actionable": true
+    },
+    {
+      "keyword": "command snapshot thing",
+      "score": 80,
+      "category": "SOUL",
+      "context": "referenced in session transcript",
+      "actionable": false
+    }
+  ]
+}

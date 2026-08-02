@@ -1,0 +1,19 @@
+{
+  "name": "Incarnation1-IRL-182Conversion",
+  "timestamp": "2026-08-02T22:24:00+07:00",
+  "irl": "I-LOG-UNAUDITED/I-LOG-Incarnation1-IRL-182Conversion.txt",
+  "irl_colorized": "I-LOG-UNAUDITED/I-LOG-Incarnation1-IRL-182Conversion-COLORIZED.md",
+  "irl_stats": "I-LOG-UNAUDITED/I-LOG-Incarnation1-IRL-182Conversion-STATS.json",
+  "audit": {
+    "SOULcount": 55,
+    "DNAcount": 311,
+    "REASONcount": 304,
+    "PHEROMONEcount": 277,
+    "total": 366,
+    "total_chars": 530432,
+    "duration_min": 0
+  },
+  "open_items": [],
+  "keywords_file": "CANON/SOUL-KEYWORDS/rfkw-Incarnation1-IRL-182Conversion.txt",
+  "lost_souls_file": "CANON/LOSTSOULS/lostsouls-Incarnation1-IRL-182Conversion.jsonl"
+}

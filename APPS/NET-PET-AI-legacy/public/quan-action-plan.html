@@ -1,0 +1,756 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Action Plan | QUAN PORTAL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        if(localStorage.getItem('quan_auth')!=='true'){
+            window.location.href='quan-portal.html';
+        }
+    </script>
+    <style>
+        :root {
+            --void: #0a0a12;
+            --card: rgba(22, 22, 35, 0.85);
+            --purple: #a855f7;
+            --gold: #f59e0b;
+            --teal: #14b8a6;
+            --text: #f8fafc;
+            --dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+            --card-radius: 16px;
+            --nav-height: 64px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--void);
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+            padding-top: calc(var(--nav-height) + 24px);
+            padding-bottom: 40px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Portal watermark */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(168, 85, 247, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 60%, rgba(245, 158, 11, 0.02) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(20, 184, 166, 0.02) 0%, transparent 50%);
+            background-size: 100% 100%;
+        }
+
+        body::after {
+            content: 'QUAN';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18vw;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.012);
+            pointer-events: none;
+            z-index: 0;
+            white-space: nowrap;
+            letter-spacing: 0.15em;
+        }
+
+        /* Fixed top nav */
+        .portal-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-height);
+            background: rgba(10, 10, 18, 0.92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 100;
+            gap: 8px;
+        }
+
+        .nav-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.06em;
+            color: var(--purple);
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+            padding: 0 8px;
+        }
+
+        .nav-links::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-link {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--dim);
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: all 0.22s ease;
+            white-space: nowrap;
+            letter-spacing: 0.03em;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link.active,
+        .nav-link[aria-current="page"] {
+            color: var(--gold);
+            background: rgba(245, 158, 11, 0.08);
+            border-color: rgba(245, 158, 11, 0.25);
+            font-weight: 600;
+        }
+
+        .nav-logout {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--dim);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 7px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.22s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+            letter-spacing: 0.03em;
+        }
+
+        .nav-logout:hover {
+            color: #f87171;
+            border-color: rgba(248, 113, 113, 0.4);
+            background: rgba(248, 113, 113, 0.06);
+        }
+
+        /* Main content wrapper */
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Page header */
+        .page-header {
+            text-align: center;
+            padding: 8px 0 4px;
+        }
+
+        .page-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: 0.08em;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .page-header .subtitle {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 0.05em;
+        }
+
+        /* Card base */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--card-radius);
+            padding: 24px 28px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: border-color 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(255, 255, 255, 0.14);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .card-header-icon {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        .card-header-icon.gold {
+            background: var(--gold);
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+        }
+
+        .card-header-icon.teal {
+            background: var(--teal);
+            box-shadow: 0 0 10px rgba(20, 184, 166, 0.5);
+        }
+
+        .card-header-icon.purple {
+            background: var(--purple);
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+        }
+
+        .card-header-text h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.15rem;
+            letter-spacing: 0.04em;
+            color: var(--text);
+            margin-bottom: 2px;
+        }
+
+        .card-header-text .card-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.8rem;
+            color: var(--dim);
+            letter-spacing: 0.02em;
+        }
+
+        .card.gold-border {
+            border-left: 3px solid var(--gold);
+        }
+
+        .card.teal-border {
+            border-left: 3px solid var(--teal);
+        }
+
+        .card.purple-border {
+            border-left: 3px solid var(--purple);
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.2s ease;
+        }
+
+        .checklist-item:hover {
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .checklist-label {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: var(--text);
+            letter-spacing: 0.01em;
+            line-height: 1.4;
+        }
+
+        /* Status badges */
+        .status-badge {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 0.72rem;
+            letter-spacing: 0.06em;
+            padding: 4px 12px;
+            border-radius: 20px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            text-transform: uppercase;
+        }
+
+        .status-badge.pending {
+            background: rgba(148, 163, 184, 0.12);
+            color: #94a3b8;
+            border: 1px solid rgba(148, 163, 184, 0.25);
+        }
+
+        .status-badge.in-progress {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .status-badge.done {
+            background: rgba(20, 184, 166, 0.1);
+            color: #14b8a6;
+            border: 1px solid rgba(20, 184, 166, 0.3);
+        }
+
+        /* Milestone items */
+        .milestone-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .milestone-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+        }
+
+        .milestone-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            flex-shrink: 0;
+            margin-top: 6px;
+            box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+        }
+
+        .milestone-content .milestone-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--dim);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .milestone-content .milestone-value {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text);
+            letter-spacing: 0.01em;
+        }
+
+        /* English focus */
+        .english-block {
+            margin-bottom: 16px;
+        }
+
+        .english-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .english-label {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 0.82rem;
+            color: var(--teal);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .english-detail {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: var(--text);
+            letter-spacing: 0.01em;
+            line-height: 1.5;
+        }
+
+        .english-detail em {
+            color: var(--teal);
+            font-style: italic;
+        }
+
+        /* OBI Note */
+        .obi-quote {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 0.95rem;
+            color: var(--text);
+            letter-spacing: 0.01em;
+            line-height: 1.65;
+            font-style: italic;
+            position: relative;
+            padding-left: 16px;
+            border-left: 2px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .obi-signature {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--purple);
+            letter-spacing: 0.05em;
+            margin-top: 12px;
+            text-align: right;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .action-btn {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.04em;
+            padding: 12px 22px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.22s ease;
+            border: 1px solid transparent;
+        }
+
+        .action-btn.purple-action {
+            background: rgba(168, 85, 247, 0.12);
+            color: var(--purple);
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .action-btn.purple-action:hover {
+            background: rgba(168, 85, 247, 0.2);
+            border-color: rgba(168, 85, 247, 0.5);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+        }
+
+        .action-btn.gold-action {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--gold);
+            border-color: rgba(245, 158, 11, 0.25);
+        }
+
+        .action-btn.gold-action:hover {
+            background: rgba(245, 158, 11, 0.18);
+            border-color: rgba(245, 158, 11, 0.45);
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.12);
+        }
+
+        .action-btn.teal-action {
+            background: rgba(20, 184, 166, 0.1);
+            color: var(--teal);
+            border-color: rgba(20, 184, 166, 0.25);
+        }
+
+        .action-btn.teal-action:hover {
+            background: rgba(20, 184, 166, 0.18);
+            border-color: rgba(20, 184, 166, 0.45);
+            box-shadow: 0 0 20px rgba(20, 184, 166, 0.12);
+        }
+
+        .action-btn .btn-icon {
+            font-size: 1rem;
+        }
+
+        /* Section divider */
+        .section-label {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--dim);
+            text-transform: uppercase;
+            margin-bottom: -8px;
+            padding-left: 4px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .portal-nav {
+                padding: 0 12px;
+                gap: 4px;
+            }
+            .nav-brand {
+                font-size: 0.9rem;
+            }
+            .nav-link {
+                font-size: 0.78rem;
+                padding: 6px 10px;
+            }
+            .nav-logout {
+                font-size: 0.75rem;
+                padding: 6px 12px;
+            }
+            .card {
+                padding: 18px 16px;
+            }
+            .page-header h1 {
+                font-size: 1.4rem;
+            }
+            .checklist-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            .quick-actions {
+                flex-direction: column;
+            }
+            .action-btn {
+                justify-content: center;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-brand {
+                font-size: 0.75rem;
+                letter-spacing: 0.03em;
+            }
+            .nav-link {
+                font-size: 0.7rem;
+                padding: 5px 8px;
+            }
+            .nav-logout {
+                font-size: 0.7rem;
+                padding: 5px 10px;
+            }
+            .page-header h1 {
+                font-size: 1.2rem;
+            }
+            .card-header-text h3 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fixed Top Navigation -->
+    <nav class="portal-nav" role="navigation" aria-label="Student Portal Navigation">
+        <span class="nav-brand">QUAN PORTAL</span>
+        <div class="nav-links">
+            <a href="quan-portal.html" class="nav-link">Dashboard</a>
+            <a href="quan-profile.html" class="nav-link">Profile</a>
+            <a href="quan-methodology.html" class="nav-link">Methodology</a>
+            <a href="quan-transcripts.html" class="nav-link">Transcripts</a>
+            <a href="quan-action-plan.html" class="nav-link active" aria-current="page">Action Plan</a>
+        </div>
+        <button class="nav-logout" id="logoutBtn" title="Logout">LOG OUT</button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content-wrapper" role="main">
+
+        <!-- Page Header -->
+        <header class="page-header">
+            <h1>ACTION PLAN</h1>
+            <p class="subtitle">Career Setup Track · CUB Phase</p>
+        </header>
+
+        <!-- Section 1: Current Sprint -->
+        <article class="card gold-border" aria-labelledby="sprint-heading">
+            <div class="card-header">
+                <span class="card-header-icon gold" aria-hidden="true"></span>
+                <div class="card-header-text">
+                    <h3 id="sprint-heading">CURRENT SPRINT — Career Launch</h3>
+                    <span class="card-subtitle">Immediate action items for this cycle</span>
+                </div>
+            </div>
+            <ul class="checklist" role="list">
+                <li class="checklist-item">
+                    <span class="checklist-label">CV + portfolio + photos → email to Michael</span>
+                    <span class="status-badge pending">PENDING</span>
+                </li>
+                <li class="checklist-item">
+                    <span class="checklist-label">Generate AI headshots</span>
+                    <span class="status-badge pending">PENDING</span>
+                </li>
+                <li class="checklist-item">
+                    <span class="checklist-label">LinkedIn profile setup / audit</span>
+                    <span class="status-badge pending">PENDING</span>
+                </li>
+                <li class="checklist-item">
+                    <span class="checklist-label">Fiverr / Upwork account creation</span>
+                    <span class="status-badge pending">PENDING</span>
+                </li>
+                <li class="checklist-item">
+                    <span class="checklist-label">Roblox 3D modeling asset scope — what does Michael need?</span>
+                    <span class="status-badge pending">PENDING</span>
+                </li>
+                <li class="checklist-item">
+                    <span class="checklist-label">Website domain + build</span>
+                    <span class="status-badge pending">PENDING</span>
+                </li>
+            </ul>
+        </article>
+
+        <!-- Section 2: Upcoming Milestones -->
+        <article class="card" aria-labelledby="milestones-heading">
+            <div class="card-header">
+                <span class="card-header-icon gold" aria-hidden="true"></span>
+                <div class="card-header-text">
+                    <h3 id="milestones-heading">UPCOMING MILESTONES</h3>
+                    <span class="card-subtitle">Targets to track and achieve</span>
+                </div>
+            </div>
+            <ul class="milestone-list" role="list">
+                <li class="milestone-item">
+                    <span class="milestone-dot" aria-hidden="true"></span>
+                    <div class="milestone-content">
+                        <p class="milestone-label">Tiger Score Target</p>
+                        <p class="milestone-value">Reach benchmark threshold — consistent upward trajectory</p>
+                    </div>
+                </li>
+                <li class="milestone-item">
+                    <span class="milestone-dot" aria-hidden="true"></span>
+                    <div class="milestone-content">
+                        <p class="milestone-label">Session Goal</p>
+                        <p class="milestone-value">Consistent Wednesday 7PM attendance — no missed sessions</p>
+                    </div>
+                </li>
+                <li class="milestone-item">
+                    <span class="milestone-dot" aria-hidden="true"></span>
+                    <div class="milestone-content">
+                        <p class="milestone-label">Portfolio Goal</p>
+                        <p class="milestone-value">3 pieces ready to show — polished and presentable</p>
+                    </div>
+                </li>
+                <li class="milestone-item">
+                    <span class="milestone-dot" aria-hidden="true"></span>
+                    <div class="milestone-content">
+                        <p class="milestone-label">Freelance Goal</p>
+                        <p class="milestone-value">First Fiverr gig posted and live</p>
+                    </div>
+                </li>
+            </ul>
+        </article>
+
+        <!-- Section 3: English Focus -->
+        <article class="card teal-border" aria-labelledby="english-heading">
+            <div class="card-header">
+                <span class="card-header-icon teal" aria-hidden="true"></span>
+                <div class="card-header-text">
+                    <h3 id="english-heading">ENGLISH FOCUS</h3>
+                    <span class="card-subtitle">Language development priorities</span>
+                </div>
+            </div>
+            <div class="english-block">
+                <p class="english-label">Primary</p>
+                <p class="english-detail">Career vocabulary in authentic context — LinkedIn profiles, portfolios, pitch language.</p>
+            </div>
+            <div class="english-block">
+                <p class="english-label">Phonics</p>
+                <p class="english-detail">Tongue twister drills — <em>"She sells seashells"</em> — Quan leads the exercise.</p>
+            </div>
+            <div class="english-block">
+                <p class="english-label">Secondary</p>
+                <p class="english-detail">Professional email writing, pitch language development.</p>
+            </div>
+        </article>
+
+        <!-- Section 4: OBI Note -->
+        <article class="card purple-border" aria-labelledby="obi-heading">
+            <div class="card-header">
+                <span class="card-header-icon purple" aria-hidden="true"></span>
+                <div class="card-header-text">
+                    <h3 id="obi-heading">COACH NOTE</h3>
+                    <span class="card-subtitle">Message from OBI / NET Coach</span>
+                </div>
+            </div>
+            <blockquote class="obi-quote">
+                "Quan, you are already doing the thing — the AI pipeline is proof. The only remaining gap is visibility. Build the presence. The train is leaving. Get on it."
+            </blockquote>
+            <p class="obi-signature">— OBI / NET Coach</p>
+        </article>
+
+        <!-- Section 5: Quick Actions -->
+        <div class="section-label" id="quick-actions-label">Quick Actions</div>
+        <nav class="quick-actions" aria-labelledby="quick-actions-label">
+            <a href="/magic-chat.html?student=quan-nguyen" class="action-btn purple-action">
+                <span class="btn-icon" aria-hidden="true">⚡</span> Start Session
+            </a>
+            <a href="quan-transcripts.html" class="action-btn teal-action">
+                <span class="btn-icon" aria-hidden="true">📄</span> View Transcripts
+            </a>
+            <a href="quan-profile.html" class="action-btn gold-action">
+                <span class="btn-icon" aria-hidden="true">👤</span> View Profile
+            </a>
+        </nav>
+
+    </main>
+
+    <!-- Logout Handler -->
+    <script>
+        (function() {
+            var logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                    localStorage.removeItem('quan_auth');
+                    window.location.href = 'quan-portal.html';
+                });
+            }
+        })();
+    </script>
+
+    <!-- Global Brand Shelf -->
+    <script src="global-brand-shelf.js"></script>
+</body>
+</html>
+```

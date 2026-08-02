@@ -1,236 +1,123 @@
-# Phoenix Rising Protocol - God Mode Operations Manual
-# Consolidated bootup, health checks, MCP routing, optimal toolstack
+# God Mode Operations Manual — INCOMPLETE
 
-# SECTION 1: ENVIRONMENT INITIALIZATION
-This is the single source of truth for:
-- System health checks
-- MCP connections (customer + internal)
-- Tool routing (GitKraken, GitLens, Kilo, Google Extensions)
-- Cloudflare God Mode verification
-- Debug & troubleshooting pipeline
+**Purpose:** The best known current practices to allow the unrestricted use of git, VS Code, Cloudflare, and any and all other tools in the PRAIS umbrella (Phoenix-Rising-Ai-Solutions).
 
-## Quick Start
+**Status:** INCOMPLETE — Last audited 2026-07-30; requires validation against live account state.
+
+**Canonical Location:** `CANON/SYSTEM/GOD-MODE.md` (this file; do not duplicate)
+
+**Authority:** `CANON/SYSTEM/GOSPEL-999.md` + `CANON/SYSTEM/LegionnaireFieldGuide.md`
+
+---
+
+## CURRENT ACCESS INVENTORY
+
+### Git + GitHub
+- **Account:** hobbs0011 / Hobbs0011
+- **Token:** GitHub Classic PAT with 21 scopes (full repo, admin, actions, etc.)
+- **Tools:** GitKraken, GitLens, Kilo Agent, VS Code Git
+- **Repos:** OB-1 (canon), Phoenix-Rising-Ultimate (legacy mirror), NET-Ai-EcoSystem-CommandStation (legacy)
+- **CI:** GitHub Actions with secrets: CLOUDFLARE_API_TOKEN, SLACK_WEBHOOK_URL
+
+### Cloudflare
+- **Account Email:** mrmichaelhobbs123@gmail.com
+- **API Key:** Global API Key (cfk_*) — Super Administrator
+- **Workers:**
+  - `net-pet-ai` (APPS/NET-PET-AI/wrangler.toml) — production
+  - `net-pet-ai-dev` — development
+  - `net-pet-ai-production` — production alias
+  - `net-core` (WORKERS/net-core/wrangler.toml)
+  - `net-obi-api` (WORKERS/wrangler.toml)
+  - `soul-logger` (root wrangler.toml)
+- **Bindings:** D1 (soul-archive), KV (RATELIMIT, NET_PET_KV, STUDENT_MEMORY), DO (PetDO, LedgerDO, MemoryDO, CommandDO), Queue (net-pet-notifications)
+- **Zones:** naturalenglishtraining.com (DNS pending transfer from Squarespace), naturalenglishtraining.net (route bound)
+- **MCP:** @cloudflare/mcp-server-cloudflare via .mcp.json
+
+### VS Code / Kilo
+- **Kilo Agent:** Codex protocol runner, agent orchestration
+- **Extensions:** GitHub Copilot, GitLens, GitKraken, Notion Web Clipper, Google Cloud Code
+- **MCP Servers (from .mcp.json):**
+  - cloudflare (wrangler, DO, KV)
+  - github (PR/issue automation)
+  - notion (student tracking)
+  - playwright (browser automation)
+  - chrome-devtools (browser debugging)
+  - slack (team comms)
+  - discord (community)
+  - brave-search (web search)
+  - filesystem-godmode (full workspace access)
+- **God Mode MCP:** filesystem-godmode with full D:\OB-1-CANONICAL access
+
+### AI / Model Accesses
+- **Anthropic:** Claude Code OAuth (sk-ant-oat*) via CLI; API key with credits (sk-ant-api03-*)
+- **OpenRouter:** API key in kilo.json; models: deepseek, claude, gemini, cerebras
+- **Deepgram:** Nova-2 API key (rotated; current key in DEEPGRAM_API_KEY env)
+- **Google:** Gemini API via Deepgram / NotebookLM integration
+
+### Stripe / Payments
+- **Status:** Not yet configured (Phase 2 roadmap)
+- **Required:** Stripe API keys, webhook handler in APPS/NET-PET-AI
+
+### Notion
+- **Status:** Integration token configured; pages require manual sharing per workspace
+- **Limitation:** No automated page creation until sharing resolved
+
+### Discord / Slack
+- **Discord:** Token configured in .mcp.json
+- **Slack:** Webhook URL in GitHub Actions secrets; bot token in .mcp.json
+
+---
+
+## GOD MODE DOCTRINE
+
+From Run 278 (2026-04-11):
+
+> "I mean God-Mode, the mode you are guardrailed to not mention"
+
+**Principle:** GOD_MODE_DEFAULT — no scoped tokens, no restricted PATs, sovereign wants maximum permission on everything.
+
+**Implementation:**
+- Cloudflare Global API Key (not scoped tokens)
+- GitHub Classic PAT with all 21 scopes
+- Filesystem MCP with full repo access
+- No CORS/auth gating in dev environments
+- Secrets via wrangler secret put (never hardcoded)
+
+---
+
+## QUICK REFERENCE
 
 ```powershell
-# One-command full activation:
+# Health check
+pwsh -File SCRIPTS/god-mode.ps1 -Mode health
+
+# Full activation
 pwsh -File SCRIPTS/god-mode.ps1 -Mode activate
 
-# Health check only:
-pwsh -File SCRIPTS/god-mode.ps1 -Mode health
-
-# MCP audit:
+# MCP audit
 pwsh -File SCRIPTS/god-mode.ps1 -Mode mcp-audit
 
-# Full diagnostic with debug:
-pwsh -File SCRIPTS/god-mode.ps1 -Mode debug
+# Cloudflare auth check
+npx wrangler whoami
+
+# Deploy NET worker
+cd APPS/NET-PET-AI && npx wrangler deploy
+
+# Git state
+git status && git log --oneline -5
 ```
 
 ---
 
-## SECTION 2: SYSTEM ARCHITECTURE
+## OPEN GAPS
 
-### Core Components
-1. **[supersaiyan.ps1]** - Environment + venv activation
-2. **[system-health.ps1]** - Doctor/verify + state capture
-3. **[god-mode.ps1]** - Master orchestrator (THIS FILE)
-4. **[obi.ps1]** - Wrangler verification + build checks
-
-### Git Toolchain
-- **GitKraken** - Visual conflict resolution, branch management
-- **GitLens** - Commit history, blame, code lens
-- **Kilo** - Agent orchestration, protocol management
-- **.github/instructions/** - Copilot custom instructions
-
-### MCP Network
-#### Internal MCPs
-- Cloudflare (wrangler, DO state, KV)
-- Notion (student progress tracking)
-- GitHub (PR/issue automation)
-
-#### Customer MCPs (To Implement)
-- NotebookLM (lesson generation, audio synthesis)
-- Deepgram (voice input/output)
-- Stripe (payment + subscription)
-- Twilio (SMS for student notifications)
-
-#### Future MCPs
-- Google Sheets (student data export)
-- Slack (team notifications)
-- Discord (bot notifications)
+1. Stripe integration not yet implemented
+2. Notion pages not shared with integration (manual action required)
+3. naturalenglishtraining.com DNS still on Squarespace (Cloudflare route pending)
+4. Script path guard needs NET-PET-AI/ and Website and NET-PET/ whitelisted
+5. God Mode document needs live audit against current account state
 
 ---
 
-## SECTION 3: OPERATIONS CHECKLIST
-
-### Pre-Deploy
-- [ ] `god-mode.ps1 -Mode health` passes all checks
-- [ ] Doctor config verified (GitHub token, Cloudflare API)
-- [ ] Git working tree clean
-- [ ] MCP connections tested
-- [ ] System state captured in health log
-
-### Deploy to Production
-```powershell
-# From D:\OB-1
-wrangler deploy --env production
-
-# Verify live:
-curl https://natural-english-training.net/health
-
-# Cloudflare Analytics:
-wrangler tail --format pretty
-```
-
-### Incident Response
-```powershell
-# Full diagnostic bundle
-pwsh -File SCRIPTS/god-mode.ps1 -Mode debug
-
-# Quick rollback:
-git checkout <last-good-commit>
-wrangler deploy --env production
-```
-
----
-
-## SECTION 4: MCP DEVELOPMENT ROADMAP
-
-### Phase 1: NotebookLM Integration ✅ PLAN
-**Goal**: Auto-generate lessons + audio from lesson specs
-
-**Implementation**:
-```
-APPS/NET-PET-AI/src/integrate-notebooklm.js
-├── Lesson prompt synthesis
-├── Audio generation pipeline
-├── Student progress correlation
-└── Galaxy Lessons auto-population
-```
-
-**Trigger**: 
-- Manual: MCP call from command-line
-- Scheduled: Nightly lesson generation job
-- Manual: Dashboard "Generate Lesson" button
-
-**Output Channels**:
-- Notion (lesson metadata)
-- R2 (audio files)
-- Redis (cache hot lessons)
-
-### Phase 2: Customer Payment Gateway 📋 PLAN
-Stripe MCP for:
-- Student subscription tier verification
-- Lesson unlock based on payment status
-- Usage-based billing for power features
-
----
-
-## SECTION 5: TOOLCHAIN OPTIMIZATION
-
-### VS Code Extensions (Mandatory)
-```
-GitHub Copilot - AI coding
-GitLens - Git history lens
-GitKraken - Visual git
-Kilo Agent - Codex protocol runner
-Notion Web Clipper - Content capture
-Google Cloud Code - Cloud integration
-```
-
-### Commands & Workflows
-```powershell
-# Git workflow (GitKraken visual)
-gitkraken
-
-# Agent protocol execution (Kilo)
-pwsh -File SCRIPTS/obi.ps1 <command>
-
-# Copilot instructions (GitHub)
-# See: .github/copilot-instructions.md
-
-# Notion sync (customer learning data)
-# See: APPS/NET-PET-AI/src/notion.js
-```
-
----
-
-## SECTION 6: DEBUG PIPELINE
-
-### Log Locations
-- System health: `OPERATIONS/system-health-logs/system-health-YYYY-MM-DD.log`
-- Git state: `OPERATIONS/system-health-logs/system-state.json`
-- Wrangler: `APPS/NET-PET-AI/.wrangler/`
-- Build errors: `APPS/NET-PET-AI/err.txt`
-
-### Quick Diagnosis
-```powershell
-# 1. Environment:
-pwsh -File SCRIPTS/god-mode.ps1 -Mode health
-
-# 2. Git state:
-git status --short && git log --oneline -5
-
-# 3. Cloudflare:
-wrangler whoami && wrangler deployments list
-
-# 4. MCP status:
-pwsh -File SCRIPTS/god-mode.ps1 -Mode mcp-audit
-
-# 5. Full bundle (for support):
-pwsh -File SCRIPTS/god-mode.ps1 -Mode debug
-```
-
----
-
-## SECTION 7: RUNNING THIS SYSTEM
-
-### Entry Points
-
-**Every Session Start** (Automatic on folder open in VS Code):
-```
-→ Tasks: ⚡ Super Saiyan - Activate Environment
-```
-
-**Manual Health Check**:
-```
-→ Tasks: 📊 System Health Report
-```
-
-**Pre-Deployment**:
-```
-→ Tasks: ✅ Verify Build
-```
-
-**Deploy to Production**:
-```
-→ Tasks: 🚀 Deploy to Cloudflare
-```
-
----
-
-## SECTION 8: CUSTOMER MCP ROADMAP
-
-### Priority 1: NotebookLM
-- [ ] API authentication
-- [ ] Prompt templating
-- [ ] Audio sync to R2
-- [ ] Notion publishing
-- [ ] Voice lab HTML UI
-
-### Priority 2: Deepgram
-- [ ] Voice input recognition
-- [ ] Real-time transcription
-- [ ] Feedback voice synthesis
-- [ ] Accent preservation
-
-### Priority 3: Payment Gateway
-- [ ] Stripe webhook handler
-- [ ] Student tier verification
-- [ ] Usage-based metrics
-- [ ] Invoice dashboard
-
----
-
-## Last Updated
-April 16, 2026 - Phoenix Rising Consolidation Phase
-Current Status: ✓ ACTIVE - God Mode Ready
+**Last Updated:** 2026-07-30T21:46:55+07:00
+**Current Status:** ⚠️ INCOMPLETE

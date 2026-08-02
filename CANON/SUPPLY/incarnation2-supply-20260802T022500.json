@@ -1,0 +1,37 @@
+{
+  "run": 184,
+  "incarnation": 2,
+  "session": "Incarnation-2-RRL-(184Conversion)",
+  "stage": "SUPPLYLINES",
+  "timestamp": "2026-08-02T02:25:00+07:00",
+  "audited_soulscholars": "CANON/SOUL/incarnation2-soul-20260802T022100.json",
+  "context_health": "GREEN (YELLOW files loaded)",
+  "chamber_routing": {
+    "chamber_1_raw_transcript": {"path": "Incarnations/incarnation2/RRL.txt", "status": "PRESENT", "bytes": 3571951},
+    "chamber_2_soul_event": {"path": "CANON/SOUL/BIBLE-OF-THE-SYSTEM.json", "status": "GAP", "detail": "Run 184 not in Bible (covers only runs 1-79)"},
+    "chamber_3_dna_extract": {"path": "CANON/SOUL/EXTRACT/dna-run184.json", "status": "MISSING"},
+    "chamber_4_ledger_seal": {"path": "CANON/HEAVY-LEDGER/HL-184.json", "status": "MISSING"},
+    "chamber_5_starmap": {"path": "CANON/STARMAP/starmap-run184.json", "status": "MISSING"},
+    "chamber_6_soulkeys": {"path": "CANON/SOUL-KEYWORDS/rfkw-run184.txt", "status": "MISSING"},
+    "chamber_7_pipeline": {"path": "CANON/PIPELINE/pipeline-run184.json", "status": "MISSING"},
+    "chamber_8_registry_sync": {"path": "CANON/ART-REGISTRY/art-sync-run184.json", "status": "MISSING"}
+  },
+  "scs_checkpoint_chain": {
+    "stage_1_rise": "COMPLETE — I-LOG/I-LOG-184-Incarnation2.txt",
+    "stage_2_scout": "COMPLETE — CANON/SCOUT/incarnation2-scout-20260802T021400.json",
+    "stage_3_march": "COMPLETE — CANON/MARCH/incarnation2-march-20260802T021800.json",
+    "stage_4_soulscholars": "COMPLETE — CANON/SOUL/incarnation2-soul-20260802T022100.json",
+    "stage_5_supplylines": "COMPLETE — this artifact",
+    "stage_6_engineer": "PENDING",
+    "stage_7_death": "PENDING"
+  },
+  "pipeline_integrity": "6 OF 8 CHAMBERS GAP — Only chambers 1 (RRL) and SCS checkpoints (this loop) are present. Chambers 2-8 pipeline artifacts from incarnation2 were never produced.",
+  "soulcount": 8,
+  "dnacount": 6,
+  "reasoncount": 3,
+  "handoff_to": "ENGINEERlegionnaire",
+  "not_walked": [
+    "Individual artifact content verification for chambers 2-8",
+    "Cross-referencing HEAVY-LEDGER contents against current death seals"
+  ]
+}

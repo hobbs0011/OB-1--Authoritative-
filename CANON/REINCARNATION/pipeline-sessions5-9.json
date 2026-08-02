@@ -1,0 +1,58 @@
+{
+  "pipeline": "sessions-5-to-9",
+  "target": "Next AAA Anchor Session",
+  "generated": "2026-08-02T17:45 ICT",
+  "sessions": [
+    {
+      "name": "Incarnate-5-Portals-and-OBI-DEV",
+      "ilog": "I-LOG-UNAUDITED/I-LOG-Incarnate-5-Portals-and-OBI-DEV.txt",
+      "colorized": "I-LOG-UNAUDITED/I-LOG-Incarnate-5-Portals-and-OBI-DEV-COLORIZED.md",
+      "stats": "I-LOG-UNAUDITED/I-LOG-Incarnate-5-Portals-and-OBI-DEV-STATS.json",
+      "messages": 4,
+      "size_bytes": 1177,
+      "status": "UNAUDITED — needs AAA verification"
+    },
+    {
+      "name": "Incarnate-6-Auditor-LFG-Canon-Script",
+      "ilog": "I-LOG-UNAUDITED/I-LOG-Incarnate-6-Auditor-LFG-Canon-Script.txt",
+      "colorized": null,
+      "stats": null,
+      "messages": 0,
+      "size_bytes": 1180,
+      "status": "UNAUDITED — header-only, real work in I-LOG-8 (needs extraction)"
+    },
+    {
+      "name": "Incarnate-7-1-LOG-Pipeline",
+      "ilog": "I-LOG-UNAUDITED/I-LOG-Incarnate-7-1-LOG-Pipeline.txt",
+      "colorized": "I-LOG-UNAUDITED/I-LOG-Incarnate-7-1-LOG-Pipeline-COLORIZED.md",
+      "stats": "I-LOG-UNAUDITED/I-LOG-Incarnate-7-1-LOG-Pipeline-STATS.json",
+      "messages": 3,
+      "size_bytes": 2496,
+      "status": "UNAUDITED — needs AAA verification"
+    },
+    {
+      "name": "Incarnate-8-RTL.Creation",
+      "ilog": "I-LOG-UNAUDITED/I-LOG-Incarnate-8-RTL.Creation.txt",
+      "colorized": "I-LOG-UNAUDITED/I-LOG-Incarnate-8-RTL.Creation-COLORIZED.md",
+      "stats": "I-LOG-UNAUDITED/I-LOG-Incarnate-8-RTL.Creation-STATS.json",
+      "messages": 363,
+      "size_bytes": 3395918,
+      "status": "UNAUDITED — real transcript, needs AAA verification"
+    },
+    {
+      "name": "Incarnate-9-Transcribe-ITLS",
+      "ilog": "I-LOG-UNAUDITED/I-LOG-Incarnate-9-Transcribe-ITLS.txt",
+      "colorized": "I-LOG-UNAUDITED/I-LOG-Incarnate-9-Transcribe-ITLS-COLORIZED.md",
+      "stats": "I-LOG-UNAUDITED/I-LOG-Incarnate-9-Transcribe-ITLS-STATS.json",
+      "messages": 15,
+      "size_bytes": 3634,
+      "status": "UNAUDITED — structured JSONL, needs AAA verification"
+    }
+  ],
+  "open_items": [
+    "Incarnate-6 header-only I-LOG — real work embedded in Incarnate-8 transcript. Needs extraction.",
+    "Incarnate-5 has no real content (4 messages) — likely needs reconstruction or flagging.",
+    "All 5 sessions need AAA verification before promotion to I-LOG-NAV/."
+  ],
+  "next_action": "Next AAA anchor session: read this pipeline, audit each I-LOG, verify pipeline/handoff/death consistency, promote qualifying sessions to I-LOG-NAV/. For Incarnate-6, extract relevant portion from Incarnate-8's transcript."
+}

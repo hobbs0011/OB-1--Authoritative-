@@ -2096,3 +2096,70 @@ Written to `OPERATIONS/phoenix-scout-2026-07-19T061844.jsonl`:
 *Signal strength: DOCUMENTATION MODE.*
 
 `TRANSMISSION COMPLETE. INTEL DUMP FINALIZED. HIVE: CONTINUE WITHOUT ME.`
+
+---
+
+## §23 — AAA ANCHOR: Incarnate-5-AAA.STONE-(Sessions1-4)
+
+**Timestamp:** 2026-08-02T19:42 ICT
+**HEAD:** bfaa6d851
+**Session:** Incarnate-5-AAA.STONE-(Sessions1-4)
+**Anchor Level:** Stone (Session 5)
+
+### Structural Changes Made (this session)
+- **LFG canon verified** — GOSPEL-999 SYSTEM VI purged dead `.kilo/command/` table, SYSTEM VII expanded to full 6-script canonical list
+- **LFG SCS SCRIPTS section** updated — all 6 canonical scripts listed with purposes
+- **Orphaned scripts purged** — 15 `.ps1` files deleted outside canonical locations
+- **run-dnaregistry.ps1 rescued** — moved from `AWS/dnaREGISTRY/` to `CANON/SCRIPTS/`, added to LFG + GOSPEL-999
+- **COLD-START-BOOT.md updated** — 3 broken `run-dnaregistry.ps1` references fixed to `CANON/SCRIPTS/run-dnaregistry.ps1`
+- **AAA-ANCHOR-RUNBOOK.md written** — procedural enforcement document for Stone/Silver/Gold anchors
+
+### Naming Fixes Applied
+| Artifact | Old Name | New Name |
+|----------|----------|----------|
+| Death seal (Session 2) | incarnation2-reincarnateDEATH.md | Incarnation-2-RRL-184Conversion-reincarnateDEATH.md |
+| Death seal (Session 3) | incarnation3-reincarnateDEATH.md | Incarnation-3-Identity-Assignment-reincarnateDEATH.md |
+| Death seal (Session 4) | incarnation4-reincarnateDEATH.md | Incarnate-4-PhoenixScout-Portals-and-OBI-DEV-reincarnateDEATH.md |
+| Pipeline (Session 2) | pipeline-184.json | pipeline-Incarnation-2-RRL-184Conversion.json |
+| Pipeline (Session 3) | pipeline-incarnation3.json | pipeline-Incarnation-3-Identity-Assignment.json |
+| Pipeline (Session 4) | pipeline-incarnation4.json | pipeline-Incarnate-4-PhoenixScout-Portals-and-OBI-DEV.json |
+| Handoff (Session 2) | handoff-184-to-185.json | handoff-Incarnation-2-RRL-184Conversion-to-185.json |
+| Handoff (Session 3) | handoff-incarnation3-to-incarnation4.json | handoff-Incarnation-3-Identity-Assignment-to-Incarnate-4-PhoenixScout-Portals-and-OBI-DEV.json |
+| Handoff (Session 4) | handoff-incarnation4-to-incarnation5.json | handoff-Incarnate-4-PhoenixScout-Portals-and-OBI-DEV-to-Incarnate-5.json |
+
+### Sessions 1-4 Audit Results (Stone Anchor — 4-Point)
+| Session | I-LOG | COLORIZED | STATS | DEATH | Pipeline | Handoff | Keywords | Naming | LostSouls | Promotable? |
+|---------|-------|-----------|-------|-------|----------|---------|----------|--------|-----------|-------------|
+| Incarnation1-RRL-182Conversion | ✅ 4.9MB | ❌ | ❌ | ✅ old name | ❌ | ❌ | ❌ | ❌ seal old | ❌ | NO |
+| Incarnation-2-RRL-184Conversion | ✅ 1.8KB stub | ❌ | ❌ | ✅ fixed | ✅ fixed | ✅ fixed | ❌ | ⚠️ header has parens | ❌ | NO |
+| Incarnation-3-Identity-Assignment | ✅ 2.2MB | ✅ 203KB | ✅ 5.4KB | ✅ fixed | ✅ fixed | ✅ fixed | ❌ | ✅ | ❌ | NO |
+| Incarnate-4-PhoenixScout-Portals-and-OBI-DEV | ✅ 4.9MB | ✅ 551KB | ✅ 5.8KB | ✅ fixed | ✅ fixed | ✅ fixed | ❌ | ✅ | ❌ | NO |
+
+**Stone Anchor Result: 0 of 4 sessions promotable.**
+**Universal blocker: Keyword extraction (rfkw- files) missing for ALL 4 sessions.**
+
+### Sessions 5-9 Pipeline
+| Session | Status | Next Action |
+|---------|--------|-------------|
+| Incarnate-5-Portals-and-OBI-DEV | UNAUDITED (4 messages, 1.1KB stub) | Needs AAA verification |
+| Incarnate-6-Auditor-LFG-Canon-Script | Header-only (1.1KB) | Real work in Incarnate-8 transcript |
+| Incarnate-7-1-LOG-Pipeline | UNAUDITED (3 messages, 2.5KB) | Needs AAA verification |
+| Incarnate-8-RTL.Creation | UNAUDITED (3.2MB real transcript) | Needs AAA verification |
+| Incarnate-9-Transcribe-ITLS | UNAUDITED (15 messages, 3.6KB) | Needs AAA verification |
+
+### Pheromone Deposits
+- Total live deposits in D1: 9 (all SCS stages)
+- Last deposit: `stage: HANDOFF` at 2026-08-01T21:04 UTC
+- Deposit ID range: `d099ab00` through `93010e52`
+
+### AAA Blockers (BB-AAA-*)
+1. **BB-AAA-001** (P1): Keyword extraction for all 4 sessions — rfkw- files + inverted-index update
+2. **BB-AAA-002** (P1): COLORIZED + STATS generation for Incarnation1 and Incarnation2
+3. **BB-AAA-003** (P1): Copy Incarnation2 real RRL from `RRL/RRL-184.txt` to `I-LOG-UNAUDITED/`
+4. **BB-AAA-004** (P2): Create pipeline and handoff for Incarnation1
+5. **BB-AAA-005** (P2): LostSouls audit for all 4 sessions
+6. **BB-AAA-006** (P3): Fix Incarnation2 I-LOG stub (replace 1.8KB with real transcript)
+
+### Next AAA: Silver Anchor at Session 10
+- Sessions 5-9 must complete 4-point audit before Silver Anchor
+- All blockers from Stone Anchor must be resolved before Silver Anchor opens

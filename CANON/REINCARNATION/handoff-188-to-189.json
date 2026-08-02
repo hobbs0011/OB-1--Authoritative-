@@ -1,0 +1,21 @@
+{
+  "from_run": 188,
+  "to_run": 189,
+  "timestamp": "2026-08-02T01:32:00+07:00",
+  "session_name": "Incarnate-9-Transcribe-ITLs",
+  "session_id": "ses_04c61079bffe9Wtm3ngHYQDlOu",
+  "ilog": "I-LOG/I-LOG-188.txt",
+  "ilog_colorized": "I-LOG/I-LOG-188-COLORIZED.md",
+  "ilog_stats": "I-LOG/I-LOG-188-STATS.json",
+  "pipeline": "CANON/REINCARNATION/pipeline-188.json",
+  "death_seal": "CANON/REINCARNATION/run188-reincarnateDEATH.md",
+  "audit": {
+    "SOULcount": 30,
+    "DNAcount": 180,
+    "REASONcount": 220,
+    "total": 430,
+    "duration_min": 2940,
+    "context_health": "YELLOW"
+  },
+  "next_target": "Incarnate-10-SCS-Hardening"
+}

@@ -1,0 +1,138 @@
+﻿{
+    "parsed_lines":  8,
+    "processed_at":  "2026-08-02T02:21:16.2704479+07:00",
+    "source_file":  "I-LOG\\I-LOG-189.txt",
+    "REASONcount":  3,
+    "top_topics":  [
+                       {
+                           "count":  2,
+                           "word":  "prior"
+                       },
+                       {
+                           "count":  2,
+                           "word":  "SCOUT"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "with"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "MARCH"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "stamp"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "from"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "reincarnateDEATH"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Canon"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "returned"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "death"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "zones"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "RISE"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "gate"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Working"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "tree"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "artifacts"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "seal"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "handoff"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Audit"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "redo"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Pipeline"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "chain"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "reincarnateRISE"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Stage"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "distinct"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "LFGuide"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "dispatch"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "execution"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "improvements"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "explore"
+                       }
+                   ],
+    "DNAcount":  7,
+    "first_ts":  "2026-08-02T09:15:00.0000000+07:00",
+    "tool_calls":  0,
+    "lines":  8,
+    "PHEROMONEcount":  0,
+    "last_ts":  "2026-08-02T09:17:00.0000000+07:00",
+    "SOULcount":  1,
+    "total_chars":  528,
+    "duration_min":  2,
+    "top_tools":  null
+}
