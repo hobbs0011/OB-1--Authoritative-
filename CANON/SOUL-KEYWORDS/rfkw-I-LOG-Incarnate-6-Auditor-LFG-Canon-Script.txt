@@ -1,0 +1,34 @@
+﻿# SOUL-KEYWORDS for Incarnate-6-Auditor-LFG-Canon-Script
+# Extracted from markdown I-LOG (non-JSONL source)
+# SOULcount=0 DNAcount=0 REASONcount=0 (markdown header, no transcript)
+
+2 | seal
+2 | DEATH
+2 | Stage
+2 | Incarnate-6-Auditor-LFG-Canon-Script
+1 | DIRTY
+1 | commits
+1 | I-LOG-8
+1 | actual
+1 | Mission
+1 | produce
+1 | Incarnate-8
+1 | Header
+1 | RISE
+1 | present
+1 | audit
+1 | Territory
+1 | Execute
+1 | Summary
+1 | pipeline
+1 | INTACT
+1 | REAL
+1 | recorded
+1 | HEAD
+1 | dirs
+1 | scripts
+1 | messages
+1 | blueprint
+1 | identify
+1 | from
+1 | session

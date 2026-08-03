@@ -1,0 +1,101 @@
+{
+  "source_file": "2026-08-03-unknown-ITL.txt",
+  "format": "ITL V1",
+  "audio_source": "Anh-Minh-Data.mp4",
+  "audio_duration_sec": 53,
+  "student": "unknown",
+  "deepgram_model": "nova-2",
+  "diarization": "word-level",
+  "total_messages": 160,
+  "total_chars": 47240,
+  "total_words": 5825,
+  "duration_min": 50,
+  "first_ts": "2026-08-03T20:07:46.388Z",
+  "last_ts": "2026-08-03T20:57:59.033Z",
+  "speakers": {
+    "unknown": 3091,
+    "Teacher": 2435
+  },
+  "top_topics": [
+    {
+      "word": "you",
+      "count": 310
+    },
+    {
+      "word": "yeah",
+      "count": 161
+    },
+    {
+      "word": "like",
+      "count": 110
+    },
+    {
+      "word": "and",
+      "count": 102
+    },
+    {
+      "word": "the",
+      "count": 94
+    },
+    {
+      "word": "that",
+      "count": 85
+    },
+    {
+      "word": "what",
+      "count": 74
+    },
+    {
+      "word": "not",
+      "count": 60
+    },
+    {
+      "word": "are",
+      "count": 57
+    },
+    {
+      "word": "your",
+      "count": 55
+    },
+    {
+      "word": "they",
+      "count": 52
+    },
+    {
+      "word": "know",
+      "count": 47
+    },
+    {
+      "word": "just",
+      "count": 47
+    },
+    {
+      "word": "very",
+      "count": 46
+    },
+    {
+      "word": "say",
+      "count": 44
+    },
+    {
+      "word": "right",
+      "count": 44
+    },
+    {
+      "word": "okay",
+      "count": 43
+    },
+    {
+      "word": "consistent",
+      "count": 42
+    },
+    {
+      "word": "but",
+      "count": 40
+    },
+    {
+      "word": "don",
+      "count": 38
+    }
+  ]
+}

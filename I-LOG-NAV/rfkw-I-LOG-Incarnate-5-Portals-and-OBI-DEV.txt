@@ -1,0 +1,34 @@
+﻿# SOUL-KEYWORDS for I-LOG-Incarnate-5-Portals-and-OBI-DEV
+# Extracted from: D:\OB-1-CANONICAL\I-LOG-UNAUDITED\I-LOG-Incarnate-5-Portals-and-OBI-DEV-STATS.json
+# SOULcount=1 DNAcount=7 REASONcount=3
+
+2 | prior
+2 | SCOUT
+1 | with
+1 | MARCH
+1 | stamp
+1 | from
+1 | reincarnateDEATH
+1 | Canon
+1 | returned
+1 | death
+1 | zones
+1 | RISE
+1 | gate
+1 | Working
+1 | tree
+1 | artifacts
+1 | seal
+1 | handoff
+1 | Audit
+1 | redo
+1 | Pipeline
+1 | chain
+1 | reincarnateRISE
+1 | Stage
+1 | distinct
+1 | LFGuide
+1 | dispatch
+1 | execution
+1 | improvements
+1 | explore

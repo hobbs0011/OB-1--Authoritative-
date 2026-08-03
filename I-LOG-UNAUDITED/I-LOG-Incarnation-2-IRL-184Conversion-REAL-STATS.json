@@ -1,0 +1,171 @@
+﻿{
+    "parsed_lines":  259,
+    "processed_at":  "2026-08-03T06:30:12.5796769+07:00",
+    "source_file":  "I-LOG-UNAUDITED/I-LOG-Incarnation-2-IRL-184Conversion-REAL.txt",
+    "REASONcount":  181,
+    "top_topics":  [
+                       {
+                           "count":  550,
+                           "word":  "user"
+                       },
+                       {
+                           "count":  466,
+                           "word":  "This"
+                       },
+                       {
+                           "count":  456,
+                           "word":  "session"
+                       },
+                       {
+                           "count":  450,
+                           "word":  "with"
+                       },
+                       {
+                           "count":  404,
+                           "word":  "what"
+                       },
+                       {
+                           "count":  389,
+                           "word":  "from"
+                       },
+                       {
+                           "count":  366,
+                           "word":  "scout"
+                       },
+                       {
+                           "count":  293,
+                           "word":  "RISE"
+                       },
+                       {
+                           "count":  281,
+                           "word":  "That"
+                       },
+                       {
+                           "count":  271,
+                           "word":  "should"
+                       },
+                       {
+                           "count":  260,
+                           "word":  "file"
+                       },
+                       {
+                           "count":  258,
+                           "word":  "They"
+                       },
+                       {
+                           "count":  234,
+                           "word":  "DEATH"
+                       },
+                       {
+                           "count":  225,
+                           "word":  "READ"
+                       },
+                       {
+                           "count":  214,
+                           "word":  "files"
+                       },
+                       {
+                           "count":  200,
+                           "word":  "check"
+                       },
+                       {
+                           "count":  192,
+                           "word":  "need"
+                       },
+                       {
+                           "count":  190,
+                           "word":  "report"
+                       },
+                       {
+                           "count":  190,
+                           "word":  "just"
+                       },
+                       {
+                           "count":  188,
+                           "word":  "said"
+                       },
+                       {
+                           "count":  183,
+                           "word":  "have"
+                       },
+                       {
+                           "count":  178,
+                           "word":  "current"
+                       },
+                       {
+                           "count":  177,
+                           "word":  "then"
+                       },
+                       {
+                           "count":  175,
+                           "word":  "missing"
+                       },
+                       {
+                           "count":  174,
+                           "word":  "command"
+                       },
+                       {
+                           "count":  172,
+                           "word":  "Looking"
+                       },
+                       {
+                           "count":  166,
+                           "word":  "write"
+                       },
+                       {
+                           "count":  161,
+                           "word":  "findings"
+                       },
+                       {
+                           "count":  150,
+                           "word":  "Update"
+                       },
+                       {
+                           "count":  145,
+                           "word":  "bash"
+                       }
+                   ],
+    "DNAcount":  188,
+    "first_ts":  "2026-07-19T05:28:43.6110000+07:00",
+    "tool_calls":  140,
+    "lines":  301,
+    "PHEROMONEcount":  140,
+    "last_ts":  "2026-07-19T14:12:54.9480000+07:00",
+    "SOULcount":  71,
+    "total_chars":  458396,
+    "duration_min":  524.2,
+    "top_tools":  [
+                      {
+                          "count":  138,
+                          "tool":  "bash"
+                      },
+                      {
+                          "count":  45,
+                          "tool":  "read"
+                      },
+                      {
+                          "count":  20,
+                          "tool":  "write"
+                      },
+                      {
+                          "count":  19,
+                          "tool":  "grep"
+                      },
+                      {
+                          "count":  15,
+                          "tool":  "glob"
+                      },
+                      {
+                          "count":  13,
+                          "tool":  "edit"
+                      },
+                      {
+                          "count":  11,
+                          "tool":  "todowrite"
+                      },
+                      {
+                          "count":  1,
+                          "tool":  "plan_exit"
+                      }
+                  ]
+}

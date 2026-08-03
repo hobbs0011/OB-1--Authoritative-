@@ -1,0 +1,19 @@
+﻿{
+    "irl_stats":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-6-Auditor-LFG-Canon-Script-STATS.json",
+    "timestamp":  "2026-08-03T06:14:10.0803583+07:00",
+    "irl_colorized":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-6-Auditor-LFG-Canon-Script-COLORIZED.md",
+    "audit":  {
+                  "total":  0,
+                  "REASONcount":  0,
+                  "total_chars":  0,
+                  "SOULcount":  0,
+                  "DNAcount":  0
+              },
+    "name":  "I-LOG-Incarnate-6-Auditor-LFG-Canon-Script",
+    "lost_souls_file":  "CANON\\LOSTSOULS\\lostsouls-I-LOG-Incarnate-6-Auditor-LFG-Canon-Script.md",
+    "irl":  "I-LOG-UNAUDITED/I-LOG-Incarnate-6-Auditor-LFG-Canon-Script.txt",
+    "open_items":  [
+
+                   ],
+    "keywords_file":  "CANON\\SOUL-KEYWORDS\\rfkw-I-LOG-Incarnate-6-Auditor-LFG-Canon-Script.txt"
+}

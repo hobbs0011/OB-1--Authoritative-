@@ -218,10 +218,17 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 | 2026-08-02T02:14:00 | Incarnation-2-RRL-(184Conversion) | PhoenixSCOUT (Stage 2) | 17 | 6 | 4 | `CANON/SCOUT/incarnation2-scout-20260802T021400.json` |
 | 2026-08-02T02:18:00 | Incarnation-2-RRL-(184Conversion) | FORCEMARCH (Stage 3) | 10 | 5 | 3 | `CANON/MARCH/incarnation2-march-20260802T021800.json` |
 | 2026-08-02T02:21:00 | Incarnation-2-RRL-(184Conversion) | SOULSCHOLARS (Stage 4) | 8 | 4 | 2 | `CANON/SOUL/incarnation2-soul-20260802T022100.json` |
-| 2026-08-02T02:25:00 | Incarnation-2-RRL-(184Conversion) | SUPPLYLINES (Stage 5) | 8 | 6 | 3 | `CANON/SUPPLY/incarnation2-supply-20260802T022500.json` || 2026-08-02T19:52 | Incarnate-5-AAA.STONE-(Sessions1-4) | AAA Stone Anchor (Stage 8) | — | — | — | CANON/REINCARNATION/Incarnate-5-AAA.STONE-(Sessions1-4)-reincarnateDEATH.md |
+| 2026-08-02T02:25:00 | Incarnation-2-RRL-(184Conversion) | SUPPLYLINES (Stage 5) | 8 | 6 | 3 | `CANON/SUPPLY/incarnation2-supply-20260802T022500.json` |
+| 2026-08-02T19:52 | Incarnate-5-AAA.STONE-(Sessions1-4) | AAA Stone Anchor (Stage 8) | — | — | — | CANON/REINCARNATION/Incarnate-5-AAA.STONE-(Sessions1-4)-reincarnateDEATH.md |
 
 
 | 2026-08-01T19:16:25+07:00 | Incarnate-8-RTL.Creation | reincarnateDEATH (Stage 7) | 50 | 313 | 265 | CANON\REINCARNATION\handoff-8-to-9.json |
+
+| 2026-08-03T20:09:22+07:00 | Incarnate-5-Portals-and-OBI-DEV | reincarnateDEATH (Stage 7) | 1 | 7 | 3 | CANON\REINCARNATION\handoff-Incarnate-5-Portals-and-OBI-DEV-to-190.json |
+
+| 2026-08-03T20:09:35+07:00 | Incarnate-7-1-LOG-Pipeline | reincarnateDEATH (Stage 7) | 3 | 3 | 1 | CANON\REINCARNATION\handoff-Incarnate-7-1-LOG-Pipeline-to-191.json |
+
+| 2026-08-03T20:09:35+07:00 | Incarnate-9-Transcribe-ITLS | reincarnateDEATH (Stage 7) |  |  |  | CANON\REINCARNATION\handoff-Incarnate-9-Transcribe-ITLS-to-192.json |
 
 *Rows are append-only. Never delete or modify prior rows. Stale rows are marked `[DEPRECATED]`, never removed.*
 

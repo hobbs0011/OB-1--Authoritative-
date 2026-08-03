@@ -1,6 +1,0 @@
-0 | career
-0 | path
-0 | pipeline
-0 | memory
-0 | system
-0 | kilogap

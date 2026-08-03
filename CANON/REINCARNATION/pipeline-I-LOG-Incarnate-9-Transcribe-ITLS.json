@@ -1,0 +1,19 @@
+﻿{
+    "irl_stats":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-9-Transcribe-ITLS-STATS.json",
+    "timestamp":  "2026-08-04T03:01:01.8416498+07:00",
+    "irl_colorized":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-9-Transcribe-ITLS-COLORIZED.md",
+    "audit":  {
+                  "total":  30,
+                  "REASONcount":  0,
+                  "total_chars":  561,
+                  "SOULcount":  10,
+                  "DNAcount":  20
+              },
+    "name":  "Incarnate-9-Transcribe-ITLS",
+    "lost_souls_file":  "CANON\\LOSTSOULS\\lostsouls-I-LOG-Incarnate-9-Transcribe-ITLS.md",
+    "irl":  "I-LOG-UNAUDITED/I-LOG-Incarnate-9-Transcribe-ITLS.txt",
+    "open_items":  [
+
+                   ],
+    "keywords_file":  "CANON\\SOUL-KEYWORDS\\rfkw-I-LOG-Incarnate-9-Transcribe-ITLS.txt"
+}

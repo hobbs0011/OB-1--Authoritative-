@@ -1,0 +1,34 @@
+﻿# SOUL-KEYWORDS for I-LOG-Incarnate-7-1-LOG-Pipeline
+# Extracted from: D:\OB-1-CANONICAL\I-LOG-UNAUDITED\I-LOG-Incarnate-7-1-LOG-Pipeline-STATS.json
+# SOULcount=3 DNAcount=3 REASONcount=1
+
+7 | Stage
+5 | Pipeline
+5 | death
+3 | RISE
+2 | optimization
+2 | color-coded
+2 | organizational
+2 | AUDIT
+2 | Script
+2 | chain
+2 | SOULCOUNT
+2 | Color
+1 | Created
+1 | Incarnate-7-I-LOG-PipelineE
+1 | Complete
+1 | Boot
+1 | reincarnateDEATH
+1 | protocol
+1 | Markdown
+1 | Triple
+1 | responses
+1 | Gate
+1 | User
+1 | Legionnaire
+1 | Emoji
+1 | Source
+1 | Yellow
+1 | Coding
+1 | Commencing
+1 | calls

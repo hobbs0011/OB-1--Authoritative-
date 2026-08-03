@@ -1,0 +1,19 @@
+﻿{
+    "irl_stats":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-8-RTL.Creation-STATS.json",
+    "timestamp":  "2026-08-03T06:30:09.8327264+07:00",
+    "irl_colorized":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-8-RTL.Creation-COLORIZED.md",
+    "audit":  {
+                  "total":  363,
+                  "REASONcount":  265,
+                  "total_chars":  0,
+                  "SOULcount":  50,
+                  "DNAcount":  313
+              },
+    "name":  "Incarnate-8-RTL.Creation",
+    "lost_souls_file":  "CANON\\LOSTSOULS\\lostsouls-I-LOG-Incarnate-8-RTL.Creation.md",
+    "irl":  "I-LOG-UNAUDITED/I-LOG-Incarnate-8-RTL.Creation.txt",
+    "open_items":  [
+
+                   ],
+    "keywords_file":  "CANON\\SOUL-KEYWORDS\\rfkw-I-LOG-Incarnate-8-RTL.Creation.txt"
+}

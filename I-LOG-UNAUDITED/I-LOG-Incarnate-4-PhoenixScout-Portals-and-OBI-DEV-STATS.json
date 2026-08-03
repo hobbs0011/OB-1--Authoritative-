@@ -1,15 +1,15 @@
 ﻿{
-    "parsed_lines":  366,
-    "processed_at":  "2026-08-02T02:01:44.0630317+07:00",
-    "source_file":  "I-LOG\\I-LOG-186.txt",
-    "REASONcount":  304,
+    "parsed_lines":  374,
+    "processed_at":  "2026-08-03T06:12:49.8293497+07:00",
+    "source_file":  "I-LOG-UNAUDITED/I-LOG-Incarnate-4-PhoenixScout-Portals-and-OBI-DEV.txt",
+    "REASONcount":  307,
     "top_topics":  [
                        {
-                           "count":  660,
+                           "count":  661,
                            "word":  "DEATH"
                        },
                        {
-                           "count":  539,
+                           "count":  540,
                            "word":  "with"
                        },
                        {
@@ -21,7 +21,7 @@
                            "word":  "This"
                        },
                        {
-                           "count":  394,
+                           "count":  395,
                            "word":  "from"
                        },
                        {
@@ -73,7 +73,7 @@
                            "word":  "write"
                        },
                        {
-                           "count":  203,
+                           "count":  204,
                            "word":  "seal"
                        },
                        {
@@ -85,7 +85,7 @@
                            "word":  "READ"
                        },
                        {
-                           "count":  197,
+                           "count":  198,
                            "word":  "artifacts"
                        },
                        {
@@ -101,7 +101,7 @@
                            "word":  "Kilo"
                        },
                        {
-                           "count":  177,
+                           "count":  178,
                            "word":  "Pipeline"
                        },
                        {
@@ -117,7 +117,7 @@
                            "word":  "have"
                        },
                        {
-                           "count":  156,
+                           "count":  158,
                            "word":  "scout"
                        },
                        {
@@ -125,13 +125,15 @@
                            "word":  "looking"
                        }
                    ],
-    "DNAcount":  311,
+    "DNAcount":  318,
+    "first_ts":  "2026-08-02T09:15:00.0000000+07:00",
     "tool_calls":  277,
-    "lines":  366,
+    "lines":  376,
     "PHEROMONEcount":  277,
-    "SOULcount":  55,
-    "total_chars":  530432,
-    "duration_min":  0,
+    "last_ts":  "2026-08-02T09:17:00.0000000+07:00",
+    "SOULcount":  56,
+    "total_chars":  530960,
+    "duration_min":  2,
     "top_tools":  [
                       {
                           "count":  259,

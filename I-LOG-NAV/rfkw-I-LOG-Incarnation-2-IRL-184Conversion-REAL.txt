@@ -1,0 +1,34 @@
+﻿# SOUL-KEYWORDS for Incarnation-2-IRL-184Conversion-REAL
+# Extracted from: D:\OB-1-CANONICAL\I-LOG-UNAUDITED\I-LOG-Incarnation-2-IRL-184Conversion-REAL-STATS.json
+# SOULcount=71 DNAcount=188 REASONcount=181
+
+550 | user
+466 | This
+456 | session
+450 | with
+404 | what
+389 | from
+366 | scout
+293 | RISE
+281 | That
+271 | should
+260 | file
+258 | They
+234 | DEATH
+225 | READ
+214 | files
+200 | check
+192 | need
+190 | report
+190 | just
+188 | said
+183 | have
+178 | current
+177 | then
+175 | missing
+174 | command
+172 | Looking
+166 | write
+161 | findings
+150 | Update
+145 | bash

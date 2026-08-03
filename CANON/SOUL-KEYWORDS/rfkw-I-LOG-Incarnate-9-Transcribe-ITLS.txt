@@ -1,0 +1,8 @@
+﻿# SOUL-KEYWORDS for Incarnate-9-Transcribe-ITLS
+# Extracted from: I-LOG-UNAUDITED/I-LOG-Incarnate-9-Transcribe-ITLS-STATS.json
+# SOULcount=10 DNAcount=20 REASONcount=0
+
+20 | response
+20 | Assistant
+10 | command
+10 | User

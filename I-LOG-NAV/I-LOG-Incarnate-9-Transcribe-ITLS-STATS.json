@@ -1,0 +1,17 @@
+﻿{
+    "parsed_lines":  30,
+    "processed_at":  "2026-08-02T01:50:09.4464735+07:00",
+    "source_file":  "I-LOG/I-LOG-188.txt",
+    "REASONcount":  0,
+    "top_topics":  null,
+    "DNAcount":  20,
+    "first_ts":  "2026-07-30T22:23:00.0000000+07:00",
+    "tool_calls":  0,
+    "lines":  30,
+    "PHEROMONEcount":  0,
+    "last_ts":  "2026-07-30T22:52:00.0000000+07:00",
+    "SOULcount":  10,
+    "total_chars":  0,
+    "duration_min":  29,
+    "top_tools":  null
+}

@@ -1,0 +1,17 @@
+﻿{
+    "parsed_lines":  363,
+    "processed_at":  "2026-08-03T06:29:33.9794842+07:00",
+    "source_file":  "I-LOG-UNAUDITED/I-LOG-Incarnate-8-RTL.Creation.txt",
+    "REASONcount":  265,
+    "top_topics":  null,
+    "DNAcount":  313,
+    "first_ts":  "2026-07-24T23:33:34.5000000+07:00",
+    "tool_calls":  283,
+    "lines":  363,
+    "PHEROMONEcount":  283,
+    "last_ts":  "2026-07-30T22:07:29.5470000+07:00",
+    "SOULcount":  50,
+    "total_chars":  0,
+    "duration_min":  8553.9,
+    "top_tools":  null
+}

@@ -10,9 +10,9 @@
         "ilog": true,
         "ilog_size_bytes": 4912461,
         "colorized": true,
-        "colorized_size_bytes": 203884,
+        "colorized_size_bytes": 551431,
         "stats": true,
-        "stats_size_bytes": 5448,
+        "stats_size_bytes": 5934,
         "death_seal": true,
         "death_seal_filename": "Incarnation1-IRL-182Conversion-reincarnateDEATH.md",
         "pipeline": true,
@@ -46,13 +46,14 @@
       "capture_audit": {
         "ilog": true,
         "ilog_size_bytes": 1805,
+        "ilog_lines": 36,
         "ilog_is_stub": true,
         "colorized": true,
-        "colorized_size_bytes": 0,
-        "colorized_note": "Generated from stub (0 entries)",
+        "colorized_size_bytes": 818,
+        "colorized_note": "Generated from stub (0 entries, 818 bytes)",
         "stats": true,
-        "stats_size_bytes": 5448,
-        "stats_note": "Generated from stub (0 entries)",
+        "stats_size_bytes": 431,
+        "stats_note": "Generated from stub (0 entries, 431 bytes)",
         "death_seal": true,
         "death_seal_filename": "Incarnation-2-IRL-184Conversion-reincarnateDEATH.md",
         "pipeline": true,
@@ -64,7 +65,7 @@
         "keywords": false,
         "rfkw_file": null,
         "inverted_index_updated": false,
-        "note": "Cannot extract keywords from 40-line stub I-LOG. Real RRL (3.5MB) not in workspace."
+        "note": "Cannot extract keywords from 36-line stub I-LOG. Real RRL (3.5MB) not in workspace."
       },
       "naming_audit": {
         "ilog_filename": "I-LOG-Incarnation-2-IRL-184Conversion.txt",
@@ -77,7 +78,7 @@
         "status": "NOT SCANNED — I-LOG is a 40-line stub (not JSONL). Real RRL (3.5MB) not in workspace."
       },
       "gaps": [
-        "I-LOG is a 40-line stub (not JSONL), not the real transcript",
+        "I-LOG is a 36-line stub (not JSONL), not the real transcript",
         "Real RRL (3.5MB) not in workspace — cannot generate real COLORIZED/STATS/keywords",
         "Keywords cannot be extracted from stub",
         "LostSouls scan not possible on stub",

@@ -1,0 +1,11 @@
+{
+  "from_anchor": "Incarnate-10-AAA.STEEL-(Sessions1-9)",
+  "to_anchor": "Incarnate-11-AAA",
+  "timestamp": "2026-08-03T06:15:00+07:00",
+  "anchor_level": "Steel",
+  "sessions_audited": 9,
+  "sessions_promoted": 8,
+  "sessions_blocked": 1,
+  "blocker": "S2 (Incarnation-2-IRL-184Conversion) — real RRL (3.5MB) not in workspace. Stub only.",
+  "next_anchor": "Titanium at session 25"
+}

@@ -1,0 +1,10 @@
+﻿{
+    "ilog":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-9-Transcribe-ITLS.txt",
+    "from_run":  "191",
+    "timestamp":  "2026-08-04T03:09:35.7118263+07:00",
+    "ilog_stats":  "I-LOG/I-LOG-Incarnate-9-Transcribe-ITLS-STATS.json",
+    "ilog_colorized":  "I-LOG/I-LOG-Incarnate-9-Transcribe-ITLS-COLORIZED.md",
+    "audit":  null,
+    "pipeline":  "CANON\\REINCARNATION\\pipeline-Incarnate-9-Transcribe-ITLS.json",
+    "to_run":  192
+}

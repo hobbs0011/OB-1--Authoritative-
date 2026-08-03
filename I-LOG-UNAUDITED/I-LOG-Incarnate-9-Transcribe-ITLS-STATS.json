@@ -1,9 +1,26 @@
 ﻿{
     "parsed_lines":  30,
-    "processed_at":  "2026-08-02T01:50:09.4464735+07:00",
-    "source_file":  "I-LOG/I-LOG-188.txt",
+    "processed_at":  "2026-08-04T03:09:35.5791075+07:00",
+    "source_file":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-9-Transcribe-ITLS.txt",
     "REASONcount":  0,
-    "top_topics":  null,
+    "top_topics":  [
+                       {
+                           "count":  20,
+                           "word":  "response"
+                       },
+                       {
+                           "count":  20,
+                           "word":  "Assistant"
+                       },
+                       {
+                           "count":  10,
+                           "word":  "command"
+                       },
+                       {
+                           "count":  10,
+                           "word":  "User"
+                       }
+                   ],
     "DNAcount":  20,
     "first_ts":  "2026-07-30T22:23:00.0000000+07:00",
     "tool_calls":  0,
@@ -11,7 +28,7 @@
     "PHEROMONEcount":  0,
     "last_ts":  "2026-07-30T22:52:00.0000000+07:00",
     "SOULcount":  10,
-    "total_chars":  0,
+    "total_chars":  561,
     "duration_min":  29,
     "top_tools":  null
 }

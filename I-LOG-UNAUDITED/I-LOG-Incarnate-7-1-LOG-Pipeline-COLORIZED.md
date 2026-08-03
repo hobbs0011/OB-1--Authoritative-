@@ -1,4 +1,4 @@
-﻿# RRL Colorized -- I-LOG-190
+﻿# RRL Colorized -- I-LOG-Incarnate-7-1-LOG-Pipeline
 
 > **LFG SCS RRL COLOR CODING:** 💜 SOUL (user) | ❤️ DNA (assistant) | 💛 REASON (reasoning) | 💚 PHEROMONE (tool/decision)
 
@@ -8,7 +8,7 @@
 
 | Field | Value |
 |-------|-------|
-| Source | I-LOG\I-LOG-190.txt |
+| Source | I-LOG-UNAUDITED\I-LOG-Incarnate-7-1-LOG-Pipeline.txt |
 | Lines | 6 |
 | 💜 SOUL | 3 |
 | ❤️ DNA | 3 |
@@ -155,5 +155,5 @@ RISE complete. Commencing DEATH protocol per death.ps1: preserving I-LOG, colori
 
 ---
 
-*Colorized by rrl-colorize.ps1 at 2026-08-02 02:29:29*
+*Colorized by rrl-colorize.ps1 at 2026-08-04 03:09:35*
 *LFG SCS RRL COLOR CODING: 💜 SOUL | ❤️ DNA | 💛 REASON | 💚 PHEROMONE*

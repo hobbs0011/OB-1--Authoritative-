@@ -1,0 +1,138 @@
+﻿{
+    "parsed_lines":  6,
+    "processed_at":  "2026-08-02T02:29:29.3718288+07:00",
+    "source_file":  "I-LOG\\I-LOG-190.txt",
+    "REASONcount":  1,
+    "top_topics":  [
+                       {
+                           "count":  7,
+                           "word":  "Stage"
+                       },
+                       {
+                           "count":  5,
+                           "word":  "Pipeline"
+                       },
+                       {
+                           "count":  5,
+                           "word":  "death"
+                       },
+                       {
+                           "count":  3,
+                           "word":  "RISE"
+                       },
+                       {
+                           "count":  2,
+                           "word":  "optimization"
+                       },
+                       {
+                           "count":  2,
+                           "word":  "color-coded"
+                       },
+                       {
+                           "count":  2,
+                           "word":  "organizational"
+                       },
+                       {
+                           "count":  2,
+                           "word":  "AUDIT"
+                       },
+                       {
+                           "count":  2,
+                           "word":  "Script"
+                       },
+                       {
+                           "count":  2,
+                           "word":  "chain"
+                       },
+                       {
+                           "count":  2,
+                           "word":  "SOULCOUNT"
+                       },
+                       {
+                           "count":  2,
+                           "word":  "Color"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Created"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Incarnate-7-I-LOG-PipelineE"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Complete"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Boot"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "reincarnateDEATH"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "protocol"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Markdown"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Triple"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "responses"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Gate"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "User"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Legionnaire"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Emoji"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Source"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Yellow"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Coding"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "Commencing"
+                       },
+                       {
+                           "count":  1,
+                           "word":  "calls"
+                       }
+                   ],
+    "DNAcount":  3,
+    "first_ts":  "2026-08-02T20:49:00.0000000+07:00",
+    "tool_calls":  0,
+    "lines":  6,
+    "PHEROMONEcount":  0,
+    "last_ts":  "2026-08-03T02:24:08.0000000+07:00",
+    "SOULcount":  3,
+    "total_chars":  2000,
+    "duration_min":  335.1,
+    "top_tools":  null
+}

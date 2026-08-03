@@ -85,6 +85,7 @@ foreach ($line in $rawLines) {
         $text = $block.text
         $tool = $block.tool
         $state = $block.state
+        if (-not $text -and $block.data -and $block.data.text) { $text = $block.data.text }
         if (-not $text -and $tool) { $text = "tool: $tool" }
 
         $blockEntry = @{

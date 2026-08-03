@@ -1,0 +1,24 @@
+{
+  "from_incarnation": "Incarnate-4-PhoenixScout-Portals-and-OBI-DEV",
+  "to_incarnation": "Incarnate-5-Portals-and-OBI-DEV",
+  "timestamp": "2026-07-24T22:31:00+07:00",
+  "head": "75efbfab0",
+  "branch": "canon",
+  "death_seal": "CANON/REINCARNATION/Incarnate-4-PhoenixScout-Portals-and-OBI-DEV-reincarnateDEATH.md",
+  "pipeline": "CANON/REINCARNATION/pipeline-Incarnate-4-PhoenixScout-Portals-and-OBI-DEV.json",
+  "irl": "IRL/Incarnate4- I-LOG Procedure.txt",
+  "irl_colorized": "IRL/Incarnate-4-PhoenixScout-COLORIZED.md",
+  "irl_stats": "IRL/Incarnate-4-PhoenixScout-STATS.json",
+  "audit": {
+    "SOULcount": 76,
+    "DNAcount": 304,
+    "REASONcount": 286,
+    "total": 380
+  },
+  "next_rise_must": [
+    "Deploy soul-logger worker with per-session /api/soul/count fix",
+    "Commit UNTRACKED phetrails artifacts (phetrails.ps1 + phetrails.md)",
+    "Execute phetrails.md Steps 2/4-7",
+    "Wire SCS stage specs to POST /api/pheromone/deposit"
+  ]
+}

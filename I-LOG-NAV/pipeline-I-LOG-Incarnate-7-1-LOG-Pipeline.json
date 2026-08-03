@@ -1,0 +1,19 @@
+﻿{
+    "irl_stats":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-7-1-LOG-Pipeline-STATS.json",
+    "timestamp":  "2026-08-03T06:14:00.2763963+07:00",
+    "irl_colorized":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-7-1-LOG-Pipeline-COLORIZED.md",
+    "audit":  {
+                  "total":  6,
+                  "REASONcount":  1,
+                  "total_chars":  2000,
+                  "SOULcount":  3,
+                  "DNAcount":  3
+              },
+    "name":  "I-LOG-Incarnate-7-1-LOG-Pipeline",
+    "lost_souls_file":  "CANON\\LOSTSOULS\\lostsouls-I-LOG-Incarnate-7-1-LOG-Pipeline.md",
+    "irl":  "I-LOG-UNAUDITED/I-LOG-Incarnate-7-1-LOG-Pipeline.txt",
+    "open_items":  [
+
+                   ],
+    "keywords_file":  "CANON\\SOUL-KEYWORDS\\rfkw-I-LOG-Incarnate-7-1-LOG-Pipeline.txt"
+}

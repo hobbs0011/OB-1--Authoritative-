@@ -11,11 +11,15 @@ fi
 
 # Always block explicit secret-bearing files.
 blocked_path_pattern='(^|/|\\)(\.env(\.|$)|\.env\.keys$|.*\.(pem|p12|pfx|key)$)'
+blocked_path_exception='(^|/|\\)\.env\.example$'
 if echo "${staged_files}" | grep -E -i "${blocked_path_pattern}" >/dev/null; then
-  echo "[secret-guard] Secret-bearing file type detected in staged changes."
-  echo "${staged_files}" | grep -E -i "${blocked_path_pattern}" | sed 's/^/[secret-guard]   /'
-  BLOCKED=1
-fi
+    blocked_list=$(echo "${staged_files}" | grep -E -i "${blocked_path_pattern}" | grep -v -E -i "${blocked_path_exception}" || true)
+    if [ -n "${blocked_list}" ]; then
+      echo "[secret-guard] Secret-bearing file type detected in staged changes."
+      echo "${blocked_list}" | sed 's/^/[secret-guard]   /'
+      BLOCKED=1
+    fi
+  fi
 
 # High-signal patterns for credentials and private keys.
 secret_pattern='(DOTENV_PRIVATE_KEY\s*=|BEGIN[[:space:]]+([A-Z]+[[:space:]]+)?PRIVATE[[:space:]]+KEY|API[_-]?KEY[[:space:]]*[:=][[:space:]]*["\x27]?[A-Za-z0-9_\-]{16,}|ghp_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{20,}|AIza[0-9A-Za-z\-_]{35}|xox[baprs]-[A-Za-z0-9-]{10,})'
@@ -50,6 +54,46 @@ done <<< "${staged_files}"
 
 if [[ ${BLOCKED} -ne 0 ]]; then
   echo "[secret-guard] Commit blocked. Remove secrets or move them to Wrangler/GitHub secrets."
+  exit 1
+fi
+
+# ── Script Path Guard ─────────────────────────────────────────────────────────
+# LFG: "Only location: CANON/SCRIPTS/". System/utility scripts live nowhere else.
+# App code in APPS/, ARCHIVE/, WORKERS/ is grandfathered.
+
+script_exts='\.(ps1|sh|py|bat|cmd|mjs|cjs|js|ts)$'
+allowed_prefixes=(
+  'CANON/SCRIPTS/'
+  'CANON/ARCHIVE/'
+  'APPS/'
+  'ARCHIVE/'
+  'WORKERS/'
+  'NET-PET-AI/'
+)
+
+new_scripts=$(git diff --cached --name-only --diff-filter=A | grep -E "${script_exts}" || true)
+
+for file in ${new_scripts}; do
+  allowed=0
+  for prefix in "${allowed_prefixes[@]}"; do
+    if [[ "${file}" == "${prefix}"* ]]; then
+      allowed=1
+      break
+    fi
+  done
+  if [[ "${allowed}" -eq 0 ]]; then
+    echo "[script-guard] New script outside allowed path: ${file}"
+    echo "  Allowed: CANON/SCRIPTS/, APPS/*, ARCHIVE/*, WORKERS/*, NET-PET-AI/*"
+    BLOCKED=1
+  fi
+  if [[ "${file}" == ".kilo/"* ]]; then
+    echo "[script-guard] Executable script in .kilo is forbidden: ${file}"
+    BLOCKED=1
+  fi
+done
+
+if [[ ${BLOCKED} -ne 0 ]]; then
+  echo "Commit blocked. Fix above violations or use --no-verify to bypass."
   exit 1
 fi
 

@@ -1,0 +1,19 @@
+﻿{
+    "irl_stats":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-5-Portals-and-OBI-DEV-STATS.json",
+    "timestamp":  "2026-08-03T06:14:12.0565455+07:00",
+    "irl_colorized":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-5-Portals-and-OBI-DEV-COLORIZED.md",
+    "audit":  {
+                  "total":  8,
+                  "REASONcount":  3,
+                  "total_chars":  528,
+                  "SOULcount":  1,
+                  "DNAcount":  7
+              },
+    "name":  "I-LOG-Incarnate-5-Portals-and-OBI-DEV",
+    "lost_souls_file":  "CANON\\LOSTSOULS\\lostsouls-I-LOG-Incarnate-5-Portals-and-OBI-DEV.md",
+    "irl":  "I-LOG-UNAUDITED/I-LOG-Incarnate-5-Portals-and-OBI-DEV.txt",
+    "open_items":  [
+
+                   ],
+    "keywords_file":  "CANON\\SOUL-KEYWORDS\\rfkw-I-LOG-Incarnate-5-Portals-and-OBI-DEV.txt"
+}

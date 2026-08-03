@@ -1,0 +1,18 @@
+﻿{
+    "ilog":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-5-Portals-and-OBI-DEV.txt",
+    "from_run":  "189",
+    "timestamp":  "2026-08-04T03:09:22.7691420+07:00",
+    "ilog_stats":  "I-LOG/I-LOG-Incarnate-5-Portals-and-OBI-DEV-STATS.json",
+    "ilog_colorized":  "I-LOG/I-LOG-Incarnate-5-Portals-and-OBI-DEV-COLORIZED.md",
+    "audit":  {
+                  "SOULcount":  1,
+                  "DNAcount":  7,
+                  "REASONcount":  3,
+                  "total":  8,
+                  "first_utc":  "2026-08-02T02:15:00.000Z",
+                  "last_utc":  "2026-08-02T02:17:00.000Z",
+                  "duration_min":  2
+              },
+    "pipeline":  "CANON\\REINCARNATION\\pipeline-Incarnate-5-Portals-and-OBI-DEV.json",
+    "to_run":  190
+}

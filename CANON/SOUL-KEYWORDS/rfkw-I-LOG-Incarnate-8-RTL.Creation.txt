@@ -1,0 +1,34 @@
+﻿# SOUL-KEYWORDS for Incarnate-8-RTL.Creation
+# Extracted from: D:\OB-1-CANONICAL\I-LOG-UNAUDITED\I-LOG-Incarnate-8-RTL.Creation-STATS.json
+# SOULcount=50 DNAcount=313 REASONcount=265
+
+352 | user
+300 | this
+272 | that
+248 | check
+243 | with
+243 | script
+233 | Worker
+228 | should
+204 | files
+192 | I-LOG
+181 | scripts
+170 | need
+170 | from
+168 | Cloudflare
+162 | what
+162 | just
+155 | file
+152 | They
+148 | session
+138 | have
+133 | path
+122 | current
+112 | also
+108 | might
+108 | Actually
+106 | already
+105 | looking
+102 | want
+100 | there
+97 | actual
