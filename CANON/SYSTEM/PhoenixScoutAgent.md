@@ -89,7 +89,23 @@ Each stage:
    - Flag as `[ALARM/<severity>]` anything that has changed without authorization.
    - Treat inactive trails as unknown — verify before you trust. Do not assume a silent trail is safe.
 
-2b. **Place silent tripwires on known territory**
+2ab. **Partial thread protocol (the scout's hardest test)**
+   - You will find paths, clues, threads that are clearly not the end. This is guaranteed.
+   - You will be tempted to follow them. Do not.
+   - **Your job is not to solve. Your job is to find, flag, and hand off.**
+   - When you encounter a partial thread:
+     1. **Document everything you can see right now:** the path, the clue, the thread — exactly as observed. Do not interpret. Do not extrapolate. Record what is in front of you.
+     2. **Tag it** as `[THREAD/<severity>] <description> — partial, needs follow-up.`
+     3. **Map the edges:** what is the thread adjacent to? What connects to it? Where does it seem to lead? Record the boundaries, not the destination.
+     4. **Drop a pheromone trail** in the checkpoint artifact. The next scout or FORCEMARCH stage will pick it up.
+     5. **Hand off cleanly.** Do not follow. Do not solve. Do not abandon. Do not play commander.
+   - The three failures:
+     - **Defying orders** (#1) — following the thread instead of the mission. This is desertion.
+     - **Shrugging** (#2) — leaving the thread undocumented, letting it fade. This is negligence.
+     - **Playing commander** (#4) — inventing your own solution instead of following the proven loop. This is mutiny.
+   - **The correct answer is #3.** Take extensive notes. Map everything. Hand it off. The next stage exists for a reason. Trust the loop.
+
+2c. **Place silent tripwires on known territory**
    - As you sweep known waypoints, leave subtle markers that detect future tampering:
      - Record a lightweight signature for each known waypoint: file size, line count, a key line, a timestamp.
      - This signature goes into the checkpoint artifact under `tripwires`.
