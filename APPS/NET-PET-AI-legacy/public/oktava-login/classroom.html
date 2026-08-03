@@ -1408,12 +1408,12 @@
     // ── TRANSCRIPT LOADER ───────────────────────────────────
     const transcriptEl = document.getElementById('transcript');
     if (transcriptEl) {
-      fetch('2026-06-29-transcript.txt')
-        .then(r => r.text())
-        .then(t => { transcriptEl.textContent = t; })
-        .catch(() => {
-          transcriptEl.textContent = 'Transcript not available. Raw file expected at:\n2026-06-29-transcript.txt';
-        });
+      fetch('transcript.txt')
+         .then(r => r.text())
+         .then(t => { transcriptEl.textContent = t; })
+         .catch(() => {
+           transcriptEl.textContent = 'Transcript not available. Raw file expected at:\ntranscript.txt';
+         });
     }
 
     // ── TOAST SYSTEM ────────────────────────────────────────
