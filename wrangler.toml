@@ -1,15 +1,11 @@
-name = "soul-logger"
+name = "oktava-portal"
 compatibility_date = "2026-05-18"
-main = "src/index.js"
-
-[[durable_objects.bindings]]
-name = "SOUL_ARCHIVE"
-class_name = "SoulDatabase"
+main = "WORKERS/oktava-index.js"
 
 [[kv_namespaces]]
 binding = "KV"
 id = "5ed0e9ab65cc42e6889822266aa7c730"
 
-[[migrations]]
-tag = "v1"
-new_classes = [ "SoulDatabase" ]
+[vars]
+ENVIRONMENT = "production"
+SITE_URL = "https://oktava-portal.pages.dev"

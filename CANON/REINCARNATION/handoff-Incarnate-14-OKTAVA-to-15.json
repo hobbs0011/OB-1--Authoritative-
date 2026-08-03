@@ -1,0 +1,30 @@
+{
+  "from_session": "Incarnate-14-OKTAVA",
+  "from_run": 14,
+  "to_run": 15,
+  "timestamp": "2026-08-04T05:34:33+07:00",
+  "head": "57b849a2f",
+  "branch": "canon",
+  "ilog": "I-LOG-UNAUDITED/I-LOG-Incarnate-14-OKTAVA.txt",
+  "death_seal": "CANON/REINCARNATION/Incarnate-14-OKTAVA-reincarnateDEATH.md",
+  "pipeline": "CANON/PIPELINE/pipeline-Incarnate-14-OKTAVA.json",
+  "soul_capture": "CANON/CASE-STUDY/OKTAVA-TEACHING-METHODOLOGY.md",
+  "pheromones": [
+    "CANON/PHEROMONES/PheTrail-run13-rise-boot.json",
+    "CANON/PHEROMONES/PheTrail-run14-force-march.json (network deposit 85479ad1)"
+  ],
+  "audit": {
+    "SOULcount": 1,
+    "DNAcount": 4,
+    "REASONcount": 0,
+    "PHEROMONEcount": 2,
+    "status": "SEAL_IMPRESSED"
+  },
+  "open_items": [
+    "DEPLOY oktava-login portal to Cloudflare Pages (src/index.js restored from archive + DEEPGRAM_API_KEY secret + wrangler login) — next DEATH",
+    "REASONcount unverifiable this run (Kilo HOLLOW); emit reasoning in next full session",
+    "Incarnate-11 missing DEATH seal — audit backlog",
+    "reincarnate-rise.ps1 boot checks are stubs"
+  ],
+  "next_session_receives": "Committed transcript-loader fix (classroom.html: fetch('transcript.txt')); canonical teaching-SOUL (KISS/TwoBraces/AnswerFormula/6Rules/WWWWH/scam-INTERNAL/OBstack/pipeline/deploystatus); verified soul-logger worker live for pheromones; located production worker index.js in archive for deploy. Next RISE: execute Cloudflare Pages deploy of oktava-login + wire Deepgram secret; run SOULSCHOLARS on next student transcript."
+}

@@ -1,8 +1,8 @@
 {
-  "from_session": "Incarnate-12-KiloFreeDeepDive",
+  "from_session": "Incarnate-12-Scout&Other",
   "from_run": 12,
   "to_run": 13,
-  "timestamp": "2026-08-04T04:43:30+07:00",
+  "timestamp": "2026-08-04T05:42:58+07:00",
   "ilog": "I-LOG-UNNAMED/I-LOG-Incarnate-12-KiloFreeDeepDive.txt",
   "ilog_colorized": "NOT GENERATED",
   "ilog_stats": "NOT GENERATED",
@@ -11,7 +11,7 @@
   "dna_extract": "CANON/SOUL/EXTRACT/dna-Incarnate-12.json",
   "phetrail": "CANON/PHEROMONES/PheTrail-Incarnate-12.json",
   "keywords": "CANON/SOUL-KEYWORDS/rfkw-Incarnate-12.txt",
-  "death_seal": "CANON/REINCARNATION/Incarnate-12-KiloFreeDeepDive-reincarnateDEATH.md",
+  "death_seal": "CANON/REINCARNATION/Incarnate-12-Scout&Other-reincarnateDEATH.md",
   "audit": {
     "SOULcount": 11,
     "DNAcount": 11,
@@ -20,12 +20,13 @@
     "total_messages": "UNKNOWN",
     "audit_coverage": "2/3 PASS — REASON gap due to RRL inaccessibility"
   },
-  "open_items": [
+  "gaps": [
     "REASONcount unverifiable without RRL access",
+    "Session name mismatch: I-LOG header says KiloFreeDeepDive, DEATH sealed as Scout&Other per operator override",
+    "RISE mission mismatch: stamp said KiloFreeDeepDive, actual work was SCS canonization + CASA draft",
     "Incarnate-11 missing DEATH seal — SCOUT-only session needs closure",
-    "RISE mission mismatch — stamp said KiloFreeDeepDive, actual work was SCS canonization + CASA draft",
     "BB-SCS-002/003 script automation pending",
     "CASA counter-proposal unsent — awaiting operator review"
   ],
-  "next_session_receives": "SCS doctrine fully canonized. CASA draft ready. Incarnate-11 scout checkpoint written but unsealed. REASON extraction problem unsolved."
+  "next_session_receives": "SCS doctrine fully canonized. CASA draft ready. Incarnate-11 scout checkpoint written but unsealed. REASON extraction problem unsolved. Session name correction applied."
 }
