@@ -44,6 +44,11 @@ This is **not** a command. It is **not** a protocol. It is a living record â€
 |---------|-----|------------|--------|------------------|-------|
 | DeepThink | 182 | LEGATUS (blueprint) | SEEDED | 7-phase pipeline blueprint, pheromone synch | Workhorse execution |
 | Workhorse | 182 | FABRI (execute) | PENDING | Awaiting blueprint handoff | Execute restoration + Engineer protocol |
+| Incarnate-11-AnhMinhContact | 11 | SCOUT | NAV | Empty session, all artifacts consistent, promoted to NAV | None |
+| Incarnate-12-ContractNegociations | 12 | FORCEMARCH | GAP | DEATH seal valid, naming mismatch (KiloFreeDeepDive vs ContractNegociations), no rfkw | Rename artifacts, extract keywords |
+| Incarnate-13-SOULCapture | 13 | SOULSCHOLARS | GAP | RISE boot only, no DEATH artifacts produced | Generate all DEATH artifacts + keywords |
+| Incarnate-14-OKTAVA | 14 | ENGINEER | GAP | DEATH seal valid, OKTAVA work committed, no I-LOG in UNAUDITED, no pipeline | Generate I-LOG artifacts + pipeline + keywords + deploy portal |
+| Incarnate-15-AAA(STONE)-(S11-14) | 15 | AAA-STONE | AUDITED | Stone Anchor audit of sessions 11-14, 1 promoted, 3 with GAPs | Resolve GAPs before next AAA anchor |
 
 *This ledger is appended. No session is ever removed. Stale entries are marked, never deleted.*
 
@@ -221,7 +226,7 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 | 2026-08-02T02:25:00 | Incarnation-2-RRL-(184Conversion) | SUPPLYLINES (Stage 5) | 8 | 6 | 3 | `CANON/SUPPLY/incarnation2-supply-20260802T022500.json` |
 | 2026-08-02T19:52 | Incarnate-5-AAA.STONE-(Sessions1-4) | AAA Stone Anchor (Stage 8) | — | — | — | CANON/REINCARNATION/Incarnate-5-AAA.STONE-(Sessions1-4)-reincarnateDEATH.md |
 | 2026-08-04T03:19 | Incarnate-11-AnhMinhContact | PhoenixSCOUT (Stage 2) | 4 | 2 | 2 | `CANON/SCOUT/scout-incarnate11-anhminh-contact-20260804T031900.md` |
-| 2026-08-04T04:43 | Incarnate-12-KiloFreeDeepDive | reincarnateDEATH (Stage 7) | 11 | 11 | GAP | `CANON/REINCARNATION/Incarnate-12-KiloFreeDeepDive-reincarnateDEATH.md` |
+| 2026-08-04T05:42 | Incarnate-12-Scout&Other | reincarnateDEATH (Stage 7) | 11 | 11 | GAP | `CANON/REINCARNATION/Incarnate-12-Scout&Other-reincarnateDEATH.md` |
 
 
 | 2026-08-01T19:16:25+07:00 | Incarnate-8-RTL.Creation | reincarnateDEATH (Stage 7) | 50 | 313 | 265 | CANON\REINCARNATION\handoff-8-to-9.json |
@@ -241,6 +246,8 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 | 2026-08-04T05:37:00+07:00 | Incarnate-14-OKTAVA | ENGINEERlegionnaire (Stage 6) | 1 | 3 | 0 | Audited: loader fixed, methodology committed, worker src located, tree clean |
 | 2026-08-04T05:38:33+07:00 | Incarnate-14-OKTAVA | reincarnateDEATH (Stage 7) | 1 | 4 | 0 | CANON/REINCARNATION/Incarnate-14-OKTAVA-reincarnateDEATH.md (SEAL IMPRESSED, commit 9704dbc35) |
 | 2026-08-04T05:36:33+07:00 | Incarnate-14-OKTAVA | HANDOFF (Stage 7) | 1 | 4 | 0 | CANON/REINCARNATION/handoff-Incarnate-14-OKTAVA-to-15.json |
+
+| 2026-08-03T22:51:10+07:00 | Incarnate-13-SOULCapture | reincarnateDEATH (Stage 7) |  |  |  | CANON\REINCARNATION\handoff-Incarnate-13-SOULCapture-to-14.json |
 
 *Rows are append-only. Never delete or modify prior rows. Stale rows are marked `[DEPRECATED]`, never removed.*
 
