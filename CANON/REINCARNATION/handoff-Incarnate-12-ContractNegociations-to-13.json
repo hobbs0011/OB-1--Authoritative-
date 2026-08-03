@@ -1,0 +1,10 @@
+﻿{
+    "ilog":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-12-ContractNegociations.txt",
+    "from_run":  "12",
+    "timestamp":  "2026-08-04T05:09:38.3662073+07:00",
+    "ilog_stats":  "I-LOG/I-LOG-Incarnate-12-ContractNegociations-STATS.json",
+    "ilog_colorized":  "I-LOG/I-LOG-Incarnate-12-ContractNegociations-COLORIZED.md",
+    "audit":  null,
+    "pipeline":  "CANON\\REINCARNATION\\pipeline-Incarnate-12-ContractNegociations.json",
+    "to_run":  13
+}
