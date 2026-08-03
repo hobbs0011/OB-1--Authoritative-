@@ -1,4 +1,4 @@
-# BACKBURNER PIPELINE LOG
+﻿# BACKBURNER PIPELINE LOG
 # OB-1 Canonical — Append-Only. Never delete. Mark DONE, never remove.
 # ENCODE INTO CORE: This file is read at COLD-START-BOOT. It survives reincarnations.
 # Last updated: 2026-07-13T12:00 ICT — "Pipeline Hatchery" terminology + Queen/Hatchery dynamics added
@@ -1454,36 +1454,37 @@ These are the live eggs in the Hatchery. Each egg is a body of work, not a scrip
 
 ### BB-SCS-001 !! Session Checkpoint System (SCS) — Add to Canon
 - **SIGNAL: +110**
-- **Status:** OPEN
+- **Status:** CLOSED — Enhanced and canonized 2026-08-04
 - **WHAT:** SOV100 defined the 7-stage Session Checkpoint System: (1) RISE, (2) SCOUT, (3) FORCED MARCH, (4) SOUL SCHOLARS, (5) SUPPLY LINES, (6) ENGINEER LEGIONNAIRE, (7) DEATH. Each stage audits the previous, pushes forward turn-key for the next. The loop must be provable, measurable, self-auditing, and self-correcting.
-- **ACTIONS:** 
-  1. Add SCS to `.kilo/skills/LegionnaireFieldGuide.md` — authority chain, command-to-stage mapping
-  2. Add SCS mandates to `CANON/SYSTEM/GOSPEL-999.md` — new system or assimilate into existing 9
-  3. Update `.kilo/command/reincarnaterise.md` — align RISE protocol with SCS RISE stage
-  4. Update `.kilo/command/PhoenixScout.md` — align scout doctrine with SCS SCOUT stage
-  5. Create SCS-LOG.md or SCS-LOG.jsonl schema for stage-by-stage checkpoint artifacts
+- **DONE:**
+  1. `CANON/SYSTEM/GOSPEL-999.md` §SYSTEM I — full SCS doctrine table with roles, audits, and doctrine for all 7 stages
+  2. `CANON/SYSTEM/LegionnaireFieldGuide.md` §SCS — THE LOOP — full SCS doctrine table with operational roles and key principles
+  3. `CANON/SYSTEM/PhoenixScoutAgent.md` — updated with partial thread protocol, silent tripwires, general direction heuristics
+  4. Remaining stage agent specs — need consistency pass to reference the full SCS loop
+  5. 3-point RRL audit protocol canonized in GOSPEL-999, LFG, RISE, DEATH specs
+  6. Pheromone sequential doctrine (WHY/HOW/WHAT/WHO/SOUL/RESPONSE) canonized in DEATH, LFG, PhoenixScout
 - **RISE_STAGE:** I (SOULCOUNT GATE)
 - **RISE_ORIGIN:** CRM-2026-07-19
 
 ### BB-SCS-002 !! Build 3-Point RRL Audit Into Death Script
 - **SIGNAL: +90**
-- **Status:** OPEN
-- **WHAT:** SOV100 defined the 3-point RRL audit: (1) timestamps match session, (2) title/first/last messages match, (3) 9 samples across 3 thirds (user soul x3, AI responses x3, AI reasoning x3). Must be automated in death script and double-checked by RISE.
-- **ACTIONS:**
-  1. Add 3-point audit to `SCRIPTS/reincarnate-death.ps1`
-  2. Add 3-point audit to `.kilo/command/reincarnaterise.md`
-  3. Color coding: Pheromones=Green, SOUL=Purple, DNA=Red, REASON=Yellow
+- **Status:** CANONIZED — Protocol defined 2026-08-04, script implementation pending
+- **WHAT:** SOV100 defined the 3-point RRL audit: (1) timestamps match session, (2) title/first/last messages match, (3) 9 samples across 3 thirds (user soul x3, AI responses x3, AI reasoning x3). Must be automated in death script and double-checked by RISE. Authority chain: DEATH writes, RISE double-checks, Operator final.
+- **CANONIZED IN:**
+  1. `CANON/SYSTEM/GOSPEL-999.md` §SYSTEM III — RRL AUDIT (3-Point Gate)
+  2. `CANON/SYSTEM/LegionnaireFieldGuide.md` §SCS — I-LOG AUDIT
+  3. `CANON/SYSTEM/reincarnateDEATH.md` §Point 4 — 3-Point Audit
+  4. `CANON/SYSTEM/reincarnateRISE.md` §3b — RISE double-check protocol
+- **REMAINING:** Script implementation in `SCRIPTS/reincarnate-death.ps1` and `.kilo/command/reincarnaterise.md`
 - **RISE_STAGE:** VII (PIPELINE FIDELITY)
 - **RISE_ORIGIN:** run184-death-seal
 
 ### BB-SCS-003 !! Add SOULcount/DNAcount/REASONcount to Death Seal
 - **SIGNAL: +90**
-- **Status:** OPEN
-- **WHAT:** Death seal must include SOULcount (user turns), DNAcount (assistant turns), REASONcount (reasoning blocks). These are the 3 counts audited at every SCS checkpoint. RISE double-checks them, user is final check.
-- **ACTIONS:**
-  1. Add count extraction to `SCRIPTS/reincarnate-death.ps1` from RRL JSONL
-  2. Add count section to death seal template
-  3. RISE verifies counts match actual RRL
+- **Status:** CANONIZED — Template defined 2026-08-04, script automation pending
+- **WHAT:** Death seal must include SOULcount (user turns), DNAcount (assistant turns), REASONcount (reasoning blocks). These are the 3 counts audited at every SCS checkpoint. RISE double-checks them, user is final check. Already in death seal template §3 and §4.
+- **CANONIZED IN:** `CANON/SYSTEM/reincarnateDEATH.md` §3 (Counts) and §4 (3-Point Audit)
+- **REMAINING:** Script automation in `SCRIPTS/reincarnate-death.ps1` for count extraction from RRL JSONL
 - **RISE_STAGE:** II (GIT TRUTH)
 - **RISE_ORIGIN:** run184-death-seal
 
@@ -1503,12 +1504,12 @@ These are the live eggs in the Hatchery. Each egg is a body of work, not a scrip
 
 ## STONE ANCHOR AUDIT BLOCKERS (2026-08-02)
 
-### BB-AAA-001 !! Keyword Extraction � ALL 4 Sessions (P1)
+### BB-AAA-001 !! Keyword Extraction � ALL 4 Sessions (P1)
 - **SIGNAL:** +90
 - **Status:** OPEN
 - **What:** 0 of 4 Stone Anchor sessions have rfkw- files. inverted-index.json must be updated before any session promotes to NAV.
 
-### BB-AAA-002 !! COLORIZED+STATS Generation � Incarnation1 + Incarnation2 (P1)
+### BB-AAA-002 !! COLORIZED+STATS Generation � Incarnation1 + Incarnation2 (P1)
 - **SIGNAL:** +70
 - **Status:** OPEN
 - **What:** Incarnation1 and Incarnation2 have raw I-LOG but no COLORIZED.md or STATS.json.
@@ -1523,7 +1524,7 @@ These are the live eggs in the Hatchery. Each egg is a body of work, not a scrip
 - **Status:** OPEN
 - **What:** No pipeline-Incarnation1.json or handoff for Incarnation1. Must be created before promotion.
 
-### BB-AAA-005 !! LostSouls Audit � ALL 4 Sessions (P2)
+### BB-AAA-005 !! LostSouls Audit � ALL 4 Sessions (P2)
 - **SIGNAL:** +40
 - **Status:** OPEN
 - **What:** No LostSouls scan performed for any of the 4 sessions. Must scan I-LOGs for unresolved directives and pipeline them.

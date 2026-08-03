@@ -232,6 +232,8 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 
 | 2026-08-03T20:09:35+07:00 | Incarnate-9-Transcribe-ITLS | reincarnateDEATH (Stage 7) |  |  |  | CANON\REINCARNATION\handoff-Incarnate-9-Transcribe-ITLS-to-192.json |
 
+| 2026-08-03T22:09:38+07:00 | Incarnate-12-ContractNegociations | reincarnateDEATH (Stage 7) |  |  |  | CANON\REINCARNATION\handoff-Incarnate-12-ContractNegociations-to-13.json |
+
 *Rows are append-only. Never delete or modify prior rows. Stale rows are marked `[DEPRECATED]`, never removed.*
 
 ---
