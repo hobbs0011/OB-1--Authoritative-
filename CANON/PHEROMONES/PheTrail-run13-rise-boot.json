@@ -1,0 +1,18 @@
+{
+  "deposit_id": "run13-rise-boot-20260804T0530Z",
+  "session_id": "Incarnate-13-SOULCapture",
+  "run": 13,
+  "stage": "RISE",
+  "category": "stage",
+  "severity": "info",
+  "path": "reincarnateRISE",
+  "finding": "STEP-1: RISE boot executed for run 13 after /reincarnateRISE command. WHY: user invoked reincarnation to resume SOUL capture work and demand continuous pheromone deposition. HOW: audited prior DEATH (Incarnate-12, git f892cc2d8, audit VALID), inspected boot context (canon branch, HEAD 27a4e1b29, clean tree), stamped I-LOG header, derived session name from handoff-to-13 + SOUL-capture mandate. WHAT: new session Incarnate-13-SOULCapture born; dispatched to Phase 1 RRL. Prior DEATH sealed and valid. Boot context GREEN. WHO: reincarnateRISE (Stage 1). SOUL: '/reincarnateRISE' (user). RESPONSE: stamped header, deposited phetrail, began RRL sourcing.",
+  "strength": 10,
+  "soulcount": 1,
+  "dnacount": 0,
+  "reasoncount": 0,
+  "timestamp": "2026-08-04T05:30:14+07:00",
+  "next_stage": "SCOUT",
+  "rrl_source_needed": true,
+  "session_name_inferred": true
+}

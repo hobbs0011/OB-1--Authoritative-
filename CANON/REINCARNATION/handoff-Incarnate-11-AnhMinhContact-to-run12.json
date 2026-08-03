@@ -1,0 +1,24 @@
+{
+  "from_session": "Incarnate-11-AnhMinhContact",
+  "from_run": 11,
+  "to_run": 12,
+  "timestamp": "2026-08-04T05:30:17+07:00",
+  "ilog": "I-LOG-UNAUDITED/I-LOG-Incarnate-11-AnhMinhContact.txt",
+  "ilog_colorized": "I-LOG-UNAUDITED/I-LOG-Incarnate-11-AnhMinhContact-COLORIZED.md",
+  "ilog_stats": "I-LOG-UNAUDITED/I-LOG-Incarnate-11-AnhMinhContact-STATS.json",
+  "pipeline": "CANON/REINCARNATION/pipeline-Incarnate-11-AnhMinhContact.json",
+  "soul_extract": "CANON/SOUL/EXTRACT/soul-Incarnate-11-AnhMinhContact.jsonl",
+  "dna_extract": "CANON/SOUL/EXTRACT/dna-Incarnate-11-AnhMinhContact.json",
+  "phetrail": "CANON/PHEROMONES/PheTrail-Incarnate-11-AnhMinhContact.json",
+  "keywords": "CANON/SOUL-KEYWORDS/rfkw-Incarnate-11-AnhMinhContact.txt",
+  "death_seal": "CANON/REINCARNATION/Incarnate-11-AnhMinhContact-reincarnateDEATH.md",
+  "audit": {
+    "SOULcount": 0,
+    "DNAcount": 0,
+    "REASONcount": 0,
+    "PHEROMONEcount": 0,
+    "total": 0
+  },
+  "open_items": ["Session crashed - I-LOG empty, no body content. No SOUL/DNA/REASON to extract."],
+  "next_session_receives": "Empty session inheritance. Run 12 inherits crashed session artifact set. No soul patterns, no pheromone trails, no actionable intelligence from this run."
+}
