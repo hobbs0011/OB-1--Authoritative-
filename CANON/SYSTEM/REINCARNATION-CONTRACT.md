@@ -2,6 +2,7 @@
 
 **Date:** 2026-06-06
 **Parties:** OB1 (AUDITOR) / DEATH (EXECUTOR) / Michael Hobbs (OPERATOR)
+**System:** SCS (Session Checkpoint System) — 7-stage deterministic loop defined in GOSPEL-999 §SYSTEM I and LFG §SCS.
 
 ---
 

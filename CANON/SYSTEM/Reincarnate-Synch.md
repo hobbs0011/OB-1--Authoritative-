@@ -220,6 +220,7 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 | 2026-08-02T02:21:00 | Incarnation-2-RRL-(184Conversion) | SOULSCHOLARS (Stage 4) | 8 | 4 | 2 | `CANON/SOUL/incarnation2-soul-20260802T022100.json` |
 | 2026-08-02T02:25:00 | Incarnation-2-RRL-(184Conversion) | SUPPLYLINES (Stage 5) | 8 | 6 | 3 | `CANON/SUPPLY/incarnation2-supply-20260802T022500.json` |
 | 2026-08-02T19:52 | Incarnate-5-AAA.STONE-(Sessions1-4) | AAA Stone Anchor (Stage 8) | — | — | — | CANON/REINCARNATION/Incarnate-5-AAA.STONE-(Sessions1-4)-reincarnateDEATH.md |
+| 2026-08-04T03:19 | Incarnate-11-AnhMinhContact | PhoenixSCOUT (Stage 2) | 4 | 2 | 2 | `CANON/SCOUT/scout-incarnate11-anhminh-contact-20260804T031900.md` |
 
 
 | 2026-08-01T19:16:25+07:00 | Incarnate-8-RTL.Creation | reincarnateDEATH (Stage 7) | 50 | 313 | 265 | CANON\REINCARNATION\handoff-8-to-9.json |

@@ -1,15 +1,15 @@
 # AAA AUTO-PIPELINE PROTOCOL
-## Automated pipeline for session processing — Stone/Silver/Gold anchors
+## SCS (Session Checkpoint System) — Automated pipeline for session processing — Stone/Silver/Gold anchors
 
 ### PURPOSE
-Make session processing inevitable, automatic, and failure-resistant. Any model can pick up and process any session with zero hand-holding.
+Make SCS session processing inevitable, automatic, and failure-resistant. Any model can pick up and process any session with zero hand-holding.
 
 ### PROTOCOL FLOW
 
 ```
-RISE → SCOUT → FORCEMARCH → SOULSCHOLARS → SUPPLYLINES → ENGINEER → WORKHORSE → DEATH
-                                                                       ↓
-                                                              CANON/SCRIPTS/workhorse-pipeline.ps1
+SCS = RISE → SCOUT → FORCΞ MARCH → SOUL SCHOLARS → SUPPLY LINES → ENGINEER LEGIONNAIRE → DEATH → RISE
+                                                                        ↓
+                                                               CANON/SCRIPTS/workhorse-pipeline.ps1
 ```
 
 ### AUTOMATED PROCESS (WORKHORSE PIPELINE)
