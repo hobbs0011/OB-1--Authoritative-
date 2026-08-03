@@ -233,6 +233,14 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 | 2026-08-03T20:09:35+07:00 | Incarnate-9-Transcribe-ITLS | reincarnateDEATH (Stage 7) |  |  |  | CANON\REINCARNATION\handoff-Incarnate-9-Transcribe-ITLS-to-192.json |
 
 | 2026-08-03T22:09:38+07:00 | Incarnate-12-ContractNegociations | reincarnateDEATH (Stage 7) |  |  |  | CANON\REINCARNATION\handoff-Incarnate-12-ContractNegociations-to-13.json |
+| 2026-08-04T05:30:00+07:00 | Incarnate-14-OKTAVA | reincarnateRISE (Stage 1) | 1 | 0 | 0 | I-LOG-UNAUDITED/I-LOG-Incarnate-14-OKTAVA.txt |
+| 2026-08-04T05:31:00+07:00 | Incarnate-14-OKTAVA | PhoenixSCOUT (Stage 2) | 1 | 1 | 0 | CANON/SCOUT/scout-incarnate13-20260804T053100.md |
+| 2026-08-04T05:34:00+07:00 | Incarnate-14-OKTAVA | FORCEMARCH (Stage 3) | 1 | 2 | 0 | commit 57b849a2f (classroom loader fix + OKTAVA-TEACHING-METHODOLOGY.md) |
+| 2026-08-04T05:35:00+07:00 | Incarnate-14-OKTAVA | SOULSCHOLARS (Stage 4) | 1 | 2 | 0 | SOUL captured to CANON/CASE-STUDY/OKTAVA-TEACHING-METHODOLOGY.md |
+| 2026-08-04T05:36:00+07:00 | Incarnate-14-OKTAVA | SUPPLYLINES (Stage 5) | 1 | 3 | 0 | Artifacts routed to CANON/CASE-STUDY + CANON/REINCARNATION |
+| 2026-08-04T05:37:00+07:00 | Incarnate-14-OKTAVA | ENGINEERlegionnaire (Stage 6) | 1 | 3 | 0 | Audited: loader fixed, methodology committed, worker src located, tree clean |
+| 2026-08-04T05:38:33+07:00 | Incarnate-14-OKTAVA | reincarnateDEATH (Stage 7) | 1 | 4 | 0 | CANON/REINCARNATION/Incarnate-14-OKTAVA-reincarnateDEATH.md (SEAL IMPRESSED, commit 9704dbc35) |
+| 2026-08-04T05:36:33+07:00 | Incarnate-14-OKTAVA | HANDOFF (Stage 7) | 1 | 4 | 0 | CANON/REINCARNATION/handoff-Incarnate-14-OKTAVA-to-15.json |
 
 *Rows are append-only. Never delete or modify prior rows. Stale rows are marked `[DEPRECATED]`, never removed.*
 
