@@ -593,5 +593,110 @@
                    "run":  "Incarnate-8-RTL.Creation",
                    "category":  "extracted",
                    "weight":  1
-               }
+               },
+    "Incarnate-6-Auditor-LFG-Canon-Script":  {
+                                                 "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                                                 "category":  "extracted",
+                                                 "weight":  1
+                                             },
+    "DIRTY":  {
+                  "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                  "category":  "extracted",
+                  "weight":  1
+              },
+    "commits":  {
+                    "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                    "category":  "extracted",
+                    "weight":  1
+                },
+    "I-LOG-8":  {
+                    "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                    "category":  "extracted",
+                    "weight":  1
+                },
+    "Mission":  {
+                    "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                    "category":  "extracted",
+                    "weight":  1
+                },
+    "produce":  {
+                    "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                    "category":  "extracted",
+                    "weight":  1
+                },
+    "Incarnate-8":  {
+                        "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                        "category":  "extracted",
+                        "weight":  1
+                    },
+    "Header":  {
+                   "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "present":  {
+                    "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                    "category":  "extracted",
+                    "weight":  1
+                },
+    "Territory":  {
+                      "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                      "category":  "extracted",
+                      "weight":  1
+                  },
+    "Execute":  {
+                    "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                    "category":  "extracted",
+                    "weight":  1
+                },
+    "Summary":  {
+                    "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                    "category":  "extracted",
+                    "weight":  1
+                },
+    "INTACT":  {
+                   "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "recorded":  {
+                     "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "HEAD":  {
+                 "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                 "category":  "extracted",
+                 "weight":  1
+             },
+    "dirs":  {
+                 "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                 "category":  "extracted",
+                 "weight":  1
+             },
+    "messages":  {
+                     "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "blueprint":  {
+                      "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                      "category":  "extracted",
+                      "weight":  1
+                  },
+    "identify":  {
+                     "run":  "Incarnate-6-Auditor-LFG-Canon-Script",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "response":  {
+                     "run":  "Incarnate-9-Transcribe-ITLS",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "Assistant":  {
+                      "run":  "Incarnate-9-Transcribe-ITLS",
+                      "category":  "extracted",
+                      "weight":  1
+                  }
 }
