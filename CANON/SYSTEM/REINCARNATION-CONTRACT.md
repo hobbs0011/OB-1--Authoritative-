@@ -16,6 +16,16 @@
 
 - Single active mode. No audit-vs-execute gate.
 
+## 3. SCS (Session Checkpoint System)
+
+The 7-stage deterministic loop is the ONLY session processing framework:
+RISE → SCOUT → FORCEMARCH → SOULSCHOLARS → SUPPLYLINES → ENGINEER LEGIONNAIRE → DEATH → RISE
+
+Every session MUST complete all 7 stages in order. No stage may be skipped.
+Every DEATH performs the 10-point I-LOG AUDIT (GOSPEL-999 §SYSTEM III).
+Every RISE re-runs the 10-point I-LOG AUDIT on the prior DEATH and double-checks the counts.
+Operator is final check before promotion to I-LOG-NAV/.
+
 ## 3. Fidelity Gate
 
 Every stage verdict is one of: **REAL** / **HOLLOW** / **MISSING**.

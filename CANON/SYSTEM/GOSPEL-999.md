@@ -78,18 +78,26 @@ Every SCS checkpoint audits these 3 counts from the RRL:
 
 ---
 
-## SYSTEM III — RRL AUDIT
+## SYSTEM III — I-LOG AUDIT (10-Point Gate)
 
-The 3-point audit performed by DEATH and double-checked by RISE:
+Every RISE audits the prior DEATH. Every DEATH self-audits. RISE double-checks DEATH. Operator is final check.
 
-1. **Timestamps:** First and last message timestamps match session timing.
-2. **Title + first/last:** Title, first 300 chars, and last 300 chars match session.
-3. **9 samples:** 3 user messages, 3 assistant responses, 3 AI reasoning blocks — one from each third of the session.
+| # | Check | Gate |
+|---|-------|------|
+| 1 | Session timestamps in RRL match known session timing | PASS / FAIL |
+| 2 | Title, first 300 chars, last 300 chars match session identity | PASS / FAIL |
+| 3 | 9 samples — 3 user, 3 assistant, 3 reasoning — one from each third | PASS / FAIL |
+| 4 | Message count matches expected for session type (REAL vs KILO_HOLLOW) | PASS / FAIL |
+| 5 | Role distribution matches session type (REAL needs user+assistant; HOLLOW may be assistant-only) | PASS / FAIL |
+| 6 | No missing time gaps > 2× normal message interval | PASS / FAIL |
+| 7 | First and last messages have expected roles (first=user or system; last=assistant or user) | PASS / FAIL |
+| 8 | Tool calls present if session was interactive (REAL sessions have tool calls) | PASS / FAIL |
+| 9 | No cross-session contamination (no messages from different runs embedded) | PASS / FAIL |
+| 10 | SOULcount / DNAcount / REASONcount match RISE and DEATH sealed counts | PASS / FAIL |
 
-**Gate:** All 3 points PASS before DEATH is final.
-**Final check:** SOV100.
-
-**ITL:** Audio class transcript with speaker diarization. Separate from RRL. Defined in LFG §SCS ITL.
+**Verdict:** ALL 10 PASS = COMPLETE. Any FAIL = GAP. Missing data = HOLLOW.
+**Authority:** DEATH writes the audit. RISE re-runs it and compares. If RISE disagrees with DEATH, RISE wins and the session is GAP until resolved.
+**Final check:** SOV100. Operator confirms before promotion to I-LOG-NAV/.
 
 ---
 
@@ -143,7 +151,27 @@ reincarnate-rise-{timestamp}.jsonl — audit artifact
 
 ---
 
-## SYSTEM VIII — PHEROMONE SCORING
+## SYSTEM VIII — PHEROMONE DOCTRINE
+
+### A. Sequential Format (Mandatory)
+
+Pheromones are NOT random findings. They are the EXACT sequence of actions taken during the session, in order, one step after another.
+
+Format:
+```
+STEP-{N}: {action taken}
+WHY: {reason for action}
+HOW: {method used}
+WHAT: {result/outcome}
+WHO: {agent/stage that took action}
+SOUL: {user's exact words that triggered this, if any}
+```
+
+Each step is numbered sequentially. No skipping. No reordering. No summarizing into one-liners.
+
+The pheromone trail is the session's decision-process record. It answers: "What actually happened, in what order, and why?"
+
+### B. Scoring
 
 | Score | Label | Meaning |
 |-------|-------|---------|

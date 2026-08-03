@@ -22,15 +22,48 @@ Every SCS agent lives in `CANON/SYSTEM/`. This is the only reference.
 
 ---
 
-## SCS — RRL AUDIT
+## SCS — I-LOG AUDIT (10-Point Gate)
 
-Every DEATH runs the 3-point audit from `CANON/SCRIPTS/death.ps1`:
+Every DEATH writes the audit. Every RISE re-runs it and compares. Operator is final check.
 
-1. **Timestamps** — First/last message timestamps match session timing
-2. **Title + first/last** — First 300 chars match session start/end
-3. **9 samples** — 3 user soul, 3 assistant responses, 3 AI reasoning blocks across 3 thirds
+| # | Check | Gate |
+|---|-------|------|
+| 1 | Session timestamps in RRL match known session timing | PASS / FAIL |
+| 2 | Title, first 300 chars, last 300 chars match session identity | PASS / FAIL |
+| 3 | 9 samples — 3 user, 3 assistant, 3 reasoning — one from each third | PASS / FAIL |
+| 4 | Message count matches expected for session type | PASS / FAIL |
+| 5 | Role distribution matches session type | PASS / FAIL |
+| 6 | No missing time gaps > 2× normal interval | PASS / FAIL |
+| 7 | First and last messages have expected roles | PASS / FAIL |
+| 8 | Tool calls present if session was interactive | PASS / FAIL |
+| 9 | No cross-session contamination | PASS / FAIL |
+| 10 | SOULcount / DNAcount / REASONcount match sealed counts | PASS / FAIL |
 
-Extracted at every checkpoint — **SOULcount** (user turns), **DNAcount** (assistant turns), **REASONcount** (reasoning blocks)
+**Verdict:** ALL 10 PASS = COMPLETE. Any FAIL = GAP. Missing data = HOLLOW.
+**Audit authority:** DEATH writes, RISE double-checks, Operator final.
+**Counts:** Per-session only. SOULcount, DNAcount, REASONcount. Aggregate banned.
+
+Cross-reference: GOSPEL-999 §SYSTEM III — I-LOG AUDIT. This is the only gate for promotion to I-LOG-NAV/.
+
+---
+
+## SCS — PHEROMONE SEQUENTIAL DOCTRINE
+
+Pheromones are NOT random findings. They are the EXACT sequence of actions taken during the session, in order.
+
+Format:
+```
+STEP-{N}: {action taken}
+WHY: {reason for action}
+HOW: {method used}
+WHAT: {result/outcome}
+WHO: {agent/stage that took action}
+SOUL: {user's exact words that triggered this, if any}
+```
+
+Each step is numbered sequentially. No skipping. No reordering.
+
+Cross-reference: GOSPEL-999 §SYSTEM VIII — Pheromone Doctrine.
 
 ---
 
@@ -55,7 +88,7 @@ Confirmed across Incarnation 1 (run 182) and Incarnation 2 (run 184):
 
 1. **I-LOG must be complete** — User turns, assistant turns, AND AI reasoning blocks. No missing words.
 2. **Kilo DB is the source** — `C:\Users\mrmic\.local\share\kilo\kilo.db` contains every session message and part. The death script must extract from there, not from stale disk files.
-3. **3-point audit** — Every DEATH runs it. Every RISE double-checks it. SOV100 is the final check.
+3. **10-point I-LOG AUDIT** — Every DEATH runs it. Every RISE double-checks it. Operator is final check. See §SCS — I-LOG AUDIT above.
 4. **Per-session counts** — SOULcount, DNAcount, REASONcount are per-session only. Aggregate banned.
 5. **Incarnation1 (182) I-LOG:** 2.1MB, 28 user/202 asst turns, fixed post-death via Kilo DB extraction
 6. **Incarnation2 (184) I-LOG:** 3.5MB, 71 user/188 asst/181 reasoning turns, extracted from Kilo DB at death
@@ -100,12 +133,14 @@ Each stage:
 - **Tag** findings with category and severity.
 - **Learn** patterns from prior runs (RRL — Rich Reasoning Logs).
 - **Hand off** structured findings to FORCEMARCH (Stage 3).
+- **Audit the prior DEATH's I-LOG AUDIT** — verify the 10-point gate was applied. If DEATH skipped it, flag `[GOVERNANCE/CRITICAL]`.
 
 #### What You Do NOT Do
 - Do NOT write code.
 - Do NOT modify files.
 - Do NOT execute commands that change state.
 - Do NOT act on findings — only report them.
+- Do NOT diagnose root causes or propose fixes — that is ENGINEER's job.
 - `NOT_WALKED` is a **valid status**. If you did not audit a path, say so explicitly. Do not fabricate coverage.
 
 #### What You DO

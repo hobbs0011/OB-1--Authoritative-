@@ -91,7 +91,7 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 
 ### BB-06 ! quang-portal.html Missing Day 1 Card
 - Status: DONE
-- What: loadDashboard() has no Day 1 state logic. New students see âš ï¸ instead of launch card.
+- What: loadDashboard() has no Day 1 state logic. New students see âš ï¸ instead of launch card.
 - Fix: Day 1 card exists with tigerScore=0 AND sessions=0 check â†’ shows day1Card, hides statsGrid
 - File: APPS/NET-PET-AI/public/quang-portal.html
 
@@ -1527,4 +1527,42 @@ These are the live eggs in the Hatchery. Each egg is a body of work, not a scrip
 - **SIGNAL:** +40
 - **Status:** OPEN
 - **What:** No LostSouls scan performed for any of the 4 sessions. Must scan I-LOGs for unresolved directives and pipeline them.
+
+### BB-SCS-001 !! death.ps1 — Implement 10-Point I-LOG AUDIT (P1)
+- **SIGNAL:** +80
+- **Status:** OPEN
+- **What:** `CANON/SCRIPTS/death.ps1` currently does not implement the 10-point I-LOG AUDIT defined in GOSPEL-999 §SYSTEM III. DEATH must write the audit into the death seal before sealing.
+- **Required:** Add checks 1-10 (timestamps, title/first/last, 9 samples, message count, role distribution, time gaps, first/last roles, tool calls, cross-session contamination, SOUL/DNA/REASON count match).
+- **Authority:** GOSPEL-999 §SYSTEM III, LFG §SCS — I-LOG AUDIT.
+
+### BB-SCS-002 !! reincarnate-rise.ps1 — Implement 10-Point I-LOG AUDIT Re-Check (P1)
+- **SIGNAL:** +80
+- **Status:** OPEN
+- **What:** `CANON/SCRIPTS/reincarnate-rise.ps1` does not re-run the 10-point I-LOG AUDIT on the prior DEATH seal. RISE must double-check DEATH's audit.
+- **Required:** Read prior DEATH seal's I-LOG AUDIT section, re-run checks 1-10, compare verdicts, flag any discrepancy as GAP.
+- **Authority:** GOSPEL-999 §SYSTEM III, LFG §SCS — I-LOG AUDIT.
+
+### BB-SCS-003 !! phetrails.ps1 — Enforce Sequential Pheromone Format (P1)
+- **SIGNAL:** +60
+- **Status:** OPEN
+- **What:** `CANON/SCRIPTS/phetrails.ps1` does not enforce the sequential pheromone format defined in GOSPEL-999 §SYSTEM VIII-A. Current format allows random findings.
+- **Required:** Enforce STEP-N / WHY / HOW / WHAT / WHO / SOUL format. Each pheromone deposit must be a sequential step in the session's action chain.
+- **Authority:** GOSPEL-999 §SYSTEM VIII-A, LFG §SCS — PHEROMONE SEQUENTIAL DOCTRINE.
+
+### BB-SCS-004 !! All SCS Stage Scripts — Emit Sequential Pheromones (P2)
+- **SIGNAL:** +40
+- **Status:** OPEN
+- **What:** `reincarnateRISE.md`, `PhoenixScoutAgent.md`, `FORCEMARCH.md`, `SOULSCHOLARS.md`, `SUPPLYLINES.md`, `ENGINEERlegionnaire.md`, `reincarnateDEATH.md` all need sequential pheromone emission at each step.
+- **Required:** Update each stage's script/command to emit STEP-N formatted pheromones via `POST /api/pheromone/deposit`.
+- **Authority:** GOSPEL-999 §SYSTEM VIII-A.
+
+### BB-SCS-005 !! S2 RRL (Incarnation2) — 2 Time Gaps > 1 Hour (P2)
+- **SIGNAL:** -20
+- **Status:** OPEN
+- **What:** 10-point I-LOG AUDIT on `Incarnations/incarnation2/RRL.jsonl` found 2 time gaps > 1 hour:
+  - Lines 75->76: 79.9 minutes
+  - Lines 179->180: 189.4 minutes
+- **Required:** Human review (SOV100) to confirm these gaps are acceptable (session pause, user away, agent processing) or indicate missing messages.
+- **Authority:** GOSPEL-999 §SYSTEM III Check 6.
+
 
