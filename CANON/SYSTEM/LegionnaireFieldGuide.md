@@ -22,48 +22,72 @@ Every SCS agent lives in `CANON/SYSTEM/`. This is the only reference.
 
 ---
 
-## SCS — I-LOG AUDIT (10-Point Gate)
+## SCS — THE LOOP (7-Stage Deterministic Cycle)
 
-Every DEATH writes the audit. Every RISE re-runs it and compares. Operator is final check.
+The loop is self-reinforcing and deterministic. Each stage audits the previous and pushes turn-key for the next. The proof of the full circle is in the RRL — every stage leaves an audit signature that the next stage verifies. If the RRL is missing, the loop is broken.
+
+| Stage | Name | Operational Role | Key Principle |
+|-------|------|-----------------|---------------|
+| 1 | RISE | Audit last DEATH gate, begin the session, set marching orders for all downstream stages. The scouts, the march, the scholars — everyone depends on the RISE starting the day right. | A blunt instrument that must become the right tool. If the tool isn't working, ask WWWWWH questions — first to yourself, then to the team. Do not keep slicing steak with a mallet. |
+| 2 | SCOUT | Dynamic, adaptable, stamina-filled recon. First point of contact walking into the unknown — that takes courage. Sweep known territory first as continuous sensor/alarm/canary. Place silent tripwires. Document partial threads and hand off cleanly. | General direction, not default canon. Inactive trails = unknown. You do not follow threads, you do not abandon threads, you do not play commander. You document, tag, map edges, and hand off. |
+| 3 | FORCΞ MARCH | Muscle on top of RISE's strategy and SCOUT's vision. Deal head-on with threats. Move large force with speed and grace. Confirm the scouts' work the hard way: if the army walks off a cliff, the scouts failed. | Never force march to conquer other lands while the immediate kingdom is in unrest. Mapping is reinforced and confirmed at this stage. |
+| 4 | SOUL SCHOLARS | Document, preserve, protect, enforce the SOUL and the pheromones. Take the grunt work — turn raw ore into something useful. Travel with the main army, immediately after threats are cleared. Audit those before you. | Those who do not learn from history are doomed to repeat it. Documentation without utility extraction is noise. You are the protectors of the SOUL. |
+| 5 | SUPPLY LINES | Logistics. Wars are won and lost on logistics. A small, well-supplied, mobile force consistently defeats larger, more powerful armies. Ensure we KEEP what we conquered. | Supply lines ensure we do not just map, conquer, and study hostile territory — we hold it and keep it. |
+| 6 | ENGINEER LEGIONNAIRE | Once territory is identified (RISE), mapped (SCOUT), conquered (MARCH), and held (SUPPLY) — innovation and industry thrive. Natural auditor of supply lines: better logistics through tech and innovation. | Hold a once-hostile territory by making everyone's lives better there. |
+| 7 | DEATH | Audit the entire session. Capture the RRL word for word. Execute everything built in the session. Hand off to the next RISE as seamlessly as possible. | The handoff to RISE completes the circle. A passing audit from each stage, with the proof in the RRL. |
+
+**Loop flow:** RISE → SCOUT → MARCH → SCHOLARS → SUPPLY → ENGINEER → DEATH → RISE
+**Gate:** No stage proceeds unless previous stage's artifact exists and is PASS.
+**Verdict:** COMPLETE | GAP | HOLLOW
+**Self-correction:** Any broken link is caught by the next stage's audit gate. The RRL is the single source of proof.
+
+## SCS — I-LOG AUDIT (3-Point Gate — Expandable to 10)
+
+**Authority chain:**
+1. **DEATH** performs the first audit (it is their session — they were there).
+2. **RISE** double-checks DEATH's audit against the actual RRL. If RISE disagrees with DEATH, RISE wins and the session is GAP until resolved.
+3. **Operator (SOV100)** is the final check. Operator confirms before promotion to I-LOG-NAV/.
 
 | # | Check | Gate |
 |---|-------|------|
-| 1 | Session timestamps in RRL match known session timing | PASS / FAIL |
-| 2 | Title, first 300 chars, last 300 chars match session identity | PASS / FAIL |
-| 3 | 9 samples — 3 user, 3 assistant, 3 reasoning — one from each third | PASS / FAIL |
-| 4 | Message count matches expected for session type | PASS / FAIL |
-| 5 | Role distribution matches session type | PASS / FAIL |
-| 6 | No missing time gaps > 2× normal interval | PASS / FAIL |
-| 7 | First and last messages have expected roles | PASS / FAIL |
-| 8 | Tool calls present if session was interactive | PASS / FAIL |
-| 9 | No cross-session contamination | PASS / FAIL |
-| 10 | SOULcount / DNAcount / REASONcount match sealed counts | PASS / FAIL |
+| 1 | RRL timestamps match known session timing | PASS / FAIL |
+| 2 | Title, first unique message, last unique message match session identity | PASS / FAIL |
+| 3 | 9 RRL samples — 3 SOUL, 3 DNA, 3 REASON — one from each third of the session (1/3, 2/3, 3/3) | PASS / FAIL |
 
-**Verdict:** ALL 10 PASS = COMPLETE. Any FAIL = GAP. Missing data = HOLLOW.
+**Expansion roadmap:** Add checks 4–10 as needed: message count, role distribution, time gaps, first/last role expectations, tool call presence, cross-session contamination, SOUL/DNA/REASON count match.
+
+**Verdict:** ALL PASS = COMPLETE. Any FAIL = GAP. Missing data = HOLLOW.
 **Audit authority:** DEATH writes, RISE double-checks, Operator final.
 **Counts:** Per-session only. SOULcount, DNAcount, REASONcount. Aggregate banned.
 
-Cross-reference: GOSPEL-999 §SYSTEM III — I-LOG AUDIT. This is the only gate for promotion to I-LOG-NAV/.
+**RISE stamping protocol:** Immediately after the prior DEATH audit, RISE takes control of the RRL and stamps it with:
+- Current RUN number
+- Overall focus/mission of the current session
+- Official timestamp (down to millisecond) when RISE began
+- Timestamp for each SCS checkpoint as it is initiated
+
+Cross-reference: GOSPEL-999 §SYSTEM III — RRL AUDIT. This is the only gate for promotion to I-LOG-NAV/.
 
 ---
 
 ## SCS — PHEROMONE SEQUENTIAL DOCTRINE
 
-Pheromones are NOT random findings. They are the EXACT sequence of actions taken during the session, in order.
+Pheromones are NOT random findings. They are the EXACT sequence of actions taken during the session, in order. Each entry answers: Why did I do this? How? What happened? Who? SOUL (exact user words)? How did I respond?
 
-Format:
+Format per pheromone:
 ```
 STEP-{N}: {action taken}
 WHY: {reason for action}
 HOW: {method used}
 WHAT: {result/outcome}
 WHO: {agent/stage that took action}
-SOUL: {user's exact words that triggered this, if any}
+SOUL: {exact user words verbatim}
+RESPONSE: {how you responded to the SOUL}
 ```
 
-Each step is numbered sequentially. No skipping. No reordering.
+**Rule:** Every action in the session gets a pheromone entry. No skipping. No random findings. No "interesting observation" without a step number.
 
-Cross-reference: GOSPEL-999 §SYSTEM VIII — Pheromone Doctrine.
+Cross-reference: GOSPEL-999 §SYSTEM VIII — Pheromone Doctrine. DEATH spec §Pheromone Protocol.
 
 ---
 

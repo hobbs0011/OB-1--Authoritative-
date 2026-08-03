@@ -50,6 +50,17 @@ Prior DEATH: {path} — SOUL={s} DNA={d} REASON={r}
 
 This is the **source of truth** for the session name. DEATH reads it from here.
 
+### 3b. Stamp the RRL (MANDATORY)
+
+After stamping the I-LOG header, take control of the RRL document and stamp it with:
+
+- Current RUN number
+- Overall focus/mission of the current session
+- Official timestamp (down to the millisecond) when RISE began
+- Timestamp for each SCS checkpoint as it is initiated
+
+This makes misplacement or mixup of the RRL effectively impossible.
+
 ### 4. Halt
 
 Do not proceed. Do not execute SCOUT, MARCH, SCHOLARS, SUPPLY, ENGINEER, or SEAL.

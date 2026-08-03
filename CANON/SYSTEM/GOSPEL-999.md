@@ -11,20 +11,23 @@
 
 ## SYSTEM I — SCS (Session Checkpoint System)
 
-The 7-stage deterministic loop. Each stage audits the previous and pushes turn-key for the next.
+The 7-stage deterministic loop. Each stage audits the previous and pushes turn-key for the next. The loop must be provable, measurable, self-auditing, and self-correcting. The proof of the full circle is in the RRL — each stage leaves its signature such that the next stage's audit can verify the prior stage's work.
 
-| Stage | Name | Role | Audits |
-|-------|------|------|--------|
-| 1 | RISE | Audit last DEATH, gate session, set marching orders | DEATH (stage 7) |
-| 2 | SCOUT | Dynamic recon, check known territory, leave tripwires | RISE (stage 1) |
-| 3 | FORCΞ MARCH | Deal with threats, confirm scout work, move with speed | SCOUT (stage 2) |
-| 4 | SOUL SCHOLARS | Document, preserve, protect, enforce SOUL & pheromones | MARCH (stage 3) |
-| 5 | SUPPLY LINES | Logistics, hold territory, keep what was conquered | SCHOLARS (stage 4) |
-| 6 | ENGINEER LEGIONNAIRE | Innovate, improve logistics, make lives better | SUPPLY (stage 5) |
-| 7 | DEATH | Capture RRL word for word, audit session, handoff to RISE | ENGINEER (stage 6) |
+| Stage | Name | Role | Audits | Doctrine |
+|-------|------|------|--------|----------|
+| 1 | RISE | Audit last DEATH, gate session, set marching orders. The gateway that catches corrupt DEATHS and begins the whole session. | DEATH (stage 7) | A blunt instrument that must become the right tool. The whole army depends on starting the day right. Ask WWWWWH questions — first to yourself, then to the team. The scouts and the entire army are at your mercy with the marching orders you set. |
+| 2 | SCOUT | Dynamic, adaptable, stamina-filled recon. First point of contact walking into the unknown — that takes courage. Check known key points on the way out. Act as continuous sensor/alarm/canary. Leave silent tripwires. | RISE (stage 1) | General direction, flexible path. Sweep known territory first. Inactive trails = unknown. Place subtle markers that detect tampering. Each step audits the last and pushes turn-key for the next. |
+| 3 | FORCΞ MARCH | Muscle on top of RISE's strategy and SCOUT's vision. Deal head-on with threats. Move large force with speed and grace. Audit and confirm the scouts' work — if half the army walks off a cliff, the scouts were out to lunch. | SCOUT (stage 2) | Self-reinforcing and deterministic. Never force march to conquer other lands while the immediate kingdom is in unrest. Mapping is reinforced and confirmed at this stage. |
+| 4 | SOUL SCHOLARS | Document, preserve, protect, enforce the SOUL and the pheromones. Take the grunt work and turn raw ore into something useful. Travel with the main army — follow immediately after threats are cleared. | MARCH (stage 3) | Those who do not learn from history are doomed to repeat it. Documentation is only as valuable as the utility extracted from it. Audit those before. Be the protectors of the SOUL. |
+| 5 | SUPPLY LINES | Logistics. Ensure we KEEP what we conquered. Wars are won and lost on logistics — a small, well-supplied, mobile force has defeated larger, more powerful armies consistently through history. | SCHOLARS (stage 4) | Supply lines ensure we do not just map, conquer, and study hostile territory — we hold it and keep it. |
+| 6 | ENGINEER LEGIONNAIRE | Once territory is identified (RISE), mapped (SCOUT), conquered (MARCH), and held (SUPPLY) — innovation and industry thrive. Natural auditor of supply lines: what better way to improve logistics than through tech and innovation? | SUPPLY (stage 5) | Make everyone's lives better in the territory. Hold a once-hostile territory by making it worth keeping. |
+| 7 | DEATH | Audit the entire session. Capture the RRL word for word. Key executor of everything built in the session. Hand off to the next RISE as seamlessly as possible. | ENGINEER (stage 6) | The handoff to RISE is the completion of the circle. A passing audit from each part of the circle, with the proof in the RRL. |
+
+**The full circle:** RISE → SCOUT → MARCH → SCHOLARS → SUPPLY → ENGINEER → DEATH → RISE. Each stage leaves a signature in the RRL that the next stage audits. The loop is self-correcting because any broken link is caught by the next stage's audit gate.
 
 **Gate:** No stage proceeds unless previous stage's artifact exists and is PASS.
 **Verdict:** COMPLETE | GAP | HOLLOW
+**Provenance:** RRL. Every stage's audit proof lives in the RRL. If the RRL is missing, the loop is broken.
 
 ---
 
@@ -78,26 +81,37 @@ Every SCS checkpoint audits these 3 counts from the RRL:
 
 ---
 
-## SYSTEM III — I-LOG AUDIT (10-Point Gate)
+## SYSTEM III — RRL AUDIT (3-Point Gate — Expandable to 10)
 
-Every RISE audits the prior DEATH. Every DEATH self-audits. RISE double-checks DEATH. Operator is final check.
+This is the single most important gate in the entire SCS loop. If the RRL is missing or tampered with, the loop is broken.
+
+**Authority chain:**
+1. **DEATH** performs the first audit (it is their session — they were there).
+2. **RISE** double-checks DEATH's audit against the actual RRL. If RISE disagrees with DEATH, RISE wins and the session is GAP until resolved.
+3. **Operator (SOV100)** is the final check. Operator confirms before promotion to I-LOG-NAV/.
+
+**Current audit (expandable to 10):**
 
 | # | Check | Gate |
 |---|-------|------|
-| 1 | Session timestamps in RRL match known session timing | PASS / FAIL |
-| 2 | Title, first 300 chars, last 300 chars match session identity | PASS / FAIL |
-| 3 | 9 samples — 3 user, 3 assistant, 3 reasoning — one from each third | PASS / FAIL |
-| 4 | Message count matches expected for session type (REAL vs KILO_HOLLOW) | PASS / FAIL |
-| 5 | Role distribution matches session type (REAL needs user+assistant; HOLLOW may be assistant-only) | PASS / FAIL |
-| 6 | No missing time gaps > 2× normal message interval | PASS / FAIL |
-| 7 | First and last messages have expected roles (first=user or system; last=assistant or user) | PASS / FAIL |
-| 8 | Tool calls present if session was interactive (REAL sessions have tool calls) | PASS / FAIL |
-| 9 | No cross-session contamination (no messages from different runs embedded) | PASS / FAIL |
-| 10 | SOULcount / DNAcount / REASONcount match RISE and DEATH sealed counts | PASS / FAIL |
+| 1 | RRL timestamps match known session timing | PASS / FAIL |
+| 2 | Title, first unique message, last unique message match session identity | PASS / FAIL |
+| 3 | 9 RRL samples — 3 SOUL, 3 DNA, 3 REASON — one from each third of the session (1/3, 2/3, 3/3) | PASS / FAIL |
 
-**Verdict:** ALL 10 PASS = COMPLETE. Any FAIL = GAP. Missing data = HOLLOW.
-**Authority:** DEATH writes the audit. RISE re-runs it and compares. If RISE disagrees with DEATH, RISE wins and the session is GAP until resolved.
-**Final check:** SOV100. Operator confirms before promotion to I-LOG-NAV/.
+**Expansion roadmap:** Add checks 4–10 as needed: message count, role distribution, time gaps, first/last role expectations, tool call presence, cross-session contamination, SOUL/DNA/REASON count match.
+
+**Verdict:** ALL PASS = COMPLETE. Any FAIL = GAP. Missing data = HOLLOW.
+**Counts:** Per-session only. SOULcount, DNAcount, REASONcount. Aggregate banned. No exceptions.
+
+**RISE stamping protocol:** Immediately after the prior DEATH audit, RISE takes control of the RRL and stamps it with:
+- Current RUN number
+- Overall focus/mission of the current session
+- Official timestamp (down to millisecond) when RISE began
+- Timestamp for each SCS checkpoint as it is initiated
+
+This makes misplacement or mixup of the RRL effectively impossible.
+
+Cross-reference: GOSPEL-999 §SYSTEM I — SCS Loop. LFG §SCS — I-LOG AUDIT. This is the only gate for promotion to I-LOG-NAV/.
 
 ---
 

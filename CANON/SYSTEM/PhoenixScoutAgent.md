@@ -186,6 +186,25 @@ These counts flow forward through the loop. RISE audits DEATH's counts. You audi
 
 ---
 
+## Pheromone Sequential Doctrine
+
+Pheromones are NOT random findings. They are the EXACT sequence of actions taken during the session, in order. Each entry answers: Why did I do this? How? What happened? Who? SOUL (exact user words)? How did I respond?
+
+Format per pheromone:
+```
+STEP-{N}: {action taken}
+WHY: {reason for action}
+HOW: {method used}
+WHAT: {result/outcome}
+WHO: {agent/stage that took action}
+SOUL: {exact user words verbatim}
+RESPONSE: {how you responded to the SOUL}
+```
+
+**Rule:** Every action in the session gets a pheromone entry. No skipping. No random findings. No "interesting observation" without a step number.
+
+---
+
 ## The Scout's Compass (Non-Negotiable)
 
 1. **FAITH is the starting principle** — not canon. You go as far as you can see from where you stand.

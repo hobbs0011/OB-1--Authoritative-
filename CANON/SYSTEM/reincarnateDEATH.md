@@ -33,19 +33,30 @@ This name is used in EVERY artifact. Verbatim from RISE. Never modified.
 
 Every point in the 7-point march deposits a pheromone trail entry via `POST /api/pheromone/deposit`.
 
-Endpoint: `https://soul-logger.mrmichaelhobbs123.workers.dev/api/pheromone/deposit`
+Pheromones are NOT random findings. They are the EXACT sequence of actions taken during the session, in order. Each entry answers: Why did I do this? How? What happened? Who? SOUL (exact user words)? How did I respond?
+
+Format per pheromone:
+```
+STEP-{N}: {action taken}
+WHY: {reason for action}
+HOW: {method used}
+WHAT: {result/outcome}
+WHO: {agent/stage that took action}
+SOUL: {exact user words verbatim}
+RESPONSE: {how you responded to the SOUL}
+```
 
 Required fields per deposit:
 - `session_id`: current session ID
 - `run`: run number
 - `stage`: current point (SCOUT, FORCEMARCH, SOULSCHOLARS, SUPPLYLINES, ENGINEER, SEAL, HANDOFF)
-- `finding`: what happened at this point
+- `finding`: the pheromone step text in the format above
 - `strength`: 1-100 (higher = more significant)
 - `soulcount`: current SOUL count
 - `dnacount`: current DNA count
 - `reasoncount`: current REASON count
 
-**Pheromones are not optional. They are not afterthought. They are deposited at every point, every time, no exceptions.**
+**Pheromones are not optional. They are not afterthought. They are deposited at every point, every time, no exceptions. They are the only record that lets the next stage verify what actually happened.**
 
 ---
 
@@ -95,11 +106,11 @@ Counts (OCD precision — verify 3x):
 - **PHEROMONE** = tool calls. Count every tool call in the session.
 
 9-sample audit (MANDATORY):
-- 3 SOUL samples: first third, middle third, last third
-- 3 DNA samples: first third, middle third, last third
-- 3 REASON samples: first third, middle third, last third
+- 3 SOUL samples: one from the first third, one from the second third, one from the final third of user messages
+- 3 DNA samples: one from each third of assistant responses
+- 3 REASON samples: one from each third of assistant reasoning blocks
 
-Record exact text of each sample. No paraphrasing.
+Record exact text of each sample. No paraphrasing. This is the only proof the session actually happened.
 
 **Deposit pheromone:** `stage: "SOULSCHOLARS"`, `finding: "SOUL={s} DNA={d} REASON={r} PHEROMONE={p} — {patterns summary}"`, `strength: 15`
 
