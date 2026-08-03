@@ -21,6 +21,12 @@ $safeName = if ($SessionName) {
 
 # CANON/SCRIPTS/death.ps1 — bare bones. 4 steps. verifiable. repeatable.
 # This is the ONLY place scripts live. No exceptions.
+# SCS Stage 7 — sequential pheromone emission mandated
+
+# 0) EMIT DEATH PHEROMONE (Stage 7 start)
+$deathStage = "DEATH"
+$deathFinding = "DEATH initiated for Run $Run. Sealing session."
+& "$PSScriptRoot\phetrails.ps1" -SessionId $safeName -Run $Run -Stage $deathStage -Finding $deathFinding -Strength 1 -Category "stage" -Severity "info" -Path $IlogSource
 
 # 1) I-LOG PRESERVED
 if (-not $IlogSource) { Write-Error "IlogSource required"; exit 1 }
@@ -119,3 +125,7 @@ if (Test-Path $synchPath) {
 }
 
 Write-Host "DEATH COMPLETE. Run $Run -> Run $nextRun ready."
+
+# 0b) EMIT DEATH COMPLETE PHEROMONE (Stage 7 end)
+$deathCompleteFinding = "DEATH complete for Run $Run. I-LOG preserved, colorized, audited. Handoff to Run $nextRun ready."
+& "$PSScriptRoot\phetrails.ps1" -SessionId $safeName -Run $Run -Stage $deathStage -Finding $deathCompleteFinding -Strength 2 -Category "stage" -Severity "info" -Path $handoffPath -SoulCount $auditObj.SOULcount -DnaCount $auditObj.DNAcount -ReasonCount $auditObj.REASONcount
