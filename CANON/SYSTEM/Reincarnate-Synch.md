@@ -45,10 +45,11 @@ This is **not** a command. It is **not** a protocol. It is a living record â€
 | DeepThink | 182 | LEGATUS (blueprint) | SEEDED | 7-phase pipeline blueprint, pheromone synch | Workhorse execution |
 | Workhorse | 182 | FABRI (execute) | PENDING | Awaiting blueprint handoff | Execute restoration + Engineer protocol |
 | Incarnate-11-AnhMinhContact | 11 | SCOUT | NAV | Empty session, all artifacts consistent, promoted to NAV | None |
-| Incarnate-12-ContractNegociations | 12 | FORCEMARCH | GAP | DEATH seal valid, naming mismatch (KiloFreeDeepDive vs ContractNegociations), no rfkw | Rename artifacts, extract keywords |
-| Incarnate-13-SOULCapture | 13 | SOULSCHOLARS | GAP | RISE boot only, no DEATH artifacts produced | Generate all DEATH artifacts + keywords |
-| Incarnate-14-OKTAVA | 14 | ENGINEER | GAP | DEATH seal valid, OKTAVA work committed, no I-LOG in UNAUDITED, no pipeline | Generate I-LOG artifacts + pipeline + keywords + deploy portal |
-| Incarnate-15-AAA(STONE)-(S11-14) | 15 | AAA-STONE | AUDITED | Stone Anchor audit of sessions 11-14, 1 promoted, 3 with GAPs | Resolve GAPs before next AAA anchor |
+| Incarnate-12-ContractNegociations | 12 | FORCEMARCH | GAP | DEATH seal valid, naming fixed (was KiloFreeDeepDive), rfkw extracted | rfkw complete |
+| Incarnate-13-SOULCapture | 13 | SOULSCHOLARS | GAP | RISE boot only, no FORCEMARCH work executed | COMPLETE — DEATH seal, pipeline, COLORIZED, STATS, rfkw all generated |
+| Incarnate-14-OKTAVA | 14 | ENGINEER | CLOSED | Full 7-point march completed: worker deployed, DEEPGRAM_API_KEY configured, classroom API endpoints, Pages deployed, KV fallback | All DEATH artifacts completed in Incarnate-16 |
+| Incarnate-15-AAA(STONE)-(S11-14) | 15 | AAA-STONE | AUDITED | Stone Anchor audit of sessions 11-14. GAPs for sessions 12 (resolved in 16), 13 (completed in 16), 14 (completed in 16). | All GAPs from sessions 11-14 resolved in Incarnate-16 |
+| Incarnate-16-ContractNegociations-P2 | 16 | DEATH | SEALED | BLUEPRINT + AUDIT + PIPELINE complete. Counter-proposal written (120hrs/50M, all 15 clauses reconciled), Cloudflare Pages deployed, workhorse pipeline ready. | Cargo delivery to Anh Bảo (workhorse STAGE 1), contract finalization (workhorse STAGE 2) |
 
 *This ledger is appended. No session is ever removed. Stale entries are marked, never deleted.*
 
