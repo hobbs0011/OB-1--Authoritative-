@@ -97,78 +97,110 @@
         }
 
         .container {
-            max-width: 860px;
+            max-width: 880px;
             margin: 0 auto;
-            padding: 60px 24px 80px;
+            padding: 80px 28px 100px;
         }
 
         .meta {
             border-bottom: 1px solid var(--panel-border);
-            padding-bottom: 24px;
-            margin-bottom: 32px;
+            padding-bottom: 28px;
+            margin-bottom: 36px;
         }
         .meta h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 800;
-            letter-spacing: 0.04em;
-            margin-bottom: 14px;
-            background: linear-gradient(135deg, var(--text), var(--gold));
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            margin-bottom: 18px;
+            background: linear-gradient(135deg, #fff 0%, var(--gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            line-height: 1.2;
         }
         .meta p {
-            font-size: 0.95em;
+            font-size: 1em;
             color: var(--muted);
-            margin-bottom: 4px;
+            margin-bottom: 5px;
+            letter-spacing: 0.02em;
         }
         .meta strong {
             color: var(--gold);
-            font-weight: 600;
+            font-weight: 700;
         }
 
         h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 700;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-top: 36px;
-            margin-bottom: 16px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid rgba(245, 158, 11, 0.20);
+            margin-top: 40px;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(245, 158, 11, 0.25);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--purple), var(--gold));
+            box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+            flex-shrink: 0;
         }
 
         p {
             margin-bottom: 14px;
             color: var(--muted-strong);
+            font-size: 1.02rem;
         }
 
         ul, ol {
-            margin: 12px 0 18px 24px;
+            margin: 14px 0 20px 28px;
         }
-        li { margin-bottom: 10px; }
-        ol li { margin-bottom: 12px; }
+        li { margin-bottom: 12px; }
+        ol li { margin-bottom: 14px; }
 
         .summary-box {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(245, 158, 11, 0.08));
-            border: 1px solid rgba(168, 85, 247, 0.30);
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(245, 158, 11, 0.10));
+            border: 1px solid rgba(168, 85, 247, 0.40);
             border-radius: var(--radius-lg);
-            padding: 28px 32px;
-            margin: 0 0 32px 0;
-            box-shadow: 0 20px 60px rgba(168, 85, 247, 0.12);
+            padding: 32px 36px;
+            margin: 0 0 36px 0;
+            box-shadow: 0 24px 80px rgba(168, 85, 247, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .summary-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.15), transparent 70%);
+            pointer-events: none;
         }
         .summary-box h2 {
             margin-top: 0;
             color: var(--gold);
-            border-bottom: 1px solid rgba(245, 158, 11, 0.25);
+            border-bottom: 1px solid rgba(245, 158, 11, 0.30);
+            position: relative;
+            z-index: 1;
         }
         .summary-box p {
-            margin-bottom: 8px;
-            font-size: 1.02rem;
+            margin-bottom: 10px;
+            font-size: 1.08rem;
             color: var(--muted-strong);
+            position: relative;
+            z-index: 1;
         }
 
         .highlight-box {
@@ -176,12 +208,22 @@
             border: 1px solid var(--panel-border);
             border-left: 4px solid var(--purple);
             border-radius: var(--radius-md);
-            padding: 24px 28px;
-            margin: 24px 0;
+            padding: 28px 32px;
+            margin: 28px 0;
             box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, var(--purple), var(--gold), transparent);
         }
         .highlight-box p {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             color: var(--muted-strong);
         }
         .highlight-box p:last-child {
@@ -190,23 +232,43 @@
 
         .timeline {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 0.95em;
-            line-height: 2;
-            padding: 20px 24px;
+            font-size: 0.98em;
+            line-height: 2.1;
+            padding: 24px 28px;
             background: var(--panel);
             border: 1px solid var(--panel-border);
             border-radius: var(--radius-md);
-            margin: 18px 0;
+            margin: 20px 0;
             box-shadow: var(--shadow-lg);
+            position: relative;
         }
-        .timeline .active { color: var(--text); font-weight: 600; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, var(--purple), var(--gold), transparent);
+        }
+        .timeline .active { color: var(--text); font-weight: 700; }
         .timeline .break { color: var(--muted); font-style: italic; }
-        .timeline .off { color: rgba(194, 203, 220, 0.5); }
+        .timeline .off { color: rgba(194, 203, 220, 0.45); }
 
         .signature {
-            margin-top: 48px;
-            padding-top: 24px;
+            margin-top: 56px;
+            padding-top: 28px;
             border-top: 1px solid var(--panel-border);
+            position: relative;
+        }
+        .signature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), transparent);
         }
         .signature p { margin-bottom: 6px; color: var(--muted-strong); }
 
@@ -221,9 +283,11 @@
         body.lang-en .timeline[data-lang="en"] { display: block; }
 
         @media (max-width: 760px) {
-            .container { padding: 40px 16px 60px; }
-            .meta h1 { font-size: 1.1rem; }
-            h2 { font-size: 0.85rem; }
+            .container { padding: 50px 18px 70px; }
+            .meta h1 { font-size: 1.2rem; }
+            h2 { font-size: 0.78rem; }
+            .summary-box { padding: 24px 22px; }
+            .highlight-box { padding: 20px 22px; }
         }
     </style>
 </head>
@@ -242,8 +306,8 @@
             <p data-lang="en"><strong>To:</strong> Anh Bảo Nguyễn &amp; Anh Minh Nguyễn</p>
             <p data-lang="vi"><strong>Từ:</strong> Michael Hobbs</p>
             <p data-lang="en"><strong>From:</strong> Michael Hobbs</p>
-            <p data-lang="vi"><strong>Chức danh đề xuất:</strong> Trưởng bộ phận Chương trình và Giáo dục Tiếng Anh</p>
-            <p data-lang="en"><strong>Proposed Title:</strong> Head of English Curriculum and Instruction</p>
+            <p data-lang="vi"><strong>Chức danh đề xuất:</strong> Giáo viên nước ngoài phụ trách tiếng Anh — Giáo dục và Chương trình Tiếng Anh</p>
+            <p data-lang="en"><strong>Suggested Title:</strong> Head Foreign ESL Teacher of English Language Education and Curriculum</p>
             <p data-lang="vi"><strong>Ngày:</strong> 4 tháng 8 năm 2026</p>
             <p data-lang="en"><strong>Date:</strong> August 4, 2026</p>
         </div>
@@ -320,21 +384,19 @@
         <p data-lang="en">I need these points reflected in the contract, not just agreed verbally. I am not asking for special treatment — I am asking for clarity so there is no confusion later.</p>
 
         <ul data-lang="vi">
-            <li><strong>Người báo cáo:</strong> Tôi báo cáo với Anh Minh về mọi quyết định liên quan đến giảng dạy, chương trình và sản phẩm. Cô Hiền không có quyền lực gì đối với bộ phận tiếng Anh — không giám sát giảng dạy của tôi, không quản lý trợ giảng, không đánh giá hiệu quả lớp học và không tham gia quyết định chương trình.</li>
-            <li><strong>Quyền quyết định chương trình:</strong> Là Trưởng bộ phận Chương trình và Giáo dục Tiếng Anh, tôi có quyền quyết định cuối cùng về tài liệu, phương pháp, đánh giá và giao tiếp với phụ huynh. Bộ giáo trình Cambridge được giữ lại vì phụ huynh tin vào nó, không phải vì tôi tin vào chất lượng của nó. Tôi tự thiết kế chương trình tiếng Anh cho các buổi học ESL buổi chiều — luôn phải có sự chấp thuận của Anh Minh, tất nhiên. Nếu có điều gì đó cần sửa, tôi sẽ thiết kế lại để đảm bảo phù hợp với thực tế của học viên. Anh Minh quyết định kinh doanh. Tôi quyết định tiếng Anh. Đó là sự phân chia.</li>
+            <li><strong>Người báo cáo:</strong> Tôi báo cáo với Anh Minh về mọi quyết định liên quan đến giảng dạy, chương trình và sản phẩm. Cô Hiền không có quyền lực gì đối với bộ phận tiếng Anh — không giám sát giảng dạy của tôi, không quản lý trợ giảng, không đánh giá hiệu quả lớp học và không tham gia quyết định chương trình. Nếu cô Hiền có phản hồi tiêu cực và đưa những phản hồi đó đến sếp của tôi hoặc đồng nghiệp chung, điều đó phải được giải quyết trong hợp đồng. Tôi không chấp nhận đánh giá từ xa từ người không có kinh nghiệm giảng dạy.</li>
+            <li><strong>Quyền quyết định chương trình:</strong> Là Giáo viên nước ngoài phụ trách tiếng Anh — Giáo dục và Chương trình Tiếng Anh, tôi có quyền quyết định cuối cùng về tài liệu, phương pháp, đánh giá và giao tiếp với phụ huynh. Bộ giáo trình Cambridge được giữ lại vì phụ huynh tin vào nó, không phải vì tôi tin vào chất lượng của nó. Tôi tự thiết kế chương trình tiếng Anh cho các buổi học ESL buổi chiều — luôn phải có sự chấp thuận của Anh Minh, tất nhiên. Nếu có điều gì đó cần sửa, tôi sẽ thiết kế lại để đảm bảo phù hợp với thực tế của học viên. Anh Minh quyết định kinh doanh. Tôi quyết định tiếng Anh. Đó là sự phân chia.</li>
             <li><strong>Quan sát lớp học:</strong> Anh Minh hoặc Anh Bảo có thể quan sát lớp bất cứ lúc nào với thông báo trước. Không có kiểm tra đột xuất. Không đánh giá lẫn nhau bởi nhân viên không có kinh nghiệm giảng dạy. Không chụp ảnh hay quay phim mà không có sự cho phép rõ ràng của tôi cho từng lần.</li>
             <li><strong>Phản hồi:</strong> Mọi phản hồi đều qua Anh Minh và Anh Bảo. Không có báo cáo sau lưng qua nhân viên khác.</li>
             <li><strong>Ban quản lý không vào lớp</strong> trong giờ giảng dạy, trừ trường hợp khẩn cấp. Toàn bộ quyền kiểm soát phương pháp thuộc về tôi.</li>
-            <li><strong>Cô Hiền:</strong> Nếu cô Hiền không thích việc không thể kiểm soát từng chi tiết công việc của tôi, và nếu cô Hiền có phản hồi tiêu cực về tôi, và cô ta liên tục đưa những phản hồi đó đến sếp của tôi hoặc các đồng nghiệp chung — thì đó là vấn đề cần được giải quyết trong hợp đồng. Tôi không chấp nhận việc bị đánh giá từ xa bởi người không có kinh nghiệm giảng dạy.</li>
             <li><strong>Trợ giảng:</strong> Tôi không cần, nhưng nếu CASA muốn có trợ giảng trong lớp, các điều kiện phải được ghi vào hợp đồng: tôi thuê, đào tạo và quản lý. Trợ giảng báo cáo với tôi, không phải cô Hiền. Thử việc 2 tuần, sau đó trả lương từ ngày thứ 15. Nếu không tiến bộ, tôi có thể cho nghỉ và tuyển người thay thế.</li>
         </ul>
         <ul data-lang="en">
-            <li><strong>Reporting line:</strong> I answer to Anh Minh for all teaching, curriculum, and product delivery decisions. Miss Hien has no authority over the English program — no supervision of my teaching, no management of the assistant, no evaluation of my classroom performance, and no role in curriculum decisions.</li>
-            <li><strong>Curriculum authority:</strong> As Head of English Curriculum and Instruction, I hold final say on materials, methods, assessment, and parent communication. Cambridge is kept because parents trust it — not because I believe it is the most effective curriculum. I design the afternoon ESL training curriculum myself, always subject to Anh Minh's approval of course. If something needs adjusting, I redesign it to match what our students actually need. Anh Minh makes the business decisions. I make the English decisions. That is the division.</li>
+            <li><strong>Reporting line:</strong> I answer to Anh Minh for all teaching, curriculum, and product delivery decisions. Miss Hien has no authority over the English program — no supervision of my teaching, no management of the assistant, no evaluation of my classroom performance, and no role in curriculum decisions. If Miss Hien has negative feedback about me and constantly feeds that to my boss or other mutual coworkers, that is a problem that must be resolved in this contract. I will not tolerate being evaluated from a distance by someone without classroom experience.</li>
+            <li><strong>Curriculum authority:</strong> As Head Foreign ESL Teacher of English Language Education and Curriculum, I hold final say on materials, methods, assessment, and parent communication. Cambridge is kept because parents trust it — not because I believe it is the most effective curriculum. I design the afternoon ESL training curriculum myself, always subject to Anh Minh's approval of course. If something needs adjusting, I redesign it to match what our students actually need. Anh Minh makes the business decisions. I make the English decisions. That is the division.</li>
             <li><strong>Classroom observation:</strong> Anh Minh or Anh Bảo may observe at any time with advance notice. No unscheduled walkthroughs. No peer evaluation by staff without classroom experience. No photographs or video without my explicit permission.</li>
             <li><strong>Feedback:</strong> All feedback flows through Anh Minh and Anh Bảo. No behind-the-back reporting through other staff.</li>
             <li><strong>Management stays out of the classroom</strong> during instruction except in emergencies. Full methodology control rests with me.</li>
-            <li><strong>Miss Hien:</strong> If Miss Hien does not like not being able to micromanage me, and if she has negative feedback about me and constantly feeds that to my boss or other mutual coworkers — that is a problem that needs to be resolved in this contract. I will not tolerate being evaluated from a distance by someone without classroom experience.</li>
             <li><strong>Teaching assistant:</strong> I do not need one, but if CASA wants a TA in the classroom, the conditions must be contractual: I hire, train, and manage. The assistant reports to me, not to Miss Hien. Two-week trial, then paid from day 15. If not progressing, I can let him go and recruit a replacement.</li>
         </ul>
 
@@ -353,7 +415,7 @@
         <ol data-lang="vi">
             <li><strong>120 giờ/tháng với 50.000.000 VND/tháng</strong> — cùng mức lương, lịch làm việc được tái cấu trúc. Buổi sáng 7:00–10:30 (nghỉ 30 phút), buổi chiều 14:30–17:30, lớp tối thứ 3 &amp; 5 từ 17:30–19:00. Khoảng 10:30–14:30 là thời gian phục hồi. Đây là mốc chuẩn cho hợp đồng 2 năm, không phải thời gian thử.</li>
             <li><strong>Cấu trúc báo cáo trong hợp đồng.</strong> Tôi báo cáo với Anh Minh về giảng dạy, chương trình và sản phẩm. Cô Hiền không có quyền lực đối với bộ phận tiếng Anh — không giám sát giảng dạy của tôi, không quản lý trợ giảng, không đánh giá hiệu quả lớp học và không tham gia quyết định chương trình. Nếu cô Hiền có phản hồi tiêu cực và đưa những phản hồi đó đến sếp của tôi hoặc đồng nghiệp chung, điều đó phải được giải quyết trong hợp đồng. Tôi không chấp nhận đánh giá từ xa từ người không có kinh nghiệm giảng dạy.</li>
-            <li><strong>Quyền quyết định chương trình.</strong> Quyền quyết định cuối về tài liệu, phương pháp, đánh giá và giao tiếp phụ huynh. Cambridge là tài liệu tham khảo, không phải mệnh lệnh.</li>
+            <li><strong>Quyền quyết định chương trình.</strong> Quyền quyết định cuối về tài liệu, phương pháp, đánh giá và giao tiếp phụ huynh. Cambridge được giữ lại vì phụ huynh tin vào nó, không phải vì tôi tin vào chất lượng của nó. Tôi tự thiết kế chương trình ESL buổi chiều, luôn phải có sự chấp thuận của Anh Minh. Nếu có điều gì cần sửa, tôi thiết kế lại để đảm bảo phù hợp với học viên. Anh Minh quyết định kinh doanh. Tôi quyết định tiếng Anh.</li>
             <li><strong>Trợ giảng.</strong> Tôi không cần, nhưng nếu CASA muốn, điều kiện phải có trong hợp đồng: tôi quản lý, tôi quyết định người đó ở lại hay đi, thử việc 2 tuần rồi trả lương, và họ báo cáo với tôi — không phải cô Hiền.</li>
             <li><strong>Ranh giới lớp học.</strong> Anh Minh hoặc Anh Bảo quan sát có thông báo trước. Không kiểm tra đột xuất. Không chụp ảnh/quay phim không có phép. Không đánh giá bởi nhân viên không giảng dạy.</li>
             <li><strong>Hoàn trả phí giấy phép lao động.</strong> Tỷ lệ phần trăm nếu tôi nghỉ sớm. Không thu hồi toàn bộ nếu hoàn thành hợp đồng.</li>
@@ -362,7 +424,7 @@
         <ol data-lang="en">
             <li><strong>120 hours/month at 50,000,000 VND/month</strong> — same salary, restructured day. Morning block 7:00–10:30 (with 30-min break), afternoon block 2:30–5:30, Tue/Thu evening classes 5:30–7:00. The 10:30–2:30 window is recovery. This is the two-year benchmark, not a trial.</li>
             <li><strong>Reporting structure in the contract.</strong> I answer to Anh Minh on teaching, curriculum, and product delivery. Miss Hien has no authority over the English program — no supervision of my teaching, no management of the assistant, no evaluation of my classroom performance, and no role in curriculum decisions. If Miss Hien has negative feedback about me and constantly feeds that to my boss or other mutual coworkers, that is a problem that must be resolved in this contract. I will not tolerate being evaluated from a distance by someone without classroom experience.</li>
-            <li><strong>Curriculum authority.</strong> Final say on English materials, methods, assessment, and parent communication. Cambridge is a reference, not a mandate.</li>
+            <li><strong>Curriculum authority.</strong> Final say on English materials, methods, assessment, and parent communication. Cambridge is kept because parents trust it — not because I believe it is the most effective curriculum. I design the afternoon ESL training curriculum myself, always subject to Anh Minh's approval of course. If something needs adjusting, I redesign it to match what our students actually need. Anh Minh makes the business decisions. I make the English decisions. That is the division.</li>
             <li><strong>Teaching assistant.</strong> I do not need one, but if CASA insists, the terms above must be in the contract: I manage, I decide if he stays or goes, two-week trial then paid, and he reports to me — not to Miss Hien.</li>
             <li><strong>Classroom boundaries.</strong> Anh Minh or Anh Bảo observe with notice. No unscheduled walkthroughs. No photos or video without permission. No peer evaluation by non-teaching staff.</li>
             <li><strong>Work permit repayment.</strong> Prorated if I resign early. No clawback if I complete the contract.</li>
