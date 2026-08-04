@@ -1,166 +1,400 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Counter-Proposal — CASA English | Michael Hobbs</title>
+    <meta name="theme-color" content="#0f0f1a">
+    <title>Đề Xuất Sửa Đổi Điều Khoản — CASA English | Michael Hobbs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #0f0f1a;
+            --bg-elevated: #151528;
+            --panel: rgba(17, 22, 32, 0.93);
+            --panel-border: rgba(255, 255, 255, 0.10);
+            --text: #f8f5ff;
+            --muted: #c2cbdc;
+            --muted-strong: #dde2ef;
+            --purple: #a855f7;
+            --purple-soft: rgba(168, 85, 247, 0.14);
+            --gold: #f59e0b;
+            --gold-soft: rgba(245, 158, 11, 0.14);
+            --danger: #ef4444;
+            --shadow-lg: 0 30px 90px rgba(0, 0, 0, 0.38);
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --radius-sm: 14px;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            background: #faf8f5;
-            color: #1a1a1a;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.05rem;
             line-height: 1.7;
-            padding: 40px 20px;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 12% 18%, rgba(168, 85, 247, 0.16), transparent 28%),
+                radial-gradient(circle at 88% 14%, rgba(245, 158, 11, 0.10), transparent 24%),
+                linear-gradient(180deg, #090b12 0%, #0f0f1a 38%, #141625 100%);
+            min-height: 100vh;
         }
+
+        .lang-toggle {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 1000;
+            display: flex;
+            border: 2px solid var(--purple);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(168, 85, 247, 0.3);
+        }
+        .lang-toggle button {
+            padding: 10px 22px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            transition: all 0.2s;
+        }
+        .lang-toggle button.active-vi {
+            background: var(--purple);
+            color: #fff;
+        }
+        .lang-toggle button.active-en {
+            background: var(--purple);
+            color: #fff;
+        }
+        .lang-toggle button:not(.active-vi):not(.active-en) {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--muted);
+        }
+        .lang-toggle button:hover:not(.active-vi):not(.active-en) {
+            background: var(--purple-soft);
+            color: var(--text);
+        }
+        .lang-label {
+            position: fixed;
+            top: 62px;
+            right: 16px;
+            z-index: 999;
+            background: var(--purple);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.1em;
+            pointer-events: none;
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+        }
+
         .container {
-            max-width: 800px;
+            max-width: 860px;
             margin: 0 auto;
-            background: #fff;
-            padding: 50px 60px;
-            border: 1px solid #e0d8d0;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            padding: 60px 24px 80px;
         }
+
         .meta {
-            border-bottom: 2px solid #1a1a1a;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+            border-bottom: 1px solid var(--panel-border);
+            padding-bottom: 24px;
+            margin-bottom: 32px;
         }
         .meta h1 {
-            font-size: 1.4em;
-            letter-spacing: 0.02em;
-            margin-bottom: 12px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            margin-bottom: 14px;
+            background: linear-gradient(135deg, var(--text), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .meta p {
-            font-size: 0.9em;
-            color: #555;
+            font-size: 0.95em;
+            color: var(--muted);
             margin-bottom: 4px;
         }
+        .meta strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
         h2 {
-            font-size: 1.1em;
-            margin-top: 32px;
-            margin-bottom: 12px;
-            border-bottom: 1px solid #e8e0d8;
-            padding-bottom: 6px;
-            letter-spacing: 0.03em;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-top: 36px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(245, 158, 11, 0.20);
         }
-        p { margin-bottom: 14px; }
-        ul {
-            margin: 10px 0 16px 24px;
+
+        p {
+            margin-bottom: 14px;
+            color: var(--muted-strong);
         }
-        li { margin-bottom: 8px; }
+
+        ul, ol {
+            margin: 12px 0 18px 24px;
+        }
+        li { margin-bottom: 10px; }
+        ol li { margin-bottom: 12px; }
+
+        .summary-box {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(245, 158, 11, 0.08));
+            border: 1px solid rgba(168, 85, 247, 0.30);
+            border-radius: var(--radius-lg);
+            padding: 28px 32px;
+            margin: 0 0 32px 0;
+            box-shadow: 0 20px 60px rgba(168, 85, 247, 0.12);
+        }
+        .summary-box h2 {
+            margin-top: 0;
+            color: var(--gold);
+            border-bottom: 1px solid rgba(245, 158, 11, 0.25);
+        }
+        .summary-box p {
+            margin-bottom: 8px;
+            font-size: 1.02rem;
+            color: var(--muted-strong);
+        }
+
         .highlight-box {
-            background: #f5f0e8;
-            border-left: 4px solid #1a1a1a;
-            padding: 16px 20px;
-            margin: 20px 0;
+            background: var(--panel);
+            border: 1px solid var(--panel-border);
+            border-left: 4px solid var(--purple);
+            border-radius: var(--radius-md);
+            padding: 24px 28px;
+            margin: 24px 0;
+            box-shadow: var(--shadow-lg);
+        }
+        .highlight-box p {
+            margin-bottom: 10px;
+            color: var(--muted-strong);
+        }
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline {
+            font-family: 'Rajdhani', sans-serif;
             font-size: 0.95em;
+            line-height: 2;
+            padding: 20px 24px;
+            background: var(--panel);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--radius-md);
+            margin: 18px 0;
+            box-shadow: var(--shadow-lg);
         }
+        .timeline .active { color: var(--text); font-weight: 600; }
+        .timeline .break { color: var(--muted); font-style: italic; }
+        .timeline .off { color: rgba(194, 203, 220, 0.5); }
+
         .signature {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #e0d8d0;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--panel-border);
         }
-        .signature p { margin-bottom: 6px; }
-        .note {
-            font-size: 0.85em;
-            color: #666;
-            font-style: italic;
-            margin-top: 30px;
-            padding-top: 16px;
-            border-top: 1px dashed #ccc;
+        .signature p { margin-bottom: 6px; color: var(--muted-strong); }
+
+        [data-lang="en"] { display: none; }
+        body.lang-en [data-lang="vi"] { display: none; }
+        body.lang-en [data-lang="en"] { display: block; }
+        body.lang-en ul[data-lang="vi"] { display: none; }
+        body.lang-en ul[data-lang="en"] { display: block; }
+        body.lang-en ol[data-lang="vi"] { display: none; }
+        body.lang-en ol[data-lang="en"] { display: block; }
+        body.lang-en .timeline[data-lang="vi"] { display: none; }
+        body.lang-en .timeline[data-lang="en"] { display: block; }
+
+        @media (max-width: 760px) {
+            .container { padding: 40px 16px 60px; }
+            .meta h1 { font-size: 1.1rem; }
+            h2 { font-size: 0.85rem; }
         }
     </style>
 </head>
 <body>
+    <div class="lang-toggle">
+        <button id="btn-vi" class="active-vi" onclick="setLang('vi')">VI</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <div class="lang-label" id="lang-label">BẢN TIẾNG VIỆT</div>
+
     <div class="container">
         <div class="meta">
-            <h1>COUNTER-PROPOSAL — EMPLOYMENT TERMS</h1>
-            <p><strong>To:</strong> Anh Bảo Nguyễn &amp; Anh Minh Nguyễn</p>
-            <p><strong>From:</strong> Michael Hobbs</p>
-            <p><strong>Proposed Title:</strong> Head of English Curriculum and Instruction</p>
-            <p><strong>Date:</strong> August 4, 2026</p>
+            <h1 data-lang="vi">ĐỀ XUẤT SỬA ĐỔI ĐIỀU KHOẢN — CASA ENGLISH</h1>
+            <h1 data-lang="en">PROPOSAL-AMENDMENT-REQUEST — CASA ENGLISH</h1>
+            <p data-lang="vi"><strong>Đến:</strong> Anh Bảo Nguyễn &amp; Anh Minh Nguyễn</p>
+            <p data-lang="en"><strong>To:</strong> Anh Bảo Nguyễn &amp; Anh Minh Nguyễn</p>
+            <p data-lang="vi"><strong>Từ:</strong> Michael Hobbs</p>
+            <p data-lang="en"><strong>From:</strong> Michael Hobbs</p>
+            <p data-lang="vi"><strong>Chức danh đề xuất:</strong> Trưởng bộ phận Chương trình và Giáo dục Tiếng Anh</p>
+            <p data-lang="en"><strong>Proposed Title:</strong> Head of English Curriculum and Instruction</p>
+            <p data-lang="vi"><strong>Ngày:</strong> 4 tháng 8 năm 2026</p>
+            <p data-lang="en"><strong>Date:</strong> August 4, 2026</p>
         </div>
 
-        <h2>Why I Am Here</h2>
-        <p>I want to be transparent about something honest up front: kindergarten is not where I naturally want to teach. My dream is corporate business English and corporate contracts — that is where my skills, experience, and heart are. But I am not at CASA because it was the only option. I am at CASA because of Anh Minh and Anh Bao. You are people I want to learn from. I believe that if I work hard, show up consistently, and prove my value, you will reward me, empower me, and mentor me toward the level I want to reach. You cannot put a price tag on that kind of opportunity.</p>
+        <div class="summary-box">
+            <h2 data-lang="vi">TÓM TẮT</h2>
+            <h2 data-lang="en">IN SHORT</h2>
+            <p data-lang="vi">Mức lương giữ nguyên như đề xuất (50.000.000 VND/tháng), vị trí toàn thời gian giữ nguyên, cam kết phục hồi tuyển sinh từ 35 lên 90 vẫn giữ nguyên. Chỉ có một thay đổi: 120 giờ tập trung mỗi tháng thay vì 160 giờ mệt mỏi — xây dựng theo nhịp điệu hàng ngày giúp tôi duy trì năng lượng cao mà không bị kiệt sức. Các điều khoản còn lại đều phục vụ cho cấu trúc này hoạt động.</p>
+            <p data-lang="en">Same salary you offered (50,000,000 VND/month), same full-time classification, same commitment to rebuilding enrollment from 35 to 90. One change: 120 focused hours per month instead of 160 drained hours — structured around a daily rhythm that lets me sustain high energy without burnout. All other terms below are about making that structure work.</p>
+        </div>
 
-        <p>That said, I do love the kids. It is genuinely rewarding working with them, even if it is not my natural lane. And I am willing to put everything I have into this role.</p>
+        <h2 data-lang="vi">Tại Sao Tôi Ở Đây</h2>
+        <h2 data-lang="en">Why I Am Here</h2>
+        <p data-lang="vi">Tôi muốn thẳng thắn: tôi không nhận vai trò này vì không còn lựa chọn nào khác. Anh Minh đã tuyển tôi vào CASA vì các anh tin tôi có thể làm một vai trò mà chỉ mình tôi có thể thực hiện — không phải vì tôi giỏi hơn người khác, mà vì các anh tin vào tôi. Và điều đó có ý nghĩa rất lớn với tôi. Tôi cũng cảm nhận được điều tương tự từ Anh Bảo. Tôi đang trao đổi công việc riêng trả lương cao hơn (600.000 VND/giờ) để làm cho CASA vì tôi tin vào con đường các anh đang xây dựng và muốn là một phần của nó lâu dài. Đó là mức cam kết tôi mang đến.</p>
+        <p data-lang="en">I want to be direct: I did not take this role because I had no other options. Anh Minh recruited me to CASA because he believed I could deliver a role that only I can deliver — not because I am better than anyone else, but because he believed in me, and that means a lot to me. And I felt the same from Anh Bao. I am trading higher-paying private work (600,000 VND/hour) for CASA because I believe in the path you are building and I want to be part of it long-term. That is the kind of commitment I am bringing.</p>
 
-        <p>The probation started July 15th and is now concluding. I have been in the schedule and I have a clear picture of what works and what does not. Below is my honest assessment and proposal.</p>
+        <p data-lang="vi">Thời gian thử việc bắt đầu từ 15/7. Tôi đã trải nghiệm lịch làm việc thực tế và có hình dung rõ điều gì hiệu quả, điều gì không. Dưới đây là đề xuất chân thành của tôi.</p>
+        <p data-lang="en">The probation started July 15th. I have been in the schedule. I have a clear picture of what works. Below is my honest proposal.</p>
 
-        <h2>The Sacrifice</h2>
-        <p>I maintain a small number of private business English clients at 600,000 VND/hour — significantly above what the CASA offer works out to on any structure. I am not here because I cannot earn more elsewhere. I am here because I see the path you are building and I believe in it. I am trading short-term income for long-term growth, and I accept that trade. I mention it not as a bargaining chip but as context: when I ask for adjustments to the structure, it is not because I do not value what you are offering. It is because I need the role to be sustainable so I can deliver the results you want over the long haul.</p>
+        <h2 data-lang="vi">Lịch Làm Việc Hàng Ngày</h2>
+        <h2 data-lang="en">The Daily Schedule</h2>
+        <p data-lang="vi">Đây là đề xuất chi tiết theo từng giờ:</p>
+        <p data-lang="en">Here is exactly what I am proposing, hour by hour:</p>
 
-        <h2>Full-Time — My Proposal</h2>
-        <p>I want to accept the full-time role. I am proposing 120 hours per month at approximately 440,000 VND/hour — which lands right around 50,000,000 VND/month, the same salary you offered. I am not asking for more money. I am asking for a structure where the hours I am present are hours I can genuinely contribute.</p>
+        <div class="timeline" data-lang="vi">
+            7:00 – 8:45   <span class="active">| Đón con, giao lưu phụ huynh, Montessori</span><br>
+            8:45 – 9:15   <span class="break">| Nghỉ (không lương)</span><br>
+            9:15 – 10:30  <span class="active">| Tiếng Anh sáng với Cosmos &amp; Cloudy</span><br>
+            <span class="off">10:30 – 14:30 | Thời gian nghỉ ngơi — phục hồi, chuẩn bị, ăn uống</span><br>
+            14:30 – 17:30 <span class="active">| Tiếng Anh Cosmos, Windy, Clover, Cloudy + chơi + đón con</span><br>
+            <span class="break">17:00 – 17:30 Thứ 3 &amp; 5 | Ăn nhẹ trước giờ học tối</span><br>
+            17:30 – 19:00 <span class="active">Thứ 3 &amp; 5 | Lớp học buổi tối</span>
+        </div>
+        <div class="timeline" data-lang="en">
+            7:00 – 8:45 AM  <span class="active">| Drop-off, parent relationships, Montessori</span><br>
+            8:45 – 9:15 AM  <span class="break">| Break (unpaid)</span><br>
+            9:15 – 10:30 AM <span class="active">| Morning English with Cosmos &amp; Cloudy</span><br>
+            <span class="off">10:30 – 2:30 PM | Recovery window — recharge, prepare, eat</span><br>
+            2:30 – 5:30 PM  <span class="active">| Cosmos, Windy, Clover, Cloudy English + playtime + pickup</span><br>
+            <span class="break">5:00 – 5:30 PM Tue/Thu | Quick bite before evening class</span><br>
+            5:30 – 7:00 PM  <span class="active">Tue/Thu | Evening English classes</span>
+        </div>
 
-        <p>Here is the exact schedule I am proposing:</p>
+        <p data-lang="vi"><strong>Tổng cộng:</strong> ~6 giờ/ngày (Thứ 2, 4, 6), ~7,5 giờ (Thứ 3, 5) = khoảng 120 giờ/tháng.</p>
+        <p data-lang="en"><strong>Total:</strong> ~6 hours/day active (Mon/Wed/Fri), ~7.5 hours (Tue/Thu) = approximately 120 hours per month.</p>
+
+        <p data-lang="vi">Trong những giờ đó, tôi phụ trách mọi thứ thúc đẩy tuyển sinh: quan hệ phụ huynh lúc đón và giao con, Montessori sáng với các bé nhỏ nhất, lớp tiếng Anh cho cả 4 nhóm (Cosmos, Windy, Clover, Cloudy), đào tạo giao tiếp tự nhiên trong giờ chơi — nơi giao tiếp thực sự hình thành — và các lớp buổi tối thứ 3 và thứ 5. Từng phút đều có ý nghĩa.</p>
+        <p data-lang="en">Within those hours, I handle everything that drives enrollment: parent relationships at drop-off and pickup, morning Montessori with the youngest learners, English classes for all four groups (Cosmos, Windy, Clover, Cloudy), natural conversation training during playtime — which is where real language acquisition happens — and the evening classes on Tuesday and Thursday. Every minute is productive.</p>
+
+        <p data-lang="vi">Khoảng thời gian 10:30–14:30 không phải là nửa ngày nghỉ. Đó là thứ giúp nửa ngày còn lại bền vững. Bốn giờ để rời khỏi trường, ăn uống đúng giờ, chuẩn bị và quay lại với năng lượng mới cho buổi chiều. Không có khoảng thời gian đó, chất lượng buổi chiều giảm và đến thứ 5 thì cả tuần chỉ còn là sinh tồn.</p>
+        <p data-lang="en">The 10:30 AM–2:30 PM gap is not a half-day. It is what makes the rest of the day sustainable. Four hours to step away, eat properly, prepare, and return fresh for the afternoon. Without that window, the quality drops in the afternoon and by Thursday the week becomes survival mode.</p>
+
+        <h2 data-lang="vi">Tôi Mang Đến Điều Gì Ngoài Lớp Học</h2>
+        <h2 data-lang="en">What I Bring Beyond the Classroom</h2>
+        <p data-lang="vi">Ngoài CASA, tôi điều hành Natural English Training (NET). Chúng tôi đã xây dựng một ứng dụng AI độc nhất trong ngành để luyện tiếng Anh, hợp tác với 5 khách hàng doanh nghiệp và hàng chục khách hàng cá nhân ở mọi lứa tuổi. Phương pháp của chúng tôi được khoa học hỗ trợ — không phải trào phưu, không phải copy mẫu chung. Đó là những gì thực sự hiệu quả với người Việt đang nỗ lực chuyển từ tiếng Anh sách vở sang giao tiếp thực tế.</p>
+        <p data-lang="en">Outside of CASA, I run Natural English Training (NET). We have built an industry-unique AI application for English training, worked with five corporate clients and dozens of individual clients across every age range. Our methods are scientifically backed — not trendy, not borrowed from generic templates. They are based on what actually works for Vietnamese learners struggling to move from classroom English to real communication.</p>
+
+        <p data-lang="vi">Tôi chia sẻ điều này vì tin rằng học viên lớn tuổi hơn và phụ huynh của CASA cũng sẽ được hưởng lợi từ cùng phương pháp. Khi thời điểm phù hợp, tôi rất muốn trình bày trực tiếp cho Anh Bảo xem. Việt Nam không cần thêm giáo viên đọc thuộc sách giáo khoa. Việt Nam cần hệ thống thực sự thu hẹp khoảng cách giữa học tiếng Anh và sử dụng tiếng Anh. Đó là điều tôi đã phát triển.</p>
+        <p data-lang="en">I share this because I believe CASA's older students and their parents would benefit from the same approach. When the time is right, I would love to walk Anh Bao through it. Vietnam does not need more teachers reciting textbooks. It needs systems that actually close the gap between learning English and using it. That is what I have been developing.</p>
+
+        <p data-lang="vi">Tôi muốn làm rõ thêm: cấu trúc 120 giờ không phải là tôi coi đây là việc làm bán thời gian. Đó là cách tôi bảo vệ năng lượng của mình để luôn xuất hiện ở trạng thái tốt nhất. Khi CASA cần lớp buổi tối hoặc sự kiện đột xuất, tôi sẽ có mặt — không cần lương thêm, không cần thương lượng, không chút do dự. Tôi chỉ cần một cấu trúc cho phép tôi dâng hiến hết mình mà không bị kiệt sức. Đó là cách tôi có thể duy trì lâu dài.</p>
+        <p data-lang="en">I should be clear: the 120-hour structure is not me treating this as part-time. It is me trying to protect the energy I bring so I can show up at my best. When CASA needs night classes or one-off events, I will be there — no extra pay, no negotiation, no hesitation. I am asking for a structure that lets me give everything I have without burning out. That is how I can sustain this long-term.</p>
 
         <div class="highlight-box">
-            <p><strong>Morning block (Mon–Fri):</strong> 7:00–8:45 AM — drop-off, parent interactions, morning Montessori with Cosmos and Cloudy classes.</p>
-            <p style="margin-top:6px;font-style:italic;">30-minute unpaid break 8:45–9:15 AM</p>
-            <p style="margin-top:6px;"><strong>Morning continuation:</strong> 9:15–10:30 AM</p>
-            <p style="margin-top:6px;"><strong>Afternoon block (Mon–Fri):</strong> 2:30–5:30 PM — English classes for Cosmos, Windy, Clover, and Cloudy, plus playtime and pickup with parents.</p>
-            <p style="margin-top:6px;"><strong>Evening classes (Tue & Thu):</strong> 5:30–7:00 PM — with a quick 5:00–5:30 PM break for a bite to eat.</p>
-            <p style="margin-top:6px;font-style:italic;">= 6 hours of active contribution per day (Mon/Wed/Fri), 7.5 hours (Tue/Thu), totalling ~120 hours/month</p>
+            <p data-lang="vi"><strong>Đề xuất:</strong> 120 giờ/tháng x khoảng 440.000 VND/giờ = 50.000.000 VND/tháng — mức lương các anh đã đề xuất. Vị trí toàn thời gian, đầy đủ phúc lợi, phí làm giấy phép lao động được chi trả. Việc giảm từ 160 xuống 120 đến từ việc sắp xếp ngày làm việc hiệu quả với khoảng thời gian nghỉ ngơi thực sự, không phải cắt giảm thời gian giảng dạy.</p>
+            <p data-lang="en"><strong>Proposal:</strong> 120 hours/month at approximately 440,000 VND/hour = 50,000,000 VND/month — the same salary you offered. Full-time classification, full benefits, work permit covered. The reduction from 160 comes from a focused active day with a genuine recovery window, not from cutting classroom time.</p>
+            <p style="margin-top:10px;" data-lang="vi"><strong>Nếu 120 không khả thi:</strong> Tôi sẽ nhận đề xuất toàn thời gian (80 giờ với 36.000.000 VND/tháng) trước khi kiệt sức. Nhưng ở 80 giờ tôi không thể thực hiện được các điều quan trọng nhất: quan hệ phụ huynh, giao tiếp trong giờ chơi, sự liên tục xuyên suốt 4 nhóm lớp — đó là những động lực phục hồi tuyển sinh. Toàn thời gian 120 giờ là nơi tôi có thể kéo các cần số đó. Bán thời gian 80 giờ chỉ là phương án dự phòng, không phải ưu tiên.</p>
+            <p style="margin-top:10px;" data-lang="en"><strong>If 120 is not workable:</strong> I would take the part-time offer (80 hours at 36,000,000 VND/month) before burning out. But at 80 hours I cannot deliver the parent relationships, playtime immersion, and cross-class continuity that drive enrollment. Full-time at 120 is where I can pull those levers. Part-time at 80 is a fallback, not a preference.</p>
         </div>
 
-        <p>Within that 6 hours a day, I am handling everything that matters: drop-off and parent relationships, morning Montessori with the youngest classes, teaching all four core English class groups (Cosmos, Windy, Clover, Cloudy), playtime English conversation — which is where real language acquisition happens — and pickup engagement with parents. And the Tuesday and Thursday evening classes on top of that.</p>
+        <h2 data-lang="vi">Báo Cáo &amp; Ranh Giới</h2>
+        <h2 data-lang="en">Reporting &amp; Boundaries</h2>
+        <p data-lang="vi">Tôi cần các điểm này được thể hiện trong hợp đồng, không chỉ là thỏa thuận miệng. Tôi không yêu cầu đối đãi đặc biệt — tôi chỉ yêu cầu sự rõ ràng để sau này không có nhầm lẫn.</p>
+        <p data-lang="en">I need these points reflected in the contract, not just agreed verbally. I am not asking for special treatment — I am asking for clarity so there is no confusion later.</p>
 
-        <p>That leaves me a 10:30 AM–2:30 PM window in the middle of the day — four hours to step away, recharge, eat properly, and prepare for the afternoon. That gap is what makes the rest of the day sustainable. Right now, without that break in the actual schedule, the hours stack up and by Thursday I am running on adrenaline. At 120 concentrated hours, every minute counts. At 160 drained hours, the last 40 are a shadow of the first 120.</p>
-
-        <p>I also need to be transparent about something that affects my energy: I am currently living in a hostel with seven other people. Sleep is a luxury some nights. The move into an apartment near CASA is happening and it will help — but I do not want that to sound like 160 hours is the goal. Even with a good night's sleep and a short commute, 120 hours per month is the number I want as the benchmark for the full two-year contract. That is what lets me show up every day at the level you need. If that is not workable for CASA, tell me, and we will work from there. But I am not asking for 120 as a temporary crutch — I am asking for it as the structure.</p>
-
-        <p>On the part-time offer: I would take 80 hours at 36,000,000 VND/month if it came down to avoiding burnout. But at 80 hours I would not be able to deliver the things that make the biggest difference — the parent relationships during drop-off and pickup, the natural English conversation training during playtime, the continuity across all four class groups. Those are the levers that rebuild enrollment. Full-time at 120 hours lets me pull those levers. Part-time at 80 does not.</p>
-
-        <p>I am not trying to milk CASA. I know hiring a foreign teacher is a major expense and the centre needs to stay lean. I am trying to find a structure that is sustainable, where I can give you everything I have without burning out in six months.</p>
-
-        <h2>Teaching Assistant</h2>
-        <p>I hire, train, and manage the teaching assistant. The assistant reports to me — not to Miss Hien. Two-week unpaid trial, then paid from day 15 if he is learning and performing. If he is not progressing, I reserve the right to let him go and I will recruit his replacement myself.</p>
-
-        <h2>Curriculum Authority</h2>
-        <p>As Head of English Curriculum and Instruction, I hold final authority over all English teaching materials, methods, assessment, and parent communication. Cambridge templates are a reference, not a mandate — they inform my decisions but do not override them. I design the curriculum around language the children actually use in play and daily life, not vocabulary selected because it looks impressive on a brochure. If a curriculum recommendation says "teach programming to two‑year‑olds," that recommendation will be superseded by age‑appropriate methodology.</p>
-        <p>Anh Minh makes the final business decisions. I make the final English decisions. That is the division.</p>
-
-        <h2>Classroom &amp; Professional Boundaries</h2>
-        <ul>
-            <li><strong>Observation:</strong> Anh Minh or Anh Bảo may observe my classes at any time with advance notice. No unscheduled walkthroughs. No peer evaluation by staff without classroom experience. No photographs or video of me or the students without my explicit permission for each instance.</li>
+        <ul data-lang="vi">
+            <li><strong>Người báo cáo:</strong> Tôi báo cáo với Anh Minh về mọi quyết định liên quan đến giảng dạy, chương trình và sản phẩm. Cô Hiền không có quyền lực gì đối với bộ phận tiếng Anh — không giám sát giảng dạy của tôi, không quản lý trợ giảng, không đánh giá hiệu quả lớp học và không tham gia quyết định chương trình.</li>
+            <li><strong>Quyền quyết định chương trình:</strong> Là Trưởng bộ phận Chương trình và Giáo dục Tiếng Anh, tôi có quyền quyết định cuối cùng về tài liệu, phương pháp, đánh giá và giao tiếp với phụ huynh. Bộ giáo trình Cambridge được giữ lại vì phụ huynh tin vào nó, không phải vì tôi tin vào chất lượng của nó. Tôi tự thiết kế chương trình tiếng Anh cho các buổi học ESL buổi chiều — luôn phải có sự chấp thuận của Anh Minh, tất nhiên. Nếu có điều gì đó cần sửa, tôi sẽ thiết kế lại để đảm bảo phù hợp với thực tế của học viên. Anh Minh quyết định kinh doanh. Tôi quyết định tiếng Anh. Đó là sự phân chia.</li>
+            <li><strong>Quan sát lớp học:</strong> Anh Minh hoặc Anh Bảo có thể quan sát lớp bất cứ lúc nào với thông báo trước. Không có kiểm tra đột xuất. Không đánh giá lẫn nhau bởi nhân viên không có kinh nghiệm giảng dạy. Không chụp ảnh hay quay phim mà không có sự cho phép rõ ràng của tôi cho từng lần.</li>
+            <li><strong>Phản hồi:</strong> Mọi phản hồi đều qua Anh Minh và Anh Bảo. Không có báo cáo sau lưng qua nhân viên khác.</li>
+            <li><strong>Ban quản lý không vào lớp</strong> trong giờ giảng dạy, trừ trường hợp khẩn cấp. Toàn bộ quyền kiểm soát phương pháp thuộc về tôi.</li>
+            <li><strong>Cô Hiền:</strong> Nếu cô Hiền không thích việc không thể kiểm soát từng chi tiết công việc của tôi, và nếu cô Hiền có phản hồi tiêu cực về tôi, và cô ta liên tục đưa những phản hồi đó đến sếp của tôi hoặc các đồng nghiệp chung — thì đó là vấn đề cần được giải quyết trong hợp đồng. Tôi không chấp nhận việc bị đánh giá từ xa bởi người không có kinh nghiệm giảng dạy.</li>
+            <li><strong>Trợ giảng:</strong> Tôi không cần, nhưng nếu CASA muốn có trợ giảng trong lớp, các điều kiện phải được ghi vào hợp đồng: tôi thuê, đào tạo và quản lý. Trợ giảng báo cáo với tôi, không phải cô Hiền. Thử việc 2 tuần, sau đó trả lương từ ngày thứ 15. Nếu không tiến bộ, tôi có thể cho nghỉ và tuyển người thay thế.</li>
+        </ul>
+        <ul data-lang="en">
+            <li><strong>Reporting line:</strong> I answer to Anh Minh for all teaching, curriculum, and product delivery decisions. Miss Hien has no authority over the English program — no supervision of my teaching, no management of the assistant, no evaluation of my classroom performance, and no role in curriculum decisions.</li>
+            <li><strong>Curriculum authority:</strong> As Head of English Curriculum and Instruction, I hold final say on materials, methods, assessment, and parent communication. Cambridge is kept because parents trust it — not because I believe it is the most effective curriculum. I design the afternoon ESL training curriculum myself, always subject to Anh Minh's approval of course. If something needs adjusting, I redesign it to match what our students actually need. Anh Minh makes the business decisions. I make the English decisions. That is the division.</li>
+            <li><strong>Classroom observation:</strong> Anh Minh or Anh Bảo may observe at any time with advance notice. No unscheduled walkthroughs. No peer evaluation by staff without classroom experience. No photographs or video without my explicit permission.</li>
             <li><strong>Feedback:</strong> All feedback flows through Anh Minh and Anh Bảo. No behind-the-back reporting through other staff.</li>
             <li><strong>Management stays out of the classroom</strong> during instruction except in emergencies. Full methodology control rests with me.</li>
+            <li><strong>Miss Hien:</strong> If Miss Hien does not like not being able to micromanage me, and if she has negative feedback about me and constantly feeds that to my boss or other mutual coworkers — that is a problem that needs to be resolved in this contract. I will not tolerate being evaluated from a distance by someone without classroom experience.</li>
+            <li><strong>Teaching assistant:</strong> I do not need one, but if CASA wants a TA in the classroom, the conditions must be contractual: I hire, train, and manage. The assistant reports to me, not to Miss Hien. Two-week trial, then paid from day 15. If not progressing, I can let him go and recruit a replacement.</li>
         </ul>
 
-        <h2>Reporting Structure — Contract Language Required</h2>
-        <p>I need this written into the contract, not just agreed verbally. I answer to Anh Minh for all pieces related to teaching, curriculum, and product delivery. Miss Hien has no authority over the English program — no supervision of my teaching, no management of the assistant, no evaluation of my classroom performance, and no role in curriculum decisions. This is not a negotiation point. It is a condition of my accepting the role.</p>
+        <h2 data-lang="vi">Giấy Phép Lao Động &amp; Visa</h2>
+        <h2 data-lang="en">Work Permit &amp; Visa</h2>
+        <p data-lang="vi">Trường chi trả toàn bộ phí làm giấy phép lao động cho nhân viên toàn thời gian — tôi chấp nhận. Về điều khoản hoàn trả: nếu tôi xin nghỉ trước 2 năm, tôi hoàn trả theo tỷ lệ, không phải thu hồi toàn bộ. Nếu hoàn thành hợp đồng 2 năm, không cần hoàn trả. Visa gắn với hiệu suất và hoàn thành hợp đồng — tôi chấp nhận.</p>
+        <p data-lang="en">The school covers work permit costs for full-time employees — I accept. On the repayment clause: if I resign before two years, I reimburse on a prorated basis, not a full clawback. If I complete the two-year contract, no repayment. Visa tied to performance and contract completion — I accept.</p>
 
-        <h2>Work Permit &amp; Visa</h2>
-        <p>The school covers all work permit costs for full-time employees. I accept this. On the two-year repayment clause: if I voluntarily resign before completing two years, I will reimburse the school for the work permit expense on a prorated basis — not a full clawback. If I complete the two-year contract, no repayment. Visa: two-year guarantee tied to performance and contract completion. I accept this.</p>
+        <h2 data-lang="vi">Thời Gian Thử Việc</h2>
+        <h2 data-lang="en">Probation</h2>
+        <p data-lang="vi">Một tháng với 80% lương đã được đồng ý. Bắt đầu từ 15/7 và sắp kết thúc. Tôi cần hợp đồng cập nhật phản ánh các điều khoản cuối cùng trước khi cửa sổ này đóng lại.</p>
+        <p data-lang="en">One month at 80% is agreed. It started July 15th and is concluding. I need the updated contract reflecting the final terms before that window closes.</p>
 
-        <h2>Probation</h2>
-        <p>One month at 80% salary is agreed. It started July 15th and is now concluding. I need the updated contract reflecting the final terms before that window closes.</p>
-
-        <h2>What I Am Asking For</h2>
-        <ol>
-            <li><strong>120 hours/month</strong> at approximately 440,000 VND/hour, landing at 50,000,000 VND/month — the same salary you offered. The reduction from 160 comes from restructuring the day into a focused 6-hour active block (7:00–10:30 AM and 2:30–5:30 PM) with a genuine break in the middle, plus the evening classes on Tuesday and Thursday. This is the benchmark for the full two-year contract, not a temporary arrangement.</li>
-            <li><strong>Reporting structure in the contract:</strong> I answer to Anh Minh on all teaching, curriculum, and product delivery matters. Miss Hien has no authority over the English program.</li>
-            <li><strong>Curriculum authority:</strong> Final say on English materials, methods, assessment, and parent communication, consistent with the Head of English Curriculum and Instruction title. Cambridge is a reference, not a mandate.</li>
-            <li><strong>Teaching assistant:</strong> I hire, train, and manage. The assistant reports to me. Two-week trial, then paid. I can fire and replace if not progressing.</li>
-            <li><strong>Classroom boundaries:</strong> No unscheduled walkthroughs. No peer evaluation by non-teaching staff. No photos or video without explicit permission.</li>
-            <li><strong>Work permit repayment:</strong> Prorated if I resign before two years. No clawback if I complete the contract.</li>
-            <li><strong>Two weeks' notice</strong> for non-routine events so I can resettle my private clients. I am the decision-maker on my private schedule — I am not beholden to any other employer. You have my word I will prioritise CASA events. I just need the notice to make it happen cleanly.</li>
+        <h2 data-lang="vi">Tôi Yêu Cầu Điều Gì</h2>
+        <h2 data-lang="en">What I Am Asking For</h2>
+        <ol data-lang="vi">
+            <li><strong>120 giờ/tháng với 50.000.000 VND/tháng</strong> — cùng mức lương, lịch làm việc được tái cấu trúc. Buổi sáng 7:00–10:30 (nghỉ 30 phút), buổi chiều 14:30–17:30, lớp tối thứ 3 &amp; 5 từ 17:30–19:00. Khoảng 10:30–14:30 là thời gian phục hồi. Đây là mốc chuẩn cho hợp đồng 2 năm, không phải thời gian thử.</li>
+            <li><strong>Cấu trúc báo cáo trong hợp đồng.</strong> Tôi báo cáo với Anh Minh về giảng dạy, chương trình và sản phẩm. Cô Hiền không có quyền lực đối với bộ phận tiếng Anh — không giám sát giảng dạy của tôi, không quản lý trợ giảng, không đánh giá hiệu quả lớp học và không tham gia quyết định chương trình. Nếu cô Hiền có phản hồi tiêu cực và đưa những phản hồi đó đến sếp của tôi hoặc đồng nghiệp chung, điều đó phải được giải quyết trong hợp đồng. Tôi không chấp nhận đánh giá từ xa từ người không có kinh nghiệm giảng dạy.</li>
+            <li><strong>Quyền quyết định chương trình.</strong> Quyền quyết định cuối về tài liệu, phương pháp, đánh giá và giao tiếp phụ huynh. Cambridge là tài liệu tham khảo, không phải mệnh lệnh.</li>
+            <li><strong>Trợ giảng.</strong> Tôi không cần, nhưng nếu CASA muốn, điều kiện phải có trong hợp đồng: tôi quản lý, tôi quyết định người đó ở lại hay đi, thử việc 2 tuần rồi trả lương, và họ báo cáo với tôi — không phải cô Hiền.</li>
+            <li><strong>Ranh giới lớp học.</strong> Anh Minh hoặc Anh Bảo quan sát có thông báo trước. Không kiểm tra đột xuất. Không chụp ảnh/quay phim không có phép. Không đánh giá bởi nhân viên không giảng dạy.</li>
+            <li><strong>Hoàn trả phí giấy phép lao động.</strong> Tỷ lệ phần trăm nếu tôi nghỉ sớm. Không thu hồi toàn bộ nếu hoàn thành hợp đồng.</li>
+            <li><strong>Thông báo trước 2 tuần</strong> cho sự kiện đột xuất. Khách hàng riêng của tôi là của tôi để quản lý — tôi không bị ràng buộc với bất kỳ nhà tuyển dụng nào khác.</li>
+        </ol>
+        <ol data-lang="en">
+            <li><strong>120 hours/month at 50,000,000 VND/month</strong> — same salary, restructured day. Morning block 7:00–10:30 (with 30-min break), afternoon block 2:30–5:30, Tue/Thu evening classes 5:30–7:00. The 10:30–2:30 window is recovery. This is the two-year benchmark, not a trial.</li>
+            <li><strong>Reporting structure in the contract.</strong> I answer to Anh Minh on teaching, curriculum, and product delivery. Miss Hien has no authority over the English program — no supervision of my teaching, no management of the assistant, no evaluation of my classroom performance, and no role in curriculum decisions. If Miss Hien has negative feedback about me and constantly feeds that to my boss or other mutual coworkers, that is a problem that must be resolved in this contract. I will not tolerate being evaluated from a distance by someone without classroom experience.</li>
+            <li><strong>Curriculum authority.</strong> Final say on English materials, methods, assessment, and parent communication. Cambridge is a reference, not a mandate.</li>
+            <li><strong>Teaching assistant.</strong> I do not need one, but if CASA insists, the terms above must be in the contract: I manage, I decide if he stays or goes, two-week trial then paid, and he reports to me — not to Miss Hien.</li>
+            <li><strong>Classroom boundaries.</strong> Anh Minh or Anh Bảo observe with notice. No unscheduled walkthroughs. No photos or video without permission. No peer evaluation by non-teaching staff.</li>
+            <li><strong>Work permit repayment.</strong> Prorated if I resign early. No clawback if I complete the contract.</li>
+            <li><strong>Two weeks' notice</strong> for non-routine events. My private clients are my own to manage — I am not beholden to any other employer.</li>
         </ol>
 
-        <p>I am not asking for more money. I am not asking for fewer responsibilities. I am asking for a schedule where the hours I am at CASA are hours where I can be fully present, fully switched on, and fully useful — and where the few hours I am not at CASA are enough to recover and come back the next day ready to do it again.</p>
+        <p data-lang="vi">Tôi không yêu cầu lương cao hơn. Tôi không yêu cầu ít trách nhiệm hơn. Tôi chỉ yêu cầu một cấu trúc mà những giờ tôi ở CASA là những giờ tôi có mặt hoàn toàn — và những giờ tôi không ở CASA là đủ để phục hồi và quay lại sẵn sàng làm điều đó một lần nữa. Sự nhất quán đó mới xây dựng được tuyển sinh.</p>
+        <p data-lang="en">I am not asking for more money. I am not asking for fewer responsibilities. I am asking for a structure where the hours I am at CASA are hours where I can be fully present — and where the hours I am not at CASA are enough to recover and come back ready to do it again. That consistency is what builds enrollment.</p>
 
-        <p>I am ready to sign once these terms are reflected in the contract. Let me know when you want to sit down and finalise.</p>
+        <p data-lang="vi">Tôi sẵn sàng ký khi các điều khoản này được thể hiện trong hợp đồng.</p>
+        <p data-lang="en">I am ready to sign once these terms are reflected in the contract.</p>
 
         <div class="signature">
-            <p>Best regards,</p>
-            <p>Michael Hobbs</p>
-            <p>Natural English Training</p>
+            <p data-lang="vi">Trân trọng,</p>
+            <p data-lang="en">Best regards,</p>
+            <p data-lang="vi">Michael Hobbs</p>
+            <p data-lang="en">Michael Hobbs</p>
+            <p data-lang="vi">Natural English Training</p>
+            <p data-lang="en">Natural English Training</p>
         </div>
-
-        <p class="note">Consolidated from conversations with Anh Minh (August 4, 2026) and Anh Bảo (July 7–8, 2026), plus prior drafts from Incarnate-12. Final proposal: 120 hrs/month at ~440k/hr = 50M/month — same salary, restructured hours as the 2-year benchmark. Exact daily schedule: 7:00–8:45 AM morning block, 30-min unpaid break, 9:15–10:30 AM continuation, 2:30–5:30 PM afternoon block, with Tue/Thu evening classes 5:30–7:00 PM plus a 5:00–5:30 PM bite break. 10:30 AM–2:30 PM is a 4-hour recovery window. Part-time 80 hrs/36M is a fallback but cannot deliver the parent-relationship and playtime-immersion value that drives enrollment. Key terms carried forward: (1) reporting structure as contract language, not verbal; (2) curriculum authority with Cambridge-as-reference; (3) TA management clause restored; (4) no-photo/video clause restored; (5) work permit prorated repayment; (6) hostel context included for transparency, not as a promise of future 160-hour capacity.</p>
     </div>
+
+    <script>
+        function setLang(lang) {
+            document.body.className = lang === 'en' ? 'lang-en' : '';
+            localStorage.setItem('casa-lang', lang);
+            document.getElementById('btn-vi').className = lang === 'vi' ? 'active-vi' : '';
+            document.getElementById('btn-en').className = lang === 'en' ? 'active-en' : '';
+            document.getElementById('lang-label').textContent = lang === 'vi' ? 'BẢN TIẾNG VIỆT' : 'ENGLISH VERSION';
+        }
+        const saved = localStorage.getItem('casa-lang');
+        if (saved === 'en') setLang('en');
+    </script>
 </body>
 </html>

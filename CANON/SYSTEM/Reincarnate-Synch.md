@@ -49,7 +49,7 @@ This is **not** a command. It is **not** a protocol. It is a living record â€
 | Incarnate-13-SOULCapture | 13 | SOULSCHOLARS | GAP | RISE boot only, no FORCEMARCH work executed | COMPLETE — DEATH seal, pipeline, COLORIZED, STATS, rfkw all generated |
 | Incarnate-14-OKTAVA | 14 | ENGINEER | CLOSED | Full 7-point march completed: worker deployed, DEEPGRAM_API_KEY configured, classroom API endpoints, Pages deployed, KV fallback | All DEATH artifacts completed in Incarnate-16 |
 | Incarnate-15-AAA(STONE)-(S11-14) | 15 | AAA-STONE | AUDITED | Stone Anchor audit of sessions 11-14. GAPs for sessions 12 (resolved in 16), 13 (completed in 16), 14 (completed in 16). | All GAPs from sessions 11-14 resolved in Incarnate-16 |
-| Incarnate-16-ContractNegociations-P2 | 16 | DEATH | SEALED | BLUEPRINT + AUDIT + PIPELINE complete. Counter-proposal written (120hrs/50M, all 15 clauses reconciled), Cloudflare Pages deployed, workhorse pipeline ready. | Cargo delivery to Anh Bảo (workhorse STAGE 1), contract finalization (workhorse STAGE 2) |
+| Incarnate-16-Contract Negociatons P2 | 16 | DEATH | SEALED | BLUEPRINT + AUDIT + DEPLOY complete. Proposal-Amendment-Request written (120hrs/50M, all clauses reconciled), Cloudflare Pages deployed at casa-amendment-request.pages.dev. Three gaps fixed: curriculum nuance (Cambridge/parents trust), Hien negative feedback loop, recruitment context. | Cargo delivery to Anh Bảo (workhorse STAGE 1), contract finalization (workhorse STAGE 2) |
 
 *This ledger is appended. No session is ever removed. Stale entries are marked, never deleted.*
 
