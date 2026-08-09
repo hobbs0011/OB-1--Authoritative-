@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f0f1a">
+  <meta name="description" content="CASA English Student Portal — dashboard for Natural English Training students.">
+  <title>Student Dashboard | CASA English</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0f1a;
+      --bg-elevated: #151528;
+      --panel: rgba(17, 22, 32, 0.93);
+      --panel-border: rgba(255, 255, 255, 0.10);
+      --text: #f8f5ff;
+      --muted: #c2cbdc;
+      --muted-strong: #dde2ef;
+      --purple: #a855f7;
+      --purple-soft: rgba(168, 85, 247, 0.14);
+      --gold: #f59e0b;
+      --gold-soft: rgba(245, 158, 11, 0.14);
+      --danger: #ef4444;
+      --success: #22c55e;
+      --shadow-lg: 0 30px 90px rgba(0, 0, 0, 0.38);
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 14px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(168, 85, 247, 0.16), transparent 28%),
+        radial-gradient(circle at 88% 14%, rgba(245, 158, 11, 0.10), transparent 24%),
+        linear-gradient(180deg, #090b12 0%, #0f0f1a 38%, #141625 100%);
+      min-height: 100vh;
+    }
+
+    .dashboard {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 28px 80px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--panel-border);
+      margin-bottom: 36px;
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .topbar-logo {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--purple), var(--gold));
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 900;
+      color: #fff;
+      font-size: 1.1rem;
+    }
+
+    .topbar-title h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .topbar-title span {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .topbar-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .student-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 999px;
+      padding: 8px 18px;
+    }
+
+    .student-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple), var(--gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: #fff;
+    }
+
+    .student-info {
+      line-height: 1.3;
+    }
+
+    .student-info strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .student-info small {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    .btn-logout {
+      padding: 9px 20px;
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--muted);
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: all 0.2s;
+    }
+
+    .btn-logout:hover {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    .welcome-banner {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(245, 158, 11, 0.10));
+      border: 1px solid rgba(168, 85, 247, 0.40);
+      border-radius: var(--radius-lg);
+      padding: 32px 36px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .welcome-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.15), transparent 70%);
+      pointer-events: none;
+    }
+
+    .welcome-banner h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .welcome-banner p {
+      color: var(--muted-strong);
+      font-size: 1rem;
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover {
+      border-color: rgba(168, 85, 247, 0.30);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--panel-border);
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .card-icon.purple { background: var(--purple-soft); }
+    .card-icon.gold { background: var(--gold-soft); }
+
+    .card-header h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .schedule-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--panel-border);
+    }
+
+    .schedule-item:last-child { border-bottom: none; }
+
+    .schedule-day {
+      font-weight: 700;
+      color: var(--text);
+      min-width: 90px;
+    }
+
+    .schedule-time {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .schedule-status {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .status-active {
+      background: rgba(34, 197, 94, 0.12);
+      color: var(--success);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+    }
+
+    .status-upcoming {
+      background: var(--gold-soft);
+      color: var(--gold);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--purple), var(--gold));
+      border-radius: 999px;
+      transition: width 0.6s ease;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .material-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--panel-border);
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .material-item:last-child { border-bottom: none; }
+    .material-item:hover { opacity: 0.8; }
+
+    .material-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background: var(--purple-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .material-info { flex: 1; }
+
+    .material-info strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .material-info small {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .material-action {
+      color: var(--purple);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 640px) {
+      .topbar { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .grid { grid-template-columns: 1fr; }
+      .login-card { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="topbar">
+      <div class="topbar-brand">
+        <div class="topbar-logo">C</div>
+        <div class="topbar-title">
+          <h1>CASA English</h1>
+          <span>Student Portal</span>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <div class="student-chip">
+          <div class="student-avatar" id="avatarLetter">S</div>
+          <div class="student-info">
+            <strong id="studentName">Student</strong>
+            <small id="studentCodeDisplay">CASA-2026-001</small>
+          </div>
+        </div>
+        <button class="btn-logout" onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <div class="welcome-banner">
+      <h2 id="welcomeTitle">Welcome back, Student</h2>
+      <p>Your KISS-powered English training dashboard. Track your schedule, materials, and progress — all in one place.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon purple">📅</div>
+          <h3>This Week</h3>
+        </div>
+        <div class="schedule-item">
+          <div>
+            <div class="schedule-day">Tuesday</div>
+            <div class="schedule-time">7:00 – 8:45</div>
+          </div>
+          <span class="schedule-status status-active">Today</span>
+        </div>
+        <div class="schedule-item">
+          <div>
+            <div class="schedule-day">Thursday</div>
+            <div class="schedule-time">7:00 – 8:45</div>
+          </div>
+          <span class="schedule-status status-upcoming">Upcoming</span>
+        </div>
+        <div class="schedule-item">
+          <div>
+            <div class="schedule-day">Saturday</div>
+            <div class="schedule-time">9:15 – 11:00</div>
+          </div>
+          <span class="schedule-status status-upcoming">Upcoming</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon gold">📊</div>
+          <h3>Progress</h3>
+        </div>
+        <div style="margin-bottom: 18px;">
+          <div style="display:flex;justify-content:space-between;font-size:0.9rem;font-weight:700;">
+            <span>Course Completion</span>
+            <span style="color:var(--gold);">68%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 68%;"></div>
+          </div>
+          <div class="progress-label">
+            <span>12 lessons done</span>
+            <span>6 remaining</span>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:0.9rem;font-weight:700;">
+            <span>Speaking Confidence</span>
+            <span style="color:var(--gold);">Level 4</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 80%;"></div>
+          </div>
+          <div class="progress-label">
+            <span>Active listener</span>
+            <span>Tiger track</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon purple">📚</div>
+          <h3>Materials</h3>
+        </div>
+        <div class="material-item">
+          <div class="material-icon">🎧</div>
+          <div class="material-info">
+            <strong>Lesson 13 — Audio Drill</strong>
+            <small>Active listening exercise</small>
+          </div>
+          <div class="material-action">Open</div>
+        </div>
+        <div class="material-item">
+          <div class="material-icon">📝</div>
+          <div class="material-info">
+            <strong>Worksheet — Two Brains</strong>
+            <small>Grammar + Intuition practice</small>
+          </div>
+          <div class="material-action">Open</div>
+        </div>
+        <div class="material-item">
+          <div class="material-icon">🎥</div>
+          <div class="material-info">
+            <strong>Video — Mouse to Tiger</strong>
+            <small>Confidence building module</small>
+          </div>
+          <div class="material-action">Open</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function getParam(name) {
+      var url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+
+    var studentName = getParam('name') || 'Student';
+    var studentCode = getParam('student') || '';
+
+    document.getElementById('studentName').textContent = studentName;
+    document.getElementById('studentCodeDisplay').textContent = studentCode;
+    document.getElementById('welcomeTitle').textContent = 'Welcome back, ' + studentName;
+    document.getElementById('avatarLetter').textContent = studentName.charAt(0).toUpperCase();
+
+    function logout() {
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
