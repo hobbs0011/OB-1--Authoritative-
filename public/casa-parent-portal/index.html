@@ -958,7 +958,7 @@
         btn.disabled = false;
 
         if (email === 'parent@casa.vn' && pwd === 'CASA2026') {
-          alert('Welcome to the Casa Dei Sol Parent Portal!\n\nThis is a demo. In production, this would redirect to the parent dashboard.');
+          window.location.href = 'dashboard.html?email=' + encodeURIComponent(email) + '&name=' + encodeURIComponent('Parent');
         } else {
           pwdErr.style.display = 'block';
           document.getElementById('password').classList.add('error');

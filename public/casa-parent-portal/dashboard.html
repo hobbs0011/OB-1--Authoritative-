@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#257c84">
+  <title>Parent Dashboard | Casa Dei Sol Montessori</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: #257c84;
+      --teal-light: #2f949b;
+      --teal-dark: #1d6269;
+      --teal-glow: rgba(37, 124, 132, 0.25);
+      --warm: #f5f0e8;
+      --cream: #faf8f4;
+      --text: #2c3e50;
+      --text-light: #5a6c7d;
+      --muted: #8a9aab;
+      --gold: #c9a96e;
+      --gold-soft: rgba(201, 169, 110, 0.15);
+      --white: #ffffff;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.10);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--teal-glow) transparent;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--teal-glow);
+      border-radius: 999px;
+    }
+
+    ::selection {
+      background: rgba(37, 124, 132, 0.25);
+      color: var(--text);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--cream);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(37, 124, 132, 0.08), transparent 40%),
+        radial-gradient(circle at 85% 90%, rgba(201, 169, 110, 0.06), transparent 40%);
+    }
+
+    /* ── Topbar ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px) saturate(1.6);
+      -webkit-backdrop-filter: blur(20px) saturate(1.6);
+      background: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid rgba(37, 124, 132, 0.10);
+    }
+
+    .topbar-inner {
+      max-width: 1280px;
+      margin-inline: auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(37, 124, 132, 0.15);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand-text strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.02em;
+      display: block;
+      line-height: 1.2;
+    }
+
+    .brand-text small {
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .topbar-nav {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .topbar-nav a {
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(37, 124, 132, 0.12);
+      background: rgba(37, 124, 132, 0.04);
+      color: var(--teal-dark);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      transition: all 0.2s;
+    }
+
+    .topbar-nav a:hover {
+      background: var(--teal);
+      color: var(--white);
+      border-color: var(--teal);
+    }
+
+    .btn-logout {
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(231, 76, 60, 0.20);
+      background: rgba(231, 76, 60, 0.05);
+      color: #c0392b;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-logout:hover {
+      background: #e74c3c;
+      color: var(--white);
+      border-color: #e74c3c;
+    }
+
+    /* ── Dashboard ── */
+    .dashboard {
+      position: relative;
+      z-index: 1;
+      max-width: 1280px;
+      margin-inline: auto;
+      padding: 32px 24px 80px;
+    }
+
+    .welcome-banner {
+      background: linear-gradient(135deg, rgba(37, 124, 132, 0.12), rgba(201, 169, 110, 0.08));
+      border: 1px solid rgba(37, 124, 132, 0.20);
+      border-radius: var(--radius-xl);
+      padding: 32px 36px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .welcome-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(201, 169, 110, 0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    .welcome-banner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 0 0 6px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .welcome-banner p {
+      margin: 0;
+      color: var(--text-light);
+      font-size: 0.95rem;
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+    }
+
+    .child-selector {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .child-chip {
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(37, 124, 132, 0.20);
+      background: var(--white);
+      color: var(--teal-dark);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .child-chip:hover {
+      border-color: var(--teal);
+      background: rgba(37, 124, 132, 0.05);
+    }
+
+    .child-chip.active {
+      background: var(--teal);
+      color: var(--white);
+      border-color: var(--teal);
+    }
+
+    .child-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(37, 124, 132, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .child-chip.active .child-avatar {
+      background: rgba(255, 255, 255, 0.25);
+      color: var(--white);
+    }
+
+    /* ── Stats Row ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: var(--white);
+      border: 1px solid rgba(37, 124, 132, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      text-align: center;
+      transition: all 0.25s;
+    }
+
+    .stat-card:hover {
+      border-color: rgba(37, 124, 132, 0.20);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .stat-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--teal);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+
+    /* ── Main Grid ── */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid rgba(37, 124, 132, 0.08);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(37, 124, 132, 0.08);
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--teal-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-badge {
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: var(--gold-soft);
+      color: #8b6f3a;
+      border: 1px solid rgba(201, 169, 110, 0.25);
+    }
+
+    /* ── Activity Timeline ── */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 16px;
+      padding: 16px;
+      background: var(--cream);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(37, 124, 132, 0.06);
+      transition: all 0.2s;
+    }
+
+    .timeline-item:hover {
+      border-color: rgba(37, 124, 132, 0.15);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .timeline-time {
+      flex-shrink: 0;
+      width: 60px;
+      text-align: center;
+    }
+
+    .timeline-time .time {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.02em;
+    }
+
+    .timeline-time .period {
+      font-size: 0.68rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--teal);
+      margin: 4px auto 8px;
+      box-shadow: 0 0 0 3px rgba(37, 124, 132, 0.15);
+      flex-shrink: 0;
+    }
+
+    .timeline-content {
+      flex: 1;
+    }
+
+    .timeline-content strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .timeline-content p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    .timeline-tag {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      margin-top: 6px;
+    }
+
+    .tag-practical { background: rgba(37, 124, 132, 0.10); color: var(--teal-dark); }
+    .tag-sensorial { background: rgba(201, 169, 110, 0.12); color: #8b6f3a; }
+    .tag-language { background: rgba(155, 89, 182, 0.10); color: #7d3c98; }
+    .tag-math { background: rgba(52, 152, 219, 0.10); color: #2c80b9; }
+    .tag-culture { background: rgba(230, 126, 34, 0.10); color: #b8651f; }
+
+    /* ── Photo Gallery ── */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .photo-card {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, var(--teal-glow), rgba(201, 169, 110, 0.1));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(37, 124, 132, 0.10);
+    }
+
+    .photo-card:hover {
+      transform: scale(1.03);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(37, 124, 132, 0.25);
+    }
+
+    .photo-card .photo-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px 12px;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+      color: var(--white);
+      font-size: 0.78rem;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    /* ── Events ── */
+    .event-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .event-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 14px;
+      background: var(--cream);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(37, 124, 132, 0.06);
+      transition: all 0.2s;
+    }
+
+    .event-item:hover {
+      border-color: rgba(37, 124, 132, 0.15);
+    }
+
+    .event-date {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: var(--teal);
+      color: var(--white);
+      border-radius: var(--radius-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .event-date .day {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .event-date .month {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      opacity: 0.9;
+    }
+
+    .event-details strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .event-details span {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── Messages ── */
+    .message-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .message-item {
+      padding: 14px;
+      background: var(--cream);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(37, 124, 132, 0.06);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .message-item:hover {
+      border-color: rgba(37, 124, 132, 0.15);
+      background: var(--white);
+    }
+
+    .message-item.unread {
+      border-left: 3px solid var(--teal);
+    }
+
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .message-sender {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .message-time {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .message-preview {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* ── Progress Ring ── */
+    .progress-section {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .progress-item {
+      text-align: center;
+      padding: 16px;
+      background: var(--cream);
+      border-radius: var(--radius-md);
+    }
+
+    .progress-ring {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 10px;
+      position: relative;
+    }
+
+    .progress-ring svg {
+      transform: rotate(-90deg);
+    }
+
+    .progress-ring-bg {
+      fill: none;
+      stroke: rgba(37, 124, 132, 0.10);
+      stroke-width: 6;
+    }
+
+    .progress-ring-fill {
+      fill: none;
+      stroke: var(--teal);
+      stroke-width: 6;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.8s ease;
+    }
+
+    .progress-ring-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+
+    .progress-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid rgba(37, 124, 132, 0.10);
+      padding: 24px 0;
+      background: var(--white);
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin-inline: auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .footer-inner .brand-mark {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--teal);
+    }
+
+    .footer-inner .tagline {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.1rem;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar-nav {
+        display: none;
+      }
+
+      .stats-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .stat-card {
+        padding: 18px;
+      }
+
+      .stat-value {
+        font-size: 1.5rem;
+      }
+
+      .welcome-banner {
+        padding: 24px;
+      }
+
+      .welcome-banner h2 {
+        font-size: 1.3rem;
+      }
+
+      .child-selector {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="https://casadeisol.edu.vn" target="_blank" rel="noopener">
+        <img
+          class="brand-logo"
+          src="https://casadeisol.edu.vn/wp-content/uploads/2025/07/cropped-Casa-Logo-SQ-300x300.png"
+          alt="Casa Dei Sol Montessori logo"
+          width="42"
+          height="42"
+        >
+        <div class="brand-text">
+          <strong>Casa Dei Sol</strong>
+          <small>Parent Portal</small>
+        </div>
+      </a>
+      <nav class="topbar-nav" aria-label="Site navigation">
+        <a href="index.html">Landing</a>
+        <a href="https://casadeisol.edu.vn" target="_blank" rel="noopener">School Website</a>
+      </nav>
+      <button class="btn-logout" onclick="logout()">Sign Out</button>
+    </div>
+  </header>
+
+  <main class="dashboard">
+    <div class="welcome-banner">
+      <h2 id="welcomeTitle">Welcome back, Parent</h2>
+      <p>Here's what's happening with your child at Casa Dei Sol Montessori today.</p>
+      <div class="child-selector">
+        <button class="child-chip active" onclick="selectChild(this, 'Emma', '5 years')">
+          <span class="child-avatar">E</span>
+          Emma, 5
+        </button>
+        <button class="child-chip" onclick="selectChild(this, 'Lucas', '3 years')">
+          <span class="child-avatar">L</span>
+          Lucas, 3
+        </button>
+        <button class="child-chip" onclick="selectChild(this, 'Sophie', '4 years')">
+          <span class="child-avatar">S</span>
+          Sophie, 4
+        </button>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon">📅</div>
+        <div class="stat-value">18</div>
+        <div class="stat-label">Days This Month</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-value">7</div>
+        <div class="stat-label">Milestones</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📸</div>
+        <div class="stat-value">42</div>
+        <div class="stat-label">Photos This Week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">💬</div>
+        <div class="stat-value">3</div>
+        <div class="stat-label">New Messages</div>
+      </div>
+    </div>
+
+    <div class="main-grid">
+      <div class="main-col">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">📋 Today's Journey</div>
+            <span class="card-badge">Monday, Aug 10</span>
+          </div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-time">
+                <div class="time">8:15</div>
+                <div class="period">AM</div>
+                <div class="timeline-dot"></div>
+              </div>
+              <div class="timeline-content">
+                <strong>Arrival & Greeting</strong>
+                <p>Emma arrived with a smile, independently hung her bag, and chose the Practical Life shelf — pouring activity.</p>
+                <span class="timeline-tag tag-practical">Practical Life</span>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-time">
+                <div class="time">9:30</div>
+                <div class="period">AM</div>
+                <div class="timeline-dot"></div>
+              </div>
+              <div class="timeline-content">
+                <strong>Math Work</strong>
+                <p>Worked with the Golden Beads — successfully completed addition with numbers 1-100. Showed great concentration for 25 minutes.</p>
+                <span class="timeline-tag tag-math">Math</span>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-time">
+                <div class="time">10:45</div>
+                <div class="period">AM</div>
+                <div class="timeline-dot"></div>
+              </div>
+              <div class="timeline-content">
+                <strong>Outdoor Play</strong>
+                <p>Led a group game of "Fox and Rabbit" on the playground. Showed inclusive behavior by helping younger children join in.</p>
+                <span class="timeline-tag tag-culture">Culture</span>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-time">
+                <div class="time">11:30</div>
+                <div class="period">AM</div>
+                <div class="timeline-dot"></div>
+              </div>
+              <div class="timeline-content">
+                <strong>Language Reading</strong>
+                <p>Read three short stories independently. Spotted 12 new sight words. Reading fluency improving week by week.</p>
+                <span class="timeline-tag tag-language">Language</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">📸 This Week's Moments</div>
+            <span class="card-badge">12 photos</span>
+          </div>
+          <div class="photo-grid">
+            <div class="photo-card">
+              📚
+              <div class="photo-caption">Reading corner — focused for 30 min</div>
+            </div>
+            <div class="photo-card">
+              🎨
+              <div class="photo-caption">Art project — color mixing</div>
+            </div>
+            <div class="photo-card">
+              🌱
+              <div class="photo-caption">Gardening — planted sunflower seeds</div>
+            </div>
+            <div class="photo-card">
+              🧮
+              <div class="photo-caption">Math beads — addition practice</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="side-col">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">📅 Upcoming Events</div>
+          </div>
+          <div class="event-list">
+            <div class="event-item">
+              <div class="event-date">
+                <span class="day">12</span>
+                <span class="month">Aug</span>
+              </div>
+              <div class="event-details">
+                <strong>Parent-Teacher Meeting</strong>
+                <span>3:30 PM — 30 min slot with Ms. Linh</span>
+              </div>
+            </div>
+            <div class="event-item">
+              <div class="event-date">
+                <span class="day">15</span>
+                <span class="month">Aug</span>
+              </div>
+              <div class="event-details">
+                <strong>Field Trip: Botanical Garden</strong>
+                <span>Full day — permission slip required</span>
+              </div>
+            </div>
+            <div class="event-item">
+              <div class="event-date">
+                <span class="day">18</span>
+                <span class="month">Aug</span>
+              </div>
+              <div class="event-details">
+                <strong>Montessori 101 Workshop</strong>
+                <span>9:00 AM — Parent education session</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">💬 Messages from Teachers</div>
+            <span class="card-badge">2 unread</span>
+          </div>
+          <div class="message-list">
+            <div class="message-item unread">
+              <div class="message-header">
+                <span class="message-sender">Ms. Linh</span>
+                <span class="message-time">Today, 10:30 AM</span>
+              </div>
+              <div class="message-preview">Emma had a wonderful morning! She independently chose the Math shelf and worked with the Golden Beads for 25 minutes...</div>
+            </div>
+            <div class="message-item unread">
+              <div class="message-header">
+                <span class="message-sender">Ms. Thu</span>
+                <span class="message-time">Yesterday, 4:15 PM</span>
+              </div>
+              <div class="message-preview">Reminder: Field trip permission slips are due by Thursday. Please sign and return in Emma's folder...</div>
+            </div>
+            <div class="message-item">
+              <div class="message-header">
+                <span class="message-sender">Ms. Linh</span>
+                <span class="message-time">Fri, Aug 7</span>
+              </div>
+              <div class="message-preview">Great week! Emma showed wonderful progress in her reading fluency. Keep practicing sight words at home...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">📊 Development Progress</div>
+          </div>
+          <div class="progress-section">
+            <div class="progress-item">
+              <div class="progress-ring">
+                <svg width="80" height="80" viewBox="0 0 80 80">
+                  <circle class="progress-ring-bg" cx="40" cy="40" r="34"></circle>
+                  <circle class="progress-ring-fill" cx="40" cy="40" r="34"
+                    stroke-dasharray="213.6"
+                    stroke-dashoffset="42.7"
+                    style="stroke: var(--teal);"></circle>
+                </svg>
+                <div class="progress-ring-text">80%</div>
+              </div>
+              <div class="progress-label">Practical Life</div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-ring">
+                <svg width="80" height="80" viewBox="0 0 80 80">
+                  <circle class="progress-ring-bg" cx="40" cy="40" r="34"></circle>
+                  <circle class="progress-ring-fill" cx="40" cy="40" r="34"
+                    stroke-dasharray="213.6"
+                    stroke-dashoffset="64.1"
+                    style="stroke: var(--gold);"></circle>
+                </svg>
+                <div class="progress-ring-text">70%</div>
+              </div>
+              <div class="progress-label">Sensorial</div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-ring">
+                <svg width="80" height="80" viewBox="0 0 80 80">
+                  <circle class="progress-ring-bg" cx="40" cy="40" r="34"></circle>
+                  <circle class="progress-ring-fill" cx="40" cy="40" r="34"
+                    stroke-dasharray="213.6"
+                    stroke-dashoffset="21.4"
+                    style="stroke: #9b59b6;"></circle>
+                </svg>
+                <div class="progress-ring-text">90%</div>
+              </div>
+              <div class="progress-label">Language</div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-ring">
+                <svg width="80" height="80" viewBox="0 0 80 80">
+                  <circle class="progress-ring-bg" cx="40" cy="40" r="34"></circle>
+                  <circle class="progress-ring-fill" cx="40" cy="40" r="34"
+                    stroke-dasharray="213.6"
+                    stroke-dashoffset="85.4"
+                    style="stroke: #3498db;"></circle>
+                </svg>
+                <div class="progress-ring-text">60%</div>
+              </div>
+              <div class="progress-label">Math</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>&copy; 2026 <span class="brand-mark">Casa Dei Sol Montessori</span> — Parent Portal Demo</span>
+      <span class="tagline">Where children bloom</span>
+    </div>
+  </footer>
+
+  <script>
+    function getParam(name) {
+      var url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+
+    var parentName = getParam('name') || 'Parent';
+    var childName = getParam('child') || 'Emma';
+    document.getElementById('welcomeTitle').textContent = 'Welcome back, ' + parentName;
+
+    function selectChild(el, name, age) {
+      document.querySelectorAll('.child-chip').forEach(function(chip) {
+        chip.classList.remove('active');
+      });
+      el.classList.add('active');
+      document.getElementById('welcomeTitle').textContent = 'Here is ' + name + "'s journey";
+    }
+
+    function logout() {
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
