@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -362,6 +362,52 @@
       margin-bottom: 6px;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid rgba(37, 124, 132, 0.15);
+      border-radius: var(--radius-sm);
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .input-wrap input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px var(--teal-glow);
+      background: var(--white);
+    }
+
+    .input-wrap input.error {
+      border-color: #e74c3c;
+      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.10);
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 0.85rem;
+      padding: 4px;
+      line-height: 1;
+    }
+
+    .password-toggle:hover {
+      color: var(--teal);
     }
 
     .form-group input {
@@ -776,7 +822,9 @@
           alt="Casa Dei Sol Montessori logo"
           width="48"
           height="48"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
         >
+        <div class="brand-logo-fallback" style="display:none;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-dark));align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1.1rem;box-shadow:var(--shadow-sm);">C</div>
         <div class="brand-text">
           <strong>Casa Dei Sol Montessori</strong>
           <small>Parent Portal</small>
@@ -810,13 +858,16 @@
         <div class="hero-visual" id="login">
           <div class="login-card">
             <div class="login-header">
-              <img
-                class="login-logo"
-                src="https://casadeisol.edu.vn/wp-content/uploads/2025/07/cropped-Casa-Logo-SQ-300x300.png"
-                alt="Casa Dei Sol Montessori"
-                width="80"
-                height="80"
-              >
+                <img
+                  class="login-logo"
+                  src="https://casadeisol.edu.vn/wp-content/uploads/2025/07/cropped-Casa-Logo-SQ-300x300.png"
+                  alt="Casa Dei Sol Montessori"
+                  width="80"
+                  height="80"
+                  loading="lazy"
+                  onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+                >
+                <div class="login-logo-fallback" style="display:none;width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-dark));align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:900;color:#fff;font-size:2rem;box-shadow:var(--shadow-md);margin:0 auto 14px;">C</div>
               <h2>Parent Login</h2>
               <p>Enter your credentials to access the portal</p>
             </div>
@@ -824,14 +875,19 @@
             <form id="loginForm" autocomplete="off">
               <div class="form-group">
                 <label for="parentEmail">Email</label>
-                <input type="email" id="parentEmail" name="parentEmail" placeholder="parent@example.com" required>
-                <div class="error-msg" id="emailError">Please enter your email address.</div>
+                <div class="input-wrap">
+                  <input type="email" id="parentEmail" name="parentEmail" placeholder="parent@example.com" required autocomplete="email">
+                </div>
+                <div class="error-msg" id="emailError" role="alert" aria-live="polite">Please enter your email address.</div>
               </div>
 
               <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                <div class="error-msg" id="pwdError">Incorrect password. Try again.</div>
+                <div class="input-wrap">
+                  <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
+                  <button type="button" class="password-toggle" id="pwdToggle" aria-label="Show password">Show</button>
+                </div>
+                <div class="error-msg" id="pwdError" role="alert" aria-live="polite">Incorrect password. Try again.</div>
               </div>
 
               <button type="submit" class="btn-login" id="loginBtn">
@@ -974,6 +1030,17 @@
     document.getElementById('password').addEventListener('input', function() {
       document.getElementById('pwdError').style.display = 'none';
       this.classList.remove('error');
+    });
+
+    document.getElementById('pwdToggle').addEventListener('click', function() {
+      var pwd = document.getElementById('password');
+      if (pwd.type === 'password') {
+        pwd.type = 'text';
+        this.textContent = 'Hide';
+      } else {
+        pwd.type = 'password';
+        this.textContent = 'Show';
+      }
     });
   </script>
 </body>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -756,7 +756,10 @@
           alt="Casa Dei Sol Montessori logo"
           width="42"
           height="42"
+          loading="lazy"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
         >
+        <div class="brand-logo-fallback" style="display:none;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-dark));align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1rem;box-shadow:var(--shadow-sm);">C</div>
         <div class="brand-text">
           <strong>Casa Dei Sol</strong>
           <small>Parent Portal</small>
@@ -818,7 +821,7 @@
         <div class="card">
           <div class="card-header">
             <div class="card-title">📋 Today's Journey</div>
-            <span class="card-badge">Monday, Aug 10</span>
+            <span class="card-badge" id="todayBadge"></span>
           </div>
           <div class="timeline">
             <div class="timeline-item">
@@ -1048,19 +1051,65 @@
 
     var parentName = getParam('name') || 'Parent';
     var childName = getParam('child') || 'Emma';
-    document.getElementById('welcomeTitle').textContent = 'Welcome back, ' + parentName;
+    var welcomeEl = document.getElementById('welcomeTitle');
+    if (welcomeEl) {
+      welcomeEl.textContent = 'Welcome back, ' + parentName;
+    }
+
+    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var today = new Date();
+    var badgeEl = document.getElementById('todayBadge');
+    if (badgeEl) {
+      badgeEl.textContent = days[today.getDay()] + ', ' + months[today.getMonth()] + ' ' + today.getDate();
+    }
+
+    var childData = {
+      Emma: { age: '5 years', days: 18, milestones: 7, photos: 42, messages: 3, events: 3 },
+      Lucas: { age: '3 years', days: 15, milestones: 5, photos: 28, messages: 1, events: 2 },
+      Sophie: { age: '4 years', days: 20, milestones: 9, photos: 35, messages: 4, events: 4 }
+    };
 
     function selectChild(el, name, age) {
       document.querySelectorAll('.child-chip').forEach(function(chip) {
         chip.classList.remove('active');
       });
       el.classList.add('active');
-      document.getElementById('welcomeTitle').textContent = 'Here is ' + name + "'s journey";
+      if (welcomeEl) {
+        welcomeEl.textContent = 'Here is ' + name + "'s journey";
+      }
+      var data = childData[name] || childData['Emma'];
+      var statCards = document.querySelectorAll('.stat-card .stat-value');
+      if (statCards.length >= 4) {
+        statCards[0].textContent = data.days;
+        statCards[1].textContent = data.milestones;
+        statCards[2].textContent = data.photos;
+        statCards[3].textContent = data.messages;
+      }
     }
 
     function logout() {
       window.location.href = 'index.html';
     }
+
+    document.querySelectorAll('.photo-card').forEach(function(card) {
+      card.addEventListener('click', function() {
+        var caption = this.querySelector('.photo-caption');
+        if (caption) {
+          alert(caption.textContent + '\n\nIn production, this would open a full-size photo viewer.');
+        }
+      });
+    });
+
+    document.querySelectorAll('.message-item').forEach(function(item) {
+      item.addEventListener('click', function() {
+        var sender = this.querySelector('.message-sender');
+        var preview = this.querySelector('.message-preview');
+        if (sender && preview) {
+          alert('From: ' + sender.textContent + '\n\n' + preview.textContent + '\n\nIn production, this would open the full message thread.');
+        }
+      });
+    });
   </script>
 </body>
 </html>
