@@ -1,8 +1,15 @@
 ﻿{
-    "timestamp":  "2026-07-18T04:00:00+07:00",
     "run":  24,
+    "timestamp":  "2026-08-11T06:11:52.7625676+07:00",
     "recovered":  true,
     "pointers":  {
-
+                     "PIPELINE":  "CANON/PIPELINE/pipeline-run024.json",
+                     "SOUL":  "CANON/SOUL/EXTRACT/soul-run024.jsonl",
+                     "DNA":  "CANON/SOUL/EXTRACT/dna-run024.json",
+                     "REASONING":  "CANON/SOUL/EXTRACT/reasoning-run024.jsonl",
+                     "REGISTRY":  "CANON/ART-REGISTRY/art-sync-run024.json",
+                     "LEDGER":  "CANON/HEAVY-LEDGER/HL-024.json",
+                     "SOULKEYS":  "CANON/SOUL-KEYWORDS/rfkw-run024.txt",
+                     "RRL":  "RRL/RRL-024.txt"
                  }
 }

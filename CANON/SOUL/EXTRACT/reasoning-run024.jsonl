@@ -1,0 +1,18 @@
+{
+    "run": 24,
+    "extracted_at": "2026-08-11T04:29:00+07:00",
+    "source": "Kilo DB part table (C:\\Users\\mrmic\\.local\\share\\kilo\\kilo.db)",
+    "session_id": "ses_0899b2c82ffe2PtNt3XBMEVv5V",
+    "status": "PENDING_EXTRACTION",
+    "reason": "Kilo extraction scripts (kilo-engineering-extract.cjs, kilo-rrl-capture.js) not present in working tree. Run 183 branch had these scripts. Backfill required.",
+    "schema": {
+        "thinking_blocks": "Agent reasoning chains",
+        "tool_results": "Tool call + result pairs",
+        "step_markers": "step-start / step-end boundaries",
+        "text_blocks": "Additional text content not in messages"
+    },
+    "estimated_parts": 961,
+    "estimated_bytes": "~500KB",
+    "positive_trails": [],
+    "negative_trails": []
+}

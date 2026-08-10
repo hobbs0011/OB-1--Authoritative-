@@ -1,0 +1,164 @@
+﻿[
+    {
+        "turn_id":  "soul-1",
+        "role":  "user",
+        "text":  "# /reincarnateRise â€” v7.0 ROMAN RISE\\n\\n**OB1 = AUDITOR. Reads what DEATH wrote. Never auto-fixes. Never executes production code.**\\n\\n**Canonical contract:** `CANON/SYSTEM/REINCARNATION-CONTRACT.md`\\n**Run number authority:** `git log --oneline --grep \\",
+        "char_count":  257
+    },
+    {
+        "turn_id":  "soul-12",
+        "role":  "user",
+        "text":  "comeplete open actions, dont break anything",
+        "char_count":  43
+    },
+    {
+        "turn_id":  "soul-23",
+        "role":  "user",
+        "text":  "on boot there seems to be 2 obis talking at once, and some lag, can you find edgecases, test with our test suite, and improve the test suite while you are at it",
+        "char_count":  160
+    },
+    {
+        "turn_id":  "soul-44",
+        "role":  "user",
+        "text":  "continue deploy, then rigorously test again\\n\\nbut first do some reading and updating to /dnaregistry\\n\\nrun a scouting mission to find and consolidate all development findings in regards to student portal and magic chat",
+        "char_count":  220
+    },
+    {
+        "turn_id":  "soul-51",
+        "role":  "user",
+        "text":  "deploy along with /reincarnatedeath",
+        "char_count":  35
+    },
+    {
+        "turn_id":  "soul-54",
+        "role":  "user",
+        "text":  "no, you have cloudeflare token, locate it, scouting mission",
+        "char_count":  59
+    },
+    {
+        "turn_id":  "soul-56",
+        "role":  "user",
+        "text":  "continue",
+        "char_count":  8
+    },
+    {
+        "turn_id":  "soul-57",
+        "role":  "user",
+        "text":  "continue",
+        "char_count":  8
+    },
+    {
+        "turn_id":  "soul-59",
+        "role":  "user",
+        "text":  "Continue if you have next steps, or stop and ask for clarification if you are unsure how to proceed.",
+        "char_count":  100
+    },
+    {
+        "turn_id":  "soul-63",
+        "role":  "user",
+        "text":  "what? did you find/restore the github and cloudflare tokens or not?",
+        "char_count":  67
+    },
+    {
+        "turn_id":  "soul-65",
+        "role":  "user",
+        "text":  "just fucking tell me if it worked or not",
+        "char_count":  40
+    },
+    {
+        "turn_id":  "soul-67",
+        "role":  "user",
+        "text":  "well tell me how we restore you to be able to do that, because you could before.",
+        "char_count":  80
+    },
+    {
+        "turn_id":  "soul-69",
+        "role":  "user",
+        "text":  "wtf are you talking about",
+        "char_count":  25
+    },
+    {
+        "turn_id":  "soul-71",
+        "role":  "user",
+        "text":  "we are not talking about fucking deepseek keys. we are talking about cloudflare.. can you actually read the session?",
+        "char_count":  116
+    },
+    {
+        "turn_id":  "soul-73",
+        "role":  "user",
+        "text":  "give me the fucking links to get you the secrets again",
+        "char_count":  54
+    },
+    {
+        "turn_id":  "soul-75",
+        "role":  "user",
+        "text":  "okay so before I create a new cloudflare token, how the fuck have we been making edits to my cloudflare app if you dont already have it?",
+        "char_count":  136
+    },
+    {
+        "turn_id":  "soul-77",
+        "role":  "user",
+        "text":  "I dont need a fucking fresh secret you dumbass. you have been telling me I need one..",
+        "char_count":  85
+    },
+    {
+        "turn_id":  "soul-79",
+        "role":  "user",
+        "text":  "# /reincarnateDeath â€” v7.0 ROMAN DEATH\\n\\n**RRL = THE FUCKING RAW CHAT LOG. Both speakers. No filter. No summary. No agent text stripped.**\\n**If RRL is not the real transcript, every downstream stage is HOLLOW.**\\n**EXECUTION ORDER IS SACRED. DO NOT REORDER STAGES.**\\n\\n**8-Stage Chain:** RRL â†’ SOUL â†’ DNA â†’ LEDGER â†’ STARMAP â†’ SOULKEYS â†’ S2Pipeline â†’ REGISTRY_SYNC\\n**Canonical contract:** CANON/SYSTEM/REINCARNATION-CONTRACT.md\\n**Run number authority:** `git log --oneline --grep \\",
+        "char_count":  501
+    },
+    {
+        "turn_id":  "soul-87",
+        "role":  "user",
+        "text":  "/reincarnatelegacy OBI MAGIC CHAT DEVELOPMENT (Run 131/140?)",
+        "char_count":  60
+    },
+    {
+        "turn_id":  "soul-91",
+        "role":  "user",
+        "text":  "That is the name I gave you, I simply want you to find and preserve your RRL as per the command",
+        "char_count":  95
+    },
+    {
+        "turn_id":  "soul-103",
+        "role":  "user",
+        "text":  "dont create any run, just use the name I gace, ignore the brackets",
+        "char_count":  66
+    },
+    {
+        "turn_id":  "soul-104",
+        "role":  "user",
+        "text":  "dont create any run, just use the name I gave, ignore the brackets\\n\\nthis session: OBI MAGIC CHAT DEVELOPMENT",
+        "char_count":  110
+    },
+    {
+        "turn_id":  "soul-111",
+        "role":  "user",
+        "text":  "AUDIT\\n\\n\\nto prove it is the real RRL, find these exact short paragraph word for word in the RRL\\n\\n\\",
+        "char_count":  102
+    },
+    {
+        "turn_id":  "soul-116",
+        "role":  "user",
+        "text":  "go",
+        "char_count":  2
+    },
+    {
+        "turn_id":  "soul-117",
+        "role":  "user",
+        "text":  "# /phetrails â€” Pheromone Trail Extraction v2.1\\n## Roman Legion Stage III: AGMEN (Main Body) â€” PHEROMONE Broadcast\\n\\n\u003e **DOCTRINE:** \\",
+        "char_count":  139
+    },
+    {
+        "turn_id":  "soul-120",
+        "role":  "user",
+        "text":  "DO NOT WRITE OR RECORD ANYTHING UNDER ANY RUN NUMBER",
+        "char_count":  52
+    },
+    {
+        "turn_id":  "soul-123",
+        "role":  "user",
+        "text":  "keep the phetrails changew the name, and while you are at it, get a new brain",
+        "char_count":  77
+    }
+]

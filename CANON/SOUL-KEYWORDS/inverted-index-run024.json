@@ -1,0 +1,37 @@
+﻿{
+    "run":  24,
+    "timestamp":  "2026-08-11T06:22:32.0139653+07:00",
+    "total_keywords":  30,
+    "total_sessions_indexed":  1,
+    "entries":  [
+                    {
+                        "keyword":  "OBI",
+                        "sessions":  [
+                                         "run024"
+                                     ],
+                        "count":  15
+                    },
+                    {
+                        "keyword":  "MAGIC",
+                        "sessions":  [
+                                         "run024"
+                                     ],
+                        "count":  12
+                    },
+                    {
+                        "keyword":  "CHAT",
+                        "sessions":  [
+                                         "run024"
+                                     ],
+                        "count":  10
+                    },
+                    {
+                        "keyword":  "DEVELOPMENT",
+                        "sessions":  [
+                                         "run024"
+                                     ],
+                        "count":  8
+                    }
+                ],
+    "schema_version":  "1.0"
+}

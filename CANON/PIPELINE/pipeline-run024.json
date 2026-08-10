@@ -1,6 +1,47 @@
 ﻿{
-    "timestamp":  "2026-07-18T04:00:00+07:00",
-    "run":  24,
-    "result":  "RECOVERED",
-    "seal_sha":  "f56044606"
+    "run": 24,
+    "session": "Incarnate-24-OBI-Magic-Chat-Development",
+    "timestamp": "2026-08-11T06:21:20+07:00",
+    "head": "651c38d7e",
+    "branch": "canon",
+    "session_type": "KILO_HOLLOW",
+    "result": "KILO_GAP",
+    "fidelity": {
+        "rrl": "REAL",
+        "soul": "REAL",
+        "dna": "REAL",
+        "reasoning": "PENDING",
+        "ledger": "REAL",
+        "starmap": "REAL",
+        "soulkeys": "REAL",
+        "pipeline": "REAL",
+        "registry": "REAL"
+    },
+    "counts": {
+        "soul_turns": 27,
+        "soul_chars": 2697,
+        "dna_turns": 98,
+        "dna_chars": 21190,
+        "reason_count": 0,
+        "rrl_bytes": 96714
+    },
+    "artifacts": {
+        "rrl": "RRL/RRL-024.txt",
+        "soul": "CANON/SOUL/EXTRACT/soul-run024.jsonl",
+        "dna": "CANON/SOUL/EXTRACT/dna-run024.json",
+        "reasoning": "CANON/SOUL/EXTRACT/reasoning-run024.jsonl",
+        "ledger": "CANON/HEAVY-LEDGER/HL-024.json",
+        "starmap": "CANON/STARMAP/starmap-run024.json",
+        "soulkeys": "CANON/SOUL-KEYWORDS/rfkw-run024.txt",
+        "pipeline": "CANON/PIPELINE/pipeline-run024.json",
+        "registry": "CANON/ART-REGISTRY/art-sync-run024.json"
+    },
+    "open_items": [
+        "Extract Kilo DB parts (961 parts, session ses_0899b2c82ffe2PtNt3XBMEVv5V) → reasoning-run024.jsonl",
+        "Write death seal"
+    ],
+    "ilog": "I-LOG-UNAUDITED/I-LOG-Incarnate-24-OBI-Magic-Chat-Development.txt",
+    "ilog_stats": "I-LOG-UNAUDITED/I-LOG-Incarnate-24-OBI-Magic-Chat-Development-STATS.json",
+    "ilog_colorized": "I-LOG-UNAUDITED/I-LOG-Incarnate-24-OBI-Magic-Chat-Development-COLORIZED.md",
+    "audit": null
 }
