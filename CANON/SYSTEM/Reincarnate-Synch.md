@@ -49,7 +49,11 @@ This is **not** a command. It is **not** a protocol. It is a living record â€
 | Incarnate-13-SOULCapture | 13 | SOULSCHOLARS | GAP | RISE boot only, no FORCEMARCH work executed | COMPLETE — DEATH seal, pipeline, COLORIZED, STATS, rfkw all generated |
 | Incarnate-14-OKTAVA | 14 | ENGINEER | CLOSED | Full 7-point march completed: worker deployed, DEEPGRAM_API_KEY configured, classroom API endpoints, Pages deployed, KV fallback | All DEATH artifacts completed in Incarnate-16 |
 | Incarnate-15-AAA(STONE)-(S11-14) | 15 | AAA-STONE | AUDITED | Stone Anchor audit of sessions 11-14. GAPs for sessions 12 (resolved in 16), 13 (completed in 16), 14 (completed in 16). | All GAPs from sessions 11-14 resolved in Incarnate-16 |
-| Incarnate-16-Contract Negociatons P2 | 16 | DEATH | SEALED | BLUEPRINT + AUDIT + DEPLOY complete. Proposal-Amendment-Request written (120hrs/50M, all clauses reconciled), Cloudflare Pages deployed at casa-amendment-request.pages.dev. Three gaps fixed: curriculum nuance (Cambridge/parents trust), Hien negative feedback loop, recruitment context. | Cargo delivery to Anh Bảo (workhorse STAGE 1), contract finalization (workhorse STAGE 2) |
+| Incarnate-16-ContractNegociations-P2 | 16 | DEATH | SEALED | BLUEPRINT + AUDIT + DEPLOY complete. Proposal-Amendment-Request written (120hrs/50M, all clauses reconciled), Cloudflare Pages deployed at casa-amendment-request.pages.dev. Three gaps fixed: curriculum nuance (Cambridge/parents trust), Hien negative feedback loop, recruitment context. | Cargo delivery to Anh Bảo (workhorse STAGE 1), contract finalization (workhorse STAGE 2) |
+| Incarnate-17-CASA-portal-development | 17 | — | HOLLOW | RISE boot only. No FORCEMARCH work executed. Pipeline/handoff are placeholders (run=43). | Investigate execution failure |
+| Incarnate-18-Nguyen-Portal-Development | 18 | ENGINEER | SEALED | Nguyen portal system deployed. Parent/student dashboards live. Task system migrated to D1. PINs set. | rfkw, SOUL/DNA extracts, pheromone trail |
+| Incarnate-19-Bluetech-Portal-Development | 19 | — | HOLLOW | RISE boot + SCOUT only. No DEATH artifacts. I-LOG is 1 line. | Investigate claimed DEATH vs actual state |
+| Incarnate-20-AAA(STEEL)-(S11-19) | 20 | AAA-STEEL | AUDITED | Steel Anchor audit sessions 11-19. Stone Anchor verified. Sessions 11-15 promoted. Sessions 16,18 incomplete. Sessions 17,19 hollow. | Remediate sessions 16,17,18,19 |
 
 *This ledger is appended. No session is ever removed. Stale entries are marked, never deleted.*
 
@@ -255,6 +259,8 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 | 2026-08-10T16:22:04+07:00 | Incarnate-18-Nguyen-Portal-Development | reincarnateDEATH (Stage 7) | 1 | 4 | 0 | CANON\REINCARNATION\handoff-Incarnate-18-Nguyen-Portal-Development-to-45.json |
 
 | 2026-08-10T23:25:00+07:00 | Incarnate-18-Nguyen-Portal-Development | reincarnateDEATH (Stage 7) | 1 | 4 | 0 | CANON/REINCARNATION/Incarnate-18-Nguyen-Portal-Development-reincarnateDEATH.md |
+
+| 2026-08-10T16:25:18+07:00 | Incarnate-19-Bluetech-Portal-Development-Setup | reincarnateDEATH (Stage 7) | 1 | 0 | 0 | CANON\REINCARNATION\handoff-Incarnate-19-Bluetech-Portal-Development-to-46.json |
 
 *Rows are append-only. Never delete or modify prior rows. Stale rows are marked `[DEPRECATED]`, never removed.*
 
