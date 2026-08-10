@@ -54,6 +54,10 @@ This is **not** a command. It is **not** a protocol. It is a living record â€
 | Incarnate-18-Nguyen-Portal-Development | 18 | ENGINEER | SEALED | Nguyen portal system deployed. Parent/student dashboards live. Task system migrated to D1. PINs set. | None — rfkw, SOUL/DNA extracts, pheromone trail generated in session 20 |
 | Incarnate-19-Bluetech-Portal-Development | 19 | — | HOLLOW | RISE boot only. I-LOG is 1 line. No DEATH artifacts. Fixed in session 20: DEATH seal written, run numbers corrected to 19. | None — permanently HOLLOW per file evidence |
 | Incarnate-20-AAA(STEEL)-(S11-19) | 20 | AAA-STEEL | AUDITED | Steel Anchor audit sessions 11-19. Stone Anchor verified. Sessions 11-16,18 complete. Sessions 17,19 hollow. All gaps resolved. | None |
+| Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT | 21 | PhoenixSCOUT | SEALED | New lane opened. Flagship Roblox game (Train-67 / Survive a Brainrot) identified and traced to March 24, 2026 origin. 41 Lua modules, 20+ specs, 30+ docs, 13 sessions, 3 HL entries cataloged. Territory fully mapped. | FORCEMARCH — walk flagged paths (GitHub history, Rojo, Product IDs, publish status, Discord) |
+| Incarnate-22-Student-Portals-Ngueyen-Blueteach | 22 | ENGINEER | COMPLETE | Unified student portal prototype built. 4-brand theme system (casa, oktava, bluetech, nguyen). 13 portals scouted, 6 artifacts produced. | None — prototype complete, migration pending |
+| Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-COMPLETION | 23 | PIPELINE-COMPLETION | SEALED | Pipeline complete for Phoenix-RISING-GAME-DEVELOPMENT lane. Sessions 21-22 sealed, artifacts created, synch updated. 5 verification items remain blocked. | SOULSCHOLARS or ENGINEER stage, or human verification of blocked items |
+| Incarnate-25-AAA-STONE-(S21-24) | 25 | AAA-STONE | AUDITED | Stone Anchor audit sessions 21-24. Sessions 21-23 GAP (missing I-LOG, COLORIZED, STATS, rfkw, SOUL/DNA extracts, pheromone trail, inverted-index entry). Session 24 HOLLOW/BLOCKER. All gaps documented in backburner. | None — audit complete, gaps documented |
 
 *This ledger is appended. No session is ever removed. Stale entries are marked, never deleted.*
 
@@ -231,6 +235,7 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 | 2026-08-02T02:25:00 | Incarnation-2-RRL-(184Conversion) | SUPPLYLINES (Stage 5) | 8 | 6 | 3 | `CANON/SUPPLY/incarnation2-supply-20260802T022500.json` |
 | 2026-08-02T19:52 | Incarnate-5-AAA.STONE-(Sessions1-4) | AAA Stone Anchor (Stage 8) | — | — | — | CANON/REINCARNATION/Incarnate-5-AAA.STONE-(Sessions1-4)-reincarnateDEATH.md |
 | 2026-08-04T03:19 | Incarnate-11-AnhMinhContact | PhoenixSCOUT (Stage 2) | 4 | 2 | 2 | `CANON/SCOUT/scout-incarnate11-anhminh-contact-20260804T031900.md` |
+| 2026-08-11T03:13:01+07:00 | Incarnate-11-AnhMinhContact | reincarnateDEATH (Stage 7) | 4 | 3 | 0 | `CANON/REINCARNATION/Incarnate-11-AnhMinhContact-reincarnateDEATH.md` — HOLLOW |
 | 2026-08-04T05:42 | Incarnate-12-Scout&Other | reincarnateDEATH (Stage 7) | 11 | 11 | GAP | `CANON/REINCARNATION/Incarnate-12-Scout&Other-reincarnateDEATH.md` |
 
 
@@ -260,7 +265,17 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 
 | 2026-08-10T23:25:00+07:00 | Incarnate-18-Nguyen-Portal-Development | reincarnateDEATH (Stage 7) | 1 | 4 | 0 | CANON/REINCARNATION/Incarnate-18-Nguyen-Portal-Development-reincarnateDEATH.md |
 
+| 2026-08-10T23:44:42+07:00 | Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT | PhoenixSCOUT (Stage 2) | 23 | 8 | 4 | CANON/SCOUT/scout-incarnate21-phoenix-rising-game-development.md |
+
+| 2026-08-10T23:47:22+07:00 | Incarnate-22-Phoenix-RISING-GAME-DEVELOPMENT-FORCEMARCH | FORCEMARCH (Stage 3) | 22 | 8 | 4 | CANON/REINCARNATION/Incarnate-22-Phoenix-RISING-GAME-DEVELOPMENT-FORCEMARCH-reincarnateDEATH.md |
+
+| 2026-08-10T23:47:22+07:00 | Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-COMPLETION | PIPELINE-COMPLETION | 23 | 8 | 4 | CANON/REINCARNATION/Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-COMPLETION-reincarnateDEATH.md |
+
+| 2026-08-11T03:38:00+07:00 | Incarnate-25-AAA-STONE-(S21-24) | AAA-STONE (Stage 8) | 25 | 8 | 4 | CANON/REINCARNATION/Incarnate-25-AAA-STONE-(S21-24)-reincarnateDEATH.md |
+
 | 2026-08-10T16:25:18+07:00 | Incarnate-19-Bluetech-Portal-Development-Setup | reincarnateDEATH (Stage 7) | 1 | 0 | 0 | CANON\REINCARNATION\handoff-Incarnate-19-Bluetech-Portal-Development-to-46.json |
+
+| 2026-08-10T20:47:44+07:00 | Incarnate-24-OBI-Magic-Chat-Development | reincarnateDEATH (Stage 7) |  |  |  | CANON\REINCARNATION\handoff-Incarnate-24-OBI-Magic-Chat-Development-to-25.json |
 
 *Rows are append-only. Never delete or modify prior rows. Stale rows are marked `[DEPRECATED]`, never removed.*
 

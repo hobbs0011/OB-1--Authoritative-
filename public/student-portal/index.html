@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta theme-color content="#0f0f1a">
+  <title>Student Portal | Natural English Training</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/theme.css">
+</head>
+<body>
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-logo" id="portalLogo">P</div>
+        <h2 id="portalTitle">Student Portal</h2>
+        <p id="portalSubtitle">Natural English Training</p>
+      </div>
+
+      <form id="loginForm" autocomplete="off">
+        <div class="field" id="studentCodeField" style="display:none;">
+          <label for="studentCode">Student Code</label>
+          <input type="text" id="studentCode" placeholder="e.g. CASA-2026-001">
+          <div class="login-error" id="codeError"></div>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter your password">
+          <div class="login-error" id="pwdError"></div>
+        </div>
+
+        <button type="submit" class="btn-primary" id="loginBtn">
+          <span id="btnText">Enter Portal</span>
+        </button>
+      </form>
+
+      <div class="login-error" id="loginError"></div>
+
+      <div class="login-header" style="margin-top:24px; margin-bottom:0;">
+        <p id="portalHint" style="font-size:0.8rem; color:var(--muted);"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const PORTALS = {
+      casa: {
+        title: 'CASA English',
+        subtitle: 'Student Portal',
+        logo: 'C',
+        theme: 'casa',
+        password: 'CASA2026',
+        codes: ['CASA-2026-001', 'CASA-2026-002', 'CASA-2026-003'],
+        dest: '/casa-login/dashboard.html',
+        lang: 'en',
+        hint: 'Demo: CASA-2026-001 / CASA2026'
+      },
+      oktava: {
+        title: 'Oktava English Class',
+        subtitle: 'Natural English Training',
+        logo: 'O',
+        theme: 'oktava',
+        password: 'KISS2026',
+        codes: ['Oktava English Class'],
+        dest: 'classroom.html',
+        lang: 'en',
+        hint: 'Class code: Oktava English Class / KISS2026'
+      },
+      bluetech: {
+        title: 'BLUETECH PORTAL',
+        subtitle: 'Staff Development & Progress Tracking',
+        logo: 'B',
+        theme: 'bluetech',
+        password: null,
+        dest: '/bluetech-login/',
+        lang: 'en',
+        hint: 'Employee / Teacher / Admin PIN access'
+      },
+      nguyen: {
+        title: 'Nguyen Family Portal',
+        subtitle: 'English + Career Progress Tracker',
+        logo: 'N',
+        theme: 'nguyen',
+        password: null,
+        dest: '/nguyen-login/',
+        lang: 'en',
+        hint: 'Parent / Student PIN access'
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const portalKey = (params.get('portal') || params.get('brand') || '').toLowerCase();
+    const portal = PORTALS[portalKey] || null;
+
+    document.getElementById('portalTitle').textContent = portal ? portal.title : 'Student Portal';
+    document.getElementById('portalSubtitle').textContent = portal ? portal.subtitle : 'Natural English Training';
+    document.getElementById('portalLogo').textContent = portal ? portal.logo : 'P';
+    document.getElementById('portalHint').textContent = portal ? portal.hint : '';
+
+    if (portal) {
+      document.body.setAttribute('data-theme', portal.theme);
+      document.documentElement.setAttribute('lang', portal.lang);
+    }
+
+    const codeField = document.getElementById('studentCodeField');
+    const passwordInput = document.getElementById('password');
+
+    if (portal && portal.codes && portal.codes.length === 1 && portal.codes[0] === 'Oktava English Class') {
+      codeField.style.display = 'none';
+      passwordInput.placeholder = 'Enter class password';
+    } else if (portal && portal.codes && portal.codes.length > 0) {
+      codeField.style.display = 'block';
+    }
+
+    if (portal && !portal.password) {
+      passwordInput.parentElement.style.display = 'none';
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const errEl = document.getElementById('loginError');
+      const pwdErr = document.getElementById('pwdError');
+      const codeErr = document.getElementById('codeError');
+      errEl.textContent = '';
+      pwdErr.textContent = '';
+      codeErr.textContent = '';
+
+      const pwd = passwordInput.value;
+      const code = document.getElementById('studentCode').value.trim();
+
+      if (portal && portal.password) {
+        if (portal.codes && portal.codes.length > 0) {
+          const codeOk = portal.codes.includes(code);
+          if (!codeOk) {
+            codeErr.textContent = 'Invalid code.';
+            return;
+          }
+        }
+        if (pwd !== portal.password) {
+          pwdErr.textContent = 'Incorrect password. Try again.';
+          return;
+        }
+        window.location.href = portal.dest + (portal.dest.includes('?') ? '&' : '?') + 'student=' + encodeURIComponent(code || 'Student') + '&name=' + encodeURIComponent('Student');
+      } else if (portal && !portal.password) {
+        window.location.href = portal.dest;
+      } else {
+        errEl.textContent = 'Unknown portal. Use ?portal=casa|oktava|bluetech|nguyen';
+      }
+    });
+
+    document.getElementById('password').addEventListener('input', function() {
+      document.getElementById('pwdError').textContent = '';
+    });
+    document.getElementById('studentCode').addEventListener('input', function() {
+      document.getElementById('codeError').textContent = '';
+    });
+  </script>
+</body>
+</html>

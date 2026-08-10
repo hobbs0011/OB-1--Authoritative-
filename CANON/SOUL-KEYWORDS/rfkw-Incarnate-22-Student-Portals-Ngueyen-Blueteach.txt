@@ -1,0 +1,59 @@
+student portal
+unified prototype
+theme system
+CSS variables
+brand switching
+OKTAVA
+CASA
+Nguyen
+Bluetech
+task API
+practice log
+progress tracking
+daily work log
+login router
+portal consolidation
+theme.css
+site.css
+app.js
+student-portal
+public/student-portal
+data-theme
+portal=query param
+single entry point
+legacy portals
+component reuse
+responsive design
+dark theme
+purple gold
+blue cyan
+gold wood
+Playfair Display
+Orbitron
+Rajdhani
+Inter
+Outfit
+/api/tasks/current
+/api/tasks/log
+/api/practice
+localStorage
+session management
+logout
+branding
+welcome banner
+topbar
+card layout
+grid layout
+empty state
+escapeHtml
+getWeekId
+requireAuth
+loadTasks
+completeTask
+saveWorkLog
+initTheme
+initBranding
+PORTAL_CONFIG
+getPortal
+getStudentId
+getStudentName

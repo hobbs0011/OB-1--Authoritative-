@@ -1,4 +1,4 @@
-{
+﻿{
     "/api/magic-chat":  {
                             "run":  186,
                             "category":  "obi_magic_chat",
@@ -703,5 +703,750 @@
                                         "run":  "Incarnate-11-AnhMinhContact",
                                         "category":  "empty_session",
                                         "weight":  1
-                                    }
+                                    },
+    "ContractNegociations":  {
+                                 "run":  "Incarnate-12-ContractNegociations",
+                                 "category":  "extracted",
+                                 "weight":  1
+                             },
+    "Incarnate":  {
+                      "run":  "Incarnate-12-ContractNegociations",
+                      "category":  "extracted",
+                      "weight":  1
+                  },
+    "PhoenixScout":  {
+                         "run":  "Incarnate-12-ContractNegociations",
+                         "category":  "extracted",
+                         "weight":  1
+                     },
+    "deep":  {
+                 "run":  "Incarnate-12-ContractNegociations",
+                 "category":  "extracted",
+                 "weight":  1
+             },
+    "dive":  {
+                 "run":  "Incarnate-12-ContractNegociations",
+                 "category":  "extracted",
+                 "weight":  1
+             },
+    "into":  {
+                 "run":  "Incarnate-12-ContractNegociations",
+                 "category":  "extracted",
+                 "weight":  1
+             },
+    "offerings":  {
+                      "run":  "Incarnate-12-ContractNegociations",
+                      "category":  "extracted",
+                      "weight":  1
+                  },
+    "SOULaudit":  {
+                      "run":  "Incarnate-12-ContractNegociations",
+                      "category":  "extracted",
+                      "weight":  1
+                  },
+    "phermone":  {
+                     "run":  "Incarnate-12-ContractNegociations",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "mapping":  {
+                    "run":  "Incarnate-12-ContractNegociations",
+                    "category":  "extracted",
+                    "weight":  1
+                },
+    "Run":  {
+                "run":  "Incarnate-12-ContractNegociations",
+                "category":  "extracted",
+                "weight":  1
+            },
+    "Incarnation":  {
+                        "run":  "Incarnate-12-ContractNegociations",
+                        "category":  "extracted",
+                        "weight":  1
+                    },
+    "REINCARNATION":  {
+                          "run":  "Incarnate-12-ContractNegociations",
+                          "category":  "extracted",
+                          "weight":  1
+                      },
+    "AAA":  {
+                "run":  "Incarnate-12-ContractNegociations",
+                "category":  "extracted",
+                "weight":  1
+            },
+    "STEEL":  {
+                  "run":  "Incarnate-12-ContractNegociations",
+                  "category":  "extracted",
+                  "weight":  1
+              },
+    "Sessions":  {
+                     "run":  "Incarnate-12-ContractNegociations",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "9":  {
+              "run":  "Incarnate-12-ContractNegociations",
+              "category":  "extracted",
+              "weight":  1
+          },
+    "FINAL":  {
+                  "run":  "Incarnate-12-ContractNegociations",
+                  "category":  "extracted",
+                  "weight":  1
+              },
+    "DNA":  {
+                "run":  "Incarnate-12-ContractNegociations",
+                "category":  "extracted",
+                "weight":  1
+            },
+    "REASON":  {
+                   "run":  "Incarnate-12-ContractNegociations",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "RRL":  {
+                "run":  "Incarnate-13-SOULCapture",
+                "category":  "extracted",
+                "weight":  1
+            },
+    "pheromone":  {
+                      "run":  "Incarnate-13-SOULCapture",
+                      "category":  "extracted",
+                      "weight":  1
+                  },
+    "reincarnate":  {
+                        "run":  "Incarnate-13-SOULCapture",
+                        "category":  "extracted",
+                        "weight":  1
+                    },
+    "Phase":  {
+                  "run":  "Incarnate-13-SOULCapture",
+                  "category":  "extracted",
+                  "weight":  1
+              },
+    "GOSPEL":  {
+                   "run":  "Incarnate-13-SOULCapture",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "capture":  {
+                    "run":  "Incarnate-13-SOULCapture",
+                    "category":  "extracted",
+                    "weight":  1
+                },
+    "clean":  {
+                  "run":  "Incarnate-13-SOULCapture",
+                  "category":  "extracted",
+                  "weight":  1
+              },
+    "SOULCapture":  {
+                        "run":  "Incarnate-13-SOULCapture",
+                        "category":  "extracted",
+                        "weight":  1
+                    },
+    "hardening":  {
+                      "run":  "Incarnate-13-SOULCapture",
+                      "category":  "extracted",
+                      "weight":  1
+                  },
+    "Oktava":  {
+                   "run":  "Incarnate-13-SOULCapture",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "client":  {
+                   "run":  "Incarnate-13-SOULCapture",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "deposition":  {
+                       "run":  "Incarnate-13-SOULCapture",
+                       "category":  "extracted",
+                       "weight":  1
+                   },
+    "ant-colony":  {
+                       "run":  "Incarnate-13-SOULCapture",
+                       "category":  "extracted",
+                       "weight":  1
+                   },
+    "reflex":  {
+                   "run":  "Incarnate-13-SOULCapture",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "OB":  {
+               "run":  "Incarnate-13-SOULCapture",
+               "category":  "extracted",
+               "weight":  1
+           },
+    "System":  {
+                   "run":  "Incarnate-13-SOULCapture",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "trail":  {
+                  "run":  "Incarnate-13-SOULCapture",
+                  "category":  "extracted",
+                  "weight":  1
+              },
+    "without":  {
+                    "run":  "Incarnate-13-SOULCapture",
+                    "category":  "extracted",
+                    "weight":  1
+                },
+    "prompting":  {
+                      "run":  "Incarnate-13-SOULCapture",
+                      "category":  "extracted",
+                      "weight":  1
+                  },
+    "f892cc2d8":  {
+                      "run":  "Incarnate-13-SOULCapture",
+                      "category":  "extracted",
+                      "weight":  1
+                  },
+    "STATS":  {
+                  "run":  "Incarnate-13-SOULCapture",
+                  "category":  "extracted",
+                  "weight":  1
+              },
+    "COLORIZED":  {
+                      "run":  "Incarnate-13-SOULCapture",
+                      "category":  "extracted",
+                      "weight":  1
+                  },
+    "VALID":  {
+                  "run":  "Incarnate-13-SOULCapture",
+                  "category":  "extracted",
+                  "weight":  1
+              },
+    "discrepancy":  {
+                        "run":  "Incarnate-13-SOULCapture",
+                        "category":  "extracted",
+                        "weight":  1
+                    },
+    "KiloFreeDeepDive":  {
+                             "run":  "Incarnate-13-SOULCapture",
+                             "category":  "extracted",
+                             "weight":  1
+                         },
+    "renamed":  {
+                    "run":  "Incarnate-13-SOULCapture",
+                    "category":  "extracted",
+                    "weight":  1
+                },
+    "COLD-START-BOOT":  {
+                            "run":  "Incarnate-13-SOULCapture",
+                            "category":  "extracted",
+                            "weight":  1
+                        },
+    "SOULKEYS":  {
+                     "run":  "Incarnate-13-SOULCapture",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "S2PIPELINE":  {
+                       "run":  "Incarnate-13-SOULCapture",
+                       "category":  "extracted",
+                       "weight":  1
+                   },
+    "REGISTRY_SYNC":  {
+                          "run":  "Incarnate-13-SOULCapture",
+                          "category":  "extracted",
+                          "weight":  1
+                      },
+    "phetrail":  {
+                     "run":  "Incarnate-13-SOULCapture",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "inferred":  {
+                     "run":  "Incarnate-13-SOULCapture",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "SOV100":  {
+                   "run":  "Incarnate-13-SOULCapture",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "deploy":  {
+                   "run":  "Incarnate-14-OKTAVA",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "Pages":  {
+                  "run":  "Incarnate-14-OKTAVA",
+                  "category":  "extracted",
+                  "weight":  1
+              },
+    "KV":  {
+               "run":  "Incarnate-14-OKTAVA",
+               "category":  "extracted",
+               "weight":  1
+           },
+    "classroom":  {
+                      "run":  "Incarnate-14-OKTAVA",
+                      "category":  "extracted",
+                      "weight":  1
+                  },
+    "API":  {
+                "run":  "Incarnate-14-OKTAVA",
+                "category":  "extracted",
+                "weight":  1
+            },
+    "FORCEMARCH":  {
+                       "run":  "Incarnate-14-OKTAVA",
+                       "category":  "extracted",
+                       "weight":  1
+                   },
+    "wrangler":  {
+                     "run":  "Incarnate-14-OKTAVA",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "NET":  {
+                "run":  "Incarnate-14-OKTAVA",
+                "category":  "extracted",
+                "weight":  1
+            },
+    "SOULSCHOLARS":  {
+                         "run":  "Incarnate-14-OKTAVA",
+                         "category":  "extracted",
+                         "weight":  1
+                     },
+    "SUPPLYLINES":  {
+                        "run":  "Incarnate-14-OKTAVA",
+                        "category":  "extracted",
+                        "weight":  1
+                    },
+    "ENGINEER":  {
+                     "run":  "Incarnate-14-OKTAVA",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "portal":  {
+                   "run":  "Incarnate-14-OKTAVA",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "endpoint":  {
+                     "run":  "Incarnate-14-OKTAVA",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "health":  {
+                   "run":  "Incarnate-14-OKTAVA",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "OAuth":  {
+                  "run":  "Incarnate-14-OKTAVA",
+                  "category":  "extracted",
+                  "weight":  1
+              },
+    "secret":  {
+                   "run":  "Incarnate-14-OKTAVA",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "production":  {
+                       "run":  "Incarnate-14-OKTAVA",
+                       "category":  "extracted",
+                       "weight":  1
+                   },
+    "CASE-STUDY":  {
+                       "run":  "Incarnate-14-OKTAVA",
+                       "category":  "extracted",
+                       "weight":  1
+                   },
+    "wrangler.toml":  {
+                          "run":  "Incarnate-14-OKTAVA",
+                          "category":  "extracted",
+                          "weight":  1
+                      },
+    "account_id":  {
+                       "run":  "Incarnate-14-OKTAVA",
+                       "category":  "extracted",
+                       "weight":  1
+                   },
+    "URL":  {
+                "run":  "Incarnate-14-OKTAVA",
+                "category":  "extracted",
+                "weight":  1
+            },
+    "transcript":  {
+                       "run":  "Incarnate-14-OKTAVA",
+                       "category":  "extracted",
+                       "weight":  1
+                   },
+    "classroom.html":  {
+                           "run":  "Incarnate-14-OKTAVA",
+                           "category":  "extracted",
+                           "weight":  1
+                       },
+    "index.js":  {
+                     "run":  "Incarnate-14-OKTAVA",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "CORS":  {
+                 "run":  "Incarnate-14-OKTAVA",
+                 "category":  "extracted",
+                 "weight":  1
+             },
+    "cross-origin":  {
+                         "run":  "Incarnate-14-OKTAVA",
+                         "category":  "extracted",
+                         "weight":  1
+                     },
+    "SPA":  {
+                "run":  "Incarnate-14-OKTAVA",
+                "category":  "extracted",
+                "weight":  1
+            },
+    "static":  {
+                   "run":  "Incarnate-14-OKTAVA",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "assets":  {
+                   "run":  "Incarnate-14-OKTAVA",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "validation":  {
+                       "run":  "Incarnate-14-OKTAVA",
+                       "category":  "extracted",
+                       "weight":  1
+                   },
+    "PASS":  {
+                 "run":  "Incarnate-14-OKTAVA",
+                 "category":  "extracted",
+                 "weight":  1
+             },
+    "authentication":  {
+                           "run":  "Incarnate-14-OKTAVA",
+                           "category":  "extracted",
+                           "weight":  1
+                       },
+    "OAuth Token":  {
+                        "run":  "Incarnate-14-OKTAVA",
+                        "category":  "extracted",
+                        "weight":  1
+                    },
+    "mrmichaelhobbs123":  {
+                              "run":  "Incarnate-14-OKTAVA",
+                              "category":  "extracted",
+                              "weight":  1
+                          },
+    "rate-limited":  {
+                         "run":  "Incarnate-14-OKTAVA",
+                         "category":  "extracted",
+                         "weight":  1
+                     },
+    "kvGet":  {
+                  "run":  "Incarnate-14-OKTAVA",
+                  "category":  "extracted",
+                  "weight":  1
+              },
+    "kvPut":  {
+                  "run":  "Incarnate-14-OKTAVA",
+                  "category":  "extracted",
+                  "weight":  1
+              },
+    "offline":  {
+                    "run":  "Incarnate-14-OKTAVA",
+                    "category":  "extracted",
+                    "weight":  1
+                },
+    "fallback":  {
+                     "run":  "Incarnate-14-OKTAVA",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "Pages production":  {
+                             "run":  "Incarnate-14-OKTAVA",
+                             "category":  "extracted",
+                             "weight":  1
+                         },
+    "promotion":  {
+                      "run":  "Incarnate-14-OKTAVA",
+                      "category":  "extracted",
+                      "weight":  1
+                  },
+    "DNS propagation":  {
+                            "run":  "Incarnate-14-OKTAVA",
+                            "category":  "extracted",
+                            "weight":  1
+                        },
+    "Nguyen":  {
+                   "run":  "Incarnate-18-Nguyen-Portal-Development",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "parent":  {
+                   "run":  "Incarnate-18-Nguyen-Portal-Development",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "Quan":  {
+                 "run":  "Incarnate-18-Nguyen-Portal-Development",
+                 "category":  "extracted",
+                 "weight":  1
+             },
+    "Quang":  {
+                  "run":  "Incarnate-18-Nguyen-Portal-Development",
+                  "category":  "extracted",
+                  "weight":  1
+              },
+    "task":  {
+                 "run":  "Incarnate-18-Nguyen-Portal-Development",
+                 "category":  "extracted",
+                 "weight":  1
+             },
+    "D1":  {
+               "run":  "Incarnate-18-Nguyen-Portal-Development",
+               "category":  "extracted",
+               "weight":  1
+           },
+    "PIN":  {
+                "run":  "Incarnate-18-Nguyen-Portal-Development",
+                "category":  "extracted",
+                "weight":  1
+            },
+    "tasks":  {
+                  "run":  "Incarnate-18-Nguyen-Portal-Development",
+                  "category":  "extracted",
+                  "weight":  1
+              },
+    "daily log":  {
+                      "run":  "Incarnate-18-Nguyen-Portal-Development",
+                      "category":  "extracted",
+                      "weight":  1
+                  },
+    "weekly completion":  {
+                              "run":  "Incarnate-18-Nguyen-Portal-Development",
+                              "category":  "extracted",
+                              "weight":  1
+                          },
+    "task status":  {
+                        "run":  "Incarnate-18-Nguyen-Portal-Development",
+                        "category":  "extracted",
+                        "weight":  1
+                    },
+    "totalMinutesLogged":  {
+                               "run":  "Incarnate-18-Nguyen-Portal-Development",
+                               "category":  "extracted",
+                               "weight":  1
+                           },
+    "getStudentTasksWithLogs":  {
+                                    "run":  "Incarnate-18-Nguyen-Portal-Development",
+                                    "category":  "extracted",
+                                    "weight":  1
+                                },
+    "parent PIN auth":  {
+                            "run":  "Incarnate-18-Nguyen-Portal-Development",
+                            "category":  "extracted",
+                            "weight":  1
+                        },
+    "route guard":  {
+                        "run":  "Incarnate-18-Nguyen-Portal-Development",
+                        "category":  "extracted",
+                        "weight":  1
+                    },
+    "input validation":  {
+                             "run":  "Incarnate-18-Nguyen-Portal-Development",
+                             "category":  "extracted",
+                             "weight":  1
+                         },
+    "minutes bounds":  {
+                           "run":  "Incarnate-18-Nguyen-Portal-Development",
+                           "category":  "extracted",
+                           "weight":  1
+                       },
+    "nguyen-login":  {
+                         "run":  "Incarnate-18-Nguyen-Portal-Development",
+                         "category":  "extracted",
+                         "weight":  1
+                     },
+    "nguyen-parent":  {
+                          "run":  "Incarnate-18-Nguyen-Portal-Development",
+                          "category":  "extracted",
+                          "weight":  1
+                      },
+    "nguyen-quang":  {
+                         "run":  "Incarnate-18-Nguyen-Portal-Development",
+                         "category":  "extracted",
+                         "weight":  1
+                     },
+    "nguyen-quan":  {
+                        "run":  "Incarnate-18-Nguyen-Portal-Development",
+                        "category":  "extracted",
+                        "weight":  1
+                    },
+    "KV quota":  {
+                     "run":  "Incarnate-18-Nguyen-Portal-Development",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "schema":  {
+                   "run":  "Incarnate-18-Nguyen-Portal-Development",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "nguyen_tasks":  {
+                         "run":  "Incarnate-18-Nguyen-Portal-Development",
+                         "category":  "extracted",
+                         "weight":  1
+                     },
+    "nguyen_task_logs":  {
+                             "run":  "Incarnate-18-Nguyen-Portal-Development",
+                             "category":  "extracted",
+                             "weight":  1
+                         },
+    "nguyen_task_summaries":  {
+                                  "run":  "Incarnate-18-Nguyen-Portal-Development",
+                                  "category":  "extracted",
+                                  "weight":  1
+                              },
+    "settings":  {
+                     "run":  "Incarnate-18-Nguyen-Portal-Development",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "PIN 9999":  {
+                     "run":  "Incarnate-18-Nguyen-Portal-Development",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "PIN 1111":  {
+                     "run":  "Incarnate-18-Nguyen-Portal-Development",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "PIN 2222":  {
+                     "run":  "Incarnate-18-Nguyen-Portal-Development",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "placeholder tasks":  {
+                              "run":  "Incarnate-18-Nguyen-Portal-Development",
+                              "category":  "extracted",
+                              "weight":  1
+                          },
+    "LinkedIn":  {
+                     "run":  "Incarnate-18-Nguyen-Portal-Development",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "CV":  {
+               "run":  "Incarnate-18-Nguyen-Portal-Development",
+               "category":  "extracted",
+               "weight":  1
+           },
+    "Facebook":  {
+                     "run":  "Incarnate-18-Nguyen-Portal-Development",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "3D modeling":  {
+                        "run":  "Incarnate-18-Nguyen-Portal-Development",
+                        "category":  "extracted",
+                        "weight":  1
+                    },
+    "presentation":  {
+                         "run":  "Incarnate-18-Nguyen-Portal-Development",
+                         "category":  "extracted",
+                         "weight":  1
+                     },
+    "S/SH phonics":  {
+                         "run":  "Incarnate-18-Nguyen-Portal-Development",
+                         "category":  "extracted",
+                         "weight":  1
+                     },
+    "shadowing":  {
+                      "run":  "Incarnate-18-Nguyen-Portal-Development",
+                      "category":  "extracted",
+                      "weight":  1
+                  },
+    "university English":  {
+                               "run":  "Incarnate-18-Nguyen-Portal-Development",
+                               "category":  "extracted",
+                               "weight":  1
+                           },
+    "daily conversation":  {
+                               "run":  "Incarnate-18-Nguyen-Portal-Development",
+                               "category":  "extracted",
+                               "weight":  1
+                           },
+    "setup endpoint":  {
+                           "run":  "Incarnate-18-Nguyen-Portal-Development",
+                           "category":  "extracted",
+                           "weight":  1
+                       },
+    "initialization":  {
+                           "run":  "Incarnate-18-Nguyen-Portal-Development",
+                           "category":  "extracted",
+                           "weight":  1
+                       },
+    "endpoints verified":  {
+                               "run":  "Incarnate-18-Nguyen-Portal-Development",
+                               "category":  "extracted",
+                               "weight":  1
+                           },
+    "live":  {
+                 "run":  "Incarnate-18-Nguyen-Portal-Development",
+                 "category":  "extracted",
+                 "weight":  1
+             },
+    "student portal":  {
+                            "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
+                            "category":  "extracted",
+                            "weight":  1
+                        },
+    "unified prototype":  {
+                              "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
+                              "category":  "extracted",
+                              "weight":  1
+                          },
+    "theme system":  {
+                         "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
+                         "category":  "extracted",
+                         "weight":  1
+                     },
+    "CSS variables":  {
+                          "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
+                          "category":  "extracted",
+                          "weight":  1
+                      },
+    "brand switching":  {
+                            "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
+                            "category":  "extracted",
+                            "weight":  1
+                        },
+    "portal consolidation":  {
+                                 "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
+                                 "category":  "extracted",
+                                 "weight":  1
+                             },
+    "CASA":  {
+                 "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
+                 "category":  "extracted",
+                 "weight":  1
+             },
+    "Oktava":  {
+                   "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
+                   "category":  "extracted",
+                   "weight":  1
+               },
+    "Bluetech":  {
+                     "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
+                     "category":  "extracted",
+                     "weight":  1
+                 },
+    "Nguyen":  {
+                    "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
+                    "category":  "extracted",
+                    "weight":  1
+                }
 }

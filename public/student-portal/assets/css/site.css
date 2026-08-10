@@ -1,0 +1,55 @@
+/* Shared component styles for the unified student portal */
+
+.skip-link {
+  position: absolute; top: -100%; left: 16px; z-index: 999;
+  padding: 10px 20px; border-radius: 10px; background: var(--purple);
+  color: #fff; font-weight: 700; text-decoration: none; transition: top 0.2s;
+}
+.skip-link:focus { top: 16px; }
+
+/* ── Student selector (parent/multi-student views) ── */
+.student-selector { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+.student-btn {
+  padding: 10px 20px; border-radius: var(--radius-sm);
+  border: 1px solid var(--panel-border); background: rgba(255, 255, 255, 0.03);
+  color: var(--muted); font-family: var(--font-display); font-weight: 600;
+  font-size: 0.9rem; cursor: pointer; transition: all 0.2s;
+}
+.student-btn.active { background: var(--purple); color: #fff; border-color: var(--purple); }
+.student-btn:hover:not(.active) { border-color: rgba(168, 85, 247, 0.35); color: var(--text); }
+
+/* ── Work log form ── */
+.wl-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.wl-row select, .wl-row input {
+  padding: 10px 12px; border-radius: 10px; border: 1px solid var(--panel-border);
+  background: rgba(255, 255, 255, 0.04); color: var(--text);
+  font-family: var(--font-body); font-size: 0.9rem;
+}
+.wl-row input[type="number"] { width: 90px; }
+.wl-btn {
+  padding: 10px 18px; border-radius: 8px; border: none;
+  background: linear-gradient(135deg, var(--purple), var(--gold));
+  color: #fff; font-family: var(--font-display); font-size: 0.8rem;
+  font-weight: 700; letter-spacing: 0.05em; cursor: pointer; text-transform: uppercase;
+}
+.wl-btn:hover { opacity: 0.9; }
+.wl-status { font-size: 0.8rem; color: var(--muted); margin-bottom: 8px; min-height: 18px; }
+.wl-textarea {
+  width: 100%; padding: 10px 12px; border-radius: 10px;
+  border: 1px solid var(--panel-border); background: rgba(255, 255, 255, 0.04);
+  color: var(--text); font-family: var(--font-body); font-size: 0.9rem;
+  resize: vertical; margin-bottom: 10px;
+}
+.wl-list { display: flex; flex-direction: column; gap: 8px; max-height: 320px; overflow-y: auto; }
+
+/* ── Theme: bluetech overrides ── */
+[data-theme="bluetech"] .student-btn.active { background: var(--purple); border-color: var(--purple); }
+[data-theme="bluetech"] .wl-btn { background: linear-gradient(135deg, var(--purple), var(--gold)); }
+
+/* ── Theme: nguyen overrides ── */
+[data-theme="nguyen"] .student-btn.active { background: var(--purple); border-color: var(--purple); }
+[data-theme="nguyen"] .wl-btn { background: linear-gradient(135deg, var(--purple), var(--gold)); }
+
+@media (max-width: 640px) {
+  .portal { padding: 24px 16px 60px; }
+}

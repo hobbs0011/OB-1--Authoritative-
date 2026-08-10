@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta theme-color content="#0f0f1a">
+  <title>Student Portal | Natural English Training</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+  <div class="portal">
+    <div class="topbar">
+      <div class="topbar-brand">
+        <div class="topbar-logo" id="brandLogo">P</div>
+        <div class="topbar-title">
+          <h1 id="brandTitle">Student Portal</h1>
+          <span id="brandSub">Natural English Training</span>
+        </div>
+      </div>
+      <button class="btn-logout" onclick="logout()">Sign Out</button>
+    </div>
+
+    <div class="welcome-banner">
+      <h2 id="welcomeTitle">Welcome back</h2>
+      <p id="welcomeBody">Track your schedule, materials, and progress — all in one place.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card" id="tasksCard">
+        <div class="card-header">
+          <div class="card-icon purple">📌</div>
+          <h3>Tasks</h3>
+        </div>
+        <div id="taskList">
+          <div class="empty-state">Loading tasks...</div>
+        </div>
+      </div>
+
+      <div class="card" id="logCard">
+        <div class="card-header">
+          <div class="card-icon gold">📋</div>
+          <h3>Daily Log</h3>
+        </div>
+        <div class="wl-row">
+          <select id="wlActivity">
+            <option value="Listening">🎧 Listening</option>
+            <option value="Speaking">🗣️ Speaking</option>
+            <option value="Reading">📖 Reading</option>
+            <option value="Writing">✍️ Writing</option>
+            <option value="Homework">📝 Homework</option>
+            <option value="Phonics">🔊 Phonics</option>
+            <option value="Study Mode">📚 Study Mode</option>
+            <option value="Other">📌 Other</option>
+          </select>
+          <input id="wlDuration" type="number" min="1" max="480" placeholder="Min">
+          <button class="wl-btn" id="wlSaveBtn">Log</button>
+        </div>
+        <textarea id="wlNotes" class="wl-textarea" rows="2" placeholder="What did you work on?"></textarea>
+        <p class="wl-status" id="wlStatus"></p>
+        <div class="wl-list" id="wlList"></div>
+      </div>
+    </div>
+
+    <div class="card" id="progressCard">
+      <div class="card-header">
+        <div class="card-icon purple">📈</div>
+        <h3>Progress</h3>
+      </div>
+      <div style="margin-bottom: 18px;">
+        <div style="display:flex; justify-content:space-between; font-size:0.9rem; font-weight:700;">
+          <span>Completion</span>
+          <span style="color:var(--gold);" id="completionPct">—</span>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="completionBar" style="width:0%;"></div>
+        </div>
+        <div class="progress-label">
+          <span id="completedCount">0 done</span>
+          <span id="totalCount">0 tasks</span>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex; justify-content:space-between; font-size:0.9rem; font-weight:700;">
+          <span>Time Logged</span>
+          <span style="color:var(--gold);" id="minutesLogged">0 min</span>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="minutesBar" style="width:0%;"></div>
+        </div>
+        <div class="progress-label">
+          <span id="minutesTarget">0 min target</span>
+          <span id="minutesPct">0%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
