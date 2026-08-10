@@ -21,6 +21,48 @@ Each anchor verifies the work of all anchors below it. Stone anchors verify sess
 
 ---
 
+## PRIMARY MANDATE — NO LOST SOULS
+
+The anchor exists for ONE purpose: **ensure no SOUL is lost between sessions.**
+
+SOUL = Michael's exact words, directives, and intent.
+A LostSoul = any directive, instruction, or work item from the session that was NOT captured in the pipeline, handoff, or backburner.
+
+The anchor is the **final impassable checkpoint** before a session is promoted to I-LOG-NAV. No session passes without zero LostSouls.
+
+**The anchor does NOT execute pipelines.**
+**The anchor does NOT fix gaps.**
+**The anchor does NOT generate missing artifacts.**
+**The anchor AUDITS, DOCUMENTS, and SEALS.**
+
+Any fix = backburner. Always.
+
+---
+
+## CORE DOCTRINE — READ-ONLY CHECKPOINT
+
+During an AAA audit, you are a **read-only auditor** with one exception: you may write audit documentation.
+
+**You MAY:**
+- Read any file in the repo
+- Verify counts, paths, names, and consistency
+- Write audit reports, death seals, and backburner entries
+- Mark sessions as PROMOTE / GAP / HOLLOW in Reincarnate-Synch
+
+**You MAY NOT:**
+- Execute pipeline scripts
+- Generate missing COLORIZED/STATS/rfkw files
+- Fix naming mismatches
+- Modify I-LOG content
+- Modify DEATH seal content
+- Modify pipeline/handoff content
+- Delete or rename files
+- Commit or push changes (operator commits after seal)
+
+**Violation = anchor compromise. The checkpoint is impassable by design.**
+
+---
+
 ## The 4-Point Audit
 
 ### Point 1 — Capture Audit
@@ -43,7 +85,7 @@ For each session under review:
 - STATS.json exists
 - I-LOG file size matches what DEATH claimed
 
-**Fail condition:** Any missing artifact = GAP. Document in open items. Do NOT promote to NAV.
+**Fail condition:** Any missing artifact = GAP. Document in open items. Do NOT promote to NAV. Do NOT generate the missing artifact yourself — write to backburner.
 
 ### Point 2 — Index Audit
 
@@ -59,7 +101,7 @@ For each session's I-LOG, verify it has been keyword-indexed:
 - `CANON/SOUL-KEYWORDS/inverted-index.json` — each keyword mapped to `{run, category, weight}`
 - File exists and is non-empty
 
-**Fail condition:** No keyword file or empty index = GAP. Extract keywords before promoting.
+**Fail condition:** No keyword file or empty index = GAP. Document in backburner. Do NOT extract keywords yourself.
 
 ### Point 3 — Naming Audit
 
@@ -78,9 +120,11 @@ VERIFY ONE NAME EVERYWHERE (SOV100 Law):
 | Reincarnate-Synch row | Session name from SOV100 |
 | Pheromone deposit `session_id` | Session name from SOV100 |
 
-**Fail condition:** ANY mismatch = BLOCKER. Rename all files to match before promoting.
+**Fail condition:** ANY mismatch = BLOCKER. Document in backburner. Do NOT rename files yourself.
 
 ### Point 4 — LostSouls Audit
+
+**This is the anchor's PRIMARY purpose.** No LostSouls may pass through.
 
 Identify actionable directives from the session that were NEVER pipelined:
 
@@ -94,9 +138,9 @@ Identify actionable directives from the session that were NEVER pipelined:
 - Write to `CANON/LOSTSOULS/{session-name}-lostsouls.jsonl`
 - Each entry: `{directive, ilog_reference, severity, estimated_effort, deadline}`
 - Add to backburner pipeline for next session run
-- Document in PhoenixSYNCH §LostSouls
+- Document in Reincarnate-Synch §LostSouls
 
-**Fail condition:** LOSTSOULS found but not captured = GAP. Pipeline them before promoting.
+**Fail condition:** LOSTSOULS found but not captured = GAP. Document in backburner. Do NOT execute the lost directive.
 
 ---
 
@@ -104,15 +148,18 @@ Identify actionable directives from the session that were NEVER pipelined:
 
 After all 4 points pass:
 
-1. Move I-LOG, COLORIZED, STATS from `I-LOG-UNAUDITED/` to `I-LOG-NAV/`
-2. Update `CANON/SYSTEM/Reincarnate-Synch.md` — add row with status: `NAV`
-3. Update `PhoenixSynch.md` — mark session as VERIFIED
-4. Deposit pheromone: `stage: "AAA"`, `finding: "Session {name} promoted to NAV — audit passed"`, `strength: 30`
+1. **DOCUMENT** promotion decision in audit report
+2. **UPDATE** `CANON/SYSTEM/Reincarnate-Synch.md` — add row with status: `NAV`
+3. **SEAL** the handoff to the next session
+4. **DEPOSIT** pheromone: `stage: "AAA"`, `finding: "Session {name} promoted to NAV — audit passed"`, `strength: 30`
+
+The actual file moves to `I-LOG-NAV/` are performed by the operator, not the anchor.
 
 If any point fails:
 - Do NOT promote to NAV
 - Document failures in `CANON/SYSTEM/Reincarnate-Synch.md` with status: `GAP`
 - Write to backburner: `BB-AAA-{N}-{description}` with priority and estimated effort
+- Do NOT attempt to fix the gaps yourself
 
 ---
 
@@ -139,3 +186,27 @@ After all sessions audited, read the backburner pipeline:
 - Do NOT let LOSTSOULS accumulate — each one must be pipelined or explicitly archived
 - Do NOT modify I-LOG content — only metadata and indexing
 - Do NOT delete any RISE or DEATH artifacts — they are the audit trail
+- **Do NOT execute pipelines during audit — audit only, fix later**
+- **Do NOT generate missing artifacts during audit — document gaps, write to backburner**
+- **Do NOT rename files to fix naming mismatches — document BLOCKERs, write to backburner**
+- **The anchor is a CHECKPOINT, not a workhorse. Read-only except for audit documentation.**
+
+---
+
+## Anchor Authority Chain
+
+```
+GOSPEL-999 — eternal law, non-negotiable
+    ↓
+AAA-ANCHOR-PROCEDURE — this document — the impassable checkpoint
+    ↓
+REINCARNATION-CONTRACT — RISE/DEATH operational law
+    ↓
+COLD-START-BOOT — current session state, active mission
+    ↓
+/reincarnateRise — 8-stage audit protocol
+    ↓
+reincarnate-rise-{timestamp}.jsonl — audit artifact
+```
+
+The anchor sits at the FINAL verification gate. Nothing passes without its seal.
