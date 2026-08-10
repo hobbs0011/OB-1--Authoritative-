@@ -21,6 +21,45 @@ Each anchor verifies the work of all anchors below it. Stone anchors verify sess
 
 ---
 
+## MANDATE — PIPELINE EXECUTES, ANCHOR SECURES
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  PIPELINE (CANON/SCRIPTS/workhorse-pipeline.ps1)                           │
+│  Role: EXECUTE work                                                         │
+│  - Colorize I-LOGs                                                          │
+│  - Extract keywords                                                         │
+│  - Extract LostSouls                                                         │
+│  - Build pipeline JSON + handoff JSON                                       │
+│  - Update inverted index                                                    │
+│  - Promote artifacts to I-LOG-NAV/                                          │
+│                                                                             │
+│  The pipeline writes artifacts. It does NOT write audit reports.            │
+│  The pipeline does NOT seal. It does NOT audit.                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  ANCHOR (AAA session — e.g. Incarnate-5-AAA.STONE-(Sessions1-4))           │
+│  Role: AUDIT, DOCUMENT, SEAL                                                │
+│  - Verify pipeline outputs are complete and consistent                       │
+│  - Run 4-point audit (Capture / Index / Naming / LostSouls)                 │
+│  - Write audit report and death seal                                        │
+│  - Document gaps without fixing them                                         │
+│  - Seal the checkpoint                                                      │
+│                                                                             │
+│  The anchor is READ-ONLY. It does NOT execute pipeline scripts.             │
+│  The anchor does NOT generate missing artifacts.                             │
+│  Any fix required = backburner entry. Always.                               │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**The anchor NEVER executes the pipeline. The pipeline NEVER writes an audit report.**
+**The anchor SECURES the pipeline output. It verifies. It seals. It does not run.**
+
+If an agent is doing both, the system has collapsed. Stop. Reassign.
+
+---
+
 ## PRIMARY MANDATE — NO LOST SOULS
 
 The anchor exists for ONE purpose: **ensure no SOUL is lost between sessions.**
@@ -36,6 +75,23 @@ The anchor is the **final impassable checkpoint** before a session is promoted t
 **The anchor AUDITS, DOCUMENTS, and SEALS.**
 
 Any fix = backburner. Always.
+
+---
+
+## SCS CHECKPOINT CLOSURE RULE
+
+Every SCS checkpoint must end in exactly one of two states:
+
+1. **EXECUTION** — The work item was performed: code written, file created, deployment made, directive fulfilled
+2. **PIPELINE** — The work item was captured: added to pipeline JSON open_items, backburner entry written
+
+**No checkpoint closes without executing OR pipelining its directives.**
+**A directive that passes through a checkpoint without execution OR pipeline capture = LostSoul.**
+**The anchor's PRIMARY job is to find these LostSouls and ensure they are captured.**
+
+**If a checkpoint ends in neither execution nor pipeline, the session is GAP until resolved.**
+
+The anchor does not execute. The anchor verifies that every checkpoint either executed or pipelined. If a checkpoint did neither, that is a LostSoul. The anchor documents it. The operator fixes it.
 
 ---
 
@@ -181,15 +237,20 @@ After all sessions audited, read the backburner pipeline:
 
 ## Anti-Patterns
 
-- Do NOT promote to NAV without all 4 points passing
-- Do NOT skip the naming audit — ONE NAME EVERYWHERE is law
-- Do NOT let LOSTSOULS accumulate — each one must be pipelined or explicitly archived
-- Do NOT modify I-LOG content — only metadata and indexing
-- Do NOT delete any RISE or DEATH artifacts — they are the audit trail
-- **Do NOT execute pipelines during audit — audit only, fix later**
-- **Do NOT generate missing artifacts during audit — document gaps, write to backburner**
-- **Do NOT rename files to fix naming mismatches — document BLOCKERs, write to backburner**
-- **The anchor is a CHECKPOINT, not a workhorse. Read-only except for audit documentation.**
+These are not suggestions. These are prohibitions.
+
+- **DO NOT execute pipeline scripts.** The pipeline runs before the anchor. If pipeline artifacts are missing, that is a GAP. Document it. Do not run the pipeline to fill the gap.
+- **DO NOT generate missing artifacts.** Missing COLORIZED, STATS, rfkw, or lostsouls files = GAP. The pipeline should have produced them. If it didn't, that is a pipeline failure, not an anchor fix.
+- **DO NOT fix gaps.** A gap is a gap. Document it. Backburner it. Seal it. Do not patch it during audit.
+- **DO NOT promote to NAV without all 4 points passing for ALL sessions in scope.**
+- **DO NOT skip the naming audit — ONE NAME EVERYWHERE is law.**
+- **DO NOT let LOSTSOULS accumulate — each one must be pipelined or explicitly archived.**
+- **DO NOT modify I-LOG content — only metadata and indexing.**
+- **DO NOT delete any RISE or DEATH artifacts — they are the audit trail.**
+- **DO NOT rename files during audit without updating ALL references (handoff, pipeline, Reincarnate-Synch, PhoenixSynch).**
+- **DO NOT touch files outside audit documentation.** If you are writing to a pipeline JSON, a handoff JSON, an I-LOG, a COLORIZED file, a STATS file, or any artifact file — you have left the anchor role.
+
+**The anchor is a READ-ONLY CHECKPOINT. If you are writing anything other than audit reports, death seals, and backburner entries, STOP.**
 
 ---
 

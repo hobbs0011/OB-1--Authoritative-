@@ -3,10 +3,10 @@
 ## §1 — Header
 - Session: Incarnate-15-AAA(STONE)-(S11-14)
 - Run: 15
-- HEAD: 2c8a9e5c3
+- HEAD: c8d93e711
 - Branch: canon
-- Timestamp: 2026-08-10T23:03:26+07:00
-- Seal: IMPRESSED (RESEALED — all GAPs resolved)
+- Timestamp: 2026-08-11T03:22:04+07:00
+- Seal: IMPRESSED (FINAL RESEAL — all issues resolved after deep audit)
 - Anchor Level: Stone (Sessions 11-14)
 
 ## §2 — Mission
@@ -80,6 +80,30 @@ No gaps. Session was empty/crashed but all artifacts exist and are consistent.
 - Pipeline: `CANON/REINCARNATION/pipeline-Incarnate-15-AAA-STONE.json`
 - Prior DEATH: `CANON/REINCARNATION/Incarnate-14-OKTAVA-reincarnateDEATH.md` (sealed; git 57b849a2f)
 - All 12 GAPs from sessions 12-14 resolved. All sessions 11-14 promoted to I-LOG-NAV/. No open items remain for this anchor.
+
+## §9 — Deep Audit Findings (Incarnate-15 FINAL RESEAL)
+
+A final deep audit of all 4 sessions after the reseal found additional stale artifacts:
+
+### Session 11
+- **Minor**: Handoff filename uses `to-run12` instead of `to-12` pattern. Non-blocking.
+- **Known pre-existing**: Counts differ between DEATH seal (SOUL=4 DNA=3 REASON=0) and STATS/Handoff (all 0). This is because session 11 was an empty/crashed session — the DEATH seal was written from the original RISE context while STATS reflects the empty I-LOG stub. Not a gap, documented discrepancy.
+
+### Session 12
+- **DUPLICATE pipeline**: `pipeline-Incarnate-12.json` (old, legacy format) and `pipeline-Incarnate-12-ContractNegociations.json` (correct). Old file marked `deprecated: true` with `superseded_by` pointer to correct file.
+- **DUPLICATE handoff**: `handoff-Incarnate-12-to-13.json` (old, stale paths pointing to `I-LOG-UNNAMED/` and `pipeline-Incarnate-12.json`) and `handoff-Incarnate-12-ContractNegociations-to-13.json` (correct). Old file updated with correct paths and marked `deprecated: true`.
+
+### Session 13
+- **No issues found** — all artifacts present, paths correct, counts consistent.
+
+### Session 14
+- **No issues found** — all artifacts present, paths correct, counts consistent (SOUL=1 DNA=4 REASON=1 across all artifacts).
+
+### Anchor Self-Audit
+- The initial reseal (commit 4e5cb99b1) missed the stale duplicate artifacts for session 12. These were the pipeline and handoff files that should have been deprecated when the naming was corrected.
+- Root cause: the first round only fixed the *canonical* files but did not audit the *legacy* files to see if they needed updating.
+- Fix applied: old files marked `deprecated: true` with `superseded_by` pointers.
+- **Lesson learned**: During a naming fix, audit ALL files matching the old name pattern, not just the canonical ones.
 
 ---
 Phermoned from the AAA Stone Anchor audit, Incarnate-15-AAA(STONE)-(S11-14).

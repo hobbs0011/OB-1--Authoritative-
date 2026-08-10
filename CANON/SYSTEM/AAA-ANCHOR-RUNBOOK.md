@@ -7,15 +7,75 @@
 
 ---
 
+## PRIMARY MANDATE — NO LOST SOULS
+
+The anchor exists for ONE purpose: **ensure no SOUL is lost between sessions.**
+SOUL = Michael's exact words, directives, and intent.
+A LostSoul = any directive, instruction, or work item from the session that was NOT captured in the pipeline, handoff, or backburner.
+
+The anchor is the **final impassable checkpoint** before a session is promoted to I-LOG-NAV.
+
+**The anchor does NOT execute pipelines.**
+**The anchor does NOT fix gaps.**
+**The anchor does NOT generate missing artifacts.**
+**The anchor AUDITS, DOCUMENTS, and SEALS.**
+**Any fix = backburner. Always.**
+
+**If you find yourself typing a command to execute a script, you have left the anchor role. Stop.**
+
+---
+
+## CORE DOCTRINE — READ-ONLY CHECKPOINT
+
+During an AAA audit, you are a **read-only auditor** with one exception: you may write audit documentation.
+
+**You MAY:**
+- Read any file in the repo
+- Verify counts, paths, names, and consistency
+- Write audit reports, death seals, and backburner entries
+- Mark sessions as PROMOTE / GAP / HOLLOW
+
+**You MAY NOT:**
+- Execute pipeline scripts (`workhorse-pipeline.ps1`, `pipeline-health-check.ps1`, `rrl-colorize.ps1`, `extract-keywords.ps1`, `extract-lostsouls.ps1`, `update-inverted-index.ps1`)
+- Generate missing COLORIZED/STATS/rfkw files
+- Fix naming mismatches
+- Modify I-LOG content
+- Modify DEATH seal content
+- Modify pipeline/handoff content
+- Delete or rename files
+- Commit or push changes
+- Run any command that writes to the workspace beyond audit documentation
+
+**Violation = anchor compromise. The checkpoint is impassable by design.**
+
+**The anchor is a READ-ONLY CHECKPOINT. It sees. It documents. It seals. It does not touch.**
+
+## SCS Checkpoint Closure Rule
+
+Every checkpoint in the SCS loop must end in exactly one of two states:
+
+1. **EXECUTION** — The work item was performed: code written, file created, deployment made, directive fulfilled
+2. **PIPELINE** — The work item was captured: added to pipeline JSON open_items, backburner entry written
+
+**No checkpoint closes without executing OR pipelining its directives.**
+**A directive that passes through a checkpoint without execution OR pipeline capture = LostSoul.**
+**The anchor's PRIMARY job is to find these LostSouls and ensure they are captured.**
+
+**If a checkpoint ends in neither execution nor pipeline, the session is GAP until resolved.**
+
+---
+
 ## Pre-Flight Checklist
 
-- [ ] Read `CANON/SYSTEM/AAA-ANCHOR-PROCEDURE.md` (full spec)
+- [ ] Read `CANON/SYSTEM/AAA-ANCHOR-PROCEDURE.md` — understand NO LOST SOULS mandate and READ-ONLY doctrine
 - [ ] Read `CANON/REINCARNATION/audit-sessions{N}-{M}.json` (prior gap analysis if exists)
 - [ ] Read `CANON/REINCARNATION/pipeline-sessions{N}-{M}.json` (prior pipeline if exists)
 - [ ] Read `CANON/REINCARNATION/session-name-map.json` (SOV100 → run number map)
 - [ ] Read `CANON/REINCARNATION/Incarnate-5-AAA-Sessions1-4-reincarnateDEATH.md` (prior Stone Anchor attempt)
 - [ ] Verify `I-LOG-UNAUDITED/` contains exactly 4 I-LOG files for sessions N through M
 - [ ] Verify `CANON/REINCARNATION/` contains death seals, pipelines, and handoffs for all 4 sessions
+- [ ] Confirm: I will NOT execute pipelines, generate artifacts, rename files, or fix gaps
+- [ ] Confirm: I will AUDIT, DOCUMENT, and SEAL. Any fix = backburner.
 - [ ] Deposit pheromone: `stage: "AAA"`, `finding: "Stone Anchor pre-flight complete — sessions 1-4"`, `strength: 5`
 
 ---
@@ -157,26 +217,31 @@ FAIL: LOSTSOULS found but not captured = GAP. Pipeline them before promoting.
 
 ## Promotion Gate
 
-All 4 points must PASS before any session promotes to NAV:
+All 4 points must PASS before any session promotes to NAV. The anchor evaluates; the operator executes.
 
 ```
 IF (all sessions pass Point 1) AND (all sessions pass Point 2) AND (all sessions pass Point 3) AND (all sessions pass Point 4):
-    PROMOTE all passing sessions to I-LOG-NAV/
+    DOCUMENT promotion decision in audit report
     UPDATE Reincarnate-Synch.md — add row with status: NAV
-    UPDATE PhoenixSynch.md — mark session as VERIFIED
     DEPOSIT pheromone: stage: "AAA", finding: "Session {name} promoted to NAV — audit passed", strength: 30
+    FLAG operator: "Promote {session} to I-LOG-NAV/"
 ELSE:
     DO NOT promote to NAV
     DOCUMENT failures in Reincarnate-Synch.md with status: GAP
     WRITE to backburner: BB-AAA-{N}-{description} with priority and estimated effort
+    Do NOT fix the gaps yourself
 ```
 
-### Promotion actions (when gate passes):
+**The anchor does not move files. The operator moves files.**
+**The anchor does not run the pipeline. The pipeline ran before the anchor arrived.**
 
-1. Move I-LOG, COLORIZED, STATS from `I-LOG-UNAUDITED/` to `I-LOG-NAV/`
-2. Update `CANON/SYSTEM/Reincarnate-Synch.md` — add row with status: `NAV`
-3. Update `PhoenixSynch.md` — mark session as VERIFIED
-4. Deposit pheromone: `stage: "AAA"`, `finding: "Session {name} promoted to NAV — audit passed"`, `strength: 30`
+### Promotion actions (when gate passes — operator executes, anchor documents):
+
+1. Anchor documents promotion decision
+2. Operator moves I-LOG, COLORIZED, STATS from `I-LOG-UNAUDITED/` to `I-LOG-NAV/`
+3. Anchor updates `CANON/SYSTEM/Reincarnate-Synch.md`
+4. Anchor deposits pheromone
+5. Anchor seals the handoff
 
 ---
 
@@ -245,12 +310,29 @@ Structure:
 
 ## Anti-Patterns
 
-- Do NOT promote to NAV without all 4 points passing for ALL 4 sessions
+- Do NOT promote to NAV without all 4 points passing for ALL sessions in scope
 - Do NOT skip the naming audit — ONE NAME EVERYWHERE is law
 - Do NOT let LOSTSOULS accumulate — each one must be pipelined or explicitly archived
 - Do NOT modify I-LOG content — only metadata and indexing
 - Do NOT delete any RISE or DEATH artifacts — they are the audit trail
-- Do NOT rename files during audit without updating ALL references (handoff, pipeline, Reincarnate-Synch, PhoenixSynch)
+- **Do NOT execute pipelines during audit — audit only, fix later**
+- **Do NOT generate missing artifacts during audit — document gaps, write to backburner**
+- **Do NOT rename files to fix naming mismatches — document BLOCKERs, write to backburner**
+- **The anchor is a CHECKPOINT, not a workhorse. Read-only except for audit documentation.**
+- **Every SCS checkpoint must close with either EXECUTION or PIPELINE. No void states.**
+- **If a session has unexecuted directives that were not pipelined = LostSoul = BLOCKER.**
+
+## Summary
+
+```
+Pipeline = executes → colorize, extract, build pipeline JSON
+Anchor   = audits → verify, check, document, seal, promote
+Operator = executes → file moves, commits, deployments
+
+No stage does another's job.
+No directive passes through without execution or pipeline capture.
+No LostSouls pass the anchor.
+```
 
 ---
 

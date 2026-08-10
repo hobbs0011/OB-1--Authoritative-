@@ -41,7 +41,7 @@ The I-LOG system uses a 3-folder hierarchy. No exceptions. No deviations.
 | `I-LOG-UNAUDITED/` | Post-DEATH. Named (RISE) + sealed (DEATH) but not AAA-audited. | Post-DEATH |
 | `I-LOG-NAV/` | Named Audited Verified. Passed AAA anchor session scrutiny. | Post-AAA |
 
-**AAA Anchor Protocol (System III):** Every 5 sessions, an AAA (Analyze Audit Anchor) session audits the prior 4 I-LOGs from UNAUDITED, verifies pipeline/handoff/death seal/SOUL/DNA/REASON/PHEROMONE consistency, and promotes to NAV. This is the FINAL verification gate — above and beyond standard RISE prior-check. The RISE prior-check is standard practice but is NOT the final check. Only AAA anchor sessions can promote to NAV.
+**AAA Anchor Protocol (System III):** Every 5 sessions, an AAA (Analyze Audit Anchor) session audits the prior 4 I-LOGs from UNAUDITED, verifies pipeline/handoff/death seal/SOUL/DNA/REASON/PHEROMONE consistency, and promotes to NAV. This is the FINAL verification gate — above and beyond standard RISE prior-check. The RISE prior-check is standard practice but is NOT the final check. Only AAA anchor sessions can promote to NAV. **The anchor is a READ-ONLY checkpoint. It does not execute pipelines, fix gaps, or generate artifacts. It AUDITS, DOCUMENTS, and SEALS. Any fix = backburner. Always.**
 
 **AAA Anchor Mandate — NO LOST SOULS:** The anchor exists for ONE purpose: ensure no SOUL is lost between sessions. SOUL = Michael's exact words, directives, and intent. A LostSoul = any directive or work item from the session that was NOT captured in pipeline, handoff, or backburner. The anchor is the impassable final checkpoint. No session passes without zero LostSouls.
 
@@ -57,12 +57,15 @@ The I-LOG system uses a 3-folder hierarchy. No exceptions. No deviations.
 | Titanium | 25 | Major audit of all 25 sessions and all 5 Stone Anchors. |
 | Phoenix | 50 | Full system audit of all 50 sessions, all anchors, all pipelines. |
 
-Each anchor verifies all anchors below it. Each anchor is the FINAL verification gate for its scope. The anchor is READ-ONLY except for audit documentation. The anchor does NOT execute, fix, or modify — it AUDITS, DOCUMENTS, and SEALS.
+Each anchor verifies all anchors below it. Each anchor is the FINAL verification gate for its scope.
 
-1. **Capture Audit** — verify RISE+DEATH artifacts, full I-LOG capture, matching counts. Do NOT generate missing artifacts.
-2. **Index Audit** — 100 top keywords/pheromones extracted, inverted-index updated. Do NOT extract keywords yourself.
-3. **Naming Audit** — ONE NAME EVERYWHERE. Verify I-LOG, death seal, pipeline, handoff, COLORIZED, STATS all use SOV100's exact session name. Do NOT rename files yourself.
-4. **LostSouls Audit** — identify unpipelined directives, capture to LOSTSOULS, add to backburner. This is the anchor's PRIMARY purpose. Do NOT execute lost directives.
+**The anchor is READ-ONLY. The anchor does NOT execute, fix, or modify — it AUDITS, DOCUMENTS, and SEALS.**
+**Violation = anchor compromise. The checkpoint is impassable by design.**
+
+1. **Capture Audit** — verify RISE+DEATH artifacts, full I-LOG capture, matching counts. **Do NOT generate missing artifacts. Do NOT fix gaps. Document to backburner.**
+2. **Index Audit** — 100 top keywords/pheromones extracted, inverted-index updated. **Do NOT extract keywords yourself. Document to backburner.**
+3. **Naming Audit** — ONE NAME EVERYWHERE. Verify I-LOG, death seal, pipeline, handoff, COLORIZED, STATS all use SOV100's exact session name. **Do NOT rename files yourself. Document BLOCKERs to backburner.**
+4. **LostSouls Audit** — identify unpipelined directives, capture to LOSTSOULS, add to backburner. This is the anchor's PRIMARY purpose. **Do NOT execute lost directives. Do NOT fix the gaps yourself. Write to backburner.**
 
 **Folder 0 (PastLives):** `PastLives/` — ancient RRLs from before the 3-folder system. NEVER DELETE. Maintained for historical reference.
 **Folder X (LostSouls):** `CANON/LOSTSOULS/` — unidentified raw logs. NEVER DELETE RAW LOGS. They take negligible space; losing them is costly.
@@ -135,6 +138,8 @@ Cross-reference: GOSPEL-999 §SYSTEM I — SCS Loop. LFG §SCS — I-LOG AUDIT. 
 
 ```
 GOSPEL-999 — eternal law, non-negotiable
+    ↓
+AAA-ANCHOR-PROCEDURE — anchor doctrine, the impassable checkpoint (read-only)
     ↓
 LegionnaireFieldGuide — immediate how-to, commands ↔ paths
     ↓
