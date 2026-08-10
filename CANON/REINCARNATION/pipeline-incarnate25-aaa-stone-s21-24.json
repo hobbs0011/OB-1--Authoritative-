@@ -1,25 +1,25 @@
 {
   "run": 25,
   "session": "Incarnate-25-AAA(STONE)-(S21-24)",
-  "timestamp": "2026-08-11T04:13:00+07:00",
+  "timestamp": "2026-08-11T04:22:00+07:00",
   "anchor_level": "Stone",
   "sessions_audited": [
     "Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT",
     "Incarnate-22-Phoenix-RISING-GAME-DEVELOPMENT-FORCEMARCH",
-    "Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-COMPLETION",
+    "Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-INTEGRATION",
     "Incarnate-24 (pending)"
   ],
   "promotions": [
     {"session": "Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT", "status": "NAV", "reason": "Corrected — all NEW lane artifacts present"}
   ],
   "gaps": [
-    {"session": "Incarnate-22-Phoenix-RISING-GAME-DEVELOPMENT-FORCEMARCH", "status": "GAP", "missing": ["DEATH seal", "pipeline JSON", "handoff JSON", "scout checkpoint"]},
-    {"session": "Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-COMPLETION", "status": "GAP", "missing": ["DEATH seal", "pipeline JSON", "handoff JSON", "scout checkpoint"]},
+    {"session": "Incarnate-22-Phoenix-RISING-GAME-DEVELOPMENT-FORCEMARCH", "status": "GAP", "missing": ["COLORIZED.md", "STATS.json", "rfkw", "SOUL/DNA extracts", "pheromone trail", "inverted-index entry"]},
+    {"session": "Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-INTEGRATION", "status": "GAP", "missing": ["I-LOG (no RISE/RRL source)", "COLORIZED.md", "STATS.json", "rfkw", "SOUL/DNA extracts", "pheromone trail", "inverted-index entry"], "backfill_path": "/reincarnateRISE + /SOUL + /DNA + /rfkw + /PheTrail + /reincarnateDEATH"},
     {"session": "Incarnate-24", "status": "HOLLOW/BLOCKER", "missing": ["All artifacts"]}
   ],
   "backburner": [
     "BB-AAA-22-ARTIFACTS: Generate full artifact set for session 22",
-    "BB-AAA-23-ARTIFACTS: Generate full artifact set for session 23",
+    "BB-AAA-23-BACKFILL: Backfill session 23 via SCS pipeline",
     "BB-AAA-24-START: Execute session 24 or mark HOLLOW",
     "BB-AAA-21-LANE-A: Execute Meshy Pro art pipeline — generate 60-80 3D assets",
     "BB-AAA-21-LANE-B: Develop Quan's AI 3D modeling curriculum using Lane A workflow"
