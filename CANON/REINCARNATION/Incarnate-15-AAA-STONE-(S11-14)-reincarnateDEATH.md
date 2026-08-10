@@ -87,7 +87,9 @@ A final deep audit of all 4 sessions after the reseal found additional stale art
 
 ### Session 11
 - **Minor**: Handoff filename uses `to-run12` instead of `to-12` pattern. Non-blocking.
-- **Known pre-existing**: Counts differ between DEATH seal (SOUL=4 DNA=3 REASON=0) and STATS/Handoff (all 0). This is because session 11 was an empty/crashed session — the DEATH seal was written from the original RISE context while STATS reflects the empty I-LOG stub. Not a gap, documented discrepancy.
+- **DUPLICATE pipeline**: `pipeline-I-LOG-Incarnate-11-AnhMinhContact.json` (original HOLLOW DEATH artifact, legacy naming with `I-LOG-` prefix) and `pipeline-Incarnate-11-AnhMinhContact.json` (correct name). Original marked `deprecated: true`.
+- **DEATH seal §5**: Referenced old artifact names (`pipeline-I-LOG-...` and `handoff-incarnate11...` lowercase). Updated to correct filenames. COLORIZED/STATS previously listed as "Missing" — now correctly noted as generated in Incarnate-15 reseal (header-only stubs for HOLLOW session).
+- **Known pre-existing**: Counts differ between DEATH seal (SOUL=4 DNA=3 REASON=0) and STATS/Handoff (all 0). This is because session 11 was HOLLOW — the DEATH seal counts were estimated from visible chat while STATS reflects the empty I-LOG stub. Not a gap, documented discrepancy.
 
 ### Session 12
 - **DUPLICATE pipeline**: `pipeline-Incarnate-12.json` (old, legacy format) and `pipeline-Incarnate-12-ContractNegociations.json` (correct). Old file marked `deprecated: true` with `superseded_by` pointer to correct file.

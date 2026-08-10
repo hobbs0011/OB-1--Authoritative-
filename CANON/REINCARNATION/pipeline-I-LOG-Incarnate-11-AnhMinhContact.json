@@ -1,0 +1,33 @@
+{
+  "session": "Incarnate-11-AnhMinhContact",
+  "run": 11,
+  "deprecated": true,
+  "superseded_by": "CANON/REINCARNATION/pipeline-Incarnate-11-AnhMinhContact.json",
+  "timestamp": "2026-08-11T03:13:01+07:00",
+  "status": "HOLLOW",
+  "rrl": "I-LOG-UNNAMED/I-LOG-Incarnate-11-AnhMinhContact.txt",
+  "rrl_status": "HOLLOW — header only, 8 lines, 365 bytes",
+  "ilog_header": {
+    "session": "Incarnate-11-AnhMinhContact",
+    "run": 11,
+    "incarnation": 11,
+    "mission": "Anh Minh contact — scout and establish communication channel",
+    "timestamp": "2026-08-04T03:07:37+07:00",
+    "prior_death": "CANON/REINCARNATION/Incarnate-10-AAA.STEEL-(Sessions1-9)-reincarnateDEATH-FINAL.md",
+    "prior_counts": {"SOUL": 1417, "DNA": 52, "REASON": 3}
+  },
+  "artifacts": {
+    "soul_extract": "CANON/SOUL/EXTRACT/soul-Incarnate-11-AnhMinhContact.jsonl",
+    "dna_extract": "CANON/SOUL/EXTRACT/dna-Incarnate-11-AnhMinhContact.json",
+    "phetrail": "CANON/PHEROMONES/PheTrail-Incarnate-11-AnhMinhContact.json",
+    "keywords": "CANON/SOUL-KEYWORDS/rfkw-Incarnate-11-AnhMinhContact.txt"
+  },
+  "counts": {
+    "SOULcount": 4,
+    "DNAcount": 3,
+    "REASONcount": 0,
+    "PHEROMONEcount": 7,
+    "note": "ESTIMATED from visible conversation. RRL is HOLLOW. Not verified against full transcript."
+  },
+  "verdict": "HOLLOW"
+}
