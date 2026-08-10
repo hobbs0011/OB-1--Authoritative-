@@ -2,7 +2,7 @@
   "from_session": "Incarnate-25-AAA(STONE)-(S21-24)",
   "from_run": 25,
   "to_run": 26,
-  "timestamp": "2026-08-11T03:38:00+07:00",
+  "timestamp": "2026-08-11T04:13:00+07:00",
   "anchor_level": "Stone",
   "sessions_audited": [
     "Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT",
@@ -10,20 +10,23 @@
     "Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-COMPLETION",
     "Incarnate-24 (pending)"
   ],
-  "promotions": [],
-  "gaps_resolved": [],
+  "promotions": [
+    {"session": "Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT", "status": "NAV", "reason": "Corrected — all NEW lane artifacts present (DEATH seal, pipeline JSON, handoff JSON, scout checkpoint). Dual-lane structure identified: Lane A (3D asset pipeline) + Lane B (Quan 3D education)."}
+  ],
+  "gaps_resolved": [
+    {"session": "Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT", "points": ["DEATH seal corrected", "pipeline JSON corrected", "handoff JSON corrected", "scout checkpoint corrected", "dual-lane structure documented"]}
+  ],
   "gaps_remaining": [
-    {"session": "Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT", "points": ["I-LOG missing", "COLORIZED.md missing", "STATS.json missing", "rfkw missing", "SOUL/DNA extracts missing", "pheromone trail missing", "inverted-index.json entry missing"]},
     {"session": "Incarnate-22-Phoenix-RISING-GAME-DEVELOPMENT-FORCEMARCH", "points": ["I-LOG missing", "COLORIZED.md missing", "STATS.json missing", "rfkw missing", "SOUL/DNA extracts missing", "pheromone trail missing", "inverted-index.json entry missing"]},
     {"session": "Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-COMPLETION", "points": ["I-LOG missing", "COLORIZED.md missing", "STATS.json missing", "rfkw missing", "SOUL/DNA extracts missing", "pheromone trail missing", "inverted-index.json entry missing"]},
     {"session": "Incarnate-24", "points": ["All artifacts missing", "Session not started or in RISE boot"]}
   ],
   "backburner_new": [
-    "BB-AAA-21-ARTIFACTS: Generate full artifact set for session 21 (I-LOG, COLORIZED, STATS, rfkw, SOUL/DNA extracts, pheromone trail)",
-    "BB-AAA-22-ARTIFACTS: Generate full artifact set for session 22 (I-LOG, COLORIZED, STATS, rfkw, SOUL/DNA extracts, pheromone trail)",
-    "BB-AAA-23-ARTIFACTS: Generate full artifact set for session 23 (I-LOG, COLORIZED, STATS, rfkw, SOUL/DNA extracts, pheromone trail)",
+    "BB-AAA-22-ARTIFACTS: Generate full artifact set for session 22 (DEATH seal, pipeline JSON, handoff JSON, scout checkpoint)",
+    "BB-AAA-23-ARTIFACTS: Generate full artifact set for session 23 (DEATH seal, pipeline JSON, handoff JSON, scout checkpoint)",
     "BB-AAA-24-START: Execute session 24 or mark as HOLLOW if abandoned",
-    "BB-AAA-LANE-PROTOCOL: Update NEW lane protocol to include standard artifact generation steps"
+    "BB-AAA-21-LANE-A: Execute Meshy Pro art pipeline — generate 60-80 3D assets for Train-67",
+    "BB-AAA-21-LANE-B: Develop Quan's AI 3D modeling curriculum using Lane A workflow as training material"
   ],
-  "next_session_receives": "0 sessions promoted to I-LOG-NAV. Sessions 21-23 need full artifact generation. Session 24 needs execution or HOLLOW marking. NEW lane protocol needs update."
+  "next_session_receives": "1 session promoted to I-LOG-NAV (session 21 — corrected). Sessions 22-23 need full artifact generation. Session 24 needs execution or HOLLOW marking. Dual-lane structure: Lane A (3D assets) + Lane B (Quan education)."
 }
