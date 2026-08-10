@@ -1,0 +1,57 @@
+{
+  "from_session": "Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT",
+  "from_run": 21,
+  "to_run": 22,
+  "timestamp": "2026-08-10T23:44:42+07:00",
+  "lane": "Phoenix-RISING-GAME-DEVELOPMENT",
+  "lane_type": "NEW",
+  "parent_session": "Incarnate-20-AAA-STEEL-(S11-19)",
+  "scout_artifact": "CANON/SCOUT/scout-incarnate21-phoenix-rising-game-development.md",
+  "pipeline_file": "CANON/REINCARNATION/pipeline-incarnate21-phoenix-rising-game-development.json",
+  "mission": "Scout flagship Roblox game (Train-67 / Survive a Brainrot) legacy territory",
+  "scout_status": "COMPLETE",
+  "findings": {
+    "flagship_game": "Train-67 / Survive a Brainrot / Skibidi Zombie: Survive the Brainrots",
+    "earliest_origin": "2025-11-19",
+    "origin_file": "CANON/ARCHIVE/RECAPTURE-2026-04-05/0311-RAW-GEM-MASTERKEY-4_txt.md",
+    "concept_seed": "July 2025 - Brain Rot Economy (CANON/ARCHIVE/RECAPTURE-2026-04-05/0177-RAW-ALPHA-OMEGA-DNA8_txt.md)",
+    "mission_lock": "2026-03-26",
+    "identity_lock": "2026-03-28",
+    "name_lock": "2026-03-29",
+    "launch_window": "2026-03-30"
+  },
+  "territory_mapped": {
+    "origin_trail": "WALKED — July 2025 concept seed → Nov 19 2025 dev start → 8-phase build marathon → Nov 21-23 HTML proofs → Jan 28 2026 full design → Mar 24 2026 re-entry",
+    "codebase": "WALKED — 41 Lua modules",
+    "specifications": "WALKED — 20+ specs",
+    "game_design_docs": "WALKED — 30+ docs",
+    "historical_sessions": "WALKED — 13 reincarnation entries",
+    "heavy_ledger": "WALKED — 3 HL entries",
+    "3d_asset_pipeline": "WALKED — Meshy Pro ($16/mo) + TripoSR (free local) + 3D AI Studio ($19/mo); 60-80 assets targeted",
+    "github_commit_history": "NOT_WALKED",
+    "rojo_configuration": "NOT_WALKED",
+    "product_ids": "NOT_WALKED",
+    "publish_status": "NOT_WALKED",
+    "discord_server": "NOT_WALKED"
+  },
+  "legacy_artifact_counts": {
+    "code_modules": 41,
+    "specifications": 20,
+    "game_design_docs": 30,
+    "reincarnation_entries": 13,
+    "heavy_ledger_entries": 3,
+    "discord_bot_files": 3,
+    "asset_pipeline_docs": 2
+  },
+  "open_items": [
+    "Verify GitHub commit history on hobbs0011/Phoenix-Rising-Protocol-Ultimate",
+    "Verify Rojo sync status and CI/CD workflow",
+    "Verify Product ID status (21 placeholders still = 0)",
+    "Verify publish status on Roblox",
+    "Verify Discord server status",
+    "Map all legacy artifacts to current APPS/TRAIN-67/ structure",
+    "Identify gaps between March 2026 design and current codebase state",
+    "Execute Meshy Pro art pipeline — generate 60-80 3D assets (TripoSR free local first, then Meshy $16/mo)"
+  ],
+  "next_session_receives": "New lane opened. Train-67 / Survive a Brainrot legacy fully scouted. Origins traced to November 19, 2025 (concept seed July 2025). Territory mapped: codebase (41 modules), specs (20+), docs (30+), sessions (13), HL entries (3), 3D asset pipeline (Meshy/TripoSR). Open items: GitHub history, Rojo status, Product IDs, publish status, Discord server, Meshy Pro asset generation."
+}

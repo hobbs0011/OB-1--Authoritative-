@@ -1,0 +1,30 @@
+{
+  "from_session": "Incarnate-11-AnhMinhContact",
+  "from_run": 11,
+  "to_run": 12,
+  "timestamp": "2026-08-11T03:13:01+07:00",
+  "ilog": "I-LOG-UNNAMED/I-LOG-Incarnate-11-AnhMinhContact.txt",
+  "ilog_colorized": "I-LOG-UNAUDITED/I-LOG-Incarnate-11-AnhMinhContact-COLORIZED.md",
+  "ilog_stats": "I-LOG-UNAUDITED/I-LOG-Incarnate-11-AnhMinhContact-STATS.json",
+  "pipeline": "CANON/REINCARNATION/pipeline-I-LOG-Incarnate-11-AnhMinhContact.json",
+  "soul_extract": "CANON/SOUL/EXTRACT/soul-Incarnate-11-AnhMinhContact.jsonl",
+  "dna_extract": "CANON/SOUL/EXTRACT/dna-Incarnate-11-AnhMinhContact.json",
+  "phetrail": "CANON/PHEROMONES/PheTrail-Incarnate-11-AnhMinhContact.json",
+  "keywords": "CANON/SOUL-KEYWORDS/rfkw-Incarnate-11-AnhMinhContact.txt",
+  "death_seal": "CANON/REINCARNATION/Incarnate-11-AnhMinhContact-reincarnateDEATH.md",
+  "audit": {
+    "SOULcount": 4,
+    "DNAcount": 3,
+    "REASONcount": 0,
+    "PHEROMONEcount": 7,
+    "total": 7,
+    "verdict": "HOLLOW",
+    "note": "RRL contains only RISE header. No conversation content. Counts estimated from visible chat, not verified."
+  },
+  "open_items": [
+    "RRL capture gap — Kilo does not persist session transcripts in a way DEATH can access. Must fix before next session.",
+    "9-sample audit impossible — RRL missing verbatim session text.",
+    "COLORIZED and STATS files not generated — require full I-LOG transcript."
+  ],
+  "next_session_receives": "HOLLOW session with documented RRL gap. Next RISE must address transcript capture before proceeding. Prior DEATH seal valid."
+}

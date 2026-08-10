@@ -1,102 +1,15 @@
-{
-  "session": "Incarnate-16-ContractNegociations-P2",
-  "run": 16,
-  "incarnation": 16,
-  "timestamp_start": "2026-08-04T06:13:13+07:00",
-  "timestamp_end": "2026-08-09T14:24:09+07:00",
-  "duration_minutes": 17231,
-  "lines": 53,
-  "soulcount": 11,
-  "dnacount": 14,
-  "reasoncount": 14,
-  "pheromonecount": 32,
-  "stages": [
-    {
-      "stage": "RISE",
-      "timestamp": "2026-08-04T06:13:13+07:00",
-      "status": "COMPLETE",
-      "finding": "Prior DEATH audited: Incarnate-15-AAA-STONE-(S11-14) — Stone anchor audit (sessions 11-14). Seal valid. Handoff present. Session name stamped: Incarnate-16-ContractNegociations-P2."
-    },
-    {
-      "stage": "SCOUT",
-      "timestamp": "2026-08-04T06:13:13+07:00",
-      "status": "COMPLETE",
-      "finding": "Deep detective scout across entire repo. Identified 7 detective gaps. Found and restored 3 dropped clauses (TA management, curriculum authority, photo/video prohibition). Identified 1 schedule contradiction (Mon/Wed vs Tue/Thu) — resolved."
-    },
-    {
-      "stage": "DEEPTHINK",
-      "timestamp": "2026-08-04T06:13:13+07:00",
-      "status": "COMPLETE",
-      "finding": "Mapped full clause history across 15 tracked negotiation elements. Identified escalation path on Hien clause. Identified mentorship value proposition as emotional center. Corrected hostel/120-hour framing from temporary to 2-year benchmark."
-    },
-    {
-      "stage": "AUDIT",
-      "timestamp": "2026-08-04T06:13:13+07:00",
-      "status": "COMPLETE",
-      "finding": "Produced CANON/AUDIT/Incarnate-16-ContractNegociations-P2-AUDIT.md. Verdict: AUDIT CLEAN. 7 gaps identified, all resolved. 3 clauses restored. 6 new clauses added. 1 contradiction corrected."
-    },
-    {
-      "stage": "BLUEPRINT",
-      "timestamp": "2026-08-04T06:13:13+07:00",
-      "status": "COMPLETE",
-      "finding": "Produced public/counter-proposal-casa/index.html — authoritative counter-proposal. 15 clauses captured. Deployed to Cloudflare Pages: https://casa-counter-proposal.pages.dev"
-    },
-    {
-      "stage": "PIPELINE",
-      "timestamp": "2026-08-04T06:13:13+07:00",
-      "status": "COMPLETE",
-      "finding": "Produced CANON/PIPELINE/Incarnate-16-ContractNegociations-P2-PIPELINE.md — 5-stage execution plan for workhorse."
-    },
-    {
-      "stage": "SESSION_CONTINUED",
-      "timestamp": "2026-08-09T14:24:09+07:00",
-      "status": "COMPLETE",
-      "finding": "Added KPI paragraph (Question 2), Cambridge flexibility paragraph (Question 4), closing paragraph before signature. Redeployed to production: https://production.casa-amendment-request.pages.dev"
-    },
-    {
-      "stage": "DEATH",
-      "timestamp": "2026-08-09T14:24:09+07:00",
-      "status": "IN_PROGRESS",
-      "finding": "7-point march execution initiated. SCOUT, FORCEMARCH, SOULSCHOLARS, SUPPLYLINES in progress."
-    }
-  ],
-  "artifacts": [
-    {
-      "name": "I-LOG",
-      "path": "I-LOG-UNAUDITED/I-LOG-Incarnate-16-ContractNegociations-P2.txt",
-      "status": "PRESENT",
-      "lines": 53
-    },
-    {
-      "name": "COLORIZED",
-      "path": "I-LOG-UNAUDITED/I-LOG-Incarnate-16-ContractNegociations-P2-COLORIZED.md",
-      "status": "PRESENT"
-    },
-    {
-      "name": "AUDIT",
-      "path": "CANON/AUDIT/Incarnate-16-ContractNegociations-P2-AUDIT.md",
-      "status": "PRESENT"
-    },
-    {
-      "name": "PIPELINE",
-      "path": "CANON/PIPELINE/Incarnate-16-ContractNegociations-P2-PIPELINE.md",
-      "status": "PRESENT"
-    },
-    {
-      "name": "DEATH_SEAL",
-      "path": "CANON/REINCARNATION/Incarnate-16-ContractNegociations-P2-reincarnateDEATH.md",
-      "status": "PRESENT"
-    },
-    {
-      "name": "HANDOFF",
-      "path": "CANON/REINCARNATION/handoff-Incarnate-16-ContractNegociations-P2-to-17.json",
-      "status": "PRESENT"
-    },
-    {
-      "name": "BLUEPRINT",
-      "path": "public/counter-proposal-casa/index.html",
-      "status": "DEPLOYED",
-      "url": "https://production.casa-amendment-request.pages.dev"
-    }
-  ]
+﻿{
+    "parsed_lines":  0,
+    "processed_at":  "2026-08-11T03:03:55.2562457+07:00",
+    "source_file":  "D:\\OB-1-CANONICAL\\I-LOG-UNAUDITED\\I-LOG-Incarnate-16-ContractNegociations-P2.txt",
+    "REASONcount":  0,
+    "top_topics":  null,
+    "DNAcount":  0,
+    "tool_calls":  0,
+    "lines":  53,
+    "PHEROMONEcount":  0,
+    "SOULcount":  0,
+    "total_chars":  0,
+    "duration_min":  0,
+    "top_tools":  null
 }

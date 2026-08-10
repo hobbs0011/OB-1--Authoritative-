@@ -74,6 +74,28 @@ Gapless audio v2+v3 was lost permanently because it ran uncommitted across 4 run
 - SOULCOUNT: 60,037,507 TITANIUM_ANCHOR (Run 32 — updated from stale 907,872)
 - PA_AUTH_SECRET is set on phoenix-architecti — always include x-pa-auth header
 
+## Scout Protocol — MANDATORY FOR ALL /PhoenixRISE SCOUT MISSIONS
+
+**Canonical doc search ALWAYS precedes SOUL system search.**
+
+When scouting a territory (game, project, feature), follow this exact search order:
+1. **Canonical project docs first** — `CANON/<PROJECT>/DOCS/`, `CANON/<PROJECT>/SPECS/`, `CANON/<PROJECT>/CODE/`
+2. **Reincarnation death seals** — `CANON/REINCARNATION/run*-reincarnateDEATH.md` for explicit decisions and pipeline definitions
+3. **Legacy archives** — `CANON/ARCHIVE/`, `APPS/<PROJECT>/`, `ASSETS/<PROJECT>/`
+4. **SOUL-KEYWORDS** — `CANON/SOUL-KEYWORDS/` for session-level keyword signals (secondary, not primary)
+5. **DNA EXTRACT** — `CANON/SOUL/EXTRACT/` for structured extraction (tertiary)
+
+**Anti-hallucination rules:**
+- A single incidental keyword in SOUL-KEYWORDS/DNA EXTRACT is NOT authoritative evidence.
+- Always cross-reference with canonical docs before drawing conclusions about contractors, tools, or pipelines.
+- "3D modeling" in a student portal placeholder is NOT a game asset pipeline — verify with `CANON/<PROJECT>/DOCS/3D-ASSET-MANIFEST.md` or equivalent.
+- If a search result conflicts with canonical docs, canonical docs win.
+
+**Required scouting checks for game projects:**
+- Asset pipeline: search `CANON/<PROJECT>/DOCS/` for manifest, pipeline, or strategy docs
+- Tool/service decisions: check `run*-reincarnateDEATH.md` for "Decision" and "Unfinished Actions" tables
+- Contractor vs AI service: verify source — human names come from canonical roster docs, AI services come from tool/pipeline docs
+
 ## Soul/DNA Capture
 Run at session start: `pwsh SCRIPTS/soul-watcher.ps1`
 This posts Michael's words to soul-archive D1 in real-time.

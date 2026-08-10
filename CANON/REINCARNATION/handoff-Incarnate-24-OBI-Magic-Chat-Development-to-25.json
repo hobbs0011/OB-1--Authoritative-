@@ -1,0 +1,10 @@
+﻿{
+    "ilog":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-24-OBI-Magic-Chat-Development.txt",
+    "from_run":  "24",
+    "timestamp":  "2026-08-11T03:47:44.8120663+07:00",
+    "ilog_stats":  "I-LOG/I-LOG-Incarnate-24-OBI-Magic-Chat-Development-STATS.json",
+    "ilog_colorized":  "I-LOG/I-LOG-Incarnate-24-OBI-Magic-Chat-Development-COLORIZED.md",
+    "audit":  null,
+    "pipeline":  "CANON\\REINCARNATION\\pipeline-Incarnate-24-OBI-Magic-Chat-Development.json",
+    "to_run":  25
+}
