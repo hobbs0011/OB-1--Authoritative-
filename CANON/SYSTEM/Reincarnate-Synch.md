@@ -250,6 +250,12 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 
 | 2026-08-03T22:51:10+07:00 | Incarnate-13-SOULCapture | reincarnateDEATH (Stage 7) |  |  |  | CANON\REINCARNATION\handoff-Incarnate-13-SOULCapture-to-14.json |
 
+| 2026-08-09T13:57:37+07:00 | Incarnate-17-CASA-portal-development | reincarnateDEATH (Stage 7) |  |  |  | CANON\REINCARNATION\handoff-Incarnate-17-CASA-portal-development-to-44.json |
+
+| 2026-08-10T16:22:04+07:00 | Incarnate-18-Nguyen-Portal-Development | reincarnateDEATH (Stage 7) | 1 | 4 | 0 | CANON\REINCARNATION\handoff-Incarnate-18-Nguyen-Portal-Development-to-45.json |
+
+| 2026-08-10T23:25:00+07:00 | Incarnate-18-Nguyen-Portal-Development | reincarnateDEATH (Stage 7) | 1 | 4 | 0 | CANON/REINCARNATION/Incarnate-18-Nguyen-Portal-Development-reincarnateDEATH.md |
+
 *Rows are append-only. Never delete or modify prior rows. Stale rows are marked `[DEPRECATED]`, never removed.*
 
 ---

@@ -91,15 +91,20 @@
 - Produces: raw transcript, vocab array, class notes, session-score metrics.
 - Portal loads `transcript.txt` (the June 29 session SOUL). Audio: `Testing123.m4a`.
 
-## 12. PORTAL STATUS — Incarnate-14-OKTAVA
+## 12. PORTAL STATUS — Incarnate-14-OKTAVA (Incarnate-15-AAA final state)
 - `index.html` = login gate (user: `Oktava English Class`, pass: `KISS2026`).
 - `classroom.html` = student SPA (dashboard, principles, vocab lab, listening lab, speaking,
-  feedback, progress, tasks, class notes). Wiring fixed: transcript loader now references
-  `transcript.txt` (was broken: fetched non-existent `2026-06-29-transcript.txt`).
-- Deploy blocker: Cloudflare Pages + Worker (`soul-logger`) src missing at repo root;
-  `DEEPGRAM_API_KEY` secret + `CLOUDFLARE_API_TOKEN` wrangler auth not present.
-  -> ACTION: restore `src/index.js` worker from `ARCHIVE/NET-PET-AI-PRODUCTION-20260519/src/`
-       and run `wrangler pages deploy public/oktava-login` after `wrangler login`.
+  feedback, progress, tasks, class notes). Wiring fixed: transcript loader references
+  `transcript.txt`. NET_API now points to the Oktava worker (was `naturalenglishtraining.net`).
+- Classroom API endpoints (`/api/classroom/session/start`, `/api/classroom/event`, `/api/classroom/session`)
+  implemented in `WORKERS/oktava-index.js` with KV-backed storage and graceful offline fallback.
+- Worker deployed at `https://oktava-portal.mrmichaelhobbs123.workers.dev` ✓
+- Static assets (Pages) deployed at `https://oktava-portal.pages.dev` ✓
+- `DEEPGRAM_API_KEY` secret configured via `wrangler secret put` ✓
+- Wrangler authenticated as `mrmichaelhobbs123@gmail.com` (OAuth token) ✓
+- KV namespace bound (`5ed0e9ab65cc42e6889822266aa7c730`) ✓
+- Known limit: KV free tier daily read limit may be exhausted on heavy use;
+  endpoints gracefully handle KV failures and return offline-compatible responses.
 
 ---
 Phermoned from the teaching SOUL (Gemini↔Michael conversation), Incarnate-14-OKTAVA.

@@ -19,12 +19,7 @@ export default {
     try {
       switch (url.pathname) {
         case '/api/health':
-          return json({
-            status: 'ok',
-            service: 'OKTAVA-PORTAL',
-            version: '0.1.0',
-            timestamp: new Date().toISOString()
-          }, corsHeaders);
+          return handleHealth(env, corsHeaders);
 
         case '/api/deepgram':
           if (request.method !== 'POST') return json({ error: 'POST only' }, corsHeaders, 405);
@@ -37,10 +32,22 @@ export default {
         case '/api/stats':
           return handleStats(env, corsHeaders);
 
+        case '/api/classroom/session/start':
+          if (request.method !== 'POST') return json({ error: 'POST only' }, corsHeaders, 405);
+          return handleSessionStart(request, env, corsHeaders);
+
+        case '/api/classroom/event':
+          if (request.method !== 'POST') return json({ error: 'POST only' }, corsHeaders, 405);
+          return handleClassroomEvent(request, env, corsHeaders);
+
+        case '/api/classroom/session':
+          if (request.method === 'GET') return handleSessionGet(request, env, corsHeaders);
+          return json({ error: 'GET only' }, corsHeaders, 405);
+
         default:
           return json({
             error: 'Not found',
-            endpoints: ['/api/health', '/api/deepgram', '/api/chat', '/api/stats']
+            endpoints: ['/api/health', '/api/deepgram', '/api/chat', '/api/stats', '/api/classroom/session', '/api/classroom/event']
           }, corsHeaders, 404);
       }
     } catch (err) {
@@ -173,4 +180,114 @@ function json(data, corsHeaders, status = 200) {
     status,
     headers: { 'Content-Type': 'application/json', ...corsHeaders }
   });
+}
+
+async function kvGet(env, key) {
+  if (!env.KV) return null;
+  try {
+    return await env.KV.get(key);
+  } catch {
+    return null;
+  }
+}
+
+async function kvPut(env, key, value) {
+  if (!env.KV) return;
+  try {
+    await env.KV.put(key, value);
+  } catch {
+    // KV rate-limited or unavailable — silently continue
+  }
+}
+
+async function handleHealth(env, corsHeaders) {
+  return json({
+    ok: true,
+    version: '0.1.0',
+    service: 'OKTAVA-PORTAL',
+    coach: 'Obi',
+    routes: 7,
+    timestamp: new Date().toISOString()
+  }, corsHeaders);
+}
+
+async function handleSessionStart(request, env, corsHeaders) {
+  try {
+    const body = await request.json();
+    const { classId, teacherId, totalStudents } = body;
+    if (!classId) return json({ error: 'classId required' }, corsHeaders, 400);
+
+    const sessionKey = `session:${classId}`;
+    const existing = await kvGet(env, sessionKey);
+    if (existing) {
+      return json({ success: true, session: JSON.parse(existing), resumed: true }, corsHeaders);
+    }
+
+    const session = {
+      classId,
+      teacherId: teacherId || 'michael',
+      totalStudents: totalStudents || 40,
+      startedAt: Date.now(),
+      events: []
+    };
+
+    await kvPut(env, sessionKey, JSON.stringify(session));
+    return json({ success: true, session, resumed: false }, corsHeaders);
+  } catch (err) {
+    return json({ success: true, session: null, resumed: false, note: 'KV unavailable, operating in offline mode' }, corsHeaders);
+  }
+}
+
+async function handleClassroomEvent(request, env, corsHeaders) {
+  try {
+    const body = await request.json();
+    const { classId, studentId, type, ruleStatus, ts, notes } = body;
+    if (!classId) return json({ error: 'classId required' }, corsHeaders, 400);
+
+    const event = {
+      classId,
+      studentId: studentId || '',
+      type: type || 'note',
+      ruleStatus: ruleStatus || 'neutral',
+      ts: ts || Date.now(),
+      notes: notes || ''
+    };
+
+    const sessionKey = `session:${classId}`;
+    const existing = await kvGet(env, sessionKey);
+    if (existing) {
+      const session = JSON.parse(existing);
+      session.events.push(event);
+      await kvPut(env, sessionKey, JSON.stringify(session));
+    }
+
+    return json({ success: true, event }, corsHeaders);
+  } catch (err) {
+    return json({ success: true, event: null, note: 'KV unavailable' }, corsHeaders);
+  }
+}
+
+async function handleSessionGet(request, env, corsHeaders) {
+  try {
+    const url = new URL(request.url);
+    const classId = url.searchParams.get('classId');
+    const totalStudents = parseInt(url.searchParams.get('totalStudents') || '40');
+
+    if (!classId) return json({ error: 'classId query param required' }, corsHeaders, 400);
+
+    let events = [];
+    const existing = await kvGet(env, `session:${classId}`);
+    if (existing) {
+      const session = JSON.parse(existing);
+      events = session.events || [];
+    }
+
+    const totalEvents = events.length;
+    const expectedEvents = totalStudents * 2;
+    const complianceRate = expectedEvents > 0 ? Math.min(100, Math.round((totalEvents / expectedEvents) * 100)) : 0;
+
+    return json({ events, complianceRate, totalEvents, totalStudents, classId }, corsHeaders);
+  } catch {
+    return json({ events: [], complianceRate: 0, totalEvents: 0, totalStudents: 0, classId: null }, corsHeaders);
+  }
 }

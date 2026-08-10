@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta theme-color content="#0f0f1a">
+  <title>Nguyen Family — Parent Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0f1a;
+      --bg-elevated: #151528;
+      --panel: rgba(17, 22, 32, 0.93);
+      --panel-border: rgba(255, 255, 255, 0.10);
+      --text: #f8f5ff;
+      --muted: #c2cbdc;
+      --muted-strong: #dde2ef;
+      --purple: #a855f7;
+      --purple-soft: rgba(168, 85, 247, 0.14);
+      --gold: #f59e0b;
+      --gold-soft: rgba(245, 158, 11, 0.14);
+      --success: #22c55e;
+      --danger: #ef4444;
+      --shadow-lg: 0 30px 90px rgba(0, 0, 0, 0.38);
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 14px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(168, 85, 247, 0.16), transparent 28%),
+        radial-gradient(circle at 88% 14%, rgba(245, 158, 11, 0.10), transparent 24%),
+        linear-gradient(180deg, #090b12 0%, #0f0f1a 38%, #141625 100%);
+      min-height: 100vh;
+    }
+    .dashboard {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 28px 80px;
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--panel-border);
+      margin-bottom: 36px;
+    }
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .topbar-logo {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--purple), var(--gold));
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      color: #fff;
+      font-size: 1.1rem;
+    }
+    .topbar-title h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+    .topbar-title span {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .welcome-banner {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(245, 158, 11, 0.10));
+      border: 1px solid rgba(168, 85, 247, 0.40);
+      border-radius: var(--radius-lg);
+      padding: 32px 36px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .welcome-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.15), transparent 70%);
+      pointer-events: none;
+    }
+    .welcome-banner h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    .welcome-banner p {
+      color: var(--muted-strong);
+      font-size: 1rem;
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: border-color 0.2s;
+    }
+    .card:hover {
+      border-color: rgba(168, 85, 247, 0.30);
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--panel-border);
+    }
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+    .card-icon.purple { background: var(--purple-soft); }
+    .card-icon.gold { background: var(--gold-soft); }
+    .card-header h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .student-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .student-btn {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--panel-border);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .student-btn.active {
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+    }
+    .student-btn:hover:not(.active) {
+      border-color: rgba(168, 85, 247, 0.35);
+      color: var(--text);
+    }
+    .task-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--panel-border);
+    }
+    .task-item:last-child { border-bottom: none; }
+    .task-info { flex: 1; }
+    .task-title {
+      font-weight: 700;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+    .task-meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .task-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .badge-pending {
+      background: var(--gold-soft);
+      color: var(--gold);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+    .badge-done {
+      background: rgba(34, 197, 94, 0.12);
+      color: var(--success);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+    }
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--purple), var(--gold));
+      border-radius: 999px;
+      transition: width 0.6s ease;
+    }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+    .day-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--panel-border);
+      font-size: 0.9rem;
+    }
+    .day-row:last-child { border-bottom: none; }
+    .day-name { font-weight: 600; color: var(--text); min-width: 80px; }
+    .day-date { color: var(--muted); font-size: 0.82rem; }
+    .day-stat { font-weight: 700; color: var(--gold); }
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    @media (max-width: 640px) {
+      .topbar { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="topbar">
+      <div class="topbar-brand">
+        <div class="topbar-logo">N</div>
+        <div class="topbar-title">
+          <h1>Nguyen Family</h1>
+          <span>Parent Dashboard</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="welcome-banner">
+      <h2>Track Quan & Quang's Progress</h2>
+      <p>See what they're working on each day, monitor task completion, and stay aligned with their English + career prep goals.</p>
+    </div>
+
+    <div class="student-selector">
+      <button class="student-btn active" onclick="selectStudent('quan-nguyen', this)">Quan</button>
+      <button class="student-btn" onclick="selectStudent('quang-nguyen', this)">Quang</button>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon purple">📊</div>
+          <h3>This Week</h3>
+        </div>
+        <div style="margin-bottom: 18px;">
+          <div style="display:flex;justify-content:space-between;font-size:0.9rem;font-weight:700;">
+            <span>Completion</span>
+            <span style="color:var(--gold);" id="completionPct">—</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="completionBar" style="width:0%;"></div>
+          </div>
+          <div class="progress-label">
+            <span id="completedCount">0 done</span>
+            <span id="totalCount">0 tasks</span>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:0.9rem;font-weight:700;">
+            <span>Time Logged</span>
+            <span style="color:var(--gold);" id="minutesLogged">0 min</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="minutesBar" style="width:0%;"></div>
+          </div>
+          <div class="progress-label">
+            <span id="minutesTarget">0 min target</span>
+            <span id="minutesPct">0%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon gold">📅</div>
+          <h3>Daily Log</h3>
+        </div>
+        <div id="dailyLog">
+          <div class="empty-state">Select a student to view daily activity.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 32px;">
+      <div class="card-header">
+        <div class="card-icon purple">📌</div>
+        <h3>Current Tasks</h3>
+      </div>
+      <div id="taskList">
+        <div class="empty-state">Select a student to view assigned tasks.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
+    let currentStudent = 'quan-nguyen';
+
+    function selectStudent(studentId, btn) {
+      currentStudent = studentId;
+      document.querySelectorAll('.student-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      loadDashboard();
+    }
+
+    async function loadDashboard() {
+      const weekId = new URLSearchParams(window.location.search).get('weekId') || getWeekId();
+      try {
+        const [tasksRes, logRes] = await Promise.all([
+          fetch(`${API}/api/parent/tasks?studentId=${encodeURIComponent(currentStudent)}&weekId=${weekId}`),
+          fetch(`${API}/api/tasks/history?studentId=${encodeURIComponent(currentStudent)}&weeks=1`)
+        ]);
+        const tasksData = await tasksRes.json();
+        const historyData = await logRes.json();
+        renderTasks(tasksData);
+        renderDailyLog(historyData.weeks?.[0]?.tasks || []);
+        renderStats(tasksData);
+      } catch (e) {
+        console.error('dashboard load failed', e);
+      }
+    }
+
+    function getWeekId(date = new Date()) {
+      const d = new Date(date);
+      const thursday = new Date(d);
+      thursday.setDate(d.getDate() + 3 - ((d.getDay() + 6) % 7));
+      const year = thursday.getFullYear();
+      const week = Math.floor((thursday - new Date(year, 0, 1)) / 604800000) + 1;
+      return `${year}-W${String(week).padStart(2, '0')}`;
+    }
+
+    function renderTasks(data) {
+      const container = document.getElementById('taskList');
+      const tasks = data.tasks || [];
+      if (!tasks.length) {
+        container.innerHTML = '<div class="empty-state">No tasks assigned this week.</div>';
+        return;
+      }
+      container.innerHTML = tasks.map(t => `
+        <div class="task-item">
+          <div class="task-info">
+            <div class="task-title">${escapeHtml(t.title)}</div>
+            <div class="task-meta">${escapeHtml(t.category || 'general')} · ${t.dailyMinutes || 20} min/day · due ${t.dueDate || 'this week'}</div>
+          </div>
+          <span class="task-badge ${t.status === 'completed' ? 'badge-done' : 'badge-pending'}">${t.status === 'completed' ? 'Done' : 'Pending'}</span>
+        </div>
+      `).join('');
+    }
+
+    function renderDailyLog(tasks) {
+      const container = document.getElementById('dailyLog');
+      if (!tasks.length) {
+        container.innerHTML = '<div class="empty-state">No activity logged this week.</div>';
+        return;
+      }
+      const days = [];
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        const date = d.toISOString().slice(0, 10);
+        const dayName = d.toLocaleDateString('en-US', { weekday: 'short' });
+        const dayDate = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        const logs = (tasks || []).filter(t => t.logs?.some(l => l.date === date && l.completed));
+        const minutes = logs.reduce((s, l) => s + (l.minutesSpent || 0), 0);
+        days.push({ date, dayName, dayDate, minutes, count: logs.length });
+      }
+      container.innerHTML = days.map(d => `
+        <div class="day-row">
+          <div>
+            <div class="day-name">${d.dayName}</div>
+            <div class="day-date">${d.dayDate}</div>
+          </div>
+          <div class="day-stat">${d.minutes} min</div>
+        </div>
+      `).join('');
+    }
+
+    function renderStats(data) {
+      const completionRate = data.completionRate || 0;
+      const totalMinutesLogged = data.totalMinutesLogged || 0;
+      const totalTasks = data.tasks?.length || 0;
+      const completedTasks = data.tasks?.filter(t => t.status === 'completed').length || 0;
+      document.getElementById('completionPct').textContent = Math.round(completionRate * 100) + '%';
+      document.getElementById('completionBar').style.width = (completionRate * 100) + '%';
+      document.getElementById('completedCount').textContent = `${completedTasks} done`;
+      document.getElementById('totalCount').textContent = `${totalTasks} tasks`;
+      document.getElementById('minutesLogged').textContent = `${totalMinutesLogged} min`;
+      const target = (data.tasks || []).reduce((s, t) => s + (t.totalMinutes || 0), 0);
+      document.getElementById('minutesTarget').textContent = `${target} min target`;
+      const pct = target > 0 ? Math.round((totalMinutesLogged / target) * 100) : 0;
+      document.getElementById('minutesBar').style.width = Math.min(100, pct) + '%';
+      document.getElementById('minutesPct').textContent = pct + '%';
+    }
+
+    function escapeHtml(str) {
+      return String(str || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    }
+
+    loadDashboard();
+  </script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta theme-color content="#0a1929">
+  <title>Quy — Bluetech Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue-deep: #0a1929;
+      --blue-dark: #0d2137;
+      --blue-mid: #0f3460;
+      --blue: #0056b3;
+      --blue-bright: #00a3e0;
+      --blue-glow: rgba(0, 163, 224, 0.25);
+      --white: #ffffff;
+      --white-soft: #e6f2ff;
+      --muted: #8aa8c7;
+      --panel: rgba(13, 33, 55, 0.93);
+      --panel-border: rgba(0, 163, 224, 0.18);
+      --success: #22c55e;
+      --danger: #ef4444;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(0, 163, 224, 0.10), transparent 28%),
+        radial-gradient(circle at 88% 14%, rgba(0, 86, 179, 0.10), transparent 24%),
+        linear-gradient(180deg, #090e17 0%, #0a1929 38%, #0d2137 100%);
+      min-height: 100vh;
+    }
+    .portal { max-width: 960px; margin: 0 auto; padding: 40px 28px 80px; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 0; border-bottom: 1px solid var(--panel-border);
+      margin-bottom: 36px;
+    }
+    .topbar-brand { display: flex; align-items: center; gap: 14px; }
+    .topbar-logo {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--blue-bright), var(--blue));
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Outfit', sans-serif; font-weight: 800; color: #fff;
+      font-size: 1.1rem; box-shadow: 0 8px 24px rgba(0, 163, 224, 0.25);
+    }
+    .topbar-title h1 {
+      font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+    .topbar-title span {
+      font-size: 0.78rem; color: var(--muted); letter-spacing: 0.04em;
+    }
+    .logout-btn {
+      padding: 10px 18px; border-radius: var(--radius-sm);
+      border: 1px solid var(--panel-border); background: rgba(255,255,255,0.03);
+      color: var(--muted); font-family: 'Outfit', sans-serif; font-weight: 600;
+      font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
+    }
+    .logout-btn:hover { border-color: rgba(239,68,68,0.4); color: var(--danger); }
+    .welcome-banner {
+      background: linear-gradient(135deg, rgba(0, 163, 224, 0.14), rgba(0, 86, 179, 0.10));
+      border: 1px solid rgba(0, 163, 224, 0.35);
+      border-radius: var(--radius-lg); padding: 32px 36px;
+      margin-bottom: 32px; position: relative; overflow: hidden;
+    }
+    .welcome-banner::before {
+      content: ''; position: absolute; top: 0; right: 0;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(0, 163, 224, 0.12), transparent 70%);
+      pointer-events: none;
+    }
+    .welcome-banner h2 {
+      font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 800;
+      margin-bottom: 8px; position: relative; z-index: 1;
+    }
+    .welcome-banner p {
+      color: var(--muted); font-size: 1rem; position: relative; z-index: 1;
+      max-width: 600px;
+    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 32px; }
+    .card {
+      background: var(--panel); border: 1px solid var(--panel-border);
+      border-radius: var(--radius-lg); padding: 28px; position: relative; overflow: hidden;
+    }
+    .card-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+      padding-bottom: 16px; border-bottom: 1px solid var(--panel-border);
+    }
+    .card-icon {
+      width: 40px; height: 40px; border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; background: rgba(0, 163, 224, 0.10); color: var(--blue-bright);
+    }
+    .card-header h3 {
+      font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--white-soft);
+    }
+    .task-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; border-bottom: 1px solid var(--panel-border);
+    }
+    .task-item:last-child { border-bottom: none; }
+    .task-info { flex: 1; }
+    .task-title { font-weight: 700; color: var(--white); font-size: 0.95rem; }
+    .task-meta { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+    .task-badge {
+      font-size: 0.75rem; font-weight: 700; padding: 4px 12px;
+      border-radius: 999px; letter-spacing: 0.04em; text-transform: uppercase;
+      font-family: 'Outfit', sans-serif;
+    }
+    .badge-pending {
+      background: rgba(0, 163, 224, 0.12); color: var(--blue-bright);
+      border: 1px solid rgba(0, 163, 224, 0.25);
+    }
+    .badge-done {
+      background: rgba(34, 197, 94, 0.12); color: var(--success);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+    }
+    .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 0.95rem; }
+    .progress-bar-wrap {
+      width: 100%; height: 6px; background: rgba(255,255,255,0.06);
+      border-radius: 999px; overflow: hidden; margin-top: 10px;
+    }
+    .progress-bar-fill {
+      height: 100%; background: linear-gradient(90deg, var(--blue-bright), var(--blue));
+      border-radius: 999px; transition: width 0.6s ease;
+    }
+    .progress-label { font-size: 0.82rem; color: var(--muted); margin-top: 8px; }
+    .done-btn {
+      padding: 6px 14px; border-radius: 6px; border: 1px solid var(--blue);
+      color: var(--blue-bright); background: rgba(0, 163, 224, 0.08);
+      cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 0.8rem;
+      font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .done-btn:hover { background: rgba(0, 163, 224, 0.18); box-shadow: 0 2px 8px rgba(0, 163, 224, 0.2); }
+    @media (max-width: 640px) {
+      .topbar { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="portal">
+    <div class="topbar">
+      <div class="topbar-brand">
+        <div class="topbar-logo">B</div>
+        <div class="topbar-title">
+          <h1>Quy Nguyen</h1>
+          <span>Bluetech Employee Portal</span>
+        </div>
+      </div>
+      <button class="logout-btn" onclick="logout()">Sign Out</button>
+    </div>
+
+    <div class="welcome-banner">
+      <h2>Welcome back, Quy</h2>
+      <p>Check your weekly tasks, log your daily practice, and track your English progress.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">📌</div>
+        <h3>This Week's Tasks</h3>
+      </div>
+      <div id="taskList">
+        <div class="empty-state">Loading tasks...</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">📋</div>
+        <h3>Daily Work Log</h3>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
+        <select id="wlActivity" style="flex:1;min-width:140px;padding:10px 12px;border-radius:10px;border:1px solid var(--panel-border);background:rgba(255,255,255,0.04);color:var(--white);font-family:inherit;font-size:0.9rem;">
+          <option value="Listening">🎧 Listening</option>
+          <option value="Speaking">🗣️ Speaking</option>
+          <option value="Reading">📖 Reading</option>
+          <option value="Writing">✍️ Writing</option>
+          <option value="Homework">📝 Homework</option>
+          <option value="Phonics">🔊 Phonics</option>
+          <option value="Study Mode">📚 Study Mode</option>
+          <option value="Other">📌 Other</option>
+        </select>
+        <input id="wlDuration" type="number" min="1" max="480" placeholder="Minutes" style="width:90px;padding:10px 12px;border-radius:10px;border:1px solid var(--panel-border);background:rgba(255,255,255,0.04);color:var(--white);font-family:inherit;font-size:0.9rem;">
+        <button id="wlSaveBtn" style="padding:10px 18px;border-radius:8px;border:none;background:linear-gradient(135deg, var(--blue-bright), var(--blue));color:#fff;font-family:'Outfit',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.05em;cursor:pointer;text-transform:uppercase;">Log</button>
+      </div>
+      <textarea id="wlNotes" rows="2" placeholder="What did you work on?" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--panel-border);background:rgba(255,255,255,0.04);color:var(--white);font-family:inherit;font-size:0.9rem;resize:vertical;margin-bottom:10px;"></textarea>
+      <p id="wlStatus" style="font-size:0.8rem;color:var(--muted);margin-bottom:8px;min-height:18px;"></p>
+      <div id="wlList" style="display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto;"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">📈</div>
+        <h3>Weekly Progress</h3>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="levelBar" style="width:5%;"></div>
+      </div>
+      <div class="progress-label" id="levelLabel">Building professional English skills for the workplace</div>
+    </div>
+  </div>
+
+  <script>
+    const API = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
+    const STUDENT_ID = 'quy-bluetech';
+
+    function requireAuth() {
+      const session = localStorage.getItem('bluetech_session');
+      if (!session) { window.location.replace('/bluetech-login/'); return false; }
+      const data = JSON.parse(session);
+      if (data.role !== 'student' || data.studentId !== STUDENT_ID) { window.location.replace('/bluetech-login/'); return false; }
+      return true;
+    }
+
+    function logout() {
+      localStorage.removeItem('bluetech_session');
+      window.location.replace('/bluetech-login/');
+    }
+
+    async function loadTasks() {
+      if (!requireAuth()) return;
+      try {
+        const r = await fetch(`${API}/api/tasks/current?studentId=${STUDENT_ID}`);
+        const d = await r.json();
+        const container = document.getElementById('taskList');
+        const tasks = d.tasks || [];
+        if (!tasks.length) {
+          container.innerHTML = '<div class="empty-state">No tasks assigned this week. Check back later!</div>';
+          return;
+        }
+        container.innerHTML = tasks.map(t => `
+          <div class="task-item">
+            <div class="task-info">
+              <div class="task-title">${escapeHtml(t.title)}</div>
+              <div class="task-meta">${escapeHtml(t.category || 'general')} · ${t.dailyMinutes || 20} min · due ${t.dueDate || 'this week'}</div>
+            </div>
+            <button class="done-btn" onclick="completeTask('${t.id}')">Done</button>
+          </div>
+        `).join('');
+      } catch (e) {
+        document.getElementById('taskList').innerHTML = '<div class="empty-state">Failed to load tasks.</div>';
+      }
+    }
+
+    async function completeTask(taskId) {
+      const today = new Date().toISOString().slice(0, 10);
+      const duration = document.getElementById('wlDuration')?.value || 20;
+      const notes = document.getElementById('wlNotes')?.value || '';
+      try {
+        const r = await fetch(`${API}/api/tasks/log`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ taskId, studentId: STUDENT_ID, date: today, completed: true, minutesSpent: Number(duration), notes })
+        });
+        const d = await r.json();
+        const status = document.getElementById('wlStatus');
+        if (d.ok) {
+          if (status) { status.textContent = 'Task logged ✓'; status.style.color = 'var(--success)'; }
+          setTimeout(loadTasks, 600);
+        } else {
+          if (status) { status.textContent = d.error || 'Failed'; status.style.color = 'var(--danger)'; }
+        }
+      } catch (e) {
+        const status = document.getElementById('wlStatus');
+        if (status) { status.textContent = 'Network error'; status.style.color = 'var(--danger)'; }
+      }
+    }
+
+    async function saveWorkLog() {
+      const activity = document.getElementById('wlActivity')?.value || 'Other';
+      const duration = document.getElementById('wlDuration')?.value || 0;
+      const notes = document.getElementById('wlNotes')?.value || '';
+      const status = document.getElementById('wlStatus');
+      if (!duration) { if (status) { status.textContent = 'Enter minutes'; status.style.color = 'var(--danger)'; } return; }
+      if (status) { status.textContent = 'Saving...'; status.style.color = 'var(--muted)'; }
+      try {
+        await fetch(`${API}/api/practice`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ studentId: STUDENT_ID, level: 'A1', topic: `${activity} - ${notes}` })
+        });
+        if (status) { status.textContent = 'Saved ✓'; status.style.color = 'var(--success)'; }
+        setTimeout(() => { if (status) status.textContent = ''; }, 2000);
+      } catch (e) {
+        if (status) { status.textContent = 'Save failed'; status.style.color = 'var(--danger)'; }
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    }
+
+    const wlSaveBtn = document.getElementById('wlSaveBtn');
+    if (wlSaveBtn) wlSaveBtn.addEventListener('click', saveWorkLog);
+
+    if (requireAuth()) loadTasks();
+  </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+# I-LOG COLORIZED — Incarnate-18-Nguyen-Portal-Development
+
+**Run:** 44
+**Session:** Incarnate-18-Nguyen-Portal-Development
+**Color standard:** 💜 SOUL | ❤️ DNA | 💛 REASON | 💚 PHEROMONE
+
+---
+
+💜 **SOUL** (user turn — 1)
+> /reincarnateRISE Incarnate-18-Nguyen-Portal-Development
+
+---
+
+❤️ **DNA** (assistant turns — 4)
+> Incarnate-18 execution in progress. Completed: RISE protocol, I-LOG/pipeline artifacts, Nguyen portal asset assessment, task data module (src/tasks.js), task API routes in src/index.js, Quan/Quang portal task widgets, parent dashboard page (public/nguyen-parent-dashboard/index.html). Validated: wrangler dry-run passed, module wiring confirmed.
+
+> Edge cases fixed: task status not updated on completion (now marks task completed), summary totalMinutesLogged always 0 (now calculated from daily logs), getStudentTasksWithLogs used creation date instead of task logs (now fetches logs correctly), no parent PIN auth (added /api/parent/checkpin and /api/admin/parent/setpin), missing route guard on parent/tasks (now requires PIN), input validation added (studentId, title, minutes bounds).
+
+> Live portals deployed. New pages: /nguyen-login/ (unified login for Parents/Quan/Quang), /nguyen-parent/ (parent dashboard with weekly completion, time logged, daily log, current tasks), /nguyen-quang/ (Quang student portal with task widget and work log), /nguyen-quan/ (Quan student portal with task widget and work log). Deployment: https://net-pet-ai.mrmichaelhobbs123.workers.dev. Parent PIN must be set via admin API before parent can log in.
+
+> Setup completed. PINs set: parent=9999, Quan=1111, Quang=2222 (stored in D1 nguyen_settings). Placeholder tasks populated: Quan has 5 tasks (LinkedIn, CV, Facebook, 3D modeling, presentation), Quang has 4 tasks (S/SH phonics, shadowing, university English, daily conversation). KV write quota was exhausted; task storage migrated to D1 (nguyen_tasks, nguyen_task_logs, nguyen_task_summaries). Setup endpoint removed after initialization. All endpoints verified and live.
+
+---
+
+💛 **REASON** (reasoning blocks — 0)
+> None captured in this session.
+
+---
+
+💚 **PHEROMONE** (tool calls — 0)
+> None captured in this session.
+
+---
+
+## Stats
+- SOULcount: 1
+- DNAcount: 4
+- REASONcount: 0
+- PHEROMONEcount: 0
+- Total messages: 5

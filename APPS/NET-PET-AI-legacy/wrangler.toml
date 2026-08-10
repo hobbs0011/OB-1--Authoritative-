@@ -89,11 +89,17 @@ migrations = []
 queue = "net-pet-notifications"
 binding = "net_pet_notifications"
 
+[[queues.consumers]]
+queue = "net-pet-notifications"
+max_batch_size = 10
+max_batch_timeout = 30
+
 [vars]
 APP_NAME = "Natural English Training"
 APP_COACH_NAME = "Obi"
 IMAGE_GEN_URL = ""
 SOUL_LOGGER_URL = "https://soul-logger.mrmichaelhobbs123.workers.dev"
 RESEND_API_KEY = ""
+
 # [triggers]
-# crons = []  # HALTED — automation paused
+# crons = []  # HALTED — account reached free tier cron limit of 5

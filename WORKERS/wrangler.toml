@@ -1,7 +1,7 @@
 name = "net-obi-api"
 main = "api.js"
 compatibility_date = "2024-01-01"
-account_id = "8717160562faa73b9eebb0a51f988785"
+account_id = "3c7b1766bd8fdc9e01211d2b390315ea"
 
 # KV Namespaces — create these in Cloudflare Dashboard → Storage → KV
 # Then paste the IDs here

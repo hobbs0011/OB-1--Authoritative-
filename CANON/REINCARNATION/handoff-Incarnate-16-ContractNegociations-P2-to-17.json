@@ -1,29 +1,35 @@
 {
-    "from_session": "Incarnate-16-ContractNegociations-P2",
-    "from_run": 16,
-    "to_run": 17,
-    "timestamp": "2026-08-04T23:17:50+07:00",
-    "riLE": "RISE → SCOUT → DEEPTHINK → AUDIT → BLUEPRINT → PIPELINE → DEATH",
-    "ilog": "I-LOG-UNAUDITED/I-LOG-Incarnate-16-ContractNegociations-P2.txt",
-    "audit": "CANON/AUDIT/Incarnate-16-ContractNegociations-P2-AUDIT.md",
-    "blueprint": "public/counter-proposal-casa/index.html",
-    "pipeline": "CANON/PIPELINE/Incarnate-16-ContractNegociations-P2-PIPELINE.md",
-    "death_seal": "CANON/REINCARNATION/Incarnate-16-ContractNegociations-P2-reincarnateDEATH.md",
-    "cloudflare_url": "https://casa-counter-proposal.pages.dev",
-    "audit_verdict": "AUDIT CLEAN — 15 clauses tracked, 7 gaps resolved, 3 clauses restored, 1 contradiction corrected",
-    "gaps_resolved": [
-        "BB-AAA-12-NAMING: Incarnate-12 naming mismatch (KiloFreeDeepDive → ContractNegociations) — CLOSED",
-        "BB-AAA-12-KEYWORDS: rfkw for Incarnate-12 — CLOSED (rfkw extracted)",
-        "BB-AAA-13-COMPLETE: Missing DEATH artifacts for Incarnate-13 — CLOSED",
-        "BB-AAA-13-KEYWORDS: rfkw for Incarnate-13 — CLOSED",
-        "BB-AAA-14-COMPLETE: Missing DEATH artifacts for Incarnate-14 — CLOSED",
-        "BB-AAA-14-KEYWORDS: rfkw for Incarnate-14 — CLOSED",
-        "BB-AAA-14-DEPLOY: Oktava portal deploy — CLOSED"
-    ],
-    "open_items": [
-        "Cargo delivery to Anh Bảo — pipeline STAGE 1 (workhorse scope)",
-        "Contract finalization and signing — pipeline STAGE 2 (workhorse scope)",
-        "Operational schedule confirmation with CASA — pipeline STAGE 4 (workhorse scope)"
-    ],
-    "next_session_receives": "Complete counter-proposal blueprint, full audit trail, execution pipeline. All prior session gaps resolved. Workhorse needs only execution: deliver to Anh Bảo, collect response, finalise contract, file artifacts."
+  "from_session": "Incarnate-16-ContractNegociations-P2",
+  "from_run": 16,
+  "to_run": 17,
+  "timestamp": "2026-08-09T14:24:09+07:00",
+  "riLE": "RISE → SCOUT → DEEPTHINK → AUDIT → BLUEPRINT → PIPELINE → DEATH",
+  "ilog": "I-LOG-UNAUDITED/I-LOG-Incarnate-16-ContractNegociations-P2.txt",
+  "audit": "CANON/AUDIT/Incarnate-16-ContractNegociations-P2-AUDIT.md",
+  "blueprint": "public/counter-proposal-casa/index.html",
+  "pipeline": "CANON/PIPELINE/Incarnate-16-ContractNegociations-P2-PIPELINE.md",
+  "death_seal": "CANON/REINCARNATION/Incarnate-16-ContractNegociations-P2-reincarnateDEATH.md",
+  "cloudflare_url": "https://production.casa-amendment-request.pages.dev",
+  "audit_verdict": "AUDIT CLEAN — 15 clauses tracked, 7 gaps resolved, 3 clauses restored, 1 contradiction corrected",
+  "gaps_resolved": [
+      "BB-AAA-12-NAMING: Incarnate-12 naming mismatch (KiloFreeDeepDive → ContractNegociations) — CLOSED",
+      "BB-AAA-12-KEYWORDS: rfkw for Incarnate-12 — CLOSED (rfkw extracted)",
+      "BB-AAA-13-COMPLETE: Missing DEATH artifacts for Incarnate-13 — CLOSED",
+      "BB-AAA-13-KEYWORDS: rfkw for Incarnate-13 — CLOSED",
+      "BB-AAA-14-COMPLETE: Missing DEATH artifacts for Incarnate-14 — CLOSED",
+      "BB-AAA-14-KEYWORDS: rfkw for Incarnate-14 — CLOSED",
+      "BB-AAA-14-DEPLOY: Oktava portal deploy — CLOSED"
+  ],
+  "session_additions": [
+      "KPI paragraph added to Question 2: marketing control delegation, lead conversion guarantee, AI sales funnel experience, 5-page eval workflow",
+      "Cambridge flexibility paragraph added to Question 4: Anh Minh's marketing requirement, no toe-stepping, flexible cooperation",
+      "Closing paragraph added before signature: stability vs solutions framing, open-minded businessmen, wiggle room on 160 hours",
+      "Redeployed to production: https://production.casa-amendment-request.pages.dev"
+  ],
+  "open_items": [
+      "Cargo delivery to Anh Bảo — pipeline STAGE 1 (workhorse scope)",
+      "Contract finalization and signing — pipeline STAGE 2 (workhorse scope)",
+      "Operational schedule confirmation with CASA — pipeline STAGE 4 (workhorse scope)"
+  ],
+  "next_session_receives": "Complete counter-proposal blueprint with all user additions (KPI, Cambridge flexibility, closing paragraph), full audit trail, execution pipeline. All prior session gaps resolved. Workhorse needs only execution: deliver to Anh Bảo, collect response, finalise contract, file artifacts."
 }

@@ -100,4 +100,96 @@ CREATE TABLE IF NOT EXISTS pets (
   updated_at INTEGER NOT NULL DEFAULT (strftime('%s', 'now'))
 );
 
+CREATE TABLE IF NOT EXISTS nguyen_tasks (
+  id TEXT PRIMARY KEY,
+  week_id TEXT NOT NULL,
+  student_id TEXT NOT NULL,
+  category TEXT DEFAULT 'general',
+  title TEXT NOT NULL,
+  description TEXT DEFAULT '',
+  daily_minutes INTEGER DEFAULT 20,
+  total_minutes INTEGER DEFAULT 140,
+  due_date TEXT,
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  created_by TEXT DEFAULT 'teacher',
+  status TEXT DEFAULT 'active'
+);
+
+CREATE TABLE IF NOT EXISTS nguyen_task_logs (
+  task_id TEXT NOT NULL,
+  date TEXT NOT NULL,
+  student_id TEXT NOT NULL,
+  completed INTEGER DEFAULT 0,
+  minutes_spent INTEGER DEFAULT 0,
+  notes TEXT DEFAULT '',
+  audio_url TEXT DEFAULT '',
+  submitted_at TEXT NOT NULL DEFAULT (datetime('now')),
+  PRIMARY KEY (task_id, date, student_id)
+);
+
+CREATE TABLE IF NOT EXISTS nguyen_task_summaries (
+  week_id TEXT NOT NULL,
+  student_id TEXT NOT NULL,
+  total_tasks INTEGER DEFAULT 0,
+  completed_tasks INTEGER DEFAULT 0,
+  total_minutes_planned INTEGER DEFAULT 0,
+  total_minutes_logged INTEGER DEFAULT 0,
+  categories TEXT DEFAULT '{}',
+  streak INTEGER DEFAULT 0,
+  generated_at TEXT NOT NULL DEFAULT (datetime('now')),
+  PRIMARY KEY (week_id, student_id)
+);
+
+CREATE TABLE IF NOT EXISTS nguyen_settings (
+  key TEXT PRIMARY KEY,
+  value TEXT DEFAULT '',
+  updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS bluetech_tasks (
+  id TEXT PRIMARY KEY,
+  week_id TEXT NOT NULL,
+  student_id TEXT NOT NULL,
+  category TEXT DEFAULT 'general',
+  title TEXT NOT NULL,
+  description TEXT DEFAULT '',
+  daily_minutes INTEGER DEFAULT 20,
+  total_minutes INTEGER DEFAULT 140,
+  due_date TEXT,
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  created_by TEXT DEFAULT 'teacher',
+  status TEXT DEFAULT 'active'
+);
+
+CREATE TABLE IF NOT EXISTS bluetech_task_logs (
+  task_id TEXT NOT NULL,
+  date TEXT NOT NULL,
+  student_id TEXT NOT NULL,
+  completed INTEGER DEFAULT 0,
+  minutes_spent INTEGER DEFAULT 0,
+  notes TEXT DEFAULT '',
+  audio_url TEXT DEFAULT '',
+  submitted_at TEXT NOT NULL DEFAULT (datetime('now')),
+  PRIMARY KEY (task_id, date, student_id)
+);
+
+CREATE TABLE IF NOT EXISTS bluetech_task_summaries (
+  week_id TEXT NOT NULL,
+  student_id TEXT NOT NULL,
+  total_tasks INTEGER DEFAULT 0,
+  completed_tasks INTEGER DEFAULT 0,
+  total_minutes_planned INTEGER DEFAULT 0,
+  total_minutes_logged INTEGER DEFAULT 0,
+  categories TEXT DEFAULT '{}',
+  streak INTEGER DEFAULT 0,
+  generated_at TEXT NOT NULL DEFAULT (datetime('now')),
+  PRIMARY KEY (week_id, student_id)
+);
+
+CREATE TABLE IF NOT EXISTS bluetech_settings (
+  key TEXT PRIMARY KEY,
+  value TEXT DEFAULT '',
+  updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
 CREATE INDEX IF NOT EXISTS idx_pets_student ON pets(student_id);

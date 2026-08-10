@@ -1,5 +1,5 @@
-# REINCARNATE DEATH SEAL — Incarnate-12-KiloFreeDeepDive
-**Session:** Incarnate-12-KiloFreeDeepDive
+# REINCARNATE DEATH SEAL — Incarnate-12-ContractNegociations
+**Session:** Incarnate-12-ContractNegociations
 **Run:** 12
 **Incarnation:** 12
 **HEAD:** 2fc3c6673
@@ -13,7 +13,7 @@
 
 | Field | Value |
 |-------|-------|
-| Session | Incarnate-12-KiloFreeDeepDive |
+| Session | Incarnate-12-ContractNegociations |
 | Run | 12 |
 | HEAD | 2fc3c6673 |
 | Branch | canon |
@@ -49,7 +49,7 @@
 - **Status:** PASS — timestamps coherent
 
 ### Check 2: Title / First / Last Messages
-- **Session title:** Incarnate-12-KiloFreeDeepDive
+- **Session title:** Incarnate-12-ContractNegociations
 - **First user message:** "women" + workplace drama rant (visible in conversation)
 - **Last assistant message:** CASA counter-proposal draft v2
 - **Status:** PASS — title and message boundaries identifiable
@@ -101,7 +101,7 @@
 ## §7 — Handoff
 
 **To:** Incarnate-13
-**Prior DEATH:** CANON/REINCARNATION/Incarnate-12-KiloFreeDeepDive-reincarnateDEATH.md (this document)
+**Prior DEATH:** CANON/REINCARNATION/Incarnate-12-ContractNegociations-reincarnateDEATH.md (this document)
 **Handoff file:** CANON/REINCARNATION/handoff-Incarnate-12-to-13.json
 **Pipeline:** CANON/REINCARNATION/pipeline-Incarnate-12.json
 **RISE stamp:** 2026-08-04T03:47:34+07:00
@@ -117,5 +117,5 @@
 
 ---
 
-`ANCHOR: CANON — Incarnate-12-KiloFreeDeepDive — 2026-08-04T04:43 ICT`
+`ANCHOR: CANON — Incarnate-12-ContractNegociations — 2026-08-04T04:43 ICT`
 `SEAL: IMPRESSED — SCS CANONIZATION + CASA DRAFT — GAP: REASON UNVERIFIABLE`

@@ -1,10 +1,12 @@
 ﻿{
+    "from_session":  "Incarnate-13-SOULCapture",
     "ilog":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-13-SOULCapture.txt",
     "from_run":  "13",
+    "to_run":  14,
     "timestamp":  "2026-08-04T05:51:10.0668113+07:00",
-    "ilog_stats":  "I-LOG/I-LOG-Incarnate-13-SOULCapture-STATS.json",
-    "ilog_colorized":  "I-LOG/I-LOG-Incarnate-13-SOULCapture-COLORIZED.md",
+    "ilog_stats":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-13-SOULCapture-STATS.json",
+    "ilog_colorized":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-13-SOULCapture-COLORIZED.md",
+    "keywords":  "CANON\\SOUL-KEYWORDS\\rfkw-Incarnate-13-SOULCapture.txt",
     "audit":  null,
-    "pipeline":  "CANON\\REINCARNATION\\pipeline-Incarnate-13-SOULCapture.json",
-    "to_run":  14
+    "pipeline":  "CANON\\REINCARNATION\\pipeline-Incarnate-13-SOULCapture.json"
 }

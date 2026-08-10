@@ -3,289 +3,268 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0a0a12">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>BlueTech English Class</title>
+  <meta theme-color content="#0a1929">
+  <title>Bluetech Portal — Login</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/portal.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    .g999-top {
-      position: fixed;
-      top: 1.5rem;
-      right: 1.5rem;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.65rem;
+    :root {
+      --blue-deep: #0a1929;
+      --blue-dark: #0d2137;
+      --blue-mid: #0f3460;
+      --blue: #0056b3;
+      --blue-bright: #00a3e0;
+      --blue-glow: rgba(0, 163, 224, 0.25);
+      --white: #ffffff;
+      --white-soft: #e6f2ff;
+      --muted: #8aa8c7;
+      --panel: rgba(13, 33, 55, 0.92);
+      --panel-border: rgba(0, 163, 224, 0.20);
+      --success: #22c55e;
+      --danger: #ef4444;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 20% 30%, rgba(0, 163, 224, 0.10), transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(0, 86, 179, 0.12), transparent 50%),
+        linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-dark) 50%, var(--blue-deep) 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .login-wrap { width: 100%; max-width: 440px; }
+    .brand { text-align: center; margin-bottom: 32px; }
+    .brand-logo {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, var(--blue-bright), var(--blue));
+      border-radius: var(--radius-md);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      color: var(--white);
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+      box-shadow: 0 16px 48px rgba(0, 163, 224, 0.30), inset 0 1px 0 rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.15);
+      letter-spacing: 0.02em;
+    }
+    .brand h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: var(--white);
+    }
+    .brand p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 6px;
+      font-style: italic;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.40), inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .role-btn {
+      padding: 14px 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--panel-border);
+      background: rgba(0, 163, 224, 0.04);
+      color: var(--muted);
+      font-family: 'Outfit', sans-serif;
       font-weight: 600;
-      letter-spacing: 0.2em;
-      color: var(--gold);
-      text-transform: uppercase;
-      opacity: 0.9;
-      z-index: 9999;
-      pointer-events: none;
-      text-shadow: 0 0 10px rgba(245,158,11,0.3);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      text-align: center;
+      letter-spacing: 0.03em;
     }
-    .g999-corner {
-      position: fixed;
-      bottom: 1.5rem;
-      left: 1.5rem;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 0.55rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      color: rgba(168,85,247,0.5);
-      text-transform: uppercase;
-      z-index: 9999;
-      pointer-events: none;
+    .role-btn:hover { background: rgba(0, 163, 224, 0.10); color: var(--white); }
+    .role-btn.active {
+      background: linear-gradient(135deg, rgba(0, 163, 224, 0.25), rgba(0, 86, 179, 0.20));
+      color: var(--white);
+      border-color: rgba(0, 163, 224, 0.50);
+      box-shadow: 0 0 20px rgba(0, 163, 224, 0.15);
     }
-    .login-crest-wrap { margin-bottom: 18px; }
-    .login-crest {
-      width: 72px; height: 72px; object-fit: contain; filter: drop-shadow(0 0 18px rgba(168,85,247,0.35));
+    .pin-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .pin-input {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--panel-border);
+      background: rgba(255,255,255,0.04);
+      color: var(--white);
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.3em;
+      text-align: center;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .pin-input:focus {
+      border-color: var(--blue-bright);
+      box-shadow: 0 0 0 3px rgba(0, 163, 224, 0.15);
+    }
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      border: none;
+      background: linear-gradient(135deg, var(--blue-bright), var(--blue));
+      color: var(--white);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      margin-top: 16px;
+      transition: all 0.2s;
+      box-shadow: 0 8px 24px rgba(0, 163, 224, 0.25);
+    }
+    .login-btn:hover {
+      box-shadow: 0 12px 32px rgba(0, 163, 224, 0.40);
+      transform: translateY(-1px);
+    }
+    .login-error {
+      color: var(--danger);
+      font-size: 0.85rem;
+      text-align: center;
+      margin-top: 12px;
+      min-height: 20px;
+    }
+    .footer-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 24px;
+      opacity: 0.8;
     }
   </style>
 </head>
-<body class="portal-bluetech">
-  <!-- LOGIN OVERLAY -->
-  <div id="loginScreen">
-    <div class="login-box" id="loginBox">
-      <div class="login-crest-wrap">
-        <img src="/isolated/phoenix-crest-clean.png" alt="Phoenix" class="login-crest" onerror="this.style.display='none'">
+<body>
+  <div class="login-wrap">
+    <div class="brand">
+      <div class="brand-logo">B</div>
+      <h1>BLUETECH PORTAL</h1>
+      <p>Staff Development &amp; Progress Tracking</p>
+    </div>
+    <div class="card">
+      <div class="role-grid">
+        <button class="role-btn active" data-role="student" onclick="selectRole('student')">Employee</button>
+        <button class="role-btn" data-role="teacher" onclick="selectRole('teacher')">Teacher</button>
+        <button class="role-btn" data-role="admin" onclick="selectRole('admin')">Admin</button>
       </div>
-      <h1>BLUETECH</h1>
-      <p class="login-subtitle">Staff English Program</p>
-      <input type="password" id="pinInput" placeholder="Family PIN" autocomplete="off">
-      <button class="login-btn" id="loginBtn">Unlock Portal</button>
+      <div class="pin-label" id="pinLabel">Employee PIN</div>
+      <select id="studentSelect" class="pin-input" style="text-align:left;letter-spacing:0;display:none;margin-bottom:10px;">
+        <option value="huong-bluetech">Huong</option>
+        <option value="mai-tram-bluetech">Mai Tram</option>
+        <option value="quy-bluetech">Quy</option>
+      </select>
+      <input type="password" id="pinInput" class="pin-input" placeholder="Enter PIN" autocomplete="off" maxlength="20">
+      <button class="login-btn" id="loginBtn" onclick="doLogin()">Sign In</button>
       <p class="login-error" id="loginErr"></p>
     </div>
+    <p class="footer-note">Bluetech Ingredients Ltd. &middot; Lakeview City, Thu Duc, HCMC</p>
   </div>
 
-  <div id="navBackdrop"></div>
-  <!-- TOP NAV -->
-  <nav id="topNav" class="hidden">
-    <a class="nav-brand" href="/bluetech-login/">
-      <img src="/isolated/phoenix-crest-clean.png" alt="Phoenix" onerror="this.style.display='none'" style="width:32px;height:32px;object-fit:contain;">
-      <span>BLUETECH</span>
-    </a>
-    <button class="nav-hamburger" id="navToggle" aria-label="Menu">☰</button>
-    <div class="nav-links" id="navLinks">
-      <a href="#roster" class="active">Roster</a>
-      <a href="#rules">Class Rules</a>
-      <a href="#vocab">Vocabulary</a>
-      <a href="#progress">Progress</a>
-      <a href="#tips">Session Tips</a>
-    </div>
-    <button class="nav-logout" id="logoutBtn">Sign Out</button>
-  </nav>
-
-  <img src="/isolated/phoenix-crest-clean.png" class="portal-watermark" alt="" style="display:none;">
-
-  <!-- MAIN CONTENT -->
-  <main class="main-container">
-    <div class="dashboard-header">
-      <h1>BlueTech</h1>
-      <p class="subtitle">Staff English Program</p>
-      <div class="tiger-slogan">Workplace English</div>
-    </div>
-
-    <section id="roster" class="section active">
-      <div class="content-card">
-        <div class="card-label">Active students</div>
-        <ul class="action-list">
-          <li><strong>Mai Tram</strong> — HR professional · BlueTech corporate · Cub (advancing)</li>
-          <li><strong>Huong</strong> — BlueTech staff · strong listening foundation · pronunciation focus</li>
-          <li><strong>Nguyễn Thị Thu Quy</strong> — HR, 21yo · BlueTech · Mouse → Cub bridge</li>
-        </ul>
-      </div>
-      <div class="content-card">
-        <div class="card-label">Session context</div>
-        <p class="login-subtitle" style="margin:0;">Workplace English for Vietnamese corporate staff. Focus: spontaneous conversation, HR vocabulary, client communication, and KISS-style output. No scripts. No Vietnamese. No perfectionism.</p>
-      </div>
-    </section>
-
-    <section id="rules" class="section">
-      <div class="content-card">
-        <div class="card-label">Operating rules</div>
-        <ul class="action-list">
-          <li><strong>No scripts.</strong> Staff may not bring prepared questions into session.</li>
-          <li><strong>No Vietnamese.</strong> Class runs in English only. Bridges are forbidden.</li>
-          <li><strong>KISS output.</strong> Short beats long. Clear beats smart-sounding.</li>
-          <li><strong>Volume + Velocity.</strong> Speak more, faster. Grammar follows fluency.</li>
-          <li><strong>Permission over Perfection.</strong> Mistakes are required. Silence is the failure.</li>
-          <li><strong>3-day rule.</strong> Miss three prep days and the session becomes review, not progression.</li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="vocab" class="section">
-      <div class="content-card">
-        <div class="card-label">Acquired live</div>
-        <div class="tag-list">
-          <span class="tag used">border</span>
-          <span class="tag used">visa</span>
-          <span class="tag used">street food</span>
-          <span class="tag used">motorbike</span>
-          <span class="tag used">signal</span>
-          <span class="tag used">Tet holiday</span>
-          <span class="tag used">snow</span>
-        </div>
-        <div class="card-label" style="margin-top:1rem;">Queued for active use</div>
-        <div class="tag-list">
-          <span class="tag unused">quarterly bonus</span>
-          <span class="tag unused">team leader</span>
-          <span class="tag unused">supervisor</span>
-          <span class="tag unused">performance salary</span>
-          <span class="tag unused">contract</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="progress" class="section">
-      <div class="content-card">
-        <div class="card-label">Session 1 metrics</div>
-        <div class="action-list">
-          <li>Active minutes: <strong>90</strong></li>
-          <li>Words acquired: <strong>16</strong></li>
-          <li>Live usage: <strong>7</strong></li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="tips" class="section">
-      <div class="content-card">
-        <div class="card-label">Focus for next session</div>
-        <ul class="action-list">
-          <li><strong>HR workflow fluency:</strong> employee contract, onboarding, team leader vs supervisor</li>
-          <li><strong>Emotional vocabulary:</strong> sucks / cool / mature / immature / lose face</li>
-          <li><strong>Business idioms:</strong> sell ice to Eskimos, bonus structure, performance salary</li>
-          <li><strong>Grammar micro-drills:</strong> I vs me, comma = half pause, period = long pause</li>
-          <li><strong>Mindset:</strong> practice problem, not knowledge problem; fear of mistakes is the real blocker</li>
-        </ul>
-      </div>
-    </section>
-  </main>
-
   <script>
-  (function() {
-    const AUTH_KEY = 'bluetech_auth';
-    const GROUP_CODE = 'BLUETECH';
+    const API = 'https://net-pet-ai.mrmichaelhobbs123.workers.dev';
+    let selectedRole = 'student';
 
-    function isAuthed() { return localStorage.getItem(AUTH_KEY) === 'true'; }
-
-    function showPortal() {
-      document.getElementById('loginScreen').classList.add('hidden');
-      document.getElementById('topNav').classList.remove('hidden');
-      bindNav();
-    }
-
-    function showLoginError() {
-      const err = document.getElementById('loginErr');
-      const box = document.getElementById('loginBox');
-      err.textContent = 'Invalid PIN. Please try again.';
-      err.classList.add('visible');
-      box.classList.remove('shaking');
-      void box.offsetWidth;
-      box.classList.add('shaking');
-      setTimeout(() => box.classList.remove('shaking'), 600);
-    }
-
-    function navigateToPortalRoot() {
-      const path = window.location.pathname;
-      const base = path.slice(0, path.lastIndexOf('/', path.length - 1) + 1) || '/';
-      window.location.replace(base);
-    }
-
-    function logout() {
-      localStorage.removeItem(AUTH_KEY);
-      navigateToPortalRoot();
-    }
-
-    function bindNav() {
-      const toggle = document.getElementById('navToggle');
-      const links = document.getElementById('navLinks');
-      const backdrop = document.getElementById('navBackdrop');
-      function closeNav() {
-        if (!links || !toggle) return;
-        links.classList.remove('open');
-        toggle.textContent = '☰';
-        if (backdrop) backdrop.classList.remove('open');
+    function selectRole(role) {
+      selectedRole = role;
+      document.querySelectorAll('.role-btn').forEach(b => b.classList.toggle('active', b.dataset.role === role));
+      const labels = { student: 'Employee PIN', teacher: 'Teacher PIN', admin: 'Admin PIN' };
+      document.getElementById('pinLabel').textContent = labels[role] || 'PIN';
+      const studentSelect = document.getElementById('studentSelect');
+      const pinInput = document.getElementById('pinInput');
+      if (role === 'student') {
+        studentSelect.style.display = 'block';
+        pinInput.placeholder = 'Enter your PIN';
+      } else {
+        studentSelect.style.display = 'none';
+        pinInput.placeholder = 'Enter PIN';
       }
-      if (toggle && links) {
-        toggle.addEventListener('click', function() {
-          const isOpen = links.classList.toggle('open');
-          toggle.textContent = isOpen ? '✕' : '☰';
-          if (backdrop) backdrop.classList.toggle('open', isOpen);
-        });
-        links.querySelectorAll('a').forEach(function(a) {
-          a.addEventListener('click', function() {
-            closeNav();
-            const targetId = this.getAttribute('href');
-            if (targetId && targetId.startsWith('#')) {
-              document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
-              const target = document.querySelector(targetId);
-              if (target) target.classList.add('active');
-              document.querySelectorAll('.nav-links a').forEach(function(x) { x.classList.remove('active'); });
-              this.classList.add('active');
-            }
-          });
-        });
-      }
-      if (backdrop) backdrop.addEventListener('click', closeNav);
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeNav();
-      });
+      document.getElementById('loginErr').textContent = '';
     }
 
-    async function sha256Hex(str) {
-      const buf = new TextEncoder().encode(str);
-      const hash = await crypto.subtle.digest('SHA-256', buf);
-      return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
-    }
-
-    document.getElementById('loginBtn').addEventListener('click', async function() {
+    async function doLogin() {
       const pin = document.getElementById('pinInput').value.trim();
-      const err = document.getElementById('loginErr');
-      const btn = document.getElementById('loginBtn');
-      err.classList.remove('visible');
-      if (!pin) {
-        err.textContent = 'Please enter your PIN.';
-        err.classList.add('visible');
-        return;
-      }
-      btn.disabled = true;
-      btn.textContent = 'CHECKING…';
+      const errEl = document.getElementById('loginErr');
+      if (!pin) { errEl.textContent = 'Enter your PIN'; return; }
+      errEl.textContent = '';
       try {
-        const hash = await sha256Hex(pin);
-        const r = await fetch('/api/student/checkpin', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ groupCode: GROUP_CODE, pin })
-        });
-        const res = await r.json();
-        if (res.ok) {
-          localStorage.setItem(AUTH_KEY, 'true');
-          showPortal();
+        if (selectedRole === 'student') {
+          const studentId = document.getElementById('studentSelect')?.value || 'bluetech';
+          const r = await fetch(`${API}/api/student/checkpin`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ studentId, pin })
+          });
+          const d = await r.json();
+          if (!d.ok) { errEl.textContent = d.error || 'Invalid PIN'; return; }
+          const sid = d.studentId || studentId;
+          localStorage.setItem('bluetech_session', JSON.stringify({ role: 'student', studentId: sid }));
+          window.location.replace('/bluetech-' + sid.replace('bluetech-', '') + '/');
+        } else if (selectedRole === 'teacher') {
+          const r = await fetch(`${API}/api/teacher/checkpin`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ pin })
+          });
+          const d = await r.json();
+          if (!d.ok) { errEl.textContent = d.error || 'Invalid PIN'; return; }
+          localStorage.setItem('bluetech_session', JSON.stringify({ role: 'teacher' }));
+          window.location.replace('/bluetech-teacher/');
         } else {
-          showLoginError();
+          const r = await fetch(`${API}/api/parent/checkpin`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ pin })
+          });
+          const d = await r.json();
+          if (!d.ok) { errEl.textContent = d.error || 'Invalid PIN'; return; }
+          localStorage.setItem('bluetech_session', JSON.stringify({ role: 'admin' }));
+          window.location.replace('/bluetech-admin/');
         }
-      } catch {
-        showLoginError();
-      } finally {
-        btn.disabled = false;
-        btn.textContent = 'Unlock Portal';
+      } catch (e) {
+        errEl.textContent = 'Network error';
       }
-    });
-
-    document.getElementById('pinInput').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') document.getElementById('loginBtn').click();
-    });
-
-    document.getElementById('logoutBtn').addEventListener('click', logout);
-
-    if (isAuthed()) {
-      showPortal();
     }
-  })();
+
+    document.getElementById('pinInput').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
   </script>
 </body>
 </html>

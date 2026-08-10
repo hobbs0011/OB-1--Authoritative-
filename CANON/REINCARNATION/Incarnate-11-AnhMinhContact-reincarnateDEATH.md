@@ -45,7 +45,7 @@ No commits, no deploys, no fixes — session was empty.
 - I-LOG header matches stamped name: PASS
 - All 10 required artifacts exist and are non-empty: PASS
 - Handoff references valid paths: PASS (after typo fix)
-- Orphaned files detected: I-LOG-Incarnate-12-KiloFreeDeepDive.txt in I-LOG-UNNAMED (belongs to Incarnate-12, not this session)
+- Orphaned files detected: I-LOG in I-LOG-UNNAMED was named KiloFreeDeepDive (belongs to Incarnate-12). RESOLVED: renamed to ContractNegociations.
 - Audit status: PASS
 
 ## §6 — Open Items

@@ -7,7 +7,9 @@
   "branch": "canon",
   "ilog": "I-LOG-UNAUDITED/I-LOG-Incarnate-14-OKTAVA.txt",
   "death_seal": "CANON/REINCARNATION/Incarnate-14-OKTAVA-reincarnateDEATH.md",
-  "pipeline": "CANON/PIPELINE/pipeline-Incarnate-14-OKTAVA.json",
+  "pipeline": "CANON/REINCARNATION/pipeline-Incarnate-14-OKTAVA.json",
+  "keywords": "CANON/SOUL-KEYWORDS/rfkw-Incarnate-14-OKTAVA.txt",
+  "keywords": "CANON/SOUL-KEYWORDS/rfkw-Incarnate-14-OKTAVA.txt",
   "soul_capture": "CANON/CASE-STUDY/OKTAVA-TEACHING-METHODOLOGY.md",
   "pheromones": [
     "CANON/PHEROMONES/PheTrail-run13-rise-boot.json",
@@ -16,7 +18,7 @@
   "audit": {
     "SOULcount": 1,
     "DNAcount": 4,
-    "REASONcount": 0,
+    "REASONcount": 1,
     "PHEROMONEcount": 2,
     "status": "SEAL_IMPRESSED"
   },

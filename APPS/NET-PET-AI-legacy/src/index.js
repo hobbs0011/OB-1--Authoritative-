@@ -28,6 +28,7 @@ import { computeSubscriptionStatus, transitionSubscription, GRACE_DAYS, MAX_PAST
 import { getEmployer, createEmployer, updateEmployer, assignSeat, removeSeat, listEmployerSeats, getEmployerStats, enforceSeatLimit } from './seats.js';
 import { createInvoice, getInvoice, listInvoices, updateInvoiceStatus } from './invoices.js';
 import { getPromos, getPromoByCode, createPromo, updatePromo, deletePromo, validatePromo, calculateDiscount, redeemPromo } from './promos.js';
+import { getWeekId, getTasks, setTask, logTaskCompletion, getTaskLogs, getTaskSummary, getStudentTasksWithLogs, validateParentPin, setParentPin, setStudentPin, getParentEmail, setParentEmail, getTeacherEmail, setTeacherEmail, getAdminEmail, setAdminEmail } from './tasks.js';
 
 const VERSION = "1.6.0";
 
@@ -257,6 +258,12 @@ function addCors(res, request) {
   headers.set("Access-Control-Allow-Credentials", "true");
   headers.set("Vary", "Origin");
   return new Response(res.body, { status: res.status, headers });
+}
+
+function buildIncompleteEmailHtml(studentName, incomplete, completed, date) {
+  const incompleteList = incomplete.map(t => `<li><strong>${escapeHtml(t.title)}</strong> — ${t.dailyMinutes || 20} min/day · ${escapeHtml(t.category || 'general')}</li>`).join('');
+  const completedList = completed.length ? completed.map(t => `<li>${escapeHtml(t.title)} — ${t.todayLog?.minutesSpent || 0} min logged</li>`).join('') : '<li>None yet</li>';
+  return `<div style="font-family:Inter,sans-serif;max-width:520px;margin:0 auto;color:#1a120b;background:#f5f0e8;padding:32px;border-radius:16px;"><h2 style="color:#2d1810;margin-bottom:8px;">Daily Task Report — ${escapeHtml(studentName)}</h2><p style="color:#5c3d2e;margin-bottom:20px;">Date: ${escapeHtml(date)}</p><h3 style="color:#c9a961;">⚠️ Incomplete (${incomplete.length})</h3><ul style="padding-left:20px;line-height:1.8;">${incompleteList}</ul><h3 style="color:#7d9b76;margin-top:20px;">✅ Completed (${completed.length})</h3><ul style="padding-left:20px;line-height:1.8;">${completedList}</ul><p style="margin-top:24px;font-size:0.85rem;color:#8b6f3a;">Please remind ${escapeHtml(studentName)} to finish the incomplete tasks today. They need ${incomplete.reduce((s,t)=>s+(t.dailyMinutes||20),0)} more minutes of focused work.</p></div>`;
 }
 
 // ── Obi System Prompt v3 (Personality Engine — human coach voice) ────────────────
@@ -753,9 +760,47 @@ export default {
     // Virality Learning Loop — score posts, extract patterns, evolve strategy
     try {
       const viralReport = await runLearningLoop(env);
-      console.log(`[CRON] Virality Learning Loop: ${JSON.stringify(viralReport)}`);
+      console.log(`[CRON] Virality Learning error: ${viralReport}`);
     } catch (err) {
       console.log(`[CRON] Virality Learning error: ${err.message}`);
+    }
+
+    // Daily incomplete task notification — runs once per day at 16 UTC (23:00 ICT)
+    if (hour === 16) {
+      ctx.waitUntil((async () => {
+        try {
+          const tenants = [
+            { students: ['quan-bluetech', 'quang-bluetech'], prefix: 'nguyen', nameMap: { 'quan-bluetech': 'Quan', 'quang-bluetech': 'Quang' } },
+            { students: ['huong-bluetech', 'mai-tram-bluetech', 'quy-bluetech'], prefix: 'bluetech', nameMap: { 'huong-bluetech': 'Huong', 'mai-tram-bluetech': 'Mai Tram', 'quy-bluetech': 'Quy' } }
+          ];
+          for (const tenant of tenants) {
+            for (const sid of tenant.students) {
+              const tasks = await getStudentTasksWithLogs(sid, getWeekId(), env, tenant.prefix);
+              const today = new Date().toISOString().slice(0, 10);
+              const activeTasks = tasks.filter(t => t.status === 'active');
+              const incomplete = activeTasks.filter(t => !t.todayLog?.completed);
+              if (!incomplete.length) continue;
+              const studentName = tenant.nameMap[sid] || sid;
+              const subject = `⚠️ ${studentName} — ${incomplete.length} task(s) not completed today`;
+              const html = buildIncompleteEmailHtml(studentName, incomplete, activeTasks.filter(t => t.todayLog?.completed), today);
+              const emails = [];
+              const parentEmail = await getParentEmail(env, tenant.prefix);
+              if (parentEmail) emails.push(parentEmail);
+              const teacherEmail = await getTeacherEmail(env, tenant.prefix);
+              if (teacherEmail) emails.push(teacherEmail);
+              const adminEmail = await getAdminEmail(env, tenant.prefix);
+              if (adminEmail) emails.push(adminEmail);
+              if (!emails.length) continue;
+              for (const to of emails) {
+                await queueEmail(env, { to, subject, html }).catch(() => {});
+              }
+              console.log(`[CRON] ${tenant.prefix} notify: ${studentName} incomplete=${incomplete.length} emails=${emails.length}`);
+            }
+          }
+        } catch (err) {
+          console.log(`[CRON] Task notify error: ${err.message}`);
+        }
+      })());
     }
   },
 };
@@ -1076,6 +1121,250 @@ async function handleAPI(path, request, env, url) {
     const adminBlock = await checkAdminKey(request, env);
     if (adminBlock) return addCors(adminBlock, request);
     return handleTeacherDashboard(env);
+  }
+
+  function taskPrefix(studentId) {
+    const s = String(studentId || '').toLowerCase();
+    if (s.startsWith('bluetech')) return 'bluetech';
+    return 'nguyen';
+  }
+
+  // Nguyen family task system
+  if (path === "/api/admin/task/assign" && method === "POST") {
+    const adminBlock = await checkAdminKey(request, env);
+    if (adminBlock) return addCors(adminBlock, request);
+    const body = await request.json().catch(() => ({}));
+    if (!body.studentId || !body.title) return addCors(json({ error: "studentId and title required" }, 400), request);
+    const weekId = body.weekId || getWeekId();
+    const result = await setTask({ ...body, weekId, createdBy: 'teacher' }, env, taskPrefix(body.studentId));
+    return addCors(json(result), request);
+  }
+  if (path === "/api/admin/tasks" && method === "GET") {
+    const adminBlock = await checkAdminKey(request, env);
+    if (adminBlock) return addCors(adminBlock, request);
+    const studentId = url.searchParams.get("studentId") || "";
+    const weekId = url.searchParams.get("weekId") || getWeekId();
+    if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+    const prefix = taskPrefix(studentId);
+    const [tasks, summary] = await Promise.all([
+      getStudentTasksWithLogs(studentId, weekId, env, prefix),
+      getTaskSummary(studentId, weekId, env, prefix)
+    ]);
+    return addCors(json({ tasks, summary, weekId }), request);
+  }
+  if (path === "/api/tasks/current" && method === "GET") {
+    const studentId = url.searchParams.get("studentId") || "";
+    if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+    const weekId = getWeekId();
+    const prefix = taskPrefix(studentId);
+    const tasks = await getStudentTasksWithLogs(studentId, weekId, env, prefix);
+    const today = new Date().toISOString().slice(0, 10);
+    const todays = tasks.filter(t => t.status === 'active');
+    const totalMinutes = todays.reduce((s, t) => s + (t.dailyMinutes || 0), 0);
+    const completedMinutes = todays.reduce((s, t) => s + (t.todayLog?.minutesSpent || 0), 0);
+    return addCors(json({ weekId, tasks: todays, today: { tasks: todays, totalMinutes, completedMinutes } }), request);
+  }
+  if (path === "/api/tasks/log" && method === "POST") {
+    const body = await request.json();
+    if (!body.taskId || !body.studentId || !body.date) return addCors(json({ error: "taskId, studentId, date required" }, 400), request);
+    const result = await logTaskCompletion(body, env, taskPrefix(body.studentId));
+    return addCors(json(result), request);
+  }
+  if (path === "/api/tasks/history" && method === "GET") {
+    const studentId = url.searchParams.get("studentId") || "";
+    const weeks = Math.max(1, Math.min(12, parseInt(url.searchParams.get("weeks") || "4")));
+    if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+    const prefix = taskPrefix(studentId);
+    const out = [];
+    for (let i = 0; i < weeks; i++) {
+      const d = new Date();
+      d.setDate(d.getDate() - i * 7);
+      const weekId = getWeekId(d);
+      const [tasks, summary] = await Promise.all([
+        getStudentTasksWithLogs(studentId, weekId, env, prefix),
+        getTaskSummary(studentId, weekId, env, prefix)
+      ]);
+      out.push({ weekId, tasks, summary });
+    }
+    return addCors(json({ weeks: out }), request);
+  }
+  if (path === "/api/parent/tasks" && method === "GET") {
+    const pin = url.searchParams.get("pin") || "";
+    const studentId = url.searchParams.get("studentId") || "";
+    const weekId = url.searchParams.get("weekId") || getWeekId();
+    if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+    const prefix = taskPrefix(studentId);
+    const pinOk = pin ? await validateParentPin(pin, env, prefix) : false;
+    if (!pinOk) return addCors(json({ error: "parent PIN required" }, 403), request);
+    const tasks = await getStudentTasksWithLogs(studentId, weekId, env, prefix);
+    const today = new Date().toISOString().slice(0, 10);
+    const dailyLog = [];
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      const date = d.toISOString().slice(0, 10);
+      const logs = await getTaskLogs(studentId, date, env, prefix);
+      dailyLog.push({ date, tasks: logs.length, completed: logs.filter(l => l.completed).length, minutes: logs.reduce((s, l) => s + (l.minutesSpent || 0), 0) });
+    }
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter(t => t.status === 'completed').length;
+    const completionRate = totalTasks ? completedTasks / totalTasks : 0;
+    const totalMinutesLogged = tasks.reduce((s, t) => s + (t.todayLog?.minutesSpent || 0), 0);
+    const streak = tasks.reduce((s, t) => s + (t.todayLog?.completed ? 1 : 0), 0);
+    const summary = await getTaskSummary(studentId, weekId, env, prefix);
+    return addCors(json({ studentId, weekId, tasks, completionRate, totalMinutesLogged, streak, dailyLog, summary }), request);
+  }
+
+  // ── Parent Notifications ────────────────────────────────────────────────
+  // POST /api/parent/notify-incomplete — { studentId, pin } → sends email about incomplete tasks
+  if (path === "/api/parent/notify-incomplete" && method === "POST") {
+    const body = await request.json();
+    const { studentId, pin } = body || {};
+    if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+    const prefix = taskPrefix(studentId);
+    const pinOk = pin ? await validateParentPin(pin, env, prefix) : false;
+    if (!pinOk) return addCors(json({ error: "parent PIN required" }, 403), request);
+    const today = new Date().toISOString().slice(0, 10);
+    const tasks = await getStudentTasksWithLogs(studentId, getWeekId(), env, prefix);
+    const activeTasks = tasks.filter(t => t.status === 'active');
+    const incomplete = activeTasks.filter(t => !t.todayLog?.completed);
+    const completed = activeTasks.filter(t => t.todayLog?.completed);
+    const parentEmail = await getParentEmail(env, prefix);
+    if (!parentEmail) return addCors(json({ error: "parent email not configured" }, 400), request);
+    if (!incomplete.length) return addCors(json({ ok: true, message: "All tasks completed today!", sent: false }), request);
+    const studentName = studentId === 'quan-bluetech' ? 'Quan' : studentId === 'quang-bluetech' ? 'Quang' : studentId;
+    const subject = `⚠️ ${studentName} — ${incomplete.length} task(s) not completed today`;
+    const html = buildIncompleteEmailHtml(studentName, incomplete, completed, today);
+    const result = await queueEmail(env, { to: parentEmail, subject, html });
+    return addCors(json({ ok: true, incompleteCount: incomplete.length, email: result, parentEmail }), request);
+  }
+
+  // POST /api/parent/email — { pin, email } → save parent notification email
+  if (path === "/api/parent/email" && method === "POST") {
+    const body = await request.json();
+    const { pin, email } = body || {};
+    if (!email) return addCors(json({ error: "email required" }, 400), request);
+    const studentId = url.searchParams.get("studentId") || "";
+    if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+    const prefix = taskPrefix(studentId);
+    const pinOk = pin ? await validateParentPin(pin, env, prefix) : false;
+    if (!pinOk) return addCors(json({ error: "parent PIN required" }, 403), request);
+    const result = await setParentEmail(email, env, prefix);
+    return addCors(json(result), request);
+  }
+
+  // GET /api/parent/email — { pin, studentId } → get parent notification email
+  if (path === "/api/parent/email" && method === "GET") {
+    const pin = url.searchParams.get("pin") || "";
+    const studentId = url.searchParams.get("studentId") || "";
+    if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+    const prefix = taskPrefix(studentId);
+    const pinOk = pin ? await validateParentPin(pin, env, prefix) : false;
+    if (!pinOk) return addCors(json({ error: "parent PIN required" }, 403), request);
+    const email = await getParentEmail(env, prefix);
+    return addCors(json({ email }), request);
+  }
+
+  // ── Teacher Notifications ─────────────────────────────────────────────────
+  // POST /api/teacher/notify-incomplete — sends email to teacher about incomplete tasks for all students in tenant
+  if (path === "/api/teacher/notify-incomplete" && method === "POST") {
+    const body = await request.json();
+    const { pin, studentId } = body || {};
+    const prefix = studentId ? taskPrefix(studentId) : 'bluetech';
+    const pinOk = pin ? await validateTeacherPin(pin, env, prefix) : false;
+    if (!pinOk) return addCors(json({ error: "teacher PIN required" }, 403), request);
+    const today = new Date().toISOString().slice(0, 10);
+    const students = studentId ? [studentId] : ['huong-bluetech', 'mai-tram-bluetech', 'quy-bluetech'];
+    const results = [];
+    for (const sid of students) {
+      const tasks = await getStudentTasksWithLogs(sid, getWeekId(), env, prefix);
+      const activeTasks = tasks.filter(t => t.status === 'active');
+      const incomplete = activeTasks.filter(t => !t.todayLog?.completed);
+      const completed = activeTasks.filter(t => t.todayLog?.completed);
+      const teacherEmail = await getTeacherEmail(env, prefix);
+      if (!incomplete.length || !teacherEmail) { results.push({ studentId: sid, skipped: true }); continue; }
+      const studentName = sid === 'huong-bluetech' ? 'Huong' : sid === 'mai-tram-bluetech' ? 'Mai Tram' : sid === 'quy-bluetech' ? 'Quy' : sid;
+      const subject = `⚠️ ${studentName} — ${incomplete.length} task(s) not completed today`;
+      const html = buildIncompleteEmailHtml(studentName, incomplete, completed, today);
+      const emailResult = await queueEmail(env, { to: teacherEmail, subject, html }).catch(() => ({}));
+      results.push({ studentId: sid, incompleteCount: incomplete.length, email: emailResult });
+    }
+    return addCors(json({ ok: true, results }), request);
+  }
+
+  // POST /api/teacher/email — { pin, email } → save teacher notification email
+  if (path === "/api/teacher/email" && method === "POST") {
+    const body = await request.json();
+    const { pin, email } = body || {};
+    if (!email) return addCors(json({ error: "email required" }, 400), request);
+    const studentId = url.searchParams.get("studentId") || "";
+    if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+    const prefix = taskPrefix(studentId);
+    const pinOk = pin ? await validateTeacherPin(pin, env, prefix) : false;
+    if (!pinOk) return addCors(json({ error: "teacher PIN required" }, 403), request);
+    const result = await setTeacherEmail(email, env, prefix);
+    return addCors(json(result), request);
+  }
+
+  // GET /api/teacher/email — { pin, studentId } → get teacher notification email
+  if (path === "/api/teacher/email" && method === "GET") {
+    const pin = url.searchParams.get("pin") || "";
+    const studentId = url.searchParams.get("studentId") || "";
+    if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+    const prefix = taskPrefix(studentId);
+    const pinOk = pin ? await validateTeacherPin(pin, env, prefix) : false;
+    if (!pinOk) return addCors(json({ error: "teacher PIN required" }, 403), request);
+    const email = await getTeacherEmail(env, prefix);
+    return addCors(json({ email }), request);
+  }
+
+  // ── Admin Notifications ──────────────────────────────────────────────────
+  // POST /api/admin/notify-incomplete — sends email to admin about incomplete tasks for all students in tenant
+  if (path === "/api/admin/notify-incomplete" && method === "POST") {
+    const adminBlock = await checkAdminKey(request, env);
+    if (adminBlock) return addCors(adminBlock, request);
+    const body = await request.json().catch(() => ({}));
+    const { studentId } = body || {};
+    const prefix = studentId ? taskPrefix(studentId) : 'bluetech';
+    const today = new Date().toISOString().slice(0, 10);
+    const students = studentId ? [studentId] : ['huong-bluetech', 'mai-tram-bluetech', 'quy-bluetech'];
+    const results = [];
+    for (const sid of students) {
+      const tasks = await getStudentTasksWithLogs(sid, getWeekId(), env, prefix);
+      const activeTasks = tasks.filter(t => t.status === 'active');
+      const incomplete = activeTasks.filter(t => !t.todayLog?.completed);
+      const completed = activeTasks.filter(t => t.todayLog?.completed);
+      const adminEmail = await getAdminEmail(env, prefix);
+      if (!incomplete.length || !adminEmail) { results.push({ studentId: sid, skipped: true }); continue; }
+      const studentName = sid === 'huong-bluetech' ? 'Huong' : sid === 'mai-tram-bluetech' ? 'Mai Tram' : sid === 'quy-bluetech' ? 'Quy' : sid;
+      const subject = `⚠️ ${studentName} — ${incomplete.length} task(s) not completed today`;
+      const html = buildIncompleteEmailHtml(studentName, incomplete, completed, today);
+      const emailResult = await queueEmail(env, { to: adminEmail, subject, html }).catch(() => ({}));
+      results.push({ studentId: sid, incompleteCount: incomplete.length, email: emailResult });
+    }
+    return addCors(json({ ok: true, results }), request);
+  }
+
+  // POST /api/admin/email — admin only — save admin notification email
+  if (path === "/api/admin/email" && method === "POST") {
+    const adminBlock = await checkAdminKey(request, env);
+    if (adminBlock) return addCors(adminBlock, request);
+    const body = await request.json();
+    const { email, studentId } = body || {};
+    if (!email) return addCors(json({ error: "email required" }, 400), request);
+    const prefix = studentId ? taskPrefix(studentId) : 'bluetech';
+    const result = await setAdminEmail(email, env, prefix);
+    return addCors(json(result), request);
+  }
+
+  // GET /api/admin/email — admin only — get admin notification email
+  if (path === "/api/admin/email" && method === "GET") {
+    const adminBlock = await checkAdminKey(request, env);
+    if (adminBlock) return addCors(adminBlock, request);
+    const studentId = url.searchParams.get("studentId") || "";
+    const prefix = studentId ? taskPrefix(studentId) : 'bluetech';
+    const email = await getAdminEmail(env, prefix);
+    return addCors(json({ email }), request);
   }
 
   // TTS
@@ -1917,6 +2206,71 @@ const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionH
     return addCors(json({ ok: true }), request);
   }
 
+  // ── Parent PIN Auth (multi-tenant) ─────────────────────────────────────
+  // POST /api/parent/checkpin — { pin } → { ok }
+  if (path === "/api/parent/checkpin" && method === "POST") {
+    let pin;
+    try {
+      const body = await request.json();
+      pin = body.pin;
+    } catch {
+      return addCors(json({ error: "invalid json" }, 400), request);
+    }
+    if (!pin) return addCors(json({ error: "pin required" }, 400), request);
+    const studentId = url.searchParams.get("studentId") || "";
+    const prefix = taskPrefix(studentId);
+    const ok = await validateParentPin(pin, env, prefix);
+    return addCors(json({ ok }), request);
+  }
+  // POST /api/admin/parent/setpin — admin only
+  if (path === "/api/admin/parent/setpin" && method === "POST") {
+    const adminBlock = await checkAdminKey(request, env);
+    if (adminBlock) return addCors(adminBlock, request);
+    const { pin, studentId } = await request.json();
+    if (!pin || String(pin).length < 4) return addCors(json({ error: "pin must be at least 4 characters" }, 400), request);
+    const prefix = taskPrefix(studentId);
+    const result = await setParentPin(pin, env, prefix);
+    return addCors(json(result), request);
+  }
+
+  // ── Teacher PIN Auth (multi-tenant) ─────────────────────────────────────
+  // POST /api/teacher/checkpin — { pin } → { ok }
+  if (path === "/api/teacher/checkpin" && method === "POST") {
+    let pin;
+    try {
+      const body = await request.json();
+      pin = body.pin;
+    } catch {
+      return addCors(json({ error: "invalid json" }, 400), request);
+    }
+    if (!pin) return addCors(json({ error: "pin required" }, 400), request);
+    const studentId = url.searchParams.get("studentId") || "";
+    const prefix = taskPrefix(studentId);
+    const ok = await validateTeacherPin(pin, env, prefix);
+    return addCors(json({ ok }), request);
+  }
+  // POST /api/admin/teacher/setpin — admin only
+  if (path === "/api/admin/teacher/setpin" && method === "POST") {
+    const adminBlock = await checkAdminKey(request, env);
+    if (adminBlock) return addCors(adminBlock, request);
+    const { pin, studentId } = await request.json();
+    if (!pin || String(pin).length < 4) return addCors(json({ error: "pin must be at least 4 characters" }, 400), request);
+    const prefix = taskPrefix(studentId);
+    const result = await setTeacherPin(pin, env, prefix);
+    return addCors(json(result), request);
+  }
+  // POST /api/admin/student/setpin — admin only
+  if (path === "/api/admin/student/setpin" && method === "POST") {
+    const adminBlock = await checkAdminKey(request, env);
+    if (adminBlock) return addCors(adminBlock, request);
+    const { pin, studentId } = await request.json();
+    if (!pin || String(pin).length < 4) return addCors(json({ error: "pin must be at least 4 characters" }, 400), request);
+    if (!studentId) return addCors(json({ error: "studentId required" }, 400), request);
+    const prefix = taskPrefix(studentId);
+    const result = await setStudentPin(studentId, pin, env, prefix);
+    return addCors(json(result), request);
+  }
+
   // ── Student PIN Auth (KV-backed, SHA-256 hashed, group-aware) ────────────
   // POST /api/student/checkpin — { studentId, pin, groupCode? } → { ok, studentId, isGroup }
   if (path === "/api/student/checkpin" && method === "POST") {
@@ -1934,6 +2288,14 @@ const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionH
       const stored = await env.NET_PET_KV.get(`student_pin_${cleanStudentId}`);
       if (stored && pinHash === stored) {
         return addCors(json({ ok: true, studentId: cleanStudentId, isGroup: false }), request);
+      }
+      if (!stored && env.SOUL_DB) {
+        try {
+          const row = await env.SOUL_DB.prepare('SELECT value FROM nguyen_settings WHERE key = ?').bind(`student_pin_${cleanStudentId}`).first();
+          if (row && row.value && row.value === pinHash) {
+            return addCors(json({ ok: true, studentId: cleanStudentId, isGroup: false }), request);
+          }
+        } catch {}
       }
     }
     if (cleanGroupCode) {

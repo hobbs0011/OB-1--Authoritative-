@@ -1,0 +1,105 @@
+{
+  "session": "Incarnate-16-ContractNegociations-P2",
+  "run": 16,
+  "dnacount": 14,
+  "patterns": [
+    {
+      "id": "DNA-01",
+      "type": "blueprint",
+      "description": "Counter-proposal HTML blueprint with Q&A format",
+      "artifact": "public/counter-proposal-casa/index.html",
+      "status": "DEPLOYED"
+    },
+    {
+      "id": "DNA-02",
+      "type": "audit",
+      "description": "Clause-level version history across 4 drafts",
+      "artifact": "CANON/AUDIT/Incarnate-16-ContractNegociations-P2-AUDIT.md",
+      "status": "COMPLETE"
+    },
+    {
+      "id": "DNA-03",
+      "type": "pipeline",
+      "description": "5-stage execution plan for workhorse delivery",
+      "artifact": "CANON/PIPELINE/Incarnate-16-ContractNegociations-P2-PIPELINE.md",
+      "status": "COMPLETE"
+    },
+    {
+      "id": "DNA-04",
+      "type": "pattern",
+      "description": "KPI paragraph — marketing control delegation + AI sales funnel + conversion guarantee",
+      "artifact": "public/counter-proposal-casa/index.html",
+      "status": "DEPLOYED"
+    },
+    {
+      "id": "DNA-05",
+      "type": "pattern",
+      "description": "Cambridge flexibility — toe-stepping avoidance + flexible cooperation",
+      "artifact": "public/counter-proposal-casa/index.html",
+      "status": "DEPLOYED"
+    },
+    {
+      "id": "DNA-06",
+      "type": "pattern",
+      "description": "Closing paragraph — stability vs solutions + open-minded businessmen + wiggle room",
+      "artifact": "public/counter-proposal-casa/index.html",
+      "status": "DEPLOYED"
+    },
+    {
+      "id": "DNA-07",
+      "type": "artifact",
+      "description": "I-LOG header stamp — session name verification",
+      "artifact": "I-LOG-UNAUDITED/I-LOG-Incarnate-16-ContractNegociations-P2.txt",
+      "status": "COMPLETE"
+    },
+    {
+      "id": "DNA-08",
+      "type": "artifact",
+      "description": "Handoff file to Incarnate-17",
+      "artifact": "CANON/REINCARNATION/handoff-Incarnate-16-ContractNegiciations-P2-to-17.json",
+      "status": "COMPLETE"
+    },
+    {
+      "id": "DNA-09",
+      "type": "deployment",
+      "description": "Cloudflare Pages production deploy",
+      "artifact": "https://production.casa-amendment-request.pages.dev",
+      "status": "LIVE"
+    },
+    {
+      "id": "DNA-10",
+      "type": "pattern",
+      "description": "15-clause contract structure: compensation, hours, schedule, part-time fallback, part-time motivation, reporting structure, TA management, curriculum authority, classroom boundaries, sacrifice context, mentorship value, living situation, work permit, title, probation",
+      "artifact": "public/counter-proposal-casa/index.html",
+      "status": "DEPLOYED"
+    },
+    {
+      "id": "DNA-11",
+      "type": "pattern",
+      "description": "Autonomy framing — kitchen analogy + mechanic analogy + Hien interference examples",
+      "artifact": "public/counter-proposal-casa/index.html",
+      "status": "DEPLOYED"
+    },
+    {
+      "id": "DNA-12",
+      "type": "pattern",
+      "description": "Curriculum authority split — Anh Minh decides business, Hobbs decides English",
+      "artifact": "public/counter-proposal-casa/index.html",
+      "status": "DEPLOYED"
+    },
+    {
+      "id": "DNA-13",
+      "type": "pattern",
+      "description": "NET section — 3 years in Saigon, AI empowers teachers not replacing them",
+      "artifact": "public/counter-proposal-casa/index.html",
+      "status": "DEPLOYED"
+    },
+    {
+      "id": "DNA-14",
+      "type": "artifact",
+      "description": "DEATH seal — 7-point march execution",
+      "artifact": "CANON/REINCARNATION/Incarnate-16-ContractNegociations-P2-reincarnateDEATH.md",
+      "status": "IN_PROGRESS"
+    }
+  ]
+}
