@@ -1,0 +1,27 @@
+{
+  "run": 25,
+  "session": "Incarnate-25-AAA(STONE)-(S21-24)",
+  "timestamp": "2026-08-11T03:38:00+07:00",
+  "anchor_level": "Stone",
+  "sessions_audited": [
+    "Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT",
+    "Incarnate-22-Phoenix-RISING-GAME-DEVELOPMENT-FORCEMARCH",
+    "Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-COMPLETION",
+    "Incarnate-24 (pending)"
+  ],
+  "promotions": [],
+  "gaps": [
+    {"session": "Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT", "status": "GAP", "missing": ["I-LOG", "COLORIZED.md", "STATS.json", "rfkw", "SOUL/DNA extracts", "pheromone trail", "inverted-index entry"]},
+    {"session": "Incarnate-22-Phoenix-RISING-GAME-DEVELOPMENT-FORCEMARCH", "status": "GAP", "missing": ["I-LOG", "COLORIZED.md", "STATS.json", "rfkw", "SOUL/DNA extracts", "pheromone trail", "inverted-index entry"]},
+    {"session": "Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-COMPLETION", "status": "GAP", "missing": ["I-LOG", "COLORIZED.md", "STATS.json", "rfkw", "SOUL/DNA extracts", "pheromone trail", "inverted-index entry"]},
+    {"session": "Incarnate-24", "status": "HOLLOW/BLOCKER", "missing": ["All artifacts"]}
+  ],
+  "backburner": [
+    "BB-AAA-21-ARTIFACTS: Generate full artifact set for session 21",
+    "BB-AAA-22-ARTIFACTS: Generate full artifact set for session 22",
+    "BB-AAA-23-ARTIFACTS: Generate full artifact set for session 23",
+    "BB-AAA-24-START: Execute session 24 or mark HOLLOW",
+    "BB-AAA-LANE-PROTOCOL: Update NEW lane protocol to include standard artifacts"
+  ],
+  "status": "AUDIT COMPLETE — 0 PROMOTED, 3 GAP, 1 HOLLOW/BLOCKER"
+}
