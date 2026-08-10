@@ -1,0 +1,53 @@
+# SOUL-KEYWORDS for Incarnate-18-Nguyen-Portal-Development
+# Extracted from: D:\OB-1-CANONICAL\I-LOG-UNAUDITED\I-LOG-Incarnate-18-Nguyen-Portal-Development.txt
+# SOULcount=1 DNAcount=4 REASONcount=0
+
+4 | Nguyen
+4 | portal
+4 | parent
+4 | Quan
+4 | Quang
+4 | task
+4 | deploy
+4 | worker
+3 | D1
+3 | PIN
+3 | classroom
+3 | tasks
+3 | daily log
+3 | weekly completion
+2 | task status
+2 | totalMinutesLogged
+2 | getStudentTasksWithLogs
+2 | parent PIN auth
+2 | route guard
+2 | input validation
+2 | studentId
+2 | minutes bounds
+2 | nguyen-login
+2 | nguyen-parent
+2 | nguyen-quang
+2 | nguyen-quan
+2 | KV quota
+2 | schema
+2 | nguyen_tasks
+2 | nguyen_task_logs
+2 | nguyen_task_summaries
+2 | settings
+2 | PIN 9999
+2 | PIN 1111
+2 | PIN 2222
+1 | placeholder tasks
+1 | LinkedIn
+1 | CV
+1 | Facebook
+1 | 3D modeling
+1 | presentation
+1 | S/SH phonics
+1 | shadowing
+1 | university English
+1 | daily conversation
+1 | setup endpoint
+1 | initialization
+1 | endpoints verified
+1 | live

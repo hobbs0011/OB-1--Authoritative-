@@ -1,11 +1,12 @@
-{
-    "run": 45,
-    "session": "Incarnate-19-Bluetech-Portal-Development",
-    "timestamp": "2026-08-10T23:05:00+07:00",
-    "head": "2c8a9e5c3",
-    "branch": "canon",
+﻿{
+  "run": "19",
+  "session": "Incarnate-19-Bluetech-Portal-Development",
+  "timestamp": "2026-08-10T22:26:57+07:00",
+  "head": "2c8a9e5c3",
+  "branch": "canon",
+  "status": "HOLLOW",
     "riLE": "RISE → SCOUT → DEEPTHINK → AUDIT → BLUEPRINT → PIPELINE → DEATH",
-    "mission": "Bluetech student portal development — build individual portals for Huong, Mai Tram, and Quy with task assignment, daily logging, and parent/teacher progress tracking.",
+    "mission": "Bluetech student portal development — build individual portals for Huong, Mai Tram, and Quy with task assignment, daily logging, and role-based access (Employee/Teacher/Admin view-only).",
     "brand": {
         "company": "Bluetech Ingredients Ltd. / Bluetechni",
         "verified_location": "No. 112, D Street, Lakeview City, Binh Trung Ward, Thu Duc City, HCMC",
@@ -40,7 +41,11 @@
             "/api/admin/parent/setpin",
             "/api/teacher/checkpin",
             "/api/admin/teacher/setpin",
-            "/api/admin/student/setpin"
+            "/api/admin/student/setpin",
+            "/api/teacher/notify-incomplete",
+            "/api/admin/notify-incomplete",
+            "/api/teacher/email",
+            "/api/admin/email"
         ],
         "d1_tables": [
             "bluetech_settings",
@@ -53,17 +58,48 @@
         "deploy": "https://net-pet-ai.mrmichaelhobbs123.workers.dev"
     },
     "roles": {
-        "admin": "View-only access for boss/parent — one shared PIN",
-        "teacher": "Assign tasks + monitor progress — dedicated PIN",
-        "student": "Individual employee portals (Huong, Mai Tram, Quy) — separate PINs each"
+        "admin": "View-only access for boss/parent — one shared PIN, receives email notifications for incomplete tasks",
+        "teacher": "Assign tasks + monitor progress — dedicated PIN, receives email notifications for incomplete tasks",
+        "student": "Individual employee portals (Huong, Mai Tram, Quy) — separate PINs each, can login and complete tasks"
+    },
+    "notification_architecture": {
+        "cron": "Daily at 16 UTC (23:00 ICT) — checks all tenants for incomplete tasks",
+        "tenants": [
+            {
+                "students": ["quan-bluetech", "quang-bluetech"],
+                "prefix": "nguyen",
+                "notify": ["parent_email"]
+            },
+            {
+                "students": ["huong-bluetech", "mai-tram-bluetech", "quy-bluetech"],
+                "prefix": "bluetech",
+                "notify": ["teacher_email", "admin_email", "parent_email"]
+            }
+        ],
+        "manual_triggers": [
+            "/api/teacher/notify-incomplete",
+            "/api/admin/notify-incomplete"
+        ]
     },
     "open_items": [
         "Deploy worker with updated schema and routes",
         "Initialize admin PIN via /api/admin/parent/setpin",
         "Initialize teacher PIN via /api/admin/teacher/setpin",
         "Initialize student PINs via /api/admin/student/setpin for huong-bluetech, mai-tram-bluetech, quy-bluetech",
-        "Populate initial weekly tasks for each employee"
+        "Populate initial weekly tasks for each employee",
+        "Configure teacher_email and admin_email in bluetech_settings"
     ],
-    "audit_verdict": "PASS — multi-tenant prefix routing added, Bluetech D1 tables created, portals styled to Bluetech brand (blue/white theme from bluetechni.com)",
-    "next_session": "TBD upon DEATH"
+    "audit_verdict": "PASS — multi-tenant prefix routing added, Bluetech D1 tables created, portals styled to Bluetech brand (blue/white theme from bluetechni.com), notification architecture supports Admin Boss + Admin Teacher + Father",
+    "audit": {
+        "SOULcount": 1,
+        "DNAcount": 0,
+        "REASONcount": 0,
+        "total": 1,
+        "first_utc": "2026-08-10T15:26:57.000Z",
+        "last_utc": "2026-08-10T15:26:57.000Z",
+        "duration_min": null
+    },
+    "next_session": "Run 46 — TBD upon next RISE",
+    "death_timestamp": "2026-08-10T23:25:18+07:00",
+    "handoff": "CANON/REINCARNATION/handoff-Incarnate-19-Bluetech-Portal-Development-to-46.json"
 }

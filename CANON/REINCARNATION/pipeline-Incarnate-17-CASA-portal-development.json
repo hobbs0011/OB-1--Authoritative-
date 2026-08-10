@@ -1,11 +1,12 @@
 ﻿{
-    "run":  "43",
+    "run":  "17",
+    "session": "Incarnate-17-CASA-portal-development",
+    "status": "HOLLOW",
     "ilog":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-17-CASA-portal-development.txt",
-    "timestamp":  "2026-08-09T20:57:37.7295045+07:00",
-    "ilog_colorized":  "I-LOG/I-LOG-Incarnate-17-CASA-portal-development-COLORIZED.md",
-    "ilog_stats":  "I-LOG/I-LOG-Incarnate-17-CASA-portal-development-STATS.json",
+    "timestamp":  "2026-08-09T20:57:37+07:00",
+    "ilog_colorized":  "MISSING",
+    "ilog_stats":  "MISSING",
     "audit":  null,
-    "open_items":  [
-
-                   ]
+    "open_items":  [],
+    "note": "HOLLOW — session was RISE-booted but never executed. Pipeline/handoff were placeholders."
 }

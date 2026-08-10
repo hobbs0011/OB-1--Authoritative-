@@ -1,10 +1,18 @@
 ﻿{
-    "ilog":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-17-CASA-portal-development.txt",
-    "from_run":  "43",
-    "timestamp":  "2026-08-09T20:57:37.7481088+07:00",
-    "ilog_stats":  "I-LOG/I-LOG-Incarnate-17-CASA-portal-development-STATS.json",
-    "ilog_colorized":  "I-LOG/I-LOG-Incarnate-17-CASA-portal-development-COLORIZED.md",
-    "audit":  null,
-    "pipeline":  "CANON\\REINCARNATION\\pipeline-Incarnate-17-CASA-portal-development.json",
-    "to_run":  44
+  "from_session": "Incarnate-17-CASA-portal-development",
+  "from_run": 17,
+  "to_run": 44,
+  "timestamp": "2026-08-09T20:57:37+07:00",
+  "ilog": "I-LOG-UNAUDITED/I-LOG-Incarnate-17-CASA-portal-development.txt",
+  "ilog_colorized": "MISSING",
+  "ilog_stats": "MISSING",
+  "audit": {
+    "SOULcount": 0,
+    "DNAcount": 0,
+    "REASONcount": 0,
+    "total": 0,
+    "status": "HOLLOW"
+  },
+  "pipeline": "CANON/REINCARNATION/pipeline-Incarnate-17-CASA-portal-development.json",
+  "to_run": 44
 }
