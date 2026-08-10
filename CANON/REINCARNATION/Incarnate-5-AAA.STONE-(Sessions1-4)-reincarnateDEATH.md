@@ -3,147 +3,126 @@
 ## §1 — Header
 - **Session:** Incarnate-5-AAA.STONE-(Sessions1-4)
 - **Run:** 5
-- **Timestamp:** 2026-08-03T00:09:48+07:00
+- **Timestamp:** 2026-08-11T03:24:33+07:00
 - **HEAD:** 7d2680b40
 - **Branch:** canon
 - **Anchor Level:** Stone (Session 5)
-- **Seal:** IMPRESSED — STONE ANCHOR — QUAD CHECK PASS
+- **Seal:** IMPRESSED — STONE ANCHOR — FINAL AUDIT
 
-## §2 — 4-Point Audit Summary
+## §2 — Mission
+
+This Stone Anchor session (Incarnate-5-AAA.STONE-(Sessions1-4)) was tasked with performing a comprehensive 4-point audit (Capture / Index / Naming / LostSouls) of sessions 1-4, promoting valid sessions to I-LOG-NAV, and ensuring zero LostSouls pass the checkpoint.
+
+This is the FINAL audit after Devil's Advocate ground-up verification found and corrected 9 errors in the previous audit.
+
+## §3 — Audit Results Summary
 
 | Session | Point 1 Capture | Point 2 Index | Point 3 Naming | Point 4 LostSouls | Promoted |
 |---------|----------------|---------------|----------------|-------------------|----------|
 | Incarnation1-IRL-182Conversion | PASS | PASS | PASS | PASS (35) | ✅ YES |
-| Incarnation-2-IRL-184Conversion | GAP (stub 1.8KB) | FAIL (stub) | PARTIAL | FAIL (stub) | ❌ NO |
+| Incarnation-2-IRL-184Conversion | GAP (naming) | PASS (REAL) | GAP (naming) | PASS (266, REAL) | ❌ NO |
 | Incarnation-3-Identity-Assignment | PASS | PASS | PASS | PASS (13) | ✅ YES |
-| Incarnate-4-PhoenixScout-Portals-and-OBI-DEV | PASS | PASS | PASS | PASS (35) | ✅ YES |
+| Incarnate-4-PhoenixScout-Portals-and-OBI-DEV | GAP (version) | PASS | PASS | PASS (35) | ❌ NO |
 
-**Stone Anchor Result: 3 of 4 sessions promoted to I-LOG-NAV/.**
-**1 blocker remaining: S2 real RRL (3.5MB) not in workspace.**
+**Stone Anchor Result: 2 of 4 sessions fully promoted to I-LOG-NAV/ (S1, S3).**
+**S2 has REAL artifacts but naming gaps prevent promotion.**
+**S4 promoted but has version mismatch between I-LOG-NAV and I-LOG-UNAUDITED.**
 
-## §3 — QUAD CHECK RESULTS (Stage 3 of 3)
+## §4 — Gaps
 
-### Verification — 3 of 3 PASS
-- ✅ All 3 promotable sessions have artifacts confirmed on filesystem
-- ✅ All rfkw- files exist with 30 keywords each
-- ✅ All lostsouls- files exist with directives extracted
-- ✅ All COLORIZED and STATS files exist and are valid
-- ✅ All pipelines and handoffs exist
-- ✅ inverted-index.json has 62+ keywords
-- ✅ Sessions promoted to I-LOG-NAV/
+### S1 (Incarnation1-IRL-182Conversion) — PASS
+- Accepted gap: I-LOG has no explicit RISE header (raw JSONL only)
 
-### Cross-Reference — All artifacts verified
-- ✅ audit JSON matches filesystem
-- ✅ Seal matches audit
-- ✅ Session name map updated (parens format removed)
-- ✅ Pipeline paths point to existing files
-- ✅ Handoff paths point to existing files
-- ✅ S2 correctly documented as blocked with stub limitation
+### S2 (Incarnation-2-IRL-184Conversion) — GAP: NAMING
+- REAL I-LOG exists (3.5MB, 301 lines) but has `-REAL` suffix: `I-LOG-Incarnation-2-IRL-184Conversion-REAL.txt`
+- REAL COLORIZED exists (458.6 KB) but has `-REAL` suffix
+- REAL STATS exists (5.9 KB) but has `-REAL` suffix
+- REAL rfkw exists (614 bytes) but has `I-LOG-` prefix AND `-REAL` suffix: `rfkw-I-LOG-Incarnation-2-IRL-184Conversion-REAL.txt`
+- REAL lostsouls exists (15.6 KB, 266 directives) but has `I-LOG-` prefix AND `-REAL` suffix: `lostsouls-I-LOG-Incarnation-2-IRL-184Conversion-REAL.md`
+- REAL pipeline exists but has `I-LOG-` prefix AND `-REAL` suffix: `pipeline-I-LOG-Incarnation-2-IRL-184Conversion-REAL.json`
+- Handoff still points to stub I-LOG, not REAL I-LOG
+- Stub files still exist alongside REAL files (should be removed after rename)
+- Previous audit incorrectly stated "real RRL not in workspace" — REAL files ARE in workspace (both I-LOG-UNAUDITED and I-LOG-NAV)
 
-### 50 Holes Found and Fixed
+**Operator actions required:**
+1. Rename `I-LOG-Incarnation-2-IRL-184Conversion-REAL.txt` → `I-LOG-Incarnation-2-IRL-184Conversion.txt` (in both I-LOG-UNAUDITED and I-LOG-NAV)
+2. Rename `I-LOG-Incarnation-2-IRL-184Conversion-REAL-COLORIZED.md` → `I-LOG-Incarnation-2-IRL-184Conversion-COLORIZED.md`
+3. Rename `I-LOG-Incarnation-2-IRL-184Conversion-REAL-STATS.json` → `I-LOG-Incarnation-2-IRL-184Conversion-STATS.json`
+4. Rename `rfkw-I-LOG-Incarnation-2-IRL-184Conversion-REAL.txt` → `rfkw-Incarnation-2-IRL-184Conversion.txt`
+5. Rename `lostsouls-I-LOG-Incarnation-2-IRL-184Conversion-REAL.md` → `lostsouls-Incarnation-2-IRL-184Conversion.md`
+6. Rename `pipeline-I-LOG-Incarnation-2-IRL-184Conversion-REAL.json` → `pipeline-Incarnation-2-IRL-184Conversion.json`
+7. Update handoff `handoff-Incarnation-2-IRL-184Conversion-to-185.json` to point to REAL I-LOG
+8. Remove stub files: `I-LOG-Incarnation-2-IRL-184Conversion.txt`, `-COLORIZED.md`, `-STATS.json` from I-LOG-UNAUDITED
+9. Remove old pipeline `pipeline-Incarnation-2-IRL-184Conversion.json` (stub version)
+10. Promote renamed artifacts to I-LOG-NAV/
 
-| # | Hole | Fix Applied |
-|---|------|-------------|
-| 1 | S1/S4 COLORIZED near-identical (protocol boilerplate) | ACCEPTED — I-LOGs are real, content differs in detail |
-| 2 | 133 dead placeholder rfkw-run*.txt files | DOCUMENTED for purge |
-| 3 | I-LOG-NAV empty — 0 sessions promoted | ✅ 3 sessions promoted |
-| 4 | S2 STATS size mismatch (audit=5448, actual=431) | ✅ Fixed audit |
-| 5 | session-name-map has parens for S1 | ✅ Fixed |
-| 6 | session-name-map has parens for S2 | ✅ Fixed |
-| 7 | S2 handoff points to run 185 (no map entry) | ✅ NOTE: run 185 is valid handoff target |
-| 8 | session-name-map key 191 format mismatch | ✅ ACCEPTED — seal uses .STONE. convention |
-| 9 | inverted-index has generic low-value keywords | ✅ ACCEPTED — protocol-level |
-| 10 | No automated pipeline script | ✅ workhorse-pipeline.ps1 created |
-| 11 | No health check mechanism | ✅ pipeline-health-check.ps1 created |
-| 12 | Sessions not promoted to I-LOG-NAV/ | ✅ 3 sessions promoted |
-| 13 | Seal HEAD stale (bfaa6d851) | ✅ Updated to 7d2680b40 |
-| 14 | Seal had "Step 4 Triple-Check" (being executed) | ✅ Replaced with quad check results |
-| 15 | S2 death seal references old path | ✅ Pipeline updated to UNAUDITED path |
-| 16 | No PIPELINE-STATUS.md | ✅ Created |
-| 17 | No AAA-AUTO-PIPELINE.md | ✅ Created |
-| 18 | No PIPELINE-HEALTH-CHECK.md fail-safe | ✅ Created as script |
-| 19 | Inverted-index duplicate entries | ✅ Deduplicated |
-| 20 | S1/S4 rfkw files identical | ✅ ACCEPTED — protocol-level topics |
-| 21 | S3 death seal old RRL path | ✅ ACCEPTED — original seal preserved |
-| 22 | No Reincarnate-Synch.md for quad check | ✅ Added below |
-| 23 | BACKBURNER missing sessions 5-9 | ✅ PIPELINE-STATUS.md has queue |
-| 24 | S2 pipeline has `audit: null` | ✅ Fixed |
-| 25 | S2 handoff has `audit: null` | ✅ Fixed |
-| 26 | No session-name-map for run 185 | ✅ ACCEPTED — handoff exists |
-| 27 | No entry for session 5 in map | ✅ Map has 191 entry |
-| 28 | Inverted-index missing S1 keywords | ✅ Included |
-| 29 | Inverted-index missing S2 (stub) | ✅ DOCUMENTED — can't extract from stub |
-| 30 | extract-keywords only gets 30 | ✅ ACCEPTED — from top_topics |
-| 31 | extract-lostsouls regex brittle | ✅ ACCEPTED — catches major patterns |
-| 32 | S4 COLORIZED size matches S1 | ✅ Content confirmed different |
-| 33 | S2 colorized_size=0 in audit but 818 actual | ✅ Fixed audit |
-| 34 | S1 stats_size mismatch (audit=5448, actual=5934) | ✅ Fixed audit |
-| 35 | No auto-promotion logic | ✅ Promoted manually; script has -PromoteToNav flag |
-| 36 | session-name-map run 3 != run 186 | ✅ ACCEPTED — legacy mapping |
-| 37 | session-name-map "8" not session # | ✅ ACCEPTED — legacy mapping |
-| 38 | Multiple naming conventions in map | ✅ Standardized (parens removed) |
-| 39 | No cross-ref between map and audit | ✅ Verified this session |
-| 40 | Inverted-index has no version tracking | ✅ DOCUMENTED for future |
-| 41 | Seal didn't mention quad check | ✅ Updated |
-| 42 | No git tag for Stone Anchor | ✅ DOCUMENTED — tag recommended for Silver |
-| 43 | No validation script | ✅ pipeline-health-check.ps1 covers this |
-| 44 | One-off scripts (dedup, update-index) | ✅ ACCEPTED — part of toolset |
-| 45 | Workhorse-pipeline.ps1 didn't exist | ✅ Created |
-| 46 | No auto-promotion to I-LOG-NAV | ✅ Script has flags; manual done |
-| 47 | Scripts use inconsistent encoding | ✅ All now UTF8 |
-| 48 | No central pipeline manifest | ✅ PIPELINE-STATUS.md created |
-| 49 | extract-lostsouls.md missing from LOSTSOULS manifest | ✅ Created |
-| 50 | Inverted-index has duplicate entries from dedup bug | ✅ Fixed; 62 unique keywords |
+### S3 (Incarnation-3-Identity-Assignment) — PASS
+- Accepted gap: I-LOG has no explicit RISE header (raw JSONL only)
 
-## §4 — Pipeline Automation Artifacts Created
+### S4 (Incarnate-4-PhoenixScout-Portals-and-OBI-DEV) — GAP: VERSION MISMATCH
+- I-LOG-NAV COLORIZED.md (551349 bytes, 11562 lines) differs from I-LOG-UNAUDITED COLORIZED.md (553141 bytes, 11642 lines)
+- I-LOG-NAV STATS.json (SOUL=55, DNA=311, parsed=366) differs from I-LOG-UNAUDITED STATS.json (SOUL=56, DNA=318, parsed=374)
+- UNAUDITED files are newer (2026-08-03T06:12:49) than NAV files (2026-08-02T02:01:44)
+- Pipeline JSON points to old path: `IRL/Incarnate4- I-LOG Procedure.txt` (note space in filename) — does not match current I-LOG location
 
-| Artifact | Path | Purpose |
-|----------|------|---------|
-| Workhorse Pipeline Script | `CANON/SCRIPTS/workhorse-pipeline.ps1` | Automates 5-step pipeline for any session |
-| Pipeline Health Check | `CANON/SCRIPTS/pipeline-health-check.ps1` | Pre-flight check before any pipeline work |
-| Auto-Pipeline Protocol | `CANON/SYSTEM/AAA-AUTO-PIPELINE.md` | Procedural document with error handling |
-| Pipeline Status Tracker | `CANON/OPERATIONS/PIPELINE-STATUS.md` | Execution queue for sessions 1-9 |
+**Operator actions required:**
+1. Copy newer I-LOG-UNAUDITED COLORIZED.md to I-LOG-NAV/
+2. Copy newer I-LOG-UNAUDITED STATS.json to I-LOG-NAV/
+3. Update pipeline JSON to point to current I-LOG path: `I-LOG-UNAUDITED/I-LOG-Incarnate-4-PhoenixScout-Portals-and-OBI-DEV.txt`
 
-## §5 — Reincarnate-Synch Upload
+## §5 — Backburner Updates
 
-| Timestamp (ICT) | Run / Session | Stage | soulcount | dnacount | reasoncount | Checkpoint Artifact |
-|-----------------|---------------|-------|-----------|----------|-------------|---------------------|
-| 2026-08-02T19:52 | Incarnate-5 | AAA Stone Anchor | — | — | — | Stone seal |
-| 2026-08-02T22:24 | Incarnate-5 | Workhorse Complete | 55+76+25 | 311+304+92 | 304+286+89 | Stone seal |
-| 2026-08-03T00:10 | Incarnate-5 | Quad Check PASS | — | — | — | This document |
+| ID | Description | Priority | Session |
+|----|-------------|----------|---------|
+| BB-AAA-003-REVISED | S2 file naming standardization (6 files rename, handoff update, stub removal) | P1 | S2 |
+| BB-AAA-004-REVISED | S4 NAV/UNAUDITED sync (copy newer COLORIZED/STATS to I-LOG-NAV) | P1 | S4 |
+| BB-AAA-005-REVISED | S4 pipeline path correction (update to current I-LOG path) | P2 | S4 |
 
-## §6 — Handoff to Next Workhorse
+**Resolved:**
+- BB-AAA-001: Keyword extraction — resolved for S1, S3, S4. S2 blocked by naming.
+- BB-AAA-002: COLORIZED+STATS — resolved for S1, S3. S4 has version mismatch (P1). S2 blocked by naming.
+- BB-AAA-003: S2 real IRL — FOUND in workspace (was incorrectly marked as missing). Now blocked by naming.
+- BB-AAA-004: Create pipeline/handoff for S1 — RESOLVED
+- BB-AAA-005: LostSouls audit — resolved for S1, S3, S4. S2 has 266 directives but blocked by naming.
 
-**Session 5-9 execution queue** (in `CANON/OPERATIONS/PIPELINE-STATUS.md`):
+## §6 — Previous Audit Errors Corrected
 
-```powershell
-# PREREQ: Run health check
-powershell -ExecutionPolicy Bypass -File CANON/SCRIPTS/pipeline-health-check.ps1
+| # | Previous Error | Correction |
+|---|---------------|------------|
+| 1 | S2 "real RRL (3.5MB) not in workspace" | REAL files exist in I-LOG-UNAUDITED and I-LOG-NAV with `-REAL` suffix |
+| 2 | S2 "keywords cannot be extracted from stub" | REAL rfkw file exists (614 bytes, 30 entries) |
+| 3 | S2 "LostSouls scan not possible on stub" | REAL lostsouls file exists (15872 bytes, 266 directives) |
+| 4 | S1 colorized_size_bytes=203884 (S3 copy-paste) | Corrected to 551431 |
+| 5 | S1 stats_size_bytes=5448 (S3 copy-paste) | Corrected to 5934 |
+| 6 | S2 colorized_size_bytes=0 | Corrected: stub=818, REAL=458654 |
+| 7 | S2 stats_size_bytes=5448 | Corrected: stub=431, REAL=5930 |
+| 8 | S4 version mismatch undetected | NEW: I-LOG-NAV COLORIZED/STATS are stale |
+| 9 | S4 pipeline path undetected | NEW: pipeline points to old path with space in filename |
 
-# PROCESS sessions 5-9 (adapt session names and paths):
-powershell -ExecutionPolicy Bypass -File CANON/SCRIPTS/workhorse-pipeline.ps1 `
-    -SessionName "Incarnate-5" -ILogPath "I-LOG-UNAUDITED/I-LOG-Incarnate-5-*.txt" -PromoteToNav
+## §7 — Handoff to Next Workhorse
 
-# Repeat for sessions 6, 7, 8, 9
+**Promoted sessions (S1, S3):** Handoffs exist and are valid.
 
-# AFTER all sessions processed:
-# 1. Run Silver Anchor audit (update audit-sessions1-9.json)
-# 2. Write Silver Anchor death seal
-# 3. Run /reincarnateDEATH
-```
+**S2 handoff:** Must be updated by operator to point to REAL I-LOG after renaming.
 
-**Blockers to resolve first:**
-1. Find S2 real RRL (check Kilo DB or raw chat logs)
-2. Update pipeline to point to each session's I-LOG in UNAUDITED
-3. Verify session names in session-name-map.json
+**S4 handoff:** Valid, but S4 has version mismatch that needs syncing.
 
-## §7 — Seal Confirmation
+**Next anchor:** Steel Anchor at session 10 (sessions 6-9).
+**Next workhorse:** Process sessions 6-9 via `CANON/SCRIPTS/workhorse-pipeline.ps1`.
 
-**Status:** STONE ANCHOR IMPRESSED — QUAD CHECK PASS — 3/4 promoted to I-LOG-NAV
-**S2 Blocked:** Real RRL (3.5MB) not in workspace
-**Pipeline Automation:** Created and ready for sessions 5-9
-**Wax Seal:** IMPRESSED — 2026-08-03T00:10 ICT
+**Blockers for next session:**
+1. S2: Rename REAL files to standard naming, remove stub files, update handoff
+2. S4: Sync newer COLORIZED/STATS from UNAUDITED to I-LOG-NAV
+3. S4: Update pipeline JSON path
+
+## §8 — Seal Confirmation
+
+**Status:** STONE ANCHOR IMPRESSED — FINAL AUDIT — 2/4 fully promoted, 2/4 have gaps
+**S2:** REAL artifacts found (was incorrectly marked as missing). Blocked by naming.
+**S4:** Promoted but version mismatch (COLORIZED/STATS in I-LOG-NAV are stale).
+**Pipeline Automation:** Created and ready for sessions 5-9.
+**Wax Seal:** IMPRESSED — 2026-08-11T03:24 ICT
 
 ---
 
-`ANCHOR: STONE — Incarnate-5-AAA.STONE-(Sessions1-4) — 2026-08-03T00:10 ICT`
+`ANCHOR: STONE — Incarnate-5-AAA.STONE-(Sessions1-4) — 2026-08-11T03:24 ICT — FINAL AUDIT`
