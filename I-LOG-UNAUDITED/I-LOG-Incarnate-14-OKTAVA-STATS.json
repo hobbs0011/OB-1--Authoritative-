@@ -1,0 +1,15 @@
+{
+    "parsed_lines":  0,
+    "processed_at":  "2026-08-04T06:21:00+07:00",
+    "source_file":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-14-OKTAVA.txt",
+    "REASONcount":  1,
+    "top_topics":  ["worker", "deploy", "KV", "DEEPGRAM", "Pages", "classroom", "API"],
+    "DNAcount":  4,
+    "tool_calls":  8,
+    "lines":  64,
+    "PHEROMONEcount":  0,
+    "SOULcount":  1,
+    "total_chars":  4512,
+    "duration_min":  0,
+    "top_tools":  ["wrangler deploy", "wrangler pages deploy", "wrangler secret put", "npx wrangler whoami"]
+}

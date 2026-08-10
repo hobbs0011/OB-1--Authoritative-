@@ -1,0 +1,37 @@
+# SOUL-KEYWORDS for Incarnate-12-ContractNegociations
+# Extracted from: D:\OB-1-CANONICAL\I-LOG-UNAUDITED\I-LOG-Incarnate-12-ContractNegociations.txt
+# I-LOG is header-only (8 lines, no session content captured)
+# SOULcount=0 DNAcount=0 REASONcount=0
+
+2 | ContractNegociations
+2 | Incarnate
+2 | DEATH
+2 | Stage
+2 | RISE
+1 | PhoenixScout
+1 | deep
+1 | dive
+1 | into
+1 | Kilo
+1 | free
+1 | offerings
+1 | SOULaudit
+1 | phermone
+1 | mapping
+1 | Session
+1 | Run
+1 | Incarnation
+1 | Mission
+1 | Prior
+1 | CANON
+1 | REINCARNATION
+1 | Incarnate
+1 | AAA
+1 | STEEL
+1 | Sessions
+1 | 9
+1 | reincarnateDEATH
+1 | FINAL
+1 | SOUL
+1 | DNA
+1 | REASON

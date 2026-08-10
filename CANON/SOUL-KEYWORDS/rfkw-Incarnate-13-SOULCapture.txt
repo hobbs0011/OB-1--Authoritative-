@@ -1,0 +1,56 @@
+# SOUL-KEYWORDS for Incarnate-13-SOULCapture
+# Extracted from: D:\OB-1-CANONICAL\I-LOG-UNAUDITED\I-LOG-Incarnate-13-SOULCapture.txt
+# SOULcount=0 DNAcount=0 REASONcount=0
+
+4 | SOUL
+4 | DEATH
+3 | RISE
+3 | pipeline
+3 | RRL
+3 | pheromone
+2 | reincarnate
+2 | Incarnate
+2 | Phase
+2 | Stage
+2 | boot
+2 | ContractNegociations
+2 | GOSPEL
+2 | Stage
+2 | handoff
+2 | prior
+2 | capture
+2 | audit
+2 | session
+2 | HEAD
+2 | clean
+2 | tree
+1 | SOULCapture
+1 | hardening
+1 | Oktava
+1 | client
+1 | deposition
+1 | ant-colony
+1 | reflex
+1 | canonical
+1 | OB
+1 | System
+1 | Write
+1 | trail
+1 | without
+1 | prompting
+1 | f892cc2d8
+1 | artifacts
+1 | STATS
+1 | COLORIZED
+1 | VALID
+1 | discrepancy
+1 | KiloFreeDeepDive
+1 | renamed
+1 | SCRIPTS
+1 | COLD-START-BOOT
+1 | SOULKEYS
+1 | S2PIPELINE
+1 | REGISTRY_SYNC
+1 | phetrail
+1 | inferred
+1 | SOV100

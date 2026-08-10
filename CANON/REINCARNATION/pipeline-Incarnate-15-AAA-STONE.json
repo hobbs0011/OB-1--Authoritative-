@@ -1,0 +1,20 @@
+{
+    "run":  "15",
+    "ilog":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-15-AAA-STONE-(S11-14).txt",
+    "timestamp":  "2026-08-10T23:03:26+07:00",
+    "ilog_colorized":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-15-AAA-STONE-(S11-14)-COLORIZED.md",
+    "ilog_stats":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-15-AAA-STONE-(S11-14)-STATS.json",
+    "death_seal":  "CANON\\REINCARNATION\\Incarnate-15-AAA-STONE-(S11-14)-reincarnateDEATH.md",
+    "handoff":  "CANON\\REINCARNATION\\handoff-Incarnate-15-AAA-STONE-to-16.json",
+    "audit":  {
+        "SOULcount": 4,
+        "DNAcount": 4,
+        "REASONcount": 1,
+        "sessions_audited": ["Incarnate-11-AnhMinhContact", "Incarnate-12-ContractNegociations", "Incarnate-13-SOULCapture", "Incarnate-14-OKTAVA"],
+        "promotions": 1,
+        "gaps_initial": 12,
+        "gaps_resolved": 12,
+        "gaps_remaining": 0
+    },
+    "open_items":  []
+}

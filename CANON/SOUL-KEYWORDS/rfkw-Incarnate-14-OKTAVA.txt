@@ -1,0 +1,58 @@
+# SOUL-KEYWORDS for Incarnate-14-OKTAVA
+# Extracted from: D:\OB-1-CANONICAL\I-LOG-UNAUDITED\I-LOG-Incarnate-14-OKTAVA.txt
+# SOULcount=1 DNAcount=4 REASONcount=1
+
+8 | deploy
+6 | worker
+6 | Pages
+5 | KV
+5 | classroom
+5 | API
+4 | FORCEMARCH
+4 | wrangler
+4 | DEEPGRAM
+4 | NET
+3 | SCOUT
+3 | SOULSCHOLARS
+3 | SUPPLYLINES
+3 | ENGINEER
+3 | SEAL
+3 | HANDOFF
+3 | oktava
+3 | portal
+3 | pages
+3 | endpoint
+3 | health
+3 | stats
+2 | Cloudflare
+2 | OAuth
+2 | secret
+2 | production
+2 | CANON
+2 | CASE-STUDY
+2 | wrangler.toml
+2 | account_id
+2 | worker
+2 | URL
+2 | transcript
+2 | classroom.html
+2 | index.js
+2 | OKTAVA
+2 | CORS
+2 | cross-origin
+2 | SPA
+2 | static
+2 | assets
+2 | validation
+2 | PASS
+1 | authentication
+1 | OAuth Token
+1 | mrmichaelhobbs123
+1 | rate-limited
+1 | kvGet
+1 | kvPut
+1 | offline
+1 | fallback
+1 | Pages production
+1 | promotion
+1 | DNS propagation
