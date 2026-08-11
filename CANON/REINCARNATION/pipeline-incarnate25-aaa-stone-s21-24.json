@@ -1,7 +1,7 @@
 {
   "run": 25,
   "session": "Incarnate-25-AAA(STONE)-(S21-24)",
-  "timestamp": "2026-08-11T04:22:00+07:00",
+  "timestamp": "2026-08-11T12:11:58+07:00",
   "anchor_level": "Stone",
   "sessions_audited": [
     "Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT",
@@ -13,16 +13,16 @@
     {"session": "Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT", "status": "NAV", "reason": "Corrected — all NEW lane artifacts present"}
   ],
   "gaps": [
-    {"session": "Incarnate-22-Phoenix-RISING-GAME-DEVELOPMENT-FORCEMARCH", "status": "GAP", "missing": ["COLORIZED.md", "STATS.json", "rfkw", "SOUL/DNA extracts", "pheromone trail", "inverted-index entry"]},
-    {"session": "Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-INTEGRATION", "status": "GAP", "missing": ["I-LOG (no RISE/RRL source)", "COLORIZED.md", "STATS.json", "rfkw", "SOUL/DNA extracts", "pheromone trail", "inverted-index entry"], "backfill_path": "/reincarnateRISE + /SOUL + /DNA + /rfkw + /PheTrail + /reincarnateDEATH"},
+    {"session": "Incarnate-22-Phoenix-RISING-GAME-DEVELOPMENT-FORCEMARCH", "status": "GAP", "missing": ["DEATH seal", "pipeline JSON", "handoff JSON", "scout checkpoint", "COLORIZED.md", "STATS.json", "rfkw", "SOUL/DNA extracts", "pheromone trail", "inverted-index entry"]},
+    {"session": "Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-INTEGRATION", "status": "PARTIAL", "present": ["I-LOG", "COLORIZED.md", "STATS.json", "pipeline JSON", "handoff JSON"], "missing": ["rfkw", "SOUL/DNA extracts", "pheromone trail", "inverted-index entry", "LostSouls", "HEAVY-LEDGER", "RRL"], "audit_counts": {"SOUL": 2, "DNA": 31, "REASON": 0}},
     {"session": "Incarnate-24", "status": "HOLLOW/BLOCKER", "missing": ["All artifacts"]}
   ],
   "backburner": [
     "BB-AAA-22-ARTIFACTS: Generate full artifact set for session 22",
-    "BB-AAA-23-BACKFILL: Backfill session 23 via SCS pipeline",
+    "BB-AAA-23-INDEX: Backfill session 23 index/enhancement artifacts",
     "BB-AAA-24-START: Execute session 24 or mark HOLLOW",
     "BB-AAA-21-LANE-A: Execute Meshy Pro art pipeline — generate 60-80 3D assets",
     "BB-AAA-21-LANE-B: Develop Quan's AI 3D modeling curriculum using Lane A workflow"
   ],
-  "status": "AUDIT COMPLETE — 1 PROMOTED (session 21 corrected), 2 GAP, 1 HOLLOW/BLOCKER"
+  "status": "AUDIT COMPLETE — 1 PROMOTED (session 21 corrected), 1 PARTIAL (session 23 backfilled core artifacts), 1 GAP, 1 HOLLOW/BLOCKER"
 }
