@@ -6,7 +6,7 @@
         {"path": "RRL/RRL-024.txt", "sha256": "C1DAE6B34ED824C1639BE676E9E574003AF2C42976D48E4621CEBD30D3E5F28A", "size": 96714, "status": "SYNCED"},
         {"path": "CANON/SOUL/EXTRACT/soul-run024.jsonl", "sha256": null, "size": 6103, "status": "SYNCED"},
         {"path": "CANON/SOUL/EXTRACT/dna-run024.json", "sha256": null, "size": 49351, "status": "SYNCED"},
-        {"path": "CANON/SOUL/EXTRACT/reasoning-run024.jsonl", "sha256": null, "size": 783, "status": "PENDING"},
+        {"path": "CANON/SOUL/EXTRACT/reasoning-run024.jsonl", "sha256": null, "size": 783, "status": "BLOCKED", "note": "Kilo DB extraction unavailable — 961 parts unmined"},
         {"path": "CANON/HEAVY-LEDGER/HL-024.json", "sha256": null, "size": 2156, "status": "SYNCED"},
         {"path": "CANON/STARMAP/starmap-run024.json", "sha256": null, "size": 708, "status": "SYNCED"},
         {"path": "CANON/SOUL-KEYWORDS/rfkw-run024.txt", "sha256": null, "size": 319, "status": "SYNCED"},

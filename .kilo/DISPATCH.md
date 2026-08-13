@@ -1,53 +1,37 @@
 # OB-1 Kilo Dispatch — Read this at every session start
 
-**Kilo-native mode.** All dispatch routes through the in-session model or Phoenix-Architecti worker.
+**Kilo-native mode.** All dispatch routes through the in-session model.
 
-## Phoenix-Architecti (T1-T2) — ALWAYS call this first for write/create/generate tasks
+## Routing
 
-```powershell
-$body = @{ task="<task>"; context="<file content>"; targetfile="<path>"; tier=1 } | ConvertTo-Json -Compress
-Invoke-RestMethod -Uri "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code" -Method POST -ContentType "application/json" -Headers @{"x-pa-auth"="ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8="} -Body $body
-```
-
-Response: `{ "code_patch": "<raw code>", "d1_row_id": "<id>" }`
-Apply `code_patch` directly to the target file. No markdown fences in output.
-
-## Tier Routing
+Inline-first. For write/create/generate tasks, execute directly in-session. Phoenix-Architecti worker is available as an optional fallback only when inline execution fails or is blocked.
 
 | Tier | Model | When |
 |------|-------|------|
-| T1 | Primary Workhorse (PA tier=1) | ALL workhorse: write / implement / generate / fix / debug / refactor / audit / pipeline |
+| Inline | In-session model (default) | ALL write / implement / generate / fix / debug / refactor / audit / pipeline tasks |
 | T2 | DeepSeek V4 Pro | Final rulings / irreversible decisions / arbitration only |
 
-Auth header required on all PA calls: `x-pa-auth: ffScwBjPQjBnoAlectawu8E+J4NcmO3idxGxtlcRue8=`
-
-## Worker URLs
+## Worker URLs (reference only — do not dispatch unless inline fails)
 - phoenix-architecti: https://phoenix-architecti.mrmichaelhobbs123.workers.dev
 - pcc (empire dashboard): https://pcc.mrmichaelhobbs123.workers.dev
 - net-pet-ai (main app): https://net-pet-ai.mrmichaelhobbs123.workers.dev
 - soul-logger: https://soul-logger.mrmichaelhobbs123.workers.dev
-
-## Check worker status
-```powershell
-Invoke-RestMethod "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status" | ConvertTo-Json
-```
 
 ## Cold Boot
 1. Read CANON/SYSTEM/COLD-START-BOOT.md
 2. Read OPERATIONS/BACKBURNER-PIPELINE-LOG.md
 3. Read RRL/RRL-[latest].txt + latest RRL/DNA-LOG-*.txt
 4. git log -5 --oneline
-5. curl phoenix-architecti /api/status
 
 ## PRE-CODE GATE — MANDATORY BEFORE ANY APPS/NET-PET-AI CHANGE
 
 Run 31 car crash: agent touched chat.js/index.js WITHOUT reading docs. Destroyed 4 runs of uncommitted work.
 
-Before dispatching T1 for any NET-PET-AI change, YOU MUST READ:
+Before any NET-PET-AI change, YOU MUST READ:
 1. `OPERATIONS/STUDENT-PORTAL-DEV.md` — full file, not partial
 2. `CANON/RESEARCH/deepgram-voice-agent-edge-cases.md` — §2 at minimum
 
-Pass both as context in the PA call. Skipping = L56 violation = Run 31 repeat.
+Skipping = L56 violation = Run 31 repeat.
 
 ### Deepgram Voice Agent — Invalid Fields (WILL BREAK SETTINGSAPPLIED)
 Never add: `language_hints`, `smart_format`, `mip_opt_out`, `utterance_end_ms`, `audio.output.container`, `audio.output.sample_rate`
@@ -71,8 +55,7 @@ Gapless audio v2+v3 was lost permanently because it ran uncommitted across 4 run
 - NOTION BLACKLISTED
 - lam portal BB-07: DO NOT BUILD without explicit Michael direction
 - Secrets restore: pwsh SCRIPTS/set-pa-secrets.ps1
-- SOULCOUNT: 60,037,507 TITANIUM_ANCHOR (Run 32 — updated from stale 907,872)
-- PA_AUTH_SECRET is set on phoenix-architecti — always include x-pa-auth header
+- SOULCOUNT: per-session only (aggregate banned per SOV100)
 
 ## Scout Protocol — MANDATORY FOR ALL /PhoenixRISE SCOUT MISSIONS
 

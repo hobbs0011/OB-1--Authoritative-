@@ -10,7 +10,7 @@
         "rrl": "REAL",
         "soul": "REAL",
         "dna": "REAL",
-        "reasoning": "PENDING",
+        "reasoning": "BLOCKED",
         "ledger": "REAL",
         "starmap": "REAL",
         "soulkeys": "REAL",
@@ -22,8 +22,12 @@
         "soul_chars": 2697,
         "dna_turns": 98,
         "dna_chars": 21190,
-        "reason_count": 0,
+        "reason_count": null,
         "rrl_bytes": 96714
+    },
+    "notes": {
+        "reasoning_block": "Kilo DB part-table extraction unavailable from this session. 961 parts for session ses_0899b2c82ffe2PtNt3XBMEVv5V remain unmined. reasoning-run024.jsonl is a schema placeholder (783 bytes).",
+        "soul_bytes_source": "Extracted from RRL user turns: 2,697 chars across 27 turns."
     },
     "artifacts": {
         "rrl": "RRL/RRL-024.txt",
