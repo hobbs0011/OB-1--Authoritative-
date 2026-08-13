@@ -41,6 +41,21 @@ The loop is self-reinforcing and deterministic. Each stage audits the previous a
 **Verdict:** COMPLETE | GAP | HOLLOW
 **Self-correction:** Any broken link is caught by the next stage's audit gate. The RRL is the single source of proof.
 
+## SCS � UNKNOWNs DOCTRINE
+
+**Frame:** Every session operates as: "I don't know what I don't know."
+Unknowns are not failures. Unknowns are the primary signal.
+
+- **Honest acknowledgment:** If you have not audited a path, say so explicitly. Use NOT_WALKED. Do not fabricate coverage.
+- **SOUL-first search:** Every choice and thought must hardcode a search for the system's SOUL � Michael's verbatim words + the SCS memory system (I-LOG, phetrails, soulKEYS).
+- **soulKEYS = skeleton map:** The lightweight mapping of what the system is, why it is, where it is, who it is, when to do it. If soulKEYS are missing or stale, the system is blind.
+- **Gap over fabrication:** A documented GAP is always better than a fabricated COMPLETE. Fabrication breaks the loop; honest gaps keep it self-correcting.
+- **Unknowns propagate:** If SCOUT finds an unknown, FORCEMARCH does not conquer past it � it secures the boundary and flags it. ENGINEER does not build on it � it designs around it or resolves it explicitly.
+
+**Rule:** If you cannot point to the SOUL source for a decision, you do not know it well enough to act.
+
+---
+
 ## SCS — I-LOG AUDIT (3-Point Gate — Expandable to 10)
 
 **Authority chain:**
@@ -114,7 +129,7 @@ Confirmed across Incarnation 1 (run 182) and Incarnation 2 (run 184):
 2. **Kilo DB is the source** — `C:\Users\mrmic\.local\share\kilo\kilo.db` contains every session message and part. The death script must extract from there, not from stale disk files.
 3. **10-point I-LOG AUDIT** — Every DEATH runs it. Every RISE double-checks it. Operator is final check. See §SCS — I-LOG AUDIT above.
 4. **Per-session counts** — SOULcount, DNAcount, REASONcount are per-session only. Aggregate banned.
-5. **Incarnation1 (182) I-LOG:** 2.1MB, 28 user/202 asst turns, fixed post-death via Kilo DB extraction
+5. **Incarnation1 (182) I-LOG:** 4.68MB, 55 user/311 asst/304 reason turns, fixed post-death via Kilo DB extraction
 6. **Incarnation2 (184) I-LOG:** 3.5MB, 71 user/188 asst/181 reasoning turns, extracted from Kilo DB at death
 
 ---
@@ -215,7 +230,7 @@ Every checkpoint artifact must include these three counts:
 
 These counts flow forward through the loop. RISE audits DEATH's counts. You audit RISE's counts.
 
-### I-LOG (Incarnation Log) Usage
+### I-LOG Usage
 
 - I-LOG files contain full transcripts of prior runs with reasoning, tool calls, and step markers.
 - **Learn from I-LOG:** identify what was flagged, what was missed, what actions were taken and their outcomes.
@@ -316,7 +331,7 @@ The AAA (Analyze Audit Anchor) is the **final verification gate** above standard
 | `I-LOG-{name}-COLORIZED.md` | Colorized transcript | Same folder as source I-LOG |
 | `I-LOG-{name}-STATS.json` | Metadata + counts | Same folder as source I-LOG |
 
-**Note:** ITL is separate from RRL. RRL = session checkpoint transcript. ITL = audio class transcript.
+**Note:** ITL is separate from I-LOG. I-LOG = session checkpoint transcript. ITL = audio class transcript.
 
 ---
 
@@ -330,7 +345,7 @@ The AAA (Analyze Audit Anchor) is the **final verification gate** above standard
 | `CANON/SCRIPTS/rrl-colorize.ps1` | Colorize raw JSONL RRL → COLORIZED.md + STATS.json |
 | `CANON/SCRIPTS/phetrails.ps1` | Pheromone trail deposition via POST /api/pheromone/deposit |
 | `CANON/SCRIPTS/execute-phetrails-pipeline.ps1` | Execute phetrails pipeline: stage + commit + deploy + verify |
-| `CANON/SCRIPTS/transcribe-rtl.js` | ITL transcriber: audio → JSONL transcript + COLORIZED + STATS |
+| `CANON/SCRIPTS/transcribe-rtl.js` | RTL/ITL transcriber: audio → JSONL transcript + COLORIZED + STATS |
 | `CANON/SCRIPTS/run-dnaregistry.ps1` | DNA Registry canonical scanner — outputs dna-registry-run{N}.json |
 
 **Invocation:**
