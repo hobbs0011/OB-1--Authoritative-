@@ -38,7 +38,7 @@
 - RRL sourced from PastLives/OBI-MAGIC-CHAT-DEVELOPMENT.jsonl (96,714 bytes, SHA256: C1DAE6B34ED824C1639BE676E9E574003AF2C42976D48E4621CEBD30D3E5F28A)
 - SOUL: 27 user turns, 2,697 chars extracted
 - DNA: 98 assistant turns, 21,190 chars, 7 blueprints (TTS speed, dual-audio x2, re-entrant guard, queue cap, mic-denied, stale connection timeout, navigator.mediaDevices guard)
-- REASONING: PENDING — Kilo DB extraction needed (961 parts estimated for session ses_0899b2c82ffe2PtNt3XBMEVv5V)
+- REASONING: BLOCKED — Kilo DB extraction unavailable from this session (961 parts estimated for session ses_0899b2c82ffe2PtNt3XBMEVv5V, 49,575 total across all sessions)
 - Pipeline: KILO_GAP (Kilo session, no Claude Code JSONL on disk)
 - Git last death commit: 85f36f6b5 (Incarnate-5-AAA.STONE) — run number regex failed on "Incarnate-5" format
 - Canonical handoff: 24 → 25 (from_run=24, to_run=25)
@@ -58,32 +58,35 @@
 
 ## §9 — Open Questions
 - Kilo DB extraction scripts (kilo-engineering-extract.cjs, kilo-rrl-capture.js) not present in working tree — backfill required from run 183 branch
-- REASONING-run024.jsonl is a schema placeholder pending actual Kilo DB extraction
-- BOOT fingerprint stale — COLD-START-BOOT.md references runs 053-096 era
-- .kilo/DISPATCH.md has dead PA T1 routing (3+ months, rate-limited)
+- REASONING-run024.jsonl is a schema placeholder (783 bytes) — blocked by unavailable Kilo DB access
+- GOSPEL-999 missing SYSTEM X — REASONING (scout finding, requires doctrinal update)
+- LFG needs L-PHE-7 through L-PHE-10 (scout finding, requires LegionnaireFieldGuide.md update)
+- 78 orphan RRL files eligible for legacy death (scout finding, requires /reincarnateLegacy processing)
+- SOULscript extraction missing for 180+ sessions (scout finding, requires automation)
+- PheTrail schema v2.1 negative trails structural gap (scout finding)
 
 ## §10 — Unfinished Actions
-- Extract Kilo DB parts for run 24 (session ses_0899b2c82ffe2PtNt3XBMEVv5V) → reasoning-run024.jsonl
-- Update COLD-START-BOOT.md FINGERPRINT to RUN 024 / HEAD 651c38d7e
-- Fix .kilo/DISPATCH.md dead PA T1 routing
-- Add REASONING stage to canonical pipeline schema (Stage 2.5)
+- Extract Kilo DB parts for run 24 (session ses_0899b2c82ffe2PtNt3XBMEVv5V) → reasoning-run024.jsonl — BLOCKED: no direct SQLite access to kilo.db
+- Add REASONING stage (Stage 2.5) to canonical pipeline schema
+- Update COLD-START-BOOT.md FINGERPRINT to RUN 024 / HEAD 651c38d7e — DONE (commit 52796324a)
+- Fix .kilo/DISPATCH.md dead PA T1 routing — DONE (commit 52796324a)
 
 ## §11 — System Design
 - 8-Stage Roman Death v7.0 operational.
-- REASONING stage (Stage 2.5) proposed by scout — between SOUL and DNA.
-- Kilo DB part table: 49,575 parts across 182+ sessions, ZERO extracted into pipeline.
+- REASONING stage proposed by scout — between SOUL and DNA. BLOCKED: no direct SQLite access to kilo.db from this session.
+- Kilo DB part table is the missing pheromone layer — 961 parts for this session, 49,575 total across all sessions
 - Scout findings: 13 items in phoenix-scout-OBI-MAGIC-CHAT-DEVELOPMENT.jsonl.
 
 ## §12 — Artifacts
 - RRL-024.txt:C1DAE6B34ED824C1639BE676E9E574003AF2C42976D48E4621CEBD30D3E5F28A
 - soul-run024.jsonl:27 entries, 2697 chars
 - dna-run024.json:98 entries, 21190 chars, 7 blueprints
-- reasoning-run024.jsonl:SCHEMA_PLACEHOLDER (pending Kilo DB extraction)
+- reasoning-run024.jsonl:BLOCKED (783-byte schema placeholder — Kilo DB extraction unavailable)
 - HL-024.json:2156 bytes
 - starmap-run024.json:708 bytes
 - rfkw-run024.txt:30 keywords
 - pipeline-run024.json:result=KILO_GAP
-- art-sync-run024.json:7 synced, 2 pending
+- art-sync-run024.json:7 synced, 1 blocked
 - **runPad:** 024 | **HL:** HL-024 | **Merkle:** PENDING
 
 ## §13 — State Snapshot
@@ -95,26 +98,26 @@
 
 ## §14 — Art Registry Sync
 - **Pieces synced:** 7
-- **Pending:** 2 (reasoning-run024.jsonl, death seal)
+- **Blocked:** 1 (reasoning-run024.jsonl — Kilo DB extraction unavailable)
 - **Art sync file:** D:\OB-1-CANONICAL\CANON\ART-REGISTRY\art-sync-run024.json
 - **Top keywords:** 30 | OBI, MAGIC, CHAT, DEVELOPMENT, DEPLOYMENT, DUAL-AUDIO, MIC-GUARD, TEST-SUITE
 
 ## §15 — Deletion Authorization
 - **KILO_HOLLOW session** — no Claude Code JSONL on disk
 - **Legacy session:** ses_0899b2c82ffe2PtNt3XBMEVv5V (OBI-MAGIC-CHAT-DEVELOPMENT)
-- **Kilo DB parts:** 961 parts estimated — NOT YET EXTRACTED
-- **Status:** PENDING — do NOT delete until reasoning extraction is complete
+- **Kilo DB parts:** 961 parts estimated — BLOCKED (no direct SQLite access to kilo.db)
+- **Status:** HOLD — do NOT delete until reasoning extraction is complete or explicitly waived by SOV100
 - **Source RRL preserved:** PastLives/OBI-MAGIC-CHAT-DEVELOPMENT.jsonl (96,714 bytes)
 
 ## §16 — Scout Intelligence
 - **Scout file:** OPERATIONS/phoenix-scout-OBI-MAGIC-CHAT-DEVELOPMENT.jsonl (13 findings)
 - **Key findings:**
-  1. Kilo DB part table unmined (961 parts for this session, 49,575 total)
-  2. REASONING stage needed between SOUL and DNA (proposed 9-stage pipeline)
-  3. GOSPEL-999 missing SYSTEM X — REASONING
-  4. LFG needs L-PHE-7 through L-PHE-10 (EXECUTION_AUTO_CAPTURE, REASONING_PRESERVED, FAILURE_IS_DATA, SCORE_EVERY_ATTEMPT)
-  5. BOOT fingerprint stale by 4-5 runs
-  6. Aggregate SOULCOUNT banned in pipeline files
-  7. .kilo/DISPATCH.md has dead PA T1 routing (3+ months)
+   1. Kilo DB part table unmined (961 parts for this session, 49,575 total) — BLOCKED: no SQLite access
+   2. REASONING stage needed between SOUL and DNA (proposed 9-stage pipeline) — OPEN
+   3. GOSPEL-999 missing SYSTEM X — REASONING — OPEN
+   4. LFG needs L-PHE-7 through L-PHE-10 — OPEN
+   5. BOOT fingerprint stale by 4-5 runs — FIXED (commit 52796324a, advanced to RUN 024 / HEAD 651c38d7e)
+   6. Aggregate SOULCOUNT banned in pipeline files — CONFIRMED, schema updated
+   7. .kilo/DISPATCH.md has dead PA T1 routing (3+ months) — FIXED (commit 52796324a, inline-first routing)
 - **Scout learned:** OPERATIONS/phetrail-scout-learned-OBI-MAGIC-CHAT-DEVELOPMENT.md (45 lines)
 - **Negative trails:** 4 (RRL format, PheTrail schema v2.1, GOSPEL-999 SOUL definition, PHEROMONE-DOCTRINE)
