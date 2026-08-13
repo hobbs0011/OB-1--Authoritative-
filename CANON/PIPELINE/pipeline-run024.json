@@ -41,8 +41,8 @@
         "registry": "CANON/ART-REGISTRY/art-sync-run024.json"
     },
     "open_items": [
-        "Extract Kilo DB parts (961 parts, session ses_0899b2c82ffe2PtNt3XBMEVv5V) → reasoning-run024.jsonl",
-        "Write death seal"
+        "Extract Kilo DB parts (961 parts, session ses_0899b2c82ffe2PtNt3XBMEVv5V) → reasoning-run024.jsonl — BLOCKED: no direct SQLite access to kilo.db",
+        "Add REASONING stage (Stage 2.5) to canonical pipeline schema"
     ],
     "ilog": "I-LOG-UNAUDITED/I-LOG-Incarnate-24-OBI-Magic-Chat-Development.txt",
     "ilog_stats": "I-LOG-UNAUDITED/I-LOG-Incarnate-24-OBI-Magic-Chat-Development-STATS.json",
