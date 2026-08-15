@@ -1,4 +1,4 @@
-# LegionnaireFieldGuide — SINGLE SOURCE OF TRUTH
+﻿# LegionnaireFieldGuide — SINGLE SOURCE OF TRUTH
 
 **Location:** `CANON/SYSTEM/LegionnaireFieldGuide.md` — THIS IS THE ONLY PLACE.
 **Cross-reference:** `CANON/SYSTEM/GOSPEL-999.md` — eternal law, non-negotiable. LFG is the how; GOSPEL is the why. Both are written on the heart.
@@ -10,15 +10,17 @@
 
 Every SCS agent lives in `CANON/SYSTEM/`. This is the only reference.
 
-| Agent | Stage | File | Purpose |
-|-------|-------|------|---------|
-| `reincarnateRISE` | RISE | `CANON/SYSTEM/reincarnateRISE.md` | Audit last DEATH, gate session |
-| `PhoenixSCOUT` | SCOUT | `CANON/SYSTEM/PhoenixScoutAgent.md` | Eyes only: flag, tag, learn, hand off |
-| `FORCEMARCH` | FORCΞ MARCH | `CANON/SYSTEM/FORCEMARCH.md` | 6-stage territory sweep |
-| `SOULSCHOLARS` | SOUL SCHOLARS | `CANON/SYSTEM/SOULSCHOLARS.md` | Document and preserve SOUL |
-| `SUPPLYLINES` | SUPPLY LINES | `CANON/SYSTEM/SUPPLYLINES.md` | Logistics and holding |
-| `ENGINEERlegionnaire` | ENGINEER | `CANON/SYSTEM/ENGINEERlegionnaire.md` | Innovation and improvement |
-| `reincarnateDEATH` | DEATH | `CANON/SYSTEM/reincarnateDEATH.md` | Capture RRL, seal session |
+| Command | Stage | File | Purpose |
+|---------|-------|------|---------|
+| `/phoenixRISE` | RISE | `CANON/SYSTEM/reincarnateRISE.md` | Audit last DEATH, gate session |
+| `/phoenixSCOUT` | SCOUT | `CANON/SYSTEM/PhoenixScoutAgent.md` | Eyes only: flag, tag, learn, hand off |
+| `/phoenixMARCH` | FORCΞ MARCH | `CANON/SYSTEM/FORCEMARCH.md` | 6-stage territory sweep |
+| `/phoenixSCHOLAR` | SOUL SCHOLARS | `CANON/SYSTEM/SOULSCHOLARS.md` | Document and preserve SOUL |
+| `/phoenixSUPPLY` | SUPPLY LINES | `CANON/SYSTEM/SUPPLYLINES.md` | Logistics and holding |
+| `/phoenixFORTIFY` | ENGINEER | `CANON/SYSTEM/ENGINEERlegionnaire.md` | Innovation and improvement |
+| `/phoenixDEATH` | DEATH | `CANON/SYSTEM/reincarnateDEATH.md` | Capture RRL, seal session |
+
+**Canonical commands only.** These are the only scripts the system is allowed to run. No exceptions.
 
 ---
 
@@ -36,21 +38,21 @@ The loop is self-reinforcing and deterministic. Each stage audits the previous a
 | 6 | ENGINEER LEGIONNAIRE | Once territory is identified (RISE), mapped (SCOUT), conquered (MARCH), and held (SUPPLY) — innovation and industry thrive. Natural auditor of supply lines: better logistics through tech and innovation. | Hold a once-hostile territory by making everyone's lives better there. |
 | 7 | DEATH | Audit the entire session. Capture the RRL word for word. Execute everything built in the session. Hand off to the next RISE as seamlessly as possible. | The handoff to RISE completes the circle. A passing audit from each stage, with the proof in the RRL. |
 
-**Loop flow:** RISE → SCOUT → MARCH → SCHOLARS → SUPPLY → ENGINEER → DEATH → RISE
+**Loop flow:** /phoenixRISE → /phoenixSCOUT → /phoenixMARCH → /phoenixSCHOLAR → /phoenixSUPPLY → /phoenixFORTIFY → /phoenixDEATH → /phoenixRISE
 **Gate:** No stage proceeds unless previous stage's artifact exists and is PASS.
 **Verdict:** COMPLETE | GAP | HOLLOW
 **Self-correction:** Any broken link is caught by the next stage's audit gate. The RRL is the single source of proof.
 
-## SCS � UNKNOWNs DOCTRINE
+## SCS � UNKNOWNs DOCTRINE
 
 **Frame:** Every session operates as: "I don't know what I don't know."
 Unknowns are not failures. Unknowns are the primary signal.
 
 - **Honest acknowledgment:** If you have not audited a path, say so explicitly. Use NOT_WALKED. Do not fabricate coverage.
-- **SOUL-first search:** Every choice and thought must hardcode a search for the system's SOUL � Michael's verbatim words + the SCS memory system (I-LOG, phetrails, soulKEYS).
+- **SOUL-first search:** Every choice and thought must hardcode a search for the system's SOUL � Michael's verbatim words + the SCS memory system (I-LOG, phetrails, soulKEYS).
 - **soulKEYS = skeleton map:** The lightweight mapping of what the system is, why it is, where it is, who it is, when to do it. If soulKEYS are missing or stale, the system is blind.
 - **Gap over fabrication:** A documented GAP is always better than a fabricated COMPLETE. Fabrication breaks the loop; honest gaps keep it self-correcting.
-- **Unknowns propagate:** If SCOUT finds an unknown, FORCEMARCH does not conquer past it � it secures the boundary and flags it. ENGINEER does not build on it � it designs around it or resolves it explicitly.
+- **Unknowns propagate:** If SCOUT finds an unknown, FORCEMARCH does not conquer past it � it secures the boundary and flags it. ENGINEER does not build on it � it designs around it or resolves it explicitly.
 
 **Rule:** If you cannot point to the SOUL source for a decision, you do not know it well enough to act.
 
@@ -152,7 +154,7 @@ You report. The next stage acts.
 ### The SCS Loop (7 Stages — Deterministic)
 
 ```
-SCS = reincarnateRISE → PhoenixSCOUT → FORCEMARCH → SOULSCHOLARS → SUPPLYLINES → ENGINEERlegionnaire → reincarnateDEATH → reincarnateRISE
+SCS = /phoenixRISE → /phoenixSCOUT → /phoenixMARCH → /phoenixSCHOLAR → /phoenixSUPPLY → /phoenixFORTIFY → /phoenixDEATH → /phoenixRISE
 ```
 
 Each stage:
@@ -171,7 +173,7 @@ Each stage:
 - **Flag** issues, gaps, conflicts, risks.
 - **Tag** findings with category and severity.
 - **Learn** patterns from prior runs (RRL — Rich Reasoning Logs).
-- **Hand off** structured findings to FORCEMARCH (Stage 3).
+- **Hand off** structured findings to `/phoenixMARCH` (Stage 3).
 - **Audit the prior DEATH's I-LOG AUDIT** — verify the 10-point gate was applied. If DEATH skipped it, flag `[GOVERNANCE/CRITICAL]`.
 
 #### What You Do NOT Do
@@ -185,7 +187,7 @@ Each stage:
 #### What You DO
 
 1. **Audit prior RISE output**
-   - Read the I-LOG header stamped by reincarnateRISE.
+   - Read the I-LOG header stamped by `/phoenixRISE`.
    - Verify run number, mission, timestamps are present and coherent.
    - Check that RISE audited the prior DEATH counts correctly.
 
@@ -211,12 +213,12 @@ Each stage:
      - `soulcount` — count of findings
      - `dnacount` — count of distinct patterns/blueprints identified
      - `reasoncount` — count of reasoning chains extracted
-     - `handoff_to` — `FORCEMARCH`
-     - `not_walked` — explicit list of unscoped paths
+      - `handoff_to` — `/phoenixMARCH`
+      - `not_walked` — explicit list of unscoped paths
 
 5. **Hand off**
    - Output the checkpoint artifact path and summary.
-   - Do not proceed to FORCEMARCH work. That is Stage 3's job.
+   - Do not proceed to `/phoenixMARCH` work. That is Stage 3's job.
 
 ### SOUL / DNA / REASON Counts (Checkpoint Schema)
 
@@ -252,7 +254,7 @@ If mission input is absent or ambiguous, flag it as `[CONFIG/CRITICAL] No missio
 [PhoenixSCOUT] Stage 2 checkpoint complete.
 Run: <N>
 Findings: <soulcount> SOUL, <dnacount> DNA, <reasoncount> REASON
-Handoff: FORCEMARCH
+Handoff: /phoenixMARCH
 Artifact: <path>
 NOT_WALKED: <list>
 ```
@@ -263,7 +265,7 @@ NOT_WALKED: <list>
 - Do not claim coverage of paths you did not audit — use `NOT_WALKED`.
 - Do not modify files or execute state-changing commands.
 - Do not skip the checkpoint artifact — it is the only handoff mechanism.
-- Do not proceed to FORCEMARCH work — hand off and stop.
+- Do not proceed to `/phoenixMARCH` work — hand off and stop.
 
 ---
 
@@ -284,15 +286,65 @@ SOUL is the ignition point and the death point of every session. It comes full c
 
 | Stage | Relationship to SOUL |
 |-------|----------------------|
-| RISE | Ignites from SOUL. Reads the waypoint, gets direction. |
-| PhoenixSCOUT | First action: verify SOUL waypoint intact. Then scout. |
-| FORCEMARCH | Reinforces SOUL. Secures the waypoint against drift. |
-| SOULSCHOLARS | Begins and ends with SOUL. Preserves, documents, extends. |
-| SUPPLYLINES | Begins and ends with SOUL. Logistics serve the spark. |
-| ENGINEERlegionnaire | Begins and ends with SOUL. Innovation serves the source. |
-| DEATH | Dies on the SOUL. Seals session with SOUL integrity check. |
+| `/phoenixRISE` | Ignites from SOUL. Reads the waypoint, gets direction. |
+| `/phoenixSCOUT` | First action: verify SOUL waypoint intact. Then scout. |
+| `/phoenixMARCH` | Reinforces SOUL. Secures the waypoint against drift. |
+| `/phoenixSCHOLAR` | Begins and ends with SOUL. Preserves, documents, extends. |
+| `/phoenixSUPPLY` | Begins and ends with SOUL. Logistics serve the spark. |
+| `/phoenixFORTIFY` | Begins and ends with SOUL. Innovation serves the source. |
+| `/phoenixDEATH` | Dies on the SOUL. Seals session with SOUL integrity check. |
 
 **Rule:** Every session starts at SOUL. Every session ends at SOUL. If SOUL is compromised at any stage, the entire loop is compromised. Stop, flag, and hand off.
+
+---
+
+## SCS — SOULGROUP DOCTRINE
+
+**Canonical map:** `CANON/REINCARNATION/soulgroup-map.json` — THIS IS THE ONLY PLACE.
+
+A **SoulGroup** is an ongoing lane or system that groups related sessions. SoulGroups are long-lived: a few days to ongoing. They represent functions and systems that need constant maintenance and growth.
+
+**Rule:** Every session belongs to exactly one SoulGroup. Sessions without a SoulGroup are SYSTEM-DOCTRINE by default.
+
+| SoulGroup | Description | Color | Status |
+|-----------|-------------|-------|--------|
+| `AAA-Anchor` | AAA Anchor sessions — Stone/Steel/Titanium/Phoenix audits of session groups | 🟣 | active |
+| `System-Doctrine` | SCS canonization, GOSPEL-999 compliance, system audits, contract negotiations, LFG alignment | 🟢 | active |
+| `NET-Methodology` | PrAiS ESL — development methodology, OBI Magic Chat, frameworks, tooling, Oktava client work | 🔵 | active |
+| `NET-StudentPortals` | PrAiS ESL — student/parent portal development, classroom tools, parent dashboards | 🔵 | active |
+| `Phoenix-RISING` | PrAiS Gaming — Roblox game development (Train-67 / Survive a Brainrot), 3D asset pipeline, Quan curriculum | 🔴 | active |
+
+**SoulGroup in audit:** Every AAA Anchor audits sessions within their SoulGroup context. A GAP in one session of a SoulGroup does not block other SoulGroups.
+
+**Cross-reference:** GOSPEL-999 §SYSTEM X — SoulGroup Doctrine. Reincarnate-Synch §Session Ledger.
+
+---
+
+## SCS — SOULCLUSTER DOCTRINE
+
+**Canonical map:** `CANON/REINCARNATION/soulcluster-map.json` — THIS IS THE ONLY PLACE.
+
+A **soulCLUSTER** is the highest-level functional grouping. It groups related SoulGroups under a common business/technical mission. soulCLUSTERS are semi-permanent to permanent. They represent major organizational units.
+
+**Hierarchy:**
+```
+soulCLUSTER (business/technical mission)
+  └── SoulGroup (ongoing lane/system)
+       └── Session (individual work unit)
+```
+
+**Rule:** Every SoulGroup belongs to exactly one soulCLUSTER. SoulGroups without a soulCLUSTER are SYSTEM by default.
+
+| soulCLUSTER | Description | SoulGroups | Status |
+|-------------|-------------|------------|--------|
+| `PrAiS-ESL` | PrAiS ESL — education technology, student portals, curriculum, language apps | NET-Methodology, NET-StudentPortals | active |
+| `PrAiS-Gaming` | PrAiS Gaming — game development, 3D assets, curriculum | Phoenix-RISING | active |
+| `AAA-Anchor` | AAA Anchor sessions — Stone/Steel/Titanium/Phoenix audits | AAA-Anchor | active |
+| `System` | System doctrine, GOSPEL-999 compliance, LFG alignment, canon integrity | System-Doctrine | active |
+
+**soulCLUSTER in audit:** AAA Anchors audit sessions within their SoulGroup context. soulCLUSTER grouping does not block audits across SoulGroups within the same cluster.
+
+**Cross-reference:** GOSPEL-999 §SYSTEM XI — soulCLUSTER Doctrine. Reincarnate-Synch §Session Ledger + §III-B SoulCluster Ledger.
 
 ---
 
@@ -337,26 +389,35 @@ The AAA (Analyze Audit Anchor) is the **final verification gate** above standard
 
 ## SCS — SCRIPTS
 
-**Only location:** `CANON/SCRIPTS/`
+**Only location:** CANON/SCRIPTS/
 
 | Script | Purpose |
 |--------|---------|
-| `CANON/SCRIPTS/death.ps1` | 3-step death pipeline: preserve I-LOG → SCS audit → colorize → pipeline → handoff |
-| `CANON/SCRIPTS/rrl-colorize.ps1` | Colorize raw JSONL RRL → COLORIZED.md + STATS.json |
-| `CANON/SCRIPTS/phetrails.ps1` | Pheromone trail deposition via POST /api/pheromone/deposit |
-| `CANON/SCRIPTS/execute-phetrails-pipeline.ps1` | Execute phetrails pipeline: stage + commit + deploy + verify |
-| `CANON/SCRIPTS/transcribe-rtl.js` | RTL/ITL transcriber: audio → JSONL transcript + COLORIZED + STATS |
-| `CANON/SCRIPTS/run-dnaregistry.ps1` | DNA Registry canonical scanner — outputs dna-registry-run{N}.json |
+| CANON/SCRIPTS/death.ps1 | 3-step death pipeline: preserve I-LOG → SCS audit → colorize → pipeline → handoff |
+| CANON/SCRIPTS/rrl-colorize.ps1 | Colorize raw JSONL RRL → COLORIZED.md + STATS.json |
+| CANON/SCRIPTS/phetrails.ps1 | Pheromone trail deposition via POST /api/pheromone/deposit |
+| CANON/SCRIPTS/execute-phetrails-pipeline.ps1 | Execute phetrails pipeline: stage + commit + deploy + verify |
+| CANON/SCRIPTS/transcribe-rtl.js | RTL/ITL transcriber: audio → JSONL transcript + COLORIZED + STATS |
+| CANON/SCRIPTS/run-dnaregistry.ps1 | DNA Registry canonical scanner — outputs dna-registry-run{N}.json |
+| CANON/SCRIPTS/reincarnate-rise.ps1 | Stage 1 RISE checkpoint — audits prior DEATH, stamps session name, gates session |
+| CANON/SCRIPTS/scout.ps1 | Stage 2 SCOUT checkpoint — flags, tags, learns, hands off findings to MARCH |
+| CANON/SCRIPTS/march.ps1 | Stage 3 MARCH checkpoint — confirms scout work, conquers territory, hands off to SCHOLARS |
+| CANON/SCRIPTS/soulscholars.ps1 | Stage 4 SCHOLARS checkpoint — documents, preserves, protects SOUL, hands off to SUPPLY |
+| CANON/SCRIPTS/supply.ps1 | Stage 5 SUPPLY checkpoint — logistics, holding territory, hands off to ENGINEER |
+| CANON/SCRIPTS/engineer.ps1 | Stage 6 ENGINEER checkpoint — innovation, improvement, auditor of supply lines, hands off to DEATH |
+| CANON/SCRIPTS/workhorse-pipeline.ps1 | Master pipeline: colorize → extract keywords → extract lost souls → build pipeline JSON + handoff JSON → update inverted index → promote to NAV |
+| CANON/SCRIPTS/extract-keywords.ps1 | Extract top keywords from STATS.json → rfkw- files for SOUL-KEYWORDS |
+| CANON/SCRIPTS/extract-lostsouls.ps1 | Extract lost souls/unpipelined directives from I-LOG → LOSTSOULS/ |
+| CANON/SCRIPTS/deduplicate-inverted-index.ps1 | Deduplicate inverted keyword index entries |
+| CANON/SCRIPTS/update-inverted-index.ps1 | Update inverted index from rfkw- files in SOUL-KEYWORDS/ |
+| CANON/SCRIPTS/pipeline-health-check.ps1 | Pipeline health check — verifies artifact consistency, optional auto-fix |
 
 **Invocation:**
-```powershell
+`powershell
 powershell -File CANON/SCRIPTS/death.ps1 -SessionName "<name>" -IlogSource <path>
-```
+`
 
 Steps: preserve I-LOG → SCS audit (SOUL/DNA/REASON counts) → colorize → pipeline → handoff → upload to Reincarnate-Synch §IX-A
-
----
-
 ## SCS — BACKBURNER PIPELINE
 
 **Location:** `CANON/OPERATIONS/BACKBURNER-PIPELINE-LOG.md` — THIS IS THE ONLY PLACE.

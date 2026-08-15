@@ -1,0 +1,26 @@
+{
+  "PrAiS-ESL": {
+    "description": "PrAiS ESL — education technology, student portals, curriculum, language apps",
+    "soulgroups": ["NET-Methodology", "NET-StudentPortals"],
+    "status": "active",
+    "color": "#3498DB"
+  },
+  "PrAiS-Gaming": {
+    "description": "PrAiS Gaming — game development, 3D assets, curriculum",
+    "soulgroups": ["Phoenix-RISING"],
+    "status": "active",
+    "color": "#E74C3C"
+  },
+  "AAA-Anchor": {
+    "description": "AAA Anchor sessions — Stone/Steel/Titanium/Phoenix audits",
+    "soulgroups": ["AAA-Anchor"],
+    "status": "active",
+    "color": "#9B59B6"
+  },
+  "System": {
+    "description": "System doctrine, GOSPEL-999 compliance, LFG alignment, canon integrity",
+    "soulgroups": ["System-Doctrine"],
+    "status": "active",
+    "color": "#1ABC9C"
+  }
+}

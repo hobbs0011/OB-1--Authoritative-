@@ -1,0 +1,32 @@
+{
+  "AAA-Anchor": {
+    "description": "AAA Anchor sessions — Stone/Steel/Titanium/Phoenix audits of session groups",
+    "sessions": ["10", "15", "20", "25", "30"],
+    "status": "active",
+    "color": "#9B59B6"
+  },
+  "System-Doctrine": {
+    "description": "SCS canonization, GOSPEL-999 compliance, system audits, contract negotiations, LFG alignment",
+    "sessions": ["11", "12", "13", "16", "28", "29"],
+    "status": "active",
+    "color": "#1ABC9C"
+  },
+  "NET-Methodology": {
+    "description": "PrAiS ESL — development methodology, OBI Magic Chat, frameworks, tooling, Oktava client work",
+    "sessions": ["14", "24"],
+    "status": "active",
+    "color": "#3498DB"
+  },
+  "NET-StudentPortals": {
+    "description": "PrAiS ESL — student/parent portal development, classroom tools, parent dashboards",
+    "sessions": ["17", "18", "19", "22", "26"],
+    "status": "active",
+    "color": "#3498DB"
+  },
+  "Phoenix-RISING": {
+    "description": "PrAiS Gaming — Roblox game development (Train-67 / Survive a Brainrot), 3D asset pipeline, Quan curriculum",
+    "sessions": ["21", "22-PHOENIX", "23", "23-PHOENIX", "27"],
+    "status": "active",
+    "color": "#E74C3C"
+  }
+}

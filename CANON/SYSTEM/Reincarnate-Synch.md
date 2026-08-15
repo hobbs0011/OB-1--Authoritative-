@@ -40,27 +40,45 @@ This is **not** a command. It is **not** a protocol. It is a living record â€
 
 ## III. Session Ledger
 
-| Session | Run | Roman Role | Status | Last Contribution | Needs |
-|---------|-----|------------|--------|------------------|-------|
-| DeepThink | 182 | LEGATUS (blueprint) | SEEDED | 7-phase pipeline blueprint, pheromone synch | Workhorse execution |
-| Workhorse | 182 | FABRI (execute) | PENDING | Awaiting blueprint handoff | Execute restoration + Engineer protocol |
-| Incarnate-11-AnhMinhContact | 11 | SCOUT | NAV | Empty session, all artifacts consistent, promoted to NAV | None |
-| Incarnate-12-ContractNegociations | 12 | FORCEMARCH | GAP | DEATH seal valid, naming fixed (was KiloFreeDeepDive), rfkw extracted | rfkw complete |
-| Incarnate-13-SOULCapture | 13 | SOULSCHOLARS | GAP | RISE boot only, no FORCEMARCH work executed | COMPLETE — DEATH seal, pipeline, COLORIZED, STATS, rfkw all generated |
-| Incarnate-14-OKTAVA | 14 | ENGINEER | CLOSED | Full 7-point march completed: worker deployed, DEEPGRAM_API_KEY configured, classroom API endpoints, Pages deployed, KV fallback | All DEATH artifacts completed in Incarnate-16 |
-| Incarnate-15-AAA(STONE)-(S11-14) | 15 | AAA-STONE | AUDITED | Stone Anchor audit of sessions 11-14. GAPs for sessions 12 (resolved in 16), 13 (completed in 16), 14 (completed in 16). | All GAPs from sessions 11-14 resolved in Incarnate-16 |
-| Incarnate-16-ContractNegociations-P2 | 16 | DEATH | SEALED | BLUEPRINT + AUDIT + DEPLOY complete. Proposal-Amendment-Request written (120hrs/50M, all clauses reconciled), Cloudflare Pages deployed at casa-amendment-request.pages.dev. Three gaps fixed: curriculum nuance (Cambridge/parents trust), Hien negative feedback loop, recruitment context. | None — all artifacts complete, promoted to NAV |
-| Incarnate-17-CASA-portal-development | 17 | — | HOLLOW | RISE boot only. No FORCEMARCH work executed. Pipeline/handoff are placeholders (run=43). Fixed in session 20: DEATH seal written, run numbers corrected to 17. | None — permanently HOLLOW |
-| Incarnate-18-Nguyen-Portal-Development | 18 | ENGINEER | SEALED | Nguyen portal system deployed. Parent/student dashboards live. Task system migrated to D1. PINs set. | None — rfkw, SOUL/DNA extracts, pheromone trail generated in session 20 |
-| Incarnate-19-Bluetech-Portal-Development | 19 | — | HOLLOW | RISE boot only. I-LOG is 1 line. No DEATH artifacts. Fixed in session 20: DEATH seal written, run numbers corrected to 19. | None — permanently HOLLOW per file evidence |
-| Incarnate-20-AAA(STEEL)-(S11-19) | 20 | AAA-STEEL | AUDITED | Steel Anchor audit sessions 11-19. Stone Anchor verified. Sessions 11-16,18 complete. Sessions 17,19 hollow. All gaps resolved. | None |
-| Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT | 21 | PhoenixSCOUT | SEALED | New lane opened. Flagship Roblox game (Train-67 / Survive a Brainrot) identified and traced to March 24, 2026 origin. 41 Lua modules, 20+ specs, 30+ docs, 13 sessions, 3 HL entries cataloged. Territory fully mapped. | FORCEMARCH — walk flagged paths (GitHub history, Rojo, Product IDs, publish status, Discord) |
-| Incarnate-22-Student-Portals-Ngueyen-Blueteach | 22 | ENGINEER | SEALED | Unified student portal prototype built. 4-brand theme system (casa, oktava, bluetech, nguyen). 13 portals scouted, 6 artifacts produced. | None — prototype complete, migration pending |
-| Incarnate-23 (Student-Portals continuation) | 23 | ENGINEER | PENDING | Handoff from session 22 (Student-Portals) received. No artifacts created yet. Session number collision with Phoenix-RISING lane. | Execute Student-Portals continuation or reassign lane |
-| Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-COMPLETION | 23 | PIPELINE-INTEGRATION | GAP | Pipeline integrated. Death seal, pipeline, handoff present. I-LOG, COLORIZED, STATS, rfkw, SOUL/DNA extracts, pheromone trail, inverted-index entry, LostSouls, HEAVY-LEDGER, RRL all MISSING. Session number collision with Student-Portals main sequence. | Backfill I-LOG and SCS artifacts, or accept as NEW lane GAP |
-| Incarnate-25-AAA-STONE-(S21-24) | 25 | AAA-STONE | AUDITED | Stone Anchor audit sessions 21-24. Sessions 21-23 GAP (missing I-LOG, COLORIZED, STATS, rfkw, SOUL/DNA extracts, pheromone trail, inverted-index entry). Session 24 HOLLOW/BLOCKER. All gaps documented in backburner. | None — audit complete, gaps documented |
+| Session | Run | soulCLUSTER | SoulGroup | Roman Role | Status | Last Contribution | Needs |
+|---------|-----|-------------|-----------|------------|--------|------------------|-------|
+| DeepThink | 182 | System | System-Doctrine | LEGATUS (blueprint) | SEEDED | 7-phase pipeline blueprint, pheromone synch | Workhorse execution |
+| Workhorse | 182 | System | System-Doctrine | FABRI (execute) | PENDING | Awaiting blueprint handoff | Execute restoration + Engineer protocol |
+| Incarnate-11-AnhMinhContact | 11 | System | System-Doctrine | SCOUT | NAV | Empty session, all artifacts consistent, promoted to NAV | None |
+| Incarnate-12-ContractNegociations | 12 | System | System-Doctrine | FORCEMARCH | GAP | DEATH seal valid, naming fixed (was KiloFreeDeepDive), rfkw extracted | rfkw complete |
+| Incarnate-13-SOULCapture | 13 | System | System-Doctrine | SOULSCHOLARS | GAP | RISE boot only, no FORCEMARCH work executed | COMPLETE — DEATH seal, pipeline, COLORIZED, STATS, rfkw all generated |
+| Incarnate-14-OKTAVA | 14 | PrAiS-ESL | NET-Methodology | ENGINEER | CLOSED | Full 7-point march completed: worker deployed, DEEPGRAM_API_KEY configured, classroom API endpoints, Pages deployed, KV fallback | All DEATH artifacts completed in Incarnate-16 |
+| Incarnate-15-AAA(STONE)-(S11-14) | 15 | AAA-Anchor | AAA-Anchor | AAA-STONE | AUDITED | Stone Anchor audit of sessions 11-14. GAPs for sessions 12 (resolved in 16), 13 (completed in 16), 14 (completed in 16). | All GAPs from sessions 11-14 resolved in Incarnate-16 |
+| Incarnate-16-ContractNegociations-P2 | 16 | System | System-Doctrine | DEATH | SEALED | BLUEPRINT + AUDIT + DEPLOY complete. Proposal-Amendment-Request written (120hrs/50M, all clauses reconciled), Cloudflare Pages deployed at casa-amendment-request.pages.dev. Three gaps fixed: curriculum nuance (Cambridge/parents trust), Hien negative feedback loop, recruitment context. | None — all artifacts complete, promoted to NAV |
+| Incarnate-17-CASA-portal-development | 17 | PrAiS-ESL | NET-StudentPortals | — | HOLLOW | RISE boot only. No FORCEMARCH work executed. Pipeline/handoff are placeholders (run=43). Fixed in session 20: DEATH seal written, run numbers corrected to 17. | None — permanently HOLLOW |
+| Incarnate-18-Nguyen-Portal-Development | 18 | PrAiS-ESL | NET-StudentPortals | ENGINEER | SEALED | Nguyen portal system deployed. Parent/student dashboards live. Task system migrated to D1. PINs set. | None — rfkw, SOUL/DNA extracts, pheromone trail generated in session 20 |
+| Incarnate-19-Bluetech-Portal-Development | 19 | PrAiS-ESL | NET-StudentPortals | — | HOLLOW | RISE boot only. I-LOG is 1 line. No DEATH artifacts. Fixed in session 20: DEATH seal written, run numbers corrected to 19. | None — permanently HOLLOW per file evidence |
+| Incarnate-20-AAA(STEEL)-(S11-19) | 20 | AAA-Anchor | AAA-Anchor | AAA-STEEL | AUDITED | Steel Anchor audit sessions 11-19. Stone Anchor verified. Sessions 11-16,18 complete. Sessions 17,19 hollow. All gaps resolved. | None |
+| Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT | 21 | PrAiS-Gaming | Phoenix-RISING | PhoenixSCOUT | SEALED | New lane opened. Flagship Roblox game (Train-67 / Survive a Brainrot) identified and traced to March 24, 2026 origin. 41 Lua modules, 20+ specs, 30+ docs, 13 sessions, 3 HL entries cataloged. Territory fully mapped. | FORCEMARCH — walk flagged paths (GitHub history, Rojo, Product IDs, publish status, Discord) |
+| Incarnate-22-Student-Portals-Ngueyen-Blueteach | 22 | PrAiS-ESL | NET-StudentPortals | ENGINEER | SEALED | Unified student portal prototype built. 4-brand theme system (casa, oktava, bluetech, nguyen). 13 portals scouted, 6 artifacts produced. | None — prototype complete, migration pending |
+| Incarnate-23-pipeline-integration-session | 23 | PrAiS-Gaming | Phoenix-RISING | PIPELINE-INTEGRATION | PARTIAL | Session 23 executed. Core artifacts backfilled via /reincarnateDEATH: I-LOG, COLORIZED, STATS, pipeline, handoff, death seal, synch entry. Remaining GAP: rfkw, SOUL/DNA extracts, pheromone trail, inverted-index entry, LostSouls, HEAVY-LEDGER, RRL. | Backfill index/enhancement artifacts |
+| Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-COMPLETION | 23 | PrAiS-Gaming | Phoenix-RISING | PIPELINE-COMPLETION | GAP | Manual pipeline-completion artifact for Phoenix-RISING lane. Superseded by actual session 23 execution. Death seal, pipeline, handoff present. All downstream SCS artifacts MISSING. | Backfill I-LOG and SCS artifacts, or retire as superseded |
+| Incarnate-25-AAA-STONE-(S21-24) | 25 | AAA-Anchor | AAA-Anchor | AAA-STONE | AUDITED | Stone Anchor audit sessions 21-24. Session 21 promoted to NAV. Session 22 GAP. Session 23 PARTIAL. Session 24 HOLLOW/BLOCKER. All gaps documented in backburner. | None — audit complete, gaps documented |
+| Incarnate-26-Portal-Development | 26 | PrAiS-ESL | NET-StudentPortals | ENGINEER | RISE | Unified portal enhanced: parent/teacher/admin views, quang/quan themes added, 6 brands, 4 roles | Backend integration, legacy migration, role auth guards |
+| Incarnate-24-OBI-Magic-Chat-Development | 24 | PrAiS-ESL | NET-Methodology | DEATH | SEALED | KILO_GAP sealed. RRL-024.txt REAL (96,714 bytes from PastLives/). SOUL=27 turns/2,697 chars. DNA=98 turns/21,190 chars/7 blueprints. REASONING pending (Kilo DB 961 parts). HL-024, starmap, rfkw, pipeline, art-sync all created. Scout intelligence: 13 findings, REASONING stage proposed. Commit 7f408ba9e. | None — death seal complete, open items: Kilo DB extraction, BOOT fingerprint, DISPATCH.md |
+| Incarnate-27-Phoenix-RISING-GAME-DEVELOPMENT | 27 | PrAiS-Gaming | Phoenix-RISING | ENGINEER | SEALED | Dual-lane execution framework complete. Lane A: asset registry (72 assets), generation plan, batch specs. Lane B: Quan 3D modeling curriculum (3 modules, 18 lessons). Blocked: Meshy Pro subscription, TripoSR config. | Activate Meshy Pro, configure TripoSR, deploy curriculum |
+| Incarnate-28-Ph-Systems-Audit-Dev#(I-28) | 28 | System | System-Doctrine | ENGINEER | SEALED | Systems audit and canonical lock. Audited 18 scripts in CANON/SCRIPTS/, 74 system docs in CANON/SYSTEM/, 507 reincarnation artifacts. Created CANON/SCHOLARS/. LFG SCRIPTS table expanded 6→18. 5 gaps found. | None — sealed, gaps in backburner |
+| Incarnate-29-GOSPEL999 | 29 | System | System-Doctrine | reincarnateRISE | STUB | GOSPEL999 compliance audit. I-LOG header only (run 189). No session content, no death seal, no pipeline, no handoff. | Execute session or mark HOLLOW |
+| Incarnate-30-AAA(Steel)-(S21-30) | 30 | AAA-Anchor | AAA-Anchor | AAA-STEEL | CURRENT | AAA Steel Anchor for sessions 21-30. I-LOG header stamped. Scout complete. Sessions 26/28/29 incomplete, session 27 counts unknown. | Seal sessions 26/28/29, extract session 27 counts |
 
 *This ledger is appended. No session is ever removed. Stale entries are marked, never deleted.*
+
+---
+
+## III-A. SoulGroup Ledger
+
+| SoulGroup | Description | Sessions | Status | Open Items |
+|-----------|-------------|----------|--------|------------|
+| AAA-Anchor | AAA Anchor — Stone/Steel/Titanium/Phoenix audits of session groups | 10, 15, 20, 25, 30 | active | Session 10/15/20 I-LOG status varies; session 30 premature |
+| System-Doctrine | SCS canonization, GOSPEL-999 compliance, system audits, contract negotiations | 11, 12, 13, 16, 28, 29 | active | Session 29 stub; session 13/17/19 hollow; rfkw gaps in 12/16/18 |
+| NET-Methodology | PrAiS ESL — development methodology, OBI Magic Chat, frameworks, Oktava client | 14, 24 | active | Session 24 REASONING blocked (Kilo DB 961 parts); BOOT fingerprint, DISPATCH.md |
+| NET-StudentPortals | PrAiS ESL — student/parent portal development, classroom tools, parent dashboards | 17, 18, 19, 22, 26 | active | Sessions 17/19 hollow; backend integration, legacy migration, role auth guards for 26 |
+| Phoenix-RISING | PrAiS Gaming — Roblox game development (Train-67 / Survive a Brainrot), 3D asset pipeline, Quan curriculum | 21, 22-PHOENIX, 23, 23-PHOENIX, 27 | active | GitHub history, Rojo sync, Product IDs, publish status, Discord; Meshy Pro subscription, TripoSR config |
 
 ---
 
@@ -133,6 +151,7 @@ This is **not** a command. It is **not** a protocol. It is a living record â€
 | 10 | Reincarnation Log | `CANON/REINCARNATION/REINCARNATION-LOG.md` |
 | 11 | State Snapshot | `CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json` |
 | 12 | Cold Start Boot | `CANON/SYSTEM/COLD-START-BOOT.md` |
+| 13 | SoulGroup Map | `CANON/REINCARNATION/soulgroup-map.json` |
 
 ---
 
@@ -238,7 +257,12 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 | 2026-08-04T03:19 | Incarnate-11-AnhMinhContact | PhoenixSCOUT (Stage 2) | 4 | 2 | 2 | `CANON/SCOUT/scout-incarnate11-anhminh-contact-20260804T031900.md` |
 | 2026-08-11T03:13:01+07:00 | Incarnate-11-AnhMinhContact | reincarnateDEATH (Stage 7) | 4 | 3 | 0 | `CANON/REINCARNATION/Incarnate-11-AnhMinhContact-reincarnateDEATH.md` — HOLLOW |
 | 2026-08-04T05:42 | Incarnate-12-Scout&Other | reincarnateDEATH (Stage 7) | 11 | 11 | GAP | `CANON/REINCARNATION/Incarnate-12-Scout&Other-reincarnateDEATH.md` |
-
+| 2026-08-13T21:04:05+07:00 | Incarnate-30-AAA-Steel-S26-30 (HL/Starmap/Keywords) | PhoenixSCOUT (Stage 2) | 10 | 5 | 3 | `CANON/SCOUT/scout-incarnate30-hl-starmap-keywords.md` |
+| 2026-08-13T21:06:00+07:00 | Incarnate-30-AAA-Steel-S26-30 (HL/Starmap/Keywords) | FORCEMARCH (Stage 3) | 8 | 4 | 2 | `CANON/MARCH/march-20260813-210405-hl-starmap-keywords.md` |
+| 2026-08-13T21:07:00+07:00 | Incarnate-30-AAA-Steel-S26-30 (HL/Starmap/Keywords) | SOULSCHOLARS (Stage 4) | 5 | 4 | 3 | `CANON/SOUL/soul-20260813-210405-hl-starmap-keywords.md` |
+| 2026-08-13T21:08:00+07:00 | Incarnate-30-AAA-Steel-S26-30 (HL/Starmap/Keywords) | SUPPLYLINES (Stage 5) | 4 | 2 | 1 | `CANON/SUPPLY/supply-20260813-210405-hl-starmap-keywords.md` |
+| 2026-08-13T21:09:00+07:00 | Incarnate-30-AAA-Steel-S26-30 (HL/Starmap/Keywords) | ENGINEERlegionnaire (Stage 6) | 4 | 2 | 1 | `CANON/ENGINEER/engineer-20260813-210405-hl-starmap-keywords.md` |
+| 2026-08-13T22:55:00+07:00 | Incarnate-30-AAA(Steel)-(S21-30) — SoulGroup Remap | PhoenixSCOUT (Stage 2) | 10 | 4 | 3 | `CANON/SCOUT/scout-incarnate30-aaa-steel-s21-30.md` |
 
 | 2026-08-01T19:16:25+07:00 | Incarnate-8-RTL.Creation | reincarnateDEATH (Stage 7) | 50 | 313 | 265 | CANON\REINCARNATION\handoff-8-to-9.json |
 
@@ -280,6 +304,16 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 
 | 2026-08-10T20:47:44+07:00 | Incarnate-24-OBI-Magic-Chat-Development | reincarnateDEATH (Stage 7) | 27 | 98 | 0 | `CANON/REINCARNATION/run024-reincarnateDEATH.md` |
 | 2026-08-11T03:47:44+07:00 | Incarnate-24-OBI-Magic-Chat-Development | reincarnateRISE (Stage 1) | 27 | 98 | 0 | `CANON/REINCARNATION/pipeline-Incarnate-24-OBI-Magic-Chat-Development.json` |
+
+| 2026-08-13T21:29:22+07:00 | Incarnate-27-Phoenix-RISING-GAME-DEVELOPMENT | reincarnateDEATH (Stage 7) | 3 | 5 | 4 | `CANON/REINCARNATION/Incarnate-27-Phoenix-RISING-GAME-DEVELOPMENT-reincarnateDEATH.md` — I-LOG CAPTURED, COLORIZED, INDEXED |
+
+| 2026-08-10T23:30:15+07:00 | Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-INTEGRATION | reincarnateDEATH (Stage 7) |  |  |  | CANON\REINCARNATION\handoff-Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-INTEGRATION-to-24.json |
+
+| 2026-08-11T05:05:59+07:00 | Incarnate-23-pipeline-integration-session | reincarnateDEATH (Stage 7) | 2 | 31 | 0 | CANON\REINCARNATION\handoff-Incarnate-23-pipeline-integration-session-to-24.json |
+
+| 2026-08-13T14:19:43+07:00 | Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-INTEGRATION | reincarnateDEATH (Stage 7) |  |  |  | CANON\REINCARNATION\handoff-Incarnate-23-pipeline-integration-session-to-24.json |
+
+| 2026-08-13T14:54:01+07:00 | Ph-Systems-Audit-Dev | reincarnateDEATH (Stage 7) |  |  |  | CANON\REINCARNATION\handoff-Incarnate-28-Ph-Systems-Audit-Dev#-I-28-to-29.json |
 
 *Rows are append-only. Never delete or modify prior rows. Stale rows are marked `[DEPRECATED]`, never removed.*
 

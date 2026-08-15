@@ -1,16 +1,127 @@
 ﻿{
-    "182": "Incarnation1-IRL-182Conversion",
-    "184": "Incarnation-2-IRL-184Conversion",
-    "186": "Incarnate-4-PhoenixScout-Portals-and-OBI-DEV",
-    "187": "Incarnate-6-Auditor-LFG-Canon-Script",
-    "188": "Incarnate-9-Transcribe-ITLS",
-    "189": "Incarnate-5-Portals-and-OBI-DEV",
-    "190": "Incarnate-7-1-LOG-Pipeline",
-    "191": "Incarnate-5-AAA.STONE-(Sessions1-4)",
-    "3":  "Incarnation-3-Identity-Assignment",
-    "8":  "Incarnate-8-RTL.Creation",
-    "21": "Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT",
-    "22": "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
-    "23": "Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-COMPLETION",
-    "25": "Incarnate-25-AAA-STONE-(S21-24)"
+  "182": {
+    "name": "Incarnation1-IRL-182Conversion",
+    "soulgroup": "System-Doctrine",
+    "soulcluster": "System"
+  },
+  "184": {
+    "name": "Incarnation-2-IRL-184Conversion",
+    "soulgroup": "System-Doctrine",
+    "soulcluster": "System"
+  },
+  "186": {
+    "name": "Incarnate-4-PhoenixScout-Portals-and-OBI-DEV",
+    "soulgroup": "NET-StudentPortals",
+    "soulcluster": "PrAiS-ESL"
+  },
+  "187": {
+    "name": "Incarnate-6-Auditor-LFG-Canon-Script",
+    "soulgroup": "System-Doctrine",
+    "soulcluster": "System"
+  },
+  "188": {
+    "name": "Incarnate-9-Transcribe-ITLS",
+    "soulgroup": "System-Doctrine",
+    "soulcluster": "System"
+  },
+  "189": {
+    "name": "Incarnate-5-Portals-and-OBI-DEV",
+    "soulgroup": "NET-StudentPortals",
+    "soulcluster": "PrAiS-ESL"
+  },
+  "190": {
+    "name": "Incarnate-7-1-LOG-Pipeline",
+    "soulgroup": "System-Doctrine",
+    "soulcluster": "System"
+  },
+  "191": {
+    "name": "Incarnate-5-AAA.STONE-(Sessions1-4)",
+    "soulgroup": "AAA-Anchor",
+    "soulcluster": "AAA-Anchor"
+  },
+  "3": {
+    "name": "Incarnation-3-Identity-Assignment",
+    "soulgroup": "System-Doctrine",
+    "soulcluster": "System"
+  },
+  "8": {
+    "name": "Incarnate-8-RTL.Creation",
+    "soulgroup": "System-Doctrine",
+    "soulcluster": "System"
+  },
+  "21": {
+    "name": "Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT",
+    "soulgroup": "Phoenix-RISING",
+    "soulcluster": "PrAiS-Gaming"
+  },
+  "21-MAIN": {
+    "name": "TBD — main sequence session 21 not created (Phoenix-RISING lane used slot 21)",
+    "soulgroup": "Phoenix-RISING",
+    "soulcluster": "PrAiS-Gaming"
+  },
+  "22": {
+    "name": "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
+    "soulgroup": "NET-StudentPortals",
+    "soulcluster": "PrAiS-ESL"
+  },
+  "22-PHOENIX": {
+    "name": "Incarnate-22-Phoenix-RISING-GAME-DEVELOPMENT-FORCEMARCH",
+    "soulgroup": "Phoenix-RISING",
+    "soulcluster": "PrAiS-Gaming"
+  },
+  "23": {
+    "name": "Incarnate-23-pipeline-integration-session",
+    "soulgroup": "Phoenix-RISING",
+    "soulcluster": "PrAiS-Gaming"
+  },
+  "23-PHOENIX": {
+    "name": "Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-COMPLETION",
+    "soulgroup": "Phoenix-RISING",
+    "soulcluster": "PrAiS-Gaming"
+  },
+  "24": {
+    "name": "Incarnate-24-OBI-Magic-Chat-Development",
+    "soulgroup": "NET-Methodology",
+    "soulcluster": "PrAiS-ESL"
+  },
+  "25": {
+    "name": "Incarnate-25-AAA-STONE-(S21-24)",
+    "soulgroup": "AAA-Anchor",
+    "soulcluster": "AAA-Anchor"
+  },
+  "26": {
+    "name": "Incarnate-26-Portal-Development",
+    "soulgroup": "NET-StudentPortals",
+    "soulcluster": "PrAiS-ESL"
+  },
+  "26-QUANG": {
+    "name": "public/nguyen-quang/ (migrated to unified portal theme=quang)",
+    "soulgroup": "NET-StudentPortals",
+    "soulcluster": "PrAiS-ESL"
+  },
+  "26-QUAN": {
+    "name": "public/nguyen-quan/ (migrated to unified portal theme=quan)",
+    "soulgroup": "NET-StudentPortals",
+    "soulcluster": "PrAiS-ESL"
+  },
+  "27": {
+    "name": "Incarnate-27-Phoenix-RISING-GAME-DEVELOPMENT",
+    "soulgroup": "Phoenix-RISING",
+    "soulcluster": "PrAiS-Gaming"
+  },
+  "28": {
+    "name": "Incarnate-28-Ph-Systems-Audit-Dev#(I-28)",
+    "soulgroup": "System-Doctrine",
+    "soulcluster": "System"
+  },
+  "29": {
+    "name": "Incarnate-29-GOSPEL999",
+    "soulgroup": "System-Doctrine",
+    "soulcluster": "System"
+  },
+  "30": {
+    "name": "Incarnate-30-AAA(Steel)-(S21-30)",
+    "soulgroup": "AAA-Anchor",
+    "soulcluster": "AAA-Anchor"
+  }
 }

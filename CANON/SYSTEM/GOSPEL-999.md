@@ -147,7 +147,7 @@ REINCARNATION-CONTRACT — RISE/DEATH operational law
     ↓
 COLD-START-BOOT — current session state, active mission
     ↓
-/reincarnateRise — 8-stage audit protocol
+/phoenixRISE — 8-stage audit protocol
     ↓
 reincarnate-rise-{timestamp}.jsonl — audit artifact
 ```
@@ -217,6 +217,56 @@ The pheromone trail is the session's decision-process record. It answers: "What 
 | Purple | SOUL | Raw Michael verbatim |
 | Red | DNA | Assistant responses, AI output |
 | Yellow | REASON | AI reasoning blocks |
+
+---
+
+## SYSTEM X — SOULGROUP DOCTRINE
+
+**Canonical map:** `CANON/REINCARNATION/soulgroup-map.json`
+
+A **SoulGroup** is an ongoing lane or system that groups related sessions. SoulGroups are long-lived: a few days to ongoing. They represent functions and systems that need constant maintenance and growth.
+
+**Rule:** Every session belongs to exactly one SoulGroup. Sessions without a SoulGroup are SYSTEM-DOCTRINE by default.
+
+| SoulGroup | Description |
+|-----------|-------------|
+| `AAA-Anchor` | AAA Anchor sessions — Stone/Steel/Titanium/Phoenix audits of session groups |
+| `System-Doctrine` | SCS canonization, GOSPEL-999 compliance, system audits, contract negotiations, LFG alignment |
+| `NET-Methodology` | PrAiS ESL — development methodology, OBI Magic Chat, frameworks, tooling, Oktava client work |
+| `NET-StudentPortals` | PrAiS ESL — student/parent portal development, classroom tools, parent dashboards |
+| `Phoenix-RISING` | PrAiS Gaming — Roblox game development (Train-67 / Survive a Brainrot), 3D asset pipeline, Quan curriculum |
+
+**In audit:** AAA Anchors audit sessions within their SoulGroup context. A GAP in one SoulGroup does not block other SoulGroups.
+
+**Cross-reference:** LFG §SCS — SOULGROUP DOCTRINE. Reincarnate-Synch §Session Ledger.
+
+---
+
+## SYSTEM XI — SOULCLUSTER DOCTRINE
+
+**Canonical map:** `CANON/REINCARNATION/soulcluster-map.json`
+
+A **soulCLUSTER** is the highest-level functional grouping. It groups related SoulGroups under a common business/technical mission. soulCLUSTERS are semi-permanent to permanent. They represent major organizational units.
+
+**Hierarchy:**
+```
+soulCLUSTER (business/technical mission)
+  └── SoulGroup (ongoing lane/system)
+       └── Session (individual work unit)
+```
+
+**Rule:** Every SoulGroup belongs to exactly one soulCLUSTER. SoulGroups without a soulCLUSTER are SYSTEM by default.
+
+| soulCLUSTER | Description | SoulGroups | Status |
+|-------------|-------------|------------|--------|
+| `PrAiS-ESL` | PrAiS ESL — education technology, student portals, curriculum, language apps | NET-Methodology, NET-StudentPortals | active |
+| `PrAiS-Gaming` | PrAiS Gaming — game development, 3D assets, curriculum | Phoenix-RISING | active |
+| `AAA-Anchor` | AAA Anchor sessions — Stone/Steel/Titanium/Phoenix audits | AAA-Anchor | active |
+| `System` | System doctrine, GOSPEL-999 compliance, LFG alignment, canon integrity | System-Doctrine | active |
+
+**soulCLUSTER in audit:** AAA Anchors audit sessions within their SoulGroup context. soulCLUSTER grouping does not block audits across SoulGroups within the same cluster.
+
+**Cross-reference:** LFG §SCS — SOULCLUSTER DOCTRINE. Reincarnate-Synch §Session Ledger + §III-B SoulCluster Ledger.
 
 ---
 
