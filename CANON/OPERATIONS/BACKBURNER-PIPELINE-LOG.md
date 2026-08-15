@@ -1664,3 +1664,32 @@ These are the live eggs in the Hatchery. Each egg is a body of work, not a scrip
 - Status: RESOLVED
 - What: Session 10 has 2026-05-24-kilo-death-seal-run10-complete.md (Kilo-side) and Incarnate-10-AAA.STEEL-(Sessions1-9)-reincarnateDEATH-FINAL.md (Incarnate-side). Both exist. The Kilo-side document is not a replacement for the Incarnate-side seal.
 - Resolution: Both documents preserved. Pipeline status updated to HOLLOW (no I-LOG).
+
+---
+
+## I-LOG = RRL REMAPPING (2026-08-16T06:54:24+07:00)
+
+### BB-190-015 !! I-LOG IS RRL — DO NOT DUPLICATE
+- SIGNAL: +90
+- Status: SEALED
+- What: I-LOG files ARE the RRLs. Same artifact, two names. Previous audit incorrectly counted I-LOG and RRL as separate artifacts, causing false "RRL MISSING" flags for sessions 11-19, 21-25, 28.
+- Resolution: Remapped audit. I-LOG presence = RRL presence.
+- Authority: User correction: "The I LOGS are the RRLS, and they are not missing, they are just not sorted"
+
+### BB-190-016 !! SESSION 27 — RRL FOUND IN RRL/ DIRECTORY
+- SIGNAL: +60
+- Status: RESOLVED
+- What: Session 27 has RRL-27-COLORIZED.md and RRL-27-STATS.json in RRL/ directory. These are the I-LOG/RRL artifacts for session 27.
+- Resolution: Session 27 marked PARTIAL (has RRL but no raw I-LOG txt).
+
+### BB-190-017 !! SESSIONS 29 + 30 — ILOG HEADER-ONLY (STUB)
+- SIGNAL: +40
+- Status: STUB
+- What: Recovered I-LOG files for sessions 29 and 30 from I-LOG-UNNAMED/. Both contain only RISE headers with no conversation body. These are STUB transcripts, not full I-LOGs.
+- Resolution: Marked STUB in pipelines. Not missing, but incomplete.
+
+### BB-190-018 !! SESSIONS 10, 20, 26 — CONFIRMED HOLLOW (NO ILOG/RRL)
+- SIGNAL: +30
+- Status: CONFIRMED HOLLOW
+- What: Exhaustive search confirmed zero I-LOG/RRL files for sessions 10, 20, 26. These sessions never produced captured transcripts.
+- Resolution: Marked HOLLOW in pipelines. Cannot reconstruct what never existed.
