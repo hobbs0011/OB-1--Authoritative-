@@ -1,0 +1,9 @@
+{
+  "name": "net-github",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "echo 'Open index.html directly or deploy via Cloudflare Pages'",
+    "deploy": "echo 'Use Cloudflare Pages deployment'"
+  }
+}

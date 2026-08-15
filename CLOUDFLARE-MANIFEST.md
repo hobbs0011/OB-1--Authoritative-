@@ -2,7 +2,7 @@
 
 **Account:** mrmichaelhobbs123@gmail.com
 **Account ID:** 3c7b1766bd8fdc9e01211d2b390315ea
-**Last audited:** 2026-05-18
+**Last audited:** 2026-08-15
 **Audit command:** `pwsh -File SCRIPTS/obi.ps1 cf-audit`
 **Last audit result:** total 18 · healthy 15 · broken 0 · untracked 0
 
@@ -36,10 +36,11 @@ This file is the authoritative inventory of all live Cloudflare assets.
 
 ---
 
-## Pages Projects (10 live)
+## Pages Projects (11 live)
 
 | Project | URL | Live | Tracked in Repo | Notes |
 |---|---|---|---|---|
+| net-github-dashboard | canon.net-github-dashboard.pages.dev | ✅ 200 | ✅ APPS/PAGES/net-github | GitHub-style NET dashboard. New deploy 2026-08-15. |
 | career-4room | career-4room.pages.dev | ✅ 200 | ✅ APPS/PAGES/career-4room | NET Career pathway assessment. RESCUED 2026-05-18 — promoted to production branch. |
 | cubs-4room | cubs-4room.pages.dev | ✅ 200 | ✅ APPS/PAGES/cubs-4room | NET Cubs child assessment (ages 3–7). RESCUED 2026-05-18 — promoted to production branch. |
 | naturalenglishtraining | naturalenglishtraining.pages.dev | ✅ 200 | ✅ APPS/PAGES/naturalenglishtraining | Marketing site — primary brand domain. Rescued to repo 2026-05-17. |
