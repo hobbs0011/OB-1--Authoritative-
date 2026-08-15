@@ -981,3 +981,43 @@ Phoenix-Centurion named. 6-stage pipeline deployed. 4 legionnaires Romanized.
 Three Forces perpetual. Cloudflare paid tier activated. soul-logger v2.2 deployed.
 
 
+---
+
+**Last Updated:** 2026-08-16T01:24:00+07:00 (Run 190-B — Full SCS Rerun Sessions 10-30)
+
+## Run 190-B (FULL SCS RERUN) | 2026-08-16T01:24:00+07:00 | Sessions 10-30 Complete Artifact Generation
+
+**Agent:** Kilo / SCS Full Pipeline
+**SOULCOUNT:** 27 sessions audited
+**DNAcount:** 27 SOULSCHOLARS artifacts written
+**REASONcount:** 27 ENGINEER artifacts written
+**HEAD:** 1c005c54a
+**Seal:** Pending commit
+
+### Key Actions:
+- RISE: Read prior death seal Incarnate-30-AAA(Steel)-(S21-30)-reincarnateDEATH.md, verified HEAD eab3333fd
+- SCOUT: Full territory sweep of sessions 10-30 across all canonical directories
+- FORCEMARCH: Verified all flagged paths, identified exact gaps
+- SOULSCHOLARS: Written SOULSCHOLARS artifacts for all 27 sessions (10-30 + aliases)
+- SUPPLYLINES: Written SUPPLY artifacts for all 27 sessions
+- ENGINEER: Written ENGINEER artifacts for all 27 sessions
+- DEATH: Pipeline JSONs written for all sessions missing them, backburner updated
+
+### Sessions Status:
+- **MOST COMPLETE:** 19, 28 (have ILOG, SOUL/DNA, Scout, Supply, Engineer, Heavy Ledger, Pheromone)
+- **PARTIAL:** 10-18, 20-27, 29-30 (have core artifacts but missing March/Supply/Engineer/RRL)
+- **HOLLOW:** 22-PHOENIX, 23-PHOENIX, 26-QUANG, 26-QUAN, 21-MAIN (all artifacts missing)
+- **DEATH SEALS FOUND:** 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 30
+- **DEATH SEALS MISSING:** 22-PHOENIX, 23-PHOENIX, 26-QUANG, 26-QUAN, 21-MAIN, 29 (no canonical seal found)
+
+### Open Items (added to BACKBURNER):
+- BB-190-001 through BB-190-010: ILOG missing, SOUL_EXTRACT missing, MARCH/SUPPLY/ENGINEER gaps, RRL missing, hollow sessions
+
+### Artifacts Written This Run:
+- 27 SOULSCHOLARS artifacts (CANON/SOUL/soul-{session}.md)
+- 27 SUPPLY artifacts (CANON/SUPPLY/supply-{session}.md)
+- 27 ENGINEER artifacts (CANON/ENGINEER/engineer-{session}.md)
+- 27 pipeline JSONs (CANON/REINCARNATION/pipeline-{session}.json)
+- Backburner updated with 10 gap entries
+
+| HEAD |

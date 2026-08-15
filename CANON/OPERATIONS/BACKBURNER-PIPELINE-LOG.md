@@ -1572,3 +1572,66 @@ These are the live eggs in the Hatchery. Each egg is a body of work, not a scrip
 - **Status:** OPEN
 - **What:** No LostSouls scan performed for any of the 4 sessions. Must scan I-LOGs for unresolved directives and pipeline them.
 
+
+---
+## SCS RUN 190 — SESSIONS 10-30 AUDIT GAPS (2026-08-16T01:22:43+07:00)
+### BB-190-001 !! SESSION 10 — ILOG MISSING, SOUL_EXTRACT MISSING
+- SIGNAL: +80
+- Status: OPEN
+- What: Session 10 has no I-LOG raw file and no SOUL/DNA extract. Scout/March/Supply/Engineer artifacts exist but ILOG is missing.
+- Target: Recover or reconstruct I-LOG for session 10. Create SOUL_EXTRACT from available sources.
+
+### BB-190-002 !! SESSION 20 — ILOG MISSING
+- SIGNAL: +70
+- Status: OPEN
+- What: Session 20 has no I-LOG raw file. DNA extract exists but no conversation capture.
+- Target: Recover or reconstruct I-LOG for session 20.
+
+### BB-190-003 !! SESSION 26 — ILOG MISSING
+- SIGNAL: +70
+- Status: OPEN
+- What: Session 26 has no I-LOG raw file. DNA extract exists but no conversation capture.
+- Target: Recover or reconstruct I-LOG for session 26.
+
+### BB-190-004 !! SESSION 27 — ILOG MISSING, SOUL_EXTRACT MISSING
+- SIGNAL: +70
+- Status: OPEN
+- What: Session 27 has no I-LOG raw file and no SOUL/DNA extract. PheTrail and Scout exist.
+- Target: Recover or reconstruct I-LOG for session 27. Create SOUL_EXTRACT.
+
+### BB-190-005 !! SESSION 29 — ILOG MISSING
+- SIGNAL: +60
+- Status: OPEN
+- What: Session 29 has no I-LOG raw file. DNA extract exists but no conversation capture.
+- Target: Recover or reconstruct I-LOG for session 29.
+
+### BB-190-006 !! SESSION 30 — ILOG MISSING
+- SIGNAL: +60
+- Status: OPEN
+- What: Session 30 has no I-LOG raw file. DNA extract exists but no conversation capture.
+- Target: Recover or reconstruct I-LOG for session 30.
+
+### BB-190-007 !! SESSIONS 21-MAIN, 22-PHOENIX, 23-PHOENIX, 26-QUANG, 26-QUAN — HOLLOW (ALL MISSING)
+- SIGNAL: +50
+- Status: OPEN
+- What: Alias sessions have zero I-LOG, zero SOUL/DNA, zero artifacts. These are either placeholders or migrated paths.
+- Target: Determine if these sessions need artifacts or can be marked DEFERRED/DEPRECATED.
+
+### BB-190-008 !! SESSION 10 — DEATH SEAL INCONSISTENT
+- SIGNAL: +40
+- Status: OPEN
+- What: Session 10 has 2026-05-24-kilo-death-seal-run10-complete.md but it is a Kilo-side document, not an Incarnate-side DEATH seal. Missing proper Incarnate-10 death seal.
+- Target: Write canonical Incarnate-10 death seal with SOUL/DNA/REASON counts.
+
+### BB-190-009 !! MULTIPLE SESSIONS — MARCH/SUPPLY/ENGINEER MISSING
+- SIGNAL: +30
+- Status: OPEN
+- What: Sessions 11-30 have MARCH/SUPPLY/ENGINEER gaps. Only sessions 10, 19, 28 have all three.
+- Target: Fill MARCH/SUPPLY/ENGINEER artifacts for all sessions 11-30.
+
+### BB-190-010 !! SESSION 10-30 — RRL MISSING FOR MOST SESSIONS
+- SIGNAL: +20
+- Status: OPEN
+- What: Only sessions 15, 16, 17, 18, 23, 27, 28 have RRL files. Sessions 10-14, 19-22, 24-26, 29-30 missing RRL.
+- Target: Extract or reconstruct RRL for all sessions 10-30.
+
