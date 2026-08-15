@@ -1,0 +1,17 @@
+﻿{
+    "parsed_lines":  11,
+    "processed_at":  "2026-08-13T21:56:21.7403208+07:00",
+    "source_file":  "D:\\OB-1-CANONICAL\\I-LOG-UNAUDITED\\I-LOG-Incarnate-28-Ph-Systems-Audit-Dev#-I-28.txt",
+    "REASONcount":  0,
+    "top_topics":  null,
+    "DNAcount":  8,
+    "first_ts":  "2026-08-13T21:41:57.0000000+07:00",
+    "tool_calls":  0,
+    "lines":  11,
+    "PHEROMONEcount":  0,
+    "last_ts":  "2026-08-13T21:52:09.0000000+07:00",
+    "SOULcount":  3,
+    "total_chars":  0,
+    "duration_min":  10.2,
+    "top_tools":  null
+}

@@ -1,0 +1,10 @@
+﻿{
+    "ilog":  "I-LOG-UNAUDITED\\I-LOG-Incarnate-28-Ph-Systems-Audit-Dev#-I-28.txt",
+    "from_run":  "28",
+    "timestamp":  "2026-08-13T21:54:01.5713255+07:00",
+    "ilog_stats":  "I-LOG/I-LOG-Incarnate-28-Ph-Systems-Audit-Dev#-I-28-STATS.json",
+    "ilog_colorized":  "I-LOG/I-LOG-Incarnate-28-Ph-Systems-Audit-Dev#-I-28-COLORIZED.md",
+    "audit":  null,
+    "pipeline":  "CANON\\REINCARNATION\\pipeline-Incarnate-28-Ph-Systems-Audit-Dev#-I-28.json",
+    "to_run":  29
+}

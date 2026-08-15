@@ -33,6 +33,50 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 
 ## IMMEDIATE BLOCKERS (must do before next deploy)
 
+### BB-28-001 !! CANON/SCHOLARS DIRECTORY MISSING ó Stage 4 Artifact Home
+- SIGNAL: +100
+- Status: OPEN
+- What: LFG ßSCS ó THE LOOP defines SOUL SCHOLARS as Stage 4 with directory CANON/SCHOLARS/. Directory does not exist. Script soulscholars.ps1 exists in CANON/SCRIPTS/, doc SOULSCHOLARS.md exists in CANON/SYSTEM/, but no artifact directory for Stage 4 outputs. Breaks stage handoff chain.
+- Target: Create CANON/SCHOLARS/ directory and define artifact schema (checkpoint .md + .json).
+- Authority: LFG ßSCS ó THE LOOP, GOSPEL-999 ßSYSTEM I.
+- Implementation: ENGINEER to create directory + schema in next execution cycle.
+
+### BB-28-002 !! LFG SCRIPT DOCUMENTATION INCOMPLETE ó 6 of 18 Scripts
+- SIGNAL: +90
+- Status: OPEN
+- What: LFG ßSCS ó SCRIPTS table documents only 6 scripts (death.ps1, rrl-colorize.ps1, phetrails.ps1, execute-phetrails-pipeline.ps1, transcribe-rtl.js, run-dnaregistry.ps1). 12 scripts undocumented: scout.ps1, march.ps1, soulscholars.ps1, supply.ps1, engineer.ps1, reincarnate-rise.ps1, phetrails.ps1 (duplicate), deduplicate-inverted-index.ps1, extract-keywords.ps1, extract-lostsouls.ps1, pipeline-health-check.ps1, update-inverted-index.ps1, workhorse-pipeline.ps1.
+- Target: Update LFG ßSCS ó SCRIPTS table with all 18 scripts, purposes, and invocation examples.
+- Authority: LFG ßSCS ó SCRIPTS claims "Only location: CANON/SCRIPTS/" ó must be complete.
+- Implementation: ENGINEER to audit each script header and update LFG.
+
+### BB-28-003 !! INCARNATE-27 DEATH SEAL MISSING SOUL/DNA/REASON COUNTS
+- SIGNAL: +80
+- Status: OPEN
+- What: Incarnate-27 DEATH seal does not contain SOULcount, DNAcount, REASONcount. RISE for session 28 cannot audit prior DEATH counts. Seal status: EXECUTION FRAMEWORK COMPLETE, but counts absent.
+- Target: Extract counts from I-LOG-UNAUDITED/I-LOG-Incarnate-27-Phoenix-RISING-GAME-DEVELOPMENT.txt STATS.json or re-run colorization pipeline to generate counts.
+- Authority: GOSPEL-999 ßSYSTEM III ó RRL AUDIT, LFG ßSCS ó I-LOG AUDIT.
+- Implementation: DEATH or ENGINEER to extract and seal counts.
+
+### BB-28-004 !! I-LOG-UNNAMED EMPTY ó Live Capture Not Functioning
+- SIGNAL: +70
+- Status: OPEN
+- What: I-LOG-UNNAMED/ contains 7 files, 0 MB total. Per GOSPEL-999 ßSYSTEM II, this folder should contain live Kilo auto-deposited session logs. Status: EMPTY.
+- Target: Verify Kilo DB capture configuration. Ensure live sessions are deposited here before RISE.
+- Authority: GOSPEL-999 ßSYSTEM II ó I-LOG FOLDER HIERARCHY.
+- Implementation: RISE/DEATH to verify Kilo integration.
+
+### BB-28-005 !! SEAL STORAGE INCONSISTENT ó Only 1 Seal in Canonical Location
+- SIGNAL: +60
+- Status: OPEN
+- What: CANON/REINCARNATION/seals/ contains 1 file (run079). 507 total reincarnation artifacts exist, but seal protocol appears inconsistently followed. Either seals are stored elsewhere or seal directory is not being used.
+- Target: Audit all 507 reincarnation artifacts for seal presence. Consolidate or document alternative seal storage pattern.
+- Authority: LFG ßSCS ó BACKBURNER PIPELINE, GOSPEL-999 ßSYSTEM I.
+- Implementation: SCOUT to audit, SCHOLARS to document, ENGINEER to fix.
+
+---
+
+## IMMEDIATE BLOCKERS (must do before next deploy)
+
 ### BB-00 !! PHEROMONE KEYLOGGER ‚Äî Continuous Pheromone Deposition System
 - SIGNAL: +110
 - Status: IN-PROGRESS
@@ -91,7 +135,7 @@ WRITE_GAP does not block death but must be named. Silence = repeat offense next 
 
 ### BB-06 ! quang-portal.html Missing Day 1 Card
 - Status: DONE
-- What: loadDashboard() has no Day 1 state logic. New students see ‚ö†Ô∏è instead of launch card.
+- What: loadDashboard() has no Day 1 state logic. New students see ‚ö†Ô∏ù instead of launch card.
 - Fix: Day 1 card exists with tigerScore=0 AND sessions=0 check ‚Üí shows day1Card, hides statsGrid
 - File: APPS/NET-PET-AI/public/quang-portal.html
 

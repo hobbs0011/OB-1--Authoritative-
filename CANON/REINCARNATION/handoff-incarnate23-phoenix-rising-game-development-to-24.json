@@ -1,18 +1,23 @@
 {
-  "from_session": "Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-COMPLETION",
+  "from_session": "Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-INTEGRATION",
   "from_run": 23,
   "to_run": 24,
-  "timestamp": "2026-08-10T23:47:22+07:00",
+  "timestamp": "2026-08-11T03:56:56+07:00",
   "lane": "Phoenix-RISING-GAME-DEVELOPMENT",
   "lane_type": "NEW",
   "parent_session": "Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT",
   "pipeline_file": "CANON/REINCARNATION/pipeline-incarnate23-phoenix-rising-game-development-pipeline-completion.json",
-  "mission": "Pipeline completion for Phoenix-RISING-GAME-DEVELOPMENT lane",
-  "pipeline_status": "COMPLETE",
+  "mission": "Pipeline completion and integration for Phoenix-RISING-GAME-DEVELOPMENT lane",
+  "pipeline_status": "INTEGRATED — GAPS DOCUMENTED",
   "sessions_completed": [
     "Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT (SCOUT)",
-    "Incarnate-22-Phoenix-RISING-GAME-DEVELOPMENT-FORCEMARCH (FORCEMARCH)"
+    "Incarnate-22-Phoenix-RISING-GAME-DEVELOPMENT-FORCEMARCH (FORCEMARCH)",
+    "Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-COMPLETION (INTEGRATION)"
   ],
+  "artifact_audit": {
+    "present": ["death_seal", "pipeline_json", "handoff_json", "reincarnation_entry"],
+    "missing": ["I-LOG", "COLORIZED.md", "STATS.json", "rfkw", "SOUL_extract", "DNA_extract", "pheromone_trail", "inverted-index_entry", "I-LOG-NAV_*", "LostSouls", "HEAVY-LEDGER", "RRL"]
+  },
   "territory_status": {
     "codebase": "MAPPED — 41 Lua modules",
     "specifications": "MAPPED — 20+ specs",
@@ -31,7 +36,8 @@
     "Verify publish status on Roblox",
     "Verify Discord server status",
     "Map legacy artifacts to current APPS/TRAIN-67/ structure",
-    "Identify gaps between March 2026 design and current codebase state"
+    "Identify gaps between March 2026 design and current codebase state",
+    "Backfill I-LOG and SCS artifacts for sessions 21-23"
   ],
-  "next_session_receives": "Pipeline complete for Phoenix-RISING-GAME-DEVELOPMENT lane. Sessions 21 (SCOUT) and 22 (FORCEMARCH) sealed. Territory fully mapped. 5 verification items blocked pending external access. Next action: SOULSCHOLARS or ENGINEER stage, or human verification of blocked items."
+  "next_session_receives": "Pipeline integrated for Phoenix-RISING-GAME-DEVELOPMENT lane. Sessions 21-23 sealed. Territory fully mapped. 5 verification items blocked pending external access. SCS artifacts missing for sessions 21-23 (GAP). Next action: SOULSCHOLARS or ENGINEER stage, human verification of blocked items, or backfill of missing artifacts."
 }

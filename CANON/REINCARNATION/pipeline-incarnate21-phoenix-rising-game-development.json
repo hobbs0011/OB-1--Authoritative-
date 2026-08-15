@@ -69,6 +69,7 @@
     "ecosystem_integration": "WALKED - Dec 2025 Roblox-Anchor API",
     "full_design": "WALKED - Jan 28, 2026 timeline + design docs",
     "asset_pipeline": "WALKED - 3D-ASSET-MANIFEST.md (Meshy Pro $16/mo + TripoSR free + 3D AI Studio $19/mo)",
+    "quan_education_lane": "IDENTIFIED - student portal placeholder task '3D modeling' in rfkw-Incarnate-18-Nguyen-Portal-Development.txt",
     "reincarnation_entries": "WALKED - Mar 24 - Apr 1, 2026",
     "codebase": "WALKED - 41 Lua modules",
     "specifications": "WALKED - 20+ specs",
@@ -91,7 +92,8 @@
     "game_design_docs": 30,
     "heavy_ledger_entries": 3,
     "discord_bot_files": 3,
-    "asset_pipeline_docs": 2
+    "asset_pipeline_docs": 2,
+    "quan_portal_task_docs": 1
   },
   "open_questions": [
     "What exactly existed before November 19, 2025? (Lost to crash)",
@@ -99,7 +101,9 @@
     "Were the 21 Product IDs ever created?",
     "Does the Discord server exist?",
     "What is the current state of the codebase vs original 20x20x20x20 design?",
-    "Was Meshy Pro subscription ever activated? Were any 3D assets generated via TripoSR/Meshy?"
+    "Was Meshy Pro subscription ever activated? Were any 3D assets generated via TripoSR/Meshy?",
+    "What is Quan's current student portal status? Is '3D modeling' task active, pending, or completed?",
+    "Does curriculum exist to teach Quan AI 3D modeling using the Lane A workflow?"
   ],
   "next_session": "Incarnate-22",
   "handoff_to": "FORCEMARCH",

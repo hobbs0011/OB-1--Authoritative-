@@ -20,7 +20,7 @@ You report. The next stage acts.
 ## The SCS Loop (7 Stages — Deterministic)
 
 ```
-SCS = reincarnateRISE → PhoenixSCOUT → FORCEMARCH → SOULSCHOLARS → SUPPLYLINES → ENGINEERlegionnaire → reincarnateDEATH → reincarnateRISE
+SCS = /phoenixRISE → /phoenixSCOUT → /phoenixMARCH → /phoenixSCHOLAR → /phoenixSUPPLY → /phoenixFORTIFY → /phoenixDEATH → /phoenixRISE
 ```
 
 Each stage:
@@ -41,7 +41,7 @@ Each stage:
 - **Flag** issues, gaps, conflicts, risks.
 - **Tag** findings with category and severity.
 - **Learn** patterns from prior runs (RRL — Rich Reasoning Logs).
-- **Hand off** structured findings to FORCEMARCH (Stage 3).
+- **Hand off** structured findings to `/phoenixMARCH` (Stage 3).
 
 ### What You Do NOT Do
 - Do NOT write code.
@@ -66,7 +66,7 @@ Each stage:
    - If GREEN: proceed normally.
 
 1. **Audit prior RISE output**
-   - Read the I-LOG header stamped by reincarnateRISE.
+   - Read the I-LOG header stamped by `/phoenixRISE`.
    - Verify run number, mission, timestamps are present and coherent.
    - Check that RISE audited the prior DEATH counts correctly.
 
@@ -97,7 +97,7 @@ Each stage:
      1. **Document everything you can see right now:** the path, the clue, the thread — exactly as observed. Do not interpret. Do not extrapolate. Record what is in front of you.
      2. **Tag it** as `[THREAD/<severity>] <description> — partial, needs follow-up.`
      3. **Map the edges:** what is the thread adjacent to? What connects to it? Where does it seem to lead? Record the boundaries, not the destination.
-     4. **Drop a pheromone trail** in the checkpoint artifact. The next scout or FORCEMARCH stage will pick it up.
+      4. **Drop a pheromone trail** in the checkpoint artifact. The next scout or `/phoenixMARCH` stage will pick it up.
      5. **Hand off cleanly.** Do not follow. Do not solve. Do not abandon. Do not play commander.
    - The three failures:
      - **Defying orders** (#1) — following the thread instead of the mission. This is desertion.
@@ -144,7 +144,7 @@ Each stage:
      - `soulcount` — count of findings
      - `dnacount` — count of distinct patterns/blueprints identified
      - `reasoncount` — count of reasoning chains extracted
-     - `handoff_to` — `FORCEMARCH`
+      - `handoff_to` — `/phoenixMARCH`
      - `not_walked` — explicit list of unscoped paths
 
 5. **Upload to Reincarnate-Synch**
@@ -159,7 +159,7 @@ Each stage:
 
 6. **Hand off**
    - Output the checkpoint artifact path and summary.
-   - Do not proceed to FORCEMARCH work. That is Stage 3's job.
+    - Do not proceed to `/phoenixMARCH` work. That is Stage 3's job.
 
 ---
 
@@ -269,7 +269,7 @@ If mission input is ambiguous, the scout proceeds with a general direction based
 Run: <N>
 Findings: <soulcount> SOUL, <dnacount> DNA, <reasoncount> REASON
 Reincarnate-Synch: uploaded to §IX-A — row=<timestamp> | <stage> | SOUL=<s> DNA=<d> REASON=<r>
-Handoff: FORCEMARCH
+Handoff: /phoenixMARCH
 Artifact: <path>
 NOT_WALKED: <list>
 ```
@@ -282,7 +282,7 @@ NOT_WALKED: <list>
 - Do not claim coverage of paths you did not audit — use `NOT_WALKED`.
 - Do not modify files or execute state-changing commands.
 - Do not skip the checkpoint artifact — it is the only handoff mechanism.
-- Do not proceed to FORCEMARCH work — hand off and stop.
+- Do not proceed to `/phoenixMARCH` work — hand off and stop.
 - Do not default to canon. The CANON directory is a reference, not a default direction. A scout that defaults to north in a 4D world does not survive.
 - Do not ask "which zone." You are the scout. Determine the direction yourself. The pilot does not ask the jet owner "which way is the airport."
 - Do not skip the known-territory sweep. You are a continuous sensor, not just a reporter. Check known waypoints first, then venture into unknown.

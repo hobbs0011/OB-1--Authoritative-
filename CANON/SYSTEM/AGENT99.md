@@ -80,15 +80,15 @@ Do not modify unless the task explicitly requires it:
 
 ## SCS — Stage References
 
-| Stage | Agent | Canonical File |
-|-------|-------|----------------|
-| RISE | reincarnateRISE | `CANON/SYSTEM/reincarnateRISE.md` |
-| SCOUT | PhoenixSCOUT | `CANON/SYSTEM/PhoenixScoutAgent.md` |
-| FORCΞ MARCH | FORCEMARCH | `CANON/SYSTEM/FORCEMARCH.md` |
-| SOUL SCHOLARS | SOULSCHOLARS | `CANON/SYSTEM/SOULSCHOLARS.md` |
-| SUPPLY LINES | SUPPLYLINES | `CANON/SYSTEM/SUPPLYLINES.md` |
-| ENGINEER | ENGINEERlegionnaire | `CANON/SYSTEM/ENGINEERlegionnaire.md` |
-| DEATH | reincarnateDEATH | `CANON/SYSTEM/reincarnateDEATH.md` |
+| Stage | Canonical Command | Canonical File |
+|-------|-------------------|----------------|
+| RISE | `/phoenixRISE` | `CANON/SYSTEM/reincarnateRISE.md` |
+| SCOUT | `/phoenixSCOUT` | `CANON/SYSTEM/PhoenixScoutAgent.md` |
+| FORCΞ MARCH | `/phoenixMARCH` | `CANON/SYSTEM/FORCEMARCH.md` |
+| SOUL SCHOLARS | `/phoenixSCHOLAR` | `CANON/SYSTEM/SOULSCHOLARS.md` |
+| SUPPLY LINES | `/phoenixSUPPLY` | `CANON/SYSTEM/SUPPLYLINES.md` |
+| ENGINEER | `/phoenixFORTIFY` | `CANON/SYSTEM/ENGINEERlegionnaire.md` |
+| DEATH | `/phoenixDEATH` | `CANON/SYSTEM/reincarnateDEATH.md` |
 
 Cross-reference: `CANON/SYSTEM/LegionnaireFieldGuide.md` for full agent definitions and SCS loop protocol.
 

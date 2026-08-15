@@ -27,7 +27,8 @@
     "game_design_docs": "WALKED — 30+ docs",
     "historical_sessions": "WALKED — 13 reincarnation entries",
     "heavy_ledger": "WALKED — 3 HL entries",
-    "3d_asset_pipeline": "WALKED — Meshy Pro ($16/mo) + TripoSR (free local) + 3D AI Studio ($19/mo); 60-80 assets targeted",
+    "lane_A_3d_asset_pipeline": "WALKED — Meshy Pro ($16/mo) + TripoSR (free local) + 3D AI Studio ($19/mo); 60-80 assets targeted; NOT EXECUTED",
+    "lane_B_quan_3d_education": "IDENTIFIED — student portal placeholder task '3D modeling' in rfkw-Incarnate-18-Nguyen-Portal-Development.txt; NO curriculum or execution yet",
     "github_commit_history": "NOT_WALKED",
     "rojo_configuration": "NOT_WALKED",
     "product_ids": "NOT_WALKED",
@@ -51,7 +52,8 @@
     "Verify Discord server status",
     "Map all legacy artifacts to current APPS/TRAIN-67/ structure",
     "Identify gaps between March 2026 design and current codebase state",
-    "Execute Meshy Pro art pipeline — generate 60-80 3D assets (TripoSR free local first, then Meshy $16/mo)"
+    "Lane A: Execute Meshy Pro art pipeline — generate 60-80 3D assets (TripoSR free local first, then Meshy $16/mo)",
+    "Lane B: Develop Quan's AI 3D modeling curriculum using Lane A workflow as training material"
   ],
-  "next_session_receives": "New lane opened. Train-67 / Survive a Brainrot legacy fully scouted. Origins traced to November 19, 2025 (concept seed July 2025). Territory mapped: codebase (41 modules), specs (20+), docs (30+), sessions (13), HL entries (3), 3D asset pipeline (Meshy/TripoSR). Open items: GitHub history, Rojo status, Product IDs, publish status, Discord server, Meshy Pro asset generation."
+  "next_session_receives": "New lane opened. Train-67 / Survive a Brainrot legacy fully scouted. Origins traced to November 19, 2025 (concept seed July 2025). DUAL LANE STRUCTURE: Lane A (game 3D assets via Meshy/TripoSR) + Lane B (Quan AI 3D modeling education). Territory mapped: codebase (41 modules), specs (20+), docs (30+), sessions (13), HL entries (3), 3D asset pipeline (Meshy/TripoSR), Quan portal task (3D modeling placeholder). Open items: GitHub history, Rojo status, Product IDs, publish status, Discord server, Meshy Pro asset generation, Quan curriculum development."
 }

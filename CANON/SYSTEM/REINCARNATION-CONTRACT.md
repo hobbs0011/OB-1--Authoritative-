@@ -19,7 +19,7 @@
 ## 3. SCS (Session Checkpoint System)
 
 The 7-stage deterministic loop is the ONLY session processing framework:
-RISE → SCOUT → FORCEMARCH → SOULSCHOLARS → SUPPLYLINES → ENGINEER LEGIONNAIRE → DEATH → RISE
+/phoenixRISE → /phoenixSCOUT → /phoenixMARCH → /phoenixSCHOLAR → /phoenixSUPPLY → /phoenixFORTIFY → /phoenixDEATH → /phoenixRISE
 
 Every session MUST complete all 7 stages in order. No stage may be skipped.
 Every DEATH performs the 10-point I-LOG AUDIT (GOSPEL-999 §SYSTEM III).

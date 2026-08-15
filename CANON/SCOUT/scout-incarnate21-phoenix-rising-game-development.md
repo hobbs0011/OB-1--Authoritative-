@@ -256,6 +256,13 @@ Focus: **Flagship Roblox game** legacy scouting — GOING AS FAR BACK AS POSSIBL
 ### [NOT_WALKED] Discord Server
 - Automation playbook written but server status unknown
 
+### [IDENTIFIED] Lane B — Quan 3D Modeling Education
+- **Source:** `CANON/SOUL-KEYWORDS/rfkw-Incarnate-18-Nguyen-Portal-Development.txt`
+- **Task:** "3D modeling" listed as placeholder in Quan's student portal
+- **Connection to Lane A:** The AI 3D workflow developed for Train-67 asset generation becomes curriculum for Quan's training
+- **Current status:** Placeholder only. No curriculum, training materials, or execution.
+- **Synergy model:** Lane A execution → process docs → repurposed as Quan's training material
+
 ---
 
 ## KEY FINDINGS
@@ -300,8 +307,9 @@ The game was built using a multi-AI system from the very beginning:
 - GPT/Anakin: Building, execution, rapid iteration
 - Perplexity: Research, orchestration layer
 
-### [TERRITORY/HIGH] 3D Asset Pipeline — AI Service Strategy (NOT Human Contractor)
-**Source:** `CANON/TRAIN-67/DOCS/3D-ASSET-MANIFEST.md` (Run 142, 2026-06-27) + `run141-reincarnateDEATH.md`
+### [TERRITORY/HIGH] Dual-Lane Structure — Game Assets + Quan Education
+**Lane A — Game Asset Pipeline (AI Service Strategy):**
+- **Source:** `CANON/TRAIN-67/DOCS/3D-ASSET-MANIFEST.md` (Run 142, 2026-06-27) + `run141-reincarnateDEATH.md`
 - **Target:** 60–80 unique 3D assets (15–20 enemies, 19 weapons, 15–25 environment props, 5–10 UI assets, 6–15 cosmetics)
 - **Primary tool:** Meshy AI Pro ($16/mo) — Roblox-native bridge, commercial rights, 100+ assets
 - **Prototyping:** TripoSR (local, unlimited free) — concept/prototyping
@@ -309,6 +317,12 @@ The game was built using a multi-AI system from the very beginning:
 - **Strategy:** Generate all 60–80 assets via free local TripoSR first, then upgrade to paid tool if volume/time requires
 - **Decision recorded in run141:** "Soft launch without custom 3D; first major update = Meshy Pro art pipeline. Removes art blocker; $16/mo for 100+ assets."
 - **Current status:** NO 3D assets generated yet. `ASSETS/ARTWORK/TRAIN-67/` exists but is empty. Meshy subscription never activated.
+
+**Lane B — Quan's Student Portal 3D Modeling Skill:**
+- **Source:** `CANON/SOUL-KEYWORDS/rfkw-Incarnate-18-Nguyen-Portal-Development.txt` — "3D modeling" listed as placeholder task in Quan's student portal
+- **Connection:** The AI 3D workflow developed for Lane A becomes the curriculum for teaching Quan AI-assisted 3D modeling
+- **Current status:** Placeholder task only. No curriculum, no training materials, no execution.
+- **Synergy:** Lane A execution generates process documentation → repurposed as Quan's training material in Lane B
 
 ---
 
@@ -334,6 +348,9 @@ The game was built using a multi-AI system from the very beginning:
 3. Were the 21 Product IDs ever created?
 4. Does the Discord server exist?
 5. What is the current state of the codebase vs the original 20x20x20x20 design?
+6. Was Meshy Pro subscription ever activated? Were any 3D assets generated via TripoSR/Meshy? (Lane A)
+7. What is Quan's current student portal status? Is "3D modeling" task active, pending, or completed? (Lane B)
+8. Does curriculum exist to teach Quan AI 3D modeling using the Lane A workflow? (Lane B)
 
 ---
 
@@ -349,11 +366,13 @@ The game was built using a multi-AI system from the very beginning:
 5. Verify publish status on Roblox
 6. Verify Discord server status
 7. Compare current 41-module codebase against original 20x20x20x20 framework
+8. **Lane A:** Execute Meshy Pro art pipeline — generate 60-80 3D assets (TripoSR free local first, then Meshy $16/mo)
+9. **Lane B:** Develop Quan's AI 3D modeling curriculum using Lane A workflow as training material
 
 ---
 
 [PhoenixSCOUT] Stage 2 checkpoint complete.
 Run: Incarnate-21 / 2026-08-11
-Findings: 31 SOUL, 12 DNA, 6 REASON
-Mission: Flagship Roblox game (Train-67 / Survive a Brainrot) legacy scouting — ORIGINS TRACED TO JULY 2025, DEVELOPMENT START NOVEMBER 19, 2025
+Findings: 33 SOUL, 13 DNA, 7 REASON
+Mission: Flagship Roblox game (Train-67 / Survive a Brainrot) legacy scouting — ORIGINS TRACED TO JULY 2025, DEVELOPMENT START NOVEMBER 19, 2025 — DUAL LANE: Lane A (game assets via Meshy/TripoSR) + Lane B (Quan 3D modeling education)
 Handoff: FORCEMARCH

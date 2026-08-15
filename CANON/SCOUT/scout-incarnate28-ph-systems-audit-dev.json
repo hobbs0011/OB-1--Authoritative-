@@ -1,0 +1,103 @@
+{
+  "run": 28,
+  "stage": "PhoenixSCOUT",
+  "timestamp": "2026-08-13T21:42:00+07:00",
+  "audited_rise": {
+    "ilog_file": "I-LOG-UNNAMED/I-LOG-Incarnate-28-Ph-Systems-Audit-Dev-I-28.txt",
+    "run_number": 28,
+    "header_status": "PRESENT_AND_COMPLETE",
+    "prior_death_audit": "GAP — SOUL/DNA/REASON counts missing from Incarnate-27 seal"
+  },
+  "findings": [
+    {
+      "id": "SCOUT-28-001",
+      "category": "GOVERNANCE",
+      "severity": "CRITICAL",
+      "path": "CANON/SCHOLARS",
+      "finding": "Stage directory MISSING. LFG §SCS — THE LOOP defines SOUL SCHOLARS as Stage 4 with directory CANON/SCHOLARS/. Script soulscholars.ps1 exists in CANON/SCRIPTS/, but no corresponding artifact directory exists. Breaks stage handoff chain."
+    },
+    {
+      "id": "SCOUT-28-002",
+      "category": "GOVERNANCE",
+      "severity": "HIGH",
+      "path": "CANON/SCRIPTS/workhorse-pipeline.ps1",
+      "finding": "Script NOT listed in LFG §SCS — SCRIPTS table (only 6 of 18 scripts documented). Referenced in AAA-ANCHOR-PROCEDURE.md, AAA-ANCHOR-RUNBOOK.md, AAA-AUTO-PIPELINE.md as canonical pipeline executor. LFG is stale."
+    },
+    {
+      "id": "SCOUT-28-003",
+      "category": "GOVERNANCE",
+      "severity": "HIGH",
+      "path": "CANON/SCRIPTS/*",
+      "finding": "18 scripts in CANON/SCRIPTS/, LFG documents only 6. Undocumented scripts: deduplicate-inverted-index.ps1, extract-keywords.ps1, extract-lostsouls.ps1, pipeline-health-check.ps1, update-inverted-index.ps1, workhorse-pipeline.ps1, engineer.ps1, supply.ps1, march.ps1, soulscholars.ps1, scout.ps1, reincarnate-rise.ps1."
+    },
+    {
+      "id": "SCOUT-28-004",
+      "category": "CONFIG",
+      "severity": "MEDIUM",
+      "path": "CANON/SYSTEM/*.md",
+      "finding": "74 system docs in CANON/SYSTEM/, LFG references ~10. Unreferenced docs include: ACTIVE-MISSION.md, BATTLEFIELD-MAP.md, BIBLE-REPO-CONSOLIDATION-MAP.md, CANON-ACCESS-INDEX.md, COLD-START-BOOT.md (60KB, heavily referenced elsewhere), CONSOLIDATION-PLAN-PHOENIX-RISING-TECHNOLOGIES.md, DISPATCH-RULES.md, EXPLORATORES-SCOUT-DOCTRINE.md, KILO-DELEGATION-BRIEF.md, KILO-SOP.md, KILOCLAW-STANDARD.md, LOCALHOST-ENTRYPOINT-MAP.md, MANDATORY-READS.bak.md (stale backup), MASTER-BLUEPRINT.md, MCP-FRONTIER-AUDIT.md, MORNING-BRIEFING-*.md, NAVIGATOR-INDEX.md, netpet-observability.md, OB1-AGENT-INSTRUCTIONS.md, OB1-SSM-V8-INSTRUCTIONS-2026-04-01.md, OmegaProtocol.md, OPENCLAW-RETIRED.md, PERMANENT-LAWS.md, PHASE0-BATTLEFIELD-SPEC.md, PHASE0-FINAL-SPEC.md, PHEROMONE-DOCTRINE.md, PHEROMONE-TRAIL-074.md, PHEROMONE-TRAIL-LEDGER.md, PHETRAIL-SCOUT-MANUAL.md, phetrails.md, PHOENIX-CENTURION-IDENTITY.md, PHOENIX-DEATH-PROTOCOL.md, PHOENIX-DISPATCH-PROTOCOL.md, PHOENIX-PULSE-PROTOCOL.md, PHOENIX-RISE-PROTOCOL.md, PHOENIX-VERIFY-PROTOCOL.md, PULSE-OPERATIONS-HISTORY.md, QUEEN-PHEROMONE.md, Reincarnate-Synch.md, REINCARNATION-BOOT-CHECK.md, REINCARNATION-CONTRACT.md, RISE-PROTOCOL-v5.md, RRL-143-SCARS.md, run110-audit-edge-cases.md, S2PIPELINE-ROMAN-LEGION-NAMING.md, SCOUT'S-CODE.md, SSM-V8-HUMAN-READABLE.md, SSM-V8-ULTIMATE-GPS.md, STUDENT-LESSON-ASSIGNMENT.md, STUDENT-PORTAL-MAP.md, TRUE-AGENT99-BOOT.md, VAULT-ZONE-INDEX.md, VAULT_SOUL-Logger_Phoenix-Drone-001_Blueprint.md, WEEKLY-REPORT-2026-03-30.md."
+    },
+    {
+      "id": "SCOUT-28-005",
+      "category": "ARTIFACT",
+      "severity": "MEDIUM",
+      "path": "CANON/REINCARNATION/seals/",
+      "finding": "Only 1 seal file present (run079). 507 total reincarnation artifacts, but seal directory contains minimal actual seal artifacts. Either seals are stored elsewhere or seal protocol is inconsistently followed."
+    },
+    {
+      "id": "SCOUT-28-006",
+      "category": "BINDING",
+      "severity": "MEDIUM",
+      "path": "I-LOG-UNNAMED/",
+      "finding": "7 files present, 0 MB total. Folder exists but appears empty/uninitialized per GOSPEL-999 §SYSTEM II. Should contain live Kilo auto-deposited session logs. Status: EMPTY."
+    },
+    {
+      "id": "SCOUT-28-007",
+      "category": "CONFIG",
+      "severity": "LOW",
+      "path": "CANON/SYSTEM/MANDATORY-READS.bak.md",
+      "finding": "Stale backup file (.bak.md) present in canonical system directory. Should be removed or moved to ARCHIVE."
+    },
+    {
+      "id": "SCOUT-28-008",
+      "category": "GOVERNANCE",
+      "severity": "HIGH",
+      "path": "CANON/SYSTEM/LegionnaireFieldGuide.md",
+      "finding": "LFG claims to be 'SINGLE SOURCE OF TRUTH' but is incomplete: missing workhorse-pipeline.ps1, engineer.ps1, supply.ps1, march.ps1, scout.ps1, soulscholars.ps1, reincarnate-rise.ps1 from SCRIPTS table. Missing CANON/SCHOLARS directory reference. I-LOG stats for run 182 were incorrect (now corrected in prior turn)."
+    }
+  ],
+  "coverage": {
+    "CANON/SCRIPTS": "WALKED — 18 scripts catalogued, 6 documented in LFG, 12 undocumented",
+    "CANON/SYSTEM": "WALKED — 74 .md files catalogued, ~10 referenced in LFG, ~64 unreferenced",
+    "CANON/REINCARNATION": "WALKED — 507 files catalogued, seal directory contains 1 file",
+    "CANON/SCHOLARS": "NOT_WALKED — DIRECTORY MISSING",
+    "CANON/SCOUT": "WALKED — 24 files present",
+    "CANON/MARCH": "WALKED — 10 files present",
+    "CANON/SUPPLY": "WALKED — 9 files present",
+    "CANON/ENGINEER": "WALKED — 7 files present",
+    "CANON/PHEROMONES": "WALKED — 533 files present",
+    "CANON/SOUL-DNA-BIBLE": "WALKED — 1 file present",
+    "CANON/SOUL-KEYWORDS": "WALKED — 23 files present",
+    "CANON/SOUL-SEGMENTS": "WALKED — 84 files present",
+    "CANON/ARCHIVE": "WALKED — 1364 files present",
+    "CANON/LOSTSOULS": "WALKED — 36 files present",
+    "CANON/OPERATIONS": "WALKED — 2 files present",
+    "I-LOG-UNNAMED": "WALKED — 7 files, 0 MB",
+    "I-LOG-UNAUDITED": "WALKED — 60 files, 20.39 MB",
+    "I-LOG-NAV": "WALKED — 79 files, 20.06 MB",
+    "CANON/SOUL": "WALKED — 9 files present",
+    "CANON/REINCARNATION/seals": "WALKED — 1 file present"
+  },
+  "soulcount": 8,
+  "dnacount": 5,
+  "reasoncount": 4,
+  "handoff_to": "FORCEMARCH",
+  "not_walked": [
+    "CANON/SCHOLARS — DIRECTORY MISSING, cannot audit contents",
+    "CANON/SOUL/EXTRACT/ — directory exists but contents not enumerated in this sweep",
+    "Individual script implementations beyond header inspection",
+    "I-LOG file contents beyond folder statistics",
+    "CANON/ARCHIVE contents beyond file count",
+    "Cross-reference integrity between all 74 system docs"
+  ]
+}

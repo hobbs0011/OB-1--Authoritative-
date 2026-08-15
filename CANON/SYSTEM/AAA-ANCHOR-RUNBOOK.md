@@ -89,7 +89,7 @@ For each session under review, in order:
 ```
 CHECK: CANON/REINCARNATION/handoff-{safe-name}-to-{N}.json — must exist
 CHECK: I-LOG-UNAUDITED/I-LOG-{safe-name}.txt — must exist, non-empty
-CHECK: I-LOG header contains === I-LOG HEADER — reincarnateRISE ===
+CHECK: I-LOG header contains === I-LOG HEADER — /phoenixRISE (Stage 1) ===
 CHECK: Session name in header matches SOV100's direct name (verbatim)
 ```
 

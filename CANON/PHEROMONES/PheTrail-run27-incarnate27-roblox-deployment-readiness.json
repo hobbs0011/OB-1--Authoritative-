@@ -1,0 +1,209 @@
+{
+  "schema_version": "2.1",
+  "run_number": "27",
+  "stage": "phoenixscout-deployment-readiness-10x",
+  "extracted_at": "2026-08-13T20:53:32+07:00",
+  "forcemarch_ts": "20260813-205332",
+  "head_sha": "HEAD",
+  "soulcount": 0,
+  "payload": {
+    "ok": true,
+    "artifacts_created": [
+      "CANON/SCOUT/scout-incarnate27-roblox-deployment-readiness-10x.md"
+    ],
+    "artifacts_modified": [],
+    "objective": "10x deep audit of Train-67 Roblox deployment pipeline. Verify actual state against documented claims. Leave definitive pheromone trail. No execution.",
+    "status": "SCOUT COMPLETE — PIPELINE DOCUMENTED BUT NOT ALIVE AND NOT INTEGRATED",
+    "evidence": {
+      "github_actions_workflow": {
+        "file": ".github/workflows/roblox-place-deploy.yml",
+        "exists": true,
+        "valid": true,
+        "trigger": "workflow_dispatch only",
+        "has_fail_closed": true,
+        "has_artifact_upload": false,
+        "has_auto_deploy": false,
+        "secret_referenced": "ROBLOX_API_KEY",
+        "universe_id_default": "9945984154",
+        "place_id_default": "83007032761005",
+        "lines": 87
+      },
+      "rojo_config": {
+        "file": "default.project.json",
+        "exists": true,
+        "valid": true,
+        "mapped_paths": 45,
+        "all_paths_resolve": true,
+        "boot_script_extensions_correct": true,
+        "legacy_unmapped_files": 6,
+        "legacy_unmapped_list": [
+          "GameMain_PHASE1_REVISED.lua",
+          "HUDController_PHASE1_REVISED.lua",
+          "MainServer_v2.lua",
+          "FTUEManager.lua",
+          "FTUEWiring.lua",
+          "DayScaling.lua"
+        ]
+      },
+      "roblox_credentials": {
+        "ROBLOX_API_KEY": "NOT_FOUND",
+        "ROBLOX_COOKIE": "NOT_FOUND",
+        "ROBLOX_PASSWORD": "NOT_FOUND",
+        "ROBLOX_USERNAME": "NOT_FOUND",
+        "rbxsign": "NOT_FOUND",
+        "local_env_present": false,
+        "git_hub_secret_confirmed": false,
+        "scan_sources": [
+          ".env",
+          ".secrets.local",
+          "Windows User env vars",
+          "Windows Machine env vars",
+          "repo files (*.lua, *.json, *.yml, *.md)"
+        ]
+      },
+      "product_ids": {
+        "GamePassConfig_lua_gamepasses": {
+          "count": 5,
+          "all_zero": true,
+          "lines": [41, 55, 67, 82, 100]
+        },
+        "GamePassConfig_lua_devproducts": {
+          "count": 10,
+          "all_zero": true,
+          "lines": [128, 129, 130, 131, 132, 135, 136, 137, 138, 139]
+        },
+        "DevProductsConfig_lua": {
+          "count": 16,
+          "placeholder_keys": true,
+          "lines": [34, 40, 46, 52, 58, 64, 72, 78, 86, 92, 98, 104, 112, 118, 124, 130]
+        },
+        "total_placeholder_ids": 31,
+        "receipt_processing": "BROKEN",
+        "dual_process_receipt_conflict": true,
+        "triple_process_receipt_conflict": true,
+        "receipt_router_integrated": false
+      },
+      "build_artifacts": {
+        "legacy_rbxl": {
+          "path": "CANON/GAME-DESIGN/train67-brainrot-survival.rbxl",
+          "exists": true,
+          "size_bytes": 249348,
+          "size_kb": 244,
+          "built": "2026-04-20",
+          "created": "2026-05-26",
+          "format": "XML-based .rbxl (starts with '<rob', ends with 'lox>')",
+          "first4_bytes": "3C-72-6F-62",
+          "last4_bytes": "6C-6F-78-3E"
+        },
+        "ci_build_artifact": "MISSING",
+        "local_build_verified": false,
+        "artifact_upload_step": "MISSING"
+      },
+      "deployment_scripts": {
+        "executable_scripts_found": 0,
+        "search_terms": ["deploy", "roblox", "rojo", "train", "publish", "studio"],
+        "file_types_searched": [".ps1", ".sh", ".bat", ".cmd"],
+        "matches_were": ["documentation files", "CI workflows", "archive files", "false positives in node_modules"]
+      },
+      "codebase_delta": {
+        "documented_modules": 41,
+        "actual_lua_files": 47,
+        "legacy_unmapped": 6,
+        "boot_script_extensions_fixed": true
+      },
+      "process_receipt_conflict": {
+        "GamePassConfig_lua_345": "MarketplaceService.ProcessReceipt = GamePassConfig.processDevProductReceipt",
+        "DevProductsConfig_lua_268": "MarketplaceService.ProcessReceipt = processReceipt",
+        "ReceiptRouter_lua_655": "MarketplaceService.ProcessReceipt = processReceipt",
+        "conflict_type": "TRIPLE assignment — last-loaded module wins",
+        "receipt_router_wired": false,
+        "receipt_router_migration_guide_present": true,
+        "receipt_router_migration_guide_lines": "584-648"
+      }
+    },
+    "positive_trails": [
+      "Rojo config is valid and complete — all 45 mapped paths resolve to existing files",
+      "Boot scripts have correct extensions (.server.lua / .client.lua) — Rojo auto-run will work",
+      "GitHub Actions workflow is syntactically valid and logically complete",
+      "Legacy build artifact exists (244KB XML .rbxl, 2026-04-20) — game was built at least once",
+      "All 41 active modules present and mapped",
+      "22 RemoteEvents + 5 RemoteFunctions correctly defined in project.json",
+      "ReceiptRouter.lua is well-designed — idempotent, audited, fail-safe — but NOT wired in",
+      "ProductIDReplacementGuide.md exists — step-by-step wiring instructions available",
+      "Documentation is comprehensive — 20-stage pipeline, battle reports, deployment packets all exist",
+      "No credentials leaked in code — all placeholder IDs are clearly marked 0 or PRODUCT_ID_*"
+    ],
+    "negative_trails": [
+      "ROBLOX_API_KEY not found anywhere — not in repo, not in .env, not in Windows env vars, not confirmed in GitHub Secrets",
+      "31 Product IDs are placeholders (not 21 as earlier docs stated) — 5 GamePassIds = 0, 10 ProductIds = 0 in GamePassConfig, 16 string keys in DevProductsConfig",
+      "Dual/triple ProcessReceipt conflict is ACTIVE — both GamePassConfig.lua and DevProductsConfig.lua set MarketplaceService.ProcessReceipt, AND ReceiptRouter.lua also sets it",
+      "ReceiptRouter.lua exists but is NOT integrated — neither config module calls ReceiptRouter.RegisterHandler()",
+      "No persistent build artifact — build.rbxl is ephemeral in CI, no actions/upload-artifact",
+      "No auto-deploy trigger — manual workflow_dispatch only",
+      "No executable deployment scripts found — only documentation and CI workflow",
+      "Critical code issues remain unresolved (combat, economy, anti-cheat)",
+      "SYNCH-STATE.md misleadingly lists Roblox as '✅ SET' — refers to local MCP tokens, not GitHub Secrets",
+      "Recent phetrails (July 2026) explicitly defer Train-67 as NOT_WALKED"
+    ],
+    "blockers": [
+      {
+        "id": "BLOCKER-1",
+        "severity": "CRITICAL",
+        "item": "ROBLOX_API_KEY GitHub Secret not set",
+        "impact": "Workflow fails-closed immediately. No deployment possible.",
+        "evidence": "Not found in repo, .env, Windows env vars, or confirmed GitHub Secret. SYNCH-STATE.md '✅ SET' refers to local MCP token, not GitHub Secrets.",
+        "next_action": "gh secret set ROBLOX_API_KEY --body '<key>' --repo hobbs0011/OB-1"
+      },
+      {
+        "id": "BLOCKER-2",
+        "severity": "CRITICAL",
+        "item": "31 Product IDs are placeholders (not 21)",
+        "impact": "All monetization non-functional. Purchases will fail at runtime.",
+        "evidence": "5 GamePassIds = 0 in GamePassConfig.lua lines 41,55,67,82,100. 10 ProductIds = 0 in lines 128-139. 16 string keys PRODUCT_ID_* in DevProductsConfig.lua lines 34-130.",
+        "next_action": "Create 21 products in Roblox Creator Dashboard (5 GamePasses + 16 DevProducts), paste real IDs into GamePassConfig.lua + DevProductsConfig.lua"
+      },
+      {
+        "id": "BLOCKER-3",
+        "severity": "CRITICAL",
+        "item": "Triple ProcessReceipt conflict — ReceiptRouter NOT integrated",
+        "impact": "Receipt processing fundamentally broken. Last-loaded module wins. ReceiptRouter idempotency/audit inactive.",
+        "evidence": "GamePassConfig.lua:345 sets ProcessReceipt. DevProductsConfig.lua:268 sets ProcessReceipt. ReceiptRouter.lua:655 also sets ProcessReceipt. Neither config module calls ReceiptRouter.RegisterHandler(). Migration guide exists at lines 584-648 but is not executed.",
+        "next_action": "Complete ReceiptRouter migration per ReceiptRouter.lua lines 584-648: remove ProcessReceipt from both configs, register handlers via ReceiptRouter"
+      },
+      {
+        "id": "BLOCKER-4",
+        "severity": "HIGH",
+        "item": "No persistent build artifact",
+        "impact": "Cannot test builds locally or rollback.",
+        "evidence": "build.rbxl is ephemeral in CI. No actions/upload-artifact step. Legacy .rbxl exists but is 4+ months old (2026-04-20).",
+        "next_action": "Add actions/upload-artifact to workflow. Verify local Rojo build produces build.rbxl."
+      },
+      {
+        "id": "BLOCKER-5",
+        "severity": "MEDIUM",
+        "item": "No auto-deploy trigger",
+        "impact": "Manual deployment only. No CI/CD.",
+        "evidence": "Only workflow_dispatch trigger. No push or schedule trigger.",
+        "next_action": "Add push trigger on main after manual deploy verified."
+      },
+      {
+        "id": "BLOCKER-6",
+        "severity": "HIGH",
+        "item": "Critical code issues unresolved",
+        "impact": "Game may be unplayable even if deployed successfully.",
+        "evidence": "March 2026 battle report identified combat system, economy validation, anti-cheat gaps.",
+        "next_action": "Address combat system, economy validation, anti-cheat per March 2026 battle report before attempting live publish."
+      }
+    ],
+    "next_actions": [
+      "Set ROBLOX_API_KEY GitHub Secret",
+      "Create 21 Product IDs in Roblox Creator Dashboard (5 GamePasses + 16 DevProducts)",
+      "Wire real IDs into GamePassConfig.lua + DevProductsConfig.lua",
+      "Resolve triple ProcessReceipt conflict by completing ReceiptRouter migration",
+      "Add actions/upload-artifact to preserve build.rbxl",
+      "Add auto-deploy trigger on push to main (after manual deploy verified)",
+      "Fix critical code issues before attempting live publish",
+      "Verify local Rojo build produces build.rbxl"
+    ]
+  }
+}

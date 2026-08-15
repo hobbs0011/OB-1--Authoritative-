@@ -1,0 +1,5 @@
+﻿# SOUL-KEYWORDS for Incarnate-23-pipeline-integration-session
+# Extracted from: I-LOG-UNAUDITED\I-LOG-Incarnate-23-pipeline-integration-session-STATS.json
+# SOULcount=2 DNAcount=31 REASONcount=0
+
+

@@ -1,0 +1,12 @@
+﻿{
+    "char_count":  6605,
+    "byte_count":  6605,
+    "run":  23,
+    "hl_id":  "HL-223",
+    "merkle_hash":  "9b164293-ae89-4567-8d83-552faf45dd7b",
+    "session_id":  "Incarnate-23-pipeline-integration-session",
+    "role":  "user",
+    "extracted_at":  "2026-08-13T21:21:21.3803345+07:00",
+    "event_id":  "97a934ef-9a33-4402-add1-6f2cf154ad19",
+    "merkle_parent":  "genesis"
+}

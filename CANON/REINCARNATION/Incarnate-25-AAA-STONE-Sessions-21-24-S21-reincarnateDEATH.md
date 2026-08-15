@@ -16,11 +16,13 @@ Open new lane for flagship Roblox game legacy scouting. Identify Train-67 / Surv
 | Territory | Status | Evidence |
 |-----------|--------|----------|
 | Origin Trail | WALKED | July 2025 (Brain Rot Economy concept) → Nov 19 2025 (official dev start + 8-phase build) → Nov 21-23 2025 (HTML lore files) → Nov 27 2025 (code archaeology) → Dec 2025 (Roblox-Anchor API) → Jan 28 2026 (full 20x20x20x20 design) → Mar 24 2026 (re-entry into REINCARNATION) |
-| Codebase | WALKED | 41 Lua modules in CANON/TRAIN-67/CODE/ + APPS/TRAIN-67/CODE/ |
-| Specifications | WALKED | 20+ specs in APPS/TRAIN-67/SPECS/ |
-| Game Design Docs | WALKED | 30+ docs in APPS/TRAIN-67/DOCS/ |
-| Historical Sessions | WALKED | 13 reincarnation entries (March 24 - April 1, 2026) |
-| Heavy Ledger | WALKED | 3 HL entries (HL-119, HL-124, HL-125) |
+| Codebase | WALKED | 41 Lua modules |
+| Specifications | WALKED | 20+ specs |
+| Game Design Docs | WALKED | 30+ docs |
+| Historical Sessions | WALKED | 13 reincarnation entries |
+| Heavy Ledger | WALKED | 3 HL entries |
+| Lane A: 3D Asset Pipeline | DEFINED | 3D-ASSET-MANIFEST.md — Meshy Pro ($16/mo) + TripoSR (free) + 3D AI Studio ($19/mo); 60-80 assets targeted; NOT EXECUTED |
+| Lane B: Quan 3D Education | IDENTIFIED | Student portal placeholder task "3D modeling" in rfkw-Incarnate-18-Nguyen-Portal-Development.txt; NO curriculum or execution yet |
 | GitHub Commit History | NOT_WALKED | Requires git log on hobbs0011/Phoenix-Rising-Protocol-Ultimate |
 | Rojo Configuration | NOT_WALKED | default.project.json exists, sync status unknown |
 | Product IDs | NOT_WALKED | 21 placeholders still = 0 |
@@ -76,6 +78,7 @@ Open new lane for flagship Roblox game legacy scouting. Identify Train-67 / Surv
 | Discord Bot Files | 3 | `APPS/discord-bot/` |
 | Artwork Assets | 0 (empty) | `ASSETS/ARTWORK/TRAIN-67/` |
 | 3D Asset Pipeline Docs | 2 | `CANON/TRAIN-67/DOCS/3D-ASSET-MANIFEST.md`, `run141-reincarnateDEATH.md` |
+| Quan Portal Tasks | 1 | `CANON/SOUL-KEYWORDS/rfkw-Incarnate-18-Nguyen-Portal-Development.txt` |
 
 ## §7 — Open Questions
 
@@ -126,7 +129,8 @@ Open new lane for flagship Roblox game legacy scouting. Identify Train-67 / Surv
 | name_lock | 2026-03-29 |
 | launch_window | 2026-03-30 |
 | scout_status | COMPLETE |
-| 3d_asset_pipeline | DEFINED but NOT EXECUTED — Meshy Pro ($16/mo) + TripoSR (free) |
+| lane_A_3d_asset_pipeline | DEFINED but NOT EXECUTED — Meshy Pro ($16/mo) + TripoSR (free) |
+| lane_B_quan_3d_education | IDENTIFIED — student portal placeholder task only; NO curriculum or execution yet |
 
 ## §12 — Session Fingerprint
 

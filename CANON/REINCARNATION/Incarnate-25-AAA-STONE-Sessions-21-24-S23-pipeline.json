@@ -1,0 +1,24 @@
+﻿{
+  "run": 23,
+  "session": "Incarnate-23-pipeline-integration-session",
+  "timestamp": "2026-08-13T21:19:43+07:00",
+  "ilog": "I-LOG-UNAUDITED\\I-LOG-Incarnate-23-pipeline-integration-session.txt",
+  "ilog_colorized": "I-LOG-UNAUDITED\\I-LOG-Incarnate-23-pipeline-integration-session-COLORIZED.md",
+  "ilog_stats": "I-LOG-UNAUDITED\\I-LOG-Incarnate-23-pipeline-integration-session-STATS.json",
+  "audit": {
+    "SOULcount": 2,
+    "DNAcount": 31,
+    "REASONcount": 0,
+    "total": 33,
+    "duration_min": 0
+  },
+  "open_items": [
+    "Backfill rfkw for session 23",
+    "Backfill SOUL/DNA extracts for session 23",
+    "Backfill pheromone trail for session 23",
+    "Backfill inverted-index entry for session 23",
+    "Backfill LostSouls for session 23",
+    "Backfill HEAVY-LEDGER entry for session 23",
+    "Backfill RRL for session 23"
+  ]
+}

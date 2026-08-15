@@ -1,0 +1,58 @@
+{
+  "from_session": "Incarnate-27-Phoenix-RISING-GAME-DEVELOPMENT",
+  "from_run": 27,
+  "to_run": 28,
+  "timestamp": "2026-08-11T12:28:43+07:00",
+  "lane": "Phoenix-RISING-GAME-DEVELOPMENT",
+  "lane_type": "CONTINUATION",
+  "parent_session": "Incarnate-20-AAA-STEEL-(S11-19)",
+  "scout_artifact": "CANON/SCOUT/scout-incarnate21-phoenix-rising-game-development.md",
+  "pipeline_file": "CANON/REINCARNATION/pipeline-incarnate27-phoenix-rising-game-development.json",
+  "mission": "Execute dual-lane structure for Phoenix-RISING-GAME-DEVELOPMENT lane. Advance Lane A (3D asset pipeline) and Lane B (Quan AI 3D modeling curriculum).",
+  "execution_status": "FRAMEWORK COMPLETE — AWAITING API SUBSCRIPTIONS",
+  "findings": {
+    "flagship_game": "Train-67 / Survive a Brainrot / Skibidi Zombie: Survive the Brainrots",
+    "earliest_origin": "2025-11-19 (concept seed July 2025)",
+    "mission_lock": "2026-03-26",
+    "identity_lock": "2026-03-28",
+    "name_lock": "2026-03-29",
+    "launch_window": "2026-03-30",
+    "lane_a_status": "EXECUTION FRAMEWORK COMPLETE — asset registry (60-80 assets), generation plan, batch-001 spec ready. Blocked: no Meshy Pro subscription, TripoSR not configured.",
+    "lane_b_status": "CURRICULUM COMPLETE — 3 modules (fundamentals, prompt engineering, workflow automation), lesson plans, assessment criteria ready for deployment.",
+    "synergy_model": "Lane A execution → process documentation → repurposed as Quan's training material"
+  },
+  "territory_mapped": {
+    "lane_a_3d_asset_pipeline": "EXECUTION FRAMEWORK COMPLETE — asset-registry.json, 3D-ASSET-GENERATION-PLAN.md, batch-001-first-20-assets.md created",
+    "lane_b_quan_3d_education": "CURRICULUM COMPLETE — quan-3d-modeling-curriculum.md, module-01/02/03, lesson-plan-template.md created",
+    "github_commit_history": "NOT_WALKED",
+    "rojo_configuration": "NOT_WALKED",
+    "product_ids": "NOT_WALKED",
+    "publish_status": "NOT_WALKED",
+    "discord_server": "NOT_WALKED"
+  },
+  "legacy_artifact_counts": {
+    "code_modules": 41,
+    "specifications": 20,
+    "game_design_docs": 30,
+    "reincarnation_entries": 13,
+    "heavy_ledger_entries": 3,
+    "discord_bot_files": 3,
+    "asset_pipeline_docs": 2,
+    "quan_portal_task_docs": 1,
+    "lane_a_deliverables": 3,
+    "lane_b_deliverables": 5
+  },
+  "open_items": [
+    "Activate Meshy Pro subscription ($16/mo)",
+    "Configure local TripoSR instance",
+    "Generate first 20 assets (batch-001)",
+    "Configure 3D AI Studio backup ($19/mo) if needed",
+    "Deploy curriculum to Quan's student portal",
+    "Verify GitHub commit history on hobbs0011/Phoenix-Rising-Protocol-Ultimate",
+    "Verify Rojo sync status and CI/CD workflow",
+    "Verify Product ID status (21 placeholders still = 0)",
+    "Verify publish status on Roblox",
+    "Verify Discord server status"
+  ],
+  "next_session_receives": "Dual-lane execution framework complete. Lane A: asset registry (60-80 assets), 3-phase generation plan, batch-001 spec ready. Lane B: 3-module AI 3D modeling curriculum (fundamentals, prompt engineering, workflow automation), lesson plans, assessment criteria ready for deployment. Synergy model documented. Active blockers: Meshy Pro subscription and TripoSR local configuration pending."
+}

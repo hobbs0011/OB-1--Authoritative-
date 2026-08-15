@@ -235,9 +235,9 @@
                  "weight":  1
              },
     "student portal":  {
-                           "run":  186,
-                           "category":  "student_portal",
-                           "weight":  8
+                           "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
+                           "category":  "extracted",
+                           "weight":  1
                        },
     "studentId":  {
                       "run":  186,
@@ -850,7 +850,7 @@
                       "weight":  1
                   },
     "Oktava":  {
-                   "run":  "Incarnate-13-SOULCapture",
+                   "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
                    "category":  "extracted",
                    "weight":  1
                },
@@ -1180,7 +1180,7 @@
                             "weight":  1
                         },
     "Nguyen":  {
-                   "run":  "Incarnate-18-Nguyen-Portal-Development",
+                   "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
                    "category":  "extracted",
                    "weight":  1
                },
@@ -1399,11 +1399,6 @@
                  "category":  "extracted",
                  "weight":  1
              },
-    "student portal":  {
-                            "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
-                            "category":  "extracted",
-                            "weight":  1
-                        },
     "unified prototype":  {
                               "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
                               "category":  "extracted",
@@ -1434,19 +1429,14 @@
                  "category":  "extracted",
                  "weight":  1
              },
-    "Oktava":  {
-                   "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
-                   "category":  "extracted",
-                   "weight":  1
-               },
     "Bluetech":  {
                      "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
                      "category":  "extracted",
                      "weight":  1
                  },
-    "Nguyen":  {
-                    "run":  "Incarnate-22-Student-Portals-Ngueyen-Blueteach",
-                    "category":  "extracted",
-                    "weight":  1
-                }
+    "pipeline-integration-session":  {
+                                         "run":  "Incarnate-23-pipeline-integration-session",
+                                         "category":  "extracted",
+                                         "weight":  1
+                                     }
 }

@@ -127,7 +127,7 @@ For each session under review:
 
 **Locate RISE artifact:**
 - `CANON/REINCARNATION/handoff-{session-name}-to-{N}.json` — must exist
-- `I-LOG-UNAUDITED/I-LOG-{session-name}.txt` — header must contain `=== I-LOG HEADER — reincarnateRISE ===`
+- `I-LOG-UNAUDITED/I-LOG-{session-name}.txt` — header must contain `=== I-LOG HEADER — /phoenixRISE (Stage 1) ===`
 - Verify session name in header matches SOV100's direct name (verbatim)
 
 **Locate DEATH artifact:**
@@ -265,7 +265,7 @@ REINCARNATION-CONTRACT — RISE/DEATH operational law
     ↓
 COLD-START-BOOT — current session state, active mission
     ↓
-/reincarnateRise — 8-stage audit protocol
+/phoenixRISE — 8-stage audit protocol
     ↓
 reincarnate-rise-{timestamp}.jsonl — audit artifact
 ```

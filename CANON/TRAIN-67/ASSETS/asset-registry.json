@@ -1,0 +1,175 @@
+{
+  "version": "1.0.0",
+  "created": "2026-08-11T12:35:00+07:00",
+  "session": "Incarnate-27-Phoenix-RISING-GAME-DEVELOPMENT",
+  "flagship_game": "Train-67 / Survive a Brainrot",
+  "total_assets": 72,
+  "categories": {
+    "enemy_models": {
+      "count": 18,
+      "assets": [
+        {"id": "ENEM-001", "name": "Skibidi Zombie", "type": "core", "tier": "Common", "biome": "All", "priority": 1},
+        {"id": "ENEM-002", "name": "Ohio Anomaly", "type": "core", "tier": "Uncommon", "biome": "All", "priority": 1},
+        {"id": "ENEM-003", "name": "Rizz Merchant", "type": "core", "tier": "Uncommon", "biome": "All", "priority": 1},
+        {"id": "ENEM-004", "name": "Brainrot Mutant", "type": "core", "tier": "Rare", "biome": "Mid+", "priority": 1},
+        {"id": "ENEM-005", "name": "Sigma Boss", "type": "core", "tier": "Boss", "biome": "Boss waves", "priority": 1},
+        {"id": "ENEM-006", "name": "Skibidi Shambler", "type": "variant", "tier": "Common", "biome": "All", "priority": 2},
+        {"id": "ENEM-007", "name": "Sigma Walker", "type": "variant", "tier": "Uncommon", "biome": "Mid+", "priority": 2},
+        {"id": "ENEM-008", "name": "Skibidi Shambler King", "type": "boss", "tier": "Boss", "biome": "Day 11", "priority": 1},
+        {"id": "ENEM-009", "name": "Ohio Anomaly Alpha", "type": "boss", "tier": "Boss", "biome": "Day 22", "priority": 2},
+        {"id": "ENEM-010", "name": "Rizz Lord Junior", "type": "boss", "tier": "Boss", "biome": "Day 33", "priority": 2},
+        {"id": "ENEM-011", "name": "Mutant Brainrot Prime", "type": "boss", "tier": "Boss", "biome": "Day 44", "priority": 2},
+        {"id": "ENEM-012", "name": "Baron Skibidi", "type": "boss", "tier": "Boss", "biome": "Day 55", "priority": 2},
+        {"id": "ENEM-013", "name": "Sigma General", "type": "boss", "tier": "Boss", "biome": "Day 66", "priority": 2},
+        {"id": "ENEM-014", "name": "Void Walker", "type": "boss", "tier": "Boss", "biome": "Day 77", "priority": 3},
+        {"id": "ENEM-015", "name": "Omega Brainrot", "type": "boss", "tier": "Boss", "biome": "Day 88", "priority": 3},
+        {"id": "ENEM-016", "name": "MEGA SIGMA", "type": "boss", "tier": "RIZZLORD", "biome": "Day 99", "priority": 1},
+        {"id": "ENEM-017", "name": "Night Skibidi", "type": "variant", "tier": "Rare", "biome": "Night waves", "priority": 3},
+        {"id": "ENEM-018", "name": "Mini Mutant", "type": "variant", "tier": "Common", "biome": "All", "priority": 2}
+      ]
+    },
+    "weapon_models": {
+      "count": 19,
+      "assets": [
+        {"id": "WPN-001", "name": "Rusty Pipe", "slot": "Melee", "rarity": "Common", "priority": 1},
+        {"id": "WPN-002", "name": "Wooden Bat", "slot": "Melee", "rarity": "Common", "priority": 1},
+        {"id": "WPN-003", "name": "Machete", "slot": "Melee", "rarity": "Uncommon", "priority": 1},
+        {"id": "WPN-004", "name": "Fire Axe", "slot": "Melee", "rarity": "Uncommon", "priority": 1},
+        {"id": "WPN-005", "name": "Katana", "slot": "Melee", "rarity": "Rare", "priority": 2},
+        {"id": "WPN-006", "name": "Chainsaw", "slot": "Melee", "rarity": "Epic", "priority": 2},
+        {"id": "WPN-007", "name": "Skibidi Blade", "slot": "Melee", "rarity": "Legendary", "priority": 3},
+        {"id": "WPN-008", "name": "Sigma Fist", "slot": "Melee", "rarity": "RIZZLORD", "priority": 3},
+        {"id": "WPN-009", "name": "Slingshot", "slot": "Ranged", "rarity": "Common", "priority": 1},
+        {"id": "WPN-010", "name": "9mm Pistol", "slot": "Ranged", "rarity": "Common", "priority": 1},
+        {"id": "WPN-011", "name": "Shotgun", "slot": "Ranged", "rarity": "Uncommon", "priority": 1},
+        {"id": "WPN-012", "name": "AR-15", "slot": "Ranged", "rarity": "Rare", "priority": 2},
+        {"id": "WPN-013", "name": "Sniper", "slot": "Ranged", "rarity": "Epic", "priority": 2},
+        {"id": "WPN-014", "name": "Ohio Cannon", "slot": "Ranged", "rarity": "Legendary", "priority": 3},
+        {"id": "WPN-015", "name": "Rizz Ray", "slot": "Ranged", "rarity": "RIZZLORD", "priority": 3},
+        {"id": "WPN-016", "name": "Rock", "slot": "Throwable", "rarity": "Common", "priority": 1},
+        {"id": "WPN-017", "name": "Molotov", "slot": "Throwable", "rarity": "Uncommon", "priority": 1},
+        {"id": "WPN-018", "name": "Frag Grenade", "slot": "Throwable", "rarity": "Rare", "priority": 2},
+        {"id": "WPN-019", "name": "Brainrot Bomb", "slot": "Throwable", "rarity": "Epic", "priority": 2}
+      ]
+    },
+    "environment_props": {
+      "count": 20,
+      "assets": [
+        {"id": "ENV-001", "name": "Engine Car", "type": "train_car", "priority": 1},
+        {"id": "ENV-002", "name": "Shield Car", "type": "train_car", "priority": 1},
+        {"id": "ENV-003", "name": "Living Quarters", "type": "train_car", "priority": 1},
+        {"id": "ENV-004", "name": "Rusted Barrel", "type": "biome_prop", "biome": "Wasteland Plains", "priority": 2},
+        {"id": "ENV-005", "name": "Cinder Block", "type": "biome_prop", "biome": "Wasteland Plains", "priority": 2},
+        {"id": "ENV-006", "name": "Broken Train Track", "type": "biome_prop", "biome": "Wasteland Plains", "priority": 2},
+        {"id": "ENV-007", "name": "Scrap Pile", "type": "biome_prop", "biome": "Wasteland Plains", "priority": 2},
+        {"id": "ENV-008", "name": "Collapsed Building Rubble", "type": "biome_prop", "biome": "Rusted City", "priority": 2},
+        {"id": "ENV-009", "name": "Concrete Barrier", "type": "biome_prop", "biome": "Rusted City", "priority": 1},
+        {"id": "ENV-010", "name": "Broken Street Lamp", "type": "biome_prop", "biome": "Rusted City", "priority": 2},
+        {"id": "ENV-011", "name": "Car Wreck", "type": "biome_prop", "biome": "Rusted City", "priority": 2},
+        {"id": "ENV-012", "name": "Toxic Barrel", "type": "biome_prop", "biome": "Toxic Swamp", "priority": 2},
+        {"id": "ENV-013", "name": "Swamp Log", "type": "biome_prop", "biome": "Toxic Swamp", "priority": 2},
+        {"id": "ENV-014", "name": "Glowing Mushroom Cluster", "type": "biome_prop", "biome": "Toxic Swamp", "priority": 3},
+        {"id": "ENV-015", "name": "Dead Tree", "type": "biome_prop", "biome": "Toxic Swamp", "priority": 2},
+        {"id": "ENV-016", "name": "Lava Rock", "type": "biome_prop", "biome": "Volcanic Rift", "priority": 2},
+        {"id": "ENV-017", "name": "Volcanic Vent", "type": "biome_prop", "biome": "Volcanic Rift", "priority": 2},
+        {"id": "ENV-018", "name": "Ash Pile", "type": "biome_prop", "biome": "Volcanic Rift", "priority": 3},
+        {"id": "ENV-019", "name": "Bone Pile", "type": "biome_prop", "biome": "Volcanic Rift", "priority": 2},
+        {"id": "ENV-020", "name": "Glitch Fragment", "type": "biome_prop", "biome": "The Void", "priority": 3}
+      ]
+    },
+    "ui_worldspace": {
+      "count": 7,
+      "assets": [
+        {"id": "UI-001", "name": "Shop Terminal", "type": "worldspace", "priority": 1},
+        {"id": "UI-002", "name": "Crate Opener", "type": "worldspace", "priority": 1},
+        {"id": "UI-003", "name": "HUD Coin Counter", "type": "hud", "priority": 1},
+        {"id": "UI-004", "name": "HUD Wave Timer", "type": "hud", "priority": 1},
+        {"id": "UI-005", "name": "HUD Combo Counter", "type": "hud", "priority": 1},
+        {"id": "UI-006", "name": "Leaderboard Panel", "type": "hud", "priority": 2},
+        {"id": "UI-007", "name": "Guild Tag UI", "type": "hud", "priority": 2}
+      ]
+    },
+    "cosmetics": {
+      "count": 8,
+      "assets": [
+        {"id": "COS-001", "name": "Basic Mouse Pet", "type": "pet", "rarity": "Common", "priority": 2},
+        {"id": "COS-002", "name": "Starter Cub Pet", "type": "pet", "rarity": "Uncommon", "priority": 2},
+        {"id": "COS-003", "name": "Fire Dragon Pet", "type": "pet", "rarity": "Rare", "priority": 2},
+        {"id": "COS-004", "name": "Sigma Fox Pet", "type": "pet", "rarity": "Epic", "priority": 3},
+        {"id": "COS-005", "name": "Golden Phoenix Pet", "type": "pet", "rarity": "Legendary", "priority": 3},
+        {"id": "COS-006", "name": "Brainrot Phoenix Pet", "type": "pet", "rarity": "Celestial", "priority": 3},
+        {"id": "COS-007", "name": "Cyberpunk Outfit Skin", "type": "skin", "rarity": "Rare", "priority": 2},
+        {"id": "COS-008", "name": "Tiger Outfit Skin", "type": "skin", "rarity": "Legendary", "priority": 3}
+      ]
+    }
+  },
+  "generation_strategy": {
+    "phase_1_prototyping": {
+      "tool": "TripoSR (local, unlimited free)",
+      "purpose": "Concept validation and rapid prototyping",
+      "assets": "All 72 assets at low-poly LOD",
+      "output": "OBJ/GLB files, 500-1000 polys each"
+    },
+    "phase_2_production": {
+      "tool": "Meshy AI Pro ($16/mo)",
+      "purpose": "Production-ready assets with commercial rights",
+      "assets": "Priority 1 assets first (enemies 1-5, weapons 1-8, environment 1-3, UI 1-2, cosmetics 1-2)",
+      "output": "GLB/FBX files, 2000-5000 polys each, PBR textures"
+    },
+    "phase_3_backup": {
+      "tool": "3D AI Studio Basic ($19/mo)",
+      "purpose": "Fill gaps if Meshy AI insufficient",
+      "assets": "Priority 2-3 assets",
+      "output": "GLB files, 2000-3000 polys each"
+    },
+    "phase_4_polish": {
+      "tool": "Manual Blender (free)",
+      "purpose": "Rigging, animation prep, texture polish",
+      "assets": "All assets requiring animation (enemies, weapons)",
+      "output": "Animated GLB/FBX, rigged meshes"
+    }
+  },
+  "batch_plan": [
+    {
+      "batch": "batch-001",
+      "name": "Core Prototypes",
+      "priority": 1,
+      "assets": ["ENEM-001", "ENEM-002", "ENEM-003", "ENEM-004", "ENEM-005", "WPN-001", "WPN-002", "WPN-003", "WPN-004", "WPN-005", "ENV-001", "ENV-002", "ENV-003", "UI-001", "UI-002", "UI-003", "UI-004", "UI-005", "COS-001", "COS-002"],
+      "count": 20,
+      "status": "pending",
+      "tool": "TripoSR (local)"
+    },
+    {
+      "batch": "batch-002",
+      "name": "Extended Prototypes",
+      "priority": 2,
+      "assets": ["ENEM-006", "ENEM-007", "ENEM-008", "ENEM-009", "ENEM-010", "ENEM-011", "ENEM-012", "WPN-006", "WPN-007", "WPN-008", "WPN-009", "WPN-010", "WPN-011", "ENV-004", "ENV-005", "ENV-006", "ENV-007", "ENV-008", "ENV-009", "COS-003"],
+      "count": 20,
+      "status": "pending",
+      "tool": "TripoSR (local)"
+    },
+    {
+      "batch": "batch-003",
+      "name": "Final Assets",
+      "priority": 3,
+      "assets": ["ENEM-013", "ENEM-014", "ENEM-015", "ENEM-016", "ENEM-017", "ENEM-018", "WPN-012", "WPN-013", "WPN-014", "WPN-015", "WPN-016", "WPN-017", "WPN-018", "WPN-019", "ENV-010", "ENV-011", "ENV-012", "ENV-013", "ENV-014", "ENV-015", "ENV-016", "ENV-017", "ENV-018", "ENV-019", "ENV-020", "UI-006", "UI-007", "COS-004", "COS-005", "COS-006", "COS-007", "COS-008"],
+      "count": 32,
+      "status": "pending",
+      "tool": "Meshy AI Pro / 3D AI Studio"
+    }
+  ],
+  "blockers": [
+    "No active Meshy Pro or 3D AI Studio subscription",
+    "TripoSR local instance not yet configured",
+    "No API keys or authentication credentials available",
+    "No GPU/VRAM budget confirmed for local TripoSR inference"
+  ],
+  "next_actions": [
+    "Activate Meshy Pro subscription ($16/mo)",
+    "Configure local TripoSR instance with GPU acceleration",
+    "Execute batch-001 generation with TripoSR (first 20 assets)",
+    "Validate output quality against Roblox import standards",
+    "Iterate on prompt engineering for complex assets (enemies, weapons)",
+    "Upgrade to Meshy Pro for batch-002 and batch-003 if TripoSR insufficient"
+  ]
+}
