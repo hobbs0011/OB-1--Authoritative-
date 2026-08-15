@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta theme-color content="#0f0f1a">
+  <meta name="description" content="Unified student portal for CASA, Oktava, Bluetech, and Nguyen learning platforms">
+  <meta name="format-detection" content="telephone=no">
   <title>Student Portal | Natural English Training</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,33 +13,35 @@
   <link rel="stylesheet" href="assets/css/theme.css">
 </head>
 <body>
+  <a href="#loginForm" class="skip-link">Skip to login form</a>
   <div class="login-wrap">
-    <div class="login-card">
+    <div class="login-card" role="region" aria-labelledby="portalTitle">
       <div class="login-header">
-        <div class="login-logo" id="portalLogo">P</div>
+        <div class="login-logo" id="portalLogo" aria-hidden="true">P</div>
         <h2 id="portalTitle">Student Portal</h2>
         <p id="portalSubtitle">Natural English Training</p>
       </div>
 
-      <form id="loginForm" autocomplete="off">
+      <form id="loginForm" autocomplete="off" novalidate>
         <div class="field" id="studentCodeField" style="display:none;">
           <label for="studentCode">Student Code</label>
-          <input type="text" id="studentCode" placeholder="e.g. CASA-2026-001">
-          <div class="login-error" id="codeError"></div>
+          <input type="text" id="studentCode" placeholder="e.g. CASA-2026-001" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="codeError">
+          <div class="login-error" id="codeError" role="alert" aria-live="polite"></div>
         </div>
 
         <div class="field">
           <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Enter your password">
-          <div class="login-error" id="pwdError"></div>
+          <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password" aria-describedby="pwdError">
+          <div class="login-error" id="pwdError" role="alert" aria-live="polite"></div>
         </div>
 
         <button type="submit" class="btn-primary" id="loginBtn">
-          <span id="btnText">Enter Portal</span>
+          <span class="btn-text" id="btnText">Enter Portal</span>
+          <span class="spinner" aria-hidden="true"></span>
         </button>
       </form>
 
-      <div class="login-error" id="loginError"></div>
+      <div class="login-error" id="loginError" role="alert" aria-live="polite"></div>
 
       <div class="login-header" style="margin-top:24px; margin-bottom:0;">
         <p id="portalHint" style="font-size:0.8rem; color:var(--muted);"></p>
@@ -88,8 +92,56 @@
         dest: '/nguyen-login/',
         lang: 'en',
         hint: 'Parent / Student PIN access'
+      },
+      quang: {
+        title: 'Quang — English Portal',
+        subtitle: 'Personal Learning Space',
+        logo: 'Q',
+        theme: 'quang',
+        password: null,
+        dest: '/nguyen-quang/',
+        lang: 'en',
+        hint: 'Personal portal for Quang'
+      },
+      quan: {
+        title: 'Quan — English Portal',
+        subtitle: 'Personal Learning Space',
+        logo: 'Q',
+        theme: 'quan',
+        password: null,
+        dest: '/nguyen-quan/',
+        lang: 'en',
+        hint: 'Personal portal for Quan'
       }
     };
+
+    const params = new URLSearchParams(window.location.search);
+    const portalKey = (params.get('portal') || params.get('brand') || '').toLowerCase();
+    const portal = PORTALS[portalKey] || null;
+
+    document.getElementById('portalTitle').textContent = portal ? portal.title : 'Student Portal';
+    document.getElementById('portalSubtitle').textContent = portal ? portal.subtitle : 'Natural English Training';
+    document.getElementById('portalLogo').textContent = portal ? portal.logo : 'P';
+    document.getElementById('portalHint').textContent = portal ? portal.hint : '';
+
+    if (portal) {
+      document.body.setAttribute('data-theme', portal.theme);
+      document.documentElement.setAttribute('lang', portal.lang);
+    }
+
+    const codeField = document.getElementById('studentCodeField');
+    const passwordInput = document.getElementById('password');
+
+    if (portal && portal.codes && portal.codes.length === 1 && portal.codes[0] === 'Oktava English Class') {
+      codeField.style.display = 'none';
+      passwordInput.placeholder = 'Enter class password';
+    } else if (portal && portal.codes && portal.codes.length > 0) {
+      codeField.style.display = 'block';
+    }
+
+    if (portal && !portal.password) {
+      passwordInput.parentElement.style.display = 'none';
+    }
 
     const params = new URLSearchParams(window.location.search);
     const portalKey = (params.get('portal') || params.get('brand') || '').toLowerCase();
@@ -122,7 +174,7 @@
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const errEl = document.getElementById('loginError');
-      const pwdErr = document.getElementById('pwdError');
+      const pwdErr = document.getElementById('pwdErr');
       const codeErr = document.getElementById('codeError');
       errEl.textContent = '';
       pwdErr.textContent = '';
@@ -130,6 +182,7 @@
 
       const pwd = passwordInput.value;
       const code = document.getElementById('studentCode').value.trim();
+      const role = (params.get('role') || 'student').toLowerCase();
 
       if (portal && portal.password) {
         if (portal.codes && portal.codes.length > 0) {
@@ -143,9 +196,9 @@
           pwdErr.textContent = 'Incorrect password. Try again.';
           return;
         }
-        window.location.href = portal.dest + (portal.dest.includes('?') ? '&' : '?') + 'student=' + encodeURIComponent(code || 'Student') + '&name=' + encodeURIComponent('Student');
+        window.location.href = 'app.html?portal=' + encodeURIComponent(portalKey) + '&role=' + encodeURIComponent(role) + '&student=' + encodeURIComponent(code || 'Student') + '&name=' + encodeURIComponent('Student');
       } else if (portal && !portal.password) {
-        window.location.href = portal.dest;
+        window.location.href = 'app.html?portal=' + encodeURIComponent(portalKey) + '&role=' + encodeURIComponent(role);
       } else {
         errEl.textContent = 'Unknown portal. Use ?portal=casa|oktava|bluetech|nguyen';
       }

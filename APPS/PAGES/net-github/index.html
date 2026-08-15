@@ -3,1002 +3,508 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0d1117">
-  <title>NET · Natural English Training — Dashboard</title>
-  <meta name="description" content="Natural English Training dashboard. Explore programs, assessments, and learning pathways for Tigers, Professionals, and more.">
+  <title>NET · Change is constant. English mastery keeps you ahead.</title>
+  <meta name="description" content="Natural English Training — English Mastery for the Next Generation of Leaders. Join learners from age 3 to professional adulthood.">
+  <meta property="og:title" content="NET · Change is constant. English mastery keeps you ahead.">
+  <meta property="og:description" content="English Mastery for the Next Generation of Leaders.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://canon.net-github-dashboard.pages.dev/">
+  <meta property="og:image" content="https://canon.net-github-dashboard.pages.dev/assets/NET-PHXRISING-LOGO.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="landing.css">
 </head>
 <body>
-  <div class="app">
-    <header class="global-header">
-      <div class="header-inner">
-        <a href="#/" class="header-logo" aria-label="NET Home">
-          <svg height="32" viewBox="0 0 16 16" width="32" fill="currentColor">
-            <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.02.01-2.06 0-.71-.24-1.18-.52-1.41 1.71-.2 3.51-.94 3.51-4.14 0-.94-.33-1.61-.87-2.18.1-.26.45-1.3-.09-2.7 0 0-.72-.23-2.34.88-.69-.18-1.44-.27-2.18-.29-.74.02-1.49.11-2.18.29C6.13 3.3 5.4 3.53 5.4 3.53c-.54 1.4-.19 2.44-.09 2.7-.54.57-.87 1.24-.87 2.18 0 3.2 1.8 3.94 3.51 4.14-.24.21-.45.62-.53 1.21-.48.21-1.07.24-1.57.02-.55-.24-.71-.84-.15-1.3.36-.24.77-.6 1.2-.94.22-.17.41-.44.41-.9 0-.51-.01-.94-.01-1.12 0-.22.18-.42.55-.38A8.013 8.013 0 0 1 8 0Z"/>
-          </svg>
-          <span class="header-logo-text">NET</span>
-        </a>
-        <nav class="header-nav" aria-label="Global">
-          <a href="#/" class="header-nav-link active" data-view="home">Pull requests</a>
-          <a href="#/issues" class="header-nav-link" data-view="issues">Issues</a>
-          <a href="#/marketplace" class="header-nav-link" data-view="marketplace">Marketplace</a>
-          <a href="#/explore" class="header-nav-link" data-view="explore">Explore</a>
-        </nav>
-        <div class="header-actions">
-          <div class="header-search">
-            <svg class="search-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-            </svg>
-            <input type="text" class="search-input" placeholder="Search or jump to..." aria-label="Search">
-          </div>
-          <button class="notification-btn" aria-label="Notifications">
-            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-              <path d="M8 16a2 2 0 0 0 1.985-1.75c.017-.137-.077-.295-.355-.594C9.827 13.86 9.45 13.26 9.45 12.5V11h1.75a.75.75 0 0 0 0-1.5H9.45V9.75a.75.75 0 0 0-.75-.75h-1.5a.75.75 0 0 0-.75.75v.75H5.75a.75.75 0 0 0 0 1.5H7v.5c0 .76.377 1.36.976 1.656.278.3.372.457.37.594A2 2 0 0 0 8 16z"/>
-              <path d="M1.75 2.5a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5h-1.5zM4 2.5a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5h-1.5zM6 2.5a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5h-1.5zM1.75 5.5a.75.75 0 0 0 0 1.5h12.5a.75.75 0 0 0 0-1.5H1.75z"/>
-            </svg>
+  <a href="#start-of-content" class="skip-link">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="NET Home">
+        <svg height="32" viewBox="0 0 16 16" width="32" fill="currentColor" aria-hidden="true">
+          <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.02.01-2.06 0-.71-.24-1.18-.52-1.41 1.71-.2 3.51-.94 3.51-4.14 0-.94-.33-1.61-.87-2.18.1-.26.45-1.3-.09-2.7 0 0-.72-.23-2.34.88-.69-.18-1.44-.27-2.18-.29-.74.02-1.49.11-2.18.29C6.13 3.3 5.4 3.53 5.4 3.53c-.54 1.4-.19 2.44-.09 2.7-.54.57-.87 1.24-.87 2.18 0 3.2 1.8 3.94 3.51 4.14-.24.21-.45.62-.53 1.21-.48.21-1.07.24-1.57.02-.55-.24-.71-.84-.15-1.3.36-.24.77-.6 1.2-.94.22-.17.41-.44.41-.9 0-.51-.01-.94-.01-1.12 0-.22.18-.42.55-.38A8.013 8.013 0 0 1 8 0Z"/>
+        </svg>
+        <span class="header-logo-text">NET</span>
+      </a>
+
+      <nav class="header-nav" aria-label="Global">
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Platform ▾
           </button>
-          <a href="#/profile" class="header-avatar" aria-label="View profile">
-            <img src="assets/NET-PHXRISING-LOGO.webp" alt="NET" width="32" height="32">
+          <div class="nav-dropdown-menu" aria-label="Platform">
+            <a href="#" class="nav-dropdown-item">
+              <strong>Learning Paths</strong>
+              <span>Structured curriculum for every learner</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Assessments</strong>
+              <span>Human-reviewed speaking and writing</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>AI Curriculum</strong>
+              <span>Adaptive learning with instant feedback</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Programs</strong>
+              <span>Tigers, Cubs, Professionals, University, Career</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Solutions ▾
+          </button>
+          <div class="nav-dropdown-menu" aria-label="Solutions">
+            <a href="#" class="nav-dropdown-item">
+              <strong>Schools</strong>
+              <span>English programs for institutions</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Corporate</strong>
+              <span>Professional English for teams</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Individuals</strong>
+              <span>Personal mastery journeys</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Tutoring Centers</strong>
+              <span>Tools for educators</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Resources ▾
+          </button>
+          <div class="nav-dropdown-menu" aria-label="Resources">
+            <a href="#" class="nav-dropdown-item">
+              <strong>Documentation</strong>
+              <span>Guides and best practices</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Blog</strong>
+              <span>News, updates, and stories</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Community</strong>
+              <span>Connect with other learners</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Support</strong>
+              <span>Get help when you need it</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Open Source ▾
+          </button>
+          <div class="nav-dropdown-menu" aria-label="Open Source">
+            <a href="#" class="nav-dropdown-item">
+              <strong>Dashboard</strong>
+              <span>NET GitHub-style dashboard</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Assessment Engine</strong>
+              <span>Open assessment tools</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Curriculum Kit</strong>
+              <span>Phonics and lesson materials</span>
+            </a>
+          </div>
+        </div>
+        <a href="#" class="header-nav-link">Enterprise</a>
+        <a href="#" class="header-nav-link">Pricing</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="header-search">
+          <svg class="search-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+          <input type="text" class="search-input" placeholder="Search or jump to..." aria-label="Search" id="headerSearchInput">
+        </div>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <a href="#" class="header-link">Sign in</a>
+        <a href="#" class="btn btn-primary">Sign up</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="start-of-content">
+    <section class="hero">
+      <div class="hero-blobs" aria-hidden="true">
+        <div class="hero-blob hero-blob--1"></div>
+        <div class="hero-blob hero-blob--2"></div>
+        <div class="hero-blob hero-blob--3"></div>
+      </div>
+      <div class="hero-octocat" aria-hidden="true">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.02.01-2.06 0-.71-.24-1.18-.52-1.41 1.71-.2 3.51-.94 3.51-4.14 0-.94-.33-1.61-.87-2.18.1-.26.45-1.3-.09-2.7 0 0-.72-.23-2.34.88-.69-.18-1.44-.27-2.18-.29-.74.02-1.49.11-2.18.29C6.13 3.3 5.4 3.53 5.4 3.53c-.54 1.4-.19 2.44-.09 2.7-.54.57-.87 1.24-.87 2.18 0 3.2 1.8 3.94 3.51 4.14-.24.21-.45.62-.53 1.21-.48.21-1.07.24-1.57.02-.55-.24-.71-.84-.15-1.3.36-.24.77-.6 1.2-.94.22-.17.41-.44.41-.9 0-.51-.01-.94-.01-1.12 0-.22.18-.42.55-.38A8.013 8.013 0 0 1 8 0Z"/></svg>
+      </div>
+      <div class="hero-inner">
+        <h1 class="hero-title">Change is constant.<br>English mastery keeps you ahead.</h1>
+        <p class="hero-subtitle">The AI-powered platform where learners, educators, and businesses build English skills that advance careers and communities.</p>
+        <form class="hero-form" onsubmit="event.preventDefault(); alert('Welcome to NET!');">
+          <input type="email" class="hero-input" placeholder="Email address" required aria-label="Email address">
+          <button type="submit" class="btn btn-large btn-primary">Get started for free →</button>
+        </form>
+        <p class="hero-note">Start your mastery journey today. No credit card required.</p>
+      </div>
+    </section>
+
+    <div class="logos reveal">
+      <div class="container">
+        <p class="logos-title">Trusted by educators and institutions worldwide</p>
+        <div class="logos-grid">
+          <span class="logo-item">Lakeview Academy</span>
+          <span class="logo-item">BrightFuture</span>
+          <span class="logo-item">EduCore</span>
+          <span class="logo-item">GlobalSpeak</span>
+          <span class="logo-item">NextGen Learning</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="features reveal">
+      <div class="container">
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A9 9 0 0 0 18 21V6.042Z"/><path d="M12 6.042A8.967 8.967 0 0 1 18 3.75v14.25a9 9 0 0 1-6 8.512V6.042Z"/></svg>
+            </div>
+            <h3 class="feature-title">Learning Paths</h3>
+            <p class="feature-desc">Structured curriculum from phonics to professional English. Age-appropriate pathways for every learner.</p>
+            <a href="#" class="feature-link">Explore paths →</a>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+            </div>
+            <h3 class="feature-title">Assessments</h3>
+            <p class="feature-desc">Human-reviewed speaking and writing assessments. Every submission gets personal feedback from Michael Hobbs.</p>
+            <a href="#" class="feature-link">Start assessment →</a>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15.59 14.37a6 6 0 0 1-5.84 7.38h-1.8a6 6 0 0 1-5.84-7.38L5.59 3.37a.75.75 0 0 1 1.06-1.06l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 1 1-1.06-1.06l2.17-2.17Zm7.32-2.17-2.17-2.17a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0Z"/></svg>
+            </div>
+            <h3 class="feature-title">AI Curriculum</h3>
+            <p class="feature-desc">AI-forward learning tools that adapt to each student. Practice speaking, writing, and pronunciation with instant feedback.</p>
+            <a href="#" class="feature-link">Explore AI tools →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats reveal">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-number">5</span>
+            <span class="stat-label">Programs</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">2,400+</span>
+            <span class="stat-label">Assessments</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">98%</span>
+            <span class="stat-label">Satisfaction</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">24h</span>
+            <span class="stat-label">Review Turnaround</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="programs reveal">
+      <div class="container">
+        <h2 class="section-title">Explore programs</h2>
+        <div class="program-grid">
+          <a href="#" class="program-card">
+            <div class="program-icon">🐯</div>
+            <h3 class="program-name">NET Tigers</h3>
+            <p class="program-desc">Ages 8–17 · Speaking confidence, phonics, writing, and reading fluency.</p>
+            <span class="program-link">Explore program →</span>
+          </a>
+          <a href="#" class="program-card">
+            <div class="program-icon">🐻</div>
+            <h3 class="program-name">NET Cubs</h3>
+            <p class="program-desc">Ages 3–7 · Foundational phonics and play-based learning.</p>
+            <span class="program-link">Explore program →</span>
+          </a>
+          <a href="#" class="program-card">
+            <div class="program-icon">💼</div>
+            <h3 class="program-name">NET Professionals</h3>
+            <p class="program-desc">Adults · Career English, AI mastery, and professional communication.</p>
+            <span class="program-link">Explore program →</span>
+          </a>
+          <a href="#" class="program-card">
+            <div class="program-icon">🎓</div>
+            <h3 class="program-name">NET University</h3>
+            <p class="program-desc">University pathways, admission prep, and academic writing.</p>
+            <span class="program-link">Explore program →</span>
+          </a>
+          <a href="#" class="program-card">
+            <div class="program-icon">🚀</div>
+            <h3 class="program-name">NET Career</h3>
+            <p class="program-desc">Vocational pathways and job-ready English. Interview, negotiate, lead.</p>
+            <span class="program-link">Explore program →</span>
           </a>
         </div>
       </div>
-    </header>
+    </section>
 
-    <div class="main-container">
-      <aside class="sidebar-left">
-        <nav class="sidebar-nav" aria-label="Repository">
-          <div class="sidebar-section">
-            <a href="#/" class="sidebar-item active" data-view="home">
-              <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                <path d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.257 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.73-.002-2.254A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.75 3.75 0 0 1 1.992-.574H15.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"/>
-              </svg>
-              <span>Home</span>
-            </a>
-            <a href="#/repositories" class="sidebar-item" data-view="repositories">
-              <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-1a2.75 2.75 0 0 0-2.75 2.75v6.5a2.75 2.75 0 0 1-2.75 2.75h-6.5A2.75 2.75 0 0 1 1 13.75v-6.5A2.75 2.75 0 0 1 3.75 5h1a.75.75 0 0 1 0 1.5h-1ZM4.5 1.5a1 1 0 0 0-1 1v6.5a1 1 0 0 0 1 1h6.5a1 1 0 0 0 1-1v-6.5a1 1 0 0 0-1-1Z"/>
-              </svg>
-              <span>Repositories</span>
-            </a>
-            <a href="#/programs" class="sidebar-item" data-view="programs">
-              <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                <path d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM6.25 12a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0"/>
-              </svg>
-              <span>Programs</span>
-            </a>
-            <a href="#/students" class="sidebar-item" data-view="students">
-              <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                <path d="M10.5 5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm.061 3.073a4 4 0 1 0-5.123 0 6.004 6.004 0 0 0-3.431 5.142.75.75 0 0 0 1.498.07 4.5 4.5 0 0 1 8.99 0 .75.75 0 1 0 1.498-.07 6.005 6.005 0 0 0-3.432-5.142Z"/>
-              </svg>
-              <span>Students</span>
-            </a>
-          </div>
-          <div class="sidebar-section">
-            <h3 class="sidebar-heading">Your programs</h3>
-            <a href="#/program/tigers" class="sidebar-item" data-view="program-tigers">
-              <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.02.01-2.06 0-.71-.24-1.18-.52-1.41 1.71-.2 3.51-.94 3.51-4.14 0-.94-.33-1.61-.87-2.18.1-.26.45-1.3-.09-2.7 0 0-.72-.23-2.34.88-.69-.18-1.44-.27-2.18-.29-.74.02-1.49.11-2.18.29C6.13 3.3 5.4 3.53 5.4 3.53c-.54 1.4-.19 2.44-.09 2.7-.54.57-.87 1.24-.87 2.18 0 3.2 1.8 3.94 3.51 4.14-.24.21-.45.62-.53 1.21-.48.21-1.07.24-1.57.02-.55-.24-.71-.84-.15-1.3.36-.24.77-.6 1.2-.94.22-.17.41-.44.41-.9 0-.51-.01-.94-.01-1.12 0-.22.18-.42.55-.38A8.013 8.013 0 0 1 8 0Z"/>
-              </svg>
-              <span>NET-Tigers</span>
-            </a>
-            <a href="#/program/professionals" class="sidebar-item" data-view="program-professionals">
-              <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.02.01-2.06 0-.71-.24-1.18-.52-1.41 1.71-.2 3.51-.94 3.51-4.14 0-.94-.33-1.61-.87-2.18.1-.26.45-1.3-.09-2.7 0 0-.72-.23-2.34.88-.69-.18-1.44-.27-2.18-.29-.74.02-1.49.11-2.18.29C6.13 3.3 5.4 3.53 5.4 3.53c-.54 1.4-.19 2.44-.09 2.7-.54.57-.87 1.24-.87 2.18 0 3.2 1.8 3.94 3.51 4.14-.24.21-.45.62-.53 1.21-.48.21-1.07.24-1.57.02-.55-.24-.71-.84-.15-1.3.36-.24.77-.6 1.2-.94.22-.17.41-.44.41-.9 0-.51-.01-.94-.01-1.12 0-.22.18-.42.55-.38A8.013 8.013 0 0 1 8 0Z"/>
-              </svg>
-              <span>NET-Professionals</span>
-            </a>
-            <a href="#/program/cubs" class="sidebar-item" data-view="program-cubs">
-              <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.02.01-2.06 0-.71-.24-1.18-.52-1.41 1.71-.2 3.51-.94 3.51-4.14 0-.94-.33-1.61-.87-2.18.1-.26.45-1.3-.09-2.7 0 0-.72-.23-2.34.88-.69-.18-1.44-.27-2.18-.29-.74.02-1.49.11-2.18.29C6.13 3.3 5.4 3.53 5.4 3.53c-.54 1.4-.19 2.44-.09 2.7-.54.57-.87 1.24-.87 2.18 0 3.2 1.8 3.94 3.51 4.14-.24.21-.45.62-.53 1.21-.48.21-1.07.24-1.57.02-.55-.24-.71-.84-.15-1.3.36-.24.77-.6 1.2-.94.22-.17.41-.44.41-.9 0-.51-.01-.94-.01-1.12 0-.22.18-.42.55-.38A8.013 8.013 0 0 1 8 0Z"/>
-              </svg>
-              <span>NET-Cubs</span>
-            </a>
-            <a href="#/program/career" class="sidebar-item" data-view="program-career">
-              <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.02.01-2.06 0-.71-.24-1.18-.52-1.41 1.71-.2 3.51-.94 3.51-4.14 0-.94-.33-1.61-.87-2.18.1-.26.45-1.3-.09-2.7 0 0-.72-.23-2.34.88-.69-.18-1.44-.27-2.18-.29-.74.02-1.49.11-2.18.29C6.13 3.3 5.4 3.53 5.4 3.53c-.54 1.4-.19 2.44-.09 2.7-.54.57-.87 1.24-.87 2.18 0 3.2 1.8 3.94 3.51 4.14-.24.21-.45.62-.53 1.21-.48.21-1.07.24-1.57.02-.55-.24-.71-.84-.15-1.3.36-.24.77-.6 1.2-.94.22-.17.41-.44.41-.9 0-.51-.01-.94-.01-1.12 0-.22.18-.42.55-.38A8.013 8.013 0 0 1 8 0Z"/>
-              </svg>
-              <span>NET-Career</span>
-            </a>
-          </div>
-        </nav>
-      </aside>
-
-      <main class="main-content" id="main-content">
-        <!-- HOME VIEW -->
-        <div class="view active" id="view-home">
-          <div class="repo-header">
-            <div class="repo-header-icon">
-              <svg viewBox="0 0 16 16" width="32" height="32" fill="currentColor">
-                <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-1a2.75 2.75 0 0 0-2.75 2.75v6.5a2.75 2.75 0 0 1-2.75 2.75h-6.5A2.75 2.75 0 0 1 1 13.75v-6.5A2.75 2.75 0 0 1 3.75 5h1a.75.75 0 0 1 0 1.5h-1ZM4.5 1.5a1 1 0 0 0-1 1v6.5a1 1 0 0 0 1 1h6.5a1 1 0 0 0 1-1v-6.5a1 1 0 0 0-1-1Z"/>
-              </svg>
-            </div>
-            <div class="repo-header-info">
-              <h1 class="repo-title">natural-english-training / dashboard</h1>
-              <p class="repo-desc">English Mastery for the Next Generation of Leaders. Làm Chủ Tiếng Anh Cho Thế Hệ Dẫn Đầu Tiếp Theo.</p>
-              <div class="repo-meta">
-                <span class="repo-visibility">Public</span>
-                <span class="repo-dot">·</span>
-                <span>5 programs</span>
-                <span class="repo-dot">·</span>
-                <span>Updated 2 hours ago</span>
+    <section class="testimonials reveal">
+      <div class="container">
+        <h2 class="section-title">Loved by learners and educators</h2>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-text">"NET transformed my speaking confidence. The human-reviewed assessments are unlike anything else — I knew exactly where to improve."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">LH</div>
+              <div>
+                <div class="testimonial-name">Linh H.</div>
+                <div class="testimonial-role">NET Tigers Student</div>
               </div>
-            </div>
-            <div class="repo-header-actions">
-              <button class="btn btn-primary">Star</button>
-              <button class="btn btn-secondary">Fork</button>
             </div>
           </div>
-
-          <div class="repo-tabs">
-            <a href="#/" class="repo-tab active" data-view="home">Code</a>
-            <a href="#/issues" class="repo-tab" data-view="issues">Issues</a>
-            <a href="#/pull-requests" class="repo-tab" data-view="pull-requests">Pull requests</a>
-            <a href="#/actions" class="repo-tab" data-view="actions">Actions</a>
-            <a href="#/projects" class="repo-tab" data-view="projects">Projects</a>
-            <a href="#/wiki" class="repo-tab" data-view="wiki">Wiki</a>
-            <a href="#/security" class="repo-tab" data-view="security">Security</a>
-            <a href="#/insights" class="repo-tab" data-view="insights">Insights</a>
-            <a href="#/settings" class="repo-tab" data-view="settings">Settings</a>
-          </div>
-
-          <div class="repo-body">
-            <div class="file-explorer">
-              <div class="file-explorer-header">
-                <div class="file-count">42 entries</div>
-                <div class="file-actions">
-                  <button class="file-action-btn" aria-label="Add file">
-                    <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M11.75 2.5a.75.75 0 1 0 0 1.5h1.5v6.75a2.25 2.25 0 0 1-2.25 2.25h-6.5A2.25 2.25 0 0 1 2 10.75V5.5h1.5a.75.75 0 0 0 0-1.5h-1.5V2.5h1.5ZM4 4.75v6.5a.75.75 0 0 0 .75.75h6.5a.75.75 0 0 0 .75-.75V5.5H4v-.75Z"/></svg>
-                    Add file
-                  </button>
-                  <button class="file-action-btn" aria-label="Upload">
-                    <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z"/><path d="M11.78 4.72a.749.749 0 1 1 1.06 1.06L8.75 9.061V13a.75.75 0 0 1-1.5 0V9.061L4.22 10.78a.749.749 0 1 1-1.06-1.06l3.25-3.25a.749.749 0 0 1 1.06 0l3.25 3.25Z"/></svg>
-                    Upload
-                  </button>
-                </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">"The AI curriculum is incredible. My pronunciation improved dramatically within weeks. The instant feedback is a game changer."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">MT</div>
+              <div>
+                <div class="testimonial-name">Minh T.</div>
+                <div class="testimonial-role">NET Professionals Learner</div>
               </div>
-              <div class="file-list">
-                <div class="file-row file-row-header">
-                  <span class="file-name">Name</span>
-                  <span class="file-message">Latest commit</span>
-                  <span class="file-time">Commit time</span>
-                </div>
-                <div class="file-row">
-                  <span class="file-name">
-                    <svg class="file-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M3.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25V6H9.75A1.75 1.75 0 0 1 8 4.25V1.5H3.75Zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06ZM2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.5-.75a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V3.5H4.75v-.75Z"/></svg>
-                    <a href="#/program/tigers">NET-Tigers</a>
-                  </span>
-                  <span class="file-message">
-                    <a href="#" class="commit-link">feat: add speaking assessment</a>
-                    <span class="commit-hash" title="Commit abc123">abc1234</span>
-                  </span>
-                  <span class="file-time">2 hours ago</span>
-                </div>
-                <div class="file-row">
-                  <span class="file-name">
-                    <svg class="file-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M3.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25V6H9.75A1.75 1.75 0 0 1 8 4.25V1.5H3.75Zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06ZM2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.5-.75a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V3.5H4.75v-.75Z"/></svg>
-                    <a href="#/program/professionals">NET-Professionals</a>
-                  </span>
-                  <span class="file-message">
-                    <a href="#" class="commit-link">feat: add AI curriculum module</a>
-                    <span class="commit-hash" title="Commit def567">def5678</span>
-                  </span>
-                  <span class="file-time">5 hours ago</span>
-                </div>
-                <div class="file-row">
-                  <span class="file-name">
-                    <svg class="file-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M3.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25V6H9.75A1.75 1.75 0 0 1 8 4.25V1.5H3.75Zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06ZM2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.5-.75a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V3.5H4.75v-.75Z"/></svg>
-                    <a href="#/program/cubs">NET-Cubs</a>
-                  </span>
-                  <span class="file-message">
-                    <a href="#" class="commit-link">feat: phonics sounds 42-set</a>
-                    <span class="commit-hash" title="Commit ghi901">ghi9012</span>
-                  </span>
-                  <span class="file-time">1 day ago</span>
-                </div>
-                <div class="file-row">
-                  <span class="file-name">
-                    <svg class="file-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M3.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25V6H9.75A1.75 1.75 0 0 1 8 4.25V1.5H3.75Zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06ZM2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.5-.75a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V3.5H4.75v-.75Z"/></svg>
-                    <a href="#/program/career">NET-Career</a>
-                  </span>
-                  <span class="file-message">
-                    <a href="#" class="commit-link">feat: university pathway mapping</a>
-                    <span class="commit-hash" title="Commit jkl345">jkl3456</span>
-                  </span>
-                  <span class="file-time">2 days ago</span>
-                </div>
-                <div class="file-row">
-                  <span class="file-name">
-                    <svg class="file-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M3.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25V6H9.75A1.75 1.75 0 0 1 8 4.25V1.5H3.75Zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06ZM2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.5-.75a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V3.5H4.75v-.75Z"/></svg>
-                    <a href="#/program/university">NET-University</a>
-                  </span>
-                  <span class="file-message">
-                    <a href="#" class="commit-link">feat: admission essay prep</a>
-                    <span class="commit-hash" title="Commit mno789">mno7890</span>
-                  </span>
-                  <span class="file-time">3 days ago</span>
-                </div>
-                <div class="file-row">
-                  <span class="file-name">
-                    <svg class="folder-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M1.75 1A1.75 1.75 0 0 0 0 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0 0 16 13.25v-8.5A1.75 1.75 0 0 0 14.25 3H7.5a.25.25 0 0 1-.206-.1L5.937 1.813A1.75 1.75 0 0 0 5.146 1.5H1.75Z"/></svg>
-                    <a href="#">docs</a>
-                  </span>
-                  <span class="file-message">
-                    <a href="#" class="commit-link">docs: update methodology</a>
-                    <span class="commit-hash" title="Commit pqr123">pqr1234</span>
-                  </span>
-                  <span class="file-time">1 week ago</span>
-                </div>
-                <div class="file-row">
-                  <span class="file-name">
-                    <svg class="folder-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M1.75 1A1.75 1.75 0 0 0 0 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0 0 16 13.25v-8.5A1.75 1.75 0 0 0 14.25 3H7.5a.25.25 0 0 1-.206-.1L5.937 1.813A1.75 1.75 0 0 0 5.146 1.5H1.75Z"/></svg>
-                    <a href="#">assessments</a>
-                  </span>
-                  <span class="file-message">
-                    <a href="#" class="commit-link">feat: add tiger assessment v2</a>
-                    <span class="commit-hash" title="Commit stu456">stu4567</span>
-                  </span>
-                  <span class="file-time">1 week ago</span>
-                </div>
-                <div class="file-row">
-                  <span class="file-name">
-                    <svg class="folder-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M1.75 1A1.75 1.75 0 0 0 0 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0 0 16 13.25v-8.5A1.75 1.75 0 0 0 14.25 3H7.5a.25.25 0 0 1-.206-.1L5.937 1.813A1.75 1.75 0 0 0 5.146 1.5H1.75Z"/></svg>
-                    <a href="#">media</a>
-                  </span>
-                  <span class="file-message">
-                    <a href="#" class="commit-link">feat: brand film upload</a>
-                    <span class="commit-hash" title="Commit vwx890">vwx8901</span>
-                  </span>
-                  <span class="file-time">2 weeks ago</span>
-                </div>
-                <div class="file-row">
-                  <span class="file-name">
-                    <svg class="file-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M4 0h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4Zm0 1.5A2.5 2.5 0 0 0 1.5 4v8A2.5 2.5 0 0 0 4 14.5h8a2.5 2.5 0 0 0 2.5-2.5V4A2.5 2.5 0 0 0 12 2.5ZM8 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
-                    <a href="#">README.md</a>
-                  </span>
-                  <span class="file-message">
-                    <a href="#" class="commit-link">docs: readme refresh</a>
-                    <span class="commit-hash" title="Commit yza234">yza2345</span>
-                  </span>
-                  <span class="file-time">2 weeks ago</span>
-                </div>
-                <div class="file-row">
-                  <span class="file-name">
-                    <svg class="file-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M3.75 1.5a.25.25 0 0 0-.25.25v11.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25V6H9.75A1.75 1.75 0 0 1 8 4.25V1.5H3.75Zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06ZM2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.5-.75a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V3.5H4.75v-.75Z"/></svg>
-                    <a href="#">package.json</a>
-                  </span>
-                  <span class="file-message">
-                    <a href="#" class="commit-link">chore: bump deps</a>
-                    <span class="commit-hash" title="Commit bcd567">bcd5678</span>
-                  </span>
-                  <span class="file-time">3 weeks ago</span>
-                </div>
-              </div>
-            </div>
-            <div class="readme-container">
-              <div class="readme-header">
-                <h2 class="readme-title">README.md</h2>
-                <div class="readme-actions">
-                  <button class="btn btn-sm btn-secondary">Edit</button>
-                  <button class="btn btn-sm btn-secondary">Raw</button>
-                  <button class="btn btn-sm btn-secondary">Blame</button>
-                  <button class="btn btn-sm btn-secondary">History</button>
-                </div>
-              </div>
-              <article class="markdown-body">
-                <h1 id="user-content-natural-english-training">Natural English Training</h1>
-                <p><strong>English Mastery for the Next Generation of Leaders.</strong></p>
-                <p><em>Làm Chủ Tiếng Anh Cho Thế Hệ Dẫn Đầu Tiếp Theo.</em></p>
-                <h2 id="user-content-about">About</h2>
-                <p>NET is a premium bilingual English training brand based in Vietnam. We run human-reviewed assessments, AI-forward curricula, and confidence-building programs for learners from age 3 to professional adulthood.</p>
-                <h2 id="user-content-programs">Programs</h2>
-                <ul>
-                  <li><strong>NET Tigers</strong> — Ages 8–17, speaking confidence, phonics, writing</li>
-                  <li><strong>NET Cubs</strong> — Ages 3–7, foundational phonics and play</li>
-                  <li><strong>NET Professionals</strong> — Adults, career English + AI mastery</li>
-                  <li><strong>NET University</strong> — Admission prep and academic writing</li>
-                  <li><strong>NET Career</strong> — Vocational pathways and job-ready English</li>
-                </ul>
-                <h2 id="user-content-tech">Tech</h2>
-                <p>Frontend lives on Cloudflare Pages. Backend runs on Workers + D1. Assessment data is captured client-side and submitted via <code>submission-api</code>.</p>
-                <pre><code class="language-bash">git clone https://github.com/naturalenglishtraining/dashboard.git
-cd dashboard
-npm install
-npm run dev</code></pre>
-                <h2 id="user-content-contributing">Contributing</h2>
-                <p>Pull requests welcome. Please open an issue first for major changes.</p>
-                <h2 id="user-content-license">License</h2>
-                <p>Proprietary — Michael Hobbs / Natural English Training.</p>
-              </article>
             </div>
           </div>
-        </div>
-
-        <!-- REPOSITORIES VIEW -->
-        <div class="view" id="view-repositories">
-          <div class="page-header">
-            <h1 class="page-title">Repositories</h1>
-            <div class="page-header-actions">
-              <input type="text" class="search-input search-input-lg" placeholder="Find a repository..." aria-label="Find a repository">
-            </div>
-          </div>
-          <div class="repo-grid">
-            <div class="repo-card">
-              <div class="repo-card-header">
-                <svg class="repo-card-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-1a2.75 2.75 0 0 0-2.75 2.75v6.5a2.75 2.75 0 0 1-2.75 2.75h-6.5A2.75 2.75 0 0 1 1 13.75v-6.5A2.75 2.75 0 0 1 3.75 5h1a.75.75 0 0 1 0 1.5h-1ZM4.5 1.5a1 1 0 0 0-1 1v6.5a1 1 0 0 0 1 1h6.5a1 1 0 0 0 1-1v-6.5a1 1 0 0 0-1-1Z"/></svg>
-                <div class="repo-card-title">
-                  <a href="#/program/tigers">NET-Tigers</a>
-                  <span class="repo-visibility-badge">Public</span>
-                </div>
-              </div>
-              <p class="repo-card-desc">Ages 8–17. Speaking confidence, phonics, writing, and reading fluency.</p>
-              <div class="repo-card-meta">
-                <span class="language-dot" style="background:#a855f7;"></span>
-                <span class="language-name">TypeScript</span>
-                <span class="repo-card-sep">·</span>
-                <span class="repo-card-stat">42 stars</span>
-                <span class="repo-card-sep">·</span>
-                <span class="repo-card-stat">Updated today</span>
-              </div>
-            </div>
-            <div class="repo-card">
-              <div class="repo-card-header">
-                <svg class="repo-card-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-1a2.75 2.75 0 0 0-2.75 2.75v6.5a2.75 2.75 0 0 1-2.75 2.75h-6.5A2.75 2.75 0 0 1 1 13.75v-6.5A2.75 2.75 0 0 1 3.75 5h1a.75.75 0 0 1 0 1.5h-1ZM4.5 1.5a1 1 0 0 0-1 1v6.5a1 1 0 0 0 1 1h6.5a1 1 0 0 0 1-1v-6.5a1 1 0 0 0-1-1Z"/></svg>
-                <div class="repo-card-title">
-                  <a href="#/program/professionals">NET-Professionals</a>
-                  <span class="repo-visibility-badge">Public</span>
-                </div>
-              </div>
-              <p class="repo-card-desc">Adults. Career English, AI mastery, and professional communication.</p>
-              <div class="repo-card-meta">
-                <span class="language-dot" style="background:#f59e0b;"></span>
-                <span class="language-name">Python</span>
-                <span class="repo-card-sep">·</span>
-                <span class="repo-card-stat">28 stars</span>
-                <span class="repo-card-sep">·</span>
-                <span class="repo-card-stat">Updated 5 hours ago</span>
-              </div>
-            </div>
-            <div class="repo-card">
-              <div class="repo-card-header">
-                <svg class="repo-card-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-1a2.75 2.75 0 0 0-2.75 2.75v6.5a2.75 2.75 0 0 1-2.75 2.75h-6.5A2.75 2.75 0 0 1 1 13.75v-6.5A2.75 2.75 0 0 1 3.75 5h1a.75.75 0 0 1 0 1.5h-1ZM4.5 1.5a1 1 0 0 0-1 1v6.5a1 1 0 0 0 1 1h6.5a1 1 0 0 0 1-1v-6.5a1 1 0 0 0-1-1Z"/></svg>
-                <div class="repo-card-title">
-                  <a href="#/program/cubs">NET-Cubs</a>
-                  <span class="repo-visibility-badge">Public</span>
-                </div>
-              </div>
-              <p class="repo-card-desc">Ages 3–7. Foundational phonics, play-based learning, and confidence.</p>
-              <div class="repo-card-meta">
-                <span class="language-dot" style="background:#22c55e;"></span>
-                <span class="language-name">HTML</span>
-                <span class="repo-card-sep">·</span>
-                <span class="repo-card-stat">19 stars</span>
-                <span class="repo-card-sep">·</span>
-                <span class="repo-card-stat">Updated 1 day ago</span>
-              </div>
-            </div>
-            <div class="repo-card">
-              <div class="repo-card-header">
-                <svg class="repo-card-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-1a2.75 2.75 0 0 0-2.75 2.75v6.5a2.75 2.75 0 0 1-2.75 2.75h-6.5A2.75 2.75 0 0 1 1 13.75v-6.5A2.75 2.75 0 0 1 3.75 5h1a.75.75 0 0 1 0 1.5h-1ZM4.5 1.5a1 1 0 0 0-1 1v6.5a1 1 0 0 0 1 1h6.5a1 1 0 0 0 1-1v-6.5a1 1 0 0 0-1-1Z"/></svg>
-                <div class="repo-card-title">
-                  <a href="#/program/career">NET-Career</a>
-                  <span class="repo-visibility-badge">Public</span>
-                </div>
-              </div>
-              <p class="repo-card-desc">University pathways, admission prep, and career-focused English.</p>
-              <div class="repo-card-meta">
-                <span class="language-dot" style="background:#3b82f6;"></span>
-                <span class="language-name">JavaScript</span>
-                <span class="repo-card-sep">·</span>
-                <span class="repo-card-stat">15 stars</span>
-                <span class="repo-card-sep">·</span>
-                <span class="repo-card-stat">Updated 2 days ago</span>
-              </div>
-            </div>
-            <div class="repo-card">
-              <div class="repo-card-header">
-                <svg class="repo-card-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-1a2.75 2.75 0 0 0-2.75 2.75v6.5a2.75 2.75 0 0 1-2.75 2.75h-6.5A2.75 2.75 0 0 1 1 13.75v-6.5A2.75 2.75 0 0 1 3.75 5h1a.75.75 0 0 1 0 1.5h-1ZM4.5 1.5a1 1 0 0 0-1 1v6.5a1 1 0 0 0 1 1h6.5a1 1 0 0 0 1-1v-6.5a1 1 0 0 0-1-1Z"/></svg>
-                <div class="repo-card-title">
-                  <a href="#">NET-PET-AI</a>
-                  <span class="repo-visibility-badge">Private</span>
-                </div>
-              </div>
-              <p class="repo-card-desc">AI-powered assessment engine and agent infrastructure.</p>
-              <div class="repo-card-meta">
-                <span class="language-dot" style="background:#ef4444;"></span>
-                <span class="language-name">Rust</span>
-                <span class="repo-card-sep">·</span>
-                <span class="repo-card-stat">88 stars</span>
-                <span class="repo-card-sep">·</span>
-                <span class="repo-card-stat">Updated 3 hours ago</span>
-              </div>
-            </div>
-            <div class="repo-card">
-              <div class="repo-card-header">
-                <svg class="repo-card-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-1a2.75 2.75 0 0 0-2.75 2.75v6.5a2.75 2.75 0 0 1-2.75 2.75h-6.5A2.75 2.75 0 0 1 1 13.75v-6.5A2.75 2.75 0 0 1 3.75 5h1a.75.75 0 0 1 0 1.5h-1ZM4.5 1.5a1 1 0 0 0-1 1v6.5a1 1 0 0 0 1 1h6.5a1 1 0 0 0 1-1v-6.5a1 1 0 0 0-1-1Z"/></svg>
-                <div class="repo-card-title">
-                  <a href="#">dashboard-ui</a>
-                  <span class="repo-visibility-badge">Public</span>
-                </div>
-              </div>
-              <p class="repo-card-desc">The NET design system, components, and shared UI primitives.</p>
-              <div class="repo-card-meta">
-                <span class="language-dot" style="background:#06b6d4;"></span>
-                <span class="language-name">CSS</span>
-                <span class="repo-card-sep">·</span>
-                <span class="repo-card-stat">7 stars</span>
-                <span class="repo-card-sep">·</span>
-                <span class="repo-card-stat">Updated 4 days ago</span>
+          <div class="testimonial-card">
+            <p class="testimonial-text">"We rolled out NET across our tutoring centers and saw measurable improvement in student engagement and speaking fluency."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">SK</div>
+              <div>
+                <div class="testimonial-name">Sarah K.</div>
+                <div class="testimonial-role">Director, BrightFuture Centers</div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <!-- PROGRAMS VIEW -->
-        <div class="view" id="view-programs">
-          <div class="page-header">
-            <h1 class="page-title">Programs</h1>
-            <p class="page-subtitle">All active NET learning pathways</p>
+    <section class="pricing reveal">
+      <div class="container">
+        <h2 class="section-title">Simple, transparent pricing</h2>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <div class="pricing-name">Starter</div>
+            <div class="pricing-price">Free</div>
+            <p class="pricing-desc">Perfect for trying NET</p>
+            <ul class="pricing-features">
+              <li>1 program access</li>
+              <li>Basic assessments</li>
+              <li>Community support</li>
+            </ul>
+            <a href="#" class="btn btn-secondary">Get started</a>
           </div>
-          <div class="program-grid">
-            <div class="program-card">
-              <div class="program-card-bg"></div>
-              <div class="program-card-body">
-                <span class="program-badge">Ages 8–17</span>
-                <h3 class="program-title">NET Tigers</h3>
-                <p class="program-desc">Speaking confidence, phonics, writing, and reading fluency. From silent to powerful.</p>
-                <div class="program-meta">
-                  <span class="program-tag">Speaking</span>
-                  <span class="program-tag">Phonics</span>
-                  <span class="program-tag">Writing</span>
-                </div>
-                <a href="#/program/tigers" class="btn btn-primary btn-block">Explore</a>
-              </div>
-            </div>
-            <div class="program-card">
-              <div class="program-card-bg"></div>
-              <div class="program-card-body">
-                <span class="program-badge">Ages 3–7</span>
-                <h3 class="program-title">NET Cubs</h3>
-                <p class="program-desc">Foundational phonics and play-based learning. Building the first bricks of confidence.</p>
-                <div class="program-meta">
-                  <span class="program-tag">Phonics</span>
-                  <span class="program-tag">Play</span>
-                  <span class="program-tag">Foundation</span>
-                </div>
-                <a href="#/program/cubs" class="btn btn-primary btn-block">Explore</a>
-              </div>
-            </div>
-            <div class="program-card">
-              <div class="program-card-bg"></div>
-              <div class="program-card-body">
-                <span class="program-badge">Adults</span>
-                <h3 class="program-title">NET Professionals</h3>
-                <p class="program-desc">Career English, AI mastery, and professional communication. Kill the Freeze.</p>
-                <div class="program-meta">
-                  <span class="program-tag">Career</span>
-                  <span class="program-tag">AI</span>
-                  <span class="program-tag">Professional</span>
-                </div>
-                <a href="#/program/professionals" class="btn btn-primary btn-block">Explore</a>
-              </div>
-            </div>
-            <div class="program-card">
-              <div class="program-card-bg"></div>
-              <div class="program-card-body">
-                <span class="program-badge">University</span>
-                <h3 class="program-title">NET University</h3>
-                <p class="program-desc">Admission prep, academic writing, and scholarship essays. Get in. Stand out.</p>
-                <div class="program-meta">
-                  <span class="program-tag">Admissions</span>
-                  <span class="program-tag">Writing</span>
-                  <span class="program-tag">Essays</span>
-                </div>
-                <a href="#/program/university" class="btn btn-primary btn-block">Explore</a>
-              </div>
-            </div>
-            <div class="program-card">
-              <div class="program-card-bg"></div>
-              <div class="program-card-body">
-                <span class="program-badge">Careers</span>
-                <h3 class="program-title">NET Career</h3>
-                <p class="program-desc">Vocational pathways and job-ready English. Interview, negotiate, lead.</p>
-                <div class="program-meta">
-                  <span class="program-tag">Vocational</span>
-                  <span class="program-tag">Interview</span>
-                  <span class="program-tag">Leadership</span>
-                </div>
-                <a href="#/program/career" class="btn btn-primary btn-block">Explore</a>
-              </div>
-            </div>
+          <div class="pricing-card featured">
+            <div class="pricing-name">Mastery</div>
+            <div class="pricing-price">$29<span>/mo</span></div>
+            <p class="pricing-desc">For serious learners</p>
+            <ul class="pricing-features">
+              <li>All 5 programs</li>
+              <li>Human-reviewed assessments</li>
+              <li>AI curriculum access</li>
+              <li>24h review turnaround</li>
+            </ul>
+            <a href="#" class="btn btn-primary">Start free trial</a>
+          </div>
+          <div class="pricing-card">
+            <div class="pricing-name">Institution</div>
+            <div class="pricing-price">Custom</div>
+            <p class="pricing-desc">For schools and teams</p>
+            <ul class="pricing-features">
+              <li>Unlimited seats</li>
+              <li>Custom curriculum</li>
+              <li>Dedicated success manager</li>
+              <li>SSO & analytics</li>
+            </ul>
+            <a href="#" class="btn btn-secondary">Contact sales</a>
           </div>
         </div>
+      </div>
+    </section>
 
-        <!-- PROGRAM DETAIL VIEWS -->
-        <div class="view" id="view-program-tigers">
-          <div class="program-detail">
-            <div class="program-detail-header">
-              <a href="#/" class="back-link">← Back to dashboard</a>
-              <h1 class="program-detail-title">NET-Tigers</h1>
-              <p class="program-detail-desc">Ages 8–17 · Speaking confidence, phonics, writing, and reading fluency.</p>
-            </div>
-            <div class="program-detail-body">
-              <div class="program-stats">
-                <div class="stat-card">
-                  <span class="stat-number">42</span>
-                  <span class="stat-label">Phonics Sounds</span>
-                </div>
-                <div class="stat-card">
-                  <span class="stat-number">5</span>
-                  <span class="stat-label">Assessment Parts</span>
-                </div>
-                <div class="stat-card">
-                  <span class="stat-number">24h</span>
-                  <span class="stat-label">Human Review</span>
-                </div>
-              </div>
-              <div class="program-content">
-                <h2>Curriculum Overview</h2>
-                <p>NET Tigers uses a human-reviewed assessment pipeline. Every submission is listened to by Michael personally — no algorithmic scoring. The program covers phonics (42 Jolly Phonics sounds), reading fluency, writing range, and free speaking.</p>
-                <h2>Assessment Structure</h2>
-                <ul>
-                  <li><strong>Part 1:</strong> About You — identity and learning context</li>
-                  <li><strong>Part 2:</strong> Jolly Phonics — 42 core sounds across 7 groups</li>
-                  <li><strong>Part 3:</strong> Reading — three passages + comprehension</li>
-                  <li><strong>Part 4:</strong> Writing — 5 open-ended prompts</li>
-                  <li><strong>Part 5:</strong> Free Speaking — 30–60 seconds on any topic</li>
-                </ul>
-                <h2>Output</h2>
-                <p>After completion, families download a submission pack. NET reviews within 24 hours and books a free trial class — in-person in Lakeview City or video call worldwide.</p>
-                <a href="#" class="btn btn-primary">Start Assessment</a>
-              </div>
-            </div>
-          </div>
-        </div>
+    <section class="cta reveal">
+      <div class="container">
+        <h2 class="cta-title">Start your mastery journey today</h2>
+        <p class="cta-desc">Join thousands of learners who have transformed their English with NET.</p>
+        <a href="#" class="btn btn-large btn-primary">Get started for free →</a>
+      </div>
+    </section>
+  </main>
 
-        <div class="view" id="view-program-professionals">
-          <div class="program-detail">
-            <div class="program-detail-header">
-              <a href="#/" class="back-link">← Back to dashboard</a>
-              <h1 class="program-detail-title">NET-Professionals</h1>
-              <p class="program-detail-desc">Adults · Career English, AI mastery, and professional communication.</p>
-            </div>
-            <div class="program-detail-body">
-              <div class="program-stats">
-                <div class="stat-card">
-                  <span class="stat-number">AI+</span>
-                  <span class="stat-label">Curriculum</span>
-                </div>
-                <div class="stat-card">
-                  <span class="stat-number">1:1</span>
-                  <span class="stat-label">Coaching</span>
-                </div>
-                <div class="stat-card">
-                  <span class="stat-number">Career</span>
-                  <span class="stat-label">Focus</span>
-                </div>
-              </div>
-              <div class="program-content">
-                <h2>Program Overview</h2>
-                <p>NET Professionals is designed for adults who need English to survive and thrive in their careers. The AI-forward curriculum covers professional communication, negotiation, presentation skills, and AI tool mastery.</p>
-                <h2>Key Modules</h2>
-                <ul>
-                  <li>Professional Email & Communication</li>
-                  <li>Meeting Leadership & Negotiation</li>
-                  <li>AI-Augmented English Workflow</li>
-                  <li>Presentation & Public Speaking</li>
-                </ul>
-                <a href="#" class="btn btn-primary">Start Assessment</a>
-              </div>
-            </div>
-          </div>
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <div class="footer-brand-name">Natural English Training</div>
+          <div class="footer-brand-desc">English Mastery for the Next Generation of Leaders.</div>
         </div>
-
-        <div class="view" id="view-program-cubs">
-          <div class="program-detail">
-            <div class="program-detail-header">
-              <a href="#/" class="back-link">← Back to dashboard</a>
-              <h1 class="program-detail-title">NET-Cubs</h1>
-              <p class="program-detail-desc">Ages 3–7 · Foundational phonics and play-based learning.</p>
-            </div>
-            <div class="program-detail-body">
-              <div class="program-stats">
-                <div class="stat-card">
-                  <span class="stat-number">Play</span>
-                  <span class="stat-label">Based</span>
-                </div>
-                <div class="stat-card">
-                  <span class="stat-number">Phonics</span>
-                  <span class="stat-label">First</span>
-                </div>
-                <div class="stat-card">
-                  <span class="stat-number">Fun</span>
-                  <span class="stat-label">Always</span>
-                </div>
-              </div>
-              <div class="program-content">
-                <h2>Program Overview</h2>
-                <p>NET Cubs introduces English through play. Young learners build phonemic awareness, vocabulary, and speaking confidence through songs, stories, and interactive activities.</p>
-                <a href="#" class="btn btn-primary">Start Assessment</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="view" id="view-program-career">
-          <div class="program-detail">
-            <div class="program-detail-header">
-              <a href="#/" class="back-link">← Back to dashboard</a>
-              <h1 class="program-detail-title">NET-Career</h1>
-              <p class="program-detail-desc">University pathways, admission prep, and career-focused English.</p>
-            </div>
-            <div class="program-detail-body">
-              <div class="program-stats">
-                <div class="stat-card">
-                  <span class="stat-number">Uni</span>
-                  <span class="stat-label">Ready</span>
-                </div>
-                <div class="stat-card">
-                  <span class="stat-number">Essays</span>
-                  <span class="stat-label">Polish</span>
-                </div>
-                <div class="stat-card">
-                  <span class="stat-number">Job</span>
-                  <span class="stat-label">Ready</span>
-                </div>
-              </div>
-              <div class="program-content">
-                <h2>Program Overview</h2>
-                <p>NET Career prepares learners for university admission and professional life. From personal statements to interview skills, we cover every step of the journey.</p>
-                <a href="#" class="btn btn-primary">Start Assessment</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="view" id="view-program-university">
-          <div class="program-detail">
-            <div class="program-detail-header">
-              <a href="#/" class="back-link">← Back to dashboard</a>
-              <h1 class="program-detail-title">NET-University</h1>
-              <p class="program-detail-desc">University pathways, admission prep, and academic writing.</p>
-            </div>
-            <div class="program-detail-body">
-              <div class="program-stats">
-                <div class="stat-card">
-                  <span class="stat-number">Admissions</span>
-                  <span class="stat-label">Expert</span>
-                </div>
-                <div class="stat-card">
-                  <span class="stat-number">Academic</span>
-                  <span class="stat-label">Writing</span>
-                </div>
-                <div class="stat-card">
-                  <span class="stat-number">Scholarship</span>
-                  <span class="stat-label">Essays</span>
-                </div>
-              </div>
-              <div class="program-content">
-                <h2>Program Overview</h2>
-                <p>NET University helps students craft compelling personal statements, ace admissions interviews, and build the academic writing skills needed for top-tier universities.</p>
-                <a href="#" class="btn btn-primary">Start Assessment</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ISSUES VIEW -->
-        <div class="view" id="view-issues">
-          <div class="page-header">
-            <h1 class="page-title">Issues</h1>
-            <div class="page-header-actions">
-              <button class="btn btn-primary">New issue</button>
-            </div>
-          </div>
-          <div class="issues-list">
-            <div class="issue-item">
-              <span class="issue-status-badge open">Open</span>
-              <div class="issue-content">
-                <a href="#" class="issue-title">Add speaking assessment for NET-Tigers v2</a>
-                <span class="issue-meta">#42 · opened 2 hours ago by mhobbs</span>
-              </div>
-              <div class="issue-meta-right">
-                <span class="comment-count">3 comments</span>
-              </div>
-            </div>
-            <div class="issue-item">
-              <span class="issue-status-badge open">Open</span>
-              <div class="issue-content">
-                <a href="#" class="issue-title">Phonics group 7 recording artifacts</a>
-                <span class="issue-meta">#41 · opened 5 hours ago by mhobbs</span>
-              </div>
-              <div class="issue-meta-right">
-                <span class="comment-count">1 comment</span>
-              </div>
-            </div>
-            <div class="issue-item">
-              <span class="issue-status-badge closed">Closed</span>
-              <div class="issue-content">
-                <a href="#" class="issue-title">Fix submission pack JSON encoding</a>
-                <span class="issue-meta">#40 · opened 1 day ago by mhobbs</span>
-              </div>
-              <div class="issue-meta-right">
-                <span class="comment-count">5 comments</span>
-              </div>
-            </div>
-            <div class="issue-item">
-              <span class="issue-status-badge open">Open</span>
-              <div class="issue-content">
-                <a href="#" class="issue-title">Mobile layout for assessment page</a>
-                <span class="issue-meta">#39 · opened 2 days ago by mhobbs</span>
-              </div>
-              <div class="issue-meta-right">
-                <span class="comment-count">2 comments</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- MARKETPLACE VIEW -->
-        <div class="view" id="view-marketplace">
-          <div class="page-header">
-            <h1 class="page-title">Marketplace</h1>
-            <p class="page-subtitle">Tools, integrations, and extensions for the NET ecosystem</p>
-          </div>
-          <div class="marketplace-grid">
-            <div class="marketplace-card">
-              <div class="marketplace-card-header">
-                <span class="marketplace-badge">Verified</span>
-                <h3 class="marketplace-card-title">OBI Agent Widget</h3>
-              </div>
-              <p class="marketplace-card-desc">Embeddable AI assistant for assessment guidance. Supports VI + EN.</p>
-              <span class="marketplace-price">Free</span>
-            </div>
-            <div class="marketplace-card">
-              <div class="marketplace-card-header">
-                <span class="marketplace-badge">New</span>
-                <h3 class="marketplace-card-title">Submission Pack Generator</h3>
-              </div>
-              <p class="marketplace-card-desc">Client-side JSON export for assessment data. Zero server dependency.</p>
-              <span class="marketplace-price">Free</span>
-            </div>
-            <div class="marketplace-card">
-              <div class="marketplace-card-header">
-                <h3 class="marketplace-card-title">Audio Recorder Pro</h3>
-              </div>
-              <p class="marketplace-card-desc">High-fidelity browser audio capture for speaking assessments.</p>
-              <span class="marketplace-price">Free</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- EXPLORE VIEW -->
-        <div class="view" id="view-explore">
-          <div class="page-header">
-            <h1 class="page-title">Explore</h1>
-            <p class="page-subtitle">Discover learning paths and trending programs</p>
-          </div>
-          <div class="explore-grid">
-            <div class="explore-card">
-              <h3>Trending Programs</h3>
-              <ul class="explore-list">
-                <li><a href="#/program/tigers">NET-Tigers — Speaking Assessment v2 🔥</a></li>
-                <li><a href="#/program/professionals">NET-Professionals — AI Curriculum Update</a></li>
-                <li><a href="#/program/cubs">NET-Cubs — Phonics Sound Set 42</a></li>
-              </ul>
-            </div>
-            <div class="explore-card">
-              <h3>Learning Paths</h3>
-              <ul class="explore-list">
-                <li><a href="#">From Phonics to Fluency</a></li>
-                <li><a href="#">Professional English Track</a></li>
-                <li><a href="#">University Admission Path</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- PROFILE VIEW -->
-        <div class="view" id="view-profile">
-          <div class="profile-header">
-            <div class="profile-avatar">
-              <img src="assets/NET-PHXRISING-LOGO.webp" alt="NET" width="160" height="160">
-            </div>
-            <div class="profile-info">
-              <h1 class="profile-name">Natural English Training</h1>
-              <p class="profile-bio">English Mastery for the Next Generation of Leaders.</p>
-              <div class="profile-meta">
-                <span>🏢 Lakeview City, District 2</span>
-                <span>🔗 naturalenglishtraining.com</span>
-              </div>
-              <div class="profile-actions">
-                <button class="btn btn-primary">Follow</button>
-                <button class="btn btn-secondary">Sponsor</button>
-              </div>
-            </div>
-          </div>
-          <div class="profile-tabs">
-            <a href="#" class="profile-tab active">Overview</a>
-            <a href="#" class="profile-tab">Repositories</a>
-            <a href="#" class="profile-tab">Projects</a>
-            <a href="#" class="profile-tab">Packages</a>
-          </div>
-          <div class="profile-body">
-            <div class="pinned-repos">
-              <h2 class="section-heading">Pinned</h2>
-              <div class="pinned-grid">
-                <div class="pinned-card">
-                  <h3 class="pinned-title"><a href="#/program/tigers">NET-Tigers</a></h3>
-                  <p class="pinned-desc">Ages 8–17 speaking confidence and phonics assessment.</p>
-                  <div class="pinned-meta">
-                    <span class="language-dot" style="background:#a855f7;"></span>
-                    <span>TypeScript</span>
-                  </div>
-                </div>
-                <div class="pinned-card">
-                  <h3 class="pinned-title"><a href="#/program/professionals">NET-Professionals</a></h3>
-                  <p class="pinned-desc">Career English and AI mastery for professionals.</p>
-                  <div class="pinned-meta">
-                    <span class="language-dot" style="background:#f59e0b;"></span>
-                    <span>Python</span>
-                  </div>
-                </div>
-                <div class="pinned-card">
-                  <h3 class="pinned-title"><a href="#">NET-PET-AI</a></h3>
-                  <p class="pinned-desc">AI-powered assessment engine and agent infrastructure.</p>
-                  <div class="pinned-meta">
-                    <span class="language-dot" style="background:#ef4444;"></span>
-                    <span>Rust</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="contribution-section">
-              <h2 class="section-heading">Contribution Activity</h2>
-              <div class="contribution-graph" id="contributionGraph"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- STUDENTS VIEW -->
-        <div class="view" id="view-students">
-          <div class="page-header">
-            <h1 class="page-title">Students</h1>
-            <p class="page-subtitle">Active learners across all NET programs</p>
-            <div class="page-header-actions">
-              <button class="btn btn-primary">Invite student</button>
-            </div>
-          </div>
-          <div class="students-table">
-            <div class="students-table-header">
-              <span>Student</span>
-              <span>Program</span>
-              <span>Status</span>
-              <span>Progress</span>
-              <span>Last active</span>
-            </div>
-            <div class="students-table-row">
-              <span class="student-name">Nguyen Van A</span>
-              <span>NET Tigers</span>
-              <span><span class="status-badge active">Active</span></span>
-              <span><div class="progress-bar"><div class="progress-fill" style="width:75%"></div></div></span>
-              <span>2 hours ago</span>
-            </div>
-            <div class="students-table-row">
-              <span class="student-name">Tran Thi B</span>
-              <span>NET Professionals</span>
-              <span><span class="status-badge active">Active</span></span>
-              <span><div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div></span>
-              <span>5 hours ago</span>
-            </div>
-            <div class="students-table-row">
-              <span class="student-name">Le Van C</span>
-              <span>NET Cubs</span>
-              <span><span class="status-badge pending">Pending</span></span>
-              <span><div class="progress-bar"><div class="progress-fill" style="width:12%"></div></div></span>
-              <span>1 day ago</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- DEFAULT VIEWS -->
-        <div class="view" id="view-default">
-          <div class="placeholder-view">
-            <div class="placeholder-icon">
-              <svg viewBox="0 0 16 16" width="64" height="64" fill="currentColor" opacity="0.5">
-                <path d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.257 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.73-.002-2.254A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.75 3.75 0 0 1 1.992-.574H15.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"/>
-              </svg>
-            </div>
-            <h1 class="placeholder-title">Coming soon</h1>
-            <p class="placeholder-desc">This view is under development. Check back soon.</p>
-            <a href="#/" class="btn btn-primary">Back to Home</a>
-          </div>
-        </div>
-      </main>
-
-      <aside class="sidebar-right">
-        <div class="right-card">
-          <div class="right-card-header">
-            <h3 class="right-card-title">About</h3>
-          </div>
-          <div class="right-card-body">
-            <p>English Mastery for the Next Generation of Leaders.</p>
-            <p class="right-card-meta"><strong>Location:</strong> Lakeview City, Vietnam</p>
-            <p class="right-card-meta"><strong>Website:</strong> <a href="#">naturalenglishtraining.com</a></p>
-            <p class="right-card-meta"><strong>Joined:</strong> 2024</p>
-          </div>
-        </div>
-        <div class="right-card">
-          <div class="right-card-header">
-            <h3 class="right-card-title">Achievements</h3>
-          </div>
-          <div class="right-card-body achievements-grid">
-            <div class="achievement" title="Quickdraw">🎯</div>
-            <div class="achievement" title="Arctic Code Vault">❄️</div>
-            <div class="achievement" title="Pull Shark">🦈</div>
-            <div class="achievement" title="YOLO">🚀</div>
-            <div class="achievement" title="Galaxy Brain">🧠</div>
-            <div class="achievement" title="Pair Extraordinaire">👥</div>
-          </div>
-        </div>
-        <div class="right-card">
-          <div class="right-card-header">
-            <h3 class="right-card-title">Top Languages</h3>
-          </div>
-          <div class="right-card-body">
-            <div class="language-bar">
-              <div class="language-bar-item">
-                <span class="language-bar-name">TypeScript</span>
-                <span class="language-bar-pct">42%</span>
-              </div>
-              <div class="language-bar-track">
-                <div class="language-bar-fill" style="width:42%; background:#a855f7;"></div>
-              </div>
-            </div>
-            <div class="language-bar">
-              <div class="language-bar-item">
-                <span class="language-bar-name">Python</span>
-                <span class="language-bar-pct">28%</span>
-              </div>
-              <div class="language-bar-track">
-                <div class="language-bar-fill" style="width:28%; background:#f59e0b;"></div>
-              </div>
-            </div>
-            <div class="language-bar">
-              <div class="language-bar-item">
-                <span class="language-bar-name">CSS</span>
-                <span class="language-bar-pct">18%</span>
-              </div>
-              <div class="language-bar-track">
-                <div class="language-bar-fill" style="width:18%; background:#22c55e;"></div>
-              </div>
-            </div>
-            <div class="language-bar">
-              <div class="language-bar-item">
-                <span class="language-bar-name">JavaScript</span>
-                <span class="language-bar-pct">12%</span>
-              </div>
-              <div class="language-bar-track">
-                <div class="language-bar-fill" style="width:12%; background:#3b82f6;"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="right-card">
-          <div class="right-card-header">
-            <h3 class="right-card-title">Activity</h3>
-            <a href="#" class="right-card-link">Contribution settings</a>
-          </div>
-          <div class="right-card-body">
-            <div class="activity-graph" id="activityGraph"></div>
-          </div>
-        </div>
-      </aside>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Product</div>
+        <a href="#">Learning Paths</a>
+        <a href="#">Assessments</a>
+        <a href="#">AI Curriculum</a>
+        <a href="#">Programs</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <a href="#">About</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+        <a href="#">Partners</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Support</div>
+        <a href="#">Documentation</a>
+        <a href="#">Blog</a>
+        <a href="#">Community</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Legal</div>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Security</a>
+        <a href="#">Sitemap</a>
+      </div>
     </div>
-  </div>
+    <div class="footer-bottom">
+      <span>© 2026 Natural English Training, Inc.</span>
+      <div class="footer-bottom-links">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Security</a>
+        <a href="#">Status</a>
+        <a href="#">Docs</a>
+        <a href="#">Contact</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </footer>
 
-  <script src="app.js?v=2" defer></script>
+  <script>
+    (function() {
+      'use strict';
+      var toggles = document.querySelectorAll('.nav-dropdown-toggle');
+      toggles.forEach(function(toggle) {
+        toggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          var menu = toggle.nextElementSibling;
+          if (!menu) return;
+          var isOpen = menu.classList.contains('open');
+          document.querySelectorAll('.nav-dropdown-menu.open').forEach(function(m) {
+            m.classList.remove('open');
+            m.previousElementSibling.setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            menu.classList.add('open');
+            toggle.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.nav-dropdown')) {
+          document.querySelectorAll('.nav-dropdown-menu.open').forEach(function(m) {
+            m.classList.remove('open');
+            var toggle = m.previousElementSibling;
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+          });
+        }
+      });
+
+      var mobileToggle = document.getElementById('mobileToggle');
+      var mobileNav = document.createElement('div');
+      mobileNav.className = 'mobile-nav';
+      mobileNav.innerHTML = '<a href="#" class="mobile-nav-item">Platform</a><a href="#" class="mobile-nav-item">Solutions</a><a href="#" class="mobile-nav-item">Resources</a><a href="#" class="mobile-nav-item">Open Source</a><a href="#" class="mobile-nav-item">Enterprise</a><a href="#" class="mobile-nav-item">Pricing</a><a href="#" class="mobile-nav-item">Sign in</a>';
+      document.body.appendChild(mobileNav);
+
+      if (mobileToggle) {
+        mobileToggle.addEventListener('click', function() {
+          var isOpen = mobileNav.classList.contains('open');
+          mobileNav.classList.toggle('open');
+          mobileToggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        });
+      }
+
+      var searchOverlay = document.createElement('div');
+      searchOverlay.className = 'search-modal-overlay';
+      searchOverlay.setAttribute('role', 'dialog');
+      searchOverlay.setAttribute('aria-label', 'Search');
+      searchOverlay.innerHTML = '<div class="search-modal"><div class="search-modal-header"><svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg><input type="text" class="search-modal-input" placeholder="Search or jump to..." autofocus><button class="search-modal-close">ESC</button></div><div class="search-modal-body"><div class="search-modal-section"><div class="search-modal-section-title">Popular</div><a href="#" class="search-modal-item">Learning Paths</a><a href="#" class="search-modal-item">Assessments</a><a href="#" class="search-modal-item">AI Curriculum</a><a href="#" class="search-modal-item">Programs</a><a href="#" class="search-modal-item">Enterprise</a></div><div class="search-modal-section"><div class="search-modal-section-title">Pages</div><a href="#" class="search-modal-item">About</a><a href="#" class="search-modal-item">Blog</a><a href="#" class="search-modal-item">Community</a><a href="#" class="search-modal-item">Contact</a></div></div></div>';
+      document.body.appendChild(searchOverlay);
+
+      var searchInput = searchOverlay.querySelector('.search-modal-input');
+      var searchClose = searchOverlay.querySelector('.search-modal-close');
+      var headerSearch = document.getElementById('headerSearchInput');
+
+      function openSearch() {
+        searchOverlay.classList.add('open');
+        if (searchInput) searchInput.focus();
+      }
+
+      function closeSearch() {
+        searchOverlay.classList.remove('open');
+      }
+
+      if (headerSearch) {
+        headerSearch.addEventListener('focus', openSearch);
+      }
+
+      if (searchClose) {
+        searchClose.addEventListener('click', closeSearch);
+      }
+
+      searchOverlay.addEventListener('click', function(e) {
+        if (e.target === searchOverlay) closeSearch();
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          openSearch();
+        }
+        if (e.key === 'Escape') {
+          closeSearch();
+          mobileNav.classList.remove('open');
+          if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      var reveals = document.querySelectorAll('.reveal');
+      function checkReveal() {
+        var windowHeight = window.innerHeight;
+        reveals.forEach(function(el) {
+          var rect = el.getBoundingClientRect();
+          if (rect.top < windowHeight - 80) {
+            el.classList.add('visible');
+          }
+        });
+      }
+      checkReveal();
+      window.addEventListener('scroll', checkReveal, { passive: true });
+      window.addEventListener('resize', checkReveal, { passive: true });
+    })();
+  </script>
 </body>
 </html>

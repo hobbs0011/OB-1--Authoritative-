@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta theme-color content="#0f0f1a">
+  <meta name="description" content="Student dashboard - track tasks, log progress, and view achievements">
   <title>Student Portal | Natural English Training</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,40 +13,44 @@
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
+  <div class="offline-banner" id="offlineBanner" role="alert" aria-live="polite">You are currently offline. Some features may be limited.</div>
+  <div class="toast-container" id="toastContainer" aria-live="assertive" aria-atomic="true"></div>
+
   <div class="portal">
-    <div class="topbar">
+    <header class="topbar" role="banner">
       <div class="topbar-brand">
-        <div class="topbar-logo" id="brandLogo">P</div>
+        <div class="topbar-logo" id="brandLogo" aria-hidden="true">P</div>
         <div class="topbar-title">
           <h1 id="brandTitle">Student Portal</h1>
           <span id="brandSub">Natural English Training</span>
         </div>
       </div>
-      <button class="btn-logout" onclick="logout()">Sign Out</button>
-    </div>
+      <button class="btn-logout" onclick="logout()" aria-label="Sign out of your account">Sign Out</button>
+    </header>
 
-    <div class="welcome-banner">
+    <section class="welcome-banner" aria-labelledby="welcomeTitle">
       <h2 id="welcomeTitle">Welcome back</h2>
       <p id="welcomeBody">Track your schedule, materials, and progress — all in one place.</p>
-    </div>
+    </section>
 
-    <div class="grid">
-      <div class="card" id="tasksCard">
+    <main class="grid" role="main" id="studentViews">
+      <article class="card" id="tasksCard" aria-labelledby="tasksHeading">
         <div class="card-header">
-          <div class="card-icon purple">📌</div>
-          <h3>Tasks</h3>
+          <div class="card-icon purple" aria-hidden="true">📌</div>
+          <h3 id="tasksHeading">Tasks</h3>
         </div>
         <div id="taskList">
           <div class="empty-state">Loading tasks...</div>
         </div>
-      </div>
+      </article>
 
-      <div class="card" id="logCard">
+      <article class="card" id="logCard" aria-labelledby="logHeading">
         <div class="card-header">
-          <div class="card-icon gold">📋</div>
-          <h3>Daily Log</h3>
+          <div class="card-icon gold" aria-hidden="true">📋</div>
+          <h3 id="logHeading">Daily Log</h3>
         </div>
         <div class="wl-row">
+          <label for="wlActivity" class="sr-only">Activity type</label>
           <select id="wlActivity">
             <option value="Listening">🎧 Listening</option>
             <option value="Speaking">🗣️ Speaking</option>
@@ -56,26 +61,29 @@
             <option value="Study Mode">📚 Study Mode</option>
             <option value="Other">📌 Other</option>
           </select>
-          <input id="wlDuration" type="number" min="1" max="480" placeholder="Min">
+          <label for="wlDuration" class="sr-only">Duration in minutes</label>
+          <input id="wlDuration" type="number" min="1" max="480" placeholder="Min" aria-describedby="durationHelp">
+          <span id="durationHelp" class="sr-only">Enter minutes spent (1-480)</span>
           <button class="wl-btn" id="wlSaveBtn">Log</button>
         </div>
+        <label for="wlNotes" class="sr-only">Notes</label>
         <textarea id="wlNotes" class="wl-textarea" rows="2" placeholder="What did you work on?"></textarea>
-        <p class="wl-status" id="wlStatus"></p>
-        <div class="wl-list" id="wlList"></div>
-      </div>
-    </div>
+        <p class="wl-status" id="wlStatus" role="status" aria-live="polite"></p>
+        <div class="wl-list" id="wlList" role="list" aria-label="Work log entries"></div>
+      </article>
+    </main>
 
-    <div class="card" id="progressCard">
+    <article class="card" id="progressCard" aria-labelledby="progressHeading">
       <div class="card-header">
-        <div class="card-icon purple">📈</div>
-        <h3>Progress</h3>
+        <div class="card-icon purple" aria-hidden="true">📈</div>
+        <h3 id="progressHeading">Progress</h3>
       </div>
       <div style="margin-bottom: 18px;">
         <div style="display:flex; justify-content:space-between; font-size:0.9rem; font-weight:700;">
           <span>Completion</span>
           <span style="color:var(--gold);" id="completionPct">—</span>
         </div>
-        <div class="progress-bar-wrap">
+        <div class="progress-bar-wrap" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Task completion percentage">
           <div class="progress-bar-fill" id="completionBar" style="width:0%;"></div>
         </div>
         <div class="progress-label">
@@ -88,7 +96,7 @@
           <span>Time Logged</span>
           <span style="color:var(--gold);" id="minutesLogged">0 min</span>
         </div>
-        <div class="progress-bar-wrap">
+        <div class="progress-bar-wrap" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Time logged percentage">
           <div class="progress-bar-fill" id="minutesBar" style="width:0%;"></div>
         </div>
         <div class="progress-label">
@@ -96,7 +104,113 @@
           <span id="minutesPct">0%</span>
         </div>
       </div>
-    </div>
+    </article>
+
+    <main class="grid" role="main" id="parentViews" style="display:none;">
+      <article class="card" aria-labelledby="parentChildrenHeading">
+        <div class="card-header">
+          <div class="card-icon gold" aria-hidden="true">👨‍👩‍👧</div>
+          <h3 id="parentChildrenHeading">My Children</h3>
+        </div>
+        <div id="parentChildList" class="student-selector" role="list" aria-label="Children list"></div>
+        <div id="parentChildDetail" class="empty-state">Select a child to view their progress.</div>
+      </article>
+
+      <article class="card" aria-labelledby="parentProgressHeading">
+        <div class="card-header">
+          <div class="card-icon purple" aria-hidden="true">📈</div>
+          <h3 id="parentProgressHeading">Progress</h3>
+        </div>
+        <div style="margin-bottom: 18px;">
+          <div style="display:flex; justify-content:space-between; font-size:0.9rem; font-weight:700;">
+            <span>Completion</span>
+            <span style="color:var(--gold);" id="parentCompletionPct">—</span>
+          </div>
+          <div class="progress-bar-wrap" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Task completion percentage">
+            <div class="progress-bar-fill" id="parentCompletionBar" style="width:0%;"></div>
+          </div>
+          <div class="progress-label">
+            <span id="parentCompletedCount">0 done</span>
+            <span id="parentTotalCount">0 tasks</span>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex; justify-content:space-between; font-size:0.9rem; font-weight:700;">
+            <span>Time Logged</span>
+            <span style="color:var(--gold);" id="parentMinutesLogged">0 min</span>
+          </div>
+          <div class="progress-bar-wrap" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Time logged percentage">
+            <div class="progress-bar-fill" id="parentMinutesBar" style="width:0%;"></div>
+          </div>
+          <div class="progress-label">
+            <span id="parentMinutesTarget">0 min target</span>
+            <span id="parentMinutesPct">0%</span>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <main class="grid" role="main" id="teacherViews" style="display:none;">
+      <article class="card" aria-labelledby="teacherAssignHeading">
+        <div class="card-header">
+          <div class="card-icon purple" aria-hidden="true">➕</div>
+          <h3 id="teacherAssignHeading">Assign Task</h3>
+        </div>
+        <div class="wl-row">
+          <label for="teacherStudent" class="sr-only">Student</label>
+          <select id="teacherStudent" class="form-select" style="flex:1;min-width:140px;"></select>
+          <label for="teacherCategory" class="sr-only">Category</label>
+          <select id="teacherCategory" class="form-select" style="flex:1;min-width:140px;">
+            <option value="Pronunciation">Pronunciation</option>
+            <option value="LinkedIn">LinkedIn</option>
+            <option value="CV">CV / Resume</option>
+            <option value="3D Modeling">3D Modeling</option>
+            <option value="Presentation">Presentation</option>
+            <option value="Phonics">Phonics</option>
+            <option value="General">General</option>
+          </select>
+        </div>
+        <input id="teacherTitle" class="form-input" placeholder="Task title" style="width:100%;margin-bottom:10px;">
+        <textarea id="teacherDesc" class="wl-textarea" rows="2" placeholder="Short description" style="width:100%;margin-bottom:10px;"></textarea>
+        <div class="wl-row">
+          <input id="teacherDaily" type="number" class="form-input" placeholder="Daily min" value="20" style="width:90px;">
+          <input id="teacherTotal" type="number" class="form-input" placeholder="Total min" value="140" style="width:90px;">
+          <input id="teacherDue" type="date" class="form-input" style="flex:1;min-width:140px;">
+          <button class="wl-btn" id="teacherAssignBtn">Assign</button>
+        </div>
+        <p class="wl-status" id="teacherAssignStatus" role="status" aria-live="polite"></p>
+      </article>
+
+      <article class="card" aria-labelledby="teacherRosterHeading">
+        <div class="card-header">
+          <div class="card-icon gold" aria-hidden="true">📋</div>
+          <h3 id="teacherRosterHeading">Roster &amp; Progress</h3>
+        </div>
+        <div id="teacherRoster" class="wl-list" role="list" aria-label="Student roster">
+          <div class="empty-state">Loading roster...</div>
+        </div>
+      </article>
+    </main>
+
+    <main class="grid" role="main" id="adminViews" style="display:none;">
+      <article class="card" aria-labelledby="adminOverviewHeading">
+        <div class="card-header">
+          <div class="card-icon purple" aria-hidden="true">🛡️</div>
+          <h3 id="adminOverviewHeading">Admin Overview</h3>
+        </div>
+        <div id="adminStats" class="empty-state">Loading admin stats...</div>
+      </article>
+
+      <article class="card" aria-labelledby="adminUsersHeading">
+        <div class="card-header">
+          <div class="card-icon gold" aria-hidden="true">👥</div>
+          <h3 id="adminUsersHeading">Users &amp; Roles</h3>
+        </div>
+        <div id="adminUserList" class="wl-list" role="list" aria-label="User list">
+          <div class="empty-state">Loading users...</div>
+        </div>
+      </article>
+    </main>
   </div>
 
   <script src="assets/js/app.js"></script>
