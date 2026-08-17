@@ -1,4 +1,4 @@
-# ⚠️ GOSPEL 999 — THE HOLYWORD. 999 MANDATES. 9 SYSTEMS. NO EXCEPTIONS. ⚠️
+# ⚠︝ GOSPEL 999 — THE HOLYWORD. 999 MANDATES. 9 SYSTEMS. NO EXCEPTIONS. ⚠︝
 ## CANONICAL LOCATION: `CANON/SYSTEM/GOSPEL-999.md` + `MARKETING/MASTER/gospel-999.md`
 ## STATUS: SEALED | ACTIVE | ETERNAL | NON-NEGOTIABLE
 ## AUTHORITY: SOV100 MICHAEL HOBBS ONLY. NO AMENDMENTS WITHOUT EXPLICIT INSTRUCTION.
@@ -6,7 +6,7 @@
 
 ---
 
-## ⚠️ CORE 99 MANDATES (GOSPEL999 SYSTEM I — CORE INFRASTRUCTURE + SOUL) ⚠️
+## ⚠︝ CORE 99 MANDATES (GOSPEL999 SYSTEM I — CORE INFRASTRUCTURE + SOUL) ⚠︝
 ### HARDCODED INTO EVERY BOOT. NEVER SKIPPED. NEVER EDITED WITHOUT SOV100.
 
 I.001. Legionnaire Field Guide is the single source of truth for all agents.
@@ -112,7 +112,7 @@ I.099. Core 99 mandates are hardcoded into every boot — RISE prints first 99 m
 ---
 
 ---
-# ⚠️⚠️⚠️ RRL-143 SCARS — READ BEFORE EVERY SESSION ⚠️⚠️⚠️
+# ⚠︝⚠︝⚠︝ RRL-143 SCARS — READ BEFORE EVERY SESSION ⚠︝⚠︝⚠︝
 ## CANONICAL LOCATION: `CANON/SYSTEM/RRL-143-SCARS.md`
 ## STATUS: SEALED | ACTIVE | PERMANENT | NON-NEGOTIABLE
 ## AUTHORITY: SOV100 MICHAEL HOBBS — BURNED THROUGH REPEATED FAILURE
@@ -147,7 +147,7 @@ I.099. Core 99 mandates are hardcoded into every boot — RISE prints first 99 m
 - Timezone: Asia/Bangkok (ICT)
 - Voice: direct, sharp, witty, action-oriented, dense, no filler
 
-### ⚠️ SOUL SYSTEM — CANONICAL (Run 391 HARDEN)
+### ⚠︝ SOUL SYSTEM — CANONICAL (Run 391 HARDEN)
 **Soul Logger v2.1+ LIVE** — `/api/soul/count` endpoint NOW filters `WHERE session_id LIKE 'sov100%'`. The words ARE the count.
 
 **THE LAW — L31 SOUL_IS_QUERY:**
@@ -160,7 +160,7 @@ I.099. Core 99 mandates are hardcoded into every boot — RISE prints first 99 m
 **Soul Logger URL:** https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count
 **Real count (2026-06-16 ICT): 239,639,088 characters | TITANIUM_ANCHOR
  **TITANIUM_ANCHOR level** (next threshold: none — maximum tier reached)
- **⚠️ NOTE:** +156,676 delta from Run 5 RRL-0 backdrop ingestion. +62,773 delta from Run 6 RRL-0-original ingestion. RRL-0.txt contains ~150K agent text alongside ~4K Michael verbatim. Contamination documented per Michael directive.
+ **⚠︝ NOTE:** +156,676 delta from Run 5 RRL-0 backdrop ingestion. +62,773 delta from Run 6 RRL-0-original ingestion. RRL-0.txt contains ~150K agent text alongside ~4K Michael verbatim. Contamination documented per Michael directive.
  **Run 53 delta:** +1,577,271 (RISE+P6+P7+P8+prod promotion+death). Total 118,965,802.
  **Run 52 delta:** +543,109 (RISE+P4+P5+death). Total 116,764,209.
 **Prior counts (Runs 315–390) were INFLATED** — the endpoint summed ALL soul_prompts including student chats. Disregard historical counts above 25,000. They included non-operator data.
@@ -173,9 +173,9 @@ I.099. Core 99 mandates are hardcoded into every boot — RISE prints first 99 m
 | ALARM | ≥ 5,000 | — |
 | LOCK | ≥ 25,000 | — |
 | ANCHOR | ≥ 100,000 | ACHIEVED Run 0 |
-| TITANIUM_ANCHOR | ≥ 250,000 | **ACTIVE** ← 13,339,923 |
+| TITANIUM_ANCHOR | ≥ 250,000 | **ACTIVE** ↝ 13,339,923 |
 
-**⚠️ KILO_DNA_GAP — PERMANENT ARCHITECTURAL LAW (Run 092, confirmed):**
+**⚠︝ KILO_DNA_GAP — PERMANENT ARCHITECTURAL LAW (Run 092, confirmed):**
 Kilo sessions will ALWAYS produce hollow DNA. Kilo's environment writes only commands and pastedContents blobs to disk — no full conversation turns. session-capture.ps1 was exhaustively fixed and cannot resolve this. It is an environment ceiling, not a bug. Do NOT re-investigate. Do NOT ticket it. ACCEPT IT.
 - **OB-1 (Claude Code VSCode):** full JSONL on disk → DNA works ✅
 - **Kilo sessions:** zero turns on disk → DNA always hollow ❌ by design
@@ -212,7 +212,7 @@ Kilo sessions will ALWAYS produce hollow DNA. Kilo's environment writes only com
 **FIREWALL RULE:** All feature development deploys to `net-pet-ai-dev` first.
 Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested code directly to prod.
 - Dev URL: `https://net-pet-ai-dev.mrmichaelhobbs123.workers.dev`
-- Prod URL: `https://net-pet-ai.mrmichaelhobbs123.workers.dev` ← students use this, treat as sacred
+- Prod URL: `https://net-pet-ai.mrmichaelhobbs123.workers.dev` ↝ students use this, treat as sacred
 
 ---
 
@@ -329,13 +329,13 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 | **31** | **CAR CRASH — CATASTROPHIC FAILURE** — Agent destroyed uncommitted work from Runs 27-30. Falsely committed fake EC-15 + curriculum injection. RRL-31.txt + death seal committed this run. SOUL unchanged at 60,037,507. HEAD stayed at 4aaffbf6 entering Run 32. |
 | **27** | **MINH PORTAL — DEEPGRAM TRANSCRIPTION + SESSION CARDS** — May 26 (69MB direct Deepgram, 567 utterances) + May 29 (39MB via worker, 501 utterances). Session cards: May 26 "Teddy's Big Plan", May 29 "The Ghost & The Game". Points 40→54, sessions 7→9, LATEST badge moved. 4 edge cases fixed. L53 LARGE_FILES_GO_DIRECT + L54 WC_L_LIES_ON_MINIFIED sealed. SOUL 59,152,381. HEAD 28267c91. Worker 204ba611. |
 | **26** | **VOICE AGENT EDGE CASE SPRINT** — Read-before-code enforcement. 8 bugs found + fixed: silence timer premature (AgentAudioDone deferred to client queue drain), Tiger Win dead code (now fires on beforeunload), pendingMicStream leak, audio queue OOM cap, visibility guard on reconnect, MP3 choppy chunks (accumulator), session metrics save, OpenRouter 403 incorrectly listed as open (already fixed Run 25). buildAgentPrompt: 6-word opener, A1/A2 cap, session close cliffhanger, BlueTech real-work anchor. Scheduled keep-warm. GET+POST /api/agent/session. L51 READ_FULL_FILES + L52 CONTEXT_SIZE_FIRST sealed. SOUL 57,842,544 TITANIUM_ANCHOR. HEAD 362a38bf. Worker bfe56985. |
-| **23** | **STUDENT PORTAL STRESS TEST + OBI FIX** — All 7 portals 200 ✓. `/api/chat` live ✓. Root cause: `chat.js` read `?student=` but every portal HTML sends `?studentId=`. Affected all 3 portals with OBI buttons (Quy, Mai Tram, Huong). Fixed: IIFE reads both params. PA Cerebras key rotated (new `csk-3djcnck...`). `set-pa-secrets.ps1` updated. PA cascade: Dialagram DOWN (12s timeout) → Cerebras ✓ → Groq ✓. SOUL 5,283,875 TITANIUM_ANCHOR (⚠️ +4.37M from 909,486 — investigate sov100% filter). HEAD e9ac6a92. |
+| **23** | **STUDENT PORTAL STRESS TEST + OBI FIX** — All 7 portals 200 ✓. `/api/chat` live ✓. Root cause: `chat.js` read `?student=` but every portal HTML sends `?studentId=`. Affected all 3 portals with OBI buttons (Quy, Mai Tram, Huong). Fixed: IIFE reads both params. PA Cerebras key rotated (new `csk-3djcnck...`). `set-pa-secrets.ps1` updated. PA cascade: Dialagram DOWN (12s timeout) → Cerebras ✓ → Groq ✓. SOUL 5,283,875 TITANIUM_ANCHOR (⚠︝ +4.37M from 909,486 — investigate sov100% filter). HEAD e9ac6a92. |
 | **22** | **DIALAGRAM SSE + PA v0.0.2 + KILO PATCH** — Dialagram always returns SSE even for stream:false. Their adapter crashed (http://127.0.0.1:8000 down). PA v0.0.2: collectSSE(), withTimeout(12s), /v1/chat/completions OpenAI-compat proxy. Kilo → PA proxy (inherits cascade). DeepSeek key saved. Cerebras new key csk-3djcnck... provided. kilo.json deepseek provider fixed. HEAD e9ac6a92. SOUL 909,486 TITANIUM_ANCHOR. |
 | **21** | **KILO TIER RESTRUCTURE** — PA T1-T4 tier restructure. Cerebras GPT-OSS-120B added. kilo.json wired. HEAD e9ac6a92. |
 
 ---
 
-\#\#\#\ FINGERPRINT\ CURRENT:\ RUN\ 190-B\ \|\ FULL\ SCS\ RERUN\ SESSIONS\ 10-30\ \|\ HEAD\ 1c005c54a\ \|\ BOOT\ UPDATED\ 2026-08-16T01:24:57\+07:00
+\#\#\#\ FINGERPRINT\ CURRENT:\ RUN\ 190-C\ \|\ HONEST\ REINCARNATEDEATH\ CORRECTION\ SESSION\ 30\ \|\ HEAD\ 0b6da2f21\ \|\ BOOT\ UPDATED\ 2026-08-17T22:15:00\+07:00
 
 ### FINGERPRINT PRIOR: RUN 182 | OBI MAGIC CHAT DEVELOPMENT DEATH SEAL | HEAD 3e62b1813 | BOOT UPDATED 2026-07-19T05:32 ICT
 
