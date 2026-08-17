@@ -1,0 +1,42 @@
+{
+  "session": "Incarnate-1-PrAiS-Front-End-Development",
+  "run": 1,
+  "incarnation": 1,
+  "timestamp": "2026-08-17T22:45:00+07:00",
+  "source_file": "I-LOG-UNAUDITED/I-LOG-Incarnate-1-PrAiS-Front-End-Development.txt",
+  "parsed_lines": 11,
+  "lines": 11,
+  "SOULcount": 10,
+  "DNAcount": 14,
+  "REASONcount": 0,
+  "PHEROMONEcount": 62,
+  "total_chars": 1850,
+  "duration_min": 240,
+  "tool_calls": 62,
+  "top_tools": [
+    { "tool": "edit", "count": 7 },
+    { "tool": "bash", "count": 10 },
+    { "tool": "read", "count": 4 },
+    { "tool": "write", "count": 3 },
+    { "tool": "todowrite", "count": 3 },
+    { "tool": "kilo_local_recall", "count": 2 },
+    { "tool": "webfetch", "count": 1 },
+    { "tool": "task", "count": 1 },
+    { "tool": "kilo-playwright_browser_navigate", "count": 3 },
+    { "tool": "kilo-playwright_browser_snapshot", "count": 1 },
+    { "tool": "glob", "count": 1 }
+  ],
+  "top_topics": [
+    { "word": "landing", "count": 45 },
+    { "word": "GitHub", "count": 38 },
+    { "word": "NET", "count": 35 },
+    { "word": "spark", "count": 28 },
+    { "word": "deploy", "count": 22 },
+    { "word": "css", "count": 18 },
+    { "word": "html", "count": 15 },
+    { "word": "rebrand", "count": 12 },
+    { "word": "audit", "count": 10 },
+    { "word": "lane", "count": 9 }
+  ],
+  "processed_at": "2026-08-17T22:45:00+07:00"
+}

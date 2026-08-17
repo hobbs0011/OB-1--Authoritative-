@@ -1,0 +1,182 @@
+[
+  {
+    "step": 1,
+    "action": "Listed todo items for spark implementation",
+    "why": "User requested 10 spark elements be added to landing page",
+    "how": "todowrite",
+    "what": "Created 11-item todo list: blobs, scroll reveals, footer, mobile nav, search modal, logo cloud, testimonials, pricing, Octocat, checklist, deploy",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "yes, and make it so the future sessions are scripted to never miss the spark",
+    "response": "Broke work into actionable todos and executed sequentially"
+  },
+  {
+    "step": 2,
+    "action": "Added animated gradient blobs to hero",
+    "why": "Spark item #1: animated blobs missing from landing page",
+    "how": "edit landing.css",
+    "what": "Added .hero-blobs, .hero-blob--1/2/3 with blobDrift keyframes",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "make it so the future sessions are scripted to never miss the spark",
+    "response": "Implemented CSS-only blob animation with 3 blobs, different durations/delays"
+  },
+  {
+    "step": 3,
+    "action": "Added scroll-triggered reveal animations",
+    "why": "Spark item #2: sections should fade/slide in via IntersectionObserver",
+    "how": "edit landing.css + landing.html",
+    "what": "Added .reveal/.visible classes, added reveal to stats/programs/testimonials/pricing/cta sections",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "never miss the spark",
+    "response": "CSS transitions + JS scroll listener for .reveal elements"
+  },
+  {
+    "step": 4,
+    "action": "Expanded footer with multi-column links + bottom legal bar",
+    "why": "Spark item #7: real GitHub footer has 4-5 columns of links + bottom legal bar",
+    "how": "edit landing.css + landing.html",
+    "what": "Replaced single-row footer with 5-column grid (Product, Company, Support, Legal) + bottom bar with Terms/Privacy/Security/Status/Docs/Contact/Sitemap",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "never miss the spark",
+    "response": "Footer now matches GitHub structure"
+  },
+  {
+    "step": 5,
+    "action": "Added mobile hamburger menu",
+    "why": "Spark item #8: nav disappears on mobile with no replacement",
+    "how": "edit landing.css + landing.html + app.js",
+    "what": "Added .mobile-toggle button, .mobile-nav overlay with slide-in animation, ARIA attributes",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "never miss the spark",
+    "response": "Mobile nav toggles via JS, closes on ESC"
+  },
+  {
+    "step": 6,
+    "action": "Added search modal/command palette",
+    "why": "Spark item #9: / or click should open a real search overlay",
+    "how": "edit landing.css + landing.html + app.js",
+    "what": "Added .search-modal-overlay with Ctrl/Cmd+K open, ESC close, click-outside close, Popular/Pages sections",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "never miss the spark",
+    "response": "Search modal functional with keyboard shortcuts"
+  },
+  {
+    "step": 7,
+    "action": "Added social proof logo cloud section",
+    "why": "Spark item #4: real GitHub shows Trusted by company logos",
+    "how": "edit landing.html",
+    "what": "Added .logos section with Lakeview Academy, BrightFuture, EduCore, GlobalSpeak, NextGen Learning",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "never miss the spark",
+    "response": "Logo cloud placed between hero and features"
+  },
+  {
+    "step": 8,
+    "action": "Added testimonials section",
+    "why": "Spark item #5: missing quote cards from users/companies",
+    "how": "edit landing.css + landing.html",
+    "what": "Added .testimonials with 3 cards: Linh H., Minh T., Sarah K. — each with avatar initials, quote, name, role",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "never miss the spark",
+    "response": "Testimonials grid with hover lift effect"
+  },
+  {
+    "step": 9,
+    "action": "Added pricing/plans cards",
+    "why": "Spark item #6: Free/Team/Enterprise pricing grid is core GitHub landing section",
+    "how": "edit landing.css + landing.html",
+    "what": "Added .pricing with 3 tiers: Starter (Free), Mastery ($29/mo), Institution (Custom) — featured card highlighted with purple glow",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "never miss the spark",
+    "response": "Pricing section with hover lift and featured card"
+  },
+  {
+    "step": 10,
+    "action": "Added Octocat hero silhouette",
+    "why": "Spark item #3: using generic SVG; GitHub's actual logo mark carries instant recognition",
+    "how": "edit landing.css + landing.html",
+    "what": "Added .hero-octocat with low-opacity GitHub SVG watermark, hidden on mobile",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "never miss the spark",
+    "response": "Octocat positioned at right 5%, top 50%, opacity 0.08"
+  },
+  {
+    "step": 11,
+    "action": "Created SPARK-CHECKLIST.md",
+    "why": "User requested future sessions be scripted to never miss the spark",
+    "how": "write SPARK-CHECKLIST.md",
+    "what": "Mandatory pre-deployment checklist covering Visual Spark, Layout Fidelity, Interactive Spark, Content Spark, Accessibility, Performance, Deployment. Includes grep verification commands.",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "make it so the future sessions are scripted to never miss the spark",
+    "response": "Checklist covers all 10 spark items with pass/fail checkboxes"
+  },
+  {
+    "step": 12,
+    "action": "Built github-mirror version (pure GitHub colors)",
+    "why": "User requested version that forgets GOSPEL-999 branding directions, mimicking GitHub color scheme",
+    "how": "write github-mirror.css + github-mirror.html",
+    "what": "Created github-mirror.css with GitHub exact palette (#58a6ff, #238636, #0d1117, #161b22, #21262d, system font stack). Created github-mirror.html with GitHub copy, GitHub title, GitHub product names.",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "try to make a version that forgets gospel999 branding dirtections for this case, mimicing the color scheme from github",
+    "response": "GitHub mirror version completed with zero purple/gold branding"
+  },
+  {
+    "step": 13,
+    "action": "Deployed github-mirror to Cloudflare Pages",
+    "why": "User requested fully updated and live site",
+    "how": "bash: npx wrangler pages deploy",
+    "what": "Deployed APPS/PAGES/net-github to net-github-dashboard project. URL: https://canon.net-github-dashboard.pages.dev",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "Ensure is fully updated and live https://canon.net-github-dashboard.pages.dev/",
+    "response": "Deployment successful. Live site showed GitHub title and copy."
+  },
+  {
+    "step": 14,
+    "action": "Self-audit: realized overcorrection",
+    "why": "User asked 'why did you switch it to github for the wording.. audit yourself'",
+    "how": "kilo_local_recall + read GOSPEL-999.md",
+    "what": "Discovered GOSPEL-999 branding directions = System IX color coding (purple=SOUL, red=DNA, yellow=REASON) + SoulGroup identity rules. User wanted NET brand retained, only GOSPEL-999 color system replaced with GitHub palette.",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "why did you switch it to github for the wording.. audit yourself",
+    "response": "Audit revealed misinterpretation. NET brand should be kept; only colors should follow GitHub palette."
+  },
+  {
+    "step": 15,
+    "action": "Restored NET branding with GitHub colors",
+    "why": "Correct the overcorrection: keep NET, use GitHub palette",
+    "how": "bash: Copy-Item landing.html to index.html + edit index.html stylesheet link",
+    "what": "Copied landing.html (NET branding) to index.html. Changed stylesheet from landing.css to github-mirror.css. Net result: NET title/copy with GitHub dark-dimmed colors (#58a6ff links, #238636 buttons, #0d1117 surfaces).",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "I switched you to workhorse, fyi if I am the one who forbid something, and then I grant it, you can probably assume it's safe to go, yes?",
+    "response": "Site restored. Live at https://canon.net-github-dashboard.pages.dev with title 'NET · Change is constant. English mastery keeps you ahead.' and GitHub color scheme."
+  },
+  {
+    "step": 16,
+    "action": "Created RL-LANES.md sorted lane checklist",
+    "why": "User requested lanes checklist from first 30 sessions",
+    "how": "write RL-LANES.md",
+    "what": "Mapped sessions 1-30 to 7 lanes: RISE/RRL, SCOUT, ENGINEER, BUSINESS, CAPTURE, AAA/STONE, GOSPEL999. Identified 5 TO-BE-OPENED lanes.",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "The I LOGS are the RRLS, and they are not missing, they are just not sorted, or you are missing something make a checklist to lanes (opened and to be opened)",
+    "response": "Lane checklist documents all 30 sessions, 7 opened lanes, 5 to-be-opened lanes"
+  },
+  {
+    "step": 17,
+    "action": "Verified /reincarnateDEATH uses no other script",
+    "why": "User asked if canonical /reincarnateDEATH from LFG uses no other script",
+    "how": "read CANON/SYSTEM/reincarnateDEATH.md",
+    "what": "Confirmed reincarnateDEATH.md is standalone 7-point march (SCOUT→/phoenixMARCH→/phoenixSCHOLAR→/phoenixSUPPLY→ENGINEER→SEAL→HANDOFF). References only HTTP API endpoints, no other scripts.",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "do the canonical /reincarnateDEATH from the LFG on git use no other script",
+    "response": "Confirmed: standalone, no script dependencies"
+  },
+  {
+    "step": 18,
+    "action": "Executed /reincarnateDEATH for current session",
+    "why": "User commanded 'redo /reincarnateDEATH'",
+    "how": "Full 7-point march: SCOUT→MARCH→SCHOLAR→SUPPLY→ENGINEER→SEAL→HANDOFF",
+    "what": "Created I-LOG, COLORIZED, STATS, pipeline, handoff, death seal, SOUL extract, DNA extract, PheTrail, keywords",
+    "who": "Incarnate-1_PrAiS-Front-End-Development",
+    "soul": "redo /reincarnateDEATH",
+    "response": "All artifacts written to canonical locations. Seal: IMPRESSED."
+  }
+]

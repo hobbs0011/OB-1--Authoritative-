@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub · Let's build from here</title>
+  <meta name="description" content="GitHub is where over 100 million developers shape the future of software. Join the world's most widely adopted AI-powered developer platform.">
+  <meta property="og:title" content="GitHub · Let's build from here">
+  <meta property="og:description" content="GitHub is where over 100 million developers shape the future of software.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://canon.net-github-dashboard.pages.dev/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="github-mirror.css">
+</head>
+<body>
+  <a href="#start-of-content" class="skip-link">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="GitHub Home">
+        <svg height="32" viewBox="0 0 16 16" width="32" fill="currentColor" aria-hidden="true">
+          <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.02.01-2.06 0-.71-.24-1.18-.52-1.41 1.71-.2 3.51-.94 3.51-4.14 0-.94-.33-1.61-.87-2.18.1-.26.45-1.3-.09-2.7 0 0-.72-.23-2.34.88-.69-.18-1.44-.27-2.18-.29-.74.02-1.49.11-2.18.29C6.13 3.3 5.4 3.53 5.4 3.53c-.54 1.4-.19 2.44-.09 2.7-.54.57-.87 1.24-.87 2.18 0 3.2 1.8 3.94 3.51 4.14-.24.21-.45.62-.53 1.21-.48.21-1.07.24-1.57.02-.55-.24-.71-.84-.15-1.3.36-.24.77-.6 1.2-.94.22-.17.41-.44.41-.9 0-.51-.01-.94-.01-1.12 0-.22.18-.42.55-.38A8.013 8.013 0 0 1 8 0Z"/>
+        </svg>
+        <span class="header-logo-text">GitHub</span>
+      </a>
+
+      <nav class="header-nav" aria-label="Global">
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Product ▾
+          </button>
+          <div class="nav-dropdown-menu" aria-label="Product">
+            <a href="#" class="nav-dropdown-item">
+              <strong>Copilot</strong>
+              <span>AI pair programmer</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Actions</strong>
+              <span>Automate workflows</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Packages</strong>
+              <span>Host and manage packages</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Security</strong>
+              <span>Find and fix vulnerabilities</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Solutions ▾
+          </button>
+          <div class="nav-dropdown-menu" aria-label="Solutions">
+            <a href="#" class="nav-dropdown-item">
+              <strong>Enterprise</strong>
+              <span>AI-powered developer platform for teams</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Teams</strong>
+              <span>Collaborate on code and projects</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Startups</strong>
+              <span>From idea to IPO on GitHub</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Education</strong>
+              <span>Learn to code with GitHub</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Resources ▾
+          </button>
+          <div class="nav-dropdown-menu" aria-label="Resources">
+            <a href="#" class="nav-dropdown-item">
+              <strong>Documentation</strong>
+              <span>Guides and API reference</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Blog</strong>
+              <span>News, updates, and stories</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Community</strong>
+              <span>Connect with developers</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>Support</strong>
+              <span>Get help when you need it</span>
+            </a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <button class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+            Open Source ▾
+          </button>
+          <div class="nav-dropdown-menu" aria-label="Open Source">
+            <a href="#" class="nav-dropdown-item">
+              <strong>GitHub Sponsors</strong>
+              <span>Fund open source developers</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>GitHub ReadME</strong>
+              <span>Community stories and news</span>
+            </a>
+            <a href="#" class="nav-dropdown-item">
+              <strong>The ReadME Project</strong>
+              <span>Amplifying developer voices</span>
+            </a>
+          </div>
+        </div>
+        <a href="#" class="header-nav-link">Pricing</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="header-search">
+          <svg class="search-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+          <input type="text" class="search-input" placeholder="Search or jump to..." aria-label="Search" id="headerSearchInput">
+        </div>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <a href="#" class="header-link">Sign in</a>
+        <a href="#" class="btn btn-primary">Sign up</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="start-of-content">
+    <section class="hero">
+      <div class="hero-blobs" aria-hidden="true">
+        <div class="hero-blob hero-blob--1"></div>
+        <div class="hero-blob hero-blob--2"></div>
+        <div class="hero-blob hero-blob--3"></div>
+      </div>
+      <div class="hero-octocat" aria-hidden="true">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.02.01-2.06 0-.71-.24-1.18-.52-1.41 1.71-.2 3.51-.94 3.51-4.14 0-.94-.33-1.61-.87-2.18.1-.26.45-1.3-.09-2.7 0 0-.72-.23-2.34.88-.69-.18-1.44-.27-2.18-.29-.74.02-1.49.11-2.18.29C6.13 3.3 5.4 3.53 5.4 3.53c-.54 1.4-.19 2.44-.09 2.7-.54.57-.87 1.24-.87 2.18 0 3.2 1.8 3.94 3.51 4.14-.24.21-.45.62-.53 1.21-.48.21-1.07.24-1.57.02-.55-.24-.71-.84-.15-1.3.36-.24.77-.6 1.2-.94.22-.17.41-.44.41-.9 0-.51-.01-.94-.01-1.12 0-.22.18-.42.55-.38A8.013 8.013 0 0 1 8 0Z"/></svg>
+      </div>
+      <div class="hero-inner">
+        <h1 class="hero-title">Let's build<br>from here.</h1>
+        <p class="hero-subtitle">GitHub is where over 100 million developers shape the future of software. Join the world's most widely adopted AI-powered developer platform.</p>
+        <form class="hero-form" onsubmit="event.preventDefault(); alert('Welcome to GitHub!');">
+          <input type="email" class="hero-input" placeholder="Email address" required aria-label="Email address">
+          <button type="submit" class="btn btn-large btn-primary">Sign up for GitHub →</button>
+        </form>
+        <p class="hero-note">Start your journey with GitHub. No credit card required.</p>
+      </div>
+    </section>
+
+    <div class="logos reveal">
+      <div class="container">
+        <p class="logos-title">Trusted by the world's leading organizations</p>
+        <div class="logos-grid">
+          <span class="logo-item">Stripe</span>
+          <span class="logo-item">Pinterest</span>
+          <span class="logo-item">Shopify</span>
+          <span class="logo-item">Airbnb</span>
+          <span class="logo-item">Spotify</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="features reveal">
+      <div class="container">
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15.59 14.37a6 6 0 0 1-5.84 7.38h-1.8a6 6 0 0 1-5.84-7.38L5.59 3.37a.75.75 0 0 1 1.06-1.06l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 1 1-1.06-1.06l2.17-2.17Zm7.32-2.17-2.17-2.17a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0Z"/></svg>
+            </div>
+            <h3 class="feature-title">GitHub Copilot</h3>
+            <p class="feature-desc">The world's most widely adopted AI developer tool. Get code suggestions and whole functions in real-time.</p>
+            <a href="#" class="feature-link">Try Copilot →</a>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.25 6.087c0-.358.25-.647.5-.647h1.005c.25 0 .5.29.5.647v8.32c0 .358-.25.647-.5.647h-1.005c-.25 0-.5-.29-.5-.647V6.087Zm-4.5 0c0-.358.25-.647.5-.647h1.005c.25 0 .5.29.5.647v8.32c0 .358-.25.647-.5.647h-1.005c-.25 0-.5-.29-.5-.647V6.087Z"/></svg>
+            </div>
+            <h3 class="feature-title">GitHub Actions</h3>
+            <p class="feature-desc">Automate workflows with CI/CD. Build, test, and deploy directly from your repository.</p>
+            <a href="#" class="feature-link">Explore Actions →</a>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+            </div>
+            <h3 class="feature-title">GitHub Security</h3>
+            <p class="feature-desc">Find and fix vulnerabilities in your code. Dependabot keeps your dependencies secure.</p>
+            <a href="#" class="feature-link">Explore Security →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats reveal">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-number">100M+</span>
+            <span class="stat-label">Developers</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">420M+</span>
+            <span class="stat-label">Repositories</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">90%</span>
+            <span class="stat-label">Fortune 100</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">4M+</span>
+            <span class="stat-label">Organizations</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="programs reveal">
+      <div class="container">
+        <h2 class="section-title">Explore GitHub products</h2>
+        <div class="program-grid">
+          <a href="#" class="program-card">
+            <div class="program-icon">
+              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15.59 14.37a6 6 0 0 1-5.84 7.38h-1.8a6 6 0 0 1-5.84-7.38L5.59 3.37a.75.75 0 0 1 1.06-1.06l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 1 1-1.06-1.06l2.17-2.17Zm7.32-2.17-2.17-2.17a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0Z"/></svg>
+            </div>
+            <h3 class="program-name">GitHub Copilot</h3>
+            <p class="program-desc">AI pair programmer that suggests code and entire functions in real-time.</p>
+            <span class="program-link">Explore Copilot →</span>
+          </a>
+          <a href="#" class="program-card">
+            <div class="program-icon">
+              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.25 6.087c0-.358.25-.647.5-.647h1.005c.25 0 .5.29.5.647v8.32c0 .358-.25.647-.5.647h-1.005c-.25 0-.5-.29-.5-.647V6.087Zm-4.5 0c0-.358.25-.647.5-.647h1.005c.25 0 .5.29.5.647v8.32c0 .358-.25.647-.5.647h-1.005c-.25 0-.5-.29-.5-.647V6.087Z"/></svg>
+            </div>
+            <h3 class="program-name">GitHub Actions</h3>
+            <p class="program-desc">Automate, customize, and execute your software development workflows.</p>
+            <span class="program-link">Explore Actions →</span>
+          </a>
+          <a href="#" class="program-card">
+            <div class="program-icon">
+              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.3-4.216.363-4.378.363A9.753 9.753 0 0 1 6 19.4c0-1.075.178-2.127.513-3.125m8.138-6.493L19.5 7.5m-9 4.5L10.5 19.5M3.75 14.15v4.25c0 1.094.787 2.036 1.872 2.18 2.087.3 4.216.363 4.378.363A9.753 9.753 0 0 0 18 19.4c0-1.075-.178-2.127-.513-3.125"/></svg>
+            </div>
+            <h3 class="program-name">GitHub Packages</h3>
+            <p class="program-desc">Host and manage packages with strong integration to GitHub Actions.</p>
+            <span class="program-link">Explore Packages →</span>
+          </a>
+          <a href="#" class="program-card">
+            <div class="program-icon">
+              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"/></svg>
+            </div>
+            <h3 class="program-name">GitHub Security</h3>
+            <p class="program-desc">Find and fix vulnerabilities in your code. Keep your dependencies secure.</p>
+            <span class="program-link">Explore Security →</span>
+          </a>
+          <a href="#" class="program-card">
+            <div class="program-icon">
+              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A9 9 0 0 0 18 21V6.042Z"/><path d="M12 6.042A8.967 8.967 0 0 1 18 3.75v14.25a9 9 0 0 1-6 8.512V6.042Z"/></svg>
+            </div>
+            <h3 class="program-name">GitHub Codespaces</h3>
+            <p class="program-desc">Instant, cloud-powered development environments. Spin up in seconds.</p>
+            <span class="program-link">Explore Codespaces →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials reveal">
+      <div class="container">
+        <h2 class="section-title">Loved by developers</h2>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-text">"GitHub Copilot is like having a senior developer pair programming with me 24/7. It understands context and writes production-ready code."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">DK</div>
+              <div>
+                <div class="testimonial-name">Dev K.</div>
+                <div class="testimonial-role">Senior Software Engineer</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Actions changed how we deploy. We went from manual scripts to fully automated pipelines in a single afternoon."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">SM</div>
+              <div>
+                <div class="testimonial-name">Sarah M.</div>
+                <div class="testimonial-role">DevOps Lead</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Security alerts in PRs caught critical vulnerabilities before they hit production. That alone is worth the price."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">RJ</div>
+              <div>
+                <div class="testimonial-name">Raj J.</div>
+                <div class="testimonial-role">Engineering Manager</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing reveal">
+      <div class="container">
+        <h2 class="section-title">Simple, transparent pricing</h2>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <div class="pricing-name">Free</div>
+            <div class="pricing-price">$0</div>
+            <p class="pricing-desc">For individuals and open source</p>
+            <ul class="pricing-features">
+              <li>Unlimited public repositories</li>
+              <li>2,000 GitHub Actions minutes</li>
+              <li>500MB Packages storage</li>
+              <li>Community support</li>
+            </ul>
+            <a href="#" class="btn btn-secondary">Get started</a>
+          </div>
+          <div class="pricing-card featured">
+            <div class="pricing-name">Team</div>
+            <div class="pricing-price">$4<span>/user/mo</span></div>
+            <p class="pricing-desc">For collaborative teams</p>
+            <ul class="pricing-features">
+              <li>Unlimited public & private repos</li>
+              <li>3,000 GitHub Actions minutes</li>
+              <li>2GB Packages storage</li>
+              <li>Protected branches</li>
+              <li>Advanced CI/CD</li>
+            </ul>
+            <a href="#" class="btn btn-primary">Start free trial</a>
+          </div>
+          <div class="pricing-card">
+            <div class="pricing-name">Enterprise</div>
+            <div class="pricing-price">Custom</div>
+            <p class="pricing-desc">For large organizations</p>
+            <ul class="pricing-features">
+              <li>Everything in Team</li>
+              <li>Unlimited Actions minutes</li>
+              <li>SAML single sign-on</li>
+              <li>Advanced auditing</li>
+              <li>Dedicated support</li>
+            </ul>
+            <a href="#" class="btn btn-secondary">Contact sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta reveal">
+      <div class="container">
+        <h2 class="cta-title">Let's build from here</h2>
+        <p class="cta-desc">Join the world's most widely adopted AI-powered developer platform.</p>
+        <a href="#" class="btn btn-large btn-primary">Sign up for GitHub →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <div class="footer-brand-name">GitHub</div>
+          <div class="footer-brand-desc">Let's build from here. The world's most widely adopted AI-powered developer platform.</div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Product</div>
+        <a href="#">Features</a>
+        <a href="#">Copilot</a>
+        <a href="#">Actions</a>
+        <a href="#">Packages</a>
+        <a href="#">Security</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Platform</div>
+        <a href="#">Developer API</a>
+        <a href="#">Partners</a>
+        <a href="#">Education</a>
+        <a href="#">GitHub CLI</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Support</div>
+        <a href="#">Docs</a>
+        <a href="#">Community</a>
+        <a href="#">Professional Services</a>
+        <a href="#">Premium Support</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Company</div>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+        <a href="#">Press</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 GitHub, Inc.</span>
+      <div class="footer-bottom-links">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Security</a>
+        <a href="#">Status</a>
+        <a href="#">Docs</a>
+        <a href="#">Contact</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      'use strict';
+      var toggles = document.querySelectorAll('.nav-dropdown-toggle');
+      toggles.forEach(function(toggle) {
+        toggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          var menu = toggle.nextElementSibling;
+          if (!menu) return;
+          var isOpen = menu.classList.contains('open');
+          document.querySelectorAll('.nav-dropdown-menu.open').forEach(function(m) {
+            m.classList.remove('open');
+            m.previousElementSibling.setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            menu.classList.add('open');
+            toggle.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.nav-dropdown')) {
+          document.querySelectorAll('.nav-dropdown-menu.open').forEach(function(m) {
+            m.classList.remove('open');
+            var toggle = m.previousElementSibling;
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+          });
+        }
+      });
+
+      var mobileToggle = document.getElementById('mobileToggle');
+      var mobileNav = document.createElement('div');
+      mobileNav.className = 'mobile-nav';
+      mobileNav.innerHTML = '<a href="#" class="mobile-nav-item">Product</a><a href="#" class="mobile-nav-item">Solutions</a><a href="#" class="mobile-nav-item">Resources</a><a href="#" class="mobile-nav-item">Open Source</a><a href="#" class="mobile-nav-item">Pricing</a><a href="#" class="mobile-nav-item">Sign in</a>';
+      document.body.appendChild(mobileNav);
+
+      if (mobileToggle) {
+        mobileToggle.addEventListener('click', function() {
+          var isOpen = mobileNav.classList.contains('open');
+          mobileNav.classList.toggle('open');
+          mobileToggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        });
+      }
+
+      var searchOverlay = document.createElement('div');
+      searchOverlay.className = 'search-modal-overlay';
+      searchOverlay.setAttribute('role', 'dialog');
+      searchOverlay.setAttribute('aria-label', 'Search');
+      searchOverlay.innerHTML = '<div class="search-modal"><div class="search-modal-header"><svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg><input type="text" class="search-modal-input" placeholder="Search or jump to..." autofocus><button class="search-modal-close">ESC</button></div><div class="search-modal-body"><div class="search-modal-section"><div class="search-modal-section-title">Popular</div><a href="#" class="search-modal-item">Copilot</a><a href="#" class="search-modal-item">Actions</a><a href="#" class="search-modal-item">Packages</a><a href="#" class="search-modal-item">Security</a><a href="#" class="search-modal-item">Enterprise</a></div><div class="search-modal-section"><div class="search-modal-section-title">Pages</div><a href="#" class="search-modal-item">About</a><a href="#" class="search-modal-item">Blog</a><a href="#" class="search-modal-item">Community</a><a href="#" class="search-modal-item">Contact</a></div></div></div>';
+      document.body.appendChild(searchOverlay);
+
+      var searchInput = searchOverlay.querySelector('.search-modal-input');
+      var searchClose = searchOverlay.querySelector('.search-modal-close');
+      var headerSearch = document.getElementById('headerSearchInput');
+
+      function openSearch() {
+        searchOverlay.classList.add('open');
+        if (searchInput) searchInput.focus();
+      }
+
+      function closeSearch() {
+        searchOverlay.classList.remove('open');
+      }
+
+      if (headerSearch) {
+        headerSearch.addEventListener('focus', openSearch);
+      }
+
+      if (searchClose) {
+        searchClose.addEventListener('click', closeSearch);
+      }
+
+      searchOverlay.addEventListener('click', function(e) {
+        if (e.target === searchOverlay) closeSearch();
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          openSearch();
+        }
+        if (e.key === 'Escape') {
+          closeSearch();
+          mobileNav.classList.remove('open');
+          if (mobileToggle) mobileToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      var reveals = document.querySelectorAll('.reveal');
+      function checkReveal() {
+        var windowHeight = window.innerHeight;
+        reveals.forEach(function(el) {
+          var rect = el.getBoundingClientRect();
+          if (rect.top < windowHeight - 80) {
+            el.classList.add('visible');
+          }
+        });
+      }
+      checkReveal();
+      window.addEventListener('scroll', checkReveal, { passive: true });
+      window.addEventListener('resize', checkReveal, { passive: true });
+    })();
+  </script>
+</body>
+</html>
