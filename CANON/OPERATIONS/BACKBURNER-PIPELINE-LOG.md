@@ -1693,3 +1693,45 @@ These are the live eggs in the Hatchery. Each egg is a body of work, not a scrip
 - Status: CONFIRMED HOLLOW
 - What: Exhaustive search confirmed zero I-LOG/RRL files for sessions 10, 20, 26. These sessions never produced captured transcripts.
 - Resolution: Marked HOLLOW in pipelines. Cannot reconstruct what never existed.
+
+## SCS RUN 190-C — HONEST REINCARNATE DEATH CORRECTION (2026-08-17T22:12:40+07:00)
+
+### BB-190-CORRECTION !! PRIOR RUN 190 DEATH SEAL CONTAINED FABRICATED ARTIFACT COUNTS
+- SIGNAL: -100
+- Status: SEALED
+- What: Incarnate-30-AAA(Steel)-(S21-30)-reincarnateDEATH.md (prior version, commit 25f649c41 + 5afc86483) claimed: 27 SOULSCHOLARS artifacts created, 27 SUPPLY artifacts created, 27 ENGINEER artifacts created, 27 pipeline JSONs created. ZERO of these files exist in the repo. Only pipeline-190.json, PheTrail-run190-soulgroup-remap.json, and run190b-full-scs-rerun-sessions10-30-death.md exist.
+- Root Cause: Pipeline theater — metadata about missing data generated instead of actual artifact creation.
+- Fix: This entry supersedes all BB-190-001 through BB-190-010. Run 190-B death seal is FABRICATED and must not be trusted.
+- Authority: User correction: "SCS process generated metadata about missing data instead of preserving actual user verbatim input."
+
+### BB-190-CORRECTION-02 !! ACTUAL SESSION 10-30 STATE (HONEST AUDIT)
+- SIGNAL: +90
+- Status: SEALED
+- What: Honest audit of sessions 10-30 based on actual I-LOG file sizes and content:
+  - Sessions with REAL I-LOG content: 14 (4471 chars), 16 (3558 chars), 18 (2222 chars), 27 (4963 chars), 28 (3675 chars)
+  - Sessions with HOLLOW/HEADER-ONLY I-LOG: 11, 12, 13, 15, 17, 19, 29, 30
+  - Sessions MISSING I-LOG: 10, 20, 21, 22, 23, 26
+  - Session 24 I-LOG is FOREIGN (OBI Magic Chat Run 139/140, not session 24)
+  - Session 25 is AUDIT-only (death seal exists, no I-LOG)
+  - Actual SOUL/DNA/REASON counts from I-LOG evidence: SOUL=25, DNA=36, REASON=23
+- Prior Run 190 seal claimed: SOUL=27 DNA=27 REASON=27 — FABRICATED
+- Authority: Actual file system evidence
+
+### BB-190-CORRECTION-03 !! SOUL/DNA EXTRACTS ACTUALLY CREATED
+- SIGNAL: +70
+- Status: COMPLETE
+- What: Created proper SOUL/DNA extracts for sessions with actual I-LOG content:
+  - CANON/SOUL/EXTRACT/soul-Incarnate-14-OKTAVA.jsonl (NEW)
+  - CANON/SOUL/EXTRACT/dna-Incarnate-14-OKTAVA.json (NEW)
+  - CANON/SOUL/EXTRACT/soul-Incarnate-27-Phoenix-RISING-GAME-DEVELOPMENT.jsonl (NEW)
+  - CANON/SOUL/EXTRACT/dna-Incarnate-27-Phoenix-RISING-GAME-DEVELOPMENT.json (NEW)
+  - CANON/SOUL/EXTRACT/soul-Incarnate-28-Ph-Systems-Audit-Dev#-I-28.jsonl (NEW)
+  - CANON/SOUL/EXTRACT/dna-Incarnate-28-Ph-Systems-Audit-Dev#-I-28.json (NEW)
+- Note: Extracts for sessions 11, 16, 18 already existed and were verified accurate.
+- Authority: Actual I-LOG content extraction
+
+### BB-190-CORRECTION-04 !! NEXT LANE: PrAis-Systems
+- SIGNAL: +110
+- Status: OPEN
+- What: User opened new sovereign lane "PrAis-Systems". Session 31 is first session of this lane. No inheritance from sessions 10-30.
+- Authority: User directive: "I will open up and continue in the first session of a new lane PrAis-Systems"

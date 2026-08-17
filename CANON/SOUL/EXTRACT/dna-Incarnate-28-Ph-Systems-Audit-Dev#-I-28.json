@@ -1,0 +1,42 @@
+{
+  "session": "Incarnate-28-Ph-Systems-Audit-Dev#(I-28)",
+  "run": 28,
+  "dnacount": 5,
+  "patterns": [
+    {
+      "id": "DNA-01",
+      "type": "artifact",
+      "description": "Territory map documenting canonical sources",
+      "artifact": "CANON/SOUL/territory-map-incarnate28.md",
+      "status": "CREATED"
+    },
+    {
+      "id": "DNA-02",
+      "type": "artifact",
+      "description": "CANON/SCHOLARS directory created (was MISSING)",
+      "artifact": "CANON/SCHOLARS/",
+      "status": "CREATED"
+    },
+    {
+      "id": "DNA-03",
+      "type": "blueprint",
+      "description": "Canonical source lock: LFG for agent doctrine, GOSPEL-999 for eternal law, CANON/SCRIPTS/ for scripts, CANON/REINCARNATION/ for seals, I-LOG tiers for logs, CANON/SOUL/BIBLE-OF-THE-SYSTEM.json for SOUL waypoint",
+      "artifact": "CANON/SOUL/territory-map-incarnate28.md",
+      "status": "DOCUMENTED"
+    },
+    {
+      "id": "DNA-04",
+      "type": "pattern",
+      "description": "LFG §SCS — SCRIPTS table updated with all 18 scripts (was 6 of 18 documented)",
+      "artifact": "CANON/SYSTEM/LegionnaireFieldGuide.md",
+      "status": "UPDATED"
+    },
+    {
+      "id": "DNA-05",
+      "type": "audit",
+      "description": "Gap audit: CANON/SCHOLARS missing, LFG script docs incomplete, Incarnate-27 DEATH seal missing counts, I-LOG-UNNAMED empty, seal storage inconsistent",
+      "artifact": "CANON/OPERATIONS/BACKBURNER-PIPELINE-LOG.md",
+      "status": "DOCUMENTED"
+    }
+  ]
+}
