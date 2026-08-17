@@ -1,111 +1,91 @@
 {
-  "generated_at": "2026-06-02T12:00:00+07:00",
-  "run": 46,
-  "doctrine": "L72 MAP_FIRST · L73 PROBE_WITH_NAMES",
-  "nodes": [
-    {"id": "net-pet-ai", "domain": "D7", "type": "worker", "status": "LIVE", "url": "net-pet-ai.mrmichaelhobbs123.workers.dev"},
-    {"id": "soul-logger", "domain": "D7", "type": "worker", "status": "LIVE", "url": "soul-logger.mrmichaelhobbs123.workers.dev"},
-    {"id": "phoenix-architecti", "domain": "D7", "type": "worker", "status": "LIVE", "url": "phoenix-architecti.mrmichaelhobbs123.workers.dev"},
-    {"id": "soul-archive", "domain": "D7", "type": "d1", "status": "LIVE"},
-    {"id": "net-submissions", "domain": "D7", "type": "d1", "status": "ORPHAN"},
-    {"id": "CACHE", "domain": "D7", "type": "kv", "status": "LIVE"},
-    {"id": "NET_PET_KV", "domain": "D7", "type": "kv", "status": "LIVE"},
-    {"id": "RATELIMIT", "domain": "D7", "type": "kv", "status": "LIVE"},
-    {"id": "SESSIONS", "domain": "D7", "type": "kv", "status": "ORPHAN"},
-    {"id": "SOUL_LOGGER_KV", "domain": "D7", "type": "kv", "status": "ORPHAN"},
-    {"id": "STUDENT_MEMORY", "domain": "D7", "type": "kv", "status": "LIVE"},
-    {"id": "TASK_QUEUE", "domain": "D7", "type": "kv", "status": "ORPHAN"},
-    {"id": "WAITLIST", "domain": "D7", "type": "kv", "status": "ORPHAN"},
-    {"id": "PET-DO", "domain": "D7", "type": "do", "status": "LIVE"},
-    {"id": "LEDGER-DO", "domain": "D7", "type": "do", "status": "LIVE"},
-    {"id": "MEMORY-DO", "domain": "D7", "type": "do", "status": "LIVE"},
-    {"id": "COMMANDS-DO", "domain": "D7", "type": "do", "status": "LIVE"},
-    {"id": "pages:tigers-selection", "domain": "D7", "type": "pages", "status": "LIVE"},
-    {"id": "pages:university-4room", "domain": "D7", "type": "pages", "status": "LIVE"},
-    {"id": "pages:career-4room", "domain": "D7", "type": "pages", "status": "LIVE"},
-    {"id": "pages:professional-4room", "domain": "D7", "type": "pages", "status": "LIVE"},
-    {"id": "pages:cubs-4room", "domain": "D7", "type": "pages", "status": "LIVE"},
-    {"id": "pages:tigers-4room", "domain": "D7", "type": "pages", "status": "LIVE"},
-    {"id": "pages:professional-selection", "domain": "D7", "type": "pages", "status": "LIVE"},
-    {"id": "pages:netpetai-presentation", "domain": "D7", "type": "pages", "status": "LIVE"},
-    {"id": "pages:net-marketing-landing", "domain": "D7", "type": "pages", "status": "LIVE"},
-    {"id": "pages:naturalenglishtraining", "domain": "D7", "type": "pages", "status": "LIVE"},
-    {"id": "pages:net-tiger-assessment", "domain": "D7", "type": "pages", "status": "LIVE"},
-    {"id": "src/index.js", "domain": "D1", "type": "code", "status": "LIVE"},
-    {"id": "public/magic-chat.html", "domain": "D1", "type": "page", "status": "LIVE"},
-    {"id": "public/sov100-portal.html", "domain": "D1", "type": "page", "status": "LIVE"},
-    {"id": "soul-search.ps1", "domain": "D5", "type": "script", "status": "LIVE"},
-    {"id": "session-capture.ps1", "domain": "D2", "type": "script", "status": "LIVE"},
-    {"id": "rrl-pipeline.ps1", "domain": "D3", "type": "script", "status": "LIVE"},
-    {"id": "build-soulkeys.ps1", "domain": "D3", "type": "script", "status": "LIVE"},
-    {"id": "/api/soul/count", "domain": "D2", "type": "endpoint", "status": "LIVE"},
-    {"id": "/api/soul/session/{run}", "domain": "D2", "type": "endpoint", "status": "LIVE"},
-    {"id": "/api/soul/event", "domain": "D2", "type": "endpoint", "status": "LIVE"},
-    {"id": "/api/soul/compress", "domain": "D2", "type": "endpoint", "status": "DANGLING"},
-    {"id": "/api/deepgram-token", "domain": "D1", "type": "endpoint", "status": "LIVE"},
-    {"id": "/api/chat", "domain": "D1", "type": "endpoint", "status": "LIVE"},
-    {"id": "public/demo.html", "domain": "D1", "type": "page", "status": "ORPHAN"},
-    {"id": "public/assessment.js", "domain": "D1", "type": "script", "status": "ORPHAN"},
-    {"id": "OpenClaw", "domain": "D8", "type": "service", "status": "GHOST"},
-    {"id": "Telegram Bot", "domain": "D9", "type": "service", "status": "GHOST"},
-    {"id": "PA dispatch loop", "domain": "D8", "type": "service", "status": "LIVE"},
-    {"id": "kilo.json", "domain": "D8", "type": "config", "status": "LIVE"},
-    {"id": ".claude/settings.json", "domain": "D2", "type": "config", "status": "LIVE"},
-    {"id": "inverted-index.json", "domain": "D3", "type": "data", "status": "LIVE"}
+  "generated_at": "2026-08-17T22:52:28+07:00",
+  "head": "4f7b73195",
+  "run": 31,
+  "lane": "PrAis-Systems",
+  "doctrine": "L72 MAP_FIRST · L73 PROBE_WITH_NAMES · CURRENT-STATE from wrangler.toml",
+  "source": "Parsed from 18 active wrangler.toml files",
+  "workers": [
+    {"name": "oktava-portal", "path": "wrangler.toml", "kv": ["KV"], "d1": [], "do": []},
+    {"name": "net", "path": "APPS/NET/wrangler.toml", "kv": [], "d1": [], "do": ["PetDO", "LedgerDO", "MemoryDO", "CommandDO"]},
+    {"name": "net-pet-ai", "path": "APPS/NET-PET-AI-legacy/wrangler.toml", "kv": ["RATELIMIT", "NET_PET_KV", "STUDENT_MEMORY"], "d1": ["soul-archive"], "do": ["PetDO", "LedgerDO", "MemoryDO", "CommandDO"], "queues": ["net-pet-notifications"]},
+    {"name": "pcc", "path": "APPS/PCC/wrangler.toml", "kv": [], "d1": ["soul-archive"], "do": []},
+    {"name": "pcc-scout-2", "path": "APPS/pcc-scout-2/wrangler.toml", "kv": ["PHETRAIL"], "d1": ["soul-archive"], "do": ["LegionRunner", "ForceAwarenessAlarm", "ScoutMissionRunner"], "services": ["SOUL_LOGGER_SVC"], "crons": ["* * * * *"]},
+    {"name": "pcc-scout-3", "path": "APPS/pcc-scout-3/wrangler.toml", "kv": ["PHETRAIL"], "d1": ["soul-archive"], "do": ["LegionRunner", "ForceAwarenessAlarm", "ScoutMissionRunner"], "services": ["SOUL_LOGGER_SVC"], "crons": ["* * * * *"]},
+    {"name": "phoenix-architecti", "path": "APPS/PHOENIX-ARCHITECTI/wrangler.toml", "kv": ["PHETRAIL", "SCUTUM", "SOUL_KV"], "d1": ["soul-archive"], "do": ["LegionRunner", "ForceAwarenessAlarm"], "vectorize": ["SOUL_INDEX", "DNA_INDEX"], "services": ["SOUL_LOGGER_SVC", "PCC2_SVC", "PCC3_SVC"], "crons": ["0 */6 * * *", "* * * * *"]},
+    {"name": "phoenix-empire", "path": "APPS/PHOENIX-EMPIRE-DEV/wrangler.toml", "kv": [], "d1": [], "do": ["PhoenixLedgerDOv2"]},
+    {"name": "phoenix-ob1-system", "path": "APPS/phoenix-ob1/wrangler.toml", "kv": ["SOUL_DNA"], "d1": [], "do": ["LedgerDO", "SessionDO", "StudentProfileDO", "RateLimiterDO", "MemoryDO"]},
+    {"name": "phoenix-pcc-1", "path": "APPS/phoenix-pcc-1/wrangler.toml", "kv": ["PHETRAIL"], "d1": ["soul-archive"], "do": ["LegionRunner", "ForceAwarenessAlarm", "ScoutMissionRunner", "StudentActualizerDO"], "services": ["SOUL_LOGGER_SVC"], "crons": ["0 */6 * * *", "* * * * *"]},
+    {"name": "phoenix-pcc-2", "path": "APPS/PHOENIX-PCC-2/wrangler.toml", "kv": ["PHETRAIL"], "d1": ["soul-archive"], "do": ["RaceRunner"], "services": ["SOUL_LOGGER_SVC"], "crons": ["30 */6 * * *", "* * * * *"]},
+    {"name": "phoenix-pcc-3", "path": "APPS/PHOENIX-PCC-3/wrangler.toml", "kv": ["CACHE"], "d1": ["soul-archive"], "do": ["RaceRunner"], "services": ["SOUL_LOGGER_SVC"], "crons": ["30 */6 * * *"]},
+    {"name": "soul-logger", "path": "APPS/SOUL-LOGGER/wrangler.toml", "kv": [], "d1": ["soul-archive"], "do": [], "crons": ["*/5 * * * *"]},
+    {"name": "sov100-vault-v0", "path": "APPS/SOV100-VAULT/V0/wrangler.toml", "kv": ["PHETRAIL"], "d1": ["soul-archive"], "do": ["LegionRunner", "ForceAwarenessAlarm", "ScoutMissionRunner"], "services": ["SOUL_LOGGER_SVC"], "frozen": true},
+    {"name": "submission-api", "path": "APPS/WORKERS/submission-api/wrangler.toml", "kv": [], "d1": ["submission-api-db"], "do": []},
+    {"name": "net-obi-api", "path": "WORKERS/wrangler.toml", "kv": [], "d1": [], "do": []},
+    {"name": "net-core", "path": "WORKERS/net-core/wrangler.toml", "kv": [], "d1": [], "do": []}
   ],
-  "edges": [
-    {"from": "net-pet-ai", "to": "soul-archive", "kind": "d1-binding"},
-    {"from": "soul-logger", "to": "soul-archive", "kind": "d1-binding"},
-    {"from": "net-pet-ai", "to": "RATELIMIT", "kind": "kv-binding"},
-    {"from": "net-pet-ai", "to": "NET_PET_KV", "kind": "kv-binding"},
-    {"from": "net-pet-ai", "to": "STUDENT_MEMORY", "kind": "kv-binding"},
-    {"from": "net-pet-ai", "to": "PET-DO", "kind": "do-binding"},
-    {"from": "net-pet-ai", "to": "LEDGER-DO", "kind": "do-binding"},
-    {"from": "net-pet-ai", "to": "MEMORY-DO", "kind": "do-binding"},
-    {"from": "net-pet-ai", "to": "COMMANDS-DO", "kind": "do-binding"},
-    {"from": "phoenix-architecti", "to": "CACHE", "kind": "kv-binding"},
-    {"from": "src/index.js", "to": "/api/chat", "kind": "route"},
-    {"from": "src/index.js", "to": "/api/deepgram-token", "kind": "route"},
-    {"from": "src/index.js", "to": "/api/soul/count", "kind": "route"},
-    {"from": "src/index.js", "to": "/api/soul/session/{run}", "kind": "route"},
-    {"from": "src/index.js", "to": "/api/soul/event", "kind": "route"},
-    {"from": "src/index.js", "to": "/api/soul/compress", "kind": "dangling-ref"},
-    {"from": "/api/deepgram-token", "to": "public/magic-chat.html", "kind": "consumes"},
-    {"from": "/api/chat", "to": "public/magic-chat.html", "kind": "consumes"},
-    {"from": ".claude/settings.json", "to": "session-capture.ps1", "kind": "stop-hook"},
-    {"from": "session-capture.ps1", "to": "rrl-pipeline.ps1", "kind": "invokes"},
-    {"from": "rrl-pipeline.ps1", "to": "build-soulkeys.ps1", "kind": "invokes"},
-    {"from": "soul-search.ps1", "to": "inverted-index.json", "kind": "reads"},
-    {"from": "kilo.json", "to": "phoenix-architecti", "kind": "routes-dispatch"},
-    {"from": "PA dispatch loop", "to": "phoenix-architecti", "kind": "routes-dispatch"},
-    {"from": "kilo.json", "to": "deepseek", "kind": "routes-provider"},
-    {"from": "kilo.json", "to": "anthropic", "kind": "routes-provider"},
-    {"from": "net-pet-ai", "to": "soul-logger", "kind": "calls", "note": "SOUL_LOGGER_URL var → soul-logger worker"}
-  ],
-  "dangling": [
-    {"node": "/api/soul/compress", "evidence": "src/index.js:2753 — comment-only ref: 'Future: POST to soul-logger /api/soul/compress'"},
-    {"node": "net-submissions", "evidence": "D1 exists but no worker binds it"}
-  ],
-  "orphans": [
-    {"node": "SESSIONS", "evidence": "KV namespace exists, zero live worker bindings (commented out v7 migration)"},
-    {"node": "SOUL_LOGGER_KV", "evidence": "KV namespace exists, zero active worker bindings (only dead root wrangler.toml)"},
-    {"node": "TASK_QUEUE", "evidence": "KV namespace exists, ZERO references anywhere in repo"},
-    {"node": "WAITLIST", "evidence": "KV namespace exists, zero live bindings (commented out; waitlist uses NET_PET_KV)"},
-    {"node": "public/demo.html", "evidence": "Zero inbound src references"},
-    {"node": "public/assessment.js", "evidence": "Zero inbound src references"}
-  ],
-  "ghosts": [
-    {"node": "OpenClaw", "evidence": "Service not installed (1060), port 18789 closed"},
-    {"node": "Telegram Bot", "evidence": "No TELEGRAM_BOT_TOKEN in environment"}
-  ],
-  "broken_wires": [
-    {"wire": "vocab-srs write-back", "from": "live voice session", "to": "POST /api/vocab/review", "status": "BROKEN", "note": "computeNextReview exists but live voice never POSTs grade back → SRS intervals frozen at day 1"}
-  ],
-  "node_status_legend": {
-    "LIVE": "connected + serving",
-    "ORPHAN": "exists, zero inbound edges",
-    "GHOST": "resolves but unbound/404",
-    "DANGLING": "referenced but target missing",
-    "BROKEN": "connected but failing"
+  "kv_namespaces": {
+    "b27d144f71c44b00a4c87360841e525f": {
+      "bindings": ["PHOENIX-ARCHITECTI:SCUTUM", "net-pet-ai:RATELIMIT"],
+      "note": "SHARED — SCUTUM and RATELIMIT share the same KV namespace. Potential collision."
+    },
+    "0583d1a59bb24e598c4645396647eb94": {
+      "bindings": ["net-pet-ai:NET_PET_KV"],
+      "note": "Dedicated to net-pet-ai session hints"
+    },
+    "807ea30d96844c0dbf561d0ae3a3c1f3": {
+      "bindings": ["net-pet-ai:STUDENT_MEMORY"],
+      "note": "Dedicated to net-pet-ai student memory pipeline"
+    },
+    "ea5c8e99cb584dee9ab4f9ba5ed421c9": {
+      "bindings": ["PHOENIX-ARCHITECTI:PHETRAIL", "PHOENIX-ARCHITECTI:SOUL_KV", "pcc-scout-2:PHETRAIL", "pcc-scout-3:PHETRAIL", "phoenix-pcc-1:PHETRAIL", "phoenix-pcc-2:PHETRAIL", "phoenix-pcc-3:CACHE", "sov100-vault-v0:PHETRAIL"],
+      "note": "SHARED — 8 bindings across 7 workers. PHETRAIL primary, SOUL_KV and CACHE aliases."
+    },
+    "bb3288a0ddf34b1db1943dcd6380e801": {
+      "bindings": ["phoenix-ob1-system:SOUL_DNA"],
+      "note": "Dedicated to phoenix-ob1-system soul/DNA data"
+    },
+    "5ed0e9ab65cc42e6889822266aa7c730": {
+      "bindings": ["oktava-portal:KV"],
+      "note": "Dedicated to oktava-portal Pages project"
+    }
+  },
+  "d1_databases": {
+    "c69a11bc-064b-478f-9b1f-e9b8e2431fb8": {
+      "name": "soul-archive",
+      "bindings": ["PHOENIX-ARCHITECTI", "net-pet-ai", "pcc-scout-2", "pcc-scout-3", "pcc", "phoenix-pcc-1", "phoenix-pcc-2", "phoenix-pcc-3", "soul-logger", "sov100-vault-v0"],
+      "note": "Shared soul-archive — 10 workers bind this database. PRIMARY data store."
+    },
+    "1a7246ce-1227-4205-9234-76cbd036fa48": {
+      "name": "submission-api-db",
+      "bindings": ["submission-api"],
+      "note": "Dedicated submission API database — 1 worker"
+    }
+  },
+  "do_classes": {
+    "CommandDO": {"workers": ["net", "net-pet-ai"]},
+    "ForceAwarenessAlarm": {"workers": ["pcc-scout-2", "pcc-scout-3", "PHOENIX-ARCHITECTI", "phoenix-pcc-1", "sov100-vault-v0"]},
+    "LedgerDO": {"workers": ["net", "net-pet-ai", "phoenix-ob1-system"]},
+    "LegionRunner": {"workers": ["pcc-scout-2", "pcc-scout-3", "PHOENIX-ARCHITECTI", "phoenix-pcc-1", "sov100-vault-v0"]},
+    "MemoryDO": {"workers": ["net", "net-pet-ai", "phoenix-ob1-system"]},
+    "PetDO": {"workers": ["net", "net-pet-ai"]},
+    "PhoenixLedgerDOv2": {"workers": ["phoenix-empire"]},
+    "ProfileDO": {"workers": ["net", "net-pet-ai"]},
+    "RaceRunner": {"workers": ["phoenix-pcc-2", "phoenix-pcc-3"]},
+    "RateLimiterDO": {"workers": ["phoenix-ob1-system"]},
+    "ScoutMissionRunner": {"workers": ["pcc-scout-2", "pcc-scout-3", "phoenix-pcc-1", "sov100-vault-v0"]},
+    "SessionDO": {"workers": ["phoenix-ob1-system"]},
+    "StudentActualizerDO": {"workers": ["phoenix-pcc-1"]},
+    "StudentProfileDO": {"workers": ["phoenix-ob1-system"]}
+  },
+  "summary": {
+    "total_workers": 17,
+    "total_kv_namespaces": 6,
+    "total_d1_databases": 2,
+    "total_do_classes": 14,
+    "shared_kv_namespaces": 2,
+    "shared_d1_databases": 1,
+    "frozen_workers": 1,
+    "workers_with_crons": 5
   }
 }

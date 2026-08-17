@@ -21,10 +21,10 @@
     "31": { "lane": "PrAis-Systems", "status": "SCOUTING", "soul": 0, "dna": 0, "reason": 0 }
   },
   "open_items": [
-    { "session": "31", "item": "WORKERS/ directory appears legacy — net-core worker may be superseded by APPS/NET-PET-AI/", "severity": "P3" },
-    { "session": "31", "item": "4 KV namespaces ORPHAN (SESSIONS, SOUL_LOGGER_KV, TASK_QUEUE, WAITLIST)", "severity": "P3" },
-    { "session": "31", "item": "D1 database net-submissions ORPHAN (49KB unused)", "severity": "P3" },
-    { "session": "31", "item": "2 ORPHAN static files (demo.html, assessment.js)", "severity": "P3" },
+    { "session": "31", "item": "KV namespace collision: SCUTUM and RATELIMIT share same ID b27d144f", "severity": "P1" },
+    { "session": "31", "item": "PHETRAIL/SOUL_KV/CACHE share KV namespace ea5c8e99 across 7 workers", "severity": "P2" },
+    { "session": "31", "item": "WORKERS/net-core and net-obi-api have no bindings — legacy placeholders", "severity": "P3" },
+    { "session": "31", "item": "3 duplicate net-pet-ai wrangler.toml configs in repo", "severity": "P3" },
     { "session": "31", "item": "/api/soul/compress dangling comment ref", "severity": "P3" },
     { "session": "31", "item": "DNA coverage 12.2% — 31 runs fixable, 11 accepted debt", "severity": "P2" },
     { "session": "31", "item": "PHEROMONES coverage 9.8% — 4/41 runs", "severity": "P2" }

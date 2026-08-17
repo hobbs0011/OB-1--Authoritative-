@@ -51,27 +51,27 @@ This scout maps the actual system components present in the repo as of Run 190-C
 
 ---
 
-## 3. Cloudflare Infrastructure (APPS/* + connection-graph.json)
+## 3. Cloudflare Infrastructure (Verified from wrangler.toml — 18 active files)
 
-**Live Workers:**
-- `net-pet-ai` — Primary student portal worker (LIVE)
-- `soul-logger` — Soul event logging worker (LIVE)
-- `phoenix-architecti` — PA dispatch / model router (LIVE)
+**Verified Workers (17):**
+- oktava-portal, net, net-pet-ai, pcc, pcc-scout-2, pcc-scout-3, phoenix-architecti, phoenix-empire, phoenix-ob1-system, phoenix-pcc-1, phoenix-pcc-2, phoenix-pcc-3, soul-logger, sov100-vault-v0, submission-api, net-obi-api, net-core
 
-**KV Namespaces:**
-- GREEN: CACHE, NET_PET_KV, RATELIMIT, STUDENT_MEMORY
-- ORPHAN: SESSIONS, SOUL_LOGGER_KV, TASK_QUEUE, WAITLIST (zero live bindings)
+**KV Namespaces (6 actual, not 8):**
+- `b27d144f71c44b00a4c87360841e525f` — SHARED: SCUTUM (phoenix-architecti) + RATELIMIT (net-pet-ai) — **COLLISION**
+- `ea5c8e99cb584dee9ab4f9ba5ed421c9` — SHARED: PHETRAIL/SOUL_KV/CACHE across 7 workers — intentional shared namespace
+- `0583d1a59bb24e598c4645396647eb94` — NET_PET_KV (net-pet-ai)
+- `807ea30d96844c0dbf561d0ae3a3c1f3` — STUDENT_MEMORY (net-pet-ai)
+- `bb3288a0ddf34b1db1943dcd6380e801` — SOUL_DNA (phoenix-ob1-system)
+- `5ed0e9ab65cc42e6889822266aa7c730` — KV (oktava-portal)
 
-**D1 Databases:**
-- GREEN: soul-archive (both workers bind)
-- ORPHAN: net-submissions (no consumer, 49KB unused)
+**D1 Databases (2 actual):**
+- `c69a11bc-064b-478f-9b1f-e9b8e2431fb8` — soul-archive (10 workers bind this — PRIMARY)
+- `1a7246ce-1227-4205-9234-76cbd036fa48` — submission-api-db (1 worker)
 
-**Durable Objects:**
-- GREEN: PETS, LEDGER, MEMORY, COMMANDS
+**DO Classes (14 actual, not 4):**
+PetDO, LedgerDO, MemoryDO, CommandDO, LegionRunner, ForceAwarenessAlarm, ScoutMissionRunner, RaceRunner, PhoenixLedgerDOv2, SessionDO, ProfileDO, StudentProfileDO, RateLimiterDO, StudentActualizerDO
 
-**Pages Projects:** 11 total, all returning 200
-
-**Status:** CF infra is largely GREEN with known ORPHAN resources that are cleanup candidates, not blockers.
+**Status:** CF infra map is now accurate. The Run 046 connection-graph.json was severely stale. Updated to current-state in `CANON/SYSTEM/connection-graph.json`. No ORPHAN KV/D1 resources in current configs — all are actively bound. Legacy concern: WORKERS/net-core and WORKERS/net-obi-api have no bindings (placeholders).
 
 ---
 
@@ -158,14 +158,14 @@ This scout maps the actual system components present in the repo as of Run 190-C
 
 | # | Gap | Severity | Domain |
 |---|-----|----------|--------|
-| 1 | WORKERS/ directory appears legacy — net-core worker may be superseded by APPS/NET-PET-AI/ | P3 | D1 |
-| 2 | 4 KV namespaces ORPHAN (SESSIONS, SOUL_LOGGER_KV, TASK_QUEUE, WAITLIST) | P3 | D7 |
-| 3 | D1 database net-submissions ORPHAN (49KB unused) | P3 | D7 |
-| 4 | 2 ORPHAN static files (demo.html, assessment.js) | P3 | D1 |
+| 1 | KV namespace collision: SCUTUM and RATELIMIT share same ID `b27d144f...` | P1 | D7 |
+| 2 | PHETRAIL/SOUL_KV/CACHE share KV namespace `ea5c8e99...` across 7 workers — intentional or bug? | P2 | D7 |
+| 3 | WORKERS/net-core and WORKERS/net-obi-api have no KV/D1/DO bindings — legacy placeholders? | P3 | D1 |
+| 4 | 17 wrangler.toml files in repo — duplicate configs for net-pet-ai (3 copies: NET-PET-AI/, APPS/NET-PET-AI-legacy/, Website and NET-PET/) | P3 | D7 |
 | 5 | `/api/soul/compress` dangling comment ref | P3 | D2 |
 | 6 | DNA coverage 12.2% — 31 runs fixable, 11 accepted debt | P2 | D3 |
 | 7 | PHEROMONES coverage 9.8% — 4/41 runs | P2 | D3 |
-| 8 | PrAis-Systems lane identity established but no sovereign artifacts yet | P1 | NEW LANE |
+| 8 | connection-graph.json was stale (Run 046) — now corrected to current-state | P1 | D7 |
 
 ---
 
