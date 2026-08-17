@@ -18,7 +18,7 @@ export async function handleStatus(env) {
     bindings: {
       AI: !!env.AI,
       DB: !!env.DB,
-      RATELIMIT: !!env.SCUTUM,
+      RATELIMIT: !!env.RATELIMIT,
       CACHE: !!env.PHETRAIL,
     },
     drone_capacity: 10,
