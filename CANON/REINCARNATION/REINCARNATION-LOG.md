@@ -55,13 +55,13 @@ Correct Run 190-B death seal which contained fabricated artifact counts and clai
 - Prior Run 190-B death seal is FABRICATED and must not be trusted
 **Last Updated:** 2026-08-15T21:28 ICT (Run 190 — AAA Steel Anchor + Lane Mapping System Remap)
 
-## RUN 31 — PRAIS-SYSTEMS SESSION 1 (2026-08-17T22:52:28+07:00)
+## RUN 190-E — PRAIS-SYSTEMS SESSION 1 (2026-08-17T22:52:28+07:00)
 
 ### Header
-- **Run:** 31 (PrAis-Systems Lane — Session 1)
+- **Run:** 190-E (PrAis-Systems Lane — Session 1)
 - **Session:** Incarnate-31-PrAis-Systems-Session-1
 - **Timestamp:** 2026-08-17T22:52:28+07:00
-- **HEAD:** 4f7b73195
+- **HEAD:** 8398696c6
 - **Branch:** canon
 - **Seal:** IMPRESSED — SOVEREIGN LANE OPENED
 
@@ -98,7 +98,7 @@ Open PrAis-Systems lane as sovereign new lane with no inheritance from sessions 
 ### Next Action
 Address BB-31-001 (KV collision) or proceed to deeper systems audit per operator direction.
 
-**Last Updated:** 2026-08-17T22:52:28+07:00 (Run 31 — PrAis-Systems Session 1)
+**Last Updated:** 2026-08-17T22:52:28+07:00 (Run 190-E — PrAis-Systems Session 1)
 
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
