@@ -97,19 +97,25 @@ This scout maps the actual system components present in the repo as of Run 190-C
 
 ---
 
-## 5. Automation & Scripts (SCRIPTS/, AWS/)
+## 5. Automation & Scripts (CANON/SCRIPTS/, AWS/)
 
-**SCRIPTS/:** Nearly empty post-cleanup. Only `_tmp-count-stage-findings.ps1` remains.
+**CANON/SCRIPTS/:** 20 canonical scripts present.
+- `run-dnaregistry.ps1` — DNA registry scanner (VERIFIED PRESENT)
+- `reincarnate-rise.ps1` / `death.ps1` — RISE/DEATH protocol scripts
+- `scout.ps1`, `pipeline-health-check.ps1`, `workhorse-pipeline.ps1` — pipeline automation
+- `soulscholars.ps1`, `supply.ps1`, `march.ps1`, `engineer.ps1` — SCS lane scripts
+- `extract-keywords.ps1`, `build-soulkeys.ps1`, `update-inverted-index.ps1` — SOULKEYS chain
+- `rrl-colorize.ps1`, `transcribe-rtl.js` — RTL/RRL processing
 
 **AWS/BROWSER/:** Playwright test suite (browser automation)
 - `playwright.config.ts`
 - `test-suite/oktava.spec.ts`
 - `test-results/`
 
-**AWS/dnaREGISTRY/:** DNA registry scanner
-- `config.json` — Scan roots, stage map, 5 laws
+**AWS/dnaREGISTRY/:** DNA registry configuration
+- `config.json` — Scan roots, stage map, 5 laws, output paths
 
-**Status:** Script layer is minimal. Most operational scripts have been migrated to `CANON/SCRIPTS/` or deleted per cleanup. The dnaREGISTRY config exists but the execution script may be elsewhere or pending.
+**Status:** Script layer is healthy. The canonical script directory is populated. The dnaREGISTRY execution script is confirmed at CANON/SCRIPTS/run-dnaregistry.ps1 with config at AWS/dnaREGISTRY/config.json.
 
 ---
 
@@ -152,16 +158,14 @@ This scout maps the actual system components present in the repo as of Run 190-C
 
 | # | Gap | Severity | Domain |
 |---|-----|----------|--------|
-| 1 | SCRIPTS/ nearly empty — canonical scripts migrated elsewhere or missing | P2 | D4 |
-| 2 | dnaREGISTRY execution script not found in AWS/dnaREGISTRY/ | P2 | D3 |
-| 3 | WORKERS/ directory appears legacy — net-core worker may be superseded by APPS/NET-PET-AI/ | P3 | D1 |
-| 4 | 4 KV namespaces ORPHAN (SESSIONS, SOUL_LOGGER_KV, TASK_QUEUE, WAITLIST) | P3 | D7 |
-| 5 | D1 database net-submissions ORPHAN (49KB unused) | P3 | D7 |
-| 6 | 2 ORPHAN static files (demo.html, assessment.js) | P3 | D1 |
-| 7 | `/api/soul/compress` dangling comment ref | P3 | D2 |
-| 8 | DNA coverage 12.2% — 31 runs fixable, 11 accepted debt | P2 | D3 |
-| 9 | PHEROMONES coverage 9.8% — 4/41 runs | P2 | D3 |
-| 10 | No PrAis-Systems lane identity established yet | P1 | NEW LANE |
+| 1 | WORKERS/ directory appears legacy — net-core worker may be superseded by APPS/NET-PET-AI/ | P3 | D1 |
+| 2 | 4 KV namespaces ORPHAN (SESSIONS, SOUL_LOGGER_KV, TASK_QUEUE, WAITLIST) | P3 | D7 |
+| 3 | D1 database net-submissions ORPHAN (49KB unused) | P3 | D7 |
+| 4 | 2 ORPHAN static files (demo.html, assessment.js) | P3 | D1 |
+| 5 | `/api/soul/compress` dangling comment ref | P3 | D2 |
+| 6 | DNA coverage 12.2% — 31 runs fixable, 11 accepted debt | P2 | D3 |
+| 7 | PHEROMONES coverage 9.8% — 4/41 runs | P2 | D3 |
+| 8 | PrAis-Systems lane identity established but no sovereign artifacts yet | P1 | NEW LANE |
 
 ---
 
@@ -196,4 +200,4 @@ This scout maps the actual system components present in the repo as of Run 190-C
 | dnaREGISTRY config | AWS/dnaREGISTRY/config.json | Present |
 | Worker fleet | WORKERS/ + APPS/* | Present |
 
-**Scout verdict:** HONEST. All claims above are backed by actual files in the working tree. No fabricated counts. No claimed artifacts that do not exist.
+**Scout verdict:** HONEST. All claims above are backed by actual files in the working tree. Initial scout overstated 2 gaps (SCRIPTS/ empty, dnaREGISTRY missing); corrected after direct filesystem verification. No fabricated counts. No claimed artifacts that do not exist.

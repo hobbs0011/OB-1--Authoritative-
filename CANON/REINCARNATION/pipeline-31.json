@@ -21,9 +21,7 @@
     "31": { "lane": "PrAis-Systems", "status": "SCOUTING", "soul": 0, "dna": 0, "reason": 0 }
   },
   "open_items": [
-    { "session": "31", "item": "SCRIPTS/ nearly empty — canonical scripts migrated or missing", "severity": "P2" },
-    { "session": "31", "item": "dnaREGISTRY execution script not found in AWS/dnaREGISTRY/", "severity": "P2" },
-    { "session": "31", "item": "WORKERS/ directory appears legacy — net-core worker may be superseded", "severity": "P3" },
+    { "session": "31", "item": "WORKERS/ directory appears legacy — net-core worker may be superseded by APPS/NET-PET-AI/", "severity": "P3" },
     { "session": "31", "item": "4 KV namespaces ORPHAN (SESSIONS, SOUL_LOGGER_KV, TASK_QUEUE, WAITLIST)", "severity": "P3" },
     { "session": "31", "item": "D1 database net-submissions ORPHAN (49KB unused)", "severity": "P3" },
     { "session": "31", "item": "2 ORPHAN static files (demo.html, assessment.js)", "severity": "P3" },
