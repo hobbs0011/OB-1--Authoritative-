@@ -1735,3 +1735,32 @@ These are the live eggs in the Hatchery. Each egg is a body of work, not a scrip
 - Status: OPEN
 - What: User opened new sovereign lane "PrAis-Systems". Session 31 is first session of this lane. No inheritance from sessions 10-30.
 - Authority: User directive: "I will open up and continue in the first session of a new lane PrAis-Systems"
+
+### BB-31-001 !! KV NAMESPACE COLLISION: SCUTUM=RATELIMIT
+- SIGNAL: +100
+- Status: CONFIRMED BUG
+- What: KV namespace b27d144f71c44b00a4c87360841e525f is bound as SCUTUM in phoenix-architecti/wrangler.toml but phoenix-architecti/src/security.js:190 reads env?.RATELIMIT (undefined at runtime). net-pet-ai binds the same namespace as RATELIMIT and uses it for student quota keys (quota:{studentId}:{type}:{hourBucket}). phoenix-architecti expects IP rate limit keys (rl:{ip}). Shared namespace, different semantics — collision risk.
+- Root Cause: Binding name mismatch in phoenix-architecti/wrangler.toml (SCUTUM vs RATELIMIT).
+- Fix Options:
+  1. Rename phoenix-architecti binding from SCUTUM to RATELIMIT (requires new KV namespace for SCUTUM if still needed)
+  2. Change phoenix-architecti code to use env.SCUTUM instead of env.RATELIMIT (keeps namespaces separate)
+- Authority: PrAis-Systems lane scout — verified from wrangler.toml + src/security.js
+
+### BB-31-002 !! PHETRAIL/SOUL_KV/CACHE SHARED KV NAMESPACE
+- SIGNAL: +60
+- Status: DOCUMENTED
+- What: KV namespace ea5c8e99cb584dee9ab4f9ba5ed421c9 is bound as PHETRAIL (6 workers), SOUL_KV (phoenix-architecti), and CACHE (phoenix-pcc-3) across 7 workers. Intentional shared namespace but creates semantic confusion.
+- Workers: pcc-scout-2, pcc-scout-3, phoenix-pcc-1, phoenix-pcc-2, phoenix-pcc-3, PHOENIX-ARCHITECTI, sov100-vault-v0
+- Authority: PrAis-Systems lane scout — verified from wrangler.toml parsing
+
+### BB-31-003 !! CONNECTION-GRAPH.JSON STALE (RUN 046 ? RUN 31)
+- SIGNAL: +80
+- Status: CORRECTED
+- What: CANON/SYSTEM/connection-graph.json claimed 8 KV namespaces, 2 D1, 4 DO classes. Actual current state from wrangler.toml: 6 KV, 2 D1, 14 DO classes, 17 workers. Updated connection-graph.json to current-state.
+- Authority: PrAis-Systems lane scout — rebuilt from 18 active wrangler.toml files
+
+### BB-31-004 !! DUPLICATE NET-PET-AI WRANGLER CONFIGS
+- SIGNAL: +40
+- Status: OPEN
+- What: 3 copies of net-pet-ai wrangler.toml exist: NET-PET-AI/, APPS/NET-PET-AI-legacy/, Website and NET-PET/NET-PET-AI/. NET-PET-AI/ has stale config (SessionDO/ProfileDO still listed, no KV/D1). APPS/NET-PET-AI-legacy/ is the active production config.
+- Authority: PrAis-Systems lane scout
