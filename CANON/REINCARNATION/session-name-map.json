@@ -220,8 +220,12 @@
     "soulgroup": "PrAis-Systems",
     "soulcluster": "PrAis-Systems",
     "lane": "PrAis-Systems",
-    "ilog_status": "PENDING",
-    "content_status": "NEW_LANE"
+    "ilog_status": "ACTIVE",
+    "content_status": "SCOUTING",
+    "soul": 0,
+    "dna": 0,
+    "reason": 0,
+    "scout": "CANON/REINCARNATION/Incarnate-31-PrAis-Systems-Session-1-sCOUT.md"
   },
   "21-MAIN": {
     "name": "TBD — main sequence session 21 not created (Phoenix-RISING lane used slot 21)",

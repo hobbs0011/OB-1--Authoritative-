@@ -1,0 +1,47 @@
+{
+  "run": "31",
+  "session": "Incarnate-31-PrAis-Systems-Session-1",
+  "timestamp": "2026-08-17T22:38:25+07:00",
+  "head": "37eb73859",
+  "branch": "canon",
+  "status": "SCOUTING_COMPLETE",
+  "audit": {
+    "sessions_audited": 1,
+    "sessions_with_real_content": 1,
+    "sessions_hollow": 0,
+    "sessions_missing": 0,
+    "sessions_foreign": 0,
+    "soulcount": 0,
+    "dnacount": 0,
+    "reasoncount": 0,
+    "total_artifacts": 3,
+    "prior_fabrication_corrected": false
+  },
+  "sessions": {
+    "31": { "lane": "PrAis-Systems", "status": "SCOUTING", "soul": 0, "dna": 0, "reason": 0 }
+  },
+  "open_items": [
+    { "session": "31", "item": "SCRIPTS/ nearly empty — canonical scripts migrated or missing", "severity": "P2" },
+    { "session": "31", "item": "dnaREGISTRY execution script not found in AWS/dnaREGISTRY/", "severity": "P2" },
+    { "session": "31", "item": "WORKERS/ directory appears legacy — net-core worker may be superseded", "severity": "P3" },
+    { "session": "31", "item": "4 KV namespaces ORPHAN (SESSIONS, SOUL_LOGGER_KV, TASK_QUEUE, WAITLIST)", "severity": "P3" },
+    { "session": "31", "item": "D1 database net-submissions ORPHAN (49KB unused)", "severity": "P3" },
+    { "session": "31", "item": "2 ORPHAN static files (demo.html, assessment.js)", "severity": "P3" },
+    { "session": "31", "item": "/api/soul/compress dangling comment ref", "severity": "P3" },
+    { "session": "31", "item": "DNA coverage 12.2% — 31 runs fixable, 11 accepted debt", "severity": "P2" },
+    { "session": "31", "item": "PHEROMONES coverage 9.8% — 4/41 runs", "severity": "P2" }
+  ],
+  "scout": {
+    "document": "CANON/REINCARNATION/Incarnate-31-PrAis-Systems-Session-1-sCOUT.md",
+    "domains_mapped": 9,
+    "key_findings": [
+      "CANON/SYSTEM/ contains ~70 sealed system doctrine files",
+      "CF infra: 3 LIVE workers, 4 GREEN KV, 1 GREEN D1, 4 GREEN DO, 11 Pages",
+      "Soul pipeline: 8-stage chain functional, DNA 12.2% coverage",
+      "SCRIPTS/ nearly empty post-cleanup",
+      "APPS/ ecosystem: ~25 app directories"
+    ]
+  },
+  "next_lane": null,
+  "next_session": null
+}
