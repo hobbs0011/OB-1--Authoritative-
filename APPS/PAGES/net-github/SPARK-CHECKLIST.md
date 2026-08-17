@@ -26,6 +26,9 @@ This checklist defines the minimum "spark" requirements for the NET GitHub-brand
 - [ ] **Search modal** — `Ctrl/Cmd+K` open, `ESC` close, click-outside close
 - [ ] **CTA hover states** — buttons lift/glow on hover
 - [ ] **Card hover states** — feature/program/testimonial/pricing cards lift on hover
+- [ ] **Hero tab carousel** — Code/Plan/Collaborate tabs with panel switching
+- [ ] **Feature accordion** — expandable feature rows with icon/chevron transitions
+- [ ] **Customer stories filter** — filter chips for All/Schools/Corporate/Individuals/Tutoring Centers
 
 ## Content Spark
 - [ ] **Logo cloud** — "Trusted by" section with institution/company names

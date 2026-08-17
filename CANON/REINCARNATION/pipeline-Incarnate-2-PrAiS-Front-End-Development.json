@@ -1,0 +1,46 @@
+{
+  "name": "Incarnate-2-PrAiS-Front-End-Development",
+  "timestamp": "2026-08-17T23:00:00+07:00",
+  "irl": "I-LOG-UNAUDITED/I-LOG-Incarnate-2-PrAiS-Front-End-Development.txt",
+  "irl_colorized": "I-LOG-UNAUDITED/I-LOG-Incarnate-2-PrAiS-Front-End-Development-COLORIZED.md",
+  "irl_stats": "I-LOG-UNAUDITED/I-LOG-Incarnate-2-PrAiS-Front-End-Development-STATS.json",
+  "death_seal": "CANON/REINCARNATION/Incarnate-2-PrAiS-Front-End-Development-reincarnateDEATH.md",
+  "handoff": "CANON/REINCARNATION/handoff-Incarnate-2-PrAiS-Front-End-Development-to-3.json",
+  "soul_extract": "CANON/SOUL/EXTRACT/soul-Incarnate-2-PrAiS-Front-End-Development.jsonl",
+  "dna_extract": "CANON/SOUL/EXTRACT/dna-Incarnate-2-PrAiS-Front-End-Development.json",
+  "phetrail": "CANON/PHEROMONES/PheTrail-Incarnate-2-PrAiS-Front-End-Development.json",
+  "keywords": "CANON/SOUL-KEYWORDS/rfkw-Incarnate-2-PrAiS-Front-End-Development.txt",
+  "audit": {
+    "SOULcount": 4,
+    "DNAcount": 6,
+    "REASONcount": 0,
+    "PHEROMONEcount": 18,
+    "total": 28
+  },
+  "open_items": [
+    "SPARK-CHECKLIST.md not yet enforced as pre-deployment gate in CI/CD",
+    "RL-LANES.md sessions 10, 20, 21, 26, 27 mapped but not audited",
+    "LANE-7 GOSPEL999 session 29 unaudited",
+    "LANE-4 BUSINESS sessions 12, 16 empty — need re-transcription",
+    "Sessions 17-19, 28, 30 unaudited"
+  ],
+  "artifacts_produced": [
+    "APPS/PAGES/net-github/index.html",
+    "APPS/PAGES/net-github/github-mirror.css",
+    "APPS/PAGES/net-github/landing.html",
+    "APPS/PAGES/net-github/landing.css",
+    "APPS/PAGES/net-github/SPARK-CHECKLIST.md",
+    "CANON/REINCARNATION/pipeline-Incarnate-2-PrAiS-Front-End-Development.json",
+    "CANON/REINCARNATION/handoff-Incarnate-2-PrAiS-Front-End-Development-to-3.json",
+    "CANON/REINCARNATION/Incarnate-2-PrAiS-Front-End-Development-reincarnateDEATH.md"
+  ],
+  "deployments": [
+    {
+      "url": "https://canon.net-github-dashboard.pages.dev",
+      "status": "LIVE",
+      "timestamp": "2026-08-17T22:40:00+07:00"
+    }
+  ],
+  "branch": "canon",
+  "head": "e921a5071"
+}

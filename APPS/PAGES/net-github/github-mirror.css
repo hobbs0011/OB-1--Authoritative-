@@ -438,6 +438,230 @@ a:hover { color: var(--text-link-hover); text-decoration: underline; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   HERO TABS
+   ═══════════════════════════════════════════════════════════════ */
+
+.hero-tabs {
+  margin-top: 48px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-tabs-nav {
+  display: inline-flex;
+  gap: 4px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 4px;
+}
+
+.hero-tab {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  font-family: var(--font-sans);
+}
+
+.hero-tab:hover {
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+
+.hero-tab.active {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.hero-tabs-panels {
+  margin-top: 20px;
+}
+
+.hero-tab-panel {
+  display: none;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  text-align: center;
+}
+
+.hero-tab-panel.active {
+  display: block;
+}
+
+.hero-tab-visual {
+  color: var(--accent-primary);
+  margin-bottom: 16px;
+  opacity: .9;
+}
+
+.hero-tab-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.hero-tab-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FEATURE ACCORDION
+   ═══════════════════════════════════════════════════════════════ */
+
+.feature-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.feature-accordion-item {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color .15s;
+}
+
+.feature-accordion-item.open {
+  border-color: var(--border-subtle);
+}
+
+.feature-accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  cursor: pointer;
+  text-align: left;
+  transition: background .15s;
+}
+
+.feature-accordion-trigger:hover {
+  background: var(--bg-tertiary);
+}
+
+.feature-accordion-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  color: var(--accent-primary);
+  flex-shrink: 0;
+  transition: transform .25s ease, background .25s ease;
+}
+
+.feature-accordion-item.open .feature-accordion-icon {
+  transform: scale(1.05);
+  background: var(--bg-overlay);
+}
+
+.feature-accordion-header {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.feature-accordion-chevron {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: transform .25s ease;
+}
+
+.feature-accordion-item.open .feature-accordion-chevron {
+  transform: rotate(180deg);
+  color: var(--text-secondary);
+}
+
+.feature-accordion-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease, padding .35s ease;
+}
+
+.feature-accordion-item.open .feature-accordion-panel {
+  max-height: 300px;
+}
+
+.feature-accordion-body {
+  padding: 0 24px 24px 88px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.feature-accordion-body .feature-link {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+.feature-accordion-body .feature-link:hover {
+  color: var(--text-link-hover);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TESTIMONIAL FILTERS
+   ═══════════════════════════════════════════════════════════════ */
+
+.testimonial-filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.testimonial-filter {
+  background: transparent;
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
+  font-family: var(--font-sans);
+}
+
+.testimonial-filter:hover {
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.testimonial-filter.active {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+}
+
+/* ═══════════════════════════════════════════════════════════════
    BUTTONS
    ═══════════════════════════════════════════════════════════════ */
 

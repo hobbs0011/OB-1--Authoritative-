@@ -10,7 +10,7 @@ binding = "PHETRAIL"
 id = "ea5c8e99cb584dee9ab4f9ba5ed421c9"
 
 [[kv_namespaces]]
-binding = "SCUTUM"
+binding = "RATELIMIT"
 id = "b27d144f71c44b00a4c87360841e525f"
 
 [[d1_databases]]

@@ -1,0 +1,45 @@
+{
+  "from_session": "Incarnate-2-PrAiS-Front-End-Development",
+  "from_run": 2,
+  "to_run": 3,
+  "timestamp": "2026-08-17T23:00:00+07:00",
+  "irl": "I-LOG-UNAUDITED/I-LOG-Incarnate-2-PrAiS-Front-End-Development.txt",
+  "irl_colorized": "I-LOG-UNAUDITED/I-LOG-Incarnate-2-PrAiS-Front-End-Development-COLORIZED.md",
+  "irl_stats": "I-LOG-UNAUDITED/I-LOG-Incarnate-2-PrAiS-Front-End-Development-STATS.json",
+  "pipeline": "CANON/REINCARNATION/pipeline-Incarnate-2-PrAiS-Front-End-Development.json",
+  "soul_extract": "CANON/SOUL/EXTRACT/soul-Incarnate-2-PrAiS-Front-End-Development.jsonl",
+  "dna_extract": "CANON/SOUL/EXTRACT/dna-Incarnate-2-PrAiS-Front-End-Development.json",
+  "phetrail": "CANON/PHEROMONES/PheTrail-Incarnate-2-PrAiS-Front-End-Development.json",
+  "keywords": "CANON/SOUL-KEYWORDS/rfkw-Incarnate-2-PrAiS-Front-End-Development.txt",
+  "death_seal": "CANON/REINCARNATION/Incarnate-2-PrAiS-Front-End-Development-reincarnateDEATH.md",
+  "audit": {
+    "SOULcount": 4,
+    "DNAcount": 6,
+    "REASONcount": 0,
+    "PHEROMONEcount": 18,
+    "total": 28
+  },
+  "open_items": [
+    "SPARK-CHECKLIST.md not yet enforced as pre-deployment gate in CI/CD",
+    "RL-LANES.md sessions 10, 20, 21, 26, 27 mapped but not audited",
+    "LANE-7 GOSPEL999 session 29 unaudited",
+    "LANE-4 BUSINESS sessions 12, 16 empty — need re-transcription",
+    "Sessions 17-19, 28, 30 unaudited"
+  ],
+  "next_session_receives": {
+    "session_name": "Incarnate-2_PrAiS-Front-End-Development",
+    "branch": "canon",
+    "head": "e921a5071",
+    "live_url": "https://canon.net-github-dashboard.pages.dev",
+    "branding": "NET product name + GitHub dark-dimmed color palette",
+    "spark_checklist": "APPS/PAGES/net-github/SPARK-CHECKLIST.md",
+    "rl_lanes": "APPS/PAGES/net-github/RL-LANES.md",
+    "key_decisions": [
+      "Hero tab carousel (Code/Plan/Collaborate) implemented with pill-style nav",
+      "Feature accordion implemented with single-open pattern and animated chevron",
+      "Customer stories filter implemented with pill-style category chips",
+      "All new components maintain GitHub dark-dimmed palette in github-mirror.css",
+      "landing.html and landing.css synced with same changes"
+    ]
+  }
+}
