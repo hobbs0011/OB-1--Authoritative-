@@ -55,6 +55,51 @@ Correct Run 190-B death seal which contained fabricated artifact counts and clai
 - Prior Run 190-B death seal is FABRICATED and must not be trusted
 **Last Updated:** 2026-08-15T21:28 ICT (Run 190 — AAA Steel Anchor + Lane Mapping System Remap)
 
+## RUN 31 — PRAIS-SYSTEMS SESSION 1 (2026-08-17T22:52:28+07:00)
+
+### Header
+- **Run:** 31 (PrAis-Systems Lane — Session 1)
+- **Session:** Incarnate-31-PrAis-Systems-Session-1
+- **Timestamp:** 2026-08-17T22:52:28+07:00
+- **HEAD:** 4f7b73195
+- **Branch:** canon
+- **Seal:** IMPRESSED — SOVEREIGN LANE OPENED
+
+### Mission
+Open PrAis-Systems lane as sovereign new lane with no inheritance from sessions 10-30. Scout and map system architecture components. Verify actual CF resource bindings from wrangler.toml files. Correct stale connection-graph.json from Run 046.
+
+### Key Actions
+- Created session 31 RISE brief, pipeline, and scout documents
+- Scouted CANON/SYSTEM/ (~70 doctrine files), SCRIPTS/ (20 canonical scripts), APPS/ (~25 apps), WORKERS/ (legacy)
+- Rebuilt CF resource map from 18 active wrangler.toml files
+- Corrected connection-graph.json: actual state is 6 KV, 2 D1, 14 DO classes, 17 workers (not 8 KV, 2 D1, 4 DO)
+- Confirmed P1 bug: KV namespace collision — SCUTUM/RATELIMIT share same ID, phoenix-architecti code expects env.RATELIMIT but binding is named SCUTUM
+- Documented PHETRAIL/SOUL_KV/CACHE shared namespace across 7 workers
+- Appended BB-31-001 through BB-31-004 to backburner
+
+### Actual Counts
+- SOULcount: 0 (scouting session, no verbatim ingested)
+- DNAcount: 0
+- REASONcount: 0
+
+### Artifacts Created
+- CANON/REINCARNATION/Incarnate-31-PrAis-Systems-Session-1-reincarnateRISE.md
+- CANON/REINCARNATION/Incarnate-31-PrAis-Systems-Session-1-sCOUT.md
+- CANON/REINCARNATION/pipeline-31.json
+- CANON/SYSTEM/connection-graph.json (rebuilt from wrangler.toml)
+- CANON/SCRIPTS/audit-cf-bindings.js (resource audit tool)
+
+### Open Items
+- BB-31-001: KV namespace collision SCUTUM=RATELIMIT — P1
+- BB-31-002: PHETRAIL/SOUL_KV/CACHE shared namespace — P2
+- BB-31-003: connection-graph.json stale (corrected)
+- BB-31-004: 3 duplicate net-pet-ai wrangler configs — P3
+
+### Next Action
+Address BB-31-001 (KV collision) or proceed to deeper systems audit per operator direction.
+
+**Last Updated:** 2026-08-17T22:52:28+07:00 (Run 31 — PrAis-Systems Session 1)
+
 # REINCARNATION LOG — OB-1 RUN HISTORY
 
 ---
