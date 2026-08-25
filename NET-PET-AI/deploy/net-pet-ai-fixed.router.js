@@ -14995,9 +14995,12 @@ async function handleAPI(path, request, env, url) {
     const sessionMode = (url.searchParams.get("mode") || "free").toLowerCase();
     if (!["free", "study", "phonics"].includes(sessionMode)) return addCors(json({ error: "mode must be one of: free, study, phonics" }, 400), request);
     if (env.NET_PET_KV) {
-      const cbState = await env.NET_PET_KV.get("circuit:deepgram:state");
-      if (cbState === "open") {
-        return addCors(json({ error: "voice_unavailable", retryAfter: 60 }, 503), request);
+      try {
+        const cbState = await env.NET_PET_KV.get("circuit:deepgram:state");
+        if (cbState === "open") {
+          return addCors(json({ error: "voice_unavailable", retryAfter: 60 }, 503), request);
+        }
+      } catch (e) {
       }
     }
     try {
@@ -15015,16 +15018,17 @@ async function handleAPI(path, request, env, url) {
         } catch (_2) {
         }
       }
+      const safeKv = (p) => p.catch(() => null);
       const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionHistory, rawSrsData, rawTranscriptIndex] = await Promise.all([
-        env.NET_PET_KV.get("student_profile_" + studentId),
-        env.NET_PET_KV.get("lang:" + studentId),
-        env.NET_PET_KV.get("vocab_list_" + studentId),
-        env.NET_PET_KV.get("vocab_arc_" + studentId),
-        env.STUDENT_MEMORY ? env.STUDENT_MEMORY.get(`mem:${studentId}`) : Promise.resolve(null),
-        sessionMode === "phonics" ? env.NET_PET_KV.get("phonics_progress_" + studentId) : Promise.resolve(null),
-        env.NET_PET_KV.get("session_history_" + studentId),
-        env.NET_PET_KV.get("srs_data_" + studentId),
-        env.STUDENT_MEMORY ? env.STUDENT_MEMORY.get(`transcript_index:${studentId}`) : Promise.resolve(null)
+        safeKv(env.NET_PET_KV.get("student_profile_" + studentId)),
+        safeKv(env.NET_PET_KV.get("lang:" + studentId)),
+        safeKv(env.NET_PET_KV.get("vocab_list_" + studentId)),
+        safeKv(env.NET_PET_KV.get("vocab_arc_" + studentId)),
+        env.STUDENT_MEMORY ? safeKv(env.STUDENT_MEMORY.get(`mem:${studentId}`)) : Promise.resolve(null),
+        sessionMode === "phonics" ? safeKv(env.NET_PET_KV.get("phonics_progress_" + studentId)) : Promise.resolve(null),
+        safeKv(env.NET_PET_KV.get("session_history_" + studentId)),
+        safeKv(env.NET_PET_KV.get("srs_data_" + studentId)),
+        env.STUDENT_MEMORY ? safeKv(env.STUDENT_MEMORY.get(`transcript_index:${studentId}`)) : Promise.resolve(null)
       ]);
       const phonicsRaw = env.ENCRYPTION_KEY && rawPhonics?.startsWith("v1:") ? await decryptField(rawPhonics.slice(3), env.ENCRYPTION_KEY).catch(() => null) : rawPhonics;
       const sessionHistRaw = env.ENCRYPTION_KEY && rawSessionHistory?.startsWith("v1:") ? await decryptField(rawSessionHistory.slice(3), env.ENCRYPTION_KEY).catch(() => null) : rawSessionHistory;
@@ -15235,7 +15239,11 @@ async function handleAPI(path, request, env, url) {
     const _sessGetRosterCheck = validateActiveStudent(studentId);
     if (!_sessGetRosterCheck.valid) return addCors(json({ error: "student not authorized", code: "NOT_IN_ROSTER" }, 403), request);
     try {
-      const history = await kvDecryptGet(env.NET_PET_KV, `session_history_${studentId}`, env.ENCRYPTION_KEY) ?? [];
+      let history = [];
+      try {
+        history = await kvDecryptGet(env.NET_PET_KV, `session_history_${studentId}`, env.ENCRYPTION_KEY) ?? [];
+      } catch (e) {
+      }
       return addCors(json({ sessions: history, count: history.length }), request);
     } catch (err) {
       return addCors(json({ error: err.message }, 500), request);
@@ -19544,13 +19552,17 @@ async function checkQuota(env, studentId, type) {
   if (limit === void 0) throw new Error(`Unsupported quota type: ${type}`);
   const hourBucket = Math.floor(Date.now() / 36e5);
   const key = `quota:${studentId}:${type}:${hourBucket}`;
-  const stored = await env.RATELIMIT.get(key);
-  const count = stored ? parseInt(stored, 10) : 0;
-  if (count >= limit) {
-    const retryAfter = Math.ceil(((hourBucket + 1) * 36e5 - Date.now()) / 1e3);
-    return { allowed: false, retryAfter };
+  try {
+    const stored = await env.RATELIMIT.get(key);
+    const count = stored ? parseInt(stored, 10) : 0;
+    if (count >= limit) {
+      const retryAfter = Math.ceil(((hourBucket + 1) * 36e5 - Date.now()) / 1e3);
+      return { allowed: false, retryAfter };
+    }
+    await env.RATELIMIT.put(key, String(count + 1), { expirationTtl: 7200 });
+  } catch (e) {
+    return { allowed: true };
   }
-  await env.RATELIMIT.put(key, String(count + 1), { expirationTtl: 7200 });
   return { allowed: true };
 }
 __name(checkQuota, "checkQuota");
