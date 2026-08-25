@@ -41,3 +41,12 @@ Do NOT rebuild from src/index.js (STALE). Do not re-add the trailing boundary ju
 .github/workflows/deploy-net-pet-ai.yml: path APPS/NET-PET-AI/ -> NET-PET-AI/, deploys the fixed bundle
 via wrangler.toml main, adds a /api/deepgram-token guardrail. Still needs CLOUDFLARE_API_TOKEN +
 CLOUDFLARE_ACCOUNT_ID repo secrets (currently ZERO - CI cannot run until added).
+
+
+## VERIFIED DEPLOY METHOD (2026-08-25)
+
+- WORKING: PUT /accounts/{ACCOUNT_ID}/workers/scripts/{WORKER_NAME} (legacy endpoint) with multipart/form-data: part1 "metadata" (JSON: main_module, compatibility_date, compatibility_flags, usage_model, keep_assets:true, bindings=[ALL non-secret bindings verbatim from current settings]), part2 "script" (the router.js bundle, Content-Type application/javascript+module).
+  - Merge semantics confirmed: unlisted bindings (secrets) are PRESERVED. Include DO namespace ids, KV, queue, assets, plain_text vars, and the SOUL_DB d1 binding explicitly.
+  - D1 binding type in deploy metadata: use "type":"d1_database","database_id":"c69a11bc-064b-478f-9b1f-e9b8e2431fb8","database_name":"soul-archive".
+- DOES NOT WORK with current API token: PUT /accounts/{ACCOUNT_ID}/workers/services/{WORKER_NAME}/script?excludeScript=true -> HTTP 405 "Method not allowed for this authentication scheme". Use the legacy endpoint above instead.
+- Account KV daily read quota (free plan 100K reads/day) is exhausted as of 2026-08-25 -> KV.get() throws "KV get() limit exceeded for the day." on ALL workers in the account (resets 00:00 UTC). The deepgram-token bundle now FAILS OPEN on KV errors so the voice endpoint keeps working (default/unpersonalized settings).
