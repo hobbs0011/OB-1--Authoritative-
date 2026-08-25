@@ -15165,10 +15165,10 @@ async function handleAPI(path, request, env, url) {
           language: "en",
           greeting: buildGreeting(agentProfile, sessionMode, memoryData?.last_topic || null),
           listen: {
-            provider: { type: "deepgram", model: "nova-3" }
+            provider: { type: "deepgram", model: "flux-general-en", version: "v2" }
           },
           think: {
-            provider: { type: "deepgram", model: "gpt-4o-mini" },
+            provider: { type: "deepgram", model: "gemini-3.1-flash-lite" },
             prompt: buildAgentPrompt(agentProfile, agentLang, recentVocab, arcData, sessionMode, memoryData, phonicsData),
             functions: [{
               name: "save_vocabulary_word",
@@ -15177,7 +15177,7 @@ async function handleAPI(path, request, env, url) {
             }]
           },
           speak: {
-            provider: { type: "deepgram", model: "aura-2-zeus-en" }
+            provider: { type: "deepgram", model: "aura-2-odysseus-en" }
           }
         }
       };
