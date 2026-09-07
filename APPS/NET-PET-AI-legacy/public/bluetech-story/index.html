@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlueTech — The Story</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue-deep: #050d1a;
+      --blue-dark: #0a1929;
+      --blue-mid: #0f3460;
+      --blue: #0056b3;
+      --blue-bright: #00a3e0;
+      --blue-glow: rgba(0, 163, 224, 0.35);
+      --white: #ffffff;
+      --white-soft: #e6f2ff;
+      --gold: #f0c060;
+      --green: #00ff88;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      background: var(--blue-deep);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .letterbox {
+      position: fixed;
+      left: 0; right: 0;
+      height: 6vh;
+      background: #000;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    .letterbox.top { top: 0; }
+    .letterbox.bottom { bottom: 0; }
+
+    .nav {
+      position: fixed;
+      top: 6vh;
+      left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: linear-gradient(180deg, rgba(5,13,26,0.95) 0%, transparent 100%);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.3em;
+      color: var(--blue-bright);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--blue-bright);
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 12vh 2rem 8vh;
+      position: relative;
+      z-index: 10;
+      animation: fadeIn 0.8s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--blue-bright);
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      margin-bottom: 2rem;
+      background: linear-gradient(180deg, #ffffff 0%, #a0d8ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .body-text {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.8);
+      max-width: 750px;
+      font-weight: 300;
+    }
+
+    /* Story blocks */
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+    .story-block {
+      padding: 2.5rem;
+      border-left: 2px solid var(--blue-bright);
+      background: rgba(0,163,224,0.03);
+      transition: all 0.4s ease;
+    }
+    .story-block:hover {
+      background: rgba(0,163,224,0.08);
+      transform: translateX(5px);
+    }
+    .story-block h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.8rem;
+      color: var(--blue-bright);
+    }
+    .story-block p {
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    /* Big quote */
+    .big-quote {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      text-align: center;
+      padding: 4rem 0;
+      position: relative;
+    }
+    .big-quote::before, .big-quote::after {
+      content: '"';
+      font-size: 8rem;
+      color: var(--blue-bright);
+      opacity: 0.3;
+      position: absolute;
+      font-family: Georgia, serif;
+    }
+    .big-quote::before { top: -2rem; left: -1rem; }
+    .big-quote::after { bottom: -4rem; right: -1rem; }
+
+    /* Manifesto section */
+    .manifesto {
+      background: linear-gradient(145deg, rgba(0,255,136,0.05) 0%, rgba(5,13,26,0.4) 100%);
+      border: 1px solid rgba(0,255,136,0.2);
+      padding: 3rem;
+      margin-top: 4rem;
+    }
+
+    .manifesto h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      color: var(--green);
+    }
+
+    .manifesto-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .manifesto-item {
+      padding: 1.5rem;
+      background: rgba(0,0,0,0.2);
+      border-left: 2px solid var(--green);
+    }
+
+    .manifesto-item h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.8rem;
+      color: var(--white);
+    }
+
+    .manifesto-item p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+    }
+
+    /* CTA */
+    .cta-btn {
+      display: inline-block;
+      padding: 1.1rem 3.5rem;
+      border: 2px solid var(--blue-bright);
+      color: var(--white);
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      background: transparent;
+      margin-top: 2rem;
+    }
+    .cta-btn:hover {
+      border-color: #fff;
+      box-shadow: 0 0 35px var(--blue-glow), 0 0 80px rgba(0,163,224,0.2);
+      transform: translateY(-2px);
+    }
+
+    .page {
+      animation: fadeIn 0.8s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .story-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .nav { padding: 1rem 1.5rem; }
+      .manifesto-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="letterbox top"></div>
+  <div class="letterbox bottom"></div>
+
+  <nav class="nav">
+    <a href="/bluetech-cinematic/" class="nav-logo">BLUETECH</a>
+    <ul class="nav-links">
+      <li><a href="/bluetech-cinematic/">Home</a></li>
+      <li><a href="/bluetech-story/" class="active">Story</a></li>
+      <li><a href="/bluetech-programs/">Programs</a></li>
+      <li><a href="/bluetech-demo/">Demo</a></li>
+      <li><a href="/bluetech-contact/">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+    <div class="container">
+      <div class="section-label">Chapter 01 — The Problem</div>
+      <h1 class="section-title">TEAMS ARE STUCK<br>IN TRANSLATION.</h1>
+      <p class="body-text">
+        In every meeting, the same pattern repeats: bright people, big ideas, and a language barrier that slows everything down. 
+        Your team has the expertise. What they lack is the fluency to move at the speed of thought.
+      </p>
+
+      <div class="story-grid">
+        <div class="story-block">
+          <h3>The Translation Tax</h3>
+          <p>Every idea that passes through translation loses precision. Nuance dies in the middleman. By the time understanding lands, urgency is gone.</p>
+        </div>
+        <div class="story-block">
+          <h3>The Confidence Gap</h3>
+          <p>Talented professionals stay silent in rooms where English is the currency. Their hesitation isn't lack of knowledge — it's lack of flow.</p>
+        </div>
+        <div class="story-block">
+          <h3>The Training Gap</h3>
+          <p>Generic courses teach grammar. Real business requires conversation, negotiation, persuasion. Most programs never bridge that gap.</p>
+        </div>
+        <div class="story-block">
+          <h3>The Opportunity</h3>
+          <p>What if your team could think in English? Not translate to it — actually operate in it. That's not training. That's transformation.</p>
+        </div>
+      </div>
+
+      <div class="big-quote">
+        We don't teach English.<br>We build English reflexes.
+      </div>
+
+      <!-- Manifesto -->
+      <div class="manifesto">
+        <h3>⚡ WHY THIS IS DIFFERENT</h3>
+        <div class="manifesto-grid">
+          <div class="manifesto-item">
+            <h4>Language Acquisition</h4>
+            <p>This isn't the failed language learning model that plagues Vietnam. This is natural language acquisition — like learning your first language.</p>
+          </div>
+          <div class="manifesto-item">
+            <h4>Scientific Methods</h4>
+            <p>Backed by spaced repetition and real-world language from your environment. Not memorization. Not cramming. Real retention.</p>
+          </div>
+          <div class="manifesto-item">
+            <h4>Dual Accountability</h4>
+            <p>The system holds students accountable AND holds trainers accountable. Measurable results for both sides. No smoke, no mirrors.</p>
+          </div>
+          <div class="manifesto-item">
+            <h4>Occupation-First Design</h4>
+            <p>Each student portal is built around their actual job. Every practice scenario mirrors their real work environment.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="/bluetech-programs/" class="cta-btn">See The Solution</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

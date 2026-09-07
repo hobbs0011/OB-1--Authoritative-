@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlueTech — Employer Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue-deep: #050d1a;
+      --blue-dark: #0a1929;
+      --blue-mid: #0f3460;
+      --blue: #0056b3;
+      --blue-bright: #00a3e0;
+      --blue-glow: rgba(0, 163, 224, 0.35);
+      --white: #ffffff;
+      --white-soft: #e6f2ff;
+      --gold: #f0c060;
+      --green: #00ff88;
+      --red: #ef4444;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      background: var(--blue-deep);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: linear-gradient(180deg, rgba(5,13,26,0.95) 0%, transparent 100%);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.3em;
+      color: var(--blue-bright);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--blue-bright);
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 10vh 2rem 4vh;
+      position: relative;
+      z-index: 10;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--blue-bright);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      margin-bottom: 2rem;
+      background: linear-gradient(180deg, #ffffff 0%, #a0d8ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Accountability Banner */
+    .accountability-banner {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(245, 158, 11, 0.1));
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .accountability-banner .icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    .accountability-banner .text {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.6;
+    }
+    .accountability-banner .text strong {
+      color: var(--white);
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: linear-gradient(145deg, rgba(15,52,96,0.4) 0%, rgba(5,13,26,0.6) 100%);
+      border: 1px solid rgba(0,163,224,0.2);
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      border-color: var(--blue-bright);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,163,224,0.15);
+    }
+
+    .stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: var(--blue-bright);
+      line-height: 1;
+      text-shadow: 0 0 20px var(--blue-glow);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-top: 0.5rem;
+    }
+
+    .stat-change {
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+
+    .stat-change.positive { color: var(--green); }
+    .stat-change.negative { color: var(--red); }
+
+    /* Employee Cards */
+    .employee-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .employee-card {
+      background: linear-gradient(145deg, rgba(15,52,96,0.4) 0%, rgba(5,13,26,0.6) 100%);
+      border: 1px solid rgba(0,163,224,0.2);
+      padding: 1.5rem;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .employee-card:hover {
+      border-color: var(--blue-bright);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,163,224,0.15);
+    }
+
+    .employee-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1rem;
+    }
+
+    .employee-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-bright), var(--blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+
+    .employee-info h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .employee-info .role {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .employee-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0,163,224,0.15);
+    }
+
+    .metric {
+      text-align: center;
+    }
+
+    .metric-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      color: var(--blue-bright);
+      line-height: 1;
+    }
+
+    .metric-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-top: 4px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .badge-gold {
+      background: rgba(240, 192, 96, 0.15);
+      color: var(--gold);
+      border: 1px solid rgba(240, 192, 96, 0.3);
+    }
+
+    .badge-silver {
+      background: rgba(148, 163, 184, 0.15);
+      color: #94a3b8;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .badge-bronze {
+      background: rgba(180, 130, 80, 0.15);
+      color: #b48250;
+      border: 1px solid rgba(180, 130, 80, 0.3);
+    }
+
+    /* ROI Section */
+    .roi-section {
+      background: linear-gradient(145deg, rgba(0,163,224,0.08) 0%, rgba(5,13,26,0.4) 100%);
+      border-left: 3px solid var(--blue-bright);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-bottom: 3rem;
+    }
+
+    .roi-section h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+      color: var(--blue-bright);
+    }
+
+    .roi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .roi-item {
+      text-align: center;
+    }
+
+    .roi-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: var(--blue-bright);
+      line-height: 1;
+    }
+
+    .roi-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-top: 0.5rem;
+    }
+
+    /* CTA */
+    .cta-btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      border: 2px solid var(--blue-bright);
+      color: var(--white);
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      transition: all 0.4s ease;
+      background: transparent;
+      margin-top: 1rem;
+    }
+
+    .cta-btn:hover {
+      border-color: #fff;
+      box-shadow: 0 0 35px var(--blue-glow), 0 0 80px rgba(0,163,224,0.2);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { gap: 1.2rem; }
+      .nav { padding: 1rem 1.5rem; }
+      .employee-metrics { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="/bluetech-cinematic/" class="nav-logo">BLUETECH</a>
+    <ul class="nav-links">
+      <li><a href="/bluetech-cinematic/">Home</a></li>
+      <li><a href="/bluetech-story/">Story</a></li>
+      <li><a href="/bluetech-programs/">Programs</a></li>
+      <li><a href="/bluetech-demo/">Demo</a></li>
+      <li><a href="/bluetech-contact/">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+    <div class="container">
+      <div class="section-label">Employer Dashboard</div>
+      <h1 class="section-title">TEAM PERFORMANCE</h1>
+
+      <!-- Accountability Banner -->
+      <div class="accountability-banner">
+        <div class="icon">⚡</div>
+        <div class="text">
+          <strong>Investment Protection:</strong> This program only works if employees do the work. 
+          Consistent practice = real ROI. No practice = wasted investment. 
+          Use this dashboard to track engagement and hold your team accountable.
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">12</div>
+          <div class="stat-label">Active Employees</div>
+          <div class="stat-change positive">↑ 2 this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">87%</div>
+          <div class="stat-label">Avg Completion Rate</div>
+          <div class="stat-change positive">↑ 5% vs last month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">4.2</div>
+          <div class="stat-label">Avg Session Score</div>
+          <div class="stat-change positive">↑ 0.3 improvement</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">23</div>
+          <div class="stat-label">Avg Streak (days)</div>
+          <div class="stat-change negative">↓ 2 this week</div>
+        </div>
+      </div>
+
+      <!-- ROI Section -->
+      <div class="roi-section">
+        <h3>📊 RETURN ON INVESTMENT</h3>
+        <div class="roi-grid">
+          <div class="roi-item">
+            <div class="roi-value">3x</div>
+            <div class="roi-label">Faster Deal Cycles</div>
+          </div>
+          <div class="roi-item">
+            <div class="roi-value">40%</div>
+            <div class="roi-label">Fewer Misunderstandings</div>
+          </div>
+          <div class="roi-item">
+            <div class="roi-value">92%</div>
+            <div class="roi-label">Client Retention</div>
+          </div>
+          <div class="roi-item">
+            <div class="roi-value">24/7</div>
+            <div class="roi-label">Practice Access</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Employee Cards -->
+      <div class="employee-grid">
+        <div class="employee-card">
+          <div class="employee-header">
+            <div class="employee-avatar">H</div>
+            <div class="employee-info">
+              <h3>Huong</h3>
+              <div class="role">Accounting Team</div>
+            </div>
+          </div>
+          <div class="employee-metrics">
+            <div class="metric">
+              <div class="metric-value">18</div>
+              <div class="metric-label">Lessons Done</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">26</div>
+              <div class="metric-label">Day Streak</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">B2</div>
+              <div class="metric-label">CEFR Level</div>
+            </div>
+          </div>
+          <span class="badge badge-gold">🏆 Consistent Performer</span>
+        </div>
+
+        <div class="employee-card">
+          <div class="employee-header">
+            <div class="employee-avatar">M</div>
+            <div class="employee-info">
+              <h3>Mai Tram</h3>
+              <div class="role">Sales Team</div>
+            </div>
+          </div>
+          <div class="employee-metrics">
+            <div class="metric">
+              <div class="metric-value">15</div>
+              <div class="metric-label">Lessons Done</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">14</div>
+              <div class="metric-label">Day Streak</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">B1</div>
+              <div class="metric-label">CEFR Level</div>
+            </div>
+          </div>
+          <span class="badge badge-silver">⭐ Improving</span>
+        </div>
+
+        <div class="employee-card">
+          <div class="employee-header">
+            <div class="employee-avatar">Q</div>
+            <div class="employee-info">
+              <h3>Quy</h3>
+              <div class="role">Presenting Team</div>
+            </div>
+          </div>
+          <div class="employee-metrics">
+            <div class="metric">
+              <div class="metric-value">12</div>
+              <div class="metric-label">Lessons Done</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">8</div>
+              <div class="metric-label">Day Streak</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">B1</div>
+              <div class="metric-label">CEFR Level</div>
+            </div>
+          </div>
+          <span class="badge badge-bronze">🔥 Getting Started</span>
+        </div>
+      </div>
+
+      <!-- Placeholder Metrics -->
+      <div class="roi-section" style="border-left-color: var(--gold);">
+        <h3 style="color: var(--gold);">📈 COMING SOON — ADVANCED METRICS</h3>
+        <div class="roi-grid">
+          <div class="roi-item">
+            <div class="roi-value" style="color: var(--gold);">--</div>
+            <div class="roi-label">Weekly Lesson Completion</div>
+          </div>
+          <div class="roi-item">
+            <div class="roi-value" style="color: var(--gold);">--</div>
+            <div class="roi-label">Home Study Minutes</div>
+          </div>
+          <div class="roi-item">
+            <div class="roi-value" style="color: var(--gold);">--</div>
+            <div class="roi-label">Client Conversation Score</div>
+          </div>
+          <div class="roi-item">
+            <div class="roi-value" style="color: var(--gold);">--</div>
+            <div class="roi-label">Team Leaderboard</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center;">
+        <a href="/bluetech-login/" class="cta-btn">Back to Login</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

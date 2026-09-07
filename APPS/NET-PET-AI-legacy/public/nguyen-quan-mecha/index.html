@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a12">
+  <title>Quan — Project: Steel Guardian · Prototype Test Frame</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --g-red: #cc2222;
+      --g-red-dim: rgba(204,34,34,0.12);
+      --g-blue: #2266cc;
+      --g-blue-dim: rgba(34,102,204,0.08);
+      --g-yellow: #f0c040;
+      --g-yellow-dim: rgba(240,192,64,0.12);
+      --g-white: #e8e8f2;
+      --g-silver: #8888a0;
+      --g-dark: #0d0d18;
+      --g-panel: rgba(10,12,22,0.93);
+      --g-border: rgba(204,34,34,0.12);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      background: var(--g-dark);
+      color: var(--g-white);
+      font-family:'Inter',sans-serif;
+      overflow-x:hidden;
+    }
+
+    /* ── Fixed scanlines ── */
+    .scanlines {
+      position:fixed; inset:0;
+      background: repeating-linear-gradient(0deg, transparent,transparent 3px, rgba(0,0,0,0.06) 3px, rgba(0,0,0,0.06) 4px);
+      pointer-events:none; z-index:100;
+    }
+    .caution-bar {
+      position:fixed; left:0; right:0; height:4px; z-index:101;
+      background: repeating-linear-gradient(90deg, var(--g-yellow) 0px, var(--g-yellow) 16px, #000 16px, #000 24px);
+    }
+    .caution-bar.top { top:0; }
+    .caution-bar.bottom { bottom:0; }
+
+    /* ── Particle Canvas (fixed) ── */
+    #particleCanvas {
+      position:fixed; inset:0; width:100%; height:100%;
+      z-index:0; pointer-events:none;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position:fixed; top:4px; left:0; right:0; z-index:80;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 28px; height:52px;
+      background: linear-gradient(180deg, rgba(10,12,22,0.97) 0%, transparent 100%);
+      border-bottom:1px solid rgba(204,34,34,0.1);
+      opacity:0; transform:translateY(-12px);
+      transition:opacity 0.6s, transform 0.6s;
+    }
+    .nav.visible { opacity:1; transform:translateY(0); }
+    .nav-brand {
+      font-family:'Orbitron',sans-serif; font-size:0.85rem; font-weight:700;
+      letter-spacing:0.08em; text-transform:uppercase; color:var(--g-white);
+      display:flex; align-items:center; gap:10px;
+    }
+    .nav-brand span { color:var(--g-red); }
+    .nav-brand small { font-family:'Rajdhani',sans-serif; font-size:0.6rem; font-weight:500; color:var(--g-silver); letter-spacing:0.1em; }
+    .nav-links { display:flex; gap:20px; }
+    .nav-links a {
+      font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600;
+      letter-spacing:0.08em; text-transform:uppercase;
+      color:var(--g-silver); text-decoration:none; transition:color 0.3s;
+    }
+    .nav-links a:hover { color:var(--g-red); }
+
+    .stage { position:relative; z-index:10; }
+    .reveal { opacity:0; transform:translateY(40px); transition:opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height:100vh;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      text-align:center; padding:5rem 2rem 4rem;
+      position:relative;
+      background: radial-gradient(ellipse at center, rgba(204,34,34,0.06) 0%, transparent 60%),
+                  linear-gradient(180deg,#0d0d18 0%,#0a0c16 100%);
+    }
+    /* Mecha canvas overlay on hero */
+    #mechaCanvas {
+      position:absolute; inset:0; width:100%; height:100%;
+      z-index:0; pointer-events:none; opacity:0.85;
+    }
+    .hero-content { position:relative; z-index:2; }
+
+    .hero .title-pre {
+      font-family:'Rajdhani',sans-serif; font-size:0.8rem; font-weight:600;
+      letter-spacing:0.3em; text-transform:uppercase; color:var(--g-silver); margin-bottom:0.5rem;
+    }
+    .hero .title-pre em { font-style:normal; color:var(--g-yellow); }
+    .hero h1 {
+      font-family:'Orbitron',sans-serif; font-size:clamp(2.8rem,8vw,6rem); font-weight:900;
+      letter-spacing:0.04em; line-height:1;
+      background:linear-gradient(180deg,#ffffff 0%,var(--g-white) 40%,var(--g-silver) 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      filter:drop-shadow(0 0 30px rgba(204,34,34,0.3));
+    }
+    .hero h1 span { background:linear-gradient(180deg,var(--g-red),#881111); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero .title-sub {
+      font-family:'Rajdhani',sans-serif; font-size:clamp(0.9rem,2vw,1.2rem); font-weight:500;
+      letter-spacing:0.25em; text-transform:uppercase; color:var(--g-silver); margin-top:0.75rem; opacity:0.8;
+    }
+    .hero .divider { width:120px; height:2px; margin:1.5rem auto; background:linear-gradient(90deg,transparent,var(--g-red),var(--g-yellow),transparent); }
+    .hero p.tagline {
+      font-family:'Rajdhani',sans-serif; font-size:clamp(0.95rem,1.8vw,1.15rem); font-weight:400;
+      line-height:1.7; max-width:650px; color:rgba(232,232,240,0.8); margin-bottom:1.5rem;
+    }
+    .hero-cta {
+      display:inline-flex; align-items:center; gap:10px;
+      padding:14px 32px; border-radius:3px;
+      border:1px solid var(--g-red); background:rgba(204,34,34,0.08);
+      color:var(--g-red); font-family:'Orbitron',sans-serif;
+      font-weight:700; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase;
+      text-decoration:none; cursor:pointer; transition:all 0.4s;
+    }
+    .hero-cta:hover { background:rgba(204,34,34,0.2); box-shadow:0 0 40px rgba(204,34,34,0.2); }
+
+    .specs { display:flex; gap:2.5rem; flex-wrap:wrap; justify-content:center; margin:2rem 0; }
+    .spec { text-align:center; }
+    .spec-num { font-family:'Orbitron',sans-serif; font-size:clamp(2.5rem,5vw,3.5rem); font-weight:800; color:var(--g-red); line-height:1; letter-spacing:0.04em; }
+    .spec-label { font-size:0.68rem; color:var(--g-silver); letter-spacing:0.12em; text-transform:uppercase; margin-top:6px; font-weight:600; }
+
+    /* ── Blueprint Section ── */
+    .blueprint {
+      position:relative; padding:5rem 2rem;
+      background:repeating-linear-gradient(0deg,transparent,transparent 30px,rgba(34,102,204,0.04) 30px,rgba(34,102,204,0.04) 31px),
+        repeating-linear-gradient(90deg,transparent,transparent 30px,rgba(34,102,204,0.04) 30px,rgba(34,102,204,0.04) 31px),
+        linear-gradient(180deg,#0d0f20,#0a0c16);
+    }
+    .blueprint::before {
+      content:'[ QN-FRAME-01 PROTOTYPE SCHEMATIC ]'; position:absolute; top:1.5rem; left:2rem;
+      font-family:'Rajdhani',sans-serif; font-size:0.65rem; font-weight:600; letter-spacing:0.12em;
+      color:rgba(34,102,204,0.2); text-transform:uppercase;
+    }
+    .sec-title { text-align:center; margin-bottom:3rem; }
+    .sec-title h2 {
+      font-family:'Orbitron',sans-serif; font-size:clamp(1.6rem,4vw,2.8rem); font-weight:800;
+      letter-spacing:0.04em; text-transform:uppercase;
+      background:linear-gradient(180deg,var(--g-white),var(--g-silver));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .sec-title p { font-family:'Rajdhani',sans-serif; color:var(--g-silver); font-size:1rem; font-weight:400; margin-top:4px; }
+
+    .frame-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; max-width:900px; margin:0 auto 3rem; }
+    .frame-part {
+      background:rgba(10,12,22,0.9); border:1px solid rgba(34,102,204,0.12);
+      border-radius:8px; padding:20px; position:relative; overflow:hidden; transition:border-color 0.3s;
+    }
+    .frame-part:hover { border-color:rgba(34,102,204,0.3); }
+    .frame-part .part-icon { width:36px; height:36px; border-radius:4px; display:flex; align-items:center; justify-content:center; margin-bottom:10px; font-size:1.1rem; }
+    .frame-part .part-icon.red { background:var(--g-red-dim); border:1px solid rgba(204,34,34,0.15); color:var(--g-red); }
+    .frame-part .part-icon.blue { background:var(--g-blue-dim); border:1px solid rgba(34,102,204,0.15); color:var(--g-blue); }
+    .frame-part .part-icon.yellow { background:var(--g-yellow-dim); border:1px solid rgba(240,192,64,0.15); color:var(--g-yellow); }
+    .frame-part h4 { font-family:'Orbitron',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px; }
+    .frame-part p { font-family:'Rajdhani',sans-serif; font-size:0.85rem; font-weight:400; color:var(--g-silver); line-height:1.5; }
+
+    /* ── Hologram Wireframe ── */
+    .holo-section {
+      position:relative; padding:4rem 2rem; text-align:center;
+      background:linear-gradient(180deg,#0d0f20,#0a0c16);
+      overflow:hidden;
+    }
+    #holoCanvas {
+      position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+      width:500px; height:500px; max-width:90vw;
+      opacity:0.9; z-index:0; pointer-events:none;
+    }
+    .holo-content { position:relative; z-index:2; }
+
+    /* ── Gallery ── */
+    .gallery {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px;
+      max-width:800px; margin:2rem auto;
+    }
+    .gal-card {
+      background:rgba(10,12,22,0.9); border:1px solid rgba(204,34,34,0.1); border-radius:8px;
+      padding:16px; text-align:center; transition:border-color 0.3s;
+    }
+    .gal-card:hover { border-color:rgba(204,34,34,0.3); }
+    .gal-card canvas { width:100%; aspect-ratio:1/1; border-radius:4px; background:#08080e; }
+    .gal-card h4 { font-family:'Orbitron',sans-serif; font-size:0.7rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-top:10px; color:var(--g-silver); }
+    .gal-card p { font-family:'Rajdhani',sans-serif; font-size:0.75rem; color:var(--g-silver); margin-top:2px; }
+
+    /* ── Timeline ── */
+    .ops-timeline { max-width:800px; margin:0 auto; position:relative; }
+    .ops-timeline::before { content:''; position:absolute; left:20px; top:0; bottom:0; width:2px; background:linear-gradient(180deg,var(--g-red),var(--g-yellow),transparent); opacity:0.3; }
+    .ops-week { display:flex; gap:20px; align-items:flex-start; margin-bottom:40px; position:relative; }
+    .ops-week .wk-num {
+      flex-shrink:0; width:40px; height:40px; border-radius:50%;
+      background:linear-gradient(135deg,var(--g-red),#881111); border:2px solid var(--g-yellow);
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Orbitron',sans-serif; font-size:0.8rem; font-weight:700; color:var(--g-white);
+      box-shadow:0 0 20px rgba(204,34,34,0.2);
+    }
+    .ops-week .wk-body { flex:1; background:rgba(10,12,22,0.85); border:1px solid rgba(204,34,34,0.1); border-radius:10px; padding:18px 20px; }
+    .ops-week .wk-body h4 { font-family:'Orbitron',sans-serif; font-size:0.82rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px; }
+    .ops-week .wk-body h4 span { color:var(--g-red); }
+    .ops-week .wk-body p { font-family:'Rajdhani',sans-serif; font-size:0.85rem; color:var(--g-silver); line-height:1.5; }
+    .wk-tasks { list-style:none; margin-top:10px; }
+    .wk-tasks li { display:flex; align-items:center; gap:8px; font-size:0.8rem; color:var(--g-silver); padding:4px 0; font-family:'Rajdhani',sans-serif; font-weight:500; }
+    .wk-tasks li::before { content:'▸'; color:var(--g-red); font-weight:700; }
+
+    /* ── Console ── */
+    .console { max-width:900px; margin:2rem auto; padding:1rem 2rem 2rem; background:rgba(10,12,22,0.85); border:1px solid rgba(204,34,34,0.08); border-radius:12px; }
+    .console-header { display:flex; align-items:center; gap:10px; padding-bottom:12px; border-bottom:1px solid rgba(204,34,34,0.08); margin-bottom:16px; }
+    .console-header .con-icon { color:var(--g-red); font-size:1.1rem; }
+    .console-header h3 { font-family:'Orbitron',sans-serif; font-size:0.78rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--g-silver); }
+    .console-days { display:flex; gap:8px; flex-wrap:wrap; }
+    .con-day { padding:8px 16px; border-radius:4px; text-align:center; flex:1; min-width:80px; border:1px solid rgba(204,34,34,0.12); background:rgba(0,0,0,0.2); }
+    .con-day .dy { font-family:'Rajdhani',sans-serif; font-size:0.78rem; font-weight:600; color:var(--g-silver); text-transform:uppercase; }
+    .con-day .dt { font-family:'Orbitron',sans-serif; font-size:0.65rem; color:var(--g-silver); letter-spacing:0.04em; margin-top:2px; }
+    .con-day .act { font-family:'Rajdhani',sans-serif; font-size:0.72rem; font-weight:600; margin-top:4px; }
+    .con-day.ops { border-color:rgba(204,34,34,0.25); }
+    .con-day.ops .act { color:var(--g-red); }
+    .con-day.study { border-color:rgba(34,102,204,0.2); }
+    .con-day.study .act { color:var(--g-blue); }
+    .con-day.rest .act { color:var(--g-silver); }
+
+    .footer { text-align:center; padding:3rem 2rem; border-top:1px solid rgba(204,34,34,0.06); margin-top:2rem; }
+    .footer p { font-family:'Rajdhani',sans-serif; font-size:0.75rem; color:var(--g-silver); letter-spacing:0.06em; }
+    .footer p em { font-style:normal; color:var(--g-red); }
+    .footer .back-link { display:inline-block; margin-top:1.2rem; padding:10px 24px; border-radius:3px; border:1px solid rgba(204,34,34,0.2); color:var(--g-silver); text-decoration:none; font-family:'Orbitron',sans-serif; font-size:0.7rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; transition:all 0.3s; }
+    .footer .back-link:hover { border-color:var(--g-red); color:var(--g-red); }
+
+    @media (max-width:640px) { .nav-links { display:none; } .hero h1 { font-size:2.2rem; } }
+  </style>
+</head>
+<body>
+  <canvas id="particleCanvas"></canvas>
+  <div class="scanlines"></div>
+  <div class="caution-bar top"></div>
+  <div class="caution-bar bottom"></div>
+
+  <nav class="nav" id="nav">
+    <div class="nav-brand"><span>⍟</span> QN<span>-FRAME</span> <small>Proto-Type-01</small></div>
+    <div class="nav-links">
+      <a href="#frame">Frame Spec</a>
+      <a href="#gallery">Frame Gallery</a>
+      <a href="#ops">OPS Plan</a>
+      <a href="#console">Schedule</a>
+    </div>
+  </nav>
+
+  <div class="stage">
+    <!-- ───────────── HERO ───────────── -->
+    <section class="hero">
+      <canvas id="mechaCanvas"></canvas>
+      <div class="hero-content">
+        <div class="title-pre reveal"><em>QN</em>-FRAME-01 / PROTOTYPE TEST UNIT</div>
+        <h1 class="reveal"><span>STEEL</span> GUARDIAN</h1>
+        <div class="title-sub reveal">Pilot: Quan Nguyen · Mobile Frame Prototype</div>
+        <div class="divider reveal"></div>
+        <p class="tagline reveal">"A frame is only as strong as its pilot. Every mission logged, every sortie completed — that's how you upgrade."</p>
+        <div class="specs reveal">
+          <div class="spec"><div class="spec-num" data-target="36">0</div><div class="spec-label">Ops</div></div>
+          <div class="spec"><div class="spec-num" data-target="4">0</div><div class="spec-label">Phases</div></div>
+          <div class="spec"><div class="spec-num" data-target="12">0</div><div class="spec-label">Sortie Days</div></div>
+          <div class="spec"><div class="spec-num" data-target="20">0</div><div class="spec-label">Min/Sortie</div></div>
+        </div>
+        <a class="hero-cta reveal" href="#frame">Frame Specs ↓</a>
+      </div>
+    </section>
+
+    <!-- ───────────── FRAME SPEC ───────────── -->
+    <section class="blueprint" id="frame">
+      <div class="sec-title reveal">
+        <h2>Frame Specifications</h2>
+        <p>QN-FRAME-01 · Prototype Steel Guardian Unit</p>
+      </div>
+      <div class="frame-grid reveal">
+        <div class="frame-part"><div class="part-icon red">⚡</div><h4>Power Core · Phase 1</h4><p>CV &amp; Resume optimization — the reactor core that powers all downstream systems. Calibrate for maximum output.</p></div>
+        <div class="frame-part"><div class="part-icon blue">📡</div><h4>Comms Array · Phase 2</h4><p>LinkedIn profile setup, bio calibration, and first broadcast (blog post). Establish your signal on the network.</p></div>
+        <div class="frame-part"><div class="part-icon yellow">🔧</div><h4>Weapon System · Phase 3</h4><p>AI 3D modeling research — your experimental weapon platform. Test, iterate, and demonstrate combat readiness.</p></div>
+        <div class="frame-part"><div class="part-icon red">📊</div><h4>Combat Analysis · Phase 4</h4><p>Mission review, performance metrics, and strategic refinement. Learn from every sortie.</p></div>
+      </div>
+    </section>
+
+    <!-- ───────────── HOLOGRAM WIREFRAME ───────────── -->
+    <section class="holo-section">
+      <canvas id="holoCanvas"></canvas>
+      <div class="holo-content reveal" style="position:relative;z-index:2;">
+        <h2 style="font-family:'Orbitron',sans-serif;font-size:clamp(1.3rem,3vw,2rem);font-weight:800;text-transform:uppercase;">Live Frame Scan</h2>
+        <p style="font-family:'Rajdhani',sans-serif;color:var(--g-silver);font-size:0.95rem;">QN-FRAME-01 · wireframe telemetry · all systems nominal</p>
+      </div>
+    </section>
+
+    <!-- ───────────── GALLERY (Canvas-drawn mecha) ───────────── -->
+    <section class="blueprint" id="gallery" style="padding-top:2rem;">
+      <div class="sec-title reveal">
+        <h2>Frame Gallery</h2>
+        <p>Prototype unit renders · real-time canvas drawings</p>
+      </div>
+      <div class="gallery">
+        <div class="gal-card reveal">
+          <canvas class="gal-canvas" data-idx="0"></canvas>
+          <h4>Front View</h4>
+          <p>Standard combat configuration</p>
+        </div>
+        <div class="gal-card reveal">
+          <canvas class="gal-canvas" data-idx="1"></canvas>
+          <h4>Bust Shot</h4>
+          <p>Head &amp; torso assembly</p>
+        </div>
+        <div class="gal-card reveal">
+          <canvas class="gal-canvas" data-idx="2"></canvas>
+          <h4>Right Arm Assembly</h4>
+          <p>Weapon mount &amp; shield hardpoint</p>
+        </div>
+        <div class="gal-card reveal">
+          <canvas class="gal-canvas" data-idx="3"></canvas>
+          <h4>Leg Thruster Array</h4>
+          <p>VTOL &amp; high-mobility package</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────── OPERATION PLAN ───────────── -->
+    <section class="blueprint" id="ops" style="padding-top:2rem;">
+      <div class="sec-title reveal">
+        <h2>Operation <span style="color:var(--g-red);">Timeline</span></h2>
+        <p>4-Phase deployment plan · September 2026</p>
+      </div>
+      <div class="ops-timeline">
+        <div class="ops-week reveal">
+          <div class="wk-num">I</div>
+          <div class="wk-body">
+            <h4>PHASE 01 · <span>REACTOR CALIBRATION</span></h4>
+            <p style="font-size:0.78rem;color:var(--g-silver);">Sep 7 – Sep 13</p>
+            <ul class="wk-tasks"><li>Update CV with latest experience and skills</li><li>Refine resume formatting — ATS-compliant</li><li>Write strong professional summary</li><li>Apply to 3 companies per sortie day</li><li>Professional headshot capture</li></ul>
+          </div>
+        </div>
+        <div class="ops-week reveal">
+          <div class="wk-num">II</div>
+          <div class="wk-body">
+            <h4>PHASE 02 · <span>COMMS ARRAY DEPLOY</span></h4>
+            <p style="font-size:0.78rem;color:var(--g-silver);">Sep 14 – Sep 20</p>
+            <ul class="wk-tasks"><li>Create / optimize LinkedIn profile with headshot</li><li>Write compelling headline and about section</li><li>Connect with 15+ professionals</li><li>Write and publish first LinkedIn blog post</li><li>Apply to 3 companies per sortie day</li></ul>
+          </div>
+        </div>
+        <div class="ops-week reveal">
+          <div class="wk-num">III</div>
+          <div class="wk-body">
+            <h4>PHASE 03 · <span>WEAPON PROTOTYPE</span></h4>
+            <p style="font-size:0.78rem;color:var(--g-silver);">Sep 21 – Sep 27</p>
+            <ul class="wk-tasks"><li>Research AI 3D modeling tools (Meshy, Luma AI, Rodin)</li><li>Create a test model using an AI tool</li><li>Write LinkedIn blog post about AI 3D journey</li><li>Share screenshots / renders of test model</li><li>Apply to 3 companies per sortie day</li></ul>
+          </div>
+        </div>
+        <div class="ops-week reveal">
+          <div class="wk-num">IV</div>
+          <div class="wk-body">
+            <h4>PHASE 04 · <span>PERFORMANCE REVIEW</span></h4>
+            <p style="font-size:0.78rem;color:var(--g-silver);">Sep 28 – Oct 4</p>
+            <ul class="wk-tasks"><li>Review all applications — responses, rejections, next steps</li><li>Analyze LinkedIn profile views and post engagement</li><li>Refine CV and resume based on feedback</li><li>Plan next month's goals and adjustments</li><li>Apply to 3 final companies</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────── SCHEDULE ───────────── -->
+    <section id="console" style="padding:2rem 1rem;">
+      <div class="sec-title reveal">
+        <h2>Sortie Console</h2>
+        <p>Weekly deployment schedule · 20-30 min per sortie</p>
+      </div>
+      <div class="console reveal">
+        <div class="console-header"><span class="con-icon">⌨</span><h3>Duty Roster · September 2026</h3></div>
+        <div class="console-days">
+          <div class="con-day ops"><div class="dy">Monday</div><div class="dt">7 · 14 · 21 · 28</div><div class="act">◈ SORTIE</div></div>
+          <div class="con-day study"><div class="dy">Tuesday</div><div class="dt">8 · 15 · 22 · 29</div><div class="act">▣ STUDY</div></div>
+          <div class="con-day ops"><div class="dy">Wednesday</div><div class="dt">9 · 16 · 23 · 30</div><div class="act">◈ SORTIE</div></div>
+          <div class="con-day study"><div class="dy">Thursday</div><div class="dt">10 · 17 · 24 · 1</div><div class="act">▣ STUDY</div></div>
+          <div class="con-day study"><div class="dy">Friday</div><div class="dt">11 · 18 · 25 · 2</div><div class="act">▣ STUDY</div></div>
+          <div class="con-day ops"><div class="dy">Saturday</div><div class="dt">12 · 19 · 26 · 3</div><div class="act">◈ SORTIE</div></div>
+          <div class="con-day rest"><div class="dy">Sunday</div><div class="dt">13 · 20 · 27 · 4</div><div class="act">◆ R&amp;R</div></div>
+        </div>
+        <div style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(204,34,34,0.06);text-align:center;">
+          <span style="font-family:'Rajdhani',sans-serif;font-size:0.85rem;color:var(--g-silver);">Total deployment: <span style="color:var(--g-red);font-weight:700;font-family:'Orbitron',sans-serif;">36</span> sorties · <span style="color:var(--g-red);font-weight:700;font-family:'Orbitron',sans-serif;">12</span> sortie days · <span style="color:var(--g-red);font-weight:700;font-family:'Orbitron',sans-serif;">3</span> companies per sortie</span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>QN-FRAME-01 / <em>Steel Guardian</em> · Prototype Test Unit · Unauthorized knockoff test frame — no affiliation with any existing IP</p>
+      <a class="back-link" href="/nguyen-login/">← Return to Base</a>
+    </footer>
+  </div>
+
+  <script>
+    // ── PARTICLE FIELD ──
+    (function(){
+      const c = document.getElementById('particleCanvas');
+      const ctx = c.getContext('2d');
+      let w, h, pts = [];
+      function resize() { w=c.width=innerWidth; h=c.height=innerHeight; }
+      resize(); addEventListener('resize', resize);
+      for(let i=0;i<120;i++) pts.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2+0.5,a:Math.random()*0.4+0.1,v:Math.random()*0.02+0.005});
+      function draw() {
+        ctx.clearRect(0,0,w,h);
+        for(const p of pts) {
+          p.a+= (Math.random()-0.5)*p.v; p.a=Math.max(0.05,Math.min(0.5,p.a));
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+          ctx.fillStyle=`rgba(204,34,34,${p.a})`; ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // ── HERO MECHA CANVAS ──
+    (function(){
+      const c = document.getElementById('mechaCanvas');
+      if(!c)return;
+      const ctx=c.getContext('2d');
+      function resize(){ c.width=c.offsetWidth||innerWidth; c.height=c.offsetHeight||innerHeight; }
+      resize(); addEventListener('resize',resize);
+      let tick=0;
+      function draw(){
+        const w=c.width, h=c.height;
+        ctx.clearRect(0,0,w,h);
+        const cx=w*0.5, cy=h*0.48, s=Math.min(w,h)*0.14;
+        ctx.strokeStyle='rgba(204,34,34,0.75)'; ctx.lineWidth=2;
+        // Head
+        ctx.strokeRect(cx-s*0.3, cy-s*0.7, s*0.6, s*0.35);
+        // V-fin
+        ctx.beginPath(); ctx.moveTo(cx,s*0.75); ctx.lineTo(cx-s*0.15,cy-s*0.75); ctx.lineTo(cx-s*0.05,cy-s*0.7); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx,s*0.75); ctx.lineTo(cx+s*0.15,cy-s*0.75); ctx.lineTo(cx+s*0.05,cy-s*0.7); ctx.stroke();
+        // Eyes
+        ctx.fillStyle='rgba(240,192,64,'+(0.85+0.15*Math.sin(tick*0.03))+')';
+        ctx.fillRect(cx-s*0.12,cy-s*0.6,s*0.08,s*0.12);
+        ctx.fillRect(cx+s*0.04,cy-s*0.6,s*0.08,s*0.12);
+        // Neck
+        ctx.strokeRect(cx-s*0.08,cy-s*0.35,s*0.16,s*0.08);
+        // Shoulders
+        ctx.strokeStyle='rgba(204,34,34,0.6)';
+        ctx.beginPath(); ctx.ellipse(cx-s*0.55,cy+s*0.05,s*0.25,s*0.1,-0.3,0,Math.PI*2); ctx.stroke();
+        ctx.beginPath(); ctx.ellipse(cx+s*0.55,cy+s*0.05,s*0.25,s*0.1,0.3,0,Math.PI*2); ctx.stroke();
+        // Torso
+        ctx.strokeStyle='rgba(204,34,34,0.5)';
+        ctx.beginPath(); ctx.moveTo(cx-s*0.2,cy-s*0.27); ctx.lineTo(cx-s*0.25,cy+s*0.4); ctx.lineTo(cx+s*0.25,cy+s*0.4); ctx.lineTo(cx+s*0.2,cy-s*0.27); ctx.closePath(); ctx.stroke();
+        // Center chest
+        ctx.strokeStyle='rgba(240,192,64,0.6)';
+        ctx.beginPath(); ctx.arc(cx,cy+s*0.1,s*0.06,0,Math.PI*2); ctx.stroke();
+        // Arms
+        ctx.strokeStyle='rgba(34,102,204,0.55)';
+        ctx.beginPath(); ctx.moveTo(cx-s*0.55,cy+s*0.05); ctx.lineTo(cx-s*0.8,cy+s*0.45); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx+s*0.55,cy+s*0.05); ctx.lineTo(cx+s*0.8,cy+s*0.45); ctx.stroke();
+        // Legs
+        ctx.strokeStyle='rgba(204,34,34,0.45)';
+        ctx.beginPath(); ctx.moveTo(cx-s*0.1,cy+s*0.4); ctx.lineTo(cx-s*0.15,cy+s*0.9); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx+s*0.1,cy+s*0.4); ctx.lineTo(cx+s*0.15,cy+s*0.9); ctx.stroke();
+        // Thrusters
+        ctx.fillStyle='rgba(240,192,64,'+(0.6+0.3*Math.sin(tick*0.05))+')';
+        const tx=cx+s*0.15, ty=cy+s*0.87;
+        ctx.beginPath(); ctx.arc(tx,ty,s*0.03,0,Math.PI*2); ctx.fill();
+        ctx.fillStyle='rgba(204,34,34,'+(0.5+0.3*Math.sin(tick*0.04+1))+')';
+        ctx.beginPath(); ctx.arc(cx-s*0.15,cy+s*0.87,s*0.03,0,Math.PI*2); ctx.fill();
+        tick++;
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // ── HOLOGRAM WIREFRAME ──
+    (function(){
+      const c = document.getElementById('holoCanvas');
+      if(!c)return;
+      const ctx=c.getContext('2d');
+      function resize(){ c.width=500; c.height=500; }
+      resize();
+      let tick=0;
+      function draw(){
+        const w=500, h=500, cx=250, cy=250, s=120;
+        ctx.clearRect(0,0,w,h);
+        const rot=Math.sin(tick*0.015)*0.4;
+        ctx.save(); ctx.translate(cx,cy); ctx.rotate(rot);
+        ctx.strokeStyle='rgba(34,102,204,0.6)'; ctx.lineWidth=1.5;
+        // Head
+        ctx.strokeRect(-s*0.25,-s*0.65,s*0.5,s*0.3);
+        ctx.beginPath(); ctx.moveTo(0,-s*0.85); ctx.lineTo(-s*0.12,-s*0.65); ctx.moveTo(0,-s*0.85); ctx.lineTo(s*0.12,-s*0.65); ctx.stroke();
+        // Eyes
+        ctx.fillStyle='rgba(240,192,64,0.8)'; ctx.fillRect(-s*0.1,-s*0.55,s*0.06,s*0.08); ctx.fillRect(s*0.04,-s*0.55,s*0.06,s*0.08);
+        // Torso
+        ctx.strokeStyle='rgba(34,102,204,0.5)';
+        ctx.beginPath(); ctx.moveTo(-s*0.2,-s*0.3); ctx.lineTo(-s*0.25,s*0.35); ctx.lineTo(s*0.25,s*0.35); ctx.lineTo(s*0.2,-s*0.3); ctx.closePath(); ctx.stroke();
+        // Shoulder blocks
+        ctx.strokeRect(-s*0.55,-s*0.15,s*0.25,s*0.15);
+        ctx.strokeRect(s*0.3,-s*0.15,s*0.25,s*0.15);
+        // Arms
+        ctx.beginPath(); ctx.moveTo(-s*0.55,-s*0.05); ctx.lineTo(-s*0.7,s*0.35); ctx.moveTo(s*0.55,-s*0.05); ctx.lineTo(s*0.7,s*0.35); ctx.stroke();
+        // Legs
+        ctx.beginPath(); ctx.moveTo(-s*0.12,s*0.35); ctx.lineTo(-s*0.12,s*0.85); ctx.moveTo(s*0.12,s*0.35); ctx.lineTo(s*0.12,s*0.85); ctx.stroke();
+        // Feet
+        ctx.strokeRect(-s*0.18,s*0.82,s*0.2,s*0.06);
+        ctx.strokeRect(s*0.02,s*0.82,s*0.2,s*0.06);
+        // Crosshair rings
+        ctx.strokeStyle='rgba(204,34,34,0.25)';
+        ctx.beginPath(); ctx.arc(0,0,s*0.8,0,Math.PI*2); ctx.stroke();
+        ctx.beginPath(); ctx.arc(0,0,s*0.4,0,Math.PI*2); ctx.stroke();
+        // Targeting reticle
+        ctx.strokeStyle='rgba(204,34,34,0.4)';
+        ctx.beginPath(); ctx.moveTo(-s*0.9,0); ctx.lineTo(-s*0.6,0); ctx.moveTo(s*0.6,0); ctx.lineTo(s*0.9,0); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0,-s*0.9); ctx.lineTo(0,-s*0.6); ctx.moveTo(0,s*0.6); ctx.lineTo(0,s*0.9); ctx.stroke();
+        // Data dots
+        ctx.fillStyle='rgba(34,102,204,0.5)';
+        for(let i=0;i<30;i++){ const a=Math.random()*Math.PI*2, r=Math.random()*s*0.85; ctx.beginPath(); ctx.arc(Math.cos(a)*r,Math.sin(a)*r,2,0,Math.PI*2); ctx.fill(); }
+        ctx.restore();
+        tick++;
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // ── GALLERY CANVASES ──
+    (function(){
+      const canvases = document.querySelectorAll('.gal-canvas');
+      const col=[], cx=200, cy=150;
+      // Front View
+      col.push(function(ctx,w,h){
+        ctx.strokeStyle='rgba(204,34,34,0.8)'; ctx.lineWidth=2;
+        ctx.strokeRect(cx-30,h-100,60,30); // head
+        ctx.beginPath(); ctx.moveTo(cx,30); ctx.lineTo(cx-20,60); ctx.lineTo(cx+20,60); ctx.closePath(); ctx.stroke(); // v-fin
+        ctx.fillStyle='rgba(240,192,64,0.9)'; ctx.fillRect(cx-12,65,10,12); ctx.fillRect(cx+2,65,10,12); // eyes
+        ctx.strokeStyle='rgba(34,102,204,0.7)';
+        ctx.beginPath(); ctx.moveTo(cx-30,85); ctx.lineTo(cx-40,h-40); ctx.lineTo(cx+40,h-40); ctx.lineTo(cx+30,85); ctx.closePath(); ctx.stroke(); // torso
+        ctx.strokeStyle='rgba(204,34,34,0.6)'; ctx.lineWidth=1.5;
+        ctx.beginPath(); ctx.moveTo(cx-50,h-30); ctx.lineTo(cx-50,h+5); ctx.moveTo(cx+50,h-30); ctx.lineTo(cx+50,h+5); ctx.stroke(); // legs
+        ctx.fillStyle='rgba(240,192,64,0.6)'; ctx.beginPath(); ctx.arc(cx,h-30,12,0,Math.PI*2); ctx.fill(); // chest
+      });
+      // Bust Shot
+      col.push(function(ctx,w,h){
+        ctx.strokeStyle='rgba(204,34,34,0.8)'; ctx.lineWidth=2;
+        const cx=200, ch=h*0.4;
+        ctx.strokeRect(cx-35,ch+10,70,40);
+        ctx.beginPath(); ctx.moveTo(cx,ch-10); ctx.lineTo(cx-15,ch+10); ctx.lineTo(cx+15,ch+10); ctx.closePath(); ctx.stroke();
+        ctx.fillStyle='rgba(240,192,64,0.9)'; ctx.fillRect(cx-14,ch+22,10,14); ctx.fillRect(cx+4,ch+22,10,14);
+        ctx.strokeStyle='rgba(34,102,204,0.7)';
+        ctx.beginPath(); ctx.moveTo(cx-32,ch+55); ctx.lineTo(cx-38,ch+100); ctx.lineTo(cx+38,ch+100); ctx.lineTo(cx+32,ch+55); ctx.closePath(); ctx.stroke();
+        ctx.strokeStyle='rgba(204,34,34,0.65)'; ctx.beginPath(); ctx.ellipse(cx,ch+78,14,14,0,0,Math.PI*2); ctx.stroke();
+        // neck vents
+        for(let i=0;i<3;i++){ ctx.strokeStyle='rgba(240,192,64,0.6)'; ctx.beginPath(); ctx.moveTo(cx-10+i*10,ch+48); ctx.lineTo(cx-10+i*10,ch+58); ctx.stroke(); }
+      });
+      // Right Arm
+      col.push(function(ctx,w,h){
+        const ox=180, oy=60;
+        ctx.strokeStyle='rgba(204,34,34,0.8)'; ctx.lineWidth=2;
+        ctx.beginPath(); ctx.ellipse(ox,oy+10,20,15,-0.3,0,Math.PI*2); ctx.stroke(); // shoulder
+        ctx.strokeStyle='rgba(34,102,204,0.7)';
+        ctx.beginPath(); ctx.moveTo(ox+10,oy+20); ctx.lineTo(ox+40,oy+60); ctx.lineTo(ox+30,oy+100); ctx.stroke(); // upper
+        ctx.beginPath(); ctx.moveTo(ox+30,oy+100); ctx.lineTo(ox+20,oy+140); ctx.stroke(); // forearm
+        ctx.strokeStyle='rgba(204,34,34,0.65)';
+        ctx.strokeRect(ox+10,oy+130,25,22); // hand
+        ctx.strokeStyle='rgba(240,192,64,0.7)';
+        ctx.beginPath(); ctx.moveTo(ox+20,oy+145+5*Math.sin(Date.now()*0.005)); ctx.lineTo(ox+40,oy+145+5*Math.sin(Date.now()*0.005)); ctx.stroke(); // weapon line
+      });
+      // Leg
+      col.push(function(ctx,w,h){
+        const cx=200; ctx.strokeStyle='rgba(204,34,34,0.8)'; ctx.lineWidth=2;
+        ctx.strokeRect(cx-15,30,30,25); // hip joint
+        ctx.strokeStyle='rgba(34,102,204,0.7)';
+        ctx.beginPath(); ctx.moveTo(cx-8,55); ctx.lineTo(cx-14,120); ctx.moveTo(cx+8,55); ctx.lineTo(cx+14,120); ctx.stroke(); // thigh
+        ctx.beginPath(); ctx.moveTo(cx-14,120); ctx.lineTo(cx-10,170); ctx.moveTo(cx+14,120); ctx.lineTo(cx+10,170); ctx.stroke(); // calf
+        ctx.strokeStyle='rgba(204,34,34,0.65)'; ctx.strokeRect(cx-18,168,36,22); // foot
+        ctx.fillStyle='rgba(240,192,64,0.6)';
+        ctx.beginPath(); ctx.arc(cx-10,115,12,0,Math.PI*2); ctx.fill(); // knee
+        ctx.beginPath(); ctx.arc(cx+10,115,12,0,Math.PI*2); ctx.fill();
+        // thruster
+        ctx.fillStyle='rgba(240,192,64,0.7)'; ctx.fillRect(cx-5,192,10,10);
+      });
+
+      canvases.forEach((can,idx)=>{
+        const w=can.parentElement.clientWidth||can.width;
+        can.width=w; can.height=w*0.75;
+        const ctx=can.getContext('2d');
+        ctx.fillStyle='#08080e'; ctx.fillRect(0,0,can.width,can.height);
+        if(col[idx]) col[idx](ctx,can.width,can.height);
+        // border glow
+        ctx.strokeStyle='rgba(204,34,34,0.5)'; ctx.lineWidth=2; ctx.strokeRect(0,0,can.width,can.height);
+      });
+    })();
+
+    // ── NAV ──
+    setTimeout(() => document.getElementById('nav').classList.add('visible'), 400);
+
+    // ── REVEAL ──
+    const obs = new IntersectionObserver(entries => {
+      for (const e of entries) { if (e.isIntersecting) e.target.classList.add('visible'); }
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    for (const el of document.querySelectorAll('.reveal')) {
+      if (el.getBoundingClientRect().top < innerHeight) el.classList.add('visible');
+      obs.observe(el);
+    }
+
+    // ── COUNTER ──
+    const cObs = new IntersectionObserver(entries => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          const el = e.target;
+          const target = parseInt(el.getAttribute('data-target'));
+          let cur = 0;
+          const inc = Math.max(1, Math.floor(target / 35));
+          const iv = setInterval(() => { cur += inc; if (cur >= target) { el.textContent = target; clearInterval(iv); } else el.textContent = cur; }, 35);
+          cObs.unobserve(el);
+        }
+      }
+    }, { threshold: 0.5 });
+    for (const el of document.querySelectorAll('.spec-num')) cObs.observe(el);
+
+    // ── SMOOTH SCROLL ──
+    for (const a of document.querySelectorAll('a[href^="#"]')) {
+      a.addEventListener('click', e => { e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+    }
+  </script>
+</body>
+</html>

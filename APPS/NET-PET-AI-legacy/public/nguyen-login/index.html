@@ -95,6 +95,123 @@
       backdrop-filter: blur(12px);
       box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(201, 169, 97, 0.08);
     }
+
+    /* ── Workflow Banner ── */
+    .workflow-banner {
+      background: linear-gradient(135deg, rgba(42, 26, 62, 0.95), rgba(26, 18, 11, 0.95));
+      border: 1px solid rgba(201, 169, 97, 0.25);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(201, 169, 97, 0.05);
+    }
+    .wf-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      border-radius: 60px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(201, 169, 97, 0.12);
+      color: var(--gold);
+      border: 1px solid rgba(201, 169, 97, 0.2);
+      margin-bottom: 12px;
+    }
+    .wf-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 16px;
+    }
+    .wf-weeks {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .wf-week {
+      flex: 1;
+      text-align: center;
+      padding: 10px 4px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(201, 169, 97, 0.1);
+      background: rgba(255, 255, 255, 0.02);
+      transition: all 0.3s;
+    }
+    .wf-week.completed {
+      border-color: rgba(125, 155, 118, 0.3);
+      background: rgba(125, 155, 118, 0.08);
+    }
+    .wf-week.completed .wf-week-num {
+      color: var(--success);
+    }
+    .wf-week.active {
+      border-color: rgba(201, 169, 97, 0.5);
+      background: rgba(201, 169, 97, 0.08);
+      box-shadow: 0 0 20px rgba(201, 169, 97, 0.08);
+    }
+    .wf-week.active .wf-week-num {
+      color: var(--gold-light);
+    }
+    .wf-week-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .wf-week-label {
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-top: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .wf-detail {
+      border-top: 1px solid rgba(201, 169, 97, 0.1);
+      padding-top: 12px;
+      margin-bottom: 14px;
+    }
+    .wf-detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      font-size: 0.82rem;
+    }
+    .wf-detail-label {
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .wf-detail-value {
+      color: var(--cream);
+      font-weight: 600;
+    }
+    .wf-cta {
+      display: block;
+      text-align: center;
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, rgba(201, 169, 97, 0.15), rgba(139, 111, 58, 0.1));
+      border: 1px solid rgba(201, 169, 97, 0.3);
+      color: var(--gold-light);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .wf-cta:hover {
+      background: rgba(201, 169, 97, 0.2);
+      border-color: var(--gold);
+      box-shadow: 0 0 30px rgba(201, 169, 97, 0.15);
+    }
+
     .role-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -194,7 +311,6 @@
       font-style: italic;
       font-family: 'Cormorant Garamond', serif;
       font-size: 0.95rem;
-    }
   </style>
 </head>
 <body>
@@ -203,6 +319,45 @@
       <div class="brand-logo">N</div>
       <h1>Nguyen Family Portal</h1>
       <p>English + Career Progress Tracker</p>
+    </div>
+
+    <!-- Workflow Banner -->
+    <div class="workflow-banner">
+      <div class="wf-badge">📋 Active Gameplan</div>
+      <div class="wf-title">Quan's 1-Month Career Launch</div>
+      <div class="wf-weeks">
+        <div class="wf-week completed">
+          <div class="wf-week-num">W1</div>
+          <div class="wf-week-label">CV & Resume</div>
+        </div>
+        <div class="wf-week active">
+          <div class="wf-week-num">W2</div>
+          <div class="wf-week-label">LinkedIn</div>
+        </div>
+        <div class="wf-week">
+          <div class="wf-week-num">W3</div>
+          <div class="wf-week-label">AI 3D Modeling</div>
+        </div>
+        <div class="wf-week">
+          <div class="wf-week-num">W4</div>
+          <div class="wf-week-label">Review</div>
+        </div>
+      </div>
+      <div class="wf-detail">
+        <div class="wf-detail-row">
+          <span class="wf-detail-label">Homework Days</span>
+          <span class="wf-detail-value">Mon · Wed · Sat</span>
+        </div>
+        <div class="wf-detail-row">
+          <span class="wf-detail-label">Daily Time</span>
+          <span class="wf-detail-value">20–30 minutes</span>
+        </div>
+        <div class="wf-detail-row">
+          <span class="wf-detail-label">Applications</span>
+          <span class="wf-detail-value">3 companies per day · 36 total</span>
+        </div>
+      </div>
+      <a class="wf-cta" href="/nguyen-gameplan/" target="_blank">View Full Gameplan →</a>
     </div>
 
     <div class="card">
@@ -221,7 +376,7 @@
       <div class="error" id="loginError"></div>
     </div>
 
-    <p class="hint">Use the PIN provided by your teacher.</p>
+    <p class="hint">PIN provided by your teacher.</p>
   </div>
 
   <script>
@@ -275,7 +430,7 @@
           ok = d.ok;
         }
         if (ok) {
-          localStorage.setItem('nguyen_session', JSON.stringify({ role: currentRole, ts: Date.now() }));
+          localStorage.setItem('nguyen_session', JSON.stringify({ role: currentRole, pin: pin, ts: Date.now() }));
           const dest = currentRole === 'parent' ? '/nguyen-parent/' : `/nguyen-${currentRole}/`;
           window.location.replace(dest);
         } else {

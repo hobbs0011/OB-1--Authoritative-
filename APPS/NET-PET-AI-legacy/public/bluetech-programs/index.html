@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlueTech — Programs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue-deep: #050d1a;
+      --blue-dark: #0a1929;
+      --blue-mid: #0f3460;
+      --blue: #0056b3;
+      --blue-bright: #00a3e0;
+      --blue-glow: rgba(0, 163, 224, 0.35);
+      --white: #ffffff;
+      --white-soft: #e6f2ff;
+      --gold: #f0c060;
+      --green: #00ff88;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      background: var(--blue-deep);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .letterbox {
+      position: fixed;
+      left: 0; right: 0;
+      height: 6vh;
+      background: #000;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    .letterbox.top { top: 0; }
+    .letterbox.bottom { bottom: 0; }
+
+    .nav {
+      position: fixed;
+      top: 6vh;
+      left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: linear-gradient(180deg, rgba(5,13,26,0.95) 0%, transparent 100%);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.3em;
+      color: var(--blue-bright);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--blue-bright);
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 12vh 2rem 8vh;
+      position: relative;
+      z-index: 10;
+      animation: fadeIn 0.8s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--blue-bright);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+      background: linear-gradient(180deg, #ffffff 0%, #a0d8ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 4rem;
+      font-weight: 300;
+      max-width: 700px;
+    }
+
+    /* Program cards */
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .program-card {
+      background: linear-gradient(145deg, rgba(15,52,96,0.4) 0%, rgba(5,13,26,0.6) 100%);
+      border: 1px solid rgba(0,163,224,0.2);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .program-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--blue-bright), var(--blue));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .program-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .program-card:hover {
+      border-color: var(--blue-bright);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 60px rgba(0,163,224,0.15);
+    }
+
+    .program-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .program-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.8rem;
+      color: var(--white);
+    }
+
+    .program-card .level {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      background: rgba(0,163,224,0.15);
+      border: 1px solid rgba(0,163,224,0.3);
+      color: var(--blue-bright);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .program-card p {
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .program-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .program-card ul li {
+      padding: 0.4rem 0;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .program-card ul li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--blue-bright);
+    }
+
+    /* Corporate section */
+    .corporate-section {
+      background: linear-gradient(145deg, rgba(0,163,224,0.08) 0%, rgba(5,13,26,0.4) 100%);
+      border-left: 3px solid var(--blue-bright);
+      padding: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .corporate-section h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      color: var(--blue-bright);
+    }
+
+    .corporate-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    .corporate-item {
+      text-align: center;
+    }
+
+    .corporate-item .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .corporate-item h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      color: var(--white);
+    }
+
+    .corporate-item p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.6;
+    }
+
+    /* Science section */
+    .science-section {
+      background: linear-gradient(145deg, rgba(0,255,136,0.05) 0%, rgba(5,13,26,0.4) 100%);
+      border: 1px solid rgba(0,255,136,0.2);
+      padding: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .science-section h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      color: var(--green);
+    }
+
+    .science-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .science-item {
+      padding: 1.5rem;
+      background: rgba(0,0,0,0.2);
+      border-left: 2px solid var(--green);
+    }
+
+    .science-item h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.8rem;
+      color: var(--white);
+    }
+
+    .science-item p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+    }
+
+    /* Outcomes */
+    .outcomes {
+      background: linear-gradient(145deg, rgba(0,163,224,0.08) 0%, rgba(5,13,26,0.4) 100%);
+      border-left: 3px solid var(--blue-bright);
+      padding: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .outcomes h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      color: var(--blue-bright);
+    }
+
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .outcome-item {
+      text-align: center;
+    }
+
+    .outcome-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--blue-bright);
+      line-height: 1;
+      text-shadow: 0 0 20px var(--blue-glow);
+    }
+
+    .outcome-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-top: 0.5rem;
+    }
+
+    /* CTA */
+    .cta-section {
+      text-align: center;
+      margin-top: 4rem;
+      padding: 4rem 2rem;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,163,224,0.05) 100%);
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 1.1rem 3.5rem;
+      border: 2px solid var(--blue-bright);
+      color: var(--white);
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      transition: all 0.4s ease;
+      background: transparent;
+    }
+
+    .cta-btn:hover {
+      border-color: #fff;
+      box-shadow: 0 0 35px var(--blue-glow), 0 0 80px rgba(0,163,224,0.2);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .programs-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 1.2rem; }
+      .nav { padding: 1rem 1.5rem; }
+      .outcomes-grid { grid-template-columns: 1fr; }
+      .corporate-grid { grid-template-columns: 1fr; }
+      .science-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="letterbox top"></div>
+  <div class="letterbox bottom"></div>
+
+  <nav class="nav">
+    <a href="/bluetech-cinematic/" class="nav-logo">BLUETECH</a>
+    <ul class="nav-links">
+      <li><a href="/bluetech-cinematic/">Home</a></li>
+      <li><a href="/bluetech-story/">Story</a></li>
+      <li><a href="/bluetech-programs/" class="active">Programs</a></li>
+      <li><a href="/bluetech-demo/">Demo</a></li>
+      <li><a href="/bluetech-contact/">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+    <div class="container">
+      <div class="section-label">Chapter 02 — The Solution</div>
+      <h1 class="section-title">BUILT FOR<br>REAL WORK.</h1>
+      <p class="section-subtitle">No grammar drills. No textbook scenarios. Only the English your team actually needs.</p>
+
+      <div class="programs-grid">
+        <div class="program-card">
+          <div class="program-icon">🎯</div>
+          <h3>Business Conversation</h3>
+          <span class="level">Intermediate to Advanced</span>
+          <p>Master the art of professional communication — from boardroom presentations to client negotiations.</p>
+          <ul>
+            <li>Meeting facilitation & leadership language</li>
+            <li>Persuasive pitching & storytelling</li>
+            <li>Cross-cultural communication</li>
+            <li>Real-time feedback on phrasing & tone</li>
+          </ul>
+        </div>
+
+        <div class="program-card">
+          <div class="program-icon">⚡</div>
+          <h3>Advanced Skills Lab</h3>
+          <span class="level">Advanced</span>
+          <p>Push beyond fluent into persuasive. This is where professionals become influential communicators.</p>
+          <ul>
+            <li>Complex idea articulation</li>
+            <li>Debate & critical thinking in English</li>
+            <li>Industry-specific vocabulary</li>
+            <li>Speed & precision under pressure</li>
+          </ul>
+        </div>
+
+        <div class="program-card">
+          <div class="program-icon">🤝</div>
+          <h3>Team Sync</h3>
+          <span class="level">All Levels</span>
+          <p>Align your entire team on one communication standard. Shared vocabulary, shared confidence.</p>
+          <ul>
+            <li>Custom curriculum for your industry</li>
+            <li>Group sessions & pair work</li>
+            <li>Progress tracking for management</li>
+            <li>Flexible scheduling around your calendar</li>
+          </ul>
+        </div>
+
+        <div class="program-card">
+          <div class="program-icon">🧠</div>
+          <h3>AI-Powered Practice</h3>
+          <span class="level">24/7 Access</span>
+          <p>Between sessions, your team has an AI coach available anytime. Practice makes permanent.</p>
+          <ul>
+            <li>Voice-based conversation practice</li>
+            <li>Instant correction & suggestions</li>
+            <li>Vocabulary retention system</li>
+            <li>Progress analytics dashboard</li>
+          </ul>
+        </div>
+
+        <div class="program-card">
+          <div class="program-icon">📈</div>
+          <h3>Executive English</h3>
+          <span class="level">Senior Level</span>
+          <p>For leaders who need to command the room. Strategic communication for C-suite and directors.</p>
+          <ul>
+            <li>Board-level presentation skills</li>
+            <li>Crisis communication</li>
+            <li>Media & public speaking</li>
+            <li>Negotiation & deal-making language</li>
+          </ul>
+        </div>
+
+        <div class="program-card">
+          <div class="program-icon">🌐</div>
+          <h3>Global Fluency</h3>
+          <span class="level">All Levels</span>
+          <p>Prepare your team for international expansion. Cultural nuance meets linguistic precision.</p>
+          <ul>
+            <li>Regional accent familiarization</li>
+            <li>International business etiquette</li>
+            <li>Virtual meeting mastery</li>
+            <li>Email & written professional communication</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Corporate Accountability -->
+      <div class="corporate-section">
+        <h3>📊 BOSS DASHBOARD — FULL TRANSPARENCY</h3>
+        <div class="corporate-grid">
+          <div class="corporate-item">
+            <div class="icon">👁️</div>
+            <h4>Live Progress</h4>
+            <p>See exactly where every employee stands. Real-time metrics on vocabulary, speaking time, and session completion.</p>
+          </div>
+          <div class="corporate-item">
+            <div class="icon">📋</div>
+            <h4>Make Requests</h4>
+            <p>Assign specific topics, vocabulary lists, or practice scenarios directly to individual employees or teams.</p>
+          </div>
+          <div class="corporate-item">
+            <div class="icon">🎯</div>
+            <h4>Accountability</h4>
+            <p>No more guesswork. Every metric is tracked, logged, and visible. Employees own their progress. Managers own the outcomes.</p>
+          </div>
+          <div class="corporate-item">
+            <div class="icon">🏆</div>
+            <h4>Leaderboard</h4>
+            <p>Taps into the competitive drive. Weekly rankings, streaks, and achievements keep motivation high and progress visible.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Science -->
+      <div class="science-section">
+        <h3>🔬 BACKED BY SCIENCE — NOT SMOKE & MIRRORS</h3>
+        <div class="science-grid">
+          <div class="science-item">
+            <h4>Spaced Repetition</h4>
+            <p>Scientific algorithm schedules vocabulary reviews at the exact moment you're about to forget. Long-term retention, not cramming.</p>
+          </div>
+          <div class="science-item">
+            <h4>Real-World Language</h4>
+            <p>We pull vocabulary and scenarios directly from your team's actual work environment. No generic textbook English.</p>
+          </div>
+          <div class="science-item">
+            <h4>Language Acquisition</h4>
+            <p>This isn't the failed language learning model that plagues Vietnam. This is natural language acquisition — like learning your first language.</p>
+          </div>
+          <div class="science-item">
+            <h4>Dual Accountability</h4>
+            <p>The system holds students accountable AND holds trainers accountable. Measurable results for both sides. No smoke, no mirrors.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Outcomes -->
+      <div class="outcomes">
+        <h3>What Your Team Gains</h3>
+        <div class="outcomes-grid">
+          <div class="outcome-item">
+            <div class="outcome-value">3x</div>
+            <div class="outcome-label">Faster Idea Exchange</div>
+          </div>
+          <div class="outcome-item">
+            <div class="outcome-value">40%</div>
+            <div class="outcome-label">Fewer Misunderstandings</div>
+          </div>
+          <div class="outcome-item">
+            <div class="outcome-value">2x</div>
+            <div class="outcome-label">More Meeting Contributions</div>
+          </div>
+          <div class="outcome-item">
+            <div class="outcome-value">24/7</div>
+            <div class="outcome-label">AI Coach Access</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-section">
+        <a href="/bluetech-contact/" class="cta-btn">Book a Demo</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

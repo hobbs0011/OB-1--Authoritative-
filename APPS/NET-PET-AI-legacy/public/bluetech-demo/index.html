@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlueTech — Live Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue-deep: #050d1a;
+      --blue-dark: #0a1929;
+      --blue-mid: #0f3460;
+      --blue: #0056b3;
+      --blue-bright: #00a3e0;
+      --blue-glow: rgba(0, 163, 224, 0.35);
+      --white: #ffffff;
+      --white-soft: #e6f2ff;
+      --green: #00ff88;
+      --green-glow: rgba(0, 255, 136, 0.3);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      background: var(--blue-deep);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .letterbox {
+      position: fixed;
+      left: 0; right: 0;
+      height: 6vh;
+      background: #000;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    .letterbox.top { top: 0; }
+    .letterbox.bottom { bottom: 0; }
+
+    .nav {
+      position: fixed;
+      top: 6vh;
+      left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: linear-gradient(180deg, rgba(5,13,26,0.95) 0%, transparent 100%);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.3em;
+      color: var(--blue-bright);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--blue-bright);
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 12vh 2rem 8vh;
+      position: relative;
+      z-index: 10;
+      animation: fadeIn 0.8s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--blue-bright);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+      background: linear-gradient(180deg, #ffffff 0%, #a0d8ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+
+    /* Demo panel */
+    .demo-panel {
+      background: linear-gradient(145deg, rgba(15,52,96,0.3) 0%, rgba(5,13,26,0.5) 100%);
+      border: 1px solid rgba(0,163,224,0.3);
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .demo-panel h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      color: var(--blue-bright);
+    }
+
+    .chat-mock {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(0,163,224,0.15);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .chat-msg {
+      margin-bottom: 1rem;
+      padding: 0.8rem 1.2rem;
+      border-radius: 4px;
+      max-width: 80%;
+      animation: msgIn 0.3s ease;
+    }
+    @keyframes msgIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .chat-msg.user {
+      background: rgba(0,163,224,0.15);
+      border-left: 3px solid var(--blue-bright);
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .chat-msg.ai {
+      background: rgba(0,255,136,0.08);
+      border-left: 3px solid var(--green);
+    }
+
+    .chat-msg .role {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 0.3rem;
+    }
+
+    .chat-msg .text {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .typing-indicator {
+      display: inline-flex;
+      gap: 4px;
+      padding: 0.5rem 1rem;
+    }
+    .typing-indicator span {
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: blink 1.4s infinite;
+    }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes blink {
+      0%, 60%, 100% { opacity: 0.3; }
+      30% { opacity: 1; }
+    }
+
+    /* Feature walkthrough */
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .feature-item {
+      padding: 1.5rem;
+      background: rgba(0,163,224,0.05);
+      border-left: 2px solid rgba(0,163,224,0.4);
+      transition: all 0.3s ease;
+    }
+
+    .feature-item:hover {
+      background: rgba(0,163,224,0.1);
+      border-left-color: var(--blue-bright);
+    }
+
+    .feature-item h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      color: var(--white);
+    }
+
+    .feature-item p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.6;
+    }
+
+    /* Obi highlight */
+    .obi-highlight {
+      background: linear-gradient(145deg, rgba(0,255,136,0.08) 0%, rgba(5,13,26,0.4) 100%);
+      border: 1px solid rgba(0,255,136,0.25);
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .obi-highlight h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+      color: var(--green);
+    }
+
+    .obi-highlight p {
+      color: rgba(255,255,255,0.8);
+      line-height: 1.8;
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .obi-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .obi-feature {
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .obi-feature .icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .obi-feature h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.3rem;
+    }
+
+    .obi-feature p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      margin: 0;
+    }
+
+    /* Science strip */
+    .science-strip {
+      background: linear-gradient(90deg, rgba(0,163,224,0.1) 0%, rgba(0,255,136,0.05) 100%);
+      border-top: 1px solid rgba(0,163,224,0.2);
+      border-bottom: 1px solid rgba(0,163,224,0.2);
+      padding: 2rem;
+      margin: 3rem 0;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .science-item {
+      text-align: center;
+    }
+
+    .science-item .value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--green);
+    }
+
+    .science-item .label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-top: 0.3rem;
+    }
+
+    /* Code preview */
+    .code-preview {
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(0,163,224,0.2);
+      padding: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      margin-top: 2rem;
+    }
+
+    .code-preview .keyword { color: #ff79c6; }
+    .code-preview .string { color: #f1fa8c; }
+    .code-preview .comment { color: #6272a4; }
+    .code-preview .function { color: #50fa7b; }
+
+    /* CTA */
+    .cta-section {
+      text-align: center;
+      margin-top: 4rem;
+      padding: 3rem 2rem;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 1.1rem 3.5rem;
+      border: 2px solid var(--blue-bright);
+      color: var(--white);
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      transition: all 0.4s ease;
+      background: transparent;
+    }
+
+    .cta-btn:hover {
+      border-color: #fff;
+      box-shadow: 0 0 35px var(--blue-glow), 0 0 80px rgba(0,163,224,0.2);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { gap: 1.2rem; }
+      .nav { padding: 1rem 1.5rem; }
+      .feature-list { grid-template-columns: 1fr; }
+      .obi-features { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="letterbox top"></div>
+  <div class="letterbox bottom"></div>
+
+  <nav class="nav">
+    <a href="/bluetech-cinematic/" class="nav-logo">BLUETECH</a>
+    <ul class="nav-links">
+      <li><a href="/bluetech-cinematic/">Home</a></li>
+      <li><a href="/bluetech-story/">Story</a></li>
+      <li><a href="/bluetech-programs/">Programs</a></li>
+      <li><a href="/bluetech-demo/" class="active">Demo</a></li>
+      <li><a href="/bluetech-contact/">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+    <div class="container">
+      <div class="section-label">Chapter 03 — See It Work</div>
+      <h1 class="section-title">LIVE DEMO</h1>
+      <p class="section-subtitle">This isn't a prototype. This is production-grade AI, running right now.</p>
+
+      <!-- Obi Chatbot Highlight -->
+      <div class="obi-highlight">
+        <h3>🧠 OBI — YOUR AI COACH, AVAILABLE 24/7</h3>
+        <p>
+          Obi isn't a chatbot. He's a personalized English coach that lives on your team's devices. 
+          On days when you don't have a live session, Obi keeps the momentum alive. 
+          He adapts to each user's occupation, weakness patterns, and learning pace — 
+          making every practice minute count, even on off days.
+        </p>
+        <div class="obi-features">
+          <div class="obi-feature">
+            <div class="icon">🎙️</div>
+            <h4>Voice First</h4>
+            <p>Speak naturally. Obi listens and responds with human-like timing.</p>
+          </div>
+          <div class="obi-feature">
+            <div class="icon">📚</div>
+            <h4>Occupation-Aware</h4>
+            <p>Each portal is built around the user's actual job and industry.</p>
+          </div>
+          <div class="obi-feature">
+            <div class="icon">🔄</div>
+            <h4>Spaced Repetition</h4>
+            <p>Scientific algorithm schedules reviews at the optimal moment.</p>
+          </div>
+          <div class="obi-feature">
+            <div class="icon">📊</div>
+            <h4>Progress Tracking</h4>
+            <p>Every session is logged. Every weakness is documented.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Demo -->
+      <div class="demo-panel">
+        <h3>⚡ Try It Now</h3>
+        <div class="chat-mock" id="chatMock">
+          <div class="chat-msg ai">
+            <div class="role">OBI Coach</div>
+            <div class="text">Welcome to BlueTech. I'm Obi, your AI English coach. What would you like to practice today?</div>
+          </div>
+        </div>
+        <button class="cta-btn" onclick="simulateChat()" style="margin-top: 0; padding: 0.8rem 2rem; font-size: 0.8rem;">
+          Simulate Conversation
+        </button>
+      </div>
+
+      <!-- Science Strip -->
+      <div class="science-strip">
+        <div class="science-item">
+          <div class="value">Spaced Repetition</div>
+          <div class="label">Scientific Retention</div>
+        </div>
+        <div class="science-item">
+          <div class="value">Real-World Context</div>
+          <div class="label">Your Environment</div>
+        </div>
+        <div class="science-item">
+          <div class="value">Language Acquisition</div>
+          <div class="label">Not Memorization</div>
+        </div>
+        <div class="science-item">
+          <div class="value">Dual Accountability</div>
+          <div class="label">Students + Trainers</div>
+        </div>
+      </div>
+
+      <!-- Feature Grid -->
+      <div class="feature-list">
+        <div class="feature-item">
+          <h4>🎙️ Voice First</h4>
+          <p>Speak naturally. Obi listens, understands context, and responds with human-like timing and intonation.</p>
+        </div>
+        <div class="feature-item">
+          <h4>🧠 Memory Engine</h4>
+          <p>Remembers every conversation, tracks weaknesses, and adapts future sessions to your exact learning curve.</p>
+        </div>
+        <div class="feature-item">
+          <h4>📊 Progress Ledger</h4>
+          <p>Immutable blockchain-style ledger tracks every milestone. Your progress is permanent, verifiable, and yours.</p>
+        </div>
+        <div class="feature-item">
+          <h4>🔐 Secure by Design</h4>
+          <p>Enterprise-grade encryption. Student data never leaves your infrastructure. Full GDPR compliance.</p>
+        </div>
+      </div>
+
+      <div class="code-preview">
+        <span class="comment">// Live API endpoint — this is running RIGHT NOW</span><br>
+        <span class="keyword">POST</span> /api/student/checkpin<br>
+        <span class="keyword">POST</span> /api/voice/chat<br>
+        <span class="keyword">GET</span>  /api/vocab/due<br>
+        <span class="keyword">POST</span> /api/memory/save<br><br>
+        <span class="comment">// Worker status</span><br>
+        { <span class="string">"ok"</span>: <span class="keyword">true</span>, <span class="string">"version"</span>: <span class="string">"1.6.0"</span>, <span class="string">"readiness"</span>: <span class="string">"ALL_SYSTEMS_GO"</span> }
+      </div>
+
+      <div class="cta-section">
+        <a href="/bluetech-contact/" class="cta-btn">Request Private Demo</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const chatMock = document.getElementById('chatMock');
+    const demoConversation = [
+      { role: 'user', text: "I'm nervous about the presentation tomorrow." },
+      { role: 'ai', text: "That's completely normal. Let's reframe it — you're not giving a presentation, you're sharing something you already know. What's the one message you want them to remember?" },
+      { role: 'user', text: "That our team can deliver faster than anyone else." },
+      { role: 'ai', text: "Strong. Let's practice the opening. Try: 'Speed isn't just about moving fast — it's about moving together.' Notice how that feels compared to what you originally planned?" },
+    ];
+
+    let chatIndex = 0;
+
+    function simulateChat() {
+      if (chatIndex >= demoConversation.length) {
+        chatIndex = 0;
+        chatMock.innerHTML = '';
+      }
+
+      const msg = demoConversation[chatIndex];
+      const div = document.createElement('div');
+      div.className = `chat-msg ${msg.role}`;
+      div.innerHTML = `<div class="role">${msg.role === 'user' ? 'You' : 'OBI Coach'}</div><div class="text">${msg.text}</div>`;
+      chatMock.appendChild(div);
+      chatMock.scrollTop = chatMock.scrollHeight;
+      chatIndex++;
+
+      if (chatIndex < demoConversation.length) {
+        setTimeout(() => {
+          const typing = document.createElement('div');
+          typing.className = 'chat-msg ai';
+          typing.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+          chatMock.appendChild(typing);
+          chatMock.scrollTop = chatMock.scrollHeight;
+          setTimeout(() => {
+            typing.remove();
+            simulateChat();
+          }, 1500);
+        }, 800);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -3,343 +3,623 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta theme-color content="#0a0a12">
-  <title>Quan — English Portal</title>
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Quan — Project: Steel Guardian</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0a0a0c;
-      --panel: rgba(14, 14, 18, 0.95);
-      --panel-border: rgba(255, 255, 255, 0.08);
-      --text: #f5f5f7;
-      --muted: #a1a1a6;
-      --marvel-blue: #4a9eff;
-      --marvel-blue-dark: #2563eb;
-      --marvel-silver: #c0c5ce;
-      --marvel-silver-dim: rgba(192, 197, 206, 0.15);
-      --success: #34c759;
-      --danger: #e23636;
-      --radius-lg: 20px;
-      --radius-md: 14px;
-      --radius-sm: 10px;
+      --bg-deep: #050508;
+      --bg-dark: #0a0a0f;
+      --bg-panel: rgba(10, 12, 18, 0.95);
+      --gundam-white: #f0f0f5;
+      --gundam-red: #cc2222;
+      --gundam-red-dim: rgba(204, 34, 34, 0.15);
+      --gundam-yellow: #f0c040;
+      --gundam-yellow-dim: rgba(240, 192, 64, 0.12);
+      --gundam-blue: #2266cc;
+      --gundam-blue-dim: rgba(34, 102, 204, 0.12);
+      --gundam-silver: #8a8a9a;
+      --gundam-silver-dim: rgba(138, 138, 154, 0.1);
+      --gundam-dark: #1a1a2e;
+      --gundam-dark-dim: rgba(26, 26, 46, 0.6);
+      --caution: #f0c040;
+      --success: #22cc66;
+      --text: #e8e8f0;
+      --muted: #7a7a8a;
+      --panel-border: rgba(204, 34, 34, 0.12);
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --radius-sm: 6px;
     }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
+
+    html, body {
+      background: var(--bg-deep);
+      color: var(--text);
       font-family: 'Inter', sans-serif;
       font-size: 1rem;
       line-height: 1.65;
-      color: var(--text);
-      background:
-        linear-gradient(135deg, rgba(74, 158, 255, 0.05) 0%, transparent 40%),
-        linear-gradient(225deg, rgba(192, 197, 206, 0.04) 0%, transparent 40%),
-        radial-gradient(circle at 50% 0%, rgba(74, 158, 255, 0.07), transparent 50%),
-        linear-gradient(180deg, #0a0a0c 0%, #0f0f12 50%, #0a0a0c 100%);
       min-height: 100vh;
+      overflow-x: hidden;
     }
+
+    body {
+      background:
+        repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(204, 34, 34, 0.015) 60px, rgba(204, 34, 34, 0.015) 61px),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(204, 34, 34, 0.015) 60px, rgba(204, 34, 34, 0.015) 61px),
+        radial-gradient(ellipse at 25% 15%, rgba(34, 102, 204, 0.06), transparent 50%),
+        radial-gradient(ellipse at 75% 85%, rgba(204, 34, 34, 0.04), transparent 50%),
+        linear-gradient(180deg, #050508 0%, #0a0a0f 40%, #08080c 100%);
+    }
+
+    /* Caution stripe bar */
+    .caution-stripe {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: repeating-linear-gradient(90deg, var(--caution) 0px, var(--caution) 20px, #000 20px, #000 30px);
+      z-index: 100;
+      opacity: 0.8;
+    }
+    .caution-stripe.bottom {
+      top: auto;
+      bottom: 0;
+    }
+
+    /* Scan line overlay */
+    .scanlines {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.03) 3px, rgba(0,0,0,0.03) 4px);
+      pointer-events: none;
+      z-index: 50;
+    }
+
     .portal {
-      max-width: 900px;
+      max-width: 920px;
       margin: 0 auto;
-      padding: 40px 28px 80px;
+      padding: 48px 28px 80px;
+      position: relative;
+      z-index: 10;
     }
+
+    /* Topbar */
     .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 24px 0;
-      border-bottom: 1px solid var(--panel-border);
-      margin-bottom: 36px;
+      padding: 20px 0 16px;
+      border-bottom: 2px solid rgba(204, 34, 34, 0.25);
+      margin-bottom: 32px;
       position: relative;
     }
     .topbar::after {
       content: '';
       position: absolute;
-      bottom: -1px;
+      bottom: -2px;
       left: 0;
-      width: 120px;
+      width: 80px;
       height: 2px;
-      background: linear-gradient(90deg, var(--marvel-blue), transparent);
+      background: var(--gundam-red);
+      box-shadow: 0 0 10px rgba(204, 34, 34, 0.5);
     }
     .topbar-brand {
       display: flex;
       align-items: center;
       gap: 16px;
     }
-    .topbar-logo {
+    .topbar-insignia {
       width: 48px;
       height: 48px;
-      background: linear-gradient(135deg, var(--marvel-blue), var(--marvel-blue-dark));
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      background: linear-gradient(135deg, var(--gundam-red), #881111);
+      clip-path: polygon(50% 0%, 80% 20%, 100% 50%, 80% 80%, 50% 100%, 20% 80%, 0% 50%, 20% 20%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Bebas Neue', sans-serif;
-      font-weight: 700;
-      color: #fff;
-      font-size: 1.3rem;
-      letter-spacing: 0.05em;
-      box-shadow: 0 8px 24px rgba(74, 158, 255, 0.3);
-    }
-    .topbar-title h1 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .topbar-title span {
-      font-size: 0.75rem;
-      color: var(--muted);
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 800;
+      color: var(--gundam-white);
+      font-size: 1.1rem;
       letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .logout-btn {
-      padding: 10px 20px;
-      border-radius: var(--radius-sm);
-      border: 1px solid rgba(74, 158, 255, 0.3);
-      background: rgba(74, 158, 255, 0.08);
-      color: var(--marvel-blue);
-      font-family: 'Oswald', sans-serif;
-      font-weight: 600;
-      font-size: 0.85rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .logout-btn:hover {
-      background: rgba(74, 158, 255, 0.15);
-      border-color: rgba(74, 158, 255, 0.5);
-      box-shadow: 0 4px 16px rgba(74, 158, 255, 0.2);
-    }
-    .welcome-banner {
-      background: linear-gradient(135deg, rgba(74, 158, 255, 0.10), rgba(192, 197, 206, 0.05));
-      border: 1px solid rgba(74, 158, 255, 0.22);
-      border-radius: var(--radius-lg);
-      padding: 32px 36px;
-      margin-bottom: 32px;
+      box-shadow:
+        0 0 20px rgba(204, 34, 34, 0.25),
+        inset 0 0 10px rgba(255,255,255,0.1);
       position: relative;
-      overflow: hidden;
     }
-    .welcome-banner::before {
+    .topbar-insignia::before {
       content: '';
       position: absolute;
-      top: 0;
-      right: 0;
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle, rgba(74, 158, 255, 0.08), transparent 70%);
-      pointer-events: none;
+      inset: 2px;
+      border: 1px solid rgba(240, 192, 64, 0.3);
+      clip-path: polygon(50% 0%, 80% 20%, 100% 50%, 80% 80%, 50% 100%, 20% 80%, 0% 50%, 20% 20%);
     }
-    .welcome-banner h2 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.4rem;
+    .topbar-title h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      margin-bottom: 8px;
+      color: var(--gundam-white);
     }
-    .welcome-banner p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      max-width: 600px;
+    .topbar-title h1 span {
+      color: var(--gundam-red);
     }
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--panel-border);
+    .topbar-title .msn {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gundam-silver);
+      margin-top: 1px;
+    }
+    .topbar-title .msn em {
+      font-style: normal;
+      color: var(--gundam-yellow);
+    }
+    .logout-btn {
+      padding: 8px 18px;
+      border-radius: 3px;
+      border: 1px solid rgba(204, 34, 34, 0.4);
+      background: rgba(204, 34, 34, 0.1);
+      color: var(--gundam-red);
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .logout-btn:hover {
+      background: rgba(204, 34, 34, 0.25);
+      box-shadow: 0 0 20px rgba(204, 34, 34, 0.2);
+      border-color: rgba(204, 34, 34, 0.6);
+    }
+
+    /* Status Bar */
+    .status-bar {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+      padding: 14px 20px;
+      background: rgba(10, 12, 18, 0.85);
+      border: 1px solid rgba(204, 34, 34, 0.15);
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(4px);
+    }
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .status-dot.online { background: var(--success); box-shadow: 0 0 6px rgba(34, 204, 102, 0.5); }
+    .status-dot.standby { background: var(--gundam-yellow); box-shadow: 0 0 6px rgba(240, 192, 64, 0.4); }
+    .status-label { color: var(--muted); }
+    .status-value { color: var(--text); }
+
+    /* Hero */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(10, 12, 18, 0.95), rgba(26, 26, 46, 0.7));
+      border: 1px solid rgba(204, 34, 34, 0.2);
       border-radius: var(--radius-lg);
-      padding: 28px;
-      margin-bottom: 24px;
+      padding: 28px 32px;
+      margin-bottom: 28px;
       position: relative;
       overflow: hidden;
+    }
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 200px;
+      height: 200px;
+      border: 2px solid rgba(204, 34, 34, 0.06);
+      border-radius: 50%;
+    }
+    .hero-banner::after {
+      content: '';
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 140px;
+      height: 140px;
+      border: 1px solid rgba(240, 192, 64, 0.04);
+      border-radius: 50%;
+    }
+    .hero-model {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: var(--gundam-silver);
+      margin-bottom: 4px;
+    }
+    .hero-model em {
+      font-style: normal;
+      color: var(--gundam-yellow);
+    }
+    .hero-banner h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--gundam-white);
+      margin-bottom: 4px;
+    }
+    .hero-banner h2 span {
+      color: var(--gundam-red);
+    }
+    .hero-banner p {
+      color: var(--gundam-silver);
+      font-size: 0.88rem;
+      max-width: 600px;
+      font-weight: 400;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 24px;
+      position: relative;
     }
     .card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
-      width: 3px;
-      height: 100%;
-      background: linear-gradient(180deg, var(--marvel-blue), var(--marvel-silver));
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gundam-red), var(--gundam-yellow), transparent);
       opacity: 0.6;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     }
     .card-header {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--panel-border);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(204, 34, 34, 0.1);
     }
     .card-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: var(--radius-sm);
+      width: 36px;
+      height: 36px;
+      border-radius: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
-      background: var(--marvel-silver-dim);
-      color: var(--marvel-silver);
+      font-size: 1rem;
+      background: var(--gundam-red-dim);
+      border: 1px solid rgba(204, 34, 34, 0.15);
+      color: var(--gundam-red);
     }
     .card-header h3 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.85rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.78rem;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--marvel-silver);
+      color: var(--gundam-silver);
     }
+
+    /* Task items */
     .task-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--panel-border);
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(204, 34, 34, 0.06);
     }
     .task-item:last-child { border-bottom: none; }
     .task-info { flex: 1; }
     .task-title {
-      font-weight: 700;
+      font-weight: 600;
       color: var(--text);
-      font-size: 0.95rem;
-      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
     }
     .task-meta {
-      font-size: 0.82rem;
+      font-size: 0.78rem;
       color: var(--muted);
-      margin-top: 4px;
+      margin-top: 3px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 500;
     }
     .task-badge {
-      font-size: 0.75rem;
+      font-size: 0.65rem;
       font-weight: 700;
       padding: 4px 12px;
-      border-radius: 999px;
-      letter-spacing: 0.04em;
+      border-radius: 2px;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      font-family: 'Oswald', sans-serif;
+      font-family: 'Orbitron', sans-serif;
     }
     .badge-pending {
-      background: rgba(74, 158, 255, 0.12);
-      color: var(--marvel-blue);
-      border: 1px solid rgba(74, 158, 255, 0.25);
+      background: var(--gundam-yellow-dim);
+      color: var(--gundam-yellow);
+      border: 1px solid rgba(240, 192, 64, 0.25);
     }
     .badge-done {
-      background: rgba(52, 199, 89, 0.12);
+      background: rgba(34, 204, 102, 0.1);
       color: var(--success);
-      border: 1px solid rgba(52, 199, 89, 0.25);
+      border: 1px solid rgba(34, 204, 102, 0.2);
     }
     .empty-state {
       text-align: center;
-      padding: 40px 20px;
+      padding: 30px 20px;
       color: var(--muted);
-      font-size: 0.95rem;
-    }
-    .progress-bar-wrap {
-      width: 100%;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 999px;
-      overflow: hidden;
-      margin-top: 10px;
-    }
-    .progress-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--marvel-blue), var(--marvel-silver));
-      border-radius: 999px;
-      transition: width 0.6s ease;
-    }
-    .progress-label {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-top: 8px;
+      font-size: 0.9rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 500;
     }
     .done-btn {
       padding: 6px 14px;
-      border-radius: 6px;
-      border: 1px solid var(--marvel-blue);
-      color: var(--marvel-blue);
-      background: rgba(74, 158, 255, 0.1);
+      border-radius: 3px;
+      border: 1px solid rgba(204, 34, 34, 0.35);
+      color: var(--gundam-red);
+      background: rgba(204, 34, 34, 0.08);
       cursor: pointer;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.8rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.68rem;
       font-weight: 600;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       transition: all 0.2s;
     }
     .done-btn:hover {
-      background: rgba(74, 158, 255, 0.2);
-      box-shadow: 0 2px 8px rgba(74, 158, 255, 0.2);
+      background: rgba(204, 34, 34, 0.18);
+      box-shadow: 0 0 12px rgba(204, 34, 34, 0.15);
     }
+
+    /* Work Log */
+    .wl-inputs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .wl-inputs select,
+    .wl-inputs input {
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(204, 34, 34, 0.15);
+      background: rgba(0,0,0,0.3);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .wl-inputs select:focus,
+    .wl-inputs input:focus {
+      border-color: var(--gundam-red);
+      box-shadow: 0 0 0 2px rgba(204, 34, 34, 0.1);
+    }
+    .wl-inputs select { flex: 1; min-width: 130px; }
+    .wl-inputs input[type=number] { width: 85px; }
+    .wl-save-btn {
+      padding: 10px 18px;
+      border-radius: 3px;
+      border: none;
+      background: linear-gradient(135deg, var(--gundam-red), #881111);
+      color: var(--gundam-white);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+    .wl-save-btn:hover {
+      box-shadow: 0 0 24px rgba(204, 34, 34, 0.3);
+      transform: translateY(-1px);
+    }
+    .wl-notes {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(204, 34, 34, 0.15);
+      background: rgba(0,0,0,0.3);
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      resize: vertical;
+      margin-bottom: 10px;
+      outline: none;
+    }
+    .wl-notes:focus {
+      border-color: var(--gundam-red);
+      box-shadow: 0 0 0 2px rgba(204, 34, 34, 0.1);
+    }
+    .wl-status {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+      min-height: 18px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 500;
+    }
+    .wl-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+
+    /* Progress */
+    .progress-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 8px;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 500;
+    }
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      margin-top: 8px;
+    }
+    .progress-track::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(0,0,0,0.2) 8px, rgba(0,0,0,0.2) 10px);
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gundam-red), var(--gundam-yellow));
+      border-radius: 4px;
+      transition: width 0.6s ease;
+      position: relative;
+    }
+
+    /* Footer unit info */
+    .unit-info {
+      text-align: center;
+      padding: 20px 0;
+      border-top: 1px solid rgba(204, 34, 34, 0.08);
+      margin-top: 20px;
+    }
+    .unit-info p {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .unit-info p em {
+      font-style: normal;
+      color: var(--gundam-silver);
+    }
+
     @media (max-width: 640px) {
-      .topbar { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .topbar { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .status-bar { gap: 10px; }
+      .status-item { font-size: 0.65rem; }
     }
   </style>
 </head>
 <body>
+  <div class="caution-stripe"></div>
+  <div class="caution-stripe bottom"></div>
+  <div class="scanlines"></div>
+
   <div class="portal">
     <div class="topbar">
       <div class="topbar-brand">
-        <div class="topbar-logo">Q</div>
+        <div class="topbar-insignia">G</div>
         <div class="topbar-title">
-          <h1>Quan Nguyen</h1>
-          <span>Student Portal</span>
+          <h1><span>G</span>uardian · <span>Q</span>uan</h1>
+          <div class="msn">Mobile Frame · Pilot ID: <em>QN-2121</em></div>
         </div>
       </div>
-      <button class="logout-btn" onclick="logout()">Sign Out</button>
+      <button class="logout-btn" onclick="logout()">[ CUT POWER ]</button>
     </div>
 
-    <div class="welcome-banner">
-      <h2>Welcome back, Quan</h2>
-      <p>Check your daily tasks, log your work, and keep building toward your career goals.</p>
+    <div class="status-bar">
+      <div class="status-item">
+        <span class="status-dot online"></span>
+        <span class="status-label">Frame Status</span>
+        <span class="status-value">OPERATIONAL</span>
+      </div>
+      <div class="status-item">
+        <span class="status-dot online"></span>
+        <span class="status-label">Link</span>
+        <span class="status-value">SYNCED</span>
+      </div>
+      <div class="status-item">
+        <span class="status-dot standby"></span>
+        <span class="status-label">Mission</span>
+        <span class="status-value" id="missionCount">0 ACTIVE</span>
+      </div>
+      <div class="status-item">
+        <span class="status-dot online"></span>
+        <span class="status-label">Comms</span>
+        <span class="status-value" id="commsStatus">STANDBY</span>
+      </div>
+    </div>
+
+    <div class="hero-banner">
+      <div class="hero-model">PROTO-TYPE-01 / FRAME: <em>QN-SteelGuardian</em></div>
+      <h2>Rise, <span>Quan</span>.</h2>
+      <p>Your next sortie is ready. Complete your daily mission objectives to advance your career level. Every sortie logged builds toward promotion.</p>
     </div>
 
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">📌</div>
-        <h3>Today's Tasks</h3>
+        <div class="card-icon">⚡</div>
+        <h3>Active Sortie Orders</h3>
       </div>
       <div id="taskList">
-        <div class="empty-state">Loading tasks...</div>
+        <div class="empty-state">Loading mission data from base command...</div>
       </div>
     </div>
 
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">📋</div>
-        <h3>Daily Work Log</h3>
+        <div class="card-icon">📡</div>
+        <h3>Mission Log · Comms Relay</h3>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
-        <select id="wlActivity" style="flex:1;min-width:140px;padding:10px 12px;border-radius:10px;border:1px solid var(--panel-border);background:rgba(255,255,255,0.04);color:var(--text);font-family:inherit;font-size:0.9rem;">
-          <option value="Listening">🎧 Listening</option>
-          <option value="Speaking">🗣️ Speaking</option>
-          <option value="Reading">📖 Reading</option>
-          <option value="Writing">✍️ Writing</option>
-          <option value="Homework">📝 Homework</option>
-          <option value="Phonics">🔊 Phonics</option>
-          <option value="Study Mode">📚 Study Mode</option>
-          <option value="Other">📌 Other</option>
+      <div class="wl-inputs">
+        <select id="wlActivity">
+          <option value="Listening">🎧 Listening — Signal Scan</option>
+          <option value="Speaking">🗣️ Speaking — Voice Comms</option>
+          <option value="Reading">📖 Reading — Intel Brief</option>
+          <option value="Writing">✍️ Writing — Field Report</option>
+          <option value="Homework">📝 Homework — Mission Prep</option>
+          <option value="Phonics">🔊 Phonics — Codec Training</option>
+          <option value="Study Mode">📚 Study Mode — System Calibration</option>
+          <option value="Other">📌 Other — Side Op</option>
         </select>
-        <input id="wlDuration" type="number" min="1" max="480" placeholder="Minutes" style="width:90px;padding:10px 12px;border-radius:10px;border:1px solid var(--panel-border);background:rgba(255,255,255,0.04);color:var(--text);font-family:inherit;font-size:0.9rem;">
-        <button id="wlSaveBtn" style="padding:10px 18px;border-radius:8px;border:none;background:linear-gradient(135deg, var(--marvel-blue), var(--marvel-blue-dark));color:#fff;font-family:'Oswald',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.05em;cursor:pointer;text-transform:uppercase;">Log</button>
+        <input id="wlDuration" type="number" min="1" max="480" placeholder="Minutes">
+        <button class="wl-save-btn" id="wlSaveBtn">Log Sortie</button>
       </div>
-      <textarea id="wlNotes" rows="2" placeholder="What did you work on?" style="width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--panel-border);background:rgba(255,255,255,0.04);color:var(--text);font-family:inherit;font-size:0.9rem;resize:vertical;margin-bottom:10px;"></textarea>
-      <p id="wlStatus" style="font-size:0.8rem;color:var(--muted);margin-bottom:8px;min-height:18px;"></p>
-      <div id="wlList" style="display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto;"></div>
+      <textarea class="wl-notes" id="wlNotes" rows="2" placeholder="Briefing notes / mission report..."></textarea>
+      <p class="wl-status" id="wlStatus"></p>
+      <div class="wl-list" id="wlList"></div>
     </div>
 
     <div class="card">
       <div class="card-header">
-        <div class="card-icon">📈</div>
-        <h3>Level Progress</h3>
+        <div class="card-icon">📊</div>
+        <h3>Pilot Rank Progress</h3>
       </div>
-      <div class="progress-bar-wrap">
-        <div class="progress-bar-fill" id="levelBar" style="width:5%;"></div>
+      <div class="progress-track">
+        <div class="progress-fill" id="levelBar" style="width:5%;"></div>
       </div>
-      <div class="progress-label" id="levelLabel">A1 → A2: Master 50 core words and hold a 2-minute conversation</div>
+      <div class="progress-label" id="levelLabel">Cadet → Mobile Frame Pilot: Master 50 core words and hold a 2-minute combat briefing</div>
+    </div>
+
+    <div class="unit-info">
+      <p>Project: Steel Guardian / Proto-Type-01 · pilot: quan nguyen · all rights reversed — knockoff test frame</p>
     </div>
   </div>
 
@@ -367,21 +647,22 @@
         const d = await r.json();
         const container = document.getElementById('taskList');
         const tasks = d.tasks || [];
+        document.getElementById('missionCount').textContent = tasks.length + ' ACTIVE';
         if (!tasks.length) {
-          container.innerHTML = '<div class="empty-state">No tasks assigned today. Check back later!</div>';
+          container.innerHTML = '<div class="empty-state">No active sorties. Awaiting new mission orders.</div>';
           return;
         }
         container.innerHTML = tasks.map(t => `
           <div class="task-item">
             <div class="task-info">
               <div class="task-title">${escapeHtml(t.title)}</div>
-              <div class="task-meta">${escapeHtml(t.category || 'general')} · ${t.dailyMinutes || 20} min · due ${t.dueDate || 'this week'}</div>
+              <div class="task-meta">${escapeHtml(t.category || 'general')} · ${t.dailyMinutes || 20} min sortie · due ${t.dueDate || 'this cycle'}</div>
             </div>
-            <button class="done-btn" onclick="completeTask('${t.id}')">Done</button>
+            <button class="done-btn" onclick="completeTask('${t.id}')">[ COMPLETE ]</button>
           </div>
         `).join('');
       } catch (e) {
-        document.getElementById('taskList').innerHTML = '<div class="empty-state">Failed to load tasks.</div>';
+        document.getElementById('taskList').innerHTML = '<div class="empty-state">Comms failure — mission data unreachable.</div>';
       }
     }
 
@@ -398,14 +679,14 @@
         const d = await r.json();
         const status = document.getElementById('wlStatus');
         if (d.ok) {
-          if (status) { status.textContent = 'Task logged ✓'; status.style.color = 'var(--success)'; }
+          if (status) { status.textContent = 'Sortie complete. Mission logged.'; status.style.color = 'var(--success)'; }
           setTimeout(loadTasks, 600);
         } else {
-          if (status) { status.textContent = d.error || 'Failed'; status.style.color = 'var(--danger)'; }
+          if (status) { status.textContent = d.error || 'Comms error'; status.style.color = 'var(--gundam-red)'; }
         }
       } catch (e) {
         const status = document.getElementById('wlStatus');
-        if (status) { status.textContent = 'Network error'; status.style.color = 'var(--danger)'; }
+        if (status) { status.textContent = 'Transmission lost — network error'; status.style.color = 'var(--gundam-red)'; }
       }
     }
 
@@ -414,18 +695,18 @@
       const duration = document.getElementById('wlDuration')?.value || 0;
       const notes = document.getElementById('wlNotes')?.value || '';
       const status = document.getElementById('wlStatus');
-      if (!duration) { if (status) { status.textContent = 'Enter minutes'; status.style.color = 'var(--danger)'; } return; }
-      if (status) { status.textContent = 'Saving...'; status.style.color = 'var(--muted)'; }
+      if (!duration) { if (status) { status.textContent = 'Enter sortie duration in minutes.'; status.style.color = 'var(--gundam-yellow)'; } return; }
+      if (status) { status.textContent = 'Transmitting sortie data...'; status.style.color = 'var(--muted)'; }
       try {
         await fetch(`${API}/api/practice`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ studentId: STUDENT_ID, level: 'A1', topic: `${activity} - ${notes}` })
         });
-        if (status) { status.textContent = 'Saved ✓'; status.style.color = 'var(--success)'; }
+        if (status) { status.textContent = 'Sortie logged successfully ✓'; status.style.color = 'var(--success)'; }
         setTimeout(() => { if (status) status.textContent = ''; }, 2000);
       } catch (e) {
-        if (status) { status.textContent = 'Save failed'; status.style.color = 'var(--danger)'; }
+        if (status) { status.textContent = 'Transmission failed'; status.style.color = 'var(--gundam-red)'; }
       }
     }
 
@@ -433,8 +714,7 @@
       return String(str || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
     }
 
-    const wlSaveBtn = document.getElementById('wlSaveBtn');
-    if (wlSaveBtn) wlSaveBtn.addEventListener('click', saveWorkLog);
+    document.getElementById('wlSaveBtn')?.addEventListener('click', saveWorkLog);
 
     if (requireAuth()) loadTasks();
   </script>

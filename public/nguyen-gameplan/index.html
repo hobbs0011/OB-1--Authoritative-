@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nguyen — 1-Month Gameplan: Quan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --wood-deep: #0e0a06;
+      --wood-dark: #1a120b;
+      --wood-mid: #3d2817;
+      --wood-light: #5c3d2e;
+      --gold: #c9a961;
+      --gold-light: #d4b87a;
+      --gold-bright: #e8cf8a;
+      --gold-glow: rgba(201, 169, 97, 0.35);
+      --gold-soft: rgba(201, 169, 97, 0.12);
+      --cream: #f5f0e8;
+      --cream-muted: #d9d0c3;
+      --text: #f5f0e8;
+      --muted: #b8a99a;
+      --purple-deep: #2a1a3e;
+      --purple-mid: #5a2d82;
+      --success: #7d9b76;
+      --danger: #a85454;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      background: var(--wood-deep);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-y: auto;
+      min-height: 100%;
+      width: 100%;
+    }
+
+    .letterbox {
+      position: fixed;
+      left: 0; right: 0;
+      height: 6vh;
+      background: #000;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    .letterbox.top { top: 0; }
+    .letterbox.bottom { bottom: 0; }
+
+    #starfield {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    #particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .vignette {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at center, transparent 35%, rgba(14,10,6,0.9) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Loading screen */
+    #loading {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: var(--wood-deep);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 1.2s ease;
+    }
+    #loading.hidden { opacity: 0; pointer-events: none; }
+    .loading-ring {
+      width: 80px; height: 80px;
+      border: 3px solid rgba(201,169,97,0.1);
+      border-top: 3px solid var(--gold);
+      border-radius: 50%;
+      animation: spin 1.5s cubic-bezier(.68,-0.55,.27,1.55) infinite;
+    }
+    .loading-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-top: 24px;
+      letter-spacing: 0.15em;
+      font-style: italic;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 64px;
+      background: linear-gradient(180deg, rgba(14,10,6,0.95) 0%, transparent 100%);
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .nav.visible { opacity: 1; transform: translateY(0); }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+    }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* Stage */
+    .stage {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 8vh 2rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1.2s cubic-bezier(.22,1,.36,1), transform 1.2s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .logo-mark {
+      width: 100px;
+      height: 100px;
+      border: 3px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      position: relative;
+      box-shadow: 0 0 50px var(--gold-glow), inset 0 0 30px rgba(201,169,97,0.1);
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+    .logo-mark::before {
+      content: '';
+      position: absolute;
+      width: 140%;
+      height: 140%;
+      border-radius: 50%;
+      border: 1px solid rgba(201,169,97,0.2);
+      animation: spin-slow 15s linear infinite;
+    }
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      width: 180%;
+      height: 180%;
+      border-radius: 50%;
+      border: 1px solid rgba(201,169,97,0.08);
+      animation: spin-slow 25s linear infinite reverse;
+    }
+    .logo-mark span {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 50px var(--gold-glow), inset 0 0 30px rgba(201,169,97,0.1); }
+      50% { box-shadow: 0 0 90px var(--gold-glow), inset 0 0 50px rgba(201,169,97,0.2); }
+    }
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .title-pre {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      opacity: 0.85;
+    }
+    .title-main {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      line-height: 0.92;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+      background: linear-gradient(180deg, #f5f0e8 0%, #d4b87a 40%, #c9a961 70%, #8b6f3a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 40px rgba(201,169,97,0.3));
+    }
+    .title-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--cream-muted);
+      opacity: 0.8;
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
+
+    .divider {
+      width: 160px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 2.5rem auto;
+      opacity: 0.6;
+    }
+
+    .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-weight: 400;
+      line-height: 1.8;
+      max-width: 720px;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+
+    .stats {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      line-height: 1;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 60px;
+      border: 1px solid var(--gold);
+      background: rgba(201,169,97,0.08);
+      color: var(--gold-light);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      margin-top: 1.5rem;
+    }
+    .hero-cta:hover {
+      background: rgba(201,169,97,0.2);
+      box-shadow: 0 0 50px var(--gold-glow);
+      transform: scale(1.03);
+    }
+
+    /* Section Headers */
+    .section-title {
+      text-align: center;
+      margin: 5rem 0 3rem;
+    }
+    .section-title h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      background: linear-gradient(180deg, #f5f0e8, #d4b87a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-title p {
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--muted);
+      font-size: 1.15rem;
+      font-style: italic;
+      margin-top: 8px;
+    }
+
+    /* Weekly Timeline */
+    .timeline {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, transparent, var(--gold), var(--gold), transparent);
+      opacity: 0.3;
+      transform: translateX(-50%);
+    }
+
+    .week-card {
+      display: flex;
+      align-items: stretch;
+      gap: 32px;
+      margin-bottom: 60px;
+      position: relative;
+    }
+    .week-card:nth-child(odd) { flex-direction: row; }
+    .week-card:nth-child(even) { flex-direction: row-reverse; }
+
+    .week-number {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--wood-dark), var(--wood-mid));
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      box-shadow: 0 0 30px rgba(201,169,97,0.2);
+      z-index: 5;
+    }
+    .week-body {
+      flex: 1;
+      background: rgba(26, 18, 11, 0.9);
+      border: 1px solid rgba(201,169,97,0.15);
+      border-radius: 20px;
+      padding: 32px;
+      backdrop-filter: blur(8px);
+      transition: border-color 0.4s, box-shadow 0.4s;
+    }
+    .week-card:nth-child(odd) .week-body { margin-left: 80px; }
+    .week-card:nth-child(even) .week-body { margin-right: 80px; }
+    .week-body:hover {
+      border-color: rgba(201,169,97,0.4);
+      box-shadow: 0 0 40px rgba(201,169,97,0.08);
+    }
+    .week-label {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .week-dates {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+    .week-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 12px;
+    }
+    .week-body p {
+      color: var(--cream-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .task-list { list-style: none; }
+    .task-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(201,169,97,0.08);
+      font-size: 0.92rem;
+      color: var(--cream-muted);
+      line-height: 1.5;
+    }
+    .task-list li:last-child { border-bottom: none; }
+    .task-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid rgba(201,169,97,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: all 0.3s;
+    }
+    .task-check.done {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+    .task-check.done::after {
+      content: '✓';
+      color: var(--wood-deep);
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .milestone {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 60px;
+      background: rgba(201,169,97,0.1);
+      border: 1px solid rgba(201,169,97,0.25);
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .weekly-schedule {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }
+    .day-pill {
+      padding: 6px 14px;
+      border-radius: 60px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border: 1px solid rgba(201,169,97,0.15);
+    }
+    .day-pill.off {
+      background: rgba(168, 84, 84, 0.08);
+      color: var(--danger);
+      border-color: rgba(168, 84, 84, 0.2);
+    }
+    .day-pill.study {
+      background: rgba(93, 130, 235, 0.08);
+      color: #5d82eb;
+      border-color: rgba(93, 130, 235, 0.2);
+    }
+    .day-pill.work {
+      background: rgba(201,169,97,0.1);
+      color: var(--gold-light);
+      border-color: rgba(201,169,97,0.25);
+    }
+
+    /* Daily Schedule Key */
+    .schedule-key {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 2rem 0 3rem;
+    }
+    .key-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .key-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .key-dot.work { background: var(--gold); }
+    .key-dot.study { background: #5d82eb; }
+    .key-dot.off { background: var(--danger); }
+
+    /* Apply counter */
+    .apply-counter {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: linear-gradient(135deg, rgba(201,169,97,0.06), rgba(201,169,97,0.02));
+      border: 1px solid rgba(201,169,97,0.15);
+      border-radius: 24px;
+      max-width: 700px;
+      margin: 3rem auto;
+    }
+    .apply-counter h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .apply-counter .big-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 10vw, 7rem);
+      color: var(--gold);
+      line-height: 1;
+      margin: 0.5rem 0;
+    }
+    .apply-counter p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* Schedule Table */
+    .schedule-block {
+      width: 100%;
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+    .schedule-block h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: var(--cream);
+    }
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .schedule-table th {
+      padding: 14px 12px;
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid rgba(201,169,97,0.2);
+    }
+    .schedule-table td {
+      padding: 12px;
+      font-size: 0.88rem;
+      color: var(--cream-muted);
+      border-bottom: 1px solid rgba(201,169,97,0.06);
+    }
+    .schedule-table .day-col { font-weight: 600; color: var(--text); min-width: 80px; }
+    .schedule-table .type-col { font-size: 0.78rem; font-weight: 600; }
+    .type-homework { color: var(--gold); }
+    .type-study { color: #5d82eb; }
+    .type-off { color: var(--danger); }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 4rem 2rem;
+      border-top: 1px solid rgba(201,169,97,0.08);
+      width: 100%;
+      max-width: 900px;
+      margin: 3rem auto 0;
+    }
+    .footer p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+    .footer .return-link {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 12px 28px;
+      border-radius: 60px;
+      border: 1px solid rgba(201,169,97,0.2);
+      color: var(--gold);
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+    .footer .return-link:hover {
+      background: rgba(201,169,97,0.1);
+      border-color: var(--gold);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .letterbox { height: 3vh; }
+      .week-card { flex-direction: column !important; }
+      .week-number { left: 28px; transform: none; }
+      .week-card:nth-child(odd) .week-body,
+      .week-card:nth-child(even) .week-body {
+        margin: 0;
+        margin-top: 30px;
+      }
+      .timeline::before { left: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="letterbox top"></div>
+  <div class="letterbox bottom"></div>
+
+  <canvas id="starfield"></canvas>
+  <canvas id="particles"></canvas>
+  <div class="vignette"></div>
+
+  <div id="loading">
+    <div class="loading-ring"></div>
+    <div class="loading-text">Preparing Quan's Gameplan…</div>
+  </div>
+
+  <nav class="nav" id="nav">
+    <a class="nav-logo" href="/nguyen-login/">Nguyen</a>
+    <div class="nav-links">
+      <a href="#week1">Week 1</a>
+      <a href="#week2">Week 2</a>
+      <a href="#week3">Week 3</a>
+      <a href="#week4">Week 4</a>
+      <a href="#schedule">Schedule</a>
+    </div>
+  </nav>
+
+  <div class="stage">
+    <section class="hero">
+      <div class="logo-mark reveal"><span>N</span></div>
+      <div class="title-pre reveal">Quan · September 2026</div>
+      <h1 class="title-main reveal">1-MONTH<br>GAMEPLAN</h1>
+      <div class="title-sub reveal">Career Launch · LinkedIn · AI 3D Modeling</div>
+      <div class="divider reveal"></div>
+      <p class="tagline reveal">
+        "Every master was once a beginner. Every application is a step closer to the career you deserve."
+      </p>
+      <div class="stats reveal">
+        <div class="stat">
+          <div class="stat-number" data-target="36">0</div>
+          <div class="stat-label">Applications</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" data-target="4">0</div>
+          <div class="stat-label">Weeks</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" data-target="12">0</div>
+          <div class="stat-label">Homework Days</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" data-target="20">0</div>
+          <div class="stat-label">Minutes Daily</div>
+        </div>
+      </div>
+      <a class="hero-cta reveal" href="#week1">Begin the Journey ↓</a>
+    </section>
+
+    <!-- Schedule Key -->
+    <div class="schedule-key reveal">
+      <span class="key-item"><span class="key-dot work"></span> Homework Day (20-30 min + 3 applications)</span>
+      <span class="key-item"><span class="key-dot study"></span> Study Day (class)</span>
+      <span class="key-item"><span class="key-dot off"></span> Weekend (off)</span>
+    </div>
+
+    <!-- Weekly Timeline -->
+    <div class="timeline" id="week1">
+      <div class="week-card reveal">
+        <div class="week-number">I</div>
+        <div class="week-body">
+          <div class="week-label">Week 1</div>
+          <div class="week-dates">September 7 — September 13</div>
+          <h3>CV & Resume Refinement</h3>
+          <p>Polish your CV and resume to professional standards. Research each company, tailor applications, and build momentum.</p>
+          <div class="weekly-schedule">
+            <span class="day-pill work">Mon 7 · 25 min + 3 apps</span>
+            <span class="day-pill study">Tue 8 · Class</span>
+            <span class="day-pill work">Wed 9 · 25 min + 3 apps</span>
+            <span class="day-pill study">Thu 10 · Class</span>
+            <span class="day-pill study">Fri 11 · Class</span>
+            <span class="day-pill work">Sat 12 · 25 min + 3 apps</span>
+            <span class="day-pill off">Sun 13 · Off</span>
+          </div>
+          <ul class="task-list">
+            <li><span class="task-check"></span> Update CV with latest experience and skills</li>
+            <li><span class="task-check"></span> Refine resume formatting — clean, professional, ATS-friendly</li>
+            <li><span class="task-check"></span> Write a strong professional summary (2-3 sentences)</li>
+            <li><span class="task-check"></span> Research and apply to 3 companies on each homework day</li>
+            <li><span class="task-check"></span> Get a professional-looking photo taken (headshot)</li>
+          </ul>
+          <span class="milestone">★ Milestone: 9 applications submitted</span>
+        </div>
+      </div>
+
+      <div class="week-card reveal" id="week2">
+        <div class="week-number">II</div>
+        <div class="week-body">
+          <div class="week-label">Week 2</div>
+          <div class="week-dates">September 14 — September 20</div>
+          <h3>LinkedIn Launch</h3>
+          <p>Set up a compelling LinkedIn profile that tells your professional story. Refine your bio, headline, and publish your first industry blog post.</p>
+          <div class="weekly-schedule">
+            <span class="day-pill work">Mon 14 · 25 min + 3 apps</span>
+            <span class="day-pill study">Tue 15 · Class</span>
+            <span class="day-pill work">Wed 16 · 25 min + 3 apps</span>
+            <span class="day-pill study">Thu 17 · Class</span>
+            <span class="day-pill study">Fri 18 · Class</span>
+            <span class="day-pill work">Sat 19 · 25 min + 3 apps</span>
+            <span class="day-pill off">Sun 20 · Off</span>
+          </div>
+          <ul class="task-list">
+            <li><span class="task-check"></span> Create / optimize LinkedIn profile with professional headshot</li>
+            <li><span class="task-check"></span> Write a compelling headline and about section</li>
+            <li><span class="task-check"></span> Connect with 15+ professionals in your target field</li>
+            <li><span class="task-check"></span> Write and publish your first LinkedIn blog post</li>
+            <li><span class="task-check"></span> Apply to 3 companies on each homework day</li>
+          </ul>
+          <span class="milestone">★ Milestone: First LinkedIn post published</span>
+        </div>
+      </div>
+
+      <div class="week-card reveal" id="week3">
+        <div class="week-number">III</div>
+        <div class="week-body">
+          <div class="week-label">Week 3</div>
+          <div class="week-dates">September 21 — September 27</div>
+          <h3>AI 3D Modeling</h3>
+          <p>Begin researching AI-powered 3D modeling tools and workflows. Document your learning journey through your weekly LinkedIn blog post.</p>
+          <div class="weekly-schedule">
+            <span class="day-pill work">Mon 21 · 25 min + 3 apps</span>
+            <span class="day-pill study">Tue 22 · Class</span>
+            <span class="day-pill work">Wed 23 · 25 min + 3 apps</span>
+            <span class="day-pill study">Thu 24 · Class</span>
+            <span class="day-pill study">Fri 25 · Class</span>
+            <span class="day-pill work">Sat 26 · 25 min + 3 apps</span>
+            <span class="day-pill off">Sun 27 · Off</span>
+          </div>
+          <ul class="task-list">
+            <li><span class="task-check"></span> Research AI 3D modeling tools (Meshy, Luma AI, Rodin, etc.)</li>
+            <li><span class="task-check"></span> Create a test model using an AI tool (even simple)</li>
+            <li><span class="task-check"></span> Write LinkedIn blog post about AI 3D modeling journey</li>
+            <li><span class="task-check"></span> Share screenshots or renders of your test model</li>
+            <li><span class="task-check"></span> Apply to 3 companies on each homework day</li>
+          </ul>
+          <span class="milestone">★ Milestone: First AI 3D model created + blog post</span>
+        </div>
+      </div>
+
+      <div class="week-card reveal" id="week4">
+        <div class="week-number">IV</div>
+        <div class="week-body">
+          <div class="week-label">Week 4</div>
+          <div class="week-dates">September 28 — October 4</div>
+          <h3>Review & Refine</h3>
+          <p>Analyze the results of this month's work. Review application outcomes, LinkedIn engagement, and refine your strategy moving forward.</p>
+          <div class="weekly-schedule">
+            <span class="day-pill work">Mon 28 · 25 min + 3 apps</span>
+            <span class="day-pill study">Tue 29 · Class</span>
+            <span class="day-pill work">Wed 30 · 25 min + 3 apps</span>
+            <span class="day-pill study">Thu 1 · Class</span>
+            <span class="day-pill study">Fri 2 · Class</span>
+            <span class="day-pill work">Sat 3 · 25 min + 3 apps</span>
+            <span class="day-pill off">Sun 4 · Off</span>
+          </div>
+          <ul class="task-list">
+            <li><span class="task-check"></span> Review all applications: responses, rejections, next steps</li>
+            <li><span class="task-check"></span> Analyze LinkedIn profile views and post engagement</li>
+            <li><span class="task-check"></span> Refine CV and resume based on month's feedback</li>
+            <li><span class="task-check"></span> Plan next month's goals and adjustments</li>
+            <li><span class="task-check"></span> Apply to 3 final companies for the month</li>
+          </ul>
+          <span class="milestone">★ Milestone: Full month review complete</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Application Total Counter -->
+    <div class="apply-counter reveal">
+      <h3>Total Applications This Month</h3>
+      <div class="big-num">36</div>
+      <p>3 companies × 3 homework days × 4 weeks</p>
+    </div>
+
+    <!-- Weekly Schedule Table -->
+    <div class="schedule-block reveal" id="schedule">
+      <h3>September 2026 — Weekly Schedule</h3>
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Focus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="day-col">Monday</td><td>7, 14, 21, 28</td><td class="type-col type-homework">Homework</td><td>20-30 min task + apply 3 companies</td></tr>
+          <tr><td class="day-col">Tuesday</td><td>8, 15, 22, 29</td><td class="type-col type-study">Study Day</td><td>English class with Michael</td></tr>
+          <tr><td class="day-col">Wednesday</td><td>9, 16, 23, 30</td><td class="type-col type-homework">Homework</td><td>20-30 min task + apply 3 companies</td></tr>
+          <tr><td class="day-col">Thursday</td><td>10, 17, 24, 1</td><td class="type-col type-study">Study Day</td><td>English class with Michael</td></tr>
+          <tr><td class="day-col">Friday</td><td>11, 18, 25, 2</td><td class="type-col type-study">Study Day</td><td>English class with Michael</td></tr>
+          <tr><td class="day-col">Saturday</td><td>12, 19, 26, 3</td><td class="type-col type-homework">Homework</td><td>20-30 min task + apply 3 companies</td></tr>
+          <tr><td class="day-col">Sunday</td><td>13, 20, 27, 4</td><td class="type-col type-off">Off</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer">
+      <p>Every step forward is a step toward the future you're building.</p>
+      <a class="return-link" href="/nguyen-login/">← Return to Nguyen Portal</a>
+    </div>
+  </div>
+
+  <script>
+    // ── LOADING SCREEN ──
+    window.addEventListener('load', () => {
+      setTimeout(() => document.getElementById('loading').classList.add('hidden'), 800);
+    });
+
+    // ── NAV ──
+    setTimeout(() => document.getElementById('nav').classList.add('visible'), 1200);
+
+    // ── STARFIELD ──
+    const starCanvas = document.getElementById('starfield');
+    const starCtx = starCanvas.getContext('2d');
+    let stars = [];
+    function resizeStarCanvas() {
+      starCanvas.width = window.innerWidth;
+      starCanvas.height = window.innerHeight;
+    }
+    resizeStarCanvas();
+    window.addEventListener('resize', resizeStarCanvas);
+
+    for (let i = 0; i < 200; i++) {
+      stars.push({
+        x: Math.random() * starCanvas.width,
+        y: Math.random() * starCanvas.height,
+        r: Math.random() * 1.8 + 0.2,
+        a: Math.random() * 0.8 + 0.2,
+        s: Math.random() * 0.02 + 0.005
+      });
+    }
+    function drawStars() {
+      starCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+      for (const s of stars) {
+        s.a += (Math.random() - 0.5) * s.s;
+        s.a = Math.max(0.1, Math.min(1, s.a));
+        starCtx.beginPath();
+        starCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        starCtx.fillStyle = `rgba(201, 169, 97, ${s.a * 0.7})`;
+        starCtx.fill();
+      }
+      requestAnimationFrame(drawStars);
+    }
+    drawStars();
+
+    // ── PARTICLES ──
+    const partCanvas = document.getElementById('particles');
+    const partCtx = partCanvas.getContext('2d');
+    let particles = [];
+    function resizePartCanvas() {
+      partCanvas.width = window.innerWidth;
+      partCanvas.height = window.innerHeight;
+    }
+    resizePartCanvas();
+    window.addEventListener('resize', resizePartCanvas);
+
+    for (let i = 0; i < 40; i++) {
+      particles.push({
+        x: Math.random() * partCanvas.width,
+        y: Math.random() * partCanvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5 - 0.2,
+        r: Math.random() * 3 + 1,
+        a: Math.random() * 0.3 + 0.1
+      });
+    }
+    function drawParticles() {
+      partCtx.clearRect(0, 0, partCanvas.width, partCanvas.height);
+      for (const p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = partCanvas.width;
+        if (p.x > partCanvas.width) p.x = 0;
+        if (p.y < 0) p.y = partCanvas.height;
+        if (p.y > partCanvas.height) p.y = 0;
+        partCtx.beginPath();
+        partCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        partCtx.fillStyle = `rgba(201, 169, 97, ${p.a})`;
+        partCtx.fill();
+      }
+      requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+
+    // ── REVEAL ON SCROLL ──
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      }
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    for (const el of revealEls) observer.observe(el);
+
+    // ── COUNTER ANIMATION ──
+    const statNumbers = document.querySelectorAll('.stat-number');
+    const counterObserver = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          const el = e.target;
+          const target = parseInt(el.getAttribute('data-target'));
+          let current = 0;
+          const increment = Math.max(1, Math.floor(target / 40));
+          const interval = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+              el.textContent = target;
+              clearInterval(interval);
+            } else {
+              el.textContent = current;
+            }
+          }, 40);
+          counterObserver.unobserve(el);
+        }
+      }
+    }, { threshold: 0.5 });
+    for (const el of statNumbers) counterObserver.observe(el);
+
+    // ── SMOOTH SCROLL ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>
