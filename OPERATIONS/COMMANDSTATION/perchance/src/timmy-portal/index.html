@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a120b">
+<title>Timmy's Portal — English + Confidence</title>
+<style>
+  :root{
+    --wood-deep:#1a120b; --wood-dark:#2d1810; --wood-mid:#3d2817; --wood-light:#5c3d2e;
+    --gold:#c9a961; --gold-light:#d4b87a; --gold-soft:rgba(201,169,97,.12);
+    --cream:#f5f0e8; --cream-muted:#d9d0c3; --text:#f5f0e8; --muted:#b8a99a;
+    --panel:rgba(30,20,14,.92); --panel-border:rgba(201,169,97,.18);
+    --success:#7d9b76; --danger:#a85454; --sky:#5ac8fa;
+    --radius-lg:20px; --radius-md:14px; --radius-sm:10px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'Segoe UI','Inter',system-ui,sans-serif; font-size:1rem; line-height:1.65; color:var(--text);
+    background:
+      repeating-linear-gradient(90deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px),
+      repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.02) 2px,rgba(0,0,0,.02) 4px),
+      radial-gradient(ellipse at 20% 20%,rgba(201,169,97,.08),transparent 50%),
+      radial-gradient(ellipse at 80% 80%,rgba(92,61,46,.15),transparent 50%),
+      linear-gradient(135deg,#1a120b 0%,#2d1810 40%,#1a120b 100%);
+    min-height:100vh; padding:24px;
+  }
+  .wrap{max-width:880px;margin:0 auto}
+  .hidden{display:none!important}
+  .brand{text-align:center;margin-bottom:26px}
+  .brand-logo{width:64px;height:64px;background:linear-gradient(135deg,var(--gold),#8b6f3a);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:800;color:var(--wood-deep);font-size:1.7rem;margin-bottom:12px;box-shadow:0 12px 40px rgba(201,169,97,.25),inset 0 1px 0 rgba(255,255,255,.2);border:2px solid rgba(201,169,97,.3)}
+  .brand h1{font-size:1.5rem;font-weight:800;letter-spacing:.05em;color:var(--cream)}
+  .brand p{color:var(--muted);font-size:.95rem;margin-top:4px;font-style:italic}
+  .card{background:var(--panel);border:1px solid var(--panel-border);border-radius:var(--radius-lg);padding:26px;margin-bottom:18px;backdrop-filter:blur(12px);box-shadow:0 20px 60px rgba(0,0,0,.4),inset 0 1px 0 rgba(201,169,97,.08)}
+  .card-header{display:flex;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:16px;border-bottom:1px solid rgba(201,169,97,.18)}
+  .card-header h3{color:var(--gold);font-size:1.05rem;font-weight:700;letter-spacing:.03em}
+  .card-icon{width:38px;height:38px;border-radius:11px;display:inline-flex;align-items:center;justify-content:center;font-size:1.1rem;background:rgba(201,169,97,.14);color:var(--gold);flex-shrink:0}
+  .card-icon.purple{background:rgba(120,90,200,.15);color:#a78bfa}
+  .card-icon.sky{background:rgba(90,200,250,.13);color:var(--sky)}
+  .role-grid{display:flex;gap:10px;margin-bottom:20px}
+  .role-btn{flex:1;padding:12px;border-radius:12px;border:1px solid var(--panel-border);background:rgba(255,255,255,.03);color:var(--muted);font-size:.9rem;font-weight:600;cursor:pointer;transition:all .25s}
+  .role-btn.active{border-color:var(--gold);background:var(--gold-soft);color:var(--gold-light);box-shadow:0 0 18px rgba(201,169,97,.1)}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .field input{width:100%;padding:13px 15px;border-radius:11px;border:1px solid var(--panel-border);background:rgba(255,255,255,.04);color:var(--text);font-family:inherit;font-size:1rem}
+  .field input:focus{outline:none;border-color:var(--gold)}
+  .submit-btn{width:100%;padding:14px;border-radius:11px;border:none;background:linear-gradient(135deg,var(--gold),#8b6f3a);color:#1a120b;font-size:.95rem;font-weight:800;letter-spacing:.05em;cursor:pointer;text-transform:uppercase;transition:opacity .2s}
+  .submit-btn:hover{opacity:.9}
+  .submit-btn:disabled{opacity:.6;cursor:wait}
+  .error{color:#ff9b9b;font-size:.85rem;min-height:20px;margin-top:10px}
+  .hint{text-align:center;color:var(--muted);font-size:.8rem;margin-top:14px}
+  .topbar{display:flex;align-items:center;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+  .topbar .who{font-weight:800;color:var(--gold-light);font-size:1.05rem}
+  .topbar .spacer{flex:1}
+  .tbtn{padding:9px 14px;border-radius:10px;border:1px solid rgba(201,169,97,.3);background:rgba(201,169,97,.07);color:var(--gold);font-size:.78rem;font-weight:700;letter-spacing:.05em;cursor:pointer;text-transform:uppercase}
+  .tbtn:hover{background:rgba(201,169,97,.15)}
+  .wf-banner{background:linear-gradient(135deg,rgba(42,26,62,.95),rgba(26,18,11,.95));border:1px solid rgba(201,169,97,.25);border-radius:var(--radius-lg);padding:22px 26px;margin-bottom:20px;backdrop-filter:blur(12px);box-shadow:0 20px 60px rgba(0,0,0,.4),0 0 40px rgba(201,169,97,.05)}
+  .wf-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border-radius:60px;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--gold-soft);color:var(--gold);margin-bottom:12px}
+  .wf-title{font-size:1.25rem;font-weight:800;color:var(--cream);letter-spacing:.02em;margin-bottom:14px}
+  .wf-weeks{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .wf-week{flex:1;min-width:130px;padding:12px;border-radius:13px;border:1px solid rgba(201,169,97,.12);background:rgba(255,255,255,.02);text-align:center}
+  .wf-week.completed{border-color:rgba(125,155,118,.35);background:rgba(125,155,118,.07)}
+  .wf-week.active{border-color:rgba(201,169,97,.55);background:rgba(201,169,97,.08);box-shadow:0 0 20px rgba(201,169,97,.08)}
+  .wf-week-num{font-weight:800;font-size:1.15rem;color:var(--muted);letter-spacing:.04em}
+  .wf-week.completed .wf-week-num{color:var(--success)}
+  .wf-week.active .wf-week-num{color:var(--gold-light)}
+  .wf-week-label{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
+  .wf-week .st{font-size:.65rem;margin-top:6px;font-weight:700}
+  .wf-week.completed .st{color:var(--success)}
+  .wf-week.active .st{color:var(--gold)}
+  .wf-detail{border-top:1px solid rgba(201,169,97,.12);padding-top:12px}
+  .wf-detail-row{display:flex;justify-content:space-between;padding:4px 0;font-size:.83rem}
+  .wf-detail-row span:first-child{color:var(--muted);font-weight:500}
+  .wf-detail-row span:last-child{color:var(--cream);font-weight:700}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .progress-bar{height:10px;border-radius:60px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:8px}
+  .progress-fill{height:100%;border-radius:60px;background:linear-gradient(90deg,#8b6f3a,var(--gold));width:0%;transition:width .5s}
+  .progress-label{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);margin-top:5px}
+  .kv{display:flex;justify-content:space-between;padding:5px 0;font-size:.84rem}
+  .kv b{color:var(--cream)}
+  .book{display:flex;gap:14px;align-items:center;padding:12px;border:1px solid rgba(201,169,97,.14);border-radius:13px;background:rgba(255,255,255,.02);margin-bottom:10px}
+  .book .bc{width:46px;height:58px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--wood-deep);flex-shrink:0;font-size:1rem}
+  .book .bt{font-size:.95rem;font-weight:700;color:var(--cream)}
+  .book .bs{font-size:.76rem;color:var(--muted)}
+  .audio-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid rgba(201,169,97,.13);border-radius:11px;margin-bottom:8px;background:rgba(255,255,255,.02)}
+  .audio-item .t{flex:1;font-size:.9rem;font-weight:600;color:var(--cream)}
+  .audio-item .d{font-size:.74rem;color:var(--muted)}
+  .audio-item audio{height:34px;width:190px}
+  @media(max-width:640px){.audio-item{flex-wrap:wrap}.audio-item audio{width:100%}}
+  .task-row{display:flex;align-items:center;gap:11px;padding:9px 4px;border-bottom:1px solid rgba(255,255,255,.05);font-size:.9rem}
+  .task-row:last-child{border-bottom:none}
+  .task-row .chk{width:20px;height:20px;border-radius:6px;border:2px solid var(--gold);cursor:pointer;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-size:.7rem;color:transparent;background:transparent;transition:all .2s}
+  .task-row .chk.done{background:var(--gold);color:#1a120b;border-color:var(--gold)}
+  .task-row .lbl{flex:1}
+  .task-row.done .lbl{color:var(--muted);text-decoration:line-through}
+  .task-row .mins{font-size:.75rem;color:var(--muted)}
+  .empty{color:var(--muted);font-size:.85rem;font-style:italic;text-align:center;padding:14px}
+  .note-box{border-left:3px solid var(--gold);background:rgba(201,169,97,.06);border-radius:0 11px 11px 0;padding:14px 16px;font-size:.88rem;color:var(--cream-muted);line-height:1.7}
+  .btn{padding:10px 16px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--gold),#8b6f3a);color:#1a120b;font-weight:700;letter-spacing:.04em;cursor:pointer;font-size:.85rem}
+  .btn.ghost{background:transparent;border:1px solid rgba(201,169,97,.3);color:var(--gold)}
+  .req{border:1px solid rgba(201,169,97,.14);border-radius:11px;padding:10px 13px;margin-bottom:8px;background:rgba(255,255,255,.02)}
+  .req .rt{font-size:.88rem;font-weight:700;color:var(--cream)}
+  .req .rr{font-size:.8rem;color:var(--muted)}
+  .req .rd{font-size:.76rem;color:var(--gold);margin-top:3px}
+  .game-card{border:1px solid rgba(90,200,250,.2);border-radius:14px;padding:16px;background:rgba(20,30,46,.55);text-align:center;cursor:pointer;transition:transform .2s}
+  .game-card:hover{transform:translateY(-2px)}
+  .game-card .gi{font-size:2.2rem}
+  .game-card .gt{font-weight:700;color:var(--cream);margin-top:6px}
+  .game-card .gs{font-size:.78rem;color:var(--muted)}
+  .match-row{display:flex;gap:10px;margin-bottom:10px}
+  .match-row .pick{flex:1;padding:13px;border-radius:12px;border:1px solid rgba(201,169,97,.25);background:rgba(255,255,255,.03);font-size:1.6rem;text-align:center;cursor:pointer;transition:all .2s}
+  .match-row .pick.sel{border-color:var(--gold);box-shadow:0 0 14px rgba(201,169,97,.25);background:var(--gold-soft)}
+  .match-row .pick.ok{border-color:var(--success);background:rgba(125,155,118,.12)}
+  .match-row .pick.bad{border-color:var(--danger);background:rgba(168,84,84,.12)}
+  .paw{font-size:.85rem;color:var(--gold);letter-spacing:2px}
+  .flashcard-area{text-align:center}
+  .big-card{min-height:210px;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:18px;border:1px solid rgba(201,169,97,.3);background:linear-gradient(150deg,#2d1810,#221410);font-size:5rem;cursor:pointer;user-select:none;transition:transform .2s;margin-bottom:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div id="view-login">
+    <div class="brand">
+      <div class="brand-logo">T</div>
+      <h1>Timmy's Portal</h1>
+      <p>English + Confidence Tracker · family of Trâm Nguyễn</p>
+    </div>
+
+    <div class="wf-banner">
+      <div class="wf-badge">🎯 Active Gameplan</div>
+      <div class="wf-title">Timmy's 4-Week English Launch</div>
+      <div class="wf-weeks">
+        <div class="wf-week active"><div class="wf-week-num">W1</div><div class="wf-week-label">Confidence</div><div class="st">Active</div></div>
+        <div class="wf-week"><div class="wf-week-num">W2</div><div class="wf-week-label">Global Stage 5</div></div>
+        <div class="wf-week"><div class="wf-week-num">W3</div><div class="wf-week-label">Science Reader</div></div>
+        <div class="wf-week"><div class="wf-week-num">W4</div><div class="wf-week-label">Review</div></div>
+      </div>
+      <div class="wf-detail">
+        <div class="wf-detail-row"><span>Lesson Day</span><b>Saturday · 10am</b></div>
+        <div class="wf-detail-row"><span>Homework</span><b>20–30 min / day</b></div>
+        <div class="wf-detail-row"><span>Focus</span><b>Confidence · Speaking · Vocabulary</b></div>
+      </div>
+    </div>
+
+    <div class="card" style="max-width:430px;margin:0 auto">
+      <div class="role-grid">
+        <button class="role-btn active" data-role="parent" onclick="selectRole('parent',this)">Parents</button>
+        <button class="role-btn" data-role="timmy" onclick="selectRole('timmy',this)">Timmy</button>
+      </div>
+      <div class="field">
+        <label id="pinLabel">Parent PIN</label>
+        <input type="password" id="pinInput" placeholder="Enter PIN" autocomplete="off">
+      </div>
+      <button class="submit-btn" id="loginBtn" onclick="handleLogin()">Sign In</button>
+      <div class="error" id="loginError"></div>
+    </div>
+    <p class="hint">PIN provided by your teacher, Michael.</p>
+  </div>
+
+  <div id="view-parent" class="hidden">
+    <div class="topbar">
+      <span class="who">🌿 Trâm's Dashboard</span>
+      <span class="spacer"></span>
+      <button class="tbtn" onclick="showGameplan()">🎯 Gameplan</button>
+      <button class="tbtn" onclick="logout()">Sign Out</button>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-icon">📖</div><h3>Teacher's Note — Timmy</h3></div>
+      <div class="note-box">
+        With Timmy the focus will mainly be <b>confidence</b>. He is a very smart kid, but social
+        interactions seem to be the thing he struggles with. If he scores lower on English tests it is
+        <b>not a lack of intelligence</b> — in my opinion he is smarter than kids his age, but social
+        interactions are confusing to him. With the right support he will grow into a very successful person.
+      </div>
+    </div>
+
+    <div class="wf-banner">
+      <div class="wf-badge">📋 Active Gameplan</div>
+      <div class="wf-title">Timmy's 4-Week English Launch</div>
+      <div class="wf-weeks">
+        <div class="wf-week completed" id="gpW1"><div class="wf-week-num">W1</div><div class="wf-week-label">Confidence</div><div class="st">✓</div></div>
+        <div class="wf-week active" id="gpW2"><div class="wf-week-num">W2</div><div class="wf-week-label">Global Stage 5</div><div class="st">Active</div></div>
+        <div class="wf-week" id="gpW3"><div class="wf-week-num">W3</div><div class="wf-week-label">Science Reader</div></div>
+        <div class="wf-week" id="gpW4"><div class="wf-week-num">W4</div><div class="wf-week-label">Review</div></div>
+      </div>
+      <div class="wf-detail">
+        <div class="wf-detail-row"><span>Lesson Day</span><b>Saturday · 10am</b></div>
+        <div class="wf-detail-row"><span>Homework</span><b>20–30 min / day</b></div>
+        <div class="wf-detail-row"><span>Books</span><b>Global Stage 5 · Oxford Read &amp; Discover L1</b></div>
+      </div>
+      <div style="text-align:center;margin-top:14px"><button class="btn ghost" onclick="showGameplan()">View Full Gameplan →</button></div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-header"><div class="card-icon purple">📊</div><h3>This Week</h3></div>
+        <div style="margin-bottom:16px">
+          <div style="display:flex;justify-content:space-between;font-size:.9rem;font-weight:700"><span>Homework Done</span><span style="color:var(--gold)" id="completionPct">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill" id="completionBar" style="width:0%"></div></div>
+          <div class="progress-label"><span id="doneCount">0 done</span><span id="totalCount">0 tasks</span></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.9rem;font-weight:700"><span>Minutes Logged</span><span style="color:var(--gold)" id="minutesLogged">0 min</span></div>
+          <div class="progress-bar"><div class="progress-fill" id="minutesBar" style="width:0%"></div></div>
+          <div class="progress-label"><span id="minutesTarget">150 min / week target</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><div class="card-icon sky">🎙️</div><h3>Audio Library</h3></div>
+        <div id="audioList"></div>
+        <div class="empty" id="audioEmpty" style="display:none">No recordings yet — Michael adds Timmy's audio here so you can listen in.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-icon sky">📌</div><h3>Homework — Homestudy Monitor</h3></div>
+      <div style="font-size:.78rem;color:var(--muted);margin-bottom:8px">Each evening Timmy logs what he did. You can see it here live.</div>
+      <div id="taskList"></div>
+      <div class="empty" id="taskEmpty">No homework logged yet this week.</div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-header"><div class="card-icon purple">✉️</div><h3>Study Requests</h3></div>
+        <div style="font-size:.82rem;color:var(--muted);margin-bottom:12px">Ask Michael what you'd like Timmy to focus on. Requests appear here and on Timmy's side.</div>
+        <div class="field"><input id="reqTopic" placeholder="e.g. more pronunciation practice" style="margin-bottom:8px"></div>
+        <div class="field"><input id="reqNote" placeholder="Anything specific? (optional)"></div>
+        <button class="btn" onclick="addRequest()">Send Request</button>
+        <div id="reqList" style="margin-top:16px"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><div class="card-icon gold">📅</div><h3>Daily Log</h3></div>
+        <div id="dailyLog"></div>
+        <div class="empty" id="dailyEmpty">No entries yet this week.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="view-timmy" class="hidden">
+    <div class="topbar">
+      <span class="who">⭐ Timmy's World</span>
+      <span class="spacer"></span>
+      <button class="tbtn" onclick="showGameplan()">🎯 Gameplan</button>
+      <button class="tbtn" onclick="logout()">Sign Out</button>
+    </div>
+
+    <div class="wf-banner" style="background:linear-gradient(135deg,rgba(26,42,62,.95),rgba(26,18,11,.95))">
+      <div class="wf-badge">🌟 Your Mission</div>
+      <div class="wf-title">Speak bravely. Learn something new every day.</div>
+      <div class="paw" id="pawRow">🐾🐾🐾🐾🐾</div>
+      <div style="font-size:.85rem;color:var(--muted);margin-top:6px">Earn paw prints for homework, games, and brave speaking!</div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-header"><div class="card-icon sky">🎮</div><h3>Fun Games</h3></div>
+        <div class="game-card" onclick="startFlash()"><div class="gi">🃏</div><div class="gt">Animal Flashcards</div><div class="gs">From the Oxford Science Reader</div></div>
+        <div style="height:10px"></div>
+        <div class="game-card" onclick="startMatch()"><div class="gi">🧩</div><div class="gt">Word Match</div><div class="gs">Match the word to its picture</div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><div class="card-icon gold">📝</div><h3>Homework</h3></div>
+        <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px">Check off what you did today, little by little. Your mom can see it too!</div>
+        <div id="timmyTasks"></div>
+        <div class="field" style="margin-top:12px"><input id="timmyTaskIn" placeholder="Add something you did…"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn" onclick="logMinutes(10)">+10 min</button>
+          <button class="btn" onclick="logMinutes(15)">+15 min</button>
+          <button class="btn" onclick="logMinutes(20)">+20 min</button>
+          <button class="btn ghost" onclick="addTimmyTask()">Add</button>
+        </div>
+        <div style="margin-top:12px" class="kv"><span>Today</span><b id="todayMins">0 min</b></div>
+      </div>
+    </div>
+
+    <div class="card" id="flashArea" style="display:none">
+      <div class="card-header"><div class="card-icon sky">🃏</div><h3>Animal Flashcards</h3></div>
+      <div class="flashcard-area">
+        <div class="big-card" id="bigCard" onclick="flipCard()"><span id="cardFront">🐘</span></div>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="btn" onclick="nextCard()">Next ➜</button>
+          <button class="btn ghost" onclick="closeGame()">Close</button>
+        </div>
+        <div style="font-size:.8rem;color:var(--muted);margin-top:8px">Tap the card to flip it and hear the word.</div>
+      </div>
+    </div>
+
+    <div class="card" id="matchArea" style="display:none">
+      <div class="card-header"><div class="card-icon sky">🧩</div><h3>Word Match</h3></div>
+      <div id="matchBoard"></div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:10px;flex-wrap:wrap">
+        <button class="btn ghost" onclick="closeGame()">Close</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-icon purple">✉️</div><h3>Requests From Home</h3></div>
+      <div id="timmyReqs"></div>
+      <div class="empty" id="reqEmpty">No requests yet.</div>
+    </div>
+  </div>
+
+  <div id="view-gameplan" class="hidden">
+    <div class="topbar">
+      <span class="who">🎯 Full Gameplan</span>
+      <span class="spacer"></span>
+      <button class="tbtn" onclick="backToDash()">← Back</button>
+    </div>
+
+    <div class="wf-banner">
+      <div class="wf-badge">🗺️ Timmy's 4-Week English Launch</div>
+      <div class="wf-title">Building confidence, one brave word at a time.</div>
+      <div class="wf-weeks">
+        <div class="wf-week active"><div class="wf-week-num">W1</div><div class="wf-week-label">Confidence</div></div>
+        <div class="wf-week"><div class="wf-week-num">W2</div><div class="wf-week-label">Global Stage 5</div></div>
+        <div class="wf-week"><div class="wf-week-num">W3</div><div class="wf-week-label">Science Reader</div></div>
+        <div class="wf-week"><div class="wf-week-num">W4</div><div class="wf-week-label">Review</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-icon">📖</div><h3>Books</h3></div>
+      <div class="book"><div class="bc" style="background:linear-gradient(135deg,#c9a961,#8b6f3a)">GS5</div><div><div class="bt">Global Stage Language Book 5</div><div class="bs">Macmillan Education · with digital workbook · Timmy — 5P1</div></div></div>
+      <div class="book"><div class="bc" style="background:linear-gradient(135deg,#7d9b76,#4f6b4a)">L1</div><div><div class="bt">Oxford Read and Discover — Young Animals</div><div class="bs">Oxford · Level 1 · simple science reader</div></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-icon gold">🗓️</div><h3>Weekly Plan</h3></div>
+      <div class="kv"><b>W1 — Confidence</b><span>speak, listen, brave talking</span></div>
+      <div class="kv"><b>W2 — Global Stage 5</b><span>reading + workbook</span></div>
+      <div class="kv"><b>W3 — Science Reader</b><span>Young Animals + vocab games</span></div>
+      <div class="kv"><b>W4 — Review</b><span>audio check + homestudy review</span></div>
+      <div style="border-top:1px solid rgba(201,169,97,.12);margin-top:10px;padding-top:10px">
+        <div class="kv"><span>Lesson Day</span><b>Saturday · 10am</b></div>
+        <div class="kv"><span>Homework</span><b>20–30 min / day</b></div>
+        <div class="kv"><span>Focus</span><b>Confidence · social interaction · pronunciation</b></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ============================================================
+   TIMMY'S PORTAL — single-file, password-protected, local-first.
+   MIMICS the Nguyen Family Portal but for Timmy (class 5P1).
+   Change the PINs below before sharing the link.
+   ============================================================ */
+var PIN_PARENT = "5820";   // Trâm (Timmy's mom)
+var PIN_TIMMY  = "3820";   // Timmy
+
+var ANIMALS = [
+  {e:"zebra", v:"ngựa vằn", em:"🦓"}, {e:"lion", v:"sư tử", em:"🦁"}, {e:"elephant", v:"con voi", em:"🐘"},
+  {e:"monkey", v:"khỉ", em:"🐵"}, {e:"tiger", v:"hổ", em:"🐯"}, {e:"giraffe", v:"hươu cao cổ", em:"🦒"},
+  {e:"bear", v:"gấu", em:"🐻"}, {e:"penguin", v:"chim cánh cụt", em:"🐧"}, {e:"parrot", v:"vẹt", em:"🦜"},
+  {e:"frog", v:"ếch", em:"🐸"}, {e:"snake", v:"rắn", em:"🐍"}, {e:"rabbit", v:"thỏ", em:"🐰"}
+];
+
+var AUDIO_LIBRARY = [
+  {t:"W1 · Confidence Talk", d:"Timmy reads his brave sentence", src:""},
+  {t:"W1 · Speaking Practice", d:"Listen to his pronunciation", src:""}
+];
+
+/* ---------------- state ---------------- */
+function store(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+function load(k,d){ try{ var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
+var session = load("timmy_session", null);
+var daily = load("timmy_daily", {});
+var reqs = load("timmy_requests", []);
+var weekStart = function(){ var d=new Date(); var day=(d.getDay()+6)%7; d.setDate(d.getDate()-day); d.setHours(0,0,0,0); return d.toISOString().slice(0,10); };
+var todayStr = function(){ return new Date().toISOString().slice(0,10); };
+
+var HOME_TASKS = [
+  {id:"t1", label:"Read one page aloud (Global Stage 5)", mins:15},
+  {id:"t2", label:"Practice the week's words — flashcards", mins:10},
+  {id:"t3", label:"Speak one brave sentence to someone", mins:5},
+  {id:"t4", label:"Listen to an English video / audio", mins:10}
+];
+
+/* ---------------- helpers ---------------- */
+function $(id){ return document.getElementById(id); }
+function show(id){
+  ["view-login","view-parent","view-timmy","view-gameplan"].forEach(function(v){ $(v).classList.add("hidden"); });
+  $(id).classList.remove("hidden");
+}
+function selectRole(role,btn){
+  document.querySelectorAll(".role-btn").forEach(function(b){ b.classList.remove("active"); });
+  btn.classList.add("active");
+  var lbl=$("pinLabel"), inp=$("pinInput");
+  if(role==="parent"){ lbl.textContent="Parent PIN"; inp.placeholder="Enter parent PIN"; }
+  else{ lbl.textContent="Timmy's PIN"; inp.placeholder="Enter Timmy's PIN"; }
+}
+function handleLogin(){
+  var role=document.querySelector(".role-btn.active").dataset.role;
+  var pin=$("pinInput").value.trim();
+  var ok = role==="parent" ? pin===PIN_PARENT : pin===PIN_TIMMY;
+  if(!ok){ $("loginError").textContent="Invalid PIN. Please try again."; return; }
+  session={role:role, ts:Date.now()};
+  store("timmy_session", session);
+  $("loginError").textContent="";
+  enter();
+}
+function logout(){ session=null; try{ localStorage.removeItem("timmy_session"); }catch(e){} $("pinInput").value=""; show("view-login"); }
+function enter(){
+  if(!session){ show("view-login"); return; }
+  if(session.role==="parent"){ renderParent(); show("view-parent"); }
+  else{ renderTimmy(); show("view-timmy"); }
+}
+function backToDash(){ enter(); }
+function showGameplan(){ show("view-gameplan"); }
+
+/* ---------------- parent ---------------- */
+function weekEntries(){
+  var ws=weekStart(), out={};
+  for(var k in daily){ if(k>=ws) out[k]=daily[k]; }
+  return out;
+}
+function renderParent(){
+  var entries=weekEntries();
+  var done=0,total=0,mins=0;
+  Object.keys(entries).forEach(function(d){
+    var e=entries[d]; if(!e) return;
+    mins += e.mins||0;
+    (e.done||[]).forEach(function(){ done++; });
+  });
+  total = Object.keys(entries).length * HOME_TASKS.length;
+  var pct = total ? Math.round(done/total*100) : 0;
+  $("doneCount").textContent=done+" done";
+  $("totalCount").textContent=total+" tasks";
+  $("completionPct").textContent=pct+"%";
+  $("completionBar").style.width=pct+"%";
+  $("minutesLogged").textContent=mins+" min";
+  var tgt=150;
+  $("minutesBar").style.width=Math.min(100,mins/tgt*100)+"%";
+  $("minutesTarget").textContent=Math.min(mins,tgt)+"/"+tgt+" min · "+(mins>=tgt?"goal met 🎉":(tgt-mins)+" min to go");
+
+  var days=Object.keys(entries).sort();
+  var latest = days.length ? days[days.length-1] : null;
+  var tl=$("taskList"); tl.innerHTML="";
+  var listEl = latest ? (entries[latest].done||[]) : [];
+  var st = new Set(listEl);
+  HOME_TASKS.forEach(function(t){
+    var c = st.has(t.id);
+    tl.innerHTML += '<div class="task-row'+(c?" done":"")+'"><span class="chk'+(c?" done":"")+'">✓</span><span class="lbl">'+t.label+'</span><span class="mins">'+t.mins+' min</span></div>';
+  });
+  $("taskEmpty").style.display = latest ? "none" : "";
+  if(!latest){ $("taskEmpty").textContent="No homework logged yet this week — Timmy's entries appear here as he logs them."; }
+
+  var dl=$("dailyLog"); dl.innerHTML="";
+  days.slice(-7).reverse().forEach(function(d){
+    var e=entries[d];
+    dl.innerHTML += '<div class="task-row"><span class="lbl">'+d+'</span><span class="mins">'+(e.mins||0)+' min · '+(e.done?e.done.length:0)+' task'+(e.done&&e.done.length!==1?"s":"")+'</span></div>';
+  });
+  $("dailyEmpty").style.display = days.length ? "none" : "";
+
+  renderAudio(); renderReqs("reqList", true);
+}
+function renderAudio(){
+  var list=$("audioList"); list.innerHTML="";
+  AUDIO_LIBRARY.forEach(function(a){
+    list.innerHTML += '<div class="audio-item"><span class="t">'+a.t+'</span><span class="d">'+a.d+'</span>'+
+      (a.src ? '<audio controls preload="none" src="'+a.src+'"></audio>' : '<span style="font-size:.7rem;color:var(--muted)">no audio yet</span>')+'</div>';
+  });
+  $("audioEmpty").style.display = AUDIO_LIBRARY.length ? "none" : "";
+}
+function addRequest(){
+  var t=$("reqTopic").value.trim(); if(!t) return;
+  var n=$("reqNote").value.trim();
+  reqs.unshift({topic:t, note:n, ts:Date.now()});
+  store("timmy_requests", reqs);
+  $("reqTopic").value=""; $("reqNote").value="";
+  renderReqs("reqList", true); renderReqs("timmyReqs", false);
+}
+function renderReqs(elId, showEmpty){
+  var el=$(elId); if(!el) return;
+  el.innerHTML="";
+  if(!reqs.length){ if(showEmpty){ el.innerHTML='<div class="empty">No requests yet.</div>'; } return; }
+  reqs.forEach(function(r){
+    var d=new Date(r.ts).toLocaleDateString();
+    el.innerHTML += '<div class="req"><div class="rt">📌 '+r.topic+'</div>'+(r.note?'<div class="rr">'+r.note+'</div>':'')+'<div class="rd">'+d+'</div></div>';
+  });
+}
+
+/* ---------------- timmy ---------------- */
+function renderTimmy(){
+  var d=daily[todayStr()] || {mins:0,done:[]};
+  $("todayMins").textContent=d.mins+" min";
+  var paws=Math.min(5,Math.floor(d.mins/20));
+  $("pawRow").textContent="🐾".repeat(paws)+"·".repeat(5-paws);
+  var tl=$("timmyTasks"); tl.innerHTML="";
+  var st=new Set(d.done||[]);
+  HOME_TASKS.forEach(function(t){
+    var c=st.has(t.id);
+    tl.innerHTML += '<div class="task-row'+(c?" done":"")+'" onclick="toggleTimmyTask(&#39;'+t.id+'&#39;)"><span class="chk'+(c?" done":"")+'">✓</span><span class="lbl">'+t.label+'</span><span class="mins">'+t.mins+' min</span></div>';
+  });
+  renderReqs("timmyReqs", false);
+  $("reqEmpty").style.display = reqs.length ? "none" : "";
+}
+function toggleTimmyTask(id){
+  var d=daily[todayStr()] || {mins:0,done:[]};
+  var st=new Set(d.done||[]);
+  if(st.has(id)) st.delete(id); else st.add(id);
+  d.done=Array.from(st); daily[todayStr()]=d; store("timmy_daily",daily);
+  renderTimmy();
+}
+function addTimmyTask(){
+  var v=$("timmyTaskIn").value.trim(); if(!v) return;
+  var d=daily[todayStr()] || {mins:0,done:[]};
+  d.done.push("x"+Date.now()); daily[todayStr()]=d; store("timmy_daily",daily);
+  $("timmyTaskIn").value="";
+  renderTimmy();
+}
+function logMinutes(n){
+  var d=daily[todayStr()] || {mins:0,done:[]};
+  d.mins+=n; daily[todayStr()]=d; store("timmy_daily",daily);
+  renderTimmy();
+}
+function startFlash(){
+  $("flashArea").style.display="";
+  flashIdx=0; renderCard();
+  $("flashArea").scrollIntoView({behavior:"smooth"});
+}
+var flashIdx=0;
+function renderCard(){
+  var a=ANIMALS[flashIdx];
+  $("cardFront").textContent=a.em;
+  speakWord(a.e);
+}
+function flipCard(){
+  var a=ANIMALS[flashIdx];
+  $("cardFront").textContent=a.em+" "+a.e;
+}
+function nextCard(){ flashIdx=(flashIdx+1)%ANIMALS.length; renderCard(); }
+function speakWord(w){
+  try{
+    speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(w); u.rate=.8; u.lang="en-US";
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+function closeGame(){ $("flashArea").style.display="none"; $("matchArea").style.display="none"; }
+function startMatch(){
+  $("matchArea").style.display="";
+  var pairs=ANIMALS.slice(0,6);
+  var picks=pairs.map(function(a){return a.em;}).concat(pairs.map(function(a){return a.e;}));
+  picks=picks.sort(function(){return Math.random()-.5;});
+  var board=$("matchBoard"); board.innerHTML="";
+  var sel=null;
+  picks.forEach(function(p){
+    var div=document.createElement("div");
+    div.style.cssText="flex:1;min-width:90px;padding:14px;border-radius:12px;border:1px solid rgba(201,169,97,.25);background:rgba(255,255,255,.03);font-size:1.5rem;text-align:center;cursor:pointer;transition:all .2s;margin:5px";
+    div.textContent=p;
+    var kind = pairs.some(function(a){return a.em===p;}) ? "em" : "word";
+    var val = kind==="em" ? pairs.find(function(a){return a.em===p;}).e : p;
+    div.dataset.kind=kind; div.dataset.val=val;
+    div.onclick=function(){
+      if(div.classList.contains("ok")||div.classList.contains("bad")) return;
+      if(!sel){ sel=div; div.classList.add("sel"); div.style.borderColor="var(--gold)"; div.style.background="rgba(201,169,97,.12)"; return; }
+      if(sel===div){ div.classList.remove("sel"); div.style.borderColor=""; div.style.background=""; sel=null; return; }
+      if(sel.dataset.val===div.dataset.val && sel.dataset.kind!==div.dataset.kind){
+        sel.classList.add("ok"); div.classList.add("ok");
+        sel.style.borderColor="var(--success)"; div.style.borderColor="var(--success)";
+        sel.style.background="rgba(125,155,118,.12)"; div.style.background="rgba(125,155,118,.12)";
+        speakWord(div.dataset.val);
+        if(board.querySelectorAll(".ok").length===picks.length){
+          setTimeout(function(){ alert("🎉 You matched them all! Brilliant!"); }, 200);
+        }
+      } else {
+        sel.classList.add("bad"); div.classList.add("bad");
+        sel.style.borderColor="var(--danger)"; div.style.borderColor="var(--danger)";
+        setTimeout(function(){ sel.classList.remove("bad"); div.classList.remove("bad"); sel.style.borderColor=""; div.style.borderColor=""; }, 450);
+      }
+      sel=null;
+    };
+    board.appendChild(div);
+  });
+  board.style.display="flex"; board.style.flexWrap="wrap"; board.style.justifyContent="center";
+  $("matchArea").scrollIntoView({behavior:"smooth"});
+}
+
+/* ---------------- boot ---------------- */
+renderReqs("timmyReqs", false);
+enter();
+</script>
+</body>
+</html>
