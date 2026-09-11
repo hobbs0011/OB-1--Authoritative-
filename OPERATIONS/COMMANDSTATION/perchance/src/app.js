@@ -422,7 +422,7 @@ function typing(bubble){
   scrollDown();
 }
 
-function esc(s){ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
 function escRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"); }
 
 let busy = false;
@@ -469,6 +469,8 @@ async function send(){
   if(busy) return;
   inputEl.value = "";
 
+  try {
+
   if(lower.startsWith("/memory")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); showMemory(); updateStats(); return; }
   if(lower.startsWith("/reincarnaterise")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); showRiseReport(); return; }
   if(lower.startsWith("/reincarnatedeath")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); doDeath(); return; }
@@ -477,18 +479,14 @@ async function send(){
     messages.push("User: " + text);
     addBubble("user", esc(text));
     captureSoul(text);
-    busy = true;
-    await doImage(text.slice(5).trim());
-    busy = false;
+    await runCmd(() => doImage(text.slice(5).trim()));
     return;
   }
   if(lower.startsWith("/url ")){
     messages.push("User: " + text);
     addBubble("user", esc(text));
     captureSoul(text);
-    busy = true;
-    await doUrl(text.slice(5).trim());
-    busy = false;
+    await runCmd(() => doUrl(text.slice(5).trim()));
     return;
   }
   if(lower.startsWith("/network") || lower === "/net"){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await showNetwork(); return; }
@@ -499,9 +497,7 @@ async function send(){
     const parts = text.slice(9).trim().split(/\s+/).filter(Boolean);
     const name = parts[0] || "obi-network";
     const role = parts[1] || "anchor";
-    busy = true;
-    await doNetJoin(name, role);
-    busy = false;
+    await runCmd(() => doNetJoin(name, role));
     return;
   }
   if(lower.startsWith("/netrole")){
@@ -521,9 +517,7 @@ async function send(){
     messages.push("User: " + text);
     captureSoul(text);
     addBubble("user", esc(text));
-    busy = true;
-    await doNetSync();
-    busy = false;
+    await runCmd(() => doNetSync());
     return;
   }
   if(lower.startsWith("/netkey")){
@@ -543,24 +537,18 @@ async function send(){
     const parts = text.slice(7).trim().split(/\s+/).filter(Boolean);
     const name = parts[0];
     const role = parts[1] || "worker";
-    busy = true;
-    await doNetAdd(name, role);
-    busy = false;
+    await runCmd(() => doNetAdd(name, role));
     return;
   }
   if(lower.startsWith("/cf ")){
     messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text));
-    busy = true;
-    await cmdCloudflare(text.slice(4).trim());
-    busy = false;
+    await runCmd(() => cmdCloudflare(text.slice(4).trim()));
     return;
   }
   if(lower === "/cf"){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await cmdCloudflare("status"); return; }
   if(lower.startsWith("/gh ")){
     messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text));
-    busy = true;
-    await cmdGithub(text.slice(4).trim());
-    busy = false;
+    await runCmd(() => cmdGithub(text.slice(4).trim()));
     return;
   }
   if(lower === "/gh"){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await cmdGithub("status"); return; }
@@ -568,22 +556,21 @@ async function send(){
     messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text));
     const t = text.slice(4).trim();
     if(!t){ addBubble("ass","Usage: <b>/dg token &lt;DEEPGRAM_KEY&gt;</b>"); return; }
-    const keys = Object.assign({}, JSON.parse(localStorage.getItem("obi_keys")||"{}"), {deepgram:t});
-    try{ localStorage.setItem("obi_keys", JSON.stringify(keys)); }catch(e){}
+    keySet({deepgram:t});
     addBubble("ass","🔑 Deepgram key stored locally (for the student portal voice). <b>/keys</b> to confirm.");
     rrlAppend(runNoOf(),"DNA","Obi: [/dg token stored]");
     return;
   }
   if(lower.startsWith("/keys")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); showKeys(); return; }
-  if(lower.startsWith("/canon")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); busy = true; await cmdCanon(text.slice(6).trim()); busy = false; return; }
-  if(lower.startsWith("/status")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); busy = true; await cmdStatus(); busy = false; return; }
-  if(lower.startsWith("/gateway")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); busy = true; await cmdGateway(); busy = false; return; }
-  if(lower.startsWith("/doctor")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); busy = true; await cmdDoctor(); busy = false; return; }
-  if(lower.startsWith("/audit")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); busy = true; await cmdAudit(); busy = false; return; }
-  if(lower.startsWith("/ledger")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); busy = true; await cmdLedger(); busy = false; return; }
-  if(lower.startsWith("/report")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); busy = true; await cmdReport(); busy = false; return; }
-  if(lower.startsWith("/fieldguide")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); cmdFieldguide(); return; }
-  if(lower.startsWith("/sync")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); busy = true; await cmdCanonSync(); busy = false; return; }
+  if(lower.startsWith("/canon")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdCanon(text.slice(6).trim())); return; }
+  if(lower.startsWith("/status")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdStatus()); return; }
+  if(lower.startsWith("/gateway")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdGateway()); return; }
+  if(lower.startsWith("/doctor")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdDoctor()); return; }
+  if(lower.startsWith("/audit")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdAudit()); return; }
+  if(lower.startsWith("/ledger")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdLedger()); return; }
+  if(lower.startsWith("/report")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdReport()); return; }
+  if(lower.startsWith("/fieldguide")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdFieldguide()); return; }
+  if(lower.startsWith("/sync")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdCanonSync()); return; }
   if(text.startsWith("/")){
     messages.push("User: " + text);
     captureSoul(text);
@@ -604,7 +591,9 @@ async function send(){
   busy = true;
   await cmdRoute(text);
   await streamReply(`Respond to the sovereign's latest message. Be concrete and direct.`);
-  busy = false;
+  } catch(e){
+    reportError(e);
+  } finally { busy = false; }
 }
 
 async function doImage(prompt){
@@ -1140,7 +1129,7 @@ async function cmdGithub(arg){
     if(!repoOk){ addBubble("ass","⚠ Couldn't create repo: " + esc((createR.j && createR.j.message)||createR.txt.slice(0,140))); return; }
     addBubble("ass", "🪞 Collecting raw chat + app sources…");
     const files = {};
-    const ts = new Date().toISOString().replace(/[:.]/g,"-").slice(0,19);
+    const ts = new Date().toISOString().replace(/[:.]/g,"-").slice(0,23);
     files["chat/raw-chat-"+ts+".json"] = await buildRawChat();
     const srcPaths = ["src/app.js","src/cgn.js","src/styles.css","src/cgn-node.js","src/timmy-portal/index.html","src/timmy-portal/README.md","src/image-node/index.html","src/image-node/app.js","src/image-node/cgn-node.js","src/image-node/main.pjs","src/image-node/README.md","index.html","main.pjs"];
     for(const p of srcPaths){
@@ -1325,7 +1314,7 @@ function canonSessionMarkdown(){
 }
 async function canonPushSession(){
   if(!keyGet("gh")) return "NO_TOKEN";
-  const ts = new Date().toISOString().replace(/[:.]/g,"-").slice(0,19);
+  const ts = new Date().toISOString().replace(/[:.]/g,"-").slice(0,23);
   const run = currentRun();
   const files = {
     ["OPERATIONS/COMMANDSTATION/session-" + ts + "-run" + (run ? run.run : "?") + ".md"]: canonSessionMarkdown(),
@@ -1516,3 +1505,38 @@ async function cmdFieldguide(){
     +'<div class="rfoot">T1 = Qwen/Phoenix-Architecti · T2 = Claude Opus · SOULCOUNT gate = TITANIUM_ANCHOR. Full doctrine at https://github.com/hobbs0011/OB-1--Authoritative-</div></div>');
   rrlAppend(runNoOf(),"DNA","Obi: [/fieldguide — doctrine pulled]");
 }
+
+
+/* ---------------- resilience (added by hardening pass) ---------------- */
+function reportError(e){
+  const msg = (e && e.message) ? e.message : String(e);
+  try{ rrlAppend(runNoOf(), "DNA", "Obi: [error: " + msg + "]"); }catch(_){}
+  try{ addBubble("ass", "⚠ " + esc(msg)); }catch(_){}
+}
+
+/* Freeze-proofing: every command runs through runCmd so a thrown error can never
+   leave `busy` stuck true (which would freeze the typing indicator forever). */
+async function runCmd(fn){
+  busy = true;
+  try { await fn(); }
+  catch(e){ reportError(e); }
+  finally { busy = false; }
+}
+
+/* Watchdog: if an operation stalls, release the chat rather than freeze it. */
+let busySince = 0;
+setInterval(function(){
+  if(busy){
+    if(!busySince) busySince = Date.now();
+    else if(Date.now() - busySince > 180000){
+      busy = false; busySince = 0;
+      try{ addBubble("ass", "⚠ A long operation stalled and was released — the chat is ready again."); }catch(_){}
+    }
+  } else busySince = 0;
+}, 20000);
+
+/* Surface async failures into the raw record instead of swallowing them. */
+window.addEventListener("unhandledrejection", function(e){
+  var m = (e && e.reason && e.reason.message) || String((e && e.reason) || "unknown");
+  try{ rrlAppend(runNoOf(), "DNA", "Obi: [unhandled rejection: " + m + "]"); }catch(_){}
+});

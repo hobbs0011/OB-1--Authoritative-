@@ -213,6 +213,12 @@
         <div class="card-header"><div class="card-icon sky">🎙️</div><h3>Audio Library</h3></div>
         <div id="audioList"></div>
         <div class="empty" id="audioEmpty" style="display:none">No recordings yet — Michael adds Timmy's audio here so you can listen in.</div>
+        <div style="border-top:1px solid rgba(201,169,97,.12);margin-top:14px;padding-top:14px">
+          <div style="font-size:.8rem;color:var(--muted);margin-bottom:8px">Paste a link to a recording (Drive, Dropbox, or any audio URL) and Timmy can play it.</div>
+          <div class="field"><input id="audioTitle" placeholder="Title — e.g. Week 1 pronunciation" style="margin-bottom:8px"></div>
+          <div class="field"><input id="audioUrl" placeholder="https://… audio link"></div>
+          <button class="btn" onclick="addAudio()">Add recording</button>
+        </div>
       </div>
     </div>
 
@@ -238,6 +244,13 @@
         <div id="dailyLog"></div>
         <div class="empty" id="dailyEmpty">No entries yet this week.</div>
       </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-icon">📄</div><h3>Weekly Report</h3></div>
+      <div style="font-size:.82rem;color:var(--muted);margin-bottom:10px">A plain-text summary of Timmy's week — copy it and send it to Michael.</div>
+      <button class="btn" onclick="showReport()">Generate report</button>
+      <div id="reportBox" style="display:none;margin-top:12px"></div>
     </div>
   </div>
 
@@ -297,6 +310,12 @@
       <div style="display:flex;gap:10px;justify-content:center;margin-top:10px;flex-wrap:wrap">
         <button class="btn ghost" onclick="closeGame()">Close</button>
       </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-icon sky">🎧</div><h3>Listen to Michael</h3></div>
+      <div id="timmyAudio"></div>
+      <div class="empty" id="timmyAudioEmpty">No recordings yet — check back after your lesson!</div>
     </div>
 
     <div class="card">
@@ -362,19 +381,26 @@ var ANIMALS = [
   {e:"frog", v:"ếch", em:"🐸"}, {e:"snake", v:"rắn", em:"🐍"}, {e:"rabbit", v:"thỏ", em:"🐰"}
 ];
 
-var AUDIO_LIBRARY = [
+var AUDIO_LIBRARY = load("timmy_audio", [
   {t:"W1 · Confidence Talk", d:"Timmy reads his brave sentence", src:""},
   {t:"W1 · Speaking Practice", d:"Listen to his pronunciation", src:""}
-];
+]);
 
 /* ---------------- state ---------------- */
 function store(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 function load(k,d){ try{ var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
+/* Local (not UTC) dates — a Vietnam evening must not read as "yesterday". */
+function dstr(d){ var p=function(n){ return (n<10?"0":"")+n; }; return d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate()); }
 var session = load("timmy_session", null);
 var daily = load("timmy_daily", {});
 var reqs = load("timmy_requests", []);
-var weekStart = function(){ var d=new Date(); var day=(d.getDay()+6)%7; d.setDate(d.getDate()-day); d.setHours(0,0,0,0); return d.toISOString().slice(0,10); };
-var todayStr = function(){ return new Date().toISOString().slice(0,10); };
+var SESSION_TTL = 12*60*60*1000;
+var weekStart = function(){ var d=new Date(); var day=(d.getDay()+6)%7; d.setDate(d.getDate()-day); d.setHours(0,0,0,0); return dstr(d); };
+var todayStr = function(){ return dstr(new Date()); };
+function dayObj(){ var k=todayStr(); if(!daily[k] || typeof daily[k]!=="object") daily[k]={mins:0,done:[],custom:[]}; if(!daily[k].done) daily[k].done=[]; if(!daily[k].custom) daily[k].custom=[]; return daily[k]; }
+function customLabel(id){ for(var k in daily){ var c=(daily[k]&&daily[k].custom)||[]; for(var i=0;i<c.length;i++){ if(c[i].id===id) return c[i].label; } } return "Custom task"; }
+function isKnownTask(id, day){ if(HOME_TASKS.some(function(t){return t.id===id;})) return true; var d=daily[day]; return !!((d&&d.custom)||[]).some(function(c){return c.id===id;}); }
 
 var HOME_TASKS = [
   {id:"t1", label:"Read one page aloud (Global Stage 5)", mins:15},
@@ -397,19 +423,34 @@ function selectRole(role,btn){
   if(role==="parent"){ lbl.textContent="Parent PIN"; inp.placeholder="Enter parent PIN"; }
   else{ lbl.textContent="Timmy's PIN"; inp.placeholder="Enter Timmy's PIN"; }
 }
+var loginFails = 0, loginLockUntil = 0;
 function handleLogin(){
-  var role=document.querySelector(".role-btn.active").dataset.role;
+  var now = Date.now();
+  if(now < loginLockUntil){
+    $("loginError").textContent = "Too many attempts. Please wait " + Math.ceil((loginLockUntil-now)/1000) + "s.";
+    return;
+  }
+  var btn = document.querySelector(".role-btn.active");
+  var role = btn ? btn.dataset.role : "parent";
   var pin=$("pinInput").value.trim();
   var ok = role==="parent" ? pin===PIN_PARENT : pin===PIN_TIMMY;
-  if(!ok){ $("loginError").textContent="Invalid PIN. Please try again."; return; }
+  if(!ok){
+    loginFails++;
+    if(loginFails>=5){ loginLockUntil = now + 30000; loginFails = 0; $("loginError").textContent="Too many attempts. Locked for 30 seconds."; }
+    else $("loginError").textContent="Invalid PIN. Please try again.";
+    $("pinInput").value = "";
+    return;
+  }
+  loginFails = 0;
   session={role:role, ts:Date.now()};
   store("timmy_session", session);
   $("loginError").textContent="";
+  $("pinInput").value = "";
   enter();
 }
 function logout(){ session=null; try{ localStorage.removeItem("timmy_session"); }catch(e){} $("pinInput").value=""; show("view-login"); }
 function enter(){
-  if(!session){ show("view-login"); return; }
+  if(!session || !session.ts || (Date.now()-session.ts) > SESSION_TTL){ session=null; try{ localStorage.removeItem("timmy_session"); }catch(e){} show("view-login"); return; }
   if(session.role==="parent"){ renderParent(); show("view-parent"); }
   else{ renderTimmy(); show("view-timmy"); }
 }
@@ -428,9 +469,9 @@ function renderParent(){
   Object.keys(entries).forEach(function(d){
     var e=entries[d]; if(!e) return;
     mins += e.mins||0;
-    (e.done||[]).forEach(function(){ done++; });
+    total += HOME_TASKS.length + ((e.custom)||[]).length;
+    (e.done||[]).forEach(function(id){ if(isKnownTask(id, d)) done++; });
   });
-  total = Object.keys(entries).length * HOME_TASKS.length;
   var pct = total ? Math.round(done/total*100) : 0;
   $("doneCount").textContent=done+" done";
   $("totalCount").textContent=total+" tasks";
@@ -448,7 +489,11 @@ function renderParent(){
   var st = new Set(listEl);
   HOME_TASKS.forEach(function(t){
     var c = st.has(t.id);
-    tl.innerHTML += '<div class="task-row'+(c?" done":"")+'"><span class="chk'+(c?" done":"")+'">✓</span><span class="lbl">'+t.label+'</span><span class="mins">'+t.mins+' min</span></div>';
+    tl.innerHTML += '<div class="task-row'+(c?" done":"")+'"><span class="chk'+(c?" done":"")+'">✓</span><span class="lbl">'+esc(t.label)+'</span><span class="mins">'+t.mins+' min</span></div>';
+  });
+  ((latest && entries[latest].custom)||[]).forEach(function(ct){
+    var c = st.has(ct.id);
+    tl.innerHTML += '<div class="task-row'+(c?" done":"")+'"><span class="chk'+(c?" done":"")+'">✓</span><span class="lbl">'+esc(ct.label)+'</span><span class="mins">'+esc(ct.mins||0)+' min</span></div>';
   });
   $("taskEmpty").style.display = latest ? "none" : "";
   if(!latest){ $("taskEmpty").textContent="No homework logged yet this week — Timmy's entries appear here as he logs them."; }
@@ -464,16 +509,43 @@ function renderParent(){
 }
 function renderAudio(){
   var list=$("audioList"); list.innerHTML="";
-  AUDIO_LIBRARY.forEach(function(a){
-    list.innerHTML += '<div class="audio-item"><span class="t">'+a.t+'</span><span class="d">'+a.d+'</span>'+
-      (a.src ? '<audio controls preload="none" src="'+a.src+'"></audio>' : '<span style="font-size:.7rem;color:var(--muted)">no audio yet</span>')+'</div>';
+  AUDIO_LIBRARY.forEach(function(a, i){
+    var src = String(a.src||"");
+    var okUrl = /^https?:\/\//i.test(src);
+    list.innerHTML += '<div class="audio-item"><span class="t">'+esc(a.t)+'</span><span class="d">'+esc(a.d)+'</span>'+
+      (okUrl ? '<audio controls preload="none" src="'+esc(src)+'"></audio>' : '<span style="font-size:.7rem;color:var(--muted)">no audio yet</span>')+
+      '<button class="tbtn" style="font-size:.7rem;padding:3px 8px" onclick="removeAudio('+i+')">Remove</button></div>';
   });
   $("audioEmpty").style.display = AUDIO_LIBRARY.length ? "none" : "";
+  renderAudioForTimmy();
+}
+function addAudio(){
+  var t=$("audioTitle").value.trim().slice(0,120), u=$("audioUrl").value.trim();
+  if(!t || !u) return;
+  if(!/^https?:\/\//i.test(u)){ alert("Please paste a full audio link starting with http"); return; }
+  AUDIO_LIBRARY.unshift({t:t, d:"Recording from Michael", src:u});
+  store("timmy_audio", AUDIO_LIBRARY);
+  $("audioTitle").value=""; $("audioUrl").value="";
+  renderAudio();
+}
+function removeAudio(i){
+  AUDIO_LIBRARY.splice(i,1);
+  store("timmy_audio", AUDIO_LIBRARY);
+  renderAudio();
+}
+function renderAudioForTimmy(){
+  var el=$("timmyAudio"); if(!el) return;
+  var playable = AUDIO_LIBRARY.filter(function(a){ return /^https?:\/\//i.test(String(a.src||"")); });
+  el.innerHTML = playable.map(function(a){
+    return '<div class="audio-item"><span class="t">'+esc(a.t)+'</span><span class="d">'+esc(a.d)+'</span><audio controls preload="none" src="'+esc(a.src)+'"></audio></div>';
+  }).join("");
+  var e2=$("timmyAudioEmpty"); if(e2) e2.style.display = playable.length ? "none" : "";
 }
 function addRequest(){
-  var t=$("reqTopic").value.trim(); if(!t) return;
-  var n=$("reqNote").value.trim();
+  var t=$("reqTopic").value.trim().slice(0,200); if(!t) return;
+  var n=$("reqNote").value.trim().slice(0,500);
   reqs.unshift({topic:t, note:n, ts:Date.now()});
+  if(reqs.length>50) reqs.length=50;
   store("timmy_requests", reqs);
   $("reqTopic").value=""; $("reqNote").value="";
   renderReqs("reqList", true); renderReqs("timmyReqs", false);
@@ -483,43 +555,53 @@ function renderReqs(elId, showEmpty){
   el.innerHTML="";
   if(!reqs.length){ if(showEmpty){ el.innerHTML='<div class="empty">No requests yet.</div>'; } return; }
   reqs.forEach(function(r){
-    var d=new Date(r.ts).toLocaleDateString();
-    el.innerHTML += '<div class="req"><div class="rt">📌 '+r.topic+'</div>'+(r.note?'<div class="rr">'+r.note+'</div>':'')+'<div class="rd">'+d+'</div></div>';
+    var d=new Date(r.ts||Date.now()).toLocaleDateString();
+    el.innerHTML += '<div class="req"><div class="rt">📌 '+esc(r.topic)+'</div>'+(r.note?'<div class="rr">'+esc(r.note)+'</div>':'')+'<div class="rd">'+esc(d)+'</div></div>';
   });
 }
 
 /* ---------------- timmy ---------------- */
 function renderTimmy(){
-  var d=daily[todayStr()] || {mins:0,done:[]};
-  $("todayMins").textContent=d.mins+" min";
-  var paws=Math.min(5,Math.floor(d.mins/20));
+  var d=dayObj();
+  $("todayMins").textContent=(d.mins||0)+" min";
+  var paws=Math.min(5,Math.floor((d.mins||0)/20));
   $("pawRow").textContent="🐾".repeat(paws)+"·".repeat(5-paws);
   var tl=$("timmyTasks"); tl.innerHTML="";
   var st=new Set(d.done||[]);
   HOME_TASKS.forEach(function(t){
     var c=st.has(t.id);
-    tl.innerHTML += '<div class="task-row'+(c?" done":"")+'" onclick="toggleTimmyTask(&#39;'+t.id+'&#39;)"><span class="chk'+(c?" done":"")+'">✓</span><span class="lbl">'+t.label+'</span><span class="mins">'+t.mins+' min</span></div>';
+    tl.innerHTML += '<div class="task-row'+(c?" done":"")+'" onclick="toggleTimmyTask(&#39;'+esc(t.id)+'&#39;)"><span class="chk'+(c?" done":"")+'">✓</span><span class="lbl">'+esc(t.label)+'</span><span class="mins">'+t.mins+' min</span></div>';
+  });
+  (d.custom||[]).forEach(function(ct){
+    var c=st.has(ct.id);
+    tl.innerHTML += '<div class="task-row'+(c?" done":"")+'" onclick="toggleTimmyTask(&#39;'+esc(ct.id)+'&#39;)"><span class="chk'+(c?" done":"")+'">✓</span><span class="lbl">'+esc(ct.label)+'</span><span class="mins">'+esc(ct.mins||0)+' min</span></div>';
   });
   renderReqs("timmyReqs", false);
   $("reqEmpty").style.display = reqs.length ? "none" : "";
+  renderAudioForTimmy();
 }
 function toggleTimmyTask(id){
-  var d=daily[todayStr()] || {mins:0,done:[]};
+  var d=dayObj();
   var st=new Set(d.done||[]);
   if(st.has(id)) st.delete(id); else st.add(id);
-  d.done=Array.from(st); daily[todayStr()]=d; store("timmy_daily",daily);
+  d.done=Array.from(st); store("timmy_daily",daily);
   renderTimmy();
 }
 function addTimmyTask(){
-  var v=$("timmyTaskIn").value.trim(); if(!v) return;
-  var d=daily[todayStr()] || {mins:0,done:[]};
-  d.done.push("x"+Date.now()); daily[todayStr()]=d; store("timmy_daily",daily);
+  var v=$("timmyTaskIn").value.trim().slice(0,120); if(!v) return;
+  var d=dayObj();
+  var id="x"+Date.now()+"_"+Math.floor(Math.random()*1e4);
+  d.custom.push({id:id, label:v, mins:0});
+  d.done.push(id);
+  store("timmy_daily",daily);
   $("timmyTaskIn").value="";
   renderTimmy();
 }
 function logMinutes(n){
-  var d=daily[todayStr()] || {mins:0,done:[]};
-  d.mins+=n; daily[todayStr()]=d; store("timmy_daily",daily);
+  var d=dayObj();
+  d.mins=(d.mins||0)+n;
+  if(d.mins>600) d.mins=600;
+  store("timmy_daily",daily);
   renderTimmy();
 }
 function startFlash(){
@@ -535,7 +617,8 @@ function renderCard(){
 }
 function flipCard(){
   var a=ANIMALS[flashIdx];
-  $("cardFront").textContent=a.em+" "+a.e;
+  $("cardFront").innerHTML='<span style="display:block;font-size:.55em;color:var(--gold);letter-spacing:.04em">'+esc(a.e)+'</span><span style="display:block;font-size:.4em;color:var(--muted)">'+esc(a.v)+'</span>';
+  speakWord(a.e);
 }
 function nextCard(){ flashIdx=(flashIdx+1)%ANIMALS.length; renderCard(); }
 function speakWord(w){
@@ -550,7 +633,7 @@ function startMatch(){
   $("matchArea").style.display="";
   var pairs=ANIMALS.slice(0,6);
   var picks=pairs.map(function(a){return a.em;}).concat(pairs.map(function(a){return a.e;}));
-  picks=picks.sort(function(){return Math.random()-.5;});
+  for(var si=picks.length-1;si>0;si--){ var sj=Math.floor(Math.random()*(si+1)); var stmp=picks[si]; picks[si]=picks[sj]; picks[sj]=stmp; }
   var board=$("matchBoard"); board.innerHTML="";
   var sel=null;
   picks.forEach(function(p){
@@ -585,9 +668,48 @@ function startMatch(){
   $("matchArea").scrollIntoView({behavior:"smooth"});
 }
 
+/* ---------------- weekly report (parent) ---------------- */
+function buildReport(){
+  var entries=weekEntries();
+  var days=Object.keys(entries).sort();
+  var mins=0, done=0, total=0;
+  days.forEach(function(k){
+    var e=entries[k]; mins+=e.mins||0;
+    total+=HOME_TASKS.length+((e.custom)||[]).length;
+    (e.done||[]).forEach(function(id){ if(isKnownTask(id,k)) done++; });
+  });
+  var L=[];
+  L.push("TIMMY — WEEKLY STUDY REPORT");
+  L.push("Week starting: "+weekStart());
+  L.push("Days logged: "+days.length);
+  L.push("Minutes: "+mins+" / 150 target");
+  L.push("Tasks completed: "+done+" / "+total+(total?(" ("+Math.round(done/total*100)+"%)"):""));
+  L.push("");
+  days.forEach(function(k){
+    var e=entries[k];
+    var labels=(e.done||[]).filter(function(id){return isKnownTask(id,k);}).map(function(id){ var t=HOME_TASKS.filter(function(x){return x.id===id;})[0]; return t?t.label:customLabel(id); });
+    L.push(k+": "+(e.mins||0)+" min — "+(labels.length?labels.join("; "):"nothing checked"));
+  });
+  L.push("");
+  L.push("Parent requests this week: "+reqs.length);
+  reqs.slice(0,10).forEach(function(r){ L.push("- "+r.topic+(r.note?" — "+r.note:"")); });
+  return L.join("\n");
+}
+function showReport(){
+  var el=$("reportBox");
+  el.innerHTML='<pre style="white-space:pre-wrap;text-align:left;font-size:.78rem;margin:0">'+esc(buildReport())+'</pre><button class="btn" style="margin-top:10px" onclick="copyReport()">Copy report</button>';
+  el.style.display="";
+}
+function copyReport(){
+  var txt=buildReport();
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(function(){ alert("Report copied — paste it to Michael."); }, function(){ alert("Copy failed. Select the text manually."); });
+  } else { alert("Copy not supported here. Select the text manually."); }
+}
+
 /* ---------------- boot ---------------- */
-renderReqs("timmyReqs", false);
-enter();
+try{ renderReqs("timmyReqs", false); enter(); }
+catch(e){ show("view-login"); }
 </script>
 </body>
 </html>
