@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a05">
+  <meta name="description" content="Mailala Hostel & Bar — Reggae vibes, rooftop views, and the best hostel stay on Bui Vien. Dorms from $6.65/night. Live music. Friendly travelers. Saigon.">
+  <meta property="og:title" content="Mailala Hostel & Bar — Reggae. Rooftop. Real Vibes.">
+  <meta property="og:description" content="Dorms from $6.65. Rooftop reggae bar. Big balconies. Daily entertainment. 185/28 Pham Ngu Lao, District 1, Saigon.">
+  <meta property="og:type" content="website">
+  <title>Mailala Hostel & Bar — Reggae. Rooftop. Real Vibes. Saigon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav>
+    <div class="brand">MAILALA</div>
+    <ul class="nav-links">
+      <li><a href="#rooms">Rooms</a></li>
+      <li><a href="#bar">Bar</a></li>
+      <li><a href="#testimonials">Stories</a></li>
+      <li><a href="#book">Book Now</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1200">
+      <source src="https://cdn.coverr.co/videos/coverr-group-of-friends-toasting-drinks-at-a-bar-5766/1080p.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="profile-badge pulse-dot">Rating 10.0 ★ — Hostelworld</div>
+        <h1>
+          <span class="gradient">Mailala</span><br>
+          Hostel &amp; Bar
+        </h1>
+        <p class="subtitle">
+          Reggae rooftop. Cold beer. Friendly travellers. <strong>Dorms from $6.65/night</strong> — right on Bui Vien, Saigon's backpacker strip.
+        </p>
+        <div class="price-flash">
+          <span class="price-big">$6.65</span>
+          <span class="price-label">dorms / night</span>
+        </div>
+        <div class="cta-group">
+          <a href="#book" class="btn btn-primary">Book Your Stay</a>
+          <a href="#rooms" class="btn btn-ghost">See Rooms</a>
+        </div>
+      </div>
+
+      <div class="profile-card">
+        <div class="card card-hero">
+          <div class="card-glow"></div>
+          <div class="card-badge">❤️💛💚 REGGAE VIBES</div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat-num">10.0</div>
+              <div class="hero-stat-label">Rating</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num">$6.65</div>
+              <div class="hero-stat-label">From/Night</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num">68</div>
+              <div class="hero-stat-label">Facilities</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num">24/7</div>
+              <div class="hero-stat-label">Vibe</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rooms">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="profile-badge" style="display:inline-flex;margin-bottom:16px;">Stay</div>
+        <h2>Your Room in <span class="gradient">Saigon</span></h2>
+        <p class="section-sub">Big balconies. AC. Clean beds. The kind of place where you walk in solo and leave with a crew.</p>
+      </div>
+
+      <div class="rooms-grid">
+        <div class="card room-card">
+          <div class="card-glow"></div>
+          <div class="room-img" style="background-image:url('https://images.unsplash.com/photo-1520277739336-7bfb0a10e36a?w=600&q=80')"></div>
+          <div class="room-body">
+            <h3>Mixed Dorm — 8 Bed</h3>
+            <div class="room-price"><span class="price-num">$6.65</span> / night</div>
+            <ul class="room-features">
+              <li>Air Conditioning</li>
+              <li>Personal Reading Light</li>
+              <li>Lockable Locker</li>
+              <li>Free WiFi</li>
+              <li>Shared Bathroom</li>
+            </ul>
+            <a href="#book" class="btn btn-primary" style="width:100%;">Book Dorm</a>
+          </div>
+        </div>
+
+        <div class="card room-card">
+          <div class="card-glow"></div>
+          <div class="room-img" style="background-image:url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80')"></div>
+          <div class="room-body">
+            <h3>Mixed Dorm — 4 Bed</h3>
+            <div class="room-price"><span class="price-num">$8.50</span> / night</div>
+            <ul class="room-features">
+              <li>Air Conditioning</li>
+              <li>Personal Reading Light</li>
+              <li>Lockable Locker</li>
+              <li>Free WiFi</li>
+              <li>En-suite Bathroom</li>
+            </ul>
+            <a href="#book" class="btn btn-primary" style="width:100%;">Book Dorm</a>
+          </div>
+        </div>
+
+        <div class="card room-card featured">
+          <div class="card-glow" style="opacity:1;"></div>
+          <div class="room-badge">Best Value</div>
+          <div class="room-img" style="background-image:url('https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80')"></div>
+          <div class="room-body">
+            <h3>Private Room — Balcony</h3>
+            <div class="room-price"><span class="price-num">$18.00</span> / night</div>
+            <ul class="room-features">
+              <li>Private Bathroom</li>
+              <li>Private Balcony</li>
+              <li>Air Conditioning</li>
+              <li>City View</li>
+              <li>Free WiFi</li>
+            </ul>
+            <a href="#book" class="btn btn-primary" style="width:100%;">Book Private</a>
+          </div>
+        </div>
+
+        <div class="card room-card">
+          <div class="card-glow"></div>
+          <div class="room-img" style="background-image:url('https://images.unsplash.com/photo-1582719508461-905c673571fd?w=600&q=80')"></div>
+          <div class="room-body">
+            <h3>Female Dorm — 6 Bed</h3>
+            <div class="room-price"><span class="price-num">$7.50</span> / night</div>
+            <ul class="room-features">
+              <li>Air Conditioning</li>
+              <li>Makeup Mirror</li>
+              <li>Hair Dryer</li>
+              <li>Lockable Locker</li>
+              <li>Free WiFi</li>
+            </ul>
+            <a href="#book" class="btn btn-primary" style="width:100%;">Book Dorm</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bar" style="background:linear-gradient(to bottom, var(--bg), #0d0d08);">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="profile-badge" style="display:inline-flex;margin-bottom:16px;">The Rooftop</div>
+        <h2>Reggae. Rooftop. <span class="gradient">Real.</span></h2>
+        <p class="section-sub">Skyline views, cold Saigon beer, and bass you feel in your chest. This is where the night finds you.</p>
+      </div>
+
+      <div class="bar-showcase">
+        <div class="card bar-card" style="grid-column:span 2;">
+          <div class="card-glow"></div>
+          <div style="padding:32px;">
+            <h3 style="font-family:'Orbitron',sans-serif;font-size:1.5rem;margin-bottom:16px;">The Roof Top Reggae Bar</h3>
+            <p style="color:var(--muted);line-height:1.7;margin-bottom:20px;">
+              Open every night. Live music. Darts. Pool. Cold beer from 15,000 VND. The sun sets, the speakers warm up, and suddenly you're surrounded by travellers from 20 countries — all here for the same thing: a damn good time.
+            </p>
+            <div class="bar-highlights">
+              <span>🎵 Live Reggae</span>
+              <span>🍺 Beer 15k</span>
+              <span>🎯 Darts</span>
+              <span>🎤 Karaoke</span>
+              <span>🌅 Skyline View</span>
+              <span>🎮 Game Night</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="features-grid">
+        <div class="stat-card feat-card">
+          <div class="feat-icon">🍺</div>
+          <div class="feat-title">Beer from 15k</div>
+          <div class="feat-desc">Cold Saigon & Hanoi beer. Cocktails. Shots. Happy hour 5-7pm.</div>
+        </div>
+        <div class="stat-card feat-card">
+          <div class="feat-icon">🎵</div>
+          <div class="feat-title">Live Music</div>
+          <div class="feat-desc">Reggae, ska, acoustic sets. Local and international artists.</div>
+        </div>
+        <div class="stat-card feat-card">
+          <div class="feat-icon">🎯</div>
+          <div class="feat-title">Games & Vibes</div>
+          <div class="feat-desc">Darts, pool, beer pong, karaoke. Every night is a vibe.</div>
+        </div>
+        <div class="stat-card feat-card">
+          <div class="feat-icon">🌅</div>
+          <div class="feat-title">Skyline View</div>
+          <div class="feat-desc">Sweeping Saigon skyline. Sunset beers. Instagram gold.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hostel-vibe" style="background:var(--bg);">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="profile-badge" style="display:inline-flex;margin-bottom:16px;">The Experience</div>
+        <h2>More Than a Bed. <span class="gradient">A Crew.</span></h2>
+        <p class="section-sub">Mailala isn't just where you sleep — it's where you meet people who change your trip.</p>
+      </div>
+
+      <div class="amenities-grid">
+        <div class="card amenity-card">
+          <div class="card-glow"></div>
+          <div class="amenity-icon">🛏️</div>
+          <h3>Big Balconies</h3>
+          <p>Morning coffee with a view. Evening beers watching the city buzz below.</p>
+        </div>
+        <div class="card amenity-card">
+          <div class="card-glow"></div>
+          <div class="amenity-icon">🍳</div>
+          <h3>Shared Kitchen</h3>
+          <p>Fully equipped. Cook your own food. Meet people over a shared meal.</p>
+        </div>
+        <div class="card amenity-card">
+          <div class="card-glow"></div>
+          <div class="amenity-icon">📺</div>
+          <h3>Common Room</h3>
+          <p>TV. Games. Chill space. Movie nights. Where solo travellers become friends.</p>
+        </div>
+        <div class="card amenity-card">
+          <div class="card-glow"></div>
+          <div class="amenity-icon">🧺</div>
+          <h3>Laundry Service</h3>
+          <p>Affordable. Fast. Because you're travelling, not doing chores.</p>
+        </div>
+        <div class="card amenity-card">
+          <div class="card-glow"></div>
+          <div class="amenity-icon">🎉</div>
+          <h3>Pub Crawls</h3>
+          <p>Weekly pub crawls through Bui Vien. Shot challenges. New friends. Bad decisions.</p>
+        </div>
+        <div class="card amenity-card">
+          <div class="card-glow"></div>
+          <div class="amenity-icon">🌍</div>
+          <h3>Daily Events</h3>
+          <p>Cooking classes. Game nights. Live music. Walking tours. Every day, something.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" style="background:linear-gradient(to bottom, var(--bg), #0d0d08);">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="profile-badge" style="display:inline-flex;margin-bottom:16px;">Real Stories</div>
+        <h2>Travellers <span class="gradient">Speak</span></h2>
+        <p class="section-sub">Raw quotes from people who actually stayed. No filters. No scripts.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="card testimonial-card">
+          <div class="card-glow"></div>
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-score">10/10</div>
+          <p class="testimonial-text">"Mailala was a vibe from start to finish. I hope I can go back and stay there again — if at least just to hit their epic rooftop bar one more time. Thank you, Mailala!"</p>
+          <div class="testimonial-author">
+            <strong>Claire</strong>
+            <span>USA · June 2026</span>
+          </div>
+        </div>
+
+        <div class="card testimonial-card">
+          <div class="card-glow"></div>
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-score">10/10</div>
+          <p class="testimonial-text">"Best decision I made in Saigon. Checked in for 2 nights, stayed for 7. The balcony rooms are unreal. Made friends from Germany, Korea, and Brazil all in one evening at the rooftop."</p>
+          <div class="testimonial-author">
+            <strong>Marcus</strong>
+            <span>Australia · May 2026</span>
+          </div>
+        </div>
+
+        <div class="card testimonial-card">
+          <div class="card-glow"></div>
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-score">10/10</div>
+          <p class="testimonial-text">"Flew into Saigon solo, left with travel buddies for the rest of Vietnam. The reggae night on Thursday was the highlight of my whole trip. Staff remembered my name on day 2."</p>
+          <div class="testimonial-author">
+            <strong>Yuki</strong>
+            <span>Japan · April 2026</span>
+          </div>
+        </div>
+
+        <div class="card testimonial-card">
+          <div class="card-glow"></div>
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-score">10/10</div>
+          <p class="testimonial-text">"Cleanest hostel dorm I've stayed in across all of SE Asia. AC actually works. The rooftop bar crew makes you feel like a local by night 2. Absolute gem on Bui Vien."</p>
+          <div class="testimonial-author">
+            <strong>Sarah</strong>
+            <span>UK · March 2026</span>
+          </div>
+        </div>
+
+        <div class="card testimonial-card">
+          <div class="card-glow"></div>
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-score">10/10</div>
+          <p class="testimonial-text">"The female dorm was spotless. Hair dryer, mirror, secure lockers — small things that matter when you're on the road. Met my best travel friend at the communal kitchen."</p>
+          <div class="testimonial-author">
+            <strong>Anna</strong>
+            <span>Germany · May 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-strip">
+        <div class="stat-item">
+          <div class="stat-number">10.0</div>
+          <div class="stat-label">Hostelworld Rating</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Value for Money</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Staff Score</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Atmosphere</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Cleanliness</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="location" style="background:var(--bg);">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="profile-badge" style="display:inline-flex;margin-bottom:16px;">Location</div>
+        <h2>Right on <span class="gradient">Bui Vien</span></h2>
+        <p class="section-sub">185/28 Pham Ngu Lao, District 1. The centre of Saigon's backpacker universe.</p>
+      </div>
+
+      <div class="card" style="padding:0;overflow:hidden;">
+        <div class="card-glow"></div>
+        <div style="padding:32px 32px 0;">
+          <div class="location-grid">
+            <div class="location-item">
+              <span>🏪</span>
+              <span>Ben Thanh Market</span>
+              <span class="loc-dist">8 min walk</span>
+            </div>
+            <div class="location-item">
+              <span>🍜</span>
+              <span>Bui Vien Walking Street</span>
+              <span class="loc-dist">2 min walk</span>
+            </div>
+            <div class="location-item">
+              <span>🏛️</span>
+              <span>Independence Palace</span>
+              <span class="loc-dist">15 min walk</span>
+            </div>
+            <div class="location-item">
+              <span>✈️</span>
+              <span>Tan Son Nhat Airport</span>
+              <span class="loc-dist">15 min drive</span>
+            </div>
+            <div class="location-item">
+              <span>🚌</span>
+              <span>Bus Station (152)</span>
+              <span class="loc-dist">5 min walk</span>
+            </div>
+            <div class="location-item">
+              <span>🎭</span>
+              <span>Saigon Notre-Dame Basilica</span>
+              <span class="loc-dist">12 min walk</span>
+            </div>
+          </div>
+        </div>
+        <div class="map-placeholder">
+          <div class="map-overlay-text">📍 185/28 Pham Ngu Lao, District 1</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="book" style="background:linear-gradient(to bottom, var(--bg), #0d0d08);">
+    <div class="section-inner" style="text-align:center;">
+      <div class="section-header">
+        <div class="profile-badge" style="display:inline-flex;margin-bottom:16px;">Book Now</div>
+        <h2>Your Saigon <span class="gradient">Awaits</span></h2>
+        <p class="section-sub">Dorms from $6.65. Balconies. Rooftop reggae. The crew is waiting.</p>
+      </div>
+
+      <div class="book-cta">
+        <div class="card book-card">
+          <div class="card-glow"></div>
+          <h3>Book Direct — Best Price Guarantee</h3>
+          <p style="color:var(--muted);margin-bottom:24px;">
+            Booking direct gets you the best rate. No commission fees. Free cancellation 1 day before.
+          </p>
+          <div class="cta-group" style="justify-content:center;">
+            <a href="https://www.hostelworld.com/hostels/p/324399/mailala-hostel-and-bar" target="_blank" rel="noopener" class="btn btn-primary">Book on Hostelworld</a>
+            <a href="https://mailala.hotels-in-hochiminh.com/en" target="_blank" rel="noopener" class="btn btn-ghost">Check Rates</a>
+          </div>
+          <div class="book-meta">
+            <span>✅ Free Cancellation (1 day)</span>
+            <span>✅ Instant Confirmation</span>
+            <span>✅ No Curfew</span>
+            <span>✅ Reception 10am-5pm / Rooftop Bar after hours</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-facts">
+        <div class="stat-card">
+          <div class="stat-number">11:30</div>
+          <div class="stat-label">Check-In</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">13:00</div>
+          <div class="stat-label">Check-Out</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">18-70</div>
+          <div class="stat-label">Age Limit</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">❤️💛💚</div>
+          <div class="stat-label">Rasta Approved</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand" style="font-size:1.2rem;">MAILALA</div>
+        <p>185/28 Pham Ngu Lao, District 1, Ho Chi Minh City, Vietnam</p>
+        <p>Reggae. Rooftop. Real Vibes.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Connect</h4>
+        <a href="https://www.instagram.com/reggae_bar_saigon" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/people/Mailala-Roof-Top-Reggae-Bar/61580002783059" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.hostelworld.com/hostels/p/324399/mailala-hostel-and-bar" target="_blank" rel="noopener">Hostelworld</a>
+      </div>
+      <div class="footer-links">
+        <h4>Policies</h4>
+        <span>Free Cancellation (1 day)</span>
+        <span>Taxes Included</span>
+        <span>Cash / Card on Arrival</span>
+        <span>No Smoking in Rooms</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Mailala Hostel & Bar. Built for the real ones.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
