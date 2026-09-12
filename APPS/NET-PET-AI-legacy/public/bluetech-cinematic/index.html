@@ -11,7 +11,7 @@
     :root {
       --void: #030b14; --navy: #0a1929; --panel: rgba(10,25,41,0.72);
       --panel-border: rgba(0,163,224,0.18); --blue: #0056b3; --blue-bright: #00a3e0;
-      --blue-glow: rgba(0, 163, 224, 0.35); --white: #ffffff; --white-soft: #e6f2ff;
+      --blue-glow: rgba(0,163,224,0.35); --white: #ffffff; --white-soft: #e6f2ff;
       --muted: #8aa8c7;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,7 +21,7 @@
       min-height: 100vh; overflow-x: hidden; -webkit-font-smoothing: antialiased;
     }
 
-    /* Premium background system */
+    /* Premium background layers */
     .bg-mesh {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background:
@@ -34,14 +34,18 @@
       mask-image: radial-gradient(ellipse at center, black 40%, transparent 100%);
       -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 100%);
     }
+    #starfield, #particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .vignette {
+      position: fixed; inset: 0; z-index: 2; pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(3,11,20,0.85) 100%);
+    }
 
-    /* Navigation - glass morphism */
+    /* Glass navigation */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.2rem 3rem;
-      background: rgba(3,11,20,0.72);
-      backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(3,11,20,0.72); backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 1px solid rgba(255,255,255,0.08);
       transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -72,6 +76,18 @@
     }
     .nav-links a:hover, .nav-links a.active { color: var(--blue-bright); }
     .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+    /* Loading curtain */
+    #curtain {
+      position: fixed; inset: 0; background: #000; z-index: 9999;
+      transition: opacity 1.2s ease; display: flex; align-items: center; justify-content: center;
+    }
+    #curtain.fade-out { opacity: 0; pointer-events: none; }
+    .curtain-text {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 1em;
+      color: var(--blue-bright); animation: flicker 2s infinite;
+    }
+    @keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
     /* Hero */
     .hero {
@@ -208,6 +224,13 @@
 <body>
   <div class="bg-mesh"></div>
   <div class="grain"></div>
+  <canvas id="starfield"></canvas>
+  <canvas id="particles"></canvas>
+  <div class="vignette"></div>
+
+  <div id="curtain">
+    <div class="curtain-text">BLUETECH</div>
+  </div>
 
   <nav class="nav">
     <a href="/bluetech-cinematic/" class="nav-logo">
@@ -256,5 +279,109 @@
   </div>
 
   <div class="footer-note">powered by NET</div>
+
+  <script>
+    // Starfield
+    const starCanvas = document.getElementById('starfield');
+    const starCtx = starCanvas.getContext('2d');
+    let stars = [];
+    function initStarfield() {
+      starCanvas.width = window.innerWidth;
+      starCanvas.height = window.innerHeight;
+      stars = [];
+      const count = Math.floor((starCanvas.width * starCanvas.height) / 3000);
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * starCanvas.width,
+          y: Math.random() * starCanvas.height,
+          r: Math.random() * 1.2 + 0.3,
+          a: Math.random() * 0.7 + 0.3,
+          speed: Math.random() * 0.015 + 0.005,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
+    }
+    function drawStars(time) {
+      starCtx.clearRect(0, 0, starCanvas.width, starCanvas.height);
+      stars.forEach(s => {
+        const alpha = s.a * (0.6 + 0.4 * Math.sin(time * s.speed + s.phase));
+        starCtx.beginPath();
+        starCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        starCtx.fillStyle = `rgba(180,220,255,${alpha})`;
+        starCtx.fill();
+      });
+    }
+
+    // Particles
+    const partCanvas = document.getElementById('particles');
+    const partCtx = partCanvas.getContext('2d');
+    let particles = [];
+    function initParticles() {
+      partCanvas.width = window.innerWidth;
+      partCanvas.height = window.innerHeight;
+      particles = [];
+      const count = Math.floor((partCanvas.width * partCanvas.height) / 15000);
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * partCanvas.width,
+          y: Math.random() * partCanvas.height,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          r: Math.random() * 1.5 + 0.5,
+          a: Math.random() * 0.5 + 0.1
+        });
+      }
+    }
+    function drawParticles() {
+      partCtx.clearRect(0, 0, partCanvas.width, partCanvas.height);
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = partCanvas.width;
+        if (p.x > partCanvas.width) p.x = 0;
+        if (p.y < 0) p.y = partCanvas.height;
+        if (p.y > partCanvas.height) p.y = 0;
+        partCtx.beginPath();
+        partCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        partCtx.fillStyle = `rgba(0,163,224,${p.a})`;
+        partCtx.fill();
+      });
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            partCtx.beginPath();
+            partCtx.moveTo(particles[i].x, particles[i].y);
+            partCtx.lineTo(particles[j].x, particles[j].y);
+            partCtx.strokeStyle = `rgba(0,163,224,${0.08 * (1 - dist / 100)})`;
+            partCtx.lineWidth = 0.5;
+            partCtx.stroke();
+          }
+        }
+      }
+    }
+
+    function animate(time) {
+      drawStars(time);
+      drawParticles();
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      initStarfield();
+      initParticles();
+    });
+
+    window.addEventListener('load', () => {
+      initStarfield();
+      initParticles();
+      requestAnimationFrame(animate);
+      setTimeout(() => {
+        document.getElementById('curtain').classList.add('fade-out');
+      }, 400);
+    });
+  </script>
 </body>
 </html>
