@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#08090d">
+  <meta name="theme-color" content="#06070b">
   <title>Michael Hobbs — CEO & Lead Trainer | NET + PrAiS</title>
   <meta name="description" content="Michael Hobbs — CEO of NET (Natural English Training) and PrAiS (Phoenix Rising Ai Solutions). SAIT Polytech business graduate. International speaker, recruiter, and founder.">
   <meta property="og:title" content="Michael Hobbs — CEO & Lead Trainer">
@@ -16,8 +16,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="preload" href="./assets/portrait.jpg" as="image">
-  <link rel="preload" href="./assets/net/60percent.jpg" as="image">
-  <link rel="preload" href="./assets/net/tiger-protocol.jpg" as="image">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,242 +23,73 @@
   <nav aria-label="Primary">
     <div class="brand">Michael Hobbs</div>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#story">Story</a></li>
-      <li><a href="#net">NET</a></li>
-      <li><a href="#prais">PrAiS</a></li>
-      <li><a href="#connect">Connect</a></li>
+      <li><a href="#" class="active">Entry</a></li>
+      <li><a href="story.html">Story</a></li>
+      <li><a href="method.html">Method</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="testimonials.html">Voices</a></li>
+      <li><a href="prais.html">PrAiS</a></li>
+      <li><a href="connect.html">Connect</a></li>
     </ul>
   </nav>
 
-  <!-- HERO ROOM -->
-  <header class="hero">
-    <video class="hero-video" autoplay muted loop playsinline poster="./assets/portrait.jpg" aria-hidden="true">
+  <!-- ROOM 01: ENTRY -->
+  <section id="entry" class="room room-entry">
+    <video class="room-entry__video" autoplay muted loop playsinline poster="./assets/portrait.jpg" aria-hidden="true">
       <source src="https://cdn.coverr.co/videos/coverr-working-in-a-cafe-1584/1080p.mp4" type="video/mp4">
     </video>
-    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="room-entry__overlay" aria-hidden="true"></div>
 
-    <div class="hero-content">
-      <div class="hero-text">
-        <div class="profile-badge">CEO & Lead Trainer</div>
-        <h1>
-          <span class="gradient">Michael Hobbs</span><br>
-          Founder of NET &amp; PrAiS
-        </h1>
-        <p class="subtitle">
-          Business degree from SAIT Polytech, Calgary. International sales &amp; public speaking across America, England, Australia, and Vietnam. 5+ years shaping English education and AI solutions in Vietnam.
-        </p>
-        <div class="cta-group">
-          <a href="#connect" class="btn btn-primary">Get In Touch</a>
-          <a href="#net" class="btn btn-ghost">Explore NET</a>
-          <a href="#prais" class="btn btn-ghost">Explore PrAiS</a>
-        </div>
-      </div>
-
-      <div class="profile-card">
-        <div class="card">
-          <div class="card-glow" aria-hidden="true"></div>
-          <div class="avatar-wrap">
-            <img class="avatar" src="./assets/portrait.jpg" alt="Michael Hobbs portrait" width="320" height="320" loading="eager">
-            <div class="avatar-ring" aria-hidden="true"></div>
-          </div>
-          <div class="card-name">Michael Hobbs</div>
-          <div class="card-role">CEO / Lead Trainer</div>
-          <div class="meta-grid">
-            <div class="meta-item">
-              <div class="meta-label">Education</div>
-              <div class="meta-value">SAIT Polytech</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Focus</div>
-              <div class="meta-value">EdTech + AI</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Experience</div>
-              <div class="meta-value">10+ Years</div>
-            </div>
-            <div class="meta-item">
-              <div class="meta-label">Base</div>
-              <div class="meta-value">Vietnam</div>
-            </div>
+    <div class="room__inner">
+      <div class="room-entry__grid">
+        <div>
+          <div class="room__label">CEO & Lead Trainer</div>
+          <h1 class="room__title">
+            <span class="gradient">Michael Hobbs</span><br>
+            Founder of NET &amp; PrAiS
+          </h1>
+          <p class="room__lead">
+            Business degree from SAIT Polytech, Calgary. International sales &amp; public speaking across America, England, Australia, and Vietnam. 5+ years shaping English education and AI solutions in Vietnam.
+          </p>
+          <div class="room-entry__cta">
+            <a href="connect.html" class="btn btn-primary">Get In Touch</a>
+            <a href="method.html" class="btn btn-ghost">Explore NET</a>
+            <a href="prais.html" class="btn btn-ghost">Explore PrAiS</a>
           </div>
         </div>
-      </div>
-    </div>
-  </header>
 
-  <!-- STORY ROOM -->
-  <section id="story" class="room room--alt" aria-labelledby="story-heading">
-    <div class="room-inner">
-      <div class="room-header">
-        <div class="profile-badge">The Story</div>
-        <h2 id="story-heading" class="room-title">
-          <span class="gradient">From Calgary</span> to the World
-        </h2>
-        <p class="room-lead">A journey through business, sales, recruitment, education, and AI — forged across four continents.</p>
-      </div>
-
-      <div class="story-grid">
-
-        <article class="story-card">
-          <h3>The Foundation</h3>
-          <p>Grew up in a traditional Christian household and was heavily involved in youth programs. Learned at a very young age how to communicate and work with children of all ages — a skill that would define the next decade of my career.</p>
-        </article>
-
-        <article class="story-card">
-          <h3>SAIT Polytech &amp; The Business Edge</h3>
-          <p>Earned a <strong>degree in Business from SAIT Polytech in Calgary</strong>. After graduating, went into commercial insurance, then into marketing for a Thai Vegan operation — mastering the art of sales and public speaking in my home country.</p>
-        </article>
-
-        <article class="story-card">
-          <h3>America → England → Australia → Vietnam</h3>
-          <p>Extensive sales and public speaking training across <strong>America, England, Australia, and Vietnam</strong>. Moved to England to continue in life insurance, which led to a year in Australia managing recruiting for an Israeli company providing cutting-edge tech to Aussie farms.</p>
-        </article>
-
-        <article class="story-card">
-          <h3>The Recruiter &amp; Team Builder</h3>
-          <p>Professional recruiter and team builder across moderators, cyber security, marketing, and dev teams. <strong>Grew investor community from 5 to 20,000</strong>. Launched 4 tokens, bringing in <strong>over $20 million in investment</strong> through a unique marketing strategy of paying investors to spread the project — versus pump-and-dump influencers.</p>
-        </article>
-
-        <article class="story-card">
-          <h3>Les Brown &amp; The Stage</h3>
-          <p>Personally selected in my early 20s to be part of one of the world's top motivational speakers, <strong>Les Brown</strong>. This is where I honed the voice and presence that would later captivate thousands of students.</p>
-        </article>
-
-        <article class="story-card">
-          <h3>Vietnam &amp; The Classroom</h3>
-          <p><strong>5 years teaching experience in Vietnam</strong>, with thousands of students ranging from 1 year old to 70. Trained in <strong>Montessori methods</strong>, <strong>Cambridge</strong>, and taught <strong>IELTS to grade 12 for 3 years</strong>.</p>
-        </article>
-
-        <article class="story-card story-card--accent">
-          <h3>The Founder</h3>
-          <p>Founded <strong>NET (Natural English Training)</strong> and <strong>PrAiS (Phoenix Rising Ai Solutions)</strong>. NET delivers English mastery through the Tiger Protocol. PrAiS builds gaming, corporate workflow solutions, and chat bots with memories <strong>1000X longer</strong> than Gemini and GPT chatbots.</p>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- NET ROOM -->
-  <section id="net" class="room room--deep" aria-labelledby="net-heading">
-    <div class="room-inner">
-      <div class="room-header">
-        <div class="profile-badge">The Methodology</div>
-        <h2 id="net-heading" class="room-title">
-          <span class="gradient">The Tiger Protocol</span>
-        </h2>
-        <p class="room-lead">Natural English Training isn't a method — it's a complete identity shift.</p>
-      </div>
-
-      <div class="method-grid">
-
-        <article class="method-card">
-          <img src="./assets/net/60percent.jpg" alt="The 60% Rule — Comprehensible Input" loading="lazy">
-          <h3>The 60% Rule</h3>
-          <p><strong>Comprehensible Input.</strong> The brain learns language fastest when it naturally understands ~60% of what it hears. YouTube. Podcasts. Context. This is how you bypass the dictionary and unlock real fluency.</p>
-        </article>
-
-        <article class="method-card">
-          <img src="./assets/net/tiger-protocol.jpg" alt="Tiger Protocol vs Grammar Prison" loading="lazy">
-          <h3>Tiger Protocol vs Grammar Prison</h3>
-          <p>Traditional centers force <strong>Grammar First</strong> — creating fear, hesitation, and translation lag. NET unlocks <strong>Tiger Mode</strong>: confident, high-velocity, room-ownership. Listen → Understand → Speak. Real-time pattern recognition. Zero-judgment zone.</p>
-        </article>
-
-        <article class="method-card">
-          <img src="./assets/net/not-broken.jpg" alt="You are not broken — the method failed, not you" loading="lazy">
-          <h3>You Are Not Broken</h3>
-          <p><strong>The traditional educational method was a mechanical failure.</strong> We do not teach grammar rules. We unlock permission. Grammar First = Fear First. We sell the psychological identity shift required to own the room.</p>
-        </article>
-
-        <article class="method-card">
-          <img src="./assets/net/diagnostic-matrix.jpg" alt="NET Diagnostic Matrix comparing traditional centers vs NET architecture" loading="lazy">
-          <h3>NET Architecture</h3>
-          <p>Real-time Pattern Recognition. AI + PET Infrastructure. Local Lakeview Networking. <strong>80% NET Guaranteed Success Rate</strong> vs 30% industry average. This is not a class. This is a system.</p>
-        </article>
-
-        <article class="method-card">
-          <img src="./assets/net/codex.jpg" alt="Phoenix Rising Codex — Master Playbook" loading="lazy">
-          <h3>The Phoenix Rising Codex</h3>
-          <p>Master Playbook: <strong>Pedagogy, Infrastructure, and the Tiger Protocol.</strong> The Lie: traditional education forces Grammar First. The Truth: You are not broken. The Law: confident velocity beats accurate grammar every single time.</p>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- QUOTE ROOM -->
-  <section class="quote-section" aria-labelledby="quote-text">
-    <div class="quote-bg" aria-hidden="true"></div>
-    <div class="quote-card">
-      <div class="quote-mark" aria-hidden="true">"</div>
-      <blockquote>
-        <p id="quote-text">Saigon is the economic hub of Vietnam — way easier to get work here. I have an apartment, a contract, and opportunity at home.</p>
-      </blockquote>
-      <div class="quote-author">— Michael Hobbs</div>
-    </div>
-  </section>
-
-  <!-- PrAiS ROOM -->
-  <section id="prais" class="room room--alt" aria-labelledby="prais-heading">
-    <div class="room-inner">
-      <div class="room-header">
-        <div class="profile-badge">AI Solutions</div>
-        <h2 id="prais-heading" class="room-title">
-          <span class="gradient">PrAiS</span> — Phoenix Rising
-        </h2>
-        <p class="room-lead">AI solutions that remember. Gaming. Corporate workflows. Chatbots with 1000X longer memory than Gemini and GPT.</p>
-      </div>
-
-      <div class="prais-stats">
-        <div class="stat-card">
-          <div class="stat-number">Gaming</div>
-          <div class="stat-label">Interactive Experiences</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">Corporate</div>
-          <div class="stat-label">Workflow Solutions</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">1000X</div>
-          <div class="stat-label">Longer Memory</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">AI Native</div>
-          <div class="stat-label">Built Different</div>
-        </div>
-      </div>
-
-      <div class="prais-card">
-        <p>PrAiS isn't just another AI wrapper. We're building <strong>gaming, corporate workflow solutions, and chat bots</strong> that are built to have memories <strong>1000X longer</strong> than the increasingly useless Gemini and GPT chatbots. The future isn't about bigger models — it's about <strong>smarter architecture</strong>.</p>
-      </div>
-
-      <div class="connect-card" id="connect">
-        <h3>Connect</h3>
-        <div class="links-stack">
-          <a href="https://beacons.ai" target="_blank" rel="noopener" class="link-btn">
-            <span>Website</span>
-            <span class="arrow" aria-hidden="true">↗</span>
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener" class="link-btn">
-            <span>Instagram</span>
-            <span class="arrow" aria-hidden="true">↗</span>
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener" class="link-btn">
-            <span>LinkedIn</span>
-            <span class="arrow" aria-hidden="true">↗</span>
-          </a>
-          <a href="https://youtube.com" target="_blank" rel="noopener" class="link-btn">
-            <span>YouTube</span>
-            <span class="arrow" aria-hidden="true">↗</span>
-          </a>
+        <div class="profile-card">
+          <div class="card">
+            <div class="card-glow" aria-hidden="true"></div>
+            <div class="avatar-wrap">
+              <img class="avatar" src="./assets/portrait.jpg" alt="Michael Hobbs portrait" width="320" height="320" loading="eager">
+              <div class="avatar-ring" aria-hidden="true"></div>
+            </div>
+            <div class="card-name">Michael Hobbs</div>
+            <div class="card-role">CEO / Lead Trainer</div>
+            <div class="meta-grid">
+              <div class="meta-item">
+                <div class="meta-label">Education</div>
+                <div class="meta-value">SAIT Polytech</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Focus</div>
+                <div class="meta-value">EdTech + AI</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Experience</div>
+                <div class="meta-value">10+ Years</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Base</div>
+                <div class="meta-value">Vietnam</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
-
-  <footer>
-    <p>© 2026 Michael Hobbs. CEO & Lead Trainer — NET + PrAiS. Built on Cloudflare Pages.</p>
-  </footer>
 
 </body>
 </html>

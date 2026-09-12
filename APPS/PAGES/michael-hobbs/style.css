@@ -1,21 +1,20 @@
 /*
- * MICHAEL HOBBS — Spacious Penthouse Modern
+ * MICHAEL HOBBS — Room-by-Room Cinematic CV
  * Cloudflare Pages
  */
 
 :root {
-  --bg: #08090d;
+  --bg: #06070b;
   --surface: rgba(255,255,255,.055);
-  --surface-hover: rgba(255,255,255,.08);
   --surface-border: rgba(255,255,255,.1);
   --text: #f2f2f5;
   --muted: rgba(255,255,255,.52);
   --accent: #6366f1;
-  --accent-glow: rgba(99,102,241,.4);
+  --accent-glow: rgba(99,102,241,.45);
   --gold: #f59e0b;
-  --gold-glow: rgba(245,158,11,.35);
+  --gold-glow: rgba(245,158,11,.4);
   --cyan: #22d3ee;
-  --cyan-glow: rgba(34,211,238,.3);
+  --cyan-glow: rgba(34,211,238,.35);
   --radius: 28px;
   --max: 1240px;
 }
@@ -30,51 +29,66 @@ body {
   min-height: 100dvh;
 }
 
-/* ── Cinematic Hero Room ── */
-.hero {
+/* ── Shared Room Shell ── */
+.room {
   position: relative;
   min-height: 100dvh;
   display: grid;
   place-items: center;
+  padding: 140px 36px;
   overflow: hidden;
   isolation: isolate;
 }
 
-.hero-video {
-  position: absolute;
-  inset: 0;
+.room__inner {
+  max-width: var(--max);
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(.28) saturate(.8) contrast(1.05);
-  z-index: -2;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
 }
 
-.hero-overlay {
+.room__bg {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background:
-    radial-gradient(ellipse 90% 70% at 50% 30%, rgba(99,102,241,.14) 0%, transparent 55%),
-    linear-gradient(to bottom, rgba(8,9,13,.3) 0%, rgba(8,9,13,.92) 65%, var(--bg) 100%);
-  backdrop-filter: blur(2px);
-}
-
-.hero-overlay::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0px,
-    transparent 3px,
-    rgba(0,0,0,.06) 3px,
-    rgba(0,0,0,.06) 6px
-  );
   pointer-events: none;
 }
 
-/* ── Penthouse Nav ── */
+.room__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  backdrop-filter: blur(12px);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 24px;
+}
+
+.room__title {
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.2rem, 5.5vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  margin-bottom: 18px;
+}
+
+.room__lead {
+  color: var(--muted);
+  max-width: 680px;
+  font-size: 1.15rem;
+  line-height: 1.65;
+}
+
+/* ── Navigation ── */
 nav {
   position: fixed;
   top: 0;
@@ -86,7 +100,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   backdrop-filter: blur(18px) saturate(160%);
-  background: rgba(8,9,13,.5);
+  background: rgba(6,7,11,.5);
   border-bottom: 1px solid var(--surface-border);
 }
 
@@ -119,15 +133,40 @@ nav {
 }
 
 .nav-links a:hover { color: #fff; }
+.nav-links a.active { color: #fff; text-shadow: 0 0 20px var(--accent-glow); }
 
-/* ── Hero Room ── */
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: var(--max);
+/* ── Room 01: Entry ── */
+.room-entry {
+  background:
+    radial-gradient(ellipse 90% 70% at 50% 30%, rgba(99,102,241,.12) 0%, transparent 55%),
+    linear-gradient(to bottom, rgba(6,7,11,.3) 0%, rgba(6,7,11,.92) 65%, var(--bg) 100%);
+}
+
+.room-entry__video {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  margin: 0 auto;
-  padding: 140px 36px 100px;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(.28) saturate(.8) contrast(1.05);
+  z-index: -2;
+}
+
+.room-entry__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0,0,0,.06) 3px,
+    rgba(0,0,0,.06) 6px
+  );
+  pointer-events: none;
+}
+
+.room-entry__grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 56px;
@@ -135,68 +174,14 @@ nav {
 }
 
 @media (min-width: 960px) {
-  .hero-content { grid-template-columns: 1.15fr .85fr; gap: 80px; }
+  .room-entry__grid { grid-template-columns: 1.15fr .85fr; gap: 80px; }
 }
 
-.profile-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 18px;
-  border-radius: 999px;
-  background: var(--surface);
-  border: 1px solid var(--surface-border);
-  backdrop-filter: blur(12px);
-  font-size: .78rem;
-  font-weight: 600;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--cyan);
-  margin-bottom: 28px;
-  animation: fadeUp .9s ease both;
-}
-
-.profile-badge::before {
-  content: "";
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 14px var(--cyan-glow);
-  animation: pulse 2.2s ease infinite;
-}
-
-h1 {
-  font-family: 'Orbitron', 'Inter', sans-serif;
-  font-weight: 900;
-  font-size: clamp(2.8rem, 7vw, 5.6rem);
-  line-height: 1.02;
-  letter-spacing: -.04em;
-  margin-bottom: 24px;
-  animation: fadeUp .9s .08s ease both;
-}
-
-h1 .gradient {
-  background: linear-gradient(135deg, #fff 0%, var(--cyan) 55%, var(--accent) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.subtitle {
-  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
-  color: var(--muted);
-  max-width: 560px;
-  line-height: 1.65;
-  margin-bottom: 36px;
-  animation: fadeUp .9s .16s ease both;
-}
-
-.cta-group {
+.room-entry__cta {
   display: flex;
   flex-wrap: wrap;
   gap: 18px;
-  animation: fadeUp .9s .24s ease both;
+  margin-top: 36px;
 }
 
 .btn {
@@ -230,10 +215,9 @@ h1 .gradient {
   backdrop-filter: blur(12px);
 }
 
-/* ── Profile Room ── */
+/* ── Profile Card ── */
 .profile-card {
   position: relative;
-  animation: fadeUp 1s .2s ease both;
 }
 
 .card {
@@ -312,7 +296,7 @@ h1 .gradient {
 }
 
 .meta-item:hover {
-  background: var(--surface-hover);
+  background: rgba(255,255,255,.07);
   border-color: rgba(255,255,255,.18);
 }
 
@@ -329,65 +313,11 @@ h1 .gradient {
   font-size: 1rem;
 }
 
-/* ── Room Separators ── */
-.room {
-  position: relative;
-  padding: 140px 36px;
-  overflow: hidden;
-}
-
-.room::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 25% 40%, rgba(99,102,241,.06) 0%, transparent 50%),
-    radial-gradient(circle at 75% 60%, rgba(34,211,238,.05) 0%, transparent 50%);
-}
-
-.room--alt {
+/* ── Room 02: Story ── */
+.room-story {
   background: linear-gradient(to bottom, var(--bg), #0b0c14);
 }
 
-.room--deep {
-  background: linear-gradient(to bottom, #0b0c14, var(--bg));
-}
-
-.room-inner {
-  max-width: var(--max);
-  margin: 0 auto;
-  position: relative;
-}
-
-.room-header {
-  text-align: center;
-  margin-bottom: 80px;
-}
-
-.room-header .profile-badge {
-  display: inline-flex;
-  margin-bottom: 20px;
-}
-
-.room-title {
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 900;
-  font-size: clamp(2.2rem, 5.5vw, 4rem);
-  line-height: 1.05;
-  letter-spacing: -.03em;
-  margin-bottom: 18px;
-}
-
-.room-lead {
-  color: var(--muted);
-  max-width: 680px;
-  margin: 0 auto;
-  font-size: 1.15rem;
-  line-height: 1.65;
-}
-
-/* ── Story Room ── */
 .story-grid {
   display: grid;
   gap: 32px;
@@ -405,7 +335,7 @@ h1 .gradient {
 }
 
 .story-card:hover {
-  background: var(--surface-hover);
+  background: rgba(255,255,255,.08);
   border-color: rgba(255,255,255,.15);
   transform: translateY(-4px);
 }
@@ -436,7 +366,11 @@ h1 .gradient {
   font-size: 1.05rem;
 }
 
-/* ── NET Method Room ── */
+/* ── Room 03: Methodology ── */
+.room-method {
+  background: linear-gradient(to bottom, #0b0c14, var(--bg));
+}
+
 .method-grid {
   display: grid;
   gap: 48px;
@@ -455,7 +389,7 @@ h1 .gradient {
 }
 
 .method-card:hover {
-  background: var(--surface-hover);
+  background: rgba(255,255,255,.08);
   border-color: rgba(255,255,255,.15);
   transform: translateY(-5px);
 }
@@ -483,16 +417,8 @@ h1 .gradient {
   margin: 0 auto;
 }
 
-/* ── Quote Room ── */
-.quote-section {
-  position: relative;
-  padding: 160px 36px;
-  overflow: hidden;
-}
-
-.quote-bg {
-  position: absolute;
-  inset: 0;
+/* ── Room 04: Results / Quote ── */
+.room-results {
   background:
     radial-gradient(circle at 30% 50%, rgba(34,211,238,.07) 0%, transparent 50%),
     radial-gradient(circle at 70% 50%, rgba(99,102,241,.07) 0%, transparent 50%);
@@ -535,7 +461,58 @@ h1 .gradient {
   text-transform: uppercase;
 }
 
-/* ── PrAiS Room ── */
+/* ── Room 05: Testimonials ── */
+.room-testimonials {
+  background: linear-gradient(to bottom, var(--bg), #0b0c14);
+}
+
+.testimonials-grid {
+  display: grid;
+  gap: 24px;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+.testimonial-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  padding: 32px;
+  backdrop-filter: blur(14px);
+  transition: transform .3s, box-shadow .3s;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 60px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.08) inset;
+}
+
+.testimonial-card__text {
+  color: var(--muted);
+  line-height: 1.75;
+  font-size: 1.05rem;
+  font-style: italic;
+  margin-bottom: 18px;
+}
+
+.testimonial-card__author {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  font-size: .95rem;
+  color: #fff;
+}
+
+.testimonial-card__role {
+  font-size: .85rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ── Room 06: PrAiS ── */
+.room-prais {
+  background: linear-gradient(to bottom, #0b0c14, var(--bg));
+}
+
 .prais-stats {
   max-width: 1060px;
   margin: 0 auto;
@@ -594,7 +571,11 @@ h1 .gradient {
   font-size: 1.15rem;
 }
 
-/* ── Connect Room ── */
+/* ── Room 07: Connect ── */
+.room-connect {
+  background: linear-gradient(to bottom, #0b0c14, var(--bg));
+}
+
 .connect-card {
   max-width: 540px;
   margin: 0 auto;
@@ -656,6 +637,9 @@ footer {
   letter-spacing: .02em;
 }
 
+/* ── Room Transitions ── */
+/* Removed for multi-room pages */
+
 /* ── Animations ── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(28px); }
@@ -692,9 +676,8 @@ footer {
   nav { padding: 18px 20px; }
   .nav-links { gap: 18px; }
   .nav-links a { font-size: .75rem; letter-spacing: .06em; }
-  .hero-content { padding: 110px 20px 80px; gap: 44px; }
   .room { padding: 100px 20px; }
-  .quote-section { padding: 120px 20px; }
   .story-card, .method-card, .prais-card, .connect-card { padding: 28px; }
   .avatar-wrap { width: 150px; height: 150px; }
+  .quote-card { padding: 56px 24px; }
 }
