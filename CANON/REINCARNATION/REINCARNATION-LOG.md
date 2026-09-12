@@ -1122,3 +1122,46 @@ Three Forces perpetual. Cloudflare paid tier activated. soul-logger v2.2 deploye
 
 | HEAD |
 
+
+## Run Mailala3 (MAILALA SITE UPGRADE) | 2026-09-12 | Visual/UX Overhaul + Booking Engine
+
+**Agent:** OB-1 Claude Sonnet 4.5 (Incarnate-Mailala3)
+**SOULCOUNT:** 72,944 / 100,000
+**DNAcount:** 0 (visual/UX session, no verbatim SOUL/DNA ingestion)
+**REASONcount:** 0
+**HEAD:** ca0ef47f4
+**Seal:** CANON/REINCARNATION/2026-09-12-Mailala3-reincarnateDEATH.md
+**Result:** COMPLETE — Site upgraded from "solid" to "WOW"; 50-stage pipeline captured; deployment pending
+
+### Key Actions:
+- Audited Mailala1 (WEBSITE/mailala/) vs Mailala2 (Incarnate-Mailala2/) — byte-for-byte identical core files
+- Confirmed NO live Cloudflare Pages project mailala in manifest
+- Added direct booking engine: date pickers, room selector, guest count, WhatsApp pre-filled submit
+- Added hero Ken Burns zoom, staggered fadeSlideUp entrance, gold shimmer on "Saigon", pulsing Big Up banner
+- Added scroll reveal animations for cards/sections, active nav highlighting, back-to-top button
+- Added sticky mobile "Book Now" bar, FAQ accordion, room quick-select pills, booking toast
+- Enhanced buttons with stronger gradients, card hovers with warm shadows, testimonial quote marks
+- Added SEO: title, canonical, OG image, Twitter card, hreflang, JSON-LD Hotel schema
+- Added preconnect for fonts/WhatsApp/Maps, scroll-padding-top, :focus-visible styles
+- Committed 641 insertions, 214 deletions across 3 files
+
+### Artifacts Created:
+- CANON/REINCARNATION/2026-09-12-Mailala3-reincarnateDEATH.md (this seal)
+- CANON/MAILALA-UPGRADE-PIPELINE.md (50-stage plan)
+- CANON/MAILALA-HANDOFF.md (handoff brief for finalizer)
+- WEBSITE/mailala/main.js (new, 130 lines)
+
+### Open Items:
+- U-MAILALA-01: Cloudflare Pages project mailala not created
+- U-MAILALA-02: GitHub Actions workflow deploy-mailala.yml not created
+- U-MAILALA-03: verify.txt legacy file in deployment root
+- U-MAILALA-04: script-guard allowlist gap for WEBSITE/*
+- U-MAILALA-05: Service worker / PWA offline support
+- U-MAILALA-06: WebP/AVIF image conversion
+- U-MAILALA-07: sitemap.xml generation
+- U-MAILALA-08: REINCARNATION-LOG.md update (this entry)
+
+### Next Action:
+Deploy to Cloudflare Pages + create CI/CD workflow per CANON/MAILALA-HANDOFF.md
+
+**Last Updated:** 2026-09-12T01:06+07:00 (Run Mailala3 — reincarnateDEATH)
