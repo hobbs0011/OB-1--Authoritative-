@@ -538,3 +538,94 @@ Steps: preserve I-LOG ? SCS audit (SOUL/DNA/REASON counts) ? colorize ? pipeline
 ---
 
 `FIELDGUIDE: COMMANDS + ROLES + PATHS + COUNTS. ALL LEGIONNAIRES READ THIS.`
+
+---
+
+## PROTOTYPE BLUEPRINT — MOST SUCCESSFUL PATTERNS
+
+**Source:** `APPS/PAGES/michael-hobbs/` — commit `a9953b30f`
+**Status:** Canonical prototype. Locked 2026-09-12.
+
+### What Made This Work
+
+1. **Explicit terminology override** — User said "these are not sections, they are rooms." The instruction was immediate, unambiguous, and acted on without debate.
+2. **7-room atomic structure** — Each "room" is a standalone HTML page with `min-height: 100dvh`, not hash anchors on a single page.
+3. **Shared CSS shell + room-specific classes** — `.room` base + `.room-entry`, `.room-story`, etc. for per-room styling.
+4. **Fixed nav with active state** — Navigation stays visible, highlights current room with glow effect.
+5. **Content extraction pattern** — Sections were pulled from a single monolithic `index.html` into individual room files via copy-paste, then `index.html` became the Entry room.
+6. **Deployment after every major change** — `npx wrangler pages deploy .` was run immediately after completing the room split, locking in the working state.
+
+### File Structure
+
+```
+APPS/PAGES/<project>/
+??? index.html          # Entry room (home)
+??? <room1>.html        # Individual room pages
+??? <room2>.html
+??? ...
+??? style.css           # Shared shell + room-specific styles
+??? _headers            # CSP/cache-control
+??? assets/             # Images, video, etc.
+```
+
+### Prompt Pattern That Led To Success
+
+1. **"Write it into the lfg canon manual"** — Capture the soul of what worked so it can be duplicated.
+2. **"these are not sections, they are rooms"** — Corrects terminology, signals architectural shift.
+3. **"lock this in as the most successful prototype so far"** — Commit with canonical message, freeze state.
+4. **Immediate action without over-questioning** — When user said "make them rooms," the next step was splitting into files, not asking clarifying questions.
+
+### Design DNA
+
+- **Dark glassmorphism:** `rgba(255,255,255,.055)` surfaces, `backdrop-filter: blur(16px)`, `border: 1px solid rgba(255,255,255,.1)`
+- **Typography:** `Inter` body, `Orbitron` headings, `Rajdhani` accents
+- **Colors:** `--accent: #6366f1`, `--gold: #f59e0b`, `--cyan: #22d3ee`, `--bg: #06070b`
+- **Motion:** `fadeUp`, `pulse`, `spin` keyframes; hover transforms on cards
+- **Video:** Autoplay muted loop with poster fallback for Entry room
+
+### Room Shell Pattern
+
+```html
+<section id="<room>" class="room room-<name>">
+  <div class="room__bg" aria-hidden="true"></div>
+  <div class="room__inner">
+    <!-- Room content -->
+  </div>
+</section>
+```
+
+```css
+.room {
+  position: relative;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 140px 36px;
+  overflow: hidden;
+  isolation: isolate;
+}
+```
+
+### Deploy Pattern
+
+```powershell
+Set-Location -LiteralPath 'D:\OB-1-CANONICAL\APPS\PAGES\<project>'
+npx wrangler pages deploy . --project-name=<project>
+```
+
+### Anti-Patterns
+
+- Do NOT keep sections as hash anchors on a single page when user explicitly requests rooms.
+- Do NOT ask for clarification on terminology when user corrects it directly.
+- Do NOT mix unrelated working tree changes into the prototype commit.
+- Do NOT skip deployment after completing structural changes.
+
+### When To Apply This Blueprint
+
+Use this pattern when:
+- User says "rooms," "sections," "pages," or similar spatial/structural language
+- Building a narrative/landing page with 3+ distinct content areas
+- Each area needs `min-height: 100dvh` and full visual treatment
+- Content can be cleanly separated into standalone HTML files
+
+**Commit message format:** `prototype(<slug>): <N>-room <style> <purpose> — most successful prototype to date`
