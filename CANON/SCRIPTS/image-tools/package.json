@@ -1,0 +1,14 @@
+{
+  "name": "canon-image-tools",
+  "version": "1.0.0",
+  "description": "Image resize and render tools for CANON",
+  "private": true,
+  "scripts": {
+    "resize": "node resize.js",
+    "render": "node render.js",
+    "audit": "node audit.js"
+  },
+  "dependencies": {
+    "sharp": "^0.33.0"
+  }
+}
