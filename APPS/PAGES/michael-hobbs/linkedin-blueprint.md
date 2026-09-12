@@ -129,7 +129,7 @@ If you want to know more about the Tiger Protocol, NET’s architecture, or PrAi
 ## Contact Preferences
 - Website: https://michael-hobbs.pages.dev
 - Instagram: [handle]
-- LinkedIn: [profile url]
+- LinkedIn: https://www.linkedin.com/in/mrhobbs/
 - YouTube: [channel]
 
 ---
