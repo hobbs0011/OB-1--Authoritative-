@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmation — Mailala Hostel & Bar</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Inter, system-ui, sans-serif; background: #f5efe6; color: #1a1714; padding: 40px 24px; line-height: 1.6; }
+    .confirmation { max-width: 600px; margin: 0 auto; background: #fffdfa; padding: 48px; border-radius: 8px; border: 2px solid #1a1714; }
+    h1 { font-size: 2rem; font-weight: 900; text-transform: uppercase; margin-bottom: 24px; color: #1b4332; }
+    .detail { padding: 12px 0; border-bottom: 1px solid #d9d0c5; display: flex; justify-content: space-between; }
+    .detail:last-child { border-bottom: none; }
+    .detail-label { font-weight: 700; }
+    .detail-value { color: #5c5650; }
+    .logo { font-size: 1.5rem; font-weight: 900; color: #1b4332; margin-bottom: 8px; }
+    .tagline { color: #5c5650; margin-bottom: 24px; }
+    .actions { margin-top: 32px; display: flex; gap: 12px; }
+    .btn { padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 700; border: 2px solid transparent; }
+    .btn-primary { background: #2d6a4f; color: #fff; border-color: #1b4332; }
+    .btn-outline { background: #fff; color: #1a1714; border-color: #1a1714; }
+    @media print { body { background: white; } .actions { display: none; } }
+  </style>
+</head>
+<body>
+  <div class="confirmation">
+    <div class="logo">🌿 MAILALA</div>
+    <p class="tagline">❤️ Love Up · 💛 Bless Up · 💚 Irie Up</p>
+    <h1>Booking Confirmed</h1>
+    <div class="detail"><span class="detail-label">Booking ID</span><span class="detail-value">#ML-2026-001</span></div>
+    <div class="detail"><span class="detail-label">Guest</span><span class="detail-value">Walk-in / WhatsApp</span></div>
+    <div class="detail"><span class="detail-label">Room</span><span class="detail-value">Mixed Dorm — 8 Bed</span></div>
+    <div class="detail"><span class="detail-label">Check-in</span><span class="detail-value">11:30 AM</span></div>
+    <div class="detail"><span class="detail-label">Check-out</span><span class="detail-value">1:00 PM</span></div>
+    <div class="detail"><span class="detail-label">Address</span><span class="detail-value">175/16 Pham Ngu Lao, D1, HCMC</span></div>
+    <div class="detail"><span class="detail-label">Phone</span><span class="detail-value">+84 768 701 106</span></div>
+    <div class="actions">
+      <a href="/" class="btn btn-primary">Back to Site</a>
+      <button onclick="window.print()" class="btn btn-outline">Print Confirmation</button>
+    </div>
+  </div>
+</body>
+</html>

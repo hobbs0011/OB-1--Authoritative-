@@ -424,11 +424,11 @@
           <div class="form-row">
             <div class="form-group">
               <label for="checkin">Check-in</label>
-              <input type="date" id="checkin" name="checkin" required>
+              <input type="date" id="checkin" name="checkin" required min="">
             </div>
             <div class="form-group">
               <label for="checkout">Check-out</label>
-              <input type="date" id="checkout" name="checkout" required>
+              <input type="date" id="checkout" name="checkout" required min="">
             </div>
           </div>
           <div class="form-row">
@@ -539,6 +539,15 @@
   <span class="whatsapp-label">Chat Now</span>
 </a>
 
+<a href="#" class="back-to-top" aria-label="Back to top">↑</a>
+
 <script src="main.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
+</script>
 </body>
 </html>
