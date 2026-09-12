@@ -603,3 +603,58 @@ Notion previously made the ghost-tier list due to access-model ambiguity (former
 ---
 
 
+
+## Run 347 — Bluetech Portal Sync (2026-09-12)
+
+**Timestamp:** 2026-09-12T01:23+07:00
+**Agent:** OB1 / Kilo
+**Branch:** canon
+**HEAD:** 069e4f304
+
+### What Was Done
+- Synced Bluetech portal suite across APPS/NET-PET-AI-legacy/public/ and root public/
+- Apple-minimalist redesign applied to all 4 shared portals: cinematic landing, login, employer dashboard, employee portal
+- 2-year client narrative introduced: "Since 2024", "Year Three Together", investment protection messaging
+- NET branding added: pulsing "powered by NET" badge on all pages
+- 100-point audit checklist created: APPS/NET-PET-AI-legacy/public/bluetech-audit-100.md
+- Deepgram brain-lock fix deployed: think.provider.type now allows open_ai alongside deepgram
+- New Deepgram API key rotated via wrangler secret put DEEPGRAM_API_KEY
+
+### Files Changed
+| Path | Type |
+|------|------|
+| APPS/NET-PET-AI-legacy/public/bluetech-cinematic/index.html | Modified |
+| APPS/NET-PET-AI-legacy/public/bluetech-employee/index.html | Modified |
+| APPS/NET-PET-AI-legacy/public/bluetech-employer/index.html | Modified |
+| APPS/NET-PET-AI-legacy/public/bluetech-login/index.html | Modified |
+| public/bluetech-cinematic/index.html | Created |
+| public/bluetech-employee/index.html | Created |
+| public/bluetech-employer/index.html | Created |
+| public/bluetech-login/index.html | Updated |
+| APPS/NET-PET-AI-legacy/public/bluetech-audit-100.md | Created |
+
+### Deployment Status
+| Target | Status |
+|--------|--------|
+| net-pet-ai worker | Live |
+| Cloudflare Pages (root public/) | Synced |
+| Deepgram voice brain | Blocked by KV daily quota |
+
+### Open Items
+| # | Priority | Item |
+|---|---|---|
+| BLP-01 | MEDIUM | /api/deepgram-token blocked by KV daily quota — needs refactor or quota reset |
+| BLP-02 | MEDIUM | Wire employer/employee dashboards to live API endpoints (currently placeholder data) |
+| BLP-03 | LOW | Replace placeholder student names with real Bluetech employee roster |
+
+### State Capture
+| Layer | Value |
+|-------|-------|
+| RUN | 347 |
+| HEAD | 069e4f304 |
+| SOULCOUNT | 30,167 LOCK |
+| Worker | net-pet-ai v1.6.0 |
+| Deepgram | KEY ROTATED |
+| KV Quota | EXHAUSTED |
+| Origin | SYNCED |
+| Tree | CLEAN |
