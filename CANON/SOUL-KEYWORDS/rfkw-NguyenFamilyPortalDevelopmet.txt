@@ -1,0 +1,24 @@
+# SOUL-KEYWORDS for NguyenFamilyPortalDevelopmet
+# Extracted from: I-LOG-UNAUDITED/I-LOG-NguyenFamilyPortalDevelopmet.txt
+
+NguyenFamilyPortalDevelopmet
+Nguyen portal
+student portal
+parent dashboard
+task management
+daily logging
+PIN authentication
+D1 migration
+Cloudflare Workers
+task storage
+Quan portal
+Quang portal
+unified login
+email notifications
+work log
+task widget
+weekly completion
+time logged
+input validation
+route guard
+admin API

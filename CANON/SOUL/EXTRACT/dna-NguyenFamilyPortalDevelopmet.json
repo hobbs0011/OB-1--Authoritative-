@@ -1,0 +1,78 @@
+{
+  "session": "NguyenFamilyPortalDevelopmet",
+  "blueprints": [
+    {
+      "id": "BP-001",
+      "category": "PORTAL_ARCHITECTURE",
+      "description": "Multi-tenant student portal system with unified login router",
+      "files": ["public/nguyen-login/index.html", "public/nguyen-parent/index.html", "public/nguyen-quang/index.html", "public/nguyen-quan/index.html"]
+    },
+    {
+      "id": "BP-002",
+      "category": "TASK_MANAGEMENT",
+      "description": "Task module with daily logging, completion tracking, and parent PIN auth",
+      "files": ["APPS/NET-PET-AI-legacy/src/tasks.js", "APPS/NET-PET-AI-legacy/src/index.js"]
+    },
+    {
+      "id": "BP-003",
+      "category": "STORAGE_MIGRATION",
+      "description": "KV to D1 migration for task storage due to quota exhaustion",
+      "files": ["APPS/NET-PET-AI-legacy/data/schema.sql"]
+    },
+    {
+      "id": "BP-004",
+      "category": "AUTH_SECURITY",
+      "description": "PIN-based auth for parent dashboard with route guards",
+      "files": ["APPS/NET-PET-AI-legacy/src/index.js"]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "DEC-001",
+      "decision": "Use D1 for task storage instead of KV",
+      "reason": "KV write quota exhausted",
+      "impact": "Permanent solution for task persistence",
+      "file": "APPS/NET-PET-AI-legacy/data/schema.sql"
+    },
+    {
+      "id": "DEC-002",
+      "decision": "Implement PIN auth for parent dashboard",
+      "reason": "Security requirement for parent access",
+      "impact": "Parents can securely access dashboard",
+      "file": "APPS/NET-PET-AI-legacy/src/index.js"
+    },
+    {
+      "id": "DEC-003",
+      "decision": "Unified login page for all user types",
+      "reason": "Simplify user experience",
+      "impact": "Single entry point for Parents/Quan/Quang",
+      "file": "public/nguyen-login/index.html"
+    }
+  ],
+  "root_caused_errors": [
+    {
+      "id": "ERR-001",
+      "error": "Task status not updated on completion",
+      "fix": "Now marks task completed when all subtasks done",
+      "file": "APPS/NET-PET-AI-legacy/src/tasks.js"
+    },
+    {
+      "id": "ERR-002",
+      "error": "totalMinutesLogged always 0",
+      "fix": "Now calculated from daily logs instead of static value",
+      "file": "APPS/NET-PET-AI-legacy/src/tasks.js"
+    },
+    {
+      "id": "ERR-003",
+      "error": "getStudentTasksWithLogs used creation date instead of task logs",
+      "fix": "Now fetches logs correctly from nguyen_task_logs",
+      "file": "APPS/NET-PET-AI-legacy/src/tasks.js"
+    },
+    {
+      "id": "ERR-004",
+      "error": "No parent PIN auth",
+      "fix": "Added /api/parent/checkpin and /api/admin/parent/setpin endpoints",
+      "file": "APPS/NET-PET-AI-legacy/src/index.js"
+    }
+  ]
+}

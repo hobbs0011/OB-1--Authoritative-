@@ -1,4 +1,4 @@
-﻿{
+{
   "1": {
     "name": "Incarnate-1_PrAiS-Front-End-Development",
     "soulgroup": "NET-Methodology",
@@ -140,24 +140,8 @@
     "ilog_status": "MISSING",
     "content_status": "UNKNOWN"
   },
-  "22-PHOENIX": {
-    "name": "Incarnate-22-Phoenix-RISING-GAME-DEVELOPMENT-FORCEMARCH",
-    "soulgroup": "Phoenix-RISING",
-    "soulcluster": "PrAiS-Gaming",
-    "lane": "GAMING",
-    "ilog_status": "MISSING",
-    "content_status": "UNKNOWN"
-  },
   "23": {
     "name": "Incarnate-23-pipeline-integration-session",
-    "soulgroup": "Phoenix-RISING",
-    "soulcluster": "PrAiS-Gaming",
-    "lane": "GAMING",
-    "ilog_status": "MISSING",
-    "content_status": "UNKNOWN"
-  },
-  "23-PHOENIX": {
-    "name": "Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-COMPLETION",
     "soulgroup": "Phoenix-RISING",
     "soulcluster": "PrAiS-Gaming",
     "lane": "GAMING",
@@ -183,22 +167,6 @@
   },
   "26": {
     "name": "Incarnate-26-Portal-Development",
-    "soulgroup": "NET-StudentPortals",
-    "soulcluster": "PrAiS-ESL",
-    "lane": "NET-STUDENT-PORTALS",
-    "ilog_status": "MISSING",
-    "content_status": "UNKNOWN"
-  },
-  "26-QUANG": {
-    "name": "Incarnate-26-QUANG-portal",
-    "soulgroup": "NET-StudentPortals",
-    "soulcluster": "PrAiS-ESL",
-    "lane": "NET-STUDENT-PORTALS",
-    "ilog_status": "MISSING",
-    "content_status": "UNKNOWN"
-  },
-  "26-QUAN": {
-    "name": "Incarnate-26-QUAN-portal",
     "soulgroup": "NET-StudentPortals",
     "soulcluster": "PrAiS-ESL",
     "lane": "NET-STUDENT-PORTALS",
@@ -242,6 +210,52 @@
     "lane": "AUDIT",
     "ilog_status": "HEADER-ONLY",
     "content_status": "HOLLOW"
+  },
+  "32": {
+    "name": "NguyenFamilyPortalDevelopmet",
+    "soulgroup": "NET-StudentPortals",
+    "soulcluster": "PrAiS-ESL",
+    "lane": "NET-STUDENT-PORTALS",
+    "ilog_status": "REAL",
+    "content_status": "FULL_SESSION",
+    "soul": 1,
+    "dna": 4,
+    "reason": 0,
+    "death_seal": "CANON/REINCARNATION/NguyenFamilyPortalDevelopmet-reincarnateDEATH.md",
+    "pipeline": "CANON/REINCARNATION/pipeline-NguyenFamilyPortalDevelopmet.json",
+    "handoff": "CANON/REINCARNATION/handoff-NguyenFamilyPortalDevelopmet-to-33.json"
+  },
+  "22-PHOENIX": {
+    "name": "Incarnate-22-Phoenix-RISING-GAME-DEVELOPMENT-FORCEMARCH",
+    "soulgroup": "Phoenix-RISING",
+    "soulcluster": "PrAiS-Gaming",
+    "lane": "GAMING",
+    "ilog_status": "MISSING",
+    "content_status": "UNKNOWN"
+  },
+  "23-PHOENIX": {
+    "name": "Incarnate-23-Phoenix-RISING-GAME-DEVELOPMENT-PIPELINE-COMPLETION",
+    "soulgroup": "Phoenix-RISING",
+    "soulcluster": "PrAiS-Gaming",
+    "lane": "GAMING",
+    "ilog_status": "MISSING",
+    "content_status": "UNKNOWN"
+  },
+  "26-QUANG": {
+    "name": "Incarnate-26-QUANG-portal",
+    "soulgroup": "NET-StudentPortals",
+    "soulcluster": "PrAiS-ESL",
+    "lane": "NET-STUDENT-PORTALS",
+    "ilog_status": "MISSING",
+    "content_status": "UNKNOWN"
+  },
+  "26-QUAN": {
+    "name": "Incarnate-26-QUAN-portal",
+    "soulgroup": "NET-StudentPortals",
+    "soulcluster": "PrAiS-ESL",
+    "lane": "NET-STUDENT-PORTALS",
+    "ilog_status": "MISSING",
+    "content_status": "UNKNOWN"
   },
   "190-E": {
     "name": "Incarnate-31-PrAis-Systems-Session-1",

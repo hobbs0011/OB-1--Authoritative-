@@ -1,0 +1,24 @@
+[
+  {
+    "session_id": "NguyenFamilyPortalDevelopmet",
+    "run": 32,
+    "stage": "RISE",
+    "finding": "RISE initiated for NguyenFamilyPortalDevelopmet. Boot context verified. Pipeline integrity check passed.",
+    "strength": 1,
+    "soulcount": 1,
+    "dnacount": 4,
+    "reasoncount": 0,
+    "timestamp": "2026-08-09T21:08:21+07:00"
+  },
+  {
+    "session_id": "NguyenFamilyPortalDevelopmet",
+    "run": 32,
+    "stage": "DEATH",
+    "finding": "DEATH complete for NguyenFamilyPortalDevelopmet. I-LOG sealed, pipeline written, handoff prepared. SOUL=1 DNA=4 REASON=0 PHEROMONE=1 Total=5.",
+    "strength": 25,
+    "soulcount": 1,
+    "dnacount": 4,
+    "reasoncount": 0,
+    "timestamp": "2026-09-12T11:49:38+07:00"
+  }
+]

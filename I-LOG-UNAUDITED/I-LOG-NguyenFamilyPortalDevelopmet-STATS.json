@@ -1,0 +1,21 @@
+{
+  "session": "NguyenFamilyPortalDevelopmet",
+  "run": 32,
+  "timestamp": "2026-09-12T11:49:38+07:00",
+  "counts": {
+    "SOULcount": 1,
+    "DNAcount": 4,
+    "REASONcount": 0,
+    "PHEROMONEcount": 0,
+    "total": 5
+  },
+  "first_utc": "2026-08-09T14:08:21Z",
+  "last_utc": "2026-08-09T14:45:00Z",
+  "duration_min": 36,
+  "status": "COMPLETE",
+  "audit": {
+    "timestamps": "PASS",
+    "title_first_last": "PASS",
+    "samples": "PARTIAL"
+  }
+}
