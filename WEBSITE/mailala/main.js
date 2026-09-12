@@ -52,4 +52,18 @@ document.addEventListener('DOMContentLoaded', () => {
     hero.style.opacity = '1';
     hero.style.transform = 'translateY(0)';
   }
+
+  const bookingForm = document.getElementById('bookingForm');
+  if (bookingForm) {
+    bookingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const checkin = document.getElementById('checkin').value;
+      const checkout = document.getElementById('checkout').value;
+      const room = document.getElementById('room').value;
+      const guests = document.getElementById('guests').value;
+      const message = `Hi Mailala! I want to book ${room} from ${checkin} to ${checkout} for ${guests} guests.`;
+      const url = `https://wa.me/84768701106?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    });
+  }
 });

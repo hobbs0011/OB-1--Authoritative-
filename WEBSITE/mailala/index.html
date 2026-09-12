@@ -38,6 +38,7 @@
 <section class="hero">
       <div class="hero-bg" style="background-image:url('assets/images/6134195124376899495_121.jpg')" role="img" aria-label="Mai Lala reggae bar interior with warm neon lights"></div>
   <div class="hero-overlay"></div>
+  <div class="hero-bigup">🔥 Big Up</div>
   <div class="hero-content">
     <div class="hero-text">
       <div class="hero-badge">
@@ -57,7 +58,7 @@
       </div>
       <div class="cta-group">
         <a href="#book" class="btn btn-primary">Book Your Stay</a>
-        <a href="https://wa.me/84768701106" target="_blank" rel="noopener" class="btn btn-outline">WhatsApp Us</a>
+        <a href="https://wa.me/84768701106?text=Hi%20Mailala!%20I%20want%20to%20book%20a%20room." target="_blank" rel="noopener" class="whatsapp-quick">💬 Quick Book</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -419,14 +420,41 @@
         <div class="badge">✅ Best Rate Guaranteed</div>
         <h2>Ready to <span class="highlight">Vibe</span>?</h2>
         <p class="section-sub" style="text-align:left;margin:0 0 24px;">Dorms from $6.65. Balconies. Rooftop reggae. The crew is waiting.</p>
-        <div class="booking-details">
-          <div class="detail-row"><span>Check-In</span><span>11:30 AM</span></div>
-          <div class="detail-row"><span>Check-Out</span><span>1:00 PM</span></div>
-          <div class="detail-row"><span>Age Limit</span><span>18–70</span></div>
-          <div class="detail-row"><span>Reception</span><span>10am–5pm</span></div>
-          <div class="detail-row"><span>Late Help</span><span>Rooftop Bar</span></div>
-          <div class="detail-row"><span>Breakfast</span><span>Not included</span></div>
-        </div>
+        <form class="booking-form" id="bookingForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="checkin">Check-in</label>
+              <input type="date" id="checkin" name="checkin" required>
+            </div>
+            <div class="form-group">
+              <label for="checkout">Check-out</label>
+              <input type="date" id="checkout" name="checkout" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="room">Room Type</label>
+              <select id="room" name="room" required>
+                <option value="">Select room</option>
+                <option value="Mixed Dorm 8-Bed">Mixed Dorm — 8 Bed ($6.65)</option>
+                <option value="Mixed Dorm 4-Bed">Mixed Dorm — 4 Bed ($8.50)</option>
+                <option value="Female Dorm 6-Bed">Female Dorm — 6 Bed ($7.50)</option>
+                <option value="Private Room Balcony">Private Room — Balcony ($18)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="guests">Guests</label>
+              <select id="guests" name="guests" required>
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5">5+ Guests</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit">📱 Book via WhatsApp</button>
+        </form>
         <div class="book-policies">
           <span>✅ Free Cancellation (1 day)</span>
           <span>✅ Instant Confirmation</span>
@@ -498,6 +526,7 @@
       <span>Taxes Included</span>
       <span>Cash / Card on Arrival</span>
       <span>No Smoking in Rooms</span>
+      <span class="footer-rasta">🚫 Say No to Drugs</span>
     </div>
   </div>
   <div class="footer-bottom">

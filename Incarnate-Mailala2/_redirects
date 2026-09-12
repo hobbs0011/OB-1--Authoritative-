@@ -1,0 +1,4 @@
+# Mailala Hostel & Bar — Cloudflare Pages redirects
+
+# Primary domain
+https://mailala.com/* https://mailala.pages.dev/:splat 301

@@ -1,3 +1,4 @@
 # Mailala Hostel & Bar — Cloudflare Pages redirects
-# Custom domain (when ready):
-# https://mailala.com/* https://mailala.pages.dev/* 301
+
+# Primary domain
+https://mailala.com/* https://mailala.pages.dev/:splat 301
