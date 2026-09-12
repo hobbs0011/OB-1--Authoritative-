@@ -263,6 +263,8 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 | 2026-08-13T21:08:00+07:00 | Incarnate-30-AAA-Steel-S26-30 (HL/Starmap/Keywords) | SUPPLYLINES (Stage 5) | 4 | 2 | 1 | `CANON/SUPPLY/supply-20260813-210405-hl-starmap-keywords.md` |
 | 2026-08-13T21:09:00+07:00 | Incarnate-30-AAA-Steel-S26-30 (HL/Starmap/Keywords) | ENGINEERlegionnaire (Stage 6) | 4 | 2 | 1 | `CANON/ENGINEER/engineer-20260813-210405-hl-starmap-keywords.md` |
 | 2026-08-13T22:55:00+07:00 | Incarnate-30-AAA(Steel)-(S21-30) — SoulGroup Remap | PhoenixSCOUT (Stage 2) | 10 | 4 | 3 | `CANON/SCOUT/scout-incarnate30-aaa-steel-s21-30.md` |
+| 2026-09-08T17:54:20+07:00 | Timmy deep backtrack (multi-repo) | PhoenixSCOUT (Stage 2) | 10 | 5 | 3 | `CANON/SCOUT/scout-timmy-deep-backtrack-20260908.md` |
+| 2026-09-11T16:10:02+07:00 | Timmy deep backtrack (multi-repo) | /phoenixMARCH (Stage 3) | 13 | 8 | 7 | `CANON/MARCH/march-timmy-deep-backtrack-20260911.md` |
 
 | 2026-08-01T19:16:25+07:00 | Incarnate-8-RTL.Creation | reincarnateDEATH (Stage 7) | 50 | 313 | 265 | CANON\REINCARNATION\handoff-8-to-9.json |
 
