@@ -627,6 +627,151 @@ nav {
   font-size: 1.2rem;
 }
 
+/* ── Room 07: CV ── */
+.room-cv {
+  background: linear-gradient(to bottom, #0b0c14, var(--bg));
+}
+
+.cv-grid {
+  display: grid;
+  gap: 32px;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+.cv-card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius);
+  padding: 44px;
+  backdrop-filter: blur(14px);
+  transition: background .25s, border-color .25s, transform .3s;
+}
+
+.cv-card:hover {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.15);
+  transform: translateY(-4px);
+}
+
+.cv-card h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.25rem;
+  margin-bottom: 18px;
+  color: var(--cyan);
+  letter-spacing: .01em;
+}
+
+.cv-contact {
+  margin-top: 18px;
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.cv-job {
+  margin-bottom: 28px;
+}
+
+.cv-job:last-child {
+  margin-bottom: 0;
+}
+
+.cv-job__header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.cv-job__title {
+  font-weight: 700;
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.cv-job__period {
+  color: var(--cyan);
+  font-weight: 600;
+  font-size: .92rem;
+  letter-spacing: .04em;
+}
+
+.cv-job__role {
+  color: var(--muted);
+  font-size: .95rem;
+  margin-bottom: 10px;
+}
+
+.cv-job ul {
+  color: var(--muted);
+  line-height: 1.75;
+  font-size: 1.05rem;
+  padding-left: 20px;
+}
+
+.cv-job li + li {
+  margin-top: 8px;
+}
+
+.cv-qual {
+  margin-bottom: 18px;
+}
+
+.cv-qual:last-child {
+  margin-bottom: 0;
+}
+
+.cv-qual__title {
+  font-weight: 700;
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.cv-qual__school {
+  color: var(--muted);
+  font-size: .95rem;
+  margin-top: 4px;
+}
+
+.cv-skill {
+  display: inline-flex;
+  margin: 0 12px 12px 0;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.035);
+  border: 1px solid var(--surface-border);
+  color: var(--text);
+  font-size: .92rem;
+  font-weight: 500;
+}
+
+.cv-ref {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cv-ref__name {
+  font-weight: 700;
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.cv-ref__role {
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.cv-refs {
+  margin-top: 32px;
+  max-width: 1060px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* ── Footer ── */
 footer {
   border-top: 1px solid var(--surface-border);
