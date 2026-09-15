@@ -462,20 +462,19 @@
       function draw(){
         const w=c.width, h=c.height;
         ctx.clearRect(0,0,w,h);
-        const cx=w*0.5 + (mx-0.5)*20, cy=h*0.48 + (my-0.5)*15, s=Math.min(w,h)*0.16;
-        // Background glow
-        const bg=ctx.createRadialGradient(cx,cy,0,cx,cy,s*2);
-        bg.addColorStop(0,'rgba(204,34,34,0.08)'); bg.addColorStop(0.5,'rgba(204,34,34,0.02)'); bg.addColorStop(1,'transparent');
+        const cx=w*0.5 + (mx-0.5)*20, cy=h*0.48 + (my-0.5)*15, s=Math.min(w,h)*0.18;
+        const bg=ctx.createRadialGradient(cx,cy,0,cx,cy,s*2.2);
+        bg.addColorStop(0,'rgba(204,34,34,0.1)'); bg.addColorStop(0.5,'rgba(204,34,34,0.03)'); bg.addColorStop(1,'transparent');
         ctx.fillStyle=bg; ctx.fillRect(0,0,w,h);
         ctx.lineWidth=2.5; ctx.lineCap='round'; ctx.lineJoin='round';
         // Head
-        ctx.strokeStyle='rgba(204,34,34,0.9)';
+        ctx.strokeStyle='rgba(204,34,34,0.95)';
         ctx.strokeRect(cx-s*0.3, cy-s*0.72, s*0.6, s*0.38);
-        ctx.fillStyle='rgba(10,12,22,0.6)'; ctx.fillRect(cx-s*0.3, cy-s*0.72, s*0.6, s*0.38);
+        ctx.fillStyle='rgba(10,12,22,0.55)'; ctx.fillRect(cx-s*0.3, cy-s*0.72, s*0.6, s*0.38);
         // V-fin
-        ctx.strokeStyle='rgba(204,34,34,0.9)';
-        ctx.beginPath(); ctx.moveTo(cx,s*0.75); ctx.lineTo(cx-s*0.18,cy-s*0.8); ctx.lineTo(cx-s*0.06,cy-s*0.72); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx,s*0.75); ctx.lineTo(cx+s*0.18,cy-s*0.8); ctx.lineTo(cx+s*0.06,cy-s*0.72); ctx.stroke();
+        ctx.strokeStyle='rgba(204,34,34,0.95)';
+        ctx.beginPath(); ctx.moveTo(cx,s*0.75); ctx.lineTo(cx-s*0.18,cy-s*0.82); ctx.lineTo(cx-s*0.06,cy-s*0.72); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx,s*0.75); ctx.lineTo(cx+s*0.18,cy-s*0.82); ctx.lineTo(cx+s*0.06,cy-s*0.72); ctx.stroke();
         // V-fin energy
         ctx.strokeStyle='rgba(240,192,64,'+(0.5+0.3*Math.sin(tick*0.04))+')'; ctx.lineWidth=1.5;
         ctx.beginPath(); ctx.moveTo(cx,s*0.75); ctx.lineTo(cx-s*0.1,cy-s*0.72); ctx.stroke();
@@ -483,95 +482,94 @@
         // Eyes
         const eyeGlow=0.7+0.3*Math.sin(tick*0.05);
         ctx.fillStyle='rgba(240,192,64,'+eyeGlow+')';
-        ctx.shadowColor='rgba(240,192,64,0.8)'; ctx.shadowBlur=15;
+        ctx.shadowColor='rgba(240,192,64,0.9)'; ctx.shadowBlur=18;
         ctx.fillRect(cx-s*0.13,cy-s*0.62,s*0.1,s*0.14);
         ctx.fillRect(cx+s*0.03,cy-s*0.62,s*0.1,s*0.14);
         ctx.shadowBlur=0;
         // Neck
-        ctx.strokeStyle='rgba(204,34,34,0.8)'; ctx.lineWidth=2;
+        ctx.strokeStyle='rgba(204,34,34,0.85)'; ctx.lineWidth=2;
         ctx.strokeRect(cx-s*0.1,cy-s*0.34,s*0.2,s*0.1);
         // Shoulders
-        ctx.strokeStyle='rgba(204,34,34,0.85)'; ctx.lineWidth=2.5;
+        ctx.strokeStyle='rgba(204,34,34,0.9)'; ctx.lineWidth=2.5;
         ctx.beginPath(); ctx.ellipse(cx-s*0.58,cy+s*0.05,s*0.28,s*0.12,-0.3,0,Math.PI*2); ctx.stroke();
         ctx.beginPath(); ctx.ellipse(cx+s*0.58,cy+s*0.05,s*0.28,s*0.12,0.3,0,Math.PI*2); ctx.stroke();
         // Shoulder armor plates
-        ctx.strokeStyle='rgba(34,102,204,0.6)'; ctx.lineWidth=1.5;
-        ctx.beginPath(); ctx.moveTo(cx-s*0.58,cy+s*0.05); ctx.lineTo(cx-s*0.7,cy-s*0.05); ctx.lineTo(cx-s*0.45,cy-s*0.05); ctx.closePath(); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx+s*0.58,cy+s*0.05); ctx.lineTo(cx+s*0.7,cy-s*0.05); ctx.lineTo(cx+s*0.45,cy-s*0.05); ctx.closePath(); ctx.stroke();
+        ctx.strokeStyle='rgba(34,102,204,0.65)'; ctx.lineWidth=1.5;
+        ctx.beginPath(); ctx.moveTo(cx-s*0.58,cy+s*0.05); ctx.lineTo(cx-s*0.72,cy-s*0.06); ctx.lineTo(cx-s*0.46,cy-s*0.06); ctx.closePath(); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx+s*0.58,cy+s*0.05); ctx.lineTo(cx+s*0.72,cy-s*0.06); ctx.lineTo(cx+s*0.46,cy-s*0.06); ctx.closePath(); ctx.stroke();
         // Torso
-        ctx.strokeStyle='rgba(204,34,34,0.8)'; ctx.lineWidth=2.5;
+        ctx.strokeStyle='rgba(204,34,34,0.85)'; ctx.lineWidth=2.5;
         ctx.beginPath(); ctx.moveTo(cx-s*0.22,cy-s*0.3); ctx.lineTo(cx-s*0.28,cy+s*0.42); ctx.lineTo(cx+s*0.28,cy+s*0.42); ctx.lineTo(cx+s*0.22,cy-s*0.3); ctx.closePath(); ctx.stroke();
+        ctx.fillStyle='rgba(10,12,22,0.35)'; ctx.fill();
         // Torso armor lines
-        ctx.strokeStyle='rgba(204,34,34,0.4)'; ctx.lineWidth=1;
-        ctx.beginPath(); ctx.moveTo(cx-s*0.15,cy-s*0.1); ctx.lineTo(cx+s*0.15,cy-s*0.1); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx-s*0.18,cy+s*0.1); ctx.lineTo(cx+s*0.18,cy+s*0.1); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx-s*0.2,cy+s*0.3); ctx.lineTo(cx+s*0.2,cy+s*0.3); ctx.stroke();
+        ctx.strokeStyle='rgba(204,34,34,0.45)'; ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(cx-s*0.16,cy-s*0.12); ctx.lineTo(cx+s*0.16,cy-s*0.12); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx-s*0.2,cy+s*0.08); ctx.lineTo(cx+s*0.2,cy+s*0.08); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx-s*0.22,cy+s*0.28); ctx.lineTo(cx+s*0.22,cy+s*0.28); ctx.stroke();
         // Center chest core
         const corePulse=0.5+0.5*Math.sin(tick*0.06);
         ctx.fillStyle='rgba(240,192,64,'+(0.4+0.4*corePulse)+')';
-        ctx.shadowColor='rgba(240,192,64,0.9)'; ctx.shadowBlur=20+10*corePulse;
+        ctx.shadowColor='rgba(240,192,64,0.95)'; ctx.shadowBlur=22+12*corePulse;
         ctx.beginPath(); ctx.arc(cx,cy+s*0.12,s*0.07,0,Math.PI*2); ctx.fill();
         ctx.strokeStyle='rgba(240,192,64,'+(0.6+0.3*corePulse)+')'; ctx.lineWidth=1.5;
-        ctx.beginPath(); ctx.arc(cx,cy+s*0.12,s*0.1,0,Math.PI*2); ctx.stroke();
+        ctx.beginPath(); ctx.arc(cx,cy+s*0.12,s*0.11,0,Math.PI*2); ctx.stroke();
         ctx.shadowBlur=0;
         // Arms
-        ctx.strokeStyle='rgba(34,102,204,0.8)'; ctx.lineWidth=2.5;
-        ctx.beginPath(); ctx.moveTo(cx-s*0.58,cy+s*0.05); ctx.lineTo(cx-s*0.85,cy+s*0.5); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx+s*0.58,cy+s*0.05); ctx.lineTo(cx+s*0.85,cy+s*0.5); ctx.stroke();
+        ctx.strokeStyle='rgba(34,102,204,0.85)'; ctx.lineWidth=2.5;
+        ctx.beginPath(); ctx.moveTo(cx-s*0.58,cy+s*0.05); ctx.lineTo(cx-s*0.88,cy+s*0.52); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx+s*0.58,cy+s*0.05); ctx.lineTo(cx+s*0.88,cy+s*0.52); ctx.stroke();
         // Forearms
-        ctx.strokeStyle='rgba(34,102,204,0.65)'; ctx.lineWidth=2;
-        ctx.beginPath(); ctx.moveTo(cx-s*0.85,cy+s*0.5); ctx.lineTo(cx-s*0.75,cy+s*0.85); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx+s*0.85,cy+s*0.5); ctx.lineTo(cx+s*0.75,cy+s*0.85); ctx.stroke();
+        ctx.strokeStyle='rgba(34,102,204,0.7)'; ctx.lineWidth=2;
+        ctx.beginPath(); ctx.moveTo(cx-s*0.88,cy+s*0.52); ctx.lineTo(cx-s*0.78,cy+s*0.88); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx+s*0.88,cy+s*0.52); ctx.lineTo(cx+s*0.78,cy+s*0.88); ctx.stroke();
         // Hands
-        ctx.strokeStyle='rgba(204,34,34,0.7)'; ctx.lineWidth=2;
-        ctx.strokeRect(cx-s*0.82,cy+s*0.82,s*0.14,s*0.1);
-        ctx.strokeRect(cx+s*0.68,cy+s*0.82,s*0.14,s*0.1);
+        ctx.strokeStyle='rgba(204,34,34,0.8)'; ctx.lineWidth=2;
+        ctx.strokeRect(cx-s*0.85,cy+s*0.85,s*0.15,s*0.11);
+        ctx.strokeRect(cx+s*0.7,cy+s*0.85,s*0.15,s*0.11);
         // Beam rifle
-        ctx.strokeStyle='rgba(240,192,64,0.8)'; ctx.lineWidth=2;
-        ctx.fillStyle='rgba(34,102,204,0.3)';
-        ctx.fillRect(cx+s*0.75,cy+s*0.55,s*0.25,s*0.08);
-        ctx.strokeRect(cx+s*0.75,cy+s*0.55,s*0.25,s*0.08);
+        ctx.fillStyle='rgba(34,102,204,0.35)'; ctx.strokeStyle='rgba(34,102,204,0.95)';
+        ctx.fillRect(cx+s*0.78,cy+s*0.57,s*0.28,s*0.09); ctx.strokeRect(cx+s*0.78,cy+s*0.57,s*0.28,s*0.09);
         // Beam charge
         if(Math.sin(tick*0.08)>0.3){
           ctx.fillStyle='rgba(240,192,64,'+(0.3+0.3*Math.sin(tick*0.1))+')';
-          ctx.shadowColor='rgba(240,192,64,0.8)'; ctx.shadowBlur=15;
-          ctx.fillRect(cx+s*1.0,cy+s*0.54,s*0.15,s*0.04);
+          ctx.shadowColor='rgba(240,192,64,0.9)'; ctx.shadowBlur=18;
+          ctx.fillRect(cx+s*1.05,cy+s*0.56,s*0.18,s*0.05);
           ctx.shadowBlur=0;
         }
         // Legs
-        ctx.strokeStyle='rgba(204,34,34,0.8)'; ctx.lineWidth=2.5;
-        ctx.beginPath(); ctx.moveTo(cx-s*0.12,cy+s*0.42); ctx.lineTo(cx-s*0.18,cy+s*0.9); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx+s*0.12,cy+s*0.42); ctx.lineTo(cx+s*0.18,cy+s*0.9); ctx.stroke();
+        ctx.strokeStyle='rgba(204,34,34,0.85)'; ctx.lineWidth=2.5;
+        ctx.beginPath(); ctx.moveTo(cx-s*0.12,cy+s*0.42); ctx.lineTo(cx-s*0.18,cy+s*0.92); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx+s*0.12,cy+s*0.42); ctx.lineTo(cx+s*0.18,cy+s*0.92); ctx.stroke();
         // Knee guards
-        ctx.strokeStyle='rgba(34,102,204,0.7)'; ctx.lineWidth=2;
-        ctx.beginPath(); ctx.arc(cx-s*0.18,cy+s*0.65,6,0,Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.arc(cx+s*0.18,cy+s*0.65,6,0,Math.PI*2); ctx.stroke();
+        ctx.strokeStyle='rgba(34,102,204,0.8)'; ctx.lineWidth=2;
+        ctx.beginPath(); ctx.arc(cx-s*0.18,cy+s*0.66,7,0,Math.PI*2); ctx.stroke();
+        ctx.beginPath(); ctx.arc(cx+s*0.18,cy+s*0.66,7,0,Math.PI*2); ctx.stroke();
         // Calves
-        ctx.strokeStyle='rgba(204,34,34,0.65)'; ctx.lineWidth=2;
-        ctx.beginPath(); ctx.moveTo(cx-s*0.18,cy+s*0.9); ctx.lineTo(cx-s*0.14,cy+s*1.25); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx+s*0.18,cy+s*0.9); ctx.lineTo(cx+s*0.14,cy+s*1.25); ctx.stroke();
+        ctx.strokeStyle='rgba(204,34,34,0.7)'; ctx.lineWidth=2;
+        ctx.beginPath(); ctx.moveTo(cx-s*0.18,cy+s*0.92); ctx.lineTo(cx-s*0.14,cy+s*1.28); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx+s*0.18,cy+s*0.92); ctx.lineTo(cx+s*0.14,cy+s*1.28); ctx.stroke();
         // Feet
-        ctx.strokeStyle='rgba(204,34,34,0.75)'; ctx.lineWidth=2.5;
-        ctx.strokeRect(cx-s*0.22,cy+s*1.22,s*0.18,s*0.08);
-        ctx.strokeRect(cx+s*0.04,cy+s*1.22,s*0.18,s*0.08);
+        ctx.strokeStyle='rgba(204,34,34,0.9)'; ctx.lineWidth=2.5;
+        ctx.strokeRect(cx-s*0.24,cy+s*1.25,s*0.2,s*0.09);
+        ctx.strokeRect(cx+s*0.04,cy+s*1.25,s*0.2,s*0.09);
         // Thrusters
         const thrusterPulse=0.5+0.5*Math.sin(tick*0.07);
         ctx.fillStyle='rgba(240,192,64,'+(0.4+0.4*thrusterPulse)+')';
-        ctx.shadowColor='rgba(240,192,64,0.7)'; ctx.shadowBlur=12+8*thrusterPulse;
-        ctx.fillRect(cx-s*0.22,cy+s*1.28,8,6+4*thrusterPulse);
-        ctx.fillRect(cx+s*0.14,cy+s*1.28,8,6+4*thrusterPulse);
+        ctx.shadowColor='rgba(240,192,64,0.8)'; ctx.shadowBlur=14+10*thrusterPulse;
+        ctx.fillRect(cx-s*0.24,cy+s*1.32,9,7+5*thrusterPulse);
+        ctx.fillRect(cx+s*0.15,cy+s*1.32,9,7+5*thrusterPulse);
         ctx.shadowBlur=0;
         // HUD overlay
-        ctx.strokeStyle='rgba(34,102,204,0.3)'; ctx.lineWidth=1;
-        ctx.beginPath(); ctx.arc(cx,cy+s*0.12,s*0.25,0,Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.arc(cx,cy+s*0.12,s*0.35,0,Math.PI*2); ctx.stroke();
+        ctx.strokeStyle='rgba(34,102,204,0.35)'; ctx.lineWidth=1;
+        ctx.beginPath(); ctx.arc(cx,cy+s*0.12,s*0.28,0,Math.PI*2); ctx.stroke();
+        ctx.beginPath(); ctx.arc(cx,cy+s*0.12,s*0.4,0,Math.PI*2); ctx.stroke();
         // Targeting brackets
-        ctx.strokeStyle='rgba(204,34,34,0.35)'; ctx.lineWidth=1;
-        const bx=cx+s*0.85, by=cy+s*0.59;
-        ctx.beginPath(); ctx.moveTo(bx-10,by-5); ctx.lineTo(bx-10,by-12); ctx.lineTo(bx-3,by-12);
-        ctx.moveTo(bx+25,by-12); ctx.lineTo(bx+32,by-12); ctx.lineTo(bx+32,by-5); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(bx-10,by+13); ctx.lineTo(bx-10,by+20); ctx.lineTo(bx-3,by+20);
-        ctx.moveTo(bx+25,by+20); ctx.lineTo(bx+32,by+20); ctx.lineTo(bx+32,by+13); ctx.stroke();
+        ctx.strokeStyle='rgba(204,34,34,0.4)'; ctx.lineWidth=1;
+        const bx=cx+s*0.88, by=cy+s*0.61;
+        ctx.beginPath(); ctx.moveTo(bx-11,by-6); ctx.lineTo(bx-11,by-14); ctx.lineTo(bx-4,by-14);
+        ctx.moveTo(bx+27,by-14); ctx.lineTo(bx+34,by-14); ctx.lineTo(bx+34,by-6); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(bx-11,by+14); ctx.lineTo(bx-11,by+22); ctx.lineTo(bx-4,by+22);
+        ctx.moveTo(bx+27,by+22); ctx.lineTo(bx+34,by+22); ctx.lineTo(bx+34,by+14); ctx.stroke();
         tick++;
         requestAnimationFrame(draw);
       }
