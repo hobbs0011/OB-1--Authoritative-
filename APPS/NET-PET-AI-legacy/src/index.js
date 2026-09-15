@@ -2297,6 +2297,49 @@ const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionH
     if (employer.pinHash !== pinHash) return addCors(json({ ok: false, error: "Invalid PIN" }), request);
     return addCors(json({ ok: true, employerCode: employer.companyCode, name: employer.name }), request);
   }
+  // POST /api/employer/auth — { employerCode, pinHash } → { authorized }
+  if (path === "/api/employer/auth" && method === "POST") {
+    try {
+      const body = await request.json();
+      const { employerCode, pinHash } = body || {};
+      if (!employerCode || !pinHash) return addCors(json({ authorized: false, error: "employerCode and pinHash required" }, 400), request);
+      const cleanCode = String(employerCode).toUpperCase().trim();
+      const employer = await getEmployer(env, cleanCode);
+      if (!employer) return addCors(json({ authorized: false, error: "Invalid employer code" }), request);
+      if (employer.pinHash !== String(pinHash)) return addCors(json({ authorized: false, error: "Invalid PIN" }), request);
+      return addCors(json({ authorized: true, employerCode: employer.companyCode, companyName: employer.companyName || employer.name }), request);
+    } catch (err) {
+      return addCors(json({ authorized: false, error: err.message }, 500), request);
+    }
+  }
+  // GET /api/employer/profile — ?employerCode=X → { companyName, employees[] }
+  if (path === "/api/employer/profile" && method === "GET") {
+    try {
+      const employerCode = url.searchParams.get("employerCode");
+      if (!employerCode) return addCors(json({ error: "employerCode query param required" }, 400), request);
+      const cleanCode = String(employerCode).toUpperCase().trim();
+      const employer = await getEmployer(env, cleanCode);
+      if (!employer) return addCors(json({ error: "Employer not found" }, 404), request);
+      const students = employer.students || [];
+      const employees = await Promise.all(students.map(async (sid) => {
+        const [profileRaw, streakRaw] = await Promise.all([
+          env.NET_PET_KV.get(`student_profile_${sid}`).catch(() => null),
+          env.NET_PET_KV.get(`streak:${sid}`).catch(() => null),
+        ]);
+        const profile = normalizeStudentProfile(profileRaw ? JSON.parse(profileRaw) : {});
+        const streak = streakRaw ? JSON.parse(streakRaw) : {};
+        const name = profile.name || profile.fullName || sid;
+        const rawLevel = (profile.level || profile.englishLevel || "A1").toUpperCase();
+        const CEFR_ORDER = ['A1','A2','B1','B2','C1','C2'];
+        const cefrLevel = CEFR_ORDER.includes(rawLevel) ? rawLevel : "A1";
+        const streakCount = streak.currentStreak || 0;
+        return { studentName: name, cefrLevel, streakCount, maeScore: null };
+      }));
+      return addCors(json({ companyName: employer.companyName || employer.name || cleanCode, employees, generatedAt: new Date().toISOString() }), request);
+    } catch (err) {
+      return addCors(json({ error: err.message }, 500), request);
+    }
+  }
   // POST /api/admin/teacher/setpin — admin only
   if (path === "/api/admin/teacher/setpin" && method === "POST") {
     const adminBlock = await checkAdminKey(request, env);

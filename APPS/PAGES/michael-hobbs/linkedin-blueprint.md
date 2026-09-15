@@ -16,7 +16,7 @@ CEO & Lead Trainer with a cross-continental career in business, sales, recruitme
 
 I’m the founder of **NET (Natural English Training)** and **PrAiS (Phoenix Rising Ai Solutions)**. I built NET around a simple idea: the traditional classroom teaches grammar first and fluency second. The **Tiger Protocol** flips that — real-time pattern recognition, the **60% Rule**, and a zero-judgment environment that produces confident speakers, not cautious ones.
 
-My background is unusual for an EdTech founder. I earned a **business degree from SAIT Polytech in Calgary**, then spent years mastering sales and public speaking across **America, England, Australia, and Vietnam**. I went from commercial insurance to marketing a Thai Vegan operation, then to life insurance in England, then to managing recruiting in Australia for an Israeli company deploying cutting-edge tech to Aussie farms.
+My background is built on Business / Marketing / Training across Canada, England and Australia before teaching. I spent years mastering sales and public speaking across America, England, Australia, and Vietnam. I went from commercial insurance to marketing a Thai Vegan operation, then to life insurance in England, then to managing recruiting in Australia for an Israeli company deploying cutting-edge tech to Aussie farms.
 
 In recruitment, I built and led teams across moderation, cyber security, marketing, and development. I **grew an investor community from 5 to 20,000** and launched **4 tokens**, raising **over $20 million** through a community-first marketing model — not pump-and-dump noise.
 
@@ -76,9 +76,8 @@ If you want to know more about the Tiger Protocol, NET’s architecture, or PrAi
 
 ## Education
 
-### SAIT Polytech, Calgary
-- **Degree:** Business
-- Focus: commercial mindset, sales, and entrepreneurship
+### Background
+- Background in Business / Marketing / Training across Canada, England and Australia before teaching
 
 ---
 
@@ -139,5 +138,5 @@ If you want to know more about the Tiger Protocol, NET’s architecture, or PrAi
 2. **60% Rule:** posts about comprehensible input, context over dictionaries
 3. **NET Architecture:** behind-the-scenes on diagnostic matrix and AI + PET infrastructure
 4. **PrAiS:** AI memory claims, chatbot demos, corporate workflow wins
-5. **Founder Story:** SAIT Polytech, Les Brown, 5→20,000 community growth, $20M+ raise
+5. **Founder Story:** Business/Marketing/Training background across Canada, England and Australia, Les Brown mentorship, 5→20,000 community growth, $20M+ raise
 6. **Vietnam Teaching:** student transformations, Montessori/Cambridge/IELTS results
