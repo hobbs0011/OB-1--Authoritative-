@@ -1,0 +1,11 @@
+name = "mailala"
+compatibility_date = "2026-09-12"
+pages_build_output_dir = "WEBSITE/mailala"
+
+[env.production]
+name = "mailala"
+route = "mailala.com/*"
+
+[env.preview]
+name = "mailala-preview"
+route = "*.mailala.pages.dev/*"
