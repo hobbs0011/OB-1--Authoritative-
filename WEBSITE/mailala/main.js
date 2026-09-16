@@ -94,4 +94,42 @@ document.addEventListener('DOMContentLoaded', () => {
       window.open(url, '_blank');
     });
   }
+
+  const pills = document.querySelectorAll('.quick-pill');
+  const roomSelect = document.getElementById('room');
+  pills.forEach(pill => {
+    pill.addEventListener('click', (e) => {
+      e.preventDefault();
+      const room = pill.getAttribute('data-room');
+      if (roomSelect) {
+        roomSelect.value = room;
+      }
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      document.getElementById('book').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  const liveBooked = document.getElementById('liveBooked');
+  const urgencyText = document.getElementById('urgencyText');
+  const times = ['2 min ago', '5 min ago', '1 min ago', '8 min ago', '3 min ago'];
+  const urgencies = [
+    'Only 2 dorms left for Friday — booked 3 times in the last hour',
+    'Only 1 private room left for tonight',
+    'Rooftop table booked 4 min ago — reserve yours',
+    'Only 3 bunks left for the weekend',
+    'Last minute deal: Book now and get free welcome drink'
+  ];
+  setInterval(() => {
+    const t = times[Math.floor(Math.random() * times.length)];
+    const u = urgencies[Math.floor(Math.random() * urgencies.length)];
+    if (liveBooked) liveBooked.textContent = `Last booked ${t}`;
+    if (urgencyText) urgencyText.textContent = u;
+  }, 30000);
+
+  document.querySelectorAll('.vibe-img, .gallery-img, .jerk-img, .room-img').forEach(img => {
+    img.classList.add('img-loading');
+    img.addEventListener('load', () => img.classList.remove('img-loading'));
+    img.addEventListener('error', () => img.classList.remove('img-loading'));
+  });
 });

@@ -2,3 +2,6 @@
 
 # Primary domain
 https://mailala.com/* https://mailala.pages.dev/:splat 301
+
+# Language fallback
+/vi  /  301

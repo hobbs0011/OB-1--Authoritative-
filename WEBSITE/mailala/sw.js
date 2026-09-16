@@ -1,9 +1,9 @@
-const CACHE_NAME = 'mailala-v1';
+const CACHE_NAME = 'mailala-v2';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/style.css',
-  '/main.js',
+  '/style.min.css',
+  '/main.min.js',
   '/manifest.json',
   '/assets/images/6134195124376899495_121.jpg',
   '/assets/images/6134195124376899502_121.jpg',

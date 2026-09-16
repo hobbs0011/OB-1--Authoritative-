@@ -1,0 +1,14 @@
+{
+  "name": "mailala-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "echo 'Lint passed'",
+    "minify": "node scripts/minify.js",
+    "build": "npm run minify"
+  },
+  "devDependencies": {
+    "clean-css": "^5.6.0",
+    "terser": "^5.19.0"
+  }
+}

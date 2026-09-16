@@ -51,6 +51,7 @@ This file is the authoritative inventory of all live Cloudflare assets.
 | tigers-4room | tigers-4room.pages.dev | ✅ 200 | ✅ APPS/PAGES/tigers-4room | NET Tigers child assessment (ages 8–17). RESCUED 2026-05-18 — promoted to production branch. |
 | tigers-selection | tigers-selection.pages.dev | ✅ 200 | ✅ APPS/PAGES/tigers-selection | Selection funnel: Cubs vs Tigers. RESCUED 2026-05-18 — promoted to production branch. |
 | university-4room | university-4room.pages.dev | ✅ 200 | ✅ APPS/PAGES/university-4room | NET University pathway assessment. RESCUED 2026-05-18 — promoted to production branch. |
+| mailala | mailala.pages.dev | 🔄 PENDING | ✅ WEBSITE/mailala | Hostel & Bar site — warm island aesthetic, 14 venue photos, booking engine, PWA, SEO. Code ready, deployment blocked on API token. |
 
 ### Removed / Deleted (no longer in CF account)
 
@@ -146,3 +147,4 @@ Apps in `APPS/` with no Cloudflare Worker or Pages deployment entry in this mani
 | GAP-6 | BlueTech students on wrong portal template | ✅ **CLOSED** — Mai Tram, Quy, Huong rebuilt against 5-tab multi-portal template (commit `fb280e6`) |
 | GAP-7 | `submission-api` and `soul-logger` untracked | ✅ **CLOSED** — both located and tracked in `APPS/` (commit `fe16efe`) |
 | GAP-8 | net-pet-ai-production deploy path | 🔒 **FROZEN** — Production stable on v1.6.2. Deploy intentionally blocked: src/ incomplete (missing StudentProfileDO, CohortAnalysisDO, phase6-init.js). Do not deploy until full source recovery. See APPS/NET-PET-AI-PRODUCTION/README.md. |
+| GAP-9 | mailala Pages project not created | 🔄 **PENDING** — Site code ready at WEBSITE/mailala/. Requires CLOUDFLARE_API_TOKEN from user to create `mailala` Pages project. |
