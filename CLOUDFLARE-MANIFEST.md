@@ -51,7 +51,7 @@ This file is the authoritative inventory of all live Cloudflare assets.
 | tigers-4room | tigers-4room.pages.dev | ✅ 200 | ✅ APPS/PAGES/tigers-4room | NET Tigers child assessment (ages 8–17). RESCUED 2026-05-18 — promoted to production branch. |
 | tigers-selection | tigers-selection.pages.dev | ✅ 200 | ✅ APPS/PAGES/tigers-selection | Selection funnel: Cubs vs Tigers. RESCUED 2026-05-18 — promoted to production branch. |
 | university-4room | university-4room.pages.dev | ✅ 200 | ✅ APPS/PAGES/university-4room | NET University pathway assessment. RESCUED 2026-05-18 — promoted to production branch. |
-| mailala | mailala.pages.dev | 🔄 PENDING | ✅ WEBSITE/mailala | Hostel & Bar site — warm island aesthetic, 14 venue photos, booking engine, PWA, SEO. Code ready, deployment blocked on API token. |
+| mailala | mailala.pages.dev | ✅ 200 | ✅ WEBSITE/mailala | Hostel & Bar site — warm island aesthetic, 14 venue photos, booking engine, PWA, SEO. Deployed 2026-09-16 via wrangler. |
 
 ### Removed / Deleted (no longer in CF account)
 
