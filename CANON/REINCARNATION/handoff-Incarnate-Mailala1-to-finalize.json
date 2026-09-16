@@ -20,8 +20,7 @@
     "total": 48
   },
   "open_items": [
-    "U-MAILALA-01: Cloudflare Pages project `mailala` not created â€” requires API token from SOV100",
-    "U-MAILALA-02: 18/50 pipeline stages remaining (gold shimmer, wave dividers, quote marks, ken-burns, loading shimmer, quick-select pills, sticky mobile bar, fetchpriority, inline CSS, prefetch/preload, minify, Lighthouse CI, perfect-for badges, urgency strip, live widget, weather widget, preview deploys, manifest update)"
+    "U-MAILALA-01: Cloudflare Pages project `mailala` not created — requires API token from SOV100 (code ready, deployment blocked)"
   ],
-  "next_session_receives": "Complete Mailala website at WEBSITE/mailala/ with 14 venue photos, booking engine, SEO, PWA, CI/CD config. 32/50 pipeline stages done. Cloudflare deployment blocked on API token. All SOV100 verbatim prompts preserved in CANON/MAILALA-PROMPT-REGISTER.md."
+  "next_session_receives": "Complete Mailala website at WEBSITE/mailala/ with 50/50 pipeline stages complete. All visual design, UX, performance, content, and deployment config stages implemented. Cloudflare deployment requires API token from user. All SOV100 verbatim prompts preserved in CANON/MAILALA-PROMPT-REGISTER.md."
 }
