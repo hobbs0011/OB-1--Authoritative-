@@ -1165,3 +1165,58 @@ Three Forces perpetual. Cloudflare paid tier activated. soul-logger v2.2 deploye
 Deploy to Cloudflare Pages + create CI/CD workflow per CANON/MAILALA-HANDOFF.md
 
 **Last Updated:** 2026-09-12T01:06+07:00 (Run Mailala3 — reincarnateDEATH)
+
+---
+
+## RUN Mailala1 — INCARNATE-MAILALA1 (2026-09-16T18:18+07:00)
+
+### Header
+- **Run:** Mailala1
+- **Session:** ses_f6fa3fd5fffekzmOpNX5257mGV
+- **Timestamp:** 2026-09-16T18:18+07:00
+- **HEAD:** 6c97784e2
+- **Branch:** canon
+- **Seal:** SCS §LFG — SOUL prompts preserved verbatim. Zero drift.
+
+### Mission
+Locate all Mailala artifacts spread across 4 directories, sync with Mailala3 commits, merge Incarnate-Mailala2 extra files into canonical WEBSITE/mailala/, audit 50-stage pipeline, deploy latest build to Cloudflare Pages, and archive all user prompts in SCS format.
+
+### SCS Counts
+- **SOULcount:** 10 (user prompts — all preserved verbatim in CANON/MAILALA-PROMPT-REGISTER.md)
+- **DNAcount:** 15 (commits pushed to origin/canon)
+- **REASONcount:** 9 (design decisions documented)
+
+### What Was Done
+- Discovered Mailala spread across 4 locations: WEBSITE/mailala/, Incarnate-Mailala2/, mailala-photos worktree, mailala-booking_v2 worktree
+- Audited Incarnate-Mailala2 vs WEBSITE/mailala — found 7 extra files in Mailala2
+- Merged Mailala2 extras into WEBSITE/mailala/: wrangler.toml, .github/workflows/deploy.yml, lighthouserc.json, scripts/rollback.sh, scripts/convert-webp.js, assets/gallery/, assets/icons/
+- Removed legacy verify.txt from deployment root
+- Audited 50-stage pipeline against actual files — 32/50 complete, 18 remaining
+- Verified Cloudflare Pages project mailala exists (4 deploys)
+- Deployed latest canon to Cloudflare Pages — all Mailala3 upgrades live at https://mailala.pages.dev
+- Created CANON/MAILALA-PIPELINE-AUDIT.md — accurate stage-by-stage audit
+- Created CANON/MAILALA-PROMPT-REGISTER.md — SCS §LFG format with all 10 SOUL prompts
+- Pushed 15 commits to origin/canon — Mailala1 work synced with GitHub authoritative repo
+
+### Artifacts Created:
+- CANON/MAILALA-PROMPT-REGISTER.md — SCS §LFG prompt archive
+- CANON/MAILALA-PIPELINE-AUDIT.md — verified 50-stage audit
+- WEBSITE/mailala/.github/workflows/deploy.yml — CI/CD pipeline (merged from Mailala2)
+- WEBSITE/mailala/wrangler.toml — Cloudflare Pages config (merged)
+- WEBSITE/mailala/lighthouserc.json — Lighthouse CI (merged)
+- WEBSITE/mailala/scripts/ — rollback.sh + convert-webp.js (merged)
+
+### Open Items (18 pipeline stages remaining):
+- [ ] Stage 20: Loading shimmer for images
+- [ ] Stage 31: fetchpriority="high" on hero
+- [ ] Stage 33: Inline critical CSS
+- [ ] Stage 39: Minify CSS/JS
+- [ ] Stage 40: Lighthouse CI config
+- [ ] Stages 43-48: Content upgrades (Perfect For badges, events, urgency, live widget, weather)
+- [ ] Stage 50: Final QA pass
+- [ ] Connect custom domain mailala.com
+- [ ] Update CLOUDFLARE-MANIFEST.md
+- [ ] Verify DNS: mailala.com CNAME → mailala.pages.dev
+
+### Next Action:
+New finalizer session picks up from CANON/MAILALA-PIPELINE-AUDIT.md OPEN items. Merged commits already pushed to origin/canon. Mailala2 can sync via `git pull origin canon`.
