@@ -1,0 +1,27 @@
+{
+  "from_session": "Incarnate-Mailala1",
+  "from_run": "Mailala1",
+  "to_run": "Mailala1-Finalize",
+  "timestamp": "2026-09-16T18:18+07:00",
+  "ilog": "I-LOG-UNNAMED/I-LOG-Incarnate-Mailala1.txt",
+  "ilog_colorized": "I-LOG-UNNAMED/I-LOG-Incarnate-Mailala1-COLORIZED.md",
+  "ilog_stats": "I-LOG-UNNAMED/I-LOG-Incarnate-Mailala1-STATS.json",
+  "pipeline": "CANON/MAILALA-UPGRADE-PIPELINE.md",
+  "soul_extract": "CANON/SOUL/EXTRACT/soul-Incarnate-Mailala1.jsonl",
+  "dna_extract": "CANON/SOUL/EXTRACT/dna-Incarnate-Mailala1.json",
+  "phetrail": "CANON/PHEROMONES/PheTrail-Incarnate-Mailala1.json",
+  "keywords": "CANON/SOUL-KEYWORDS/rfkw-Incarnate-Mailala1.txt",
+  "death_seal": "CANON/REINCARNATION/Incarnate-Mailala1-reincarnateDEATH.md",
+  "audit": {
+    "SOULcount": 10,
+    "DNAcount": 8,
+    "REASONcount": 3,
+    "PHEROMONEcount": 27,
+    "total": 48
+  },
+  "open_items": [
+    "U-MAILALA-01: Cloudflare Pages project `mailala` not created — requires API token from SOV100",
+    "U-MAILALA-02: 18/50 pipeline stages remaining (gold shimmer, wave dividers, quote marks, ken-burns, loading shimmer, quick-select pills, sticky mobile bar, fetchpriority, inline CSS, prefetch/preload, minify, Lighthouse CI, perfect-for badges, urgency strip, live widget, weather widget, preview deploys, manifest update)"
+  ],
+  "next_session_receives": "Complete Mailala website at WEBSITE/mailala/ with 14 venue photos, booking engine, SEO, PWA, CI/CD config. 32/50 pipeline stages done. Cloudflare deployment blocked on API token. All SOV100 verbatim prompts preserved in CANON/MAILALA-PROMPT-REGISTER.md."
+}
