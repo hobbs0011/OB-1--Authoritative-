@@ -15814,6 +15814,27 @@ async function handleAPI(path, request, env, url) {
     const result = await setStudentPin(studentId, pin, env, prefix);
     return addCors(json(result), request);
   }
+  if (path === "/api/employer/checkpin" && method === "POST") {
+    let pin;
+    try {
+      const body = await request.json();
+      pin = body.pin;
+    } catch {
+      return addCors(json({ error: "invalid json" }, 400), request);
+    }
+    if (!pin) return addCors(json({ error: "pin required" }, 400), request);
+    const pinHash = await computeHash2(pin);
+    const { keys } = await env.NET_PET_KV.list({ prefix: "employer:" }).catch(() => ({ keys: [] }));
+    for (const key of keys) {
+      const raw = await env.NET_PET_KV.get(key.name).catch(() => null);
+      if (!raw) continue;
+      const emp = JSON.parse(raw);
+      if (emp.pinHash === pinHash) {
+        return addCors(json({ ok: true, employerCode: emp.companyCode, name: emp.name }), request);
+      }
+    }
+    return addCors(json({ ok: false, error: "Invalid PIN" }), request);
+  }
   if (path === "/api/student/checkpin" && method === "POST") {
     const { studentId, pin, groupCode } = await request.json();
     if (!pin) return addCors(json({ error: "pin required" }, 400), request);
@@ -15887,6 +15908,47 @@ async function handleAPI(path, request, env, url) {
     const ip = request.headers.get("CF-Connecting-IP") || "unknown";
     await logAudit(env, { action: "student_delete", actor: "admin", target: studentId, ip, meta: { kvDeleted, d1Deleted } });
     return addCors(json({ deleted: true, studentId, kvDeleted, d1Deleted }), request);
+  }
+  if (path === "/api/employer/auth" && method === "POST") {
+    try {
+      const body = await request.json();
+      const { employerCode, pinHash } = body || {};
+      if (!employerCode || !pinHash) return addCors(json({ authorized: false, error: "employerCode and pinHash required" }, 400), request);
+      const cleanCode = String(employerCode).toUpperCase().trim();
+      const employer = await getEmployer(env, cleanCode);
+      if (!employer) return addCors(json({ authorized: false, error: "Invalid employer code" }), request);
+      if (employer.pinHash !== String(pinHash)) return addCors(json({ authorized: false, error: "Invalid PIN" }), request);
+      return addCors(json({ authorized: true, employerCode: employer.companyCode, companyName: employer.companyName || employer.name }), request);
+    } catch (err) {
+      return addCors(json({ authorized: false, error: err.message }, 500), request);
+    }
+  }
+  if (path === "/api/employer/profile" && method === "GET") {
+    try {
+      const employerCode = url.searchParams.get("employerCode");
+      if (!employerCode) return addCors(json({ error: "employerCode query param required" }, 400), request);
+      const cleanCode = String(employerCode).toUpperCase().trim();
+      const employer = await getEmployer(env, cleanCode);
+      if (!employer) return addCors(json({ error: "Employer not found" }, 404), request);
+      const students = employer.students || [];
+      const employees = await Promise.all(students.map(async (sid) => {
+        const [profileRaw, streakRaw] = await Promise.all([
+          env.NET_PET_KV.get(`student_profile_${sid}`).catch(() => null),
+          env.NET_PET_KV.get(`streak:${sid}`).catch(() => null),
+        ]);
+        const profile = profileRaw ? JSON.parse(profileRaw) : {};
+        const streak = streakRaw ? JSON.parse(streakRaw) : {};
+        const name = profile.name || profile.fullName || sid;
+        const rawLevel = (profile.level || profile.englishLevel || "A1").toUpperCase();
+        const CEFR_ORDER = ["A1","A2","B1","B2","C1","C2"];
+        const cefrLevel = CEFR_ORDER.includes(rawLevel) ? rawLevel : "A1";
+        const streakCount = streak.currentStreak || 0;
+        return { studentName: name, cefrLevel, streakCount, maeScore: null };
+      }));
+      return addCors(json({ companyName: employer.companyName || employer.name || cleanCode, employees, generatedAt: new Date().toISOString() }), request);
+    } catch (err) {
+      return addCors(json({ error: err.message }, 500), request);
+    }
   }
   if (path === "/api/student/state" && method === "GET") {
     const studentId = url.searchParams.get("studentId") || "";

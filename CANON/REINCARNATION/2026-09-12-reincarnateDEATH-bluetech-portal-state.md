@@ -26,17 +26,24 @@
   - `quy-bluetech`
   - `huong-bluetech`
   - `mai-tram-bluetech`
-- Session transcript exists:
-  - `SESSIONS/session-260521-bluetech.json` — NOTE: path may be case-sensitive; verify exact location.
+- Session transcript exists and path verified:
+  - `SESSIONS/session-260521-bluetech.json` ✅
+- **Deploy fix (2026-09-16 continuation):**
+  - New Bluetech portals were orphaned in root `public/` and NOT deployed.
+  - Copied `public/bluetech-*` portals + `magic-chat.html` + brand assets into `NET-PET-AI/public/` so they are served by the active worker.
+  - Patched deployed worker bundle `NET-PET-AI/deploy/net-pet-ai-fixed.router.js` to add missing `/api/employer/checkpin` route.
+  - Added `/api/employer/auth` and `/api/employer/profile` routes to the bundle for legacy employer portal compatibility.
+  - Dry-run validation passed: `wrangler deploy --dry-run` reads 17 asset files and produces 828KB bundle without errors.
 
 ### Current Gaps / Broken Links
-- ~~New employer portal JS calls `/api/employer/auth` and `/api/employer/profile`.~~
-- ~~Worker `APPS/NET-PET-AI-legacy/src/index.js` does NOT implement `/api/employer/auth` or `/api/employer/profile`.~~
-- Both endpoints now implemented at `src/index.js:2300` and `src/index.js:2316`.
-  - `/api/employer/checkpin` (POST)
-  - `/api/employer/create` (POST, admin)
-  - `/api/admin/student-activity` (GET, admin-key gated)
-- New employer portal will 404/500 on auth and profile fetch until worker endpoints are wired.
+- New employer portal (`public/bluetech-employer/index.html`) is static and does not call `/api/employer/auth` or `/api/employer/profile`.
+- Legacy employer portal (`APPS/NET-PET-AI-legacy/public/employer-portal.html`) DOES call `/api/employer/auth` and `/api/employer/profile`, but is NOT currently deployed.
+- Deployed worker bundle now includes:
+  - `/api/employer/checkpin` (POST) — added 2026-09-16
+  - `/api/employer/auth` (POST) — added 2026-09-16
+  - `/api/employer/profile` (GET) — added 2026-09-16
+- Bluetech portals are now present in `NET-PET-AI/public/` and will be served on next deploy.
+- Remaining nav links in new portals (`/bluetech-story/`, `/bluetech-programs/`, `/bluetech-demo/`, `/bluetech-contact/`) do not yet exist — 404 until pages are created.
 
 ### Uncommitted Changes (Working Tree)
 ```
@@ -58,26 +65,28 @@ These are unrelated to the Bluetech portal work. Do not mix them into a portal f
 
 ## Next Session — Exact Actions
 
-1. **Wire missing employer API routes**
-   - Implement `/api/employer/auth` (POST) in `APPS/NET-PET-AI-legacy/src/index.js` or the active worker entrypoint.
-   - Implement `/api/employer/profile` (GET) returning employer + employee roster data.
-   - Match the request/response shapes expected by `public/bluetech-employer/index.html`.
+1. **✅ Wire missing employer API routes**
+   - `/api/employer/checkpin`, `/api/employer/auth`, `/api/employer/profile` patched into deployed bundle `NET-PET-AI/deploy/net-pet-ai-fixed.router.js`.
+   - Dry-run validated.
 
-   **Status:** COMPLETED in `src/index.js` lines 2300–2342.
+2. **✅ Deploy Bluetech portals to active assets**
+   - Copied `public/bluetech-{login,employee,employer,cinematic}/index.html` + `magic-chat.html` + brand assets into `NET-PET-AI/public/`.
+   - Next `wrangler deploy` from `NET-PET-AI/` will serve them.
 
-2. **Audit portals against checklist**
+3. **Audit portals against checklist**
    - Open `APPS/NET-PET-AI-legacy/public/bluetech-audit-100.md`.
    - Score each of the 100 items against the 4 portal pages.
    - Fix all items scoring 0.5 or 0 before launch.
 
-3. **Deduplicate legacy vs new portals**
+4. **Deduplicate legacy vs new portals**
    - Decide whether `APPS/NET-PET-AI-legacy/public/` portals remain canonical or are replaced by `public/` portals.
    - Remove duplicate files and stale routes once canonical sources are confirmed.
 
-4. **Verify session file path**
-   - Confirm exact path of `session-260521-bluetech.json` and update any broken imports.
+5. **Create missing portal pages**
+   - New portals nav links to `/bluetech-story/`, `/bluetech-programs/`, `/bluetech-demo/`, `/bluetech-contact/` — these do not exist yet.
+   - Either create placeholder pages or remove nav links.
 
-5. **Commit with reincarnateDEATH message**
+6. **Commit with reincarnateDEATH message**
    - Use message format: `reincarnateDEATH: <summary>`
    - Do not commit the unrelated `APPS/PAGES/michael-hobbs` or `WEBSITE/mailala` changes in the same commit.
 
@@ -88,11 +97,14 @@ These are unrelated to the Bluetech portal work. Do not mix them into a portal f
 - New employee portal: `public/bluetech-employee/index.html`
 - New employer portal: `public/bluetech-employer/index.html`
 - New login portal: `public/bluetech-login/index.html`
+- Cinematic portal: `public/bluetech-cinematic/index.html`
+- **Deployed portals (active):** `NET-PET-AI/public/bluetech-*/index.html`
 - Legacy portals: `APPS/NET-PET-AI-legacy/public/bluetech-*.html`
 - Audit checklist: `APPS/NET-PET-AI-legacy/public/bluetech-audit-100.md`
-- Worker source: `APPS/NET-PET-AI-legacy/src/index.js`
+- Deployed worker bundle: `NET-PET-AI/deploy/net-pet-ai-fixed.router.js`
+- Worker source (stale, do not deploy from): `APPS/NET-PET-AI-legacy/src/index.js`
 - Student config registry: `public/bluetech-portal.html` (BT_STUDENTS object — may need migration)
-- Session transcript: `SESSIONS/session-260521-bluetech.json` (verify path)
+- Session transcript: `SESSIONS/session-260521-bluetech.json` ✅
 
 ---
 
