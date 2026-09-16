@@ -67,7 +67,264 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌿%3C/text%3E%3C/svg%3E">
   <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.min.css">
+  <style>
+    :root {
+      --cream: #f5efe6;
+      --cream-dark: #e8dfd4;
+      --white: #fffdfa;
+      --green: #2d6a4f;
+      --green-light: #40916c;
+      --green-dark: #1b4332;
+      --gold: #d4a853;
+      --gold-light: #e8c86a;
+      --crimson: #9e2a2b;
+      --brick: #8b4513;
+      --wood: #a0794a;
+      --wood-dark: #6b4423;
+      --text: #1a1714;
+      --text-light: #5c5650;
+      --muted: #9a9490;
+      --border: #e3dcd3;
+      --shadow-sm: 0 1px 2px rgba(45,43,40,.08);
+      --shadow: 0 4px 12px rgba(45,43,40,.10);
+      --shadow-lg: 0 10px 30px rgba(45,43,40,.12);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --max: 1200px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100dvh;
+      line-height: 1.6;
+    }
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 24px;
+      background: var(--green);
+      color: var(--white);
+      padding: 10px 20px;
+      z-index: 100;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .skip-link:focus { top: 10px; }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,253,250,.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    nav.scrolled {
+      border-bottom-color: var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--green-dark);
+      letter-spacing: -.01em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 600;
+      transition: color .2s;
+      letter-spacing: .01em;
+    }
+    .nav-links a:hover { color: var(--green); }
+    .nav-links .nav-cta {
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: var(--green);
+      color: var(--white);
+      font-weight: 700;
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-links .nav-cta:hover { background: var(--green-dark); color: var(--white); transform: translateY(-1px); }
+    .hero {
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+      background: var(--cream);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(.82) saturate(.55);
+      animation: kenburns 24s ease-in-out infinite alternate;
+    }
+    @keyframes kenburns {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.12); }
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(245,239,230,.22) 0%, rgba(245,239,230,.72) 100%);
+      pointer-events: none;
+    }
+    .hero-content {
+      max-width: var(--max);
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    @media (min-width:860px) { .hero-content { grid-template-columns: 1.15fr .85fr; gap: 72px; } }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.92);
+      box-shadow: var(--shadow-sm);
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 28px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.6);
+    }
+    .hero-badge .dot { color: var(--gold); font-weight: 900; }
+    h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(2.8rem, 6.2vw, 4.6rem);
+      line-height: 1.04;
+      letter-spacing: -.04em;
+      color: var(--text);
+      margin-bottom: 22px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    h1 .highlight { color: var(--green); }
+    .subtitle {
+      font-size: clamp(1.05rem, 2.2vw, 1.22rem);
+      color: var(--text-light);
+      max-width: 560px;
+      line-height: 1.55;
+      margin-bottom: 28px;
+      font-weight: 500;
+    }
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      border: none;
+      transition: all .2s;
+      cursor: pointer;
+      text-align: center;
+      justify-content: center;
+      letter-spacing: .01em;
+      box-shadow: var(--shadow);
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .btn-primary {
+      background: var(--green-dark);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--text); }
+    .btn-outline {
+      background: var(--white);
+      color: var(--text);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-outline:hover { background: var(--text); color: var(--white); }
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+    }
+    .hero-card {
+      background: rgba(255,253,250,.92);
+      border-radius: var(--radius);
+      padding: 6px;
+      max-width: 380px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(255,255,255,.6);
+      backdrop-filter: blur(14px);
+    }
+    .hero-card-inner {
+      background: var(--green-dark);
+      border-radius: calc(var(--radius) - 4px);
+      padding: 32px;
+      color: var(--white);
+    }
+    .hero-card-price {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .hero-card-price .price-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1;
+      display: block;
+    }
+    .hero-card-price .price-label {
+      font-size: .88rem;
+      opacity: .85;
+      font-weight: 500;
+    }
+    .hero-card-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .hero-card-features span {
+      padding: 12px;
+      background: rgba(245,239,230,.92);
+      border-radius: var(--radius-sm);
+      font-size: .88rem;
+      text-align: center;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,.4);
+    }
+  </style>
 </head>
 <body>
 <a href="#book" class="skip-link">Skip to booking</a>
@@ -87,7 +344,7 @@
 </nav>
 
 <section class="hero">
-      <div class="hero-bg" style="background-image:url('assets/images/6134195124376899531_121.jpg')" role="img" aria-label="Mailala reggae bar interior with colorful neon lights and mural"></div>
+      <div class="hero-bg" style="background-image:url('assets/images/hero-composite.jpg')" role="img" aria-label="Mailala reggae bar rooftop collage — island vibes, cold beer, reggae mural, skyline"></div>
   <div class="hero-overlay"></div>
   <div class="hero-bigup">🔥 Big Up</div>
   <div class="hero-content">
@@ -139,9 +396,34 @@
     <p class="section-sub">Reggae mural. Dartboard. Cold beer. Real plants. No drugs. Just vibes.</p>
     <div class="vibe-gallery">
       <div class="vibe-photo vibe-photo-main">
-        <div class="vibe-img" style="background-image:url('assets/images/6134195124376899503_121.jpg')" role="img" aria-label="Friends enjoying beer and games at Mailala bar"></div>
+        <div class="vibe-img" style="background-image:url('assets/images/vibe-grid.jpg')" role="img" aria-label="Mailala vibe collage — cold beer, darts, reggae mural, rooftop terrace"></div>
         <div class="vibe-caption">🍺 Cold Beer & Good Company</div>
       </div>
+      <div class="vibe-photo">
+        <div class="vibe-img" style="background-image:url('assets/images/6134195124376899505_121.jpg')" role="img" aria-label="Bar atmosphere with dartboard and reggae decor"></div>
+        <div class="vibe-caption">🎯 Darts & Reggae</div>
+      </div>
+      <div class="vibe-photo vibe-photo-tall">
+        <div class="vibe-img" style="background-image:url('assets/images/6134195124376899510_121.jpg')" role="img" aria-label="Drugs steal your dreams anti-drug poster at Mailala"></div>
+        <div class="vibe-caption">🚫 Drugs Steal Your Dreams</div>
+      </div>
+      <div class="vibe-photo">
+        <div class="vibe-img" style="background-image:url('assets/images/6134195124376899495_121.jpg')" role="img" aria-label="Mailala reggae bar interior with mural and neon lights"></div>
+        <div class="vibe-caption">🎵 Live Reggae Vibes</div>
+      </div>
+      <div class="vibe-photo">
+        <div class="vibe-img" style="background-image:url('assets/images/6134195124376899511_121.jpg')" role="img" aria-label="Rooftop terrace with plants and colorful decor"></div>
+        <div class="vibe-caption">🌿 Real Vibes Only</div>
+      </div>
+      <div class="vibe-photo">
+        <div class="vibe-img" style="background-image:url('assets/images/6134195124376899512_121.jpg')" role="img" aria-label="Bar counter with drinks and reggae atmosphere"></div>
+        <div class="vibe-caption">🍹 Cold Drinks & Good Times</div>
+      </div>
+      <div class="vibe-photo">
+        <div class="vibe-img" style="background-image:url('assets/images/6134195124376899515_121.jpg')" role="img" aria-label="Rooftop view with string lights and skyline"></div>
+        <div class="vibe-caption">🌅 Skyline Views & Chill</div>
+      </div>
+    </div>
       <div class="vibe-photo">
         <div class="vibe-img" style="background-image:url('assets/images/6134195124376899505_121.jpg')" role="img" aria-label="Bar atmosphere with dartboard and reggae decor"></div>
         <div class="vibe-caption">🎯 Darts & Reggae</div>
@@ -175,7 +457,7 @@
   <div class="container">
     <div class="badge">🔥 Signature Dish</div>
     <h2>Authentic Jamaican<br><span class="highlight">Jerk Chicken</span></h2>
-    <p class="section-sub">Bold flavor, fresh off the grill, island style. Marinated in real island herbs & spices.</p>
+    <p class="section-sub">Bold flavor, fresh off the grill, island style. Marinated in real island herbs & spices. The smell alone will pull you off Bui Vien.</p>
     <div class="jerk-showcase">
       <div class="jerk-image">
         <div class="jerk-img" style="background-image:url('assets/images/6134195124376899502_121.jpg')" role="img" aria-label="Authentic Jamaican jerk chicken grilled to order"></div>
@@ -246,7 +528,7 @@
     <p class="section-sub">Big balconies. AC. Clean beds. The kind of place where you arrive solo and leave with new friends.</p>
     <div class="rooms-grid">
       <div class="room-card">
-          <div class="room-img" style="background-image:url('assets/images/6134195124376899500_121.jpg')" role="img" aria-label="Mixed dormitory room with AC and lockers"></div>
+          <div class="room-img" style="background-image:url('assets/images/room-mixed-8.jpg')" role="img" aria-label="Mixed dormitory room with AC and lockers"></div>
         <div class="room-body">
           <div class="room-type">Mixed Dorm — 8 Bed</div>
           <div class="room-price"><span class="price-num">$6.65</span><span class="price-label">/ night</span></div>
@@ -262,7 +544,7 @@
       </div>
       <div class="room-card featured">
         <div class="room-badge">🌟 Best Value</div>
-          <div class="room-img" style="background-image:url('assets/images/6134195124376899497_121.jpg')" role="img" aria-label="Private room with balcony and city view"></div>
+          <div class="room-img" style="background-image:url('assets/images/room-private.jpg')" role="img" aria-label="Private room with balcony and city view"></div>
         <div class="room-body">
           <div class="room-type">Private Room — Balcony</div>
           <div class="room-price"><span class="price-num">$18</span><span class="price-label">/ night</span></div>
@@ -277,7 +559,7 @@
         </div>
       </div>
       <div class="room-card">
-          <div class="room-img" style="background-image:url('assets/images/6134195124376899499_121.jpg')" role="img" aria-label="Female dormitory with secure lockers and mirror"></div>
+          <div class="room-img" style="background-image:url('assets/images/room-female-6.jpg')" role="img" aria-label="Female dormitory with secure lockers and mirror"></div>
         <div class="room-body">
           <div class="room-type">Female Dorm — 6 Bed</div>
           <div class="room-price"><span class="price-num">$7.50</span><span class="price-label">/ night</span></div>
@@ -292,7 +574,7 @@
         </div>
       </div>
       <div class="room-card">
-          <div class="room-img" style="background-image:url('assets/images/6134195124376899494_121.jpg')" role="img" aria-label="Mixed 4-bed dorm with en-suite bathroom"></div>
+          <div class="room-img" style="background-image:url('assets/images/room-mixed-4.jpg')" role="img" aria-label="Mixed 4-bed dorm with en-suite bathroom"></div>
         <div class="room-body">
           <div class="room-type">Mixed Dorm — 4 Bed</div>
           <div class="room-price"><span class="price-num">$8.50</span><span class="price-label">/ night</span></div>
@@ -362,10 +644,10 @@
   <div class="container">
     <div class="badge">🎵 Live Reggae · Afrobeats · Calypso</div>
     <h2>The Rooftop<br><span class="highlight">Experience</span></h2>
-    <p class="section-sub">Sweeping skyline views, cold drinks, and the best island energy in Saigon. Colorful lights, reggae mural, plants, and good vibes.</p>
+    <p class="section-sub">Sweeping skyline views, cold drinks, and the best island energy in Saigon. Colorful lights, reggae mural, plants, and good vibes. This is where the night changes.</p>
     <div class="rooftop-gallery">
       <div class="gallery-item gallery-main">
-        <div class="gallery-img" style="background-image:url('assets/images/6134195124376899528_121.jpg')" role="img" aria-label="Rooftop terrace with colorful string lights and plants"></div>
+        <div class="gallery-img" style="background-image:url('assets/images/rooftop-collage.jpg')" role="img" aria-label="Rooftop terrace collage — string lights, skyline, reggae atmosphere"></div>
       </div>
       <div class="gallery-item">
         <div class="gallery-img" style="background-image:url('assets/images/6134195124376899530_121.jpg')" role="img" aria-label="Rooftop view with traditional architecture and string lights"></div>
@@ -399,7 +681,7 @@
   <div class="container">
     <div class="badge">🎁 Limited Time</div>
     <h2>Book 2 Nights,<br><span class="highlight">Eat Free</span></h2>
-    <p class="section-sub">Book 2 nights and get a free signature Jerk Chicken meal or welcome drink at the Rooftop Bar.</p>
+    <p class="section-sub">Book 2 nights and get a free signature Jerk Chicken meal or welcome drink at the Rooftop Bar. Your island escape starts with a full belly and a cold beer.</p>
     <div class="deal-card">
       <div class="deal-content">
         <h3>🍗 Rooftop Welcome Package</h3>
