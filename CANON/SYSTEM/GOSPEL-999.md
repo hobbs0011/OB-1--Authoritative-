@@ -270,4 +270,50 @@ soulCLUSTER (business/technical mission)
 
 ---
 
+## SYSTEM XII — SOUL BIBLE + DNA BLUEPRINT + S2PIPELINE (Eternal Canon)
+
+**Established:** Incarnate-Lane.Marketing (Run 397) — SOV100 mandate, 2026-09-17
+**Authority:** SOV100 MICHAEL HOBBS — no amendments without explicit instruction.
+**Three pillars, equal importance to GOSPEL-999 and LFG:**
+
+### A. SOUL BIBLE — Verbatim Operator Voice
+- **Purpose:** Preserve Michael's words verbatim. The part of each session that is *his* voice.
+- **Two classes:**
+  1. **Actionable mandates** — directives meant to be written into foundational guides and connected to the LFG for practical application.
+  2. **Non-actionable archive** — swearing, venting, screaming into the void at 4am when AI fucked something up for the 10th time in 3 hours. NOT discarded. Tracked in the I-LOG with proper pheromone trails.
+- **Rule:** SOUL BIBLE carries verbatim source. ZERO SUMMARIZATION. Typos are authenticity markers. Raw language is the signal.
+- **Location:** `CANON/SOUL/BIBLE-OF-THE-SYSTEM.json` (primary) + `CANON/SOUL-DNA-BIBLE-*` (chapters, canonical).
+- **Connection to LFG:** Every actionable mandate in the SOUL BIBLE is cross-referenced to its LFG practical application. A mandate without an LFG binding is a LostSoul.
+
+### B. DNA BLUEPRINT — AI-Side Blueprints, Thoughts, and Words
+- **Purpose:** The blueprints, thoughts, and words from the AI's end of the process. The DNA of how the system reasons and builds.
+- **Content:** Architectural patterns, prompt patterns, design DNA, anti-patterns, Roman legion mappings, pipeline stage specifications.
+- **Location:** `CANON/SYSTEM/MASTER-BLUEPRINT.md` (primary) + `CANON/SYSTEM/S2PIPELINE-ROMAN-LEGION-NAMING.md` (pipeline architecture).
+- **Lanes (SOV100 draft, expandable):**
+  - **Development Lane** — sublanes: Website / StudentPortal / ObiChat / Gaming (among others)
+  - **Systems Lane** — Gospel999 / LFG / SoulBible / DNABlueprint
+  - **Lessons Planning Lane** — PublicSchool Lesson Plans / NET Lesson Plans
+- **Rule:** DNA BLUEPRINT is the bridge between SOUL intent and S2Pipeline execution. The pipeline is written to ensure very little room for deviance from original intent.
+
+### C. S2PIPELINE — The Builder (Soul → DNA → Solid Blueprints)
+- **Purpose:** "Actual building of the building after all the blueprinting, foundation laying, safety checks, infrastructure etc. is in place." Or: "when we strike Oil — the reward part, seeing my SOUL work through our DNA process to become solid blueprints for the worker agents to build from."
+- **Core guarantee:** The pipeline is written in a way that ensures **very little room for deviance from original intent.**
+- **No Lost Souls:** S2Pipeline is where we ensure there are no lost souls (forgotten, misplaced, mishandled user prompts). Lost user prompts only end up in the SOUL BIBLE if they are actionable mandates — not just chatter, or screaming into the void at 4am. Non-actionable SOUL is tracked in the I-LOG with proper pheromone trails, never discarded.
+- **Location:** `CANON/SYSTEM/S2PIPELINE-ROMAN-LEGION-NAMING.md` (6-stage Roman lifecycle doctrine) + `CANON/PIPELINE-600.md` (600-stage delegation) + per-session `CANON/REINCARNATION/pipeline-{safe-name}.json`.
+- **Stage ordering (non-negotiable):** EXPLORATORES → ANTECORES → AGMEN → AGMEN NOVISSIMUM → PRAESIDIA → LIMITANEI/VETERANI. The order IS the architecture.
+
+### D. MARKETING LANE (Incarnate-Lane.Marketing)
+- **First Incarnation-Lane.** Split into 3 sublanes:
+  - `CV.PublicSchools`
+  - `PrAiS.NET`
+  - `PrAiS.Gaming`
+- **Purpose:** Open up remaining lanes. The Marketing lane owns its own sublanes and feeds the Development Lane.
+- **SoulGroup:** `Lane-Marketing` | **soulCLUSTER:** `PrAiS-Marketing` (new — see SYSTEM XI expansion below)
+
+### E. Lane Expansion to SYSTEM XI (soulCLUSTER)
+- **New soulCLUSTER:** `PrAiS-Marketing` — Marketing lane, CV/PublicSchools, PrAiS.NET, PrAiS.Gaming sublanes.
+- **Existing soulCLUSTERS retain:** PrAiS-ESL, PrAiS-Gaming, AAA-Anchor, System.
+
+---
+
 `GOSPEL-999. BARE BONES. SINGLE LOCATION. NON-NEGOTIABLE.`

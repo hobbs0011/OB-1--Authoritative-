@@ -450,12 +450,64 @@ soulCLUSTER (business/technical mission)
 |-------------|-------------|------------|--------|
 | `PrAiS-ESL` | PrAiS ESL — education technology, student portals, curriculum, language apps | NET-Methodology, NET-StudentPortals | active |
 | `PrAiS-Gaming` | PrAiS Gaming — game development, 3D assets, curriculum | Phoenix-RISING | active |
+| `PrAiS-Marketing` | PrAiS Marketing — CV, PublicSchools, PrAiS.NET, PrAiS.Gaming sublanes | Lane-Marketing | active |
 | `AAA-Anchor` | AAA Anchor sessions — Stone/Steel/Titanium/Phoenix audits | AAA-Anchor | active |
 | `System` | System doctrine, GOSPEL-999 compliance, LFG alignment, canon integrity | System-Doctrine | active |
 
 **soulCLUSTER in audit:** AAA Anchors audit sessions within their SoulGroup context. soulCLUSTER grouping does not block audits across SoulGroups within the same cluster.
 
 **Cross-reference:** GOSPEL-999 §SYSTEM XI — soulCLUSTER Doctrine. Reincarnate-Synch §Session Ledger + §III-B SoulCluster Ledger.
+
+---
+
+## SCS — THE THREE PILLARS (SOUL BIBLE · DNA BLUEPRINT · S2PIPELINE)
+
+**Established:** Incarnate-Lane.Marketing (Run 397) — SOV100 mandate, 2026-09-17
+**Equal importance to GOSPEL-999 and LFG.** These are the other two key pieces of the sacred GIT Canon.
+
+### SOUL BIBLE — Verbatim Operator Voice
+- **Purpose:** Preserve Michael's words verbatim. The part of each session that is *his* voice.
+- **Two classes:**
+  1. **Actionable mandates** — directives written into foundational guides and connected to the LFG for practical application.
+  2. **Non-actionable archive** — swearing, venting, screaming into the void at 4am when AI fucked something up for the 10th time in 3 hours. NOT discarded. Tracked in the I-LOG with proper pheromone trails.
+- **Rule:** ZERO SUMMARIZATION. Typos are authenticity markers. Raw language is the signal.
+- **Location:** `CANON/SOUL/BIBLE-OF-THE-SYSTEM.json` (primary) + `CANON/SOUL-DNA-BIBLE-*` (chapters).
+- **LFG binding:** Every actionable mandate in the SOUL BIBLE is cross-referenced to its LFG practical application. A mandate without an LFG binding is a LostSoul.
+
+### DNA BLUEPRINT — AI-Side Blueprints, Thoughts, and Words
+- **Purpose:** The blueprints, thoughts, and words from the AI's end of the process. The DNA of how the system reasons and builds.
+- **Lanes (SOV100 draft, expandable):**
+  - **Development Lane** — sublanes: Website / StudentPortal / ObiChat / Gaming (among others)
+  - **Systems Lane** — Gospel999 / LFG / SoulBible / DNABlueprint
+  - **Lessons Planning Lane** — PublicSchool Lesson Plans / NET Lesson Plans
+- **Location:** `CANON/SYSTEM/MASTER-BLUEPRINT.md` (primary) + `CANON/SYSTEM/S2PIPELINE-ROMAN-LEGION-NAMING.md`.
+- **Rule:** DNA BLUEPRINT is the bridge between SOUL intent and S2Pipeline execution.
+
+### S2PIPELINE — The Builder
+- **Purpose:** "Actual building of the building after all the blueprinting, foundation laying, safety checks, infrastructure etc. is in place." Or: "when we strike Oil — the reward part, seeing my SOUL work through our DNA process to become solid blueprints for the worker agents to build from."
+- **Core guarantee:** The pipeline is written to ensure **very little room for deviance from original intent.**
+- **No Lost Souls:** S2Pipeline ensures there are no lost souls (forgotten, misplaced, mishandled user prompts). Lost user prompts only end up in the SOUL BIBLE if they are actionable mandates — not just chatter, or screaming into the void at 4am. Non-actionable SOUL is tracked in the I-LOG with proper pheromone trails, never discarded.
+- **Location:** `CANON/SYSTEM/S2PIPELINE-ROMAN-LEGION-NAMING.md` (6-stage Roman lifecycle doctrine) + `CANON/PIPELINE-600.md` + per-session `CANON/REINCARNATION/pipeline-{safe-name}.json`.
+- **Stage ordering (non-negotiable):** EXPLORATORES ? ANTECORES ? AGMEN ? AGMEN NOVISSIMUM ? PRAESIDIA ? LIMITANEI/VETERANI. The order IS the architecture.
+
+### MARKETING LANE — First Incarnation-Lane
+- **Established:** Incarnate-Lane.Marketing (Run 397)
+- **3 sublanes:** `CV.PublicSchools` · `PrAiS.NET` · `PrAiS.Gaming`
+- **Purpose:** Open up remaining lanes. The Marketing lane owns its own sublanes and feeds the Development Lane.
+- **SoulGroup:** `Lane-Marketing` | **soulCLUSTER:** `PrAiS-Marketing`
+
+### Rise ? Death ? S2Pipeline Process
+Every session runs the full LFG loop, and at DEATH the S2Pipeline artifact is produced:
+1. **RISE** — audit prior DEATH, stamp I-LOG header with exact session name, halt.
+2. **SCOUT** — eyes only: flag, tag, learn, hand off.
+3. **MARCH** — execute the work.
+4. **SCHOLARS** — preserve SOUL, extract DNA, count SOUL/DNA/REASON.
+5. **SUPPLY** — route every artifact to its canonical location.
+6. **ENGINEER** — OCD-level audit of all artifacts.
+7. **DEATH** — seal the session, produce `pipeline-{safe-name}.json`, upload to Reincarnate-Synch §IX-A.
+8. **S2Pipeline** — the pipeline artifact is the reward: SOUL ? DNA ? solid blueprints for worker agents to build from, with minimal room for deviance from original intent.
+
+**I-LOG preservation (no exceptions):** The raw script is preserved each session. As part of the LFG Rise-to-Death process it is preserved as-is, color-coded (Purple=SOUL, Red=DNA, Yellow=REASON, Green=PHEROMONE), and separated into its proper place. No exceptions.
 
 ---
 

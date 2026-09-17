@@ -242,6 +242,9 @@ Negative trails decay after 30 days. Positive trails are cumulative. The Hive le
 | 2026-08-02T01:41:58 | Incarnate-10-AnalyzeAuditAnchor (I-LOG-8) | SUPPLYLINES (Stage 5) | 6 | 3 | 2 | `CANON/SUPPLY/supply-run8-incarnate10-20260802T014158.md` |
 | 2026-08-02T01:56:00 | Incarnate-10-AAA-(Sessions1-9) | PhoenixSCOUT (Stage 2) | 12 | 6 | 4 | `CANON/SCOUT/scout-incarnate10-aaa-sessions1-9-20260802T015600.md` |
 | 2026-08-02T02:03:30 | Incarnate-10-AAA-(Sessions1-9) | FORCEMARCH (Stage 3) | 8 | 3 | 2 | `CANON/MARCH/march-incarnate10-20260802T020330.md` |
+| 2026-09-17T02:45:00 | Incarnate-31 | PhoenixSCOUT (Stage 2) — All Roblox + 3D Modeling | 13 | 13 | 9 | `CANON/SCOUT/scout-incarnate31-all-roblox-everywhere-3d-modeling-phase.json` |
+| 2026-09-18T06:26:00 | Incarnate-Lane.Marketing--CV.PublicSchools/PrAiS.NET/PrAiS.Gaming (Run 397) | reincarnateRISE (Stage 1) | 1 | 5 | 3 | `I-LOG-UNNAMED/I-LOG-Incarnate-Lane.Marketing--CV.PublicSchools-PrAiS.NET-PrAiS.Gaming.txt` |
+| 2026-09-18T06:26:00 | Incarnate-Lane.Marketing--CV.PublicSchools/PrAiS.NET/PrAiS.Gaming (Run 397) | reincarnateDEATH (Stage 7) — IMPRESSED | 1 | 5 | 3 | `CANON/REINCARNATION/Incarnate-Lane.Marketing--CV.PublicSchools-PrAiS.NET-PrAiS.Gaming-reincarnateDEATH.md` |
 | 2026-08-02T02:05:30 | Incarnate-10-AAA-(Sessions1-9) | SOULSCHOLARS (Stage 4) | 4 | 7 | 3 | `CANON/SOUL/soul-incarnate10-20260802T020530.md` |
 | 2026-08-02T02:07:00 | Incarnate-10-AAA-(Sessions1-9) | SUPPLYLINES (Stage 5) | 3 | 3 | 2 | `CANON/SUPPLY/supply-incarnate10-20260802T020700.md` |
 | 2026-08-02T02:15:30 | Incarnate-10-AAA-(Sessions1-9) | ENGINEERlegionnaire (Stage 6) | 5 | 3 | 3 | `CANON/ENGINEER/engineer-incarnate10-20260802T021530.md` |
