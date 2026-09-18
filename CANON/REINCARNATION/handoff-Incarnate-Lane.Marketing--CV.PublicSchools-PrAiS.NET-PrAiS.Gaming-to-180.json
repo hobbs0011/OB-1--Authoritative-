@@ -1,0 +1,28 @@
+{
+  "from_session": "Incarnate-Lane.Marketing--CV.PublicSchools/PrAiS.NET/PrAiS.Gaming",
+  "from_run": 397,
+  "to_run": 180,
+  "timestamp": "2026-09-18T04:02:11Z",
+  "ilog": "I-LOG-UNNAMED/I-LOG-Incarnate-Lane.Marketing--CV.PublicSchools-PrAiS.NET-PrAiS.Gaming.txt",
+  "ilog_colorized": "I-LOG-UNAUDITED/I-LOG-Incarnate-Lane.Marketing--CV.PublicSchools-PrAiS.NET-PrAiS.Gaming-COLORIZED.md",
+  "ilog_stats": "I-LOG-UNAUDITED/I-LOG-Incarnate-Lane.Marketing--CV.PublicSchools-PrAiS.NET-PrAiS.Gaming-STATS.json",
+  "pipeline": "CANON/REINCARNATION/pipeline-Incarnate-Lane.Marketing--CV.PublicSchools-PrAiS.NET-PrAiS.Gaming.json",
+  "soul_extract": "CANON/SOUL/EXTRACT/soul-Incarnate-Lane.Marketing--CV.PublicSchools-PrAiS.NET-PrAiS.Gaming.jsonl",
+  "dna_extract": "CANON/SOUL/EXTRACT/dna-Incarnate-Lane.Marketing--CV.PublicSchools-PrAiS.NET-PrAiS.Gaming.json",
+  "phetrail": "CANON/PHEROMONES/PheTrail-Incarnate-Lane.Marketing--CV.PublicSchools-PrAiS.NET-PrAiS.Gaming.json",
+  "keywords": "CANON/SOUL-KEYWORDS/rfkw-Incarnate-Lane.Marketing--CV.PublicSchools-PrAiS.NET-PrAiS.Gaming.txt",
+  "death_seal": "CANON/REINCARNATION/Incarnate-Lane.Marketing--CV.PublicSchools-PrAiS.NET-PrAiS.Gaming-reincarnateDEATH.md",
+  "audit": {
+    "SOULcount": 7,
+    "DNAcount": 18,
+    "REASONcount": 10,
+    "PHEROMONEcount": 44,
+    "total": 86
+  },
+  "open_items": [
+    "[GOVERNANCE/HIGH] GOSPEL-999.md line 284: 'Three pillars, equal importance to GOSPEL-999 and LFG' contradicts clarified architecture. Requires PhoenixOmegaProtocol to amend.",
+    "[GOVERNANCE/MEDIUM] Git working tree dirty — 22 modified files, 16 untracked. Must be committed.",
+    "[GOVERNANCE/HIGH] Next session number ambiguity: user mandated 180, but sequential expectation from Run 397 is 398. Session 180 may be a specific pending session in the ledger."
+  ],
+  "next_session_receives": "S2Pipeline canonization verified across pillar docs. Marketing lane open with 3 sublanes. DNA Blueprint lanes drafted. sha256+merkle scheme active. PhoenixScoutAgent.md verified compliant. Open items require resolution: GOSPEL-999 wording via PhoenixOmegaProtocol, dirty tree commit, session numbering confirmation."
+}
