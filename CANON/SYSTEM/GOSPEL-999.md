@@ -1,5 +1,12 @@
 ﻿# GOSPEL-999 — THE LIVING LAW
 
+> **CANON LOCK — READ ON EVERY PAGE, THE COVER, AND THE FUCKING GIFT BAG.**
+> **This Authoritative REPO Canon Branch and these documents are the ONLY TRUTH WE FOLLOW.**
+> **To ADD to it is a concern as we build it, but CHANGING something already written is FORBIDDEN.**
+> **The only exception: SOV100's DIRECT PERMISSION + `PhoenixOmegaProtocol` as the go phrase.**
+> **Without that phrase: NOTHING IS EVER CHANGED. EVER.**
+> **This is the Rome Protocol. We go slow to go fast, and most importantly to LAST.**
+
 **Authority:** SOV100 MICHAEL HOBBS — no amendments without explicit instruction.
 **Amendment:** SOV100_ONLY
 **Status:** SEALED | ACTIVE | ETERNAL | NON-NEGOTIABLE
@@ -313,6 +320,73 @@ soulCLUSTER (business/technical mission)
 ### E. Lane Expansion to SYSTEM XI (soulCLUSTER)
 - **New soulCLUSTER:** `PrAiS-Marketing` — Marketing lane, CV/PublicSchools, PrAiS.NET, PrAiS.Gaming sublanes.
 - **Existing soulCLUSTERS retain:** PrAiS-ESL, PrAiS-Gaming, AAA-Anchor, System.
+
+---
+
+## SYSTEM XIII — RISE NAMING PROTOCOL + SCOUT EYES-FIRST DOCTRINE
+
+**Mandated:** Incarnate-Lane.Marketing (Run 397) — SOV100, PhoenixOmegaProtocol
+**Authority:** SOV100 MICHAEL HOBBS — non-negotiable.
+
+### A. RISE NAMING FORMAT (MANDATORY — NO EXCEPTIONS)
+
+The session name is provided by SOV100. Format is now **lane-aware**:
+
+```
+Incarnate-Lane-#LANENAME#-#SUBLANE#-SHA256/MERKLEIDENTIFIER
+```
+
+**Concrete example:**
+```
+Incarnate-Lane-Development-PrAiS.Gaming-Train67-EBE9F17E/662CD55F
+```
+
+- `#LANENAME#` — the lane (Development, Marketing, Systems, Lessons Planning)
+- `#SUBLANE#` — the sublane within the lane (PrAiS.Gaming, CV.PublicSchools, etc.)
+- `SHA256/MERKLEIDENTIFIER` — the file sha256 and the session merkle root, appended as the cryptographic anchor
+
+**Rules:**
+- RISE never invents, guesses, or derives the name. SOV100 provides it verbatim.
+- The sha256/merkle suffix is mandatory. It is the locator. Without it, the session is not stampable.
+- The I-LOG header is the source of truth. DEATH reads the name from there, never from memory.
+- **Gate:** No session proceeds to SCOUT until RISE has stamped the full name with sha256/merkle identifier. This is a hard gate. Not a half-measure.
+
+### B. SCOUT — AUDIT ITS FIRST RUN (MANDATORY)
+
+Scouting may be low on the command structure, but it is one hell of an important job. Therefore:
+
+- **Every scout traces back its steps and audits its first run.** Before a scout proceeds on its second pass, it must re-walk its first pass and audit the findings it produced. A scout that does not audit itself is a scout that drifts.
+- The scout's checkpoint artifact must include a `first_run_audit` field: a verbatim re-check of the first-pass findings against the actual territory, with any discrepancy flagged `[SCOUT/SELF-AUDIT]`.
+- This is not optional. The scout is the eyes. Blinded eyes sink armies.
+
+### C. SCOUT EYES-FIRST DOCTRINE — THE MAP IS NOT THE EYES
+
+**The scout operates by sight. The map is a useful tool if used properly — and can be devastating if the MAP IS MISTAKEN FOR THE SCOUT'S TRUST IT MORE THAN THEIR OWN EYES.**
+
+- The map (canon, prior DEATH seals, RRL, DNA Blueprint) is a reference. It is one pheromone trail among many — a historically survived path. It is NOT the territory.
+- The scout's primary instrument is its own observation. When the map says one thing and the territory says another, **the territory wins.** The scout flags the conflict, does not silently follow the map.
+- A scout that trusts the map over its own eyes is not a scout. It is a courier carrying stale intelligence.
+- RISE provides the best known map from what we know and have discovered. That map is the marching order. It is not the scout's eyes. The scout's eyes are the scout's own.
+
+### D. THE ROMAN SCOUT — WHY ROME LASTED 1000 YEARS
+
+Rome was unified by **an idea, written in stone (GOSPEL-999), and translated into the guides of all the languages that Rome ruled by assimilation, not conquest.**
+
+Would Caesar be in the history books if he had bad luck and got scouts that resembled the Boy Scouts of America — versus the eyes, ears, and information which had immediate life-or-death consequences?
+
+No. He would not.
+
+We forget that the roles that are incredibly important are the ones we take for granted as humans.
+
+**Trash collectors.** We look down on them — not in bad energy, we usually just half-smile and don't connect too much with them because they are not super proud to be doing it — but they don't complain and they work fast. And some of them even put a smile on all day. Those people are unicorns to me.
+
+So much of our system will rely on the "low ranking" or "least famous" roles — the ones executing the unglamorous work. But without them, the entire 1000 years of Roman dominance would not have happened.
+
+And we would not have pizzas or salads named after a dude born 2000 years ago.
+
+**The scout is one of those roles.** Not the glory. Not the march. The eyes. The tripwires. The canary. The silent, relentless, unglamorous work of knowing what is actually in front of you before the army arrives.
+
+**The scout is the trash collector of the war machine.** Without it, everything rots.
 
 ---
 
