@@ -1,0 +1,105 @@
+{
+  "from_session": "Incarnate-Website.DEV.OKT-2",
+  "from_run": "OKT-2",
+  "to_run": "OKT-3",
+  "timestamp": "2026-09-20T05:12:00+07:00",
+  "anchor_level": "Website.DEV",
+  "sessions_audited": ["Incarnate-Website.DEV.OKT-1", "Incarnate-Website.DEV.OKT-2"],
+  "priority_order": [
+    "Verify production deployment is live and serving all pages correctly",
+    "Monitor Cloudflare Pages for any 404s or broken asset requests",
+    "CANON automation for website asset sync",
+    "All other CANON work — deferred to OKT-4+"
+  ],
+  "promotions": [
+    {
+      "session": "Incarnate-Website.DEV.OKT-2",
+      "status": "NAV",
+      "reason": "Static site deployed to Cloudflare Pages (naturalenglishtraining). Broken links fixed across all public/ subdirectories. Sitemap updated with all lesson pages and WEBSITE/ subdirectories. NET-Mouse-To-Tiger-Confidence card already present in lessons.html (added in OKT-1). All assets verified. Staging directory created with _headers and _redirects for proper caching and SPA fallback."
+    },
+    {
+      "session": "Incarnate-Website.DEV.OKT-1",
+      "status": "NAV",
+      "reason": "Inherited: root pages created, WEBSITE/ pages added, public/oktava-login links fixed, robots.txt/sitemap.xml/404.html created."
+    }
+  ],
+  "gaps_initial": [
+    {
+      "session": "Incarnate-Website.DEV.OKT-2",
+      "points": [
+        "Point 1: Missing bluetech-logo.jpg and bluetech-icon.jpg in assets/brand/ (referenced by public/bluetech-* pages)",
+        "Point 2: Missing magic-chat.html at root (referenced by public/bluetech-employee/index.html iframe)",
+        "Point 3: Missing stub pages for /bluetech-story/, /bluetech-programs/, /bluetech-demo/, /bluetech-contact/ (navigation links in bluetech-* pages return 404)",
+        "Point 4: sitemap.xml only listed 6 root pages — missing GALAXY-LESSONS, WEBSITE/, and other root-level pages",
+        "Point 5: No deployment configuration or _headers/_redirects files for CDN hosting"
+      ]
+    }
+  ],
+  "gaps_resolved": [
+    {
+      "session": "Incarnate-Website.DEV.OKT-2",
+      "points": [
+        "Point 1: Copied bluetech-logo.jpg and bluetech-icon.jpg from NET-PET-AI/public/assets/brand/ to both root assets/brand/ and public/assets/brand/",
+        "Point 2: Copied magic-chat.html from NET-PET-AI/public/ to both root level and public/magic-chat.html",
+        "Point 3: Created stub index.html pages for public/bluetech-story/, public/bluetech-programs/, public/bluetech-demo/, public/bluetech-contact/ with consistent bluetech design system and back-to-home navigation",
+        "Point 4: Updated sitemap.xml to include all 18 GALAXY-LESSONS lesson pages (including NET-Mouse-To-Tiger-Confidence), 4 WEBSITE/ subdirectory pages, magic-chat.html, HighSchoolLesson-3.html, and all existing root pages",
+        "Point 5: Created staging directory WEBSITE-DEPLOY/ with _headers (security + caching) and _redirects (SPA fallback). Deployed to Cloudflare Pages project 'naturalenglishtraining'. Added WEBSITE-DEPLOY/ to .gitignore."
+      ]
+    }
+  ],
+  "deployment": {
+    "provider": "Cloudflare Pages",
+    "project_name": "naturalenglishtraining",
+    "deployment_url": "https://be4d7004.naturalenglishtraining.pages.dev",
+    "alias_url": "https://canon.naturalenglishtraining.pages.dev",
+    "custom_domain": "https://www.naturalenglishtraining.com",
+    "files_uploaded": 283,
+    "deploy_time_seconds": 26.16,
+    "config_added": [
+      "WEBSITE-DEPLOY/_headers — security headers, cache-control rules",
+      "WEBSITE-DEPLOY/_redirects — SPA fallback to /index.html"
+    ]
+  },
+  "link_audit_results": {
+    "oktava_login_classroom": "PASS — absolute root paths (/index.html, /about.html, etc.) resolve correctly",
+    "student_portal_app": "PASS — assets/js/app.js exists",
+    "bluetech_login": "FIXED — /assets/brand/bluetech-logo.jpg now exists in both root assets/brand/ and public/assets/brand/",
+    "bluetech_employer": "FIXED — /assets/brand/bluetech-icon.jpg resolved, missing nav stubs created",
+    "bluetech_cinematic": "FIXED — missing nav stubs created",
+    "bluetech_employee": "FIXED — /magic-chat.html iframe source now resolves, missing nav stubs created",
+    "bluetech_story": "FIXED — stub page created",
+    "bluetech_programs": "FIXED — stub page created",
+    "bluetech_demo": "FIXED — stub page created",
+    "bluetech_contact": "FIXED — stub page created",
+    "casa_login": "PASS — anchor links and mailto only, no broken internal links",
+    "casa_parent_portal": "PASS — links to index.html (relative) resolves correctly",
+    "nguyen_login": "PASS — links to /nguyen-gameplan/ which exists",
+    "nguyen_gameplan": "PASS — links to /nguyen-login/ which exists",
+    "nguyen_parent": "PASS — links to /nguyen-gameplan/ which exists",
+    "nguyen_quan_mecha": "PASS — links to /nguyen-login/ which exists",
+    "nguyen_quang": "PASS — no internal nav links, Google Fonts only",
+    "nguyen_quan": "PASS — no internal nav links, Google Fonts only",
+    "nguyen_parent_dashboard": "PASS — no internal nav links, Google Fonts only",
+    "counter_proposal_casa": "PASS — Google Fonts only, no internal links"
+  },
+  "artifacts_committed": [
+    "sitemap.xml",
+    "magic-chat.html",
+    "assets/brand/bluetech-logo.jpg",
+    "assets/brand/bluetech-icon.jpg",
+    "public/bluetech-story/index.html",
+    "public/bluetech-programs/index.html",
+    "public/bluetech-demo/index.html",
+    "public/bluetech-contact/index.html",
+    "public/assets/brand/bluetech-logo.jpg",
+    "public/assets/brand/bluetech-icon.jpg",
+    "public/magic-chat.html",
+    "I-LOG-NAV/handoff-Incarnate-Website.DEV.OKT-2-to-3.json"
+  ],
+  "death_seal": "I-LOG-NAV/handoff-Incarnate-Website.DEV.OKT-2-to-3.json",
+  "next_rise_must": [
+    "Monitor production deployment for 404s and broken assets (check Cloudflare analytics)",
+    "Implement CANON automation for syncing WEBSITE/ and root asset directories",
+    "Consider consolidating duplicate lesson pages (root-level NET-* duplicates GALAXY-LESSONS/)"
+  ]
+}

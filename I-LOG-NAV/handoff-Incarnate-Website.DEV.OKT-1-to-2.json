@@ -1,0 +1,62 @@
+{
+  "from_session": "Incarnate-Website.DEV.OKT-1",
+  "from_run": "OKT-1",
+  "to_run": "OKT-2",
+  "timestamp": "2026-09-19T21:58:00+07:00",
+  "anchor_level": "Website.DEV",
+  "sessions_audited": ["Incarnate-Website.DEV.OKT-1"],
+  "priority_order": [
+    "Deploy static site to production (Cloudflare Pages / Netlify / Vercel)",
+    "Fix remaining broken internal links across all public/ subdirectories",
+    "Add missing lesson pages to root lessons.html (NET-Mouse-To-Tiger-Confidence coverage)",
+    "CANON automation for website asset sync — only if it unblocks deployment",
+    "All other CANON work — deferred to OKT-3+"
+  ],
+  "promotions": [
+    {
+      "session": "Incarnate-Website.DEV.OKT-1",
+      "status": "NAV",
+      "reason": "Site build complete. Root pages verified: index.html, assessment.html, about.html, huong-gospel444.html, testimonials.html, lessons.html, classroom.html, login.html, 404.html, robots.txt, sitemap.xml. WEBSITE/ privacy.html and terms.html added. public/oktava-login/classroom.html absolute links fixed. All asset paths resolve. No broken root/WEBSITE/ internal links remain."
+    }
+  ],
+  "gaps_initial": [
+    {
+      "session": "Incarnate-Website.DEV.OKT-1",
+      "points": [
+        "Point 1: Missing testimonials.html, lessons.html, login.html at root",
+        "Point 2: Missing privacy.html and terms.html in WEBSITE/",
+        "Point 3: Broken relative links in public/oktava-login/classroom.html",
+        "Point 4: Missing root-level robots.txt, sitemap.xml, 404.html"
+      ]
+    }
+  ],
+  "gaps_resolved": [
+    {
+      "session": "Incarnate-Website.DEV.OKT-1",
+      "points": [
+        "Point 1: Created testimonials.html, lessons.html, login.html at root",
+        "Point 2: Created WEBSITE/privacy.html and WEBSITE/terms.html",
+        "Point 3: Fixed public/oktava-login/classroom.html — converted relative nav links to absolute root paths (/about.html, /lessons.html, etc.)",
+        "Point 4: Created root robots.txt, sitemap.xml, and branded 404.html"
+      ]
+    }
+  ],
+  "artifacts_committed": [
+    "testimonials.html",
+    "lessons.html",
+    "login.html",
+    "WEBSITE/privacy.html",
+    "WEBSITE/terms.html",
+    "robots.txt",
+    "sitemap.xml",
+    "404.html",
+    "I-LOG-NAV/handoff-Incarnate-Website.DEV.OKT-1-to-2.json"
+  ],
+  "death_seal": "I-LOG-NAV/handoff-Incarnate-Website.DEV.OKT-1-to-2.json",
+  "next_rise_must": [
+    "Deploy root static site to production CDN",
+    "Run full cross-site link checker on public/ subdirectories",
+    "Add NET-Mouse-To-Tiger-Confidence lesson page to root lessons.html",
+    "Sync WEBSITE/ and root asset directories for production parity"
+  ]
+}

@@ -126,3 +126,6 @@ APPS/NET-PET-AI/public/audio/*.m4a
 !CANON/EVIDENCE/VIETNAMESE-PHRASES/*.opus
 
 .secrets.local
+
+# === OKT-2 DEPLOYMENT STAGING ===
+WEBSITE-DEPLOY/

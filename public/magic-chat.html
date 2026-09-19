@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#030f1a">
+  <title>Obi — Natural English Training</title>
+  <style>
+    :root {
+      --void: #030f1a;
+      --purple: #a855f7;
+      --gold: #f59e0b;
+      --teal: #14b8a6;
+      --teal-glow: rgba(20,184,166,0.3);
+      --glass: rgba(168, 85, 247, 0.08);
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --radius: 16px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--void);
+      color: var(--text);
+      height: 100dvh;
+      overflow: hidden;
+    }
+    #micUnavailableBanner {
+      top: max(58px, env(safe-area-inset-top, 58px)) !important;
+      z-index: 90 !important;
+    }
+    #modeLanding.hidden ~ #orbScreen { z-index: 10001; }
+    #modeLanding.hidden ~ #orbScreen #orbTopBar,
+    #modeLanding.hidden ~ #orbScreen #orbEndBtn { z-index: 10003; }
+    #modeLanding.hidden ~ #orbScreen #orbStage,
+    #modeLanding.hidden ~ #orbScreen #orb { z-index: 10002; }
+
+    /* ── Mode color system ── */
+    :root { --mode-color: #a855f7; --mode-glow: rgba(168,85,247,0.22); --mode-bg: rgba(168,85,247,0.12); }
+    body[data-mode="study"]   { --mode-color: #f59e0b; --mode-glow: rgba(245,158,11,0.22); --mode-bg: rgba(245,158,11,0.10); }
+    body[data-mode="phonics"] { --mode-color: #14b8a6; --mode-glow: rgba(20,184,166,0.22); --mode-bg: rgba(20,184,166,0.10); }
+
+    /* ═══════════════════════════════════════
+       GHOST ELEMENTS — JS refs, never shown
+    ═══════════════════════════════════════ */
+    #feed, header, #inputBar, #form, .network-fallback-banner { display: none !important; }
+
+    /* ═══════════════════════════════════════
+       ORB SCREEN
+    ═══════════════════════════════════════ */
+    #orbScreen {
+      position: fixed; inset: 0;
+      background: var(--void);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      z-index: 1;
+      overflow: hidden;
+    }
+    /* Ambient room glow behind orb */
+    #orbScreen::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70vmax; height: 70vmax;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--mode-glow), transparent 65%);
+      pointer-events: none;
+      transition: background 0.9s ease;
+    }
+
+    /* Top bar */
+    #orbTopBar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: max(14px, env(safe-area-inset-top, 14px)) 18px 14px;
+      display: flex; align-items: center; justify-content: space-between;
+      z-index: 100;
+    }
+    #orbTopLeft { display: flex; align-items: center; gap: 10px; }
+    .orb-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #ef4444; transition: background 0.4s; flex-shrink: 0;
+    }
+    .orb-dot.ok { background: #22c55e; }
+    #orbModeChip {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.05em;
+      padding: 4px 12px; border-radius: 20px;
+      border: 1px solid rgba(168,85,247,0.35);
+      background: rgba(168,85,247,0.08);
+      color: var(--purple); cursor: pointer;
+      transition: all 0.25s; white-space: nowrap;
+    }
+    #orbModeChip:hover, #orbModeChip:active {
+      border-color: var(--gold); background: rgba(245,158,11,0.1); color: var(--gold);
+    }
+
+    /* Orb stage */
+    #orbStage {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      width: min(320px, 88vmin);
+      height: min(320px, 88vmin);
+    }
+
+    /* ── THE ORB ── */
+    #orb {
+      width: min(216px, 55vmin);
+      height: min(216px, 55vmin);
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative; z-index: 2;
+      will-change: transform, filter;
+      -webkit-user-select: none; user-select: none;
+      touch-action: manipulation;
+      animation: orb-breathe 3.8s ease-in-out infinite;
+      transition: box-shadow 0.6s ease;
+    }
+    /* Mode gradient cores */
+    body[data-mode="free"] #orb {
+      background: radial-gradient(circle at 37% 33%,
+        rgba(210,140,255,1) 0%,
+        rgba(138,58,230,0.88) 38%,
+        rgba(60,12,110,0.65) 68%,
+        rgba(8,2,22,0.25) 90%
+      );
+      box-shadow:
+        inset 0 -6px 30px rgba(0,0,0,0.35),
+        inset 0 6px 20px rgba(255,255,255,0.1),
+        0 0 0 1px rgba(168,85,247,0.22),
+        0 0 35px rgba(168,85,247,0.4),
+        0 0 80px rgba(168,85,247,0.2),
+        0 0 160px rgba(168,85,247,0.08);
+    }
+    body[data-mode="study"] #orb {
+      background: radial-gradient(circle at 37% 33%,
+        rgba(255,220,90,1) 0%,
+        rgba(210,128,18,0.88) 38%,
+        rgba(90,38,4,0.65) 68%,
+        rgba(20,6,1,0.25) 90%
+      );
+      box-shadow:
+        inset 0 -6px 30px rgba(0,0,0,0.35),
+        inset 0 6px 20px rgba(255,255,255,0.08),
+        0 0 0 1px rgba(245,158,11,0.22),
+        0 0 35px rgba(245,158,11,0.4),
+        0 0 80px rgba(245,158,11,0.2),
+        0 0 160px rgba(245,158,11,0.08);
+    }
+    body[data-mode="phonics"] #orb {
+      background: radial-gradient(circle at 37% 33%,
+        rgba(100,240,220,1) 0%,
+        rgba(20,158,140,0.88) 38%,
+        rgba(4,42,38,0.65) 68%,
+        rgba(1,12,10,0.25) 90%
+      );
+      box-shadow:
+        inset 0 -6px 30px rgba(0,0,0,0.35),
+        inset 0 6px 20px rgba(255,255,255,0.08),
+        0 0 0 1px rgba(20,184,166,0.22),
+        0 0 35px rgba(20,184,166,0.4),
+        0 0 80px rgba(20,184,166,0.2),
+        0 0 160px rgba(20,184,166,0.08);
+    }
+
+    /* Orb states */
+    @keyframes orb-breathe {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.03); }
+    }
+    #orb.state-listening {
+      animation: orb-listen 1.8s ease-in-out infinite;
+    }
+    @keyframes orb-listen {
+      0%, 100% { transform: scale(1); filter: brightness(1); }
+      50%       { transform: scale(1.06); filter: brightness(1.14); }
+    }
+    #orb.state-thinking {
+      animation: orb-think 2.4s ease-in-out infinite;
+    }
+    @keyframes orb-think {
+      0%, 100% { transform: scale(0.97); filter: brightness(0.75) saturate(0.6); }
+      50%       { transform: scale(1.01); filter: brightness(0.92) saturate(1); }
+    }
+    #orb.state-speaking { animation: none; } /* rAF drives this */
+
+    /* Ripple rings */
+    .orb-ripple {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: orb-ripple-expand 1.7s ease-out forwards;
+      z-index: 1;
+      box-sizing: border-box;
+    }
+    @keyframes orb-ripple-expand {
+      0%   { width: min(216px,55vmin); height: min(216px,55vmin); opacity: 0.5; border-width: 1.5px; }
+      100% { width: min(390px,100vmin); height: min(390px,100vmin); opacity: 0; border-width: 0.5px; }
+    }
+
+    /* Status text */
+    #orbStatus {
+      margin-top: 38px;
+      font-size: 11px; font-weight: 600;
+      color: rgba(148,163,184,0.4);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      transition: color 0.4s, opacity 0.4s;
+      pointer-events: none; text-align: center;
+      position: relative; z-index: 2;
+    }
+    #orbStatus.active { color: var(--mode-color); opacity: 0.9; }
+
+    /* End session button */
+    #orbEndBtn {
+      position: fixed;
+      bottom: max(18px, env(safe-area-inset-bottom, 18px));
+      right: 18px;
+      font-size: 10px; font-weight: 500;
+      color: rgba(148,163,184,0.2);
+      letter-spacing: 0.07em; text-transform: uppercase;
+      cursor: pointer; border: none; background: none;
+      padding: 6px 10px; transition: color 0.2s;
+    }
+    #orbEndBtn:hover { color: rgba(148,163,184,0.55); }
+
+    /* NET badge watermark */
+    #orbBadge {
+      position: fixed;
+      bottom: max(20px, env(safe-area-inset-bottom, 20px));
+      left: 50%; transform: translateX(-50%);
+      opacity: 0.04; pointer-events: none;
+      width: 72px; height: 72px;
+      background: url('/assessment-assets/brand/NET-PHXRISING-LOGO.webp') center/contain no-repeat;
+    }
+
+    /* ═══════════════════════════════════════
+       OVERLAYS (mode landing, modals, etc.)
+    ═══════════════════════════════════════ */
+
+    /* Mode Landing */
+    #modeLanding {
+      position: fixed; inset: 0;
+      background: var(--void);
+      background-image: url('https://net-art-arsenal.pages.dev/thumbs/artwork/gemini-concept-art-07.webp');
+      background-size: cover; background-position: center; background-repeat: no-repeat;
+      z-index: 10000;
+      display: flex; flex-direction: column;
+      /* flex-start + scroll, NOT center: on a short iPhone viewport, center +
+         no-overflow strands the "Start Session" button below the fold with no
+         way to scroll to it — the student selects a mode and dead-ends. */
+      align-items: center; justify-content: flex-start;
+      gap: 24px;
+      padding: 24px;
+      padding-top: max(24px, env(safe-area-inset-top));
+      padding-bottom: max(40px, env(safe-area-inset-bottom));
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    #modeLanding::before {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(3, 5, 18, 0.85); z-index: 0;
+    }
+    #modeLanding.hidden { display: none; }
+    #modeLanding > * { position: relative; z-index: 1; }
+    #modeLanding h2 { font-size: 1.5rem; color: var(--purple); margin-bottom: 8px; text-align: center; }
+    #modeLanding p { color: var(--muted); font-size: 0.9rem; max-width: 400px; text-align: center; }
+    .landing-modes { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 16px; }
+    .landing-mode-card {
+      background: rgba(168,85,247,0.06);
+      border: 2px solid rgba(168,85,247,0.2);
+      border-radius: 16px; padding: 20px 24px;
+      min-width: 140px; text-align: center;
+      cursor: pointer; transition: all 0.2s; position: relative;
+    }
+    .landing-mode-card[data-mode="free"] { border-color: rgba(168,85,247,0.3); }
+    .landing-mode-card[data-mode="free"]:hover { border-color: var(--purple); background: rgba(168,85,247,0.12); }
+    .landing-mode-card[data-mode="free"].selected { border-color: var(--purple); background: rgba(168,85,247,0.15); box-shadow: 0 0 0 3px rgba(168,85,247,0.2); }
+    .landing-mode-card[data-mode="study"] { border-color: rgba(245,158,11,0.3); }
+    .landing-mode-card[data-mode="study"]:hover { border-color: var(--gold); background: rgba(245,158,11,0.10); }
+    .landing-mode-card[data-mode="study"].selected { border-color: var(--gold); background: rgba(245,158,11,0.12); box-shadow: 0 0 0 3px rgba(245,158,11,0.2); }
+    .landing-mode-card[data-mode="phonics"] { border-color: rgba(20,184,166,0.3); }
+    .landing-mode-card[data-mode="phonics"]:hover { border-color: var(--teal); background: rgba(20,184,166,0.10); }
+    .landing-mode-card[data-mode="phonics"].selected { border-color: var(--teal); background: rgba(20,184,166,0.12); box-shadow: 0 0 0 3px var(--teal-glow); }
+    .landing-mode-card .lmc-icon { font-size: 2rem; margin-bottom: 8px; }
+    .landing-mode-card .lmc-label { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+    .landing-mode-card .lmc-desc { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+    .landing-start-btn {
+      margin-top: 24px; padding: 14px 40px;
+      background: var(--purple); color: white;
+      border: none; border-radius: 12px;
+      font-size: 1rem; font-weight: 600;
+      cursor: pointer; opacity: 0.4; pointer-events: none;
+      transition: all 0.2s;
+    }
+    .landing-start-btn.ready { opacity: 1; pointer-events: auto; }
+    .landing-start-btn.ready:hover { background: #9333ea; transform: translateY(-2px); }
+
+    /* Modal backdrop */
+    .modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 9998; display: none;
+    }
+    .modal-backdrop.show { display: block; }
+
+    /* Mode modal */
+    #modeModal {
+      position: fixed; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(15,15,26,0.98);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 16px; padding: 24px;
+      z-index: 9999; display: none; min-width: 280px;
+    }
+    #modeModal.show { display: block; }
+    #modeModal h3 { color: var(--purple); margin-bottom: 16px; font-size: 1.1rem; }
+    .mode-option {
+      padding: 12px 16px; border-radius: 10px;
+      cursor: pointer; margin-bottom: 8px;
+      border: 1px solid rgba(168,85,247,0.15);
+      transition: all 0.15s;
+    }
+    .mode-option:hover { background: rgba(168,85,247,0.1); }
+    .mode-option.active { border-color: var(--gold); background: rgba(245,158,11,0.08); }
+
+    /* Taster banner */
+    #tasterBanner {
+      display: none; position: fixed;
+      top: 0; left: 0; right: 0; z-index: 9997;
+      background: linear-gradient(90deg,#7c3aed,#a855f7);
+      color: white; padding: 12px 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+    #tasterBanner.show { display: block; }
+    #tasterBanner .taster-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    #tasterBanner .taster-title { font-weight: 700; font-size: 14px; }
+    #tasterBanner .taster-sub { font-size: 12px; opacity: 0.9; }
+    #tasterBanner .taster-actions { display: flex; gap: 8px; }
+    #tasterBanner button { background: rgba(255,255,255,0.18); color: white; border: 1px solid rgba(255,255,255,0.35); border-radius: 10px; padding: 8px 12px; font-size: 12px; cursor: pointer; }
+    #tasterBanner button:hover { background: rgba(255,255,255,0.28); }
+
+    /* Tiger Win */
+    #tigerSummary {
+      display: none; position: fixed; inset: 0;
+      background: rgba(15,15,26,0.92);
+      -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+      z-index: 9999; align-items: center; justify-content: center;
+      flex-direction: column; gap: 20px; padding: 24px;
+    }
+    #tigerSummary.show { display: flex; }
+    #tigerSummary .ts-card { background: rgba(168,85,247,0.08); border: 1px solid rgba(168,85,247,0.3); border-radius: 20px; padding: 28px 32px; max-width: 360px; width: 100%; text-align: center; }
+    #tigerSummary .ts-title { font-size: 1.4rem; font-weight: 700; color: var(--purple); margin-bottom: 6px; }
+    #tigerSummary .ts-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; }
+    #tigerSummary .ts-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    #tigerSummary .ts-stat { background: rgba(168,85,247,0.06); border-radius: 12px; padding: 12px 8px; }
+    #tigerSummary .ts-stat-n { font-size: 1.6rem; font-weight: 700; color: var(--gold); }
+    #tigerSummary .ts-stat-l { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    #tigerSummary .ts-words { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; min-height: 20px; }
+    #tigerSummary .ts-btn { background: var(--purple); color: white; border: none; border-radius: 12px; padding: 12px 28px; font-size: 0.95rem; font-weight: 600; cursor: pointer; width: 100%; }
+    .pill { display: inline-block; padding: 2px 8px; border-radius: 8px; background: rgba(168,85,247,0.15); font-size: 12px; margin: 2px; }
+    .pronunciation-flag { text-decoration: underline dotted #f59e0b; cursor: help; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+  <script src="/assets/net-emoji.js" defer></script>
+</head>
+<body data-mode="free">
+
+  <!-- ═══════════════════════════════════════
+       GHOST ELEMENTS — hidden, JS refs intact
+  ═══════════════════════════════════════ -->
+  <div id="feed" aria-hidden="true" style="display:none"></div>
+  <header aria-hidden="true" style="display:none">
+    <span id="dot"></span>
+    <div id="obiAvatar" class="obi-avatar" title="Change mode"><img src="/isolated/phoenix-neon-clean.png" alt="Obi"></div>
+    <h1><span id="obiName">Obi</span></h1>
+    <span id="modeChip" onclick="openModeModal()">Free Talk ▾</span>
+    <button id="speakToggle"></button>
+  </header>
+  <div aria-hidden="true" style="display:none">
+    <div id="inputBar">
+      <input id="msg" type="text" autocomplete="off" tabindex="-1" aria-hidden="true">
+      <button type="button" id="sendBtn" aria-hidden="true"></button>
+      <button type="button" id="mic"></button>
+      <div id="micStatus">Tap to start</div>
+      <button type="button" id="endSessionBtn" onclick="endAgentSession()"></button>
+    </div>
+  </div>
+  <form id="form" autocomplete="off" style="display:none" aria-hidden="true"></form>
+  <div id="networkFallbackBanner" class="network-fallback-banner" style="display:none">
+    Voice blocked on this network — <button onclick="retryVoiceAgent()">Try Again</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       OVERLAYS
+  ═══════════════════════════════════════ -->
+
+  <!-- Mode Landing -->
+  <div id="modeLanding">
+    <h2>Choose Your Session Mode</h2>
+    <p>Select how you want to practice English today.</p>
+    <div class="landing-modes">
+      <button class="landing-mode-card" data-mode="free" onclick="selectLandingMode('free')">
+        <div class="lmc-icon"><img src="https://net-art-arsenal.pages.dev/icons/audio-waveform-64.png" alt="" width="36" height="36"></div>
+        <div class="lmc-label">Free Talk</div>
+        <div class="lmc-desc">Casual conversation</div>
+      </button>
+      <button class="landing-mode-card" data-mode="study" onclick="selectLandingMode('study')">
+        <div class="lmc-icon"><img src="https://net-art-arsenal.pages.dev/icons/ring-45-15-64.png" alt="" width="36" height="36"></div>
+        <div class="lmc-label">Log-Home-Study</div>
+        <div class="lmc-desc">Structured learning</div>
+      </button>
+      <button class="landing-mode-card" data-mode="phonics" onclick="selectLandingMode('phonics')">
+        <div class="lmc-icon"><img src="https://net-art-arsenal.pages.dev/icons/brain-circuit-64.png" alt="" width="36" height="36"></div>
+        <div class="lmc-label">NET Phonics</div>
+        <div class="lmc-desc">Pronunciation drills</div>
+      </button>
+    </div>
+    <button id="landingStartBtn" class="landing-start-btn" onclick="confirmLandingMode()">Start Session →</button>
+  </div>
+
+  <!-- Modal backdrop + mode switch modal -->
+  <div class="modal-backdrop" onclick="closeModeModal()"></div>
+  <div id="modeModal">
+    <h3>Switch Mode</h3>
+    <div class="mode-option" data-mode="free" onclick="selectMode('free')"><img class="icon-replace" src="https://net-art-arsenal.pages.dev/icons/audio-waveform-64.png" alt="" width="20" height="20"> Free Talk</div>
+    <div class="mode-option" data-mode="study" onclick="selectMode('study')"><img class="icon-replace" src="https://net-art-arsenal.pages.dev/icons/ring-45-15-64.png" alt="" width="20" height="20"> Log-Home-Study</div>
+    <div class="mode-option" data-mode="phonics" onclick="selectMode('phonics')"><img class="icon-replace" src="https://net-art-arsenal.pages.dev/icons/brain-circuit-64.png" alt="" width="20" height="20"> NET Phonics</div>
+  </div>
+
+  <!-- Taster banner -->
+  <div id="tasterBanner">
+    <div class="taster-inner">
+      <div>
+        <div class="taster-title" id="tasterTitle">Free taster — let's try a few minutes together</div>
+        <div class="taster-sub" id="tasterSub">Michael will follow up within 24h to book your full class.</div>
+      </div>
+      <div class="taster-actions">
+        <button id="tasterEndBtn" type="button">End taster</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tiger Win session summary -->
+  <div id="tigerSummary">
+    <div class="ts-card">
+      <div class="ts-title"><img class="ts-icon" src="https://net-art-arsenal.pages.dev/icons/tiger-portrait-64.png" alt="" width="40" height="40"> Tiger Win!</div>
+      <div class="ts-sub" id="tsSubtitle">Great session today</div>
+      <div class="ts-stats">
+        <div class="ts-stat"><div class="ts-stat-n" id="tsMinutes">0</div><div class="ts-stat-l">Minutes</div></div>
+        <div class="ts-stat"><div class="ts-stat-n" id="tsTurns">0</div><div class="ts-stat-l">Exchanges</div></div>
+      </div>
+      <div class="ts-words" id="tsWords"></div>
+      <button class="ts-btn" onclick="document.getElementById('tigerSummary').classList.remove('show')">Continue →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       ORB SCREEN
+  ═══════════════════════════════════════ -->
+  <div id="orbScreen">
+    <div id="orbTopBar">
+      <div id="orbTopLeft">
+        <span class="orb-dot" id="orbDot"></span>
+        <img src="/isolated/phoenix-neon-clean.png" width="22" height="22" style="border-radius:50%;opacity:0.45;flex-shrink:0" alt="">
+      </div>
+      <span id="orbModeChip" onclick="openModeModal()">Free Talk ▾</span>
+    </div>
+
+    <div id="orbStage">
+      <div id="orb" onclick="triggerMicOnGesture()" title="Tap to speak with Obi"></div>
+    </div>
+
+    <div id="orbStatus">Tap to start</div>
+  </div>
+
+  <div id="orbBadge" aria-hidden="true"></div>
+  <button id="orbEndBtn" onclick="endAgentSession()">End session</button>
+
+  <script src="/chat.js"></script>
+</body>
+</html>
