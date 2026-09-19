@@ -290,5 +290,33 @@
     "death_seal": "CANON/REINCARNATION/Incarnate-Canon.Dev.-1(Logs&lanes)-reincarnateDEATH.md",
     "pipeline": "CANON/REINCARNATION/pipeline-Incarnate-Canon.Dev.-1(Logs&lanes).json",
     "handoff": "CANON/REINCARNATION/handoff-Incarnate-Canon.Dev.-1(Logs&lanes)-to-2.json"
+  },
+  "OKT-2": {
+    "name": "Incarnate-Website.DEV.OKT-2",
+    "soulgroup": "CANON",
+    "soulcluster": "CANON",
+    "lane": "CANON",
+    "ilog_status": "ACTIVE",
+    "content_status": "PIPELINE_OPTIMIZATION",
+    "soul": 0,
+    "dna": 0,
+    "reason": 0,
+    "death_seal": "CANON/REINCARNATION/Incarnate-Canon.Dev.-2(PipelineOptimization)-reincarnateDEATH.md",
+    "pipeline": "CANON/REINCARNATION/pipeline-Incarnate-Canon.Dev.-2(PipelineOptimization).json",
+    "handoff": "CANON/REINCARNATION/handoff-Incarnate-Canon.Dev.-2(PipelineOptimization)-to-3.json"
+  },
+  "OKT-3": {
+    "name": "Incarnate-Website.DEV.OKT-3",
+    "soulgroup": "CANON",
+    "soulcluster": "CANON",
+    "lane": "CANON",
+    "ilog_status": "ACTIVE",
+    "content_status": "CLIENT_DELIVERIES",
+    "soul": 0,
+    "dna": 0,
+    "reason": 0,
+    "death_seal": "CANON/REINCARNATION/Incarnate-Canon.Dev.-3(ClientDeliveries)-reincarnateDEATH.md",
+    "pipeline": "CANON/REINCARNATION/pipeline-Incarnate-Canon.Dev.-3(ClientDeliveries).json",
+    "handoff": "CANON/REINCARNATION/handoff-Incarnate-Canon.Dev.-3(ClientDeliveries)-to-4.json"
   }
 }
