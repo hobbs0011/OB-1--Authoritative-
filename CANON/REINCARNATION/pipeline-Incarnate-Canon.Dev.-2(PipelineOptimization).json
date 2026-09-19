@@ -1,0 +1,47 @@
+{
+  "session": "Incarnate-Canon.Dev.-2(PipelineOptimization)",
+  "run": "OKT-2",
+  "lane": "CANON",
+  "soulgroup": "CANON",
+  "soulcluster": "CANON",
+  "name": "Incarnate-Canon.Dev.-2(PipelineOptimization)",
+  "status": "SEALED",
+  "death_seal": "CANON/REINCARNATION/Incarnate-Canon.Dev.-2(PipelineOptimization)-reincarnateDEATH.md",
+  "handoff": "CANON/REINCARNATION/handoff-Incarnate-Canon.Dev.-2(PipelineOptimization)-to-3.json",
+  "next_session": "Incarnate-Canon.Dev.-3(TBD)",
+  "next_run": "OKT-3",
+  "artifacts": {
+    "ilog": "I-LOG-UNNAMED/I-LOG-Incarnate-Canon.Dev.-2(PipelineOptimization).txt",
+    "scout": "CANON/SCOUT/scout-incarnate-canon-dev-2-pipeline-optimization.md",
+    "scholars": "CANON/SCOUT/scholars-incarnate-canon-dev-2-pipeline-optimization.md",
+    "supply": "CANON/SCOUT/supply-incarnate-canon-dev-2-pipeline-optimization.md",
+    "engineer": "CANON/SCOUT/engineer-incarnate-canon-dev-2-pipeline-optimization.md",
+    "audit": "CANON/OPERATIONS/I-LOG-AUDIT.md",
+    "synch": "CANON/SYSTEM/Reincarnate-Synch.md"
+  },
+  "canon_artifacts": [
+    "CANON/SYSTEM/GOSPEL-999.md",
+    "CANON/SYSTEM/LegionnaireFieldGuide.md",
+    "CANON/REINCARNATION/session-name-map.json",
+    "CANON/REINCARNATION/soulgroup-map.json",
+    "CANON/REINCARNATION/soulcluster-map.json"
+  ],
+  "open_items": [
+    "Create CANON/SCRIPTS/lane-assign.ps1",
+    "Create CANON/SCRIPTS/ilog-audit.ps1",
+    "Create CANON/SCRIPTS/archive-rrl.ps1",
+    "Create CANON/ARCHIVE/RRL-INDEX.md",
+    "Archive I-LOG-UNNAMED stale duplicates",
+    "Name unnamed I-LOGs",
+    "Normalize legacy lane values in session-name-map.json",
+    "Kilo DB extraction for runs 24, 26, 21, 20",
+    "Hollow session recovery",
+    "Seal session 29 or mark HOLLOW"
+  ],
+  "deliverables": [
+    "CANON/SCRIPTS/lane-assign.ps1",
+    "CANON/SCRIPTS/ilog-audit.ps1",
+    "CANON/SCRIPTS/archive-rrl.ps1",
+    "CANON/ARCHIVE/RRL-INDEX.md"
+  ]
+}
