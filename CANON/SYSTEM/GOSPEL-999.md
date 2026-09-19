@@ -390,4 +390,74 @@ And we would not have pizzas or salads named after a dude born 2000 years ago.
 
 ---
 
+## SYSTEM XIV — LANE REGISTRY (REFERENCE)
+
+**Status:** REFERENCE
+**Authority:** SOV100 MICHAEL HOBBS
+
+Lanes are owned by the session that created them. The owner session is the stable reference for the lane's purpose, scope, and any future handoff. Ownership is not merely administrative — it carries authority over the lane's destiny, its sublanes, and its CANON doctrine. No session may act on behalf of a lane without the owner session's explicit direction or an SOV100 mandate.
+
+### How Lanes Work
+
+- **Ownership:** Every lane has exactly one owner session. That session's existence defines the lane's active lifecycle. When the owner session ends (DEATH), the lane persists as a structured record until reactivated by its owner or SOV100.
+- **Convention:** Lanes follow the RISE Naming Protocol (SYSTEM XIII). The lane name is the `#LANENAME#` segment. Sublanes follow the `#SUBLANE#` segment. The full session name with sha256/merkle identifier is the primary key.
+- **Permanence:** Lane records in this registry are permanent. They may transition from DRAFT to REFERENCE to CANON, but they are never deleted. A retired lane moves to HISTORICAL status and remains queryable.
+- **CANON Special Status:** A lane elevated to CANON status is protected by GOSPEL-999's lock clause. No amendment without SOV100's direct permission plus the `PhoenixOmegaProtocol` go phrase. CANON lanes are the highest trust tier in the registry.
+- **Cross-Lane Routing:** Sessions may reference multiple lanes. Cross-lane routing requires the source lane's owner session or SOV100 approval. No session unilaterally claims authority over another lane's artifacts or doctrine.
+
+### Lane Ownership Rules
+
+1. The session that creates a lane becomes its owner. Ownership is established at the moment of creation and is recorded in this registry.
+2. Ownership may only transfer by explicit SOV100 mandate or by the owner session's documented handoff in its DEATH seal.
+3. A TBD owner indicates the lane is registered but unassigned. TBD lanes may not execute active work. They exist as placeholders only.
+4. CANON.Dev sessions (see Naming Convention) may hold ownership of infrastructure lanes (CANON, SYSTEMS, DEBUG) but may not claim ownership of business lanes without SOV100's explicit mandate.
+5. When ownership is disputed, SOV100 is the sole arbiter. No automation or committee may resolve a lane ownership dispute.
+
+### CANON Lane Doctrine
+
+- **Purpose:** A CANON lane carries doctrines, rules, or infrastructure that all other lanes depend on. CANON lanes are foundational. Their integrity is the integrity of the entire system.
+- **Authority:** CANON lanes operate under GOSPEL-999's lock. The CANON.Dev owner session holds stewardship, not absolute ownership. All CANON lane changes require SOV100's explicit approval.
+- **Modification Rule:** CANON lanes may never be modified by routine sessions. Modification requires: (a) SOV100 explicit instruction, (b) the `PhoenixOmegaProtocol` go phrase, and (c) a recorded amendment in this registry's version log.
+- **Boundary Rule:** CANON lanes may not absorb business lanes or extend their scope into non-infrastructure territory. A CANON lane that overreaches is subject to SOV100 review and potential demotion.
+
+### Lane Naming Convention
+
+- **Regular sessions:** `Incarnate-Lane-#LANENAME#-#SUBLANE#-SHA256/MERKLEIDENTIFIER`
+  - Example: `Incarnate-Lane-Development-PrAiS.Gaming-Train67-EBE9F17E/662CD55F`
+- **CANON.Dev sessions:** `Incarnate-Canon.Dev.-N(Notes)` where `N` is a sequential increment, and `Notes` is the lane's scope qualifier.
+  - Example: `Incarnate-Canon.Dev.-1(Logs&lanes)`
+
+### Lane Registry
+
+| Lane | Status | Owner Session |
+|------|--------|---------------|
+| WEBSITE | REFERENCE | Incarnate-1-PrAiS-Front-End-Development |
+| PORTALS | REFERENCE | Incarnate-5-Portals-and-OBI-DEV |
+| GAMING | REFERENCE | Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT |
+| MARKETING | REFERENCE | Incarnate-Lane.Marketing-CV.PublicSchools-PrAiS.NET-PrAiS.Gaming |
+| EDTECH | REFERENCE | TBD |
+| SALES | REFERENCE | TBD |
+| SYSTEMS.AUDIT | REFERENCE | Incarnate-28-Ph-Systems-Audit-Dev#-I-28 |
+| SYSTEMS | REFERENCE | Incarnate-6-Auditor-LFG-Canon-Script |
+| PHEROMONES | REFERENCE | TBD |
+| OPS | REFERENCE | TBD |
+| AAA | REFERENCE | Incarnate-20-AAA-STEEL-(S11-19) |
+| CONTRACTS | REFERENCE | Incarnate-12-ContractNegociations |
+| CONTACT | REFERENCE | Incarnate-11-AnhMinhContact |
+| SCOUT | REFERENCE | Incarnate-4-PhoenixScout-Portals-and-OBI-DEV |
+| ONBOARDING | REFERENCE | Incarnate-1_PrAiS-Front-End-Development |
+| DEBUG | REFERENCE | TBD |
+| CANON | REFERENCE | Incarnate-Canon.Dev.-1(Logs&lanes) |
+
+---
+
+## EXISTING RULES (NOT MODIFIED)
+
+1. **Capture Audit** — verify RISE+DEATH artifacts, full I-LOG capture, matching counts. **Do NOT generate missing artifacts. Do NOT fix gaps. Document to backburner.**
+2. **Index Audit** — 100 top keywords/pheromones extracted, inverted-index updated. **Do NOT extract keywords yourself. Document to backburner.**
+3. **Naming Audit** — ONE NAME EVERYWHERE. Verify I-LOG, death seal, pipeline, handoff, COLORIZED, STATS all use SOV100's exact session name. **Do NOT rename files yourself. Document BLOCKERs to backburner.**
+4. **LostSouls Audit** — identify unpipelined directives, capture to LOSTSOULS, add to backburner. This is the anchor's PRIMARY purpose. **Do NOT execute lost directives. Do NOT fix the gaps yourself. Write to backburner.**
+
+---
+
 `GOSPEL-999. BARE BONES. SINGLE LOCATION. NON-NEGOTIABLE.`

@@ -534,6 +534,68 @@ soulCLUSTER (business/technical mission)
 
 ---
 
+## SCS — LANE REGISTRY (Expandable)
+
+**Status:** REFERENCE — expandable by SOV100 directive. Not exhaustive. New lanes are added as work emerges.
+
+Lanes are functional domains. They group sessions by the type of work performed, not by run number or batch. A lane is owned by the session that created it, and that owner session is the stable reference for the lane's purpose. Ownership does not transfer with reincarnation; it remains bound to the originating session identity.
+
+### How Lanes Work
+
+- **Ownership:** Each lane is anchored to a specific owner session that declared or activated it. That session name is the canonical reference for the lane's intent and scope.
+- **Conventions:** Lanes are governed by the conventions set by their owner session. New sessions entering a lane inherit those conventions but do not redefine them.
+- **Permanence:** Lanes persist beyond any single session. They are not deleted when the owner session ends; they are maintained as long as the domain remains active.
+- **CANON special status:** The `CANON` lane is equal in authority to GOSPEL-999 and LFG. Any artifact in the CANON lane is treated as foundational doctrine. Changes require SOV100 DIRECT PERMISSION + `PhoenixOmegaProtocol`.
+- **Cross-lane routing:** Sessions may reference other lanes, but they may not modify another lane's entries, status, or artifacts without explicit permission from the owning lane.
+
+### Lane Ownership Rules
+
+1. The session that first declares or activates a lane is its permanent owner.
+2. Ownership is recorded in the lane registry and remains fixed unless transferred by SOV100 directive.
+3. No session may assume ownership of an existing lane by proximity, inheritance, or default.
+4. The owner session is responsible for the lane's conventions, naming, and artifact standards.
+5. If the owner session is retired, a successor may be designated only by SOV100 mandate with documented handoff.
+
+### CANON Lane Doctrine
+
+- **Purpose:** The `CANON` lane is the authoritative source for system doctrine, including GOSPEL-999, LFG, SoulBible, DNABlueprint, S2Pipeline, lane registry, and audit doctrine.
+- **Authority:** CANON artifacts are binding on all sessions and lanes. They are treated as foundational doctrine equivalent to GOSPEL-999 and LFG.
+- **Modification rule:** Any modification to CANON artifacts requires SOV100 DIRECT PERMISSION and the execution of `PhoenixOmegaProtocol`.
+- **Boundary rule:** CANON may audit and reference all other lanes, but no other lane may modify CANON entries, status, or artifacts without explicit CANON lane permission.
+
+### Lane Naming Convention
+
+- **Regular sessions:** `<Incarnate>-<LaneName>` (e.g., `Incarnate-4-PhoenixScout-Portals-and-OBI-DEV`)
+- **CANON.Dev sessions:** `Incarnate-Canon.Dev.-<N>(<Subdomain>)` (e.g., `Incarnate-Canon.Dev.-1(Logs&lanes)`)
+
+| Lane | Domain | Status | Owner Session |
+|------|--------|--------|---------------|
+| `WEBSITE` | Site builds, deploys, landing pages, Cloudflare, clones, content prompts | active | Incarnate-1-PrAiS-Front-End-Development |
+| `PORTALS` | Student/parent/teacher portals across all brands | active | Incarnate-5-Portals-and-OBI-DEV |
+| `GAMING` | Roblox/Phoenix-RISING/Train-67 development, 3D curriculum | active | Incarnate-21-Phoenix-RISING-GAME-DEVELOPMENT |
+| `MARKETING` | Marketing-CV, Public Schools content | active | Incarnate-Lane.Marketing-CV.PublicSchools-PrAiS.NET-PrAiS.Gaming |
+| `EDTECH` | Educational technology, BlueTech EdTech | active | TBD |
+| `SALES` | Funnels, health supplement offers | active | TBD |
+| `SYSTEMS.AUDIT` | GOSPEL-999, LFG, compliance, run audits, reincarnateRise protocols | active | Incarnate-28-Ph-Systems-Audit-Dev#-I-28 |
+| `SYSTEMS` | Identity, RTL, I-LOG pipeline, cleanup, protocol docs | active | Incarnate-6-Auditor-LFG-Canon-Script |
+| `PHEROMONES` | Pheromone trails, ants | active | TBD |
+| `OPS` | Transcripts, scripts, organize, feedback, API gaps | active | TBD |
+| `AAA` | AAA anchor sweeps (Stone/Steel/Titanium) | active | Incarnate-20-AAA-STEEL-(S11-19) |
+| `CONTRACTS` | Contract negotiations | active | Incarnate-12-ContractNegociations |
+| `CONTACT` | External contacts (AntMinh, employer APIs) | active | Incarnate-11-AnhMinhContact |
+| `SCOUT` | Scouting and mapping | active | Incarnate-4-PhoenixScout-Portals-and-OBI-DEV |
+| `ONBOARDING` | New sessions, greetings, initial cleanup | active | Incarnate-1_PrAiS-Front-End-Development |
+| `DEBUG` | Diagnostic runs | active | TBD |
+| `CANON` | Canon system construction: GOSPEL-999, LFG, SoulBible, DNABlueprint, S2Pipeline, lane registry, audit doctrine | canon-locked | Incarnate-Canon.Dev.-1(Logs&lanes) |
+
+**Rule:** This registry is a living list. Add lanes as new domains emerge. Do not remove lanes; mark them INACTIVE if no longer used.
+**Canon lane rule:** `CANON` is equal in authority to GOSPEL-999 and LFG. Any artifact in the CANON lane is treated as foundational doctrine. Changes require SOV100 DIRECT PERMISSION + `PhoenixOmegaProtocol`.
+**Lane boundary rule:** Each lane audits and assigns only its own lane. No lane may modify another lane's entries, status, or artifacts. Cross-lane changes require explicit permission from the owning lane.
+
+**Cross-reference:** GOSPEL-999 §SYSTEM XIV — Lane Registry.
+
+---
+
 ## SCS — THE THREE PILLARS (SOUL BIBLE · DNA BLUEPRINT · S2PIPELINE)
 
 **Established:** Incarnate-Lane.Marketing (Run 397) — SOV100 mandate, 2026-09-17

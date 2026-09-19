@@ -22,5 +22,11 @@
     "soulgroups": ["System-Doctrine"],
     "status": "active",
     "color": "#1ABC9C"
+  },
+  "CANON": {
+    "description": "CANON lane — foundational doctrine",
+    "soulgroups": ["CANON"],
+    "status": "canon-locked",
+    "color": "#000000"
   }
 }

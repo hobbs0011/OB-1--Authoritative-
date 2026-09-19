@@ -28,5 +28,11 @@
     "sessions": ["21", "22-PHOENIX", "23", "23-PHOENIX", "27"],
     "status": "active",
     "color": "#E74C3C"
+  },
+  "CANON": {
+    "description": "CANON lane construction — GOSPEL-999, LFG, SoulBible, DNABlueprint, S2Pipeline, lane registry, audit doctrine",
+    "sessions": ["OKT-1"],
+    "status": "canon-locked",
+    "color": "#000000"
   }
 }
