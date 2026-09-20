@@ -1,3 +1,21 @@
-# SPA fallback — serve index.html for any route that doesn't match a file
-# Cloudflare Pages checks existing files first, so all .html pages are served directly
+# HTML file redirects (overrides Cloudflare Pretty URLs 308 redirects)
+# Pretty URLs redirects: /file.html -> /file -> /file/
+# These rules intercept the final URL and serve the original .html file
+/GALAXY-LESSONS/HighSchoolLesson-3/ /GALAXY-LESSONS/HighSchoolLesson-3.html 200
+/GALAXY-LESSONS/NET-Mouse-To-Tiger-Confidence/ /GALAXY-LESSONS/NET-Mouse-To-Tiger-Confidence.html 200
+/GALAXY-LESSONS/TIGER-MAN-TALKS/ /GALAXY-LESSONS/TIGER-MAN-TALKS.html 200
+/HighSchoolLesson-3/ /HighSchoolLesson-3.html 200
+/404/ /404.html 200
+/magic-chat/ /magic-chat.html 200
+/lessons/ /lessons.html 200
+/index/ /index.html 200
+/WEBSITE/ChattyNET-MOBILE-APP-V1.1/ /WEBSITE/ChattyNET-MOBILE-APP-V1.1.html 200
+/WEBSITE/gallery/ /WEBSITE/gallery.html 200
+/WEBSITE/index/ /WEBSITE/index.html 200
+/WEBSITE/privacy/ /WEBSITE/privacy.html 200
+/WEBSITE/terms/ /WEBSITE/terms.html 200
+/WEBSITE/mailala/confirmation/ /WEBSITE/mailala/confirmation.html 200
+/WEBSITE/mailala/index/ /WEBSITE/mailala/index.html 200
+
+# SPA fallback — serve index.html for any unmatched route
 /* /index.html 200
