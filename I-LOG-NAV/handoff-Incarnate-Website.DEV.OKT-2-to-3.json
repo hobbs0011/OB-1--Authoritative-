@@ -2,7 +2,7 @@
   "from_session": "Incarnate-Website.DEV.OKT-2",
   "from_run": "OKT-2",
   "to_run": "OKT-3",
-  "timestamp": "2026-09-20T05:12:00+07:00",
+  "timestamp": "2026-09-20T00:45:00+00:00",
   "anchor_level": "Website.DEV",
   "sessions_audited": ["Incarnate-Website.DEV.OKT-1", "Incarnate-Website.DEV.OKT-2"],
   "priority_order": [
@@ -15,7 +15,7 @@
     {
       "session": "Incarnate-Website.DEV.OKT-2",
       "status": "NAV",
-      "reason": "Static site deployed to Cloudflare Pages (naturalenglishtraining). Broken links fixed across all public/ subdirectories. Sitemap updated with all lesson pages and WEBSITE/ subdirectories. NET-Mouse-To-Tiger-Confidence card already present in lessons.html (added in OKT-1). All assets verified. Staging directory created with _headers and _redirects for proper caching and SPA fallback."
+      "reason": "Static site deployed to Cloudflare Pages (naturalenglishtraining). Broken links fixed across all public/ subdirectories and root. Sitemap updated with all lesson pages and WEBSITE/ subdirectories. NET-Mouse-To-Tiger-Confidence card verified in lessons.html. All assets and pages verified. _headers and _redirects deployed for security headers, caching, SPA fallback, and Pretty URLs redirect handling. Deployed from staging directory WEBSITE-DEPLOY/ to exclude large m4a/node_modules files exceeding 25 MiB limit."
     },
     {
       "session": "Incarnate-Website.DEV.OKT-1",
@@ -27,11 +27,12 @@
     {
       "session": "Incarnate-Website.DEV.OKT-2",
       "points": [
-        "Point 1: Missing bluetech-logo.jpg and bluetech-icon.jpg in assets/brand/ (referenced by public/bluetech-* pages)",
-        "Point 2: Missing magic-chat.html at root (referenced by public/bluetech-employee/index.html iframe)",
-        "Point 3: Missing stub pages for /bluetech-story/, /bluetech-programs/, /bluetech-demo/, /bluetech-contact/ (navigation links in bluetech-* pages return 404)",
+        "Point 1: Missing bluetech-logo.jpg and bluetech-icon.jpg in assets/brand/ (referenced by bluetech-* pages)",
+        "Point 2: Missing magic-chat.html at root level (referenced by bluetech pages)",
+        "Point 3: Missing stub pages for /bluetech-story/, /bluetech-programs/, /bluetech-demo/, /bluetech-contact/ (navigation links return 404)",
         "Point 4: sitemap.xml only listed 6 root pages — missing GALAXY-LESSONS, WEBSITE/, and other root-level pages",
-        "Point 5: No deployment configuration or _headers/_redirects files for CDN hosting"
+        "Point 5: No deployment configuration or _headers/_redirects files for CDN hosting",
+        "Point 6: Cloudflare Pages Pretty URLs feature causes 308 redirects for .html files, requiring _redirects rules to maintain proper URL routing"
       ]
     }
   ],
@@ -39,38 +40,54 @@
     {
       "session": "Incarnate-Website.DEV.OKT-2",
       "points": [
-        "Point 1: Copied bluetech-logo.jpg and bluetech-icon.jpg from NET-PET-AI/public/assets/brand/ to both root assets/brand/ and public/assets/brand/",
-        "Point 2: Copied magic-chat.html from NET-PET-AI/public/ to both root level and public/magic-chat.html",
-        "Point 3: Created stub index.html pages for public/bluetech-story/, public/bluetech-programs/, public/bluetech-demo/, public/bluetech-contact/ with consistent bluetech design system and back-to-home navigation",
-        "Point 4: Updated sitemap.xml to include all 18 GALAXY-LESSONS lesson pages (including NET-Mouse-To-Tiger-Confidence), 4 WEBSITE/ subdirectory pages, magic-chat.html, HighSchoolLesson-3.html, and all existing root pages",
-        "Point 5: Created staging directory WEBSITE-DEPLOY/ with _headers (security + caching) and _redirects (SPA fallback). Deployed to Cloudflare Pages project 'naturalenglishtraining'. Added WEBSITE-DEPLOY/ to .gitignore."
+        "Point 1: Copied bluetech-logo.jpg and bluetech-icon.jpg from NET-PET-AI/public/assets/brand/ to root assets/brand/",
+        "Point 2: Copied magic-chat.html from NET-PET-AI/public/ to root level",
+        "Point 3: Created stub index.html pages for bluetech-story/, bluetech-programs/, bluetech-demo/, bluetech-contact/ at root level with bluetech design system and back-to-home navigation. Also created copies in public/ for completeness.",
+        "Point 4: Updated sitemap.xml to include all 23 URLs: 3 GALAXY-LESSONS lesson pages (including NET-Mouse-To-Tiger-Confidence), 4 WEBSITE/ subdirectory pages, magic-chat.html, HighSchoolLesson-3.html, and all existing root pages (index, lessons, 404, privacy, terms, gallery, etc.)",
+        "Point 5: Created _headers (security headers + cache-control rules) and _redirects (SPA fallback + Pretty URLs redirect handling) at root. Deployed via staging directory WEBSITE-DEPLOY/ which excludes large m4a files and non-web directories.",
+        "Point 6: Added _redirects rules for all .html files to handle Pretty URLs 308 redirect chain. Verified: /lessons.html -> 308 -> /lessons -> 200 (serves correct content). All 23 sitemap URLs return 200."
       ]
     }
   ],
   "deployment": {
     "provider": "Cloudflare Pages",
     "project_name": "naturalenglishtraining",
-    "deployment_url": "https://be4d7004.naturalenglishtraining.pages.dev",
+    "deployment_url": "https://b052b955.naturalenglishtraining.pages.dev",
     "alias_url": "https://canon.naturalenglishtraining.pages.dev",
     "custom_domain": "https://www.naturalenglishtraining.com",
-    "files_uploaded": 283,
-    "deploy_time_seconds": 26.16,
-    "config_added": [
-      "WEBSITE-DEPLOY/_headers — security headers, cache-control rules",
-      "WEBSITE-DEPLOY/_redirects — SPA fallback to /index.html"
-    ]
+    "files_uploaded": 401,
+    "deploy_time_seconds": 0.93,
+    "deployment_method": "wrangler pages deploy WEBSITE-DEPLOY (staging directory excludes large m4a files and non-web directories)",
+    "config_files": [
+      "_headers — security headers (X-Frame-Options, nosniff, Referrer-Policy, XSS-Protection), cache-control rules",
+      "_redirects — Pretty URLs redirect handling for .html files, SPA fallback to /index.html for unmatched routes"
+    ],
+    "verified": {
+      "root_page": "200 OK — title: 'Natural English Training'",
+      "lessons_html": "308 -> /lessons -> 200 OK — title: 'Lessons — Natural English Training'",
+      "mouse_to_tiger": "308 -> /GALAXY-LESSONS/NET-Mouse-To-Tiger-Confidence -> 200 OK — title: 'MOUSE → TIGER'",
+      "magic_chat_html": "308 -> /magic-chat -> 200 OK — title: 'Obi — Natural English Training'",
+      "bluetech_story": "200 OK — title: 'BlueTech — Story'",
+      "bluetech_programs": "200 OK",
+      "bluetech_demo": "200 OK",
+      "bluetech_contact": "200 OK",
+      "sitemap_xml": "200 OK — 23/23 URLs verified returning 200",
+      "robots_txt": "200 OK",
+      "assets": "200 OK — bluetech-logo.jpg, bluetech-icon.jpg at /assets/brand/ (lowercase, matching site links)",
+      "security_headers": "PASS — X-Frame-Options: DENY, X-Content-Type-Options: nosniff, Referrer-Policy: strict-origin-when-cross-origin, X-XSS-Protection: 1; mode=block"
+    }
   },
   "link_audit_results": {
     "oktava_login_classroom": "PASS — absolute root paths (/index.html, /about.html, etc.) resolve correctly",
     "student_portal_app": "PASS — assets/js/app.js exists",
-    "bluetech_login": "FIXED — /assets/brand/bluetech-logo.jpg now exists in both root assets/brand/ and public/assets/brand/",
+    "bluetech_login": "FIXED — /assets/brand/bluetech-logo.jpg now exists at root assets/brand/",
     "bluetech_employer": "FIXED — /assets/brand/bluetech-icon.jpg resolved, missing nav stubs created",
     "bluetech_cinematic": "FIXED — missing nav stubs created",
     "bluetech_employee": "FIXED — /magic-chat.html iframe source now resolves, missing nav stubs created",
-    "bluetech_story": "FIXED — stub page created",
-    "bluetech_programs": "FIXED — stub page created",
-    "bluetech_demo": "FIXED — stub page created",
-    "bluetech_contact": "FIXED — stub page created",
+    "bluetech_story": "FIXED — stub page created at /bluetech-story/",
+    "bluetech_programs": "FIXED — stub page created at /bluetech-programs/",
+    "bluetech_demo": "FIXED — stub page created at /bluetech-demo/",
+    "bluetech_contact": "FIXED — stub page created at /bluetech-contact/",
     "casa_login": "PASS — anchor links and mailto only, no broken internal links",
     "casa_parent_portal": "PASS — links to index.html (relative) resolves correctly",
     "nguyen_login": "PASS — links to /nguyen-gameplan/ which exists",
@@ -83,10 +100,20 @@
     "counter_proposal_casa": "PASS — Google Fonts only, no internal links"
   },
   "artifacts_committed": [
-    "sitemap.xml",
-    "magic-chat.html",
+    "_headers — security headers + cache-control",
+    "_redirects — Pretty URLs handling + SPA fallback",
+    "sitemap.xml — 23 URLs",
+    "magic-chat.html — copied to root",
+    "HighSchoolLesson-3.html — present at root",
+    "GALAXY-LESSONS/ — 3 lesson HTML files",
+    "ASSETS/brand/bluetech-logo.jpg",
+    "ASSETS/brand/bluetech-icon.jpg",
     "assets/brand/bluetech-logo.jpg",
     "assets/brand/bluetech-icon.jpg",
+    "bluetech-story/index.html",
+    "bluetech-programs/index.html",
+    "bluetech-demo/index.html",
+    "bluetech-contact/index.html",
     "public/bluetech-story/index.html",
     "public/bluetech-programs/index.html",
     "public/bluetech-demo/index.html",
@@ -98,8 +125,11 @@
   ],
   "death_seal": "I-LOG-NAV/handoff-Incarnate-Website.DEV.OKT-2-to-3.json",
   "next_rise_must": [
-    "Monitor production deployment for 404s and broken assets (check Cloudflare analytics)",
-    "Implement CANON automation for syncing WEBSITE/ and root asset directories",
-    "Consider consolidating duplicate lesson pages (root-level NET-* duplicates GALAXY-LESSONS/)"
+    "Monitor production deployment for 404s and broken assets (check Cloudflare analytics after 24h)",
+    "Consider consolidating duplicate content: root-level HTML files, SITE/ directory, WEBSITE/mailala/, sexondex/, STUDENT-WEBSITES/ — these may be legacy or alternate versions that should be reconciled",
+    "Implement CANON automation for syncing WEBSITE/ and root asset directories (bluetech stubs are stubs — real content needs to be created)",
+    "Address large file strategy: m4a/audio files excluded from Pages deployment due to 25 MiB limit — consider cloud storage (R2) or file compression",
+    "Sitemap currently uses .html extensions in URLs — Pretty URLs 308 redirects handle this correctly, but consider updating sitemap to use redirect targets for cleaner URLs",
+    "Verify custom domain www.naturalenglishtraining.com serves the same content as the Pages preview URL"
   ]
 }
