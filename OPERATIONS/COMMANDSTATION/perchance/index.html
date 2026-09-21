@@ -1,0 +1,344 @@
+<link rel="stylesheet" href="src/styles.css">
+
+<script type="text/x-server-plugin">
+/* OB-1 PHOENIXCOMMAND — the free always-on command tunnel (perchance server-plugin).
+   Durable `state` (50 MiB) = binary append-only command log:
+   header(64B): magic "OBC1" · ver u16 · nextId u32 · count u32 · dataStart u32 · dataEnd u32
+   then records: u32 len + UTF-8 JSON (id,text,status,claimed_by,result,translation,...)
+   Keeps the newest 500 commands (in-place compaction); older entries drop out. */
+const MAGIC = 0x4F424331, VER = 1, HDR = 64, MAX_KEEP = 500, MAX_TEXT = 4000;
+function u32(o){ return ((state[o]<<24)>>>0) + (state[o+1]<<16) + (state[o+2]<<8) + state[o+3]; }
+function setU32(o,v){ state[o]=v>>>24&255; state[o+1]=v>>>16&255; state[o+2]=v>>>8&255; state[o+3]=v&255; }
+
+function ensureHdr(){
+  if (u32(0) === MAGIC && u32(4) === VER) return;
+  state.fill(0);
+  setU32(0, MAGIC); setU32(4, VER); setU32(8, 1); setU32(12, 0);
+  setU32(16, HDR); setU32(20, HDR);
+}
+ensureHdr();
+
+function utf8Encode(s){
+  const out = [];
+  for (let i=0;i<s.length;i++){
+    let c = s.charCodeAt(i);
+    if (c < 0x80) out.push(c);
+    else if (c < 0x800) out.push(0xc0|(c>>6), 0x80|(c&63));
+    else if (c >= 0xD800 && c <= 0xDBFF && i+1 < s.length){
+      const lo = s.charCodeAt(i+1);
+      if (lo >= 0xDC00 && lo <= 0xDFFF){
+        const cp = 0x10000 + ((c-0xD800)<<10) + (lo-0xDC00);
+        out.push(0xf0|(cp>>18), 0x80|((cp>>12)&63), 0x80|((cp>>6)&63), 0x80|(cp&63)); i++;
+      } else out.push(0xef, 0xbf, 0xbd);
+    } else if (c >= 0xD800 && c <= 0xDFFF) out.push(0xef, 0xbf, 0xbd);
+    else out.push(0xe0|(c>>12), 0x80|((c>>6)&63), 0x80|(c&63));
+  }
+  return out;
+}
+function utf8Decode(b){
+  let s = "", i = 0;
+  while (i < b.length){
+    const x = b[i];
+    if (x < 0x80){ s += String.fromCharCode(x); i++; }
+    else if (x < 0xe0){ s += String.fromCharCode(((x&31)<<6)|(b[i+1]&63)); i += 2; }
+    else if (x < 0xf0){ s += String.fromCharCode(((x&15)<<12)|((b[i+1]&63)<<6)|(b[i+2]&63)); i += 3; }
+    else { const cp = ((x&7)<<18)|((b[i+1]&63)<<12)|((b[i+2]&63)<<6)|(b[i+3]&63); s += String.fromCodePoint(cp); i += 4; }
+  }
+  return s;
+}
+
+function readRecs(){
+  const recs = [];
+  let o = u32(16), end = u32(20);
+  while (o >= HDR && o + 4 <= end && o + 4 <= state.length){
+    const len = u32(o);
+    if (len <= 0 || len > 100000 || o + 4 + len > state.length) break;
+    const bytes = new Array(len);
+    for (let i = 0; i < len; i++) bytes[i] = state[o + 4 + i];
+    try { recs.push(JSON.parse(utf8Decode(bytes))); } catch(e){}
+    o += 4 + len;
+  }
+  return recs;
+}
+function rewriteAll(recs){
+  let w = u32(16);
+  for (const r of recs){
+    const payload = utf8Encode(JSON.stringify(r));
+    const n = 4 + payload.length;
+    if (w + n > state.length) break;
+    state[w] = payload.length>>>24&255; state[w+1] = payload.length>>>16&255; state[w+2] = payload.length>>>8&255; state[w+3] = payload.length&255;
+    for (let i = 0; i < payload.length; i++) state[w+4+i] = payload[i];
+    w += n;
+  }
+  setU32(20, w); setU32(12, recs.length);
+}
+function compact(){ rewriteAll(readRecs().slice(-MAX_KEEP)); }
+function appendRec(r){
+  const payload = utf8Encode(JSON.stringify(r));
+  const need = 4 + payload.length;
+  if (need > state.length - HDR) throw new Error("state full");
+  let end = u32(20);
+  if (end + need > state.length) compact();
+  end = u32(20);
+  if (end + need > state.length) throw new Error("record too large");
+  state[end] = payload.length>>>24&255; state[end+1] = payload.length>>>16&255; state[end+2] = payload.length>>>8&255; state[end+3] = payload.length&255;
+  for (let i = 0; i < payload.length; i++) state[end+4+i] = payload[i];
+  setU32(20, end+need); setU32(12, u32(12)+1);
+}
+function nextId(){ const id = u32(8); setU32(8, id+1); return id; }
+
+function short(t, n){ const s = String(t||"").replace(/\s+/g," ").trim(); return s.length > n ? s.slice(0,n)+"…" : s; }
+
+const FALLBACK = { name:"Legion", id:0, skills:["agent99","route"],
+  interp:t=>`Command routed to the Legion — no specialist match: ${short(t,80)}.`,
+  stress:()=>"No drone keyword matched — confirm intent before executing." };
+const DRONES = [
+  { name:"PhoenixScout", id:1, skills:["recon","canon","sweep"], kw:["scout","recon","sweep","survey","inspect","phetrail","probe"],
+    interp:t=>`Reconnaissance sweep — read-only scan of the canon stack and live services for: ${short(t,80)}. Reports, never changes state.`,
+    stress:()=>"Verify every path/count live before engagement (L58 MAP≠TERRAIN). Canon is private; reads need the stored PAT." },
+  { name:"SoulSearch", id:2, skills:["soul","memory","ledger"], kw:["soul","memory","ledger","search","find","remember","recall","sdnad"],
+    interp:t=>`Soul/memory lookup across the SDNAD ledger for: ${short(t,80)}. Raw fragments only — SOUL is verbatim.`,
+    stress:()=>"Soul counts are per-session only (L31/L32, aggregate retired) — never cite a global number." },
+  { name:"DNA Registry", id:3, skills:["dna","sdnad","capture"], kw:["dna","registry","sdnad","capture","soul-dna","souldna"],
+    interp:t=>`DNA registration — the fragment is captured verbatim into the ledger: ${short(t,80)}.`,
+    stress:()=>"SOUL-CAPTURE-FIRST: the words were captured before translation. Never summarize." },
+  { name:"ForceMarch", id:4, skills:["deploy","pipeline","launch"], kw:["forcemarch","force march","deploy","pipeline","launch","push","stage","ship"],
+    interp:t=>`Execution push — queue the deploy/pipeline run: ${short(t,80)}.`,
+    stress:()=>"GitHub-hosted runners never start on this repo (startup_failure) — prefer the self-hosted runner or the worker." },
+  { name:"NetPet", id:5, skills:["worker","cloudflare","tunnel"], kw:["net-pet","netpet","worker","cloudflare","cf ","tunnel","wrangler"],
+    interp:t=>`Network-pet / Cloudflare worker operation: ${short(t,80)}.`,
+    stress:()=>"Deploy targets: net-pet-ai (prod) vs net-pet-ai-dev. Verify the active line first." },
+  { name:"ImageGen", id:6, skills:["image","art","vision"], kw:["image","img","picture","draw","art","poster","logo","icon","vision"],
+    interp:t=>`Image creation routed to the image node: ${short(t,80)}.`,
+    stress:()=>"Needs the image generator node registered in CGN — else falls back to local generateImage." },
+  { name:"WebLookup", id:7, skills:["web","search","url"], kw:["web","search","url","lookup","fetch","browse","wikipedia"],
+    interp:t=>`Web lookup via superFetch for: ${short(t,80)}.`,
+    stress:()=>"Cross-origin pages need the super-fetch proxy; verify the response is real, not a captcha wall." },
+  { name:"Terminal", id:8, skills:["shell","script","run"], kw:["terminal","shell","script","run command",".ps1",".sh","execute"],
+    interp:t=>`Terminal op — run/verify on the command machine: ${short(t,80)}.`,
+    stress:()=>"Execution happens on the sovereign's machine (D:\\OB-1-CANONICAL) — this chat only queues it." },
+  { name:"Audit", id:9, skills:["audit","verify","compliance"], kw:["audit","verify","compliance","check","validate","gate"],
+    interp:t=>`Audit/verification pass over: ${short(t,80)}.`,
+    stress:()=>"Fail-closed: any gap flags the sector RED until verified." },
+  { name:"Reincarnate", id:10, skills:["reincarnation","lifecycle"], kw:["reincarnat","rise","death","rebirth","purge","soul-cycle"],
+    interp:t=>`Reincarnation lifecycle event: ${short(t,80)}.`,
+    stress:()=>"Death seals the run and purges the session — irreversible. Confirm before execute." },
+  { name:"Queue", id:11, skills:["queue","status","command"], kw:["queue","status","commands","pending","list"],
+    interp:t=>`Queue/status view of the command tunnel: ${short(t,80)}.`,
+    stress:()=>"Queue shows the last 500 commands; oldest completed entries are compacted away." },
+  { name:"Network", id:12, skills:["cgn","network","mesh"], kw:["network","mesh","cgn","connected generator","node","hub"],
+    interp:t=>`Connected Generator Network operation: ${short(t,80)}.`,
+    stress:()=>"CGN hub lives in the obi namespace; nodes must be registered before routing." },
+  { name:"Report", id:13, skills:["report","document","summarize"], kw:["report","document","summar","write up","brief"],
+    interp:t=>`Report/documentation task: ${short(t,80)}.`,
+    stress:()=>"Keep canon pristine — write to PROPOSED-CANON or the archive, never edit canon directly." }
+];
+function classify(text){
+  const t = String(text||"").toLowerCase();
+  let best = FALLBACK, bs = 0;
+  for (const d of DRONES){
+    let s = 0;
+    for (const k of d.kw){ let i = t.indexOf(k); while (i !== -1){ s++; i = t.indexOf(k, i+k.length); } }
+    if (s > bs){ bs = s; best = d; }
+  }
+  return { drone: bs > 0 ? best : FALLBACK, score: bs };
+}
+function priorityOf(text){
+  const t = String(text||"").toLowerCase();
+  if (/\b(urgent|asap|immediately|now|critical|severe|911)\b/.test(t)) return "high";
+  if (/\b(later|someday|whenever|when you can|low|minor)\b/.test(t)) return "low";
+  return "normal";
+}
+function translate(text, meta){
+  const c = classify(text);
+  return {
+    agent99: { interpretation: c.drone.interp(text) },
+    primaryDrone: { name: c.drone.name, id: c.drone.id, score: c.score, skills: c.drone.skills },
+    agent98: { notes: c.drone.stress() },
+    agent97: { trail: "SOUL captured verbatim (L37) · run "+(meta.run||"?")+" · session "+(meta.session||"?")+" · SDNAD" },
+    priority: priorityOf(text)
+  };
+}
+
+const sendLog = new Map();
+function allowSend(conn){
+  const k = String((conn && conn.net && conn.net[3]) || 0), now = Date.now();
+  const e = sendLog.get(k) || { t: [] };
+  e.t = e.t.filter(x => now - x < 60000);
+  if (e.t.length >= 15) return false;
+  e.t.push(now); sendLog.set(k, e);
+  return true;
+}
+function publish(t, m){ try { pubsub.publish(t, m); } catch(e){} }
+function act(conn, data, status, result){
+  let p = {}; try { p = JSON.parse(data); } catch(e){ return JSON.stringify({ok:false,error:"bad json"}); }
+  const id = Number(p.commandId);
+  if (!isFinite(id)) return JSON.stringify({ok:false,error:"bad commandId"});
+  const recs = readRecs();
+  const rec = recs.find(r => r.id === id);
+  if (!rec) return JSON.stringify({ok:false,error:"not found"});
+  if (rec.status === "completed" || rec.status === "failed") return JSON.stringify({ok:true});
+  rec.status = status;
+  if (result) rec.result = String(result).slice(0, 1000);
+  if (!rec.claimed_by) rec.claimed_by = String(p.by || "legion").slice(0, 40);
+  rec.updated_at = Date.now();
+  rewriteAll(recs);
+  publish("cmdq", JSON.stringify({id, status, count: u32(12)}));
+  return JSON.stringify({ok:true});
+}
+
+const safe = fn => (ctx, data) => {
+  try { return fn(ctx, data); }
+  catch(e){ return JSON.stringify({ok:false, error: "server: " + String((e && e.message) || e)}); }
+};
+
+self.rpc = {
+  send: safe((ctx, data) => {
+    let p = {}; try { p = JSON.parse(data); } catch(e){ return JSON.stringify({ok:false,error:"bad json"}); }
+    if (typeof p.command !== "string") return JSON.stringify({ok:false,error:"command must be a string"});
+    const text = p.command.trim().slice(0, MAX_TEXT);
+    if (!text) return JSON.stringify({ok:false,error:"empty command"});
+    if (!allowSend(ctx.conn)) return JSON.stringify({ok:false,error:"rate limited — slow down, sovereign"});
+    const id = nextId();
+    const meta = { run: p.run||0, session: String(p.session||"") };
+    const rec = { id, text, source: String(p.source||"magic chat"), session: meta.session, run: meta.run,
+      status: "pending", claimed_by: null, result: null, created_at: Date.now(), translation: translate(text, meta) };
+    try { appendRec(rec); } catch(e){ return JSON.stringify({ok:false,error:String(e.message||e)}); }
+    publish("cmdq", JSON.stringify({id, status:"pending", count: u32(12)}));
+    return JSON.stringify({ok:true, commandId: id, assignedDrone: rec.translation.primaryDrone.name, translation: rec.translation});
+  }),
+  history: safe((ctx, data) => {
+    let limit = 8;
+    try { const p = JSON.parse(data); limit = Math.max(1, Math.min(200, parseInt(p.limit||"8",10))); } catch(e){}
+    return JSON.stringify({ok:true, commands: readRecs().slice(-limit).reverse()});
+  }),
+  claim: safe((ctx, data) => act(ctx.conn, data, "claimed", "")),
+  complete: safe((ctx, data) => { let p={}; try{p=JSON.parse(data);}catch(e){} return act(ctx.conn, data, "completed", p.result||"executed by Obi magic chat"); }),
+  fail: safe((ctx, data) => { let p={}; try{p=JSON.parse(data);}catch(e){} return act(ctx.conn, data, "failed", p.result||"failed by Obi magic chat"); }),
+  status: safe((ctx, data) => {
+    const recs = readRecs();
+    const counts = {pending:0, claimed:0, completed:0, failed:0};
+    for (const r of recs) counts[r.status] = (counts[r.status]||0)+1;
+    return JSON.stringify({ok:true, count: recs.length, counts, lastId: u32(8)-1});
+  })
+};
+
+self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
+</script>
+
+<div id="app" class="net-shell">
+  <div id="topbar">
+    <div class="logo"><span class="grad">PrAis</span> <span class="divider">/</span> <span class="obi">OBI</span></div>
+    <div class="sub">PhoenixCommand · Command Station</div>
+    <div class="spacer"></div>
+    <button class="tbtn" id="studentsBtn" title="Open the 👤 Student Evaluator tab — pick the client, then the student or class">👤 Student Evaluator</button>
+    <button class="tbtn" id="voiceBtn" title="Toggle spoken voice">🔊 <span id="voiceLbl">Voice on</span></button>
+    <button class="tbtn" id="cmdsBtn" title="All commands">⌘ Commands</button>
+    <button class="tbtn" id="memoryBtn" title="Soul DNA memory ledger">◈ <span id="memoryLbl">Memory</span></button>
+    <button class="tbtn" id="clearBtn" title="Reincarnate (new session)">⟳ Reincarnate</button>
+  </div>
+
+  <div id="tabbar">
+    <button class="tabbtn on" id="tabCmdBtn" data-view="cmd" title="The command station — speak, and the empire listens">⌘ Command Station</button>
+    <button class="tabbtn" id="tabEvalBtn" data-view="eval" title="The evaluation desk — clients, students, classes, writeups and reviews">👤 Student Evaluator</button>
+    <span class="tabfill"></span>
+    <span id="tabMeta" class="tabmeta"></span>
+  </div>
+
+  <div id="memoryPanel" class="hidden">
+    <div class="mp-head">
+      <div style="font-weight:700; font-size:15px">Soul DNA · Memory Ledger</div>
+      <div class="hint">Non-negotiable protocol (L37–L60). Sovereign words captured <b>verbatim</b> — never summarized, never edited. Every session boundary is a <b>reincarnation event</b> (L46).</div>
+      <div id="memStats" class="mem-stats"></div>
+    </div>
+    <div id="memList"></div>
+  </div>
+
+  <div class="views">
+    <div id="viewCmd" class="view">
+      <div id="messages">
+        <div id="empty">
+          <div class="big">⌘</div>
+          <div class="title">I am <b style="color:var(--text)">Obi</b> — the command station.</div>
+          <div class="hint" style="max-width:560px">Speak, and Agent 99 answers — type it or tap 🎙. Every word is Soul DNA: captured verbatim, never edited. Every answer about this station is read from its live state, not guessed — <b>/state</b> shows exactly what it can reach, <b>⌘ /help</b> is the whole shelf, and the <b>👤 Student Evaluator</b> tab is the evaluation desk (record → summarize → write up).</div>
+          <div class="chipgroup">⌘ Command Station</div>
+          <div class="chips">
+            <button class="cmd" data-cmd="/memory">◈ /memory</button>
+            <button class="cmd" data-cmd="/state">◈ /state</button>
+            <button class="cmd" data-cmd="/queue">🗂 /queue</button>
+            <button class="cmd" data-cmd="/network">⛓ /network</button>
+            <button class="cmd" data-cmd="/os">◈ /os</button>
+            <button class="cmd" data-cmd="/playbook">◆ /playbook</button>
+            <button class="cmd" data-cmd="/scout">🦅 /scout</button>
+            <button class="cmd" data-cmd="/tools">⚒ /tools</button>
+            <button class="cmd" data-cmd="/constellation">✧ /constellation</button>
+            <button class="cmd" data-cmd="/web">🌐 /web …</button>
+            <button class="cmd" data-cmd="/weather">🌦 /weather</button>
+            <button class="cmd" data-cmd="/client">👤 /client</button>
+            <button class="cmd" data-cmd="/help">⌘ /help — all commands</button>
+            <button class="cmd" data-cmd="/ilog">🧾 /ilog — the record</button>
+            <button class="cmd" data-cmd="/omega">🔐 /omega — Canon gate</button>
+            <button class="cmd" data-cmd="/forge">⚒ /forge — edit itself</button>
+          </div>
+          <div class="chipgroup">👤 Student Evaluator</div>
+          <div class="chips">
+            <button class="cmd" data-cmd="/transcribe">🎬 /transcribe</button>
+            <button class="cmd" data-cmd="/transcripts">🎧 /transcripts</button>
+            <button class="cmd" data-cmd="/summary">📝 /summary</button>
+            <button class="cmd" data-cmd="/summaries">🗂 /summaries</button>
+            <button class="cmd" data-cmd="/class">🏫 /class</button>
+            <button class="cmd" data-cmd="/writeup">📋 /writeup</button>
+            <button class="cmd" data-cmd="/student">🎒 /student</button>
+            <button class="cmd" data-cmd="/review">📋 /review</button>
+            <button class="cmd" data-cmd="/find ">🔎 /find …</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="composer">
+        <button class="iconbtn" id="micBtn" title="Dictate — speak, the empire listens">🎙</button>
+        <button class="iconbtn" id="mediaBtn" title="Transcribe a video or audio file (drop one on the chat, or paste it)">🎬</button>
+        <textarea id="inputEl" rows="1" placeholder="Speak, and I will remember…"></textarea>
+        <button class="iconbtn primary" id="sendBtn" title="Send">➤</button>
+      </div>
+      <div id="dropHint">🎬 Drop a video or audio recording to transcribe it<br><span class="hint">any length — long ones are split at pauses · Deepgram nova-3 · raw capture into the run log</span></div>
+    </div>
+
+    <div id="viewEval" class="view hidden">
+      <div id="studentsPanel">
+        <div class="ev-head">
+          <div class="ev-title">👤 Student Evaluator</div>
+          <div class="hint">Active client: <b id="clientLbl">Timmy</b> — choose the client below, then the student or class. Every recording, summary, note, review and writeup files under the active client alone: <b>record → summarize → write up</b>. Tapping a desk action opens it in the ⌘ Command Station.</div>
+        </div>
+        <div id="evalActions" class="eval-grid">
+          <button class="eval-tile" data-cmd="/transcribe"><b>🎬 Record a lesson</b><span>Drop or paste a lesson video/audio — any length, verbatim transcript</span></button>
+          <button class="eval-tile" data-cmd="/transcripts"><b>🎧 Recordings</b><span>The archive of saved transcripts (read · parts · export · delete)</span></button>
+          <button class="eval-tile" data-cmd="/summary"><b>📝 Study summary</b><span>Summarize the latest recording (or a URL, or pasted notes)</span></button>
+          <button class="eval-tile" data-cmd="/summaries"><b>🗂 Summaries</b><span>The archive of saved summaries</span></button>
+          <button class="eval-tile" data-cmd="/writeup"><b>📋 Class writeup</b><span>Write up the active class from its filed evidence</span></button>
+          <button class="eval-tile" data-cmd="/review"><b>📝 Student review</b><span>Write up the active student from their filed evidence</span></button>
+          <button class="eval-tile" data-cmd="/writeups"><b>📚 Writeups</b><span>The archive of class writeups</span></button>
+          <button class="eval-tile" data-cmd="/reviews"><b>🗃 Reviews</b><span>The archive of student reviews</span></button>
+          <button class="eval-tile" data-cmd="/find " data-arg="1"><b>🔎 Find evidence</b><span>Verbatim search across transcripts, summaries and notes</span></button>
+          <button class="eval-tile" data-cmd="/clients"><b>◈ Client ledger</b><span>Every client with counts — create · switch · delete</span></button>
+        </div>
+        <div id="selBody"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="src/pheromone.js"></script>
+<script src="src/playbooks.js"></script>
+<script src="src/scout.js"></script>
+<script src="src/ecosystem.js"></script>
+<script src="src/constellation.js"></script>
+<script src="src/clients.js"></script>
+<script src="src/ilog.js"></script>
+<script src="src/app.js"></script>
+<script src="src/forge.js"></script>
+<script src="src/cgn.js"></script>
+<script src="src/audio-split.js"></script>
+<script src="src/transcribe.js"></script>
+<script src="src/summary.js"></script>
+<script src="src/review.js"></script>

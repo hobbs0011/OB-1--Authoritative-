@@ -62,11 +62,16 @@ function cgnNodeId(){
 }
 function cgnSelfName(){ return String(window.generatorName || "obi").replace(/[^a-z0-9-]/gi,"").toLowerCase(); }
 
+/* Where editable files are served from. perchance keeps them on editable.uploads.dev; a
+   self-hosted build points this at its own origin (src/cloudflare/public/ob1-shim.js sets it),
+   keeping the same <base>/<generator>/<file> shape. */
+const CGN_EDIT_BASE = (typeof window !== "undefined" && window.OBI_EDITABLE_BASE) || "https://editable.uploads.dev/file";
+
 function cgnHubUrl(){
-  return `https://editable.uploads.dev/file/${cgnSelfName()}/${cgnS.hubName}`;
+  return `${CGN_EDIT_BASE}/${cgnSelfName()}/${cgnS.hubName}`;
 }
 function cgnNodeUrl(genName){
-  return `https://editable.uploads.dev/file/${String(genName).toLowerCase()}/${CGN_NODE_NAME}`;
+  return `${CGN_EDIT_BASE}/${String(genName).toLowerCase()}/${CGN_NODE_NAME}`;
 }
 
 function cgnEmptyHub(){

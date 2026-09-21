@@ -14,11 +14,11 @@ body{
   display:flex; flex-direction:column; height:100vh; overflow:hidden;
 }
 #topbar{
-  display:flex; align-items:center; gap:10px; padding:12px 16px;
+  display:flex; align-items:center; gap:10px; padding:12px 16px; flex-wrap:wrap;
   background:linear-gradient(90deg,rgba(20,30,52,.9),rgba(12,17,30,.9));
   border-bottom:1px solid var(--line); backdrop-filter:blur(8px);
 }
-.logo{font-size:16px; font-weight:800; letter-spacing:.4px}
+.logo{font-size:24px; font-weight:800; letter-spacing:.4px}
 .logo .grad{background:linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent}
 .logo .divider{color:var(--muted); margin:0 6px; font-weight:400}
 .logo .obi{color:var(--cyan)}
@@ -31,6 +31,66 @@ body{
 }
 .tbtn:hover{background:#1b2440}
 .tbtn.on{background:var(--accent); border-color:var(--accent); color:#05131f}
+#tabbar{display:flex; align-items:center; gap:6px; padding:7px 14px; border-bottom:1px solid var(--line); background:rgba(11,16,28,.72); overflow-x:auto}
+.tabbtn{background:transparent; color:var(--muted); border:1px solid transparent; border-radius:9px; padding:6px 13px; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; white-space:nowrap; display:flex; align-items:center; gap:6px}
+.tabbtn:hover{color:var(--text); background:var(--panel2)}
+.tabbtn.on{color:var(--text); background:linear-gradient(180deg,rgba(110,168,254,.22),rgba(110,168,254,.08)); border-color:var(--accent)}
+.tabfill{flex:1}
+.tabmeta{font-size:10.5px; color:var(--muted); font-family:ui-monospace,monospace; white-space:nowrap; padding-right:6px}
+.tabmeta b{color:var(--cyan); font-weight:700}
+.views{flex:1; min-height:0; min-width:0; display:flex}
+.view{flex:1; min-height:0; min-width:0; display:flex; flex-direction:column}
+.view.hidden{display:none}
+#viewGen{overflow-y:auto; padding:16px 14px 28px; display:block}
+#viewGen.hidden{display:none}
+#viewSet{overflow-y:auto; padding:16px 14px 28px; display:block}
+#viewSet.hidden{display:none}
+#genWrap,#setWrap{width:100%; max-width:1000px; margin:0 auto}
+
+/* ---------------------- ◈ PHOENIX GENERATORS (the shelf) ---------------------- */
+/* one chip, everywhere (states in cards, /state, /tools, /constellation, /queue) */
+.chip{display:inline-block; font-size:10px; font-weight:800; padding:2px 8px; border-radius:999px; font-family:ui-monospace,monospace; letter-spacing:.3px; color:#08101f}
+.div-strip{display:flex; gap:6px; flex-wrap:wrap; margin-top:13px}
+.divbtn{background:transparent; color:var(--muted); border:1px solid transparent; border-radius:9px; padding:6px 12px; font-size:12.5px; font-weight:700; cursor:pointer; font-family:inherit; display:flex; align-items:center; gap:6px; white-space:nowrap}
+.divbtn:hover{color:var(--text); background:var(--panel2)}
+.divbtn.on{color:var(--text); background:linear-gradient(180deg,rgba(110,168,254,.22),rgba(110,168,254,.08)); border-color:var(--accent)}
+.divchip{font-size:9.5px; font-weight:800; font-family:ui-monospace,monospace; letter-spacing:.4px}
+.gen-head{font-size:14px; margin-top:16px}
+.gen-full{color:var(--muted); font-size:11.5px; font-weight:600}
+.gen-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(272px, 1fr)); gap:10px; margin-top:11px}
+.gen-card{border:1px solid var(--line); border-radius:12px; padding:12px; background:var(--panel2); display:flex; flex-direction:column; gap:7px; align-items:flex-start}
+.gen-card[data-status="live"]{border-color:rgba(80,220,130,.35)}
+.gen-top{display:flex; align-items:center; gap:7px; flex-wrap:wrap; width:100%}
+.gen-top .chip{margin-left:auto}
+.gen-ic{font-size:17px}
+.gen-nm{font-weight:800; font-size:13.5px}
+.gen-bl{font-size:11.5px; color:var(--muted); line-height:1.5}
+.gen-does{font-size:11px; color:var(--muted); line-height:1.55}
+.gen-lbl{display:block; font-size:9.5px; letter-spacing:1px; font-weight:800; color:var(--accent); margin-bottom:2px}
+.gen-open{margin-top:2px}
+.gen-foot{margin-top:16px; font-size:11.5px; color:var(--muted); line-height:1.5}
+.gen-foot b{color:var(--accent)}
+.desk-bar{display:flex; align-items:center; gap:10px; margin-top:18px; flex-wrap:wrap}
+.desk-tag{font-size:11px; color:var(--muted); font-family:ui-monospace,monospace; letter-spacing:.3px}
+#genDesk.hidden{display:none}
+#genDesk #studentsPanel{margin-top:11px}
+
+/* ---------------------- ⚙ SETTINGS ---------------------- */
+.set-row{border:1px solid var(--line); border-radius:10px; padding:10px 12px; margin-top:8px; font-size:12.5px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; background:var(--panel2)}
+.set-k{flex:1; min-width:220px}
+.set-k b{display:block; font-size:13px; font-weight:700; margin-bottom:2px}
+.set-k span{color:var(--muted); font-size:11.5px; line-height:1.5}
+.set-tgl{min-width:56px; font-weight:800; font-family:ui-monospace,monospace}
+.set-tgl.on{background:var(--accent); border-color:var(--accent); color:#05131f}
+.ci-act.danger{border-color:rgba(255,123,123,.5); color:#ff9b9b}
+.ci-act.danger:hover{background:rgba(255,123,123,.14); border-color:#ff7b7b}
+.set-instr{border:1px solid var(--line); border-radius:10px; margin-top:9px; overflow:hidden; background:rgba(20,12,34,.4)}
+.set-kv{display:flex; align-items:baseline; gap:10px; padding:6px 12px; border-bottom:1px solid var(--line); font-size:12px}
+.set-kv:last-child{border-bottom:none}
+.set-kv b{color:var(--accent); font-family:ui-monospace,monospace; font-size:11px; letter-spacing:.4px; min-width:110px}
+.set-kv span{color:var(--muted); font-family:ui-monospace,monospace; font-size:11.5px; word-break:break-word}
+
+#studentsPanel{width:100%; max-width:1000px; margin:0 auto; background:rgba(14,20,36,.72); border:1px solid var(--line); border-radius:14px; padding:16px}
 #messages{flex:1; min-height:0; overflow-y:auto; padding:18px 14px; display:flex; flex-direction:column; gap:14px; scroll-behavior:smooth}
 .row{display:flex; width:100%; gap:10px; align-items:flex-end}
 .row.user{justify-content:flex-end}
@@ -43,10 +103,11 @@ body{
 #empty{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--muted); text-align:center; padding:20px}
 #empty .big{font-size:44px; margin-bottom:14px; color:var(--cyan); text-shadow:0 0 24px rgba(57,224,230,.4)}
 #empty .title{font-size:19px; font-weight:700; color:var(--text); margin-bottom:10px}
-#empty .chips{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:22px; max-width:340px; width:100%}
-#empty .cmd{background:var(--panel2); border:1px solid var(--line); border-radius:999px; padding:7px 14px; font-size:12.5px; color:var(--text); cursor:pointer; font-family:inherit; transition:border-color .15s, background .15s}
+#empty .chipgroup{font-size:10.5px; letter-spacing:1.3px; text-transform:uppercase; font-weight:800; color:var(--muted); margin-top:20px}
+#empty .chips{display:grid; grid-template-columns:repeat(auto-fill, minmax(136px, 1fr)); gap:8px; margin-top:22px; max-width:640px; width:100%}
+#empty .chipgroup + .chips{margin-top:9px}
+#empty .cmd{background:var(--panel2); border:1px solid var(--line); border-radius:999px; padding:7px 14px; font-size:12.5px; color:var(--text); cursor:pointer; font-family:inherit; transition:border-color .15s, background .15s; line-height:1.35}
 #empty .cmd:hover{background:#1b2440; border-color:var(--accent)}
-@media (min-width:561px){ #empty .chips{width:auto} }
 #composer{border-top:1px solid var(--line); padding:10px 14px 14px; background:rgba(15,21,34,.85); display:flex; align-items:flex-end; gap:8px}
 #inputEl{flex:1; background:var(--panel2); border:1px solid var(--line); color:var(--text); border-radius:12px; padding:11px 14px; font-size:14.5px; resize:none; outline:none; max-height:140px}
 #inputEl:focus{border-color:var(--accent)}
@@ -54,10 +115,45 @@ body{
 .iconbtn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); border:none; color:#08101f; font-size:19px}
 #micBtn.recording{background:#ff5a5a; border-color:#ff5a5a; color:#fff; animation:pulse 1s infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,90,90,.5)}50%{box-shadow:0 0 0 9px rgba(255,90,90,0)}}
-#app.net-shell{position:relative; flex:1; min-height:0; display:flex; flex-direction:column}
-#memoryPanel{position:absolute; top:56px; right:10px; width:400px; max-width:92vw; z-index:40; background:rgba(14,20,36,.94); border:1px solid var(--line); border-radius:14px; padding:16px; box-shadow:0 12px 40px rgba(0,0,0,.6); max-height:78vh; display:flex; flex-direction:column}
+#app.net-shell{position:relative; flex:1; min-height:0; display:flex; flex-direction:column; text-align:left}
+#dropHint{position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center; gap:6px; z-index:60; background:rgba(7,9,15,.82); color:var(--cyan); font-size:15px; font-weight:700; text-align:center; padding:24px; pointer-events:none; backdrop-filter:blur(3px)}
+#app.dragging #dropHint{display:flex}
+#app.dragging{border:2px dashed var(--accent)}
+.tr-card .tr-bar{height:6px; border-radius:4px; background:rgba(120,160,255,.14); overflow:hidden; width:100%; margin-top:4px}
+.tr-card .tr-bar i{display:block; height:100%; width:0%; background:linear-gradient(90deg,var(--accent),var(--accent2)); transition:width .3s ease}
+.tr-card .tr-bar.indet i{width:34%; animation:trslide 1.15s ease-in-out infinite}
+@keyframes trslide{0%{margin-left:-34%}100%{margin-left:100%}}
+.tr-card .rrow.tr-preview{display:block}
+.tr-card .tr-text{max-height:220px; overflow:auto; white-space:pre-wrap; text-align:left; line-height:1.5; font-size:11.5px}
+.tr-acts{display:flex; flex-wrap:wrap; gap:6px; margin-top:2px}
+.tr-card .tr-out{white-space:pre-wrap; word-wrap:break-word}
+.tr-card .tr-status{font-family:ui-monospace,monospace; text-align:left}
+.tr-card .part-chip{display:inline-block; font-family:ui-monospace,monospace; font-size:10.5px; padding:1px 7px; margin:1px 0; border:1px solid var(--line); border-radius:999px; background:var(--panel2); color:var(--muted)}
+.tr-card .part-chip.ok{border-color:rgba(57,224,230,.55); color:var(--cyan)}
+.tr-card .part-chip.run{border-color:var(--accent); color:var(--accent2); animation:pulse 1.4s infinite}
+.tr-card .part-chip.bad{border-color:#ff7b7b; color:#ff7b7b}
+
+#memoryPanel{position:absolute; top:calc(var(--topbar-h, 56px) + 8px); right:10px; width:400px; max-width:92vw; z-index:40; background:rgba(14,20,36,.94); border:1px solid var(--line); border-radius:14px; padding:16px; box-shadow:0 12px 40px rgba(0,0,0,.6); max-height:78vh; display:flex; flex-direction:column}
 #memoryPanel.hidden{display:none}
 #memoryPanel .mp-head{padding-bottom:10px; border-bottom:1px solid var(--line)}
+#studentsPanel{width:100%; max-width:1000px; margin:0 auto; background:rgba(14,20,36,.72); border:1px solid var(--line); border-radius:14px; padding:16px}
+#studentsPanel .ev-head{padding-bottom:10px; border-bottom:1px solid var(--line)}
+#studentsPanel .ev-title{font-weight:800; font-size:17px; letter-spacing:.2px}
+#selBody{padding:4px 0}
+.eval-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(230px, 1fr)); gap:9px; margin-top:13px}
+.eval-tile{display:flex; flex-direction:column; align-items:flex-start; gap:3px; text-align:left; background:var(--panel2); border:1px solid var(--line); border-radius:11px; padding:10px 12px; color:var(--text); cursor:pointer; font-family:inherit}
+.eval-tile:hover{border-color:var(--accent); background:#1b2440}
+.eval-tile b{font-size:13px; font-weight:700}
+.eval-tile span{font-size:11px; color:var(--muted); line-height:1.4}
+.sel-group{margin-top:12px; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; font-weight:700}
+.sel-row{border:1px solid var(--line); border-radius:10px; padding:8px 11px; margin-top:7px; font-size:12.5px; display:flex; align-items:center; gap:7px; flex-wrap:wrap; background:var(--panel2)}
+.sel-row.on{border-color:var(--accent); background:rgba(110,168,254,.10)}
+.sel-row .sn{font-weight:700}
+.sel-row .ss{width:100%; color:var(--muted); font-size:11px; font-family:ui-monospace,monospace}
+.sel-add{display:flex; gap:6px; margin-top:8px}
+.sel-add input{flex:1; min-width:0; background:var(--panel2); border:1px solid var(--line); color:var(--text); border-radius:8px; padding:6px 9px; font-size:12.5px}
+.sel-add input:focus{outline:none; border-color:var(--accent)}
+.sel-add .ci-act{padding:6px 10px; font-size:12px; line-height:1; white-space:nowrap}
 .hint{font-size:11.5px; color:var(--muted); margin-top:8px; line-height:1.5}
 .hint b{color:var(--accent)}
 .mem-stats{font-size:12px; color:var(--cyan); margin-top:8px; font-family:ui-monospace,monospace}
@@ -68,12 +164,12 @@ body{
 .mem-item .mf{color:var(--accent); font-size:11px; margin-top:5px}
 .mem-item.run .mq{color:var(--cyan); font-style:normal}
 .rise{border:1px solid var(--line); border-radius:12px; overflow:hidden; background:rgba(20,12,34,.6)}
-.rise .rhead{font-size:14px; font-weight:800; padding:9px 12px; background:linear-gradient(90deg,rgba(198,120,255,.18),transparent); border-bottom:1px solid var(--line); color:var(--accent2); letter-spacing:.3px}
+.rise .rhead{font-size:14px; font-weight:800; padding:9px 12px; background:linear-gradient(90deg,rgba(198,120,255,.18),transparent); border-bottom:1px solid var(--line); color:var(--accent2); letter-spacing:.3px; line-height:1.4}
 .rrow{padding:7px 12px; border-bottom:1px solid var(--line); font-size:12.5px; display:flex; align-items:center; gap:8px; flex-wrap:wrap}
 .rrow:last-of-type{border-bottom:none}
 .rrow .vd{margin-left:auto; font-weight:700; font-size:11.5px; color:var(--cyan); font-family:ui-monospace,monospace}
 .rrow.bad .vd{color:#ff7b7b}
-.rrow .rd{width:100%; color:var(--muted); font-size:11.5px; font-family:ui-monospace,monospace}
+.rrow .rd{width:100%; color:var(--muted); font-size:11.5px; font-family:ui-monospace,monospace; line-height:1.55}
 .rise .rfoot{font-size:12px; padding:8px 12px; color:var(--text); font-weight:700; border-top:1px solid var(--line); background:rgba(57,224,230,.06)}
 
 /* ---------------------- PHOENIXCOMMAND · CMD PANEL (styles kept for agent cards) ---------------------- */
@@ -90,20 +186,91 @@ body{
 .chip.failed{background:rgba(255,123,123,.14); color:#ff7b7b; border:1px solid rgba(255,123,123,.4)}
 .cmd-item .ci-sub{display:flex; gap:6px; align-items:center; margin-top:6px; flex-wrap:wrap}
 .cmd-item .ci-drone{font-size:10.5px; color:var(--muted); font-family:ui-monospace,monospace}
-.cmd-item .ci-act{font-size:11px; border:1px solid var(--line); background:var(--panel2); color:var(--text); border-radius:6px; padding:2px 8px; cursor:pointer}
-.ci-act{font-size:11px; border:1px solid var(--line); background:var(--panel2); color:var(--text); border-radius:6px; padding:2px 8px; cursor:pointer}
+.cmd-item .ci-act{font-size:11px; border:1px solid var(--line); background:var(--panel2); color:var(--text); border-radius:6px; padding:2px 8px; cursor:pointer; white-space:nowrap}
+.ci-act{font-size:11px; border:1px solid var(--line); background:var(--panel2); color:var(--text); border-radius:6px; padding:2px 8px; cursor:pointer; white-space:nowrap}
 .ci-act:hover{border-color:var(--accent)}
 .cmd-item .ci-res{font-size:11px; color:var(--cyan); margin-top:4px; font-family:ui-monospace,monospace; white-space:pre-wrap; word-wrap:break-word}
 .cmd-empty{color:var(--muted); font-size:12.5px; padding:10px 2px; font-style:italic}
 
+/* ---------------------- ⌘ COMMAND BOOK (the whole shelf) ---------------------- */
+.cmdbook{display:grid; grid-template-columns:repeat(auto-fill, minmax(235px, 1fr)); gap:8px; margin-top:8px; padding-right:2px}
+.cmdbook + .sel-group{margin-top:20px}
+.rrow + .sel-group{margin-top:18px}
+.cmdbook .cmd{display:flex; flex-direction:column; align-items:flex-start; gap:3px; text-align:left; background:var(--panel2); border:1px solid var(--line); border-radius:9px; padding:9px 11px; color:var(--text); cursor:pointer; font-family:inherit}
+.cmdbook .cmd:hover{border-color:var(--accent); background:#1b2440}
+.cmdbook .cmd b{font-size:12.5px; font-weight:800; font-family:ui-monospace,monospace; color:var(--accent)}
+.cmdbook .cmd .cmd-hint{font-size:11px; color:var(--muted); line-height:1.5}
+.cmdbook .cmd .cmd-hint i{color:var(--cyan); font-style:normal; opacity:.85}
+@media (max-width:560px){ .cmdbook{grid-template-columns:1fr; gap:9px} }
+
 /* ---------------------- PHONE / NARROW (phone-first: 390px and below) ---------------------- */
 @media (max-width:560px){
   #topbar{gap:6px; padding:10px 10px; flex-wrap:wrap}
-  .logo{font-size:13px}
+  .logo{font-size:19px}
   .logo .divider{display:none}
   .sub{display:none}
   .tbtn{padding:7px 9px; font-size:12px}
-  #cmdPanel,#memoryPanel{top:52px; right:6px; width:96vw; max-width:96vw}
+  #tabbar{padding:6px 8px; gap:4px; flex-wrap:wrap; overflow-x:visible}
+  .tabbtn{padding:6px 9px; font-size:12px}
+  .tabmeta{flex:1 1 100%; width:100%; white-space:normal; font-size:10px; line-height:1.45; padding:2px 2px 0; text-align:left; color:var(--muted)}
+  #cmdPanel,#memoryPanel{top:calc(var(--topbar-h, 56px) + 6px); right:6px; width:96vw; max-width:96vw}
+  #viewGen,#viewSet{padding:12px 9px 24px}
+  #studentsPanel{padding:12px}
+  .eval-grid{grid-template-columns:1fr}
+  .gen-grid{grid-template-columns:1fr}
+  .set-k{min-width:0}
+  .set-kv b{min-width:88px}
 }
 
+/* ---- NET ACADEMY lessons (/lesson) — the built lesson opens in an overlay ---- */
+.lf-acts{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+.lf-out{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.82rem;line-height:1.5;opacity:.85;white-space:pre-wrap;word-break:break-word;max-height:9rem;overflow:hidden}
+.lf-overlay{position:fixed;inset:0;z-index:12000;background:rgba(5,5,12,.86);backdrop-filter:blur(6px);display:flex;flex-direction:column;padding:12px;gap:8px}
+.lf-bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:6px 10px;border:1px solid var(--line,#2a2a44);border-radius:10px;background:rgba(26,26,38,.8)}
+.lf-frame{flex:1;width:100%;border:0;border-radius:14px;background:#0f0f1a;box-shadow:0 20px 60px rgba(168,85,247,.35)}
 
+/* ---- 📚 LESSON CREATOR — the desk (Phoenix Generators → NET) ---- */
+#lessonDesk.hidden{display:none}
+#lessonDesk{width:100%; max-width:1000px; margin:0 auto}
+#lessonPanel{background:rgba(14,20,36,.72); border:1px solid var(--line); border-radius:14px; padding:16px; margin-top:11px}
+.lc-head{padding-bottom:10px; border-bottom:1px solid var(--line)}
+.lc-title{font-weight:800; font-size:17px; letter-spacing:.2px}
+.lc-sub{font-size:11px; color:var(--muted); font-family:ui-monospace,monospace; font-weight:600; margin-left:6px}
+.lc-tabs{display:flex; gap:6px; flex-wrap:wrap; margin-top:11px}
+.lctab{background:transparent; color:var(--muted); border:1px solid transparent; border-radius:9px; padding:6px 12px; font-size:12.5px; font-weight:700; cursor:pointer; font-family:inherit}
+.lctab:hover{color:var(--text); background:var(--panel2)}
+.lctab.on{color:var(--text); background:linear-gradient(180deg,rgba(110,168,254,.22),rgba(110,168,254,.08)); border-color:var(--accent)}
+.lc-note{display:none; font-size:12px; color:var(--cyan); font-family:ui-monospace,monospace; padding:7px 10px; margin-top:9px; border:1px solid rgba(57,224,230,.3); border-radius:9px; background:rgba(57,224,230,.06); line-height:1.5}
+.lc-note:not(:empty){display:block}
+.lc-note.bad{color:#ff9b9b; border-color:rgba(255,123,123,.4); background:rgba(255,123,123,.07)}
+#lcBody{padding-top:4px}
+.lc-empty{border:1px dashed var(--line); border-radius:10px; padding:14px; margin-top:11px; font-size:12.5px; color:var(--muted); line-height:1.55}
+.lc-form{display:flex; flex-direction:column; gap:9px; margin-top:9px}
+.lc-f{display:flex; flex-direction:column; gap:4px; font-size:12px; color:var(--muted)}
+.lc-f span{font-weight:700; color:var(--text); font-size:12.5px}
+.lc-f span i{color:var(--muted); font-weight:400; font-style:normal}
+.lc-f input,.lc-f textarea{background:var(--panel2); border:1px solid var(--line); color:var(--text); border-radius:9px; padding:8px 11px; font-size:13px; font-family:inherit; outline:none; width:100%}
+.lc-f input:focus,.lc-f textarea:focus{border-color:var(--accent)}
+.lc-ta{resize:vertical}
+.lc-acts{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px}
+.lc-acts .ci-act{padding:5px 10px; font-size:12px; line-height:1.2}
+.ci-act.primary{background:linear-gradient(135deg,var(--accent),var(--accent2)); border-color:transparent; color:#08101f; font-weight:800}
+.ci-act:disabled{opacity:.55; cursor:default}
+.lc-stream{display:none; white-space:pre-wrap; word-break:break-word; font-family:ui-monospace,monospace; font-size:11.5px; line-height:1.5; color:var(--muted); max-height:130px; overflow:auto; margin-top:10px; padding:9px 11px; border:1px solid var(--line); border-radius:9px; background:rgba(20,12,34,.5)}
+.lc-stream:not(:empty){display:block}
+.lc-spec{width:100%; min-height:190px; margin-top:9px; background:#0b1120; border:1px solid var(--line); color:var(--text); border-radius:9px; padding:10px 12px; font-family:ui-monospace,monospace; font-size:11.5px; line-height:1.5; resize:vertical; outline:none; white-space:pre}
+.lc-spec:focus{border-color:var(--accent)}
+#lessonPanel.lc-busy .lc-spec{opacity:.5}
+.lr-row{border:1px solid var(--line); border-radius:11px; padding:10px 12px; margin-top:9px; background:var(--panel2)}
+.lr-top{display:flex; align-items:baseline; gap:9px; flex-wrap:wrap}
+.lr-top b{font-size:13.5px}
+.lr-tag{margin-left:auto; font-size:10.5px; font-family:ui-monospace,monospace; color:var(--cyan); letter-spacing:.3px}
+.lr-sub{font-size:11px; color:var(--muted); font-family:ui-monospace,monospace; margin-top:3px; line-height:1.5}
+#lessonPanel .sel-group{margin-top:16px}
+#lessonPanel .sel-group:first-child{margin-top:6px}
+@media (max-width:560px){
+  #lessonPanel{padding:12px}
+  .lc-tabs{gap:4px}
+  .lctab{padding:6px 9px; font-size:12px}
+  .lc-acts .ci-act{flex:1 1 auto; text-align:center}
+}

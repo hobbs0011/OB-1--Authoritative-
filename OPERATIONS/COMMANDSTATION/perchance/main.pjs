@@ -1,0 +1,13 @@
+$meta
+  title = Student Summary Generator
+  description = Student Summary Generator — Obi: Agent 99's voice on the PrAis umbrella. Recording a class? Drop the lesson video or audio and get a verbatim transcript — any length, split into parts at pauses and stitched back into one timeline. Then write it up: class writeups and per-student reviews, built only from the filed evidence with verbatim quotes and timestamps. Every sovereign word is Soul DNA (captured verbatim, SDNAD), and commands route through Agent 99 to the Legion over a free always-on command tunnel (perchance server-plugin — a durable queue, no card, no external worker). Chat, vision, image gen, web lookup, voice dictation, transcription, and the Connected Generator Network (CGN). And the station can read and rewrite its own source — /forge, the self-forge, gated by PHOENIXOMEGAPROTOCOL.
+  tags = summary, study, transcription, class, writeup, review, teacher, ai, chat, assistant, memory, sdnad, legion, phoenixcommand, pr-ais, command, vision, image, tts, self-forge, self-editing
+  header
+    mode = minimal
+
+generateText = {import:ai-text-plugin}
+generateImage = {import:text-to-image-plugin}
+superFetch = {import:super-fetch-plugin}
+uploadPlugin = {import:upload-plugin}
+createServerSocket = {import:server-plugin}
+kv = {import:kv-plugin}
