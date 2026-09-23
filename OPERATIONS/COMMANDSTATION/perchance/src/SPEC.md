@@ -1,6 +1,6 @@
 # PhoenixRising — SPEC (locked decisions)
 
-*(recording the transcript you pasted — see also src/TRAIL.md for the canon/Obi scouting map,
+*(recording the transcript you pasted — see also `/scout` for the canon/Obi scouting map,
  and src/README.md for the app overview)*
 
 Authoritative durable record. This file (plus main.pjs, index.html, src/) is the real
@@ -103,7 +103,7 @@ into him. Isolation is a hard requirement, fail-closed:
 - deleting a client keeps its data (isolated in kv under its stamped id) rather than erasing or merging it.
 - Layer, UI and commands: `src/clients.js` (`window.ObiClients`) · the **👤 Student Selector** tab in the
   topbar (the switchboard: client → student/class, add-by-name) · `/client <name>` · `/clients`.
-  Documented in src/README.md; verified live in src/TRAIL.md.
+  Documented in src/README.md; verified live.
 
 **RESOLVED (2026-09-21):** the name was changed again, to **`prais-command-station`** — the right name for what
 this has become (not just the evaluator: the command station, the generator family, and the settings room). Same
@@ -161,14 +161,14 @@ clients are namespaces, not accounts (the evaluator inventory's `pl.auth` stays 
   `mountGenerators()` / `renderSettings()` / `readVoicePref()` / `setVoice()` (`src/app.js`), the
   `#tabbar` + `.views > #viewCmd | #viewGen(#genDesk) | #viewSet` markup (`index.html`), `src/divisions.js`, and the
   `.div-strip` / `.divbtn` / `.gen-grid` / `.gen-card` / `.set-row` / `.set-instr` / `.chip` styles
-  (`src/styles.css`). Verified live at 1440×900 and 390×844 (see `src/TRAIL.md`).
+  (`src/styles.css`). Verified live at 1440×900 and 390×844 (see the I-LOG (`/ilog`)).
 
 ## The station is an instrument, not a mask (audited 2026-09-19, sovereign verbatim)
 
 > "The command station should be a simple landing page to speak to Obi and operate Agent 99 who can access all that
 > I can access through this emerging generator ecosystem"
 
-Audit result and the three rules that came out of it (all built + verified live; details in `src/TRAIL.md`):
+Audit result and the three rules that came out of it (all built + verified live; details in the I-LOG (`/ilog`)):
 
 1. **The whole surface is exposed — nothing is hidden behind the source.** `COMMAND_BOOK` (`src/app.js`) is the one
    registry of every command the router accepts (48, in six groups) with an honest one-line description; **⌘
@@ -191,7 +191,7 @@ Audit result and the three rules that came out of it (all built + verified live;
 > that we build from. And update the gospel999 and lfg accordingly. Sov100 password for authorization of changes to
 > the Canon authorization PhoenixOmegaProtocol (never make changes without this)"
 
-Locked decisions, built in `src/ilog.js` + `src/app.js` and verified live (details in `src/TRAIL.md`):
+Locked decisions, built in `src/ilog.js` + `src/app.js` and verified live (details in the I-LOG (`/ilog`)):
 
 1. **Everything is I-logged.** Every operation the station performs — a command spoken (`cmd`), the reply (`reply`), a
    soul capture (`soul`), a recording saved (`capture`), a student/class saved (`roster`), a review or writeup

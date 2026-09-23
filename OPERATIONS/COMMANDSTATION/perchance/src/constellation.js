@@ -97,9 +97,9 @@
       iface: { commands: ["#login (PIN)", "#parent", "#student", "study request", "daily log"], endpoints: [] },
       cgn: { net: "obi-network", role: "portal" },
       deepLink: "?student=<name> — the portal knows whose it is",
-      scaffold: "src/generators/student-portal/ (main.pjs · index.html · README — the generalized Timmy's Portal)",
-      needs: ["generalize src/timmy-portal/ (currently a stale hand-built snapshot)", "change PINs + move the check server-side", "CGN node so the portal's captures flow into the student's file"],
-      notes: "The sovereign's stated direction: one generator per student. The portal is the *student's* surface; the station stays the teacher's. Timmy's Portal is instance #1 — live, but not yet a CGN node, and its local copy is stale."
+      scaffold: "src/generators/student-portal/ (main.pjs · index.html · README — the generalized client portal)",
+      needs: ["the old hand-built snapshot was wiped 2026-09-22 (its client dropped) — build the next portal from src/generators/student-portal/, not from that file", "change PINs + move the check server-side", "CGN node so the portal's captures flow into the student's file"],
+      notes: "The sovereign's stated direction: one generator per student. The portal is the *student's* surface; the station stays the teacher's. The first real instance was retired with its client on 2026-09-22 (face.client-portal); the next one is built from the generalized source, and nothing about it is live until it runs."
     },
     {
       id: "node.practice", family: "nodes", kind: "generator", role: "practice",
@@ -118,8 +118,37 @@
       tagline: "every student, one board: who is behind, who is ready, what was never taught",
       iface: { commands: ["/roster", "/term", "/coverage", "/who"], endpoints: [] },
       cgn: { net: "obi-network", role: "watchtower" },
-      needs: ["read the CGN hub for every portal + the station's rosters", "term progress across students", "coverage-vs-syllabus (the biggest missing tool in the evaluator stack)"],
+      needs: ["read the CGN hub for every portal + the station's rosters", "term progress across students", "coverage-vs-syllabus — the engine now exists in the station (/coverage · src/curriculum.js, built 2026-09-21); the watchtower is it at class scale"],
       notes: "The station can already write one student's review; the watchtower is the class-level view — the parent question ('what did we pay for?') answered with evidence."
+    },
+
+    {
+      id: "node.site", family: "nodes", kind: "generator", role: "site",
+      name: "Site Builder — the hand that puts a page on the web", status: "scaffold",
+      url: null, plannedUrl: "https://perchance.org/prais-site-builder",
+      tagline: "a brief goes in, a real self-contained website comes out — previewed, downloadable, and honest about who can publish it",
+      iface: { commands: ["/plan <brief>", "/build <brief>", "/sites", "/open <n>", "/dl <n>", "/brand on|off", "/deploy"], endpoints: [] },
+      cgn: { net: "obi-network", role: "site" },
+      deepLink: "?brief=<text> — opens with the brief filled and builds",
+      scaffold: "src/generators/site-builder/ (README · main.pjs · index.html · src/app.js · src/styles.css · src/cgn-node.js)",
+      needs: ["create the generator from src/generators/site-builder/ and open it once (it writes its node file)", "/netadd <name> site",
+              "a publish path: the Cloudflare build is in src/cloudflare/ but deploying needs the sovereign's account (no token held → BLOCKED)"],
+      notes: "The Web Development division's first generator (the division was empty until this). It reuses the website machinery already built — src/cloudflare/ (one Worker, two Durable Objects, build.mjs asserting every <script src> resolves), face.prais on Cloudflare Pages — and the build-in-parts machinery proven in src/freephoenix.js (unfinished part ends <<<MORE>>>). It builds ONE self-contained HTML file per site (the same law as a lesson, a deck, a built app), previews it in a sandboxed iframe and files it locally. It cannot publish and it says so: publishing is the sovereign's account, and a write to the authority is the station's PHOENIXOMEGAPROTOCOL gate. MARKED scaffold ON PURPOSE — the source is written and parse-checked but has never run in a generator of its own."
+    },
+
+    {
+      id: "node.video", family: "nodes", kind: "generator", role: "video",
+      name: "Video Node — the eye", status: "scaffold",
+      url: null, plannedUrl: "https://perchance.org/prais-video-node",
+      tagline: "the drop station — video · pictures · links · words in; a blueprint, a reel and a verdict out",
+      iface: { commands: ["/sweep", "/sweepone <n>", "/activate <n>", "/queue", "/zipall", "/pulse [n]", "/plan [n]", "/test", "/links <a b c…>", "/cross", "/prompt <words>", "/research", "/blueprint", "/orders", "/perfect", "/audit", "/gate", "/assemble", "/doc", "/ship", "/frames [n]", "/sheet", "/shorts [n] [s]", "/vibe", "/hand", "/all", "/save", "/add <url…>", "/stills-reel", "/reel", "/preview", "/poster", "/lookup <url>", "/story", "/dress", "/sold"], endpoints: [] },
+      cgn: { net: "obi-network", role: "video" },
+      deepLink: "?brief= (outbound, to the Site Builder — the vision pass writes the brief the builder takes)",
+      scaffold: "src/generators/video-node/ (README · main.pjs · index.html · src/app.js · src/pulse.js · src/reel.js · src/story.js · src/drop.js · src/styles.css · src/cgn-node.js)",
+      needs: ["create the generator from src/generators/video-node/ and open it once (it writes its node file)", "/netadd <name> video",
+              "the venue's own music as the reel's bed (a file off the disk — nothing is uploaded)",
+              "paste main.pjs as-is: it imports text-to-image-plugin so the image hand can be run in-node"],
+      notes: "Built for one sentence from the sovereign: 'I cannot attach the videos because 20MB is too big? fix that by making possible in the generator.' A file chosen from disk is read with the File API, so the chat's attachment cap simply does not exist in here. It has since grown into the DROP STATION — four doors (video · pictures · links · the owner's own words) and one conductor. Footage in → a queue read one at a time (a 4 GB file costs what a 4 MB one does), stills, a timecoded contact sheet, THE PULSE (src/pulse.js: a motion walk + a loudness pass, normalised against the file's own floor and peak, with a stillness floor so quiet parts are never padded into clips), clips cut from the measured peaks, and the look in words. Links in → every address fetched live through superFetch and read IN CODE, then the LINK AUDIT (linked · given-but-not-linked · on the site but never given · named but never linked · absent) plus phone/address disagreement detection. Words in → research (the model's industry knowledge is labelled `rule of thumb, not measured`), a blueprint for the first prototype, and orders for whatever is missing. Then THE THREE HANDS ARE RUN, not described: the image hand (text-to-image-plugin, in-node), the copy hand (the register — src/story.js IS the copy hand; there is no separate copy agent in the family), and the video hand (this node: it renders the film). Every order is re-audited, so an order only reads PASS when a hand actually made it. Then THE GATE answers one question — READY TO EXECUTE / NOT YET COMPLETE / BLOCKED — where only a fault in this node's OWN output (an invented number, a withheld line, a file that will not play back) is allowed to block; a fault in the client's own site becomes an order for the prototype. The register's law is enforced in code: no number the offering does not state (and with no offering, no digit at all), and no register example reused. Measured live: 12 venue photographs and canon.mailala.pages.dev read → a 29.9s 1080×1920 MP4 with an AAC bed, 897 frames, written in 6.5s and read back as playable; and a full station run on the same venue → 4 links read, 6 industry must-haves, a 6-section blueprint, 5 assets made, a 8.9s MP4 rendered, 8 pass / 5 warn / 1 hole / 0 fail, gate NOT YET COMPLETE. MARKED scaffold ON PURPOSE — exercised end to end in a harness, but never yet a generator of its own."
     },
 
     /* -------------------------------- FACES -------------------------------- */
@@ -135,15 +164,14 @@
       notes: "Live and read: 'Phoenix Rising AI solutions that remember… smarter architecture'. The natural public face of the offering catalogue (src/AGENT99-OS.md §4)."
     },
     {
-      id: "face.timmy", family: "faces", kind: "site", role: "client-portal",
-      name: "Timmy's Portal — instance #1", status: "live",
-      url: "https://timmy-portal.mrmichaelhobbs123.workers.dev/",
-      expect: "Timmy",
-      tagline: "a real student/parent portal, in the hands of a real family",
-      iface: { commands: ["#login", "#parent", "#timmy", "#gameplan"], endpoints: [] },
-      cgn: { net: "obi-network", role: "portal" },
-      host: "Cloudflare Worker",
-      notes: "42.7 KB live vs 41.8 KB in src/timmy-portal/ — the local copy is a STALE SNAPSHOT. Read the deployed file or have the sovereign hand over the current source before building on it. PINs are still the defaults; that is an open to-do."
+      id: "face.client-portal", family: "faces", kind: "site", role: "client-portal",
+      name: "Client portal — retired", status: "retired",
+      url: null, deployedUrl: "https://timmy-portal.mrmichaelhobbs123.workers.dev/",
+      tagline: "the first client's portal — retired with the client, 2026-09-22",
+      iface: { commands: ["#login", "#parent", "#gameplan"], endpoints: [] },
+      cgn: null,
+      host: "Cloudflare Worker — deployment left in place; the source was wiped from src/",
+      notes: "WIPED 2026-09-22 at the sovereign's instruction — \"timmy dropped us, so wipe him\". The client record is out of the ledger, src/timmy-portal/ is gone from the tree, and the scout no longer probes it. The Worker deployment itself is untouched (it is the sovereign's account, not this station's to delete), so the URL is recorded here as a fact rather than as a live service this station watches. The generalized replacement design is src/generators/student-portal/."
     },
 
     /* ------------------------------ SERVICES ------------------------------- */
@@ -208,7 +236,7 @@
       iface: { commands: ["/cf status", "/cf deploy"], endpoints: [] },
       cgn: null,
       needs: ["a Cloudflare API token in this browser (/cf token <token>) — held nowhere right now"],
-      notes: "Last full scan (recorded in TRAIL.md): 20 Workers, 10 Pages, 2 D1, 8 KV, 0 zones. Without a token the scout can only report BLOCKED — never guess."
+      notes: "Last full scan (recorded in the I-LOG): 20 Workers, 10 Pages, 2 D1, 8 KV, 0 zones. Without a token the scout can only report BLOCKED — never guess."
     }
   ];
 

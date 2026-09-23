@@ -40,8 +40,18 @@
      STATE classes (empty/selected/correct/wrong on the feedback + choice pills)
      and the writing-task class are part of the contract too. */
   const CLASSES = ["dialogue-block","speaker","chatty-clue","chatty-hint","vocab-list","vocab-item",
-                   "chatty-choices","chatty-feedback","summary-card","write-task",
+                   "chatty-choices","chatty-feedback","summary-card","write-task","reading","game",
                    "empty","selected","correct","wrong"];
+  /* THE GAMES (the lesson's own runtime plays them — no scripts in the content).
+     One element, three game types, driven entirely by data attributes:
+       <div class="game" data-game="scramble" data-items="cooker=the machine you cook on;pot=…"></div>
+       <div class="game" data-game="match"    data-items="shelf=a flat board on the wall;…"></div>
+       <div class="game" data-game="sort"     data-groups="Identity: clothes, food, language | Home: shelf, pot"></div>
+     Scramble: the learner clicks letter tiles in order to rebuild each word.
+     Match:    click a word, then its meaning — a wrong pair shakes and releases.
+     Sort:     click a chip, then the group it belongs to.
+     Every correct answer pays the lesson's own coin reward; nothing is scored twice. */
+  const GAMES = ["scramble","match","sort"];
   /* the spine (LSN-4) — the four anchors never move */
   const SPINE = [
     { at:0,     graphic:"🏠", label:"Warm-Up", what:"welcome + what you will leave with, as bullets", fixed:true },
@@ -93,10 +103,17 @@
     const labelOf = r => String((r && r.label) || "").toLowerCase();
     if(rooms.length){
       if(!/warm/.test(labelOf(at(0))))  errors.push("room 1 must be the warm-up (label contains 'warm')");
-      if(labelOf(at(3)) !== "learn")    errors.push("room 4 must be the learn room (label exactly 'learn')");
-      if(!/test|quiz/.test(labelOf(at(4)))) errors.push("room 5 must be the test room (label 'test' or 'quiz')");
       if(!/mastery|finish/.test(labelOf(last))) errors.push("the last room must be the exit (label 'mastery' or 'finish')");
     }
+    /* THE ANCHORS ARE FOUND BY LABEL, NOT BY POSITION. The spine still opens with the
+       warm-up and closes with the exit, and the learn room still comes before the test
+       room — but a lesson may now carry MORE rooms than the six (games, extra practice,
+       a reading room) without breaking the check. */
+    const learnIdx = rooms.findIndex(r => labelOf(r) === "learn");
+    const testIdx  = rooms.findIndex(r => /test|quiz/.test(labelOf(r)));
+    if(learnIdx < 0) errors.push("no learn room — one room must be labelled 'learn' (exactly)");
+    if(testIdx  < 0) errors.push("no test room — one room must be labelled 'test' or 'quiz'");
+    if(learnIdx >= 0 && testIdx >= 0 && testIdx < learnIdx) errors.push("the test room must come after the learn room");
     rooms.forEach((r, i) => {
       const n = "room " + (i+1);
       if(!r || !r.graphic) errors.push(n + ": no graphic emoji");
@@ -110,12 +127,12 @@
       const styleAttr = (c.match(/style="([^"]*)"/g) || []);
       styleAttr.forEach(s => { const decl = s.slice(7, -1); if(!/^(margin[^;]*;?\s*)+$/.test(decl)) errors.push(n + ": inline style is only allowed for margin one-offs"); });
     });
-    const learn = at(3) || {}; const learnC = String(learn.content || "");
+    const learn = (learnIdx >= 0 ? rooms[learnIdx] : {}) || {}; const learnC = String(learn.content || "");
     const vocab = (learnC.match(/class="vocab-item"/g) || []).length;
     if(vocab < 3) errors.push("the learn room needs a .vocab-list with 3+ .vocab-item (found " + vocab + ")");
     if(vocab && (learnC.match(/<strong>/gi) || []).length < vocab) errors.push("every vocab item needs a <strong> term");
 
-    const test = at(4) || {}; const testC = String(test.content || "");
+    const test = (testIdx >= 0 ? rooms[testIdx] : {}) || {}; const testC = String(test.content || "");
     const blocks = (testC.match(/class="chatty-choices"/g) || []).length;
     if(!blocks) errors.push("the test room needs at least one .chatty-choices block");
     const answers = (testC.match(/data-answer="/g) || []).length;
@@ -132,7 +149,7 @@
     if(lis < 3) errors.push("the summary card needs 3+ <li> takeaways (found " + lis + ")");
     if(!/level up/i.test(lastC) && lastC.indexOf("<textarea") === -1) errors.push("the exit needs either a Level Up hint or a writing <textarea>");
 
-    const before = rooms.slice(0, 4).map(r => String((r && r.content) || "")).join("");
+    const before = rooms.slice(0, learnIdx < 0 ? 4 : learnIdx).map(r => String((r && r.content) || "")).join("");
     if(before.indexOf("chatty-clue") === -1) errors.push("no .chatty-clue before the test — Chatty must do the reality check");
     if(before.indexOf("chatty-hint") === -1) errors.push("no .chatty-hint before the test — Chatty must give the transferable rule");
 
@@ -179,6 +196,11 @@
 "body::after{bottom:-20%;right:-10%;background:radial-gradient(circle,var(--gold),transparent 60%);animation:pulse 12s infinite alternate-reverse}",
 "@keyframes pulse{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.3) translate(20px,20px)}}",
 ".landing{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;position:relative;z-index:1}",
+/* LSN-32 (2026-09-23): flex items shrink by default, so on a phone a long hero
+   title was squashed into a box shorter than its own glyphs and the status bar printed
+   over the last line. A lesson named the school's way is a full guide row, not a short
+   brand name, so the hero must never be allowed to shrink: it overflows and scrolls. */
+".landing>*{flex:0 0 auto}",
 ".hero-logo{width:140px;height:140px;margin-bottom:2rem;animation:heroFloat 3s ease-in-out infinite;filter:drop-shadow(0 0 50px var(--neon-purple));display:flex;align-items:center;justify-content:center;font-size:5rem;line-height:1}",
 "@keyframes heroFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-25px) rotate(5deg)}}",
 ".hero-title{font-size:clamp(3rem,10vw,7rem);font-weight:800;background:linear-gradient(135deg,var(--neon-purple),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1.5rem;text-align:center;letter-spacing:-.02em;animation:titleGlow 3s ease-in-out infinite}",
@@ -245,9 +267,78 @@
 ".summary-card li::before{content:'\\2728';position:absolute;left:0;font-size:1.3rem;filter:drop-shadow(0 0 15px var(--gold));animation:sparkle 2s ease-in-out infinite}",
 "@keyframes sparkle{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.2) rotate(15deg)}}",
 ".write-task{width:98%;min-height:80px;border-radius:.6rem;margin-top:.8rem;border:1.5px solid var(--neon-purple);background:rgba(38,38,60,.2);color:var(--text-primary);font-size:1rem;padding:.7rem;font-family:var(--font-ui)}",
+".reading{background:rgba(38,38,60,.7);border:1px solid var(--glass-border);border-left:4px solid var(--gold);border-radius:1rem;padding:1.4rem;margin-bottom:1.4rem;line-height:1.8}",
+".game{background:rgba(26,26,38,.75);border:1px solid rgba(168,85,247,.35);border-radius:1.2rem;padding:1.4rem;margin-bottom:1.6rem;box-shadow:0 8px 30px rgba(0,0,0,.35)}",
+".g-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1rem}",
+".g-name{font-weight:800;color:var(--gold);letter-spacing:.02em}",
+".g-score{font-size:.9rem;opacity:.85}",
+".g-row{margin-bottom:1.1rem}",
+".g-hint{font-size:.95rem;opacity:.9;margin-bottom:.5rem}",
+".g-tiles{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.5rem}",
+".g-tile,.g-slot{font-family:var(--font-ui);font-weight:700;font-size:1.05rem;border-radius:.6rem;padding:.5rem .7rem;min-width:2.3rem;text-align:center}",
+".g-tile{background:rgba(38,38,60,.9);border:2px solid var(--neon-purple);color:var(--text-primary);cursor:pointer;transition:all .2s}",
+".g-tile:hover:not([disabled]){background:rgba(168,85,247,.3);border-color:var(--gold);transform:translateY(-2px)}",
+".g-tile.used{opacity:.25;pointer-events:none}",
+".g-slot{display:inline-block;background:rgba(15,15,26,.8);border:2px dashed rgba(168,85,247,.5);color:var(--gold);margin-right:.3rem;min-height:2.4rem}",
+".g-row.ok .g-slot{border-style:solid;border-color:#22c55e;color:#bbf7d0}",
+".g-row.bad .g-tiles{animation:shake .5s}",
+".g-btn{background:linear-gradient(135deg,var(--neon-purple),var(--gold));color:var(--deep-dark);font-weight:700;border:none;border-radius:999px;padding:.5rem 1.2rem;cursor:pointer;font-family:var(--font-ui);font-size:.95rem}",
+".g-btn.ghost{background:transparent;border:1.5px solid var(--neon-purple);color:var(--text-primary)}",
+".g-cols{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}",
+".g-item{background:rgba(38,38,60,.85);border:2px solid var(--neon-purple);border-radius:.8rem;padding:.7rem .9rem;cursor:pointer;transition:all .2s;line-height:1.4}",
+".g-item:hover:not(.done){border-color:var(--gold);transform:translateX(4px)}",
+".g-item.picked{background:rgba(245,158,11,.25);border-color:var(--gold)}",
+".g-item.done{background:rgba(34,197,94,.18);border-color:#22c55e;cursor:default}",
+".g-item.bad{animation:shake .5s;border-color:#ef4444}",
+".g-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}",
+".g-buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.8rem}",
+".g-bucket{background:rgba(15,15,26,.6);border:2px dashed rgba(168,85,247,.5);border-radius:.9rem;padding:.8rem;min-height:4.5rem;cursor:pointer;transition:all .2s}",
+".g-bucket.on{border-style:solid;border-color:var(--gold)}",
+".g-bucket b{display:block;color:var(--gold);margin-bottom:.4rem;font-size:.95rem}",
+".g-bucket .g-placed{display:inline-block;background:rgba(34,197,94,.2);border:1px solid #22c55e;border-radius:999px;padding:.15rem .6rem;margin:.15rem .2rem;font-size:.9rem}",
+".g-score.win{color:#bbf7d0}",
+".g-slots{margin-bottom:.5rem}",
+".g-bucket.bad{animation:shake .5s;border-color:#ef4444}",
+"@media (max-width:520px){.g-cols{grid-template-columns:1fr}}",
 ".coins-display{position:fixed;top:20px;right:20px;background:var(--glass-bg);backdrop-filter:blur(12px);border:1px solid var(--glass-border);border-radius:999px;padding:.8rem 1.5rem;font-size:1.2rem;font-weight:700;color:var(--gold);box-shadow:0 0 25px rgba(168,85,247,.4);z-index:1000;display:none;align-items:center;gap:.5rem}",
 ".coins-display.active{display:flex}",
 ".coins-display.bump{animation:correctPulse .6s}",
+/* ---- BRAND LAYER (AMENDMENT III / BRAND.002 + BRAND.004) ------------------
+   The frozen tokens stand: --neon-purple is the system, --gold is the reward,
+   --deep-dark is the ground (LESSON.008). This adds the chrome the dossier gave
+   the family and nothing else: the plum court, the antique-gold hairline and
+   corner bracket, the monospace status bar, the sigil. It may not restyle a
+   lesson for a topic's mood — that is still the breach LESSON.008 names. */
+":root{--hud-court:#3b1d5c;--hud-court-deep:#2a1040;--hud-ancient:#e8c565;--hud-line:rgba(120,80,200,.35);--hud-mono:JetBrains Mono,ui-monospace,SFMono-Regular,Menlo,monospace}",
+".rooms-container{border-radius:.4rem;border-color:rgba(232,197,101,.22);box-shadow:0 10px 40px rgba(0,0,0,.5),0 0 80px rgba(168,85,247,.25),inset 0 0 60px rgba(59,29,92,.35)}",
+".rooms-container::before{content:'';position:absolute;top:7px;left:7px;width:20px;height:20px;border-top:2px solid var(--hud-ancient);border-left:2px solid var(--hud-ancient);pointer-events:none;z-index:11;opacity:.85}",
+".rooms-container::after{content:'';position:absolute;bottom:7px;right:7px;width:20px;height:20px;border-bottom:2px solid var(--hud-ancient);border-right:2px solid var(--hud-ancient);pointer-events:none;z-index:11;opacity:.85}",
+".hud-bar{font-family:var(--hud-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--hud-ancient);opacity:.82;line-height:1.7;text-align:center;max-width:760px;margin:0 auto}",
+".hud-bar .sep{opacity:.5;margin:0 .35em}",
+".hud-bar b{color:#fff;font-weight:700}",
+".hud-sigil{display:inline-block;background-size:contain;background-repeat:no-repeat;background-position:center;filter:drop-shadow(0 0 14px rgba(232,197,101,.5))}",
+".hud-hero{display:flex;align-items:center;justify-content:center;gap:1.1rem;margin-bottom:1.2rem;flex-wrap:wrap}",
+".hud-hero .hud-sigil{width:62px;height:62px}",
+".hud-hero .hero-logo{margin-bottom:0}",
+".hud-bar{margin:1.1rem 0 0}",
+".hud-foot{margin-top:2.5rem}",
+".game,.summary-card,.reading,.dialogue-block,.vocab-item{position:relative}",
+".game{border-radius:.5rem;border-color:rgba(232,197,101,.22)}",
+".summary-card{border-radius:.5rem}",
+".reading{border-radius:.5rem}",
+".dialogue-block{border-radius:.45rem;border-top:1px solid rgba(232,197,101,.14);border-bottom:1px solid rgba(232,197,101,.14)}",
+".vocab-item{border-radius:.4rem;box-shadow:inset 0 0 0 1px rgba(232,197,101,.07)}",
+".feature-card{border-radius:.5rem}",
+".game::before,.summary-card::before{content:'';position:absolute;top:-1px;left:-1px;width:15px;height:15px;border-top:2px solid rgba(232,197,101,.7);border-left:2px solid rgba(232,197,101,.7);pointer-events:none;border-top-left-radius:.5rem}",
+".game::after,.summary-card::after{content:'';position:absolute;bottom:-1px;right:-1px;width:15px;height:15px;border-bottom:2px solid rgba(232,197,101,.7);border-right:2px solid rgba(232,197,101,.7);pointer-events:none;border-bottom-right-radius:.5rem}",
+".coins-display{border-radius:.4rem;border:1px solid rgba(232,197,101,.3);background:linear-gradient(180deg,rgba(59,29,92,.8),rgba(15,15,26,.86));padding:.45rem .7rem;gap:.55rem;align-items:center;box-shadow:0 0 25px rgba(168,85,247,.35),0 0 0 1px rgba(0,0,0,.4)}",
+".coins-display .hud-sigil{width:26px;height:26px;filter:none}",
+".coins-display .hud-lab{font-family:var(--hud-mono);font-size:.6rem;letter-spacing:.16em;color:var(--hud-ancient);opacity:.85;text-transform:uppercase}",
+".coins-display .hud-sep{width:1px;align-self:stretch;background:rgba(232,197,101,.25)}",
+".coins-display .hud-crest{font-family:Orbitron,system-ui,sans-serif;font-size:.6rem;letter-spacing:.12em;color:var(--hud-ancient);border:1px solid rgba(232,197,101,.4);border-radius:2px;padding:2px 6px}",
+".coins-display .hud-coins{font-family:var(--hud-mono);font-size:.82rem;color:var(--gold)}",
+".coins-display .hud-room{font-family:var(--hud-mono);font-size:.7rem;color:#cbb6ff;opacity:.9}",
+"@media (max-width:720px){.coins-display .hud-lab,.coins-display .hud-sep{display:none}.hud-hero .hud-sigil{width:48px;height:48px}}",
 "@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}",
 "@media (max-width:720px){.hero-features{grid-template-columns:1fr}.room{padding:2rem 1.5rem}.room-header{gap:1rem}.scene-graphic{width:70px;height:70px;font-size:2.5rem}.coins-display{top:10px;right:10px;font-size:1rem;padding:.6rem 1.2rem}.rooms-container{max-width:99vw;border-radius:0;box-shadow:none}}"
 ].join("\n");
@@ -263,7 +354,9 @@
 "var rooms=window.__LESSON_ROOMS__||[];",
 "var currentRoom=0,coins=START;",
 "var landing=document.getElementById('landing'),classroom=document.getElementById('classroom'),startBtn=document.getElementById('startBtn'),coinsDisplay=document.getElementById('coinsDisplay'),coinsCount=document.getElementById('coinsCount'),progressFill=document.getElementById('progressFill'),host=document.getElementById('roomsContainer');",
-"function renderCoins(){coinsCount.textContent=coins;coinsDisplay.classList.remove('bump');setTimeout(function(){coinsDisplay.classList.add('bump');},10);}",
+"var TIERS=[[5000,'LEGEND'],[500,'TIGER'],[200,'CUB'],[0,'MOUSE']];",
+"function tierOf(n){for(var i=0;i<TIERS.length;i++){if(n>=TIERS[i][0])return TIERS[i][1];}return 'MOUSE';}",
+"function renderCoins(){coinsCount.textContent=coins;var cr=document.getElementById('tierCrest');if(cr)cr.textContent=tierOf(coins);coinsDisplay.classList.remove('bump');setTimeout(function(){coinsDisplay.classList.add('bump');},10);}",
 "function fbClear(){var fb=host.querySelector('.chatty-feedback');if(fb){fb.textContent='';fb.className='chatty-feedback empty';}}",
 "function blockReset(b){b.querySelectorAll('button').forEach(function(x){x.classList.remove('selected','correct','wrong');x.disabled=false;});}",
 "function feedbackReset(){fbClear();host.querySelectorAll('.chatty-choices button').forEach(function(b){b.classList.remove('selected','correct','wrong');b.disabled=false;});}",
@@ -275,7 +368,9 @@
 "  h+='<div class=\"nav-btns\"><button class=\"nav-btn\" data-action=\"prev\"'+(isFirst?' disabled':'')+'><span>\\u2b05\\ufe0f Back</span></button>';",
 "  h+='<button class=\"nav-btn\" data-action=\"'+(isLast?'restart':'next')+'\"><span>'+(isLast?'\\ud83d\\udd04 Restart':'Next \\u27a1\\ufe0f')+'</span></button></div></div>';",
 "  host.innerHTML=h;",
+"  initGames(host);",
 "  progressFill.style.width=(((currentRoom+1)/rooms.length)*100)+'%';",
+"  var rc=document.getElementById('roomCount');if(rc)rc.textContent=(currentRoom+1)+'/'+rooms.length;",
 "}",
 "startBtn.addEventListener('click',function(){landing.style.display='none';classroom.classList.add('active');coinsDisplay.classList.add('active');render();renderCoins();});",
 "host.addEventListener('click',function(e){",
@@ -293,15 +388,134 @@
 "  if(answer==='correct'){t.classList.add('correct');coins+=PER_CORRECT;renderCoins();showFeedback(block.getAttribute('data-correct-feedback')||'\\ud83c\\udf89 Correct!','correct');}",
 "  else{t.classList.add('wrong');coins=Math.max(0,coins-PER_WRONG);renderCoins();showFeedback(block.getAttribute('data-wrong-feedback')||'\\u274c Not quite \\u2014 read the rule again.','wrong');}",
 "});",
+"/* ------------------------------- the games ------------------------------- */",
+"function gShuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}",
+"function gPairs(s){return String(s==null?'':s).split(';').map(function(p){var k=String(p).split('=');return {a:(k[0]||'').trim(),b:(k.slice(1).join('=')||'').trim()};}).filter(function(p){return p.a&&p.b;});}",
+"function gHead(el,name,total){el.setAttribute('data-total',String(total));el.setAttribute('data-got','0');return '<div class=\\\"g-head\\\"><span class=\\\"g-name\\\">'+name+'</span><span class=\\\"g-score\\\">0 / '+total+' done</span></div>';}",
+"function gDone(el){var got=(Number(el.getAttribute('data-got'))||0)+1;el.setAttribute('data-got',String(got));var s=el.querySelector('.g-score');var total=Number(el.getAttribute('data-total'))||0;if(s)s.textContent=got+' / '+total+' done';if(total&&got>=total&&s)s.className='g-score win';coins+=PER_CORRECT;renderCoins();}",
+"function gScramble(el){",
+"  var items=gPairs(el.getAttribute('data-items'));",
+"  el.innerHTML=gHead(el,el.getAttribute('data-title')||'🔤 Scramble',items.length)+'<div class=\\\"g-body\\\"></div>';",
+"  var body=el.querySelector('.g-body');",
+"  items.forEach(function(it){",
+"    var word=String(it.a).toLowerCase().replace(/[^a-z]/g,'');",
+"    var row=document.createElement('div');row.className='g-row';",
+"    var hint=document.createElement('div');hint.className='g-hint';hint.textContent=it.b||'';",
+"    var slots=document.createElement('div');slots.className='g-slots';",
+"    var tiles=document.createElement('div');tiles.className='g-tiles';",
+"    var box=document.createElement('span');box.className='g-slot';box.textContent='…';",
+"    var clear=document.createElement('button');clear.className='g-btn ghost';clear.textContent='Clear';",
+"    var built='';",
+"    slots.appendChild(box);slots.appendChild(clear);",
+"    gShuffle(word.split('')).forEach(function(ch){",
+"      var t=document.createElement('button');t.className='g-tile';t.textContent=ch;",
+"      t.addEventListener('click',function(){",
+"        if(row.classList.contains('ok'))return;",
+"        t.classList.add('used');built+=ch;box.textContent=built;",
+"        if(built.length===word.length){",
+"          if(built===word){row.classList.add('ok');box.textContent=word+' \\u2713';tiles.querySelectorAll('.g-tile').forEach(function(x){x.classList.add('used');});gDone(el);}",
+"          else{row.classList.add('bad');setTimeout(function(){row.classList.remove('bad');built='';box.textContent='…';tiles.querySelectorAll('.g-tile').forEach(function(x){x.classList.remove('used');});},700);}",
+"        }",
+"      });",
+"      tiles.appendChild(t);",
+"    });",
+"    clear.addEventListener('click',function(){if(row.classList.contains('ok'))return;built='';box.textContent='…';tiles.querySelectorAll('.g-tile').forEach(function(x){x.classList.remove('used');});});",
+"    row.appendChild(hint);row.appendChild(slots);row.appendChild(tiles);body.appendChild(row);",
+"  });",
+"}",
+"function gMatch(el){",
+"  var items=gPairs(el.getAttribute('data-items'));",
+"  el.innerHTML=gHead(el,el.getAttribute('data-title')||'🔗 Match',items.length)+'<div class=\\\"g-body g-cols\\\"></div>';",
+"  var body=el.querySelector('.g-body'),left=document.createElement('div'),right=document.createElement('div');",
+"  body.appendChild(left);body.appendChild(right);",
+"  var pick=null;",
+"  function hit(d){",
+"    if(d.classList.contains('done'))return;",
+"    if(!pick){pick=d;d.classList.add('picked');return;}",
+"    if(pick===d){d.classList.remove('picked');pick=null;return;}",
+"    if(pick.getAttribute('data-side')===d.getAttribute('data-side')){pick.classList.remove('picked');pick=d;d.classList.add('picked');return;}",
+"    var a=pick,b=d;pick=null;a.classList.remove('picked');",
+"    if(a.getAttribute('data-key')===b.getAttribute('data-key')){a.classList.add('done');b.classList.add('done');gDone(el);}",
+"    else{a.classList.add('bad');b.classList.add('bad');setTimeout(function(){a.classList.remove('bad');b.classList.remove('bad');},700);}",
+"  }",
+"  function mk(side,it,ki){var d=document.createElement('div');d.className='g-item';d.textContent=(side==='a'?it.a:it.b);d.setAttribute('data-key',String(ki));d.setAttribute('data-side',side);d.addEventListener('click',function(){hit(d);});return d;}",
+"  gShuffle(items.map(function(it,i){return {it:it,i:i};})).forEach(function(o){left.appendChild(mk('a',o.it,o.i));});",
+"  gShuffle(items.map(function(it,i){return {it:it,i:i};})).forEach(function(o){right.appendChild(mk('b',o.it,o.i));});",
+"}",
+"function gSort(el){",
+"  var groups=String(el.getAttribute('data-groups')||'').split('|').map(function(g){var k=g.split(':');return {name:(k[0]||'').trim(),items:(k.slice(1).join(':')||'').split(',').map(function(x){return x.trim();}).filter(Boolean)};}).filter(function(g){return g.name&&g.items.length;});",
+"  var total=groups.reduce(function(n,g){return n+g.items.length;},0);",
+"  el.innerHTML=gHead(el,el.getAttribute('data-title')||'📦 Sort it out',total)+'<div class=\\\"g-body\\\"></div>';",
+"  var body=el.querySelector('.g-body'),chips=document.createElement('div'),buckets=document.createElement('div');",
+"  chips.className='g-chips';buckets.className='g-buckets';",
+"  var pick=null,all=[];",
+"  groups.forEach(function(g){g.items.forEach(function(x){all.push({t:x,g:g.name});});});",
+"  gShuffle(all).forEach(function(o){",
+"    var c=document.createElement('button');c.className='g-tile';c.textContent=o.t;c.setAttribute('data-g',o.g);",
+"    c.addEventListener('click',function(){if(c.classList.contains('used'))return;if(pick)pick.classList.remove('picked');pick=c;c.classList.add('picked');});",
+"    chips.appendChild(c);",
+"  });",
+"  groups.forEach(function(g){",
+"    var b=document.createElement('div');b.className='g-bucket';b.setAttribute('data-g',g.name);b.innerHTML='<b>'+g.name+'</b>';",
+"    b.addEventListener('click',function(){",
+"      if(!pick)return;",
+"      if(pick.getAttribute('data-g')===g.name){",
+"        var c=pick;pick=null;c.classList.remove('picked');c.classList.add('used');c.disabled=true;c.style.display='none';",
+"        var s=document.createElement('span');s.className='g-placed';s.textContent=c.textContent;b.appendChild(s);gDone(el);",
+"      }",
+"      else{b.classList.add('bad');var c2=pick;pick=null;setTimeout(function(){b.classList.remove('bad');if(c2)c2.classList.remove('picked');},700);}",
+"    });",
+"    buckets.appendChild(b);",
+"  });",
+"  body.appendChild(chips);body.appendChild(buckets);",
+"}",
+"function initGames(root){",
+"  if(!root||!root.querySelectorAll)return;",
+"  root.querySelectorAll('.game').forEach(function(el){",
+"    var g=el.getAttribute('data-game');",
+"    try{ if(g==='scramble')gScramble(el); else if(g==='match')gMatch(el); else if(g==='sort')gSort(el); }",
+"    catch(e){ el.innerHTML='<div class=\\\"g-name\\\">this game could not start</div>'; }",
+"  });",
+"}",
 "window.ObiLesson={go:function(i){currentRoom=i;render();},rooms:rooms};",
 "})();"
     ].join("\n");
     return code;
   }
 
+  /* ------------------------------ brand marks ----------------------------- */
+  /* BRAND.005: the brand's marks are shipped files, so a lesson INLINES the one it
+     uses instead of linking anywhere (LESSON.010: one file, handed over). The
+     sigil's data URL is fetched once when this module loads; a lesson built
+     before it lands, or with no brand module at all, simply carries no sigil —
+     never a broken image. */
+  let SIGIL = null;
+  function marksNow(){
+    const m = {};
+    if(SIGIL) m.head = SIGIL;
+    try{ const B = window.ObiBrand; const s = B && B.assetDataUrlSync && (B.assetDataUrlSync("head-ui") || B.assetDataUrlSync("head")); if(s){ SIGIL = s; m.head = s; } }catch(e){}
+    return m;
+  }
+  /* the UI-size sigil first (132 px, ~9 KB) and the full mark only as a fallback:
+     a lesson inlines this, and 29 lessons in the library is 300 KB of difference */
+  try{
+    if(window.ObiBrand && window.ObiBrand.assetDataUrl){
+      window.ObiBrand.assetDataUrl("head-ui")
+        .catch(() => window.ObiBrand.assetDataUrl("head"))
+        .then(u => { if(u) SIGIL = u; })
+        .catch(() => {});
+    }
+  }catch(e){}
+
   /* --------------------------------- build -------------------------------- */
   function build(spec){
-    spec = spec || {};
+    /* NEVER MUTATE THE CALLER'S SPEC. build() is called with the caller's own object
+       (a library record's spec, the desk's spec) and an earlier version assigned to
+       it — which silently baked a 25 KB data URL into every stored spec. Copy first.
+       Fresh marks also WIN over any marks already on the spec: the brand module is
+       the source of truth, a stored copy is only a cache (BRAND.005). */
+    spec = Object.assign({}, spec || {});
+    spec.marks = Object.assign({}, spec.marks || {}, marksNow());
     const rooms = (spec.rooms || []).map(r => ({
       graphic: String(r.graphic || "•"),
       title: String(r.title || ""),
@@ -311,6 +525,20 @@
     const feats = (spec.features || []).slice(0, 4);
     const title = String(spec.title || "Lesson");
     const logo = String(spec.logo || "📚");
+    /* the brand layer: the sigil is INLINED (one data URL, referenced from CSS so
+       it appears in several places without being copied), and the status line is
+       built from this lesson's real numbers — rooms, the per-correct rate, the
+       standard. BRAND.004: the bar states, it does not decorate. */
+    const marks = spec.marks || {};
+    const sigil = marks.head ? String(marks.head) : null;
+    const coinsSpec = spec.coins || {};
+    const hudLine = [
+      "NET ACADEMY",
+      spec.topic ? esc(String(spec.topic).toUpperCase()) : null,
+      rooms.length + " ROOMS",
+      "+" + Number(coinsSpec.correct == null ? 10 : coinsSpec.correct) + " PER CORRECT",
+      "STANDARD " + esc(String(STANDARD).replace(/^src\//, ""))
+    ].filter(Boolean).join(' <span class="sep">//</span> ');
     const html = [];
     html.push('<!DOCTYPE html>');
     html.push('<html lang="en">');
@@ -321,12 +549,18 @@
     html.push('<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">');
     html.push('<style>');
     html.push(THEME);
+    if(sigil) html.push('.hud-sigil{background-image:url("' + sigil + '")}');
+    /* a lesson titled the school's way is a whole guide row, not a short brand name —
+       the hero gets a smaller clamp so the name still reads as a hero and is never
+       clipped by the status bar underneath it (LSN-32) */
+    if(title.length > 30) html.push('.hero-title{font-size:clamp(1.6rem,5.6vw,3.6rem);line-height:1.12}');
     html.push('</style>');
     html.push('</head>');
     html.push('<body>');
     html.push('<div class="landing" id="landing">');
-    html.push('<div class="hero-logo">' + logo + '</div>');
+    html.push('<div class="hud-hero">' + (sigil ? '<span class="hud-sigil" aria-hidden="true"></span>' : '') + '<div class="hero-logo">' + logo + '</div></div>');
     html.push('<h1 class="hero-title">' + esc(title) + '</h1>');
+    html.push('<div class="hud-bar">' + hudLine + '</div>');
     html.push('<p class="hero-subtitle">' + esc(spec.subtitle || "") + '</p>');
     html.push('<button class="hero-cta" id="startBtn"><span>' + esc(spec.cta || "🚀 Begin") + '</span></button>');
     html.push('<div class="hero-features">');
@@ -334,8 +568,14 @@
       html.push('<div class="feature-card"><div class="feature-icon">' + String(f.icon || "") + '</div><div class="feature-title">' + esc(f.title) + '</div><div class="feature-desc">' + esc(f.desc) + '</div></div>');
     });
     html.push('</div>');
+    html.push('<div class="hud-bar hud-foot">' + hudLine + '</div>');
     html.push('</div>');
-    html.push('<div class="coins-display" id="coinsDisplay"><span>💰</span><span id="coinsCount">0</span></div>');
+    html.push('<div class="coins-display" id="coinsDisplay">'
+      + (sigil ? '<span class="hud-sigil" aria-hidden="true"></span>' : '')
+      + '<span class="hud-lab">NET Academy</span><span class="hud-sep"></span>'
+      + '<span class="hud-crest" id="tierCrest">MOUSE</span>'
+      + '<span class="hud-coins">🪙 <b id="coinsCount">0</b></span>'
+      + '<span class="hud-room" id="roomCount">1/' + rooms.length + '</span></div>');
     html.push('<div class="classroom" id="classroom"><div class="rooms-container"><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div><div id="roomsContainer"></div></div></div>');
     html.push('<script>window.__LESSON_ROOMS__=' + JSON.stringify(rooms).replace(/<\//g, "<\\/") + ';window.__LESSON_STANDARD__=' + JSON.stringify({ standard: "NET Academy Lesson Standard", spec: STANDARD, built: new Date().toISOString(), topic: spec.topic || null }) + ';<\/script>');
     html.push('<script>');
@@ -625,7 +865,7 @@ ROOM_RULES[0], "", ROOM_RULES[1], "", ROOM_RULES[2], "", ROOM_RULES[3], "", ROOM
   /* --------------------------------- store -------------------------------- */
   /* A lesson belongs to a CLIENT, exactly like the evidence it came from
      (src/clients.js): one station, many engagements, and nothing leaks sideways. */
-  const CLIENT_FALLBACK = "timmy";
+  const CLIENT_FALLBACK = "unassigned";
   function clientId(){
     try{ if(window.ObiClients && window.ObiClients.id) return window.ObiClients.id(); }catch(e){}
     return CLIENT_FALLBACK;
@@ -645,7 +885,11 @@ ROOM_RULES[0], "", ROOM_RULES[1], "", ROOM_RULES[2], "", ROOM_RULES[3], "", ROOM
   async function save(spec, built){
     const f = folder();
     const rec = { id: "L" + Date.now().toString(36), title: spec.title || "lesson", topic: spec.topic || null,
-      client: clientId(), created: Date.now(), rooms: built.rooms, bytes: built.bytes, spec: spec, html: built.html, src: window.generatorName || null };
+      client: clientId(), created: Date.now(), rooms: built.rooms, bytes: built.bytes, html: built.html, src: window.generatorName || null,
+      /* the record keeps the spec WITHOUT the inlined marks: they are re-attached
+         from src/brand.js at every rebuild, and a data URL per record would bloat
+         the library for nothing (the built html keeps the copy it needs) */
+      spec: (function(s){ const c = Object.assign({}, s); delete c.marks; return c; })(spec) };
     if(f){ try{ await f.set(rec.id, rec); bubble('🗂 Saved as <b>' + esc(rec.title) + '</b> · id ' + esc(rec.id) + ' · /lesson list'); return rec; }catch(e){} }
     try{ download(built.html, fileName(spec)); }catch(e){}
     bubble('🗂 Storage unavailable — the file was downloaded instead.');
@@ -674,6 +918,15 @@ ROOM_RULES[0], "", ROOM_RULES[1], "", ROOM_RULES[2], "", ROOM_RULES[3], "", ROOM
     if(!text || text === "desk" || text === "creator" || text === "create" || text === "build"){ openDesk(text === "build" ? "build" : "plan"); return; }
     if(text === "standard" || text === "spec"){ standard(); return; }
     if(text === "list" || text === "library"){ await list(); return; }
+    if(/^forge(\s|$)/.test(text)){
+      /* AUDIT 2026-09-21: this module is src/lesson-forge.js and it owns window.ObiLessonForge.
+         It used to publish itself as window.ObiForge — the SAME global the self-forge (src/forge.js)
+         uses — so whichever loaded last (lesson-forge) won and the self-forge was unreachable:
+         /forge selftest ran the lesson queue instead. Renamed. */
+      if(window.ObiLessonForge && window.ObiLessonForge.cmd) await window.ObiLessonForge.cmd(text.replace(/^forge\s*/, ""));
+      else bubble('⚠ the lesson forge did not load — reload the page.');
+      return;
+    }
     if(/^push(\s|$)/.test(text)){ await pushToCanon(text.replace(/^push\s*/, "").trim()); return; }
     if(text === "check"){
       bubble('<div class="rise"><div class="rhead">✅ /lesson check — the validator</div><div class="rd">The rules are in <b>' + esc(STANDARD) + '</b>: the spine (six rooms), the fixed component vocabulary, Chatty\'s three voices, the scoring practice block, the exit card, phone + reduced-motion, one self-contained file. Every lesson this station builds is checked against it before it is called done — <b>a lesson that fails the check is not shipped</b>.</div><div class="rfoot">/lesson &lt;topic&gt; builds one and runs the check on it.</div></div>');

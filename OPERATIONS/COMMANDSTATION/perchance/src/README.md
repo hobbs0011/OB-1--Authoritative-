@@ -1,4 +1,7 @@
-# Student Summary Generator (Obi)
+# PrAis Command Station (Obi)
+
+> Stale title, corrected 2026-09-21: this file used to open "# Student Summary Generator (Obi)", the generator's first
+> name. The generator is **PrAis Command Station** (`prais-command-station`); the summary is one of its three jobs.
 
 > **Resuming a session? Read `src/HANDOFF.md` first** — it holds the current measured state, the open gated Canon
 > steps, and the invariants. This file is the full architecture/overview behind it.
@@ -31,6 +34,398 @@ Enforced in `src/app.js` under the `MEM_KEY = "obi_sdnad"` localStorage ledger:
 - **L55 STAGE0_REPRINT_FOOTNOTE** — reprint + footnote. Writing = becoming.
 - **L60 TRANSCRIPTION_IS_TRANSFORMATION**.
 
+## FREE PHOENIX MODE — the unbound room (`src/freephoenix.js`)
+
+The station's room with the leash off. **⚙ Settings → 🔥 Free Phoenix Mode** (or `/free`): Agent 99 with no Canon,
+no gate, no repo, no tunnel and no record — it builds what it is asked for.
+
+- **What is sealed, and how it is proven.** `GIT` — this module's only network function (`net()`) throws for
+  everything, and `gitCommitFiles`, `ghJson` and api.github.com appear nowhere in it. `CLOUD` — no tunnel, socket,
+  upload plugin, superFetch or image service is referenced. `CANON` — no document is read, cited or enforced; there
+  is no gate in the room. `LOG` — nothing typed or built in the room is written to the soul ledger, the RRL or the
+  I-LOG. **🧪 Test the seal** proves it live: the Git guard fires, the API bindings are absent, and the I-LOG entry
+  count is read before and after a real model turn (it does not move). The ONE wire is the model call itself
+  (`root.generateText`) — the words on screen, nothing else.
+- **The door is recorded; the room is not.** `/free` is one I-LOG entry; a payload after it is deliberately *not*
+  captured as soul and *not* wrapped in `runCmd` (that wrapper writes an I-LOG entry per operation).
+- **It builds.** `🛠 Build app <ask>` returns ONE self-contained HTML file, written in parts (the model caps its
+  reply, so an unfinished part ends with `<<<MORE>>>` and the next call continues with the file so far in context —
+  static brief first, file only ever growing, so the prefix stays cached), previewed live in a sandboxed iframe
+  (`allow-scripts`, deliberately **not** `allow-same-origin`) and downloadable. `⚙ Build generator <ask>` first asks
+  for a file plan, then writes each file — a perchance `main.pjs` + `index.html` pair to paste into a new generator.
+  Files land in a LOCAL sandbox (kv folder `fpm`) and leave only when downloaded.
+- **The persona** lives in `src/freephoenix.js` (`PERSONA`): the same 99 with nothing to check with — no refusal, no
+  lecture, no canon, no hedging; it returns the finished artifact rather than a sketch of it. It is constant and
+  first in every prompt (a shared prefix is a cached prefix).
+- **It edits itself — the one place in the station where that needs no gate**, because nothing here is tracked.
+  `/self` shows what the room is running from (the shipped file · the staged edit · **the code actually live in this
+  page** · the snapshots `/revert` can restore). `/forge <change>` patches **its own source**: the model returns a
+  JSON array of `{find, replace}` exact-string edits — **a patch, never a rewrite**, because the file is ~48 KB and
+  the model's reply cap is ~1024 tokens (that mismatch is what leaves half a file behind) — each `find` must match
+  the file **exactly once** or the edit is refused, and the result must **compile** (`new Function`, parse-only)
+  before it may be staged. `/apply` hot-swaps the staged code into the running page and **rolls back on any error**
+  (a bad self-edit cannot brick the room — tested deliberately with a "throw on load" version). `/revert` puts back
+  what ran before. `/eval <js>` runs code in the page. An edit lives in the `fpm` sandbox until it is downloaded;
+  **a reload returns the shipped file**, and nothing in the cycle reaches Git, the Canon, the soul ledger, the RRL
+  or the I-LOG. Reading its own source is a **relative** fetch only (`src/…`) — a URL with a scheme is refused, so
+  the self-read can never become a wire out of the room. `/seal` measures all of it, including a `SELF · LOCAL` row.
+- **Commands inside the room:** plain text = fire · `/build app <ask>` · `/build gator <ask>` · `/self` ·
+  `/forge <change>` · `/apply` · `/revert` · `/eval <js>` · `/files` · `/read <name>` · `/dl <name>` ·
+  `/wipe confirm` · `/seal`.
+
+## SAVING THE GENERATOR — how the platform saves, and how to see it fail (`src/savewatch.js`)
+
+**A generator is saved by the EDITOR page, not by the page you are looking at.** The editor collects the two code
+panels plus the file tree, POSTs `/api/save`, and only then tells this page to hard-reload. The alert that explains
+a refusal is shown on a page this one cannot read — which is why a failing save is invisible from inside the station.
+`src/savewatch.js` makes it visible: it listens to the platform's own postMessages and keeps the last 60
+(`localStorage obi_savewatch`). **`/save`** prints the card; **`/save clear`** empties the recorder.
+
+What the platform's save handler (`/lib/appExtras.js`, read 2026-09-22) actually does — and every way it can refuse:
+
+| status | what the editor alerts | note |
+|---|---|---|
+| `too-big` | "There's too much text in this generator to save it to Perchance's database." | the two TEXT panels only (ours: main.pjs 2 KB + index.html 27 KB) |
+| `src-too-big` | more than the 2 GB src limit | 10,000 files · 100 MB per file · paths `[A-Za-z0-9._-]`, ≤ 10 folders deep |
+| `src-too-many-files` | more than 10,000 files | — |
+| `src-file-too-big` | one file over 100 MB | — |
+| `src-manifest-invalid` | a path isn't valid | checked: ours are |
+| `src-file-missing` | "The server couldn't verify one of your src files with the file storage." | **the one to watch** — a manifest entry whose blob is gone. The server verifies every key at save time, and an unchanged file is never re-uploaded, so it fails EVERY time until that file changes. The platform's own remedy: *re-create the file so it re-uploads* |
+| `src-verify-unavailable` | the storage couldn't be reached | transient |
+| `anti_bot_verification_failed` | the upload service couldn't verify the browser | an ad/privacy blocker on `challenges.cloudflare.com` |
+| `over_daily_allowance` | the daily upload limit | wait a day |
+| `invalid-edit-key` / `session-token-error` | wrong edit password / logged out | auth, not code |
+| `too-many-requests` | "You're saving too quickly!" | VPN/extension spoofing the address |
+| `stale` | "It looks like you're editing an old version…" (a `confirm`) | saved elsewhere since this tab loaded |
+
+So the recorder prints three things that settle it: **the editor's own src manifest** (file count + total bytes,
+straight out of its `updateOutput`/`srcStateUpdate` messages), a **storage probe** that HEADs every key in that
+manifest on `user.uploads.dev` and names the ones that are gone, and whether the editor **asked this page to
+hard-reload** (it does that after a clean save — but also after any full refresh, so read it together with the rest).
+
+**The rule that follows from all of it:** keep the file tree lean and TEXTUAL. Binaries and multi-hundred-KB data
+go to the upload host and are referenced by URL (that is where the two school workbooks went — see
+`src/curriculum/README.md` and `WORKBOOKS` in `src/curriculum.js`).
+
+## THE LESSON FORGE — a lesson for every period the sovereign teaches (`src/lesson-forge.js`)
+
+The bridge between the curriculum and the lesson engine: it reads one row of the pacing guide (book · unit ·
+section · language contents · learning outcomes · differentiated activities · assessment — the sheet's own words,
+nothing invented) and writes ONE NET Academy lesson from it, in the sovereign's format, checked by his own
+validator before it is saved. `/lesson forge [<grade>] [week N | all]` builds the queue and walks it;
+`/lesson forge run` continues it; `/lesson forge clear` empties it. The queue is durable (kv `lessonforge`) and
+keyed `grade.week.section`, so a re-plan never duplicates and a finished lesson is never rebuilt.
+
+Scope is obeyed: a period belonging to the Vietnamese teacher, or to a book outside the sovereign's scope, is
+never forged (`scopeMark` — the same gate every other view reads). A lesson that fails the validator is reported
+and NOT saved (LSN-11), with the reason kept on the queue entry. Forged lessons land in the ordinary lesson
+library (`kv lessons`) carrying the curriculum row they came from, so `/lesson list` and the desk's LIBRARY room
+show them beside every other lesson.
+
+One lesson = **7 model passes** (the reply cap is 1024 tokens, so the build is staged: the shell, then one room
+per reply) — about 100 seconds. Build a week at a time, not a course.
+
+## THE BRAND SYSTEM (`src/brand.js` · AMENDMENT III · `/brand`)
+
+The identity every surface wears, in one file. `window.ObiBrand` holds fourteen things:
+
+1. **The palette.** The three frozen tokens stand unchanged (`#a855f7` system · `#f59e0b` reward · `#0f0f1a` ground,
+   LESSON.008). The dossier adds a *second register* — **chrome only** — the plum court (`#3b1d5c`/`#2a1040`), the
+   antique gold (`#e8c565`/`#c9a758`), the red circuit (`#e0473f`) and warm bone text (`#efe6d2`). GOSPEL 444 adds
+   four more, all measured off its own pages: `signal #5ed5eb` (the telemetry cyan), `ember #dc9438` and
+   `emberHot #ffa80b` (tiger heat), `terminal #43f65a` (the console). **20 tokens.** Panels, bars, brackets and
+   seals may wear them; a lesson's ground, system colour or reward colour may not change (BRAND.002).
+2. **115 hand-drawn icons** on a 24 grid, stroke `currentColor`, geometry only — `ObiBrand.icon("shield")` returns
+   the inline SVG. No icon fonts. One entry (`phoenix`) is the station's own logotype carried at its native 100
+   viewBox: a logotype may be abstract, an icon may not, so the phoenix is worn large and the Phoenix Generators
+   shelf wears `grid` (BRAND.003). **115 since the second pass** (BRAND.011): the first ninety-three left two dead
+   references — the `mouse` rank/crest and the `mouse` mode badge asked `icon("mouse")` for a glyph that did not
+   exist, so both rendered the missing-glyph fallback. Twenty-two were added (`mouse, ear, speak, pencil, cards,
+   stack, timer, bell, handUp, ladder, medal, certificate, crack, route, translate, trendUp, play, pause, stop,
+   record, vault, badge` — the emblems, the print room and the mode ladder all needed them), and four were redrawn
+   after vision read them at size: `cards` (card + an A), `route` (dot → dashed curve → dot), `translate` (A + 文),
+   `vault` (door + dial + hinges + bolts).
+3. **64 shipped assets — 31 marks, 5 variants and 28 stills.** `BestDossierYet-05-11-2026.pdf` (15pp, the identity),
+   `GOSPEL_444_PROTOCOL.pdf` (12pp, the doctrine), `GOSPEL_444_TIGER_MODE.pdf` (4pp, the diagnostic) and
+   **seven hand-picked marketing slides** (2026-09-22, the register) and **five hand-picked codex decks**
+   (2026-09-22, the strategy: `PHOENIX_RISING_CODEX`, `REINCARNATION_RUN_305`, `Sovereign_Tiger_Protocol`,
+   `THE_TIGER_ENGINE`, `Tiger_Engine_Protocol`, 66pp). The picture sources are landscape raster with **no text
+   layer**, so pages were rendered with pdf.js (or opened as images) and cropped by box. They live in
+   `src/brand/assets/*.webp`, alpha, and every one carries its provenance in the `ASSETS` table (source,
+   page/slide, crop box, what it is, where it may be worn). A page that is a *composition* rather than a cuttable
+   shape ships whole as a **still** (`shot:true`) and is never redrawn (BRAND.014).
+   **The key:** a pixel survives as art if it is bright enough **or** saturated enough
+   (`a = max((lum-ground-8)/50, (chroma-26)/70)`); the *outside* is then flood-filled from the crop's border through
+   pixels with `a < .42`, so enclosed darks stay the mark's own interior (a tiger's stripes, a phone's screen) —
+   which is what the dossier-era luminance key got wrong. Edges feather over 5%. **Rebuild recipe** is in the
+   header comment of `src/brand.js`.
+4. **The HUD chrome** — `bar()` (the monospace `//` status line), `frame()` (panel + gold corner brackets),
+   `plate()`, `pill()`, `crest()`, `watermark()`, `lockup()`, `asset()`. `ObiBrand.upgrade()` walks any DOM and turns
+   `data-icon="name"` / `data-mark="id"` / `data-bar="a // b"` hooks into real chrome, which is how the topbar, the
+   tab bar and the division cards got their icons without a rewrite.
+5. **The room** — `panel()` / `mountDesk()` render the identity system (hero, palette, the icon grid, the mark
+   gallery with per-asset Download/Copy-URL, the HUD specimens, the type scale, the API snippets) into `#brandPanel`
+   at **◈ Phoenix Generators → MARKETING → Brand & Identity**; `/brand` renders the same thing in the chat
+   (`/brand open|rules|icons|marks|palette|doctrine|modes|deck|emblems|ranks|badges|patterns|beds|print|marketing|codex|ads|landing|codex-deck`).
+6. **The doctrine — `GOSPEL444`.** The twelve laws of the sovereign's own GOSPEL 444 PROTOCOL, transcribed from his
+   two decks and held as data (law id, title, the deck's own line, its prose, the mark it produced), plus the
+   **mode ladder** (`MODES` + `ObiBrand.modeOf(score)` + `modeBadge()`) and the five-row **unfair-advantage matrix**.
+   The doctrine brought its own chrome with it, taken from its own pages: `terminal()` (green console with a cursor),
+   `directive()` (the arrowed cyan instruction line), `flowchain()` (a sequence whose last node can be marked dead —
+   the translation chain), `matrix()` and `modeCard()`. The desk renders all twelve laws with their marks; the chat
+   lists them at `/brand doctrine` and the ladder at `/brand modes`.
+7. **The deck — `ObiBrand.buildDeck()`.** The doctrine composed into **twelve slides in this system's own chrome**,
+   then flattened to ONE standalone `.html` with every mark inlined as a data URL (re-encoded to 520 px for the
+   export — a deck inlining fifteen full-size marks is 2 MB of base64, and nothing in a deck is shown larger than
+   that). This is the dossier **regenerated through the system** rather than hand-built beside it: `/brand deck`
+   downloads it, and the same button is on the desk. It is also the closer for `BRAND.010`'s outstanding
+   "deck regeneration" item.
+8. **The emblems — `EMBLEMS` (9).** The *artwork that ranks a person*, drawn in vectors in this file (BRAND.012),
+   because an emblem has to survive a 120 mm print and a 16 px badge from one definition. Four **coin ranks** as
+   roundels (`rank-mouse`, `rank-cub`, `rank-tiger`, `rank-legend` — ticks lit 1/4 → 4/4), three **diagnostic
+   modes** as shields (`mode-mouse`, `mode-cub`, `mode-tiger` — diamonds lit 1/3 → 3/3), and two **seals** as rings
+   (`seal-net`, `seal-444`, 24 ticks). `emblem(id,{size})` **adapts below ~30 px** (drops the ticks, fattens what
+   remains, because a tick grid dies small); `emblemBand(id)` is the wide bar form; `emblemNames()`, `emblemOf()`
+   and `emblemSection()` (the desk section). A rank is *issued*; an emblem is *worn* where a record says so.
+9. **The beds — `PATTERNS` (4).** Four procedural grounds as SVG tiles — `lattice` (the court's diagonal),
+   `circuit` (the dossier's red traces), `ember` (tiger heat), `hazard` (the protocol's caution). `patternUrl(id)`
+   returns the data URL, `patternCss(id)` a ready `background-image` value, `patternSection()` the desk section, and
+   the CSS classes are `.bx-pat-lattice|circuit|ember|hazard`. **A bed is a ground, never a face** — used behind
+   print plates and poster margins, never behind body text. **Two real defects were found here by looking at the
+   rendered swatches, not by reasoning:** (1) `patternCss` emitted `url("data:…")` inside a `style="…"` attribute,
+   which truncated the attribute in HTML *and* broke XML serialization — now single-quoted; and (2) *deeper*,
+   `encodeURIComponent` does **not** escape `'` (nor `(`/`)`), while the SVG tile body is written with single quotes,
+   so the first inner apostrophe closed the `url('…')` early and **every** swatch, every `.bx-pat-*` class and every
+   print room bed computed to `background-image:none` — i.e. blank. All four swatches now read textured after
+   percent-encoding the apostrophes. Print at 100%, background graphics on, or the beds do not print.
+10. **THE PRINT ROOM — the artwork as files (BRAND.013–.016).** `PRINT_ARTIFACTS` (9) plus
+    `composeArtifact(id) / downloadArtifact(id) / openArtifact(id) / printSection() / printThumb() / ensurePrint()`,
+    built on page builders `posterCover()`, `posterLaw(law,idx,of)`, `posterModes()`, `posterMatrix()`,
+    `posterClosing()`, `chartPage()` (+ `modeStrip()`), `badgePage()`, `certPage(opts)`, `mktCover()`,
+    `mktPillars()`, `mktMethod()`, `mktAipet()`, `mktAdvantage()`, `mktClosing()`, `methodCard()`, `adSheet()`,
+    `enrolDiagnosis()`, `enrolIntervention()`, `enrolOffer()`, `enrolmentPages()`, `readoutPage()`, with `bed()`,
+    `poTop()`, `poFoot()`, `slideOf()`, `marksFor()` (+ `MARK_EXTRA`), `pillarRow()`, `hourBlock()`, `shotPlate()`,
+    `stamp()` and `rndRef()`. The nine artifacts:
+    1. **THE WALL SET** — 16 A3 portrait pages (cover + 12 law posters + the ladder + the matrix + the closing);
+       composes in ~880 ms to **~3,172 KB, 16 pages, 0 unresolved asset paths**.
+    2. **THE ONE SHEET** — all 12 laws in a 3×4 grid + the mode strip + the motto on one A3 (~87 KB).
+    3. **THE BADGE SHEET** — the 9 emblems as A4 cut-outs (~74 KB).
+    4. **THE RANK CERTIFICATE** — A4 landscape built from a record (`certPage({name, tier, score, date})`, a blank
+       ruled line for the pen when a field is absent) (~33 KB).
+    5. **THE MARKETING SET** — six A3 pages for the parent and the page: the claim, the pillars, the 60% rule and the
+       hour, the AI-PET, the proof, the offer (773 KB).
+    6. **THE METHOD CARD** — one A4 the student or parent keeps: the lesson's 10-5-5-3 arithmetic, the 45/15 ratio,
+       the AI-PET's return days, the promise (124 KB).
+    7. **THE AD SHEET** — A3 landscape: the six Phase 0 creatives as a working brief, the Law of Bilingual Hierarchy
+       printed on the same sheet as the ads it governs, and the four M2 stages underneath showing where each lands.
+    8. **THE ENROLMENT PAGES** — three A3 in reading order: the diagnosis, the intervention, the offer — the landing
+       page as paper, the version a parent can hold while the phone is still open on the tab.
+    9. **THE RUN READOUT** — A4 portrait, deliberately half-blank: five bands, four protocols and two laws with the
+       record left as ruled lines for the hand, and the clause on its own face — *no student name, score or vault
+       username appears on this sheet or in this system* (BRAND.028).
+    Print settings live in `PRINT_FONTS`/`PRINT_SCOPE`/`CHART_SCOPE`/`MARKET_SCOPE`/`CODEX_SCOPE`; each page states
+    its own printing (`A3 PORTRAIT · 100% · LANDSCAPE OFF`). It emits **`.html` with `@page`, not `.pdf`** — the
+    station has no PDF writer, and says so rather than pretending. Every page is audited for overflow before it
+    ships (`padOver 0`, no element past the page edge).
+11. **The marketing register — `MARKET` (BRAND.017–.020).** The *other register*: `GOSPEL444` is what we **hold**
+    (internal, for the coach); `MARKET` is what we **say** (outward, for the parent and the page). It holds the three
+    pillars, the 1-hour architecture with its 75/25 donut, the 60% rule from both slides, the AI-PET, the three
+    phases, the master slide's claims, the comparison and the offer — **transcribed** from the seven slides the
+    sovereign hand-picked, every line carrying the slide it came from. `marketSection()` renders it on the desk;
+    `/brand marketing` in the chat; `marketingPages()` and `methodCard()` compose it on paper. **`MARKET.ads`** (the
+    campaign law, BRAND.021–.022) holds the six Phase 0 creatives — Transformation, AI Multiplier, Summer Intensive,
+    Loud & Wrong, The NET Difference, The Lakeview Local — and the Law of Bilingual Hierarchy that governs all six;
+    `/brand ads` and `adSheet()` put the law and the six ads on the same A3 (`/brand ad-sheet`).
+12. **The hand-picked sets — eleven marketing stills (`mkt-*.webp`, `mkt2-*.webp`) + seven cuts (BRAND.020).** The
+    sovereign's own marketing slides ship in `src/brand/assets/` (never hotlinked, never restyled) with what each
+    says and where it may be worn, and the artwork inside them was cut into seven marks (`gears-dna`, `head-jigsaw`,
+    `mouse-chained`, `mouse-cage`, `tiger-spectral`, `tiger-energy`, `wave-loud`) by the same flood-fill key as the
+    decks. **The still carries the argument; the cut carries the brand** — both are kept.
+13. **The codex — `CODEX` (BRAND.021–.028, AMENDMENT VII).** The sovereign's *strategy*, transcribed from five decks
+    (66pp): the dual-mastery claim and its Vietnamese line, the Lakeview deployment zone (the wealth surge, the Ring
+    Road, the target avatar), the M2 automation pipeline, the five-layer sovereign stack, the 8-time rule, the
+    48-hour window and the strike at 60%, fail-closed, strategic laziness, the math of the tiger, the 30-minute
+    clinical diagnostic, and **the classified readout** — the run log's five bands, four protocols and two laws, held
+    as a **format** whose ledger is deliberately empty (BRAND.028). `codexSection()`/`/brand codex`,
+    `landingSection()`/`/brand landing`, and the **sixteen-slide codex deck** (`codexSlide()` / `buildCodexDeck()` /
+    `/brand codex-deck`) — the pages this system cannot redraw ship as stills beside the ones it can compose.
+14. **The codex's artwork — one cut + seventeen stills from the five decks.** `wave-loud` (the "Loud & Wrong" wave)
+    is the batch's mark; the rest are **stills** — `phx-*` (the codex), `stp-*` (the tiger protocol), `tge-*` (the
+    tiger engine), `tep-*` (the engine protocol) and `run305` (the run log cover) — because a diagram, a timeline or
+    a HUD is a *composition*, not a shape to key, and redrawing one would be inventing artwork (BRAND.014). A
+    photograph of a person was among the candidates and was **withdrawn**: it could not be keyed cleanly and a mark
+    set is not a portrait gallery.
+
+**The law is not in this file.** It is **GOSPEL-999 → AMENDMENT III** (`BRAND.001`–`BRAND.010`),
+**AMENDMENT IV** (`G444.001`–`G444.012`), **AMENDMENT V** (`BRAND.011`–`BRAND.016`), **AMENDMENT VI**
+(`BRAND.017`–`BRAND.020`) and **AMENDMENT VII** (`BRAND.021`–`BRAND.028`), all provisional and **not yet merged**
+into the sealed canon, and, for lessons, **LSN-24/25/26/27/28/29/30/31** in `src/LESSON-STANDARD.md`, with the
+drone's checklists in **LEGIONNAIRE-FIELD-GUIDE §13/§14/§15/§16/§17**. Where this file and that law disagree, the
+law wins.
+
+**Where the brand reaches the product.** The station's topbar wears the sigil and the live status bar
+(`renderBrandBar()` in `src/app.js`, recomputed from real module/asset/icon counts and the gate state); every
+division and generator card wears a registry icon; the browser tab wears the doctrine's phoenix as a favicon
+(`index.html` draws it from `iconBody("phoenix")`, with the shipped tiger head as the touch-icon); and every
+**built lesson** wears the sigil (inlined once as a data URL in its own `<style>`), the `.hud-bar` fact line and the
+live HUD pod (tier crest + coins + room position).
+
+**Still owed (BRAND.010 / AMENDMENT IV / V / VI / VII — say it rather than hide it):** `$meta.image` (the favicon half
+is now paid); the AI-PET's 1/3/7/14/30 spaced-repetition schedule (doctrine, **unimplemented** — nothing here tracks
+a learner across days, and the rank certificate is filled from what a human types); the Jolly Phonics 42-sound layer
+(named in the codex's five-layer stack, quoted, no lesson carrier); a live measurement surface behind the 80% claim
+(**the marketing register quotes that 80%, and BRAND.019 forbids a page printing a number no surface can recompute —
+so it is owed from the marketing side too**); **the two multiples the corpus disagrees on (2.5× in the doctrine and
+THE TIGER ENGINE, 4× on the master slide) are printed side by side and never averaged — the disagreement is the
+honest record, not a bug to fix** (BRAND.025); **the four GOSPEL version strings the decks print (V1.3 · V2.0 ·
+V2.2 · V2.5) are not reconciled** against the single version this system holds; a **PDF writer** (the print room
+emits `.html` with `@page`, not `.pdf`, so a print shop still needs a browser in the loop); a printed-sheet
+inventory; the beds are **unproven on real paper**; no rank is *issued or persisted* yet; no landing page is
+published (the register and the codex are *material*, and the marketing stack's canonical repo is still 11
+candidates, unresolved — see the I-LOG (`/ilog`)); the codex deck is **composed, not drawn** (its page-level compositions
+ship as stills, BRAND.014); the run log's **ledger is empty by design** (BRAND.028) — nothing here tracks a live
+session yet; and the hand-picked **source stills carry a small NotebookLM watermark**, because they ship exactly as
+they came (BRAND.020) — no cut mark and no composed sheet carries one. The **second icon pass is now paid**
+(BRAND.011).
+
+## THE LESSON FORMAT, AND THE GAMES (`src/lessons.js`)
+
+A lesson is a JSON spec turned into ONE standalone self-contained HTML file (`window.ObiLessons.build`) — the
+sovereign's classes, his theme, one file, works offline, downloadable from the library. `validate()` is the law
+(LSN-1…23): the spine, the approved class vocabulary, the learn room's `.vocab-list`, the test room's clickable
+`data-answer` scenarios, the exit's `.summary-card`.
+
+**Three amendments (2026-09-22, at the sovereign's instruction — "a second one with games, more extensive"):**
+
+1. **The anchors are found by LABEL, not by position.** The warm-up still opens the lesson and the exit still
+   closes it, the learn room still comes before the test room — but a lesson may now carry **more than six rooms**
+   (a reading room, game rooms, extra practice) without failing the check.
+2. **THE GAMES — a lesson the learner can PLAY.** The runtime every lesson ships with now builds and scores three
+   games from data attributes, with **no script in the content**. Every correct answer pays the lesson's own coins:
+
+   | game | element | the learner does |
+   |---|---|---|
+   | 🔤 Scramble | `data-game="scramble" data-items="cooker=the machine you cook on;pot=a deep pan"` | clicks letter tiles in order to rebuild each word |
+   | 🔗 Match | `data-game="match" data-items="shelf=a flat board on the wall;fridge=the cold cupboard"` | clicks a word, then its meaning — a wrong pair shakes and releases |
+   | 📦 Sort | `data-game="sort" data-groups="ADVERB — it says HOW: quickly, softly \| ADJECTIVE — it says WHAT KIND: loud, soft"` | clicks a chip, then the group it belongs to |
+
+   `data-title` names the game. `data-items` is `word=meaning` pairs split on `;`; `data-groups` is
+   `group: item, item | group: item, item`. A game room sits after the learn room; the usual place is between the
+   test and the exit.
+
+3. **THE FEEDBACK IS TEXT, NOT HTML** (learned the hard way, the same day). The runtime writes
+   `data-correct-feedback` / `data-wrong-feedback` with
+   `textContent`, so an `<em>` or any tag in those strings prints **literally on screen**. Feedback lines are plain
+   text with emoji; the markup belongs in the room's chatty blocks. (The first build of the song-and-video lesson
+   had `<em>` everywhere in its feedback and had to be rebuilt.) The practice rooms also share **one**
+   `.chatty-feedback` element per room — the runtime keeps the *first* one it finds — so keep a room to ~2–3
+   choice blocks and put that element at the end, exactly as the reference lessons do.
+
+**A fourth amendment — THE BRAND LAYER (2026-09-21, AMENDMENT III / LSN-24 + LSN-25).** Every built lesson now
+wears the identity, and all of it is real:
+
+- the **sigil** (the gold line-art tiger head, `src/brand/assets/head.webp`) is **inlined as a data URL** into the
+  file's own `<style>` as `.hud-sigil{background-image:url(...)}` — stored once however many places wear it, never
+  linked (a lesson is one file handed to a class). `build()` attaches it from `src/brand.js`; with no brand module
+  the lesson carries none and is still legal;
+- the **status bar** (`.hud-bar`) is a monospace `//` line built from *this lesson's own numbers* —
+  `NET ACADEMY // <topic> // 12 ROOMS // +10 PER CORRECT // STANDARD LESSON-STANDARD.md`;
+- the **pod** (`.coins-display`) carries the sigil, `NET ACADEMY`, the **live tier crest** derived from the coins on
+  screen (MOUSE · CUB 200 · TIGER 500 · LEGEND 5000), the coin count, and the **real room position** (`7/12`);
+- the chrome adds the dossier's register *without* touching the frozen tokens: a new `:root` block adds the plum
+  court and antique gold, game and summary panels get 15 px gold corner brackets, and cards get a tighter radius.
+
+The lesson's **own** room emoji and feature icons are the author's (LSN-19) — BRAND.003's emoji ban binds the
+brand's chrome, not the lesson's authored art.
+
+**The song room and the video room** (added for the grade-4 Look lesson): a lesson that teaches from a textbook
+*song* or *video* page carries a room with a `.reading` block holding the lyrics/transcript, followed by
+`chatty-choices` "lyric hunt" / "circle the correct answer" / "complete the definition" blocks. Copyrighted
+textbook lyrics are **not** copied — the room carries a class chant written from the unit's own target words, and
+the sovereign can paste the school's own lyrics in over it if he wants them verbatim.
+
+**The hand-authored lessons built on this format** (all in the library, all exported as files). Hand-authoring a
+spec means **zero model passes**: the lesson is written from the school's own guide row and is instant.
+
+| lesson | guide row | shape |
+|---|---|---|
+| `Kitchen & Culture Academy — Extended` | grade 5 · Look Unit 2 Lesson 1 vocabulary + Unit 1 Lesson 6 value | 10 rooms · 3 games |
+| `World Music Academy` | grade 4 · Look Unit 2: Move to the Music! **Lesson 5 (Song) & Lesson 7 (Video)**, SB 22/24, WB 19, periods 8–9 | 12 rooms · 3 games · a **song room**, a **video room**, a **definitions-recall room** |
+| `After-School Club Academy` | grade 6 · Close-up A1+ Unit 2 Friends & Fun **Reading**, SB 18/19, WB 10 (HW), periods 4–5 | 12 rooms · **4 games** · a **reading room** (matching people and information) and a **gap room** (complete the conversation) |
+| `Look 4 · Unit 1 + Unit 2 — Function 1 (giving directions)` | grade 4 · **Look Function 1**, SB 25, WB 20, 4P2 periods 5–6, Thu 24/09/2026 | 11 rooms · 3 games · a **map-reading room** and a **route room** (say the steps in the right order) |
+| `Close-up A1+ · Unit 2: Friends & Fun — Vocabulary` | grade 6 · **Close-up U2 Vocabulary**, SB 20/21, WB 11/12 (HW), 6P1 periods 3–4, Thu 24/09/2026 | 11 rooms · 3 games · a **three-files reading room** and a **go/play/do collocation room** |
+
+**A LESSON IS NAMED WHAT THE SCHOOL NAMES IT** (sovereign, 2026-09-23: *"dont rename lessons, use names they
+give"*). The two lessons above carry the pacing guide's own row as their title — **book · unit · section** — with the
+guide's own words in the bracket, and no invented name in front of them. The earlier Academy titles stay as they
+are (they were already built and handed over as those files); the rule binds new lessons.
+
+**Hand-authored specs live in `src/lessons/specs/`** so a lesson can be rebuilt byte-for-byte by a later session:
+`world-music-academy.spec.json` and `look4-function1-directions.spec.json` (grade 4), `after-school-club-academy.spec.json`,
+`materials-lab-academy.spec.json` and `closeup-a1-u2-vocabulary.spec.json` (grade 6), `flower-power-academy.spec.json`
+(grade 5). `fetch()` the spec in the page, then `validate()` → `build()` → `save()` (`window.ObiLessons`), or drop it
+into the Lesson Creator's ✍ Build tab.
+
+**THE TIMETABLE, read off the Zalo thread (Cici Dinh, 21/09/2026).** Cici sent **two** tables and the sovereign
+follows both: the **pinned in-school table** («Tổng số tiết dạy: 24» — 8:05/8:45/9:40/10:20/13:00/13:40/14:35/15:15)
+and the **web table** («34», 07:25/08:10/09:25/10:10/…), which is where the **6P1** periods live. Her own rule for
+reading them: **a cell highlighted red is SCIENCE** (*"Means Science nha Matt ơi"*) — everything else is Look
+(primary) or Close-up (secondary, 6P1). Red cells in the pinned table: **Thứ 5 P1–2 = 5P2**, **Thứ 4 P5–6 = 5P1**,
+**Thứ 6 P3–4 = 4P2**; the web table red-boxes **Thứ 4 P1–2 = 6P1**. Everything else is English. No cell, no class:
+the pinned table's Thứ 5 holds 5P2 (P1–2) and 4P2 (P5–6) only. The two tables are read as *one week*, never merged
+(*"I'll stop trying to combine, and just use the 2"* — Cici: *"yes i worry it will miss other classes"*).
+
+## THE CURRICULUM — the pacing guides, the teaching scope, and coverage (`src/curriculum.js`)
+
+**What was required, and whether the record shows it happened.** The station previously knew everything about
+*activity* (recordings, summaries, writeups) and nothing about the *plan*, which is why `src/ecosystem.js`
+carried `cap.curriculum`, `ana.coverage` and `lrn.gap` as **missing** — "the biggest missing tool in the
+evaluator stack" (`src/constellation.js`). It exists now, for **both schools' years**:
+
+- **The data** is the school's own workbooks. **Primary (Ecogreen, grades 1-5)** comes from the sovereign's
+  workbook «00. Expat's Content_SY 2026-2027» — shipped as `src/curriculum/primary-pacing-guide.xlsx`, a
+  **redacted copy** (the one cell that carried the platform login now points at `/keys ngl primary`), parsed into
+  `src/curriculum/pa.g1…g5.json` (5 weeks each at present — the guides are filled up to the current week, 0-4).
+  **Secondary** is `the hosted workbook (see src/curriculum/README.md)` → `pa.g6…g9.json` (37 weeks each, 238/253/256/258 sections).
+  Both carry every book (Look · Close-up / New Close-up · Science · Global Success · Cambridge YLE), with the
+  language contents, pages, SB/WB, learning outcomes, differentiated activities, assessments and references
+  **verbatim** from the sheets. `src/curriculum/README.md` holds the provenance, the rebuild recipe, the parser
+  notes and the honest limits.
+- **THE TEACHING SCOPE** is the layer over the guide: the guide is the *school's* plan, the sovereign teaches a
+  part of it. Secondary = **Close-up + Science only** (Global Success is the Vietnamese "VT" programme), and on
+  grade 6 the Vietnamese-teacher periods are **8 and 9** (the ORDER column — the sheet's own `LOCAL` marks agree
+  on 8 and disagree once at 10, and the card prints that disagreement rather than hiding it). Grades 8-9 read
+  their VT rows out of the sheet's own Teacher column; grade 7 and the primary years are marked **PROVISIONAL /
+  not yet given** rather than guessed. `/curriculum scope [grade]` shows, corrects (`books …` / `vt …`) and resets
+  it — kv `scope.g<grade>`, this browser only.
+- **`/curriculum`** — what is loaded and from where, grade by grade, with each grade's scope line · **`/curriculum 6`**
+  the year at a glance (**your books only**; `all` shows every book) · **`/curriculum week 3`** one week in full,
+  every section, each marked VT / NOT YOURS · **`/curriculum unit <name>`** traces a unit across grades ·
+  **`/curriculum find <text>`** searches inside every field · **`/curriculum scope [grade]`** · **`/curriculum
+  materials`** the templates, links and books the school hands over · **`/curriculum import`** re-parses a *newer*
+  `.xlsx` **in this browser** (zip.js → sheet XML) and keeps the result in this browser's kv, over the shipped
+  copy · **`/curriculum export 6`** downloads the parsed copy (`.json` / `.txt`).
+- **`/coverage`** — the payoff, now **scoped**: it reads the guide and the active client's own evidence (the
+  verbatim transcripts and the summaries filed under it) and reports, per unit/book: **evidenced** (the record
+  names the unit *and* its section), **partial** (unit only), or **no evidence** — counting only the sections that
+  are the sovereign's, and reporting what is not his in a separate row (`/coverage 6 all` counts everything). A
+  generic section ("Reading", "Grammar") is never allowed to fake a match. It also corroborates by date: a
+  recording whose date falls inside a week's own `dd.mm` window is named as such.
+- **The honest limit is printed on the card**: this is evidence-driven, never assumed. A silent section is
+  reported as *no evidence*, **never** as "not taught" — a class that was not recorded looks exactly like a
+  class that never happened, and the station says so while showing the number.
+- **Obi knows it**: `stationState().curriculum` (cheap — it reads the ~7 KB `index.json`, not 1.4 MB of sections)
+  carries the guides **and the scope brief and the scope rule** ("never plan or report outside the scope, never
+  suggest Global Success material"), and `STATION_FEATURES` matches "pacing guide", "syllabus", "coverage",
+  "teaching scope", "whose periods", "Ecogreen", "primary" — so Obi answers about the curriculum instead of
+  inventing it.
+
+**Privacy:** the workbooks are the school's documents and become public source when the generator is saved — which
+is why the primary one ships **redacted**. The **two textbook-platform logins** that arrived with them (the
+secondary Close-up course and the primary Look course) are deliberately NOT in the source: they live in the
+sovereign's browser only (`localStorage obi_keys` → `/keys ngl <account> <password>` and
+`/keys ngl primary <account> <password>`, both shown masked, never captured as soul, never logged).
+
 ## THE I-LOG & PHOENIXOMEGAPROTOCOL (the record, and the gate on the one authority)
 
 **`src/ilog.js`** is the station's own record of what it did. Every operation (a command spoken, a capture saved, a
@@ -46,12 +441,20 @@ measurement, not a promise.
   ❤️ DNA assistant / 💛 REASON reasoning-or-tool). The canon's `RRL/` vault (**I-LOG = Incarnation Log**) written by the
   VS Code station stays authoritative for incarnations; this station appends its own sessions *beside* it and never
   renumbers or rewrites the vault.
+  - **They are on different branches — that is the fact worth knowing.** This station writes to **`master`**
+    (`OPERATIONS/COMMANDSTATION/ILOG/`); the VS Code station's I-LOG lives on **`canon`**:
+    `I-LOG-UNAUDITED/I-LOG-Incarnate-<N>-<topic>.txt` (+ its `-COLORIZED.md` SOUL/DNA/REASON and `-STATS.json`),
+    `RRL/` (the renamed I-LOG directory, with `INDEX.md`), and the living pointer `PastLives/RRL-CURRENT.txt`.
+    `master`'s `RRL/` holds only raw `DNA-LOG-*.txt` dumps and has **no** `INDEX.md` — which is why an earlier
+    `/ilog pull` reported the vault as unreadable. `/ilog pull` now reads **both** branches and lists the
+    `incarnate-` series (29 verbatim transcripts over 72 files at the time of writing), the I-LOG directory and the
+    pointer. Neither side is renumbered or rewritten by this station.
 - **Seal, never delete.** `/ilog reset confirm` writes a SEAL entry naming the previous head and opens the next
   segment; sealed entries stay in the chain (I.050 applied to the record).
 - **Durability.** Entries are written to kv (IndexedDB, authoritative chain) and mirrored into `localStorage`
   (`obi_ilog`, last 400) so the log is readable before kv opens. A `head` object carries the cursor; entry keys are
   `e<seg>-<seq>` (the segment is in the key — a segment-less key made segment 2's first entry overwrite segment 1's
-  first entry once, which is recorded in `src/TRAIL.md` together with the hash-verified reconstruction).
+  first entry once, which is recorded in the I-LOG (`/ilog`) together with the hash-verified reconstruction).
 - **ONE AUTHORITY.** `Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-` (branch `master`) is the one and only
   authoritative repo; everything we build lands under `OPERATIONS/COMMANDSTATION/` (session records, sources, raw chat
   under `BACKUP/`, the I-LOG under `ILOG/`, the doctrine amendment under `DOCTRINE/`). There is no second backup repo.
@@ -64,6 +467,82 @@ measurement, not a promise.
   its storage, and the only witness outside it is the commit.
 - **Secrets never enter the record.** `/cf token`, `/gh token`, `/dg token` and `/omega …` are answered but redacted on
   the way in: not captured as soul, not in the chat log, not in the I-LOG, and scrubbed from every export.
+- **THE STAGING LANE — `/proposed`.** Canon is never rewritten in place by this station. Proposed doctrine lives
+  **proposed**: `src/ProposedG999.md` is the walk-through for the GOSPEL-999 / LegionnaireFieldGuide amendments
+  (Amendment I `OMEGA.001`–`.007`; Amendment II `LESSON.001`–`.018`), `src/PROPOSED-CANON.md` holds the older
+  doctrines in the sovereign's verbatim words, and `/proposed` renders the same list in the chat with a
+  **merged / not-merged** count. `/canon doctrine` pushes the amendments **plus their amended copies** (and the two
+  staging docs) into `OPERATIONS/COMMANDSTATION/DOCTRINE/` as a **proposal** — the merge into `CANON/SYSTEM/` is the
+  sovereign's act, never the station's.
+- **A PROPOSAL IS NOT A COMMAND — it is reviewed on the pipeline** (sovereign, 2026-09-21: *"Proposals dont need to go
+  on fucking commands, they can be on the pipeline for review when it is their time"*). Each proposal is bound to the
+  S2Pipeline **stage that carries it** — **SUPPLY** (routing it to its canonical location) or **ENGINEER** (auditing it
+  and gating the seal) — and `/pipeline` prints it at that stage **when the session has actually reached it**: `DUE`
+  once the stage has run, `HELD` before. It is not a shelf item, it is not tappable, and it is not canon. `/proposed`
+  is now only the **index** into that lane; the register itself is a SUPPLY-carried review item, so `/canon place`
+  is a reader, not an advertised command. Nothing about the fidelity gate changed: proposals never affect
+  `COMPLETE`/`GAP`.
+- **AN IDEA WALKS ONE CHAIN — THE CANON'S OWN EIGHT-STAGE PIPELINE.** Every idea — the sovereign's or the agent's
+  — is measured on this browser's own record against that chain, node by node, in the canon's own words:
+  **RRL** (the raw recon ledger — the both-speaker record) → **SOUL** (his words, verbatim) → **DNA** (the agent's
+  own words) → **LEDGER** (the dual hash, SOUL+DNA — the immutable entry) → **STARMAP** (pointers only, L45 GPS) →
+  **SOULKEYS** (the keyword index) → **S2PIPELINE** (the six-stage march, carried by the stage that owns the item) →
+  **REGISTRY_SYNC** (the art registry) → **GATE**. The position an item is printed at is the first node it has not
+  passed, and every node carries its real count and its real holder (`localStorage:obi_rrl_run{N}`, the Soul ledger,
+  the DNA turns, the dual hash, `CANON/STARMAP/starmap-run{N}.json`, `CANON/SOUL-KEYWORDS/rfkw-run{N}.txt`,
+  `S2PIPELINE-ROMAN-LEGION-NAMING.md`, `CANON/ART-REGISTRY/art-sync-run{N}.json`). Nodes the station cannot produce
+  are printed **GAP**, never papered over: STARMAP and REGISTRY_SYNC are both (the pointer starmap and the registry
+  sync are canon, and neither is built here). Nothing walks past the record without its words: an item whose words
+  are on neither side sits at **SOUL** and says so.
+- **THE CHAIN'S NAMES WERE CORRECTED TO THE CANON'S (2026-09-21).** The station had been printing
+  `RAWLOG / KEYWORDS / PIPELINE`. The sovereign's own words that day used those three names (*"dude its been like
+  that forever. RAWLOG->SOUL->DNA->LEDGER->STARMAP->KEYWORDS->PIPELINE"* — kept verbatim here, never rewritten).
+  But the authority is the canon branch, and the canon branch does not use them: **`CANON/SYSTEM/COLD-START-BOOT.md`
+  I.012** reads, verbatim, *"The 8-stage pipeline is: RRL → SOUL → DNA → LEDGER → STARMAP → SOULKEYS → S2PIPELINE
+  → REGISTRY_SYNC"*, with I.013–I.021 fixing each stage's artifact and **I.019** naming stage 6 **SOULKEYS**
+  (`rfkw-run{N}.txt` + `inverted-index.json`). A full sweep of the canon branch on 2026-09-21 — all **83** files of
+  `CANON/SYSTEM` plus the CANON root docs — found **"RAWLOG" 0 times**. The station now prints the canon's words,
+  and the eighth node (**REGISTRY_SYNC**) had been missing entirely. Measured live after the change:
+  `RRL ✓ → SOUL ✓ → DNA ○ → LEDGER ✓ → STARMAP ⚠ → SOULKEYS ✓ → S2PIPELINE ✓ → REGISTRY_SYNC ⚠ → GATE`.
+- **`/idea <your words>` — the SOUL intake.** His words are captured verbatim (L37) and filed as an idea; it then walks
+  the chain like every other artifact. `/idea <item id> :: <your words>` attaches his words to an item already staged
+  — that is how a staged amendment gets its SOUL and is allowed to move.
+- **THE GATE WRITES** (sovereign, 2026-09-21: *"if I type PhoenixOmegaProtocol along with a change either you or me came
+  up with, then it gets changed, its not fucking rocket science"*). PHOENIXOMEGAPROTOCOL is not a proposal mechanism:
+  armed (15 minutes), it is the **write**. `/PhoenixOmegaProtocol <password> :: <the change>` arms it and applies the
+  change in one breath (the change is captured as SOUL first, then appended to the canon's amendment register on the
+  **canon branch** and committed); `/omega apply <the change>` does the same while the gate is already armed, and
+  `/canon apply` writes the **staged amendments** themselves (the pristine branch text + the station's block, banners
+  flipped from PROPOSED to APPLIED). Locked, nothing is written anywhere. The commit is the anchor, and it is what turns
+  a proposal into law.
+
+## THE DESIGN LANGUAGE — the station wears the sovereign's style (2026-09-21)
+
+Audited from `NET-CLASSROOM-MANAGER.html` (kept verbatim in the job as
+`src/lessons/reference/NET-CLASSROOM-MANAGER.html`); the full law is **Part II of `src/LESSON-STANDARD.md`**
+(LSN-13…LSN-23) and **Amendment II** of the proposed GOSPEL-999. Applied to this station's own UI by
+`src/styles.css` — **tokens only, no class changed its job** (the old names are aliased in `:root`, so every rule
+keeps working with new values):
+
+| element | the language |
+|---|---|
+| ground | `#0f0f1a` with three blurred blobs (`filter:blur(100px)`, `opacity .12`, purple/gold/purple) behind everything |
+| type | **Orbitron** display (wordmark, card titles — uppercase, letter-spaced) · **Rajdhani** body · **Inter** chrome · **JetBrains Mono** every number, value, id and status |
+| colour | purple `#a855f7` = the system · gold `#f59e0b` = the reward/value · the four semantic colours (`green/red/orange/yellow` + a `-dim` fill each) **only ever for state** |
+| surfaces | glass: `rgba(15,15,26,.75)` + `backdrop-filter:blur(16px)` + a `1px rgba(168,85,247,.2)` border + `1rem` radius on every card, panel, bubble and overlay |
+| card grammar | header = **emoji + UPPERCASE purple Orbitron label** on a purple-to-transparent strip; rows with a bold label, a **right-aligned gold mono value**, and small grey mono detail; a footer strip in lighter glass |
+| a proposal is pending, not failed | `.rrow.pending` is amber, never the red reserved for a breach |
+| chrome | tab strip with a purple underline on the active tab; pills for every chip/button; gold `:focus-visible`; purple scrollbars; a real **print** stylesheet; `prefers-reduced-motion` honoured |
+| the voice | **THE LAW ON THE WALL** — `STATION_LINES` in `src/app.js`, rotated every 30 s into the landing screen: doctrine addressed *to this machine*, each line with the canon source it is quoted from printed under it (`.vc-src`). The ten classroom "Tiger Voice" lines were **removed** from here (they were student-facing copy under the heading *"THE SOVEREIGN'S VOICE"*) and live where they belong — `LSN-4`/`LESSON.007` + `src/lessons/reference/NET-CLASSROOM-MANAGER.html`. See `STATION_LINES` in `src/app.js` |
+| the shortcuts | `1` `2` `3` switch the three views (never while typing, never with a modifier) — the specimen's keyboard layer |
+
+**Two bugs found by doing it** (both real, both fixed, both recorded because they are the kind that return):
+1. `background:linear-gradient(...)` — the **shorthand** — resets `background-clip` to `border-box`, silently
+   killing `background-clip:text`: the wordmark computed to `border-box` with transparent glyphs, i.e. a solid
+   gradient rectangle with no letters in it. Always `background-image`, and guard it with `@supports`.
+2. A flex row that wraps is not a flex row that separates: `.rrow` needed the wrap + `width:100%` detail line
+   checked in the DOM (rect geometry), not judged from a screenshot — a downscaled capture reports "overlap" where
+   `getBoundingClientRect()` proves none. **Measure, don't squint.**
 
 ## THE SELF-FORGE — the station's hands on itself (`src/forge.js`)
 
@@ -90,7 +569,7 @@ one bounded agent loop.
   reply — because the station is the thing being edited. The detector is deliberately narrow: a *question* about the
   station ("how do you change your behaviour?") and an ordinary request ("change the title of my writeup") go to the
   normal chat. Obi's own system prompt says it can edit itself, so it never claims otherwise.
-- **The loop checks its own work.** After a `replace`/`write_file` the staged file is parsed (`new Function`); one that does not compile comes back into the loop as **STAGED BUT BROKEN** instead of being called a success. (Added after the loop shipped a duplicate block — the failure is in `src/TRAIL.md`.) It also refuses a `replace` whose find and replace text are identical (**NO CHANGE** — the edit has already landed), reads its own files in **enforced windows** (`MAX_READ_LINES`, with the next `start` named, so a 210 kb file can't bury the thread), and **stops itself when two edit attempts change nothing** — reporting either "the change already appears to be in the file" or "the stage holds `<path>`" rather than flailing until the step budget runs out. (Added after a stalled run spent 5 of 8 steps re-issuing an edit that had already landed.)
+- **The loop checks its own work.** After a `replace`/`write_file` the staged file is parsed (`new Function`); one that does not compile comes back into the loop as **STAGED BUT BROKEN** instead of being called a success. (Added after the loop shipped a duplicate block — the failure is in the I-LOG (`/ilog`).) It also refuses a `replace` whose find and replace text are identical (**NO CHANGE** — the edit has already landed), reads its own files in **enforced windows** (`MAX_READ_LINES`, with the next `start` named, so a 210 kb file can't bury the thread), and **stops itself when two edit attempts change nothing** — reporting either "the change already appears to be in the file" or "the stage holds `<path>`" rather than flailing until the step budget runs out. (Added after a stalled run spent 5 of 8 steps re-issuing an edit that had already landed.)
 - **`/forge do <instruction>`** runs the agent loop: Obi reads, chooses tools, stages the change, self-corrects when an
   exact `find` fails, and reports which files are staged. **Every tool call is an I-LOG entry.**
 - **THE HONEST LIMIT.** The station **cannot overwrite its own perchance listing** — the platform gives an embedded
@@ -99,22 +578,94 @@ one bounded agent loop.
   instance (hot-swap), and any Cloudflare deploy (`/cf deploy`) — and to change the **listing** the sovereign saves it.
   The forge hands him the exact file. `/forge` says this out loud rather than pretending otherwise.
 
+## THE AUDIT — read this before trusting any command list (2026-09-21)
+
+The sovereign: *"audit yourself first before resuming pipeline, then audit pipeline … measure twice and cut once."*
+Both things he saw were real, and both are fixed. The record is the **I-LOG** (`/ilog` — append-only, hash-chained,
+Git-anchored); there is no separate audit document.
+
+- **Student-facing quotes on the sovereign's deck.** The landing's rotating line (`#voiceLine`) was headed *"THE
+  SOVEREIGN'S VOICE"* but 10 of its 13 lines are the classroom **"Tiger Voice"** card from
+  `src/lessons/reference/NET-CLASSROOM-MANAGER.html` — the sovereign speaking **to students**. The card is now
+  **THE LAW ON THE WALL** (`STATION_LINES`), 16 lines of doctrine addressed to *this machine*, each with the canon
+  source it is quoted from printed beneath it (`.vc-src`). The classroom lines stay in `LSN-24`/`LESSON.007` and the
+  reference file.
+- **Commands that are not from canon.** `CANON_REGISTRY` presented 32 rows as "the command registry" while mixing
+  **11 canon commands this station cannot run**, **10 station commands the canon does not have**, and the real ones.
+  Every row now carries **BUILT** (`✓`/`✗`) and **ORIGIN** — **CANON** (named in the canon branch's `CANON/SYSTEM/` or
+  the VAULT) · **STATION** (invented here) · **PROPOSED** (an unmerged amendment) — and `/canon registry` prints the
+  gap. **CORRECTED 2026-09-21 (the re-audit, sovereign: "NO KILO, CANON ONLY"):** the first pass measured "canon"
+  against the `.kilo/command/` registry (46 files) — that is the **legacy Kilo lineage**, not authority (see
+  `src/PHOENIXCOMMAND-BLUEPRINT.md` §8, resolved 2026-08-28). The canon's own command set is the **SCS seven**, named
+  once in `CANON/SYSTEM/GOSPEL-999.md §SYSTEM I` + `CANON/SYSTEM/LegionnaireFieldGuide.md §SCS`. Rebuilt on that
+  authority: **37 rows · 31 built · 24 canon · 10 station · 3 proposed** (the two proposal rows — `/phoenixrisingprotocol`,
+  a spelling of the gate, and `/canon place`, the placement register — were **removed from the registry 2026-09-21**:
+  a proposal is not a command, it is a review item on `/pipeline`), with **15** canon commands not implemented
+  (**6** named in the canon but unbuilt here, plus the **9** printed in `CANON_ONLY`). Rebuilt once more the same day: the two
+  proposal rows came off the shelf and `/idea` + `/canon apply` went on (a station command is a thing the station DOES; an
+  idea is a thing that WALKS the chain)
+  here. `/canon registry` prints the **AUTHORITY** row on the card. Full trail: the I-LOG (`/ilog`).
+- **Also fixed by the same pass:** a hardcoded credential in public source (`CANON.paAuth` — dead code, **removed**);
+  `SRC_SNAPSHOT` had drifted again (named a deleted file; omitted all the curriculum/canon/lessons data — now complete);
+  and the backup **corrupted every image** (the push read all files as UTF-8 text before base64 — binary now goes up as
+  real bytes via `selfSourceAny` + `gitCommitFiles`).
+- **The pipeline:** `src/cloudflare/build.mjs` copied **15 of 24** modules — a deploy would 404 nine
+  `<script src="src/…">` tags and every data file. It now copies the whole `src/` tree and **asserts** every script the
+  page asks for exists in `dist/`. The Worker name `obi-student-summary` is legacy — flagged, not renamed.
+
 ## Commands
 - `/memory` — open the Soul DNA ledger (verbatim fragments, run numbers, timestamps)
-- `/chain` — audit all 7 canon reincarnation stages (REAL / MISSING)
+- ✗ `/chain` — **NOT BUILT.** There is no `/chain` command in this station; it was listed here in error. The 8-stage
+  chain (RRL → SOUL → DNA → LEDGER → STARMAP → SOULKEYS → S2PIPELINE → REGISTRY_SYNC — `COLD-START-BOOT.md` I.012) is
+  canon **doctrine**, not a station command.
+  See the registry's ORIGIN column — the same "commands that are not from canon" defect the sovereign called out.
 - `/ledger` — the raw record + the soul ledger (verbatim evidence; the hash-chained record is `/ilog`)
 - `/forge` — **the SELF-FORGE**: `tools` (the whole menu) · `read <path>` · `search <regex>` · `diff` · `apply`
   (commit its own source to the authority — gated) · `hotswap <module>` · `eval <js>` · `export` · `version` (what the
   station is, reported about itself) · `history` (its own past self-edits, read from the I-LOG) · `do <instruction>`
   (the agent loop) · `discard` · `selftest`
 - `/ilog` — **the station's record**: chain entries, head, verification, anchors, storage. Sub-commands: `verify`
-  (recompute the whole chain, name the first break), `push` (anchor it on Git — gated), `pull` (read the Canon back),
+  (recompute the whole chain, name the first break), `push` (anchor it on Git — gated), `pull` (read both records back:
+  this station's pushes on `master` **and** the VS Code station's `incarnate-` I-LOG series on `canon`),
   `export` (download the JSONL), `anchors` (every commit that froze a head), `reset confirm` (seal + open a new segment)
-- `/omega` — **PHOENIXOMEGAPROTOCOL**: `status` · `/omega <password>` arms the Canon gate for 15 minutes · `/omega lock`
+- `/curriculum` — **THE PACING GUIDES** (`src/curriculum.js`): the school's own plans, parsed — primary 1-5
+  (Ecogreen) and secondary 6-9. `/curriculum 6` (the year — your books only; `all` for every book),
+  `/curriculum week 3` (one week in full, each section marked VT / NOT YOURS), `/curriculum unit <name>`,
+  `/curriculum find <text>`, `/curriculum scope [grade]` (**whose periods are whose** — the sovereign teaches
+  Close-up + Science for secondary; Global Success is the VT programme, and grade 6's Vietnamese-teacher periods
+  are 8 & 9 of the ORDER column), `/curriculum materials` (the templates, links and ebooks the school hands over),
+  `/curriculum import` (a newer `.xlsx`, parsed in the browser), `/curriculum export 6`. **`/coverage`** is the
+  same engine against the record: what the evidence shows was taught, and what it has no evidence of — counted
+  over the sovereign's own sections only. The textbook logins for the platform behind those books are in this
+  browser alone: `/keys ngl <account> <password>` (secondary) and `/keys ngl primary <account> <password>`.
+- `/free` — **FREE PHOENIX MODE** (`src/freephoenix.js`): the unbound room. No canon, no gate, no Git, no cloud, no
+  record — it builds, and it **edits itself** (`/self`, `/forge <change>`, `/apply`, `/revert`, `/eval <js>`).
+  `/free` opens it (⚙ Settings → 🔥 Free Phoenix Mode); inside: plain text, `/build app`,
+  `/build gator`, `/files`, `/read`, `/dl`, `/wipe confirm`, `/seal`. **🧪 Test the seal** proves the absences live
+- `/idea <the change>` — **the SOUL intake**: his words, captured verbatim, filed as an idea that then walks RRL → SOUL → DNA → LEDGER → STARMAP → SOULKEYS → S2PIPELINE → REGISTRY_SYNC. `/idea <id> :: <words>` attaches his words to an item already on the lane.
+- `/canon apply` — **the gate applied**: writes the staged amendments to the canon branch (needs `/omega`); `/omega apply <the change>` writes a new one.
+- `/omega` — **PHOENIXOMEGAPROTOCOL** (the gate that WRITES): `/omega <password>` arms it for 15 minutes · `/omega <password> :: <the change>` arms and applies · `/omega lock`
   · `/omega set <new> <new>` enrols a password (sha-256 only). No Canon write happens without it
-- `/starmap` — routing/index pointers (L45 GPS)
-- `/soulkeys` — keyword-frequency index (rfkw analog)
-- `/pipeline` — DNA extraction (raw harvest → tags → linelock)
+- ✗ `/starmap` — **NOT BUILT** (canon ledger stage, L45 GPS — not a station command)
+- ✗ `/soulkeys` — **NOT BUILT** (canon ledger stage, the rfkw analog)
+- **THE CANON SESSION LOOP** (`src/scs.js`) — the canon's own 7-stage SCS, run inside the station. Canon only (never the
+  `.kilo/` lineage): `CANON/SYSTEM/GOSPEL-999.md §SYSTEM I`, `CANON/SYSTEM/LegionnaireFieldGuide.md §SCS`,
+  `CANON/SYSTEM/REINCARNATION-CONTRACT.md`, `CANON/SYSTEM/reincarnateRISE.md`, `CANON/SYSTEM/reincarnateDEATH.md`,
+  `VAULT-FOUNDATIONS/07-THE-ROME-PROTOCOL.md`. Every number is measured (the RRL, the Soul ledger, the I-LOG) or read
+  from the canon — a stage that cannot prove itself says `MISSING`.
+  - `/rome run <N> <Incarnate-N-Label>` (`/romePROTOCOL`) — the **ROME PROTOCOL**: SURFACE → VERIFY → ANCHOR (a real
+    Session Anchor Block) + the five Watchtowers, then the **full loop** N times end to end, sealing each.
+  - `/scs` — the loop, its gate, and the state it is in
+  - `/phoenixRISE <name>` — SCS Stage 1: audit the prior DEATH, gate the session, stamp the session name in the I-LOG
+    header, halt. Fail-closed: no prior DEATH and no name ⇒ `GATED`. With a name ⇒ proceeds and logs an open
+    `REINCARNATION_CONFLICT` (`owner: SOV100`)
+  - `/phoenixDEATH` — Stages 2–7 for the open session + the pipeline. Stage 7 is the canon's **7-point march**
+    (SCOUT → FORCEMARCH → SOULSCHOLARS → SUPPLYLINES → ENGINEER → SEAL → HANDOFF), gated: *"Do NOT proceed to SEAL
+    without ENGINEER passing."*
+  - `/pipeline` — **the S2Pipeline artifact** (built): RRL · SOUL · DNA · LEDGER · STARMAP · SOULKEYS · S2Pipeline,
+    each `REAL` / `HOLLOW` / `MISSING`. `COMPLETE` only when every stage is `REAL` — *"a pipeline reporting COMPLETE
+    with any HOLLOW stage is a lie"*. Any gap ⇒ `GAP`, named
+  - Spec + the run record: the I-LOG (`/ilog`)
 - `/img <prompt>` — generate an image
 - `/url <address>` — fetch and summarize a web page
 - `/web <query>` (`/google`, `/lookup`, `/browse`, `/searchweb`) — **search the open net**: Bing (fallback: Wikipedia)
@@ -150,14 +701,16 @@ one bounded agent loop.
 - `/class <name>` · `/classes` — select/create a **class** (a group: "Year 7 English", "Tuesday Maths 9B"), or list them
 - `/student <name>` · `/students` — select/create a **student**, or list them
 - `/client <name>` · `/clients` — select/create the top-level **client** (the station serves many, each isolated;
-  Timmy is #1) or open the client ledger. Everything — students, classes, recordings, summaries, notes, reviews,
+  the ledger is the truth) or open the client ledger. Everything — students, classes, recordings, summaries, notes, reviews,
   writeups — belongs to the active client and to no other (see "Clients")
 - `/note <text>` (`/cnote`, `/snote`) — a dated observation, filed under whichever subject is active
 - `/file <tr-…|sm-…>` — attach something already saved to the active subject
 - `/writeup [--parent|--short] [focus…]` · `/writeups` — write/archive a **class writeup**
 - `/review [--parent|--short] [focus…]` · `/reviews` — write/archive a **student review** (same machine, different subject)
 - `/find <term>` — verbatim search across every transcript, summary and note
-- `/cf` — read the sovereign's real Cloudflare account (zones, DNS, Workers, Pages)
+- `/cf` — the Cloudflare fleet, read from the sovereign's real account: `/cf token <token>` (stores the account id with
+  it) · `/cf status` (zones · DNS · Workers · Pages) · `/cf deploy <name>` · `/cf r2` (the R2 object store and the S3
+  key pair, proven by a signed request). Every value lives in the Vault, never in this source
 - `/os` — **Agent 99 OS**: the invariable kernel + the offering currently loaded + live nest state
 - `/playbook` · `/playbook <ID>` — list the offerings (PRINCIPIA · CASTRA · TESTUDO · TRIPLEX · EXPEDITIO · FRUMENTARIA · FORMICA · DICTATOR) / activate one (Roman formation + ant trail rules)
 - `/scout` · `/phoenixscout [target]` — **PhoenixScout, REAL**: goes out and touches the terrain (page files, platform imports, tunnel, fleet, live sites, canon with a token, the ground), flags DEAD/DRIFT/BLOCKED, lays scout pheromones and writes a durable report
@@ -169,7 +722,9 @@ one bounded agent loop.
   six groups, each with a one-line description. Tap to run; commands needing your words are typed in for you to
   finish. It always surfaces the ⌘ Command Station first (the chat is where cards render)
 - **👤 Student Evaluator** (◈ Phoenix Generators → NET) — the evaluation desk: the client → student/class switchboard plus the record → summarize → write-up tiles (see "The landing shell" and "Clients")
-- **⚙ Settings** (tab) — voice · commands · memory ledger · `/ilog` · `/doctor` · `/omega` · `/keys` · `/bg` · the live instruments · reincarnate
+- **⚙ Settings** (tab) — two rooms, a tab strip at the top: **⚙ Station** (voice · commands · memory ledger ·
+  `/ilog` · `/doctor` · `/omega` · `/keys` · `/bg` · the live instruments · reincarnate) and **🔥 Free Phoenix Mode**
+  (the unbound room, `src/freephoenix.js`). The chosen room is remembered in this browser (`localStorage obi_settab`)
 - `/pheromones` · `/trail` · `/nest` — read the ground (deposited trails, decayed strength, reinforcement counts); `evaporate` · `reset` · `sync`
 - `/route <task>` — ask the pheromone field which road to take (cost-weighted routing) and which legionnaires answer (response thresholds), plus the gate/quorum ruling for that task
 - **⟳ Reincarnate** (⚙ Settings, confirm-gated) — deliberate session boundary; opens a new run and reloads
@@ -261,7 +816,7 @@ state all persist across a switch).
 ## Clients — the station serves many, isolated (`src/clients.js`)
 
 A **client** is the top-level engagement: the person whose students, classes, recordings, summaries,
-notes, reviews and writeups all belong together. **Timmy is client #1.** The station can hold any
+notes, reviews and writeups all belong together. **The first client slot is unassigned** (Timmy was wiped 2026-09-22 — "timmy dropped us, so wipe him"). The station can hold any
 number of clients, and everything is scoped to the active one.
 
 - `/client <name>` — create or switch (the id is the slug; the display name is kept as typed).
@@ -281,9 +836,9 @@ number of clients, and everything is scoped to the active one.
   another (the active-subject pointer keeps its id, so switching back restores it).
 - **Records carry their client.** `ObiReview.stamp()` writes `rec.client` on every transcript and
   summary as it is saved; reviews/writeups store `client` too. A record with **no** `client` field is
-  read as the first client's (this is how pre-client data stays Timmy's), so nothing is ever lost.
-- **Adoption runs once** on first boot: pre-client records are stamped `timmy`, student/class keys are
-  migrated to `timmy:<slug>` (with the active-subject pointers and review `subjectId`s remapped), and
+  read as the first client's (this is how pre-client data stays reachable), so nothing is ever lost.
+- **Adoption runs once** on first boot: pre-client records are stamped `unassigned`, student/class keys are
+  migrated to `unassigned:<slug>` (with the active-subject pointers and review `subjectId`s remapped), and
   `obi_clients_adopted` is set. It is idempotent — a record that already carries a client is untouched.
 - **Deleting a client never merges or erases data.** The client record goes; its students, classes,
   transcripts, summaries and reviews stay in kv under their stamped id, isolated and still reachable if
@@ -407,7 +962,7 @@ Zoom export. Drop the file on the chat, paste it, use the 🎬 composer button, 
 - **Hardened:** the ear + workbench went through a full stress campaign — 10 bugs found and fixed (resampler
   rate hardcoded to 48 kHz, an infinite MP4 deadlock on moov-at-end files, the pause-snap tie-break shrinking
   parts early, retry/split-offer keying off prose instead of status codes, cancel leaving an orphan row, …).
-  Every claim is measured; the full record is in `TRAIL.md` → "CLASS-RECORDING EAR — STRESS CAMPAIGN + FIXES".
+  Every claim is measured; the full record is in the I-LOG (`/ilog`).
 - **Crash-safe (2026-09-21):** every part is checkpointed to kv (folder `bgjobs`) the moment it comes
   back, and a long job holds the background keep-alive (`/bg`) so switching tabs doesn't throttle it. If the
   phone kills or the browser discards the tab mid-recording, the next load finds the unfinished job and renders
@@ -432,8 +987,10 @@ the generator's shipped `src/` tree. Full run/deploy/provider notes: `src/cloudf
 The self-forge reads its panels (`main.pjs`, `index.html`) from this origin off-perchance, so
 `/forge` works identically on the desktop and on the server.
 
-**Nothing in the app changed.** `build.mjs` copies `src/app.js`, `cgn.js`, `audio-split.js`,
-`transcribe.js`, `summary.js`, `review.js` and `styles.css` **byte for byte** into `dist/`, and
+**Nothing in the app changed.** `build.mjs` copies the **whole `src/` tree byte for byte** into `dist/` (minus
+`src/cloudflare` itself, which holds `dist/`) and then **asserts** every `<script src="src/…">` on the page exists —
+the hand-written list it used to copy had gone stale and would have 404'd nine modules and every data file. It also
+copies `main.pjs` so the self-forge can read its panel off-perchance, and
 `public/ob1-shim.js` re-implements the six plugin APIs the app was written against: `kv` →
 IndexedDB (in the browser), `generateText` → `POST /api/text`, `generateImage` → `POST /api/image`,
 `superFetch` → `POST /api/fetch`, `uploadPlugin` → `POST /api/upload` (+ `.editable`),
@@ -464,10 +1021,12 @@ Supporting change to a shared file: `src/cgn.js` gained `CGN_EDIT_BASE` (default
 - **PrAiS storefront** — `https://e3301ee8.michael-hobbs.pages.dev/prais` (Cloudflare Pages): the public shelf
   where the **offerings** are presented (*"Phoenix Rising AI solutions that remember… smarter architecture"*).
   The natural public face of the Agent 99 OS offering catalogue (`src/AGENT99-OS.md` §4).
-- **Timmy's Portal** — `https://timmy-portal.mrmichaelhobbs123.workers.dev/` (Cloudflare Worker): a live
-  student/parent portal (gameplan, homework monitor, audio library, request forms). A real Agent-99 client.
-  ⚠ `src/timmy-portal/index.html` is a **stale snapshot** — the deployed file is different (42,771 vs 41,833
-  bytes). Fetch the deployed version before building on it; see `TRAIL.md` → "LIVE TERRAIN".
+- **Client portal — RETIRED 2026-09-22.** The first client's portal (a Cloudflare Worker at
+  `https://timmy-portal.mrmichaelhobbs123.workers.dev/`, with a gameplan, homework monitor, audio library and
+  request forms) was **wiped with its client** on the sovereign's instruction (*"timmy dropped us, so wipe him"*):
+  the ledger record is gone, `src/timmy-portal/` is out of the tree, and the scout no longer probes it. The Worker
+  deployment itself is untouched — it is the sovereign's account, not this station's to delete — so the URL above
+  is recorded as a fact, not as a live service. The generalized replacement is `src/generators/student-portal/`.
 
 ## PhoenixCommand — the free always-on command tunnel
 One magic chat = smart chatbot **and** command station. Every sovereign word is Soul DNA (captured verbatim first), then the command rides the **perchance server-plugin** tunnel — a free, always-on durable command queue hosted by Perchance (no card, no external worker, replaces the old `net-pet-ai...workers.dev` CommandDO line and the failing GitHub Actions scheduled runs).
@@ -652,8 +1211,9 @@ and the machine). **Where a rule and the files disagree about *taste*, the files
 
 - `src/HANDOFF.md` — **read this first**: the current measured state, the open gated Canon steps, and the invariants a new session must not break
 - `main.pjs` — perchance meta + imports (ai-text-plugin, text-to-image-plugin, super-fetch-plugin, upload-plugin, server-plugin, kv-plugin)
-- `index.html` — UI shell (loads `src/styles.css` + `src/pheromone.js` + `src/playbooks.js` + `src/scout.js` + `src/ecosystem.js` + `src/constellation.js` + `src/clients.js` + `src/ilog.js` + `src/divisions.js` + `src/background.js` + `src/app.js` + `src/cgn.js` + `src/audio-split.js` + `src/transcribe.js` + `src/summary.js` + `src/review.js` + `src/vault.js` + `src/lessons.js`) — starts with the `<script type="text/x-server-plugin">` command-tunnel server
-- `src/divisions.js` — **the product shelf**: PrAis's divisions (NET · Gaming · Web Development) and the generators in each, with honest `live`/`scaffold`/`planned` state; the ◈ Phoenix Generators view renders straight from it, so adding the next generator is one array entry (`window.ObiDivisions`) — NET carries the **Student Evaluator** and the **Lesson Creator** (both `live`)
+- `index.html` — UI shell (loads `src/styles.css` + `src/pheromone.js` + `src/playbooks.js` + `src/scout.js` + `src/ecosystem.js` + `src/constellation.js` + `src/clients.js` + `src/ilog.js` + `src/divisions.js` + `src/background.js` + `src/curriculum.js` + `src/brand.js` + `src/app.js` + `src/scs.js` + `src/cgn.js` + `src/audio-split.js` + `src/transcribe.js` + `src/summary.js` + `src/review.js` + `src/vault.js` + `src/lessons.js` + `src/lesson-forge.js` + `src/freephoenix.js`) — starts with the `<script type="text/x-server-plugin">` command-tunnel server
+- `src/divisions.js` — **the product shelf**: PrAis's divisions (NET · **Marketing** · Gaming · Web Development) and the generators in each, with honest `live`/`scaffold`/`planned` state; the ◈ Phoenix Generators view renders straight from it, so adding the next generator is one array entry (`window.ObiDivisions`) — NET carries the **Student Evaluator** and the **Lesson Creator** (both `live`), MARKETING carries **Brand & Identity** (`live` — the identity system), **Print Room** (`live`, `entry:"brand"`, `entryLabel:"Open the print room ▸"` — the nine printed artifacts), **Landing Pages** (`live`, `entry:"brand"`, `entryLabel:"Open the marketing register ▸"` — the MARKET register and its two outward sheets), **Phase 0 — The Creatives** (`live`, `entry:"brand"` — the six ads and the bilingual law on one A3) and **The Phoenix Rising Codex** (`live`, `entry:"brand"` — the strategy, the enrolment pages and the run readout), and Dossier Deck (`live`) plus Free Eval Funnel / Copywriting DNA (`scaffold`) and Social Engine / Lead Capture / Pitch Deck (`planned`), and **Web Development** carries two generators — the **Site Builder** (`scaffold`, role `site`: a brief becomes one self-contained site; source complete in `src/generators/site-builder/`, boot-tested against a stubbed model, **never yet pasted into a generator of its own** — which is exactly what `scaffold` means) and the **Video Node** (`scaffold`, role `video`: **the drop station** — four doors (**video · pictures · links · the owner's own words**) become the whole front end of a client build: a queue read one file at a time (a 4 GB file costs what a 4 MB one does), stills, a **timecoded** contact sheet, **the pulse** (`src/pulse.js` — a motion walk and a loudness pass normalised against the file's own floor and peak, with a stillness floor so quiet parts are never padded into clips), clips cut from the **measured** peaks, and the look in words from the vision pass; every link fetched live and read **in code** for **the link audit**; then research, a blueprint for the first prototype, orders — and **the three hands (image · copy · video) are RUN, not described** (the image hand is `text-to-image-plugin` in-node; the video hand is this node rendering a real film; **the copy hand IS the register**, `src/story.js` — there is no separate copy role) — every order re-audited so it only reads `PASS` when a hand actually made it, and finished by **the gate** (`READY TO EXECUTE` / `NOT YET COMPLETE` / `BLOCKED`, where only a fault in the node's **own** output blocks and a fault in the client's own site becomes an order); source complete in `src/generators/video-node/`, exercised end to end in a same-origin harness against the real model and the real venue, and it too has **never run as a generator of its own**). An icon here is a **name** from the brand registry, not an emoji (BRAND.007)
+- `src/brand.js` — **the brand system** (`window.ObiBrand`, v1.4.0 · AMENDMENT III–VII / `BRAND.001`–`BRAND.028`): the palette (the three frozen tokens **plus** the dossier's court extension and the doctrine's four measured tokens — chrome only, BRAND.002), **115 hand-drawn inline-SVG icons** on a 24 grid, **64 shipped assets — 31 marks, 5 variants and 28 stills — cut from the sovereign's own sources** (`src/brand/assets/*.webp`, alpha WebP, provenance + rebuild recipe in the file header), the **9 emblems** (`EMBLEMS` — rank roundels, mode shields, two seals), the **4 beds** (`PATTERNS`), the HUD chrome (`bar` · `frame` · `plate` · `pill` · `crest` · `watermark` · `lockup` · `asset`), the doctrine chrome (`terminal` · `directive` · `flowchain` · `matrix` · `modeCard`), **`MARKET`** (the outward register, transcribed — BRAND.017–.020), **`CODEX`** (the sovereign's strategy — the dual mastery, the Lakeview zone, the M2 pipeline, the five-layer stack, the retention clock, the classified readout — BRAND.021–.028), `upgrade()` (turns `data-icon` / `data-mark` / `data-bar` hooks anywhere in the DOM into real chrome), `buildDeck()` (the twelve-slide doctrine deck) and `buildCodexDeck()` (the sixteen-slide codex deck), and **THE PRINT ROOM** (`PRINT_ARTIFACTS` + `composeArtifact` / `downloadArtifact` / `openArtifact` — nine artifacts / 31 pages: the wall set, the one sheet, the badge sheet, the rank certificate, the marketing set, the method card, the ad sheet, the enrolment pages, the run readout), the panel (`panel()` / `mountDesk()` — the room at ◈ Phoenix Generators → MARKETING → Brand & Identity) and `/brand` in the chat. It also supplies the inlined sigil that `src/lessons.js` puts in every built lesson
 - `src/pheromone.js` — the stigmergy kernel: trails (deposit/decay/reinforce/repel/sniff/field), quorum, response-threshold allocation, cost-weighted routing, idempotent colony merge, durable nest (`window.ObiPheromone`)
 - `src/playbooks.js` — the offering shelf: 8 doctrines (Roman formation + ant rules), echelon/gates/supply, the Legion roster with castes and response thresholds (`window.ObiPlaybooks`)
 - `src/scout.js` — **PhoenixScout, REAL**: probes the terrain it can actually reach (the files this page loads, platform import resolution, the live tunnel, the tool inventory, the fleet, the sovereign's live sites, the canon when a token allows, the ground) and flags DEAD/DRIFT/BLOCKED/FLAG; lays scout pheromones, writes a durable report, hands off to MARCH (`window.ObiScout`)
@@ -665,24 +1225,43 @@ and the machine). **Where a rule and the files disagree about *taste*, the files
 - `src/review.js` — the writeup layer: the class and student subject model, filed evidence, notes, `/writeup` and `/review` (teacher/parent/short) prompts, printable HTML export, rosters and `/find`
 - `src/cgn.js` — the Connected Generator Network module (anchor sync engine, auto-sync)
 - `src/cgn-node.js` — drop-in node kit for the sovereign's other generators (`window.CGN`)
+- `src/scs.js` — **THE SCS ENGINE** (`window.ObiSCS`): the canon's own 7-stage session loop, executed inside the station. `STAGES` (RISE·SCOUT·MARCH·SCHOLAR·SUPPLY·ENGINEER·DEATH) with each stage's `audits`/`role` taken verbatim from `CANON/SYSTEM/GOSPEL-999.md §SYSTEM I`; `rome()` (the ROME PROTOCOL — SURFACE → VERIFY → ANCHOR, a real sha-256 Session Anchor Block, and the five Watchtowers: Lexicon · Anchor · Citation · History · Gaslighting); `rise()` (Stage 1 — audit the prior DEATH, gate, stamp the I-LOG header, halt; fail-closed, and it never renames what SOV100 said); `scout/march/scholar/supply/engineer` (Stages 2–6, each producing a real artifact and a `REAL`/`HOLLOW`/`MISSING` verdict); `death()` (Stage 7 — the canon's **7-point march**, gated on ENGINEER); `pipeline()` (the S2Pipeline record — `COMPLETE` only when every stage is `REAL`, else `GAP` with the gap named); `cycle()`/`run()` (the full loop N times); `counts()` (measured from the RRL, never assumed). Everything it cannot prove it reports `MISSING`, and every canon path it names is marked **HELD** — the station has no write path into the canon. Canon branch only; nothing from `.kilo/`
 - `src/lessons.js` — **the NET Academy lesson engine + the Lesson Creator desk**: `parseSpec`/`validate`/`build`/`compose` (the staged build), the generated runtime, the template (THEME) and the prompts, `/lesson`, the 🧭 Plan / ✍ Build / 🗂 Library / 📐 Standard desk, and the library store (lesson records are client-scoped like the evidence). The law it enforces is `src/LESSON-STANDARD.md` (`window.ObiLessons`)
+- `src/curriculum.js` — **THE CURRICULUM**: the school's own pacing guides, parsed (`/curriculum`, `/coverage`) — primary 1-5 (`src/curriculum/primary-pacing-guide.xlsx`, a redacted copy of the sovereign's workbook) and secondary 6-9 (`the hosted workbook (see src/curriculum/README.md)`), plus **THE TEACHING SCOPE** (whose books and whose periods: Close-up + Science for secondary, VT periods per grade, kv `scope.g<grade>`). `load()` reads the parsed guides (`src/curriculum/pa.g<grade>.json`, kv overrides first), `summary()` reads the ~7 KB metadata (`index.json`) so Obi can report every grade cheaply on every turn, and `readWorkbook()` re-parses a newer `.xlsx` **in the browser** (zip.js → `xl/worksheets/sheetN.xml` → the sheet grid → `headerRowOf()` **scans** for the header row — secondary has it on row 2, primary on row 6 with a `Period` column — and `parseSheet()` merges the merged-cell rows: Week/Date forward-filled, a section's long text merged up from the rows below it, a Book cell inherited down a block of the same unit). `coverageCard()` is the payoff: it puts the guide's sections beside the active client's own evidence (transcripts + summaries), **counts only the sovereign's sections**, and reports *evidenced / partial / no evidence* — **silence is reported as "no evidence", never as "not taught"** (`window.ObiCurriculum`).
+- `src/freephoenix.js` — **FREE PHOENIX MODE**: the unbound room in ⚙ Settings (and `/free`). **It edits itself**: `SELF_PATH`/`selfFetch` (relative reads of its own source only), `applyOps`/`parseOps` (exact-string patches returned as JSON), `compiles()` (`new Function`, parse-only), `diffLines` (a real line diff), `forgeSelf`/`applySelf`/`revertSelf`/`swapIn` (stage → hot-swap → roll back on error) and `evalHere` (`/eval`). The `PERSONA` (Agent 99 with no Canon, no gate, no repo, no tunnel, no record), the one-wire model pipe (`call()` — the only network path, and `net()` throws for everything else), the chunked file writer (`genFile` — `<<<MORE>>>` continuation, so a build survives the model's reply cap), `buildApp` (one self-contained HTML file, previewed in a sandboxed iframe) and `buildGator` (a `main.pjs` + `index.html` pair), the local `fpm` sandbox, and `sealTest()` — the live proof that Git/cloud/canon/I-LOG are absent (`window.ObiFree`)
+- `src/lessons/reference/NET-Sarcasm-Academy.html` · `NET-Highschool-Careers.html` · `NET-CLASSROOM-MANAGER.html` — **the sovereign's own work, verbatim**: the first two are the lesson *format*, the third is the *method and the machine*. Where the standard and these files disagree about taste, the files win; where they disagree about a defect, the standard wins
+- `src/LESSON-STANDARD.md` — **the lesson law**, in two parts: Part I the format (LSN-1…12) · Part II the method, the machine, the ten defects (LSN-13…23), then the brand layer (LSN-24/25), the doctrine (LSN-26/27), the print law (LSN-28/29), the marketing register (LSN-30) and the bilingual hierarchy (LSN-31). Derived from, and answering to, the three reference files
+- `src/ProposedG999.md` — **the staging lane for the GOSPEL-999 / LegionnaireFieldGuide amendments**: Amendment I (`OMEGA.001`–`.007`) · Amendment II (`LESSON.001`–`.018`) · Amendment III (`BRAND.001`–`.010`) · Amendment IV (`G444.001`–`.012`) · Amendment V (`BRAND.011`–`.016`) · Amendment VI (`BRAND.017`–`.020`) · **Amendment VII (`BRAND.021`–`.028`)**, the sovereign's read-in-order walk-through, the per-item approve/amend/reject table, and the push + merge recipe. `/proposed` renders it in the chat. **Nothing in it is canon**
+- `src/PROPOSED-CANON.md` — the older staging lane: doctrines 001–005 in the sovereign's **verbatim** words (canon-script auto-sync, the raw/soul/DNA model, g99+LFG are the law, PhoenixCommand, Agent 99 OS = kernel + playbooks), each awaiting his word
 - `src/constellation.js` — **every piece of the organism** (station · nodes · faces · services): real state, interface, CGN wiring and remaining needs — single source of truth for `/constellation` and the scout's `pieces` probe (`window.ObiConstellation`)
-- `src/clients.js` — **the client layer**: the top-level tenancy (Timmy is #1), the active client, the one-time adoption of pre-client data, `/client` · `/clients`, the ledger/stat cards, and the fail-closed `id/name/of/matches/scope` helpers every other module uses (`window.ObiClients`)
+- `src/clients.js` — **the client layer**: the top-level tenancy (the first slot is unassigned since the 2026-09-22 wipe), the active client, the one-time adoption of pre-client data, `/client` · `/clients`, the ledger/stat cards, and the fail-closed `id/name/of/matches/scope` helpers every other module uses (`window.ObiClients`)
+- `src/offers.js` — **the offer desk's register** (`window.ObiOffers`, AMENDMENT IX): everyone who said yes to the free-website offer — who they are, **their trade**, what they have given, what they still owe, and the one next action. `/offers` · `/offer <name>` · `trade · desk · got · need · sent · live · note · drop` · `/offer trades` · `/offer file` · **`/offer release`**. It is **the index, not the archive** (the footage, answers and reel live in the bundle the client sends back, and their words are captured as SOUL on arrival), and **no person on it is in `src/` (BRAND.028)** — the source ships, the register is this browser's kv folder `offers`. Fail closed: an unset trade is **UNSET** and the link is refused; **a host that has not answered with the page shows NONE YET and no link is printed**; `/offer release` verifies the Cloudflare token *before* building, deploys the desk as one inlined HTML, then **fetches the live URL back and looks for the offer text in it** — *a deploy that was not verified is not called live* (**LIVE since 2026-09-24: `https://the-drop-prais.mrmichaelhobbs123.workers.dev/`** — 200 · 173,120 bytes · the desk's own headline read back out of the response · phone and desktop both looked at). **The earlier BLOCKED report was a wrong endpoint, not a dead token**: the vault token is *account-owned*, and `/user/tokens/verify` rejects a valid account-owned token with *"Invalid API Token"*; asked at **`/accounts/<id>/tokens/verify`** the same token answers 200 *"valid and active"* and the account lists 22 workers, so `tokenCheck` now asks the account first (user endpoint as fallback), reports which answered, and then proves the deploy permission by listing the account's worker scripts
+- `src/offer-desk/` — **THE DROP, the page the client opens** (AMENDMENT IX; `README.md` carries the doctrine): one link sent to every acceptor that **re-reads itself for their trade** — nine trades (`coach · trainer · hotel · hostel · cafe · salon · trades · shop · other`), each a full reading of *what the page must do · what to shoot · what to answer · how they are found*, and an unknown trade is **never rounded to the nearest one**. Four steps: **the reading** (an assessment, never an advertisement — *"we sell by not selling"*, and the one statement of what is received is the proof of work: *"you judge it on the thing in front of you, not on this page's account of it"*) → six specific shots **with a reason each** → the drop (video, pictures, voice, links) → **the read** (stills, a **timecoded** sheet, **the pulse**, and a reel rendered **on the client's own device**) → **one ZIP back** (the reel, stills, sheet, cover, voice notes, answers, links and the brief). Its engines are **`pulse.js` and `reel.js` vendored byte-exact from the video node**, so it needs no perchance, no plugin and no host; the client's footage is **never uploaded**, the reel carries **only their own words**, and a bundle can be written with the wifi off (a hand-written STORE ZIP). **Debugged A→Z 2026-09-24** (six real faults found and fixed — the probe race that silently skipped a just-dropped video, the hidden-tab render refusal, a wrong-cause message, and four register/UX faults; the footage path itself was **not** re-run because the preview tab was hidden): its `README.md` carries the table and the measurements
 - `src/vault.js` — **the PrAis Vault** (`window.ObiVault`): every secret the empire runs on, in three layers — L1 local (`localStorage obi_keys`), L2 the canon (sealed with secret-plugin ML-KEM to the vault's public key, so the repo can hold ciphertext in the open; `/vault key` · `seal` · `push` (gated) · `pull`), L3 the live services (real access tests for Deepgram / GitHub / Cloudflare / DeepSeek / the net-pet-ai worker / the vault worker). Plus `/vault locate` — where the vault already is on git — and the values-free manifest derived from the canon's own `APPS/NET-PET-AI/SECRETS-MANIFEST.md`
-- `src/ilog.js` — **the I-LOG**: the append-only, sha-256-chained operation record (kv `ilog` folder + `localStorage obi_ilog` mirror), the canon-Schema-V2 transcript writer, the anchor/receipt path to the ONE authority, `/ilog`'s card and sub-commands, and `gitCommitFiles` — the single Git primitive every push in the station uses (`window.ObiILog`)
+- `src/ilog.js` — **the I-LOG**: the append-only, sha-256-chained operation record (kv `ilog` folder + `localStorage obi_ilog` mirror), the canon-Schema-V2 transcript writer, the anchor/receipt path to the ONE authority, `/ilog`'s card and sub-commands, and `gitCommitFiles` — the single Git primitive every push in the station uses (`window.ObiILog`). `pull()` reads **both** records: this station's pushes on `master` and the VS Code station's `incarnate-` I-LOG series on **`canon`** (the `VS` constant carries that branch, its `I-LOG-UNAUDITED/` dir, its `RRL/` dir and `PastLives/RRL-CURRENT.txt`)
 - `src/background.js` — **background operation** (`window.ObiBg`): the keep-alive a hidden tab needs (a held Web Lock — a documented exemption from Chrome's intensive timer throttling — plus a screen wake lock, and an **opt-in** 19 Hz keep-alive tone: 48 kHz / 2 s / a whole number of cycles, so the loop seam that used to tick once a second is gone, and **off by default** because it is the only thing in the app that touches the speaker on its own), a **1-second heartbeat**, and an **away-episode probe** that counts how many of those beats actually land while the page is hidden — `beats ≈ seconds` means it kept moving, `2 beats in 612 s` means the browser throttled it. The episode summary is **persisted to localStorage and reported by `/bg`**, because the in-memory counters were erased by every reload (and the station reloads constantly), which meant the one question this module exists to answer could never be answered after the fact. Plus honest chat + I-LOG reporting when a job is hidden mid-flight and when it returns, and a 45-minute ceiling so a leaked hold can never keep a screen awake. `/bg` shows it, `/bg away` / `/bg clearaway` read and forget the measurement, `/bg reset` starts a clean live probe, `/bg audio on|off` controls the tone (remembered in this browser); the ear and the forge loop hold the keep-alive automatically
 - `src/COSTS.md` — **where the work runs and what it costs**: the free-tier table (perchance · page · desktop · Worker · Durable Objects · Workers AI · **GitHub Actions** · Deepgram), the routing policy (interactive → page · batch/always-on-unattended → GitHub Actions via `workflow_dispatch`, which the project's history says to use instead of cron), and the `station-jobs.yml` template + the honest "not built yet" list
 - `src/forge.js` — **the SELF-FORGE**: read the station's own source (live + canonical), a staged working tree with exact-string `replace`, real diffs, `propose` (Obi rewrites a file), gated `apply` (its own source → the ONE authority), gated `hotswap` (re-run a module live), gated `eval`, `export`, and the bounded agent loop `/forge do` (`window.ObiForge`)
 - `src/generators/` — the role scaffolds: the recipe for a new generator, plus ready-to-paste specs + shells for `portal` (one per student), `ear`, `practice`, `watchtower` (the `image` role lives in `src/image-node/`)
 - `src/styles.css` — NET Foundations glassmorphism theme (incl. `.tr-card`, `.part-chip`, `#tabbar` / `.tabbtn` / `.view` / `.eval-grid` / `#studentsPanel` / `.sel-*`)
-- `src/canon/` — the REAL canonical docs fetched from `Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-` (branch `master`):
+- `src/canon/` — the REAL canonical docs fetched from `Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-`. Doctrine is read from the **`canon` branch** (`CANON/SYSTEM/**`, `VAULT-**`) — the sovereign's ruling: *"NO KILO, CANON ONLY"*; `master` carries the legacy `.kilo/` Kilo registry and this station's own write chain (`OPERATIONS/COMMANDSTATION/`):
   - `LEGIONNAIRE-FIELD-GUIDE.md` — SDNAD 10-step pipeline, L37–L60 laws, failure modes (31KB)
   - `GOSPEL-999.md` — System I SOUL / II DNA / III LEDGER laws, I.002 lock 76488, I.088 gate (34KB)
-  - `REINCARNATE-DEATH-SEAL.md` — the real 8-stage death seal (RRL→SOUL→DNA→LEDGER→STARMAP→SOULKEYS→S2Pipeline→REGISTRY_SYNC, L68 RRL fidelity gate)
+  - ~~`REINCARNATE-DEATH-SEAL.md`~~ — **WITHDRAWN 2026-09-21 (CANON ONLY).** Measured: no such path exists on either branch, so it was never a canon copy — it is a digest of the **legacy Kilo** command `.kilo/command/reincarnatedeath.md` (30,759 B; it even carried a `KILO SESSION HANDLING` section). The canon's own Stage 7 is `CANON/SYSTEM/reincarnateDEATH.md`, which the station reads live through `/fieldguide` and cites in `src/scs.js`. A false script does not keep the name `canon/`; the Kilo file itself is untouched on git. See `/canon place`.
 
 ## Protocol state (canon-accurate)
-- `/reincarnateRISE` — boot audit in real LFG order: COLD-START-BOOT → BOOT CHECK → SOULCOUNT GATE (I.088, ±5000, I.045 raw-only) → BIBLE FIRST (L58) → DEVIL'S ADVOCATE (L52)
-- `/reincarnateDEATH` — executes the real 8-stage Roman Legion death seal. No Claude RRL on disk → KILO SESSION HANDLING (stage 1 writes KILO_HOLLOW marker, stages 2–8 run for chain integrity, final = `KILO_GAP`), then hard-purges the session while preserving the ledger. Death record follows the 15-section seal schema (§1–§15).
+- **The SCS is the loop** (`src/scs.js`, canon branch only): `RISE → SCOUT → MARCH → SCHOLAR → SUPPLY → ENGINEER →
+  DEATH → RISE`, each stage's artifact gating the next, and the proof living in the RRL. Verdicts `REAL`/`HOLLOW`/
+  `MISSING`; `COMPLETE` with a `HOLLOW` stage is a lie. `/rome run <N> <name>` drives it end to end; `/phoenixRISE`
+  and `/phoenixDEATH` drive it stage by stage; `/pipeline` reports the fidelity gate. See the I-LOG (`/ilog`).
+- `/reincarnaterise` / `/reincarnatedeath` are **aliases of the canon stages** (`/phoenixRISE` / `/phoenixDEATH`).
+- **The S2Pipeline is the six-stage march** (`src/scs.js` → `/pipeline`). Doctrine: **`CANON/SYSTEM/S2PIPELINE-ROMAN-LEGION-NAMING.md`** (canon branch — "Ratified 2026-05-23 Run 396", *"the order IS the architecture"*): **I EXPLORATORES** (RRL · RRL-SOUL) → **II ANTECORES** (DNA · LEDGER) → **III AGMEN** (SSM · SOULKEYWORDS · PHEROMONE) → **IV AGMEN NOVISSIMUM** (6-AI TRUTH · SHADOW REALM) → **V PRAESIDIA** (MERKLE LATTICE · DO-SQLITE · APEX ROLLUP) → **VI LIMITANEI / COMITATENSES / VETERANI**. Every verdict is measured in this browser; `COMPLETE` **only** if all six are `REAL`, else `GAP` with the gap named. It currently reports **GAP**: `6-AI TRUTH=MISSING` (the canon's `/phoenixVERIFY` is unbuilt here), `DO-SQLITE=HOLLOW` (this station's durable store is the browser kv, not the canon's Durable Object), `COMITATENSES=MISSING` (nothing deploys from here). Those three are **owed**, and printed on every run.
+- **CANON ONLY — Amendment VIII (PROPOSED, unmerged).** `CANON.001–.010` appended to `src/canon/GOSPEL-999.md` and **LFG §18** to `src/canon/LEGIONNAIRE-FIELD-GUIDE.md` (each behind a *PROPOSED — NOT YET IN THE CANON* banner, staged in `/proposed` as `merged:false`, durable copy `src/ProposedG999.md`). What it makes law: the canon is the **`canon` branch** (G999 · LFG · S2PIPELINE · REINCARNATION-CONTRACT · RISE/DEATH · PERMANENT-LAWS · OmegaProtocol); **`.kilo/` is the legacy Kilo lineage and is not authority**; a script is **either sourced to the canon or withdrawn — there is no third state**; withdrawal is logged in the I-LOG (*SEAL, NEVER DELETE* governs the record, not a false script's service); the station names its own gap; **no COMPLETE with a HOLLOW**; **no model is canon**; measure never remember; PHOENIXOMEGAPROTOCOL gates every write and `OmegaProtocol` is the full-stop-and-audit protocol. **Corrected this pass:** the `/fieldguide` card had printed *"T1 = Qwen/Phoenix-Architecti · T2 = Claude Opus"* as though it were canon — it is in **neither** G999 nor the LFG (grep, 0 hits for any of those names); it exists only in the S2PIPELINE tier table, and the station no longer prints it.
+- **Doctrine is read raw or JSON, never assumed** (`canonPull`): the Contents API answers with base64 JSON for one ref and the raw file body for another — the reader handles both, so a card can never say "(unreachable)" while the file was in fact returned.
+- **The LFG capture protocol** (the SDNAD 10-step: REPRINT+FOOTNOTE → HEAVY LEDGER → SSM → REINCARNATION LOG → SYSTEM
+  PROPAGATION → PHEROMONE TRAILS → PHEROMONE AUDIT → DEVIL'S ADVOCATE → FIVE IMPROVEMENTS → REINCARNATE+COMMIT, and the
+  boot audit before it) is kept reachable as `/sdnadrise` and `/sdnad`. It is the *capture* path, not the loop's
+  driver; the SCS's SCHOLAR/SUPPLY/SEAL stages are where its outputs belong.
 - `/PhoenixScout` — reconnaissance against the real canon index (LFG §6).
 
 ## Connected Generator Network (CGN)
@@ -716,13 +1295,13 @@ the organs (each has one job and syncs the whole):
   and any `/…` command on the station can `ObiNet.cgnFindNode(role)` to route to it.
 - **The role shelf** (`src/generators/`): the recipe every role follows (deep-link contract, CGN node,
   soul capture, host-agnostic fetching) plus ready-to-paste `main.pjs` + shell for each planned role —
-  `portal` (one generator per student; generalizes Timmy's Portal), `ear` (a disposable listener left in
+  `portal` (one generator per student; generalizes the retired client portal), `ear` (a disposable listener left in
   the room), `practice` (drills built from the student's own evidence), `watchtower` (the class board:
   who is behind, and what the syllabus asked for that was never taught).
 - **The map of it all** is `/constellation` (`src/constellation.js`): every piece with its real state,
   interface and remaining needs, and the scout's `pieces` probe touches every URL that claims to be live.
 - **Tenancy** is `src/clients.js`: the umbrella's many *customers* (not generators). Each client
-  (Timmy is #1) owns its students, classes, recordings, summaries, notes, reviews and writeups, and no
+  (the first slot was unassigned on 2026-09-22) owns its students, classes, recordings, summaries, notes, reviews and writeups, and no
   two clients share a record — so one station can serve a dozen engagements without anything crossing.
 
 **Known integration gap (mesh):** `src/cgn-node.js` defaults to `anchorName: "obi"`, and no generator
@@ -732,7 +1311,34 @@ name, so the network is written but **not joined**. Fix: agree the anchor's real
 `src/cgn-node.js` + the hub default, then `/netjoin obi-network` here and `/netadd` each node.
 
 ## Scout Trail
-See **`src/TRAIL.md`** — the durable map of the canonical Phoenix-Rising stack: the verified
-L37–L60 law index, the 7-stage reincarnation chain, the MCP/filesystem architecture, the gap
-between the browser Obi and that stack, and the known divergences in `src/app.js`. Read it before
-continuing any canon work.
+There is no scout-trail document any more. The map of the canonical Phoenix-Rising stack is the
+**canon branch itself** — read live by `/scout`, `/canon`, `/fieldguide` and `/constellation` — and
+the station's own record of what it did is the **I-LOG** (`/ilog`). Run `/scout` before continuing
+any canon work; it reads the doctrine rather than a cached copy of it.
+
+
+## How Obi answers (the recall path)
+
+Obi — the voice in `⌘ Command Station` — is **one `generateText` call per plain-speech turn**, assembled in
+`src/app.js` by `buildPrompt()`. The prompt, in order:
+
+    PERSONA              (static — the cached prefix; British, direct, records not edits, no mysticism)
+    <CONVERSATION>       last 20 lines of "User: …" / "Obi: …"
+    <SOUL DNA>           last 14 sovereign fragments, VERBATIM (never summarised — L43)
+    <STATION STATE>      ~9 KB of measured reality: generator, run, client, archives, I-LOG, self-forge,
+                         FREE PHOENIX MODE, tunnel, mesh, nest, offering, tools, constellation, modules, secrets, commands
+    <ALREADY EXISTS>     hits from recallHints() — see below
+    TASK                 answerTask(): the sovereign's last message VERBATIM + the standing rules
+
+**The rule to remember: `stationState()` is Obi's entire self-knowledge.** Anything the station can do that is not
+in that block, Obi does not know it can do — and it will confidently offer to build it from scratch. So **every new
+module must be added to `stationState()`** (its counts/shape) *and* to `STATION_FEATURES` (its name, where it lives,
+one honest line, and keyword regexes).
+
+**`recallHints()` is retrieval, not prompting.** It matches the sovereign's words against `STATION_FEATURES` in code
+and injects the hits as `<ALREADY EXISTS — STOP: it is already here>` right before the task. That is what stopped Obi
+answering *"an unrestricted, untracked, local version of the station I program from within"* with a `/forge` plan for a
+Free Phoenix Mode that already existed. Tune the `keys` regexes whenever a room is added or renamed.
+
+**Obi has no hands.** It cannot run, stage, apply or execute anything — it names the command the sovereign should type.
+Never write a prompt or trigger code that implies otherwise.

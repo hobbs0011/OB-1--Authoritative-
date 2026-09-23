@@ -7,8 +7,10 @@
    active client: what you record, file, review or search is this client's, and
    another client's evidence can never leak in.
 
-   The first client is Timmy. Everything the station stored before clients
-   existed is adopted into him once on first boot — stamped, never rewritten.
+   The first client slot is UNASSIGNED. Timmy was wiped 2026-09-22 ("timmy dropped
+   us, so wipe him") — the slot stays open and unnamed until /client <name> is run.
+   Everything the station stored before clients existed is adopted into the first real
+   client once on first boot — stamped, never rewritten.
 
    Isolation is fail-closed: every read filters to the active client, a record
    with no client stamp is read as the first client's, /file refuses to file a
@@ -24,8 +26,8 @@
 const FOLDER = "clients";
 const ACTIVE_KEY = "obi_client";
 const ADOPT_KEY = "obi_clients_adopted";
-const DEFAULT_ID = "timmy";
-const DEFAULT_NAME = "Timmy";
+const DEFAULT_ID = "unassigned";
+const DEFAULT_NAME = "Unassigned";
 
 let _active = null;
 let _name = null;
@@ -249,7 +251,7 @@ async function roster(){
   catch(err){ addBubble("ass", "⚠ Client store unavailable: " + e(err.message)); return; }
   if(!list.length){
     addBubble("ass", '<div class="rise tr-card"><div class="rhead">👤 /clients</div><div class="rrow"><b>LEDGER</b><span class="vd">EMPTY</span><div class="rd">no clients yet</div></div>'
-      + '<div class="rfoot">Start one: <b>/client Timmy</b>. Every recording, summary, note, review and writeup then files under that client.</div></div>');
+      + '<div class="rfoot">Start one: <b>/client &lt;name&gt;</b>. Every recording, summary, note, review and writeup then files under that client.</div></div>');
     return;
   }
   const act = id();

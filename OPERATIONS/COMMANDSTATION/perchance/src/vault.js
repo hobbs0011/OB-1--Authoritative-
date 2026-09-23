@@ -42,8 +42,14 @@
       why:"the ear — video/audio → verbatim transcript, any length, split at pauses and stitched back" },
     { local:"gh",        name:"GITHUB_TOKEN",        svc:"GitHub",      where:"this browser only",
       why:"the canon — doctrine, sessions, the I-LOG chain, and this vault" },
-    { local:"cf",        name:"CLOUDFLARE_API_TOKEN",svc:"Cloudflare",  where:"this browser only",
-      why:"the fleet — 20 workers, deploys, secret rotation" },
+    { local:"cf",        name:"CLOUDFLARE_API_TOKEN",svc:"Cloudflare",  where:"this browser only · the `nameless-feather-3545` token (full permissions) · /vault set cf <token>",
+      why:"the fleet — workers, deploys, secret rotation, Pages, and the R2 store; proven by /accounts/<id>/tokens/verify (an account-owned token is rejected by /user/tokens/verify even when valid) and then by listing the account's worker scripts, with R2 reported as its own separate fact" },
+    { local:"cfAcct",    name:"CLOUDFLARE_ACCOUNT_ID",svc:"Cloudflare", where:"this browser only · the account the token is scoped to (it is the S3 endpoint's subdomain)",
+      why:"every fleet call is addressed through the account id — fleet status, deploys, and the R2 endpoint https://<account>.r2.cloudflarestorage.com" },
+    { local:"cfR2Key",   name:"CLOUDFLARE_R2_ACCESS_KEY_ID",svc:"Cloudflare R2", where:"this browser only · S3-compatible access key id — created at R2 → Manage R2 API Tokens (NOT the API token's own id)",
+      why:"the empire's own object store (R2 speaks the S3 API) — half of the signing pair; useless without the secret below. ⚠ AUDIT 2026-09-21, RE-MEASURED: as stored, this value EQUALS the Cloudflare API token's id (122c79ce…) — i.e. it was pasted from the wrong place; an R2 S3 key is a separate credential created at R2 → Manage R2 API Tokens. R2's own state is UNPROVEN from here: through the station's proxy the buckets endpoint answers 400 code 9106 (the Authorization header does not reach it), so R2 cannot be called enabled OR disabled — it has to be checked in the Cloudflare dashboard" },
+    { local:"cfR2Secret",name:"CLOUDFLARE_R2_SECRET_ACCESS_KEY",svc:"Cloudflare R2", where:"this browser only · shown once, at R2 API token creation",
+      why:"signs every R2 S3 request (AWS SigV4). Proven by a real presigned ListBuckets through the station's proxy — header-signing cannot work here because the proxy strips x-amz-content-sha256" },
     { local:"deepseek",  name:"DEEPSEEK_API_KEY",    svc:"DeepSeek",    where:"net-pet-ai worker secret",
       why:"the brain fallback (chat / lesson / practice / feedback)" },
     { local:"sovereign", name:"SOVEREIGN_KEY",       svc:"net-pet-ai",  where:"net-pet-ai worker secret",
@@ -223,6 +229,59 @@
     netpet:   "https://net-pet-ai.mrmichaelhobbs123.workers.dev",
     vault:    "https://sov100-vault-v0.mrmichaelhobbs123.workers.dev"
   };
+  /* ------------------------- the R2 (S3) signer ---------------------------
+     R2 speaks S3, so the credential pair is proven the only way S3 credentials
+     can be proven: by signing a request. AWS SigV4 in the browser with WebCrypto;
+     the response travels through the station's proxy because the R2 S3 endpoint
+     answers no CORS preflight (a plain fetch would fail before the key was tested,
+     which would be a lie about the key). */
+  function r2Host(){ const a = get("cfAcct"); return a ? (a + ".r2.cloudflarestorage.com") : null; }
+  async function hmac256(keyBytes, msg){
+    const k = await subtle().importKey("raw", keyBytes, { name:"HMAC", hash:"SHA-256" }, false, ["sign"]);
+    return new Uint8Array(await subtle().sign("HMAC", k, new TextEncoder().encode(msg)));
+  }
+  function hexOf(bytes){ return Array.from(bytes).map(b => b.toString(16).padStart(2, "0")).join(""); }
+  function amzStamp(d){
+    return d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  }
+  async function r2Test(){
+    const id = get("cfR2Key"), secret = get("cfR2Secret"), host = r2Host();
+    if(!host) return { ok:false, detail:"no CLOUDFLARE_ACCOUNT_ID stored — the S3 endpoint is built from it (/vault set cfAcct <accountId>)" };
+    if(!id || !secret) return { ok:false, detail:"the R2 pair is incomplete — both the access key id and the secret are needed (/cf r2 <accessKeyId> <secret>)" };
+    if(!subtle()) return { ok:false, detail:"this browser cannot sign (crypto.subtle is unavailable — needs https)" };
+    const now = new Date(), amz = amzStamp(now), date = amz.slice(0, 8);
+    const region = "auto", service = "s3";
+    const scope = date + "/" + region + "/" + service + "/aws4_request";
+    /* PRESIGNED-URL SigV4 (query auth), NOT header auth.
+       AUDIT 2026-09-21 (pipeline): the header-signed version could never work through this
+       station's proxy, because the proxy STRIPS the `x-amz-content-sha256` header — measured
+       directly: httpbin through superFetch echoed `X-Amz-Date` but no `X-Amz-Content-Sha256`,
+       and R2 answered "Missing x-amz-content-sha256". A signed S3 request needs that header,
+       so the proof was impossible, not the key wrong. With query-string auth the credential
+       and the signature travel in the URL, and only `host` is signed — nothing the proxy can
+       strip. This is the standard "presigned URL" flow and R2 accepts it. */
+    const q = [
+      "X-Amz-Algorithm=AWS4-HMAC-SHA256",
+      "X-Amz-Credential=" + encodeURIComponent(id + "/" + scope),
+      "X-Amz-Date=" + amz,
+      "X-Amz-Expires=120",
+      "X-Amz-SignedHeaders=host"
+    ].join("&");
+    const canonical = ["GET", "/", q, "host:" + host, "", "host", "UNSIGNED-PAYLOAD"].join("\n");
+    const stringToSign = ["AWS4-HMAC-SHA256", amz, scope, hexOf(await subtle().digest("SHA-256", new TextEncoder().encode(canonical)))].join("\n");
+    let k = await hmac256(new TextEncoder().encode("AWS4" + secret), date);
+    k = await hmac256(k, region); k = await hmac256(k, service); k = await hmac256(k, "aws4_request");
+    const signature = hexOf(await hmac256(k, stringToSign));
+    const r = await sf("https://" + host + "/?" + q + "&X-Amz-Signature=" + signature, { method:"GET" });
+    if(r.status === 200){
+      const names = []; const re = /<Name>([^<]+)<\/Name>/g; let m;
+      while((m = re.exec(String(r.txt || ""))) && names.length < 30) names.push(m[1]);
+      return { ok:true, detail:"R2 accepted the presigned S3 request (HTTP 200)" + (names.length ? " · " + names.length + " bucket(s): " + names.join(", ") : " · no buckets in this account yet") };
+    }
+    let why = ""; try{ const m = String(r.txt || "").match(/<Message>([^<]+)<\/Message>/); if(m) why = " — " + m[1]; }catch(e){}
+    if(!why) try{ const j = r.j; if(j && j.errors && j.errors[0] && j.errors[0].message) why = " — " + j.errors[0].message; }catch(e){}
+    return { ok:false, detail:"R2 refused the presigned request (HTTP " + r.status + ")" + why + (r.err ? " — " + r.err : "") };
+  }
   const TESTS = {
     deepgram: async v => {
       const r = await sf(HOSTS.deepgram + "/v1/projects", { headers:{ Authorization:"Token " + v } });
@@ -268,10 +327,65 @@
         extra:{ login:(u && u.login), scopes:list, canon:canon } };
     },
     cf: async v => {
-      const r = await sf("https://api.cloudflare.com/client/v4/user/tokens/verify", { headers:{ Authorization:"Bearer " + v } });
-      if(r.j && r.j.success) return { ok:true, detail:"token verified (" + ((r.j.result && r.j.result.status) || "active") + ")" };
-      return { ok:false, detail:"Cloudflare refused it (HTTP " + r.status + ")" + ((r.j && r.j.errors && r.j.errors[0] && r.j.errors[0].message) ? " — " + r.j.errors[0].message : "") + (r.err ? " — " + r.err : "") };
+      /* AUDIT 2026-09-21 (pipeline): this test hit ONLY /user/tokens/verify — the endpoint for
+         USER-owned tokens. An ACCOUNT-owned token (the kind created under an account) is
+         rejected there with "Invalid API Token" even when it is valid and active, so a working
+         token was reported dead. The account endpoint is the authority for an account token, so
+         it is tried FIRST now, and the user endpoint is the fallback. */
+      const id = get("cfAcct");
+      let r = null, via = null;
+      if(id){
+        r = await sf("https://api.cloudflare.com/client/v4/accounts/" + id + "/tokens/verify", { headers:{ Authorization:"Bearer " + v } });
+        if(r.j && r.j.success) via = "account endpoint";
+      }
+      if(!(r && r.j && r.j.success)){
+        const u = await sf("https://api.cloudflare.com/client/v4/user/tokens/verify", { headers:{ Authorization:"Bearer " + v } });
+        if(u.j && u.j.success){ r = u; via = "user endpoint"; }
+        else r = u;   /* when neither works, the user endpoint's reason is the one to report */
+      }
+      if(!(r.j && r.j.success)) return { ok:false, detail:"Cloudflare refused it (HTTP " + r.status + ")" + ((r.j && r.j.errors && r.j.errors[0] && r.j.errors[0].message) ? " — " + r.j.errors[0].message : "") + (id ? "" : " · (no account id stored — /vault set cfAcct <accountId>, an account-owned token is verified AT the account)") + (r.err ? " — " + r.err : "") };
+      /* deeper than "the token is active": name the account and count the fleet it opens.
+         These are the two calls the pipeline actually makes, so a token that answers
+         /verify but cannot list workers is reported as partial, not as verified. */
+      const bits = ["token " + ((r.j.result && r.j.result.status) || "active") + (via ? " (via the " + via + ")" : "")];
+      const tokenId = (r.j.result && r.j.result.id) || null;
+      if(id){
+        const b = await sf("https://api.cloudflare.com/client/v4/accounts/" + id + "/r2/buckets", { headers:{ Authorization:"Bearer " + v } });
+        bits.push(b.j && b.j.success ? (((b.j.result && b.j.result.buckets) || []).length + " R2 bucket(s)") : ("R2 refused (HTTP " + b.status + ")"));
+        const w = await sf("https://api.cloudflare.com/client/v4/accounts/" + id + "/workers/scripts", { headers:{ Authorization:"Bearer " + v } });
+        bits.push(w.j && w.j.success ? ((w.j.result || []).length + " worker(s)") : ("workers refused (HTTP " + w.status + ")"));
+      } else bits.push("no account id stored, so only the token itself is proven — /vault set cfAcct <accountId>");
+      /* the R2 S3 pair is a DIFFERENT credential from a Cloudflare API token. If the stored
+         "access key id" is the API token's own id, it was pasted from the wrong place and the
+         signature can never match — say so instead of letting /cf r2 fail for no stated reason. */
+      if(tokenId && get("cfR2Key") && get("cfR2Key") === tokenId)
+        bits.push("⚠ the stored R2 access key id IS this API token's id (" + tokenId.slice(0,6) + "…) — an R2 S3 key is a separate credential (R2 → Manage R2 API Tokens), so `/cf r2` cannot sign with it");
+      return { ok:true, detail:bits.join(" · ") };
     },
+    cfAcct: async v => {
+      /* AUDIT 2026-09-21 (pipeline): this test proved the account ONLY by listing R2 buckets. On
+         an account where R2 has not been enabled that answers 403 "Please enable R2 through the
+         Cloudflare Dashboard" — which is NOT the account being unreadable (and a flaky proxy
+         turned it into a bare 400 "Missing X-Auth-Key…", which is doubly misleading). The
+         account is now proven by listing worker scripts, and R2 is reported as its own fact. */
+      const t = get("cf");
+      if(!t) return { ok:false, detail:"the Cloudflare token is not stored locally — /vault set cf <token>" };
+      const H = { Authorization:"Bearer " + t };
+      const w = await sf("https://api.cloudflare.com/client/v4/accounts/" + v + "/workers/scripts", { headers:H });
+      if(!(w.j && w.j.success)) return { ok:false, detail:"the account could not be read (HTTP " + w.status + ")" + ((w.j && w.j.errors && w.j.errors[0] && w.j.errors[0].message) ? " — " + w.j.errors[0].message : "") + (w.err ? " — " + w.err : "") };
+      const b = await sf("https://api.cloudflare.com/client/v4/accounts/" + v + "/r2/buckets", { headers:H });
+      const r2 = (b.j && b.j.success)
+        ? (((b.j.result && b.j.result.buckets) || []).length + " R2 bucket(s)")
+        : ("R2 NOT USABLE — " + ((b.j && b.j.errors && b.j.errors[0] && b.j.errors[0].message) || ("HTTP " + b.status)));
+      return { ok:true, detail:"account " + v + " opens — " + ((w.j.result || []).length) + " worker(s) · endpoint https://" + v + ".r2.cloudflarestorage.com · " + r2 };
+    },
+    /* THE R2 S3 PROOF — a real AWS SigV4 request, signed in this browser with WebCrypto.
+       Listing the buckets is the credential pair's own proof: the signature either
+       matches what R2 recomputes or it does not, and nothing can be dressed up.
+       Routed through the station's proxy because the R2 S3 endpoint sends no CORS
+       headers — a plain browser fetch would die at the wall before any key was tested. */
+    cfR2Key:   async () => await r2Test(),
+    cfR2Secret: async () => await r2Test(),
     deepseek: async v => {
       const r = await sf("https://api.deepseek.com/models", { headers:{ Authorization:"Bearer " + v } });
       if(r.status === 200) return { ok:true, detail:"api.deepseek.com accepted the key" };
@@ -777,6 +891,7 @@
   window.ObiVault = {
     cmd: cmd, status: statusPanel, locate: locate, manifest: manifestMd, escrowPanel: escrowPanel,
     names: NEEDED.map(r => r.local), get: get, set: put, forget: del, fp: fp, test: testRow,
-    sealed: sealedBlob, keyPair: keyPair, paths: PATH, escrow: escrowMeta
+    sealed: sealedBlob, keyPair: keyPair, paths: PATH, escrow: escrowMeta,
+    r2: r2Test, r2Host: r2Host, needs: NEEDED
   };
 })();

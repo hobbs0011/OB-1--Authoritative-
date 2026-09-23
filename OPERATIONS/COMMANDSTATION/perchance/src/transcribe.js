@@ -73,7 +73,7 @@ function key(){ try{ return (typeof keyGet === "function") ? keyGet("deepgram") 
 function folder(){ if(!root || !root.kv) throw new Error("kv-plugin not loaded (main.pjs) — /transcripts unavailable"); return root.kv[KV_FOLDER]; }
 /* this client's recordings only — see src/clients.js */
 function inClient(rec){ try{ if(window.ObiClients && window.ObiClients.matches) return window.ObiClients.matches(rec); }catch(e){} return true; }
-function clientName(){ try{ if(window.ObiClients && window.ObiClients.name) return window.ObiClients.name(); }catch(e){} return "Timmy"; }
+function clientName(){ try{ if(window.ObiClients && window.ObiClients.name) return window.ObiClients.name(); }catch(e){} return "Unassigned"; }
 function safeEsc(s){ return (typeof esc === "function") ? esc(s) : String(s == null ? "" : s); }
 function pad(n){ return String(n).padStart(2, "0"); }
 function fmtDur(sec){

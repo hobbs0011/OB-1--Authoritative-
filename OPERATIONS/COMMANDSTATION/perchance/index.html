@@ -1,3 +1,6 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="src/styles.css">
 
 <script type="text/x-server-plugin">
@@ -227,20 +230,21 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
 </script>
 
 <div id="app" class="net-shell">
+  <div class="glow-blob blob-1"></div>
+  <div class="glow-blob blob-2"></div>
+  <div class="glow-blob blob-3"></div>
   <div id="topbar">
+    <span class="brand-sigil" data-mark="head" data-mark-style="width:38px;height:38px;object-fit:contain"></span>
     <div class="logo"><span class="grad">PrAis</span> <span class="divider">/</span> <span class="obi">OBI</span></div>
     <div class="sub">PhoenixCommand · Command Station</div>
     <div class="spacer"></div>
-    <button class="tbtn" id="studentsBtn" title="Open the 👤 Student Evaluator tab — pick the client, then the student or class">👤 Student Evaluator</button>
-    <button class="tbtn" id="voiceBtn" title="Toggle spoken voice">🔊 <span id="voiceLbl">Voice on</span></button>
-    <button class="tbtn" id="cmdsBtn" title="All commands">⌘ Commands</button>
-    <button class="tbtn" id="memoryBtn" title="Soul DNA memory ledger">◈ <span id="memoryLbl">Memory</span></button>
-    <button class="tbtn" id="clearBtn" title="Reincarnate (new session)">⟳ Reincarnate</button>
+    <div id="brandBar" class="bx-bar"></div>
   </div>
 
   <div id="tabbar">
-    <button class="tabbtn on" id="tabCmdBtn" data-view="cmd" title="The command station — speak, and the empire listens">⌘ Command Station</button>
-    <button class="tabbtn" id="tabEvalBtn" data-view="eval" title="The evaluation desk — clients, students, classes, writeups and reviews">👤 Student Evaluator</button>
+    <button class="tabbtn on" id="tabCmdBtn" data-view="cmd" data-icon="cmd" data-icon-pos="before" title="The command station — speak, and the empire listens"> Command Station</button>
+    <button class="tabbtn" id="tabGenBtn" data-view="gen" data-icon="grid" data-icon-pos="before" title="Phoenix Generators — the divisions of PrAis, and the generators in each"> Phoenix Generators</button>
+    <button class="tabbtn" id="tabSetBtn" data-view="settings" data-icon="gear" data-icon-pos="before" title="Voice, the command shelf, the ledger, the instruments, reincarnate"> Settings</button>
     <span class="tabfill"></span>
     <span id="tabMeta" class="tabmeta"></span>
   </div>
@@ -260,7 +264,8 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
         <div id="empty">
           <div class="big">⌘</div>
           <div class="title">I am <b style="color:var(--text)">Obi</b> — the command station.</div>
-          <div class="hint" style="max-width:560px">Speak, and Agent 99 answers — type it or tap 🎙. Every word is Soul DNA: captured verbatim, never edited. Every answer about this station is read from its live state, not guessed — <b>/state</b> shows exactly what it can reach, <b>⌘ /help</b> is the whole shelf, and the <b>👤 Student Evaluator</b> tab is the evaluation desk (record → summarize → write up).</div>
+          <div class="hint" style="max-width:560px">Speak, and Agent 99 answers — type it or tap 🎙. Every word is Soul DNA: captured verbatim, never edited. Every answer about this station is read from its live state, not guessed — <b>/state</b> shows exactly what it can reach, <b>⌘ /help</b> is the whole shelf, <b>◈ /generators</b> is the Phoenix Generators family, and the <b>👤 Student Evaluator</b> — under ◈ Phoenix Generators → NET — is the evaluation desk (record → summarize → write up). Everything else lives in <b>⚙ Settings</b>.</div>
+          <div class="voice-card" id="voiceLine"></div>
           <div class="chipgroup">⌘ Command Station</div>
           <div class="chips">
             <button class="cmd" data-cmd="/memory">◈ /memory</button>
@@ -272,6 +277,8 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
             <button class="cmd" data-cmd="/scout">🦅 /scout</button>
             <button class="cmd" data-cmd="/tools">⚒ /tools</button>
             <button class="cmd" data-cmd="/constellation">✧ /constellation</button>
+            <button class="cmd" data-cmd="/generators">◈ /generators — the family</button>
+            <button class="cmd" data-cmd="/settings">⚙ /settings</button>
             <button class="cmd" data-cmd="/web">🌐 /web …</button>
             <button class="cmd" data-cmd="/weather">🌦 /weather</button>
             <button class="cmd" data-cmd="/client">👤 /client</button>
@@ -292,6 +299,10 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
             <button class="cmd" data-cmd="/review">📋 /review</button>
             <button class="cmd" data-cmd="/find ">🔎 /find …</button>
           </div>
+          <div class="chipgroup">🔥 Free Phoenix Mode — the unbound room</div>
+          <div class="chips">
+            <button class="cmd" data-cmd="/free">🔥 /free — Agent 99, no leash</button>
+          </div>
         </div>
       </div>
 
@@ -304,41 +315,180 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
       <div id="dropHint">🎬 Drop a video or audio recording to transcribe it<br><span class="hint">any length — long ones are split at pauses · Deepgram nova-3 · raw capture into the run log</span></div>
     </div>
 
-    <div id="viewEval" class="view hidden">
-      <div id="studentsPanel">
+    <div id="viewGen" class="view hidden">
+      <div id="genWrap">
         <div class="ev-head">
-          <div class="ev-title">👤 Student Evaluator</div>
-          <div class="hint">Active client: <b id="clientLbl">Timmy</b> — choose the client below, then the student or class. Every recording, summary, note, review and writeup files under the active client alone: <b>record → summarize → write up</b>. Tapping a desk action opens it in the ⌘ Command Station.</div>
+          <div class="ev-title">◈ Phoenix Generators</div>
+          <div class="hint">One family, many divisions. PrAis ships generators by division — <b>NET</b> (education) holds the <b>👤 Student Evaluator</b> (record → summarize → write up) and the <b>📚 Lesson Creator</b> (plan from that evidence → build → library). Pick a division, then open a generator to work in it. The list below is the registry itself: <b>src/divisions.js</b>.</div>
         </div>
-        <div id="evalActions" class="eval-grid">
-          <button class="eval-tile" data-cmd="/transcribe"><b>🎬 Record a lesson</b><span>Drop or paste a lesson video/audio — any length, verbatim transcript</span></button>
-          <button class="eval-tile" data-cmd="/transcripts"><b>🎧 Recordings</b><span>The archive of saved transcripts (read · parts · export · delete)</span></button>
-          <button class="eval-tile" data-cmd="/summary"><b>📝 Study summary</b><span>Summarize the latest recording (or a URL, or pasted notes)</span></button>
-          <button class="eval-tile" data-cmd="/summaries"><b>🗂 Summaries</b><span>The archive of saved summaries</span></button>
-          <button class="eval-tile" data-cmd="/writeup"><b>📋 Class writeup</b><span>Write up the active class from its filed evidence</span></button>
-          <button class="eval-tile" data-cmd="/review"><b>📝 Student review</b><span>Write up the active student from their filed evidence</span></button>
-          <button class="eval-tile" data-cmd="/writeups"><b>📚 Writeups</b><span>The archive of class writeups</span></button>
-          <button class="eval-tile" data-cmd="/reviews"><b>🗃 Reviews</b><span>The archive of student reviews</span></button>
-          <button class="eval-tile" data-cmd="/find " data-arg="1"><b>🔎 Find evidence</b><span>Verbatim search across transcripts, summaries and notes</span></button>
-          <button class="eval-tile" data-cmd="/clients"><b>◈ Client ledger</b><span>Every client with counts — create · switch · delete</span></button>
+        <div id="divStrip" class="div-strip"></div>
+        <div id="genBody"></div>
+
+        <div id="genDesk" class="hidden">
+          <div class="desk-bar">
+            <button class="ci-act" id="deskBackBtn">← All NET generators</button>
+            <span class="desk-tag">👤 Student Evaluator · NET</span>
+          </div>
+          <div id="studentsPanel">
+            <div class="ev-head">
+              <div class="ev-title">👤 Student Evaluator</div>
+              <div class="hint">Active client: <b id="clientLbl">Timmy</b> — choose the client below, then the student or class. Every recording, summary, note, review and writeup files under the active client alone: <b>record → summarize → write up</b>. Tapping a desk action opens it in the ⌘ Command Station.</div>
+            </div>
+            <div id="evalActions" class="eval-grid">
+              <button class="eval-tile" data-cmd="/transcribe"><b>🎬 Record a lesson</b><span>Drop or paste a lesson video/audio — any length, verbatim transcript</span></button>
+              <button class="eval-tile" data-cmd="/transcripts"><b>🎧 Recordings</b><span>The archive of saved transcripts (read · parts · export · delete)</span></button>
+              <button class="eval-tile" data-cmd="/summary"><b>📝 Study summary</b><span>Summarize the latest recording (or a URL, or pasted notes)</span></button>
+              <button class="eval-tile" data-cmd="/summaries"><b>🗂 Summaries</b><span>The archive of saved summaries</span></button>
+              <button class="eval-tile" data-cmd="/writeup"><b>📋 Class writeup</b><span>Write up the active class from its filed evidence</span></button>
+              <button class="eval-tile" data-cmd="/review"><b>📝 Student review</b><span>Write up the active student from their filed evidence</span></button>
+              <button class="eval-tile" data-cmd="/writeups"><b>📚 Writeups</b><span>The archive of class writeups</span></button>
+              <button class="eval-tile" data-cmd="/reviews"><b>🗃 Reviews</b><span>The archive of student reviews</span></button>
+              <button class="eval-tile" data-cmd="/find " data-arg="1"><b>🔎 Find evidence</b><span>Verbatim search across transcripts, summaries and notes</span></button>
+              <button class="eval-tile" data-cmd="/clients"><b>◈ Client ledger</b><span>Every client with counts — create · switch · delete</span></button>
+            </div>
+            <div id="selBody"></div>
+          </div>
         </div>
-        <div id="selBody"></div>
+        <div id="lessonDesk" class="hidden">
+          <div class="desk-bar">
+            <button class="ci-act" id="lessonBackBtn">← All NET generators</button>
+            <span class="desk-tag">📚 Lesson Creator · NET</span>
+          </div>
+          <div id="lessonPanel"></div>
+        </div>
+        <div id="brandDesk" class="hidden">
+          <div class="desk-bar">
+            <button class="ci-act" id="brandBackBtn">← All MARKETING generators</button>
+            <span class="desk-tag" data-icon="seal" data-icon-pos="before"> Brand &amp; Identity · MARKETING</span>
+          </div>
+          <div id="brandPanel"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="viewSet" class="view hidden">
+      <div id="setWrap">
+        <div class="ev-head">
+          <div class="ev-title">⚙ Settings</div>
+          <div class="hint">The station's own controls, out of the way. Everything here is also a command in the ⌘ Command Station — nothing is reachable only by a button.</div>
+        </div>
+
+        <div class="lc-tabs" id="setTabs">
+          <button class="lctab on" id="setTabStationBtn" data-stab="station">⚙ Station</button>
+          <button class="lctab" id="setTabFreeBtn" data-stab="free">🔥 Free Phoenix Mode</button>
+        </div>
+
+        <div id="setTabStation">
+
+        <div class="sel-group">Voice</div>
+        <div class="set-row">
+          <div class="set-k"><b>🔊 Speak Obi's replies</b><span>Reads each answer aloud (a British voice when the browser has one). Remembered in this browser, so turning it off keeps it off across reloads.</span></div>
+          <button class="ci-act set-tgl" id="setVoiceBtn">ON</button>
+        </div>
+
+        <div class="sel-group">The shelf &amp; the record</div>
+        <div class="set-row">
+          <div class="set-k"><b>⌘ Commands</b><span>The whole surface, grouped — every command the station accepts, one tap away.</span></div>
+          <button class="ci-act" id="setCmdsBtn">Open the shelf</button>
+        </div>
+        <div class="set-row">
+          <div class="set-k"><b>◈ Memory ledger</b><span>Soul DNA, captured verbatim: every fragment, run and timestamp. Never summarized.</span></div>
+          <button class="ci-act" id="setMemBtn">Open the ledger</button>
+        </div>
+        <div class="set-row">
+          <div class="set-k"><b>🧾 I-LOG</b><span>The append-only operation record — hash-chained, verified at /audit, anchored on Git at /ilog push.</span></div>
+          <button class="ci-act" data-run="/ilog">Run /ilog</button>
+        </div>
+        <div class="set-row">
+          <div class="set-k"><b>🔐 PrAis Vault</b><span>Every key the empire runs on — where the vault already is on git, live access tests, and the sealed copy on the canon.</span></div>
+          <button class="ci-act" data-run="/vault">Open /vault</button>
+        </div>
+        <div class="set-row">
+          <div class="set-k"><b>🩺 Doctor</b><span>Evidence-first self-check: tokens, ledger, tunnel, gate, one authority.</span></div>
+          <button class="ci-act" data-run="/doctor">Run /doctor</button>
+        </div>
+        <div class="set-row">
+          <div class="set-k"><b>🔐 Canon gate</b><span>PHOENIXOMEGAPROTOCOL — no Canon change without Sov100's password. Enrol or arm it here.</span></div>
+          <button class="ci-act" data-run="/omega">Open /omega</button>
+        </div>
+        <div class="set-row">
+          <div class="set-k"><b>🗝 Secrets</b><span>Which keys are held locally in this browser — never in this public source, never in a URL.</span></div>
+          <button class="ci-act" data-run="/keys">Run /keys</button>
+        </div>
+        <div class="set-row">
+          <div class="set-k"><b>🛡 Background</b><span>The keep-alive a hidden tab needs, and the measurement of whether it actually worked while you were away.</span></div>
+          <button class="ci-act" data-run="/bg">Run /bg</button>
+        </div>
+
+        <div class="sel-group">Instruments — read from the live station, not remembered</div>
+        <div id="setInstr" class="set-instr"></div>
+
+        <div class="sel-group">Protocol</div>
+        <div class="set-row">
+          <div class="set-k"><b>⟳ Reincarnate</b><span>A deliberate session boundary (L46): the death seal runs, this session is purged, a new run opens. The ledger — the Soul DNA — is kept.</span></div>
+          <button class="ci-act danger" id="setReincBtn">Reincarnate</button>
+        </div>
+
+        </div>
+
+        <div id="setTabFree" hidden>
+          <div id="freeRoot"></div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+<script src="src/savewatch.js"></script>
 <script src="src/pheromone.js"></script>
 <script src="src/playbooks.js"></script>
 <script src="src/scout.js"></script>
 <script src="src/ecosystem.js"></script>
 <script src="src/constellation.js"></script>
 <script src="src/clients.js"></script>
+<script src="src/offers.js"></script>
 <script src="src/ilog.js"></script>
+<script src="src/divisions.js"></script>
+<script src="src/background.js"></script>
+<script src="src/curriculum.js"></script>
+<script src="src/brand.js"></script>
+<script>
+/* THE FAVICON — the logotype, reduced to the one form that survives a tab.
+   index.html is BODY content (the platform owns <head>), so this reaches the
+   head with JS. Until 2026-09-22 the tab wore the doctrine's abstract phoenix
+   glyph; now that the sovereign has sent the station's real logotype (THE
+   PRAIS APEX), the small sizes wear the TESSERACT CORE — the mark's own
+   reduced form, drawn on the 24 grid precisely because the full mark's
+   fiber-optic hatching turns to mud under ~48 px. The full mark carries the
+   touch icon instead. BRAND.029; BRAND.010's favicon item, still closed. */
+(function(){
+  try{
+    const B = window.ObiBrand;
+    const head = document.head || document.getElementsByTagName("head")[0];
+    if(!head) return;
+    const link = (rel, href, type) => { const l = document.createElement("link"); l.rel = rel; l.href = href; if(type) l.type = type; head.appendChild(l); };
+    if(B && B.iconBody){
+      const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" style="color:#e8c565" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'
+        + '<rect width="32" height="32" rx="7" fill="#0f0f1a" stroke="none"/>'
+        + '<g transform="translate(4 4)">' + B.iconBody("apex") + '</g></svg>';
+      link("icon", "data:image/svg+xml," + encodeURIComponent(svg), "image/svg+xml");
+    }
+    if(B && B.assetPath) link("apple-touch-icon", B.assetPath("apex-app"));
+    if(!document.querySelector('meta[name="theme-color"]')){
+      const m = document.createElement("meta"); m.name = "theme-color"; m.content = "#0f0f1a"; head.appendChild(m);
+    }
+  }catch(e){}
+})();
+</script>
 <script src="src/app.js"></script>
+<script src="src/scs.js"></script>
 <script src="src/forge.js"></script>
 <script src="src/cgn.js"></script>
 <script src="src/audio-split.js"></script>
 <script src="src/transcribe.js"></script>
 <script src="src/summary.js"></script>
 <script src="src/review.js"></script>
+<script src="src/vault.js"></script>
+<script src="src/lessons.js"></script>
+<script src="src/lesson-forge.js"></script>
+<script src="src/freephoenix.js"></script>

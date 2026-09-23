@@ -17,10 +17,13 @@
   const VM = { LIVE:"#4cd97b", DEAD:"#ff5a5a", DRIFT:"#f5a623", FLAG:"#ff5a5a", BLOCKED:"#8a94a6", UNVERIFIED:"#f5a623", INFO:"#5ac8fa" };
   const FLAGGY = ["DEAD", "DRIFT", "FLAG", "UNVERIFIED", "BLOCKED"];
 
+  /* CANON ONLY (sovereign, 2026-09-21: "NO KILO, CANON ONLY"). Doctrine is read from the
+     `canon` branch — CANON/SYSTEM/**. The `.kilo/` registry (master) is the LEGACY Kilo
+     lineage; it is not scouted as canon. This station's own chain still lands on master. */
   const CANON = {
-    owner:"Phoenix-Rising-Ai-Solutions", repo:"OB-1--Authoritative-", branch:"master",
+    owner:"Phoenix-Rising-Ai-Solutions", repo:"OB-1--Authoritative-", branch:"canon", writeBranch:"master",
     base:"https://api.github.com/repos/Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-",
-    files:[".kilo/agent/AGENT99.md", ".kilo/DISPATCH.md", ".github/skills/unstoppable-agent-orchestration/resources/command-matrix.md"]
+    files:["CANON/SYSTEM/GOSPEL-999.md", "CANON/SYSTEM/LegionnaireFieldGuide.md", "CANON/SYSTEM/REINCARNATION-CONTRACT.md"]
   };
   const FLEET = [
     ["net-pet-ai", "https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/status"],
@@ -29,8 +32,7 @@
     ["soul-logger", "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"]
   ];
   const LIVE_SITES = [
-    { id:"prais", url:"https://e3301ee8.michael-hobbs.pages.dev/prais", expect:"PrAiS" },
-    { id:"timmy", url:"https://timmy-portal.mrmichaelhobbs123.workers.dev/", expect:"Timmy" }
+    { id:"prais", url:"https://e3301ee8.michael-hobbs.pages.dev/prais", expect:"PrAiS" }
   ];
   const SRC_EXPECT = {
     "app.js":"Obi", "cgn.js":"ObiNet", "cgn-node.js":"CGN", "transcribe.js":"ObiTranscribe",
@@ -151,14 +153,14 @@
     if(!h.ok) return { verdict: h.status === 401 || h.status === 403 ? "BLOCKED" : "DEAD", summary:"commits API HTTP " + h.status, rows:[["HTTP", String(h.status), (await h.text()).slice(0,160)]], cache:[] };
     const commits = await h.json();
     const c = Array.isArray(commits) ? commits[0] : null;
-    const root = await withTimeout(fetch(CANON.base + "/contents/", head), 12000, "canon root");
+    const root = await withTimeout(fetch(CANON.base + "/contents/?ref=" + CANON.branch, head), 12000, "canon root");
     const rootJ = root.ok ? await root.json() : null;
     const rows = [["HEAD", c ? c.sha.slice(0,10) : "—", c ? (new Date(c.commit.author.date).toISOString().slice(0,16).replace("T"," ") + " · " + String(c.commit.message).split("\n")[0].slice(0,90)) : "no commits returned"]];
     rows.push(["ROOT", rootJ ? String(rootJ.length) + " entries" : "unreadable", rootJ ? rootJ.slice(0,10).map(x => x.name).join(" · ") : ""]);
     const cache = [];
     let verified = 0;
     for (const f of CANON.files){
-      const pr = await withTimeout(fetch(CANON.base + "/contents/" + encodeURIComponent(f).replace(/%2F/g, "/"), head), 12000, f);
+      const pr = await withTimeout(fetch(CANON.base + "/contents/" + encodeURIComponent(f).replace(/%2F/g, "/") + "?ref=" + CANON.branch, head), 12000, f);
       const ok = pr.ok;
       if(ok) verified++;
       rows.push([f, ok ? "PRESENT" : "HTTP " + pr.status, ok ? "verified live" : "canonical path does not resolve"]);

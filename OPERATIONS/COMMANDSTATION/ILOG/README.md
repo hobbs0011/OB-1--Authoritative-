@@ -5,8 +5,11 @@ It lives under the ONE authoritative repo — Phoenix-Rising-Ai-Solutions/OB-1--
 nothing is written there without PHOENIXOMEGAPROTOCOL (Sov100's password, armed with /omega; refusals are recorded).
 Companion of the canon I-LOG (the RRL vault, renamed **I-LOG (Incarnation Log)**, Schema V2 JSONL
 `content[].data.{text,tool,state}`, roles/colours per LFG §SCS: 🟣 SOUL · ❤️ DNA · 💛 REASON) which the
-VS Code station writes. `rrl-*.jsonl` in this directory is this station's transcript in that same line
-shape; the operation chain below is the tamper-evident record of the stations' own actions.
+VS Code station writes. That vault is on the **`canon` branch**, not `master`:
+`I-LOG-UNAUDITED/I-LOG-Incarnate-<N>-<topic>.txt` (+ `-COLORIZED.md` + `-STATS.json`), `RRL/`
+with its own INDEX.md, and the living pointer `PastLives/RRL-CURRENT.txt`. `rrl-*.jsonl` in this directory is this
+station's transcript in that same line shape; the operation chain below is the tamper-evident record of
+the stations' own actions. `/ilog pull` reads both branches back.
 
 Each line of `ilog-*.jsonl` is one entry:
 

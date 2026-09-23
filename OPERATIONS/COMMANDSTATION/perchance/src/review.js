@@ -63,7 +63,7 @@ function lsSet(k, v){ try{ v ? localStorage.setItem(k, v) : localStorage.removeI
    helpers below are the only gate: reads are filtered to the active client,
    unstamped records read as the first client's, and ids are keyed
    `<client>:<slug>` so two clients can each hold a student of the same name. */
-const CLIENT_FALLBACK = "timmy";
+const CLIENT_FALLBACK = "unassigned";
 function clientId(){
   try{ if(window.ObiClients && window.ObiClients.id) return window.ObiClients.id(); }catch(err){}
   return lsGet("obi_client") || CLIENT_FALLBACK;
@@ -204,7 +204,7 @@ async function setActive(kind, name){
   const K = KINDS[kind];
   const s = slug(name);
   if(!s){
-    addBubble("ass", "Usage: <b>/" + K.noun + " &lt;name&gt;</b> — e.g. <b>/" + K.noun + " " + (kind === "class" ? "Year 7 English" : "Timmy") + "</b>.");
+    addBubble("ass", "Usage: <b>/" + K.noun + " &lt;name&gt;</b> — e.g. <b>/" + K.noun + " " + (kind === "class" ? "Year 7 English" : "Minh") + "</b>.");
     return;
   }
   const id = clientId() + ":" + s;
@@ -236,7 +236,7 @@ async function note(text){
   }
   const ent = await current();
   if(!ent){
-    addBubble("ass", "No active subject on client <b>" + e(clientName()) + "</b>. <b>/class Year 7 English</b> or <b>/student Timmy</b> first (then /note …).");
+    addBubble("ass", "No active subject on client <b>" + e(clientName()) + "</b>. <b>/class Year 7 English</b> or <b>/student Minh</b> first (then /note …).");
     return;
   }
   ent.notes = ent.notes || [];
@@ -261,7 +261,7 @@ async function attach(id){
     return;
   }
   const ent = await current();
-  if(!ent){ addBubble("ass", "No active subject on client <b>" + e(clientName()) + "</b> — <b>/class Year 7 English</b> or <b>/student Timmy</b> first, then /file again."); return; }
+  if(!ent){ addBubble("ass", "No active subject on client <b>" + e(clientName()) + "</b> — <b>/class Year 7 English</b> or <b>/student Minh</b> first, then /file again."); return; }
   await file({ id: rec.id, kind, title: rec.name || rec.title || rec.id, duration: rec.duration || null });
   addBubble("ass", "📎 Filed " + e(kind) + " <b>" + e(rec.name || rec.title) + "</b> under <b>" + e(ent.name) + "</b> (" + e(ent.kind) + ").");
   try{ rrlAppend(runNoOf(), "DNA", "Obi: [filed " + rec.id + " under " + ent.name + "]"); }catch(err){}
@@ -466,7 +466,7 @@ function howtoCard(kind){
     return;
   }
   addBubble("ass", '<div class="rise tr-card"><div class="rhead">📝 /review — no student selected</div>'
-    + '<div class="rrow"><b>STEP 1</b><span class="vd">WHO</span><div class="rd"><b>/student Timmy</b> — creates/selects the student; everything you then transcribe, summarize or note files under them</div></div>'
+    + '<div class="rrow"><b>STEP 1</b><span class="vd">WHO</span><div class="rd"><b>/student &lt;name&gt;</b> — creates/selects the student; everything you then transcribe, summarize or note files under them</div></div>'
     + '<div class="rrow"><b>STEP 2</b><span class="vd">EVIDENCE</span><div class="rd"><b>/transcribe &lt;recording&gt;</b> · <b>/summary</b> · <b>/note &lt;observation&gt;</b></div></div>'
     + '<div class="rrow"><b>STEP 3</b><span class="vd">WRITE</span><div class="rd"><b>/review</b> · <b>/review --parent</b> · <b>/review --short</b> · <b>/review focus text…</b></div></div>'
     + '<div class="rfoot">/students lists every student · /reviews is the archive · a review is derived text with citations — the transcripts it came from are never replaced.</div></div>');

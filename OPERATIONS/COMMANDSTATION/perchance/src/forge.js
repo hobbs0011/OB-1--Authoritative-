@@ -39,9 +39,14 @@
   const shortHash = h => String(h||"").slice(0, 12);
 
   /* the station's own files — read from app.js's SRC_SNAPSHOT so the two can
-     never drift (the whole reason SRC_SNAPSHOT exists). */
+     never drift (the whole reason SRC_SNAPSHOT exists). Binaries are dropped in
+     the FORGE's view of the list on purpose: the manifest compares source against
+     the authority by fetching each file as TEXT and hashing it, which is neither
+     meaningful nor quick for 103 .webp/.png files (AUDIT 2026-09-21 — the backup
+     list carries them; this list is for reading, diffing and hot-swap). */
+  const BIN_RE = /\.(webp|png|jpe?g|gif|ico|bmp|avif|woff2?|ttf|otf|eot|mp3|wav|ogg|mp4|webm|pdf|zip|xlsx?|wasm)$/i;
   function fileList(){
-    try{ if(typeof SRC_SNAPSHOT !== "undefined" && Array.isArray(SRC_SNAPSHOT) && SRC_SNAPSHOT.length) return SRC_SNAPSHOT.slice(); }catch(e){}
+    try{ if(typeof SRC_SNAPSHOT !== "undefined" && Array.isArray(SRC_SNAPSHOT) && SRC_SNAPSHOT.length) return SRC_SNAPSHOT.filter(p => !BIN_RE.test(p)); }catch(e){}
     return ["main.pjs","index.html","src/app.js","src/styles.css","src/ilog.js","src/forge.js"];
   }
   /* modules that expose a `window.ObiX = …` object and can therefore be re-run
@@ -199,7 +204,7 @@
 
   /* the stage as a bounded diff — the loop is shown what its last edit ACTUALLY
      did, so it can tell when the task is already finished instead of re-issuing
-     the same edit (three of eight steps were burned that way; see TRAIL.md). */
+     the same edit (three of eight steps were burned that way; see the I-LOG). */
   async function stageDiffText(max){
     const rows = stageRows();
     if(!rows.length) return "(empty — nothing staged yet)";
@@ -476,7 +481,7 @@
       if(out && typeof out === "object" && out.done){ answer = out.summary || "done"; steps.push({ name:"done", ok:true, note:answer }); render("forge — done"); break; }
       /* the machine checks its own work: a staged file that does not parse is a
          failure to fix, not a step to build on (added after the loop shipped a
-         duplicate block — see TRAIL.md) */
+         duplicate block — see the I-LOG) */
       if((name === "replace" || name === "write_file") && /^staged/.test(String(out))){
         const p = String((args && args.path) || "");
         const code = (stage[p] && stage[p].mode !== "delete") ? stage[p].content : null;
@@ -638,7 +643,11 @@
       await t("hash", async () => ({ ok: (await hashText("obi")).length === 64, note: "sha-256 → " + shortHash(await hashText("obi")) }));
       await t("diff", async () => { const d = diff("a\nb\nc", "a\nB\nc"); return { ok: !d.identical && d.added === 1 && d.removed === 1, note: "+" + d.added + "/-" + d.removed + " on a 3-line file" }; });
       await t("stage + diff + discard", async () => { const before = stageRows().length; stageSet("src/__probe.js", "// probe\n", "write", "selftest"); const mid = stageRows().length; stageClear(); return { ok: mid === before + 1 && stageRows().length === before, note: "stage round-trips and clears" }; });
-      await t("canon compare", async () => { const m = await manifest(true); return { ok:true, note: token() ? (m.filter(r=>r.git).length + " files matched in the authority") : "no token — canon compare skipped (honest gap, not a failure)" }; });
+      /* AUDIT 2026-09-21: this step used to run a FULL manifest(true) — one live fetch + one
+         authority read per file — so /forge selftest could take minutes. The primitive is now
+         exercised with ONE bounded authority read (the same code path), and the full sweep stays
+         available as the forge's `manifest` tool. */
+      await t("canon compare", async () => { const g = await read("src/forge.js", { from:"git" }); return { ok:true, note: token() ? (g.lines + " lines read back from the authority (drift-check primitive OK)") : "no token — canon compare skipped (honest gap, not a failure)" }; });
       await t("gate", async () => { const g = omegaStatusText(); return { ok:true, note: g.armed ? ("ARMED (" + g.armedMinutesLeft + "m)") : "LOCKED — writes will refuse, as designed" }; });
       addBubble("ass", '<div class="rise"><div class="rhead">🧪 /forge selftest — ' + rows.filter(r=>r.ok).length + "/" + rows.length + ' pass</div>'
         + rows.map(r => '<div class="rrow"' + (r.ok ? "" : ' bad') + '><b>' + esc(r.name) + '</b><span class="vd">' + (r.ok ? "PASS" : "GAP") + '</span><div class="rd">' + esc(r.note) + '</div></div>').join("")

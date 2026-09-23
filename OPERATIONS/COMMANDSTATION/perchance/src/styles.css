@@ -1,7 +1,29 @@
 :root{
-  --bg:#07090f; --panel:rgba(18,24,38,.72); --panel2:#131b2b; --line:rgba(120,160,255,.14);
-  --text:#e6ecff; --muted:#8b94ad; --accent:#6ea8fe; --accent2:#c678ff; --cyan:#39e0e6;
-  --user:#12335f; --user2:#0f2a4d;
+  /* ===================== THE SOVEREIGN'S PALETTE =====================
+     Audited from NET-CLASSROOM-MANAGER.html (2026-09-21): purple is the SYSTEM,
+     gold is the REWARD, #0f0f1a is the ground, and the four semantic colours are
+     only ever STATE. Every token below is the station's own; the legacy aliases
+     after them re-point the older names at these values, so no rule changed its
+     job — only its clothes. */
+  --void:#0f0f1a;
+  --purple:#a855f7; --purple-dim:rgba(168,85,247,.3); --purple-glow:rgba(168,85,247,.15);
+  --gold:#f59e0b;   --gold-dim:rgba(245,158,11,.3);
+  --glass:rgba(15,15,26,.75); --glass-light:rgba(255,255,255,.05); --glass-border:rgba(168,85,247,.2);
+  --text-solid:#e2e8f0; --text-dim:#94a3b8; --text-bright:#f8fafc;
+  --ok:#22c55e; --ok-dim:rgba(34,197,94,.2);
+  --warn:#eab308; --warn-dim:rgba(234,179,8,.2);
+  --notice:#f97316; --notice-dim:rgba(249,115,22,.2);
+  --bad:#ef4444; --bad-dim:rgba(239,68,68,.2);
+  --radius:1rem; --radius-sm:.5rem;
+  --font-head:'Orbitron',sans-serif;
+  --font-body:'Rajdhani',sans-serif;
+  --font-ui:'Inter',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+
+  /* LEGACY ALIASES */
+  --bg:var(--void); --panel:var(--glass); --panel2:var(--glass-light); --line:var(--glass-border);
+  --text:var(--text-solid); --muted:var(--text-dim); --accent:var(--purple); --accent2:var(--gold); --cyan:var(--gold);
+  --user:rgba(168,85,247,.22); --user2:rgba(168,85,247,.10);
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
@@ -172,6 +194,23 @@ body{
 .rrow .rd{width:100%; color:var(--muted); font-size:11.5px; font-family:ui-monospace,monospace; line-height:1.55}
 .rise .rfoot{font-size:12px; padding:8px 12px; color:var(--text); font-weight:700; border-top:1px solid var(--line); background:rgba(57,224,230,.06)}
 
+/* ---------------------- THE CURRICULUM · SCOPE MARKS (src/curriculum.js) ---------------------- */
+/* A tag inside a card: dates in the pacing guide, "no evidence:" in /coverage. */
+.tr-tag{display:inline-block; font-family:ui-monospace,monospace; font-size:10.5px; padding:0 6px; border:1px solid var(--line); border-radius:4px; background:rgba(120,160,255,.10); color:var(--muted); letter-spacing:.3px}
+/* Verbatim guide text (contents / outcomes / activities) inside a week card. */
+.tr-card .cur-text{border-left:2px solid rgba(168,85,247,.45); padding-left:7px; margin-top:4px; color:var(--muted)}
+/* Whose period is this? VT = the Vietnamese teacher's; NOT YOURS = another book. */
+.sc-chip{font-family:ui-monospace,monospace; font-size:9.5px; font-weight:800; letter-spacing:.6px; padding:1px 6px; border-radius:999px; border:1px solid var(--line); background:var(--panel2); color:var(--muted); cursor:help; white-space:nowrap}
+.sc-chip.vt{border-color:rgba(245,158,11,.6); color:#f59e0b; background:rgba(245,158,11,.10)}
+.sc-chip.out{border-color:rgba(140,150,180,.45); color:#9aa4c4}
+.sc-why{color:var(--muted); font-style:italic}
+/* One line of a marked list inside a row's description. A block, not a <br>: a
+   wrapped <br> block is drawn as one tall text box, which renderers (and readers)
+   handle badly — a line per box cannot be stacked on top of its neighbour. */
+.sc-line{display:block; padding:1px 0; line-height:1.5}
+.rrow.sc-vt, .rrow.sc-out{opacity:.66}
+.rrow.sc-vt b, .rrow.sc-out b{font-weight:600}
+
 /* ---------------------- PHOENIXCOMMAND · CMD PANEL (styles kept for agent cards) ---------------------- */
 .cmd-queue{overflow-y:auto; margin-top:10px; flex:1; padding-bottom:8px}
 .cmd-queue .qh{font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin:4px 0 6px; font-weight:700}
@@ -274,3 +313,240 @@ body{
   .lctab{padding:6px 9px; font-size:12px}
   .lc-acts .ci-act{flex:1 1 auto; text-align:center}
 }
+
+/* ==========================================================================================
+   THE SOVEREIGN'S DESIGN LANGUAGE  (2026-09-21 — the audit of NET-CLASSROOM-MANAGER.html)
+   ------------------------------------------------------------------------------------------
+   The station now wears the same language its lessons do: the void #0f0f1a under blurred
+   organic blobs, glass on every surface, purple = the system, gold = the reward, the four
+   semantic colours only ever for state, Orbitron for display, Rajdhani for the body,
+   JetBrains Mono for data. This block only overrides — no class changed its job.
+   ========================================================================================== */
+
+/* ---------- the ground, and the ambient life behind it ---------- */
+body{
+  background:
+    radial-gradient(1100px 640px at 72% -12%, rgba(168,85,247,.16) 0%, transparent 62%),
+    radial-gradient(880px 560px at 8% 112%, rgba(245,158,11,.10) 0%, transparent 58%),
+    var(--void);
+  font-family:var(--font-body);
+  font-size:15px;
+  letter-spacing:.1px;
+}
+.glow-blob{position:fixed; border-radius:50%; filter:blur(100px); opacity:.12; pointer-events:none; z-index:0}
+.blob-1{width:420px; height:420px; background:var(--purple); top:-140px; left:-120px}
+.blob-2{width:360px; height:360px; background:var(--gold); bottom:-120px; right:-100px}
+.blob-3{width:300px; height:300px; background:var(--purple); top:46%; right:16%; opacity:.06}
+#app.net-shell{z-index:1}
+
+/* ---------- display type · body type · data type ---------- */
+.logo, .big, .title, .ev-title, .gen-head, .rhead, .lc-name, .mp-head > div:first-child,
+#empty .title, #empty .big { font-family:var(--font-head); letter-spacing:.06em }
+.logo{font-size:22px; font-weight:800}
+.phoenix-logo{width:32px; height:32px; flex-shrink:0; filter:drop-shadow(0 0 12px var(--purple-glow))}
+#topbar{gap:10px}
+/* NOTE: background-image, never the `background` shorthand — the shorthand resets
+   background-clip to border-box and silently kills the gradient text (it computes
+   back to border-box while the glyphs stay transparent, so the wordmark renders as
+   a solid gradient RECTANGLE with no letters in it. Found in the browser audit.) */
+.logo .grad{background-image:linear-gradient(135deg,var(--purple),var(--gold)); color:var(--gold)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .logo .grad{ -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent }
+}
+.logo .obi{color:var(--gold)}
+.sub{font-family:var(--font-ui); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-dim)}
+.bubble, #inputEl, .hint, .rd, .mp-head .hint, .lr-sub, .sel-row, .lc-empty { font-family:var(--font-body) }
+.bubble{font-size:15px; line-height:1.5}
+.tabmeta, .meta, .chip, .divchip, .set-kv b, .set-kv span, .mem-stats, .mem-item .mh, .rrow .vd,
+.rrow .rd, .cmd-item .cid, .cmd-item .ci-drone, .cmd-item .ci-res, .tr-status, .tr-card .part-chip,
+.lc-note, .lc-stream, .lc-spec, .lr-tag, .lf-out, .ci-drone, .ss, .eval-tile span,
+.cmdbook .cmd b, .cmdbook .cmd .cmd-hint, .desk-tag, .set-tgl, .lc-sub { font-family:var(--font-mono) }
+
+/* ---------- chrome: glass everywhere ---------- */
+#topbar{
+  background:var(--glass); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--glass-border); padding:10px 16px;
+}
+#tabbar{
+  background:var(--glass); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--glass-border); padding:0 10px; gap:2px;
+}
+.tabbtn{
+  border-radius:0; border-bottom:2px solid transparent; padding:10px 14px;
+  font-family:var(--font-ui); font-size:12.5px; font-weight:600; letter-spacing:.02em;
+}
+.tabbtn:hover{color:var(--text-bright); background:var(--purple-glow); border-radius:0}
+.tabbtn.on{
+  color:var(--purple); background:var(--purple-glow);
+  border-color:transparent; border-bottom-color:var(--purple);
+}
+.tabmeta b{color:var(--gold)}
+.tbtn{border-radius:999px; font-family:var(--font-ui); font-size:12.5px; background:var(--glass-light)}
+.tbtn:hover{background:var(--purple-dim); border-color:var(--purple)}
+.tbtn.on{background:linear-gradient(135deg,var(--purple),var(--gold)); border-color:transparent; color:#160b22}
+
+/* ---------- the conversation ---------- */
+#messages{padding:20px 16px}
+.ass .bubble, .user .bubble{backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); box-shadow:0 8px 28px rgba(0,0,0,.35)}
+.ass .bubble{background:var(--glass); border:1px solid var(--glass-border); border-bottom-left-radius:5px}
+.user .bubble{background:linear-gradient(135deg,var(--user),var(--user2)); border:1px solid rgba(168,85,247,.35)}
+#composer{background:var(--glass); backdrop-filter:blur(16px); border-top:1px solid var(--glass-border)}
+#inputEl{background:var(--glass-light); border:1px solid var(--glass-border); border-radius:var(--radius); font-size:15px}
+#inputEl:focus{border-color:var(--purple); box-shadow:0 0 0 3px var(--purple-glow)}
+.iconbtn{border-radius:var(--radius); background:var(--glass-light); border:1px solid var(--glass-border)}
+.iconbtn:hover{border-color:var(--purple); background:var(--purple-glow)}
+.iconbtn.primary{background:linear-gradient(135deg,var(--purple),var(--gold)); color:#160b22; border:none}
+#empty .big{color:var(--gold); text-shadow:0 0 26px var(--gold-dim)}
+#empty .chipgroup{color:var(--text-dim); letter-spacing:.16em}
+.voice-card{
+  margin-top:20px; max-width:560px; min-height:2.9em;
+  font-family:var(--font-body); font-style:italic; font-size:15px; line-height:1.5;
+  color:var(--gold); opacity:.9; text-shadow:0 0 18px var(--gold-dim); transition:opacity .6s;
+}
+/* the source line under each rotated line of doctrine — every line on the station is attributable */
+.voice-card .vc-src{
+  display:block; margin-top:5px; font-style:normal; font-family:var(--font-ui);
+  font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-dim);
+  opacity:.75; text-shadow:none;
+}
+#empty .cmd, .cmdbook .cmd{
+  background:var(--glass-light); border:1px solid var(--glass-border); border-radius:999px;
+  font-family:var(--font-ui); transition:transform .18s, border-color .18s, background .18s, box-shadow .18s;
+}
+.cmdbook .cmd{border-radius:var(--radius-sm); font-family:var(--font-ui)}
+#empty .cmd:hover, .cmdbook .cmd:hover{
+  background:var(--purple-glow); border-color:var(--purple);
+  transform:translateY(-2px); box-shadow:0 6px 22px var(--purple-glow);
+}
+.cmdbook .cmd b{color:var(--purple)}
+
+/* ---------- cards, titles, rows (the card-title grammar) ---------- */
+.rise, #memoryPanel, #studentsPanel, #lessonPanel, .eval-tile, .sel-row, .cmd-item, .mem-item,
+.lr-row, .lc-empty, .tr-card{
+  background:var(--glass); border:1px solid var(--glass-border);
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+}
+.rise{border-radius:var(--radius); box-shadow:0 10px 34px rgba(0,0,0,.4)}
+.rise .rhead{
+  font-family:var(--font-head); font-size:12.5px; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--purple);
+  background:linear-gradient(90deg,var(--purple-glow),transparent); border-bottom:1px solid var(--glass-border);
+  padding:10px 13px;
+}
+.rrow{border-bottom:1px solid var(--glass-border)}
+.rrow .vd{color:var(--gold)}
+.rrow.bad .vd{color:var(--bad)}
+.rise .rfoot{
+  background:var(--glass-light); border-top:1px solid var(--glass-border);
+  font-family:var(--font-ui); font-size:11.5px; font-weight:500; color:var(--text-dim);
+}
+.mem-item .mq{color:var(--text-solid)}
+.mem-item .mf{color:var(--purple); font-family:var(--font-mono); font-size:10.5px}
+.mem-item.run .mq{color:var(--gold)}
+.mem-item{border-radius:var(--radius-sm)}
+
+/* ---------- state, in the sovereign's four colours (colour + its dim fill) ---------- */
+.chip.pending { background:var(--warn-dim);   color:var(--warn);   border:1px solid rgba(234,179,8,.4) }
+.chip.claimed { background:var(--purple-dim); color:var(--purple); border:1px solid rgba(168,85,247,.4) }
+.chip.completed{ background:var(--ok-dim);    color:var(--ok);     border:1px solid rgba(34,197,94,.4) }
+.chip.failed  { background:var(--bad-dim);    color:var(--bad);    border:1px solid rgba(239,68,68,.4) }
+.tr-card .part-chip.ok { border-color:rgba(34,197,94,.55);  color:var(--ok) }
+.tr-card .part-chip.run{ border-color:var(--purple);        color:var(--gold) }
+.tr-card .part-chip.bad{ border-color:rgba(239,68,68,.6);   color:var(--bad) }
+.rrow.bad { background:rgba(239,68,68,.06) }
+/* a proposal is PENDING, not failed — the amber of the sovereign's palette, never
+   the red reserved for a breach */
+.rrow.pending .vd{ color:var(--warn) }
+.rrow.pending{ background:rgba(234,179,8,.05) }
+
+/* ---------- controls ---------- */
+.ci-act, .ci-act, .lc-acts .ci-act{
+  background:var(--glass-light); border:1px solid var(--glass-border); border-radius:999px;
+  font-family:var(--font-ui); font-size:11.5px; transition:transform .16s, border-color .16s, background .16s;
+}
+.ci-act:hover{border-color:var(--purple); background:var(--purple-glow); transform:translateY(-1px)}
+.ci-act.primary{background:linear-gradient(135deg,var(--purple),var(--gold)); border-color:transparent; color:#160b22}
+.lc-f input, .lc-f textarea, .sel-add input{
+  background:var(--glass-light); border:1px solid var(--glass-border); border-radius:var(--radius-sm);
+  font-family:var(--font-ui); font-size:13px;
+}
+.lc-f input:focus, .lc-f textarea:focus, .sel-add input:focus{border-color:var(--purple); box-shadow:0 0 0 3px var(--purple-glow)}
+.lc-spec{background:rgba(10,10,20,.72); border-radius:var(--radius-sm); font-size:11px}
+.lc-spec:focus{border-color:var(--purple)}
+.lc-note{border-radius:var(--radius-sm); color:var(--gold); border-color:var(--gold-dim); background:var(--gold-dim)}
+.lc-note.bad{color:var(--bad); border-color:var(--bad-dim); background:var(--bad-dim)}
+.lc-note:not(:empty){display:block}
+.lc-stream{border-radius:var(--radius-sm); background:rgba(10,10,20,.55)}
+.sel-row.on{border-color:var(--purple); background:var(--purple-glow)}
+.eval-tile:hover{border-color:var(--purple); background:var(--purple-glow); transform:translateY(-2px)}
+.eval-tile{transition:transform .18s, border-color .18s, background .18s}
+.lr-tag{color:var(--gold)}
+#dropHint{background:rgba(15,15,26,.85); color:var(--gold); font-family:var(--font-ui)}
+#app.dragging{border:2px dashed var(--purple)}
+.tr-card .tr-bar{background:var(--glass-light)}
+.tr-card .tr-bar i{background:linear-gradient(90deg,var(--purple),var(--gold)); box-shadow:0 0 12px var(--gold-dim)}
+.set-kv b{color:var(--purple)}
+#micBtn.recording{background:var(--bad); border-color:var(--bad)}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.5)}50%{box-shadow:0 0 0 9px rgba(239,68,68,0)}}
+
+/* ---------- focus, scrollbars, honesty about motion ---------- */
+:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+*::-webkit-scrollbar{width:8px; height:8px}
+*::-webkit-scrollbar-track{background:transparent}
+*::-webkit-scrollbar-thumb{background:var(--purple-dim); border-radius:4px}
+*::-webkit-scrollbar-thumb:hover{background:var(--purple)}
+*{scrollbar-width:thin; scrollbar-color:var(--purple-dim) transparent}
+@media (prefers-reduced-motion:reduce){ *{animation:none!important; transition:none!important} }
+
+/* ---------- it survives the classroom (print) ---------- */
+@media print{
+  body{background:#fff; color:#000}
+  #topbar, #tabbar, #composer, .glow-blob, #dropHint, .ci-act, .lf-overlay{display:none!important}
+  .views{display:block!important}
+  .view{display:block!important}
+  .view.hidden{display:block!important}
+  .rise, #memoryPanel, #studentsPanel, #lessonPanel, .bubble{background:#fff!important; color:#000!important; border:1px solid #ccc!important; box-shadow:none!important; backdrop-filter:none!important}
+  .rhead{color:#000!important; background:#fff!important}
+  .rrow .vd, .rrow .rd, .mem-item .mh{color:#333!important}
+}
+
+/* ---------- phone: the blobs and the display face step back ---------- */
+@media (max-width:560px){
+  .glow-blob{filter:blur(70px); opacity:.09}
+  .blob-3{display:none}
+  .logo{font-size:18px}
+  .rise .rhead{font-size:11.5px; letter-spacing:.06em}
+}
+
+
+/* ============================================================================
+   FREE PHOENIX MODE — the unbound room (src/freephoenix.js)
+   The same design language with its own heat: purple stays the system, gold is
+   still the reward, and this room burns orange because it is neither. The four
+   absent things (git · cloud · canon · log) are chips in the "state" red — in
+   here, absent is a designed state, not a fault.
+   ============================================================================ */
+#setTabFree[hidden]{display:none}
+#freeRoot{padding-top:4px}
+.fpm-badges{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px}
+.fpm-badges .chip{font-size:10px}
+.fpm-chat{margin-top:12px; max-height:46vh; overflow-y:auto; padding-right:4px}
+.fpm-msg{border:1px solid var(--line); border-radius:11px; padding:9px 12px; margin-bottom:9px; background:var(--panel2)}
+.fpm-msg.fpm-user{border-color:rgba(168,85,247,.35); background:rgba(168,85,247,.10)}
+.fpm-msg.fpm-99{border-color:rgba(249,115,22,.32); background:rgba(249,115,22,.06)}
+.fpm-who{font-family:var(--font-head); font-size:10px; letter-spacing:1.4px; color:var(--muted); margin-bottom:5px}
+.fpm-msg.fpm-99 .fpm-who{color:var(--notice)}
+.fpm-body{font-size:13px; line-height:1.55; word-break:break-word}
+.fpm-body.fpm-live{white-space:pre-wrap; font-family:var(--font-mono); font-size:12px; color:var(--muted)}
+.fpm-body b{color:var(--text-bright)}
+.fpm-code{white-space:pre; overflow-x:auto; background:#0b1120; border:1px solid var(--line); border-radius:9px; padding:10px 12px; margin:8px 0; font-family:var(--font-mono); font-size:11.5px; line-height:1.5; color:#cfe3ff}
+.fpm-inline{background:rgba(168,85,247,.16); border:1px solid var(--purple-dim); border-radius:5px; padding:1px 5px; font-family:var(--font-mono); font-size:11.5px}
+.fpm-files{margin-top:6px}
+/* the room's own diff — it edits itself, so the change is shown as text, not claimed */
+.fpm-diff{margin-top:8px; border:1px solid var(--line); border-radius:9px; overflow:hidden; background:#0b1120}
+.fpm-dl{white-space:pre-wrap; word-break:break-word; font-family:var(--font-mono); font-size:11px; line-height:1.5; padding:0 10px; color:var(--muted)}
+.fpm-dl.fpm-dadd{background:rgba(76,217,123,.10); color:#9ff0bb}
+.fpm-dl.fpm-ddel{background:rgba(255,90,90,.10); color:#ffb0b0}
+.fpm-dl.fpm-dgap{color:var(--muted); opacity:.6; padding:2px 10px}
+.fpm-frame{width:100%; height:440px; margin-top:9px; border:1px solid var(--line); border-radius:10px; background:#fff}
+@media (max-width:640px){ .fpm-chat{max-height:38vh} .fpm-frame{height:320px} }

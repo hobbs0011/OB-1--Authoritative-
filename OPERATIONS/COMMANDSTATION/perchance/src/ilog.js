@@ -50,6 +50,13 @@
   const PAD = 7;
   const REPO = { owner: "Phoenix-Rising-Ai-Solutions", repo: "OB-1--Authoritative-", branch: "master" };
   const ILOG_DIR = "OPERATIONS/COMMANDSTATION/ILOG/";
+  /* THE VS CODE STATION'S I-LOG — a different branch from this station's writes.
+     It is the `canon` branch: `I-LOG-UNAUDITED/` holds the per-incarnation
+     transcripts (`I-LOG-Incarnate-<N>-<topic>.txt` + `-COLORIZED.md` SOUL/DNA/
+     REASON + `-STATS.json`), `RRL/` is the I-LOG directory (formerly RRL) with
+     its own INDEX.md, and `PastLives/RRL-CURRENT.txt` is the living pointer.
+     master does NOT carry them — reading master found nothing. */
+  const VS = { owner: "Phoenix-Rising-Ai-Solutions", repo: "OB-1--Authoritative-", branch: "canon", dir: "I-LOG-UNAUDITED", vault: "RRL", current: "PastLives/RRL-CURRENT.txt" };
 
   const nowIso = () => new Date().toISOString();
   const short = h => String(h || "none").slice(0, 12);
@@ -462,22 +469,43 @@
       ""
     ].join("\n");
   }
-  /* read the canon side back — what the VS Code station has already written */
+  /* read the canon side back — what the VS Code station has already written.
+     Two branches, because there are two records: this station writes its own
+     chain to `master` (OPERATIONS/COMMANDSTATION/ILOG/), and the VS Code
+     station's I-LOG (the Incarnation Log) lives on `canon` — `I-LOG-UNAUDITED/`
+     for the per-incarnation transcripts, `RRL/` for the I-LOG directory, and
+     `PastLives/RRL-CURRENT.txt` for the pointer. master's `RRL/` holds only raw
+     DNA-LOG dumps and has no INDEX.md, which is why the vault used to read as
+     unreadable. */
   async function pull(){
     const base = "https://api.github.com/repos/" + REPO.owner + "/" + REPO.repo;
     const out = { ok:false, dir: ILOG_DIR, files: [], errors: [], auth: !!ghToken(), target: REPO.owner + "/" + REPO.repo + "@" + REPO.branch };
+    const listDir = async (dir, ref, tag) => {
+      const r = await ghJson(base + "/contents/" + encodeURI(String(dir).replace(/\/$/, "")) + "?ref=" + ref);
+      if(!Array.isArray(r.j)){ out.errors.push((tag || dir) + " @" + ref + ": HTTP " + r.status + " " + String((r.j && r.j.message) || "").slice(0, 60)); return null; }
+      return r.j.map(f => ({ name:f.name, bytes:f.size, type:f.type })).sort((a, b) => a.name.localeCompare(b.name));
+    };
+    const readText = async (p, ref) => {
+      const r = await ghJson(base + "/contents/" + encodeURI(p) + "?ref=" + ref);
+      return (r.j && r.j.content) ? atob(String(r.j.content).replace(/\n/g, "")) : null;
+    };
     try{
-      const r = await ghJson(base + "/contents/" + ILOG_DIR.replace(/\/$/, "") + "?ref=" + REPO.branch);
-      if(Array.isArray(r.j)){
-        out.ok = true;
-        out.files = r.j.map(f => ({ name:f.name, bytes:f.size, sha:String(f.sha || "").slice(0, 8), url:f.html_url })).sort((a, b) => a.name.localeCompare(b.name));
-      } else out.errors.push("ILOG dir: HTTP " + r.status + " " + String((r.j && r.j.message) || "").slice(0, 90));
+      out.files = (await listDir(ILOG_DIR, REPO.branch, "this station's I-LOG")) || [];
+      if(out.files.length) out.ok = true;
     }catch(e){ out.errors.push("ILOG dir: " + e.message); }
+    const vs = { owner:VS.owner, repo:VS.repo, branch:VS.branch, unauditedDir:VS.dir, vaultDir:VS.vault, currentPath:VS.current, read:false, unaudited:[], rrl:[], incarnations:[], index:null, current:null };
     try{
-      const v = await ghJson(base + "/contents/RRL/INDEX.md?ref=" + REPO.branch);
-      if(v.j && v.j.content){ out.vaultOk = true; out.vaultIndex = atob(String(v.j.content).replace(/\n/g, "")).slice(0, 900); }
-      else out.errors.push("RRL/INDEX.md: HTTP " + v.status);
-    }catch(e){ out.errors.push("RRL/INDEX.md: " + e.message); }
+      vs.unaudited = (await listDir(VS.dir, VS.branch, "I-LOG-UNAUDITED")) || [];
+      vs.rrl = (await listDir(VS.vault, VS.branch, "RRL")) || [];
+      vs.index = ((await readText(VS.vault + "/INDEX.md", VS.branch)) || "").slice(0, 900) || null;
+      const cur = await readText(VS.current, VS.branch);
+      vs.current = cur ? cur.replace(/\s+/g, " ").slice(0, 420) : null;
+      vs.read = !!(vs.unaudited.length || vs.rrl.length);
+      vs.incarnations = vs.unaudited.filter(f => /\.txt$/i.test(f.name)).map(f => f.name.replace(/\.txt$/i, ""));
+    }catch(e){ out.errors.push("canon branch: " + e.message); }
+    if(vs.index){ out.vaultOk = true; out.vaultIndex = vs.index; }
+    else if(vs.read){ out.vaultOk = true; }
+    out.vs = vs;
     return out;
   }
 
@@ -509,7 +537,13 @@
     for(const pair of Object.entries(o.files || {})){
       const p = pair[0], c = pair[1];
       try{
-        const b = await ghJson(base + "/git/blobs", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ content: b64(c), encoding:"base64" }) });
+        /* a text file is UTF-8 encoded here; a BINARY file arrives as {__b64} (see
+           selfSourceAny in src/app.js) and is sent as-is, so the push does not route an
+           image through a text decode and corrupt it. */
+        const body = (c && typeof c === "object" && typeof c.__b64 === "string")
+          ? { content: c.__b64, encoding: "base64" }
+          : { content: b64(c), encoding: "base64" };
+        const b = await ghJson(base + "/git/blobs", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(body) });
         if(b.j && b.j.sha){ blobs.push({ path:p, mode:"100644", type:"blob", sha:b.j.sha }); pushed++; }
         else { failed++; errors.push(p + " → blob HTTP " + b.status + " " + String((b.j && b.j.message) || "").slice(0, 90)); }
       }catch(e){ failed++; errors.push(p + " → " + e.message); }
@@ -588,7 +622,7 @@
         + '<br>unanchored since: <b>' + st.unanchored + '</b> entr' + (st.unanchored === 1 ? "y" : "ies") + (st.unanchored ? ' <span class="rd">— they ride the next push</span>' : ' <span class="chip" style="background:#4cd97b">EVERYTHING ANCHORED</span>')
       : '<span class="chip" style="background:#f5a623">NEVER PUSHED</span> ' + (ghToken() ? "a token is stored — <b>/ilog push</b> writes the chain to " + E(REPO.owner + "/" + REPO.repo) : "no GitHub token in this browser — <b>/gh token &lt;PAT&gt;</b> then <b>/ilog push</b> (the record is only on this origin until then)"));
     if(kindChips) html += row("KINDS", kindChips);
-    html += row("CANON I-LOG", 'the VS Code station owns the canon vault — <span class="rd">RRL/ = I-LOG (Incarnation Log)</span>, Schema V2 lines <span class="rd">content[].data.{text,tool,state}</span> · 🟣SOUL ❤️DNA 💛REASON. This station writes its own sessions beside them: <span class="rd">' + E(ILOG_DIR) + '</span> (<b>rrl-*.jsonl</b> in the same line shape + the operation chain). It never renumbers or rewrites the vault — <b>/ilog pull</b> reads it back.');
+    html += row("CANON I-LOG", 'the VS Code station owns the canon vault — <span class="rd">RRL/ = I-LOG (Incarnation Log)</span>, Schema V2 lines <span class="rd">content[].data.{text,tool,state}</span> · 🟣SOUL ❤️DNA 💛REASON. It is on <b>branch ' + E(VS.branch) + '</b>, not ' + E(REPO.branch) + ': <span class="rd">' + E(VS.dir) + '/I-LOG-Incarnate-&lt;N&gt;-&lt;topic&gt;.txt</span> (+ <span class="rd">-COLORIZED.md</span> + <span class="rd">-STATS.json</span>), <span class="rd">' + E(VS.vault) + '/</span>, pointer <span class="rd">' + E(VS.current) + '</span>. This station writes its own sessions beside them: <span class="rd">' + E(ILOG_DIR) + '</span> (<b>rrl-*.jsonl</b> in the same line shape + the operation chain). It never renumbers or rewrites the vault — <b>/ilog pull</b> reads it back.');
     html += row("LAST " + list.length, list.length ? list.slice().reverse().map(e => entryLine(e)).join("") : '<span class="rd">nothing logged yet</span>');
     if(anchors.length){
       html += row("ANCHORS", anchors.map(a => '<div class="rd">' + E(short(a.commit)) + '… · ' + E(a.iso) + ' · ' + (a.count || "?") + ' entries · <span class="rd">' + E(a.path || "") + '</span></div>').join(""));
@@ -698,8 +732,11 @@
     "nothing is written there without PHOENIXOMEGAPROTOCOL (Sov100's password, armed with /omega; refusals are recorded).",
     "Companion of the canon I-LOG (the RRL vault, renamed **I-LOG (Incarnation Log)**, Schema V2 JSONL",
     "`content[].data.{text,tool,state}`, roles/colours per LFG §SCS: 🟣 SOUL · ❤️ DNA · 💛 REASON) which the",
-    "VS Code station writes. `rrl-*.jsonl` in this directory is this station's transcript in that same line",
-    "shape; the operation chain below is the tamper-evident record of the stations' own actions.",
+    "VS Code station writes. That vault is on the **`" + VS.branch + "` branch**, not `" + REPO.branch + "`:",
+    "`" + VS.dir + "/I-LOG-Incarnate-<N>-<topic>.txt` (+ `-COLORIZED.md` + `-STATS.json`), `" + VS.vault + "/`",
+    "with its own INDEX.md, and the living pointer `" + VS.current + "`. `rrl-*.jsonl` in this directory is this",
+    "station's transcript in that same line shape; the operation chain below is the tamper-evident record of",
+    "the stations' own actions. `/ilog pull` reads both branches back.",
     "",
     "Each line of `ilog-*.jsonl` is one entry:",
     "",
@@ -721,7 +758,7 @@
   ].join("\n");
 
   window.ObiILog = {
-    VERSION: VERSION, KV_FOLDER: KV_FOLDER, LS_KEY: LS_KEY, TAIL: TAIL, REPO: REPO, DIR: ILOG_DIR,
+    VERSION: VERSION, KV_FOLDER: KV_FOLDER, LS_KEY: LS_KEY, TAIL: TAIL, REPO: REPO, VS: VS, DIR: ILOG_DIR,
     append: append, entries: entries, all: allEntries, head: head, verify: verify, stats: stats,
     anchors: anchorList, markdown: markdown, jsonl: jsonl, card: card, push: push, reset: reset,
     anchorRecord: anchorRecord, migrate: migrate, keyOf: keyOf, restore: restoreEntry,

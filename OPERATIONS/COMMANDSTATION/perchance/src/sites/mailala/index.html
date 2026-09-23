@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAILALA | Reggae Hostel & Rooftop Bar Saigon</title>
+    <meta name="description" content="Mailala — reggae hostel and rooftop bar at 175/16 Pham Ngu Lao, District 1, Saigon. Dorms from $6.65, private rooms with balconies, Jamaican jerk chicken till late. Message us on WhatsApp.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f5efe6;
+            --forest: #2d6a4f;
+            --dark-forest: #1b4332;
+            --gold: #d4a853;
+            --crimson: #a93226;
+            --brick: #8b4513;
+            --near-black: #1a1714;
+            --muted: #5c5852;
+            --stripe: linear-gradient(90deg, var(--forest) 0%, var(--forest) 33%, var(--gold) 33%, var(--gold) 66%, var(--crimson) 66%, var(--crimson) 100%);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--cream);
+            color: var(--near-black);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 {
+            font-family: 'DM Serif Display', serif;
+            line-height: 1.2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(245, 239, 230, 0.95);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--forest);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: none;
+        }
+
+        .cta-button {
+            background-color: var(--forest);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+            min-height: 44px;
+        }
+
+        .cta-button:hover {
+            background-color: var(--dark-forest);
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            height: 85vh;
+            min-height: 500px;
+            background: url('https://user.uploads.dev/file/2d4d72888f789429517f1679730cc067.jpg') center/cover no-repeat;
+            display: flex;
+            align
+-items-center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--near-black);
+            padding: 12px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            transition: opacity 0.2s;
+        }
+
+        .btn-secondary:hover {
+            opacity: 0.9;
+        }
+
+        /* Section General */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-label {
+            display: block;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--stripe);
+        }
+
+        /* Story Section */
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .story-text h2 {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .story-text p {
+            margin-bottom: 1.5rem;
+            color: var(--muted);
+        }
+
+        .house-words {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .word-tag {
+            background: var(--gold);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .story-img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Signature Dish */
+        .dish-band {
+            background: var(--brick);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .dish-band h2 {
+            font-size: 2.5rem;
+margin-bottom: 1rem;
+        }
+
+        .dish-band p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Menu Cards */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .menu-card {
+            background: white;
+            border-bottom: 5px solid var(--stripe);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-card h3 {
+            color: var(--brick);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .menu-card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Rooms Section */
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .room-card {
+            background: #fff;
+            border: 1px solid #e0dcd6;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .room-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        /* a room card with no photograph on purpose — a stripe in the house
+           colours instead of a stand-in picture of somewhere else */
+        .room-stripe {
+            height: 6px;
+            background: linear-gradient(90deg, var(--forest) 0 33%, var(--gold) 33% 66%, var(--crimson) 66% 100%);
+        }
+        .room-note {
+            max-width: 720px;
+            margin: 18px auto 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #6b6155;
+        }
+
+        .room-info {
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .room-price {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.4rem;
+            color: var(--forest);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .room-features {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        /* Rooftop/Events */
+        .highlight-box {
+            background: var(--forest);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 0 auto;
+            max-width: 900px;
+        }
+
+        .highlight-box h2 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        /* Testimonials */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 25px;
+            border-left: 4px solid var(--gold);
+            font-style: italic;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .testimonial-author {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            font-style: normal;
+            font-size: 0.9rem;
+            color: var(--forest);
+        }
+
+        /* FAQ */
+        details {
+            background: white;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 1px solid #e0dcd6;
+        }
+
+        details[open] summary {
+            font-weight: 600;
+            color: var(--forest);
+        }
+
+        details summary {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        details summary::after {
+            content: "+";
+            font-size: 1.2rem;
+            color: var(--gold);
+        }
+
+        details[open] summary::after {
+            content: "−";
+        }
+
+        .faq-content {
+            padding-top: 10px;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        /* Footer & Map */
+        footer {
+            background: var(--dark-forest);
+            color: var(--cream);
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .footer-address {
+            color: rgba(245, 239, 230, 0.78);
+            font-style: normal;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 250px;
+            background: #14281c;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(245, 239, 230, 0.18);
+            font-size: 0.8rem;
+            color: rgba(245, 239, 230, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .story-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            section { padding: 50px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">MAILALA</a>
+            <a href="https://wa.me/84768701106" class="cta-button">WhatsApp / phone +84 768 701 106</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Reggae Vibes in the Heart of Saigon</h1>
+            <p>A sanctuary for solo travellers, crews, and couples seeking a warm, musical escape just steps from Bui Vien.</p>
+            <div class="hero-actions">
+                <a href="https://wa.me/84768701106" class="cta-button">WhatsApp / phone +84 768 701 106</a>
+                <a href="#menu" class="btn-secondary">See the Menu</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="story" class="container">
+        <div class="story-grid">
+            <div class="story-text">
+                <span class="section-label">Our Spirit</span>
+                <h2>Love Up · Bless Up</h2>
+                <p>Mailala is more than a place to sleep; it's a community built on the rhythms of roots, rock, and reggae. Whether you're here for the live music on the roof or the shared stories in the kitchen, you're home.</p>
+                <div class="house-words">
+                    <span class="word-tag">Love Up</span>
+                    <span class="word-tag">Bless Up</span>
+                    <span class="word-tag">Irie Up</span>
+                    <span class="word-tag">Big Up</span>
+                </div>
+                <p><strong>Note:</strong> We are a drug-free sanctuary. Say no to drugs.</p>
+            </div>
+            <div>
+                <img src="https://user.uploads.dev/file/7c599abd02e6fcf92fd706ee440b457d.jpg" alt="The bar at Mailala at night, strung with fairy lights" class="story-img" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <section class="dish-band">
+        <div class="container">
+            <h2>The Signature Taste</h2>
+            <p>Our Jamaican Jerk Chicken is grilled to order for that authentic, smoky heat. Perfect with a cold beer on the roof.</p>
+            <a href="https://wa.me/84768701106" class="cta-button" style="background: var(--gold);">Pre-order via WhatsApp</a>
+        </div>
+    </section>
+
+    <section id="menu" class="container">
+        <span class="section-label">The Kitchen</span>
+        <h2 class="section-title">Island Flavours</h2>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <h3>Jamaican Jerk Chicken</h3>
+                <p>Grilled to order with traditional spices. The heart of our kitchen.</p>
+            </div>
+            <div class="menu-card">
+                <h3>Curry Goat</h3>
+                <p>Slow-cooked, tender goat meat in a rich, aromatic curry sauce.</p>
+            </div>
+            <div class="menu-card">
+                <h3>Oxtail Stew</h3>
+                <p>Rich and savory oxtail simmered until it falls off the bone.</p>
+            </div>
+            <div class="menu-card">
+                <h3>Festivals & Plantains</h3>
+                <p>Traditional fried dough and sweet plantains — the perfect side.</p>
+            </div>
+            <div class="menu-card">
+                <h3>Rice and Peas</h3>
+                <p>Classic coconut-infused rice with kidney beans.</p>
+            </div>
+            <div class="menu-card">
+                <h3>Late Night Bites</h3>
+                <p>Our kitchen stays open late to keep the vibe going.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="rooms" class="container">
+        <span class="section-label">Rest & Recharge</span>
+        <h2 class="section-title">Stay With Us</h2>
+        <div class="rooms-grid">
+            <div class="room-card">
+                <div class="room-stripe"></div>
+                <div class="room-info">
+                    <span class="room-price">From $6.65 / night</span>
+                    <h3>Mixed Dorms</h3>
+                    <p class="room-features">Available in 4-bed and 8-bed configurations. Perfect for solo travellers.</p>
+                </div>
+            </div>
+            <div class="room-card">
+                <div class="room-stripe"></div>
+                <div class="room-info">
+                    <span class="room-price">From $6.65 / night</span>
+                    <h3>Female Dorm</h3>
+                    <p class="room-features">Cozy 6-bed dorm exclusively for women. Safe and social.</p>
+                </div>
+            </div>
+            <div class="room-card">
+                <div class="room-stripe"></div>
+                <div class="room-info">
+                    <span class="room-price">Approx. $18 / night</span>
+                    <h3>Private Room</h3>
+                    <p class="room-features">Your own sanctuary with a private balcony. Ideal for couples.</p>
+                </div>
+            </div>
+        </div>
+        <p class="room-note">Photographs of the dormitories are not on this page yet — we would rather show you the real rooms than a stand-in. Message us on WhatsApp and we will send them today, or come up and look.</p>
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="https://wa.me/84768701106" class="cta-button">WhatsApp / phone +84 768 701 106</a>
+        </div>
+    </section>
+
+    <section class="container" style="margin-top: 80px;">
+        <span class="section-label">Atmosphere</span>
+        <h2 class="section-title">Life at Mailala</h2>
+        <div class="gallery-grid">
+            <img src="https://user.uploads.dev/file/1f050d9e3a2afcfd4adf67c7e348a224.jpg" alt="The rooftop seating at night, under fairy lights and potted plants" class="gallery-img" loading="lazy">
+            <img src="https://user.uploads.dev/file/2d4d72888f789429517f1679730cc067.jpg" alt="Two guests at a table beneath the wall painting, lit by the room's coloured lights" class="gallery-img" loading="lazy">
+            <img src="https://user.uploads.dev/file/e8e7af459b9bc160670d3e910bf5cf09.jpg" alt="The hand-painted painting of a band playing, on the yellow wall at Mailala" class="gallery-img" loading="lazy">
+            <img src="https://user.uploads.dev/file/f10419589c8113b97d4a48ae263db72a.jpg" alt="The Mailala menu board: Good Vibes, Big Flavors, Full Belly, Till Late" class="gallery-img" loading="lazy">
+            <img src="https://user.uploads.dev/file/880d30dc3f5d42f4587ded1c3541dad4.jpg" alt="The Jamaican Catering sign on the yellow wall — jerk chicken, curry goat, oxtail" class="gallery-img" loading="lazy">
+            <img src="https://user.uploads.dev/file/08714813e4b88da142cceb572954ec98.jpg" alt="The sign in the restroom: drug use is strictly prohibited" class="gallery-img" loading="lazy">
+            <img src="https://user.uploads.dev/file/19b9e769e4df8687d1a1107f48ed7665.jpg" alt="The Say No to Drugs poster on the wall at Mailala" class="gallery-img" loading="lazy">
+            <img src="https://user.uploads.dev/file/39c59cf17556bee1ef3a6f06fc2fb7f2.jpg" alt="A guest with a folding fan in the bar at Mailala" class="gallery-img" loading="lazy">
+        </div>
+    </section>
+
+    <section class="container" style="margin-top: 80px;">
+        <div class="highlight-box">
+            <h2>Roots, Rock and Reggae</h2>
+            <p>Our rooftop bar is the heart of the house. Enjoy live music nights, handcrafted cocktails, and cold beers with the absolute best view of the lane. Whether you're here for a pub crawl or a quiet drink, the vibe is always Irie.</p>
+        </div>
+    </section>
+
+    <section class="container" style="margin-top: 80px;">
+        <span class="section-label">Guest Experience</span>
+        <h2 class="section-title">What Our Guests Say</h2>
+        <!-- Placeholder testimonials to be replaced by real guest words -->
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p>"The best vibe in Saigon. Loved the rooftop and the jerk chicken was incredible!"</p>
+                <span class="testimonial-author">Mark, UK</span>
+            </div>
+            <div class="testimonial-card">
+                <p>"Met so many amazing people here. The female dorm felt very safe and welcoming."</p>
+                <span class="testimonial-author">Sarah, Australia</span>
+            </div>
+            <div class="testimonial-card">
+                <p>"A true hidden gem. The music, the people, and the balcony views are just perfect."</p>
+                <span class="testimonial-author">Elena, Italy</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="margin-top: 80px;">
+        <span class="section-label">Good to Know</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-list">
+            <details>
+                <summary>What is your drug policy?</summary>
+                <div class="faq-content">We are a drug-free sanctuary. We ask all our guests to say no to drugs to keep the environment healthy and positive for everyone.</div>
+            </details>
+            <details>
+                <summary>How do I pre-order the Jerk Chicken?</summary>
+                <div class="faq-content">You
+<div class="faq-content">The best way to secure your meal is via WhatsApp. Message us at +84 768 701 106 to let us know when you'll be arriving so we can grill it fresh for you.</div>
+            </details>
+            <details>
+                <summary>Do you have shared facilities?</summary>
+                <div class="faq-content">Yes, we have a shared kitchen and a common room where guests from all over the world connect, cook, and relax.</div>
+            </details>
+            <details>
+                <summary>What activities are available?</summary>
+                <div class="faq-content">We organize pub crawls and have something happening every single night, from live music on the roof to social gatherings in the common area.</div>
+            </details>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>MAILALA</h3>
+                    <p class="footer-address">
+                        175/16 Pham Ngu Lao<br>
+                        District 1, Saigon<br>
+                        Vietnam
+                    </p>
+                </div>
+                <div class="footer-contact">
+                    <h3>Get In Touch</h3>
+                    <p>Ready for the vibe? Message us directly.</p>
+                    <a href="https://wa.me/84768701106" class="cta-button" style="margin-top: 1rem; display: inline-block;">WhatsApp / phone +84 768 701 106</a>
+                </div>
+                <div class="footer-map">
+                    <div class="map-container">
+                        <svg width="100%" height="100%" viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" style="background: #14281c; color: #6f7f74;">
+                            <rect width="400" height="250" fill="#14281c" />
+                            <path d="M100,50 L150,120 L200,40 L300,180" stroke="#444" stroke-width="2" fill="none" />
+                            <circle cx="150" cy="120" r="5" fill="var(--gold)" />
+                            <text x="160" y="125" fill="var(--gold)" font-family="Inter" font-size="12">175/16 Pham Ngu Lao</text>
+                            <text x="34" y="240" fill="#6f7f74" font-family="Inter" font-size="10">Map visualization - Visit us in District 1</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; <script>document.write(new Date().getFullYear())</script> MAILALA Reggae Hostel & Rooftop Bar. Love Up · Bless Up · Irie Up · Big Up.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchors
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

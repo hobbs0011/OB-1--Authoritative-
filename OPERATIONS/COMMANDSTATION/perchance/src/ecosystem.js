@@ -30,8 +30,8 @@
     ["cap.voiceself",  "capture", "Teacher voice notes / dictation", "built", "mic dictation (Web Speech) · src/app.js", "handsfree note-taking mid-lesson"],
     ["cap.attendance", "capture", "Attendance / presence capture", "missing", "—", "cheapest high-value signal in any classroom"],
     ["cap.scores",     "capture", "Quiz / test / exit-ticket result intake", "missing", "—", "the objective half of the grade"],
-    ["cap.curriculum", "capture", "Syllabus / textbook TOC ingestion", "missing", "—", "needed to judge coverage, not just activity"],
-    ["cap.home",       "capture", "Home/parent input (practice logs, requests)", "partial", "timmy-portal (worker)", "lives in the portal, not yet flowing into the evaluator"],
+    ["cap.curriculum", "capture", "Syllabus / textbook TOC ingestion", "built", "/curriculum /curriculum import · src/curriculum.js", "the school's own pacing guides, parsed — PRIMARY grade 1-5 (Ecogreen) and SECONDARY grade 6-9, every book, every section; a newer .xlsx is ingested in the browser. /curriculum scope holds whose books and whose periods they are"],
+    ["cap.home",       "capture", "Home/parent input (practice logs, requests)", "partial", "retired 2026-09-22 (client dropped)", "lives in the portal, not yet flowing into the evaluator"],
     ["cap.segment",    "capture", "Lesson/topic segmentation with timestamps", "partial", "part indices · src/audio-split.js", "parts exist; topic boundaries do not"],
 
     /* ---- ANALYSIS ---- */
@@ -44,11 +44,11 @@
     ["ana.fluency",    "analysis", "Fluency metrics: words/min, pause ratio, repairs", "partial", "silence map · src/audio-split.js", "the pause map is the primitive; the metrics are unbuilt"],
     ["ana.pronounce",  "analysis", "Pronunciation / phoneme assessment", "missing", "—", "needs audio scoring, not just text"],
     ["ana.trend",      "analysis", "Growth trends per student per skill over time", "partial", "portal progress bars", "not in the evaluator; no term-level roll-up"],
-    ["ana.coverage",   "analysis", "Coverage vs syllabus: what was taught, what was skipped", "missing", "—", "answers the parent question 'what did we pay for?'"],
+    ["ana.coverage",   "analysis", "Coverage vs syllabus: what was taught, what was skipped", "built", "/coverage · src/curriculum.js", "evidence-driven, never assumed: the guide's sections against the client's transcripts + summaries — counted over the sovereign's OWN sections (the teaching scope), with everything else reported beside them"],
     ["ana.authorship", "analysis", "Authorship/AI-origin check on submitted work", "missing", "—", "increasingly required in schools"],
     ["ana.question",   "analysis", "Comprehension question generation from the lesson", "missing", "—", "turns evidence into the next lesson's material"],
     ["ana.identity",   "analysis", "Longitudinal identity (same student across classes/aliases)", "missing", "—", "without it growth data fractures"],
-    ["ana.translate",  "analysis", "Bilingual glossing / translation (EN↔VN)", "partial", "flashcards in timmy-portal", "parents read in their first language"],
+    ["ana.translate",  "analysis", "Bilingual glossing / translation (EN↔VN)", "partial", "retired 2026-09-22 (client dropped)", "parents read in their first language"],
 
     /* ---- JUDGEMENT ---- */
     ["jud.evidence",   "judgement", "Evidence-sufficiency gate (fail closed when thin)", "built", "TESTUDO gate · src/playbooks.js", "thin evidence is stated, never papered over"],
@@ -100,7 +100,7 @@
     ["gov.retention",  "governance", "Retention policy + scheduled deletion", "missing", "—", "how long may a child's recording live?"],
     ["gov.pii",        "governance", "PII minimisation / redaction in transcripts", "missing", "—", "names, addresses, faces"],
     ["gov.residency",  "governance", "Data residency / localisation (VN PDPD)", "missing", "—", "the operator is in Vietnam; students are minors"],
-    ["gov.access",     "governance", "Access control on evidence (who may read a minor's file)", "partial", "PIN in timmy-portal", "the evaluator app has no gate"],
+    ["gov.access",     "governance", "Access control on evidence (who may read a minor's file)", "partial", "retired 2026-09-22 (client dropped)", "the evaluator app has no gate"],
     ["gov.moderate",   "governance", "Moderation of uploaded media", "missing", "upload-plugin fileInfo API", "the API exists and is unused"],
     ["gov.disclose",   "governance", "AI-assistance disclosure to parents/schools", "missing", "—", "say plainly that a machine helped"],
     ["gov.human",      "governance", "Human sign-off required for high-stakes output", "partial", "doctrine only (Audit/DICTATOR)", "no enforced signature"],
@@ -111,8 +111,8 @@
 
     /* ---- LEARNING LOOP ---- */
     ["lrn.practice",   "learning", "Practice generation from the student's own errors", "missing", "—", "evaluation that generates the next drill"],
-    ["lrn.srs",        "learning", "Spaced-repetition scheduling of vocabulary", "missing", "flashcards in timmy-portal", "cards exist without scheduling"],
-    ["lrn.gap",        "learning", "Curriculum gap analysis (covered vs required)", "missing", "—", "what the class still needs"],
+    ["lrn.srs",        "learning", "Spaced-repetition scheduling of vocabulary", "missing", "retired 2026-09-22 (client dropped)", "cards exist without scheduling"],
+    ["lrn.gap",        "learning", "Curriculum gap analysis (covered vs required)", "built", "/coverage · src/curriculum.js", "the same engine read the other way: the sections the record has no evidence of are the next lessons"],
     ["lrn.plan",       "learning", "Lesson planning derived from past evaluations", "missing", "—", "the loop closes here"],
     ["lrn.adaptive",   "learning", "Adaptive difficulty for the next lesson", "missing", "—", "no two classes need the same lesson"],
     ["lrn.peer",       "learning", "Peer / self assessment workflows", "missing", "—", "scales teacher attention"],
