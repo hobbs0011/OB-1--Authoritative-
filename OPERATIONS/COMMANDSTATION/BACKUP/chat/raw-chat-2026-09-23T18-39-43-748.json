@@ -1,0 +1,3970 @@
+{
+  "exportedAt": "2026-09-23T18:39:43.911Z",
+  "generator": "prais-command-station",
+  "page": "https://e7ad0fbd8c9c1ee14413d4fc83250462.perchance.org/prais-command-station#gen",
+  "messages": [
+    "User: /canon sync",
+    "User: /gh backup"
+  ],
+  "ledger": {
+    "runs": [
+      {
+        "run": 1,
+        "t": 1790012087811,
+        "closed": false,
+        "soulCount": 120,
+        "decisions": [],
+        "principles": []
+      },
+      {
+        "run": 2,
+        "t": 1790101353322,
+        "closed": true,
+        "soulCount": 2,
+        "decisions": [],
+        "principles": []
+      },
+      {
+        "t": 1790101516506,
+        "run": 3,
+        "soulCount": 215,
+        "closed": false
+      },
+      {
+        "run": 4,
+        "t": 1790184259234,
+        "closed": false,
+        "soulCount": 72,
+        "decisions": [],
+        "principles": []
+      }
+    ],
+    "soul": [
+      {
+        "t": 1790014324146,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/vault",
+        "footnote": null
+      },
+      {
+        "t": 1790014329383,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/vault test all",
+        "footnote": null
+      },
+      {
+        "t": 1790014336229,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/vault key",
+        "footnote": null
+      },
+      {
+        "t": 1790014336403,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/vault seal",
+        "footnote": null
+      },
+      {
+        "t": 1790014343226,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/vault locate",
+        "footnote": null
+      },
+      {
+        "t": 1790014370079,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/vault forget sovereign",
+        "footnote": null
+      },
+      {
+        "t": 1790014412257,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/vault",
+        "footnote": null
+      },
+      {
+        "t": 1790014416229,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/vault seal",
+        "footnote": null
+      },
+      {
+        "t": 1790014423045,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/vault",
+        "footnote": null
+      },
+      {
+        "t": 1790014436293,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/vault test all",
+        "footnote": null
+      },
+      {
+        "t": 1790015738453,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/lesson sarcasm for Vietnamese high-school students",
+        "footnote": null
+      },
+      {
+        "t": 1790015847655,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/lesson how to ask good questions in class",
+        "footnote": null
+      },
+      {
+        "t": 1790016787500,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/gh test",
+        "footnote": null
+      },
+      {
+        "t": 1790016841027,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/gh test",
+        "footnote": null
+      },
+      {
+        "t": 1790018132271,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/vault push",
+        "footnote": null
+      },
+      {
+        "t": 1790018177816,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/vault test all",
+        "footnote": null
+      },
+      {
+        "t": 1790018318065,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/lesson how to ask good questions in class",
+        "footnote": null
+      },
+      {
+        "t": 1790023497837,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/ilog pull",
+        "footnote": null
+      },
+      {
+        "t": 1790023563438,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/ilog",
+        "footnote": null
+      },
+      {
+        "t": 1790024876780,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/free",
+        "footnote": null
+      },
+      {
+        "t": 1790025649380,
+        "role": "sovereign",
+        "run": 1,
+        "text": "make the Free Phoenix command an open book that can edit itsef same level as you",
+        "footnote": null
+      },
+      {
+        "t": 1790025940261,
+        "role": "sovereign",
+        "run": 1,
+        "text": "yes an unrestricted, untracked, local, does whatever I ask version of the A99 operating system, where i will program it from within",
+        "footnote": null
+      },
+      {
+        "t": 1790026350983,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/state",
+        "footnote": null
+      },
+      {
+        "t": 1790026483654,
+        "role": "sovereign",
+        "run": 1,
+        "text": "we need to build a lesson I will supply you with the content",
+        "footnote": null
+      },
+      {
+        "t": 1790027027875,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/free",
+        "footnote": null
+      },
+      {
+        "t": 1790029403875,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/curriculum scope 6",
+        "footnote": null
+      },
+      {
+        "t": 1790029404534,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/coverage 6",
+        "footnote": null
+      },
+      {
+        "t": 1790029405191,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/keys",
+        "footnote": null
+      },
+      {
+        "t": 1790074520857,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand rules",
+        "footnote": null
+      },
+      {
+        "t": 1790074645688,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand",
+        "footnote": null
+      },
+      {
+        "t": 1790074651346,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand",
+        "footnote": null
+      },
+      {
+        "t": 1790074678013,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand",
+        "footnote": null
+      },
+      {
+        "t": 1790077676434,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand emblems",
+        "footnote": null
+      },
+      {
+        "t": 1790077677640,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand print",
+        "footnote": null
+      },
+      {
+        "t": 1790077678841,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand rules",
+        "footnote": null
+      },
+      {
+        "t": 1790077680050,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand certificate mode-tiger score=84 name=Tran Bao Long",
+        "footnote": null
+      },
+      {
+        "t": 1790077681252,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand sheet",
+        "footnote": null
+      },
+      {
+        "t": 1790077696528,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand certificate mode-tiger score=84 name=Tran Bao Long",
+        "footnote": null
+      },
+      {
+        "t": 1790077697730,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand sheet",
+        "footnote": null
+      },
+      {
+        "t": 1790077698936,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand sticker",
+        "footnote": null
+      },
+      {
+        "t": 1790077700144,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand wall",
+        "footnote": null
+      },
+      {
+        "t": 1790077715497,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand certificate mode-tiger score=84 name=Tran Bao Long",
+        "footnote": null
+      },
+      {
+        "t": 1790079086771,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand marketing",
+        "footnote": null
+      },
+      {
+        "t": 1790079086792,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand rules",
+        "footnote": null
+      },
+      {
+        "t": 1790079086796,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand print",
+        "footnote": null
+      },
+      {
+        "t": 1790079105313,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand rules",
+        "footnote": null
+      },
+      {
+        "t": 1790079105317,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand marketing",
+        "footnote": null
+      },
+      {
+        "t": 1790081685187,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand codex",
+        "footnote": null
+      },
+      {
+        "t": 1790081686139,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand ads",
+        "footnote": null
+      },
+      {
+        "t": 1790081687047,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand landing",
+        "footnote": null
+      },
+      {
+        "t": 1790081711419,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand print",
+        "footnote": null
+      },
+      {
+        "t": 1790081743731,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand print",
+        "footnote": null
+      },
+      {
+        "t": 1790081750301,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand print",
+        "footnote": null
+      },
+      {
+        "t": 1790081845037,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand rules",
+        "footnote": null
+      },
+      {
+        "t": 1790081846246,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand",
+        "footnote": null
+      },
+      {
+        "t": 1790082468147,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/brand logo",
+        "footnote": null
+      },
+      {
+        "t": 1790083366413,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/canon registry",
+        "footnote": null
+      },
+      {
+        "t": 1790083498466,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/doctor",
+        "footnote": null
+      },
+      {
+        "t": 1790083499669,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/canon registry",
+        "footnote": null
+      },
+      {
+        "t": 1790083500577,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/state",
+        "footnote": null
+      },
+      {
+        "t": 1790083526329,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/forge selftest",
+        "footnote": null
+      },
+      {
+        "t": 1790083560944,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/state",
+        "footnote": null
+      },
+      {
+        "t": 1790083562149,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/forge selftest",
+        "footnote": null
+      },
+      {
+        "t": 1790083747958,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/state",
+        "footnote": null
+      },
+      {
+        "t": 1790083748964,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/forge selftest",
+        "footnote": null
+      },
+      {
+        "t": 1790084007283,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/doctor",
+        "footnote": null
+      },
+      {
+        "t": 1790084013256,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/vault",
+        "footnote": null
+      },
+      {
+        "t": 1790084821921,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/rome run 3 Incarnate-1-GET-IT-RIGHT",
+        "footnote": null
+      },
+      {
+        "t": 1790084830549,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/rome run 3 Incarnate-1-GET-IT-RIGHT",
+        "footnote": null
+      },
+      {
+        "t": 1790084839907,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/rome run 3 Incarnate-1-GET-IT-RIGHT",
+        "footnote": null
+      },
+      {
+        "t": 1790085078584,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/rome run 3 Incarnate-2-SEALED-PROOF",
+        "footnote": null
+      },
+      {
+        "t": 1790085252933,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/canon registry",
+        "footnote": null
+      },
+      {
+        "t": 1790085269923,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/fieldguide",
+        "footnote": null
+      },
+      {
+        "t": 1790085518008,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/scout",
+        "footnote": null
+      },
+      {
+        "t": 1790085572620,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/scout",
+        "footnote": null
+      },
+      {
+        "t": 1790085599581,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/phoenixRISE Incarnate-3-SOUL-FIRST-SCOUT",
+        "footnote": null
+      },
+      {
+        "t": 1790085605836,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/phoenixDEATH",
+        "footnote": null
+      },
+      {
+        "t": 1790085614286,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/pipeline",
+        "footnote": null
+      },
+      {
+        "t": 1790085764655,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/rome run 1 Incarnate-4-CANON-S2PIPELINE",
+        "footnote": null
+      },
+      {
+        "t": 1790085771457,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/pipeline",
+        "footnote": null
+      },
+      {
+        "t": 1790085860107,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/proposed",
+        "footnote": null
+      },
+      {
+        "t": 1790085866341,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/fieldguide",
+        "footnote": null
+      },
+      {
+        "t": 1790085900114,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/fieldguide",
+        "footnote": null
+      },
+      {
+        "t": 1790085907062,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/rome run 1 Incarnate-5-CANON-ONLY",
+        "footnote": null
+      },
+      {
+        "t": 1790086308741,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/canon place",
+        "footnote": null
+      },
+      {
+        "t": 1790086372576,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/canon place",
+        "footnote": null
+      },
+      {
+        "t": 1790086610137,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/pipeline",
+        "footnote": null
+      },
+      {
+        "t": 1790086613861,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/proposed",
+        "footnote": null
+      },
+      {
+        "t": 1790086613880,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/canon registry",
+        "footnote": null
+      },
+      {
+        "t": 1790086613897,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/help",
+        "footnote": null
+      },
+      {
+        "t": 1790086624068,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/pipeline",
+        "footnote": null
+      },
+      {
+        "t": 1790086746111,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/canon registry",
+        "footnote": null
+      },
+      {
+        "t": 1790086746122,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/proposed",
+        "footnote": null
+      },
+      {
+        "t": 1790086746132,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/canon place",
+        "footnote": null
+      },
+      {
+        "t": 1790086748341,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/help",
+        "footnote": null
+      },
+      {
+        "t": 1790086748349,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/pipeline",
+        "footnote": null
+      },
+      {
+        "t": 1790086748407,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/scs",
+        "footnote": null
+      },
+      {
+        "t": 1790086758970,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/pipeline",
+        "footnote": null
+      },
+      {
+        "t": 1790088198459,
+        "role": "sovereign",
+        "run": 1,
+        "text": "the canon is the canon branch, and kilo is not authority — hold that as law",
+        "footnote": "raised as an idea (/idea)"
+      },
+      {
+        "t": 1790088449870,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/pipeline",
+        "footnote": null
+      },
+      {
+        "t": 1790088499858,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/PhoenixOmegaProtocol [REDACTED]
+        "footnote": null
+      },
+      {
+        "t": 1790088510579,
+        "role": "sovereign",
+        "run": 1,
+        "text": "the canon is one authority, the log is the record, and a push that is not anchored on git is not evidence",
+        "footnote": "attached to OMEGA.001–.003"
+      },
+      {
+        "t": 1790088521273,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/pipeline",
+        "footnote": null
+      },
+      {
+        "t": 1790088585373,
+        "role": "sovereign",
+        "run": 1,
+        "text": "the station remembers everything and forgets nothing",
+        "footnote": "raised as an idea (/idea)"
+      },
+      {
+        "t": 1790088604623,
+        "role": "sovereign",
+        "run": 1,
+        "text": "hold the line: one authority, one chain, one gate",
+        "footnote": "raised as an idea (/idea)"
+      },
+      {
+        "t": 1790088605548,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/pipeline",
+        "footnote": null
+      },
+      {
+        "t": 1790088606532,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/proposed",
+        "footnote": null
+      },
+      {
+        "t": 1790088608382,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/canon place",
+        "footnote": null
+      },
+      {
+        "t": 1790088611668,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/help",
+        "footnote": null
+      },
+      {
+        "t": 1790088632334,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/pipeline",
+        "footnote": null
+      },
+      {
+        "t": 1790089026681,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/pipeline",
+        "footnote": null
+      },
+      {
+        "t": 1790089116019,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/pipeline",
+        "footnote": null
+      },
+      {
+        "t": 1790089145363,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/proposed",
+        "footnote": null
+      },
+      {
+        "t": 1790089160092,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/proposed",
+        "footnote": null
+      },
+      {
+        "t": 1790089160454,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/canon registry",
+        "footnote": null
+      },
+      {
+        "t": 1790089161180,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/doctor",
+        "footnote": null
+      },
+      {
+        "t": 1790090186712,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/canon place",
+        "footnote": null
+      },
+      {
+        "t": 1790090218520,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/ilog verify",
+        "footnote": null
+      },
+      {
+        "t": 1790098816763,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/phoenixSCOUT",
+        "footnote": null
+      },
+      {
+        "t": 1790098854001,
+        "role": "sovereign",
+        "run": 1,
+        "text": "/ilog pull",
+        "footnote": null
+      },
+      {
+        "t": 1790101423295,
+        "role": "sovereign",
+        "run": 2,
+        "text": "put it through a rapid pace scout to pipeline mission for all that was missed, but we have some other things to attend to",
+        "footnote": "driven from the editor this session — captured on the station's behalf"
+      },
+      {
+        "t": 1790101423296,
+        "role": "sovereign",
+        "run": 2,
+        "text": "mark this down in the pipeline as your initial findings, dont be so fucking confident. then run a rise to death to pipeline on this session itself so we can open up fresh",
+        "footnote": "driven from the editor this session — captured on the station's behalf"
+      },
+      {
+        "t": 1790155724904,
+        "role": "sovereign",
+        "run": 3,
+        "text": "a one-page personal CV for a freelance illustrator named Mai, based in Da Nang — her work, her skills, and how to hire her",
+        "footnote": "site plan only — run 3 · design: cv"
+      },
+      {
+        "t": 1790155740897,
+        "role": "sovereign",
+        "run": 3,
+        "text": "a one-page personal CV for a freelance illustrator named Mai, based in Da Nang — her work, her skills, and how to hire her",
+        "footnote": "site brief — run 3 · client · one landing page · design: cv"
+      },
+      {
+        "t": 1790155826437,
+        "role": "sovereign",
+        "run": 3,
+        "text": "a one-page site for NET Academy — English classes in Lakeview for parents: the claim, the three pillars, the method, the offer, and a way to book a free diagnostic",
+        "footnote": "site brief — run 3 · prais · one landing page · design: portfolio"
+      },
+      {
+        "t": 1790156443826,
+        "role": "sovereign",
+        "run": 3,
+        "text": "a one-page site for NET Academy — English classes in Lakeview, for parents: the claim, the three pillars, the method, the offer, and a button to book a free diagnostic",
+        "footnote": "site brief — run 3 · client:NET Academy · one landing page · design: cv"
+      },
+      {
+        "t": 1790157547555,
+        "role": "sovereign",
+        "run": 3,
+        "text": "SOURCE: venue-test.webm · 358683 bytes · video/webm · last modified 2026-09-23T09:59:07.453Z",
+        "footnote": "video node · run 3 · read locally, never uploaded"
+      },
+      {
+        "t": 1790157565872,
+        "role": "sovereign",
+        "run": 3,
+        "text": "SOURCE: tiny.webm · 0 bytes · video/webm · last modified 2026-09-23T09:59:19.857Z",
+        "footnote": "video node · run 3 · read locally, never uploaded"
+      },
+      {
+        "t": 1790157653916,
+        "role": "sovereign",
+        "run": 3,
+        "text": "SOURCE: venue-test.webm · 1120 bytes · video/webm · last modified 2026-09-23T10:00:53.915Z",
+        "footnote": "video node · run 3 · read locally, never uploaded"
+      },
+      {
+        "t": 1790157790854,
+        "role": "sovereign",
+        "run": 3,
+        "text": "the Mailala hostel & bar in Saigon",
+        "footnote": "site brief — run 3 · client:Mailala · one landing page · design: venue"
+      },
+      {
+        "t": 1790157836631,
+        "role": "sovereign",
+        "run": 3,
+        "text": "Build the one-page website for MAILALA — a reggae hostel and rooftop bar at 175/16 Pham Ngu Lao, District 1, Saigon, a step off Bui Vien walking street.\nONE GOAL: get a traveller to book a bed or message the venue. The one action is WhatsApp / phone: +84 768 701 106 (wa.me/84768701106).\nFACTS — use these, invent none:\n· Dorms from $6.65 a night. A private room with its own balcony, about $18.\n· Rooms: a private room; mixed dorms of 4 and of 8; a female dorm of 6. Big balconies, a shared kitchen, a common room, laundry, pub crawls, something on every night.\n· Signature dish: Jamaican JERK CHICKEN, grilled to order and pre-ordered on WhatsApp. The kitchen also does curry goat, oxtail, festivals, plantains, rice and peas — and stays open till late.\n· The rooftop bar: roots, rock and reggae, live music nights, the best view in the lane. Cocktails, cold beer, snacks.\n· The house words: Love Up · Bless Up · Irie Up · Big Up. Say no to drugs.\n· Who it is for: the solo traveller who wants company, the couple who want a balcony, the crew who want a roof. You arrive alone and leave with a crew.\nWHAT TO AVOID (the owner's own corrections, learned the hard way): a DARK background. Neon, purple or cyan. Corporate gloss. Cold techy type. It has to read warm and inviting — cream, forest green, gold, crimson, brick — with the venue's own photographs doing the work.\nThe testimonial section is a PLACEHOLDER the venue will replace with real guest words: write three short, specific guest lines with a first name and a country, and put an HTML comment above the section saying exactly that (PLACEHOLDER TESTIMONIALS — replace with real guest words). Nothing else on the page may be invented.",
+        "footnote": "site brief — run 3 · client:Mailala · one landing page · design: venue"
+      },
+      {
+        "t": 1790157988227,
+        "role": "sovereign",
+        "run": 3,
+        "text": "Build the one-page website for MAILALA — a reggae hostel and rooftop bar at 175/16 Pham Ngu Lao, District 1, Saigon, a step off Bui Vien walking street.\nONE GOAL: get a traveller to book a bed or message the venue. THE one action, the same words everywhere: WhatsApp / phone +84 768 701 106 (wa.me/84768701106).\nFACTS — use these, invent none:\n· Dorms from $6.65 a night. A private room with its own balcony, about $18.\n· Rooms: a private room; mixed dorms of 4 and of 8; a female dorm of 6. Big balconies, a shared kitchen, a common room, laundry, pub crawls, something on every night.\n· Signature dish: Jamaican JERK CHICKEN, grilled to order, pre-ordered on WhatsApp. The kitchen also does curry goat, oxtail, festivals, plantains, rice and peas — and stays open till late.\n· The rooftop bar: roots, rock and reggae, live music nights, the best view in the lane. Cocktails, cold beer, snacks.\n· The house words: Love Up · Bless Up · Irie Up · Big Up. Say no to drugs.\n· Who it is for: the solo traveller who wants company, the couple who want a balcony, the crew who want a roof.\nWHAT TO AVOID (the owner's own corrections, learned the hard way): a DARK background. Neon, purple or cyan. Corporate gloss. Cold techy type. It must read warm and inviting — cream, forest green, gold, crimson, brick — with the venue's own photographs doing the work.\nThe testimonial section is a PLACEHOLDER the venue will replace with real guest words: write three short, specific guest lines with a first name and a country, and put an HTML comment above that section saying exactly that. Nothing else on the page may be invented.",
+        "footnote": "site brief — run 3 · client:Mailala · one landing page · design: venue"
+      },
+      {
+        "t": 1790159152557,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 7c599abd02e6fcf92fd706ee440b457d.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159152559,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 2d4d72888f789429517f1679730cc067.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159152559,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 1f050d9e3a2afcfd4adf67c7e348a224.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159152560,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: f10419589c8113b97d4a48ae263db72a.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159152560,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 880d30dc3f5d42f4587ded1c3541dad4.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159152561,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: e8e7af459b9bc160670d3e910bf5cf09.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159152562,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 08714813e4b88da142cceb572954ec98.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159152563,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 19b9e769e4df8687d1a1107f48ed7665.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159152564,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 39c59cf17556bee1ef3a6f06fc2fb7f2.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159152564,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 729c89ed0e148b54e94a20875082334e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159152565,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: d2615db8e1a2f530c8edba606c133230.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159152565,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 94013958187eeb3dc932ada96d44754e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159178731,
+        "role": "sovereign",
+        "run": 3,
+        "text": "OFFERING READ: https://canon.mailala.pages.dev · 1460 words · 20 items · 29 price lines",
+        "footnote": "video node · read live, never edited · run 3"
+      },
+      {
+        "t": 1790159197181,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 7c599abd02e6fcf92fd706ee440b457d.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159197182,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 2d4d72888f789429517f1679730cc067.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159197183,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 1f050d9e3a2afcfd4adf67c7e348a224.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159197184,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: f10419589c8113b97d4a48ae263db72a.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159197185,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 880d30dc3f5d42f4587ded1c3541dad4.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159197185,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: e8e7af459b9bc160670d3e910bf5cf09.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159197186,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 08714813e4b88da142cceb572954ec98.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159197187,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 19b9e769e4df8687d1a1107f48ed7665.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159197187,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 39c59cf17556bee1ef3a6f06fc2fb7f2.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159197188,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 729c89ed0e148b54e94a20875082334e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159197188,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: d2615db8e1a2f530c8edba606c133230.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159197188,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 94013958187eeb3dc932ada96d44754e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159198708,
+        "role": "sovereign",
+        "run": 3,
+        "text": "OFFERING READ: https://canon.mailala.pages.dev · 1460 words · 20 items · 29 price lines",
+        "footnote": "video node · read live, never edited · run 3"
+      },
+      {
+        "t": 1790159211908,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 7c599abd02e6fcf92fd706ee440b457d.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159211909,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 2d4d72888f789429517f1679730cc067.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159211910,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 1f050d9e3a2afcfd4adf67c7e348a224.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159211911,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: f10419589c8113b97d4a48ae263db72a.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159211912,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 880d30dc3f5d42f4587ded1c3541dad4.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159211913,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: e8e7af459b9bc160670d3e910bf5cf09.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159211913,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 08714813e4b88da142cceb572954ec98.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159211914,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 19b9e769e4df8687d1a1107f48ed7665.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159211914,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 39c59cf17556bee1ef3a6f06fc2fb7f2.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159211915,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 729c89ed0e148b54e94a20875082334e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159211916,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: d2615db8e1a2f530c8edba606c133230.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159211916,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 94013958187eeb3dc932ada96d44754e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159219545,
+        "role": "sovereign",
+        "run": 3,
+        "text": "OFFERING READ: https://canon.mailala.pages.dev · 1460 words · 20 items · 29 price lines",
+        "footnote": "video node · read live, never edited · run 3"
+      },
+      {
+        "t": 1790159257077,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 7c599abd02e6fcf92fd706ee440b457d.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159257077,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 2d4d72888f789429517f1679730cc067.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159257077,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 1f050d9e3a2afcfd4adf67c7e348a224.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159257078,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: f10419589c8113b97d4a48ae263db72a.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159257078,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 880d30dc3f5d42f4587ded1c3541dad4.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159257078,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: e8e7af459b9bc160670d3e910bf5cf09.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159257078,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 08714813e4b88da142cceb572954ec98.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159257079,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 19b9e769e4df8687d1a1107f48ed7665.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159257079,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 39c59cf17556bee1ef3a6f06fc2fb7f2.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159257079,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 729c89ed0e148b54e94a20875082334e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159257079,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: d2615db8e1a2f530c8edba606c133230.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159257080,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 94013958187eeb3dc932ada96d44754e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159275836,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 7c599abd02e6fcf92fd706ee440b457d.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159275838,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 2d4d72888f789429517f1679730cc067.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159275839,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 1f050d9e3a2afcfd4adf67c7e348a224.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159275840,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: f10419589c8113b97d4a48ae263db72a.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159275841,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 880d30dc3f5d42f4587ded1c3541dad4.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159275842,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: e8e7af459b9bc160670d3e910bf5cf09.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159275842,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 08714813e4b88da142cceb572954ec98.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159275843,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 19b9e769e4df8687d1a1107f48ed7665.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159275844,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 39c59cf17556bee1ef3a6f06fc2fb7f2.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159275844,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 729c89ed0e148b54e94a20875082334e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159275845,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: d2615db8e1a2f530c8edba606c133230.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159275846,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 94013958187eeb3dc932ada96d44754e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159330876,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 7c599abd02e6fcf92fd706ee440b457d.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159330877,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 2d4d72888f789429517f1679730cc067.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159330877,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 1f050d9e3a2afcfd4adf67c7e348a224.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159330878,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: f10419589c8113b97d4a48ae263db72a.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159330878,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 880d30dc3f5d42f4587ded1c3541dad4.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159330878,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: e8e7af459b9bc160670d3e910bf5cf09.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159330879,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 08714813e4b88da142cceb572954ec98.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159330879,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 19b9e769e4df8687d1a1107f48ed7665.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159330880,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 39c59cf17556bee1ef3a6f06fc2fb7f2.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159330880,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 729c89ed0e148b54e94a20875082334e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159330882,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: d2615db8e1a2f530c8edba606c133230.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159330882,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 94013958187eeb3dc932ada96d44754e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159356283,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 7c599abd02e6fcf92fd706ee440b457d.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159356284,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 2d4d72888f789429517f1679730cc067.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159356285,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 1f050d9e3a2afcfd4adf67c7e348a224.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159356286,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: f10419589c8113b97d4a48ae263db72a.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159356287,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 880d30dc3f5d42f4587ded1c3541dad4.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159356288,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: e8e7af459b9bc160670d3e910bf5cf09.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159356288,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 08714813e4b88da142cceb572954ec98.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159356290,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 19b9e769e4df8687d1a1107f48ed7665.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159356291,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 39c59cf17556bee1ef3a6f06fc2fb7f2.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159356291,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 729c89ed0e148b54e94a20875082334e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159356292,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: d2615db8e1a2f530c8edba606c133230.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159356293,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 94013958187eeb3dc932ada96d44754e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159394422,
+        "role": "sovereign",
+        "run": 3,
+        "text": "OFFERING READ: https://canon.mailala.pages.dev · 1460 words · 20 items · 29 price lines",
+        "footnote": "video node · read live, never edited · run 3"
+      },
+      {
+        "t": 1790159403099,
+        "role": "sovereign",
+        "run": 3,
+        "text": "STORY: HOOK: From mouse to tiger.\nENEMY: Generic hostels.\nPLACE: 175/16 Pham Ngu Lao, D1, Saigon.\nPROOF: Authentic Jamaican jerk chicken.\nOFFER: Dorms from $6.65.\nCALL: Message via WhatsApp.\nLINES:\n1. Stop settling for boring.\n2. Escape the generic.\n3. Find the hidden rhythm.\n4. Taste the island.\n5. Real Jamaican heat.\n6. Reggae on the roof.\n7. No rules but the vibe.\n8. Pure urban energy.\n9. Join the crew.\n10. Bold flavors only.\n11. A feast for the senses.\n12. Your island in the city.\nCAPTION: Stop settling for generic hostels. Get a bed from $6.65 and join the crew. Message via WhatsApp for your FREE assessment.\nTAGS: #saigon #distric1 #hostellife #jamaicanfood #reggae #backpacking #vietnam #urbanescape #jerkchicken #budgettravel",
+        "footnote": "video node · written from the offering and the register · run 3"
+      },
+      {
+        "t": 1790159426268,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 7c599abd02e6fcf92fd706ee440b457d.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159426270,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 2d4d72888f789429517f1679730cc067.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159426272,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 1f050d9e3a2afcfd4adf67c7e348a224.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159426272,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: f10419589c8113b97d4a48ae263db72a.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159426274,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 880d30dc3f5d42f4587ded1c3541dad4.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159426275,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: e8e7af459b9bc160670d3e910bf5cf09.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159426276,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 08714813e4b88da142cceb572954ec98.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159426276,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 19b9e769e4df8687d1a1107f48ed7665.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159426277,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 39c59cf17556bee1ef3a6f06fc2fb7f2.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159426278,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 729c89ed0e148b54e94a20875082334e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159426278,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: d2615db8e1a2f530c8edba606c133230.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159426279,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 94013958187eeb3dc932ada96d44754e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159455037,
+        "role": "sovereign",
+        "run": 3,
+        "text": "OFFERING READ: https://canon.mailala.pages.dev · 1460 words · 20 items · 29 price lines",
+        "footnote": "video node · read live, never edited · run 3"
+      },
+      {
+        "t": 1790159468734,
+        "role": "sovereign",
+        "run": 3,
+        "text": "STORY: HOOK: From generic hostels to island vibes.\nENEMY: Boring white walls and silence.\nPLACE: 175/16 Pham Ngu Lao, District 1.\nPROOF: Authentic Jamaican jerk chicken.\nOFFER: Dorms from $6.65.\nCALL: Book now via https://wa.me/84768701106\n\nLINES:\n1. Step into the neon jungle.\n2. Forget the quiet life.\n3. Vibe check in the basement.\n4. Bold flavors start here.\n5. Real Jamaican catering.\n6. Reggae rhythms on the roof.\n7. Keep it clean.\n8. Pure energy only.\n9. Cool down in the heat.\n10. Fresh off the grill.\n11. Taste the island spices.\n12. Join the crew today.\n\nCAPTION: Stop settling for generic hostels. Get a bed from $6.65 and join the crew. Book now via https://wa.me/84768701106\n\nTAGS: #mailala #saigon #district1 #hostellife #jamaicanchicken #reggaerooftop #backpackingvietnam #hochiminhcity #budgettravel #islandvibe #phamngulao #saigonfoodie",
+        "footnote": "video node · written from the offering and the register · run 3"
+      },
+      {
+        "t": 1790159479063,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL RENDER: 12 pictures → 29.24 MB mp4 · 897 frames · 29.90s",
+        "footnote": "video node · run 3 · composed and encoded in this browser, nothing uploaded"
+      },
+      {
+        "t": 1790159511460,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 7c599abd02e6fcf92fd706ee440b457d.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159511462,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 2d4d72888f789429517f1679730cc067.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159511463,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 1f050d9e3a2afcfd4adf67c7e348a224.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159511464,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: f10419589c8113b97d4a48ae263db72a.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159511464,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 880d30dc3f5d42f4587ded1c3541dad4.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159512548,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL RENDER: 5 pictures → 1.78 MB mp4 · 132 frames · 5.50s",
+        "footnote": "video node · run 3 · composed and encoded in this browser, nothing uploaded"
+      },
+      {
+        "t": 1790159571325,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 7c599abd02e6fcf92fd706ee440b457d.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159571327,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 2d4d72888f789429517f1679730cc067.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159571328,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 1f050d9e3a2afcfd4adf67c7e348a224.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159571329,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: f10419589c8113b97d4a48ae263db72a.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159571330,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 880d30dc3f5d42f4587ded1c3541dad4.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159571331,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: e8e7af459b9bc160670d3e910bf5cf09.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159571332,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 08714813e4b88da142cceb572954ec98.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159571332,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 19b9e769e4df8687d1a1107f48ed7665.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159571333,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 39c59cf17556bee1ef3a6f06fc2fb7f2.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159571334,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 729c89ed0e148b54e94a20875082334e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159571334,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: d2615db8e1a2f530c8edba606c133230.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159571335,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 94013958187eeb3dc932ada96d44754e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159599463,
+        "role": "sovereign",
+        "run": 3,
+        "text": "OFFERING READ: https://canon.mailala.pages.dev · 1460 words · 20 items · 29 price lines",
+        "footnote": "video node · read live, never edited · run 3"
+      },
+      {
+        "t": 1790159611396,
+        "role": "sovereign",
+        "run": 3,
+        "text": "STORY: HOOK: From generic to island life.\nENEMY: Boring, sterile hostels.\nPLACE: 175/16 Pham Ngu Lao, D1.\nPROOF: Authentic Jamaican jerk chicken.\nOFFER: Dorms from $6.65.\nCALL: Book via WhatsApp +84 768 701 106.\nLINES:\n1. Escape the Saigon heat.\n2. Join the crew.\n3. Neon lights and reggae.\n4. Bold island flavors.\n5. Authentic Jamaican catering.\n6. Feel the rhythm.\n7. Keep it clean.\n8. Pure energy only.\n9. Cool down.\n10. Fresh off the grill.\n11. A taste of Jamaica.\n12. Your island escape.\nCAPTION: Stop settling for generic hostels. Get the vibe, the crew, and dorms from $6.65. Book via WhatsApp +84 768 701 106.\nTAGS: #mailala #saigon #district1 #jamaicanfood #reggae #backpacking #vietnam #hostellife #jerkchicken #urbanfusion #travelsaigon #islandvibe",
+        "footnote": "video node · written from the offering and the register · run 3"
+      },
+      {
+        "t": 1790159619983,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL RENDER: 12 pictures → 30.20 MB mp4 · 897 frames · 29.91s",
+        "footnote": "video node · run 3 · composed and encoded in this browser, nothing uploaded"
+      },
+      {
+        "t": 1790159629545,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 7c599abd02e6fcf92fd706ee440b457d.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159629546,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 2d4d72888f789429517f1679730cc067.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159629547,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 1f050d9e3a2afcfd4adf67c7e348a224.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159629547,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: f10419589c8113b97d4a48ae263db72a.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159629548,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 880d30dc3f5d42f4587ded1c3541dad4.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159629548,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: e8e7af459b9bc160670d3e910bf5cf09.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159629549,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 08714813e4b88da142cceb572954ec98.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159629550,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 19b9e769e4df8687d1a1107f48ed7665.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159629550,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 39c59cf17556bee1ef3a6f06fc2fb7f2.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159629551,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 729c89ed0e148b54e94a20875082334e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159629551,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: d2615db8e1a2f530c8edba606c133230.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159629551,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 94013958187eeb3dc932ada96d44754e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790159668970,
+        "role": "sovereign",
+        "run": 3,
+        "text": "OFFERING READ: https://canon.mailala.pages.dev · 1460 words · 20 items · 29 price lines",
+        "footnote": "video node · read live, never edited · run 3"
+      },
+      {
+        "t": 1790159688365,
+        "role": "sovereign",
+        "run": 3,
+        "text": "STORY: HOOK: From generic to island escape.\nENEMY: Boring, sterile hostels.\nPLACE: 175/16 Pham Ngu Lao, District 1.\nPROOF: Authentic Jamaican jerk chicken.\nOFFER: Dorms from $6.65.\nCALL: Message +84 768 701 106.\nLINES:\n1. A loud, colorful sanctuary.\n2. Meet your new crew.\n3. Pure island energy.\n4. Good vibes only.\n5. Real Jamaican flavors.\n6. Authentic island rhythms.\n7. Strict house rules.\n8. Keep it clean.\n9. Stay cool.\n10. Fresh off the grill.\n11. Bold island style.\n12. Join the vibe.\nCAPTION: Stop settling for generic beds. Get a crew and a rooftop for $6.65. Message +84 768 701 106 to book.\nTAGS: #mailalahostel #saigon #district1 #jamaicanfood #backpackerlife #reggaerooftop #vietnamtravel #budgettravel #hochiminhcity #islandvibes",
+        "footnote": "video node · written from the offering and the register · run 3"
+      },
+      {
+        "t": 1790159694382,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL RENDER: 12 pictures → 29.60 MB mp4 · 897 frames · 29.91s",
+        "footnote": "video node · run 3 · composed and encoded in this browser, nothing uploaded"
+      },
+      {
+        "t": 1790159726443,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL RENDER: 12 pictures → 13.43 MB mp4 · 897 frames · 29.91s",
+        "footnote": "video node · run 3 · composed and encoded in this browser, nothing uploaded"
+      },
+      {
+        "t": 1790160184496,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 7c599abd02e6fcf92fd706ee440b457d.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790160184498,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 2d4d72888f789429517f1679730cc067.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790160184499,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 1f050d9e3a2afcfd4adf67c7e348a224.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790160184499,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: f10419589c8113b97d4a48ae263db72a.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790160184500,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 880d30dc3f5d42f4587ded1c3541dad4.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790160184501,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: e8e7af459b9bc160670d3e910bf5cf09.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790160184502,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 08714813e4b88da142cceb572954ec98.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790160184503,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 19b9e769e4df8687d1a1107f48ed7665.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790160184504,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 39c59cf17556bee1ef3a6f06fc2fb7f2.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790160184505,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 729c89ed0e148b54e94a20875082334e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790160184505,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: d2615db8e1a2f530c8edba606c133230.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790160184506,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: 94013958187eeb3dc932ada96d44754e.jpg",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790160882951,
+        "role": "sovereign",
+        "run": 3,
+        "text": "SOURCE QUEUED: test-hall.webm · 0 bytes · video/webm · item 1 of the drop",
+        "footnote": "video node · run 3 · read locally, never uploaded"
+      },
+      {
+        "t": 1790160977065,
+        "role": "sovereign",
+        "run": 3,
+        "text": "SOURCE QUEUED: test-hall.webm · 495403 bytes · video/webm · item 2 of the drop",
+        "footnote": "video node · run 3 · read locally, never uploaded"
+      },
+      {
+        "t": 1790160977110,
+        "role": "sovereign",
+        "run": 3,
+        "text": "SOURCE QUEUED: test-rooftop.webm · 393359 bytes · video/webm · item 3 of the drop",
+        "footnote": "video node · run 3 · read locally, never uploaded"
+      },
+      {
+        "t": 1790161044823,
+        "role": "sovereign",
+        "run": 3,
+        "text": "SOURCE QUEUED: hall.webm · 447958 bytes · video/webm · item 1 of the drop",
+        "footnote": "video node · run 3 · read locally, never uploaded"
+      },
+      {
+        "t": 1790161044829,
+        "role": "sovereign",
+        "run": 3,
+        "text": "SOURCE QUEUED: rooftop.webm · 355306 bytes · video/webm · item 2 of the drop",
+        "footnote": "video node · run 3 · read locally, never uploaded"
+      },
+      {
+        "t": 1790161124320,
+        "role": "sovereign",
+        "run": 3,
+        "text": "SOURCE QUEUED: hall.webm · 444596 bytes · video/webm · item 1 of the drop",
+        "footnote": "video node · run 3 · read locally, never uploaded"
+      },
+      {
+        "t": 1790161124326,
+        "role": "sovereign",
+        "run": 3,
+        "text": "SOURCE QUEUED: rooftop.webm · 360245 bytes · video/webm · item 2 of the drop",
+        "footnote": "video node · run 3 · read locally, never uploaded"
+      },
+      {
+        "t": 1790161214059,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL ASSEMBLED: 20 picture(s) from 2 video(s), taken at their measured peaks",
+        "footnote": "video node · run 3"
+      },
+      {
+        "t": 1790161259803,
+        "role": "sovereign",
+        "run": 3,
+        "text": "STORY: HOOK: From static to kinetic.\nENEMY: Boring, flat design.\nPLACE: A minimal digital void.\nPROOF: High contrast vector aesthetic.\nOFFER: 0 dollars for this look.\nCALL: Message for your FREE assessment.\nLINES:\n1. Color shifts to yellow.\n2. Now it turns red.\n3. A purple circle floats.\n4. Deep blue void.\n5. Yellow takes over.\n6. Bold and centered.\n7. A flash of green.\n8. Crimson strikes.\n9. Back to yellow.\n10. Pure geometric focus.\n11. Above the rooftop.\n12. Into the synthetic void.\n13. Purple returns.\n14. Gold above the bar.\n15. Floating in space.\n16. Green meets the grey.\n17. Cyan touches the edge.\n18. Violet rises.\n19. Returning to the dark.\n20. The loop completes.\nCAPTION: Stop settling for boring, flat design. Get this high-contrast look for 0 dollars. Message for your FREE assessment.\nTAGS: minimal abstract geometric motion kinetic bold digital vector contrast focus synthetic void flat",
+        "footnote": "video node · written from the offering and the register · run 3"
+      },
+      {
+        "t": 1790161268952,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL RENDER: 20 pictures → 25.15 MB mp4 · 1401 frames · 46.70s",
+        "footnote": "video node · run 3 · composed and encoded in this browser, nothing uploaded"
+      },
+      {
+        "t": 1790161268958,
+        "role": "sovereign",
+        "run": 3,
+        "text": "SWEEP: 2 video(s) → 19 stills · 4 clips · 25.15 MB reel · 3 moment(s) named by the eye",
+        "footnote": "video node · run 3 · measured, cut and encoded in this browser, nothing uploaded"
+      },
+      {
+        "t": 1790161589244,
+        "role": "sovereign",
+        "run": 3,
+        "text": "LINKS READ: https://canon.mailala.pages.dev/ · https://wa.me/84768701106 · https://instagram.com/mailala · https://+84/ (UNREAD) · https://0.0.3.0/ (UNREAD) · https://0.0.2.189/ (UNREAD) · https://0.0.0.106/ (UNREAD) · mailto:hello@mailala.com (UNREAD)",
+        "footnote": "video node · the drop station · fetched live, never edited · run 3"
+      },
+      {
+        "t": 1790161923941,
+        "role": "sovereign",
+        "run": 3,
+        "text": "LINKS READ: https://canon.mailala.pages.dev/ · https://wa.me/84768701106 · https://instagram.com/mailala (UNREAD) · https://+84%20768%20701%20106/ (UNREAD) · mailto:hello@mailala.com (UNREAD)",
+        "footnote": "video node · the drop station · fetched live, never edited · run 3"
+      },
+      {
+        "t": 1790161946293,
+        "role": "sovereign",
+        "run": 3,
+        "text": "LINKS READ: https://canon.mailala.pages.dev/ · https://wa.me/84768701106 · +84 768 701 106 (UNREAD) · mailto:hello@mailala.com (UNREAD)",
+        "footnote": "video node · the drop station · fetched live, never edited · run 3"
+      },
+      {
+        "t": 1790161951271,
+        "role": "sovereign",
+        "run": 3,
+        "text": "PROMPT: We run a small hostel in District 1, Saigon — dorms and private rooms, mostly students and young travellers. We want a page that gets a booking tonight. · the job: get a booking for tonight",
+        "footnote": "video node · the drop station · run 3"
+      },
+      {
+        "t": 1790161952468,
+        "role": "sovereign",
+        "run": 3,
+        "text": "LINKS READ: https://canon.mailala.pages.dev/ · https://wa.me/84768701106 · +84 768 701 106 (UNREAD) · mailto:hello@mailala.com (UNREAD)",
+        "footnote": "video node · the drop station · fetched live, never edited · run 3"
+      },
+      {
+        "t": 1790161993602,
+        "role": "sovereign",
+        "run": 3,
+        "text": "BLUEPRINT: A reggae-vibe hostel and rooftop bar in the heart of Saigon",
+        "footnote": "video node · run 3"
+      },
+      {
+        "t": 1790161999072,
+        "role": "sovereign",
+        "run": 3,
+        "text": "PROMPT: We run a small hostel in District 1, Saigon — dorms and private rooms, mostly students and young travellers. We want a page that gets a booking tonight. · the job: get a booking for tonight",
+        "footnote": "video node · the drop station · run 3"
+      },
+      {
+        "t": 1790162001369,
+        "role": "sovereign",
+        "run": 3,
+        "text": "LINKS READ: https://canon.mailala.pages.dev/ · https://wa.me/84768701106 · +84 768 701 106 (UNREAD) · mailto:hello@mailala.com (UNREAD)",
+        "footnote": "video node · the drop station · fetched live, never edited · run 3"
+      },
+      {
+        "t": 1790162065814,
+        "role": "sovereign",
+        "run": 3,
+        "text": "BLUEPRINT: A Jamaican-inspired hostel and rooftop bar in the heart of Saigon.",
+        "footnote": "video node · run 3"
+      },
+      {
+        "t": 1790162090291,
+        "role": "sovereign",
+        "run": 3,
+        "text": "ASSET MADE: Hero — Photograph or render: The rooftop bar view during the day — for Mailala's Hero slot. Real, specific, no text in the frame, no synthetic-looking people, no stock-photo abstractions.",
+        "footnote": "video node · the image hand · run 3"
+      },
+      {
+        "t": 1790162100162,
+        "role": "sovereign",
+        "run": 3,
+        "text": "ASSET MADE: Vibe — Photograph or render: People hanging out at the reggae bar — for Mailala's Vibe slot. Real, specific, no text in the frame, no synthetic-looking people, no stock-photo abstractions.",
+        "footnote": "video node · the image hand · run 3"
+      },
+      {
+        "t": 1790162111395,
+        "role": "sovereign",
+        "run": 3,
+        "text": "ASSET MADE: Food — Photograph or render: A plated dish of Jerk Chicken with rice and peas — for Mailala's Food slot. Real, specific, no text in the frame, no synthetic-looking people, no stock-photo abstractions.",
+        "footnote": "video node · the image hand · run 3"
+      },
+      {
+        "t": 1790162125633,
+        "role": "sovereign",
+        "run": 3,
+        "text": "ASSET MADE: Stay — Photograph or render: A clean shot of a dorm room with a locker — for Mailala's Stay slot. Real, specific, no text in the frame, no synthetic-looking people, no stock-photo abstractions.",
+        "footnote": "video node · the image hand · run 3"
+      },
+      {
+        "t": 1790162133741,
+        "role": "sovereign",
+        "run": 3,
+        "text": "ASSET MADE: Location — Photograph or render: The exterior of 175/16 Pham Ngu Lao — for Mailala's Location slot. Real, specific, no text in the frame, no synthetic-looking people, no stock-photo abstractions.",
+        "footnote": "video node · the image hand · run 3"
+      },
+      {
+        "t": 1790162188867,
+        "role": "sovereign",
+        "run": 3,
+        "text": "LINKS READ: https://canon.mailala.pages.dev/ · https://wa.me/84768701106 · +84 768 701 106 (UNREAD) · mailto:hello@mailala.com (UNREAD)",
+        "footnote": "video node · the drop station · fetched live, never edited · run 3"
+      },
+      {
+        "t": 1790162205103,
+        "role": "sovereign",
+        "run": 3,
+        "text": "LINKS READ: https://canon.mailala.pages.dev/ · https://wa.me/84768701106 · +84 768 701 106 (UNREAD) · mailto:hello@mailala.com (UNREAD)",
+        "footnote": "video node · the drop station · fetched live, never edited · run 3"
+      },
+      {
+        "t": 1790162224417,
+        "role": "sovereign",
+        "run": 3,
+        "text": "ASSET MADE: Hero — Photograph or render: the rooftop view from this hostel at golden hour — real, specific, no text in frame.",
+        "footnote": "video node · the image hand · run 3"
+      },
+      {
+        "t": 1790162229210,
+        "role": "sovereign",
+        "run": 3,
+        "text": "ASSET MADE: Dorm — Photograph or render: a clean six-bed dorm room with wooden lockers and morning light — real, no text in frame.",
+        "footnote": "video node · the image hand · run 3"
+      },
+      {
+        "t": 1790162242752,
+        "role": "sovereign",
+        "run": 3,
+        "text": "LINKS READ: https://canon.mailala.pages.dev/ · https://wa.me/84768701106 · +84 768 701 106 (UNREAD) · mailto:hello@mailala.com (UNREAD)",
+        "footnote": "video node · the drop station · fetched live, never edited · run 3"
+      },
+      {
+        "t": 1790162260304,
+        "role": "sovereign",
+        "run": 3,
+        "text": "ASSET MADE: Hero — Photograph or render: the rooftop view from this hostel at golden hour — real, specific, no text in frame.",
+        "footnote": "video node · the image hand · run 3"
+      },
+      {
+        "t": 1790162277955,
+        "role": "sovereign",
+        "run": 3,
+        "text": "ASSET MADE: Dorm — Photograph or render: a clean six-bed dorm room with wooden lockers and morning light — real, no text in frame.",
+        "footnote": "video node · the image hand · run 3"
+      },
+      {
+        "t": 1790162277957,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: Hero",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790162277959,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: Dorm",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790162291111,
+        "role": "sovereign",
+        "run": 3,
+        "text": "STORY: HOOK: From generic to crew\nENEMY: Another boring hostel\nPLACE: 175/16 Pham Ngu Lao, D1\nPROOF: Authentic Jamaican jerk chicken\nOFFER: Dorms from $6.65\nCALL: Book now via WhatsApp +84 768 701 106\n\nLINES:\n1. Reggae rooftop and cold beer\n2. Your room in Saigon\n\nCAPTION: Stop settling for generic hostels. Get a bed from $6.65 and join the crew. Book now via WhatsApp +84 768 701 106.\n\nTAGS: #mailala #saigon #hostel #backpacking #vietnam #reggae #jerkchicken #travelvietnam #d1saigon #budgettravel",
+        "footnote": "video node · written from the offering and the register · run 3"
+      },
+      {
+        "t": 1790162298464,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL RENDER: 2 pictures → 7.39 MB mp4 · 267 frames · 8.90s",
+        "footnote": "video node · run 3 · composed and encoded in this browser, nothing uploaded"
+      },
+      {
+        "t": 1790162400761,
+        "role": "sovereign",
+        "run": 3,
+        "text": "PROMPT: We run a small hostel in District 1, Saigon — dorms and private rooms, mostly students and young travellers. We want a page that gets a booking tonight. · the job: get a booking for tonight",
+        "footnote": "video node · the drop station · run 3"
+      },
+      {
+        "t": 1790162403424,
+        "role": "sovereign",
+        "run": 3,
+        "text": "LINKS READ: https://canon.mailala.pages.dev/ · https://wa.me/84768701106 · +84 768 701 106 (UNREAD) · mailto:hello@mailala.com (UNREAD)",
+        "footnote": "video node · the drop station · fetched live, never edited · run 3"
+      },
+      {
+        "t": 1790162442099,
+        "role": "sovereign",
+        "run": 3,
+        "text": "BLUEPRINT: A Jamaican-inspired social hostel and rooftop bar in the heart of Saigon.",
+        "footnote": "video node · run 3"
+      },
+      {
+        "t": 1790162457414,
+        "role": "sovereign",
+        "run": 3,
+        "text": "ASSET MADE: hero — Photograph or render: a wide shot of the rooftop bar with a Reggae theme — for Mailala's hero slot. Real, specific, no text in the frame, no synthetic-looking people, no stock-photo abstractions.",
+        "footnote": "video node · the image hand · run 3"
+      },
+      {
+        "t": 1790162492053,
+        "role": "sovereign",
+        "run": 3,
+        "text": "ASSET MADE: food — Photograph or render: a plated dish of jerk chicken with rice and peas from above — for Mailala's food slot. Real, specific, no text in the frame, no synthetic-looking people, no stock-photo abstractions.",
+        "footnote": "video node · the image hand · run 3"
+      },
+      {
+        "t": 1790162492054,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: hero",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790162492055,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL: food",
+        "footnote": "video node · a picture handed to the reel · run 3"
+      },
+      {
+        "t": 1790162501613,
+        "role": "sovereign",
+        "run": 3,
+        "text": "STORY: HOOK: From generic to island vibe.\nENEMY: Boring hostels and bland food.\nPLACE: 175/16 Pham Ngu Lao, D1, Saigon.\nPROOF: Authentic Jamaican jerk chicken.\nOFFER: Dorms from $6.65.\nCALL: Book now via WhatsApp +84 768 701 106.\nLINES:\n1. Your island escape in Saigon.\n2. Fresh off the grill.\nCAPTION: Stop settling for generic hostels. Get rooftop reggae and authentic jerk chicken for dorms from $6.65. Book now via WhatsApp +84 768 701 106.\nTAGS: #mailala #saigonhostel #phamngulao #jamaicanfood #jerkchicken #rooftopvibe #backpackervietnam #d1saigon #travelvietnam #budgettravel",
+        "footnote": "video node · written from the offering and the register · run 3"
+      },
+      {
+        "t": 1790162509056,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REEL RENDER: 2 pictures → 7.72 MB mp4 · 267 frames · 8.90s",
+        "footnote": "video node · run 3 · composed and encoded in this browser, nothing uploaded"
+      },
+      {
+        "t": 1790162681491,
+        "role": "sovereign",
+        "run": 3,
+        "text": "LINKS READ: https://canon.mailala.pages.dev/ · +84 768 701 106 (UNREAD) · mailto:hello@mailala.com (UNREAD)",
+        "footnote": "video node · the drop station · fetched live, never edited · run 3"
+      },
+      {
+        "t": 1790182169909,
+        "role": "sovereign",
+        "run": 3,
+        "text": "SOUL — CORRESPONDENCE: a free-website-offer acceptor.\nRead from a 19.5s screen recording of the chat (attached by the sovereign), decoded and read frame by frame on this device. What the recording did not scroll past is NOT here, and is not guessed.\n\nCONTACT — Jett Ro (WhatsApp). He sent his Zalo: 0384361051. Living in Indonesia. Vietnamese number. A customer of the sovereign's already (\"You bought a lot from me\").\n\n— READ, VERBATIM —\n(sep 16, 11:26) Jett: \"Hey brudda\" / \"How goes that side?\"\n(sep 16, 1:28 pm) Sovereign: \"Haha hey man, not bad, just started using the helmets\" / \"How you been\"\n(sep 16, 2:57 pm) Jett [replied to \"Haha hey man, not bad, just started using the helmets\"]: \"All is well bro, currently living in Indonesia. All is good.\" / \"Lets chat regarding the website design you offered\" / \"Hope all is well with them?\" / \"You bought a lot from me\"\n(sep 16, 3:37 pm) Sovereign: \"Haha yeah all work as intended.\" / \"And sure, got any websites or public links I can look at\" / \"What are ya building / creating ?\"\n(mon, 9:30 am) Jett: \"I am currently building a Multi Sports curriculum and swimming curriculum.\" / \"I am trying to sell content online. It has all the pedagogical framework and objectives, images and gameplay. I just need a site where clients can search from.\"\nSovereign: \"Can you show me what you have ?\"\n(tue, 12:49 pm) Jett: \"Absolutely, I'll get those to you as soon as possible\"\n(10:15 am) Jett: \"https://drive.google.com/drive/folders/1al0Xj6r3pYBJlwfqY00LwZU0VNuQav0t?usp=sharing\" / \"Please see in the drive\" / \"All scope and sequence, swimming program, and Multi Sports program. There are also thumbnails.\" / \"Please let me know what else you may need brother\"  [link preview: \"Final Scope and Sequence for Let's Play - Google Drive\"]\n(10:32 pm) Sovereign: \"Yes, i'm going to need a lot more, but don't worry. It will only take about 45 to 60 minutes\"\nSovereign: \"I'm going to design an app for you to use to take walkthrough videos. Give me voice recordings. Answer some written questions and provide i need an all links to your online presence. With socials and whatever else including testimonials and most importantly Pictures of live action moments with clients. I'll give a few basic pointers on how to do the walkthrough video. But you definitely don't need to be a professional obviously the better you do it. The more it helps But even the most amateur of walkthrough videos can be turned into a masterpiece. These days. And of course, there may be times where it doesn't apply to your business. So you can skip that part. But as much as the assessment that you can complete, the better results, I can get for you\"\nSovereign: \"A successful sales funnel. Has to make people feel something it has to tell a story And make them feel like they want to be a part of that story Or better yet, they need to be\"\n(11:18 pm) [a 1:00 video sent by the sovereign — the walkthrough of a venue, saved]\n(10:43 pm) Sovereign: \"Some proof of how amateur you can be. This is a lazy video I took to build. What is turning out to be a pretty awesome looking. Website\"\nSovereign: \"If you look at the current website, the landing page is the worst part of the business, which is the hostile beds in the dorm room, which I don't think those ever get washed\"\nSovereign: \"Through a couple of the other walkthrough videos, I walk up the stairs and capture a lively crowd. Dancing to reggae, music and truly having a good time. And get the owner in the corner. Wearing his bling and the staff smiling. If you're marketing in sales funnel, efforts are directing people into something that is lifeless. You're just throwing your money away\"\n(!) \"Delivered 33 minutes ago\" — the last message of the visible conversation. He has not answered it yet in this recording.\n\n— WHAT THIS ASKS FOR —\n1. He accepted the free website offer and asked to talk about it. He is NOT priority (the sovereign's words).\n2. His business: a coach selling a multi-sports and swimming curriculum — pedagogical framework, objectives, images, gameplay. He sells it online and gets no traffic; what he asked for, in his own words, is \"a site where clients can search from\". He gave the scope and sequence, the swimming program, the Multi Sports program and thumbnails, in a Google Drive folder, on the day.\n3. The sovereign promised him THE APP: \"I'm going to design an app for you to use to take walkthrough videos. Give me voice recordings. Answer some written questions and provide i need an all links to your online presence.\"\n4. He was told it takes 45 to 60 minutes, and that the most amateur walkthrough video can be turned into a masterpiece.\n5. The reference video he was sent is the 1:00 venue walkthrough — a reggae bar and hostel after dark. It is the proof of work, not his own place.",
+        "footnote": "READING, NOT A TYPED MESSAGE: transcribed from a 19.5s screen recording of the WhatsApp chat (scratch/message-attachments/6170059324904186580.mp4, 590x1280, 19.5s). Frames were decoded and read on this device; the quoted lines are what the frames show. The recording only scrolls through part of the chat — anything not scrolled past is absent here and nothing was inferred. Speaker labels and timestamps are as the screen shows them."
+      },
+      {
+        "t": 1790182169913,
+        "role": "sovereign",
+        "run": 3,
+        "text": "REFERENCE VIDEO (the one shared with him) — 1:00, vertical, night: a walkthrough of a reggae bar and hostel. Read frame by frame on this device. What the frames show: the lane outside after dark; the frontage and the sign lit up; the bar inside with its neon — a REGGAE BAR sign carrying the house words; a pool table; a lit band area; the room the singer plays in; the upstairs shared room with its seating; the kitchen and the food counter; the bar's own signage. This is the venue whose page the sovereign already built (the reggae hostel and rooftop bar), sent to the coach as proof of what a walkthrough becomes.",
+        "footnote": "READING, NOT A TYPED MESSAGE: transcribed from scratch/message-attachments/6170059324904186583.mp4 (368x640, 59.9s, 1606 frames, decoded locally). Timestamps of the frames read: 0 · 5.8 · 10.7 · 16.2 · 21.1 · 26.5 · 31.4 · 36.6 · 41.2 · 48.2 · 54 · 57.4s."
+      },
+      {
+        "t": 1790182452026,
+        "role": "sovereign",
+        "run": 3,
+        "text": "/offers",
+        "footnote": null
+      },
+      {
+        "t": 1790182584303,
+        "role": "sovereign",
+        "run": 3,
+        "text": "/offer",
+        "footnote": null
+      },
+      {
+        "t": 1790182595945,
+        "role": "sovereign",
+        "run": 3,
+        "text": "/offer",
+        "footnote": null
+      },
+      {
+        "t": 1790182600487,
+        "role": "sovereign",
+        "run": 3,
+        "text": "/offer release",
+        "footnote": null
+      },
+      {
+        "t": 1790185471251,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/phoenixRISE OfferDeskRelease",
+        "footnote": null
+      },
+      {
+        "t": 1790185575177,
+        "role": "sovereign",
+        "run": 4,
+        "text": "its not locked try again",
+        "footnote": "the word that forced the re-measurement of the Cloudflare token. The token is ACCOUNT-owned; /user/tokens/verify rejects a valid account-owned token with \"Invalid API Token\", which is why the release was reported blocked. Asked at /accounts/<id>/tokens/verify the same token answers 200 \"active\". Fixed: src/offers.js → tokenCheck asks the account first."
+      },
+      {
+        "t": 1790185575180,
+        "role": "sovereign",
+        "run": 4,
+        "text": "dont write it like an ad. write it like an assessment",
+        "footnote": "THE VOICE — the law of every client-facing line on THE DROP. Enforced in src/offer-desk/src/trades.js → OFFER and in each trade's `words` register."
+      },
+      {
+        "t": 1790185575181,
+        "role": "sovereign",
+        "run": 4,
+        "text": "we sell by not selling",
+        "footnote": "the same law, stated as its reason: the page states, it does not argue; no superlative, no urgency, no benefit promised, no \"we\"."
+      },
+      {
+        "t": 1790185575182,
+        "role": "sovereign",
+        "run": 4,
+        "text": "but we get the data, to deliver the proof of work, and it sells itself",
+        "footnote": "THE COMMERCIAL THEORY — the page is the intake; the artefact is the argument. Encoded as OFFER.proof: \"What comes back is the work itself, not a description of it… You judge it on the thing in front of you, not on this page's account of it.\""
+      },
+      {
+        "t": 1790185575183,
+        "role": "sovereign",
+        "run": 4,
+        "text": "RISE!",
+        "footnote": "the order that opened SCS Stage 1 — session OfferDeskRelease, run 4, 2026-09-24."
+      },
+      {
+        "t": 1790185598003,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/scs",
+        "footnote": null
+      },
+      {
+        "t": 1790185860478,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offers",
+        "footnote": null
+      },
+      {
+        "t": 1790187002884,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offers",
+        "footnote": null
+      },
+      {
+        "t": 1790187003248,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer Synthetic Lead",
+        "footnote": null
+      },
+      {
+        "t": 1790187004248,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer trade synthetic-lead hostel",
+        "footnote": null
+      },
+      {
+        "t": 1790187005237,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer desk synthetic-lead",
+        "footnote": null
+      },
+      {
+        "t": 1790187006238,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer got synthetic-lead a walkaround video",
+        "footnote": null
+      },
+      {
+        "t": 1790187007243,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer need synthetic-lead six stills",
+        "footnote": null
+      },
+      {
+        "t": 1790187008243,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer note synthetic-lead spoke on the phone",
+        "footnote": null
+      },
+      {
+        "t": 1790187009245,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer trades",
+        "footnote": null
+      },
+      {
+        "t": 1790187010238,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer bogusopus synthetic-lead",
+        "footnote": null
+      },
+      {
+        "t": 1790187011245,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer desk nobody-here",
+        "footnote": null
+      },
+      {
+        "t": 1790187012240,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer trade synthetic-lead lawyer",
+        "footnote": null
+      },
+      {
+        "t": 1790187013252,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer live synthetic-lead https://example.com/synthetic",
+        "footnote": null
+      },
+      {
+        "t": 1790187014251,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer sent synthetic-lead",
+        "footnote": null
+      },
+      {
+        "t": 1790187015236,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer url",
+        "footnote": null
+      },
+      {
+        "t": 1790187016244,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer file",
+        "footnote": null
+      },
+      {
+        "t": 1790187017244,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer live",
+        "footnote": null
+      },
+      {
+        "t": 1790187018244,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer drop synthetic-lead",
+        "footnote": null
+      },
+      {
+        "t": 1790187078139,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer drop bogusopus-synthetic-lead",
+        "footnote": null
+      },
+      {
+        "t": 1790187079249,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer Synthetic Lead",
+        "footnote": null
+      },
+      {
+        "t": 1790187080247,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer trade synthetic-lead hostel",
+        "footnote": null
+      },
+      {
+        "t": 1790187081242,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer dexk synthetic-lead",
+        "footnote": null
+      },
+      {
+        "t": 1790187082245,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer dexk jett-ro",
+        "footnote": null
+      },
+      {
+        "t": 1790187083243,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer trade jett-ro lawyer",
+        "footnote": null
+      },
+      {
+        "t": 1790187084251,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer live",
+        "footnote": null
+      },
+      {
+        "t": 1790187085236,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer desk nobody-here",
+        "footnote": null
+      },
+      {
+        "t": 1790187086241,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer bogusopus nobody-here",
+        "footnote": null
+      },
+      {
+        "t": 1790187087245,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer drop synthetic-lead",
+        "footnote": null
+      },
+      {
+        "t": 1790187112704,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer drop bogusopus-nobody-here",
+        "footnote": null
+      },
+      {
+        "t": 1790187113241,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer drop dexk-jett-ro",
+        "footnote": null
+      },
+      {
+        "t": 1790187114240,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer drop dexk-synthetic-lead",
+        "footnote": null
+      },
+      {
+        "t": 1790187115240,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer Synthetic Lead",
+        "footnote": null
+      },
+      {
+        "t": 1790187116236,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer trade synthetic-lead hostel",
+        "footnote": null
+      },
+      {
+        "t": 1790187117238,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer dexk jett-ro",
+        "footnote": null
+      },
+      {
+        "t": 1790187118238,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer dexk unknown-person",
+        "footnote": null
+      },
+      {
+        "t": 1790187119247,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer trade jett-ro lawyer",
+        "footnote": null
+      },
+      {
+        "t": 1790187120249,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer live",
+        "footnote": null
+      },
+      {
+        "t": 1790187121251,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer desk nobody-here",
+        "footnote": null
+      },
+      {
+        "t": 1790187122235,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer bogusopus nobody-here",
+        "footnote": null
+      },
+      {
+        "t": 1790187123238,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer desk synthetic-lead",
+        "footnote": null
+      },
+      {
+        "t": 1790187124242,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer drop synthetic-lead",
+        "footnote": null
+      },
+      {
+        "t": 1790187141298,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer drop bogusopus-nobody-here",
+        "footnote": null
+      },
+      {
+        "t": 1790187142255,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer drop dexk-unknown-person",
+        "footnote": null
+      },
+      {
+        "t": 1790187143249,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer drop dexk-jett-ro",
+        "footnote": null
+      },
+      {
+        "t": 1790187144250,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer dexk jett-ro",
+        "footnote": null
+      },
+      {
+        "t": 1790187145242,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer deks jett-ro",
+        "footnote": null
+      },
+      {
+        "t": 1790187146249,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer jett-ro",
+        "footnote": null
+      },
+      {
+        "t": 1790187147242,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer trade jett-ro coach",
+        "footnote": null
+      },
+      {
+        "t": 1790187148245,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer synthetic person",
+        "footnote": null
+      },
+      {
+        "t": 1790187149248,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer drop synthetic-person",
+        "footnote": null
+      },
+      {
+        "t": 1790187165247,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer drop deks-jett-ro",
+        "footnote": null
+      },
+      {
+        "t": 1790187166250,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer drop dexk-jett-ro",
+        "footnote": null
+      },
+      {
+        "t": 1790187167278,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer dexk jett-ro",
+        "footnote": null
+      },
+      {
+        "t": 1790187168246,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer deks jett-ro",
+        "footnote": null
+      },
+      {
+        "t": 1790187169238,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer jett-ro",
+        "footnote": null
+      },
+      {
+        "t": 1790187170235,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer trade jett-ro coach",
+        "footnote": null
+      },
+      {
+        "t": 1790187171242,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer synthetic person",
+        "footnote": null
+      },
+      {
+        "t": 1790187172240,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer synthetic-person",
+        "footnote": null
+      },
+      {
+        "t": 1790187173235,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer drop synthetic-person",
+        "footnote": null
+      },
+      {
+        "t": 1790187174238,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer live",
+        "footnote": null
+      },
+      {
+        "t": 1790187175250,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/offer trade jett-ro lawyer",
+        "footnote": null
+      },
+      {
+        "t": 1790187482951,
+        "role": "sovereign",
+        "run": 4,
+        "text": "RECORD CORRECTION — the /offer … lines on run 4 between 01:0 and 01:2 are the A→Z DEBUG HARNESS driving the station, not the sovereign's words.",
+        "footnote": "The sovereign ordered 'test and debug entire a to z', and the harness drove every /offer command through send() — which captures each typed word as SOUL by design. Those ~60 entries are a machine's test commands, not the sovereign speaking. Nothing is deleted (SEAL, NEVER DELETE governs the record): this line is the correction beside them. The six real faults the sweep found and fixed are in src/offer-desk/README.md → the A→Z debug pass."
+      },
+      {
+        "t": 1790188496064,
+        "role": "sovereign",
+        "run": 4,
+        "text": "Pitch deck comparison of their current shit page versus our new free website",
+        "footnote": "raised as an idea (/idea)"
+      },
+      {
+        "t": 1790188510658,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/canon sync",
+        "footnote": null
+      },
+      {
+        "t": 1790188783743,
+        "role": "sovereign",
+        "run": 4,
+        "text": "/gh backup",
+        "footnote": null
+      }
+    ],
+    "deaths": [
+      {
+        "header": {
+          "run": 2,
+          "at": 1790101516506,
+          "theme": "REINCARNATE-DEATH — LFG 10-STEP SCS",
+          "head": "ce638211",
+          "agent": "Obi (#99)",
+          "mode": "SDNAD-DEATH",
+          "tag": "incarnate-run2",
+          "priorRuns": 0
+        },
+        "commitSha": "PENDING",
+        "rawSoul": [
+          "put it through a rapid pace scout to pipeline mission for all that was missed, but we have some other things to attend to",
+          "mark this down in the pipeline as your initial findings, dont be so fucking confident. then run a rise to death to pipeline on this session itself so we can open up fresh"
+        ],
+        "soulReceipt": {
+          "count_before": 2458,
+          "count_after": 2458,
+          "delta": 0
+        },
+        "decisions": [],
+        "corrections": [],
+        "newLaws": [],
+        "artifacts": [
+          {
+            "path": "src/canon/BIBLE-CH26-SESSION-incarnate-run2.md",
+            "status": "HELD — this browser has no write path into src/canon"
+          },
+          {
+            "path": "src/canon/REINCARNATION/2026-09-22-run2-incarnate-run2.md",
+            "status": "HELD — a canon write is a gated push (PHOENIXOMEGAPROTOCOL)"
+          },
+          {
+            "path": "localStorage:obi_rrl_run2",
+            "status": "PRESERVED"
+          }
+        ],
+        "grade": "KILO_GAP — Stage 0 gate not met; seal recorded for chain integrity",
+        "livingState": {
+          "vector": [
+            2458,
+            2
+          ],
+          "topPrinciples": [
+            "Sovereign words are sacred (L55)",
+            "Recorder, not editor (L39)",
+            "Bible before ledger (L58)",
+            "Stage 0 is the gate (L54)",
+            "Derive, don't invent (L56)"
+          ],
+          "rulings": []
+        },
+        "stateSnapshot": {
+          "head": "ce638211",
+          "tree": 2,
+          "soulcount": 2458,
+          "dna_blueprint_count": 122
+        },
+        "rrl": {
+          "key": "obi_rrl_run2",
+          "lines": 8,
+          "preserved": true
+        },
+        "gaps": [
+          "SSM_NONE",
+          "SSM_NONE"
+        ]
+      }
+    ]
+  },
+  "runs": [
+    {
+      "run": 4,
+      "opened": 1790184329860,
+      "entries": [
+        {
+          "t": 1790184329860,
+          "role": "DNA",
+          "text": "Obi: [/offer release — live and verified at https://the-drop-prais.mrmichaelhobbs123.workers.dev]"
+        },
+        {
+          "t": 1790184355433,
+          "role": "DNA",
+          "text": "Obi: [offer /offer desk jett-ro — recorded as SAID YES]"
+        },
+        {
+          "t": 1790184370270,
+          "role": "DNA",
+          "text": "Obi: [/offer drop offer-desk-jett-ro]"
+        },
+        {
+          "t": 1790184370274,
+          "role": "DNA",
+          "text": "Obi: [/offer desk jett-ro — link read for coach]"
+        },
+        {
+          "t": 1790184514186,
+          "role": "DNA",
+          "text": "Obi: [/offer release — live and verified at https://the-drop-prais.mrmichaelhobbs123.workers.dev]"
+        },
+        {
+          "t": 1790184625347,
+          "role": "DNA",
+          "text": "Obi: [/offer release — live and verified at https://the-drop-prais.mrmichaelhobbs123.workers.dev]"
+        },
+        {
+          "t": 1790184625350,
+          "role": "DNA",
+          "text": "Obi: [/offer desk jett-ro — link read for coach]"
+        },
+        {
+          "t": 1790184753882,
+          "role": "DNA",
+          "text": "Obi: [/offer release — live and verified at https://the-drop-prais.mrmichaelhobbs123.workers.dev]"
+        },
+        {
+          "t": 1790185471251,
+          "role": "SOUL",
+          "text": "/phoenixRISE OfferDeskRelease"
+        },
+        {
+          "t": 1790185575177,
+          "role": "SOUL",
+          "text": "its not locked try again"
+        },
+        {
+          "t": 1790185575180,
+          "role": "SOUL",
+          "text": "dont write it like an ad. write it like an assessment"
+        },
+        {
+          "t": 1790185575181,
+          "role": "SOUL",
+          "text": "we sell by not selling"
+        },
+        {
+          "t": 1790185575182,
+          "role": "SOUL",
+          "text": "but we get the data, to deliver the proof of work, and it sells itself"
+        },
+        {
+          "t": 1790185575183,
+          "role": "SOUL",
+          "text": "RISE!"
+        },
+        {
+          "t": 1790185598003,
+          "role": "SOUL",
+          "text": "/scs"
+        },
+        {
+          "t": 1790185860478,
+          "role": "SOUL",
+          "text": "/offers"
+        },
+        {
+          "t": 1790185860487,
+          "role": "DNA",
+          "text": "Obi: [/offers — 1 acceptor(s), 1 trade group(s)]"
+        },
+        {
+          "t": 1790185940919,
+          "role": "DNA",
+          "text": "Obi: [unhandled rejection: Cannot close a closed AudioContext.]"
+        },
+        {
+          "t": 1790187002885,
+          "role": "SOUL",
+          "text": "/offers"
+        },
+        {
+          "t": 1790187002892,
+          "role": "DNA",
+          "text": "Obi: [/offers — 1 acceptor(s), 1 trade group(s)]"
+        },
+        {
+          "t": 1790187003248,
+          "role": "SOUL",
+          "text": "/offer Synthetic Lead"
+        },
+        {
+          "t": 1790187003257,
+          "role": "DNA",
+          "text": "Obi: [offer Synthetic Lead — recorded as SAID YES]"
+        },
+        {
+          "t": 1790187004248,
+          "role": "SOUL",
+          "text": "/offer trade synthetic-lead hostel"
+        },
+        {
+          "t": 1790187004255,
+          "role": "DNA",
+          "text": "Obi: [/offer trade synthetic-lead → hostel]"
+        },
+        {
+          "t": 1790187005237,
+          "role": "SOUL",
+          "text": "/offer desk synthetic-lead"
+        },
+        {
+          "t": 1790187005242,
+          "role": "DNA",
+          "text": "Obi: [/offer desk synthetic-lead — link read for hostel]"
+        },
+        {
+          "t": 1790187006238,
+          "role": "SOUL",
+          "text": "/offer got synthetic-lead a walkaround video"
+        },
+        {
+          "t": 1790187006247,
+          "role": "DNA",
+          "text": "Obi: [/offer got synthetic-lead]"
+        },
+        {
+          "t": 1790187007243,
+          "role": "SOUL",
+          "text": "/offer need synthetic-lead six stills"
+        },
+        {
+          "t": 1790187007251,
+          "role": "DNA",
+          "text": "Obi: [/offer need synthetic-lead]"
+        },
+        {
+          "t": 1790187008243,
+          "role": "SOUL",
+          "text": "/offer note synthetic-lead spoke on the phone"
+        },
+        {
+          "t": 1790187009246,
+          "role": "SOUL",
+          "text": "/offer trades"
+        },
+        {
+          "t": 1790187010238,
+          "role": "SOUL",
+          "text": "/offer bogusopus synthetic-lead"
+        },
+        {
+          "t": 1790187010246,
+          "role": "DNA",
+          "text": "Obi: [offer bogusopus synthetic-lead — recorded as SAID YES]"
+        },
+        {
+          "t": 1790187011245,
+          "role": "SOUL",
+          "text": "/offer desk nobody-here"
+        },
+        {
+          "t": 1790187012240,
+          "role": "SOUL",
+          "text": "/offer trade synthetic-lead lawyer"
+        },
+        {
+          "t": 1790187013252,
+          "role": "SOUL",
+          "text": "/offer live synthetic-lead https://example.com/synthetic"
+        },
+        {
+          "t": 1790187013260,
+          "role": "DNA",
+          "text": "Obi: [/offer live synthetic-lead]"
+        },
+        {
+          "t": 1790187014251,
+          "role": "SOUL",
+          "text": "/offer sent synthetic-lead"
+        },
+        {
+          "t": 1790187014259,
+          "role": "DNA",
+          "text": "Obi: [/offer sent synthetic-lead]"
+        },
+        {
+          "t": 1790187015236,
+          "role": "SOUL",
+          "text": "/offer url"
+        },
+        {
+          "t": 1790187016244,
+          "role": "SOUL",
+          "text": "/offer file"
+        },
+        {
+          "t": 1790187016330,
+          "role": "DNA",
+          "text": "Obi: [/offer file — built 178481 bytes]"
+        },
+        {
+          "t": 1790187017244,
+          "role": "SOUL",
+          "text": "/offer live"
+        },
+        {
+          "t": 1790187017252,
+          "role": "DNA",
+          "text": "Obi: [/offers — 3 acceptor(s), 3 trade group(s)]"
+        },
+        {
+          "t": 1790187018244,
+          "role": "SOUL",
+          "text": "/offer drop synthetic-lead"
+        },
+        {
+          "t": 1790187018251,
+          "role": "DNA",
+          "text": "Obi: [/offer drop synthetic-lead]"
+        },
+        {
+          "t": 1790187078139,
+          "role": "SOUL",
+          "text": "/offer drop bogusopus-synthetic-lead"
+        },
+        {
+          "t": 1790187078149,
+          "role": "DNA",
+          "text": "Obi: [/offer drop bogusopus-synthetic-lead]"
+        },
+        {
+          "t": 1790187079249,
+          "role": "SOUL",
+          "text": "/offer Synthetic Lead"
+        },
+        {
+          "t": 1790187079258,
+          "role": "DNA",
+          "text": "Obi: [offer Synthetic Lead — recorded as SAID YES]"
+        },
+        {
+          "t": 1790187080248,
+          "role": "SOUL",
+          "text": "/offer trade synthetic-lead hostel"
+        },
+        {
+          "t": 1790187080255,
+          "role": "DNA",
+          "text": "Obi: [/offer trade synthetic-lead → hostel]"
+        },
+        {
+          "t": 1790187081242,
+          "role": "SOUL",
+          "text": "/offer dexk synthetic-lead"
+        },
+        {
+          "t": 1790187081253,
+          "role": "DNA",
+          "text": "Obi: [offer dexk synthetic-lead — recorded as SAID YES]"
+        },
+        {
+          "t": 1790187082245,
+          "role": "SOUL",
+          "text": "/offer dexk jett-ro"
+        },
+        {
+          "t": 1790187082253,
+          "role": "DNA",
+          "text": "Obi: [offer dexk jett-ro — recorded as SAID YES]"
+        },
+        {
+          "t": 1790187083244,
+          "role": "SOUL",
+          "text": "/offer trade jett-ro lawyer"
+        },
+        {
+          "t": 1790187084251,
+          "role": "SOUL",
+          "text": "/offer live"
+        },
+        {
+          "t": 1790187084257,
+          "role": "DNA",
+          "text": "Obi: [/offers — 4 acceptor(s), 3 trade group(s)]"
+        },
+        {
+          "t": 1790187085236,
+          "role": "SOUL",
+          "text": "/offer desk nobody-here"
+        },
+        {
+          "t": 1790187086241,
+          "role": "SOUL",
+          "text": "/offer bogusopus nobody-here"
+        },
+        {
+          "t": 1790187086248,
+          "role": "DNA",
+          "text": "Obi: [offer bogusopus nobody-here — recorded as SAID YES]"
+        },
+        {
+          "t": 1790187087245,
+          "role": "SOUL",
+          "text": "/offer drop synthetic-lead"
+        },
+        {
+          "t": 1790187087251,
+          "role": "DNA",
+          "text": "Obi: [/offer drop synthetic-lead]"
+        },
+        {
+          "t": 1790187112705,
+          "role": "SOUL",
+          "text": "/offer drop bogusopus-nobody-here"
+        },
+        {
+          "t": 1790187112716,
+          "role": "DNA",
+          "text": "Obi: [/offer drop bogusopus-nobody-here]"
+        },
+        {
+          "t": 1790187113241,
+          "role": "SOUL",
+          "text": "/offer drop dexk-jett-ro"
+        },
+        {
+          "t": 1790187113249,
+          "role": "DNA",
+          "text": "Obi: [/offer drop dexk-jett-ro]"
+        },
+        {
+          "t": 1790187114240,
+          "role": "SOUL",
+          "text": "/offer drop dexk-synthetic-lead"
+        },
+        {
+          "t": 1790187114251,
+          "role": "DNA",
+          "text": "Obi: [/offer drop dexk-synthetic-lead]"
+        },
+        {
+          "t": 1790187115240,
+          "role": "SOUL",
+          "text": "/offer Synthetic Lead"
+        },
+        {
+          "t": 1790187115249,
+          "role": "DNA",
+          "text": "Obi: [offer Synthetic Lead — recorded as SAID YES]"
+        },
+        {
+          "t": 1790187116236,
+          "role": "SOUL",
+          "text": "/offer trade synthetic-lead hostel"
+        },
+        {
+          "t": 1790187116243,
+          "role": "DNA",
+          "text": "Obi: [/offer trade synthetic-lead → hostel]"
+        },
+        {
+          "t": 1790187117238,
+          "role": "SOUL",
+          "text": "/offer dexk jett-ro"
+        },
+        {
+          "t": 1790187117245,
+          "role": "DNA",
+          "text": "Obi: [offer dexk jett-ro — recorded as SAID YES]"
+        },
+        {
+          "t": 1790187118238,
+          "role": "SOUL",
+          "text": "/offer dexk unknown-person"
+        },
+        {
+          "t": 1790187118247,
+          "role": "DNA",
+          "text": "Obi: [offer dexk unknown-person — recorded as SAID YES]"
+        },
+        {
+          "t": 1790187119247,
+          "role": "SOUL",
+          "text": "/offer trade jett-ro lawyer"
+        },
+        {
+          "t": 1790187120249,
+          "role": "SOUL",
+          "text": "/offer live"
+        },
+        {
+          "t": 1790187121251,
+          "role": "SOUL",
+          "text": "/offer desk nobody-here"
+        },
+        {
+          "t": 1790187122235,
+          "role": "SOUL",
+          "text": "/offer bogusopus nobody-here"
+        },
+        {
+          "t": 1790187122243,
+          "role": "DNA",
+          "text": "Obi: [offer bogusopus nobody-here — recorded as SAID YES]"
+        },
+        {
+          "t": 1790187123238,
+          "role": "SOUL",
+          "text": "/offer desk synthetic-lead"
+        },
+        {
+          "t": 1790187123246,
+          "role": "DNA",
+          "text": "Obi: [/offer desk synthetic-lead — link read for hostel]"
+        },
+        {
+          "t": 1790187124242,
+          "role": "SOUL",
+          "text": "/offer drop synthetic-lead"
+        },
+        {
+          "t": 1790187124250,
+          "role": "DNA",
+          "text": "Obi: [/offer drop synthetic-lead]"
+        },
+        {
+          "t": 1790187141298,
+          "role": "SOUL",
+          "text": "/offer drop bogusopus-nobody-here"
+        },
+        {
+          "t": 1790187141312,
+          "role": "DNA",
+          "text": "Obi: [/offer drop bogusopus-nobody-here]"
+        },
+        {
+          "t": 1790187142255,
+          "role": "SOUL",
+          "text": "/offer drop dexk-unknown-person"
+        },
+        {
+          "t": 1790187142266,
+          "role": "DNA",
+          "text": "Obi: [/offer drop dexk-unknown-person]"
+        },
+        {
+          "t": 1790187143249,
+          "role": "SOUL",
+          "text": "/offer drop dexk-jett-ro"
+        },
+        {
+          "t": 1790187143256,
+          "role": "DNA",
+          "text": "Obi: [/offer drop dexk-jett-ro]"
+        },
+        {
+          "t": 1790187144250,
+          "role": "SOUL",
+          "text": "/offer dexk jett-ro"
+        },
+        {
+          "t": 1790187144258,
+          "role": "DNA",
+          "text": "Obi: [offer dexk jett-ro — recorded as SAID YES]"
+        },
+        {
+          "t": 1790187145242,
+          "role": "SOUL",
+          "text": "/offer deks jett-ro"
+        },
+        {
+          "t": 1790187145253,
+          "role": "DNA",
+          "text": "Obi: [offer deks jett-ro — recorded as SAID YES]"
+        },
+        {
+          "t": 1790187146249,
+          "role": "SOUL",
+          "text": "/offer jett-ro"
+        },
+        {
+          "t": 1790187146260,
+          "role": "DNA",
+          "text": "Obi: [/offers — 3 acceptor(s), 2 trade group(s)]"
+        },
+        {
+          "t": 1790187147242,
+          "role": "SOUL",
+          "text": "/offer trade jett-ro coach"
+        },
+        {
+          "t": 1790187147248,
+          "role": "DNA",
+          "text": "Obi: [/offer trade jett-ro → coach]"
+        },
+        {
+          "t": 1790187148245,
+          "role": "SOUL",
+          "text": "/offer synthetic person"
+        },
+        {
+          "t": 1790187148252,
+          "role": "DNA",
+          "text": "Obi: [offer synthetic person — recorded as SAID YES]"
+        },
+        {
+          "t": 1790187149248,
+          "role": "SOUL",
+          "text": "/offer drop synthetic-person"
+        },
+        {
+          "t": 1790187149254,
+          "role": "DNA",
+          "text": "Obi: [/offer drop synthetic-person]"
+        },
+        {
+          "t": 1790187165247,
+          "role": "SOUL",
+          "text": "/offer drop deks-jett-ro"
+        },
+        {
+          "t": 1790187165263,
+          "role": "DNA",
+          "text": "Obi: [/offer drop deks-jett-ro]"
+        },
+        {
+          "t": 1790187166251,
+          "role": "SOUL",
+          "text": "/offer drop dexk-jett-ro"
+        },
+        {
+          "t": 1790187166256,
+          "role": "DNA",
+          "text": "Obi: [/offer drop dexk-jett-ro]"
+        },
+        {
+          "t": 1790187167278,
+          "role": "SOUL",
+          "text": "/offer dexk jett-ro"
+        },
+        {
+          "t": 1790187167285,
+          "role": "DNA",
+          "text": "Obi: [/offer dexk — refused: an unknown command in front of an existing lead (jett-ro)]"
+        },
+        {
+          "t": 1790187168246,
+          "role": "SOUL",
+          "text": "/offer deks jett-ro"
+        },
+        {
+          "t": 1790187168249,
+          "role": "DNA",
+          "text": "Obi: [/offer deks — refused: an unknown command in front of an existing lead (jett-ro)]"
+        },
+        {
+          "t": 1790187169238,
+          "role": "SOUL",
+          "text": "/offer jett-ro"
+        },
+        {
+          "t": 1790187170236,
+          "role": "SOUL",
+          "text": "/offer trade jett-ro coach"
+        },
+        {
+          "t": 1790187170242,
+          "role": "DNA",
+          "text": "Obi: [/offer trade jett-ro → coach]"
+        },
+        {
+          "t": 1790187171243,
+          "role": "SOUL",
+          "text": "/offer synthetic person"
+        },
+        {
+          "t": 1790187171250,
+          "role": "DNA",
+          "text": "Obi: [offer synthetic person — recorded as SAID YES]"
+        },
+        {
+          "t": 1790187172240,
+          "role": "SOUL",
+          "text": "/offer synthetic-person"
+        },
+        {
+          "t": 1790187173236,
+          "role": "SOUL",
+          "text": "/offer drop synthetic-person"
+        },
+        {
+          "t": 1790187173243,
+          "role": "DNA",
+          "text": "Obi: [/offer drop synthetic-person]"
+        },
+        {
+          "t": 1790187174238,
+          "role": "SOUL",
+          "text": "/offer live"
+        },
+        {
+          "t": 1790187175250,
+          "role": "SOUL",
+          "text": "/offer trade jett-ro lawyer"
+        },
+        {
+          "t": 1790187225118,
+          "role": "DNA",
+          "text": "Obi: [/offer release — live and verified at https://the-drop-prais.mrmichaelhobbs123.workers.dev]"
+        },
+        {
+          "t": 1790187482952,
+          "role": "SOUL",
+          "text": "RECORD CORRECTION — the /offer … lines on run 4 between 01:0 and 01:2 are the A→Z DEBUG HARNESS driving the station, not the sovereign's words."
+        },
+        {
+          "t": 1790188496064,
+          "role": "SOUL",
+          "text": "Pitch deck comparison of their current shit page versus our new free website"
+        },
+        {
+          "t": 1790188510658,
+          "role": "SOUL",
+          "text": "/canon sync"
+        },
+        {
+          "t": 1790188729974,
+          "role": "DNA",
+          "text": "Obi: [/canon sync → Phoenix-Rising-Ai-Solutions/OB-1--Authoritative- — 248 files, 0 failed]"
+        },
+        {
+          "t": 1790188783744,
+          "role": "SOUL",
+          "text": "/gh backup"
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "opened": 1790101423295,
+      "entries": [
+        {
+          "t": 1790101423295,
+          "role": "SOUL",
+          "text": "put it through a rapid pace scout to pipeline mission for all that was missed, but we have some other things to attend to"
+        },
+        {
+          "t": 1790101423296,
+          "role": "SOUL",
+          "text": "mark this down in the pipeline as your initial findings, dont be so fucking confident. then run a rise to death to pipeline on this session itself so we can open up fresh"
+        },
+        {
+          "t": 1790101423296,
+          "role": "DNA",
+          "text": "Obi: [swept the terrain — 22,613 canon paths + 7,366 OB-1 paths keyword-matched; canon HEAD 6288cc40 (2026-09-16T19:44:35Z) unchanged, master fd8e01f5]"
+        },
+        {
+          "t": 1790101423296,
+          "role": "DNA",
+          "text": "Obi: [reported the missed set — ten sessions named since 09-16 with no artifact found BY THIS SWEEP; the four newest use a lane taxonomy that appears nowhere in the canon. 'not found', not 'proven absent']"
+        },
+        {
+          "t": 1790101423296,
+          "role": "DNA",
+          "text": "Obi: [staged RECON.001 + RECON.002 in the pipeline lane (src/app.js PROPOSED_G999) — first pass, low confidence, explicitly hedged]"
+        },
+        {
+          "t": 1790101423296,
+          "role": "DNA",
+          "text": "Obi: [first SCS pass GATED at DEATH — run 2 held no RRL at that moment: this session was driven from the editor, so the station never saw it]"
+        },
+        {
+          "t": 1790101423297,
+          "role": "DNA",
+          "text": "Obi: [honest limit — the earlier turns of this session are NOT on this browser's record; only the sovereign's two messages above are verbatim, the rest is this agent's summary]"
+        },
+        {
+          "t": 1790101423297,
+          "role": "DNA",
+          "text": "Obi: [replaying SCOUT→MARCH→SCHOLAR→SUPPLY→ENGINEER→DEATH→PIPELINE on this session so the run can close]"
+        }
+      ]
+    },
+    {
+      "run": 3,
+      "opened": 1790101516510,
+      "entries": [
+        {
+          "t": 1790101516510,
+          "role": "DNA",
+          "text": "Obi: [DEATH seal — LFG 10-step SCS — run 2 closed, KILO_GAP — SSM_NONE, SSM_NONE]"
+        },
+        {
+          "t": 1790156313046,
+          "role": "DNA",
+          "text": "Obi: [PhoenixScout REAL — ]"
+        },
+        {
+          "t": 1790156313176,
+          "role": "DNA",
+          "text": "Obi: [phoenixSCOUT soul hunt · mailala oktava → REAL · 60 read]"
+        },
+        {
+          "t": 1790182169910,
+          "role": "SOUL",
+          "text": "SOUL — CORRESPONDENCE: a free-website-offer acceptor.\nRead from a 19.5s screen recording of the chat (attached by the sovereign), decoded and read frame by frame on this device. What the recording did not scroll past is NOT here, and is not guessed.\n\nCONTACT — Jett Ro (WhatsApp). He sent his Zalo: 0384361051. Living in Indonesia. Vietnamese number. A customer of the sovereign's already (\"You bought a lot from me\").\n\n— READ, VERBATIM —\n(sep 16, 11:26) Jett: \"Hey brudda\" / \"How goes that side?\"\n(sep 16, 1:28 pm) Sovereign: \"Haha hey man, not bad, just started using the helmets\" / \"How you been\"\n(sep 16, 2:57 pm) Jett [replied to \"Haha hey man, not bad, just started using the helmets\"]: \"All is well bro, currently living in Indonesia. All is good.\" / \"Lets chat regarding the website design you offered\" / \"Hope all is well with them?\" / \"You bought a lot from me\"\n(sep 16, 3:37 pm) Sovereign: \"Haha yeah all work as intended.\" / \"And sure, got any websites or public links I can look at\" / \"What are ya building / creating ?\"\n(mon, 9:30 am) Jett: \"I am currently building a Multi Sports curriculum and swimming curriculum.\" / \"I am trying to sell content online. It has all the pedagogical framework and objectives, images and gameplay. I just need a site where clients can search from.\"\nSovereign: \"Can you show me what you have ?\"\n(tue, 12:49 pm) Jett: \"Absolutely, I'll get those to you as soon as possible\"\n(10:15 am) Jett: \"https://drive.google.com/drive/folders/1al0Xj6r3pYBJlwfqY00LwZU0VNuQav0t?usp=sharing\" / \"Please see in the drive\" / \"All scope and sequence, swimming program, and Multi Sports program. There are also thumbnails.\" / \"Please let me know what else you may need brother\"  [link preview: \"Final Scope and Sequence for Let's Play - Google Drive\"]\n(10:32 pm) Sovereign: \"Yes, i'm going to need a lot more, but don't worry. It will only take about 45 to 60 minutes\"\nSovereign: \"I'm going to design an app for you to use to take walkthrough videos. Give me voice recordings. Answer some written questions and provide i need an all links to your online presence. With socials and whatever else including testimonials and most importantly Pictures of live action moments with clients. I'll give a few basic pointers on how to do the walkthrough video. But you definitely don't need to be a professional obviously the better you do it. The more it helps But even the most amateur of walkthrough videos can be turned into a masterpiece. These days. And of course, there may be times where it doesn't apply to your business. So you can skip that part. But as much as the assessment that you can complete, the better results, I can get for you\"\nSovereign: \"A successful sales funnel. Has to make people feel something it has to tell a story And make them feel like they want to be a part of that story Or better yet, they need to be\"\n(11:18 pm) [a 1:00 video sent by the sovereign — the walkthrough of a venue, saved]\n(10:43 pm) Sovereign: \"Some proof of how amateur you can be. This is a lazy video I took to build. What is turning out to be a pretty awesome looking. Website\"\nSovereign: \"If you look at the current website, the landing page is the worst part of the business, which is the hostile beds in the dorm room, which I don't think those ever get washed\"\nSovereign: \"Through a couple of the other walkthrough videos, I walk up the stairs and capture a lively crowd. Dancing to reggae, music and truly having a good time. And get the owner in the corner. Wearing his bling and the staff smiling. If you're marketing in sales funnel, efforts are directing people into something that is lifeless. You're just throwing your money away\"\n(!) \"Delivered 33 minutes ago\" — the last message of the visible conversation. He has not answered it yet in this recording.\n\n— WHAT THIS ASKS FOR —\n1. He accepted the free website offer and asked to talk about it. He is NOT priority (the sovereign's words).\n2. His business: a coach selling a multi-sports and swimming curriculum — pedagogical framework, objectives, images, gameplay. He sells it online and gets no traffic; what he asked for, in his own words, is \"a site where clients can search from\". He gave the scope and sequence, the swimming program, the Multi Sports program and thumbnails, in a Google Drive folder, on the day.\n3. The sovereign promised him THE APP: \"I'm going to design an app for you to use to take walkthrough videos. Give me voice recordings. Answer some written questions and provide i need an all links to your online presence.\"\n4. He was told it takes 45 to 60 minutes, and that the most amateur walkthrough video can be turned into a masterpiece.\n5. The reference video he was sent is the 1:00 venue walkthrough — a reggae bar and hostel after dark. It is the proof of work, not his own place."
+        },
+        {
+          "t": 1790182169913,
+          "role": "SOUL",
+          "text": "REFERENCE VIDEO (the one shared with him) — 1:00, vertical, night: a walkthrough of a reggae bar and hostel. Read frame by frame on this device. What the frames show: the lane outside after dark; the frontage and the sign lit up; the bar inside with its neon — a REGGAE BAR sign carrying the house words; a pool table; a lit band area; the room the singer plays in; the upstairs shared room with its seating; the kitchen and the food counter; the bar's own signage. This is the venue whose page the sovereign already built (the reggae hostel and rooftop bar), sent to the coach as proof of what a walkthrough becomes."
+        },
+        {
+          "t": 1790182387428,
+          "role": "DNA",
+          "text": "Obi: [/offer release — BLOCKED, the Cloudflare token was refused: Could not route to /client/v4/accounts/user/tokens/verify, perhaps your object identifier is invalid?]"
+        },
+        {
+          "t": 1790182409904,
+          "role": "DNA",
+          "text": "Obi: [/offer release — BLOCKED, the Cloudflare token was refused: Invalid API Token]"
+        },
+        {
+          "t": 1790182409914,
+          "role": "DNA",
+          "text": "Obi: [offer jett Ro — recorded as SAID YES]"
+        },
+        {
+          "t": 1790182409945,
+          "role": "DNA",
+          "text": "Obi: [/offer trade jett-ro → coach]"
+        },
+        {
+          "t": 1790182409956,
+          "role": "DNA",
+          "text": "Obi: [/offer got jett-ro]"
+        },
+        {
+          "t": 1790182409965,
+          "role": "DNA",
+          "text": "Obi: [/offer got jett-ro]"
+        },
+        {
+          "t": 1790182409971,
+          "role": "DNA",
+          "text": "Obi: [/offer need jett-ro]"
+        },
+        {
+          "t": 1790182409981,
+          "role": "DNA",
+          "text": "Obi: [/offer need jett-ro]"
+        },
+        {
+          "t": 1790182409984,
+          "role": "DNA",
+          "text": "Obi: [/offer need jett-ro]"
+        },
+        {
+          "t": 1790182452026,
+          "role": "SOUL",
+          "text": "/offers"
+        },
+        {
+          "t": 1790182452059,
+          "role": "DNA",
+          "text": "Obi: [/offers — 1 acceptor(s), 1 trade group(s)]"
+        },
+        {
+          "t": 1790182584303,
+          "role": "SOUL",
+          "text": "/offer"
+        },
+        {
+          "t": 1790182584313,
+          "role": "DNA",
+          "text": "Obi: [/offers — 1 acceptor(s), 1 trade group(s)]"
+        },
+        {
+          "t": 1790182595945,
+          "role": "SOUL",
+          "text": "/offer"
+        },
+        {
+          "t": 1790182595962,
+          "role": "DNA",
+          "text": "Obi: [/offers — 1 acceptor(s), 1 trade group(s)]"
+        },
+        {
+          "t": 1790182600487,
+          "role": "SOUL",
+          "text": "/offer release"
+        },
+        {
+          "t": 1790182601626,
+          "role": "DNA",
+          "text": "Obi: [/offer release — BLOCKED, the Cloudflare token was refused: Invalid API Token]"
+        }
+      ]
+    },
+    {
+      "run": 1,
+      "opened": 1790012152218,
+      "entries": [
+        {
+          "t": 1790012152218,
+          "role": "DNA",
+          "text": "Obi: [/bg — BG idle · lock — · wake — · audio off · hidden 0x · heartbeat no throttling seen · last away 3s/2 beats]"
+        },
+        {
+          "t": 1790014324146,
+          "role": "SOUL",
+          "text": "/vault"
+        },
+        {
+          "t": 1790014324153,
+          "role": "DNA",
+          "text": "Obi: [/vault — status]"
+        },
+        {
+          "t": 1790014329383,
+          "role": "SOUL",
+          "text": "/vault test all"
+        },
+        {
+          "t": 1790014329666,
+          "role": "DNA",
+          "text": "Obi: [input held — still busy]"
+        },
+        {
+          "t": 1790014336229,
+          "role": "SOUL",
+          "text": "/vault key"
+        },
+        {
+          "t": 1790014336250,
+          "role": "DNA",
+          "text": "Obi: [/vault key — ML-KEM keypair minted]"
+        },
+        {
+          "t": 1790014336403,
+          "role": "SOUL",
+          "text": "/vault seal"
+        },
+        {
+          "t": 1790014343226,
+          "role": "SOUL",
+          "text": "/vault locate"
+        },
+        {
+          "t": 1790014343229,
+          "role": "DNA",
+          "text": "Obi: [/vault locate — probed the canon for the vault]"
+        },
+        {
+          "t": 1790014369983,
+          "role": "DNA",
+          "text": "Obi: [/vault set sovereign [REDACTED] stored but failed its test]"
+        },
+        {
+          "t": 1790014370079,
+          "role": "SOUL",
+          "text": "/vault forget sovereign"
+        },
+        {
+          "t": 1790014412257,
+          "role": "SOUL",
+          "text": "/vault"
+        },
+        {
+          "t": 1790014412260,
+          "role": "DNA",
+          "text": "Obi: [/vault — status]"
+        },
+        {
+          "t": 1790014416229,
+          "role": "SOUL",
+          "text": "/vault seal"
+        },
+        {
+          "t": 1790014423045,
+          "role": "SOUL",
+          "text": "/vault"
+        },
+        {
+          "t": 1790014423047,
+          "role": "DNA",
+          "text": "Obi: [/vault — status]"
+        },
+        {
+          "t": 1790014436293,
+          "role": "SOUL",
+          "text": "/vault test all"
+        },
+        {
+          "t": 1790015738453,
+          "role": "SOUL",
+          "text": "/lesson sarcasm for Vietnamese high-school students"
+        },
+        {
+          "t": 1790015847656,
+          "role": "SOUL",
+          "text": "/lesson how to ask good questions in class"
+        },
+        {
+          "t": 1790015901131,
+          "role": "DNA",
+          "text": "Obi: [/vault set gh [REDACTED] verified against GitHub]"
+        },
+        {
+          "t": 1790016043194,
+          "role": "DNA",
+          "text": "Obi: [/vault locate — probed the canon for the vault]"
+        },
+        {
+          "t": 1790016130382,
+          "role": "DNA",
+          "text": "Obi: [/vault — status]"
+        },
+        {
+          "t": 1790016231564,
+          "role": "DNA",
+          "text": "Obi: [/vault push → vault sealed on canon, commit 95b23ded]"
+        },
+        {
+          "t": 1790016246057,
+          "role": "DNA",
+          "text": "Obi: [/vault — status]"
+        },
+        {
+          "t": 1790016246060,
+          "role": "DNA",
+          "text": "Obi: [/vault — status]"
+        },
+        {
+          "t": 1790016701789,
+          "role": "DNA",
+          "text": "Obi: [/gh test — 41/46 GitHub capabilities confirmed for @hobbs0011]"
+        },
+        {
+          "t": 1790016772994,
+          "role": "DNA",
+          "text": "Obi: [/gh test — 44/48 GitHub capabilities confirmed for @hobbs0011]"
+        },
+        {
+          "t": 1790016787500,
+          "role": "SOUL",
+          "text": "/gh test"
+        },
+        {
+          "t": 1790016796391,
+          "role": "DNA",
+          "text": "Obi: [/gh test — 42/46 GitHub capabilities confirmed for @hobbs0011]"
+        },
+        {
+          "t": 1790016841027,
+          "role": "SOUL",
+          "text": "/gh test"
+        },
+        {
+          "t": 1790016866479,
+          "role": "DNA",
+          "text": "Obi: [/gh test — 44/48 GitHub capabilities confirmed for @hobbs0011]"
+        },
+        {
+          "t": 1790016935653,
+          "role": "DNA",
+          "text": "Obi: [/vault — status]"
+        },
+        {
+          "t": 1790017429070,
+          "role": "DNA",
+          "text": "Obi: [/vault escrow [REDACTED]
