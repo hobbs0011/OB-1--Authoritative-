@@ -4239,6 +4239,9 @@ function wireBackup(){
   if(ex && !ex.__wired){ ex.__wired = true; ex.onclick = function(){
     const pack = { at:new Date().toISOString(), kind:"pais-data-backup", keys:backupDataKeys() };
     pack.keyList = Object.keys(pack.keys);
+    let expScrub = 0;
+    if(pack.keys["obi_boardroom"]){ const r = scrubBoardroomNSFW(pack.keys["obi_boardroom"]); pack.keys["obi_boardroom"] = r.json; expScrub = r.scrubbed; }
+    pack.nsfwScrubbed = expScrub;
     const blob = new Blob([JSON.stringify(pack)], { type:"application/json" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
@@ -4246,11 +4249,41 @@ function wireBackup(){
     document.body.appendChild(a); a.click();
     setTimeout(function(){ try{ URL.revokeObjectURL(a.href); a.remove(); }catch(e){} }, 4000);
     const st = document.getElementById("bkStatus");
-    if(st) st.textContent = "downloaded " + pack.keyList.length + " keys — carry the file to the next browser and Import it there";
+    if(st) st.textContent = "downloaded " + pack.keyList.length + " keys — carry the file to the next browser and Import it there" + (expScrub ? " · NSFW scrubbed: " + expScrub + " lines" : "");
     try{ logOp({ kind:"op", action:"backup export", result:pack.keyList.length + " keys" }); }catch(e){}
   }; }
   const im = document.getElementById("bkImportFile");
   if(im && !im.__wired){ im.__wired = true; im.onchange = function(){ importBackupFile(im.files && im.files[0], document.getElementById("bkStatus")); im.value = ""; }; }
+}
+/* NSFW EXCLUSION (sovereign order: no not-safe-for-work content travels between
+   browsers or to git). The transfer scrubs crude language out of sitting
+   transcripts and blueprints on export AND on import, counting every line it
+   touches. Laws, memories, owners, dates and decisions are untouched — the
+   meaning travels, the filth does not. */
+function scrubBoardroomNSFW(boardStr){
+  let scrubbed = 0, out = boardStr;
+  try{
+    const b = JSON.parse(boardStr);
+    const scrubArr = function(a){
+      if(!Array.isArray(a)) return a;
+      return a.map(function(line){
+        if(typeof line !== "string") return line;
+        const clean = scrubWorkSafe(line);
+        if(clean !== line) scrubbed++;
+        return clean;
+      });
+    };
+    const scrubBp = function(s){
+      if(s && typeof s.blueprint === "string"){
+        const c = scrubWorkSafe(s.blueprint);
+        if(c !== s.blueprint){ scrubbed++; s.blueprint = c; }
+      }
+    };
+    (b.sittings || []).forEach(function(s){ s.transcript = scrubArr(s.transcript); scrubBp(s); });
+    if(b.draft){ b.draft.transcript = scrubArr(b.draft.transcript); scrubBp(b.draft); }
+    out = JSON.stringify(b);
+  }catch(e){}
+  return { json: out, scrubbed: scrubbed };
 }
 async function importBackupFile(file, statusEl){
   const say = function(t){ if(statusEl) statusEl.textContent = t; };
@@ -4261,17 +4294,20 @@ async function importBackupFile(file, statusEl){
   if(!pack || typeof pack !== "object" || !pack.keys || typeof pack.keys !== "object"){ say("not a backup file (no keys in it)"); return; }
   const names = Object.keys(pack.keys).filter(function(k){ return k.indexOf("obi_") === 0 && k !== "obi_keys"; });
   if(!names.length){ say("backup holds no data keys — nothing to restore"); return; }
-  let ok = 0; const bad = [];
+  let ok = 0; const bad = []; let impScrub = 0;
   for(const k of names){
     try{
-      localStorage.setItem(k, String(pack.keys[k]));
-      if(localStorage.getItem(k) === String(pack.keys[k])) ok++;
+      let v = String(pack.keys[k]);
+      if(k === "obi_boardroom"){ const r = scrubBoardroomNSFW(v); v = r.json; impScrub += r.scrubbed; }
+      localStorage.setItem(k, v);
+      if(localStorage.getItem(k) === v) ok++;
       else bad.push(k);
     }catch(e){ bad.push(k); }
   }
+  const scrubNote = " · NSFW scrubbed: " + impScrub + " lines";
   say(ok === names.length
-    ? "restored " + ok + " keys from " + (pack.at || "the backup") + " — secrets never travel (keys are typed per device)"
-    : "restored " + ok + "/" + names.length + (bad.length ? " · failed: " + bad.join(", ") : ""));
+    ? "restored " + ok + " keys from " + (pack.at || "the backup") + " — secrets never travel (keys are typed per device)" + scrubNote
+    : "restored " + ok + "/" + names.length + (bad.length ? " · failed: " + bad.join(", ") : "") + scrubNote);
   try{
     let sittings = 0, mem = 0;
     try{ const b = JSON.parse(localStorage.getItem("obi_boardroom") || "{}"); sittings = (b.sittings || []).length; mem = Object.keys(b.seatmem || {}).length; }catch(e){}
