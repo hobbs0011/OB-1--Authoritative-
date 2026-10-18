@@ -315,6 +315,7 @@
     let md = "# SCOUT — " + ctx.session + " — " + iso + "\n\n";
     md += "> **Doctrine:** " + "No pipeline. No AI calls. No processing. Flag and tag only." + " (CANON/SCRIPTS/scout.ps1)\n";
     md += "> **Generator:** " + ctx.session + " · run " + (ctx.run == null ? "—" : ctx.run) + " · took " + elapsed + " ms\n";
+    md += "> **Scope:** " + (ctx.scope || "all sectors") + " · " + results.length + " target(s) probed\n";
     md += "> **Verdict:** " + (flags.length ? "FLAGGED — " + flags.length + " sector(s) require verification before engage" : "SECTOR CLEAR") + "\n\n";
     md += "| target | verdict | ms | machine-measured |\n|---|---|---|---|\n";
     for (const r of results) md += "| " + r.id + " | " + r.verdict + " | " + r.ms + " | " + String(r.summary).replace(/\|/g, "\\|") + " |\n";
@@ -326,7 +327,8 @@
     md += "\n## Scout pheromones laid (" + trailed.laid + ")\n";
     md += "positive " + trailed.byKind.positive + " · negative " + trailed.byKind.negative + " · neutral " + trailed.byKind.neutral + "\n";
     md += "\nHandoff: " + (flags.length ? "flags raised — MARCH must not engage these sectors without verification (L58 MAP != TERRAIN)." : "sector clear — hand off to MARCH.") + "\n";
-    md += "\nDEPOSIT: PENDING — writing CANON/SCOUT/scout-" + ctx.session.replace(/[^\w.-]+/g, "-") + "-" + ctx.stamp + ".md requires a write-scoped token (/gh token).\n";
+    md += "\nDEPOSIT: HELD — writing CANON/SCOUT/scout-" + ctx.session.replace(/[^\w.-]+/g, "-") + "-" + ctx.stamp + ".md runs through PHOENIXOMEGAPROTOCOL. The GitHub token IS held in this browser; the gate is the blocker, not the token. Arm it (/phoenixomegaprotocol <password>) and the deposit goes; until then the free wire carries the report and the canon stays untouched. The wire does not write the canon, and does not claim to.\n";
+    if(ctx.scs) md += "\n## SCS Stage 2 (the gate)\n" + ctx.scs.state + " · " + ctx.scs.detail + "\n";
     return md;
   }
 
@@ -344,10 +346,148 @@
       html += '<div class="rrow"><b>LOCAL SECTOR</b><span class="vd">BOOKKEEPING</span><div class="rd">' + ctx.local.length + ' records</div></div>';
       for (const l of ctx.local) html += '<div class="rrow"><b>' + esc(l.name) + '</b><span class="vd">' + esc(l.verdict) + '</span><div class="rd">' + esc(l.detail) + "</div></div>";
     }
+    if(ctx.scs){
+      const sc = ctx.scs;
+      html += '<div class="rrow"><b>SCS STAGE 2</b><span class="vd" style="color:' + (VM[sc.verdict] || "#8a94a6") + '">' + esc(sc.state) + '</span><div class="rd">' + esc(sc.detail) + '</div></div>';
+    }
     html += '<div class="rrow"><b>PHEROMONES</b><span class="vd" style="color:' + VM.LIVE + '">' + trailed.laid + ' LAID</span><div class="rd">positive ' + trailed.byKind.positive + " · negative " + trailed.byKind.negative + " · neutral " + trailed.byKind.neutral + " — the ground now knows what the scout walked</div></div>";
-    html += '<div class="rrow"><b>REPORT</b><span class="vd">' + esc(rep.id) + '</span><div class="rd">' + rep.bytes + ' B · saved to the durable scout archive (kv) · <a href="' + rep.url + '" download="' + esc(rep.id) + '" style="color:var(--cyan)">⬇ download the scout report</a> · DEPOSIT PENDING (canon write needs a token)</div></div>';
+    const w = rep.wire;
+    let wireTxt;
+    if(!w) wireTxt = "the free wire was not consulted — nothing was pushed";
+    else if(w.nerve) wireTxt = "DELIVERED ON THE FREE WIRE — nerve broadcast " + esc(String(w.nerve))
+      + (w.url ? ' · <a href="' + esc(w.url) + '" target="_blank" rel="noopener" style="color:var(--cyan)">⤓ the flagged report, addressed</a> (permanent · no token needed)' : " · nerve only — a clean sweep's details are already in the register's digests, so nothing new was addressed")
+      + (w.carryWhy ? " · the carrier refused the file: " + esc(w.carryWhy) : "");
+    else wireTxt = "the free wire refused: " + esc(w.nerveWhy || "no reason given");
+    html += '<div class="rrow"><b>REPORT</b><span class="vd">' + esc(rep.id) + '</span><div class="rd">' + rep.bytes + ' B · saved to the durable scout archive (kv) · <a href="' + rep.url + '" download="' + esc(rep.id) + '" style="color:var(--cyan)">⬇ download the scout report</a><br>' + wireTxt + '<br>CANON DEPOSIT: HELD — the authority is behind PHOENIXOMEGAPROTOCOL, not a missing token (the token is held in this browser). Arm the gate (/phoenixomegaprotocol &lt;password&gt;) and the deposit goes; until then the wire carries the report and the canon is untouched. The wire does not write the canon, and does not claim to.</div></div>';
     html += '<div class="rfoot">' + (flags.length ? "FLAGGED — " + flags.map(f => f.id).join(", ") + " must be verified before engage (L58 MAP ≠ TERRAIN)." : "SECTOR CLEAR — hand off to MARCH.") + ' Run <b>/route &lt;task&gt;</b> to see how the trails changed.</div></div>';
     return html;
+  }
+
+  /* ------------------------------ THE HARD CONFIRMATION ----------------------
+     MARCH (SCS Stage 3) audits SCOUT: "Territory sweep. Confirm the scout the
+     hard way." (src/scs.js STAGES · GOSPEL-999 §SYSTEM I). A verdict printed
+     once is only a claim, so the march walks the flagged sectors AGAIN, on its
+     own, and compares the two readings. Same verdict → CONFIRMED. A sector that
+     answers differently → MOVED (the scout's flag was stale, and that is worth
+     exactly as much as a confirmation). A sector whose re-probe throws →
+     UNREACHABLE. Nothing is inferred from the first reading, and a sector the
+     march could not walk is named rather than dropped.
+
+     AND ALONG THE CLAIM ITSELF. Re-running the same probe is the weakest form of
+     confirmation — two readings of one test. So for the claims that can be tested
+     a DIFFERENT way, MARCH does that: where the scout said "the canon is private,
+     no PAT", the march asks GitHub anonymously (a 404 is the claim holding, a 200
+     would contradict it outright); where the scout said "no Cloudflare credential
+     works from here", the march asks Cloudflare anonymously. The two credential
+     flags are exactly the ones worth testing independently, because they are the
+     two that would change everything if they were wrong. Every item says which
+     test was used. */
+  async function claimCanon(){
+    const claim = "the canon is PRIVATE — an anonymous read is refused";
+    try{
+      const r = await withTimeout(fetch(CANON.base + "/commits?per_page=1&sha=" + CANON.branch, { headers:{ "Accept":"application/vnd.github+json" } }), 12000, "anonymous canon read");
+      const body = (await r.text()).slice(0, 200).replace(/\s+/g, " ");
+      return { claim, tested: !r.ok,
+        detail: "anonymous commits API (no Authorization header) → HTTP " + r.status + (r.ok ? " · THE REPO ANSWERED WITHOUT A CREDENTIAL — the BLOCKED flag is CONTRADICTED and the canon is readable" : " · " + body.slice(0, 140)) };
+    }catch(e){ return { claim, tested:null, detail:"the independent read threw: " + ((e && e.message) || e) }; }
+  }
+  async function claimCloudflare(){
+    const claim = "no Cloudflare credential works from this origin";
+    const url = "https://api.cloudflare.com/client/v4/user/tokens/verify";
+    const tries = [];
+    let r = null, via = "anonymous token verify from this origin (plain fetch, no Authorization header)";
+    try{ r = await withTimeout(fetch(url, { headers:{ "Accept":"application/json" } }), 12000, "anonymous cloudflare verify"); }
+    catch(e){
+      tries.push("plain fetch: " + ((e && e.message) || e));
+      /* cloudflare's API sends no CORS header, so the anonymous read goes through
+         the platform proxy — still with NO credential, so it is still a test of the
+         claim and not a bypass of it. */
+      try{
+        if(root && root.superFetch){ r = await withTimeout(root.superFetch(url, { headers:{ "Accept":"application/json" } }), 25000, "anonymous cloudflare verify (proxied)"); via = "anonymous token verify through the platform proxy (plain fetch was CORS-blocked), no Authorization header"; }
+      }catch(e2){ tries.push("the platform proxy: " + ((e2 && e2.message) || e2)); }
+    }
+    if(!r) return { claim, tested:null, detail:"the independent read could not be taken — " + tries.join(" · ") };
+    let body = ""; try{ body = (await r.text()).slice(0, 160).replace(/\s+/g, " "); }catch(e){}
+    /* The claim is "no credential works from here", so the claim HOLDS when the API
+       REFUSES the anonymous call — whatever shape its refusal takes. Cloudflare
+       answers a bare request with HTTP 400 + code 1001 "Missing \"Authorization\"
+       header" rather than 401, and reading only for 401/403 made a refusal look
+       like a contradiction. Only a 2xx (the API actually answering as
+       authenticated) can contradict the claim. The API's own words are printed so
+       the reader can check the judgement rather than trust it. */
+    return { claim, tested: !r.ok,
+      detail: via + " → HTTP " + r.status + (r.ok ? " · THE API ANSWERED AS AUTHENTICATED — the BLOCKED flag is CONTRADICTED" : " · the API refused the unauthenticated call: " + body.slice(0, 120)) };
+  }
+  const CLAIM_TESTS = { canon: claimCanon, cloudflare: claimCloudflare };
+
+  async function confirm(opts){
+    opts = opts || {};
+    const prev = last;
+    if(!prev || !prev.results || !prev.results.length){
+      return { ok:false, why:"no scout on record in this page's life — MARCH confirms a scout, it does not invent one", items:[], confirmed:0, moved:0, unreachable:0, independent:0 };
+    }
+    const flagged = prev.results.filter(r => FLAGGY.indexOf(r.verdict) !== -1);
+    const ctx = { started: Date.now(), session: prev.session, run: prev.run };
+    const items = [];
+    for(const was of flagged){
+      const t = TERRAIN.filter(x => x.id === was.id)[0];
+      const t0 = Date.now();
+      /* 1 — the claim, tested a different way, where such a test exists */
+      let claim = null;
+      try{ if(CLAIM_TESTS[was.id]) claim = await CLAIM_TESTS[was.id](); }
+      catch(e){ claim = { claim:"the independent test threw", tested:null, detail:String((e && e.message) || e) }; }
+      /* 2 — and the sector itself, walked a second time */
+      let now = null;
+      if(t){
+        try{ now = await t.run(ctx); }
+        catch(e){ now = { verdict:"UNREACHABLE", summary:"the re-probe threw: " + ((e && e.message) || e) }; }
+      }
+      const v = now ? ((now && now.verdict) || "UNREACHABLE") : null;
+      let result, how;
+      if(claim && claim.tested === true){
+        result = "CONFIRMED"; how = "independent claim test";
+      } else if(claim && claim.tested === false){
+        result = "CONTRADICTED"; how = "independent claim test";
+      } else if(claim){
+        result = (v === was.verdict) ? "CONFIRMED" : (v === "UNREACHABLE" ? "UNREACHABLE" : "MOVED");
+        how = "second reading (the independent test could not be taken)";
+      } else if(!t){
+        result = "NOT WALKED"; how = "no probe for this sector in TERRAIN";
+      } else {
+        result = (v === was.verdict) ? "CONFIRMED" : (v === "UNREACHABLE" ? "UNREACHABLE" : "MOVED");
+        how = "second reading";
+      }
+      items.push({ id:was.id, was:was.verdict, now:v, ms:Date.now() - t0, how,
+        claim: claim ? claim.claim : null,
+        claimDetail: claim ? claim.detail : null,
+        result,
+        summary: (now && now.summary) || (t ? "" : "no probe for this sector in TERRAIN") });
+    }
+    const confirmed = items.filter(i => i.result === "CONFIRMED").length;
+    const moved = items.filter(i => i.result === "MOVED" || i.result === "CONTRADICTED").length;
+    const unreachable = items.filter(i => i.result === "UNREACHABLE" || i.result === "NOT WALKED").length;
+    const independent = items.filter(i => /^independent/.test(i.how || "")).length;
+    return { ok:true, at:ctx.started, session:ctx.session, items, confirmed, moved, unreachable, independent,
+      flagsBefore: flagged.map(r => r.id),
+      sentence: items.length + " flagged sector(s) confirmed · " + confirmed + " held · " + moved + " moved/contradicted · " + unreachable + " not walked · " + independent + " tested independently" };
+  }
+
+  /* ------------------------------- THE ROUTE BACK ---------------------------
+     Whatever MARCH could not walk, named. The canon sector is the standing one:
+     it is private, and this browser holds no PAT, so no sweep of this station can
+     ever confirm it — that is a statement about the credential, not about the
+     canon. A march that stayed silent about it would be the L58 defect (map read
+     as terrain). */
+  function notWalked(){
+    var rows = [];
+    try{
+      var has = {};
+      try{ has = JSON.parse(localStorage.getItem("obi_keys") || "{}") || {}; }catch(e){ has = {}; }
+      rows.push({ sector:"canon", why: has.gh ? "a PAT is present — the canon sweep can run" : "no GitHub PAT in this browser: the canon is private, so nothing in it was walked or confirmed", reachable: !!has.gh });
+      rows.push({ sector:"cloudflare", why: has.cf ? "a token is present — the account sweep can run" : "no Cloudflare token/account in this browser: the sovereign's account was not walked", reachable: !!has.cf });
+      rows.push({ sector:"ground", why:"the pheromone field is local (this origin) — it is walked by every sweep, not by a march", reachable:true });
+    }catch(e){}
+    return rows;
   }
 
   function localRows(records){
@@ -358,8 +498,27 @@
     opts = opts || {};
     const ctx = { started: Date.now(), session: opts.session || ((window.generatorName || "obi") + "/" + String(window.generatorPublicId || "").slice(0, 6)), run: opts.run == null ? null : opts.run };
     ctx.stamp = new Date().toISOString().replace(/[-:T]/g, "").slice(0, 14);
+    /* THE SCS STAGE-2 STATUS — handed in by the route (app.js scsScoutStatus).
+       Stage 2 (the canon's /phoenixSCOUT) audits RISE, so the card carries the
+       session verdict beside the terrain verdict: a real sweep on a shut gate is
+       still a shut gate, and the card must not hide that. */
+    ctx.scs = opts.scs || null;
+    /* THE ARGUMENT IS READ AS WORDS, NOT AS ONE STRING. It carries both the
+       terrain filter AND the hunt's terms — the sovereign's command is one
+       sentence ("/PhoenixScout all Mailhala, and website info, SOUL priority
+       everything to https://…") — so matching the whole string against a sector
+       id matched none of them and probed NOTHING. An empty sweep is the worst
+       kind of wrong: it renders as reconnaissance. `all` / `every` /
+       `everything` mean the whole map (his own word for it); a named sector
+       still narrows the sweep; and a word list that names no sector falls back
+       to the whole map rather than to silence. The sweep is read-only, so a
+       wider map can only add evidence. */
     const only = String(opts.only || "").trim().toLowerCase();
-    const targets = only ? TERRAIN.filter(t => t.id.indexOf(only) !== -1 || only.indexOf(t.id) !== -1) : TERRAIN;
+    const words = only.split(/[\s,]+/).filter(Boolean);
+    const every = !words.length || words.some(w => w === "all" || w === "every" || w === "everything");
+    let targets = every ? TERRAIN : TERRAIN.filter(t => words.some(w => t.id.indexOf(w) !== -1 || w.indexOf(t.id) !== -1));
+    if(!targets.length) targets = TERRAIN;
+    ctx.scope = every ? "all sectors (the sovereign's word: all)" : (targets.length === TERRAIN.length ? "all sectors (no sector name matched in: " + only + ")" : targets.map(t => t.id).join(", "));
     const P = window.ObiPheromone;
     if(P) P.deposit({ kind:"neutral", key:"mission:scout", signal:only || "all", text:"scout out — " + targets.map(t => t.id).join(", "), session:ctx.session, run:ctx.run, drone:"PhoenixScout" });
 
@@ -375,7 +534,8 @@
     const elapsed = Date.now() - ctx.started;
     const trailed = trailEmit(results, ctx);
 
-    let rep = { id:"scout-" + ctx.stamp + ".md", bytes:0, url:"#", md:"" };
+    let rep = { id:"scout-" + ctx.stamp + ".md", bytes:0, url:"#", md:"", wire:null };
+    let flags = results.filter(r => FLAGGY.indexOf(r.verdict) !== -1);
     try{
       const md = report(ctx, results, trailed, elapsed);
       rep.md = md; rep.bytes = md.length;
@@ -383,6 +543,36 @@
       lastUrl = URL.createObjectURL(new Blob([md], { type:"text/markdown" }));
       rep.url = lastUrl;
       if(root && root.kv && root.kv.scout) await root.kv.scout.set(rep.id, { id:rep.id, at:ctx.started, session:ctx.session, run:ctx.run, markdown:md, results:results.map(r => ({ id:r.id, verdict:r.verdict, ms:r.ms, summary:r.summary })) });
+      /* THE WIRE — reconnaissance that cannot be delivered is a diary. The canon
+         write is behind PHOENIXOMEGAPROTOCOL (the GitHub token IS held in this
+         browser; the gate is what is closed), but the free wire needs no token at
+         all, so the SCOUT verdict goes out on the nerve EVERY run
+         (compact, append-only), and a FLAGGED report — the runs that carry
+         information the register's digests do not already hold — is carried to a
+         permanent addressed key. Fail closed: a refusal is printed, never
+         implied, and the canon deposit is named HELD-with-reason, never as a
+         token the browser lacks. */
+      try{
+        const FW = window.ObiFreeWire;
+        if(FW && FW.send){
+          const flagIds = flags.map(r => r.id);
+          /* the carry goes FIRST, so the broadcast can cite the address it made —
+             a family node reading the nerve then needs no second lookup. */
+          let carried = null;
+          if(flags.length && FW.put){
+            carried = await FW.put(String(md) + "\n", "scout-" + ctx.stamp + ".md", "text/plain");
+            if(!(carried && carried.ok)) carried = null;
+          }
+          const said = await FW.send("[SCOUT] " + ctx.session + " · " + new Date(ctx.started).toISOString() + " · "
+            + results.length + " targets · " + (flagIds.length ? flagIds.join(", ").toUpperCase() + " FLAGGED" : "SECTOR CLEAR")
+            + (ctx.scs ? " · SCS " + ctx.scs.state : "")
+            + "\n" + (flags.length ? flags.map(r => r.id.toUpperCase() + " " + r.verdict + " — " + r.summary).join("\n") : "no sector flagged")
+            + (carried ? "\nREPORT " + carried.url + " (permanent · no token)" : (flags.length ? "\nREPORT not addressed — every carrier refused" : "")),
+            { title:"Obi · scout " + (flags.length ? "flagged" : "clear"), tags: flags.length ? "warning" : "eyes" });
+          rep.wire = { nerve: said && said.ok ? said.id : null, nerveWhy: said && said.ok ? null : ((said && said.why) || "the nerve refused"), url: carried ? carried.url : null };
+          if(flags.length && !carried) rep.wire.carryWhy = "every carrier refused the report file";
+        } else rep.wire = { nerve:null, nerveWhy:"src/freewire.js is not loaded on this page" };
+      }catch(e){ rep.wire = { nerve:null, nerveWhy:"the wire threw: " + String((e && e.message) || e) }; }
     }catch(e){ rep.error = e.message; }
 
     last = { at:ctx.started, session:ctx.session, results, trailed, report:{ id:rep.id, bytes:rep.bytes } };
@@ -393,5 +583,5 @@
     };
   }
 
-  window.ObiScout = { run, hooks, TERRAIN, CANON, FLEET, LIVE_SITES, VM, FLAGGY, get last(){ return last; } };
+  window.ObiScout = { run, confirm, notWalked, hooks, TERRAIN, CANON, FLEET, LIVE_SITES, VM, FLAGGY, get last(){ return last; } };
 })();

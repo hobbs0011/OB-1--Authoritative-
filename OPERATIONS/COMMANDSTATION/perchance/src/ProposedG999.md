@@ -74,19 +74,19 @@ commit is the anchor.
 | L | **Amendment II — THE LESSON AUTHORITY** | `LESSON.001`–`LESSON.018` | `src/canon/GOSPEL-999.md` → *Amendment II* | ✅ same commit | ❌ **NO** |
 | L§ | LFG **§12 — LESSON AUTHORSHIP** | the four authorities, the method, the machine, the voice, the failure modes, the checklist | `src/canon/LEGIONNAIRE-FIELD-GUIDE.md` → §12 | ✅ same commit | ❌ **NO** |
 | — | `src/LESSON-STANDARD.md` Part II | LSN-13…LSN-23 (the standard the lesson engine *already enforces*) | `src/LESSON-STANDARD.md` | ships in the station (not a canon write) | n/a — the station's own law |
-| B | **Amendment III — THE BRAND, THE MARK AND THE ICONOGRAPHY** | `BRAND.001`–`BRAND.010` | `src/canon/GOSPEL-999.md` → *Amendment III* | ⏳ not yet pushed (`/canon doctrine` after `/omega`) | ❌ **NO — sovereign's call** |
+| B | **Amendment III — THE BRAND, THE MARK AND THE ICONOGRAPHY** | `BRAND.001`–`BRAND.010` | `src/canon/GOSPEL-999.md` → *Amendment III* | ⏳ not yet pushed (`/canon doctrine` after `/phoenixomegaprotocol`) | ❌ **NO — sovereign's call** |
 | B§ | LFG **§13 — THE BRAND** | the three registers, what a lesson must wear, the failure modes, the checklist | `src/canon/LEGIONNAIRE-FIELD-GUIDE.md` → §13 | ⏳ not yet pushed | ❌ **NO** |
 | — | `src/LESSON-STANDARD.md` LSN-24/25 | the brand layer is chrome, never a restyle · the lesson wears the sign and the bar states | `src/LESSON-STANDARD.md` | ships in the station (not a canon write) | n/a — the station's own law |
-| 4 | **Amendment IV — GOSPEL 444 (THE TIGER PROTOCOL)** | `G444.001`–`G444.012` | `src/canon/GOSPEL-999.md` → *Amendment IV* | ⏳ not yet pushed (`/canon doctrine` after `/omega`) | ❌ **NO — sovereign's call** |
+| 4 | **Amendment IV — GOSPEL 444 (THE TIGER PROTOCOL)** | `G444.001`–`G444.012` | `src/canon/GOSPEL-999.md` → *Amendment IV* | ⏳ not yet pushed (`/canon doctrine` after `/phoenixomegaprotocol`) | ❌ **NO — sovereign's call** |
 | 4§ | LFG **§14 — THE DOCTRINE** | the twelve laws in shorthand, the failure modes a drone must refuse, the checklist | `src/canon/LEGIONNAIRE-FIELD-GUIDE.md` → §14 | ⏳ not yet pushed | ❌ **NO** |
 | — | `src/LESSON-STANDARD.md` LSN-26/27 | 10-5-5-3 is doctrine, not house style · the two ladders are two instruments | `src/LESSON-STANDARD.md` | ships in the station (not a canon write) | n/a — the station's own law |
-| 5 | **Amendment V — THE EMBLEM, THE BED AND THE PRINT ROOM** | `BRAND.011`–`BRAND.016` | `src/canon/GOSPEL-999.md` → *Amendment V* | ⏳ not yet pushed (`/canon doctrine` after `/omega`) | ❌ **NO — sovereign's call** |
+| 5 | **Amendment V — THE EMBLEM, THE BED AND THE PRINT ROOM** | `BRAND.011`–`BRAND.016` | `src/canon/GOSPEL-999.md` → *Amendment V* | ⏳ not yet pushed (`/canon doctrine` after `/phoenixomegaprotocol`) | ❌ **NO — sovereign's call** |
 | 5§ | LFG **§15 — THE PRINT ROOM** | the artifact table, the emblem/ladder key, the print harness, the failure modes, the checklist | `src/canon/LEGIONNAIRE-FIELD-GUIDE.md` → §15 | ⏳ not yet pushed | ❌ **NO** |
 | — | `src/LESSON-STANDARD.md` LSN-28/29 | a lesson may award an emblem, never a composed one · a printed sheet states its own printing | `src/LESSON-STANDARD.md` | ships in the station (not a canon write) | n/a — the station's own law |
-| 6 | **Amendment VI — THE MARKETING REGISTER** | `BRAND.017`–`BRAND.020` | `src/canon/GOSPEL-999.md` → *Amendment VI* | ⏳ not yet pushed (`/canon doctrine` after `/omega`) | ❌ **NO — sovereign's call** |
+| 6 | **Amendment VI — THE MARKETING REGISTER** | `BRAND.017`–`BRAND.020` | `src/canon/GOSPEL-999.md` → *Amendment VI* | ⏳ not yet pushed (`/canon doctrine` after `/phoenixomegaprotocol`) | ❌ **NO — sovereign's call** |
 | 6§ | LFG **§16 — THE MARKETING REGISTER** | the two registers, where the words came from, the two sheets, the failure modes, the checklist | `src/canon/LEGIONNAIRE-FIELD-GUIDE.md` → §16 | ⏳ not yet pushed | ❌ **NO** |
 | — | `src/LESSON-STANDARD.md` LSN-30 | a lesson has a parent page, and it speaks the register | `src/LESSON-STANDARD.md` | ships in the station (not a canon write) | n/a — the station's own law |
-| 7 | **Amendment VII — THE BILINGUAL HIERARCHY AND THE CODEX** | `BRAND.021`–`BRAND.028` | `src/canon/GOSPEL-999.md` → *Amendment VII* | ⏳ not yet pushed (`/canon doctrine` after `/omega`) | ❌ **NO — sovereign's call** |
+| 7 | **Amendment VII — THE BILINGUAL HIERARCHY AND THE CODEX** | `BRAND.021`–`BRAND.028` | `src/canon/GOSPEL-999.md` → *Amendment VII* | ⏳ not yet pushed (`/canon doctrine` after `/phoenixomegaprotocol`) | ❌ **NO — sovereign's call** |
 | 7§ | LFG **§17 — THE MARKETING HIERARCHY AND THE RUN READOUT** | the bilingual hierarchy, the zone, the M2 pipeline, the run log as a format, the failure modes, the checklist | `src/canon/LEGIONNAIRE-FIELD-GUIDE.md` → §17 | ⏳ not yet pushed | ❌ **NO** |
 | — | `src/LESSON-STANDARD.md` LSN-31 | a parent-facing page carries the bilingual hierarchy, and names the diagnosis it answers | `src/LESSON-STANDARD.md` | ships in the station (not a canon write) | n/a — the station's own law |
 
@@ -119,7 +119,7 @@ pipeline). `/ilog reset` writes a SEAL entry naming the previous head and opens 
 stay in the chain, verifiable forever.
 
 **OMEGA.005. PHOENIXOMEGAPROTOCOL — NO CANON CHANGE WITHOUT SOV100.** Nothing writes to the authority unless the
-sovereign's password has been entered in that session: `/omega <password>` arms the gate for 15 minutes and never
+sovereign's password has been entered in that session: `/phoenixomegaprotocol <password>` arms the gate for 15 minutes and never
 survives a reload. Only a sha-256 is stored, never the password — never logged, never captured as soul, never
 exported. Five failures lock the gate for ten minutes. Every attempt — armed, refused, failed — is an I-LOG entry.
 
@@ -456,7 +456,7 @@ redrawn (`BRAND.014`); and **no student appears anywhere** — the run log's led
 | `OPERATIONS/COMMANDSTATION/DOCTRINE/copies/LEGIONNAIRE-FIELD-GUIDE.md` | the amended copy (§11 + §12) |
 | `OPERATIONS/COMMANDSTATION/DOCTRINE/README.md` | the index of both amendments |
 
-**To re-push after any change to the wording:** `/canon doctrine` (arms with `/omega <password>`, 15 minutes).
+**To re-push after any change to the wording:** `/canon doctrine` (arms with `/phoenixomegaprotocol <password>`, 15 minutes).
 **To merge (the sovereign's act, not the station's):** open the two `copies/*.md`, splice the proposed blocks into
 `CANON/SYSTEM/GOSPEL-999.md` and `CANON/SYSTEM/LegionnaireFieldGuide.md` on a branch, assign final mandate numbers,
 and commit — the commit is the anchor. The station never performs this step.

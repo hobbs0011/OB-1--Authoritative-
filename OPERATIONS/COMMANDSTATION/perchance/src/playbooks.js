@@ -41,6 +41,8 @@
     { name:"Queue",         id:11, caste:"praefectus", threshold:1.0, line:"hastati", skills:["queue","status","command"], kw:["queue","status","commands","pending","list"] },
     { name:"Network",       id:12, caste:"praefectus", threshold:1.1, line:"principes", skills:["cgn","network","mesh"], kw:["network","mesh","cgn","connected generator","node","hub"] },
     { name:"Report",        id:13, caste:"signifer",  threshold:1.0, line:"principes", skills:["report","document","summarize"], kw:["report","document","summar","write up","brief"] },
+    { name:"SiteBuilder",   id:14, caste:"faber",     threshold:1.2, line:"principes", skills:["build","site","webdev","page"], kw:["build","building","rebuild","website","web site","webpage","web page","landing page","homepage","site","html","front-end","app","one-pager"] },
+    { name:"Umbrella",      id:15, caste:"praefectus", threshold:1.1, line:"principes", skills:["umbrella","station","authority","fleet"], kw:["umbrella","command station","the station","generators","my generators","our generators","other generators","masterlink","master link","aim the link"] },
     { name:"Legion",        id:0,  caste:"massa",     threshold:1.0, line:"triarii", skills:["agent99","route"], kw:[] }
   ];
   const byName = {}; for (const d of LEGION) byName[d.name] = d;

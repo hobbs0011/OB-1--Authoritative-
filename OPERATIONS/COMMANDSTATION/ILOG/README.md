@@ -1,8 +1,8 @@
 # I-LOG — the Command Station's operation record
 
-Written by the perchance generator (https://perchance.org/prais-command-station) on every operation it performs.
+Written by the perchance generator (https://perchance.org/phoenix-ai-solutions-command-mastermind) on every operation it performs.
 It lives under the ONE authoritative repo — Phoenix-Rising-Ai-Solutions/OB-1--Authoritative- (branch master) — and
-nothing is written there without PHOENIXOMEGAPROTOCOL (Sov100's password, armed with /omega; refusals are recorded).
+nothing is written there without PHOENIXOMEGAPROTOCOL (Sov100's password, armed with /phoenixomegaprotocol; refusals are recorded).
 Companion of the canon I-LOG (the RRL vault, renamed **I-LOG (Incarnation Log)**, Schema V2 JSONL
 `content[].data.{text,tool,state}`, roles/colours per LFG §SCS: 🟣 SOUL · ❤️ DNA · 💛 REASON) which the
 VS Code station writes. That vault is on the **`canon` branch**, not `master`:

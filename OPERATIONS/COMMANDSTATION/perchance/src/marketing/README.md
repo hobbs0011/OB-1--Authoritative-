@@ -14,6 +14,8 @@ clear rule for what is *in* the library matters more than another ten files in i
 | `README.md` | this file — the pipeline, the rules, how to run the next batch |
 | `INGEST-LOG.md` | the audit: every file of batch 001, with its verdict and the reason |
 | `MANIFEST.json` | the same audit, machine-readable (sha-256, dimensions, classification, verdict, asset id) |
+| `OPEN-SOURCE-PLAY.md` | **the market play** — the measured recon of the open-source field, the three empty seats, the channels and the sequence. Engine: `src/market.js` (`/market`); the method behind it: `src/canon/SECRET-SAUCE.md` (`/SecretSauce`). |
+| `awesome-perchance.md` | **the index nobody built** — the canonical list of the Perchance open-source market, populated with real repositories and real star counts from the live scan. Ready to publish. |
 
 ---
 

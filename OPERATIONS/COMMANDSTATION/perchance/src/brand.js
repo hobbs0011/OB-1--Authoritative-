@@ -759,9 +759,9 @@ apex:      { vb:"0 0 24 24", body:'<path d="M12 3.6 19.4 7.9 19.4 16.5 12 20.8 4
      ========================================================================== */
   const ASSETS = [
     { id:"head-ui", file:"head-ui.webp", w:132, h:106, box:[22,46,16,23], page:11, variant:true, name:"The Tiger Head (UI size)", use:"INLINED into every built lesson, and any 24-64px surface", note:"the same sigil at display resolution — 2x of a 66px slot, so a lesson stays light" },
-    { id:"tiger",   file:"tiger.webp",   w:509, h:491, box:[37,16,37,64], page:1,  name:"The Tiger",            use:"hero band, the forge, /omega, any 'the work is done' moment", note:"wireframe tiger breaking golden chains, sparks and circuit lines" },
+    { id:"tiger",   file:"tiger.webp",   w:509, h:491, box:[37,16,37,64], page:1,  name:"The Tiger",            use:"hero band, the forge, /phoenixomegaprotocol, any 'the work is done' moment", note:"wireframe tiger breaking golden chains, sparks and circuit lines" },
     { id:"mouse",   file:"mouse.webp",   w:348, h:434, box:[8,30,25,56],  page:1,  name:"The Mouse",            use:"the diagnostic's low end — a student before the method", note:"wireframe mouse wrapped in chains on the grid" },
-    { id:"head",    file:"head.webp",    w:220, h:177, box:[22,46,16,23], page:11, name:"The Tiger Head",       use:"THE sigil — crest, seals, lesson badge, station topbar", note:"gold line-art head, drawn separately from its shield" },
+    { id:"head",    file:"head.webp",    w:220, h:177, box:[22,46,16,23], page:11, name:"The Tiger Head",       use:"the dossier sigil — crest, seals, the lesson badge (NOT the station topbar: that wears THE PRAIS APEX since 2026-09-22)", note:"gold line-art head, drawn separately from its shield; the shipped cut is tight — the jaw sits on the crop line and the source page's ground shows in two corners, so it is kept for the dossier surfaces it was cut for and is no longer the station's mark" },
     { id:"shield",  file:"shield.webp",  w:719, h:396, box:[6,31,52,51],  page:11, name:"The Ecosystem Shield", use:"protection, the vault, the ecosystem map", note:"purple ellipse shield with the gold head at its core" },
     { id:"pyramid", file:"pyramid.webp", w:471, h:487, box:[14,17,34,63], page:6,  name:"The Four Layers",      use:"hierarchy, curriculum ladders, tier diagrams", note:"circuit-lit pyramid, gold capstone to deep plum base" },
     { id:"venn",    file:"venn.webp",    w:596, h:388, box:[28,13,43,50], page:9,  name:"The Sovereign Operator", use:"positioning, the two-circle claim", note:"glowing purple and gold circles, the overlap" },
@@ -773,7 +773,7 @@ apex:      { vb:"0 0 24 24", body:'<path d="M12 3.6 19.4 7.9 19.4 16.5 12 20.8 4
     /* ---- cut from GOSPEL_444_PROTOCOL.pdf (12pp) and GOSPEL_444_TIGER_MODE.pdf
        (4pp) — the doctrine's own pictures. Same page size, same key, same rules. */
     { id:"phoenix", file:"phoenix.webp", w:564, h:522, box:[51,4,41,68], page:12, src:"protocol", name:"The Phoenix", use:"the station's hero image, the deck cover, top of a writeup", note:"gold-and-violet bird climbing out of the wreck of the old stack" },
-    { id:"roar",    file:"roar.webp",    w:564, h:392, box:[56,14,41,51], page:4, src:"tiger-mode", name:"The Tiger, Awake", use:"TIGER MODE, the forge, the closing slide, /omega", note:"roaring tiger in ember and violet — the doctrine's loudest mark" },
+    { id:"roar",    file:"roar.webp",    w:564, h:392, box:[56,14,41,51], page:4, src:"tiger-mode", name:"The Tiger, Awake", use:"TIGER MODE, the forge, the closing slide, /phoenixomegaprotocol", note:"roaring tiger in ember and violet — the doctrine's loudest mark" },
     { id:"cub",     file:"cub.webp",     w:248, h:276, box:[42,28,18,36], page:3, src:"protocol", name:"The Cub", use:"CUB MODE, the middle rung, 'the habit exists'", note:"violet cub's head wired into the grid" },
     { id:"elephant",file:"elephant.webp",w:564, h:399, box:[6,19,41,52], page:2, src:"protocol", name:"The Grammar Prison", use:"why the old method failed — diagnosis slides, parent-facing writeups", note:"violet elephant caged in grammar books, lightning on the bars" },
     { id:"bookshelf",file:"bookshelf.webp",w:454,h:492,box:[32,20,33,64], page:1, src:"tiger-mode", name:"The Breach", use:"'we don't teach English, we unlock permission' — the moment of change", note:"a bookshelf blown open by a violet burst" },
@@ -1202,8 +1202,8 @@ apex:      { vb:"0 0 24 24", body:'<path d="M12 3.6 19.4 7.9 19.4 16.5 12 20.8 4
     const s = opts.size || "40px";
     return '<span class="bx-lockup">'
       + '<span class="bx-sigil">' + asset("head", { style:"width:" + s + ";height:" + s + ";object-fit:contain" }) + '</span>'
-      + '<span class="bx-lockup-t"><span class="bx-wm-1">PrAis</span><span class="bx-wm-s">/</span><span class="bx-wm-2">OBI</span>'
-      + '<span class="bx-wm-sub">' + esc(opts.sub || "PhoenixCommand · Command Station") + '</span></span></span>';
+      + '<span class="bx-lockup-t"><span class="bx-wm-1">PaiS-HQ</span><span class="bx-wm-s">/</span><span class="bx-wm-2">COMMAND</span>'
+      + '<span class="bx-wm-sub">' + esc(opts.sub || "Phoenix AI Solutions · Central Delegation Hub") + '</span></span></span>';
   }
 
   /* ==========================================================================

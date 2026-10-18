@@ -1,5 +1,11 @@
 # role: portal — "the door" (one generator per student)
 
+> **This crate is one stage of a pipeline.** On 2026-09-26 the five live student portals were picked apart and
+> every part assigned its own generator — this portal is the **assembler** of that pipeline. The decomposition,
+> the assignment, the Worker's real API contract and the flags found while dissecting are written down in
+> **`src/STUDENT-PORTAL-PIPELINE.md`**; the shelf carries the whole list under NET, group *STUDENT PORTAL
+> PIPELINE*. Read that file before building here.
+
 **Mandate.** Each student gets their own generator: their world, their homework, their books, their
 voice. The station stays the teacher's surface; the portal is the student's. The first real instance was a
 hand-built single file (`src/timmy-portal/`), **retired with its client on 2026-09-22** — *"timmy dropped us,

@@ -30,7 +30,7 @@ const DRONES = [
   { name:"ImageGen", id:6, skills:["image","art","vision"], kw:["image","img","picture","draw","art","poster","logo","icon","vision"],
     interp:t=>`Image creation routed to the image node: ${short(t,80)}.`,
     stress:()=>"Needs the image generator node registered in CGN — else falls back to local generateImage." },
-  { name:"WebLookup", id:7, skills:["web","search","url"], kw:["web","search","url","lookup","fetch","browse","wikipedia"],
+  { name:"WebLookup", id:7, skills:["web","search","url"], kw:["web","search","urls","url","lookup","fetch","browse","wikipedia"],
     interp:t=>`Web lookup via superFetch for: ${short(t,80)}.`,
     stress:()=>"Cross-origin pages need the super-fetch proxy; verify the response is real, not a captcha wall." },
   { name:"Terminal", id:8, skills:["shell","script","run"], kw:["terminal","shell","script","run command",".ps1",".sh","execute"],
@@ -39,7 +39,7 @@ const DRONES = [
   { name:"Audit", id:9, skills:["audit","verify","compliance"], kw:["audit","verify","compliance","check","validate","gate"],
     interp:t=>`Audit/verification pass over: ${short(t,80)}.`,
     stress:()=>"Fail-closed: any gap flags the sector RED until verified." },
-  { name:"Reincarnate", id:10, skills:["reincarnation","lifecycle"], kw:["reincarnat","rise","death","rebirth","purge","soul-cycle"],
+  { name:"Reincarnate", id:10, skills:["reincarnation","lifecycle"], kw:["reincarnate","reincarnation","reincarnating","rise","death","rebirth","purge","soul-cycle"],
     interp:t=>`Reincarnation lifecycle event: ${short(t,80)}.`,
     stress:()=>"Death seals the run and purges the session — irreversible. Confirm before execute." },
   { name:"Queue", id:11, skills:["queue","status","command"], kw:["queue","status","commands","pending","list"],
@@ -48,16 +48,40 @@ const DRONES = [
   { name:"Network", id:12, skills:["cgn","network","mesh"], kw:["network","mesh","cgn","connected generator","node","hub"],
     interp:t=>`Connected Generator Network operation: ${short(t,80)}.`,
     stress:()=>"CGN hub lives in the obi namespace; nodes must be registered before routing." },
-  { name:"Report", id:13, skills:["report","document","summarize"], kw:["report","document","summar","write up","brief"],
+  { name:"Report", id:13, skills:["report","document","summarize"], kw:["report","document","summary","summaries","summarize","summarise","write up","writeup","brief"],
     interp:t=>`Report/documentation task: ${short(t,80)}.`,
-    stress:()=>"Keep canon pristine — write to PROPOSED-CANON or the archive, never edit canon directly." }
+    stress:()=>"Keep canon pristine — write to PROPOSED-CANON or the archive, never edit canon directly." },
+  { name:"SiteBuilder", id:14, skills:["build","site","webdev","page"], kw:["build","building","rebuild","website","web site","webpage","web page","landing page","homepage","site","html","front-end","app","one-pager"],
+    interp:t=>`Build routed to the Web Development division — the Site Builder and the Video Node: ${short(t,80)}. The build itself runs in 🔥 Free Phoenix Mode (🛠 Build app) or in the Site Builder wing; it is handed over as ONE self-contained file.`,
+    stress:()=>"The Site Builder wing is a SCAFFOLD (src/generators/site-builder/) — paste it into its own generator before calling it live. Building is not publishing: /deploy reads BLOCKED until a Cloudflare token is held." },
+  { name:"Umbrella", id:15, skills:["umbrella","station","authority","fleet"], kw:["umbrella","command station","the station","generators","my generators","our generators","other generators","masterlink","master link","aim the link"],
+    interp:t=>`Umbrella / station authority — the generators this station answers for: ${short(t,80)}. It reads any of them by name (the master link's pull lane, /masterlink name <generator>) and routes to the nodes that have joined the mesh, but no generator can write into another's namespace — the change lands when that generator's own /forge is committed by the Sovereign's save or the /phoenixomegaprotocol gate.`,
+    stress:()=>"Nothing under the umbrella is commanded from the outside: cross-namespace writes do not exist — /masterlink NAME aims the read, and the mesh carries words, not files." }
 ];
+/* KEYWORDS MATCH WHOLE WORDS, NOT SUBSTRINGS. Plain prefix matching labelled
+   "build a website" as a web lookup — the "web" inside "website" — and matched
+   "art" inside "start", "party", "article". That is a routing label nobody can act
+   on, so a keyword now has to sit on a word edge, and the two truncation keywords
+   that relied on substring matching were written out in full (reincarnat →
+   reincarnate/reincarnation/reincarnating, summar → summary/summaries/summarize).
+   If lookbehind is ever unavailable, the plain pattern is the fallback: classify
+   never throws and the tunnel never stops routing. */
+const KW_RE = new Map();
+function kwRe(k){
+  let r = KW_RE.get(k);
+  if (r) return r;
+  const body = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  try { r = new RegExp((/^[a-z0-9]/.test(k) ? "(?<![a-z0-9])" : "") + body + (/[a-z0-9]$/.test(k) ? "(?![a-z0-9])" : ""), "g"); }
+  catch(e){ r = new RegExp(body, "g"); }
+  KW_RE.set(k, r);
+  return r;
+}
 function classify(text){
   const t = String(text||"").toLowerCase();
   let best = FALLBACK, bs = 0;
   for (const d of DRONES){
     let s = 0;
-    for (const k of d.kw){ let i = t.indexOf(k); while (i !== -1){ s++; i = t.indexOf(k, i+k.length); } }
+    for (const k of d.kw){ const re = kwRe(k); re.lastIndex = 0; while (re.test(t)) s++; }
     if (s > bs){ bs = s; best = d; }
   }
   return { drone: bs > 0 ? best : FALLBACK, score: bs };

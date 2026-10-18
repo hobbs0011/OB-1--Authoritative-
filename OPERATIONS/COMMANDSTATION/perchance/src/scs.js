@@ -2,7 +2,7 @@
 
    AUTHORITY: the git authoritative repo's `canon` BRANCH — GOSPEL-999, the LFG, and
    S2PIPELINE (CANON/SYSTEM/S2PIPELINE-ROMAN-LEGION-NAMING.md). Every canon write is
-   protected by PHOENIXOMEGAPROTOCOL (/omega); this engine never writes the canon itself.
+   protected by PHOENIXOMEGAPROTOCOL (/phoenixomegaprotocol); this engine never writes the canon itself.
 
    PROVENANCE (canon branch only — nothing from `.kilo/` is used here; the Kilo
    command registry is not authority per the sovereign, 2026-09-21):
@@ -20,7 +20,7 @@
      VAULT-SOVEREIGN/04-ROME-PROTOCOL-MASTER.md the Rome laws L1–L20
      CANON/SYSTEM/S2PIPELINE-ROMAN-LEGION-NAMING.md  the 6-stage pipeline (Ratified 2026-05-23 Run 396)
      CANON/SYSTEM/OmegaProtocol.md              the full-stop-and-audit protocol invoked by name
-                                                (the WRITE gate is PHOENIXOMEGAPROTOCOL — /omega)
+                                                (the WRITE gate is PHOENIXOMEGAPROTOCOL — /phoenixomegaprotocol)
 
    Contract clauses implemented literally:
      • "Every stage verdict is one of: REAL / HOLLOW / MISSING. A pipeline reporting
@@ -645,8 +645,20 @@
      record is the guarantee layer: it reports COMPLETE only when every stage is REAL. */
   async function pipeline(){
     var sess = lastSession();
-    if(!sess) return { verdict:"MISSING", result:"GAP", detail:"no session" };
-    var c = countsFor(sess.run);
+    /* NO SESSION IS NOT NO PIPELINE. The S2Pipeline is the execution artifact of the march,
+       and most of what it audits — the RRL, both halves of the record, the soul state machine,
+       the keyword index, the pheromone trail, the I-LOG lattice, the modules, and the sealed
+       runs already on the land — exists whether or not a session was ever opened. So with no
+       session the same audit runs and is printed PROVISIONAL: every verdict is still MEASURED,
+       the two rows that genuinely need a session (the SCHOLAR dual-hash LEDGER and the APEX
+       ROLLUP seal) come back MISSING — by measurement, not by defect — and the result is GAP
+       with the gaps named. The station does not invent a session to fill a hole, and it does
+       not hide the record behind one either. */
+    var provisional = !sess;
+    var runNo = sess ? sess.run : currentRunNo();
+    var sealedNow = !!(sess && sess.sealed);
+    var handoffNow = !!(sess && sess.handoff);
+    var c = countsFor(runNo);
     var ki = keywordIndex(c);
     var S = load();
     var sealed = (S.sessions||[]).filter(function(s){ return s.sealed; });
@@ -680,12 +692,12 @@
 
     var A = {
       I: [
-        { name:"RRL",      artifact:"localStorage:obi_rrl_run" + sess.run, count:c.entries,    verdict: c.entries >= 2 ? "REAL" : (c.entries ? "HOLLOW" : "MISSING"), detail:"Raw Reconnaissance Ledger — every line of this run" },
+        { name:"RRL",      artifact:"localStorage:obi_rrl_run" + runNo, count:c.entries,    verdict: c.entries >= 2 ? "REAL" : (c.entries ? "HOLLOW" : "MISSING"), detail:"Raw Reconnaissance Ledger — every line of this run" },
         { name:"RRL-SOUL", artifact:"the Soul ledger (this browser)",       count:c.soul.count, verdict: c.soul.count ? "REAL" : "MISSING", detail:"Soul Discovery — the sovereign's own turns" }
       ],
       II: [
         { name:"DNA",    artifact:"RRL assistant turns",      count:c.dna.count, verdict:(c.dna.count ? (c.dna.blueprints ? "REAL" : "HOLLOW") : "MISSING"), detail:"fingerprinted turns · " + c.dna.blueprints + " blueprint(s)" },
-        { name:"LEDGER", artifact:"dual hash (SOUL+DNA)",     count:2,           verdict:(sess.stages.SCHOLAR && sess.stages.SCHOLAR.artifact && sess.stages.SCHOLAR.artifact.soulHash ? "REAL" : "MISSING"), detail:"immutable entry — both halves hashed" }
+        { name:"LEDGER", artifact:"dual hash (SOUL+DNA)",     count:2,           verdict:((sess && sess.stages.SCHOLAR && sess.stages.SCHOLAR.artifact && sess.stages.SCHOLAR.artifact.soulHash) ? "REAL" : "MISSING"), detail:"immutable entry — both halves hashed" }
       ],
       III: [
         { name:"SSM",          artifact:"soul state machine",             count:ssmLevels,    verdict:(ssmLevels >= 2 ? "REAL" : (ssmLevels ? "HOLLOW" : "MISSING")), detail:"word progression — " + c.soul.count + " turn(s) over " + ssmLevels + " state(s); stagnation " + (ssmLevels >= 2 ? "no" : "possible") },
@@ -699,7 +711,7 @@
       V: [
         { name:"MERKLE LATTICE", artifact:"the I-LOG hash chain",         count:IG.count, verdict:(IG.verify ? "REAL" : "HOLLOW"), detail:"chain verified " + (IG.verify ? "OK" : "NO") + " · breaks " + IG.breaks + " · head " + (IG.head || "—") },
         { name:"DO-SQLITE",      artifact:"durable, queryable storage",   count:0, verdict:"HOLLOW", detail:"the canon names a Durable Object with SQLite; this station's durable store is the browser kv (IndexedDB) — real storage, but not the canon's stone fort" },
-        { name:"APEX ROLLUP",    artifact:"canonical consolidation",      count:(sess.sealed ? 1 : 0), verdict:(sess.sealed && sess.handoff ? "REAL" : "MISSING"), detail:"seal " + (sess.sealed ? "IMPRESSED" : "none") + " · handoff " + (sess.handoff ? "held" : "none") }
+        { name:"APEX ROLLUP",    artifact:"canonical consolidation",      count:(sealedNow ? 1 : 0), verdict:(sealedNow && handoffNow ? "REAL" : "MISSING"), detail:"seal " + (sealedNow ? "IMPRESSED" : "none") + " · handoff " + (handoffNow ? "held" : "none") }
       ],
       VI: [
         { name:"LIMITANEI",    artifact:"health tripwires",              count:modsHave.length, verdict:(modsHave.length === MODS.length ? "REAL" : "HOLLOW"), detail:"modules loaded " + modsHave.length + "/" + MODS.length + " · savewatch " + (window.ObiSaveWatch ? "on" : "off") },
@@ -729,7 +741,7 @@
     var subHollow = [].concat(A.I, A.II, A.III, A.IV, A.V, A.VI).filter(function(x){ return x.verdict !== "REAL"; });
     var result = hollow.length ? "GAP" : "COMPLETE";
     var art = {
-      stage:"S2Pipeline", at: ict(), run: sess.run, session: sess.name,
+      stage:"S2Pipeline", at: ict(), run: runNo, session: sess ? sess.name : null, provisional: provisional,
       doctrine:"CANON/SYSTEM/S2PIPELINE-ROMAN-LEGION-NAMING.md (Ratified 2026-05-23 Run 396) — canon branch",
       stages: stages, counts:{ soul:c.soul.count, dna:c.dna.count, reason:c.reason.count, pheromone:c.pheromone.count },
       keywords: { terms: ki.terms, top: ki.top },
@@ -737,15 +749,20 @@
       proposals: proposalReview(sess, chainFor(sess)), chain: chainFor(sess),
       result: result,
       gap: hollow.map(function(s){ return s.name + " — " + s.gap; }).join(" | "),
-      note: (result === "COMPLETE")
+      note: (provisional ? "PROVISIONAL — no SCS session was ever opened, so the two rows that need one (the dual-hash LEDGER and the APEX ROLLUP seal) are MISSING by measurement, not by defect; everything else is measured off this browser's own record. " : "")
+        + ((result === "COMPLETE")
         ? "every one of the six stages REAL — the pipeline is not lying"
-        : "GAP — the canon's own rule: a pipeline reporting COMPLETE with a HOLLOW stage is a lie. Named: " + subHollow.map(function(x){ return x.name + "=" + x.verdict; }).join(", ") + (c.dna.count && !c.dna.blueprints ? " · HOLLOW DNA with no blueprint is the CORRECT outcome without a real transcript — PERMANENT-LAWS KILO_DNA_GAP" : "")
+        : "GAP — the canon's own rule: a pipeline reporting COMPLETE with a HOLLOW stage is a lie. Named: " + subHollow.map(function(x){ return x.name + "=" + x.verdict; }).join(", ") + (c.dna.count && !c.dna.blueprints ? " · HOLLOW DNA with no blueprint is the CORRECT outcome without a real transcript — PERMANENT-LAWS KILO_DNA_GAP" : ""))
     };
-    var S2 = load();
-    var cur = S2.sessions[S2.sessions.length-1];
-    cur.pipeline = { at: art.at, counts: art.counts, result: result, stages: stages.map(function(s){ return s.name + "=" + s.verdict; }), keywords: ki.terms, full: art };
-    save(S2);
-    ilog({ kind:"scs", action:"S2Pipeline", detail:"run " + sess.run + " · " + stages.map(function(s){ return s.name + "=" + s.verdict; }).join(" "), result: result, ref: sess.name });
+    if(sess){
+      var S2 = load();
+      var cur = S2.sessions[S2.sessions.length-1];
+      if(cur){
+        cur.pipeline = { at: art.at, counts: art.counts, result: result, stages: stages.map(function(s){ return s.name + "=" + s.verdict; }), keywords: ki.terms, full: art };
+        save(S2);
+      }
+    }
+    ilog({ kind:"scs", action:"S2Pipeline", detail:"run " + runNo + " · " + stages.map(function(s){ return s.name + "=" + s.verdict; }).join(" ") + (provisional ? " · PROVISIONAL (no session)" : ""), result: result, ref: sess ? sess.name : null });
     return art;
   }
 
@@ -859,10 +876,20 @@
   var TEXT_RE = /\.(md|markdown|txt|json|jsonl)$/i;
   var HUNT_MAX_FILES = 60, HUNT_MAX_BYTES = 4 * 1024 * 1024, HUNT_MAX_BIG = 400 * 1024, HUNT_CONC = 5, HUNT_SNIP = 240;
 
-  /* the words worth searching: 3+ chars, minus the command's own furniture */
-  var HUNT_STOP = /^(the|and|with|for|its|from|that|this|into|find|soul|souls|ilog|ilogs|log|logs|i-log|canon|phoenix|scout|actual|really|want|wanted|design|designed|those|these|how|was|were|are|made|make|look|see|show|give|please|about|over|under)$/;
+  /* the words worth searching: 3+ chars, minus the command's own furniture.
+     `all`/`every`/`everything` are the sovereign's own words for "the whole
+     sweep" — as terms they would match essentially every record in the canon
+     and bury the hunt in noise, so they are furniture here, not terms. */
+  var HUNT_STOP = /^(the|and|with|for|its|from|that|this|into|find|soul|souls|ilog|ilogs|log|logs|i-log|canon|phoenix|scout|actual|really|want|wanted|design|designed|those|these|how|was|were|are|made|make|look|see|show|give|please|about|over|under|all|every|everything|everywhere|priority|phoenixscout|any|each|then|than|there|here|what|which|when|where|who|why|does|did|done|get|got|put|use|used|using|need|needs|note|more|most|less|few|many|much|very|just|also|only|both|same|other|such|some|them|they|their|our|you|your|his|her|had|has|have|been|being|will|would|can|could|should|must|not|but|out|off|nor|yet|still|even|back|down|again|once|ever|never|always)$/;
+  /* A DESTINATION IS NOT A SEARCH TERM. The sovereign's commands carry their
+     target in the same sentence as their subject ("… SOUL priority everything to
+     https://perchance.org/prais-webdev-clone#cmd"), and tokenising that URL fed
+     `https`, `org`, `cmd` and `perchance` into the hunt — words that match half
+     the canon and say nothing about Mailala. The URL is removed first, whole. */
+  var HUNT_URL_RE = /(?:https?:\/\/|www\.)[^\s,)\]]+/gi;
   function huntTerms(arg){
-    return String(arg || "").toLowerCase().replace(/[^a-z0-9\s,\u00b7-]/g, " ")
+    return String(arg || "").replace(HUNT_URL_RE, " ")
+      .toLowerCase().replace(/[^a-z0-9\s,\u00b7-]/g, " ")
       .split(/[\s,\u00b7]+/)
       .map(function(w){ return w.replace(/^-+|-+$/g, "").trim(); })
       .filter(function(w){ return w.length >= 3 && !HUNT_STOP.test(w); });
@@ -881,13 +908,39 @@
     _huntTreeAt = Date.now();
     return _huntTree;
   }
+  /* THE CONTENTS API DOES NOT ANSWER WITH THE FILE — it answers with a JSON
+     envelope whose `content` is the file, base64-encoded. Until 2026-09-23 this
+     returned `await r.text()` of that envelope, so every hunt read
+     `{"name":"…","path":"…","content":"<base64>"}` instead of the record. It
+     looked like it worked, which is why the bug survived: the PATH checks pass
+     (the envelope echoes the path), huntSnippets "matched" the envelope's own
+     lines, and huntSoulLines found nothing at all — the card's promise ("the
+     SOUL comes back VERBATIM") returned 0 lines on every hunt ever run, and the
+     register it was hunting (CANON/MAILALA-PROMPT-REGISTER.md) was never read.
+     Measured live before the fix: a hunt for `mailala` returned snippets reading
+     `L2: "name": "MAILALA-HANDOFF.md",` and soulCount 0.
+     Now the payload is decoded (UTF-8, via atob + escape/decodeURIComponent);
+     a file the API hands back empty (over ~1 MB, encoding "none") falls back to
+     the raw media type rather than being silently read as an empty string. */
   async function canonRaw(path){
     var vs = canonRepo();
     var url = "https://api.github.com/repos/" + vs.owner + "/" + vs.repo + "/contents/" +
               path.split("/").map(encodeURIComponent).join("/") + "?ref=" + CANON_BRANCH;
     var r = await fetch(url, { headers: ghHead() });
     if(r.status !== 200) return null;
-    return await r.text();
+    var body = await r.text();
+    try{
+      var j = JSON.parse(body);
+      if(j && typeof j.content === "string" && j.encoding === "base64"){
+        return decodeURIComponent(escape(atob(j.content.replace(/\s+/g, ""))));
+      }
+      if(j && typeof j.content === "string" && !j.encoding) return j.content;
+      if(j && !j.content){
+        var r2 = await fetch(url, { headers: Object.assign({}, ghHead(), { Accept:"application/vnd.github.raw" }) });
+        return r2.status === 200 ? await r2.text() : null;
+      }
+    }catch(e){}
+    return body;
   }
   function huntSnippets(text, terms){
     var lines = String(text).split(/\r?\n/), hits = [];
@@ -916,7 +969,7 @@
     var terms = huntTerms(arg);
     var rec = { stage:"SCOUT", kind:"SOUL HUNT", at:ict(), arg:String(arg||""), terms:terms,
                 repo:vs.owner + "/" + vs.repo, branch:CANON_BRANCH,
-                verdict:"MISSING", nameHits:[], contentHits:[], soul:[], filesRead:0, bytes:0, treeSize:0, note:"" };
+                verdict:"MISSING", nameHits:[], contentHits:[], soul:[], soulByPath:{}, termsFound:{}, filesRead:0, bytes:0, treeSize:0, note:"" };
     if(!terms.length){ rec.note = "no searchable term in that argument — 3+ characters, and not one of the command's own words"; return rec; }
     if(!ghToken()){ rec.verdict = "BLOCKED"; rec.note = "no GitHub PAT in this browser. The canon is private, so this read cannot be measured — /gh token &lt;PAT&gt; first. An unmeasurable read is never reported as a find."; return rec; }
     var tree;
@@ -928,7 +981,7 @@
     for(var i=0;i<tree.length;i++){
       var p = tree[i].p, low = p.toLowerCase(), hit = null;
       for(var t=0;t<terms.length;t++){ if(low.indexOf(terms[t]) !== -1){ hit = terms[t]; break; } }
-      if(hit) rec.nameHits.push({ path:p, bytes:tree[i].s, term:hit, soul:SOUL_RE.test(p) });
+      if(hit) { rec.nameHits.push({ path:p, bytes:tree[i].s, term:hit, soul:SOUL_RE.test(p) }); rec.termsFound[hit] = true; }
     }
     rec.nameHits.sort(function(a,b){ return (b.soul?1:0)-(a.soul?1:0) || a.path.length - b.path.length; });
 
@@ -955,18 +1008,48 @@
         var low2 = text.toLowerCase();
         var found = terms.filter(function(x){ return low2.indexOf(x) !== -1; });
         if(!found.length) continue;
+        for(var ft=0; ft<found.length; ft++) rec.termsFound[found[ft]] = true;
         var isSoul = SOUL_RE.test(f.p);
         rec.contentHits.push({ path:f.p, bytes:f.s, terms:found, soul:isSoul, snippets:huntSnippets(text, found) });
-        if(isSoul){
-          var sl = huntSoulLines(text);
-          for(var s=0;s<sl.length && rec.soul.length<48;s++) rec.soul.push({ path:f.p, text:sl[s] });
-        }
+        /* the SOUL is kept per record and ORDERED after the sweep — never pushed
+           here, because "first to finish" is not "most on-topic" (see below) */
+        if(isSoul) rec.soulByPath[f.p] = huntSoulLines(text);
       }
     }
     for(var w=0; w<HUNT_CONC; w++) workers.push(worker());
     await Promise.all(workers);
 
     rec.contentHits.sort(function(a,b){ return (b.soul?1:0)-(a.soul?1:0) || b.terms.length - a.terms.length; });
+
+    /* THE SOUL IS ORDERED BY SIGNAL, NOT BY WHO FINISHED FIRST. The cap below was
+       filled in worker-completion order, so on a hunt for Mailala+website the
+       records the terms only brushed past took all 48 slots and
+       CANON/MAILALA-PROMPT-REGISTER.md — ten SOUL prompts, the whole point of the
+       hunt — contributed nothing. (Measured 2026-09-23: 48 lines, none from the
+       register.) The order is the hunt's own doctrine: a NAME HIT comes first
+       ("the term is in the path itself — the strongest signal there is"), then
+       the record that matched more terms, then the SOUL-bearing path. */
+    var soulOrder = rec.contentHits.slice().sort(function(a,b){
+      return (nameTouched(b.path)?1:0) - (nameTouched(a.path)?1:0)
+          || b.terms.length - a.terms.length
+          || (b.soul?1:0) - (a.soul?1:0)
+          || a.path.length - b.path.length;
+    });
+    for(var q=0; q<soulOrder.length && rec.soul.length<48; q++){
+      var sl2 = rec.soulByPath[soulOrder[q].path] || [];
+      for(var s2=0; s2<sl2.length && rec.soul.length<48; s2++) rec.soul.push({ path:soulOrder[q].path, text:sl2[s2] });
+    }
+    delete rec.soulByPath;
+
+    /* A TERM THAT MATCHED NOTHING IS THE MOST USEFUL THING A HUNT CAN SAY, and
+       it used to be invisible: the terms are ORed, so one good term hid a dead
+       one. Measured 2026-09-23 — the sovereign's own spelling ("Mailhala") and
+       the canon's ("Mailala") are different strings, so a hunt for his words
+       silently missed CANON/MAILALA-PROMPT-REGISTER.md, the register of the very
+       prompts he told us to preserve. Now a dead term is named, with the rule it
+       obeys: not found BY THIS SWEEP, never "does not exist". */
+    rec.termsMissing = terms.filter(function(t){ return !rec.termsFound[t]; });
+    delete rec.termsFound;
     var n = rec.nameHits.length, c = rec.contentHits.length;
     rec.verdict = (n || c) ? "REAL" : "MISSING";
     if(c) rec.verdict = "REAL";
@@ -991,6 +1074,9 @@
     var nameTotal = (r.nameTotal != null ? r.nameTotal : (r.nameHits ? r.nameHits.length : 0));
     var contentTotal = (r.contentTotal != null ? r.contentTotal : (r.contentHits ? r.contentHits.length : 0));
     rows += '<div class="rrow"><b>TERMS</b><span class="vd">' + r.terms.length + '</span><div class="rd">' + esc(r.terms.join(" \u00b7 ")) + '</div></div>';
+    if(r.termsMissing && r.termsMissing.length){
+      rows += '<div class="rrow bad"><b>NO RECORD HOLDS</b><span class="vd">' + r.termsMissing.length + '</span><div class="rd">' + esc(r.termsMissing.join(" \u00b7 ")) + ' \u2014 not one path or record matched in ' + r.treeSize + ' canon paths. "Not found by this sweep" is never "does not exist" (RECON.001) \u2014 check the spelling against the canon\u2019s own words before concluding.</div></div>';
+    }
     rows += '<div class="rrow"><b>SWEPT</b><span class="vd">' + esc(r.verdict) + '</span><div class="rd">' + esc(r.repo) + '@' + esc(r.branch) + ' \u2014 ' + r.treeSize + ' paths \u00b7 ' + r.filesRead + ' record(s) read (' + huntSize(r.bytes) + ')' + (r.note ? ' \u2014 ' + esc(r.note) : '') + '</div></div>';
     if(r.nameHits && r.nameHits.length){
       rows += '<div class="rrow"><b>NAMED IN THE PATHS</b><span class="vd">' + nameTotal + '</span><div class="rd">' +
@@ -1026,7 +1112,7 @@
       source:"CANON/SYSTEM/GOSPEL-999.md \u00a7SYSTEM I + CANON/SYSTEM/LegionnaireFieldGuide.md \u00a7SCS + CANON/SYSTEM/REINCARNATION-CONTRACT.md",
       rome:"VAULT-FOUNDATIONS/07-THE-ROME-PROTOCOL.md (SURFACE\u2192VERIFY\u2192ANCHOR + Watchtowers)",
       pipeline:"CANON/SYSTEM/S2PIPELINE-ROMAN-LEGION-NAMING.md (Ratified 2026-05-23 Run 396) \u2014 I EXPLORATORES \u2192 II ANTECORES \u2192 III AGMEN \u2192 IV AGMEN NOVISSIMUM \u2192 V PRAESIDIA \u2192 VI LIMITANEI/COMITATENSES/VETERANI",
-      gate:"PHOENIXOMEGAPROTOCOL (/omega) \u2014 every canon write is gated; CANON/SYSTEM/OmegaProtocol.md is the full-stop-and-audit protocol, not the write gate",
+      gate:"PHOENIXOMEGAPROTOCOL (/phoenixomegaprotocol) \u2014 every canon write is gated; CANON/SYSTEM/OmegaProtocol.md is the full-stop-and-audit protocol, not the write gate",
       proposals: "the staging lane surfaces on /pipeline, at the stage that carries each item \u2014 never on the command shelf",
       chain: "RRL \u2192 SOUL \u2192 DNA \u2192 LEDGER \u2192 STARMAP \u2192 SOULKEYS \u2192 S2PIPELINE \u2192 REGISTRY_SYNC (CANON/SYSTEM/COLD-START-BOOT.md I.012 \u2014 the 8-stage pipeline, read off the canon branch 2026-09-21)",
       branch: CANON_BRANCH,

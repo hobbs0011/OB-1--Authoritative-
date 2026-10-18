@@ -33,7 +33,7 @@
 
   const KV_FOLDER = "lessons";
   const REF_DIR = "src/lessons/reference/";
-  const REFS = ["NET-Sarcasm-Academy.html", "NET-Highschool-Careers.html", "NET-CLASSROOM-MANAGER.html"];
+  const REFS = ["NET-Sarcasm-Academy.html", "NET-Highschool-Careers.html", "NET-Neon-City-Genesis.html", "NET-CLASSROOM-MANAGER.html"];
   const STANDARD = "src/LESSON-STANDARD.md";
 
   /* the approved component vocabulary — content may use nothing else (LSN-5).
@@ -1016,7 +1016,7 @@ ROOM_RULES[0], "", ROOM_RULES[1], "", ROOM_RULES[2], "", ROOM_RULES[3], "", ROOM
     return '<div class="rise"><div class="rhead">📐 The NET Academy Lesson Standard</div>'
       + '<div class="rrow"><b>WHO OBEYS IT</b><span class="vd">AGENT 99</span><div class="rd">through GOSPEL-999 (the mandates) and the Legionnaire Field Guide (the laws) — every lesson, in every generator</div></div>'
       + rows.map(r => '<div class="rrow"><b>' + esc(r[0]) + ' — ' + esc(r[1]) + '</b><span class="vd">LAW</span><div class="rd">' + esc(r[2]) + '</div></div>').join("")
-      + '<div class="rrow"><b>GROUND TRUTH</b><span class="vd">' + REFS.length + ' FILES</span><div class="rd">' + REFS.map(r => '<span class="cmd">' + esc(REF_DIR + r) + '</span>').join(" ") + ' — the sovereign\'s own work. The two lessons are the format, the Classroom Manager is the method and the machine; where this document and those files disagree about taste, the files win.</div></div>'
+      + '<div class="rrow"><b>GROUND TRUTH</b><span class="vd">' + REFS.length + ' FILES</span><div class="rd">' + REFS.map(r => '<span class="cmd">' + esc(REF_DIR + r) + '</span>').join(" ") + ' — the sovereign\'s own work. Sarcasm + Careers are the six-room format, Neon City Genesis is the Grade-12 deck-and-games shape, the Classroom Manager is the method and the machine; where this document and those files disagree about taste, the files win.</div></div>'
       + '<div class="rfoot">The document: <b>' + esc(STANDARD) + '</b> · build one with <b>/lesson &lt;topic&gt;</b> · /lesson check · /lesson list</div></div>';
   }
   function standard(){
@@ -1274,7 +1274,9 @@ ROOM_RULES[0], "", ROOM_RULES[1], "", ROOM_RULES[2], "", ROOM_RULES[3], "", ROOM
       + '</div>'
       + '<div class="lc-acts"><button class="ci-act primary" data-lc="gen">✨ Agent 99 writes the lesson</button>'
       + '<button class="ci-act" data-lc="stop">⏹ Stop</button>'
-      + '<button class="ci-act" data-lc="check">✅ Check the spec</button></div>'
+      + '<button class="ci-act" data-lc="check">✅ Check the spec</button>'
+      + '<label class="ci-act">📎 From deck (PDF)<input type="file" id="lcDeck" accept="application/pdf,.pdf" hidden></label></div>'
+      + '<div class="hint">From deck: a slide-deck PDF fills the topic + notes above from its own words — parsed in this browser, never uploaded. Read the brief, change what you disagree with, then generate.</div>'
       + '<div id="lcStream" class="lc-stream"></div>'
       + resultHTML()
       + '<div class="sel-group">The spec <i>(exactly what Agent 99 returns — edit it and build again)</i></div>'
@@ -1322,6 +1324,28 @@ ROOM_RULES[0], "", ROOM_RULES[1], "", ROOM_RULES[2], "", ROOM_RULES[3], "", ROOM
     sync("lcTopic", "topic"); sync("lcLevel", "level"); sync("lcNotes", "notes");
     const sp = el("lcSpec"); if(sp) sp.addEventListener("input", () => { desk.specJson = sp.value; });
     const ph = el("lcPlanHint"); if(ph) ph.addEventListener("input", () => { desk.planFor = ph.value; });
+    const dk = el("lcDeck");
+    if(dk) dk.addEventListener("change", () => { deckFromFile(dk.files && dk.files[0]).catch(function(err){ say("⛔ " + ((err && err.message) || err)); }); });
+  }
+  /* THE DECK INTAKE (plug-and-play): a slide-deck PDF → the Build brief.
+     Parsed in this browser (src/deck.js, pdf.js CDN); the file never leaves
+     the machine. Fills topic + notes, then hands back control — the sovereign
+     reads the brief and generates. */
+  async function deckFromFile(file){
+    if(!file) return;
+    if(!window.ObiDeck){ say("⚠ The deck reader did not load — reload the page and try again."); return; }
+    if(!/\.pdf$/i.test(file.name || "") && file.type !== "application/pdf"){ say("⚠ Only PDF decks for now — «" + file.name + "» is not one."); return; }
+    say("📎 Reading «" + file.name + "» (" + Math.round(file.size / 1024) + " KB) in this browser…");
+    var ex;
+    try{ ex = await window.ObiDeck.extractPdf(file); }
+    catch(e){ say("⛔ Could not read that PDF — " + String((e && e.message) || e).slice(0, 200)); return; }
+    if(!ex.text){ say("⚠ That PDF has no selectable text (" + ex.pageCount + " page(s) — scanned images, most likely). Paste the lesson words into the notes by hand, or run it through transcription first."); return; }
+    var b = window.ObiDeck.briefFromPdf(file.name, ex);
+    desk.topic = b.topic;
+    desk.notes = b.notes;
+    log({ kind:"op", action:"lesson deck intake", ok:true, detail:file.name, result:ex.pagesRead + "/" + ex.pageCount + " page(s) · brief filled" });
+    say("📎 Brief filled from «" + file.name + "» — " + ex.pagesRead + " of " + ex.pageCount + " page(s)" + (b.clipped ? " (deck words clipped to fit the build)" : "") + ". Read it, change what you disagree with, then ✨ generate.");
+    paint();
   }
   async function act(name, btn){
     const id = btn && btn.dataset ? btn.dataset.id : null;

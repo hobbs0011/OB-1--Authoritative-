@@ -70,7 +70,7 @@
   function put(obj){ try{ localStorage.setItem(LS, JSON.stringify(Object.assign({}, all(), obj))); return true; }catch(e){ return false; } }
   function del(k){ const a = all(); delete a[k]; try{ localStorage.setItem(LS, JSON.stringify(a)); return true; }catch(e){ return false; } }
   function fp(v){ if(!v) return "(none)"; return v.slice(0,4) + "…" + v.slice(-4) + " · len " + v.length; }
-  function rowOf(local){ for(const r of NEEDED) if(r.local === local) return r; return null; }
+  function rowOf(local){ for(const r of NEEDED) if(r.local === local || r.local.toLowerCase() === String(local || "").toLowerCase()) return r; return null; }
   function keyPair(){ const pub = get("vaultPub"), priv = get("vaultPriv"); return (pub && priv) ? { pub: pub, priv: priv } : null; }
   function armed(){ try{ return !!(window.omegaStatusText && window.omegaStatusText().armed); }catch(e){ return false; } }
   function bubble(html, meta){
@@ -115,7 +115,82 @@
   }
   async function sha256hex(s){ const b = await subtle().digest("SHA-256", new TextEncoder().encode(s)); return Array.from(new Uint8Array(b)).map(x => x.toString(16).padStart(2, "0")).join(""); }
   function escrowMeta(){ const a = all(); return { at:a.vaultEscrowAt || null, url:a.vaultEscrowUrl || null, fp:a.vaultEscrowFp || null, name:a.vaultEscrowName || null,
-    escrowJson:a.vaultEscrowJson || null, sealedUrl:a.vaultSealedUrl || null, recoveryUrl:a.vaultRecoveryUrl || null }; }
+    escrowJson:a.vaultEscrowJson || null, sealedUrl:a.vaultSealedUrl || null, recoveryUrl:a.vaultRecoveryUrl || null, ptrUrl:a.vaultPtrUrl || null }; }
+
+  /* ===================== THE DURABLE POINTER (L2.7) =========================
+     THE FAULT THIS FIXES, in our own words (MASTERMIND-SYNC 2026-09-23): "the
+     escrow copy on the canon needs a git token first, and the mirror URL lived in
+     the old origin's store". We built the escrow correctly and then wrote its
+     ADDRESS into localStorage — the one store a rename destroys. The ciphertext
+     survived in three places; the pointer to it survived in none.
+
+     This lane is the pointer. `keyvalue.immanuel.co` is open to write with a
+     caller-chosen key, readable with no account and no token, and tied to NO
+     origin — so it outlives a rename, a wiped browser, a new machine and a new
+     agent. It holds the recovery bundle's URL and nothing else; the bundle is
+     ciphertext, so publishing the address costs nothing. Written to fit the
+     measured URL ceiling, and a write is only believed after reading it back. */
+  const PTR_NS = "prais-agent99", PTR_KEY = "v", PTR_CEILING = 278;
+  const ptrGetUrl = () => "https://keyvalue.immanuel.co/api/KeyVal/GetValue/" + PTR_NS + "/" + PTR_KEY;
+  const ptrSetUrl = (v) => "https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/" + PTR_NS + "/" + PTR_KEY + "/" + v;
+  /* THE URL CANNOT RIDE RAW. Measured on this store, twice: a value written into the
+     URL PATH is rejected with HTTP 404 the moment it carries a `.` (the server reads
+     it as a file extension) — and a percent-encoded URL 404s too, because `%` is not
+     in the accepted alphabet either. `freewire.js` hit the same wall and solved it by
+     never putting anything but `[A-Za-z0-9_-]` in the path. So the address is carried
+     as base64url: measured end to end, write 200 → read back identical → decodes to
+     the exact URL, 158 characters of URL against the 278 ceiling. A raw value is still
+     accepted on read, so an older pointer is not made unreadable by this change. */
+  function ptrEnc(s){ return btoa(unescape(encodeURIComponent(String(s)))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,""); }
+  function ptrDec(s){
+    const t = String(s || "");
+    if(!/^[A-Za-z0-9_-]+$/.test(t)) return t;
+    try{ const d = decodeURIComponent(escape(atob(t.replace(/-/g,"+").replace(/_/g,"/")))); return /^https?:\/\//i.test(d) ? d : t; }catch(e){ return t; }
+  }
+  async function ptrRead(){
+    try{
+      const r = await sf(ptrGetUrl());
+      /* MEASURED: an UNWRITTEN key answers 200 with an empty body, but a key written
+         EMPTY answers HTTP 500 — so 500 is read as "no address here", not as a fault,
+         and the placeholder `-` (freewire's own word for "not known from here") reads
+         the same way. Both are honest empty states, not errors dressed as answers. */
+      if(!r || (r.status !== 200 && r.status !== 500)) return { ok:false, status:(r && r.status) || 0, why:"the pointer store answered HTTP " + ((r && r.status) || "nothing"), url:ptrGetUrl() };
+      let val = String(r.txt || "");
+      try{ const j = JSON.parse(val); if(typeof j === "string") val = j; }catch(e){}
+      val = val.trim().replace(/^"|"$/g, "");
+      if(!val || val === "-") return { ok:false, status:r.status, empty:true, value:"", raw:val,
+        why:"the pointer holds no address (" + (!val ? "empty" : "`-`") + ") — no escrow has been published from this line, or the last one was cleared", url:ptrGetUrl() };
+      const decoded = ptrDec(val);
+      return { ok:!!decoded, status:r.status, value:decoded, raw:val, url:ptrGetUrl() };
+    }catch(e){ return { ok:false, why:String((e && e.message) || e).slice(0, 90), url:ptrGetUrl() }; }
+  }
+  async function ptrWrite(value){
+    const v = String(value || "").trim();
+    if(!/^https?:\/\//i.test(v)) return { ok:false, why:"the pointer must be an http(s) URL — got " + (v ? "a non-URL" : "nothing") };
+    const wire = ptrEnc(v);
+    const fit = ptrSetUrl(wire).length;
+    if(fit > PTR_CEILING) return { ok:false, why:"the pointer does not fit the measured ceiling: " + fit + " chars against " + PTR_CEILING + ". Nothing was sent." };
+    try{
+      const r = await sf(ptrSetUrl(wire), { method:"POST" });
+      if(!r || r.status !== 200) return { ok:false, why:"the pointer store refused: HTTP " + ((r && r.status) || "nothing") };
+      /* A WRITE IS NOT PROVEN BY ITS OWN 200 — it is proven by reading it back. */
+      const back = await ptrRead();
+      const ok = !!(back.ok && back.value === v);
+      return { ok:ok, readback:(back && back.value) || null, url:ptrGetUrl(), wire:wire.length,
+        why: ok ? null : "the store accepted the write but did not return the same bytes — treated as NOT written" };
+    }catch(e){ return { ok:false, why:"the pointer could not be written: " + String((e && e.message) || e).slice(0, 90) }; }
+  }
+  /* clearing is a WRITE of the placeholder, not a delete: writing an empty value makes
+     this store answer 500 on every later read (measured), which would dress a healthy
+     "nothing here" as a fault. `-` is the honest empty, and it reads back as empty. */
+  async function ptrClear(){
+    try{
+      const r = await sf(ptrSetUrl("-"), { method:"POST" });
+      if(!r || r.status !== 200) return { ok:false, why:"the pointer store refused the clear: HTTP " + ((r && r.status) || "nothing") };
+      const back = await ptrRead();
+      return { ok:!(back && back.ok), readback:"-", why:(back && back.ok) ? "the clear did not take — the pointer still holds an address" : null };
+    }catch(e){ return { ok:false, why:"the pointer could not be cleared: " + String((e && e.message) || e).slice(0, 90) }; }
+  }
 
   /* THE RECOVERY BUNDLE — one file that carries the WHOLE disaster plan: the wrapped
      private key AND the sealed secrets beside it. With the escrow alone, a machine
@@ -172,7 +247,12 @@
         if(rec.url) put({ vaultRecoveryUrl:rec.url });
       }
     }catch(e){ rec = { url:null, note:"the bundle could not be refreshed: " + String((e && e.message) || e).slice(0, 80) }; }
-    return { sealed:sb, recovery:rec };
+    /* a refreshed bundle gets a NEW url, so the durable pointer is re-aimed — the
+       pointer must never be left pointing at a superseded file. */
+    let ptr = { ok:false, why:"no bundle url to point at" };
+    if(rec.url) ptr = await ptrWrite(rec.url);
+    if(ptr.ok) put({ vaultPtrUrl:rec.url, vaultPtrAt:new Date().toISOString() });
+    return { sealed:sb, recovery:rec, pointer:ptr };
   }
   async function wrapPriv(pass, priv, pub){
     const salt = crypto.getRandomValues(new Uint8Array(16));
@@ -205,6 +285,14 @@
       if(t.charAt(0) !== "{") return { err:"the URL did not return a JSON document" };
       return { src:"mirror", where:urlOpt, text:t };
     }
+    /* THE DURABLE POINTER — read before the canon, because it is the only lane that
+       needs NOTHING: no token, no stored state, no URL from anyone. This is what
+       makes "the passphrase is the reliable half" actually true. */
+    const ptr = await ptrRead();
+    if(ptr.ok && /^https?:\/\//i.test(ptr.value)){
+      const text = await fetchText(ptr.value);
+      if(text && text.charAt(0) === "{") return { src:"pointer", where:ptr.value, text:text };
+    }
     const fromCanon = await escrowDocFromCanon();
     if(fromCanon) return { src:"canon", where:PATH.escrow, doc:fromCanon };
     const m = escrowMeta();
@@ -215,7 +303,7 @@
       const text = await fetchText(t[0]);
       if(text && text.charAt(0) === "{") return { src:"mirror", where:t[0], text:text };
     }
-    return { err:"no escrow is reachable: the canon copy needs a GitHub token in this browser" + (get("gh") ? " (a token is present, so the canon file is simply not there yet — run /vault escrow <passphrase>)" : " (none stored), and this browser knows no mirror URL — pass one: /vault recover <passphrase> <url>") };
+    return { err:"no escrow is reachable. The durable pointer (L2.7) answered " + (ptr.ok ? ("\u201c" + ptr.value.slice(0, 60) + "\u201d, but that address did not return a document") : "nothing (\u201c" + (ptr.why || "empty") + "\u201d)") + "; the canon copy needs a GitHub token in this browser" + (get("gh") ? " (a token is present, so the canon file is simply not there yet — run /vault escrow <passphrase>)" : " (none stored)") + ", and this browser knows no mirror URL — pass one: /vault recover <passphrase> <url>" };
   }
 
   /* ---------------------------- live access tests -------------------------- */
@@ -451,7 +539,7 @@
       bubble('<div class="rise"><div class="rhead">🔐 PrAis Vault — ' + E(r.name) + ' stored</div>'
         + '<div class="rrow"><b>' + E(r.svc) + '</b><span class="vd">' + (t.ok ? "VERIFIED" : "FAILED") + '</span><div class="rd">' + E(fp(val)) + ' · ' + E(t.detail) + '</div></div>'
         + (t.ok ? '' : '<div class="rfoot">Fail closed: it is stored locally, but nothing was sealed or pushed while it fails its own test.</div>')
-        + '<div class="rfoot">L1 local only so far. <b>/vault seal</b> to encrypt it for the canon, <b>/vault push</b> (needs /omega) to commit it.</div></div>');
+        + '<div class="rfoot">L1 local only so far. <b>/vault seal</b> to encrypt it for the canon, <b>/vault push</b> (needs /phoenixomegaprotocol) to commit it.</div></div>');
       dna("Obi: [/vault set " + local + " — " + (t.ok ? "verified against " + r.svc : "stored but failed its test") + "]");
       return;
     }
@@ -478,7 +566,7 @@
       const sub = (parts[1] || "").toLowerCase();
       const kp = keyPair();
       if(sub === "reveal" || sub === "show"){
-        if(!armed()){ bubble('⛔ <b>/vault key reveal</b> shows the crown jewel — arm PHOENIXOMEGAPROTOCOL first: <b>/omega &lt;password&gt;</b>.'); return; }
+        if(!armed()){ bubble('⛔ <b>/vault key reveal</b> shows the crown jewel — arm PHOENIXOMEGAPROTOCOL first: <b>/phoenixomegaprotocol &lt;password&gt;</b>.'); return; }
         if(!kp){ bubble('🔐 No vault keypair yet. <b>/vault key</b> to mint one.'); return; }
         bubble('<div class="rise"><div class="rhead">👑 Vault private key — SAVE THIS ELSEWHERE</div>'
           + '<div class="rrow"><b>PRIVATE</b><span class="vd">CROWN JEWEL</span><div class="rd rd-mono">' + E(kp.priv) + '</div></div>'
@@ -490,7 +578,7 @@
         const lt = lastTest.vaultkey;
         bubble('<div class="rise"><div class="rhead">🔑 PrAis Vault — the vault key</div>'
           + '<div class="rrow"><b>PUBLIC</b><span class="vd">SHAREABLE</span><div class="rd rd-mono">' + E(kp.pub.slice(0, 72)) + '…</div></div>'
-          + '<div class="rrow"><b>PRIVATE</b><span class="vd">HELD HERE</span><div class="rd">' + E(fp(kp.priv)) + ' · reveal needs /omega</div></div>'
+          + '<div class="rrow"><b>PRIVATE</b><span class="vd">HELD HERE</span><div class="rd">' + E(fp(kp.priv)) + ' · reveal needs /phoenixomegaprotocol</div></div>'
           + '<div class="rfoot">The public key is safe to commit (it only encrypts). <b>/vault seal</b> uses it.</div></div>');
         return;
       }
@@ -500,9 +588,36 @@
       log({ kind:"secret", action:"vault keypair", ok:true, detail:"ML-KEM (FIPS 203) keypair minted; private key kept in this browser", result:"public " + k.public.length + " chars · private " + k.private.length + " chars" });
       bubble('<div class="rise"><div class="rhead">🔑 PrAis Vault — keypair minted</div>'
         + '<div class="rrow"><b>PUBLIC</b><span class="vd">SHAREABLE</span><div class="rd rd-mono">' + E(k.public) + '</div></div>'
-        + '<div class="rrow"><b>PRIVATE</b><span class="vd">CROWN JEWEL</span><div class="rd">kept in this browser · <b>/vault key reveal</b> (after /omega) to save it in your own password manager</div></div>'
+        + '<div class="rrow"><b>PRIVATE</b><span class="vd">CROWN JEWEL</span><div class="rd">kept in this browser · <b>/vault key reveal</b> (after /phoenixomegaprotocol) to save it in your own password manager</div></div>'
         + '<div class="rfoot">ML-KEM (FIPS 203) — post-quantum. Everything the vault seals on the canon can only be opened by this private key.</div></div>');
       dna("Obi: [/vault key — ML-KEM keypair minted]");
+      return;
+    }
+    if(op === "pointer" || op === "ptr"){
+      const sub = (parts[1] || "").toLowerCase();
+      if(sub === "clear" || sub === "none"){
+        const c = await ptrClear();
+        if(c.ok) put({ vaultPtrUrl:null, vaultPtrAt:null });
+        bubble('<div class="rise"><div class="rhead">🧭 ' + (c.ok ? "Pointer cleared" : "Pointer NOT cleared") + '</div>'
+          + '<div class="rrow' + (c.ok ? "" : " bad") + '"><b>VALUE</b><span class="vd">' + (c.ok ? "EMPTY" : "UNCHANGED") + '</span><div class="rd rd-mono">' + E(c.ok ? "-" : (c.why || "refused")) + '</div></div>'
+          + '<div class="rfoot">' + E(ptrGetUrl()) + ' now reads as empty, which is the honest state when no escrow has been published from this line.</div></div>');
+        return;
+      }
+      if(sub === "set"){
+        const v = parts.slice(2).join(" ").trim();
+        if(!v){ bubble('🧭 The shape is <b>/vault pointer set &lt;url&gt;</b>.'); return; }
+        const w = await ptrWrite(v);
+        if(w.ok) put({ vaultPtrUrl:v, vaultPtrAt:new Date().toISOString() });
+        bubble('<div class="rise"><div class="rhead">🧭 ' + (w.ok ? "Pointer aimed" : "Pointer NOT aimed") + '</div>'
+          + '<div class="rrow' + (w.ok ? "" : " bad") + '"><b>VALUE</b><span class="vd">' + (w.ok ? "READ BACK IDENTICAL" : "REFUSED") + '</span><div class="rd rd-mono">' + E(w.ok ? v : (w.why || "refused")) + '</div></div>'
+          + '<div class="rfoot">' + E(ptrGetUrl()) + ' — worthless to an attacker (it is one URL to ciphertext), priceless to a machine with nothing.</div></div>');
+        return;
+      }
+      const r = await ptrRead();
+      bubble('<div class="rise"><div class="rhead">🧭 PrAis Vault — the durable pointer (L2.7)</div>'
+        + '<div class="rrow"><b>WHERE</b><span class="vd">ORIGIN-FREE</span><div class="rd rd-mono">' + E(ptrGetUrl()) + '</div></div>'
+        + '<div class="rrow' + (r.ok ? "" : " bad") + '"><b>HOLDS</b><span class="vd">' + (r.ok ? "A BUNDLE URL" : "NOTHING") + '</span><div class="rd rd-mono">' + E(r.ok ? r.value : (r.why || "empty")) + '</div></div>'
+        + '<div class="rfoot">The address of the recovery bundle, <b>readable with no token, no account and no stored state</b> — everything the old localStorage copy was not. <b>/vault recover &lt;passphrase&gt;</b> reads this first, so the passphrase alone is enough.</div></div>');
       return;
     }
     if(op === "escrow"){
@@ -517,7 +632,7 @@
         return;
       }
       if(!subtle()){ bubble('⚠ This browser cannot derive keys (<span class="rd-mono">crypto.subtle</span> is unavailable) — the escrow fails closed rather than storing something weak.'); return; }
-      if(!armed()){ bubble('⛔ <b>/vault escrow</b> writes the wrapped key to the canon — arm PHOENIXOMEGAPROTOCOL first: <b>/omega &lt;password&gt;</b>.'); return; }
+      if(!armed()){ bubble('⛔ <b>/vault escrow</b> writes the wrapped key to the canon — arm PHOENIXOMEGAPROTOCOL first: <b>/phoenixomegaprotocol &lt;password&gt;</b>.'); return; }
       bubble('🔐 /vault escrow — wrapping the private key with PBKDF2-SHA256 × ' + ESCROW_ITER.toLocaleString() + ' → AES-256-GCM…');
       let doc;
       try{ doc = await wrapPriv(pass, kp.priv, kp.pub); }
@@ -544,6 +659,13 @@
       put({ vaultEscrowAt:new Date().toISOString(), vaultEscrowFp:fp,
             vaultEscrowUrl:mEsc.url || escrowMeta().url || null,
             vaultRecoveryUrl:mRec.url || escrowMeta().recoveryUrl || null });
+      /* THE DURABLE POINTER — publish the bundle's ADDRESS where a wiped browser, a
+         renamed generator and a new agent can all find it with no token. This is the
+         half that was missing: without it /vault recover still needed a URL from a
+         human, and the human's only copy was the store the rename destroyed. */
+      const ptrUrl = mRec.url || mEsc.url || null;
+      const ptr = ptrUrl ? await ptrWrite(ptrUrl) : { ok:false, why:"no mirror URL was published, so there is nothing to point at" };
+      if(ptr.ok) put({ vaultPtrUrl:ptrUrl, vaultPtrAt:new Date().toISOString() });
       /* THE CANON COPY — authoritative, committed with the now-accurate manifest */
       const L = window.ObiILog, R = (L && L.REPO) || {};
       let pushed = 0, commit = null, errs = [];
@@ -563,7 +685,10 @@
         + '<div class="rrow' + (mEsc.url ? "" : " bad") + '"><b>ESCROW MIRROR</b><span class="vd">' + (mEsc.url ? "PUBLISHED" : "NONE") + '</span><div class="rd rd-mono">' + E(mEsc.url || mEsc.note) + (mEsc.url && mEsc.note ? "<br>" + E(mEsc.note) : "") + '</div></div>'
         + '<div class="rrow' + (mRec.url ? "" : " bad") + '"><b>RECOVERY BUNDLE</b><span class="vd">' + (mRec.url ? "PUBLISHED" : "NONE") + '</span><div class="rd rd-mono">' + E(mRec.url || mRec.note)
           + (mRec.url ? '<br>the wrapped key + ' + E(sbNow && sbNow.n ? sbNow.n + " sealed secret(s)" : "no sealed blob yet") + ' in one file — <b>this URL + your passphrase rebuilds the whole vault on ANY machine, with no GitHub token</b>' : "") + '</div></div>'
-        + '<div class="rfoot"><b>Your browser is no longer the only copy.</b> Recover anywhere with the passphrase: <b>/vault recover &lt;passphrase&gt;</b>' + (mRec.url ? ' — or, on a machine with no token and no stored state, <b>/vault recover &lt;passphrase&gt; ' + E(mRec.url) + '</b>' : "") + '.<br>'
+        + '<div class="rrow' + (ptr.ok ? "" : " bad") + '"><b>DURABLE POINTER</b><span class="vd">' + (ptr.ok ? "AIMED" : "NOT AIMED") + '</span><div class="rd">' + (ptr.ok
+            ? 'the bundle\u2019s address is published where <b>no token, no stored state and no rename can lose it</b>, and read back identical — so <b>/vault recover &lt;passphrase&gt;</b> now needs nothing else. <span class="rd-mono">' + E(ptr.url) + '</span>'
+            : E(ptr.why || "not written")) + '</div></div>'
+        + '<div class="rfoot"><b>Your browser is no longer the only copy.</b> Recover anywhere with the passphrase alone: <b>/vault recover &lt;passphrase&gt;</b>' + (mRec.url ? ' — or name the file directly, <b>/vault recover &lt;passphrase&gt; ' + E(mRec.url) + '</b>' : "") + '.<br>'
         + '<b>Write the passphrase in your password manager now</b> — the station never stored it and cannot show it to you again.</div></div>');
       dna("Obi: [/vault escrow — crown jewel wrapped, canon + escrow mirror + recovery bundle published]");
       return;
@@ -659,11 +784,11 @@
       bubble('<div class="rise"><div class="rhead">🔒 PrAis Vault — sealed</div>'
         + '<div class="rrow"><b>SEALED</b><span class="vd">' + n + ' SECRET</span><div class="rd">' + E(enc.length) + ' chars ciphertext · only the vault private key opens it</div></div>'
         + '<div class="rrow"><b>DESTINATION</b><span class="vd">CANON</span><div class="rd">' + E(PATH.sealed) + ' @ ' + E(BRANCH) + '</div></div>'
-        + '<div class="rfoot"><b>/vault push</b> (needs /omega — it writes to the canon) commits the sealed blob + the public key + the values-free manifest.</div></div>');
+        + '<div class="rfoot"><b>/vault push</b> (needs /phoenixomegaprotocol — it writes to the canon) commits the sealed blob + the public key + the values-free manifest.</div></div>');
       return;
     }
     if(op === "push"){
-      if(!armed()){ bubble('⛔ <b>/vault push</b> writes to the canon — arm PHOENIXOMEGAPROTOCOL first: <b>/omega &lt;password&gt;</b>.'); return; }
+      if(!armed()){ bubble('⛔ <b>/vault push</b> writes to the canon — arm PHOENIXOMEGAPROTOCOL first: <b>/phoenixomegaprotocol &lt;password&gt;</b>.'); return; }
       const kp = keyPair();
       const L = window.ObiILog;
       if(!kp){ bubble('🔐 No vault keypair — <b>/vault key</b> first.'); return; }
@@ -873,7 +998,7 @@
         + '</div></div>'
       + (sealedBlob() ? '<div class="rrow"><b>SEALED HERE</b><span class="vd">' + (sealedBlob().n || "?") + ' SECRET</span><div class="rd">' + E(sealedBlob().text.length) + ' chars ciphertext · ready for <b>/vault push</b></div></div>' : "")
       + '<div class="rrow"><b>L3 LIVE</b><span class="vd">' + Object.keys(lastTest).length + ' TESTED</span><div class="rd">' + (Object.keys(lastTest).length ? E(Object.keys(lastTest).map(k => k + ":" + (lastTest[k].ok ? "ok" : "no")).join(" · ")) : "nothing tested yet this session") + '</div></div>'
-      + '<div class="rrow"><b>GATE</b><span class="vd">' + (armed() ? "ARMED" : "LOCKED") + '</span><div class="rd">canon writes need PHOENIXOMEGAPROTOCOL (/omega) · ' + (armed() ? "writes authorised" : "seal is free, push is gated") + '</div></div>'
+      + '<div class="rrow"><b>GATE</b><span class="vd">' + (armed() ? "ARMED" : "LOCKED") + '</span><div class="rd">canon writes need PHOENIXOMEGAPROTOCOL (/phoenixomegaprotocol) · ' + (armed() ? "writes authorised" : "seal is free, push is gated") + '</div></div>'
       + '<div class="rfoot"><b>/vault locate</b> (where the vault already is on git) · <b>/vault test [name|all]</b> (real calls) · <b>/vault set &lt;name&gt; &lt;value&gt;</b> · <b>/vault key</b> · <b>/vault seal</b> · <b>/vault push</b> · <b>/vault pull</b> · <b>/vault escrow &lt;passphrase&gt;</b> (make the private key recoverable) · <b>/vault recover &lt;passphrase&gt; [url]</b> · <b>/vault manifest</b>'
       + '</div></div>';
   }
@@ -892,6 +1017,7 @@
     cmd: cmd, status: statusPanel, locate: locate, manifest: manifestMd, escrowPanel: escrowPanel,
     names: NEEDED.map(r => r.local), get: get, set: put, forget: del, fp: fp, test: testRow,
     sealed: sealedBlob, keyPair: keyPair, paths: PATH, escrow: escrowMeta,
+    pointer: ptrRead, pointerWrite: ptrWrite, pointerUrl: ptrGetUrl, pointerClear: ptrClear,
     r2: r2Test, r2Host: r2Host, needs: NEEDED
   };
 })();

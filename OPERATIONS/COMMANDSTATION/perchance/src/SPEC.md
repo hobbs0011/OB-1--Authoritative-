@@ -153,7 +153,7 @@ clients are namespaces, not accounts (the evaluator inventory's `pl.auth` stays 
   Training · Gaming · Web Development) and the generators in each, with conservative `live` / `scaffold` / `planned`
   state. The view renders straight from it; a planned card says it is planned and lists what it still needs, and
   opening one answers in the station rather than dead-clicking. **Add the next generator there — one array entry.**
-- **⚙ Settings holds the controls** (voice, commands, the ledger, `/ilog` `/doctor` `/omega` `/keys` `/bg`,
+- **⚙ Settings holds the controls** (voice, commands, the ledger, `/ilog` `/doctor` `/phoenixomegaprotocol` `/keys` `/bg`,
   reincarnate) plus **instruments read live** (run · soul · I-LOG · client · view · tunnel · background · canon gate ·
   secret *names* · which modules loaded). Voice is **persisted** (`localStorage obi_voice`) and reincarnate is
   confirm-gated.
@@ -217,11 +217,11 @@ Locked decisions, built in `src/ilog.js` + `src/app.js` and verified live (detai
    "backed up" must not be claimed. Honest limit: the chain is verified in the sovereign's browser — the commit is the
    only witness outside it.
 6. **PHOENIXOMEGAPROTOCOL — no Canon change without Sov100.** Every authority write requires the password entered in
-   that session: `/omega <password>` arms the gate for 15 minutes and never survives a reload; only a sha-256 hash is
+   that session: `/phoenixomegaprotocol <password>` arms the gate for 15 minutes and never survives a reload; only a sha-256 hash is
    stored (this browser's kv), never the password itself and never in the public source; it is never logged, captured
    as soul, or exported; five failures lock the gate for ten minutes; **every attempt — armed, refused, failed — is an
    I-LOG entry**. A refused write touches nothing and says so.
-7. **Secrets never enter the record.** `/cf token`, `/gh token`, `/dg token` and `/omega …` are handled but
+7. **Secrets never enter the record.** `/cf token`, `/gh token`, `/dg token` and `/phoenixomegaprotocol …` are handled but
    redacted on the way in (no soul capture, no chat-log line, no I-LOG detail), and every export (RRL, raw chat,
    canon session record) is scrubbed of credential-shaped strings.
 8. **The doctrine is updated, and proposed rather than imposed.** `src/canon/GOSPEL-999.md` gained the amendment block

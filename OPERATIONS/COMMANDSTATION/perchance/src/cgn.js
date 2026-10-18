@@ -103,11 +103,24 @@ async function cgnReadNodeFile(genName){
   return cgnReadJson(cgnNodeUrl(genName));
 }
 
+/* A verdict that CANNOT fail open. upload-plugin answers a refusal with {error:"..."} and a
+   success with {url|size|editKey|editCount|unchanged|superseded}. Silence — no url and no error —
+   is BLOCKED, never success. The same rule the relay uses for its lane measurement, so the mesh
+   reports one way no matter which module asked. */
+function cgnWriteVerdict(res){
+  if(!res) return { ok:false, why:"no response from the write — treated as blocked" };
+  if(res.error) return { ok:false, why:String(res.error) };
+  if(res.superseded) return { ok:true, superseded:true, changed:false };
+  if(res.url || res.editKey || res.unchanged) return { ok:true };
+  if(typeof res.editCount === "number") return { ok:true };
+  return { ok:false, why:"no url and no error reported — treated as blocked" };
+}
+
 async function cgnWriteHub(hub){
   try{
     const res = await root.uploadPlugin.editable.set(cgnS.hubName, JSON.stringify(hub), {editKey: cgnS.editKey});
-    return !res.error;
-  }catch(e){ return false; }
+    return cgnWriteVerdict(res);
+  }catch(e){ return { ok:false, why:"threw: " + String((e&&e.message)||e) }; }
 }
 
 function cgnSoulKey(e){ return (e.t||"") + "|" + String(e.text||""); }
@@ -163,8 +176,10 @@ async function cgnAddMember(genName, role){
   const pull = await cgnPullMember(hub, genName);
   hub.updated = Date.now();
   hub.seq = (hub.seq||0) + 1;
-  const ok = await cgnWriteHub(hub);
-  return { ok, genName, role, memberFound: pull.ok, soulAdded: pull.soulAdded, lawsAdded: pull.lawsAdded, members: hub.members };
+  const w = await cgnWriteHub(hub);
+  if(!w.ok) return { ok:false, blocked:true, genName, role, memberFound: pull.ok, members: hub.members,
+    why:"the anchor could not write the hub — " + w.why + " · nothing was registered" };
+  return { ok:true, genName, role, memberFound: pull.ok, soulAdded: pull.soulAdded, lawsAdded: pull.lawsAdded, members: hub.members };
 }
 
 /* ---- full sync: push own -> hub, pull hub + all members -> local + hub ---- */
@@ -206,8 +221,8 @@ async function cgnSync(){
   if(changed || !st.seq){
     hub.seq = (hub.seq || 0) + 1;
     hub.updated = Date.now();
-    const ok = await cgnWriteHub(hub);
-    if(!ok) return { ok:false, why:"hub write failed", pushed:{soul:pushedSoul,laws:pushedLaws}, pulled:0, nodes:Object.keys(hub.nodes).length, seq:hub.seq, before, after:null };
+    const w = await cgnWriteHub(hub);
+    if(!w.ok) return { ok:false, why:"the anchor could not write the hub — " + w.why, blocked:true, pushed:{soul:pushedSoul,laws:pushedLaws}, pulled:0, nodes:Object.keys(hub.nodes).length, seq:hub.seq, before, after:null };
   }
   st.seq = hub.seq;
   st.lastSync = Date.now();
@@ -239,12 +254,23 @@ async function cgnJoin(netName, role){
   if(st.net === netName && st.hubName) return { ok:true, already:true, net:netName };
   const hubName = CGN_HUB_PREFIX + netName;
   const created = await root.uploadPlugin.editable.set(hubName, JSON.stringify(cgnEmptyHub()));
+  const v = cgnWriteVerdict(created);
+  if(!v.ok){
+    /* The write was REFUSED. That is not "the hub exists" and it is not "the key is lost" —
+       say exactly what the platform said, and join nothing. */
+    const existing = await cgnReadJson(`${CGN_EDIT_BASE}/${cgnSelfName()}/${hubName}`);
+    return { ok:false, refused:true, gate:v.why, hubName,
+      why:"the platform refused the write: " + v.why + (existing
+        ? " (a hub file for " + netName + " already exists, but this browser holds no key to it)"
+        : " (no hub file exists for " + netName + " — nothing was created)") };
+  }
   if(created.editKey){
     cgnS.editKey = created.editKey;
   } else if(st.editKey){
     cgnS.editKey = st.editKey;
   } else {
-    return { ok:false, why:"hub exists but editKey is unknown — reveal it from the generator that created it via /netkey" };
+    return { ok:false, hubExists:true, hubName,
+      why:"the hub " + hubName + " already exists and this browser holds no editKey for it — only the node that created it, or a holder of that key, can write it. This station cannot become the anchor of " + netName + " from here." };
   }
   cgnS.net = netName;
   cgnS.hubName = hubName;
@@ -267,8 +293,22 @@ function cgnStatus(){
     lastSync: st.lastSync ? new Date(st.lastSync).toLocaleTimeString() : "never",
     seq: st.seq || 0,
     localSoul: ledger.soul.length,
-    localLaws: (ledger.deaths||[]).reduce((n,d)=> n + (d.newLaws||[]).length, 0)
+    localLaws: (ledger.deaths||[]).reduce((n,d)=> n + (d.newLaws||[]).length, 0),
+    hubUrl: st.hubName ? cgnHubUrl() : null,
+    nodeUrl: cgnNodeUrl(cgnSelfName()),
+    hasEditKey: !!st.editKey
   };
+}
+
+/* Measure the mesh write lane ONCE, now, without joining anything or leaving a file behind
+   where the platform allows a write. Its refusal IS the measurement. */
+async function cgnProbe(){
+  const name = "obi-cgn-lane";
+  try{
+    const res = await root.uploadPlugin.editable.set(name, JSON.stringify({ t:Date.now(), probe:true }));
+    const v = cgnWriteVerdict(res);
+    return { open: v.ok, gate: v.ok ? null : v.why, detail: v.ok ? "the gate lifted — a write into this generator's own namespace succeeded" : v.why };
+  }catch(e){ return { open:false, gate:"threw", detail:"threw: " + String((e&&e.message)||e) }; }
 }
 
 /* ---- auto-sync: mark dirty on each capture, flush on an interval ---- */
@@ -277,6 +317,7 @@ function cgnMarkDirty(){ cgnDirty = true; }
 window.cgnMarkDirty = cgnMarkDirty;
 
 setInterval(async ()=>{
+  if(window.ObiAuto && !window.ObiAuto.canAuto()) return; /* HELD — /auto is off */
   const st = cgnState();
   if(!st.net || !cgnDirty) return;
   cgnDirty = false;
@@ -285,6 +326,7 @@ setInterval(async ()=>{
 
 /* boot: if already joined, pull the whole once the page is up */
 setTimeout(async ()=>{
+  if(window.ObiAuto && !window.ObiAuto.canAuto()) return; /* HELD — stopped by default */
   const st = cgnState();
   if(st.net && st.hubName && window.root){
     try{ await cgnSync(); }catch(e){}
@@ -304,4 +346,4 @@ async function cgnFindNode(role){
   }catch(e){ return null; }
 }
 
-window.ObiNet = { cgnSync, cgnJoin, cgnAddMember, cgnStatus, cgnReadHub, cgnReadNodeFile, cgnNodeId, cgnFindNode, cgnState: ()=>cgnState() };
+window.ObiNet = { cgnSync, cgnJoin, cgnAddMember, cgnStatus, cgnProbe, cgnWriteVerdict, cgnReadHub, cgnReadNodeFile, cgnNodeId, cgnFindNode, cgnState: ()=>cgnState() };

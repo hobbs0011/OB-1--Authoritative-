@@ -8,7 +8,35 @@ diff a future run against it.
 |---|---|---|
 | `mailala/index.html` | the wing's Mailala venue page — composed by the Site Builder from the 100-step pipeline's brief (SOUL-01…SOUL-10), then finished by hand | **NOT authority.** The canonical Mailala site is the canon's `WEBSITE/mailala/`, live at `canon.mailala.pages.dev`. This is the wing's own build of the same brief, kept as the worked example. |
 | `mailala/SOUL.md` | the sovereign's Mailala words, **verbatim** (SOUL-01…SOUL-10 from the canon register + the 2026-09-24 directive), the material he supplied with what each file actually shows, and **the venue's own words** read off its signage | **the record of intent.** Copy the canon's `CANON/MAILALA-PROMPT-REGISTER.md`; this is the travelling copy. Never edited, never summarised. |
-| `mailala/material/` | the venue photographs supplied by the sovereign (9 files, original ids kept as provenance) — bar at night, rooftop, murals, the menu poster, the "Say No to Drugs" posters, "Jamaican Catering", the rasta restroom sign | raw material, not yet wired into `mailala/index.html`. Described truthfully in `SOUL.md §4`, because invented alt text was the first build's worst defect. |
+| `mailala/material/` | the venue photographs supplied by the sovereign (9 files, original ids kept as provenance) — bar at night, rooftop, murals, the menu poster, the "Say No to Drugs" posters, "Jamaican Catering", the rasta restroom sign | all nine are now USED by `mailala/index.html`, and `ASSET-MANIFEST.json` names each one's slot (M-01 the hero + `og:image`, M-02 the spirit panel, M-03 the menu board, M-04 the rooftop gallery …). Described truthfully in `SOUL.md §4`, because invented alt text was the first build's worst defect. |
+| `mailala/ASSET-MANIFEST.md` / `.json` | **THE ASSET REGISTER** — every asset in the blueprint located, labelled and SHA-256 hashed from its actual bytes, plus the census of the whole estate (count · bytes · one TREE DIGEST over every `path sha256` line). The `.md` is for reading, the `.json` carries every digest. | **the register is the inventory.** Generated, never hand-typed: the register pass re-runs it, and `/relay` rebuilds the same census in the browser and names anything that has moved. The four delivery documents are excluded from the census, and the file says so. |
+| `mailala/SYNC-PACKET.md` / `.json` | **THE SYNC PACKET** — the same work addressed to the node (`phoenix-rising-ai-solutions-agent99-webapp`): every artifact with a URL that answers and the digest to check it by, plus the three lanes as MEASURED (the token-free read channel WORKS pull-only; the mesh write is BLOCKED at the anti-bot gate; the cloud is BLOCKED with no credential). | **the packet is the courier** — regenerated and delivered again whenever the state moves. The register is the stable artifact.
+
+## The delivery — the four truth-documents, and the pipeline that carries them
+
+The wing's work leaves this shelf through **four documents and one pipeline**. They are the four
+files above that are *excluded from the register's own census* — because a document that enumerated
+itself would be stale the moment it was written — and they are carried by **the relay**
+(`src/relay.js`, `/relay`): the master sync pipeline that reads them, measures the estate against
+the register, uploads what has moved (by digest, so identical bytes are never re-uploaded), tries
+the mesh and the cloud and records each refusal verbatim, re-hashes every URL it delivered, indexes
+the result, and seals the run under its own digest. It reports **REAL / HOLLOW / MISSING / BLOCKED**
+and it is never allowed to say COMPLETE with a shut door.
+
+A run of it looks like this (2026-09-25, measured in the station's own browser):
+
+| stage | verdict | what it measured |
+|---|---|---|
+| READ | REAL | both delivery documents answer on this origin |
+| CENSUS | REAL | 244 files · 18,415,585 B — the tree digest rebuilt here is the tree digest the register recorded |
+| DELIVER | BLOCKED | the four documents are out (by digest); the mesh write returned `anti_bot_verification_needed`; no Cloudflare credential exists in this origin |
+| VERIFY | REAL | every delivered URL was fetched again and re-hashes to the digest it was delivered with |
+| INDEX | REAL | the brain's index built over the estate |
+| ARCHIVE | REAL | one hashed snapshot, under the run's own digest |
+
+**Result: HELD, not COMPLETE** — which is the point. Two doors are shut, each one says why, and
+nothing is claimed as sent that was not sent.
+
 
 ## What is the model's and what is not, in `mailala/index.html`
 

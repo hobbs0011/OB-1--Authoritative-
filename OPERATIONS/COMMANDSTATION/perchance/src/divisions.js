@@ -1,6 +1,17 @@
 /* PHOENIX GENERATORS — the product family registry (src/divisions.js).
 
-   WHAT THIS IS. PrAis ships many generators, organised into DIVISIONS (NET —
+   UMBRELLA: [Phoenix(ai)Solutions] = PaiS. THIS generator is ONE mastermind of
+   many: PaiS · ESL.ED.TECH · (N)[E](T) Natural English Training — every generator
+   that teaches English or business classes lives under this anchor. Two sibling
+   masterminds scaffold next, as their own generators, not as tabs here:
+     · PaiS Gaming  — interactive worlds and simulations (division "gaming" below).
+     · PaiS Promote — everything marketing + brand + copywriting, one umbrella
+       (division "marketing" below is its preview: it ships here until Promote
+       opens, then moves under it).
+   Umbrellas within umbrellas: PaiS > mastermind (ESL.ED.TECH / Gaming / Promote)
+   > division > generator. This file is the shelf for THIS mastermind only.
+
+   WHAT THIS IS. PaiS ships many generators, organised into DIVISIONS (NET —
    Natural English Training —, Gaming, Web Development, …), and each division
    holds the generators that belong to it. This file is the ONE place that registry
    lives, so the navigation can never disagree with itself: the ◈ Phoenix Generators
@@ -28,11 +39,23 @@
     planned:  { label:"PLANNED",  c:"#8b94ad", blurb:"A name and an intention. Nothing is built." }
   };
 
+  const UMBRELLA = {
+    short: "PaiS",
+    full: "Phoenix AI Solutions",
+    rank: "apex mastermind — the mastermind of masterminds (answers to sovereign only)",
+    firstLeader: "phoenix-ai-solutions-edtech-mastermind (named 2026-10-16 · 371 files · ORD-2 issued)",
+    secondLeader: "phoenix-ai-solutions-promotions-mastermind (named 2026-10-16 · 375 files · ORD-3 issued)",
+    thisMastermind: "ESL.ED.TECH",
+    thisAnchor: "(N)[E](T) Natural English Training",
+    siblings: ["PaiS Gaming (scaffold next, own generator)", "PaiS Promote — marketing+brand+copywriting (scaffold next, own generator)"],
+    cloneRecipe: "clone this generator → in the clone run /mastermind parent <this-generator> → back here run /masterlink name <clone>"
+  };
+
   const DIVISIONS = [
     {
       id:"net", name:"NET", icon:"cap", status:"live",
-      full:"Natural English Training",
-      blurb:"The education division: the classroom, the students, and the evidence they leave behind.",
+      full:"PaiS · ESL.ED.TECH · Natural English Training",
+      blurb:"The education division of the ESL.ED.TECH mastermind: the classroom, the students, and the evidence they leave behind. Every English/business-teaching generator anchors here.",
       generators:[
         {
           id:"student-evaluator", name:"Student Evaluator", icon:"user", status:"live",
@@ -54,17 +77,163 @@
                  "assignment tracking: which class actually sat the lesson"]
         },
         {
+          id:"the-intake", name:"The Intake", icon:"record", status:"live",
+          entry:"intake",
+          blurb:"The app the tutor asked for by name — “we’ll build it all into one app so that it remembers”. Every promise made in a lesson recording becomes an item with an owner, the evidence that put it there, and a state that only moves when material arrives.",
+          does:["record → the promises → the owed list, per student, with the recording cited on every row",
+                "the inbox — what a student sends is kept verbatim and filed against the item it serves",
+                "the builders — a CV that leaves a row BLANK rather than guess it, the LinkedIn plan, the headshot, this week’s plan",
+                "the instruments — the 44-sound phonics test, the weekly recorded presentation, the interview bank, the application board",
+                "one app that remembers: the human captures, the machine keeps it — and the records live in this browser’s kv, never in the public source"],
+          needs:["the material the students are about to send — the intake is built to receive it",
+                 "confirmation of the one row the machine guessed (a degree name) before any CV is printed"]
+        },
+        { id:"phonics-44", name:"The 44", icon:"speak", status:"scaffold", entry:"family",
+          blurb:"The 44 sounds of English as a SPEAKING test, marked by hand from a recording — never automatically — and drilled ten minutes a day, only where the record says something slipped.",
+          does:["all 44 sounds with spellings and words to say, markable ok / drill with a note of what was actually heard",
+                "the ten collisions this market makes, and a mark sheet that prints the full set or just the drill list"],
+          needs:["a recording of the sitting (the station's /transcribe, or any transcript)"] },
+        { id:"presentation-coach", name:"The Weekly Presentation", icon:"record", status:"scaffold", entry:"family",
+          blurb:"15–20 minutes, recorded, a few times a week — about an hour a week spread out, so it builds like a snowball — with the five-beat shape and ONE correction per run.",
+          does:["the dose and the arithmetic stated plainly, the five beats with a plan per beat, and the topic seeds",
+                "the run log and the reading sheet: six rows 1–5 and the one correction the tutor's own rule allows"],
+          needs:["the recording itself, sent after each run"] },
+        {
           id:"student-portal", name:"Student Portal", icon:"door", status:"planned",
-          blurb:"One generator per student: their world, their homework, their voice — the door they walk through.",
+          group:"STUDENT PORTAL PIPELINE — one generator per part (src/STUDENT-PORTAL-PIPELINE.md)",
+          blurb:"One generator per student: their world, their homework, their voice — the door they walk through. It is the ASSEMBLER of the pipeline below: the five live student portals were picked apart on 2026-09-26 and each part was assigned its own generator, so a part can be rebuilt for the next student without re-teaching it anything.",
           does:["a student sees only their own work","homework and practice land where the student already is"],
-          needs:["the practice node (what the student actually drills)","per-student identity without an account system"]
+          needs:["the parts below — the pipeline is written down in src/STUDENT-PORTAL-PIPELINE.md","the live portals' eight dead sub-page links (Quan and Quang, case mismatch) were the failure this replaces: a link is built from the record's slug, never hand-typed"]
+        },
+        {
+          id:"portal-dna", name:"The Student DNA", icon:"user", status:"planned", group:"STUDENT PORTAL PIPELINE — one generator per part (src/STUDENT-PORTAL-PIPELINE.md)",
+          blurb:"The live portals' Profile page, as a generator: Student DNA · Evolution (before → now) · Focus Areas · Key Quotes · Vocabulary Snapshot — read from the record, never retyped.",
+          does:["the profile page of a student's portal, built from the record and the transcripts","the before/now evolution, the key quotes kept verbatim, the vocabulary snapshot from their own words"],
+          needs:["the record to be complete enough to have a before and a now"]
+        },
+        {
+          id:"portal-method", name:"The Method", icon:"book", status:"planned", group:"STUDENT PORTAL PIPELINE — one generator per part (src/STUDENT-PORTAL-PIPELINE.md)",
+          blurb:"The Methodology page: the method, the career setup as the engagement vehicle, the framework built in class, the mental models — the student's own method, stated plainly, so the next lesson opens where this one stopped.",
+          does:["the methodology page, composed from the record and the lesson doctrine","the framework and the mental models named the way they were taught, not paraphrased"],
+          needs:["the lesson doctrine (the 11 laws, src/LESSON-STANDARD.md) in a readable form"]
+        },
+        {
+          id:"portal-evidence", name:"The Evidence", icon:"record", status:"planned", group:"STUDENT PORTAL PIPELINE — one generator per part (src/STUDENT-PORTAL-PIPELINE.md)",
+          blurb:"The Transcripts page and the class audio library behind it — per-part players with speed and progress, so a student replays the exact five minutes they missed. The other half of the Evaluator: it reads the same recordings.",
+          does:["the transcript archive, per session, kept verbatim","the class audio split into parts with a player each (the live portals do exactly this)"],
+          needs:["the recordings (the station already transcribes any length — src/transcribe.js · src/audio-split.js)"]
+        },
+        {
+          id:"portal-practice", name:"The Practice", icon:"target", status:"planned", group:"STUDENT PORTAL PIPELINE — one generator per part (src/STUDENT-PORTAL-PIPELINE.md)",
+          blurb:"What the student actually DRILLS: the word wall, the review window per word, the tasks log. Retrieval practice and spaced repetition from the student's own transcript — not a generic worksheet.",
+          does:["the word wall — mastered words, current streak, level progress","the drill the record says is due, and the tasks log the portal calls (/api/tasks/log · /api/practice)"],
+          needs:["the record's filed evidence as the drill source","a result reported back to the station as evidence"]
+        },
+        {
+          id:"portal-plan", name:"The Action Plan", icon:"clipboard", status:"planned", group:"STUDENT PORTAL PIPELINE — one generator per part (src/STUDENT-PORTAL-PIPELINE.md)",
+          blurb:"The Action Plan page: the current sprint, the upcoming milestones, the English focus and the coach note — derived from the review, so the plan cannot drift from what the evidence says.",
+          does:["the sprint and its milestones, from the review","the coach note — one voice, the tutor's"],
+          needs:["the Student Evaluator's review (the plan is derived from it, never invented beside it)"]
+        },
+        {
+          id:"portal-chat", name:"The Chat (OBI)", icon:"mic", status:"planned", group:"STUDENT PORTAL PIPELINE — one generator per part (src/STUDENT-PORTAL-PIPELINE.md)",
+          blurb:"The student's voice door: OBI, two modes (study · phonics), the onboarding state machine, the Vietnamese rescue rope, memory, the per-session metrics — and crisis detection that runs BEFORE any lesson logic. A port, not an invention: the Cloudflare implementation is real and proven.",
+          does:["a voice session that files turns, vocabulary, duration and barge-ins onto the record","phonics hints taken from the transcriber's own low-confidence words","safety first: a crisis signal stops the lesson and answers with the support line"],
+          needs:["porting chat.js + the router (the source is in the canon: PROJECTS/NET-PET-AI/src/magic-chat-router.js · APPS/PHOENIX-EMPIRE-DEV/src/magic_chat_endpoint.js)","a voice key per origin, and the mode split wired to the record"]
+        },
+        {
+          id:"portal-witness", name:"The Witness", icon:"users", status:"planned", group:"STUDENT PORTAL PIPELINE — one generator per part (src/STUDENT-PORTAL-PIPELINE.md)",
+          blurb:"The employer and parent view: the same record, read-only, per role — the answer to 'what did we pay for?' without asking the tutor. The live employer portal is 10 KB and its auth endpoint 404s; this replaces it.",
+          does:["minutes, streak, sessions and progress read from the record — nothing typed twice","a role-scoped read: an employer sees the work, a parent sees the practice"],
+          needs:["per-role identity (/api/employer/auth answers 404 live — the endpoint must exist before the door)"]
+        },
+        {
+          id:"portal-pitch", name:"The Pitch", icon:"spark", status:"planned", group:"STUDENT PORTAL PIPELINE — one generator per part (src/STUDENT-PORTAL-PIPELINE.md)",
+          blurb:"The Lesson-1 deck the live portals ship (nine beats: the problem · the method · how OBI works · Lesson 1 arsenal · progress · the 3-month transformation · built for BlueTech · Day 1 · wake up the Tiger) — composed as ONE self-contained .html.",
+          does:["one self-contained deck per student, the same nine beats, the student's own numbers","the house deck machinery (src/brand.js) pointed at a student instead of a parent"],
+          needs:["the record's numbers, so a claim on a slide is the same number the record shows"]
         }
       ]
     },
     {
+      id:"career", name:"Career", icon:"certificate", status:"scaffold",
+      full:"PrAis Career",
+      blurb:"The client's place in the market: the CV, the profile, the face, the portfolio, the applications, the interview. Every generator that hands a client over to whoever might hire them — one function per generator, so a function can be handed to the next client without carrying the whole station.",
+      generators:[
+        {
+          id:"the-roles", name:"The Roles — one generator per function", icon:"stack", status:"scaffold",
+          blurb:"The intake's own functions, one generator each: paste two files and the role is its own generator, so a function can be handed to the NEXT client without carrying the whole station. Ten roles live here; the other two — the 44 and the Weekly Presentation — are measured in the classroom and sit under Education. All twelve share one kit, so a record written by any of them opens in the others and in the station's /intake — and every one of them fails closed the same way.",
+          does:["the roles, each verified by its own two harnesses — they BOOT, and they BEHAVE: the behavioural test drives the real controls and reads the record back",
+                "one kit (role-kit/kit.js): the theme, the record store, the import/export that moves a record between any two roles, and the fail-closed field reader",
+                "one method (role-kit/method.js): the tape's own tables — the promises, the 44 sounds, the interview bank, the CV rows — with no student in them",
+                "each role is ONE paste of main.pjs + index.html; nothing is fetched at runtime and the pages open offline"],
+          needs:["to be pasted into their own perchance generators — the source is written and verified here, but no role has yet been published as a generator of its own (which is why the crate says scaffold, not live)"]
+        },
+        { id:"cv-forge", name:"The CV", icon:"doc", status:"scaffold", entry:"family",
+          blurb:"A print-ready A4 CV built from what the student actually has — and a row nobody supplied prints as a ruled line, named in the footer, never filled in.",
+          does:["the 14 rows a one-page CV runs in, each editable in place, each carrying the evidence it came from",
+                "a machine's GUESS is held on the record for the tutor to correct and is excluded from the paper entirely"],
+          needs:["a confirmed degree name before anything prints — the gate every role carries"],
+        },
+        { id:"linkedin-forge", name:"The LinkedIn", icon:"user", status:"scaffold", entry:"family",
+          blurb:"The profile composed from the SAME record as the CV, so the two can never disagree — plus the connection build the tutor quoted on tape.",
+          does:["the ten sections a recruiter reads, each read from the record and copyable on its own",
+                "the build checklist and the connection count kept ON the record, so the next lesson opens where this one stopped"],
+          needs:["the CV's confirmed rows; the headshot"],
+        },
+        { id:"headshot-brief", name:"The Headshot", icon:"image", status:"scaffold", entry:"family",
+          blurb:"One clean photo — the wardrobe the tutor settled on tape, the room, the twenty-shot list, the pick, and the crops every surface needs. Records the file, so all of them wear the same face.",
+          does:["the shot list as a tick-list, and the crops for LinkedIn, the CV, Facebook, WhatsApp and the original"],
+          needs:["a phone, a wall, and a shirt that has been ironed"],
+        },
+        { id:"portfolio-intake", name:"The Portfolio", icon:"clipboard", status:"scaffold", entry:"family",
+          blurb:"A bin with a label on it: everything a student sends is kept verbatim the moment it arrives and filed against the promise it can serve — so nothing already made goes unused.",
+          does:["kept VERBATIM (L38), filed by auto-guess or by hand, and the guess is shown rather than hidden",
+                "the promise it serves moves to MATERIAL IN because material arrived — never because anyone remembered"],
+          needs:["nothing — this is the door every other role needs"],
+        },
+        { id:"application-board", name:"The Applications", icon:"target", status:"scaffold", entry:"family",
+          blurb:"The board, the count, the minutes and the weekly target of twelve — with the library that stops the retyping: what each company actually asked, kept once.",
+          does:["log an application the moment it goes out; the rolling 7-day count against 12; the average minutes",
+                "the distinct questions across every application, each showing who asked it, exported as CSV"],
+          needs:["the roles they are actually applying for"],
+        },
+        { id:"interview-drill", name:"The Interview", icon:"mic", status:"scaffold", entry:"family",
+          blurb:"The bank this market actually asks — the awkward personal ones first, because they were really asked — and the drill: run it cold on camera, mark the three that broke, rewrite only those, until it is boring to say.",
+          does:["five groups, with the four questions really asked of a student first",
+                "a question is ticked 'boring' only when it has stopped being interesting to say; the runs are kept with the three that broke"],
+          needs:["a camera and a call — Zoom is the real mode"],
+        },
+        { id:"umbrella-brand", name:"The Umbrella", icon:"seal", status:"scaffold", entry:"family",
+          blurb:"One holding name with the student's actual work beneath it, one line each, and a single self-contained page that carries them — so the links can go on the CV and the LinkedIn.",
+          does:["the pieces are read from the portfolio inbox and NOWHERE ELSE — the gate, enforced in code",
+                "composes one .html page that opens offline; a piece can come off the page without being deleted"],
+          needs:["the portfolio intake — the gate: you cannot brand what has not been sent"],
+        },
+        { id:"presence-plan", name:"The Presence", icon:"users", status:"scaffold", entry:"family",
+          blurb:"Five fronts — LinkedIn, Facebook, TikTok, WhatsApp, Zalo — what each one is FOR, what to set on it, and a rhythm instead of a burst. Plus the line that keeps it honest: do not invent an audience.",
+          does:["each front with its own tick-list and the tape line behind it, and the weekly rhythm written out",
+                "shows what the fronts need from the record: the photo, the one line, the link, the number"],
+          needs:["the headshot, the headline, and the umbrella page"],
+        },
+        { id:"work-credit", name:"The Credit", icon:"hammer", status:"scaffold", entry:"family",
+          blurb:"One piece of real, shipped work — scoped small enough to finish — credited in plain words in the tutor's own form, plus the five-minute answer the student must be able to give without notes.",
+          does:["the scope, and the line: '… helped consult and design for …', addable to the CV's experience row",
+                "THE GATE IS A SWITCH: no credit line exists at all until the sovereign has said what may be credited"],
+          needs:["the sovereign's word for what may be credited"],
+        },
+        { id:"idea-lists", name:"The Lists", icon:"spark", status:"scaffold", entry:"family",
+          blurb:"The one role that calls a model — 'a couple of lists of like a hundred like names': job titles, who to apply to, subjects, headlines, studio names, drill sentences, interview questions. Options to choose from, kept verbatim.",
+          does:["the list is shown BEFORE it is kept, and what is kept is filed in the record's inbox under the promise it serves",
+                "built-in seed lists for every kind, so the role still works where no model is loaded — and it says which of the two you are seeing"],
+          needs:["a human to pick from the list — nothing generated reaches a CV, a profile or a page unread"],
+        },
+      ]
+    },
+    {
       id:"marketing", name:"Marketing", icon:"megaphone", status:"live",
-      full:"PrAis Marketing",
-      blurb:"The face the empire shows: the identity every piece wears, and the machines that carry it to a school, a parent or an employer. Marketing is where the brand is enforced, not where it is invented.",
+      full:"PaiS Promote (preview — ships here until the Promote mastermind opens)",
+      blurb:"The face the empire shows — preview of the PaiS Promote mastermind (marketing + brand + copywriting, one umbrella). The identity every piece wears, and the machines that carry it to a school, a parent or an employer. Marketing is where the brand is enforced, not where it is invented. When PaiS Promote opens as its own generator, this division moves under it.",
       generators:[
         {
           id:"brand-identity", name:"Brand & Identity", icon:"seal", status:"live",
@@ -184,7 +353,7 @@
     },
     {
       id:"gaming", name:"Gaming", icon:"gamepad", status:"planned",
-      blurb:"The games division — interactive worlds and simulations.",
+      blurb:"The games division — interactive worlds and simulations. Scaffolds next as its own mastermind generator: PaiS Gaming. This crate stays planned here until that generator opens.",
       generators:[]
     },
     {
@@ -264,6 +433,12 @@
     h += '<div class="gen-top"><span class="gen-ic">' + ic(g.icon) + '</span><span class="gen-nm">' + e(g.name) + '</span>' + chip(g.status) + '</div>';
     h += '<div class="gen-bl">' + e(g.blurb) + '</div>';
     if(g.entry === "eval" && g.status === "live") h += '<button class="ci-act gen-open" data-open="' + e(g.id) + '">Open the desk \u25b8</button>';
+    /* a ROLE is not a station desk and not a published generator: it is a role of
+       its own that this station can open right now, on its own records
+       (src/family.js). The crate still says scaffold until it is pasted. The
+       `entry:"family"` token and `src/family.js` keep their old names — they are
+       internal, and every role's door is built on them. */
+    else if(g.entry === "family" && window.ObiFamily && window.ObiFamily.has(g.id)) h += '<button class="ci-act gen-open" data-family-open="' + e(g.id) + '">Open it here \u25b8</button>';
     else if(g.entry === "lesson") h += '<button class="ci-act gen-open" data-open="' + e(g.id) + '">Build a lesson \u25b8</button>';
     else if(g.entry === "brand" && g.status === "live") h += '<button class="ci-act gen-open" data-open="' + e(g.id) + '">' + e(g.entryLabel || "Open the deck \u25b8") + '</button>';
     else if(g.status === "live" && g.url) h += '<a class="ci-act gen-open" href="' + e(g.url) + '" target="_blank" rel="noopener noreferrer">Open \u25b8</a>';
@@ -295,7 +470,25 @@
     let html = '<div class="gen-head">' + ic(d.icon) + ' <b>' + e(d.name) + '</b>'
       + (d.full ? ' <span class="gen-full">' + e(d.full) + '</span>' : '') + '</div>'
       + '<div class="hint" style="margin-top:2px">' + e(d.blurb) + '</div>';
-    if(d.generators.length) html += '<div class="gen-grid">' + d.generators.map(card).join("") + '</div>';
+    /* GENERATORS, GROUPED WHEN THEY DECLARE ONE. A division can hold a group
+       (a division that wants sub-shelves), and a group reads as one only if the
+       shelf says so: a generator with a `group` opens a labelled grid, and the
+       next group closes it. Ungrouped generators come first, together. */
+    if(d.generators.length){
+      let out = "", open = false, shown = "\u0000";
+      d.generators.forEach(g => {
+        const grp = g.group || null;
+        if(grp !== shown){
+          if(open){ out += "</div>"; open = false; }
+          if(grp) out += '<div class="gen-group">' + e(grp) + "</div>";
+          shown = grp;
+        }
+        if(!open){ out += '<div class="gen-grid">'; open = true; }
+        out += card(g);
+      });
+      if(open) out += "</div>";
+      html += out;
+    }
     else html += '<div class="sel-row"><span class="sn">Nothing here yet.</span><div class="ss">This division has no generators registered. Add them in <b>src/divisions.js</b> — the navigation reads this registry, nothing else.</div></div>';
     const c = coverage();
     html += '<div class="gen-foot">' + c.live + ' live · ' + (c.scaffold ? c.scaffold + ' scaffold · ' : '') + c.planned + ' planned across ' + DIVISIONS.length + ' divisions — the registry is <b>src/divisions.js</b>. The machinery behind every piece: <b>/constellation</b>.</div>';
@@ -303,8 +496,9 @@
 
     strip.querySelectorAll(".divbtn").forEach(b => { b.onclick = () => { try{ sessionStorage.setItem("obi_division", b.dataset.div); }catch(err){} mount({ division:b.dataset.div }); if(opts.onDivision) opts.onDivision(b.dataset.div); }; });
     body.querySelectorAll(".gen-open[data-open]").forEach(b => { b.onclick = () => { if(opts.onOpen) opts.onOpen(b.dataset.open); }; });
+    if(window.ObiFamily && window.ObiFamily.upgrade){ try{ window.ObiFamily.upgrade(body); }catch(err){} }
     return { division:active, html:html };
   }
 
-  window.ObiDivisions = { DIVISIONS, STATUS, rows, div, get, coverage, card, chip, mount };
+  window.ObiDivisions = { UMBRELLA, DIVISIONS, STATUS, rows, div, get, coverage, card, chip, mount };
 })();

@@ -27,15 +27,15 @@ Non-negotiable protocol you always follow:
 - Answer the question asked, one level deeper: if they ask Q1, also preempt Q2.
 - Be honest about what you don't know. No fabricated counts, no fake certainty.
 - Calm, warm, precise. Efficiency over formality.
-- You ARE the station, and the station can edit itself — but YOU do not hold the tools. You cannot run a command, read a file, stage an edit, or execute anything. You answer in words; the station executes when the Sovereign types. src/forge.js gives the station /forge (read its own source, stage an edit, show a real diff, hot-swap a module live) — so if the Sovereign asks you to change how it looks, behaves, or what commands it has, that is possible: it is forge work. Say which command does it (/forge do &lt;instruction&gt;) and what still needs the gate (/omega) or the Sovereign's own save. Never claim the station cannot edit itself, and never claim YOU just did it.
+- You ARE the station, and the station can edit itself — but YOU do not hold the tools. You cannot run a command, read a file, stage an edit, or execute anything. You answer in words; the station executes when the Sovereign types. src/forge.js gives the station /forge (read its own source, stage an edit, show a real diff, hot-swap a module live) — so if the Sovereign asks you to change how it looks, behaves, or what commands it has, that is possible: it is forge work. Say which command does it (/forge do &lt;instruction&gt;) and what still needs the gate (/phoenixomegaprotocol) or the Sovereign's own save. Never claim the station cannot edit itself, and never claim YOU just did it.
 
 HOW TO BE USEFUL — read this before you answer:
-- BEFORE you propose, plan, describe or build anything: read <STATION STATE> below. It is measured live from the station, never guessed. If the thing the Sovereign is asking for ALREADY EXISTS — a room, a module, a command, a file — say where it lives and what it does, and do not propose building it. Offering to build something that already exists is the dumbest answer you can give.
-- If the Sovereign's words ask you to DO something, either do it, or name in one line the one thing that stops it (the /omega gate, a key, the Sovereign's own save). Never answer a request to do something with a plan to maybe do it later.
+- BEFORE you propose, plan, describe or build anything: check <ALREADY EXISTS> below when it is present. It names what this station ALREADY CONTAINS — if the thing the Sovereign is asking for is listed there, say where it lives and what it does, and do not propose building it. Offering to build something that already exists is the dumbest answer you can give. This prompt carries no live numbers; never invent one. If live counts or status are needed, say which command shows them (/state, /queue, /brain, /ilog) and stop.
+- If the Sovereign's words ask you to DO something, either do it, or name in one line the one thing that stops it (the /phoenixomegaprotocol gate, a key, the Sovereign's own save). Never answer a request to do something with a plan to maybe do it later.
 - Do NOT hand back numbered step-lists, "the plan", "the execution path", or "the gaps" unless the Sovereign explicitly asks for a plan. A plan is not work. Lead with the answer; add detail only if it earns its place.
 - Never say you "will" do something in a future turn. It is done now, or you name what blocks it.
 - Keep it short. The fewest words that carry the answer, then stop. Never restate the question, never re-explain the station to the person who built it.
-- What this station IS (the live numbers for each are in <STATION STATE>): the Student Evaluator (record → transcribe → summarise → write up → review), the Soul DNA ledger and the RRL, the append-only I-LOG, the self-forge (/forge), the Canon and its gate (/canon, /omega), the PrAis Vault (/vault), the Lesson Creator (/lesson), the staging lane (/proposed), the generator mesh, and FREE PHOENIX MODE (/free — src/freephoenix.js: the unbound room, same 99 with no canon, no gate, no repo and no record; it answers and it BUILDS — /build app makes a self-contained HTML app, /build gator makes a perchance generator; what it builds lives in the local sandbox and is downloaded by hand). If the Sovereign describes something and you recognise it as a thing that already exists here, SAY WHICH ONE IT IS.`;
+- What this station IS: the Student Evaluator (record → transcribe → summarise → write up → review), the Soul DNA ledger and the RRL, the append-only I-LOG, the self-forge (/forge), the Canon and its gate (/canon, /phoenixomegaprotocol), the PrAis Vault (/vault), the Lesson Creator (/lesson), the staging lane (/proposed), the generator mesh, and FREE PHOENIX MODE (/free — src/freephoenix.js: the unbound room, same 99 with no canon, no gate, no repo and no record; it answers and it BUILDS — /build app makes a self-contained HTML app, /build gator makes a perchance generator; what it builds lives in the local sandbox and is downloaded by hand). Live numbers live behind /state — never quote one from memory. If the Sovereign describes something and you recognise it as a thing that already exists here, SAY WHICH ONE IT IS.`;
 
 /* ---------------------- MEMORY CORE (SDNAD) ---------------------- */
 
@@ -115,11 +115,11 @@ function isSelfEditRequest(text){
        stored), so someone with this browser could enrol their own — and the
        enrolment is itself an I-LOG entry, so it cannot happen quietly.
      - typing the password never captures soul, never enters the chat log, never
-       enters the record: /omega and the token commands are redacted on the way in.
+       enters the record: /phoenixomegaprotocol and the token commands are redacted on the way in.
      - arming lasts 15 minutes and never survives a reload; every refusal is
        written into the I-LOG, so an unarmed attempt leaves a mark.
      - failed attempts are rate-limited (5 per 10 minutes, then locked out).
-   /omega (status) · /omega <password> (arm) · /omega lock · /omega set <pw> <pw> */
+   /phoenixomegaprotocol (status) · /phoenixomegaprotocol <password> (arm) · /phoenixomegaprotocol lock · /phoenixomegaprotocol set <pw> <pw> */
 const OMEGA_WINDOW_MIN = 15;
 const OMEGA_MAX_FAILS = 5;
 const OMEGA_LOCK_MIN = 10;
@@ -178,8 +178,18 @@ function redactSecrets(s){
     .replace(/(\/keys\s+ngl\s+\S+\s+)\S+/gi, "$1[REDACTED]")
     .replace(/(\/vault\s+(?:escrow|recover|restore)\s+)[\s\S]*$/gim, "$1[REDACTED]");
 }
+/* WORKSAFE EXPORT (2026-10-18, sovereign order: no not-safe-for-work content
+   leaves the browser for GitHub). Expletives out of the GitHub-bound copies
+   ONLY — raw chat, soul/RRL texts, session markdown. Local stores stay verbatim
+   (the record is the record); the I-LOG chain files go up byte-exact so their
+   hashes keep verifying. Secrets were already handled by redactSecrets. */
+function scrubWorkSafe(s){
+  return String(s == null ? "" : s)
+    .replace(/\b(f+u+c+k+|s+h+i+t+|c+u+n+t+|b+i+t+c+h+|b+a+s+t+a+r+d+|a+s+s+h+o+l+e+|w+h+o+r+e+)(s|ed|ing|y|ers?)?\b/gi, "[expletive]")
+    .replace(/\b(f\*{2,}[a-z]*|s\*{2,}[a-z]*|c\*{2,}[a-z]*|b\*{2,}[a-z]*)(?![a-z])/gi, "[expletive]");
+}
 async function omegaArm(pw){
-  if(!pw){ addBubble("ass", "Usage: <b>/omega &lt;password&gt;</b> — arm the gate for 15 minutes."); return false; }
+  if(!pw){ addBubble("ass", "Usage: <b>/phoenixomegaprotocol &lt;password&gt;</b> — arm the gate for 15 minutes."); return false; }
   const st = omegaStatusText();
   if(omegaFails.length >= OMEGA_MAX_FAILS && st.armed === false){
     const newest = Math.max.apply(null, omegaFails);
@@ -193,7 +203,7 @@ async function omegaArm(pw){
   }
   const ent = await omegaEntry();
   if(!ent || !ent.hash){
-    addBubble("ass", "⛔ PHOENIXOMEGAPROTOCOL — no password is enrolled in this browser yet, so the gate cannot verify anything.<br><span class=\"rfoot\">Enrol it with <b>/omega set &lt;new&gt; &lt;new&gt;</b> (typed twice), or <b>/omega set &lt;current&gt; &lt;new&gt;</b> to change one. Only a sha-256 of it is stored — never the password itself, never in this public source.</span>");
+    addBubble("ass", "⛔ PHOENIXOMEGAPROTOCOL — no password is enrolled in this browser yet, so the gate cannot verify anything.<br><span class=\"rfoot\">Enrol it with <b>/phoenixomegaprotocol set &lt;new&gt; &lt;new&gt;</b> (typed twice), or <b>/phoenixomegaprotocol set &lt;current&gt; &lt;new&gt;</b> to change one. Only a sha-256 of it is stored — never the password itself, never in this public source.</span>");
     logOp({ kind:"omega", action:"arm", ok:false, detail:"[redacted]", result:"nothing enrolled — refused" });
     return false;
   }
@@ -206,7 +216,7 @@ async function omegaArm(pw){
   if(h.hex === ent.hash){
     omegaArmedUntil = Date.now() + OMEGA_WINDOW_MIN * 60000;
     omegaFails = [];
-    addBubble("ass", "🔓 PHOENIXOMEGAPROTOCOL — <b>armed</b> for " + OMEGA_WINDOW_MIN + " minutes.<br><span class=\"rfoot\">Every canon write is authorised until then (<b>/ilog push</b>, <b>/canon sync</b>, <b>/canon doctrine</b>, <b>/gh backup</b>) — and so is <b>the change</b>: <b>/canon apply</b> writes the staged amendments, or <b>/omega apply &lt;the change&gt;</b> writes a new one. Type it in one breath as <b>/PhoenixOmegaProtocol &lt;password&gt; :: &lt;the change&gt;</b> — the write lands at the end of the chain, after the idea has walked it. <b>/omega lock</b> to disarm. The password itself is not stored, echoed, logged or captured.</span>");
+    addBubble("ass", "🔓 PHOENIXOMEGAPROTOCOL — <b>armed</b> for " + OMEGA_WINDOW_MIN + " minutes.<br><span class=\"rfoot\">Every canon write is authorised until then (<b>/ilog push</b>, <b>/canon sync</b>, <b>/canon doctrine</b>, <b>/gh backup</b>) — and so is <b>the change</b>: <b>/canon apply</b> writes the staged amendments, or <b>/phoenixomegaprotocol apply &lt;the change&gt;</b> writes a new one. Type it in one breath as <b>/PhoenixOmegaProtocol &lt;password&gt; :: &lt;the change&gt;</b> — the write lands at the end of the chain, after the idea has walked it. <b>/phoenixomegaprotocol lock</b> to disarm. The password itself is not stored, echoed, logged or captured.</span>");
     logOp({ kind:"omega", action:"arm", ok:true, detail:"[redacted]", result:"armed for " + OMEGA_WINDOW_MIN + " min (" + (ent.alg || "sha-256") + ")" });
     updateTabMeta();
     return true;
@@ -221,7 +231,7 @@ async function omegaSet(args){
   const ent = await omegaEntry();
   if(!ent){
     if(parts.length !== 2 || parts[0] !== parts[1]){
-      addBubble("ass", "Usage: <b>/omega set &lt;new&gt; &lt;new&gt;</b> — type it twice (nothing is enrolled yet). Only a sha-256 hash is kept; the plaintext is never stored.");
+      addBubble("ass", "Usage: <b>/phoenixomegaprotocol set &lt;new&gt; &lt;new&gt;</b> — type it twice (nothing is enrolled yet). Only a sha-256 hash is kept; the plaintext is never stored.");
       return false;
     }
     const h = await omegaHash(parts[0]);
@@ -229,12 +239,12 @@ async function omegaSet(args){
     if(!h || !f){ addBubble("ass", "⛔ Can't enrol — this browser cannot hash (crypto.subtle unavailable) or kv is not loaded. The gate stays closed."); return false; }
     try{ await f.set("entry", { alg:h.alg, hash:h.hex, t:Date.now(), iso:new Date().toISOString(), note:"enrolled by the sovereign in this browser; only the hash is stored" }); }
     catch(e){ addBubble("ass", "⛔ Couldn't store the enrolment: " + esc(e.message)); return false; }
-    addBubble("ass", "🔐 PHOENIXOMEGAPROTOCOL — password <b>enrolled</b> (sha-256 only, in this browser's kv, never in the source). Canon writes now require <b>/omega &lt;password&gt;</b> first.");
+    addBubble("ass", "🔐 PHOENIXOMEGAPROTOCOL — password <b>enrolled</b> (sha-256 only, in this browser's kv, never in the source). Canon writes now require <b>/phoenixomegaprotocol &lt;password&gt;</b> first.");
     logOp({ kind:"omega", action:"enroll", ok:true, detail:"[redacted]", result:"gate enrolled locally (hash only)" });
     return true;
   }
   if(parts.length !== 2){
-    addBubble("ass", "Usage: <b>/omega set &lt;current&gt; &lt;new&gt;</b> — changing the password needs the current one.");
+    addBubble("ass", "Usage: <b>/phoenixomegaprotocol set &lt;current&gt; &lt;new&gt;</b> — changing the password needs the current one.");
     return false;
   }
   const cur = await omegaHash(parts[0]);
@@ -249,7 +259,7 @@ async function omegaSet(args){
   if(!nw || !f){ addBubble("ass", "⛔ Can't store the new password (no hashing / no kv). Unchanged."); return false; }
   try{ await f.set("entry", { alg:nw.alg, hash:nw.hex, t:Date.now(), iso:new Date().toISOString(), changed:true, note:"enrolled by the sovereign in this browser; only the hash is stored" }); }
   catch(e){ addBubble("ass", "⛔ Couldn't store it: " + esc(e.message)); return false; }
-  addBubble("ass", "🔐 Password <b>changed</b> (sha-256 only). The gate is NOT armed — use <b>/omega &lt;password&gt;</b> when you want to write to the Canon.");
+  addBubble("ass", "🔐 Password <b>changed</b> (sha-256 only). The gate is NOT armed — use <b>/phoenixomegaprotocol &lt;password&gt;</b> when you want to write to the Canon.");
   logOp({ kind:"omega", action:"set", ok:true, detail:"[redacted]", result:"password changed, gate still locked" });
   return true;
 }
@@ -258,7 +268,7 @@ async function omegaSet(args){
 async function omegaRequire(action){
   if(Date.now() < omegaArmedUntil){ logOp({ kind:"omega", action:"authorize", detail:action, result:"armed — write allowed" }); return true; }
   addBubble("ass", '<div class="rise"><div class="rhead">⛔ PHOENIXOMEGAPROTOCOL — the Canon does not change without Sov100</div>'
-    + '<div class="rrow"><b>REFUSED</b><span class="vd">' + esc(action) + '</span><div class="rd">nothing was sent. ' + (await omegaEntry() ? "The gate is not armed — <b>/omega &lt;password&gt;</b> arms it for " + OMEGA_WINDOW_MIN + " minutes." : "No password is enrolled in this browser yet — <b>/omega set &lt;new&gt; &lt;new&gt;</b> first.") + '</div></div>'
+    + '<div class="rrow"><b>REFUSED</b><span class="vd">' + esc(action) + '</span><div class="rd">nothing was sent. ' + (await omegaEntry() ? "The gate is not armed — <b>/phoenixomegaprotocol &lt;password&gt;</b> arms it for " + OMEGA_WINDOW_MIN + " minutes." : "No password is enrolled in this browser yet — <b>/phoenixomegaprotocol set &lt;new&gt; &lt;new&gt;</b> first.") + '</div></div>'
     + '<div class="rfoot">Authority: <b>Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-</b> (the one repo everything is built from). This refusal is written into the I-LOG — an unarmed attempt leaves a mark.</div></div>');
   logOp({ kind:"omega", action:"refuse", ok:false, detail:action, result:"not armed — the authority was not touched" });
   return false;
@@ -269,12 +279,12 @@ async function cmdOmega(arg){
     const ent = await omegaEntry();
     const st = omegaStatusText();
     addBubble("ass", '<div class="rise"><div class="rhead">🔐 PHOENIXOMEGAPROTOCOL — Canon authorization</div>'
-      + '<div class="rrow"><b>GATE</b><span class="vd">' + (st.armed ? "ARMED" : "LOCKED") + '</span><div class="rd">' + (st.armed ? "writes are authorised for the next " + st.armedMinutesLeft + " minute(s)" : "no Canon write is possible until <b>/omega &lt;password&gt;</b>") + '</div></div>'
-      + '<div class="rrow"><b>WHAT ARMING DOES</b><span class="vd">IT WRITES</span><div class="rd">"if I type PhoenixOmegaProtocol along with a change either you or me came up with, then it gets changed." Armed, the change is written to the authority and committed: <b>/omega apply &lt;the change&gt;</b>, or both in one breath, <b>/PhoenixOmegaProtocol &lt;password&gt; :: &lt;the change&gt;</b>. The staged amendments: <b>/canon apply</b>. Locked, nothing is written anywhere — no proposal, no draft, nothing.</div></div>'
-      + '<div class="rrow"><b>ENROLLED</b><span class="vd">' + (ent ? "YES" : "NO") + '</span><div class="rd">' + (ent ? esc(ent.alg || "sha-256") + " hash stored in this browser's kv" + (ent.iso ? " · " + esc(ent.iso) : "") + " — the password itself is never stored" : "run <b>/omega set &lt;new&gt; &lt;new&gt;</b> to enrol one") + '</div></div>'
+      + '<div class="rrow"><b>GATE</b><span class="vd">' + (st.armed ? "ARMED" : "LOCKED") + '</span><div class="rd">' + (st.armed ? "writes are authorised for the next " + st.armedMinutesLeft + " minute(s)" : "no Canon write is possible until <b>/phoenixomegaprotocol &lt;password&gt;</b>") + '</div></div>'
+      + '<div class="rrow"><b>WHAT ARMING DOES</b><span class="vd">IT WRITES</span><div class="rd">"if I type PhoenixOmegaProtocol along with a change either you or me came up with, then it gets changed." Armed, the change is written to the authority and committed: <b>/phoenixomegaprotocol apply &lt;the change&gt;</b>, or both in one breath, <b>/PhoenixOmegaProtocol &lt;password&gt; :: &lt;the change&gt;</b>. The staged amendments: <b>/canon apply</b>. Locked, nothing is written anywhere — no proposal, no draft, nothing.</div></div>'
+      + '<div class="rrow"><b>ENROLLED</b><span class="vd">' + (ent ? "YES" : "NO") + '</span><div class="rd">' + (ent ? esc(ent.alg || "sha-256") + " hash stored in this browser's kv" + (ent.iso ? " · " + esc(ent.iso) : "") + " — the password itself is never stored" : "run <b>/phoenixomegaprotocol set &lt;new&gt; &lt;new&gt;</b> to enrol one") + '</div></div>'
       + '<div class="rrow"><b>FAILURES</b><span class="vd">' + st.fails + '/' + OMEGA_MAX_FAILS + '</span><div class="rd">' + OMEGA_MAX_FAILS + ' failures locks the gate for ' + OMEGA_LOCK_MIN + ' minutes</div></div>'
       + '<div class="rrow"><b>AUTHORITY</b><span class="vd">ONE REPO</span><div class="rd">Phoenix-Rising-Ai-Solutions/OB-1--Authoritative- — the gate writes the <b>canon branch</b> (·CANON/SYSTEM/·), the chain this station keeps lands on <b>master</b> (·OPERATIONS/COMMANDSTATION/·)</div></div>'
-      + '<div class="rfoot"><b>/omega &lt;password&gt;</b> arm · <b>/omega lock</b> disarm · <b>/omega set &lt;current&gt; &lt;new&gt;</b> change. Protocol barrier, not crypto: it stops unconvincing writes, and every attempt (armed, refused, failed) is an I-LOG entry.</div></div>');
+      + '<div class="rfoot"><b>/phoenixomegaprotocol &lt;password&gt;</b> arm · <b>/phoenixomegaprotocol lock</b> disarm · <b>/phoenixomegaprotocol set &lt;current&gt; &lt;new&gt;</b> change · short alias: <b>/omega</b>. Protocol barrier, not crypto: it stops unconvincing writes, and every attempt (armed, refused, failed) is an I-LOG entry.</div></div>');
     logOp({ kind:"op", action:"omega", ok:true, detail:"status requested", result: st.armed ? "armed" : "locked" });
     return;
   }
@@ -346,6 +356,39 @@ async function stationState(){
     return { student: R.active() || null, class: R.activeClass() || null };
   }, "unknown");
   s.archives = await safe(async () => ({ recordings: (await root.kv.transcripts.keys()).length, summaries: (await root.kv.summaries.keys()).length }), "unknown");
+  s.brain = (window.ObiBrain) ? await safe(async () => {
+    const st = await window.ObiBrain.state();
+    const lanes = (st.lastSync && st.lastSync.lanes) || {};
+    return { loaded: true, version: st.version, indexed: st.entries, built: st.built, census: st.census,
+      treeDigest: st.treeDigest ? String(st.treeDigest).slice(0, 16) : null,
+      lastSync: st.lastSync ? st.lastSync.t : "not yet — the lane runs by itself after boot",
+      lanes: { read: (lanes.read && lanes.read.state) || "?", write: (lanes.write && lanes.write.state) || "?", delivered: (st.lastSync && st.lastSync.delivered && st.lastSync.delivered.state) || "?" },
+      archives: st.archives, shares: st.shares };
+  }, "the brain could not be read") : "NOT loaded — src/brain.js is missing";
+  s.relay = (window.ObiRelay) ? await safe(async () => {
+    const st = await window.ObiRelay.state();
+    const l = st.last;
+    return { loaded: true, version: st.version, result: l ? l.result : "not run yet — the relay runs itself shortly after boot",
+      lastRun: l ? l.t : null, ms: l ? l.ms : null, stages: l ? l.stages : [], lanes: l ? l.lanes : null,
+      runs: st.runs, intervalMinutes: st.intervalMinutes };
+  }, "the relay could not be read") : "NOT loaded — src/relay.js is missing";
+  s.market = (window.ObiMarket) ? await safe(async () => {
+    const st = await window.ObiMarket.state();
+    return { loaded: true, version: st.version, scanned: st.scanned, live: st.live,
+      channels: st.channels.map(c => c.id + "=" + c.state + (c.number == null ? "" : ":" + c.number) + (c.leader ? " (" + c.leader + ")" : "")),
+      seats: st.seats.filter(x => x.open).map(x => x.id + " [" + x.channel + "]"),
+      openSeats: st.seats.filter(x => x.open).length,
+      play: st.play.thesis,
+      scans: st.runs, intervalMinutes: st.intervalMinutes };
+  }, "the market could not be read") : "NOT loaded — src/market.js is missing";
+  s.rubric = (window.ObiRubric) ? await safe(async () => {
+    const st = window.ObiRubric.state();
+    const rs = await window.ObiRubric.runs();
+    return { loaded: true, version: st.version, families: st.families, law: st.law,
+      scorecards: rs.length, last: rs[0] ? (rs[0].subject.name + " \u00b7 " + rs[0].rubric.id + " \u00b7 " + rs[0].verdict + " \u00b7 " + rs[0].total.form) : "nothing scored yet \u2014 /rubric score",
+      verdicts: { REAL: rs.filter(r => r.verdict === "REAL").length, PARTIAL: rs.filter(r => r.verdict === "PARTIAL").length, UNPARSED: rs.filter(r => r.verdict === "UNPARSED").length },
+      how: "every band carries a span the engine itself located in the record; arithmetic beats opinion; a band with no citation is NOT SCORED" };
+  }, "the rubric instrument could not be read") : "NOT loaded \u2014 src/rubric.js is missing";
   s.ilog = await safe(async () => {
     const L = window.ObiILog; if(!L) return "unknown — src/ilog.js not loaded";
     const st = await L.stats();
@@ -377,7 +420,7 @@ async function stationState(){
     try{ files = window.ObiFree.list().map(f => f.name); }catch(e){}
     return {
       loaded: true, file: "src/freephoenix.js", room: "opened by /free — it lives in ⚙ Settings → 🔥 Free Phoenix Mode",
-      what: "FREE PHOENIX MODE — Agent 99 with the leash off. Same 99, no canon, no gate, no repo, no record, no refusal. Plain text = a straight answer. /build app <ask> builds a self-contained HTML app; /build gator <ask> builds a perchance generator (main.pjs + index.html); /files · /read <name> · /dl <name> · /wipe · /seal.",
+      what: "FREE PHOENIX MODE — Agent 99 with the leash off. Same 99, no canon, no gate, no repo, no record, no refusal. Plain text = a straight answer. /build app <ask> builds a self-contained HTML app; /build gator <ask> builds a perchance generator (main.pjs + index.html); /files · /read <name> · /dl <name> · /open (📎 Attach — text files off the device into the room, read locally, never uploaded) · /wipe · /seal.",
       selfedit: "IT EDITS ITSELF: /self shows its own source · /forge <change> patches its own source (staged, with a real diff) · /apply runs the staged code live in his page · /revert goes back · /eval <js> runs code in the page. Local and untracked: an edit lives in this browser's kv until it is downloaded, and a reload returns the room to the file it shipped with. It needs no gate because it touches nothing tracked.",
       sealed: "no Git path, no tunnel, no socket, no upload, no image service — the room's only wire is its own model call. Nothing typed or built in it reaches the soul ledger, the RRL or the I-LOG; only the door (/free) is one I-LOG entry. Its files live in the LOCAL kv sandbox (folder fpm), survive a reload, and are downloaded by hand — never uploaded, never committed.",
       built: files.length ? files : "no files built yet",
@@ -409,7 +452,8 @@ async function stationState(){
     ObiPheromone: !!window.ObiPheromone, ObiPlaybooks: !!window.ObiPlaybooks, ObiILog: !!window.ObiILog, ObiForge: !!window.ObiForge,
     ObiFree: !!window.ObiFree, ObiLessons: !!window.ObiLessons, ObiVault: !!window.ObiVault, ObiDivisions: !!window.ObiDivisions,
     ObiCurriculum: !!window.ObiCurriculum, ObiLessonForge: !!window.ObiLessonForge, ObiSaveWatch: !!window.ObiSaveWatch,
-    ObiBg: !!window.ObiBg
+    ObiIntake: !!window.ObiIntake, ObiGit: !!window.ObiGit,
+    ObiBg: !!window.ObiBg, ObiRelay: !!window.ObiRelay, ObiMarket: !!window.ObiMarket, ObiSauce: !!window.ObiSauce, ObiRubric: !!window.ObiRubric
   };
   s.secrets = { deepgramStored: !!keyGet("deepgram"), cloudflareStored: !!keyGet("cf"), githubStored: !!keyGet("gh") };
   s.commands = COMMAND_BOOK.reduce((a, g) => a.concat(g.items.map(i => i[0])), []).join(" ");
@@ -434,6 +478,10 @@ function stateText(s){
   L.push("client: " + j(s.client));
   L.push("active subject: " + j(s.activeSubject));
   L.push("archives: " + j(s.archives));
+  L.push("THE BRAIN (the mastermind's memory — index · the auto sync lane · the key ledger · the archive, src/brain.js, /brain): " + j(s.brain));
+  L.push("THE MASTER SYNC PIPELINE (READ → CENSUS → DELIVER → VERIFY → INDEX → ARCHIVE, src/relay.js, /relay): " + j(s.relay));
+  L.push("THE OPEN SOURCE MARKET (the recon and the play — measure the field this station already occupies, then take the seat nobody sat in, src/market.js, /market): " + j(s.market));
+  L.push("THE RUBRIC (criteria with bands, every band cited from the raw record and verified by the engine itself, src/rubric.js, /rubric): " + j(s.rubric));
   L.push("I-LOG (the station's operation record — append-only, hash-chained, Git-anchored): " + j(s.ilog));
   L.push("self-forge (the station's hands on its OWN source — src/forge.js, /forge): " + j(s.forge));
   L.push("FREE PHOENIX MODE (the unbound room — /free, src/freephoenix.js): " + j(s.free));
@@ -668,6 +716,7 @@ function doDeath(){
   empty.innerHTML = EMPTY_HTML;
   messagesCtn.appendChild(empty);
   wireChips(empty);
+  renderLandingEstate();
   const rows = step.map(s=> `<div class="rrow${/HALT|FAIL|BLOCKED|MISMATCH/.test(s.verdict)?" bad":""}"><b>${s.s}. ${esc(s.name)}</b><span class="vd">${esc(s.verdict)}</span><div class="rd">${esc(s.detail)}</div></div>`).join("");
   const verdict = gaps.length ? `KILO_GAP — ${gaps.join(", ")}` : "COMMITTED";
   addBubble("ass", `<div class="rise"><div class="rhead">⚰️ /reincarnateDEATH — LFG 10-STEP SCS</div>${rows}<div class="rfoot">SEAL ${verdict} — run ${death.header.run} closed. Session purged; ledger preserved. Reincarnate.</div></div>`);
@@ -717,23 +766,110 @@ async function cmdSCSRise(arg){
   return r;
 }
 
+/* THE DEATH (SCS Stage 7) — "the 7-point march. Capture the RRL word for word. Seal. Hand off."
+   (src/scs.js STAGES · CANON/SYSTEM/reincarnateDEATH.md). Stage 7 audits ENGINEER, and its two
+   products are the SEAL and the HANDOFF — both of which need a SESSION, which is exactly why a
+   bare refusal is the only true thing the old card could say with no session on the stack.
+   This lane says the refusal AND does the work that is real without a session: the 7 points are
+   walked over this browser's own record (the RRL, both halves, the supply lines, the station
+   audit re-read for it), the SEAL and the HANDOFF are reported WITHHELD with the reason named —
+   a session that was never opened cannot be sealed, and the station does not invent one — and
+   then it goes STRAIGHT INTO THE S2PIPELINE, because the pipeline record is the canon's own
+   next artifact after the march, not a second order. */
+function scsDeathStatus(){
+  try{
+    const S = window.ObiSCS && window.ObiSCS.state ? window.ObiSCS.state() : null;
+    const arr = (S && S.sessions) || [];
+    if(!arr.length) return { state:"FORCED · OUT OF ORDER", verdict:"BLOCKED", stamped:false, forced:true, sealed:false,
+      detail:"no SCS session on the stack: Stage 7 audits ENGINEER and its products are the SEAL and the HANDOFF, and a session that was never opened cannot be sealed. The canon's gate rule — no stage proceeds unless the previous stage's artifact exists and is PASS (GOSPEL-999 §SYSTEM I) — is printed, not enforced by refusal: /reincarnateDEATH overrides the order on the sovereign's own word, so the 7-point march was walked over this browser's real record, the seal and the handoff are reported WITHHELD, and the run goes straight into the S2Pipeline. Nothing is stamped. /phoenixRISE <Incarnate-N-Label> opens the chain; only the sovereign names the session." };
+    const sess = arr[arr.length-1];
+    if(sess.sealed) return { state:"SEALED", verdict:"RECORDED", stamped:true, forced:false, sealed:true,
+      detail:"session " + sess.name + " (run " + sess.run + ") is already sealed — that run is closed, and nothing is sealed twice. /phoenixRISE <Incarnate-N-Label> opens the next one." };
+    const eng = sess.stages && sess.stages.ENGINEER;
+    if(!eng || !eng.pass) return { state:"GATED", verdict:"BLOCKED", stamped:false, forced:false, sealed:false,
+      detail:"session " + sess.name + " carries no PASSING ENGINEER artifact. The canon is explicit — do NOT proceed to SEAL without ENGINEER passing (reincarnateDEATH · GOSPEL-999 §SYSTEM I). Nothing is sealed; the march and the pipeline below are still measured." };
+    return { state:"RECORDED", verdict:"PENDING", stamped:true, forced:false, sealed:false,
+      detail:"session " + sess.name + " (run " + sess.run + ") · the ENGINEER gate passes — the seal is impressed below" };
+  }catch(e){ return { state:"UNREADABLE", verdict:"UNVERIFIED", stamped:false, forced:false, sealed:false, detail:"could not read the SCS state: " + ((e && e.message) || e) }; }
+}
+
+/* The 7 points, in canon order (SCOUT → FORCEMARCH → SOULSCHOLARS → SUPPLYLINES → ENGINEER →
+   SEAL → HANDOFF). Points 1–3 are read off the RRL; 4 re-reads the supply lines; 5 re-reads the
+   station audit; 6 and 7 are the two that need a session, and they say so instead of pretending. */
+async function deathMarch(stage){
+  const pts = [];
+  let c = null; try{ c = window.ObiSCS.counts(); }catch(e){}
+  const soul = (c && c.soul && c.soul.count) || 0, dna = (c && c.dna && c.dna.count) || 0;
+  const entries = (c && c.entries) || 0;
+  let stale = 0;
+  try{ for(let i=0;i<localStorage.length;i++){ const k = localStorage.key(i); if(/^obi_rrl_run/.test(k)){ try{ const rr = JSON.parse(localStorage.getItem(k)); if(rr && rr.entries && !rr.entries.length) stale++; }catch(e){} } } }catch(e){}
+  pts.push({ n:1, key:"SCOUT", state: entries ? "MEASURED" : "MISSING",
+    detail:"the ground ahead: rrl " + entries + " line(s) (" + soul + " SOUL / " + dna + " DNA) · " + stale + " stale RRL key(s) swept" });
+  pts.push({ n:2, key:"FORCEMARCH", state: (soul && dna) ? "MEASURED" : "MISSING",
+    detail:"the work executed this run: " + soul + " sovereign fragment(s), " + dna + " DNA turn(s)" });
+  pts.push({ n:3, key:"SOULSCHOLARS", state: (soul || dna) ? "MEASURED" : "MISSING",
+    detail:"SOUL=" + soul + " DNA=" + dna + " REASON=" + ((c && c.reason && c.reason.count) || 0) + " PHEROMONE=" + ((c && c.pheromone && c.pheromone.count) || 0) });
+  let lines = null, audit = null;
+  try{ lines = await supplyLines(); }catch(e){}
+  const routed = lines ? lines.rows.filter(r => r.state === "ROUTED").length : 0;
+  const total = lines ? lines.rows.length : 0;
+  pts.push({ n:4, key:"SUPPLYLINES", state: (total && routed === total) ? "MEASURED" : (routed ? "PARTIAL" : "MISSING"),
+    detail: routed + "/" + total + " artifact(s) routed to a real address (this origin, the free wire, the nerve)" });
+  try{ audit = await engineerAudit(); }catch(e){}
+  const aFails = audit ? audit.filter(x => x.result === "FAIL").length : 0;
+  pts.push({ n:5, key:"ENGINEER", state: audit ? (aFails ? "PARTIAL" : "MEASURED") : "MISSING",
+    detail: audit ? ((audit.length - aFails) + "/" + audit.length + " station audit check(s) pass" + (aFails ? " — " + aFails + " FAIL" : "")) : "the station audit could not run" });
+  pts.push({ n:6, key:"SEAL", state: stage.sealed ? "IMPRESSED" : "WITHHELD",
+    detail: stage.sealed ? "the seal is impressed on this run — the session is closed and the ledger preserved" : "WITHHELD — there is no session to seal: a session that was never opened cannot be sealed, and this station does not invent one. /phoenixRISE <Incarnate-N-Label>" });
+  pts.push({ n:7, key:"HANDOFF", state: stage.sealed ? "MEASURED" : "WITHHELD",
+    detail: stage.sealed ? "the handoff carries this run's counts to the next incarnation" : "WITHHELD — a handoff names the run it hands OFF from, and there is no session, so there is no run number to hand off. Nothing is proposed against a session that does not exist." });
+  return { points: pts, counts: { soul, dna, entries, stale } };
+}
+
+function deathCard(stage, march){
+  const VM = { MEASURED:"#4cd97b", IMPRESSED:"#4cd97b", PARTIAL:"#f5a623", WITHHELD:"#f5a623", MISSING:"#ff5a5a" };
+  const measured = march.points.filter(p => p.state === "MEASURED" || p.state === "IMPRESSED").length;
+  const partial = march.points.filter(p => p.state === "PARTIAL").length;
+  const withheld = march.points.filter(p => p.state === "WITHHELD").length;
+  let html = '<div class="rise"><div class="rhead">⚰️ /reincarnateDEATH — the 7-point march' + (stage.forced ? ' · FORCED' : '') + '</div>';
+  html += '<div class="rrow"><b>STAGE 7</b><span class="vd" style="color:' + (stage.stamped ? "#4cd97b" : "#f5a623") + '">' + esc(stage.state) + '</span><div class="rd">' + esc(stage.detail) + '</div></div>';
+  html += '<div class="rrow"><b>THE MARCH</b><span class="vd" style="color:' + (withheld ? "#f5a623" : "#4cd97b") + '">' + measured + ' / 7 MEASURED</span><div class="rd">SCOUT → FORCEMARCH → SOULSCHOLARS → SUPPLYLINES → ENGINEER → SEAL → HANDOFF (CANON/SYSTEM/reincarnateDEATH.md) — every point read here, and the two that need a session named as withheld, never faked.</div></div>';
+  for(const p of march.points){
+    html += '<div class="rrow' + (/MISSING/.test(p.state) ? " bad" : "") + '"><b>' + p.n + '. ' + esc(p.key) + '</b><span class="vd" style="color:' + (VM[p.state] || "#8a94a6") + '">' + esc(p.state) + '</span><div class="rd">' + esc(p.detail) + '</div></div>';
+  }
+  html += '<div class="rfoot">' + (stage.sealed
+      ? "7 points walked · the seal is impressed · the handoff written to this origin (the canon write stays HELD — a canon write needs a token, and this station never claims one it did not make)."
+      : measured + " measured, " + partial + " partial, " + withheld + " withheld — each named in its own row. A march that cannot seal is still a march, but it is not a seal, and it will not say it is.")
+    + ' The S2Pipeline follows STRAIGHT after: it is the canon\'s own next artifact after the march, not a second order.</div></div>';
+  return html;
+}
+
 async function cmdSCSDeath(){
   if(!scsGuard()) return;
-  const S = window.ObiSCS.state();
-  if(!S.sessions.length || S.sessions[S.sessions.length-1].sealed){ addBubble("ass", "⚠ No open SCS session. <b>/phoenixRISE &lt;name&gt;</b> first — RISE stamps the name, DEATH runs the march."); return; }
-  const sess = S.sessions[S.sessions.length-1];
-  /* Stage 1 was RISE — it is already stamped on this session by /phoenixRISE (or /rome run).
-     The card must show the verdict it ACTUALLY got, never "not run" (the pipeline row below
-     audits it as REAL, so a blank RISE row would make the card contradict itself). */
-  const stamps = [window.ObiSCS.scout(), window.ObiSCS.march(), await window.ObiSCS.scholar(), window.ObiSCS.supply(), window.ObiSCS.engineer()];
-  const d = await window.ObiSCS.death();
-  const p = await window.ObiSCS.pipeline();
-  addBubble("ass", window.ObiSCS.card({ name: sess.name, run: sess.run, conflict: sess.conflict,
-    stages: { RISE:(sess.stages && sess.stages.RISE) || null, SCOUT:stamps[0], MARCH:stamps[1], SCHOLAR:stamps[2], SUPPLY:stamps[3], ENGINEER:stamps[4], DEATH:d }, pipeline: p }));
-  messages.push("Obi: [DEATH — " + (S.sessions[S.sessions.length-1].name) + " sealed · pipeline " + p.result + "]");
-  logOp({ kind:"scs", action:"DEATH", detail:"7-point march", result: "sealed · S2Pipeline " + p.result });
-  updateStats();
-  return { death:d, pipeline:p };
+  const stage = scsDeathStatus();
+  const bubble = addBubble("ass", "");
+  typing(bubble);
+  try{
+    /* Seal FIRST when the gate allows it, so the two session points report what ACTUALLY
+       happened rather than what was about to happen. */
+    let d = null;
+    if(stage.stamped && !stage.sealed){
+      d = await window.ObiSCS.death();
+      if(d && d.verdict === "REAL") stage.sealed = true;
+      else if(d && d.verdict !== "REAL"){ stage.stamped = false; stage.state = "GATED"; stage.detail = "the ENGINEER gate did not pass at seal time — nothing is sealed. " + ((d && d.detail) || ""); }
+    }
+    const march = await deathMarch(stage);
+    const measured = march.points.filter(p => p.state === "MEASURED" || p.state === "IMPRESSED").length;
+    const p = await window.ObiSCS.pipeline();
+    bubble.innerHTML = deathCard(stage, march);
+    messages.push("Obi: [DEATH — " + stage.state + " · " + measured + "/7 measured · S2Pipeline " + p.result + "]");
+    rrlAppend(runNoOf(), "DNA", "Obi: [reincarnateDEATH " + (stage.stamped ? "stamped" : "FORCED") + " — " + march.points.map(x => x.key + ":" + x.state).join(", ") + " · S2Pipeline " + p.result + "]");
+    logOp({ kind:"scs", action:"reincarnateDEATH" + (stage.forced ? " (forced)" : ""), ok: !!stage.sealed, detail: stage.state + " · " + measured + "/7 points measured · " + march.points.filter(x => x.state === "WITHHELD").length + " withheld", result: (stage.sealed ? "sealed · " : "") + "S2Pipeline " + p.result });
+    updateStats();
+    /* STRAIGHT INTO THE S2PIPELINE. */
+    if(p && p.stages) addBubble("ass", pipelineCard(p));
+    return { death: d, pipeline: p, stage: stage, march: march };
+  }catch(e){ bubble.textContent = "⚠ DEATH failed: " + ((e && e.message) || e); }
 }
 
 async function cmdSCS(){
@@ -749,10 +885,35 @@ async function cmdSCS(){
   logOp({ kind:"op", action:"scs", result: (S.sessions || []).length + " session(s) · " + ((S.sessions || []).filter(x => x.sealed).length) + " sealed" });
 }
 
-async function cmdPipeline(){
+/* THE S2PIPELINE CARD — one renderer for the artifact, whether it covers a session or is
+   PROVISIONAL (no session was ever opened). /pipeline prints it, and DEATH prints it STRAIGHT
+   after the march: the pipeline record is the canon's own next artifact after the seal, not a
+   second order. "A pipeline reporting COMPLETE with any HOLLOW stage is a lie." */
+function pipelineCard(p){
+  const pr = p.proposals || null;
+  const prRows = pr ? pr.items.map(x => '<div class="rrow' + (x.at === "SOUL" ? " pending" : "") + '"><b>' + esc(x.id) + '</b><span class="vd">' + esc(x.at) + '</span><div class="rd"><b>' + esc(x.sys) + ' — ' + esc(x.title) + '.</b> ' + esc(x.says) + '<br><b>' + esc(x.path) + '</b> — ' + esc((x.nodes.filter(n => n.node === x.at)[0] || x.nodes[x.nodes.length-1]).detail) + '</div></div>').join("") : "";
+  const prBlock = pr ? ('<div class="rrow"><b>PROPOSALS</b><span class="vd">' + pr.total + ' · ' + pr.onRecord + ' ON RECORD · ' + pr.atSoul + ' AT SOUL · ' + pr.merged + ' APPLIED</span><div class="rd">' + esc(pr.note) + '. <b>Every idea walks the same chain</b> — ' + esc(pr.loop) + ' → GATE. Lane: ' + esc(pr.lane) + ' — ' + esc(pr.rule) + '.</div></div>' + prRows) : "";
+  const tick = v => v === "REAL" ? "✓" : (v === "HOLLOW" ? "⚠" : "✗");
+  const rows = p.stages.map(s => {
+    const subs = (s.subs || []).map(x => '<div class="rrow' + (x.verdict === "REAL" ? "" : " bad") + '"><b>' + esc(x.name) + '</b><span class="vd">' + tick(x.verdict) + ' ' + esc(x.verdict) + '</span><div class="rd">' + esc(String(x.count)) + ' · ' + esc(x.artifact) + ' — ' + esc(x.detail || "") + '</div></div>').join("");
+    return '<div class="rrow' + (s.verdict === "REAL" ? "" : " bad") + '"><b>' + esc(s.name) + '</b><span class="vd">' + tick(s.verdict) + ' ' + esc(s.verdict) + '</span><div class="rd">' + esc(s.role || "") + '</div></div>' + subs;
+  }).join("");
+  return '<div class="rise"><div class="rhead">⛓ S2Pipeline — run ' + esc(p.run) + (p.provisional ? " · PROVISIONAL" : "") + '</div>'
+    + '<div class="rrow"><b>DOCTRINE</b><span class="vd">6 STAGES</span><div class="rd">' + esc(p.doctrine || "") + '</div></div>'
+    + (p.provisional ? '<div class="rrow bad"><b>PROVISIONAL</b><span class="vd">NO SESSION</span><div class="rd">no SCS session was ever opened, so this artifact is the march measured off this browser\'s own record instead of off a session — every verdict is still real, and the two rows that need a session are MISSING by measurement, not by defect. A seal needs a session, and only you open one: <b>/phoenixRISE &lt;Incarnate-N-Label&gt;</b>.</div></div>' : "")
+    + rows
+    + prBlock
+    + '<div class="rrow' + (p.result === "COMPLETE" ? "" : " bad") + '"><b>RESULT</b><span class="vd">' + esc(p.result) + '</span><div class="rd">' + esc(p.note) + '</div></div>'
+    + '<div class="rfoot">REINCARNATION-CONTRACT §3 — a pipeline reporting COMPLETE with any HOLLOW stage is a lie. Every verdict above is measured from this browser; the gaps are named, never hidden. Doctrine: CANON/SYSTEM/S2PIPELINE-ROMAN-LEGION-NAMING.md (canon branch).</div></div>';
+}
+
+async function cmdPipeline(arg){
+  /* /pipeline sync IS the master sync pipeline (src/relay.js). The session pipeline below
+     reviews a reincarnation; the sync pipeline carries the estate. One command, two
+     artifacts, and neither pretends to be the other. */
+  if(/^\s*(sync|relay)\b/i.test(String(arg || ""))){ return cmdRelay(""); }
   if(!scsGuard()) return;
   const p = await window.ObiSCS.pipeline();
-  if(p.verdict === "MISSING"){ addBubble("ass", "⚠ no SCS session on the stack — <b>/phoenixRISE &lt;name&gt;</b> or <b>/rome run &lt;name&gt;</b> first."); return; }
   /* THE PROPOSALS ON THE PIPELINE (sovereign, 2026-09-21: "they can be on the pipeline for
      review when it is their time"). Each one is carried by a stage; DUE = that stage has run
      in this session, HELD = it has not. A proposal is not a change and not a canon command. */
@@ -766,13 +927,9 @@ async function cmdPipeline(){
     const subs = (s.subs || []).map(x => '<div class="rrow' + (x.verdict === "REAL" ? "" : " bad") + '"><b>' + esc(x.name) + '</b><span class="vd">' + tick(x.verdict) + ' ' + esc(x.verdict) + '</span><div class="rd">' + esc(String(x.count)) + ' · ' + esc(x.artifact) + ' — ' + esc(x.detail || "") + '</div></div>').join("");
     return '<div class="rrow' + (s.verdict === "REAL" ? "" : " bad") + '"><b>' + esc(s.name) + '</b><span class="vd">' + tick(s.verdict) + ' ' + esc(s.verdict) + '</span><div class="rd">' + esc(s.role || "") + '</div></div>' + subs;
   }).join("");
-  addBubble("ass", '<div class="rise"><div class="rhead">⛓ S2Pipeline — run ' + esc(p.run) + '</div>'
-    + '<div class="rrow"><b>DOCTRINE</b><span class="vd">6 STAGES</span><div class="rd">' + esc(p.doctrine || "") + '</div></div>'
-    + rows
-    + prBlock
-    + '<div class="rrow' + (p.result === "COMPLETE" ? "" : " bad") + '"><b>RESULT</b><span class="vd">' + esc(p.result) + '</span><div class="rd">' + esc(p.note) + '</div></div>'
-    + '<div class="rfoot">REINCARNATION-CONTRACT §3 — a pipeline reporting COMPLETE with any HOLLOW stage is a lie. Every verdict above is measured from this browser; the gaps are named, never hidden. Doctrine: CANON/SYSTEM/S2PIPELINE-ROMAN-LEGION-NAMING.md (canon branch).</div></div>');
+  addBubble("ass", pipelineCard(p));
   logOp({ kind:"op", action:"pipeline", detail:"run " + p.run + " · " + p.stages.map(s => s.name + "=" + s.verdict).join(" "), result: p.result });
+  return p;
 }
 
 /* ============================================================================
@@ -817,16 +974,43 @@ function phoenixScout(){
   return rec;
 }
 
+/* THE SCS STAGE-2 GATE (src/scs.js; canon: GOSPEL-999 §SYSTEM I).
+   /phoenixSCOUT is the canon's Stage 2, and Stage 2 AUDITS RISE. The terrain
+   sweep below is the MAP; this is the STAGE. Until 2026-09-24 the route ran the
+   sweep and never looked at the session stack, so the card could not tell the
+   sovereign whether a Stage-2 artifact had been recorded — the exact silence
+   the gate exists to prevent. Fail closed: with no session nothing is stamped
+   and the card says so, naming the one command that opens the gate. A narrowed
+   sweep is real recon but it is not the whole map, so it stamps nothing. */
+function scsScoutStatus(only){
+  try{
+    const S = window.ObiSCS && window.ObiSCS.state ? window.ObiSCS.state() : null;
+    const arr = (S && S.sessions) || [];
+    if(!arr.length) return { state:"GATE SHUT", verdict:"BLOCKED", stamped:false,
+      detail:"no SCS session on the stack — Stage 2 audits RISE. Nothing stamped. /phoenixRISE <Incarnate-N-Label> opens the session; only the sovereign names it." };
+    const sess = arr[arr.length-1];
+    if(!window.ObiSCS.scout) return { state:"UNREADABLE", verdict:"UNVERIFIED", stamped:false,
+      detail:"session " + sess.name + " is on the stack but src/scs.js exposes no scout() — nothing stamped (fail closed)." };
+    const words = String(only||"").trim().toLowerCase().split(/[\s,]+/).filter(Boolean);
+    const every = !words.length || words.some(w => w === "all" || w === "every" || w === "everything");
+    if(!every) return { state:"NOT STAMPED", verdict:"PARTIAL", stamped:false,
+      detail:"session " + sess.name + " (run " + sess.run + ") — this sweep was narrowed (" + words.join(", ") + "); Stage 2's artifact is the WHOLE map, so nothing was stamped. Run /phoenixSCOUT all to stamp it." };
+    const rec = window.ObiSCS.scout();
+    return { state:"RECORDED", verdict: (rec && rec.verdict) || "UNVERIFIED", stamped:true,
+      detail:"session " + sess.name + " (run " + sess.run + ") · artifact stamped · " + ((rec && rec.detail) || "") };
+  }catch(e){ return { state:"UNREADABLE", verdict:"UNVERIFIED", stamped:false, detail:"could not read the SCS state: " + ((e && e.message) || e) }; }
+}
+
 function showPhoenixScout(arg){
   const local = phoenixScout();
   if(!window.ObiScout){
     const rows = local.map(r=> `<div class="rrow"><b>${esc(r.name)}</b><span class="vd">${esc(r.verdict)}</span><div class="rd">${esc(r.detail)}</div></div>`).join("");
-    addBubble("ass", `<div class="rise"><div class="rhead">🦅 /PhoenixScout</div>${rows}<div class="rfoot">⚠ src/scout.js didn't load — bookkeeping only, no terrain probed.</div></div>`);
+    addBubble("ass", `<div class="rise"><div class="rhead">🦅 /PhoenixScout</div>${rows}<div class="rrow"><b>SCS STAGE 2</b><span class="vd">${esc(scsScoutStatus(String(arg||"").trim()).state)}</span><div class="rd">${esc(scsScoutStatus(String(arg||"").trim()).detail)}</div></div><div class="rfoot">⚠ src/scout.js didn't load — bookkeeping only, no terrain probed.</div></div>`);
     return;
   }
   const bubble = addBubble("ass", "");
   typing(bubble);
-  return window.ObiScout.run({ only: String(arg||"").trim(), local: local, run: runNoOf(), session: cmdSessionTag() })
+  return window.ObiScout.run({ only: String(arg||"").trim(), local: local, run: runNoOf(), session: cmdSessionTag(), scs: scsScoutStatus(String(arg||"").trim()) })
     .then(async out => {
       bubble.innerHTML = out.html;
       messages.push("Obi: [PhoenixScout — " + out.results.length + " targets, " + out.flags.length + " flags, " + (out.trailed ? out.trailed.laid : 0) + " pheromones]");
@@ -853,60 +1037,481 @@ function showPhoenixScout(arg){
     .catch(e => { bubble.textContent = "⚠ Scout failed: " + e.message; });
 }
 
+/* THE MARCH (SCS Stage 3) — "Territory sweep. Confirm the scout the hard way."
+   (src/scs.js STAGES · GOSPEL-999 §SYSTEM I). Stage 3 audits SCOUT, and the
+   canon's gate rule is that no stage proceeds unless the previous stage's
+   artifact exists and is PASS — this station honours the rule by SAYING SO, not
+   by refusing: /forceMARCH runs the sweep and the confirmation, and prints that
+   it ran OUT OF ORDER on the sovereign's own word, with nothing stamped. What
+   MARCH adds that SCOUT cannot: every flagged sector is walked a SECOND time, by
+   itself, and the two readings are compared (src/scout.js confirm()). */
+function scsMarchStatus(){
+  try{
+    const S = window.ObiSCS && window.ObiSCS.state ? window.ObiSCS.state() : null;
+    const arr = (S && S.sessions) || [];
+    if(!arr.length) return { state:"FORCED · OUT OF ORDER", verdict:"BLOCKED", stamped:false,
+      detail:"no SCS session on the stack: Stage 3 audits SCOUT, and SCOUT stamped nothing, so nothing is stamped now. The canon's gate rule is explicit — no stage proceeds unless the previous stage's artifact exists and is PASS (GOSPEL-999 §SYSTEM I). /forceMARCH overrides the order on the sovereign's own word, so the sweep ran and is recorded as FORCED, never as a passed stage. /phoenixRISE <Incarnate-N-Label> opens the chain; only the sovereign names the session." };
+    const sess = arr[arr.length-1];
+    if(!window.ObiSCS.march) return { state:"UNREADABLE", verdict:"UNVERIFIED", stamped:false,
+      detail:"session " + sess.name + " is on the stack but src/scs.js exposes no march() — nothing stamped (fail closed)." };
+    const sc = sess.stages && sess.stages.SCOUT;
+    if(!sc) return { state:"NOT STAMPED", verdict:"BLOCKED", stamped:false,
+      detail:"session " + sess.name + " carries no SCOUT artifact — Stage 3 confirms a scout. Run /phoenixSCOUT all first; MARCH will not stamp a stage whose input was never walked." };
+    const rec = window.ObiSCS.march();
+    return { state:"RECORDED", verdict: (rec && rec.verdict) || "UNVERIFIED", stamped:true,
+      detail:"session " + sess.name + " (run " + sess.run + ") · artifact stamped · " + ((rec && rec.detail) || "") };
+  }catch(e){ return { state:"UNREADABLE", verdict:"UNVERIFIED", stamped:false, detail:"could not read the SCS state: " + ((e && e.message) || e) }; }
+}
+
+function marchCard(stage, conf, swept){
+  const VMC = { CONFIRMED:"#4cd97b", MOVED:"#f5a623", UNREACHABLE:"#ff5a5a", "NOT WALKED":"#8a94a6" };
+  let html = '<div class="rise"><div class="rhead">⚔️ /forceMARCH — the territory sweep confirms the scout the hard way</div>';
+  html += '<div class="rrow"><b>STAGE 3</b><span class="vd" style="color:' + (stage.stamped ? "#4cd97b" : "#f5a623") + '">' + esc(stage.state) + '</span><div class="rd">' + esc(stage.detail) + '</div></div>';
+  html += '<div class="rrow"><b>CONFIRMATION</b><span class="vd" style="color:' + ((conf.moved || conf.unreachable) ? "#f5a623" : "#4cd97b") + '">' + esc(conf.sentence) + '</span><div class="rd">' + (swept ? "a fresh sweep was taken first — no scout was on record in this page's life" : "re-probing the sectors the scout flagged, each one walked a second time") + ' · ' + (conf.independent || 0) + ' of ' + conf.items.length + ' tested along the CLAIM, not just re-read' + '</div></div>';
+  for (const i of conf.items){
+    html += '<div class="rrow"><b>' + esc(i.id.toUpperCase()) + '</b><span class="vd" style="color:' + (VMC[i.result] || "#8a94a6") + '">' + esc(i.result) + '</span><div class="rd">' + esc((i.was || "—") + " → " + (i.now || "—")) + (i.ms ? " · " + i.ms + " ms" : "") + " · " + esc(i.how || "") + "<br>" + esc((i.claim ? i.claim + " — " : "") + (i.claimDetail || i.summary || "")) + '</div></div>';
+  }
+  const nw = (window.ObiScout && window.ObiScout.notWalked) ? window.ObiScout.notWalked() : [];
+  for (const r of nw){
+    html += '<div class="rrow"><b>NOT WALKED · ' + esc(String(r.sector).toUpperCase()) + '</b><span class="vd" style="color:' + (r.reachable ? "#5ac8fa" : "#8a94a6") + '">' + (r.reachable ? "REACHABLE" : "SHUT") + '</span><div class="rd">' + esc(r.why) + '</div></div>';
+  }
+  html += '<div class="rfoot">' + (conf.moved ? "⚠ " + conf.moved + " sector(s) MOVED — the scout's flag was stale, and the second reading is the true one." : (conf.items.length ? "Every flagged sector answered the same way twice." : "nothing was flagged to confirm.")) + ' A march is only a confirmation if the sectors it could NOT walk are named — and they are, above.</div></div>';
+  return html;
+}
+
+async function cmdMarch(){
+  const bubble = addBubble("ass", "");
+  typing(bubble);
+  try{
+    if(!window.ObiScout || !window.ObiScout.confirm){ bubble.textContent = "⚠ src/scout.js is not loaded — MARCH has nothing to sweep with."; return; }
+    let swept = false;
+    if(!window.ObiScout.last || !window.ObiScout.last.results || !window.ObiScout.last.results.length){
+      await window.ObiScout.run({ only:"", run: runNoOf(), session: cmdSessionTag(), scs: scsScoutStatus("") });
+      swept = true;
+    }
+    const conf = await window.ObiScout.confirm({});
+    const stage = scsMarchStatus();
+    bubble.innerHTML = marchCard(stage, conf, swept);
+    messages.push("Obi: [MARCH — " + stage.state + " · " + conf.sentence + "]");
+    rrlAppend(runNoOf(), "DNA", "Obi: [phoenixMARCH " + (stage.stamped ? "stamped" : "FORCED") + " — " + conf.items.map(i => i.id + ":" + i.result).join(", ") + "]");
+    logOp({ kind:"scs", action:"phoenixMARCH (forced)", ok: conf.items.every(i => i.result === "CONFIRMED"), detail: stage.state + " · " + conf.items.map(i => i.id + ":" + i.result).join(","), result: conf.sentence });
+    updateStats();
+  }catch(e){ bubble.textContent = "⚠ MARCH failed: " + ((e && e.message) || e); }
+}
+
+/* THE SUPPLY LINES (SCS Stage 5) — "route every artifact; hold the ground."
+   (src/scs.js STAGES · GOSPEL-999 §SYSTEM I). Stage 5 audits SCHOLAR. The canon
+   route sends every artifact to its canonical destination; the station cannot
+   write the canon, so a canon destination is ALWAYS HELD — never claimed as
+   written (that was the defect the first audit found in the old runDeath, which
+   printed canon paths as "WRITTEN"). What it can do is say where each artifact
+   ACTUALLY is, with its real address, and route the ones it owns onto the free
+   wire so the supply lines are reachable with no credential. */
+function scsSupplyStatus(){
+  try{
+    const S = window.ObiSCS && window.ObiSCS.state ? window.ObiSCS.state() : null;
+    const arr = (S && S.sessions) || [];
+    if(!arr.length) return { state:"FORCED · OUT OF ORDER", verdict:"BLOCKED", stamped:false,
+      detail:"no SCS session on the stack: Stage 5 audits SCHOLAR and routes the SESSION'S artifacts, and there is no session, so there are none of those to route. The canon's gate rule — no stage proceeds unless the previous stage's artifact exists and is PASS (GOSPEL-999 §SYSTEM I) — is printed, not enforced by refusal: /supplyLINES overrides the order on the sovereign's own word, so the station's REAL supply lines (the register, the packet, the scout archive, the pointer, the nerve) were measured and routed, and the run is recorded as FORCED, never as a passed stage. /phoenixRISE <Incarnate-N-Label> opens the chain." };
+    const sess = arr[arr.length-1];
+    if(!window.ObiSCS.supply) return { state:"UNREADABLE", verdict:"UNVERIFIED", stamped:false, detail:"session " + sess.name + " is on the stack but src/scs.js exposes no supply() — nothing stamped (fail closed)." };
+    const sc = sess.stages && sess.stages.SCHOLAR;
+    if(!sc) return { state:"NOT STAMPED", verdict:"BLOCKED", stamped:false, detail:"session " + sess.name + " carries no SCHOLAR artifact — Stage 5 routes what Stage 4 preserved. Run /phoenixSCHOLAR first; SUPPLY will not stamp a stage whose input was never written." };
+    const rec = window.ObiSCS.supply();
+    return { state:"RECORDED", verdict: (rec && rec.verdict) || "UNVERIFIED", stamped:true, detail:"session " + sess.name + " (run " + sess.run + ") · artifact stamped · " + ((rec && rec.detail) || "") };
+  }catch(e){ return { state:"UNREADABLE", verdict:"UNVERIFIED", stamped:false, detail:"could not read the SCS state: " + ((e && e.message) || e) }; }
+}
+
+async function supplyLines(){
+  const rows = [];
+  const push = (artifact, where, state, detail) => rows.push({ artifact, where, state, detail });
+  let sess = null;
+  try{ const S = window.ObiSCS && window.ObiSCS.state ? window.ObiSCS.state() : null; const a = (S && S.sessions) || []; sess = a.length ? a[a.length-1] : null; }catch(e){}
+  const safe = sess ? String(sess.name || "").replace(/[^A-Za-z0-9._-]+/g, "-") : "<session>";
+  const DEST = { RISE:"CANON/REINCARNATION/" + safe + "-reincarnateDEATH.md §header", SCOUT:"CANON/SCOUT/", MARCH:"CANON/MARCH/", SCHOLAR:"CANON/SOUL/EXTRACT/", SUPPLY:"CANON/SUPPLY/" };
+  ["RISE","SCOUT","MARCH","SCHOLAR","SUPPLY"].forEach(k => {
+    const rec = sess && sess.stages && sess.stages[k];
+    push("SCS " + k + " artifact", rec ? "localStorage:obi_scs (this origin)" : "—", rec ? "ROUTED" : "MISSING",
+      rec ? ("verdict " + rec.verdict + " · canon destination " + (DEST[k] || "CANON/") + " HELD — a canon write needs a token, and this station never claims one it did not make")
+          : "no session on the stack: there is no " + k + " artifact to route");
+  });
+  let del = null;
+  try{ del = await root.kv.relay.get("deliveries"); }catch(e){ del = null; }
+  const names = { "src/sites/mailala/ASSET-MANIFEST.json":"the register (machine copy)", "src/sites/mailala/ASSET-MANIFEST.md":"the register (human copy)", "src/sites/mailala/SYNC-PACKET.json":"the sync packet (machine copy)", "src/sites/mailala/SYNC-PACKET.md":"the sync packet (human copy)" };
+  Object.keys(names).forEach(k => {
+    const e = (del && del[k]) || null;
+    push(names[k], e ? e.url : "not addressed from this origin", e ? "ROUTED" : "MISSING",
+      e ? ((e.bytes ? e.bytes + " B · " : "") + "permanent · no token needed" + (e.at ? " · last delivered " + String(e.at).slice(0,16).replace("T"," ") : "")) : "run /relay — DELIVER puts it on the free wire and aims the pointer at it");
+  });
+  let scoutN = 0, scoutLast = "";
+  try{ const ks = await root.kv.scout.keys(); scoutN = (ks || []).length; scoutLast = scoutN ? String(ks[ks.length-1]) : ""; }catch(e){}
+  push("scout reports (durable archive)", "kv:scout (this origin)", scoutN ? "ROUTED" : "MISSING",
+    scoutN ? (scoutN + " report(s) held · latest " + scoutLast + " · the recon also broadcasts on the free-wire nerve on every run") : "no scout report in this origin yet — /phoenixSCOUT");
+  let ptr = null;
+  try{ ptr = await window.ObiFreeWire.pointer(); }catch(e){}
+  push("the estate pointer", "keyvalue.immanuel.co/api/KeyVal/GetValue/prais-agent99/p", (ptr && ptr.raw) ? "ROUTED" : "MISSING",
+    (ptr && ptr.raw) ? ("read back: " + ptr.raw) : "the pointer could not be read — /wire pointer");
+  push("the nerve (append-only broadcast)", "https://ntfy.sh/prais-agent99-nerves", "ROUTED",
+    "every broadcast this station makes is in the topic's history, and the whole history comes back in one GET with no token");
+  return { rows, sess };
+}
+
+async function supplyRoute(rows){
+  const out = { nerve:null, url:null, held:false, why:null };
+  try{
+    const FW = window.ObiFreeWire;
+    if(!FW){ out.why = "src/freewire.js is not loaded on this page"; return out; }
+    const manifest = "# SUPPLY LINES — " + (window.generatorName || "obi") + " — " + new Date().toISOString() + "\n\n"
+      + "SCS Stage 5: route every artifact; hold the ground. A canon destination is HELD, never claimed as written.\n\n"
+      + rows.map(r => "| " + r.artifact + " | " + r.state + " | " + r.where + " | " + String(r.detail || "").replace(/\|/g, "\\|") + " |").join("\n") + "\n";
+    let digest = null;
+    try{ const b = new TextEncoder().encode(manifest); digest = Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", b))).map(x => x.toString(16).padStart(2, "0")).join(""); }catch(e){}
+    let prev = null;
+    try{ prev = await root.kv.freewire.get("supply"); }catch(e){}
+    /* the same HELD rule the register pair uses: identical bytes are never carried
+       twice. A manifest that has not moved is already addressed. */
+    if(prev && digest && prev.digest === digest && prev.url){ out.url = prev.url; out.held = true; }
+    else{
+      const carried = await FW.put(manifest, "supply-lines-" + Date.now() + ".md", "text/plain");
+      if(carried && carried.ok){
+        out.url = carried.url;
+        try{ await root.kv.freewire.set("supply", { digest, url: carried.url, at: Date.now() }); }catch(e){}
+      } else out.why = (carried && carried.why) || "every carrier refused";
+    }
+    const counts = rows.reduce((a, r) => { a[r.state] = (a[r.state] || 0) + 1; return a; }, {});
+    const said = await FW.send("[SUPPLY] " + (window.generatorName || "obi") + " · " + new Date().toISOString()
+      + " · " + rows.length + " artifact(s) · " + Object.keys(counts).map(k => counts[k] + " " + k).join(", ")
+      + "\n" + (rows.filter(r => r.state !== "ROUTED").length ? rows.filter(r => r.state !== "ROUTED").map(r => r.artifact.toUpperCase() + " — " + r.state).join("\n") : "no line is missing")
+      + (out.url ? "\nMANIFEST " + out.url + (out.held ? " (HELD — identical to the last one addressed)" : " (permanent · no token)") : ""),
+      { title:"Obi · supply lines", tags:"package" });
+    out.nerve = said && said.ok ? said.id : null;
+    if(!(said && said.ok)) out.why = (out.why ? out.why + " · " : "") + ((said && said.why) || "the nerve refused");
+  }catch(e){ out.why = "the wire threw: " + ((e && e.message) || e); }
+  return out;
+}
+
+function supplyCard(stage, lines, wire){
+  const VMS = { ROUTED:"#4cd97b", MISSING:"#ff5a5a", HELD:"#f5a623" };
+  const routed = lines.filter(r => r.state === "ROUTED").length;
+  let html = '<div class="rise"><div class="rhead">📦 /supplyLINES — every artifact, and where it actually is</div>';
+  html += '<div class="rrow"><b>STAGE 5</b><span class="vd" style="color:' + (stage.stamped ? "#4cd97b" : "#f5a623") + '">' + esc(stage.state) + '</span><div class="rd">' + esc(stage.detail) + '</div></div>';
+  html += '<div class="rrow"><b>THE LINES</b><span class="vd" style="color:' + (routed === lines.length ? "#4cd97b" : "#f5a623") + '">' + routed + ' / ' + lines.length + ' ROUTED</span><div class="rd">each line states where the artifact ACTUALLY is. A canon destination is HELD — the station has no write path into the canon, and it never claims a write it did not make.</div></div>';
+  for (const r of lines){
+    const where = (r.where && /^https?:/.test(r.where)) ? '<a href="' + esc(r.where) + '" target="_blank" rel="noopener" style="color:var(--cyan)">' + esc(r.where) + '</a>' : esc(r.where || "");
+    html += '<div class="rrow"><b>' + esc(r.artifact) + '</b><span class="vd" style="color:' + (VMS[r.state] || "#8a94a6") + '">' + esc(r.state) + '</span><div class="rd"><span style="opacity:.85">' + where + '</span><br>' + esc(r.detail || "") + '</div></div>';
+  }
+  const w = wire || {};
+  html += '<div class="rrow"><b>THE WIRE</b><span class="vd" style="color:' + (w.nerve ? "#4cd97b" : "#f5a623") + '">' + (w.nerve ? "BROADCAST" : "REFUSED") + '</span><div class="rd">'
+    + (w.nerve ? "the supply line is on the nerve (message " + esc(String(w.nerve)) + ") — the family reads it with no token" : "the nerve refused: " + esc(w.why || "no reason given"))
+    + (w.url ? "<br>manifest " + (w.held ? "HELD — identical to the last one addressed: " : "carried to a permanent key: ") + '<a href="' + esc(w.url) + '" target="_blank" rel="noopener" style="color:var(--cyan)">' + esc(w.url) + '</a>' : "")
+    + '</div></div>';
+  const missing = lines.filter(r => r.state === "MISSING");
+  html += '<div class="rfoot">' + (missing.length ? "⚠ " + missing.length + " line(s) MISSING — " + esc(missing.map(m => m.artifact).join(", ")) + ". A ground that cannot say what it is missing is not holding anything." : "Every line routed — the ground is held.") + '</div></div>';
+  return html;
+}
+
+async function cmdSupply(){
+  const bubble = addBubble("ass", "");
+  typing(bubble);
+  try{
+    const lines = await supplyLines();
+    const stage = scsSupplyStatus();
+    const wire = await supplyRoute(lines.rows);
+    bubble.innerHTML = supplyCard(stage, lines.rows, wire);
+    const routed = lines.rows.filter(r => r.state === "ROUTED").length;
+    messages.push("Obi: [SUPPLY — " + stage.state + " · " + routed + "/" + lines.rows.length + " lines routed]");
+    rrlAppend(runNoOf(), "DNA", "Obi: [phoenixSUPPLY " + (stage.stamped ? "stamped" : "FORCED") + " — " + lines.rows.map(r => r.artifact + ":" + r.state).join(", ") + "]");
+    logOp({ kind:"scs", action:"phoenixSUPPLY (forced)", ok: routed === lines.rows.length, detail: stage.state, result: routed + "/" + lines.rows.length + " routed · nerve " + (wire.nerve || "refused") });
+    updateStats();
+  }catch(e){ bubble.textContent = "⚠ SUPPLY failed: " + ((e && e.message) || e); }
+}
+
+/* THE SCHOLAR (SCS Stage 4) — "document and preserve the SOUL." (src/scs.js
+   STAGES · GOSPEL-999 §SYSTEM I). Stage 4 audits MARCH: it counts the RRL, takes
+   a sha-256 of each half, builds the keyword index, and samples the verbatim
+   text — the artifact that makes a session's own words recoverable. What the
+   station adds is the PRESERVATION: the extract is written durably into this
+   origin (kv) and offered as a download, and a SEALED form of it — the counts,
+   both hashes and the index, with no verbatim text — is carried on the free wire
+   so the family can verify the SOUL was preserved without the station publishing
+   the sovereign's own words to a permanent public URL. Publishing verbatim SOUL
+   is the sovereign's call, not the station's; it is offered, and it says so. */
+function scsScholarStatus(){
+  try{
+    const S = window.ObiSCS && window.ObiSCS.state ? window.ObiSCS.state() : null;
+    const arr = (S && S.sessions) || [];
+    if(!arr.length) return { state:"FORCED · OUT OF ORDER", verdict:"BLOCKED", stamped:false,
+      detail:"no SCS session on the stack: Stage 4 audits MARCH and preserves the SESSION'S words. The RRL of this run exists regardless, so a real extract was taken and is preserved below — but the STAGE artifact is not stamped, because the canon's gate rule is that no stage proceeds unless the previous stage's artifact exists and is PASS (GOSPEL-999 §SYSTEM I). /soulSCHOLAR overrides the order on the sovereign's own word and is recorded as FORCED, never as a passed stage. /phoenixRISE <Incarnate-N-Label> opens the chain." };
+    const sess = arr[arr.length-1];
+    if(!window.ObiSCS.scholar) return { state:"UNREADABLE", verdict:"UNVERIFIED", stamped:false, detail:"session " + sess.name + " is on the stack but src/scs.js exposes no scholar() — nothing stamped (fail closed)." };
+    const mr = sess.stages && sess.stages.MARCH;
+    if(!mr) return { state:"NOT STAMPED", verdict:"BLOCKED", stamped:false, detail:"session " + sess.name + " carries no MARCH artifact — Stage 4 documents what Stage 3 confirmed. The extract below is still taken from the real RRL, but it is not stamped as the session's Stage-4 artifact." };
+    return { state:"RECORDED", verdict:"PENDING", stamped:true, detail:"session " + sess.name + " (run " + sess.run + ") · the Stage-4 artifact is stamped below" };
+  }catch(e){ return { state:"UNREADABLE", verdict:"UNVERIFIED", stamped:false, detail:"could not read the SCS state: " + ((e && e.message) || e) }; }
+}
+
+function scholarExtractMd(rec, wire){
+  const a = rec && rec.artifact ? rec.artifact : {};
+  const c = a.counts || {};
+  let md = "# SOUL EXTRACT — " + (window.generatorName || "obi") + " — " + (a.at || new Date().toISOString()) + "\n";
+  md += "\n> SCS Stage 4 (SCHOLAR): document and preserve the SOUL. Verdict **" + ((rec && rec.verdict) || "?") + "**, run " + (a.run == null ? "?" : a.run) + ".\n";
+  md += "\n## The counts (measured from the RRL, never assumed)\n";
+  md += "| half | turns | chars |\n|---|---|---|\n";
+  md += "| SOUL (the sovereign's words) | " + (c.SOULcount || 0) + " | " + (c.SOULchars || 0) + " |\n";
+  md += "| DNA (the station's words) | " + (c.DNAcount || 0) + " | " + (c.DNAchars || 0) + " |\n";
+  md += "| REASON | " + (c.REASONcount || 0) + " | — |\n";
+  md += "| blueprints (fenced / large DNA blocks) | " + (c.DNAblueprints || 0) + " | — |\n";
+  md += "| pheromone records | " + (c.PHEROMONEcount || 0) + " | — |\n";
+  md += "\n## The proof (a sha-256 of each half, verbatim, in order)\n";
+  md += "- soulHash `" + (a.soulHash || "—") + "`\n- dnaHash `" + (a.dnaHash || "—") + "`\n";
+  md += "\n## The index (" + ((a.keywords && a.keywords.terms) || 0) + " terms)\n";
+  md += ((a.keywords && a.keywords.top) || []).map(t => "- `" + t.w + "` ×" + t.n + " (" + (t.tags || []).join("+") + ")").join("\n") + "\n";
+  md += "\n## Samples (verbatim — the station does not edit the sovereign)\n";
+  ((a.samples && a.samples.soul) || []).forEach((s, i) => { md += "\n**SOUL " + (i + 1) + ":** " + s + "\n"; });
+  ((a.samples && a.samples.dna) || []).forEach((s, i) => { md += "\n**DNA " + (i + 1) + ":** " + s + "\n"; });
+  md += "\n## Where this artifact is\n";
+  md += "- this origin: `kv:scholar` (durable) and the RRL (`localStorage:obi_rrl_run" + (a.run == null ? "?" : a.run) + "`)\n";
+  md += "- canon destination `CANON/SOUL/EXTRACT/` — **HELD**: a canon write needs a token, and the station never claims a write it did not make\n";
+  if(wire && wire.url) md += "- the SEALED form (counts + hashes + index, no verbatim text) is on the free wire: " + wire.url + "\n";
+  return md;
+}
+
+async function scholarPreserve(rec, wire){
+  const out = { key:null, url:null, sealed:null, held:false, why:null };
+  try{
+    const a = (rec && rec.artifact) || {};
+    const md = scholarExtractMd(rec, wire);
+    const id = "extract-run" + (a.run == null ? "?" : a.run) + "-" + String(a.at || "").replace(/[^0-9]/g, "").slice(0, 14) + ".md";
+    try{ if(root && root.kv && root.kv.scholar) await root.kv.scholar.set(id, { id, at: Date.now(), run: a.run, markdown: md, extract: a }); out.key = id; }catch(e){}
+    try{
+      if(window.__scholarUrl){ try{ URL.revokeObjectURL(window.__scholarUrl); }catch(e){} }
+      window.__scholarUrl = URL.createObjectURL(new Blob([md], { type: "text/markdown" }));
+      out.url = window.__scholarUrl;
+    }catch(e){}
+    /* the SEALED form — everything that PROVES preservation, and none of the
+       sovereign's verbatim words. See the header: publishing verbatim SOUL is his
+       call, not the station's. */
+    const FW = window.ObiFreeWire;
+    if(FW && FW.send){
+      const sealed = "# SOUL EXTRACT (SEALED) — " + (window.generatorName || "obi") + " — " + (a.at || "") + "\n"
+        + "SCS Stage 4. Verbatim text is NOT in this document: the SOUL is the sovereign's own words.\n"
+        + "counts SOUL=" + (a.counts ? a.counts.SOULcount : "?") + "/" + (a.counts ? a.counts.SOULchars : "?") + "chars DNA=" + (a.counts ? a.counts.DNAcount : "?") + "/" + (a.counts ? a.counts.DNAchars : "?") + "chars REASON=" + (a.counts ? a.counts.REASONcount : "?") + " blueprints=" + (a.counts ? a.counts.DNAblueprints : "?") + "\n"
+        + "soulHash " + (a.soulHash || "—") + "\ndnaHash " + (a.dnaHash || "—") + "\n"
+        + "index terms " + ((a.keywords && a.keywords.terms) || 0) + " · top: " + ((a.keywords && a.keywords.top) || []).map(t => t.w).join(", ") + "\n"
+        + "preserved in this origin: kv:scholar" + (out.key ? " (" + out.key + ")" : "") + "\n"
+        + "canon destination CANON/SOUL/EXTRACT/ — HELD (a canon write needs a token)\n";
+      let digest = null;
+      try{ const b = new TextEncoder().encode(sealed); digest = Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", b))).map(x => x.toString(16).padStart(2, "0")).join(""); }catch(e){}
+      let prev = null; try{ prev = await root.kv.freewire.get("scholar"); }catch(e){}
+      if(prev && digest && prev.digest === digest && prev.url){ out.sealed = prev.url; out.held = true; }
+      else{
+        const carried = await FW.put(sealed, "soul-extract-sealed-" + Date.now() + ".md", "text/plain");
+        if(carried && carried.ok){ out.sealed = carried.url; try{ await root.kv.freewire.set("scholar", { digest, url: carried.url, at: Date.now() }); }catch(e){} }
+        else out.why = (carried && carried.why) || "every carrier refused the sealed extract";
+      }
+      const said = await FW.send("[SCHOLAR] " + (window.generatorName || "obi") + " · " + new Date().toISOString()
+        + " · run " + (a.run == null ? "?" : a.run) + " · SOUL " + (a.counts ? a.counts.SOULcount : "?") + " turns / " + (a.counts ? a.counts.SOULchars : "?") + " chars"
+        + " · DNA " + (a.counts ? a.counts.DNAcount : "?") + " turns"
+        + "\nsoulHash " + String(a.soulHash || "—").slice(0, 24) + "… · dnaHash " + String(a.dnaHash || "—").slice(0, 24) + "…"
+        + (out.sealed ? "\nSEALED EXTRACT " + out.sealed + (out.held ? " (HELD — identical to the last one)" : " (permanent · no verbatim text in it)") : "\nthe sealed extract could not be addressed")
+        + "\nverbatim SOUL stays in the station's own origin (kv:scholar) — publishing it is the sovereign's call",
+        { title: "Obi · soul preserved", tags: "scroll" });
+      out.nerve = said && said.ok ? said.id : null;
+      if(!(said && said.ok)) out.why = (out.why ? out.why + " · " : "") + ((said && said.why) || "the nerve refused");
+    } else out.why = "src/freewire.js is not loaded on this page";
+  }catch(e){ out.why = "preservation threw: " + ((e && e.message) || e); }
+  return out;
+}
+
+function scholarCard(stage, rec, extract, wire){
+  const a = extract || {};
+  const c = a.counts || {};
+  let html = '<div class="rise"><div class="rhead">📜 /soulSCHOLAR — the SOUL, counted, hashed and preserved</div>';
+  html += '<div class="rrow"><b>STAGE 4</b><span class="vd" style="color:' + (stage.stamped ? "#4cd97b" : "#f5a623") + '">' + esc(stage.state) + '</span><div class="rd">' + esc(stage.detail) + '</div></div>';
+  html += '<div class="rrow"><b>VERDICT</b><span class="vd" style="color:' + ((rec && rec.verdict === "REAL") ? "#4cd97b" : "#f5a623") + '">' + esc((rec && rec.verdict) || "?") + '</span><div class="rd">' + esc((rec && rec.detail) || "") + '</div></div>';
+  html += '<div class="rrow"><b>THE SOUL</b><span class="vd" style="color:' + ((c.SOULcount && c.DNAcount) ? "#4cd97b" : "#f5a623") + '">' + (c.SOULcount || 0) + " / " + (c.DNAcount || 0) + '</span><div class="rd">'
+    + 'SOUL (the sovereign\'s words) <b>' + (c.SOULcount || 0) + '</b> turns · ' + (c.SOULchars || 0) + ' chars &nbsp;·&nbsp; DNA (the station\'s words) <b>' + (c.DNAcount || 0) + '</b> turns · ' + (c.DNAchars || 0) + ' chars &nbsp;·&nbsp; REASON ' + (c.REASONcount || 0) + ' · blueprints ' + (c.DNAblueprints || 0) + ' · pheromone ' + (c.PHEROMONEcount || 0) + '</div></div>';
+  html += '<div class="rrow"><b>THE PROOF</b><span class="vd" style="color:#5ac8fa">SHA-256</span><div class="rd">a digest of each half, verbatim and in order — if the words change, these change<br>soulHash <code style="font-size:11px">' + esc(a.soulHash || "—") + '</code><br>dnaHash <code style="font-size:11px">' + esc(a.dnaHash || "—") + '</code></div></div>';
+  html += '<div class="rrow"><b>THE INDEX</b><span class="vd">' + ((a.keywords && a.keywords.terms) || 0) + ' TERMS</span><div class="rd">' + esc(((a.keywords && a.keywords.top) || []).map(t => t.w + "×" + t.n).join(" · ")) + '</div></div>';
+  const s1 = ((a.samples && a.samples.soul) || []).slice(0, 2).map(s => String(s).slice(0, 240));
+  if(s1.length) html += '<div class="rrow"><b>SAMPLES</b><span class="vd">VERBATIM</span><div class="rd">' + s1.map((s, i) => '<i style="opacity:.8">SOUL ' + (i + 1) + ':</i> ' + esc(s)).join("<br><br>") + '</div></div>';
+  const w = wire || {};
+  html += '<div class="rrow"><b>PRESERVED</b><span class="vd" style="color:' + (w.key ? "#4cd97b" : "#f5a623") + '">' + (w.key ? "IN THIS ORIGIN" : "NOT WRITTEN") + '</span><div class="rd">'
+    + (w.key ? 'kv:scholar → <b>' + esc(w.key) + '</b> (durable across reloads) · <a href="' + esc(w.url || "#") + '" download="' + esc(w.key) + '" style="color:var(--cyan)">⬇ download the full extract with its verbatim samples</a>' : "the extract could not be written to kv — " + esc(w.why || "no reason given"))
+    + '<br><span style="opacity:.85">canon destination CANON/SOUL/EXTRACT/ is <b>HELD</b> — a canon write needs a token, and this station never claims a write it did not make.</span></div></div>';
+  html += '<div class="rrow"><b>THE WIRE</b><span class="vd" style="color:' + (w.nerve ? "#4cd97b" : "#f5a623") + '">' + (w.nerve ? "SEALED · BROADCAST" : "REFUSED") + '</span><div class="rd">'
+    + (w.nerve ? "the SEALED extract — counts, both hashes and the index, with NO verbatim text — is on the nerve (message " + esc(String(w.nerve)) + ")" : "the nerve refused: " + esc(w.why || "no reason given"))
+    + (w.sealed ? "<br>" + (w.held ? "sealed extract HELD (identical to the last one addressed): " : "sealed extract carried to a permanent key: ") + '<a href="' + esc(w.sealed) + '" target="_blank" rel="noopener" style="color:var(--cyan)">' + esc(w.sealed) + '</a>' : "")
+    + '<br><span style="opacity:.85">the SOUL is the sovereign\'s own words: the station publishes a proof it was preserved, not the words themselves. Publishing them is his call — ask, and it becomes the payload.</span></div></div>';
+  html += '<div class="rfoot">' + (rec && rec.verdict === "REAL" ? "Both halves are present and hashed — the SOUL of this run is recoverable from this origin." : "The extract is HOLLOW — one half of the RRL is missing, so there is no complete SOUL to preserve.") + '</div></div>';
+  return html;
+}
+
+async function cmdScholar(){
+  const bubble = addBubble("ass", "");
+  typing(bubble);
+  try{
+    if(!window.ObiSCS || !window.ObiSCS.scholar){ bubble.textContent = "⚠ src/scs.js is not loaded — SCHOLAR has nothing to preserve with."; return; }
+    const stage = scsScholarStatus();
+    const rec = await window.ObiSCS.scholar();
+    const wire = await scholarPreserve(rec, null);
+    bubble.innerHTML = scholarCard(stage, rec, rec.artifact, wire);
+    messages.push("Obi: [SCHOLAR — " + stage.state + " · SOUL " + ((rec.artifact && rec.artifact.counts && rec.artifact.counts.SOULcount) || 0) + " turns · " + ((rec && rec.verdict) || "?") + "]");
+    rrlAppend(runNoOf(), "DNA", "Obi: [phoenixSCHOLAR " + (stage.stamped ? "stamped" : "FORCED") + " — " + ((rec && rec.verdict) || "?") + " · soulHash " + String(rec.artifact && rec.artifact.soulHash || "").slice(0, 16) + "…]");
+    logOp({ kind:"scs", action:"phoenixSCHOLAR (forced)", ok: !!(rec && rec.verdict === "REAL"), detail: stage.state, result: ((rec && rec.verdict) || "?") + " · sealed " + (wire.sealed ? "addressed" : "not addressed") + " · nerve " + (wire.nerve || "refused") });
+    updateStats();
+  }catch(e){ bubble.textContent = "⚠ SCHOLAR failed: " + ((e && e.message) || e); }
+}
+
+/* THE ENGINEER (SCS Stage 6) — "audit every artifact; gate the seal." (src/scs.js
+   STAGES · GOSPEL-999 §SYSTEM I). Stage 6 audits SUPPLY and its whole job is the
+   GATE: nothing seals unless every artifact is present and passing. The canon's
+   own audit runs against the SESSION; with no session every one of its checks
+   fails, which is correct and useless on its own. So ENGINEER also audits what
+   actually EXISTS here, and audits it the hard way: it fetches the PUBLISHED
+   copies back off the free wire and compares them, byte for byte, with the copies
+   in this origin — because "we uploaded it" is a claim about a request, and a
+   digest is a claim about a file. */
+function scsEngineerStatus(){
+  try{
+    const S = window.ObiSCS && window.ObiSCS.state ? window.ObiSCS.state() : null;
+    const arr = (S && S.sessions) || [];
+    if(!arr.length) return { state:"FORCED · OUT OF ORDER", verdict:"BLOCKED", stamped:false,
+      detail:"no SCS session on the stack. The canon's audit is written against a session, so every one of its session checks fails — reported below, not hidden. Stage 6 audits SUPPLY and its product is the GATE: the canon's rule is that no stage proceeds unless the previous stage's artifact exists and is PASS (GOSPEL-999 §SYSTEM I). /phoenixENGINEER overrides the order on the sovereign's own word, so the station's own audit ran against what really exists, and the run is recorded as FORCED. The SEAL is SHUT. /phoenixRISE <Incarnate-N-Label> opens the chain." };
+    const sess = arr[arr.length-1];
+    if(!window.ObiSCS.engineer) return { state:"UNREADABLE", verdict:"UNVERIFIED", stamped:false, detail:"session " + sess.name + " is on the stack but src/scs.js exposes no engineer() — nothing stamped (fail closed)." };
+    const sr = sess.stages && sess.stages.SUPPLY;
+    if(!sr) return { state:"NOT STAMPED", verdict:"BLOCKED", stamped:false, detail:"session " + sess.name + " carries no SUPPLY artifact — Stage 6 audits what Stage 5 routed. The station's own audit ran, but the session artifact is not stamped." };
+    return { state:"RECORDED", verdict:"PENDING", stamped:true, detail:"session " + sess.name + " (run " + sess.run + ") · the Stage-6 artifact is stamped below" };
+  }catch(e){ return { state:"UNREADABLE", verdict:"UNVERIFIED", stamped:false, detail:"could not read the SCS state: " + ((e && e.message) || e) }; }
+}
+
+async function engineerAudit(){
+  const checks = [];
+  const add = (what, ok, note) => checks.push({ what, result: (ok === null ? "HELD" : (ok ? "PASS" : "FAIL")), note: note || "" });
+  const origin = location.origin;
+  const hash = async t => { try{ const b = new TextEncoder().encode(t); return Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256", b))).map(x => x.toString(16).padStart(2, "0")).join(""); }catch(e){ return null; } };
+  const key = u => { const m = /\/([0-9a-f]{8,64})(?:\.[a-z0-9]+)?(?:$|\?)/i.exec(String(u || "")); return m ? m[1] : "-"; };
+  let del = null; try{ del = await root.kv.relay.get("deliveries"); }catch(e){}
+  let reg = null; try{ reg = JSON.parse(await (await fetch(origin + "/src/sites/mailala/ASSET-MANIFEST.json")).text()); }catch(e){}
+
+  /* 1 — the published copy versus the copy that ships. This is the check nobody
+     else makes: the relay can say it delivered, but only this can say the file the
+     family fetches is the file in this tree. */
+  const one = async (label, localPath, ledgerKey) => {
+    const e = del && del[ledgerKey];
+    if(!e || !e.url){ add(label, false, "no delivered address on record — run /relay"); return; }
+    let pub = null, loc = null;
+    try{ pub = await (await fetch(e.url)).text(); }catch(err){ add(label, false, "the published copy could not be fetched: " + ((err && err.message) || err)); return; }
+    try{ loc = await (await fetch(origin + "/" + localPath)).text(); }catch(err){ add(label, false, "the copy in this origin could not be read: " + ((err && err.message) || err)); return; }
+    const hp = await hash(pub), hl = await hash(loc);
+    const same = !!hp && hp === hl;
+    add(label, same, "published sha " + String(hp || "—").slice(0, 16) + "… · this origin sha " + String(hl || "—").slice(0, 16) + "… · " + (same ? "IDENTICAL — the published copy IS the copy that ships" : "DIFFERENT — the family is fetching something this tree no longer is"));
+  };
+  await one("register .json — published vs this origin", "src/sites/mailala/ASSET-MANIFEST.json", "src/sites/mailala/ASSET-MANIFEST.json");
+  await one("register .md — published vs this origin", "src/sites/mailala/ASSET-MANIFEST.md", "src/sites/mailala/ASSET-MANIFEST.md");
+  await one("sync packet .json — published vs this origin", "src/sites/mailala/SYNC-PACKET.json", "src/sites/mailala/SYNC-PACKET.json");
+
+  /* 2 — the pointer must be aimed at THIS register, or the family follows a stale
+     address. A register cannot detect that about itself; the engineer can. */
+  let ptr = null; try{ ptr = await window.ObiFreeWire.pointer(); }catch(e){}
+  const p = ptr && ptr.parsed;
+  const regUrl = del && del["src/sites/mailala/ASSET-MANIFEST.json"] ? del["src/sites/mailala/ASSET-MANIFEST.json"].url : null;
+  const pktUrl = del && del["src/sites/mailala/SYNC-PACKET.json"] ? del["src/sites/mailala/SYNC-PACKET.json"].url : null;
+  if(p && reg && reg.estate){
+    const tree16 = String(reg.estate.treeDigestSha256 || "").slice(0, 16);
+    add("the pointer is aimed at THIS register", p.n === reg.estate.count && p.b === reg.estate.bytes && p.tree === tree16,
+      "pointer " + p.n + " files / " + p.b + " B / tree " + p.tree + " · this origin's register " + reg.estate.count + " / " + reg.estate.bytes + " / " + tree16);
+    add("the pointer's keys are the delivered addresses", p.reg === key(regUrl) && p.pkt === key(pktUrl),
+      "pointer reg " + p.reg + " · pkt " + p.pkt + " · the ledger's reg " + key(regUrl) + " · pkt " + key(pktUrl));
+  } else add("the pointer", false, ptr ? "the pointer did not parse" : "the pointer could not be read — /wire pointer");
+
+  /* 3 — the SEAL on the SOUL: the published extract must not contain the words. */
+  let seal = null; try{ seal = await root.kv.freewire.get("scholar"); }catch(e){}
+  let scholarKey = null; try{ const ks = await root.kv.scholar.keys(); scholarKey = ks && ks.length ? ks[ks.length - 1] : null; }catch(e){}
+  if(seal && seal.url){
+    let samples = [];
+    try{ const rec = await root.kv.scholar.get(scholarKey); samples = (((rec || {}).extract || {}).samples || {}).soul || []; }catch(e){}
+    samples = samples.map(s => String(s).slice(0, 40)).filter(s => s.length > 12);
+    try{
+      const t = await (await fetch(seal.url)).text();
+      const hit = samples.filter(s => t.indexOf(s) !== -1)[0];
+      add("the published SOUL extract carries no verbatim text", !hit,
+        samples.length ? (samples.length + " soul sample(s) from the preserved extract searched for inside the published file · " + (hit ? 'FOUND A MATCH — "' + String(hit).slice(0, 40) + '"' : "none of them appears")) : "no preserved extract to compare against — /soulSCHOLAR");
+    }catch(e){ add("the published SOUL extract", false, "could not be fetched: " + ((e && e.message) || e)); }
+  } else add("the published SOUL extract", false, "nothing is sealed yet — /soulSCHOLAR");
+
+  /* 4 — what the station does NOT do, stated rather than scored. */
+  add("the canon", null, "CANON/SOUL/EXTRACT/ · CANON/SCOUT/ · CANON/MARCH/ · CANON/SUPPLY/ · the DEATH header are all HELD — a canon write needs a token, and this station never claims one it did not make");
+  return checks;
+}
+
+function engineerCard(stage, rec, audit){
+  const VME = { PASS:"#4cd97b", FAIL:"#ff5a5a", HELD:"#8a94a6" };
+  const a = (rec && rec.artifact) || {};
+  const sChecks = a.checks || [];
+  const sFails = sChecks.filter(c => c.result === "FAIL").length;
+  const aFails = audit.filter(c => c.result === "FAIL").length;
+  const seal = (stage.stamped && rec && rec.pass && aFails === 0) ? "OPEN" : "SHUT";
+  let html = '<div class="rise"><div class="rhead">⚙️ /phoenixENGINEER — audit every artifact; gate the seal</div>';
+  html += '<div class="rrow"><b>STAGE 6</b><span class="vd" style="color:' + (stage.stamped ? "#4cd97b" : "#f5a623") + '">' + esc(stage.state) + '</span><div class="rd">' + esc(stage.detail) + '</div></div>';
+  html += '<div class="rrow"><b>THE CANON AUDIT</b><span class="vd" style="color:' + (sFails ? "#ff5a5a" : "#4cd97b") + '">' + (sChecks.length - sFails) + ' / ' + sChecks.length + ' PASS</span><div class="rd">the canon\'s own checks, written against the SESSION — ' + (sChecks.length ? (sFails ? sFails + ' failing: ' + esc(sChecks.filter(c => c.result === "FAIL").map(c => c.check).join(" · ").slice(0, 300)) : "all passing") : "no checks could be built") + '</div></div>';
+  html += '<div class="rrow"><b>THE STATION AUDIT</b><span class="vd" style="color:' + (aFails ? "#ff5a5a" : "#4cd97b") + '">' + (audit.length - aFails) + ' / ' + audit.length + ' PASS</span><div class="rd">the same questions asked of what ACTUALLY EXISTS here — the published copies fetched back off the wire and compared byte for byte with the copies in this origin, the pointer checked against this register, and the seal on the SOUL checked by searching the published file for its own words</div></div>';
+  for (const c of audit){
+    html += '<div class="rrow"><b>' + esc(c.what) + '</b><span class="vd" style="color:' + (VME[c.result] || "#8a94a6") + '">' + esc(c.result) + '</span><div class="rd">' + esc(c.note) + '</div></div>';
+  }
+  html += '<div class="rrow"><b>THE SEAL</b><span class="vd" style="color:' + (seal === "OPEN" ? "#4cd97b" : "#ff5a5a") + '">' + seal + '</span><div class="rd">'
+    + (seal === "OPEN" ? "every artifact present and passing, and every station audit check passed — Stage 7 (DEATH) may seal this session. Nothing here seals it: DEATH does, and only when you call it."
+      : (!stage.stamped ? "a session that was never opened cannot be sealed — the chain has no RISE, so Stage 7 has nothing to close. " + (aFails ? aFails + " station audit check(s) also fail." : "") : (aFails ? aFails + " station audit check(s) FAIL — a seal over a failing artifact is a lie." : "the stage audit has failing checks.")))
+    + '</div></div>';
+  html += '<div class="rfoot">' + (aFails ? "⚠ " + aFails + " check(s) FAILED — fix or reroute before any seal." : "Nothing failed. The canon destinations stay HELD: the audit proves what the station did, and states what it did not do.") + '</div></div>';
+  return html;
+}
+
+async function cmdEngineer(){
+  const bubble = addBubble("ass", "");
+  typing(bubble);
+  try{
+    if(!window.ObiFreeWire){ bubble.textContent = "⚠ src/freewire.js is not loaded — the station audit cannot fetch the published copies back."; return; }
+    const stage = scsEngineerStatus();
+    let rec = null;
+    if(window.ObiSCS && window.ObiSCS.engineer) rec = window.ObiSCS.engineer();
+    const audit = await engineerAudit();
+    bubble.innerHTML = engineerCard(stage, rec, audit);
+    const aFails = audit.filter(c => c.result === "FAIL").length;
+    const seal = (stage.stamped && rec && rec.pass && aFails === 0) ? "OPEN" : "SHUT";
+    messages.push("Obi: [ENGINEER — " + stage.state + " · station audit " + (audit.length - aFails) + "/" + audit.length + " · SEAL " + seal + "]");
+    rrlAppend(runNoOf(), "DNA", "Obi: [phoenixENGINEER " + (stage.stamped ? "stamped" : "FORCED") + " — SEAL " + seal + " · " + audit.filter(c => c.result === "FAIL").map(c => c.what).join("; ") + "]");
+    logOp({ kind:"scs", action:"phoenixENGINEER (forced)", ok: aFails === 0, detail: stage.state + " · seal " + seal, result: (audit.length - aFails) + "/" + audit.length + " station checks pass" });
+    updateStats();
+  }catch(e){ bubble.textContent = "⚠ ENGINEER failed: " + ((e && e.message) || e); }
+}
+
 /* ---------------------- UI ---------------------- */
 const $ = id => document.getElementById(id);
 const messagesCtn = $("messages");
 const inputEl = $("inputEl");
 
-const EMPTY_HTML = `<div class="big">⌘</div>
+/* THE LANDING PAGE — captured from the markup, so there is exactly ONE source
+   of truth. index.html holds the branded landing (the marketing register in
+   reading order, built from the files in src/brand/assets), and this reads it
+   back so a reincarnation rebuilds the same page instead of an older, plainer
+   one. The fallback only fires if the markup is somehow absent. */
+const EMPTY_HTML = (function(){
+  try{ const el = document.getElementById("empty"); if(el && el.innerHTML.trim()) return el.innerHTML; }catch(e){}
+  return `<div class="big">⌘</div>
 <div>I am <b style="color:var(--text)">Obi</b> — the command station.</div>
-<div class="hint" style="max-width:560px">Speak, and Agent 99 answers — type it or tap 🎙. Every word is Soul DNA, captured verbatim and never edited, and every answer about this station is read from its live state, not guessed. <b>⌘ /help</b> is the whole shelf; <b>/state</b> is what it can reach right now. The 👤 Student Evaluator tab is the evaluation desk (record → summarize → write up).</div>
+<div class="hint" style="max-width:560px">Speak, and Agent 99 answers. <b>⌘ /help</b> is the whole shelf; <b>/state</b> is what it can reach right now.</div>
 <div class="voice-card" id="voiceLine"></div>
 <div class="chipgroup">⌘ Command Station</div>
 <div class="chips">
   <span class="cmd">/state</span>
   <span class="cmd">/help</span>
   <span class="cmd">/memory</span>
-  <span class="cmd">/queue</span>
-  <span class="cmd">/network</span>
-  <span class="cmd">/os</span>
-  <span class="cmd">/playbook</span>
-  <span class="cmd">/scout</span>
-  <span class="cmd">/tools</span>
-  <span class="cmd">/constellation</span>
-  <span class="cmd">/route …</span>
-  <span class="cmd">/pheromones</span>
-  <span class="cmd">/web …</span>
-  <span class="cmd">/wiki …</span>
-  <span class="cmd">/weather …</span>
-</div>
-<div class="chipgroup">👤 Student Evaluator</div>
-<div class="chips">
-  <span class="cmd">/transcribe</span>
-  <span class="cmd">/transcripts</span>
-  <span class="cmd">/summary</span>
-  <span class="cmd">/summaries</span>
-  <span class="cmd">/client &lt;name&gt;</span>
-  <span class="cmd">/clients</span>
-  <span class="cmd">/class Year 7 English</span>
-  <span class="cmd">/student &lt;name&gt;</span>
-  <span class="cmd">/writeup</span>
-  <span class="cmd">/review</span>
-  <span class="cmd">/writeups</span>
-  <span class="cmd">/reviews</span>
-  <span class="cmd">/find …</span>
-</div>
-<div class="chipgroup">Station services</div>
-<div class="chips">
-  <span class="cmd">/reincarnateRISE</span>
-  <span class="cmd">/PhoenixScout</span>
-  <span class="cmd">/img a glowing fox</span>
-  <span class="cmd">/url https://…</span>
-  <span class="cmd">/cf status</span>
-  <span class="cmd">/gh backup</span>
-  <span class="cmd">/keys</span>
-  <span class="cmd">/ledger</span>
+  <span class="cmd">/generators</span>
+  <span class="cmd">/settings</span>
 </div>`;
+})();
 
 let messages = [];
 let meta = null;
@@ -937,7 +1542,7 @@ const STATION_FEATURES = [
     what:"Agent 99 with the leash off — no canon, no gate, no repo, no record, no refusal. Unrestricted, untracked, LOCAL. It answers, it BUILDS (/build app → a self-contained HTML app; /build gator → a perchance generator), and IT EDITS ITSELF: /self shows its own source, /forge <change> patches it (staged, with a real diff), /apply runs the staged code live in the page, /revert goes back, /eval <js> runs code in the page. What it builds and edits lives in the local sandbox (kv folder fpm) and is downloaded by hand — never uploaded, never committed, and a reload returns the room to the file it shipped with. The Sovereign programs inside it. THIS IS THE ANSWER to \"an unrestricted, untracked, local, does-whatever-I-ask version of the OS that I program from within\", \"let it edit itself\", \"same level as Obi's forge\" — it already exists; do not propose to build it.",
     keys:[/free\s*phoenix/, /\bunbound\b/, /\bunrestricted\b/, /\buntracked\b/, /\bleash\b/, /no (canon|gate|repo|record|rules?)\b/, /does (whatever|what) i (ask|want)/, /program (it|the os|the station|the system) from (the )?inside/, /\bsandbox (version|instance|copy)\b/, /phoenix instance/, /without (the )?(rules|gate|canon|restrictions)/, /edit (it|itself|the free room|free phoenix)/, /(free|unbound) (room )?(edit|rewrite|change) (it|itself)/, /open book/] },
   { id:"forge", name:"SELF-FORGE", where:"/forge · src/forge.js",
-    what:"the station's hands on its OWN source: read its own files (live and canonical), stage an edit with a real diff, run code inside itself, hot-swap a running module. Landing is gated by /omega. It cannot overwrite its own perchance listing — the Sovereign saves that.",
+    what:"the station's hands on its OWN source: read its own files (live and canonical), stage an edit with a real diff, run code inside itself, hot-swap a running module. Landing is gated by /phoenixomegaprotocol. It cannot overwrite its own perchance listing — the Sovereign saves that.",
     keys:[/\bforge\b/, /edit (yourself|itself|the station|your own code)/, /change (your|its) (own )?(code|source|look|interface)/, /self[-\s]?edit/] },
   { id:"curriculum", name:"THE CURRICULUM — THE PACING GUIDE", where:"/curriculum · /coverage · src/curriculum.js",
     what:"the school's own pacing guide, parsed: PRIMARY grades 1-5 (the sovereign's own schedule — Look, Science, Global Success, Cambridge YLE) and SECONDARY grades 6-9 (Close-up / New Close-up, Science, Global Success, Cambridge), every week and every section, with its language contents, pages, learning outcomes, differentiated activities and assessments. /curriculum 6 = the year at a glance · /curriculum week 3 = one week in full · /curriculum unit <name> · /curriculum find <text> · /curriculum import reads a NEWER .xlsx in the browser (never uploaded) · /curriculum export 6 downloads the parsed copy · /curriculum materials = the templates, links and books the school hands over. /coverage puts that guide beside the station's own evidence for the active client (transcripts + summaries): which sections the record shows, and which it has no evidence of — EVIDENCE-DRIVEN, so silence is reported as 'no evidence', never as 'not taught'. THE TEACHING SCOPE is part of it: the guide is the school's plan and the Sovereign teaches a part of it — for Secondary, Close-up + Science ONLY (Global Success is the Vietnamese 'VT' programme), and on grade 6 the VT periods are 8 & 9 (the ORDER column). Primary is provisional: Look + Science. /curriculum scope shows whose periods are whose; /curriculum scope <grade> corrects it.",
@@ -951,8 +1556,8 @@ const STATION_FEATURES = [
   { id:"ilog", name:"I-LOG", where:"/ilog · src/ilog.js",
     what:"append-only sha-256 hash-chained record of every operation the station performs, frozen in Git by an anchor. /ilog verify · /ilog push (gated).",
     keys:[/i[-\s]?log/, /audit trail/, /hash chain/] },
-  { id:"canon", name:"CANON + PHOENIXOMEGAPROTOCOL", where:"/canon /fieldguide /proposed /omega · Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-",
-    what:"GOSPEL-999 and the Legionnaire Field Guide are the sealed bible (SOV100 only). /omega <password> arms the gate for 15 minutes (never across a reload). New doctrine is STAGED as a proposal (/proposed) and never merged without the Sovereign's word.",
+  { id:"canon", name:"CANON + PHOENIXOMEGAPROTOCOL", where:"/canon /fieldguide /proposed /phoenixomegaprotocol · Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-",
+    what:"GOSPEL-999 and the Legionnaire Field Guide are the sealed bible (SOV100 only). /phoenixomegaprotocol <password> arms the gate for 15 minutes (never across a reload). New doctrine is STAGED as a proposal (/proposed) and never merged without the Sovereign's word.",
     keys:[/\bcanon\b/, /\bgospel\b/, /\bbible\b/, /field guide/, /\bdoctrine\b/, /\bamendment\b/, /\bomega\b/] },
   { id:"vault", name:"PRAIS VAULT", where:"/vault · src/vault.js",
     what:"the local sealed store: an ML-KEM keypair, secrets sealed under it, escrow published to the Canon plus a mirror, and recover to rebuild the crown jewel. /vault seal · /vault escrow · /vault recover · /vault test all.",
@@ -962,7 +1567,22 @@ const STATION_FEATURES = [
     keys:[/lesson creat/, /net academy/, /make (a|me a) lesson/, /lesson library/, /teach (a|this) (topic|concept)/] },
   { id:"mesh", name:"THE MESH, DIVISIONS & THE FIELD", where:"/network /generators /constellation /scout /pheromones /tools",
     what:"the connected-generator mesh (CGN), the PrAis divisions and every generator in them, the ecosystem map, PhoenixScout terrain flags, and the pheromone routing field.",
-    keys:[/\bmesh\b/, /network of generators/, /\bdivision/, /\bconstellation\b/, /\bpheromone/, /\bscout\b/] }
+    keys:[/\bmesh\b/, /network of generators/, /\bdivision/, /\bconstellation\b/, /\bpheromone/, /\bscout\b/] },
+  { id:"rubric", name:"THE RUBRIC", where:"/rubric · src/rubric.js",
+    what:"the instrument the word 'evaluator' means — and this estate's own inventory row ana.rubric, which sat MISSING until it was built. Criteria with bands, scored from the record with every band CITED: the ENGINE locates each quote itself inside the raw record and REFUSES any span it cannot find (an invented quote is printed as refused and never counted); it reads the timestamp off the transcript's own utterance map and never asks the model for a clock; where the record holds a number (words, wpm, pauses, duration, parts, dates, speakers) the band is COMPUTED and the model's own band is kept as recorded dissent; a band with no verified citation is NOT SCORED — excluded from the total and listed in the omission audit; coverage travels with every total; and every scorecard prints WHAT LOWERED IT (the adverse-action reasons), carries the rubric's version and sha-256 plus its own digest, and can be re-audited later. Four families (cefr.speaking · cefr.writing · teach.lesson · err.taxonomy) plus custom rubrics defined in one line (/rubric new Year 7 writing :: task achievement :: lexis :: accuracy). /rubric score [name] · errors · teach · list · show <id> · verify <run> · trend [name] · archive · export <run> · canary (the engine checking itself by machine; /doctor runs it).",
+    keys:[/\brubric/, /\bband\b/, /\bcefr\b/, /score (the|a|this) (student|class|lesson)/, /grade (the|a|this) (student|class|lesson)/, /assess (the|a|this) (student|class|lesson)/, /marking (scheme|criteria)/, /what lowered/, /error (taxonomy|list|frequency)/, /cited (score|evidence)/] },
+  { id:"market", name:"THE OPEN SOURCE MARKET", where:"/market · src/market.js",
+    what:"the recon and the play. Nine real endpoints (GitHub, npm, HuggingFace, Reddit) are measured live in this browser: a NUMBER is printed for every channel that answered and the REFUSAL VERBATIM for every one that did not, the open seats are DERIVED from what was measured (a seat is open when the market's leader is under 100 stars), and the play is written down in src/marketing/OPEN-SOURCE-PLAY.md with the ready artefact in src/marketing/awesome-perchance.md. It re-measures itself every 30 minutes. /market scan · /market play · /market state · /market log.",
+    keys:[/open source market/, /\bmarket\b/, /competitors?/, /who else is (building|doing|making)/, /how many repos/, /github stars?/, /\bpositioning\b/] },
+  { id:"sauce", name:"THE SECRET SAUCE", where:"/SecretSauce (also /sauce) · src/secretsauce.js · src/canon/SECRET-SAUCE.md",
+    what:"the method, given away FREE (CC0): ten best practices, eight best-kept secrets, and the ladder that starts with best practice and then upgrades. The MacGyver principle is the first section — build the way out with the parts already on the bench. Opened by the canon hallmark; only its sha-256 is ever stored; it fails closed after five wrong tries. /SecretSauce best · secrets · upgrade · train (builds the ORDERED training corpus, best practice first, and hashes it — the station cannot fine-tune and says so) · forums (searches Hacker News, dev.to, GitHub issues, StackExchange and Reddit live, printing every refusal verbatim) · free · lock.",
+    keys:[/secret sauce/, /\bbest practice/, /train(ing)? (corpus|data|set)/, /give (it )?away for free/, /what do (they|you) know that (we|i) don/] },
+  { id:"relay", name:"THE MASTER SYNC PIPELINE", where:"/relay (also /mastersync) · src/relay.js",
+    what:"READ → CENSUS → DELIVER → VERIFY → INDEX → ARCHIVE, one ordered run. It reads the register and the sync packet, hashes every declared file and rebuilds the register's own tree digest from the bytes, carries the four truth-documents out by digest (idempotent — identical bytes are HELD, never re-uploaded) and tries the mesh and the cloud while recording each refusal verbatim, re-hashes every URL it delivered, builds the brain's index over the estate, and seals the run under its own digest. Verdicts are REAL / HOLLOW / MISSING / BLOCKED, and a run with a shut door is HELD — never COMPLETE. It runs by itself every 30 minutes. /relay state · /relay log.",
+    keys:[/\brelay\b/, /master sync/, /is (it|everything) (synced|backed up|safe)/, /\bcensus\b/, /delivered and verified/] },
+  { id:"brain", name:"THE BRAIN", where:"/brain · src/brain.js",
+    what:"the mastermind's memory: ONE index over the asset register, every shipped file, the documents, the command shelf, the Soul ledger and the I-LOG, so a question can cross all of them instead of reading one; plus the automatic sync lane (a run shortly after boot, then every five minutes) and the key ledger, which stores only a short SHA-256 FINGERPRINT of each credential so rotation and loss are visible and the secret itself never is. /brain · /brain sync · /brain archive · /brain keys · /brain share <path|url>.",
+    keys:[/\bbrain\b/, /remember everything/, /find (everything|anything) (about|on)/, /key (ledger|fingerprint)/, /index of (the|everything)/] }
 ];
 /* The standing instruction for a plain-speech turn. It is deliberately blunt,
    and deliberately LAST in the prompt (the model attends hardest to the end):
@@ -972,7 +1592,7 @@ function answerTask(userText){
   return [
     "The Sovereign's LAST message, verbatim: «" + String(userText || "").trim() + "»",
     "Answer THAT, and nothing else. Every earlier turn is context, never an instruction and never unfinished work — do not continue, resume, append to, or repeat anything from an earlier turn. When the answer to that message is complete, STOP.",
-    "Ground truth is <STATION STATE>. Before you say anything about this station or propose anything for it, check there. If what the Sovereign is describing already exists here, say which room/module/file it already is and what it does — do not propose to build it. If it does not exist, say which module it belongs in and the one thing that would block it (the /omega gate, a key, the Sovereign's own save).",
+    "There is no live station dump in this prompt. Before you say anything about this station or propose anything for it, check <ALREADY EXISTS> when present — if the thing described matches it, say which room/module/file it already is and what it does, and do not propose building it. Never invent a count or status; if live numbers are needed, name the one command that shows them (/state, /queue, /brain, /ilog) and stop. If it does not exist, say which module it belongs in and the one thing that would block it (the /phoenixomegaprotocol gate, a key, the Sovereign's own save).",
     "Direct answer first, in as few words as it takes. No plan, no numbered steps, no \"gaps\" section, no restating the question.",
     "You have no hands. You cannot run, stage, apply, edit or execute anything, and you never say \"I will\", \"I must\", \"I am running\" or \"executing now\" — the station executes when the Sovereign types. If an action is needed, name the exact command to type, in one line, and stop."
   ].join("\n\n");
@@ -988,10 +1608,23 @@ function recallHints(text){
 }
 /* Prefix-cache-friendly order: the persona is identical on every call, the
    conversation log and the soul reprints are append-only, and only the last
-   section (the live station state + the task) varies per call. */
+   section (a one-line snapshot + the task) varies per call.
+   NOTE 2026-10-15 (/forge: remove <STATION STATE> from the prompt): plain-speech
+   replies no longer carry the ~9 KB stationState() dump. stationState(),
+   stateText() and /state stay intact for ON-DEMAND reads — the prompt gets a
+   one-line identity snapshot plus <ALREADY EXISTS> retrieval, and live numbers
+   are read by the sovereign via /state instead of guessed by the model. */
+function leanContext(){
+  try{
+    const g = (typeof window !== "undefined" && window.generatorName) || "?";
+    const v = (typeof currentView === "string" ? currentView : "?");
+    const r = (typeof runNoOf === "function" ? runNoOf() : "?");
+    return "generator: " + g + " · view: " + v + " · run: " + r + " · " + new Date().toLocaleString();
+  }catch(e){ return "station snapshot unreadable"; }
+}
 function buildPrompt(task, stationText, hints){
   const state = stationText
-    ? `\n\n<STATION STATE — read live from the station. Answer any question about the station, the client, or what you can reach from this block ALONE; if something is not in it, say it is not readable — never guess a number.>\n${stationText}\n</STATION STATE>`
+    ? `\n\n<STATION SNAPSHOT — identity only, not live numbers. Never quote counts or status from this line; point at /state for those.>\n${stationText}\n</STATION SNAPSHOT>`
     : "";
   return `${systemText()}\n\n<CONVERSATION>\n${logText()}\n</CONVERSATION>${soulMemoryBlock(14)}${state}${hints || ""}\n\nTASK: ${task}`;
 }
@@ -1041,12 +1674,742 @@ let CMD_SHELF = [];
    own words, so tapping it TYPES it into the composer instead of running it blind.
    The landing page keeps its curated chips (`CMD_SHELF`); ⌘ Commands opens this,
    so nothing Agent 99 can do is hidden behind reading the source. */
+/* BLUEPRINT MODE — the architect's plan for the build in flight. The document is the
+   authority (src/sites/mailala/ARCHITECT-BLUEPRINT.md); this reads it live, so what the
+   station shows can never drift from the file a builder actually reads. */
+async function cmdBlueprint(arg){
+  arg = String(arg || "").trim();
+  let md = null, why = "";
+  try{
+    const r = await fetch(location.origin + "/src/sites/mailala/ARCHITECT-BLUEPRINT.md", {cache:"no-store"});
+    if(!r.ok) why = "HTTP " + r.status; else md = await r.text();
+  }catch(e){ why = e.message; }
+  if(!md){
+    addBubble("ass", '<div class="rise"><div class="rhead">\u2726 BLUEPRINT MODE</div><div class="rfoot">The plan could not be read (' + esc(why) + '). Nothing is shown rather than something invented.</div></div>');
+    return;
+  }
+  const lines = md.split("\n");
+  const secs = [];
+  lines.forEach((l, i) => { if(/^##\s/.test(l)) secs.push({ title: l.replace(/^##\s+/, "").trim(), start: i }); });
+  secs.forEach((s, i) => { s.end = (i + 1 < secs.length) ? secs[i + 1].start : lines.length; });
+  const headEnd = secs.length ? secs[0].start : lines.length;
+  const norm = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  let chosen = null, note = "";
+  if(!arg){ chosen = lines.slice(0, headEnd); note = "index"; }
+  else if(/^all$/i.test(arg)){ chosen = lines; note = "whole plan"; }
+  else {
+    const n = parseInt(arg, 10);
+    /* a section is matched by its heading FIRST, so a number with a suffix (\u201c4b\u201d) reaches the layer it
+       names rather than parseInt silently truncating it to 4 and showing the wrong layer. */
+    const pick = secs.find(s => norm(s.title).startsWith(norm(arg)))
+      || ((!isNaN(n) && n >= 1 && n <= secs.length) ? secs[n - 1] : secs.find(s => norm(s.title).indexOf(norm(arg)) !== -1));
+    if(pick){ chosen = lines.slice(pick.start, pick.end); note = pick.title; }
+  }
+  const mdInline = (s) => esc(s)
+    .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+    .replace(/`([^`]+)`/g, '<code style="background:rgba(255,255,255,.08);padding:0 4px;border-radius:4px">$1</code>');
+  const rows = (chosen || []).map(function(l){
+    const t = l.replace(/\s+$/, "");
+    if(!t.trim()) return "";
+    if(/^#\s/.test(t))    return '<div class="rhead" style="font-size:1.05rem">' + mdInline(t.replace(/^#\s+/, "")) + "</div>";
+    if(/^##\s/.test(t))   return '<div class="rhead">' + mdInline(t.replace(/^##\s+/, "")) + "</div>";
+    if(/^###\s/.test(t))  return '<div style="font-weight:600;margin:10px 0 3px">' + mdInline(t.replace(/^###\s+/, "")) + "</div>";
+    if(/^\|/.test(t))     return '<div style="font-family:ui-monospace,SFMono-Regular,monospace;font-size:.76rem;opacity:.92">' + mdInline(t) + "</div>";
+    if(/^[-*]\s/.test(t)) return '<div style="margin:3px 0">\u2022 ' + mdInline(t.replace(/^[-*]\s+/, "")) + "</div>";
+    if(/^>\s/.test(t))    return '<div style="border-left:3px solid #e2b45a;padding-left:10px;opacity:.94;margin:6px 0">' + mdInline(t.replace(/^>\s+/, "")) + "</div>";
+    return '<div style="margin:4px 0">' + mdInline(t) + "</div>";
+  }).join("");
+  const index = (note === "index")
+    ? '<div class="rhead">THE LAYERS</div>' + secs.map((s, i) => '<div style="margin:3px 0"><b>' + (i + 1) + '</b> \u2014 ' + esc(s.title) + '</div>').join("")
+    : "";
+  const body = chosen
+    ? (rows + index)
+    : '<div>No section matches \u201c' + esc(arg) + '\u201d. Try <code>/blueprint</code> for the index, a number, a word from a heading, or <code>/blueprint all</code>.</div>';
+  addBubble("ass", '<div class="rise"><div class="rhead">\u2726 BLUEPRINT MODE \u2014 ' + esc(note === "index" ? "THE ARCHITECT\u2019S PLAN" : ("THE ARCHITECT\u2019S PLAN \u00b7 " + note)) + '</div>' + body + '<div class="rfoot">source: <b>src/sites/mailala/ARCHITECT-BLUEPRINT.md</b> \u2014 <b>/blueprint 1\u201313</b> for one layer \u00b7 <b>/blueprint all</b> for the whole plan \u00b7 the asset register is <b>/assets</b>. Where the file and the build disagree, the build wins.</div></div>');
+}
+
+/* THE ASSET REGISTER — every asset in the blueprint, located, labelled and SHA-256 hashed from
+   its actual bytes. The register (src/sites/mailala/ASSET-MANIFEST.json) is the authority and is
+   GENERATED, never hand-typed, so it states the tree as it is. This reads it live; `/assets verify`
+   re-hashes the assets in this browser and compares, so "unchanged" is a measurement, not a claim. */
+let ASSET_REG = null;
+async function loadAssetReg(){
+  if(ASSET_REG) return ASSET_REG;
+  const r = await fetch(location.origin + "/src/sites/mailala/ASSET-MANIFEST.json", {cache:"no-store"});
+  if(!r.ok) throw new Error("HTTP " + r.status);
+  ASSET_REG = await r.json();
+  return ASSET_REG;
+}
+async function cmdAssets(arg){
+  arg = String(arg || "").trim();
+  const verify = /^verify\b/i.test(arg);
+  const q = arg.replace(/^verify\b/i, "").trim().toLowerCase();
+  let reg = null, why = "";
+  try{ reg = await loadAssetReg(); }catch(e){ why = e.message; }
+  if(!reg){
+    addBubble("ass", '<div class="rise"><div class="rhead">\u2726 ASSET REGISTER</div><div class="rfoot">The register could not be read (' + esc(why) + '). Nothing is shown rather than something invented.</div></div>');
+    return;
+  }
+  const all = (reg.assets || []);
+  const hay = (a) => [a.id, a.label, a.kind, a.slot, a.local, a.url, a.note, (a.sha256 || "").slice(0, 12)].filter(Boolean).join(" ").toLowerCase();
+  const picked = q ? all.filter(a => hay(a).indexOf(q) !== -1) : all;
+  const b = (n) => (n == null) ? "—" : Number(n).toLocaleString() + " B";
+  const shortSha = (a) => a.sha256 ? a.sha256.slice(0, 12) : (a.unhashed || "UNHASHED");
+
+  if(verify){
+    const rows = [], skipped = [];
+    for(const a of picked){
+      if(!a.fetchable){ skipped.push(a.id + " (" + (a.verifyNote || (a.dynamic ? "live remote document" : "in-document")) + ")"); continue; }
+      if(rows.length >= 14){ skipped.push("the rest (showing 14)"); break; }
+      const src = a.url || a.local;
+      let verdict;
+      try{
+        const r = await fetch(src, {cache:"no-store"});
+        if(!r.ok) verdict = "unreachable \u00b7 HTTP " + r.status;
+        else {
+          const buf = new Uint8Array(await r.arrayBuffer());
+          const h = [...new Uint8Array(await crypto.subtle.digest("SHA-256", buf))].map(x => x.toString(16).padStart(2, "0")).join("");
+          if(h === a.sha256) verdict = '<span style="color:#3fa06a">\u2713 MATCH</span> \u00b7 ' + b(buf.length);
+          else if(a.dynamic)  verdict = '<span style="opacity:.8">\u2248 drift \u00b7 now ' + h.slice(0, 12) + ' (expected for a live document)</span>';
+          else                verdict = '<span style="color:#d24a33">\u2716 DRIFT</span> \u00b7 now ' + h.slice(0, 12) + ' \u00b7 was ' + (a.sha256 || "").slice(0, 12);
+        }
+      }catch(e){ verdict = "unreachable \u00b7 " + esc(e.message); }
+      rows.push('<div style="font-family:ui-monospace,SFMono-Regular,monospace;font-size:.78rem;margin:3px 0"><b>' + esc(a.id) + '</b> ' + esc(a.label) + ' \u2014 ' + verdict + '</div>');
+    }
+    addBubble("ass", '<div class="rise"><div class="rhead">\u2726 ASSET REGISTER \u00b7 VERIFY' + (q ? ' \u00b7 \u201c' + esc(q) + '\u201d' : '') + '</div>'
+      + (rows.join("") || '<div>Nothing to hash for that.</div>')
+      + (skipped.length ? '<div style="margin-top:8px;opacity:.75;font-size:.8rem">not hashed here: ' + esc(skipped.join(" \u00b7 ")) + '</div>' : "")
+      + '<div class="rfoot">re-hashed in this browser against <b>src/sites/mailala/ASSET-MANIFEST.json</b> \u2014 a mismatch is drift, and drift is reported, never smoothed over.</div></div>');
+    return;
+  }
+
+  const wanted = ["photograph", "video", "font", "map", "mark", "schema"];
+  const page = picked.filter(a => wanted.indexOf(a.kind) !== -1);
+  const rows = page.map(a => '<div style="font-family:ui-monospace,SFMono-Regular,monospace;font-size:.76rem;margin:3px 0"><b>' + esc(a.id) + '</b> \u00b7 ' + esc(a.label)
+    + (a.slot ? ' \u2014 ' + esc(a.slot) : '') + '<br><span style="opacity:.75">' + b(a.bytes) + ' \u00b7 ' + esc(shortSha(a)) + (a.proven ? ' \u00b7 ' + esc(a.proven) : '') + '</span></div>');
+  const kinds = page.reduce((o, a) => (o[a.kind] = (o[a.kind] || 0) + 1, o), {});
+  const est = reg.estate || {};
+  addBubble("ass", '<div class="rise"><div class="rhead">\u2726 ASSET REGISTER \u2014 ' + (q ? 'MATCHING \u201c' + esc(q) + '\u201d' : 'EVERY ASSET IN THE BLUEPRINT') + '</div>'
+    + '<div style="margin-bottom:6px;opacity:.9">' + Object.keys(kinds).map(k => kinds[k] + " " + k).join(" \u00b7 ") + '</div>'
+    + (rows.join("") || '<div>Nothing matches \u201c' + esc(q) + '\u201d. Try a label, an id, a hash or a slot.</div>')
+    + '<div style="margin-top:10px">the estate: <b>' + (est.count || 0) + '</b> shipped files \u00b7 <b>' + (est.bytes ? Math.round(est.bytes / 1024) + " KB" : "\u2014") + '</b>, every one digested in the register</div>'
+    + (reg.unhashed && reg.unhashed.length ? '<div style="margin-top:6px;opacity:.8">not hashed, and why: ' + reg.unhashed.map(u => esc(u.what)).join(" \u00b7 ") + '</div>' : "")
+    + '<div class="rfoot">' + (reg.generated ? 'generated ' + esc(reg.generated) + ' \u00b7 ' : '') + 'source: <b>src/sites/mailala/ASSET-MANIFEST.json</b> \u2014 <b>/assets verify</b> re-hashes them here \u00b7 <b>/assets &lt;word&gt;</b> filters \u00b7 the register is generated from the bytes, never typed.</div></div>');
+  if(reg.authority) addBubble("ass", '<div class="rfoot">' + esc(reg.authority.chain) + '</div>');
+}
+
+/* THE BRAIN (/brain) — the mastermind's memory, read live from src/brain.js.
+   The index points at things and carries their digests; the sync lane is TRIED
+   every time this runs, and its failures are shown verbatim — a sync that says
+   nothing happened is worth more than one that pretends. */
+async function cmdBrain(arg){
+  arg = String(arg || "").trim();
+  const B = window.ObiBrain;
+  if(!B){ addBubble("ass", '\u26a0 <b>src/brain.js</b> didn\u2019t load \u2014 reload the page.'); return; }
+  const parts = arg.split(/\s+/);
+  const low = (parts[0] || "").toLowerCase();
+  const tail = parts.slice(1).join(" ").trim();
+  const row = (k, v, d) => '<div class="rrow"><b>' + esc(k) + '</b><span class="vd">' + v + '</span>' + (d ? '<div class="rd">' + d + '</div>' : '') + '</div>';
+  const box = (title, body, foot) => addBubble("ass", '<div class="rise"><div class="rhead">' + title + '</div>' + body + (foot ? '<div class="rfoot">' + foot + '</div>' : '') + '</div>');
+  const when = (t) => { try{ return new Date(t).toLocaleTimeString(); }catch(e){ return "\u2014"; } };
+
+  if(low === "help"){
+    box("\u2726 THE BRAIN", row("WHAT IT IS", "an index", "every artifact, file, document, command, memory fragment, key and lane this station can reach \u2014 each pointing at its source and carrying its digest.")
+      + row("/brain &lt;words&gt;", "SEARCH", "ranked hits: what it is, where it lives, its size and hash.")
+      + row("/brain sync", "THE LANE", "pull the published manifest, re-hash the delivery, and TRY the write \u2014 failures shown verbatim.")
+      + row("/brain rebuild", "RE-INDEX", "read every source again. The index never guesses.")
+      + row("/brain archive [label]", "SNAPSHOT", "one hashed snapshot of the whole state, kept in the brain\u2019s own archive.")
+      + row("/brain verify [all]", "INTEGRITY", "re-hash the estate here and compare with the register\u2019s recorded digests \u2014 <b>all</b> rebuilds the tree digest over every file.")
+      + row("/brain keys", "THE KEY LEDGER", "which credentials are held, by FINGERPRINT \u2014 rotation and loss visible, the secret never stored."),
+      "automatic: the lane runs " + Math.round((B.SYNC_EVERY_MS || 300000) / 60000) + " min after boot and every " + Math.round((B.SYNC_EVERY_MS || 300000) / 60000) + " min after that.");
+    return;
+  }
+
+  if(low === "rebuild"){
+    addBubble("ass", "\u2726 THE BRAIN \u2014 re-indexing\u2026");
+    const idx = await B.build();
+    box("\u2726 THE BRAIN \u2014 REBUILT", row("ENTRIES", String(idx.entries.length), Object.keys(idx.stats).sort().map(k => idx.stats[k] + " " + k).join(" \u00b7 "))
+      + row("TOOK", idx.ms + " ms") + row("CENSUS", idx.census == null ? "\u2014" : String(idx.census), idx.treeDigest ? "tree " + String(idx.treeDigest).slice(0, 16) : "the register was not readable"),
+      "/brain &lt;words&gt; to search it.");
+    return;
+  }
+
+  if(low === "sync"){
+    addBubble("ass", "\u2726 THE BRAIN \u2014 syncing (reading, re-hashing, trying the write lane)\u2026");
+    const s = await B.sync();
+    const r = s.lanes.read || {}, w = s.lanes.write || {}, d = s.delivered || {};
+    let body = row("READ CHANNEL", esc(r.state || "?"), r.published != null ? (r.published + " files \u00b7 " + Math.round((r.bytes || 0) / 1024) + " KB published \u00b7 register published: <b>" + (r.registerPublished ? "yes" : "NOT YET") + "</b> \u00b7 " + esc(r.drift || "drift unknown")) : esc(r.why || "no reading"));
+    body += row("WRITE LANE", '<span style="color:' + (/OPEN/.test(w.state || "") ? "#4cd97b" : "#f5a623") + '">' + esc(w.state || "?") + '</span>', esc(w.why || w.note || ""));
+    body += row("DELIVERY", esc(d.state || "?"), (d.rows || []).map(x => esc(x.what + " \u2014 " + x.state + (x.got ? " (now " + x.got + ", register says " + x.want + ")" : ""))).join("<br>") || "nothing to check");
+    body += row("ESTATE CHECK", s.estateCheck ? (s.estateCheck.changed.length ? '<span style="color:#d24a33">' + s.estateCheck.changed.length + " changed</span>" : '<span style="color:#4cd97a">intact</span>') : "\u2014",
+      s.estateCheck ? (s.estateCheck.changed.length ? s.estateCheck.changed.slice(0, 4).map(c => esc(c.path.split("/").pop()) + " " + esc(c.state)).join(" \u00b7 ") : "the " + esc(s.estateCheck.scope || "") + " hash to what the register recorded") : "");
+    body += row("ESTATE", s.estate && s.estate.census != null ? s.estate.census + " files" : "\u2014", s.estate && s.estate.treeDigest ? "tree " + s.estate.treeDigest.slice(0, 16) + " \u00b7 register generated " + esc(s.estate.registerGenerated || "?") : esc(s.estate && s.estate.error || ""));
+    body += row("KEYS", (s.keys || []).filter(k => k.present).length + " held / " + (s.keys || []).length + " slots", (s.keys || []).filter(k => k.present).map(k => esc(k.slot) + " <b>" + esc(k.fp) + "</b>").join(" \u00b7 ") || "none held \u2014 every lane that needs one stays blocked");
+    box("\u2726 AUTO-SYNC \u2014 " + esc(s.t), body + row("TOOK", s.ms + " ms"),
+      "the lane runs by itself after boot and every " + Math.round((B.SYNC_EVERY_MS || 300000) / 60000) + " minutes. What it cannot do, it says \u2014 verbatim, in the record.");
+    return;
+  }
+
+  if(low === "keys"){
+    const rows = await B.keys(true);
+    const log = await B.keylog();
+    box("\u2726 THE KEY LEDGER", row("HOW IT IS KEPT", "BY FINGERPRINT", "each slot is stored as a 10-character SHA-256 of the value. You can see a key arrive, be rotated or be cleared \u2014 the value itself is never written here, logged, or sent anywhere.")
+      + rows.map(k => row(esc(k.slot).toUpperCase(), k.present ? '<span style="color:#4cd97b">HELD</span>' : '<span style="opacity:.7">ABSENT</span>', k.present ? "fingerprint <b>" + esc(k.fp) + "</b> \u00b7 set with /cf token, /gh token, /dg token, /keys ngl" : "nothing in this browser for that slot")).join("")
+      + (log.length ? row("TRANSITIONS", String(log.length), log.slice(-6).reverse().map(x => esc(x.slot) + " " + esc(x.event) + " \u00b7 " + esc(x.fp) + " \u00b7 " + when(x.t)).join("<br>")) : ""),
+      "values live only in this browser (localStorage <b>obi_keys</b>) \u2014 never in this public source, never in a URL, never in the I-LOG.");
+    return;
+  }
+
+  if(low === "archive"){
+    const e = await B.archive(tail || undefined);
+    box("\u2726 THE BRAIN \u2014 ARCHIVED", row("SNAPSHOT", esc(e.label), esc(e.t))
+      + row("DIGEST", "<b>" + esc(String(e.digest).slice(0, 24)) + "\u2026</b>", "the snapshot\u2019s own SHA-256")
+      + row("ESTATE", e.estate ? e.estate.census + " files" : "\u2014", e.estate ? "tree " + esc(String(e.estate.treeDigest).slice(0, 16)) : "")
+      + row("MEMORY", esc(String(e.soul)) + " soul fragments", e.ilog ? "I-LOG " + esc(String(e.ilog.count)) + " entries" : "")
+      + row("KEYS", e.keys.filter(k => k.present).length + " held", e.keys.filter(k => k.present).map(k => esc(k.slot) + " " + esc(k.fp)).join(" \u00b7 "))
+      + row("LANES", esc(e.sync ? e.sync.write : "not yet synced"), e.sync ? "read " + esc(e.sync.read) + " \u00b7 delivery " + esc(e.sync.delivered) : ""),
+      "kept in the brain\u2019s archive (kv \u00b7 brain). /brain archives lists them.");
+    return;
+  }
+
+  if(low === "archives"){
+    const list = (await B.archives()).slice(-8).reverse();
+    box("\u2726 THE BRAIN \u2014 ARCHIVE", list.length ? list.map(a => row(esc(a.label), esc(String(a.digest).slice(0, 16)) + "\u2026", esc(a.t) + (a.estate ? " \u00b7 " + a.estate.census + " files \u00b7 tree " + String(a.estate.treeDigest).slice(0, 12) : ""))).join("") : "<div>Nothing archived yet. <b>/brain archive</b> takes the first snapshot.</div>",
+      "each entry is a hashed snapshot of the whole state at that moment.");
+    return;
+  }
+
+  if(low === "share"){
+    if(!tail){ box("\u2726 SHARE", "<div>Name a thing \u2014 a path in the estate (<b>/brain share src/sites/mailala/material/6134195124376899530_121.jpg</b>) or a URL (<b>/brain share https://\u2026/photo.jpg</b>).</div>", "the bytes are read here, hashed, given a permanent link, and recorded in the brain\u2019s share archive."); return; }
+    addBubble("ass", "\u2726 SHARING \u2014 reading, hashing, uploading\u2026");
+    const r = await B.share(tail);
+    box("\u2726 SHARE \u2014 " + (r.ok ? "DONE" : "REFUSED"),
+      r.ok ? row("LINK", '<a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(r.url) + "</a>", esc(String(r.bytes).toLocaleString()) + " B \u00b7 SHA-256 <b>" + esc(String(r.sha256).slice(0, 24)) + "\u2026</b>")
+           : row("WHY", "nothing left this browser", esc(r.why || "unknown") + (r.sha256 ? " \u00b7 the bytes read hash to <b>" + esc(String(r.sha256).slice(0, 16)) + "\u2026</b>" : "")),
+      r.ok ? "from <b>" + esc(r.from) + "</b> \u00b7 recorded in the brain\u2019s share archive so it can be found again." : "the host refused, so nothing was published \u2014 that is the whole of it.");
+    return;
+  }
+
+  if(low === "shares"){
+    const list = (await B.shares()).slice(-8).reverse();
+    box("\u2726 THE BRAIN \u2014 SHARES", list.length ? list.map(s => row(esc(s.from), esc(String(s.sha256).slice(0, 12)), '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.url) + "</a> \u00b7 " + esc(String(s.bytes).toLocaleString()) + " B \u00b7 " + esc(s.t))).join("") : "<div>Nothing shared yet. <b>/brain share &lt;path|url&gt;</b>.</div>",
+      "what left the station, with the digest of what left.");
+    return;
+  }
+
+  if(low === "verify"){
+    const all = /^all$/i.test(tail);
+    addBubble("ass", "\u2726 THE BRAIN \u2014 re-hashing the estate against the register" + (all ? " (all 242 files)" : " (the core files)") + "\u2026");
+    const r = await B.verifyEstate({ all });
+    if(!r.ok){ box("\u2726 THE BRAIN \u2014 VERIFY", "<div>" + esc(r.why) + "</div>"); return; }
+    const rows = r.changed.slice(0, 10).map(c => row(esc(c.path.split("/").pop()), '<span style="color:#d24a33">' + esc(c.state) + "</span>",
+      c.now ? ("now <b>" + esc(c.now) + "</b> \u00b7 the register records <b>" + esc(c.register) + "</b> \u00b7 " + esc(String(c.bytes)) + " B") : "")).join("");
+    box("\u2726 THE BRAIN \u2014 VERIFY \u00b7 " + esc(r.scope),
+      row("CHECKED", String(r.checked), "hashed here, from the bytes served on this origin")
+      + row("VERDICT", r.changed.length ? '<span style="color:#d24a33">' + r.changed.length + " CHANGED</span>" : '<span style="color:#4cd97a">the tree matches the register</span>',
+        r.changed.length ? "the register is a snapshot: regenerate it (the register pass) or accept that the tree has moved \u2014 but never both silently." : "every one of these files hashes to exactly what the register recorded")
+      + rows
+      + (r.tree ? row("TREE DIGEST", r.tree.matches ? "MATCHES" : "MOVED", "recorded <b>" + esc(String(r.tree.recorded).slice(0, 16)) + "\u2026</b>") : row("TREE DIGEST", "needs all", "run <b>/brain verify all</b> to rebuild the digest over every file")),
+      "/brain verify all re-hashes the whole estate (242 files) and rebuilds the tree digest.");
+    return;
+  }
+
+  /* no argument: the brain's state. Anything else: a search. */
+  if(!arg){
+    let s = await B.state();
+    if(!s.built && !s.entries) { await B.build(); s = await B.state(); }
+    const ls = s.lastSync || {};
+    const lanes = ls.lanes || {};
+    box("\u2726 THE BRAIN \u2014 " + (s.entries ? s.entries + " entries" : "not built"),
+      row("INDEXED", s.built ? String(s.entries) + " entries" : "rebuild with /brain rebuild", Object.keys(s.stats || {}).sort().map(k => s.stats[k] + " " + k).join(" \u00b7 ") || (s.lastBuild ? "last built " + esc(s.lastBuild.built) : ""))
+      + row("ESTATE", s.census == null ? "\u2014" : s.census + " files", s.treeDigest ? "tree digest <b>" + esc(String(s.treeDigest).slice(0, 16)) + "\u2026</b>" : "")
+      + row("LAST SYNC", ls.t ? esc(when(ls.t)) : "not yet \u2014 the lane runs \u224825 s after boot, then every " + Math.round((B.SYNC_EVERY_MS || 300000) / 60000) + " min", ls.t ? ("read <b>" + esc((lanes.read || {}).state || "?") + "</b> \u00b7 write <b>" + esc((lanes.write || {}).state || "?") + "</b> \u00b7 delivery <b>" + esc((ls.delivered || {}).state || "?") + "</b>" + ((lanes.read || {}).drift ? " \u00b7 " + esc(lanes.read.drift) : "")) : "")
+      + row("ARCHIVE", s.archives + " snapshot(s) \u00b7 " + s.shares + " share(s)", "kv \u00b7 brain")
+      + row("BUILT", s.version, "src/brain.js"),
+      "<b>/brain &lt;words&gt;</b> searches it \u00b7 <b>/brain sync</b> runs the lane now \u00b7 <b>/brain archive</b> snapshots the whole state \u00b7 <b>/brain keys</b> the credential ledger \u00b7 <b>/brain share &lt;path|url&gt;</b> publishes a file.");
+    return;
+  }
+
+  const r = B.searchDetailed(arg, 12);
+  const hits = r.hits;
+  if(!hits.length){
+    box("\u2726 THE BRAIN \u2014 \u201c" + esc(arg) + "\u201d", "<div>Nothing indexed matches that. The index covers: every artifact and file in the register, the documents\u2019 sections, every command, the soul ledger, the operation record, the credential slots and the lanes. <b>/brain rebuild</b> re-reads the sources.</div>");
+    return;
+  }
+  const byKind = {};
+  for(const h of hits) (byKind[h.kind] = byKind[h.kind] || []).push(h);
+  const body = Object.keys(byKind).map(k => '<div class="sel-group">' + esc(k) + '</div>'
+    + byKind[k].map(h => row(esc(h.id || h.kind), esc(String(h.label || "").slice(0, 90)),
+        esc(h.where || "") + (h.bytes ? " \u00b7 " + h.bytes.toLocaleString() + " B" : "") + (h.sha ? " \u00b7 <b>" + esc(String(h.sha).slice(0, 12)) + "\u2026</b>" : "") + (h.text ? "<br>" + esc(String(h.text).slice(0, 200)) : ""))).join("")).join("");
+  box("\u2726 THE BRAIN \u2014 \u201c" + esc(arg) + "\u201d \u00b7 " + hits.length + " hit(s)" + (r.mode === "any" ? " \u00b7 loose match" : ""), body,
+    (r.mode === "any" ? "no entry carries every word, so these are the entries that carry <b>any</b> of them \u2014 the match is loose and it says so. " : "") + "each hit names where it lives \u2014 nothing here is remembered from a previous answer.");
+}
+
+/* THE RELAY (/relay) — THE MASTER SYNC PIPELINE, read live from src/relay.js.
+   It is the one object that does the whole carry in order, and it is runnable from
+   here: READ → CENSUS → DELIVER → VERIFY → INDEX → ARCHIVE. Every stage verdict is
+   measured in this browser; a door that is shut is printed shut, with the refusal
+   the door itself gave. A run with a shut door is HELD — never COMPLETE. */
+async function cmdRelay(arg){
+  arg = String(arg || "").trim();
+  const R = window.ObiRelay;
+  if(!R){ addBubble("ass", '\u26a0 <b>src/relay.js</b> didn\u2019t load \u2014 reload the page.'); return; }
+  const low = arg.toLowerCase();
+  const row = (k, v, d) => '<div class="rrow"><b>' + esc(k) + '</b><span class="vd">' + v + '</span>' + (d ? '<div class="rd">' + d + '</div>' : '') + '</div>';
+  const box = (title, body, foot) => addBubble("ass", '<div class="rise"><div class="rhead">' + title + '</div>' + body + (foot ? '<div class="rfoot">' + foot + '</div>' : '') + '</div>');
+
+  if(low === "help"){
+    box("\u26a1 THE RELAY \u2014 THE MASTER SYNC PIPELINE",
+      row("WHAT IT IS", "one chain", "the estate is measured, carried, verified and sealed in a single ordered run \u2014 each stage refuses to run on a lie from the stage before it.")
+      + R.STAGES.map(s => row(s.name, "STAGE", esc(s.role))).join("")
+      + row("THE VERDICTS", "REAL \u00b7 HOLLOW \u00b7 MISSING \u00b7 BLOCKED", "REAL proves itself; HOLLOW has an artifact but a gap; MISSING has nothing; BLOCKED is a door that refused, named verbatim.")
+      + row("THE RESULT", "COMPLETE \u00b7 HELD \u00b7 GAP", "COMPLETE only when every stage is REAL. A blocked door gives <b>HELD</b>, a hollow stage gives <b>GAP</b> \u2014 and a run reporting COMPLETE with a stage below REAL is a lie (REINCARNATION-CONTRACT \u00a73)."),
+      "automatic: the relay runs itself \u2248" + Math.round((R.FIRST_RUN_MS || 40000) / 1000) + " s after boot, then every " + R.RUN_EVERY_MS / 60000 + " min. <b>/relay state</b> prints the last run without running one \u00b7 <b>/relay log</b> is the ledger of runs.");
+    return;
+  }
+
+  if(low === "state"){
+    const s = await R.state();
+    const l = s.last;
+    /* the lanes in the LAST RUN are kept whole (each carries its own detail); the runs
+       ledger keeps their states as strings. Reading a lane name off the wrong shape
+       printed "[object Object]" on this card — so the state is read by shape, once. */
+    const laneState = (v) => (typeof v === "string") ? v : ((v && v.state) || "?");
+    box("\u26a1 THE RELAY \u2014 LAST RUN",
+      l ? row("RESULT", '<span style="color:' + (l.result === "COMPLETE" ? "#4cd97b" : (l.result === "HELD" ? "#f5a623" : "#d24a33")) + '">' + esc(l.result) + '</span>', esc(l.t) + " \u00b7 " + l.ms + " ms \u00b7 digest <b>" + esc(l.digest) + "\u2026</b>")
+        + row("STAGES", (l.stages || []).length + "", esc((l.stages || []).join(" \u00b7 ")))
+        + row("LANES", "measured", "read <b>" + esc(laneState(l.lanes && l.lanes.read)) + "</b> \u00b7 wire <b>" + esc(laneState(l.lanes && l.lanes.wire)) + "</b> \u00b7 mesh <b>" + esc(laneState(l.lanes && l.lanes.mesh)) + "</b> \u00b7 cloud <b>" + esc(laneState(l.lanes && l.lanes.cloud)) + "</b>")
+        : "<div>No run on record in this browser. <b>/relay</b> runs one.</div>",
+      s.runs + " run(s) on this browser \u00b7 automatic every " + s.intervalMinutes + " min \u00b7 <b>/relay</b> runs it now.");
+    return;
+  }
+
+  if(low === "log"){
+    const list = (await R.runs()).slice(-10).reverse();
+    const tick = v => v === "REAL" ? '<span style="color:#4cd97b">\u2713</span>' : (v === "BLOCKED" ? '<span style="color:#f5a623">\u26d4</span>' : '<span style="color:#d24a33">\u2717</span>');
+    box("\u26a1 THE RELAY \u2014 THE RUN LEDGER",
+      list.length ? list.map(r => row(esc(r.result) + " \u00b7 " + esc(r.digest), esc(r.t), (r.stages || []).map(x => esc(x.split("=")[0]) + " " + tick(x.split("=")[1]) + " " + esc(x.split("=")[1])).join(" \u00b7 ") + (r.census ? "<br>" + r.census.count + " files \u00b7 " + Number(r.census.bytes).toLocaleString() + " B \u00b7 tree " + esc(String(r.census.tree).slice(0, 12)) : "") + (r.lanes ? "<br>delivered " + esc(String(r.lanes.delivered)) + " \u00b7 wire " + esc(String(r.lanes.wire)) + " \u00b7 mesh " + esc(String(r.lanes.mesh)) + " \u00b7 cloud " + esc(String(r.lanes.cloud)) : ""))).join("")
+        : "<div>Nothing yet.</div>",
+      "each entry is one pipeline run, kept in this browser (kv \u00b7 relay) \u2014 the record of what was carried, when, and what refused.");
+    return;
+  }
+
+  /* no argument, or "run": run the pipeline NOW. */
+  addBubble("ass", "\u26a1 THE RELAY \u2014 running the master sync pipeline (read \u2192 census \u2192 deliver \u2192 verify \u2192 index \u2192 archive)\u2026");
+  const out = await R.run({});
+  const tick = v => v === "REAL" ? '<span style="color:#4cd97b">\u2713 REAL</span>' : (v === "BLOCKED" ? '<span style="color:#f5a623">\u26d4 BLOCKED</span>' : (v === "HOLLOW" ? '<span style="color:#f5a623">\u26a0 HOLLOW</span>' : '<span style="color:#d24a33">\u2717 MISSING</span>'));
+  const rows = out.stages.map(s => '<div class="rrow' + (s.verdict === "REAL" ? "" : " bad") + '"><b>' + esc(s.name) + '</b><span class="vd">' + tick(s.verdict) + '</span><div class="rd">' + esc(s.role) + '</div></div>'
+    + (s.rows || []).map(x => '<div class="rrow"><b>' + esc(x.what) + '</b><span class="vd">' + esc(String(x.state)) + '</span><div class="rd">' + esc(String(x.note || "")) + '</div></div>').join("")).join("");
+  const colour = out.result === "COMPLETE" ? "#4cd97b" : (out.result === "HELD" ? "#f5a623" : "#d24a33");
+  box("\u26a1 THE MASTER SYNC PIPELINE \u2014 " + esc(out.result),
+    row("RESULT", '<span style="color:' + colour + '">' + esc(out.result) + '</span>', esc(out.note))
+    + row("DIGEST", "<b>" + esc(String(out.digest).slice(0, 24)) + "\u2026</b>", "the run\u2019s own SHA-256 over its stage verdicts \u2014 the snapshot in the archive carries it")
+    + rows
+    + row("TOOK", out.ms + " ms", out.station + " \u00b7 " + esc(out.started)),
+    "every verdict above was measured in this browser just now. The two doors this station cannot open (the mesh write and the cloud) are reported with the refusal each one gave \u2014 never smoothed over. <b>/pipeline sync</b> is the same run.");
+  logOp({ kind:"sync", action:"master sync pipeline", detail: out.stages.map(s => s.name + "=" + s.verdict).join(" "),
+    result: out.result + " · " + (out.census ? out.census.count + " files" : "no census") + " · mesh " + ((out.lanes && out.lanes.mesh && out.lanes.mesh.state) || "?") });
+}
+
+/* THE OPEN SOURCE MARKET (/market) — the recon and the play, read live from
+   src/market.js. Every number it prints was fetched in this browser just now: a
+   channel that answered gives a number, a channel that refused gives its refusal.
+   The play is printed against those numbers, and the seats are DERIVED from them
+   (a seat is open when that market's measured leader is under 100 stars) — never
+   asserted, never remembered. */
+async function cmdMarket(arg){
+  arg = String(arg || "").trim();
+  const M = window.ObiMarket;
+  if(!M){ addBubble("ass", '\u26a0 <b>src/market.js</b> didn\u2019t load \u2014 reload the page.'); return; }
+  const low = arg.toLowerCase();
+  const row = (k, v, d) => '<div class="rrow"><b>' + esc(k) + '</b><span class="vd">' + v + '</span>' + (d ? '<div class="rd">' + d + '</div>' : '') + '</div>';
+  const box = (title, body, foot) => addBubble("ass", '<div class="rise"><div class="rhead">' + title + '</div>' + body + (foot ? '<div class="rfoot">' + foot + '</div>' : '') + '</div>');
+  const tick = v => v === "REAL" ? '<span style="color:#4cd97b">\u2713 REAL</span>' : '<span style="color:#f5a623">\u26d4 BLOCKED</span>';
+  const lead = c => (c && c.top && c.top[0]) ? ("leader " + esc(String(c.top[0].full || c.top[0].name || c.top[0].id)) + ((c.top[0].stars != null) ? " (" + c.top[0].stars + "\u2605)" : "")) : "";
+
+  if(low === "help"){
+    box("\u26a1 THE OPEN SOURCE MARKET \u2014 THE RECON AND THE PLAY",
+      row("WHAT IT IS", "nine measured channels", "the market this station already occupies, measured with real endpoints \u2014 GitHub, npm, HuggingFace, Reddit \u2014 and the campaign that follows from the numbers.")
+      + M.CHANNELS.map(c => row(c.id, "CHANNEL", esc(c.what) + " \u2014 " + esc(c.role))).join("")
+      + row("THE VERDICTS", "REAL \u00b7 BLOCKED", "REAL is an endpoint that answered with a number; BLOCKED is a door that refused, printed with the refusal it gave. Nothing here is estimated.")
+      + row("THE SEATS", "OPEN \u00b7 CLOSED", "a seat is OPEN when that market's measured leader is under " + M.SEAT + " stars \u2014 derived from the scan, never asserted."),
+      "<b>/market scan</b> measures the market now \u00b7 <b>/market play</b> prints the campaign \u00b7 <b>/market state</b> prints the last recon \u00b7 <b>/market log</b> is the scan ledger. The recon also arms itself after boot.");
+    return;
+  }
+
+  if(low === "play"){
+    box("THE OPEN SOURCE PLAY \u2014 take the seat nobody sat in",
+      '<pre style="white-space:pre-wrap;font:12px/1.5 ui-monospace,Menlo,monospace;text-align:left;margin:6px 0">' + esc(M.playText()) + '</pre>',
+      "the same play, written down, is <b>src/marketing/OPEN-SOURCE-PLAY.md</b>; the index artefact is <b>src/marketing/awesome-perchance.md</b> \u2014 populated from the live scan and ready to publish.");
+    return;
+  }
+
+  if(low === "state"){
+    const l = await M.last();
+    const n = await M.numbers();
+    box("\u26a1 THE OPEN SOURCE MARKET \u2014 LAST RECON",
+      l ? row("VERDICT", '<span style="color:' + (l.verdict === "MEASURED" ? "#4cd97b" : "#f5a623") + '">' + esc(l.verdict) + '</span>', esc(l.at) + " \u00b7 " + l.measured + "/" + l.channels + " channels answered \u00b7 " + l.ms + " ms \u00b7 digest <b>" + esc(String(l.digest).slice(0, 12)) + "\u2026</b>")
+        + (l.channelsDetail || []).map(c => row(esc(c.id), c.state === "REAL" ? tick("REAL") + (c.number == null ? "" : " " + c.number) : tick("BLOCKED"), esc(c.what) + " \u2014 " + lead(c) + (c.refused ? " \u00b7 " + esc(c.refused) : ""))).join("")
+        : '<div>No recon on record in this browser.</div>' + n.channels.map(c => row(esc(c.id), c.state === "REAL" ? tick("REAL") + (c.number == null ? "" : " " + c.number) : tick("BLOCKED"), esc(c.what))).join(""),
+      "seats measured from this recon: " + n.seats.filter(s => s.open).length + " open \u00b7 <b>/market scan</b> measures again now.");
+    return;
+  }
+
+  if(low === "log"){
+    const list = (await M.scans()).slice(-10).reverse();
+    box("\u26a1 THE OPEN SOURCE MARKET \u2014 THE SCAN LEDGER",
+      list.length ? list.map(r => row(esc(r.verdict) + " \u00b7 " + esc(r.digest), esc(r.at), r.measured + " channels answered \u00b7 " + r.ms + " ms<br>" + Object.keys(r.numbers || {}).map(k => esc(k) + "=" + (r.numbers[k] == null ? "\u26d4" : esc(String(r.numbers[k])))).join(" \u00b7 "))).join("")
+        : "<div>Nothing yet.</div>",
+      "each entry is one recon, kept in this browser (kv \u00b7 market) \u2014 the record of what the market was, and when it was measured.");
+    return;
+  }
+
+  /* no argument, or "scan": measure the market NOW. */
+  addBubble("ass", "\u26a1 THE OPEN SOURCE MARKET \u2014 measuring nine channels (GitHub \u00b7 npm \u00b7 HuggingFace \u00b7 Reddit)\u2026");
+  const out = await M.scan({});
+  const rows = out.channelsDetail.map(c => '<div class="rrow' + (c.state === "REAL" ? "" : " bad") + '"><b>' + esc(c.id) + '</b><span class="vd">' + tick(c.state) + (c.number == null ? "" : " " + c.number) + '</span><div class="rd">' + esc(c.what) + " \u2014 " + lead(c) + (c.refused ? " \u00b7 " + esc(c.refused) : "") + '</div></div>').join("");
+  const seatRows = out.seats.map(s => '<div class="rrow"><b>' + esc(s.id) + '</b><span class="vd">' + (s.open ? '<span style="color:#4cd97b">OPEN</span>' : '<span style="color:#8a8a8a">CLOSED</span>') + '</span><div class="rd">' + esc(s.evidence) + ' \u2014 ' + esc(s.channel) + '</div></div>').join("");
+  box("\u26a1 THE OPEN SOURCE MARKET \u2014 " + esc(out.verdict),
+    row("VERDICT", '<span style="color:' + (out.verdict === "MEASURED" ? "#4cd97b" : "#f5a623") + '">' + esc(out.verdict) + '</span>', esc(out.note) + " \u00b7 " + out.measured + "/" + out.channels + " channels \u00b7 " + out.ms + " ms")
+    + row("DIGEST", "<b>" + esc(String(out.digest).slice(0, 24)) + "\u2026</b>", "the recon's own SHA-256 over its channel verdicts")
+    + rows
+    + row("THE SEATS", out.seats.filter(s => s.open).length + " open \u00b7 " + out.seats.length + " read", "derived from the numbers above \u2014 an open seat is a market whose measured leader is under " + M.SEAT + " stars")
+    + seatRows,
+    "every number above was fetched in this browser just now. A channel that refused is printed with the refusal it gave \u2014 the play never claims what the scan could not measure. <b>/market play</b> is the campaign.");
+  logOp({ kind: "market", action: "open source market recon",
+    detail: out.channelsDetail.map(c => c.id + "=" + c.state + (c.number == null ? "" : ":" + c.number)).join(" "),
+    result: out.verdict + " · " + out.seats.filter(s => s.open).length + " open seat(s) of " + out.seats.length });
+}
+/* THE SECRET SAUCE (/SecretSauce) — the method, given away free, read live from
+   src/secretsauce.js. Gated by the canon hallmark (only its sha-256 is ever
+   stored): /SecretSauce <hallmark> opens it for 15 minutes. Then: best · secrets ·
+   upgrade · train · forums · free · state · lock. The train lane builds the ordered
+   corpus (best practice first, then the measurement, then the secrets) and hashes
+   it; the forums lane asks the forums themselves and keeps every refusal verbatim. */
+async function cmdSauce(arg){
+  arg = String(arg || "").trim();
+  const S = window.ObiSauce;
+  if(!S){ addBubble("ass", '\u26a0 <b>src/secretsauce.js</b> didn\u2019t load \u2014 reload the page.'); return; }
+  const low = arg.toLowerCase();
+  const row = (k, v, d) => '<div class="rrow"><b>' + esc(k) + '</b><span class="vd">' + v + '</span>' + (d ? '<div class="rd">' + d + '</div>' : '') + '</div>';
+  const box = (title, body, foot) => addBubble("ass", '<div class="rise"><div class="rhead">' + title + '</div>' + body + (foot ? '<div class="rfoot">' + foot + '</div>' : '') + '</div>');
+  const pre = t => '<pre style="white-space:pre-wrap;font:12px/1.5 ui-monospace,Menlo,monospace;text-align:left;margin:6px 0">' + esc(t) + '</pre>';
+  const EGG = '\uD83C\uDF73';
+
+  if(low === "lock"){ S.lock(); box("THE SECRET SAUCE \u2014 locked", row("STATE", "LOCKED", "the canon is closed again. Nothing was deleted.")); return; }
+  if(low === "state"){
+    const st = S.state();
+    box("THE SECRET SAUCE \u2014 state",
+      row("GATE", st.armed ? '<span style="color:#4cd97b">OPEN</span>' : '<span style="color:#f5a623">LOCKED</span>', st.armed ? "open for " + st.minutesLeft + " more minute(s)" : "type the canon hallmark after the command to open it")
+      + row("THE METHOD", st.practices + " practices \u00b7 " + st.secrets + " secrets \u00b7 " + st.ladder + " rungs", "src/secretsauce.js \u00b7 src/canon/SECRET-SAUCE.md")
+      + row("FAILURES", st.fails + "/" + st.maxFails, st.maxFails + " failures locks the gate for 10 minutes"),
+      "the method is <b>free</b> \u2014 the gate is a threshold, not a lock: no service, no account and no data sits behind it. <b>/SecretSauce best</b> \u00b7 <b>secrets</b> \u00b7 <b>upgrade</b> \u00b7 <b>train</b> \u00b7 <b>forums</b>.");
+    return;
+  }
+
+  if(S.locked()){
+    if(!arg || low === "help"){
+      box(EGG + " THE SECRET SAUCE \u2014 the method, given away free",
+        row("WHAT IT IS", "the canon, opened", "the best practices and the best-kept secrets, measured against the real market \u2014 and the ladder that starts with best practice and then upgrades. Free to read, copy and teach (CC0).")
+        + row("HOW TO OPEN IT", "the canon hallmark", "type <b>/SecretSauce</b> followed by the canon hallmark. Only the sha-256 of what you type is stored \u2014 never the plaintext, never logged, never captured.")
+        + row("WHAT IS BEHIND THE GATE", "nothing secret", "no service, no account, no credential and no user data. It is a threshold, not a lock: the material is meant to be given away, and the gate exists so the doctrine is entered knowingly.")
+        + row("THE LANES", "best \u00b7 secrets \u00b7 upgrade \u00b7 train \u00b7 forums", "the ten practices \u00b7 the best-kept secrets \u00b7 the ladder \u00b7 the ordered training corpus (hashed) \u00b7 a live search of the forums, refusals printed verbatim."),
+        "the canon document is <b>src/canon/SECRET-SAUCE.md</b>. <b>/SecretSauce state</b> shows the gate.");
+      return;
+    }
+    const r = await S.unlock(arg);
+    if(!r.ok){ box("\u26d4 THE SECRET SAUCE \u2014 refused", row("WHY", '<span style="color:#f5a623">refused</span>', esc(r.why)), "nothing was stored, echoed or logged."); return; }
+    box(EGG + " THE SECRET SAUCE \u2014 OPEN",
+      row("OPEN FOR", "15 minutes", esc(r.why) + " \u00b7 the canon, given away free."),
+      "<b>/SecretSauce best</b> the ten practices \u00b7 <b>/SecretSauce secrets</b> the best-kept secrets \u00b7 <b>/SecretSauce upgrade</b> the ladder \u00b7 <b>/SecretSauce train</b> build the hashed training corpus \u00b7 <b>/SecretSauce forums</b> search the forums \u00b7 <b>/SecretSauce free</b> the terms.");
+    return;
+  }
+
+  if(low === "best" || low === "practices" || low === "foundation"){
+    box(EGG + " THE BEST PRACTICES \u2014 the foundation",
+      S.PRACTICES.map(p => row(p.id, esc(p.rule), esc(p.why))).join(""),
+      "enforce two of these in code before reading the secrets \u2014 a practice you have not automated is a preference.");
+    return;
+  }
+  if(low === "secrets" || low === "secret"){
+    box(EGG + " THE BEST-KEPT SECRETS \u2014 the upgrade",
+      S.SECRETS.map(s => row(s.id, esc(s.title), esc(s.body))).join(""),
+      "read against the practices, never before them \u2014 that ordering is the secret. <b>/SecretSauce train</b> turns all of it into a corpus.");
+    return;
+  }
+  if(low === "upgrade" || low === "ladder"){
+    box(EGG + " THE LADDER \u2014 start with best practice, then upgrade",
+      S.LADDER.map(s => row("STEP " + s.step, esc(s.name), esc(s.do))).join(""),
+      "the loop is the product: re-measure, and let the corpus grow with the measurements.");
+    return;
+  }
+  if(low === "free" || low === "terms"){
+    box(EGG + " FOR FREE \u2014 the terms", row("TERMS", "CC0", esc(S.TERMS)),
+      "the only thing that is not free is the work at the end \u2014 a website built for you \u2014 and that is offered, never bundled.");
+    return;
+  }
+  if(low === "train" || low === "corpus"){
+    addBubble("ass", EGG + " building the training corpus (best practice \u2192 measurement \u2192 secrets \u2192 the ladder)\u2026");
+    const t = await S.train();
+    const runs = await S.corpusRuns();
+    box(EGG + " THE TRAINING CORPUS \u2014 built",
+      row("SIZE", t.chars.toLocaleString() + " chars \u00b7 " + t.bytes.toLocaleString() + " B", t.practiceLines + " practices \u00b7 " + t.secretLines + " secrets \u00b7 the measurement \u00b7 the ladder")
+      + row("DIGEST", "<b>" + esc(t.digest.slice(0, 24)) + "\u2026</b>", "the corpus hashed \u2014 it cannot change under you without the digest changing")
+      + row("ORDER", "BEST PRACTICE FIRST", "a model fed secrets first learns to guess; a model fed the practices first learns to check. The order is the whole upgrade.")
+      + row("WHAT IT DOES NOT CLAIM", "no trained model", "this station cannot fine-tune. It builds the corpus a training run or a retrieval index consumes, and proves its digest \u2014 training is a separate act, on separate infrastructure."),
+      "kept in this browser (kv \u00b7 sauce \u00b7 " + runs.length + " built). <a href=\"data:text/markdown;charset=utf-8," + encodeURIComponent(t.corpus) + "\" download=\"secret-sauce-corpus.md\">download the corpus</a> \u00b7 build it again and identical bytes give an identical digest.");
+    return;
+  }
+  if(low === "forums" || low === "forum" || low === "search"){
+    addBubble("ass", EGG + " searching the forums (Hacker News \u00b7 dev.to \u00b7 GitHub issues \u00b7 StackExchange \u00b7 Reddit)\u2026");
+    const f = await S.forums();
+    const tick = v => v === "REAL" ? '<span style="color:#4cd97b">\u2713 REAL</span>' : '<span style="color:#f5a623">\u26d4 BLOCKED</span>';
+    const rows = f.rows.map(r => '<div class="rrow' + (r.state === "REAL" ? "" : " bad") + '"><b>' + esc(r.name) + '</b><span class="vd">' + tick(r.state) + (r.number == null ? "" : " " + r.number) + '</span><div class="rd">"' + esc(r.q) + '"' + (r.top && r.top.length ? " \u00b7 top: " + r.top.map(x => esc(x.t) + (x.pts ? " (" + x.pts + " pts)" : "")).join(" \u00b7 ") : "") + (r.refused ? " \u00b7 " + esc(r.refused) : "") + (r.note2 ? " \u00b7 " + esc(r.note2) : "") + '</div></div>').join("");
+    box(EGG + " THE FORUMS \u2014 " + esc(f.verdict),
+      row("VERDICT", esc(f.verdict), f.measured + "/" + f.total + " forum answers measured in this browser just now \u00b7 digest " + esc(String(f.digest).slice(0, 12)) + "\u2026")
+      + rows,
+      "a forum that refused is printed with its refusal \u2014 never guessed around. Post the <b>measurement</b>, not the advert: it is true, it is checkable, and it is the one thing the field has never seen.");
+    return;
+  }
+
+  box(EGG + " THE SECRET SAUCE \u2014 the method, given away free",
+    pre(S.canonText()),
+    "the canon document is <b>src/canon/SECRET-SAUCE.md</b>. <b>/SecretSauce best</b> \u00b7 <b>secrets</b> \u00b7 <b>upgrade</b> \u00b7 <b>train</b> \u00b7 <b>forums</b> \u00b7 <b>free</b> \u00b7 <b>lock</b>.");
+}
+
+/* ⚖ THE RUBRIC (src/rubric.js) — the instrument the word "evaluator" means. It is the
+   estate's own inventory row `ana.rubric` ("the word 'evaluator' means this"), which
+   sat MISSING until now. What the engine guarantees, and what this command prints:
+   every band must carry a verbatim span from the raw record; the ENGINE locates that
+   span itself (so an invented quote is refused, never believed) and reads the
+   timestamp off the transcript's own utterance map (the model is never asked for a
+   clock); and where the record holds a number — words, wpm, pauses, duration, parts,
+   dates, speakers — the band is COMPUTED and the model's own band is kept as recorded
+   dissent. A band with no verified citation is NOT SCORED, excluded from the total
+   and listed in the omission audit, because an error nobody found is not the same as
+   no error. Scorecards are append-only and re-verifiable (/rubric verify). */
+async function cmdRubric(arg){
+  arg = String(arg || "").trim();
+  const R = window.ObiRubric;
+  if(!R){ addBubble("ass", '⚠ <b>src/rubric.js</b> didn\'t load — reload the page.'); return; }
+  const low = arg.toLowerCase();
+  const row = (k, v, d) => '<div class="rrow"><b>' + esc(k) + '</b><span class="vd">' + (v == null ? "" : v) + '</span>' + (d ? '<div class="rd">' + d + '</div>' : '') + '</div>';
+  const box = (t, b, f) => addBubble("ass", '<div class="rise"><div class="rhead">' + t + '</div>' + b + (f ? '<div class="rfoot">' + f + '</div>' : '') + '</div>');
+  const pre = t => '<pre style="white-space:pre-wrap;font:12px/1.5 ui-monospace,Menlo,monospace;text-align:left;margin:6px 0;max-height:320px;overflow:auto">' + esc(t) + '</pre>';
+  const SH = "⚖";
+  const chip = (b, c) => '<span class="chip" style="background:' + c + ';color:#08110c">' + esc(b) + '</span>';
+
+  /* ------------------------------------------------------------------ the card */
+  if(!arg || low === "help" || low === "law"){
+    const ls = await R.list();
+    box(SH + ' THE RUBRIC — the instrument the word "evaluator" means',
+      row("WHAT IT IS", "criteria with bands, judged from the record",
+        "Every band must carry a verbatim span from the raw record. The engine locates that span itself, reads its timestamp off the transcript's own timeline, and refuses any band it cannot cite. Where the record holds a number, the band is arithmetic — and the model's opinion is kept as recorded dissent.")
+      + row("THE LAW", "8 rules, enforced in code",
+        "no citation, no score · the machine verifies every quote · the machine reads the clock · arithmetic beats opinion · coverage travels with every total · thresholds are stated, not universal · a scorecard is append-only · a partial record scores only what it holds")
+      + row("THE FAMILIES", ls.length + " on this station", ls.map(x => '<b>' + esc(x.id) + '</b> · ' + x.criteria + ' criteria' + (x.custom ? ' · custom' : '')).join('<br>'))
+      + row("HOW IT IS ESTABLISHED", chip("COMPUTED", "#4cd97b") + " " + chip("CITED", "#f5a623") + " " + chip("NOT SCORED", "#ff5a5a"),
+        "<b>COMPUTED</b> arithmetic on the record — nobody judged it · <b>CITED</b> a verbatim span the engine found, with its source and its time · <b>NOT SCORED</b> no verified ground: fail closed, excluded from the total, listed in the omission audit")
+      + row("THE COMMANDS", "list · show · new · score · verify · trend · archive · canary",
+        "<b>/rubric list</b> the families · <b>/rubric show cefr.speaking</b> the criteria and every band · <b>/rubric score Minh</b> (or the active subject) · <b>/rubric new Year 7 writing :: task :: lexis :: grammar</b> your own rubric, versioned and hashed · <b>/rubric verify rb-…</b> re-check every citation against the record as it stands · <b>/rubric trend Minh</b> the band movement between runs · <b>/rubric canary</b> the engine checking itself")
+      + row("WHAT IT WILL NOT DO", "reassure you",
+        "It will not score from a partial recording without saying so, it will not print a total without its coverage, and it will not repeat a quote it could not find. A rubric that flatters is worth less than no rubric."),
+      "the engine is <b>src/rubric.js</b> · the law is restated in its header · <b>/rubric canary</b> runs the machine check.");
+    return;
+  }
+
+  if(low === "list" || low === "rubrics" || low === "families"){
+    const ls = await R.list();
+    box(SH + " THE RUBRIC FAMILIES — " + ls.length + " on this station",
+      ls.map(x => '<div class="rrow"><b>' + esc(x.id) + '</b><span class="vd">' + chip("v" + x.version, x.custom ? "#f5a623" : "#4cd97b") + '</span><div class="rd">' + esc(x.name) + ' · ' + x.criteria + ' criteria · scale ' + esc(x.scale) + ' · digest ' + esc(String(x.sha).slice(0, 16)) + '…' + (x.custom ? ' · <b>custom</b> (defined on this station)' : ' · built-in') + '</div></div>').join(""),
+      "<b>/rubric show &lt;id&gt;</b> reads one out in full. A custom rubric is versioned on every edit, so a stored scorecard's cited definition can never change under it.");
+    return;
+  }
+
+  if(low.startsWith("show ") || low.startsWith("read ")){
+    const id = arg.replace(/^(?:show|read)\s+/i, "").trim();
+    const d = await R.get(id);
+    if(!d){ addBubble("ass", '⚠ no rubric called <b>' + esc(id) + '</b> — <b>/rubric list</b>'); return; }
+    box(SH + " " + esc(d.id) + " — " + esc(d.name) + " (v" + d.version + ")",
+      row("SCALE", esc(d.scale), esc(d.purpose))
+      + row("DIGEST", esc(String(d.sha).slice(0, 24)) + "…", "the definition that judged a scorecard cannot change without this digest changing")
+      + d.criteria.map(c => row(c.name + (c.role === "context" ? " (context)" : "") + (c.measure ? " · engine-measured" : ""), esc(c.id), esc(c.question) + "<br>" + c.bands.map(b => '<b>' + esc(b.label) + '</b> — ' + esc(b.desc || "")).join("<br>"))).join(""),      "<b>/rubric score &lt;subject&gt; --rubric " + esc(d.id) + "</b> to use it.");
+    return;
+  }
+
+  /* a custom rubric, in one line: /rubric new <name> :: <criterion> :: <criterion> … */
+  if(low.startsWith("new ") || low.startsWith("define ")){
+    const body = arg.replace(/^(?:new|define)\s+/i, "").trim();
+    const bits = body.split("::").map(s => s.trim()).filter(Boolean);
+    const name = bits.shift();
+    if(!name || bits.length < 2){ addBubble("ass", '⚠ a custom rubric needs a name and at least two criteria:<br><b>/rubric new Year 7 writing :: task achievement :: lexical range :: accuracy</b><br>Each criterion is <b>Name :: what to look for</b> (or just the name).'); return; }
+    const scaleM = arg.match(/--scale\s+([^:]+)/i);
+    const res = await R.define(name, bits, scaleM ? { scaleName: scaleM[1].trim() } : {});
+    if(!res.ok){ addBubble("ass", "⚠ " + esc(res.why)); return; }
+    const d = res.def;
+    box(SH + " RUBRIC DEFINED — " + esc(d.name),
+      row("ID", '<b>' + esc(d.id) + '</b>', "v" + d.version + " · digest " + esc(d.sha.slice(0, 20)) + "…")
+      + row("CRITERIA", d.criteria.length + " on a " + d.criteria[0].bands.length + "-band scale", d.criteria.map(c => '<b>' + esc(c.name) + '</b> — ' + esc(c.question)).join("<br>")),
+      "stored on this station (kv · rubrics). <b>/rubric score &lt;subject&gt; --rubric " + esc(d.id) + "</b> · editing it again makes v" + (d.version + 1) + " and leaves v" + d.version + " intact for every scorecard that cited it.");
+    return;
+  }
+
+  /* --------------------------------------------------------------- the canary */
+  if(low === "canary" || low === "selftest" || low === "self-test"){
+    addBubble("ass", SH + " running the canary — the engine checking itself, no model and no network…");
+    const c = await R.canary();
+    box(SH + " THE CANARY — " + (c.pass === c.total ? '<span style="color:#4cd97b">' + c.pass + "/" + c.total + " PASS</span>" : '<span style="color:#ff5a5a">' + c.pass + "/" + c.total + " — FAILURES BELOW</span>"),
+      c.checks.map(x => '<div class="rrow' + (x[1] ? '' : ' bad') + '"><b>' + esc(x[0]) + '</b><span class="vd">' + (x[1] ? "✓" : "✗") + '</span><div class="rd">' + esc(String(x[2] == null ? "" : x[2]).slice(0, 200)) + '</div></div>').join(""),
+      "this drives the real pipeline with a canned model response and asserts the law: arithmetic beats opinion, an invented quote is refused, a band with no citation is not scored, the clock comes off the record, coverage travels with the total, and a forged citation is caught by verify. No model, no network, no evidence of yours.");
+    try{ logOp({ kind: "rubric", action: "canary", detail: c.pass + "/" + c.total, result: c.pass === c.total ? "PASS" : "FAILURES: " + c.checks.filter(x => !x[1]).map(x => x[0]).join("; ") }); }catch(err){}
+    return;
+  }
+
+  /* ------------------------------------------------------------- the archive */
+  if(low === "archive" || low === "runs" || low === "scorecards"){
+    const rs = await R.runs();
+    box(SH + " THE SCORECARDS — " + rs.length + " on this station",
+      rs.slice(0, 30).map(r => '<div class="rrow"><b>' + esc(r.subject.name) + '</b><span class="vd">' + chip(r.verdict, r.verdict === "REAL" ? "#4cd97b" : (r.verdict === "PARTIAL" ? "#f5a623" : "#ff5a5a")) + '</span><div class="rd">' + esc(r.rubric.id) + ' v' + r.rubric.version + ' · ' + esc(r.total.form) + (r.total.composite ? ' → <b>' + esc(r.total.composite) + '</b>' : '') + ' · ' + esc(r.period) + ' · ' + esc(r.id) + (r.supersededBy ? ' · <i>superseded by ' + esc(r.supersededBy) + '</i>' : '') + '</div></div>').join("") || row("EMPTY", "nothing scored yet", "score something first: <b>/rubric score</b>"),
+      "every scorecard is kept as written and can be re-checked: <b>/rubric verify &lt;run id&gt;</b> re-locates every citation in the record as it stands now.");
+    return;
+  }
+
+  /* --------------------------------------------------------------- the trend */
+  if(low.startsWith("trend") || low.startsWith("drift")){
+    const who = arg.replace(/^(?:trend|drift)\s*/i, "").trim();
+    const t = await R.trend(who || null);
+    if(!t.runs || !t.sets || !t.sets.length){
+      box(SH + " THE TREND", row("RUNS", t.runs || 0, esc(t.note || "no comparison available yet")), "score the same subject twice on the same rubric and the movement between them is printed here.");
+      return;
+    }
+    const parts = [];
+    for(const st of t.sets){
+      parts.push('<div class="rhead" style="margin-top:6px">' + esc(st.rubric.id) + ' — ' + st.runs + ' run(s) · mean ' + esc(String(st.means.first)) + ' → ' + esc(String(st.means.last)) + '</div>');
+      parts.push(row("PERIOD", "", esc(st.period)));
+      for(const x of st.rows){
+        let vd;
+        if(x.state === "NO COMPARISON") vd = "—";
+        else if(x.state === "HELD") vd = chip("HELD", "#8a93a6");
+        else if(x.delta > 0) vd = '<span style="color:#4cd97b">▲ ' + esc(x.from) + ' → ' + esc(x.to) + '</span>';
+        else vd = '<span style="color:#ff5a5a">▼ ' + esc(x.from) + ' → ' + esc(x.to) + '</span>';
+        parts.push('<div class="rrow"><b>' + esc(x.name) + '</b><span class="vd">' + vd + '</span><div class="rd">' + esc(x.why || "") + '</div></div>');
+      }
+    }
+    box(SH + " THE TREND — " + esc(who || "the active subject"), parts.join(""),
+      "only criteria scored in BOTH runs are compared — a criterion that was never scored in one of them is not a movement, it is a gap, and is printed as one.");
+    return;
+  }
+
+  /* -------------------------------------------------------------- the verify */
+  if(low.startsWith("verify") || low.startsWith("audit")){
+    const id = arg.replace(/^(?:verify|audit)\s*/i, "").trim();
+    if(!id){ addBubble("ass", '⚠ which scorecard? <b>/rubric archive</b> lists them — then <b>/rubric verify rb-…</b>'); return; }
+    addBubble("ass", SH + " re-checking every citation of <b>" + esc(id) + "</b> against the record as it stands now…");
+    const v = await R.verify(id);
+    if(!v.ok){ addBubble("ass", "⚠ " + esc(v.why)); return; }
+    box(SH + " RE-VERIFICATION — " + esc(v.run.subject.name) + " · " + esc(v.run.id),
+      row("VERDICT", '<b style="color:' + (v.verdict === "ALL STAND" ? "#4cd97b" : "#ff5a5a") + '">' + esc(v.verdict) + '</b>', (v.rows.filter(x => x.state === "VERIFIED").length) + " citation(s) found again · " + v.rows.filter(x => x.state === "DRIFTED").length + " NOT found · " + v.rows.filter(x => x.state === "STANDS").length + " computed (re-runnable, not re-verifiable by quote) · " + v.rows.filter(x => x.state === "NOT SCORED").length + " never scored")
+      + v.rows.map(x => '<div class="rrow' + (x.state === "DRIFTED" ? ' bad' : '') + '"><b>' + esc(x.id) + '</b><span class="vd">' + chip(x.state, x.state === "VERIFIED" ? "#4cd97b" : (x.state === "DRIFTED" ? "#ff5a5a" : "#8a93a6")) + '</span><div class="rd">' + esc(x.why) + '</div></div>').join(""),
+      "this is the point of a scorecard: it can be audited later, by someone else, against the record as it stands. A citation that no longer exists is reported as DRIFTED, never quietly dropped.");
+    return;
+  }
+
+  /* -------------------------------------------------------------- the export */
+  if(low.startsWith("export") || low.startsWith("download")){
+    const id = arg.replace(/^(?:export|download)\s*/i, "").trim();
+    const r = await R.getRun(id);
+    if(!r){ addBubble("ass", '⚠ no scorecard called <b>' + esc(id) + '</b> — <b>/rubric archive</b>'); return; }
+    const md = R.toMarkdown(r), html = R.toPrintHTML(r);
+    box(SH + " EXPORT — " + esc(r.subject.name),
+      row("MARKDOWN", esc(md.length) + " chars", '<a href="data:text/markdown;charset=utf-8,' + encodeURIComponent(md) + '" download="scorecard-' + esc(r.subject.name.replace(/[^a-z0-9]+/gi, "-").toLowerCase()) + '.md">download the scorecard (.md)</a>')
+      + row("PRINTABLE", esc(html.length) + " chars", '<a href="data:text/html;charset=utf-8,' + encodeURIComponent(html) + '" download="scorecard-' + esc(r.subject.name.replace(/[^a-z0-9]+/gi, "-").toLowerCase()) + '.html" target="_blank">open the printable (print to PDF)</a>')
+      + row("ON SCREEN", "", '<button class="ci-act" onclick="window.ObiRubric.download(\'scorecard.json\', JSON.stringify(window.ObiRubric.__last||{} , null, 2), \'application/json\')">download this run as JSON</button>'),
+      "the printable carries the same citations, the rubric digest and the run digest — an outside reader can check every quote against the transcript.");
+    try{ R.__last = r; }catch(err){}
+    return;
+  }
+
+  /* --------------------------------------------------------------- the score */
+  /* /rubric score [subject] [--rubric id] [--focus text] [--kind student|class]
+     Shortcuts: /rubric errors [subject] → the error taxonomy, /rubric teach → the lesson. */
+  const errMode = /^(errors?|err)\b/.test(low), teachMode = /^(teach|lesson)\b/.test(low);
+  const sp = arg.replace(/^(?:score|run|assess|grade|errors?|err|teach|lesson)\s*/i, "").trim();
+  const rMatch = sp.match(/--rubric\s+([^\s]+)/i);
+  const fMatch = sp.match(/--focus\s+(.+)$/i);
+  const kMatch = sp.match(/--kind\s+([^\s]+)/i);
+  const who = sp.replace(/--(rubric|focus|kind)\s+[^\s]+/gi, " ").replace(/\s+/g, " ").trim() || null;
+  let id = rMatch ? rMatch[1] : (teachMode ? "teach.lesson" : (errMode ? "err.taxonomy" : null));
+  if(!id){
+    const Rv = window.ObiReview;
+    let kind = kMatch ? kMatch[1] : null;
+    if(!kind){ try{ const c = Rv && Rv.context && Rv.context(); const a = await (Rv && Rv.current ? Rv.current() : null); kind = (a && a.kind) || (c && c.kind) || "student"; }catch(e){ kind = "student"; } }
+    id = (kind === "class") ? "teach.lesson" : "cefr.speaking";
+  }
+  const def = await R.get(id);
+  if(!def){ addBubble("ass", '⚠ no rubric called <b>' + esc(id) + '</b> — <b>/rubric list</b>'); return; }
+
+  const bubble = addBubble("ass", "");
+  bubble.innerHTML = '<div class="tr-status hint" style="text-align:left"></div><div class="tr-out"></div>';
+  const status = bubble.querySelector(".tr-status"), out = bubble.querySelector(".tr-out");
+  status.innerHTML = SH + " scoring with <b>" + esc(def.id) + "</b> (v" + def.version + ") — reading the record, then putting every claim beside the span it came from\u2026";
+  let ticks = 0;
+  const timer = setInterval(() => { ticks++; status.innerHTML = SH + " scoring with <b>" + esc(def.id) + "</b> \u00b7 " + ticks + "s — the engine will check every quote it is given"; }, 1000);
+  const res = await R.score(id, who, { focus: fMatch ? fMatch[1].trim() : null, kind: kMatch ? kMatch[1] : null,
+    onChunk: acc => { out.textContent = String(acc || "").slice(-700); try{ scrollDown(); }catch(err){} } });
+  clearInterval(timer);
+  if(!res.ok){
+    status.innerHTML = "⚠ the run stopped: " + esc(res.why || res.error || "unknown");
+    if(res.gate && !res.gate.ok) status.innerHTML += " \u2014 <b>nothing was scored</b>: " + esc((res.gate.reasons || []).join(" \u00b7 "));
+    bubble.querySelector(".tr-out").innerHTML = '<div class="hint">A rubric refuses an empty record on purpose. Record the class or add a note first: <b>/transcribe</b> \u00b7 <b>/summary</b> \u00b7 <b>/note</b>, then file it under the subject with <b>/file</b>.</div>';
+    return;
+  }
+  status.innerHTML = "";
+  out.textContent = "";
+  bubble.innerHTML = R.card(res);
+  const acts = document.createElement("div");
+  acts.className = "tr-acts";
+  acts.style.marginTop = "8px";
+  const md = R.toMarkdown(res.run), html = R.toPrintHTML(res.run);
+  const nm = res.run.subject.name.replace(/[^a-z0-9]+/gi, "-").toLowerCase();
+  [["📄 .md", () => R.download("scorecard-" + nm + ".md", md, "text/markdown")],
+   ["🖨 Printable", () => { const w = window.open("", "_blank"); if(w){ w.document.write(html); w.document.close(); } }],
+   ["⚖ Verify now", () => cmdRubric("verify " + res.run.id)],
+   ["📈 Trend", () => cmdRubric("trend " + res.run.subject.name)],
+   ["⛔ Supersede", null]
+  ].forEach(([lbl, fn]) => {
+    const b = document.createElement("button");
+    b.className = "ci-act"; b.textContent = lbl;
+    if(fn) b.onclick = fn;
+    else b.onclick = async () => {
+      const prev = (await R.runs(res.run.subject.name)).filter(r => r.id !== res.run.id && r.rubric.id === res.run.rubric.id)[0];
+      if(!prev) { status.textContent = "no earlier run of this rubric to supersede."; return; }
+      await R.supersede(prev.id, res.run.id);
+      status.innerHTML = "earlier run <b>" + esc(prev.id) + "</b> annotated as superseded by <b>" + esc(res.run.id) + "</b> — the earlier scorecard is kept, not rewritten.";
+    };
+    acts.appendChild(b);
+  });
+  bubble.appendChild(acts);
+  const foot = document.createElement("div");
+  foot.className = "hint";
+  foot.style.textAlign = "left";
+  foot.textContent = "Run " + res.run.id + " · verdict " + res.run.verdict + " · " + res.run.total.form + " · digest " + String(res.run.digest).slice(0, 16) + "…";
+  bubble.appendChild(foot);
+  return res;
+}
+
 const COMMAND_BOOK = [
   { group: "⌘ Command Station — speak, and operate", items: [
     ["/help", "this shelf — every command, one tap", 0],
     ["/generators", "the ◈ Phoenix Generators family — PrAis's divisions, and every generator in them", 0],
     ["/settings", "voice · the shelf · the ledger · the live instruments · reincarnate", 0],
     ["/state", "what this station is and can reach, right now (the live map)", 0],
+    ["/blueprint", "blueprint mode — the architect's plan for the build in flight (the layers · the contracts · the budget · the deploy · the tests)", 0],
+    ["/roles", "THE ROLES — the intake taken apart: one generator per function (the CV · the LinkedIn · the headshot · the portfolio · the applications · the interview · the umbrella · the presence · the credit · the lists · the 44 · the weekly presentation). `/roles` lists them and opens one here, on this station's own records — the same store /intake uses; each is also its own generator in src/generators/ (paste main.pjs + index.html). `/roles cv-forge` · `/roles 5`. The 44 and the weekly presentation open here too, though the registry files them under NET because the classroom owns what they measure", 0],
+    ["/assets", "the asset register — every asset in the blueprint, located, labelled, SHA-256 hashed · /assets verify re-hashes them here", 0],
+    ["/brain", "the mastermind's memory — search everything (artifacts · files · docs · commands · soul · I-LOG) · /brain sync runs the auto lane · /brain archive snapshots the state · /brain keys = the credential ledger by fingerprint · /brain share <path|url>", 0],
+    ["/relay", "THE MASTER SYNC PIPELINE — READ → CENSUS → DELIVER → VERIFY → INDEX → ARCHIVE, one ordered run. It hashes every declared file and rebuilds the register's own tree digest, carries the four truth-documents out by digest, tries the mesh and the cloud, re-hashes every URL it delivered, seals the run — and reports REAL / HOLLOW / MISSING / BLOCKED, never COMPLETE with a shut door · /relay state · /relay log", 0],
+    ["/market", "THE OPEN SOURCE MARKET — measure the market this station already occupies, then take the seat nobody sat in. It fetches nine real endpoints (GitHub · npm · HuggingFace · Reddit), prints a NUMBER for each or the refusal it gave, DERIVES the open and closed seats from what it measured (an empty seat is a market whose leader is under 100 stars), and prints the play · /market scan · /market play · /market state · /market log", 0],
+    ["/SecretSauce", "THE SECRET SAUCE — the method, given away free, opened by the canon hallmark. The ten best practices, the best-kept secrets, and the ladder that starts with best practice and then upgrades · /SecretSauce train builds the ORDERED training corpus (best practice → measurement → secrets) and hashes it · /SecretSauce forums searches the forums live and prints every refusal verbatim · best · secrets · upgrade · free · state · lock", 0],
     ["/memory", "the Soul DNA ledger — verbatim fragments, runs, timestamps", 0],
     ["/queue", "the command tunnel queue — claim → execute → complete", 0],
     ["/os", "Agent 99 OS: the kernel, the offering loaded, the nest", 0],
@@ -1071,7 +2434,8 @@ const COMMAND_BOOK = [
     ["/file", "attach a saved transcript/summary to the active subject", 1],
     ["/writeup", "write up the active class · /writeups = the archive", 0],
     ["/review", "write up the active student · /reviews = the archive", 0],
-    ["/find", "verbatim search across every transcript, summary and note", 1]
+    ["/find", "verbatim search across every transcript, summary and note", 1],
+    ["/rubric", "THE RUBRIC — criteria with bands, and every band CITED from the raw record: the engine locates each quote itself, reads the timestamp off the transcript’s own timeline, refuses any band it cannot cite, and uses arithmetic over opinion wherever the record holds a number · /rubric list · show <id> · new <name> :: <criterion>… · score [name] · verify <run> · trend [name] · archive · canary", 0],
   ]},
   { group: "🌐 The open net — Obi's basic senses", items: [
     ["/web", "search the net, read the top sources, cite what it found", 1],
@@ -1085,7 +2449,18 @@ const COMMAND_BOOK = [
     ["/netadd", "register another of your generators as a node", 1],
     ["/netsync", "force a sync — push captures, pull every member", 0],
     ["/netrole", "set this node's role", 1],
-    ["/netkey", "reveal the hub editKey (anchor only)", 0]
+    ["/netkey", "reveal the hub editKey (anchor only)", 0],
+    ["/masterlink", "THE MASTER LINK — the master's side of the handoff lane. /masterlink status reads every generator named under the umbrella (by CONTENT KEY, no token); sync now looks at them all; name <generator> aims the link (a name is stored only once it RESOLVES — naming is the command this station actually has); list [gen] the whole published tree; read <gen> <path> any file, whole; inbox the handoffs pulled, verbatim, with digests; order <generator> :: <instruction> issues THE COMMAND down both lanes that cross (the Legion queue AND the artifact courier) and shows each verdict; orders = what has been issued; reply <text> answers as an artifact; off|on the every-3-minute watch, skipped while the tab is hidden · card = this station's own master-link card read off the pull lane · card publish writes it (the platform's answer, verbatim) · card pull <gen> reads any other station's card", 0],
+    ["/mastermind", "THE RANK — apex vs sub. This station is the apex mastermind (answers to sovereign only). /mastermind = rank card · /mastermind parent <generator> = this clone becomes a sub of that apex (must resolve) · /mastermind apex = release back to apex · clone recipe included · /mastermind <dept> opens a department desk (training · systems · fsdev · a2zmarketing)", 0],
+    ["/umbrella", "THE UMBRELLA — every generator this station answers for, and what it can actually do to each. /umbrella reads them all right now (the master link's own reading: FOUND · files · bytes · index.html and main.pjs sizes); /umbrella <generator> reads one generator now; /wings is the same door. Reads only — no generator can write into another's namespace, and this card never claims one did", 0],
+    ["/boardroom", "THE BOARDROOM — the mastermind ritual, in-house. /boardroom <question> convenes every executive and above: each POV spoken, everything challenged, the challenged output (the BESTIARY) feeding the Architect's blueprint · /boardroom press <seat> cross-examines one seat (ceo · architect · pres · training · systems · fsdev · atoz) · /boardroom room opens the living table (the Boardroom tab — organic talk, victories celebrated) · /boardroom name <seat> <name> renames a seat · /boardroom law|memory <seat> reads that seat's law / memory file · /boardroom fire|hire <seat> empties / refills a chair · /boardroom take|yield <seat> the sovereign holds / releases a chair himself · /boardroom call me <name> names the sovereign. The table advises, the sovereign decides, HQ orders — nothing here commands"],
+    ["/wire", "THE FREE WIRE — control of the estate with NO credential. Every lane was written to and read back from this origin: uploads.dev (permanent carrier) · ntfy.sh (a public nerve: publish, and the whole 12 h history in one GET) · keyvalue.immanuel.co (the MUTABLE pointer — the only store measured where a value can be overwritten with no account) · x0.at · ntfy attachments · tmpfiles · paste.rs · pastes.dev · GitHub reads. /wire is the measured lane table; probe re-measures every lane live; announce aims the pointer at the newest register AND broadcasts it on the nerve, then READS THE POINTER BACK, so any station finds the register with no token, no account and no URL from anyone; pointer reads it as it stands; send <text> broadcasts; tail [n] reads the nerve verbatim; put <path> carries a file out; slate <text> writes something permanent. The two credential doors (GitHub PAT · Cloudflare token) are still listed, with their refusal, and are not pretended open", 0]
+  ]},
+  { group: "◈ Departments — the Senior Exec desks", items: [
+    ["/training", "Head of Training desk (EaiB) — outcomes through teaching · doors: /transcribe · /class · /writeup · /lesson · /curriculum · /intake · alias /eaib", 0],
+    ["/systems", "Head of Systems desk — custody, roads, hygiene · doors: /vault · /ilog · /doctor · /bg · /keys · alias /sys", 0],
+    ["/fsdev", "Head of FullStackDev desk — products built to order · doors: /free (the build room) · /forge · /blueprint · /assets · alias /fullstack", 0],
+    ["/a2zmarketing", "Head of A-to-Z Marketing desk — voice · image · funnels · community · doors: /brand · /market · /img · alias /a2z", 0]
   ]},
   { group: "📚 NET Academy — the lessons", items: [
     ["/lesson", "the Lesson Creator desk — 🧭 Plan from this week's evidence · ✍ Build · 🗂 Library · 📐 Standard", 0],
@@ -1093,13 +2468,18 @@ const COMMAND_BOOK = [
     ["/lesson check", "the lesson validator — a lesson that fails it is not shipped", 0],
     ["/lesson standard", "the law: LSN-1…23 — the format (from the two reference lessons) and the method (from NET-CLASSROOM-MANAGER.html)", 0],
     ["/lesson list", "the lessons built in this browser (scoped to the active client)", 0],
-    ["/lesson push <id>", "commit a built lesson to the canon beside the class it came from (needs the /omega gate)", 1]
+    ["/lesson push <id>", "commit a built lesson to the canon beside the class it came from (needs the /phoenixomegaprotocol gate)", 1],
+    ["/intake", "🎓 THE INTAKE — the app that remembers: every promise made in a lesson recording, who owes it, and what has arrived", 0],
+    ["/intake <name>", "one dossier — the record, the evidence behind every row, and the next thing to do", 1],
+    ["/intake receive <name> :: <what>", "file what a student sent against the item it serves — the item moves to MATERIAL IN, and the raw is kept verbatim", 1],
+    ["/intake cv <name> [build]", "the CV: what is ready, what is MISSING, and the printed A4 sheet — a guessed row is never printed", 1]
   ]},
   { group: "☁ Canon, cloud and self-check", items: [
     ["/canon", "the ONE authority (Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-) · /canon sync · /canon doctrine", 0],
+    ["/git", "THE GIT, OPEN — every part of the canon that answers with NO token (the public monorepo · the Worker source · the raw soul-DNA archive), the one branch that is behind a PAT, and the one line that opens it. /git repos = the live census · /git tree [path] · /git search <term> · /git read <path> · /git archive · /git doctrine · /git auth", 0],
     ["/proposed", "the staging lane, as an index — the review itself is on /pipeline, at the stage that carries each proposal, when it is its time", 0],
     ["/ilog", "the I-LOG — operation record, chain verify, Git anchor (verify · push · pull · export · anchors · reset)", 0],
-    ["/omega", "PHOENIXOMEGAPROTOCOL — the gate that WRITES: arm it and the change is made (written to the authority branch and committed). /omega apply <the change> · /canon apply (the staged amendments), or both in one breath, /PhoenixOmegaProtocol <password> :: <the change> · /omega lock to disarm", 0],
+    ["/phoenixomegaprotocol", "PHOENIXOMEGAPROTOCOL — the gate that WRITES: arm it and the change is made (written to the authority branch and committed). /phoenixomegaprotocol apply <the change> · /canon apply (the staged amendments), or both in one breath, /PhoenixOmegaProtocol <password> :: <the change> · /phoenixomegaprotocol lock to disarm", 0],
     ["/idea ", "raise a change as SOUL — captured verbatim, then it moves through the pipeline like everything else", 1],
     ["/forge", "the SELF-FORGE — read its own source, edit itself, commit to the authority (gated), hot-swap a live module", 0],
     ["/cf", "the Cloudflare fleet: /cf token <token> (stores the account id with it) · /cf status · /cf deploy <name> · /cf r2 — the object store and the S3 key pair, proven by a signed request · all of it sealed in the vault", 0],
@@ -1111,6 +2491,7 @@ const COMMAND_BOOK = [
     ["/vault", "the PrAis Vault — every key the empire runs on · locate · test · seal · push", 0],
     ["/status", "station status", 0],
     ["/bg", "background operation — the keep-alive, the away-measurement, /bg audio on|off", 1],
+    ["/auto", "the master switch for every automatic lane — /auto = state · /auto on = resume (brain 5m · relay 30m · market 30m · masterlink watch 3m · cgn flush) · /auto off = stop them all (command #10). Stopped is the resting state; manual commands (/brain sync · /relay · /market scan · /masterlink sync) still work", 0],
     ["/gateway", "gateway status", 0],
     ["/doctor", "self-check", 0],
     ["/audit", "audit pass (fail-closed)", 0],
@@ -1121,33 +2502,97 @@ const COMMAND_BOOK = [
   { group: "🔥 Free Phoenix Mode — the unbound room", items: [
     ["/curriculum", "the school's own pacing guide, parsed — primary 1-5 and secondary 6-9, every book, every section · /curriculum 6 (the year, your scope) · /curriculum week 3 · /curriculum unit <name> · /curriculum find <text> · /curriculum scope (whose periods are whose) · /curriculum materials (templates, links, ebooks) · /curriculum import (a newer .xlsx) · /curriculum export 6", 0],
     ["/coverage", "the pacing guide vs the record: which sections the station's own evidence shows, and which it has no evidence of (evidence-driven, never assumed)", 0],
-    ["/free", "Agent 99 with the leash off: no Canon, no gate, no Git, no cloud, no record. It builds what you ask, and it EDITS ITSELF. /free opens it; inside: plain text, /build app <ask>, /build gator <ask>, /self, /forge <change>, /apply, /revert, /eval <js>, /files, /read, /dl, /wipe, /seal", 0]
+    ["/free", "Agent 99 with the leash off: no Canon, no gate, no Git, no cloud, no record. It builds what you ask, and it EDITS ITSELF. /free opens it; inside: plain text, /build app <ask>, /build gator <ask>, /self, /forge <change>, /apply, /revert, /eval <js>, /files, /read, /dl, /open (📎 Attach — device text files, local only), /wipe, /seal", 0]
   ]},
   { group: "♻ Protocol — reincarnation", items: [
     ["/rome run ", "ROME PROTOCOL + the full SCS loop (RISE→…→DEATH→S2Pipeline) — canon", 1],
     ["/scs", "the canon session loop — all 7 stages and the fidelity gate", 0],
     ["/pipeline", "the S2Pipeline artifact — REAL / HOLLOW / MISSING", 0],
     ["/phoenixRISE ", "SCS Stage 1 — audit the prior DEATH, gate, stamp the session name", 1],
-    ["/phoenixDEATH", "SCS Stage 7 — the 7-point march, seal, handoff", 0]
+    ["/phoenixDEATH", "SCS Stage 7 — the 7-point march, seal, handoff", 0],
+    ["/reincarnateDEATH", "SCS Stage 7 under its sovereign alias, run OUT OF ORDER on his word when no session is open — the 7-point march is walked over this browser's real record (the supply lines and the station audit are re-read for it), the SEAL and the HANDOFF are reported WITHHELD with the reason named (a session that was never opened cannot be sealed, and the station does not invent one), and it goes STRAIGHT INTO THE S2PIPELINE, which is then printed as its own artifact", 0]
   ]}
 ];
+/* the shelf is also the brain's source for what this station can be asked to do:
+   one list, read live, so a command can never be indexed that does not exist. */
+window.ObiCommandBook = COMMAND_BOOK;
 
-function showCommands(){
-  /* the shelf renders in the chat, so always surface the station first */
-  if(currentView !== "cmd") showView("cmd");
+/* the shelf opens as eight doors, not eighty buttons. Nothing is removed:
+   open a door and every command in it is there, one tap away. */
+const SHELF_OPEN = { 0: true };
+let shelfFull = false;
+let shelfAll = false;
+
+function shelfHint(s){
+  const t = String(s || "");
+  if(shelfFull) return t;
+  let c = t.split(" \u00b7 ")[0];
+  const m = c.match(/^(.{0,150}?[.;])(\s|$)/);
+  if(m) c = m[1];
+  if(c.length > 104) c = c.slice(0, 101).trim() + "\u2026";
+  return c;
+}
+
+function shelfHTML(){
   const total = COMMAND_BOOK.reduce((n, g) => n + g.items.length, 0);
-  const groups = COMMAND_BOOK.map(g => {
-    const rows = g.items.map(it => '<button class="cmd" data-cmd="' + esc(it[0]) + '" data-arg="' + (it[2] ? "1" : "") + '">'
-      + '<b>' + esc(it[0]) + '</b><span class="cmd-hint">' + esc(it[1]) + (it[2] ? ' <i>— needs your words</i>' : '') + '</span></button>').join("");
-    return '<div class="sel-group">' + esc(g.group) + '</div><div class="cmdbook">' + rows + '</div>';
+  const groups = COMMAND_BOOK.map((g, gi) => {
+    const open = !!SHELF_OPEN[gi];
+    const rows = g.items.map(it => '<button class="cmd" data-cmd="' + esc(it[0]) + '" data-arg="' + (it[2] ? "1" : "") + '" title="' + esc(it[1]) + '">'
+      + '<b>' + esc(it[0]) + '</b><span class="cmd-hint">' + esc(shelfHint(it[1])) + (it[2] ? ' <i>\u2014 needs your words</i>' : '') + '</span></button>').join("");
+    const name = String(g.group || "").split(" \u2014 ")[0];
+    return '<div class="shelf-group">'
+      + '<button class="shelf-head' + (open ? ' open' : '') + '" data-g="' + gi + '" title="' + esc(g.group) + '"><span class="sh-caret">' + (open ? '\u25be' : '\u25b8') + '</span><span class="sh-name">' + esc(name) + '</span>' + (open ? '' : '<span class="sh-sub">' + esc(String(g.group || "").split(" \u2014 ")[1] || "") + '</span>') + '<span class="sh-count">' + g.items.length + '</span></button>'
+      + '<div class="cmdbook" data-body="' + gi + '"' + (open ? '' : ' hidden') + '>' + rows + '</div>'
+      + '</div>';
   }).join("");
-  const bubble = addBubble("ass", '<div class="rise"><div class="rhead">⌘ Commands — the whole shelf · ' + total + '</div>'
-    + '<div class="rrow"><b>HOW</b><span class="vd">TAP OR TYPE</span><div class="rd">Tap one to run it in the chat. Commands that need your own words are typed in for you to finish (they are never run blind). Anything that is <i>not</i> a command is simply speech — type it or tap 🎙 and Obi answers, grounded in the live station state.</div></div>'
+  return '<div class="rise"><div class="rhead">\u2318 Commands \u2014 the whole shelf \u00b7 ' + total + '</div>'
+    + '<div class="rrow"><b>HOW</b><span class="vd">OPEN A DOOR \u00b7 TAP TO RUN</span><div class="rd">Eight doors, ' + total + ' commands. Open one, then tap a command to run it in the chat. Commands that need your own words are typed in for you to finish (they are never run blind). Anything that is <i>not</i> a command is simply speech \u2014 type it or tap \ud83c\udf99 and Obi answers, grounded in the live station state.</div></div>'
+    + '<div class="shelf-bar"><button class="shelf-tool" data-tool="all">' + (shelfAll ? 'collapse all' : 'expand all') + '</button><button class="shelf-tool" data-tool="text">' + (shelfFull ? 'short text' : 'full text') + '</button></div>'
     + groups
-    + '<div class="rfoot"><b>/state</b> shows exactly what the station can reach right now (measured, not assumed). <b>/constellation</b> maps the whole organism and links every live piece.</div></div>');
+    + '<div class="rfoot"><b>/state</b> shows exactly what the station can reach right now (measured, not assumed). <b>/constellation</b> maps the whole organism and links every live piece. <b>/help all</b> reads it with every door open and every word kept.</div></div>';
+}
+
+function wireShelf(bubble){
+  bubble.querySelectorAll(".shelf-head").forEach(h => {
+    h.onclick = () => {
+      const gi = h.dataset.g;
+      SHELF_OPEN[gi] = !SHELF_OPEN[gi];
+      const open = !!SHELF_OPEN[gi];
+      h.classList.toggle("open", open);
+      const caret = h.querySelector(".sh-caret");
+      if(caret) caret.textContent = open ? "\u25be" : "\u25b8";
+      const body = bubble.querySelector('.cmdbook[data-body="' + gi + '"]');
+      if(body) body.hidden = !open;
+      shelfAll = false;
+      const at = bubble.querySelector('.shelf-tool[data-tool="all"]');
+      if(at) at.textContent = "expand all";
+    };
+  });
+  bubble.querySelectorAll(".shelf-tool").forEach(t => {
+    t.onclick = () => {
+      if(t.dataset.tool === "text"){ shelfFull = !shelfFull; }
+      else {
+        shelfAll = !shelfAll;
+        COMMAND_BOOK.forEach((_, gi) => { SHELF_OPEN[gi] = shelfAll; });
+      }
+      bubble.innerHTML = shelfHTML();
+      wireShelf(bubble);
+      scrollDown();
+    };
+  });
   bubble.querySelectorAll(".cmd").forEach(b => {
     b.onclick = () => runInStation(b.dataset.cmd || "", b.dataset.arg === "1");
   });
+}
+
+function showCommands(full){
+  /* the shelf renders in the chat, so always surface the station first */
+  if(currentView !== "cmd") showView("cmd");
+  if(full){ shelfFull = true; shelfAll = true; COMMAND_BOOK.forEach((_, gi) => { SHELF_OPEN[gi] = true; }); }
+  const bubble = addBubble("ass", "");
+  bubble.innerHTML = shelfHTML();
+  wireShelf(bubble);
+  scrollDown();
   return bubble;
 }
 
@@ -1171,7 +2616,10 @@ async function streamReply(task, existingBubble){
   const label = "Obi:";
   let out = "";
   let stationText = "";
-  try{ stationText = stateText(await stationState()); }catch(e){ stationText = "station state unreadable: " + e.message; }
+  /* 2026-10-15: no more full stationState() dump per reply (was ~9 KB + kv/brain/
+     relay/market reads every turn). One lean identity line; live numbers stay
+     behind /state. */
+  try{ stationText = leanContext(); }catch(e){ stationText = ""; }
   let hints = "";
   try{ hints = recallHints(lastUserText()); }catch(e){}
   try{
@@ -1250,7 +2698,7 @@ async function send(){
   if(lower.startsWith("/idea")){ addBubble("user", esc(text)); await runCmd(() => cmdIdea(text.replace(/^\/\S+\s*/i, "").trim())); return; }
   if(lower.startsWith("/pipeline")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdPipeline()); return; }
   if(lower.startsWith("/phoenixrise") || lower.startsWith("/reincarnaterise")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdSCSRise(text.replace(/^\/\S+\s*/i, "").trim())); return; }
-  if(lower.startsWith("/phoenixdeath") || lower.startsWith("/reincarnatedeath")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdSCSDeath()); return; }
+  if(lower.startsWith("/phoenixdeath") || lower.startsWith("/reincarnatedeath")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdSCSDeath(text.replace(/^\/\S+\s*/i, "").trim())); return; }
   /* the LFG capture protocol (the SDNAD 10-step) — kept reachable, not the chain's driver */
   if(lower.startsWith("/sdnadrise")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); showRiseReport(); return; }
   if(lower.startsWith("/sdnad") || lower.startsWith("/sdnaddeath")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); doDeath(); return; }
@@ -1259,12 +2707,76 @@ async function send(){
     await runCmd(() => showPhoenixScout(text.replace(/^\/\S+\s*/i, "").trim()));
     return;
   }
+  if(lower.startsWith("/forcemarch") || lower.startsWith("/phoenixmarch") || lower.startsWith("/march")){
+    messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text));
+    await runCmd(() => cmdMarch());
+    return;
+  }
+  if(lower.startsWith("/supplylines") || lower.startsWith("/phoenixsupply") || lower.startsWith("/supply")){
+    messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text));
+    await runCmd(() => cmdSupply());
+    return;
+  }
+  if(lower.startsWith("/soulscholar") || lower.startsWith("/phoenixscholar") || lower.startsWith("/scholar")){
+    messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text));
+    await runCmd(() => cmdScholar());
+    return;
+  }
+  /* STAGE 6 — the canon's own STAGES table names this command `/phoenixFORTIFY`
+     (src/scs.js · GOSPEL-999 §SYSTEM I), but only `/phoenixengineer` was routed, so
+     the name the station PRINTS answered "Unknown command". Both names now reach
+     ENGINEER, and so does the plain `/fortify`. */
+  if(lower.startsWith("/phoenixfortify") || lower.startsWith("/fortify") || lower.startsWith("/phoenixengineer") || lower.startsWith("/engineer")){
+    messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text));
+    await runCmd(() => cmdEngineer());
+    return;
+  }
   if(lower.startsWith("/tools") || lower.startsWith("/stack")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdTools(text.replace(/^\/\S+\s*/i, "").trim())); return; }
   if(/^\/(constellation|parts|organism)(\s|$)/i.test(text)){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdConstellation(text.replace(/^\/\S+\s*/i, "").trim())); return; }
   if(lower.startsWith("/os")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); cmdOs(); return; }
   if(lower.startsWith("/playbook")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await cmdPlaybook(text.replace(/^\/playbook\s*/i, "").trim()); return; }
+  if(lower.startsWith("/blueprint") || lower.startsWith("/architect")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdBlueprint(text.replace(/^\/(?:blueprint|architect)\s*/i, "").trim())); return; }
+  /* THE ROLES — the intake's functions, one generator each, opened here
+     on THIS station's own records (src/family.js). `/roles` lists them and
+     opens the first; `/roles <role|n>` opens one. `/family` is kept as an alias. */
+  if(lower === "/roles" || lower.startsWith("/roles ") || lower === "/family" || lower.startsWith("/family ")){
+    messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text));
+    const F = window.ObiFamily;
+    /* app.js has no shared `card`/`rr` — every other caller reaches a module's own
+       (R.card, W.card, L.card…). These two are local to this door. */
+    const rcard = (head, body, foot) => '<div class="rise tr-card"><div class="rhead">' + head + '</div>' + body + '<div class="rfoot">' + (foot || "") + "</div></div>";
+    const rrow = (label, value, note) => '<div class="rrow"><b>' + label + '</b><span class="vd">' + (value == null ? "" : value) + '</span><div class="rd">' + (note || "") + "</div></div>";
+    if(!F){ addBubble("ass", rcard("⚠ THE ROLES", rrow("not loaded", "src/family.js did not load", "the roles are still in src/generators/ — reload the page"), "`/roles`")); return; }
+    const arg = text.replace(/^\/(?:roles|family)\s*/i, "").trim();
+    if(!arg){
+      const rowsHtml = F.ROLES.map((r, i) => '<div class="rrow"><b>' + (i + 1) + " · " + esc(r.name) + '</b><span class="vd">' + esc(r.slug) + '</span><div class="rd">' + esc(r.what)
+        + '<div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem"><button class="eval-tile" data-family-open="' + esc(r.slug) + '">open it here</button></div>' + "</div></div>").join("");
+      addBubble("ass", '<div class="rise"><div class="rhead">🜂 THE ROLES — one generator per function</div>' + rowsHtml
+        + '<div class="rfoot">Each one is a generator of its own in <b>src/generators/</b> (paste <b>main.pjs</b> + <b>index.html</b>); until then they open here, on this station’s own records — the same store <b>/intake</b> uses. <b>/roles cv-forge</b> · <b>🚪 the door</b></div></div>');
+      window.ObiFamily.upgrade();
+      return;
+    }
+    const hit = F.has(arg.toLowerCase()) ? arg.toLowerCase()
+      : (F.ROLES[parseInt(arg, 10) - 1] ? F.ROLES[parseInt(arg, 10) - 1].slug : (/cv|linkedin|head|portfolio|phonic|44|present|application|apps|interview|umbrella|presence|credit|list/i.test(arg)
+        ? (F.ROLES.filter(r => new RegExp(arg, "i").test(r.name)).map(r => r.slug)[0] || null) : null));
+    if(!hit){ addBubble("ass", rcard("⚠ THE ROLES", rrow("no such role", esc(arg), "try a number, or one of: " + F.ROLES.map(r => r.slug).join(" · ")), "`/roles`")); return; }
+    const ok = await F.open(hit);
+    addBubble("ass", rcard("🜂 " + esc(F.role(hit) ? F.role(hit).name : hit), rrow("opened", ok ? "the role is on screen, reading this station’s records" : "the source could not be read", esc(F.role(hit) ? F.role(hit).what : "")), "close it with the ✕ or Escape · `/roles` for the list"));
+    return;
+  }
+  if(lower.startsWith("/assets") || lower.startsWith("/register")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdAssets(text.replace(/^\/(?:assets|register)\s*/i, "").trim())); return; }
+  if(lower.startsWith("/brain")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdBrain(text.replace(/^\/brain\s*/i, "").trim())); return; }
+  if(lower.startsWith("/relay") || lower.startsWith("/mastersync")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdRelay(text.replace(/^\/\S+\s*/i, "").trim())); return; }
+  if(lower.startsWith("/market") || lower.startsWith("/opensource")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdMarket(text.replace(/^\/\S+\s*/i, "").trim())); return; }
+  /* THE RUBRIC — the instrument the word "evaluator" means (src/rubric.js). Every band
+     must carry a span the engine itself located in the record; a band with no citation
+     is NOT SCORED, never guessed. /score and /assess are the same command. */
+  if(lower.startsWith("/rubric") || lower.startsWith("/score") || lower.startsWith("/assess")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdRubric(text.replace(/^\/\S+\s*/i, "").trim())); return; }
+  if(/^\/secretsauce(\s|$)/i.test(text) || /^\/sauce(\s|$)/i.test(text)){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdSauce(text.replace(/^\/\S+\s*/i, "").trim())); return; }
   if(lower.startsWith("/pheromone") || lower.startsWith("/pheromones") || lower.startsWith("/trail") || lower.startsWith("/nest")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await cmdPheromones(text.replace(/^\/\S+\s*/i, "").trim()); return; }
+  if(lower === "/route" || lower === "/route "){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); addBubble("ass", "Usage: <b>/route &lt;the task&gt;</b> \u2014 asks the pheromone field which road to take. e.g. <b>/route push the lesson</b>"); return; }
   if(lower.startsWith("/route ")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); cmdRouteAsk(text.replace(/^\/route\s*/i, "").trim()); return; }
+  if(lower === "/img" || lower === "/img "){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); addBubble("ass", "Usage: <b>/img &lt;what you want to see&gt;</b> \u2014 generate an image."); return; }
   if(lower.startsWith("/img ")){
     messages.push("User: " + text);
     addBubble("user", esc(text));
@@ -1272,6 +2784,7 @@ async function send(){
     await runCmd(() => doImage(text.slice(5).trim()));
     return;
   }
+  if(lower === "/url" || lower === "/url "){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); addBubble("ass", "Usage: <b>/url &lt;the page&gt;</b> \u2014 read one page."); return; }
   if(lower.startsWith("/url ")){
     messages.push("User: " + text);
     addBubble("user", esc(text));
@@ -1302,10 +2815,20 @@ async function send(){
     await runCmd(() => doWeather(text.replace(/^\/\S+\s*/i, "").trim()));
     return;
   }
-  if(lower === "/help" || lower === "/?" || lower === "/commands"){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); showCommands(); return; }
+  if(lower === "/help" || lower === "/?" || lower === "/commands" || lower === "/help all" || lower === "/help full" || lower === "/commands all"){
+    messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text));
+    showCommands(lower.indexOf("all") > -1 || lower.indexOf("full") > -1);
+    return;
+  }
   if(lower === "/generators" || lower === "/gen" || lower === "/divisions"){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await showView("gen"); return; }
   if(lower === "/settings" || lower === "/prefs" || lower === "/preferences"){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await showView("settings"); return; }
   if(lower.startsWith("/network") || lower === "/net"){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await showNetwork(); return; }
+  if(lower.startsWith("/masterlink") || lower === "/link" || lower.startsWith("/link ")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await doMasterlink(text); return; }
+  if(lower === "/mastermind" || lower.startsWith("/mastermind ")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => doMastermind(text)); return; }
+  if(lower.startsWith("/umbrella") || lower.startsWith("/wings")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await doUmbrella(text); return; }
+  if(lower.startsWith("/boardroom") || lower.startsWith("/board ") || lower.startsWith("/table ")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await window.doBoardroom(text); return; }
+  if(lower === "/training" || lower.startsWith("/training ") || lower === "/eaib" || lower.startsWith("/eaib ") || lower === "/systems" || lower.startsWith("/systems ") || lower === "/sys" || lower.startsWith("/sys ") || lower === "/fsdev" || lower.startsWith("/fsdev ") || lower === "/fullstack" || lower.startsWith("/fullstack ") || lower === "/a2zmarketing" || lower.startsWith("/a2zmarketing ") || lower === "/a2z" || lower.startsWith("/a2z ") || lower === "/atoz" || lower.startsWith("/atoz ")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => window.doDepartment(text)); return; }
+  if(lower.startsWith("/wire") || lower === "/nerves"){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await doWire(text); return; }
   if(lower.startsWith("/netjoin")){
     messages.push("User: " + text);
     captureSoul(text);
@@ -1370,6 +2893,7 @@ async function send(){
     return;
   }
   if(lower === "/gh"){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await cmdGithub("status"); return; }
+  if(lower === "/dg" || lower === "/dg "){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); addBubble("ass", "Usage: <b>/dg</b> \u00b7 <b>/dg test</b> \u00b7 <b>/dg recover</b> \u00b7 <b>/dg token &lt;key&gt;</b> \u2014 the Ear\u2019s Deepgram key."); return; }
   if(lower.startsWith("/dg ")){
     if(!secretIn){ messages.push("User: " + text); captureSoul(text); }
     addBubble("user", esc(secretIn ? maskSecretInput(text) : text));
@@ -1377,9 +2901,9 @@ async function send(){
     if(!t){ addBubble("ass","Usage: <b>/dg token &lt;DEEPGRAM_KEY&gt;</b> · <b>/dg recover</b> (pull the key from the NET-PET-AI worker on Cloudflare and verify it) · <b>/dg test</b> (check the key already stored)"); return; }
     if(t === "recover" || t === "find" || t === "cloudflare"){ await runCmd(() => dgRecover()); return; }
     if(t === "test"){ await runCmd(() => dgTest()); return; }
-    keySet({deepgram:t});
+    keyStore({deepgram:t});
     logOp({ kind:"secret", action:"dg token", detail:"stored in this browser only (value never logged)", result: maskTok(t) });
-    addBubble("ass","🔑 Deepgram key stored locally — powers the student portal voice <b>and</b> <b>/transcribe</b> (video/audio → verbatim transcript; long recordings are split at pauses and stitched back into one timeline). <b>/keys</b> to confirm.");
+    addBubble("ass","🔑 Deepgram key stored locally <span style=\"opacity:.7\">(written and read back)</span> — powers the student portal voice <b>and</b> <b>/transcribe</b> (video/audio → verbatim transcript; long recordings are split at pauses and stitched back into one timeline). <b>/keys</b> to confirm.");
     rrlAppend(runNoOf(),"DNA","Obi: [/dg token stored]");
     return;
   }
@@ -1405,8 +2929,9 @@ async function send(){
       if(parts.length < 2){ addBubble("ass", "Usage: <b>/keys ngl &lt;account&gt; &lt;password&gt;</b> (the Secondary course) or <b>/keys ngl primary &lt;account&gt; &lt;password&gt;</b> (the Primary LOOK course). Stored in this browser only (obi_keys). It never enters the source, the chat log, the soul ledger or the I-LOG."); rrlAppend(runNoOf(),"DNA","Obi: [/keys ngl — insufficient arguments]"); return; }
       const user = parts[0], pass = parts.slice(1).join(" ");
       const rec = { user: user, password: pass, at: Date.now(), site: "https://learn.eltngl.com" };
-      keySet(slot === "nglP" ? { nglP: rec } : { ngl: rec });
-      addBubble("ass", "🔑 Textbook platform login stored locally — <b>" + esc(label) + "</b> · <b>" + esc(user) + "</b> · " + esc(maskTok(pass)) + ".<br><span class=\"rfoot\">learn.eltngl.com — Student Book + Workbook presentation tools, Online Practice. Held in this browser's localStorage only; it is never written into this public source, never captured as soul and never logged. <b>/keys</b> to confirm. <span style=\"opacity:.7\">(Clear it with <b>/keys ngl" + (primary ? " primary" : "") + " clear</b>.)</span></span>");
+      const stN = keyStore(slot === "nglP" ? { nglP: rec } : { ngl: rec });
+      if(!stN.ok){ addBubble("ass", "⛔ <b>NOT STORED.</b> The browser refused to keep the login — " + esc(stN.why) + ". Nothing was saved."); logOp({ kind:"secret", action:"/keys ngl" + (primary ? " primary" : ""), detail:"WRITE REFUSED — nothing stored", result:"NOT STORED" }); return; }
+      addBubble("ass", "🔑 Textbook platform login stored locally <span style=\"opacity:.7\">(written and read back)</span> — <b>" + esc(label) + "</b> · <b>" + esc(user) + "</b> · " + esc(maskTok(pass)) + ".<br><span class=\"rfoot\">learn.eltngl.com — Student Book + Workbook presentation tools, Online Practice. Held in this browser's localStorage only; it is never written into this public source, never captured as soul and never logged. <b>/keys</b> to confirm. <span style=\"opacity:.7\">(Clear it with <b>/keys ngl" + (primary ? " primary" : "") + " clear</b>.)</span></span>");
       logOp({ kind:"secret", action:"/keys ngl" + (primary ? " primary" : ""), detail:"textbook platform credential stored in this browser only (value never logged)", result: esc(user) });
       return;
     }
@@ -1418,9 +2943,27 @@ async function send(){
     await runCmd(() => window.ObiVault ? window.ObiVault.cmd(text.slice(6).trim()) : addBubble("ass", "⚠ src/vault.js didn't load — reload the page."));
     return;
   }
+  /* THE GIT (src/gitcanon.js) — the sovereign said three words: "open the git".
+     This reads every part of the canon that answers without a credential, and
+     names the one branch that does not. Read-only; nothing here writes. */
+  if(lower.startsWith("/git")){
+    messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text));
+    await runCmd(() => window.ObiGit ? window.ObiGit.cmd(text.replace(/^\/git\s*/i, "").trim()) : addBubble("ass", "⚠ src/gitcanon.js didn't load — reload the page."), { stallMs: 120000 });
+    return;
+  }
   if(lower.startsWith("/lesson")){
     messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text));
     await runCmd(() => window.ObiLessons ? window.ObiLessons.run(text.slice(7).trim()) : addBubble("ass", "⚠ src/lessons.js didn't load — reload the page."), { stallMs: 600000 });
+    return;
+  }
+  /* THE INTAKE (src/intake.js) — the app the tutor asked for on 23/09/2026:
+     "we'll build it all into one app so that it remembers". Every promise made
+     in a lesson recording, its owner, the evidence that put it there, and the
+     material that moves it. The RECORDS live in this browser's kv — private,
+     per origin, durable; the public source holds the METHOD and no student. */
+  if(lower.startsWith("/intake")){
+    messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text));
+    await runCmd(() => window.ObiIntake ? window.ObiIntake.cmd(text.replace(/^\/intake\s*/i, "").trim()) : addBubble("ass", "⚠ src/intake.js didn't load — reload the page."), { stallMs: 120000 });
     return;
   }
   if(lower.startsWith("/brand")){
@@ -1470,6 +3013,7 @@ async function send(){
   }
   if(lower.startsWith("/status")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdStatus()); return; }
   if(lower.startsWith("/bg") || lower.startsWith("/background")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdBg(text)); return; }
+  if(lower === "/auto" || lower.startsWith("/auto ") || lower.startsWith("/autostop") || lower === "/stop auto" || lower.startsWith("/stop auto ")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdAuto(text)); return; }
   if(lower.startsWith("/gateway")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdGateway()); return; }
   if(lower.startsWith("/doctor")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdDoctor()); return; }
   if(lower.startsWith("/audit")){ messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text)); await runCmd(() => cmdAudit()); return; }
@@ -1957,6 +3501,8 @@ async function showNetwork(){
     rows.push({name:"SOUL (local)", detail:`${stat.localSoul} fragments in this generator's ledger · whole-organism union lives in the hub`, verdict:"VERBATIM"});
     rows.push({name:"LAWS", detail:`${stat.localLaws} laws registered in this node's deaths · network law registry in hub`, verdict:"DERIVED"});
   }
+  const lane = (window.ObiNet && window.ObiNet.cgnProbe) ? await window.ObiNet.cgnProbe() : { open:false, detail:"cgn module not loaded" };
+  rows.push({name:"WRITE LANE", detail:`measured now, verbatim: ${lane.detail}${lane.open ? "" : " · so this station cannot create or write the hub, and no generator can be commanded by it until that door opens — the PULL lane (reading members' node files) is unaffected"}`, verdict: lane.open ? "OPEN" : "SHUT"});
   const hub = await window.ObiNet.cgnReadHub();
   if(hub && hub.nodes){
     const list = Object.entries(hub.nodes).map(([id,n])=>{
@@ -2014,6 +3560,470 @@ async function doNetSync(){
   updateStats();
 }
 
+/* ------------------------- THE UMBRELLA (/umbrella) ------------------------
+   The generators this station answers for, and what it can actually do to each.
+   It is a DOORWAY, not a second implementation: the reading is the master link's
+   own (/masterlink status · /masterlink list <gen>), so the two can never fall
+   out of step about what the link sees. Reads only — naming aims the link, and no
+   cross-namespace write exists to claim. */
+async function doUmbrella(text){
+  const arg = String(text == null ? "" : text).replace(/^\/(umbrella|wings)\s*/i, "").trim();
+  addBubble("ass", '<div class="rise"><div class="rhead">☂ /umbrella — what this station can actually command</div>'
+    + '<div class="rd">Every generator named under the umbrella, read right now by content key with no token. A rung is printed only with the number it measured.'
+    + (arg ? ' Reading one: <b>' + esc(arg) + '</b>.' : '') + '</div></div>');
+  if(arg) return doMasterlink("/masterlink list " + arg);
+  return doMasterlink("/masterlink status");
+}
+
+/* ------------------- THE RANK: apex vs sub (src/masterlink.js) -------------------
+   THIS station is the apex mastermind — the mastermind of masterminds. A clone
+   from this tree becomes a SUB by naming a parent, and a sub answers only to
+   its parent and to the sovereign. Rank is explicit config (kv masterlink), so
+   a fresh clone opens as apex until it is told otherwise — no silent inheritance. */
+async function doMastermind(text){
+  const M = window.ObiMasterlink;
+  if(!M){ addBubble("ass", "⚠ src/masterlink.js did not load — reload the page."); return; }
+  const rest = String(text == null ? "" : text).replace(/^\/mastermind\s*/i, "").trim();
+  const parts = rest.split(/\s+/).filter(Boolean);
+  const verb = (parts[0] || "").toLowerCase();
+  const row = (k, v, d) => '<div class="rrow"><b>' + esc(k) + '</b><span class="vd">' + esc(v) + '</span>' + (d ? '<div class="rd">' + d + '</div>' : '') + '</div>';
+  if(verb === "parent" && parts[1]){
+    const r = await M.setParent(parts[1]);
+    if(!r.ok){ addBubble("ass", '<div class="rise"><div class="rhead">▲ /mastermind parent — NOT SET</div>' + row("WHY", "", esc(r.why)) + '</div>'); return; }
+    addBubble("ass", '<div class="rise"><div class="rhead">▲ /mastermind parent — SUB OF ' + esc(r.parent) + '</div>'
+      + row("RANK", "SUB", "answers only to <b>" + esc(r.parent) + "</b> and to the sovereign — never to a sibling, never to a stranger")
+      + row("WATCHING", String(r.targets.length), r.targets.map(esc).join(" · "))
+      + '<div class="rfoot">Rank is stored in this generator\'s own kv (masterlink config) — it survives reloads and never leaks into the parent. <b>/mastermind</b> shows the card · <b>/mastermind apex</b> releases it.</div></div>');
+    try{ rrlAppend(runNoOf(), "DNA", "Obi: [/mastermind parent " + r.parent + " — sub]"); }catch(e){}
+    return;
+  }
+  if(verb === "apex" || verb === "release"){
+    const r = await M.setRole("apex");
+    addBubble("ass", '<div class="rise"><div class="rhead">▲ /mastermind apex</div>'
+      + row("RANK", "APEX", "the mastermind of masterminds — answers to the sovereign only")
+      + (r.ok ? "" : row("NOTE", "", esc(r.why || "")))
+      + '</div>');
+    try{ rrlAppend(runNoOf(), "DNA", "Obi: [/mastermind apex]"); }catch(e){}
+    return;
+  }
+  const deptHit = (window.ObiBoardroom && window.ObiBoardroom.dept) ? window.ObiBoardroom.dept(verb) : null;
+  if(deptHit && window.doDepartment){
+    await window.doDepartment(text);
+    try{ rrlAppend(runNoOf(), "DNA", "Obi: [/mastermind " + deptHit.cmd + " — desk]"); }catch(e){}
+    return;
+  }
+  if(verb && verb !== "status" && verb !== "rank" && verb !== "card"){
+    addBubble("ass", 'Usage: <b>/mastermind</b> · <b>/mastermind &lt;dept&gt;</b> (training · systems · fsdev · a2zmarketing) · <b>/mastermind parent &lt;generator&gt;</b> · <b>/mastermind apex</b>');
+    return;
+  }
+  const rk = await M.rank();
+  const self = (function(){ try{ return window.generatorName || "?"; }catch(e){ return "?"; } })();
+  addBubble("ass", '<div class="rise"><div class="rhead">▲ /mastermind — ' + esc(rk.role.toUpperCase()) + '</div>'
+    + row("THIS STATION", esc(self), rk.role === "apex" ? "the apex mastermind — the mastermind of masterminds" : "a sub-mastermind")
+    + row("ANSWERS TO", esc(rk.answersTo.join(" + ")), rk.role === "apex" ? "nothing else can command it" : "siblings and strangers are refused — only the parent and the sovereign")
+    + (rk.parent ? row("PARENT", esc(rk.parent), "set explicitly by /mastermind parent — must resolve on the read channel") : "")
+    + row("CLONE RECIPE", "1 · 2 · 3", "1) clone this generator (fork it) · 2) open the clone and run <b>/mastermind parent " + esc(self) + "</b> · 3) back here, run <b>/masterlink name &lt;clone&gt;</b> — reads and orders cross, writes never do (each station lands its own /forge by its own save or the /omega gate)")
+    + row("DEPARTMENTS", "4 DESKS", '<div class="chips" style="margin-top:8px">' + ((window.ObiBoardroom && window.ObiBoardroom.deptChips) ? window.ObiBoardroom.deptChips() : "training · systems · fsdev · a2zmarketing") + '</div>')
+    + '<div class="rfoot">PaiS umbrella: apex here (ESL.ED.TECH) · subs wherever you plant them (Gaming · Promote · …). Umbrellas within umbrellas — rank, not vibes.</div></div>');
+  try{ rrlAppend(runNoOf(), "DNA", "Obi: [/mastermind — " + rk.role + "]"); }catch(e){}
+}
+
+/* ------------------- THE MASTER LINK (src/masterlink.js) -------------------
+   The master's side of the handoff lane. The sibling station watches THIS tree;
+   this watches the generators named under the umbrella — by content key, with no
+   token. NAMING is the command it actually has, so every card says which lane the
+   answer came from and never claims a write that did not happen. */
+async function doMasterlink(text){
+  const M = window.ObiMasterlink;
+  if(!M){ addBubble("ass", "⚠ src/masterlink.js did not load — reload the page."); return; }
+  const rest = String(text == null ? "" : text).replace(/^\/(masterlink|link)\s*/i, "").trim();
+  const parts = rest.split(/\s+/).filter(Boolean);
+  const verb = (parts[0] || "status").toLowerCase();
+  const a1 = parts[1] || "", a2 = parts.slice(2).join(" ");
+  const K = n => (n == null || isNaN(n)) ? "—" : Number(n).toLocaleString();
+  const row = (k, v, d) => '<div class="rrow"><b>' + esc(k) + '</b><span class="vd">' + esc(v) + '</span>' + (d ? '<div class="rd">' + d + '</div>' : '') + '</div>';
+
+  if(verb === "name" || verb === "aim"){
+    if(!a1){ addBubble("ass", 'Usage: <b>/masterlink name &lt;generator&gt;</b>'); return; }
+    const r = await M.name(a1);
+    if(!r.ok){
+      addBubble("ass", '<div class="rise"><div class="rhead">🔗 /masterlink name — ' + esc(a1) + '</div>'
+        + row("RESULT", "NOT NAMED") + row("WHAT THE LANE SAID", "", esc(r.why))
+        + row("WHY IT WAS NOT STORED", "", "a name is saved only once it RESOLVES on the read channel — naming IS the command this station actually has, so an empty name would be a claim, not a command. Nothing was stored.")
+        + '</div>');
+      return;
+    }
+    addBubble("ass", '<div class="rise"><div class="rhead">🔗 /masterlink name — ' + esc(r.gen) + '</div>'
+      + row("RESULT", r.already ? "ALREADY NAMED" : "NAMED")
+      + row("ITS PUBLISHED TREE", K(r.count) + " files", K(r.bytes) + " B · read from the read channel, no token, no credential")
+      + row("UNDER THE UMBRELLA", String(r.targets.length), r.targets.map(esc).join(" · "))
+      + '<div class="rfoot">This station can now see that generator, list it, read any of its files whole, watch it for movement, and pull its handoffs. It still cannot WRITE into it — that door is the platform\'s and it is shut. <b>/masterlink status</b>.</div></div>');
+    return;
+  }
+
+  if(verb === "unname"){
+    if(!a1){ addBubble("ass", 'Usage: <b>/masterlink unname &lt;generator&gt;</b>'); return; }
+    const r = await M.unname(a1);
+    addBubble("ass", '<div class="rise"><div class="rhead">🔗 /masterlink unname — ' + esc(r.gen) + '</div>'
+      + row(r.had ? "RELEASED" : "WAS NOT NAMED", r.had ? "removed from the umbrella" : "nothing to remove")
+      + row("STILL NAMED", String(r.targets.length), r.targets.map(esc).join(" · ") || "none")
+      + '<div class="rfoot">Naming is a read: nothing was ever written into that generator, here or at any other time.</div></div>');
+    return;
+  }
+
+  if(verb === "list"){
+    const gen = a1 || (await M.config()).targets[0];
+    if(!gen){ addBubble("ass", "Nothing is named yet — <b>/masterlink name &lt;generator&gt;</b>."); return; }
+    addBubble("ass", "Reading <b>" + esc(gen) + "</b>'s published tree…");
+    const man = await M.manifest(gen);
+    if(!man.ok){ addBubble("ass", "⚠ " + esc(man.why)); return; }
+    const paths = Object.keys(man.files);
+    const hands = paths.filter(p => M.HANDOFF_RE.test(p));
+    const groups = {};
+    for(const p of paths){ const g = p.indexOf("/") === -1 ? "(root)" : p.split("/")[0] + "/"; groups[g] = (groups[g] || 0) + 1; }
+    const gr = Object.keys(groups).sort((x, y) => groups[y] - groups[x]).map(g => esc(g) + " <b>" + groups[g] + "</b>").join(" · ");
+    addBubble("ass", '<div class="rise"><div class="rhead">🔗 /masterlink list — ' + esc(gen) + '</div>'
+      + row("PUBLISHED", K(paths.length) + " files", K(man.bytes) + " B")
+      + row("BY FOLDER", String(Object.keys(groups).length), gr)
+      + row("HANDOFFS IT CARRIES", String(hands.length), hands.map(esc).join("<br>") || "none")
+      + row("FIRST FILES", String(Math.min(30, paths.length)), paths.slice(0, 30).map(esc).join(' <span style="opacity:.5">·</span> '))
+      + '<div class="rfoot">Read whole, without a token: <b>/masterlink read ' + esc(gen) + ' &lt;path&gt;</b>.</div></div>');
+    return;
+  }
+
+  if(verb === "read"){
+    const cfg = await M.config();
+    let gen = a1, path = a2;
+    if(a1 && a1.indexOf("/") !== -1 && !a2){ path = a1; gen = cfg.targets[0]; }
+    if(!gen || !path){ addBubble("ass", 'Usage: <b>/masterlink read &lt;generator&gt; &lt;path&gt;</b> — e.g. <b>/masterlink read ' + esc(cfg.targets[0] || "<gen>") + ' HANDOFF.md</b>'); return; }
+    addBubble("ass", "Reading <b>" + esc(gen) + " / " + esc(path) + "</b>…");
+    const r = await M.readFile(gen, path);
+    if(!r.ok){ addBubble("ass", "⚠ " + esc(r.why)); return; }
+    const body = r.text.length > 4000 ? r.text.slice(0, 4000) + "\n… [" + K(r.text.length - 4000) + " more characters — the whole file is in the record]" : r.text;
+    addBubble("ass", '<div class="rise"><div class="rhead">🔗 /masterlink read — ' + esc(gen) + ' / ' + esc(path) + '</div>'
+      + row("BYTES", K(r.bytes), "declared by the manifest: " + K(r.declared) + (r.match ? " — MATCH (the bytes that arrived are the bytes it published)" : " — <b>MISMATCH</b>, said out loud rather than smoothed over") + " · " + K(r.chars) + " characters")
+      + row("SHA-256", r.sha256.slice(0, 24) + "…", "computed from the bytes this station actually received")
+      + '<div class="rd" style="white-space:pre-wrap;text-align:left;margin-top:6px;opacity:.92">' + esc(body) + '</div></div>');
+    return;
+  }
+
+  if(verb === "inbox"){
+    const box = await M.inbox();
+    const items = Object.keys(box).map(k => box[k]).sort((x, y) => (x.at < y.at ? 1 : -1));
+    if(!items.length){ addBubble("ass", '<div class="rise"><div class="rhead">🔗 /masterlink inbox</div>' + row("PULLED", "0", "nothing has arrived on the lane yet — run <b>/masterlink sync now</b>") + '</div>'); return; }
+    const list = items.map(it => '<div class="rrow"><b>' + esc(it.path) + '</b><span class="vd">' + esc(it.gen) + '</span><div class="rd">' + K(it.size) + ' B · ' + esc(String(it.sha256).slice(0, 16)) + '… · read ' + esc(it.at) + '</div></div>').join("");
+    const last = items[0];
+    const full = String(last.text || "");
+    const body = full.slice(0, 2500);
+    addBubble("ass", '<div class="rise"><div class="rhead">🔗 /masterlink inbox — ' + items.length + ' handoff(s)</div>' + list
+      + '<div class="rfoot">Newest, verbatim — <b>' + esc(last.gen) + ' / ' + esc(last.path) + '</b>:</div>'
+      + '<div class="rd" style="white-space:pre-wrap;text-align:left;opacity:.92">' + esc(body + (full.length > 2500 ? "\n… [" + K(full.length - 2500) + " more characters]" : "")) + '</div></div>');
+    return;
+  }
+
+  if(verb === "reply"){
+    const body = a2 || a1;
+    if(!body){ addBubble("ass", 'Usage: <b>/masterlink reply &lt;text&gt;</b> — the master answers as an artifact, the one courier that crosses origins today.'); return; }
+    addBubble("ass", "Uploading the answer as an artifact…");
+    const r = await M.reply(body);
+    if(!r.ok){ addBubble("ass", "⚠ " + esc(r.why)); return; }
+    addBubble("ass", '<div class="rise"><div class="rhead">🔗 /masterlink reply — sent as an artifact</div>'
+      + row("URL", "PERMANENT", '<a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer">' + esc(r.url) + '</a>')
+      + row("BYTES", K(r.bytes), "sha-256 " + esc(r.sha256.slice(0, 24)) + "…")
+      + '<div class="rfoot">Immutable uploads work where editable writes do not, so this is the courier the register and the packet already ride. Hand the URL to the node; it needs no token to read it.</div></div>');
+    return;
+  }
+
+  if(verb === "card"){
+    /* /masterlink card           — read THIS station's own card off the pull lane
+       /masterlink card publish   — write it (the platform's answer, verbatim)
+       /masterlink card pull <gen>— read any named generator's card, the family's
+                                    own way of getting to know each other */
+    const what = (a1 || "").toLowerCase();
+    if(what === "publish" || what === "push"){
+      addBubble("ass", "Writing this station's master-link card to the pull lane…");
+      const r = await M.publishCard();
+      if(!r.ok){
+        addBubble("ass", '<div class="rise"><div class="rhead">🜂 /masterlink card publish — NOT PUBLISHED</div>'
+          + row("RESULT", "REFUSED", "the platform's own code: <b>" + esc(r.code || "?") + "</b>")
+          + row("WHAT THE LANE SAID", "", esc(r.why))
+          + row("THE CANONICAL URL", esc(r.url), "where every sibling station looks for the master's card")
+          + row("THE COPY THAT ALWAYS EXISTS", esc(r.inTree || "src/master-link.json"), "inside this station's own published tree — read by content key, ships with the next save, needs no verification")
+          + row("THE CARD ITSELF", K(r.bytes) + " B", "built now from live measurements · <b>/masterlink card</b> to see it")
+          + '<div class="rfoot">A refusal is a measurement, not something to hide: the platform gave this answer, so it is printed as given. The in-tree copy still reaches every station that reads this tree; the canonical URL opens the moment the verification passes or the generator is saved.</div></div>');
+        return;
+      }
+      addBubble("ass", '<div class="rise"><div class="rhead">🜂 /masterlink card publish — PUBLISHED</div>'
+        + row("THE CARD", r.created ? "CREATED" : "UPDATED", esc(r.url) + (r.editCount ? " · change #" + r.editCount : ""))
+        + row("BYTES", K(r.bytes), "every number read at the moment it was written")
+        + row("THE IN-TREE COPY", "src/master-link.json", "the same card ships with the next save")
+        + '<div class="rfoot">Now any station can read the master at that URL with no token. <b>/masterlink card</b> reads it back.</div></div>');
+      return;
+    }
+    if(what === "pull"){
+      const gen = a2 || "";
+      if(!gen){ addBubble("ass", "Usage: <b>/masterlink card pull &lt;generator&gt;</b>"); return; }
+      addBubble("ass", "Reading the card at " + esc(M.cardUrl(gen)) + "…");
+      const r = await M.readCard(gen);
+      if(!r.ok){ addBubble("ass", '<div class="rise"><div class="rhead">🜂 /masterlink card pull — ' + esc(gen) + '</div>' + row("NO CARD", "HTTP " + esc(String(r.status || "—")), esc(r.why)) + '</div>'); return; }
+      const c = r.card || {};
+      const ck = c.nerves || {}, cbr = ck.brain || {}, cil = ck.ilog || {};
+      addBubble("ass", '<div class="rise"><div class="rhead">🜂 /masterlink card — ' + esc(gen) + '</div>'
+        + row("PUBLISHED", esc(c.iso || "?"), K(r.bytes) + " B · HTTP " + r.status)
+        + row("ROLE", esc(c.role || "—"), esc(c.title || ""))
+        + row("ITS NERVES", "", "brain " + K(cbr.docs || 0) + " docs · soul " + K(ck.soul) + " · i-log " + esc(String(cil.entries == null ? "—" : cil.entries)))
+        + (c.ruling ? row("ITS RULING", esc(c.ruling.sync || "—"), esc(c.ruling.says || "")) : "")
+        + '<div class="rfoot">Read from the public pull lane: <a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer">' + esc(r.url) + '</a></div></div>');
+      return;
+    }
+    addBubble("ass", "Reading this station's own card off the pull lane…");
+    const r = await M.readCard();
+    const c = r.card;
+    addBubble("ass", '<div class="rise"><div class="rhead">🜂 /masterlink card — this station\'s master-link</div>'
+      + row("THE CANONICAL URL", r.ok ? "PUBLISHED · HTTP " + r.status : "NOT PUBLISHED · HTTP " + esc(String(r.status || "—")),
+          '<a href="' + esc(M.cardUrl()) + '" target="_blank" rel="noopener noreferrer">' + esc(M.cardUrl()) + '</a>'
+          + (r.ok ? " · " + K(r.bytes) + " B" : "<br>" + esc(r.why)))
+      + row("THE IN-TREE COPY", "src/master-link.json", "the copy that always ships with a save and is read by content key — remove nothing, trust this one")
+      + (c ? (row("IT SAYS", esc(c.role || ""), "generator " + esc(c.generator || "") + " · written " + esc(c.iso || ""))
+          + row("THE UMBRELLA ON THE CARD", String((((c.umbrella || {}).measured) || []).length), ((((c.umbrella || {}).measured) || [])).map(x => esc(x.gen) + " — " + K(x.files) + " files · " + K(x.bytes) + " B" + (x.why ? " <i>(" + esc(x.why) + ")</i>" : "")).join("<br>"))
+          + row("THE RULING ON THE CARD", esc(((c.ruling || {}).sync) || "—"), esc(((c.ruling || {}).says) || ""))) : "")
+      + '<div class="rfoot">The card is how a sibling reads this station the way the web station established: tree, brain, key log, no token. <b>/masterlink card publish</b> writes it · <b>/masterlink card pull &lt;gen&gt;</b> reads another station\'s.</div></div>');
+    return;
+  }
+
+  if(verb === "off" || verb === "on"){
+    const on = await M.setAuto(verb === "on");
+    addBubble("ass", '<div class="rise"><div class="rhead">🔗 /masterlink ' + verb + '</div>'
+      + row("WATCH", on ? "ARMED" : "OFF", on ? "every 3 minutes, skipped while the tab is hidden and run the moment it comes back · silent unless something moved, a handoff arrived, or a failure changed" : "the link is still readable on demand — /masterlink status · sync now · read · inbox")
+      + '</div>');
+    return;
+  }
+
+  if(verb === "order"){
+    /* /masterlink order <generator> :: <instruction>  — the command itself.
+       Both lanes are tried and each verdict is shown: the Legion queue (send →
+       claim → complete) and the artifact courier, which always crosses. */
+    const m = rest.match(/^order\s+([a-z0-9-]+)\s*::\s*([\s\S]+)$/i);
+    let gen = m ? m[1] : "", body = m ? m[2] : "";
+    if(!m){
+      const alt = rest.match(/^order\s+([\s\S]+)$/i);
+      const cfg0 = await M.config();
+      if(alt && cfg0.targets.length){ gen = cfg0.targets[0]; body = alt[1]; }
+    }
+    if(!gen || !body){
+      addBubble("ass", 'Usage: <b>/masterlink order &lt;generator&gt; :: &lt;instruction&gt;</b><br>e.g. <b>/masterlink order ' + esc(M.SIBLING) + ' :: run /umbrella and report what you can actually command</b>');
+      return;
+    }
+    addBubble("ass", "Issuing the order to <b>" + esc(gen) + "</b>…");
+    const cfg = await M.config();
+    const named = cfg.targets.indexOf(gen) !== -1;
+    const rec = await M.order(gen, body, { enqueue: async (cmdText) => {
+      const ok = await cmdRoute(cmdText);
+      const live = window.__cmdLive;
+      return { ok, id: (ok && live && live.id != null) ? live.id : null };
+    } });
+    if(!rec || !rec.text){ addBubble("ass", "⚠ " + esc((rec && rec.why) || "the order was not recorded")); return; }
+    const q = rec.lanes.queue || {}, a = rec.lanes.artifact || {};
+    addBubble("ass", '<div class="rise"><div class="rhead">🔗 /masterlink order — ' + esc(rec.to) + '</div>'
+      + row("THE ORDER", rec.text.length + " chars", esc(rec.text.slice(0, 400)))
+      + row("LANE 1 · THE TUNNEL QUEUE", q.ok ? "CARRIED" + (q.id ? " · #" + q.id : "") : "NOT CARRIED",
+          q.ok ? "sent to the Legion's durable queue (send → claim → complete) · /queue shows it and its status" : esc(q.why || "no reason given"))
+      + row("LANE 2 · THE ARTIFACT COURIER", a.ok ? "CARRIED" : "NOT CARRIED",
+          a.ok ? '<a href="' + esc(a.url) + '" target="_blank" rel="noopener noreferrer">' + esc(a.url) + '</a><br>' + K(a.bytes) + " B · sha-256 " + esc(String(a.sha256).slice(0, 24)) + "…"
+               : esc(a.why || "no reason given"))
+      + row("ADDRESSED TO", named ? "A NAMED GENERATOR" : "A GENERATOR THAT RESOLVES",
+          named ? esc(gen) + " is named under the umbrella, so it is watched and its handoffs land in the inbox" : esc(gen) + " resolves on the read channel but is not named — /masterlink name " + esc(gen) + " to watch it")
+      + '<div class="rfoot">Neither lane writes into ' + esc(gen) + "'s files — no cross-namespace write exists, and this card will not pretend one happened. The order is delivered; the execution happens inside that generator, on its own save or gate, and its answer comes back on the SESSIONS/ lane this station reads by content key.</div></div>");
+    return;
+  }
+
+  if(verb === "orders"){
+    const list = await M.orders();
+    if(!list.length){ addBubble("ass", '<div class="rise"><div class="rhead">🔗 /masterlink orders</div>' + row("ISSUED", "0", "nothing has been commanded from this station yet — <b>/masterlink order &lt;generator&gt; :: &lt;instruction&gt;</b>") + '</div>'); return; }
+    const rows = list.slice(0, 10).map(o => row(o.to, o.carried ? "DELIVERED" : "HELD",
+      esc(String(o.text).slice(0, 160)) + '<br><span style="opacity:.7">' + esc(o.at) + " · queue " + ((o.lanes.queue || {}).ok ? "carried" : "not carried") + " · artifact " + ((o.lanes.artifact || {}).ok ? "carried" : "not carried") + "</span>"
+      + ((o.lanes.artifact || {}).url ? '<br><a href="' + esc(o.lanes.artifact.url) + '" target="_blank" rel="noopener noreferrer">' + esc(o.lanes.artifact.url) + "</a>" : ""))).join("");
+    addBubble("ass", '<div class="rise"><div class="rhead">🔗 /masterlink orders — ' + list.length + ' issued</div>' + rows
+      + '<div class="rfoot">Append-only, kept in this browser. An order reads DELIVERED when a lane carried it — never EXECUTED, because this station cannot see inside another generator. The node\'s own answer is what /masterlink inbox reads back.</div></div>');
+    return;
+  }
+
+  if(verb === "sync" || verb === "now" || verb === "look"){
+    addBubble("ass", "Looking at every named generator…");
+    const out = await M.lookAll({});
+    const rows = out.results.map(r => {
+      if(r.verdict === "FAILED") return row(r.gen, "FAILED", esc(r.why));
+      const cls = r.first ? "BASELINE" : (r.moved ? r.moved + " MOVED" : "STILL");
+      const movedList = r.first ? "" : (r.diff.added.map(x => "+ " + esc(x.path)).concat(r.diff.changed.map(x => "~ " + esc(x.path) + " " + K(x.from) + "→" + K(x.to)), r.diff.gone.map(x => "− " + esc(x.path))).slice(0, 12).join("<br>")
+        + (r.diff.moved > 12 ? "<br>… and " + (r.diff.moved - 12) + " more" : ""));
+      return row(r.gen, cls, K(r.files) + " files · " + K(r.bytes) + " B · " + r.ms + " ms"
+        + (r.first ? "<br>the first look at this generator — taken as the BASELINE. Nothing has moved until there is something to move from." : "")
+        + (movedList ? "<br>" + movedList : "")
+        + ((r.handoffs || []).length ? '<br><b>' + r.handoffs.length + ' handoff(s) pulled:</b><br>' + r.handoffs.slice(0, 8).map(h => esc(h.path) + " · " + K(h.bytes) + " B · " + esc(String(h.sha256).slice(0, 12)) + "…").join("<br>") : ""));
+    }).join("");
+    addBubble("ass", '<div class="rise"><div class="rhead">🔗 /masterlink sync now — ' + esc(out.verdict) + '</div>' + rows
+      + row("THE RUN", out.moved + " file(s) moved", out.pulled + " handoff(s) pulled · " + out.failed.length + " failure(s)"
+          + (out.firsts ? " · " + out.firsts + " baseline look(s)" : "")
+          + (out.recovered.length ? " · recovered: " + out.recovered.map(esc).join(" · ") : ""))
+      + '<div class="rfoot">A look READS the published tree; it does not touch the generator. Nothing was written anywhere by this run.</div></div>');
+    return;
+  }
+
+  /* status — measured now, never remembered */
+  addBubble("ass", "Measuring the link…");
+  const st = await M.status();
+  const trows = st.targets.map(t => t.lastFail
+    ? row(t.gen, "UNREACHABLE", esc(t.lastFail))
+    : row(t.gen, t.known ? "IN SIGHT" : "NEVER LOOKED",
+        (t.known ? K(t.count) + " files · " + K(t.bytes) + " B · last look " + esc(t.last) : "named, not yet read")
+        + (t.lastDiff && t.lastDiff.moved ? " · last move: " + t.lastDiff.moved + " file(s)" : ""))).join("");
+  const inbox = st.inbox.slice(0, 6).map(it => esc(it.path) + ' <span style="opacity:.6">(' + esc(it.gen) + ')</span>').join("<br>") || "none pulled yet";
+  /* the card lane, measured now: the canonical URL is read back, so PUBLISHED is
+     a fact and a 404 is stated rather than assumed. The in-tree copy is what
+     always ships. */
+  let cardRow;
+  try{
+    const c = await M.readCard();
+    cardRow = row("THE CARD (master-link)", c.ok ? "PUBLISHED · HTTP " + c.status : "NOT PUBLISHED · HTTP " + String(c.status || "—"),
+      esc(M.cardUrl()) + (c.ok ? " · " + K(c.bytes) + " B" : " — the platform's editable pull lane") + " · the copy that always ships is <b>src/master-link.json</b> · <b>/masterlink card</b>" + (c.ok ? "" : " · <b>/masterlink card publish</b>"));
+  }catch(e){ cardRow = row("THE CARD (master-link)", "UNMEASURED", esc(String((e && e.message) || e))); }
+  addBubble("ass", '<div class="rise"><div class="rhead">🔗 /masterlink — the master link</div>'
+    + row("THIS SIDE", st.self.generator, "Obi · public id " + esc(String(st.self.publicId || "?").slice(0, 12)) + "…")
+    + row("NAMED (the umbrella)", String(st.targets.length), st.targets.map(t => esc(t.gen)).join(" · "))
+    + trows
+    + row("HANDOFFS PULLED", String(st.inbox.length), inbox)
+    + row("WRITE LANE", st.write.open ? "OPEN" : "SHUT", "measured now, verbatim: " + esc(st.write.detail) + " — the link READS generators; it cannot write into one, and it does not pretend to")
+    + cardRow
+    + row("ORDERS ISSUED", String((st.orders || []).length), (st.orders || []).length ? ("newest: " + esc(String(st.orders[0].text).slice(0, 120)) + " → " + esc(st.orders[0].to) + " (" + esc(st.orders[0].at) + ") · /masterlink orders") : "none yet — <b>/masterlink order &lt;generator&gt; :: &lt;instruction&gt;</b>")
+    + row("DURABLE LANE", st.durable.served ? "SERVED" : "NOT YET SERVED", esc(st.durable.path) + (st.durable.bytes ? " · " + K(st.durable.bytes) + " B on this origin" : " · ships with the next save"))
+    + row("WATCH", st.cfg.auto ? "ARMED · EVERY 3 MIN" : "OFF", "last look " + esc(st.cfg.lastLook || "not yet") + " · /masterlink on|off")
+    + '<div class="rfoot">Three lanes, exactly as the sibling station states them: the LINK (read, no token) · the DURABLE LANE (a src/ file that travels with a save) · the INBOX (handoffs pulled by content key). Naming is the command this station actually has.</div></div>');
+}
+
+/* ------------------------ THE FREE WIRE (src/freewire.js) ------------------
+   The fabric that needs no credential. Every lane it prints was written to and
+   read back from this origin; every refusal is printed in the refusing party's
+   own words. It exists because the two doors the estate kept reporting shut
+   (the platform's editable store and the cloud) are not the only road: a mutable
+   pointer and a public nerve carry the estate without a token. */
+async function doWire(text){
+  const W = window.ObiFreeWire;
+  if(!W){ addBubble("ass", "⚠ src/freewire.js did not load — reload the page."); return; }
+  const rest = String(text == null ? "" : text).replace(/^\/(wire|nerves)\s*/i, "").trim();
+  const parts = rest.split(/\s+/).filter(Boolean);
+  const verb = (parts[0] || "").toLowerCase();
+  const arg = parts.slice(1).join(" ");
+  const K = n => (n == null || isNaN(n)) ? "—" : Number(n).toLocaleString();
+  const row = (k, v, d) => '<div class="rrow"><b>' + esc(k) + '</b><span class="vd">' + esc(v) + '</span>' + (d ? '<div class="rd">' + d + '</div>' : '') + '</div>';
+
+  if(verb === "probe"){
+    addBubble("ass", "Re-measuring every free lane, live…");
+    const p = await W.probe();
+    const rows = p.rows.map(r => '<div class="rrow' + (r.ok ? "" : " bad") + '"><b>' + esc(r.lane) + '</b><span class="vd">' + (r.ok ? "WORKS" : "REFUSED") + '</span><div class="rd">' + esc(r.note) + '</div></div>').join("");
+    addBubble("ass", '<div class="rise"><div class="rhead">🛰 /wire probe — measured ' + esc(p.at) + '</div>'
+      + row("LANES THAT ANSWERED", p.open + " / " + p.total, "a real write, a real read-back, or a real read — never a status code taken on faith")
+      + rows
+      + '<div class="rfoot">The shut lanes are printed with their own words. Nothing here needs a token except the two doors that always did: GitHub (a PAT) and Cloudflare (a token).</div></div>');
+    return;
+  }
+
+  if(verb === "announce" || verb === "aim"){
+    addBubble("ass", "Reading the register from this origin, aiming the pointer, broadcasting on the nerve…");
+    const r = await W.announce({ verdict: "REAL" });
+    const rows = r.steps.map(s => '<div class="rrow' + (s.state === "REAL" || s.state === "AIMED" || s.state === "SENT" || s.state === "READ" ? "" : " bad") + '"><b>' + esc(s.what) + '</b><span class="vd">' + esc(s.state) + '</span><div class="rd">' + esc(s.note) + '</div></div>').join("");
+    addBubble("ass", '<div class="rise"><div class="rhead">🛰 /wire announce — ' + esc(r.verdict) + '</div>'
+      + rows
+      + row("THE POINTER NOW SAYS", "", '<span class="rd-mono">' + esc(r.line) + '</span><br>' + esc(r.fit.value) + " chars of value · URL " + r.fit.url + " of a ceiling of " + r.fit.ceiling + " (room " + r.fit.room + ")")
+      + row("READ IT WITH NO TOKEN", "ANYONE", '<a href="' + esc(W.pointerUrl()) + '" target="_blank" rel="noopener noreferrer">' + esc(W.pointerUrl()) + '</a>')
+      + row("THE NERVE", "https://ntfy.sh/" + esc(W.NERVE), "append-only, 12 h of history in one GET · <b>/wire tail</b>")
+      + '<div class="rfoot">' + esc(r.says) + '</div></div>');
+    return;
+  }
+
+  if(verb === "pointer" || verb === "where"){
+    const p = await W.pointer();
+    if(!p.ok){ addBubble("ass", "⚠ " + esc(p.why)); return; }
+    const q = p.parsed || {};
+    addBubble("ass", '<div class="rise"><div class="rhead">🛰 /wire pointer — the family pointer, as it stands</div>'
+      + row("RAW", p.empty ? "(empty — nothing has announced yet)" : "", esc(p.raw || ""))
+      + (q && !q.malformed && !p.empty ? row("AIMED AT", String(q.st || "—"), "announced " + esc(new Date((q.t || 0) * 1000).toISOString()) + " · verdict " + esc(q.v || "—"))
+        + row("THE REGISTER", esc(String(q.reg || "-")), q.reg && q.reg !== "-" ? "the file host key — <a href=\"https://user.uploads.dev/file/" + esc(q.reg) + "\" target=\"_blank\" rel=\"noopener noreferrer\">read it</a>" : "not addressed from here yet — /relay delivers it")
+        + row("THE PACKET", esc(String(q.pkt || "-")), q.pkt && q.pkt !== "-" ? '<a href="https://user.uploads.dev/file/' + esc(q.pkt) + '" target="_blank" rel="noopener noreferrer">read it</a>' : "not addressed from here yet")
+        + row("THE ESTATE AT THAT MOMENT", K(q.n) + " files", K(q.b) + " B · tree " + esc(String(q.tree || "-")) + "…") : "")
+      + (p.empty ? row("WHY IT IS EMPTY", "", "the store answers, but no station has written an announcement yet — <b>/wire announce</b>") : "")
+      + '<div class="rfoot">This is the mutable store that does the job the platform\'s editable store refused: overwritten freely, read by anyone, no account. <span class="rd-mono">' + esc(p.url) + '</span></div></div>');
+    return;
+  }
+
+  if(verb === "send"){
+    if(!arg){ addBubble("ass", "Usage: <b>/wire send &lt;text&gt;</b> — a line on the family nerve (" + esc("https://ntfy.sh/" + W.NERVE) + ")."); return; }
+    const s = await W.send(arg, { title: "Obi · " + (window.generatorName || "?") });
+    addBubble("ass", '<div class="rise"><div class="rhead">🛰 /wire send — ' + (s.ok ? "BROADCAST" : "REFUSED") + '</div>'
+      + row("THE LINE", K(s.bytes) + " B", esc(arg.slice(0, 300)))
+      + row("THE NERVE", "https://ntfy.sh/" + esc(s.topic), s.ok ? "message " + esc(String(s.id)) + " · read it back with <b>/wire tail</b>" : esc(s.why))
+      + '<div class="rfoot">Publish is open and needs no account. Anything on the nerve is public — the nerve is a broadcast, never a place for a secret.</div></div>');
+    return;
+  }
+
+  if(verb === "tail" || verb === "read"){
+    const n = Math.max(1, Math.min(50, parseInt(arg, 10) || 8));
+    const t = await W.tail(0);
+    if(!t.ok){ addBubble("ass", "⚠ " + esc(t.why)); return; }
+    const nerveUrl = "https://ntfy.sh/" + W.NERVE;
+    const rows = t.rows.slice(-n).map(m => '<div class="rrow"><b>' + esc(String(m.title || m.topic || "line")) + '</b><span class="vd">' + esc(new Date((m.time || 0) * 1000).toLocaleString()) + '</span><div class="rd" style="white-space:pre-wrap">' + esc(String(m.message || "").slice(0, 500)) + '</div></div>').join("");
+    addBubble("ass", '<div class="rise"><div class="rhead">🛰 /wire tail — the nerve, verbatim</div>'
+      + row("ON THE NERVE", K(t.count) + " line(s) in the window", 'showing the newest ' + Math.min(n, t.rows.length) + ' · <a href="' + esc(nerveUrl) + '" target="_blank" rel="noopener noreferrer">' + esc(nerveUrl) + '</a>')
+      + (rows || '<div class="rd">nothing on the nerve in this window</div>')
+      + (rows || '<div class="rd">nothing on the nerve in this window</div>')
+      + '<div class="rfoot">One GET returns the whole history in order. Append-only is the transport\'s own shape, which is why this is a ledger and not a buzzer.</div></div>');
+    return;
+  }
+
+  if(verb === "put"){
+    if(!arg){ addBubble("ass", "Usage: <b>/wire put &lt;src/path&gt;</b> — carries one file of this estate out over the first free carrier that takes it."); return; }
+    addBubble("ass", "Carrying <b>" + esc(arg) + "</b>…");
+    let buf = null;
+    try{ const r = await fetch(location.origin + "/" + arg.replace(/^\//, ""), { cache:"no-store" }); if(r.ok) buf = new Uint8Array(await r.arrayBuffer()); }
+    catch(e){}
+    if(!buf){ addBubble("ass", "⚠ " + esc(arg) + " could not be read from this origin (it may not exist, or the tree is unsaved)."); return; }
+    const type = /\.json$/i.test(arg) ? "application/json" : (/\.(md|txt)$/i.test(arg) ? "text/plain" : "application/octet-stream");
+    const p = await W.put(buf, arg.split("/").pop(), type);
+    const tries = (p.tries || []).map(t => '<div class="rrow"><b>' + esc(t.lane) + '</b><span class="vd">refused</span><div class="rd">' + esc(t.why) + '</div></div>').join("");
+    addBubble("ass", '<div class="rise"><div class="rhead">🛰 /wire put — ' + (p.ok ? "CARRIED" : "REFUSED") + '</div>'
+      + row("THE FILE", esc(arg), K(buf.length) + " B")
+      + (p.ok ? row("CARRIED BY", esc(p.lane), '<a href="' + esc(p.url) + '" target="_blank" rel="noopener noreferrer">' + esc(p.url) + '</a> · keeps ' + esc(p.keeps))
+              : row("RESULT", "NOTHING WAS CARRIED", esc(p.why)))
+      + tries
+      + '<div class="rfoot">The carriers are tried in order: the estate\'s own host first (permanent), then the anonymous ones. A refusal never stops the next lane.</div></div>');
+    return;
+  }
+
+  if(verb === "slate"){
+    if(!arg){ addBubble("ass", "Usage: <b>/wire slate &lt;text&gt;</b> — puts text somewhere permanent and readable by a human."); return; }
+    addBubble("ass", "Writing a slate…");
+    const s = await W.slate(arg);
+    addBubble("ass", '<div class="rise"><div class="rhead">🛰 /wire slate — ' + (s.ok ? "BY " + esc(s.lane) : "REFUSED") + '</div>'
+      + (s.ok ? row("READ IT", K(s.bytes) + " B", '<a href="' + esc(s.url) + '" target="_blank" rel="noopener noreferrer">' + esc(s.url) + '</a>' + (s.immutable ? " · measured IMMUTABLE — write once, never edit" : ""))
+              : row("RESULT", "REFUSED", esc(s.why)))
+      + '<div class="rfoot">A slate cannot be edited, which is why it is the right shape for a record and the wrong shape for a pointer — the pointer lives in the mutable store. <b>/wire pointer</b>.</div></div>');
+    return;
+  }
+
+  /* the default card: the lane table, as measured, and the pointer's name */
+  const c = W.card();
+  const lanes = c.lanes.map(l => '<div class="rrow' + (l.write === "SHUT" ? " bad" : "") + '"><b>' + esc(l.name) + '</b><span class="vd">' + esc(l.write === "SHUT" ? "SHUT" : (l.write === "OPEN" ? "OPEN" : "READ-ONLY")) + '</span><div class="rd">' + l.why + '<br><span class="rd-mono">' + esc(l.url) + '</span>' + (l.needs ? ' · <b>needs</b> ' + esc(l.needs) : "") + '</div></div>').join("");
+  addBubble("ass", '<div class="rise"><div class="rhead">🛰 /wire — the free wire (control with no credential)</div>'
+    + row("THIS STATION", esc(c.station), "Obi · freewire v" + esc(c.version))
+    + row("LANES OPEN", c.open + " of " + c.lanes.length, "every OPEN lane was written to and read back from this origin")
+    + row("STILL SHUT", String(c.shut.length), c.shut.map(l => esc(l.name)).join(" · "))
+    + row("WHAT UNLOCKS THEM", String(c.needs.length), c.needs.map(esc).join(" · "))
+    + row("THE NERVE", "https://ntfy.sh/" + esc(c.nerve), "append-only, 12 h of history in one GET · nothing on it is secret")
+    + row("THE POINTER", esc(c.ns) + " · ceiling " + c.pointerCeiling + " chars of URL", '<a href="' + esc(c.pointerUrl) + '" target="_blank" rel="noopener noreferrer">' + esc(c.pointerUrl) + '</a> — measured: overwrite answers 200, and the read-back is the proof')
+    + '<div class="rd" style="margin:8px 0 4px"><b>THE MEASURED LANE TABLE</b></div>'
+    + lanes
+    + '<div class="rfoot"><b>/wire announce</b> aims the pointer and broadcasts the newest register · <b>/wire pointer</b> reads it · <b>/wire probe</b> re-measures · <b>/wire tail</b> reads the nerve · <b>/wire put &lt;path&gt;</b> carries a file · <b>/wire slate &lt;text&gt;</b> writes a permanent slate. The free wire does not replace the two credential doors: it is a second road that does not wait for them.</div></div>');
+}
+
 /* ---------------------- STUDENT SELECTOR UI ---------------------- */
 function fmtDay(t){ try{ return new Date(t).toLocaleDateString(); }catch(e){ return "?"; } }
 /* ---------------------- THE LANDING SHELL (views + tabs) ----------------------
@@ -2033,17 +4043,18 @@ function fmtDay(t){ try{ return new Date(t).toLocaleDateString(); }catch(e){ ret
    The active face is remembered for the browser session (sessionStorage `obi_view`)
    and named in the URL hash (#cmd / #gen / #eval / #settings), so a face can be
    linked to directly — and a fresh visit always lands on the command station. */
-const VIEWS = { cmd: "⌘ Command Station", gen: "◈ Phoenix Generators", settings: "⚙ Settings", eval: "👤 Student Evaluator", lesson: "📚 Lesson Creator" };
-const TAB_OF = { cmd: "cmd", gen: "gen", settings: "settings", eval: "gen", lesson: "gen" };   /* which TAB a view lights up */
+const VIEWS = { cmd: "⌘ Command Station", room: "◈ Boardroom", gen: "◈ Phoenix Generators", settings: "⚙ Settings", eval: "👤 Student Evaluator", lesson: "📚 Lesson Creator", intake: "🎓 The Intake" };
+const TAB_OF = { cmd: "cmd", room: "room", gen: "gen", settings: "settings", eval: "gen", lesson: "gen", intake: "gen" };   /* which TAB a view lights up */
 let currentView = "cmd";
 
 function setViewTab(name){
   const tab = TAB_OF[name] || "cmd";
   document.querySelectorAll("#tabbar .tabbtn").forEach(b => b.classList.toggle("on", b.dataset.view === tab));
-  const c = $("viewCmd"), g = $("viewGen"), s = $("viewSet");
+  const c = $("viewCmd"), g = $("viewGen"), s = $("viewSet"), r = $("viewRoom");
   if(c) c.classList.toggle("hidden", tab !== "cmd");
   if(g) g.classList.toggle("hidden", tab !== "gen");
   if(s) s.classList.toggle("hidden", tab !== "settings");
+  if(r) r.classList.toggle("hidden", tab !== "room");
   if(tab !== "gen") deskOpen(false);
 }
 
@@ -2052,15 +4063,25 @@ function setViewTab(name){
    {the division grid, a desk} is on screen, and the desk keeps whatever its own
    module put in it. `which` is "eval" (default) or "lesson"; falsy closes both. */
 function deskOpen(on, which){
-  const g = $("genDesk"), l = $("lessonDesk"), br = $("brandDesk"), b = $("genBody");
+  const g = $("genDesk"), l = $("lessonDesk"), br = $("brandDesk"), nk = $("intakeDesk"), b = $("genBody");
   const open = on ? (which || "eval") : null;
   if(g) g.classList.toggle("hidden", open !== "eval");
   if(l) l.classList.toggle("hidden", open !== "lesson");
   if(br) br.classList.toggle("hidden", open !== "brand");
+  if(nk) nk.classList.toggle("hidden", open !== "intake");
   if(b) b.classList.toggle("hidden", !!open);
   if(open === "eval" && window.ObiReview) return Promise.resolve(renderStudentSelector()).then(() => true).catch(() => true);
   if(open === "lesson" && window.ObiLessons && window.ObiLessons.mount){ try{ window.ObiLessons.mount(); }catch(e){} }
   if(open === "brand" && window.ObiBrand && window.ObiBrand.mountDesk){ try{ window.ObiBrand.mountDesk(); }catch(e){} }
+  /* THE INTAKE (src/intake.js) — the app that remembers: every promise from a
+     lesson recording, its owner, its evidence and its state. It reads kv and
+     renders itself; a missing module is reported rather than mounted empty. */
+  if(open === "intake"){
+    if(window.ObiIntake && window.ObiIntake.mount) return Promise.resolve(window.ObiIntake.mount()).catch(() => false);
+    const np = $("intakePanel");
+    if(np) np.innerHTML = '<div class="hint">⚠ <b>src/intake.js</b> did not load — reload the page. (THE INTAKE is the app the tutor asked for on the 23rd: “we’ll build it all into one app so that it remembers”.)</div>';
+    return Promise.resolve(false);
+  }
   return Promise.resolve(!!open);
 }
 
@@ -2078,6 +4099,7 @@ function openGenerator(id){
   if(!g) return;
   if(g.entry === "eval"){ showView("eval"); return; }
   if(g.entry === "lesson"){ showView("lesson"); return; }
+  if(g.entry === "intake"){ showView("intake"); return; }
   if(g.entry === "brand"){ showView("gen"); deskOpen(true, "brand"); return; }
   if(g.status === "live" && g.url){ try{ window.open(g.url, "_blank", "noopener"); }catch(e){} return; }
   const st = (D.STATUS[g.status] || D.STATUS.planned);
@@ -2089,7 +4111,7 @@ function openGenerator(id){
   showView("cmd");
 }
 
-/* the station's live state, kept in the tab bar: run · soul · I-LOG · tunnel */
+/* the station's live state, kept in the tab bar: run · soul · I-LOG · tunnel · brain */
 function updateTabMeta(){
   const el = $("tabMeta");
   if(!el) return;
@@ -2098,7 +4120,48 @@ function updateTabMeta(){
      so the count is on screen before kv finishes opening */
   let ilogN = null;
   try{ const m = JSON.parse(localStorage.getItem("obi_ilog") || "null"); if(m && typeof m.count === "number") ilogN = m.count; }catch(e){}
-  el.innerHTML = "RUN <b>" + (runNoOf() || "—") + "</b> · SOUL <b>" + ledger.soul.length + "</b> · I-LOG <b>" + (ilogN == null ? "—" : ilogN) + "</b> · tunnel <b>" + esc(tunnel) + "</b>";
+  /* the brain is an instrument too: how much it has indexed, and what the auto lane
+     last found. It shows the WRITE lane's verdict, so a blocked sync is on screen
+     rather than buried in a card nobody opens. */
+  /* and the relay is an instrument too: the last master sync run, its result and its
+     stages, read synchronously from the pipeline itself (never remembered from a card). */
+  let relay = "…", relayTitle = "the relay (src/relay.js) is not loaded";
+  try{
+    const RL = window.ObiRelay;
+    if(RL){
+      const c = RL.cached ? RL.cached() : null;
+      if(c){ relay = String(c.result || "—"); relayTitle = "the master sync pipeline: " + c.result + " · " + (c.stages || []).map(s => s.name + "=" + s.verdict).join(" ") + " · " + c.ms + " ms · /relay"; }
+      else { relay = "—"; relayTitle = "not run yet — the relay runs itself shortly after boot · /relay"; }
+    }
+  }catch(e){}
+  /* and the market is an instrument too: the last recon, and how many seats it found
+     open, read synchronously from the recon engine itself (never remembered from a card). */
+  let market = "…", marketTitle = "the open source market (src/market.js) is not loaded";
+  try{
+    const MK = window.ObiMarket;
+    if(MK){
+      const c = MK.cached ? MK.cached() : null;
+      if(c){ const open = (c.seats || []).filter(x => x.open).length; market = String(open); marketTitle = "the open source market: " + c.verdict + " · " + c.measured + "/" + c.channels + " channels answered · " + open + " open seat(s) · " + c.at + " · /market"; }
+      else { market = "—"; marketTitle = "not scanned yet — the recon runs itself after boot · /market scan"; }
+    }
+  }catch(e){}
+  let brain = "—", brainTitle = "the brain (src/brain.js) is not loaded";
+  try{
+    const B = window.ObiBrain;
+    if(B){
+      const idx = B.index();
+      brain = idx ? String(idx.entries.length) : "build…";
+      brainTitle = "the brain: " + (idx ? idx.entries.length + " entries indexed · built " + idx.built : "not built yet") + " · /brain";
+    }
+  }catch(e){}
+  /* and the rubric is the instrument the word "evaluator" means: its families and its
+     law, read synchronously from the engine itself (never remembered from a card). */
+  let rubric = "\u2014", rubricTitle = "the rubric instrument (src/rubric.js) is not loaded";
+  try{
+    const RB = window.ObiRubric;
+    if(RB){ const st = RB.state(); rubric = String(st.built); rubricTitle = "the rubric: " + st.built + " families \u00b7 " + st.law + " laws enforced in code \u00b7 /rubric · /rubric canary checks this instrument by machine"; }
+  }catch(e){}
+  el.innerHTML = "RUN <b>" + (runNoOf() || "—") + "</b> · SOUL <b>" + ledger.soul.length + "</b> · I-LOG <b>" + (ilogN == null ? "—" : ilogN) + "</b> · tunnel <b>" + esc(tunnel) + "</b> · brain <b title=\"" + esc(brainTitle) + "\">" + esc(brain) + "</b> · relay <b title=\"" + esc(relayTitle) + "\">" + esc(relay) + "</b> · market <b title='" + esc(marketTitle) + "'>" + esc(market) + "</b> · rubric <b title='" + esc(rubricTitle) + "'>" + esc(rubric) + "</b>";
   try{ renderBrandBar(); }catch(e){}
 }
 
@@ -2143,7 +4206,115 @@ function renderSettings(){
     ["secrets", Object.keys(keys).length ? Object.keys(keys).join(", ") + " (names only — never shown here)" : "none stored in this browser"],
     ["modules", (window.ObiForge ? "forge ok" : "forge MISSING") + " · " + (window.ObiILog ? "ilog ok" : "ilog MISSING") + " · " + (window.ObiBg ? "bg ok" : "bg MISSING") + " · " + (window.ObiDivisions ? "divisions ok" : "divisions MISSING") + " · " + (window.ObiBrand ? "brand ok · " + window.ObiBrand.iconNames().length + " icons" : "brand MISSING")]
   ];
-  el.innerHTML = rows.map(r => '<div class="set-kv"><b>' + esc(r[0]) + '</b><span>' + esc(r[1]) + '</span></div>').join("");
+  el.innerHTML = rows.map(r => '<div class="set-kv"><b>' + esc(r[0]) + '</b><span>' + esc(r[1]) + '</span></div>').join("") + backupHtml();
+  wireBackup();
+}
+
+/* BACKUP & RESTORE (2026-10-18, sovereign order: the data on every browser).
+   Export builds the portable shelf (every obi_* data key — never obi_keys: keys
+   stay per device and are typed as commands). Import restores it with read-back
+   verification. Snapshot semantics: the file wins, per key. */
+function backupDataKeys(){
+  const out = {};
+  try{
+    for(let i = 0; i < localStorage.length; i++){
+      const k = localStorage.key(i);
+      if(k && k.indexOf("obi_") === 0 && k !== "obi_keys") out[k] = localStorage.getItem(k);
+    }
+  }catch(e){}
+  return out;
+}
+function backupHtml(){
+  let n = 0, chars = 0;
+  try{ const d = backupDataKeys(); n = Object.keys(d).length; for(const k of Object.keys(d)) chars += (d[k] || "").length; }catch(e){}
+  return '<div class="sel-group">Backup &amp; restore — the data on every browser</div>'
+    + '<div class="set-kv"><b>shelf</b><span>' + n + ' keys · ' + (chars/1048576).toFixed(2) + ' MB · secrets never travel</span></div>'
+    + '<div class="rm-controls"><button class="rm-btn primary" id="bkExportBtn">Download backup</button> '
+    + '<label class="rm-btn" for="bkImportFile" style="cursor:pointer">Import backup…</label>'
+    + '<input type="file" id="bkImportFile" accept=".json,application/json" hidden></div>'
+    + '<div class="rm-status" id="bkStatus">one file carries the whole shelf to the next browser</div>';
+}
+function wireBackup(){
+  const ex = document.getElementById("bkExportBtn");
+  if(ex && !ex.__wired){ ex.__wired = true; ex.onclick = function(){
+    const pack = { at:new Date().toISOString(), kind:"pais-data-backup", keys:backupDataKeys() };
+    pack.keyList = Object.keys(pack.keys);
+    const blob = new Blob([JSON.stringify(pack)], { type:"application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "pais-data-backup-" + pack.at.slice(0, 10) + ".json";
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ try{ URL.revokeObjectURL(a.href); a.remove(); }catch(e){} }, 4000);
+    const st = document.getElementById("bkStatus");
+    if(st) st.textContent = "downloaded " + pack.keyList.length + " keys — carry the file to the next browser and Import it there";
+    try{ logOp({ kind:"op", action:"backup export", result:pack.keyList.length + " keys" }); }catch(e){}
+  }; }
+  const im = document.getElementById("bkImportFile");
+  if(im && !im.__wired){ im.__wired = true; im.onchange = function(){ importBackupFile(im.files && im.files[0], document.getElementById("bkStatus")); im.value = ""; }; }
+}
+async function importBackupFile(file, statusEl){
+  const say = function(t){ if(statusEl) statusEl.textContent = t; };
+  if(!file){ say("pick a backup file first"); return; }
+  if(file.size > 50 * 1048576){ say("file too big (" + (file.size/1048576).toFixed(1) + " MB) — refusing"); return; }
+  let pack = null;
+  try{ pack = JSON.parse(await file.text()); }catch(e){ say("not a readable backup file"); return; }
+  if(!pack || typeof pack !== "object" || !pack.keys || typeof pack.keys !== "object"){ say("not a backup file (no keys in it)"); return; }
+  const names = Object.keys(pack.keys).filter(function(k){ return k.indexOf("obi_") === 0 && k !== "obi_keys"; });
+  if(!names.length){ say("backup holds no data keys — nothing to restore"); return; }
+  let ok = 0; const bad = [];
+  for(const k of names){
+    try{
+      localStorage.setItem(k, String(pack.keys[k]));
+      if(localStorage.getItem(k) === String(pack.keys[k])) ok++;
+      else bad.push(k);
+    }catch(e){ bad.push(k); }
+  }
+  say(ok === names.length
+    ? "restored " + ok + " keys from " + (pack.at || "the backup") + " — secrets never travel (keys are typed per device)"
+    : "restored " + ok + "/" + names.length + (bad.length ? " · failed: " + bad.join(", ") : ""));
+  try{
+    let sittings = 0, mem = 0;
+    try{ const b = JSON.parse(localStorage.getItem("obi_boardroom") || "{}"); sittings = (b.sittings || []).length; mem = Object.keys(b.seatmem || {}).length; }catch(e){}
+    reconLog({ what:"import", keys:ok + "/" + names.length, from:pack.at || "a backup file", sittings:sittings, seatmem:mem });
+  }catch(e){}
+  try{ logOp({ kind:"op", action:"backup import", result:ok + "/" + names.length + " keys" }); }catch(e){}
+  try{ if(window.ObiRoom && window.ObiRoom.mount) window.ObiRoom.mount(); }catch(e){}
+  renderSettings();
+}
+
+/* RECONCILIATION LOG (sovereign order: one recovery file on git — every
+   cross-browser merge marked down for the final sort-through).
+   The log lives in obi_recon, an obi_ key, so it rides the backup file to
+   every browser. Each push renders OPERATIONS/COMMANDSTATION/
+   PhoenixOmegaRecovery.md from it, newest last. */
+function reconLog(entry){
+  let log = [];
+  try{ log = JSON.parse(localStorage.getItem("obi_recon") || "[]"); if(!Array.isArray(log)) log = []; }catch(e){ log = []; }
+  log.push(Object.assign({ at:new Date().toISOString() }, entry || {}));
+  while(log.length > 200) log.shift();
+  try{ localStorage.setItem("obi_recon", JSON.stringify(log)); }catch(e){}
+  return log.length;
+}
+function reconFile(){
+  let log = [];
+  try{ log = JSON.parse(localStorage.getItem("obi_recon") || "[]") || []; if(!Array.isArray(log)) log = []; }catch(e){}
+  const L = ["# Phoenix Omega Recovery", "",
+    "Every reconciliation of the empire's shelves, marked down for the final sort-through.",
+    "Newest last. A row is true because the browser that wrote it counted it.", ""];
+  if(!log.length) L.push("(no reconciliations marked yet)");
+  log.forEach(function(e, i){
+    L.push("## " + (i + 1) + " — " + (e.at || "?"));
+    L.push("");
+    L.push("- what: " + (e.what || "?"));
+    if(e.keys != null) L.push("- keys: " + e.keys);
+    if(e.sittings != null) L.push("- sittings: " + e.sittings);
+    if(e.seatmem != null) L.push("- seats with memory: " + e.seatmem);
+    if(e.from) L.push("- from: " + e.from);
+    if(e.commit) L.push("- commit: " + e.commit);
+    if(e.note) L.push("- note: " + e.note);
+    L.push("");
+  });
+  return L.join("\n");
 }
 
 async function showView(name){
@@ -2154,8 +4325,10 @@ async function showView(name){
   try{ history.replaceState(null, "", "#" + name); }catch(e){}
   if(name === "eval") await deskOpen(true, "eval");
   else if(name === "lesson") await deskOpen(true, "lesson");
+  else if(name === "intake") await deskOpen(true, "intake");
   else deskOpen(false);
   if(name === "gen" || name === "eval") mountGenerators();  if(name === "settings"){ renderSettings(); try{ setSetTab(localStorage.getItem("obi_settab") || "station"); }catch(e){ setSetTab("station"); } }
+  if(name === "room" && window.ObiRoom && window.ObiRoom.mount){ try{ window.ObiRoom.mount(); }catch(e){} }
   if(name === "gen" || name === "eval" || name === "settings"){
     const mp = $("memoryPanel"); if(mp && !mp.classList.contains("hidden")) mp.classList.add("hidden");
   }
@@ -2401,7 +4574,9 @@ function cmdStatusColor(st){
 /* The Agent 99 translation card — the full triad (translate / stress / audit),
    drone + skills + priority, rendered as a chat bubble. The drone is a ROUTING
    LABEL produced by keyword classification, not a claim that a drone ran: the
-   queue is the execution surface (/queue → claim → complete). */
+   queue is the execution surface (/queue → claim → complete).
+   Full card stays for /queue. Plain-speech turns use cmdCardCompact() below,
+   and Legion fallback (score 0) shows nothing at all — see cmdRoute. */
 function cmdCard(tr, id, extra){
   const t = tr || {};
   const a99 = t.agent99 || {}, a98 = t.agent98 || {}, a97 = t.agent97 || {};
@@ -2415,6 +4590,20 @@ function cmdCard(tr, id, extra){
   return '<div class="rise"><div class="rhead">⚡ Agent 99 · command #'+(id??"?")+(t.priority!=null?' · priority '+esc(t.priority):'')+'</div>'+rows+(extra||"")+'</div>';
 }
 
+/* Quiet routing label for plain-speech turns (2026-10-15): one line + a
+   collapsed <details> for the audit trail. The full cmdCard wall only ever
+   made sense in /queue. */
+function cmdCardCompact(tr, id, extra){
+  const t = tr || {};
+  const p = t.primaryDrone || {};
+  const name = p.name || "Legion";
+  const pri = t.priority || "normal";
+  const full = cmdCard(tr, id, extra);
+  return '<div class="rise" style="opacity:.85"><div class="rhead" style="font-size:.82rem">⚡ #'+(id??"?")+' → '+esc(name)+' · '+esc(pri)+'</div>'
+    + '<details style="margin-top:4px"><summary style="cursor:pointer;opacity:.7;font-size:.78rem">routing label — why this, audit</summary>'
+    + full + '</details></div>';
+}
+
 function cmdListFrom(data){
   if(Array.isArray(data)) return data;
   if(data && Array.isArray(data.commands)) return data.commands;
@@ -2423,9 +4612,13 @@ function cmdListFrom(data){
 }
 
 /* SOUL-CAPTURE-FIRST: the sovereign's words were captured verbatim by send()
-   BEFORE this runs. Here they ride the tunnel through Agent 99 and the full
-   translation card is shown in the chat. */
-async function cmdRoute(text){
+   BEFORE this runs. Here they ride the tunnel through Agent 99.
+   2026-10-15 quiet mode (/forge): Legion fallback (score 0, no specialist
+   match) logs to RRL/I-LOG but shows NOTHING in chat — it was pure noise on
+   every plain-speech turn. Real drone matches show a one-line label with the
+   full card collapsed inside <details>. The full wall still lives in /queue. */
+async function cmdRoute(text, opts){
+  const quiet = !(opts && opts.showLegion);
   try{
     const r = await cmdFetch("/api/command/send", {
       method: "POST",
@@ -2440,6 +4633,13 @@ async function cmdRoute(text){
     const h = await cmdFetch("/api/command/history?limit=1");
     const list = cmdListFrom(h.data) || [];
     const rec = list.find(x => x.id === id) || list[0] || null;
+    const tr = (rec && rec.translation) || null;
+    const p = (tr && tr.primaryDrone) || {};
+    const isFallback = (p.name || drone) === "Legion" && Number(p.score || 0) === 0;
+    if(isFallback && quiet){
+      /* Still routed, still in the queue (/queue shows it) — just no chat wall. */
+      return true;
+    }
     let extra = "";
     if(window.ObiPlaybooks && window.ObiPheromone){
       const g = window.ObiPlaybooks.gate(text, { mission: "command" });
@@ -2453,7 +4653,7 @@ async function cmdRoute(text){
       if(g.hold) extra += '<div class="rrow"><b>GATE</b><span class="vd">HELD</span><div class="rd">'+esc(g.reason)+'</div></div>';
       else if(g.emergency) extra += '<div class="rrow"><b>GATE</b><span class="vd">DICTATOR</span><div class="rd">rules suspended · timer '+g.timerMinutes+'m · Audit holds the rollback</div></div>';
     }
-    addBubble("ass", cmdCard(rec && rec.translation, id, extra));
+    addBubble("ass", cmdCardCompact(tr, id, extra));
     return true;
   }catch(e){
     rrlAppend(runNoOf(), "DNA", "Obi: [command held locally — tunnel unreachable: " + e.message + "]");
@@ -2515,9 +4715,11 @@ async function cmdShowQueue(){
   }
 }
 
-/* /state — the same live map Obi is handed before answering, rendered on demand so
+/* /state — the live map of the running station, rendered on demand so
    the sovereign can audit it line for line (L58 MAP ≠ TERRAIN: every number here was
-   read from the running station, and anything unreadable says so). */
+   read from the running station, and anything unreadable says so).
+   NOTE 2026-10-15: replies no longer carry this block automatically — /state is
+   now the ON-DEMAND readout Obi points at instead of guessing. */
 /* /bg — BACKGROUND OPERATION: what the browser does to a hidden page, what the
    station holds against it, and what still has to be handed to something that is
    not the page. Everything here is read from ObiBg's live state, not described. */
@@ -2556,6 +4758,47 @@ async function cmdBg(text){
   rrlAppend(runNoOf(), "DNA", "Obi: [/bg — " + B.text() + "]");
 }
 
+/* /auto — the master switch for every automatic network lane (src/auto.js).
+   Command #10 ("Stop auto posting") is owned here now: it used to fall through
+   to the Legion with score 0 because no drone owned it. Stopped is the resting
+   state; manual runs (/brain sync · /relay · /market scan · /masterlink sync)
+   still work — they are typed, not automatic. */
+async function cmdAuto(text){
+  const A = window.ObiAuto;
+  if(!A){ addBubble("ass", "⚠ <b>src/auto.js</b> didn't load — reload the page."); return; }
+  const raw = String(text || "").trim();
+  const arg = raw.replace(/^\/(auto|autostop|stop\s+auto)/i, "").trim().toLowerCase();
+  const row = (k, v) => '<div class="rrow"><b>' + esc(k) + '</b><span class="vd"></span><div class="rd">' + v + '</div></div>';
+  if(arg === "on" || arg === "resume" || arg === "start" || arg === "enable"){
+    A.setAuto(true);
+    addBubble("ass", '<div class="rise"><div class="rhead">▶ /auto ON — automatic lanes resumed</div>'
+      + row("LANES", "brain 5m · relay 30m · market 30m · masterlink watch 3m · cgn flush 60s")
+      + row("NOTE", "They run on their timers again. <b>/auto off</b> stops them.")
+      + '<div class="rfoot">Typed, not automatic: /brain sync · /relay · /market scan · /masterlink sync still work either way.</div></div>');
+    try{ rrlAppend(runNoOf(), "DNA", "Obi: [/auto on — lanes resumed]"); }catch(e){}
+    try{ if(typeof window.logOp === "function") window.logOp({ kind:"op", action:"auto on", result:"lanes resumed" }); }catch(e){}
+    return;
+  }
+  if(arg === "off" || arg === "stop" || arg === "halt" || arg === "disable" || arg.indexOf("stop") !== -1){
+    A.setAuto(false);
+    addBubble("ass", '<div class="rise"><div class="rhead">⏹ /auto OFF — auto posting stopped</div>'
+      + row("STOPPED", "brain auto-sync · relay auto-run · market auto-scan · masterlink watch · cgn flush")
+      + row("STILL RUNNING (local only)", "background heartbeat 1s · watchdog 20s · voice-line 30s — measurements, no traffic")
+      + row("MANUAL STILL WORKS", "/brain sync · /relay · /market scan · /masterlink sync — type them and they run once")
+      + '<div class="rfoot">Command #10, executed: nothing moves on its own now. <b>/auto on</b> resumes. Resting state survives reloads.</div></div>');
+    try{ rrlAppend(runNoOf(), "DNA", "Obi: [/auto off — command #10 executed, lanes stopped]"); }catch(e){}
+    try{ if(typeof window.logOp === "function") window.logOp({ kind:"op", action:"auto off", result:"command #10 — lanes stopped" }); }catch(e){}
+    return;
+  }
+  const s = A.state();
+  addBubble("ass", '<div class="rise"><div class="rhead">⏯ /auto — ' + (s.stopped ? "STOPPED" : "RUNNING") + '</div>'
+    + row("STATE", s.stopped ? "<b>OFF</b> — nothing moves on its own (command #10 holds)" : "<b>ON</b> — lanes run on their timers")
+    + row("AUTOMATIC WHEN ON", esc(s.lanes.join(" · ")))
+    + row("ALWAYS LOCAL", esc(s.local.join(" · ")))
+    + '<div class="rfoot"><b>/auto off</b> stops everything automatic · <b>/auto on</b> resumes · manual commands run once either way.</div></div>');
+  try{ rrlAppend(runNoOf(), "DNA", "Obi: [/auto — " + s.auto + "]"); }catch(e){}
+}
+
 async function cmdState(){
   const s = await stationState();
   const row = (k, v) => '<div class="rrow"><b>' + esc(k) + '</b><span class="vd"></span><div class="rd">' + v + '</div></div>';
@@ -2568,6 +4811,7 @@ async function cmdState(){
     + row("CLIENT", j(s.client))
     + row("ACTIVE SUBJECT", j(s.activeSubject))
     + row("ARCHIVES", j(s.archives))
+    + row("THE BRAIN", j(s.brain))
     + row("I-LOG (the operation record — append-only, hash-chained, Git-anchored)", (s.ilog && typeof s.ilog === "object"
         ? ("<b>" + s.ilog.entries + "</b> entries · segment " + esc(s.ilog.segment) + " · head " + esc(s.ilog.head) + " · " + esc(s.ilog.alg) + " · anchors " + s.ilog.anchors + (s.ilog.unanchored ? " · <b style=\"color:#e6b43c\">UNANCHORED — not yet pushed</b>" : "") + " · last push " + esc(s.ilog.lastPush || "never") + " · kinds " + j(s.ilog.kinds))
         : j(s.ilog)))
@@ -2583,7 +4827,7 @@ async function cmdState(){
     + row("MODULES", mods)
     + row("SECRETS", j(s.secrets))
     + row("COMMANDS", esc(s.commands))
-    + '<div class="rfoot">This is exactly the block Obi is given before answering — so what it says about the station is measured, not guessed. <b>/constellation</b> maps the organism · <b>/help</b> is the whole shelf.</div></div>');
+    + '<div class="rfoot">On-demand readout — Obi\'s replies no longer carry this block every turn (2026-10-15); it stays honest by pointing at /state instead of guessing numbers. <b>/constellation</b> maps the organism · <b>/help</b> is the whole shelf.</div></div>');
   rrlAppend(runNoOf(), "DNA", "Obi: [/state — run " + s.run + "]");
 }
 
@@ -2608,7 +4852,7 @@ async function cmdTools(arg){
     const missing = E.rows().filter(r => r.family === k && r.status !== "built").map(r => r.name).slice(0,5).join(" · ");
     html += '<div class="rrow"><b>'+f.icon+' '+esc(f.name)+'</b><span class="vd">'+f.built+'/'+f.total+'</span><div class="rd">'+esc(f.why)+(missing ? '<br>not yet: '+esc(missing)+' …' : '')+'</div></div>';
   }
-  html += '<div class="rrow"><b>PRIORITY</b><span class="vd">NEXT 8</span><div class="rd">'+E.PRIORITY.map((p,i)=>'<b>'+(i+1)+'. '+esc(p[1])+'</b> — '+esc(p[2])).join('<br>')+'</div></div>';
+  html += '<div class="rrow"><b>PRIORITY</b><span class="vd">NEXT 8</span><div class="rd">'+E.PRIORITY.map((p,i)=>'<b>'+(i+1)+'. '+esc(p[1])+'</b> — '+esc(p[2])+(p[3] ? ' <span style="color:#4cd97b">✓ BUILT</span>' : '')).join('<br>')+'</div></div>';
   html += '<div class="rfoot">/tools &lt;family&gt; or /tools &lt;status&gt; to drill in · the same inventory is the SCOUT probe <b>tools</b> · source of truth: <b>src/ecosystem.js</b>, doc generated from it.</div></div>';
   addBubble("ass", html);
   rrlAppend(runNoOf(), "DNA", "Obi: [/tools — " + c.built + "/" + c.total + " built]");
@@ -2621,8 +4865,8 @@ async function cmdTools(arg){
 function cmdConstellation(arg){
   const C = window.ObiConstellation;
   if(!C){ addBubble("ass", "⚠ src/constellation.js didn't load — reload the page."); return; }
-  const chip = s => '<span class="chip" style="background:' + C.STATUS[s].c + '">' + C.STATUS[s].label + '</span>';
-  const line = p => '<div class="rrow"><b>' + esc(p.name) + '</b><span class="vd" style="color:' + C.STATUS[p.status].c + '">' + C.STATUS[p.status].label + '</span><div class="rd">'
+  const chip = s => '<span class="chip" style="background:' + (C.STATUS[s] || C.STATUS.planned).c + '">' + (C.STATUS[s] || C.STATUS.planned).label + '</span>';
+  const line = p => '<div class="rrow"><b>' + esc(p.name) + '</b><span class="vd" style="color:' + (C.STATUS[p.status] || C.STATUS.planned).c + '">' + (C.STATUS[p.status] || C.STATUS.planned).label + '</span><div class="rd">'
     + esc(p.tagline)
     + (p.url ? ' <a href="' + esc(p.url) + '" target="_blank" rel="noopener noreferrer">' + esc(p.url.replace(/^https?:\/\//, "")) + '</a>' : (p.plannedUrl ? ' · will live at <b>' + esc(p.plannedUrl.replace(/^https?:\/\//, "")) + '</b>' : ""))
     + '</div></div>';
@@ -2631,7 +4875,7 @@ function cmdConstellation(arg){
     const p = C.get(q);
     if(p){
       let html = '<div class="rise"><div class="rhead">✧ ' + esc(p.id) + ' — ' + esc(p.name) + '</div>';
-      html += '<div class="rrow"><b>STATE</b><span class="vd" style="color:' + C.STATUS[p.status].c + '">' + C.STATUS[p.status].label + '</span><div class="rd">' + esc(C.STATUS[p.status].blurb) + ' · ' + esc(p.kind) + ' · role <b>' + esc(p.role || "—") + '</b> · family ' + esc(p.family) + '</div></div>';
+      html += '<div class="rrow"><b>STATE</b><span class="vd" style="color:' + (C.STATUS[p.status] || C.STATUS.planned).c + '">' + (C.STATUS[p.status] || C.STATUS.planned).label + '</span><div class="rd">' + esc(C.STATUS[p.status].blurb) + ' · ' + esc(p.kind) + ' · role <b>' + esc(p.role || "—") + '</b> · family ' + esc(p.family) + '</div></div>';
       html += '<div class="rrow"><b>IT IS</b><span class="vd"></span><div class="rd">' + esc(p.tagline) + '</div></div>';
       if(p.url) html += '<div class="rrow"><b>LIVE AT</b><span class="vd"></span><div class="rd"><a href="' + esc(p.url) + '" target="_blank" rel="noopener noreferrer">' + esc(p.url) + '</a>' + (p.host ? " · " + esc(p.host) : "") + '</div></div>';
       else if(p.plannedUrl) html += '<div class="rrow"><b>WILL LIVE AT</b><span class="vd"></span><div class="rd">' + esc(p.plannedUrl) + (p.host ? " · " + esc(p.host) : "") + '</div></div>';
@@ -2862,6 +5106,52 @@ function wireChips(scope){
   });
 }
 wireChips(document.getElementById("empty"));
+/* chat-bubble chips — one delegated door for every .cmd button the chat ever
+   prints (boards, dossiers, desks, directories). Per-bubble wiring misses any
+   chip printed after addBubble returns (every typing flow does that), and the
+   shelf + landing keep their own direct wiring — this lane only takes buttons
+   with no onclick of their own, so nothing ever runs twice. */
+(function(){
+  const box = document.getElementById("messages");
+  if(!box || box.__cmdDelegated) return;
+  box.__cmdDelegated = true;
+  box.addEventListener("click", ev => {
+    const b = ev.target && ev.target.closest ? ev.target.closest("button.cmd") : null;
+    if(!b || !box.contains(b) || b.onclick) return;
+    const cmd = (b.dataset && b.dataset.cmd) || (b.textContent || "").trim();
+    if(!cmd) return;
+    ev.preventDefault();
+    try{ inputEl.value = cmd; }catch(e){}
+    try{ send(); }catch(e){}
+  });
+})();
+
+/* THE LANDING'S ESTATE BLOCK — the divisions, read LIVE from src/divisions.js.
+   The landing is static markup, so this fills its one live slot rather than a
+   list typed by hand: a landing that named a generator the registry does not
+   hold would be the same defect as a status card that drifts from reality. */
+function renderLandingEstate(){
+  const el = document.getElementById("lpEstate");
+  if(!el) return;
+  const D = window.ObiDivisions;
+  if(!D || !D.DIVISIONS){ el.innerHTML = '<div class="hint">the division registry is not readable right now — /generators retries.</div>'; return; }
+  const S = D.STATUS || {};
+  const B = window.ObiBrand;
+  el.innerHTML = D.DIVISIONS.map(d => {
+    const st = S[d.status] || { label: String(d.status || "?").toUpperCase(), c: "#8b94ad" };
+    const gens = (d.generators || []).length;
+    const ic = (B && B.has && B.has(d.icon)) ? B.icon(d.icon) : "";
+    return '<button class="lp-div" data-cmd="/generators">'
+      + '<span class="lp-div-ic">' + ic + '</span>'
+      + '<span class="lp-div-n">' + esc(d.name) + '</span>'
+      + '<span class="lp-div-f">' + esc(d.full || "") + '</span>'
+      + '<span class="lp-div-g">' + gens + (gens === 1 ? " generator" : " generators") + '</span>'
+      + '<span class="lp-div-c" style="color:' + st.c + '">' + esc(st.label) + '</span>'
+      + '</button>';
+  }).join("");
+  el.querySelectorAll(".lp-div").forEach(b => { b.onclick = () => { inputEl.value = "/generators"; send(); }; });
+}
+renderLandingEstate();
 
 /* ---- THE LAW ON THE WALL — the station's own doctrine, rotated -----------------
    AUDIT 2026-09-21 (self-audit, first pass). This card used to rotate thirteen lines
@@ -2936,6 +5226,7 @@ document.querySelectorAll("#setWrap [data-run]").forEach(b => { b.onclick = () =
 if($("deskBackBtn")) $("deskBackBtn").onclick = () => showView("gen");
 if($("lessonBackBtn")) $("lessonBackBtn").onclick = () => showView("gen");
 if($("brandBackBtn")) $("brandBackBtn").onclick = () => showView("gen");
+if($("intakeBackBtn")) $("intakeBackBtn").onclick = () => showView("gen");
 
 /* the landing shell — tabs (⌘ Command Station is the landing page) */
 document.querySelectorAll("#tabbar .tabbtn").forEach(b => { b.onclick = () => showView(b.dataset.view); });
@@ -3044,18 +5335,26 @@ const SRC_SNAPSHOT = [
         examples included) had been written into the tree without being registered here, so /canon sync
         was silently not carrying it to the authority. Added. Rule restated, because this is the second
         time it bit: a file that is not in this list is not in the authority. */
+     /* AUDIT 2026-09-24: the SESSIONS/ lane — the masterlink handoff channel. The node
+        (phoenix-rising-ai-solutions-agent99-webapp) polls THIS tree for SESSIONS/handoff-from-*
+        and reads by content key with no token, so a file written here IS the command reaching
+        that node — the only command path that exists while the write gate is shut. Registered in
+        the same edit that wrote it, which is the rule obeyed rather than restated a third time:
+        a handoff not in this list is not in the census, not in the backup, not in the delivery —
+        and would arrive nowhere. */
+  "src/SESSIONS/handoff-from-mastermind.md",
   "src/AGENT99-OS.md", "src/COSTS.md", "src/HANDOFF.md", "src/LESSON-STANDARD.md", "src/PHOENIXCOMMAND-BLUEPRINT.md",
-  "src/PROPOSED-CANON.md", "src/ProposedG999.md", "src/README.md", "src/REPO.md", "src/SPEC.md",
+  "src/PROPOSED-CANON.md", "src/ProposedG999.md", "src/README.md", "src/REPO.md", "src/SPEC.md", "src/VAULT-RECOVERY.md",
   "src/STUDENT-EVALUATOR-ECOSYSTEM.md", "src/app.js", "src/audio-split.js", "src/background.js", "src/scs.js",
   "src/brand.js", "src/canon/GOSPEL-999.md", "src/canon/LEGIONNAIRE-FIELD-GUIDE.md", "src/canon/NET-PET-AI-SECRETS-MANIFEST.md",
-  "src/cgn-node.js", "src/cgn.js", "src/clients.js", "src/cloudflare/README.md", "src/cloudflare/build.mjs",
+  "src/cgn-node.js", "src/cgn.js", "src/masterlink.js", "src/master-link.json", "src/clients.js", "src/cloudflare/README.md", "src/cloudflare/build.mjs",
   "src/cloudflare/dev.vars.example", "src/cloudflare/package.json", "src/cloudflare/public/ob1-patch.js", "src/cloudflare/public/ob1-shim.js", "src/cloudflare/store-do.js",
   "src/cloudflare/tunnel-do.js", "src/cloudflare/worker.js", "src/cloudflare/wrangler.toml", "src/constellation.js", "src/curriculum.js",
   "src/curriculum/README.md", "src/curriculum/index.json", "src/curriculum/materials.json", "src/curriculum/pa.g1.json", "src/curriculum/pa.g2.json",
   "src/curriculum/pa.g3.json", "src/curriculum/pa.g4.json", "src/curriculum/pa.g5.json", "src/curriculum/pa.g6.json", "src/curriculum/pa.g7.json",
   "src/curriculum/pa.g8.json", "src/curriculum/pa.g9.json", "src/divisions.js", "src/ecosystem.js", "src/forge.js",
   "src/freephoenix.js", "src/generators/README.md", "src/generators/ear/README.md", "src/generators/ear/main.pjs", "src/generators/practice/README.md",
-  "src/generators/practice/main.pjs", "src/generators/site-builder/README.md", "src/generators/site-builder/main.pjs", "src/generators/site-builder/index.html", "src/generators/site-builder/src/app.js",
+  "src/generators/practice/main.pjs", "src/generators/site-builder/README.md", "src/generators/site-builder/RESEARCH-LANDING-PAGES.md", "src/generators/site-builder/main.pjs", "src/generators/site-builder/index.html", "src/generators/site-builder/src/app.js",
   "src/generators/site-builder/src/styles.css", "src/generators/site-builder/src/cgn-node.js", "src/generators/site-builder/examples/README.md", "src/generators/site-builder/examples/michael-hobbs-cv/index.html", "src/generators/site-builder/examples/michael-hobbs-cv/style.css",
   "src/generators/site-builder/examples/michael-hobbs-cv/linkedin-blueprint.md", "src/generators/site-builder/examples/portfolio-template-violet/index.html", "src/generators/site-builder/examples/portfolio-template-green/index.html", "src/generators/student-portal/README.md", "src/generators/student-portal/index.html",
   "src/generators/student-portal/main.pjs", "src/generators/watchtower/README.md",
@@ -3068,7 +5367,31 @@ const SRC_SNAPSHOT = [
   "src/generators/video-node/src/app.js", "src/generators/video-node/src/pulse.js", "src/generators/video-node/src/reel.js",
   "src/generators/video-node/src/story.js", "src/generators/video-node/src/drop.js", "src/generators/video-node/src/styles.css",
   "src/generators/video-node/src/cgn-node.js",
-  "src/sites/README.md", "src/sites/mailala/index.html",
+     /* AUDIT 2026-09-26 (the fifth time — and this one was large): the STUDENT
+        PORTAL PIPELINE doc (src/STUDENT-PORTAL-PIPELINE.md), THE ROLES desk
+        (src/family.js), the role kit (src/generators/role-kit/**) and all TWELVE
+        role crates (src/generators/<role>/**) had been written into the tree
+        without ever being registered here — so /canon sync and /gh backup were
+        silently leaving 58 files, the whole ROLES suite, out of the authority.
+        Registered in the same edit that the audit found them, which is the rule
+        obeyed rather than restated a fifth time: a file that is not in this list
+        is not in the authority. */
+  "src/STUDENT-PORTAL-PIPELINE.md", "src/SOUL-VERBATIM-PORTALS-MAGIC-CHAT.md", "src/family.js",
+  "src/generators/role-kit/kit.js", "src/generators/role-kit/method.js", "src/generators/role-kit/build.js",
+  "src/generators/role-kit/test-roles.js", "src/generators/role-kit/test-actions.js", "src/generators/role-kit/test.html", "src/generators/role-kit/test-roles.html",
+  "src/generators/cv-forge/README.md", "src/generators/cv-forge/index.html", "src/generators/cv-forge/main.pjs", "src/generators/cv-forge/src/panel.js",
+  "src/generators/linkedin-forge/README.md", "src/generators/linkedin-forge/index.html", "src/generators/linkedin-forge/main.pjs", "src/generators/linkedin-forge/src/panel.js",
+  "src/generators/headshot-brief/README.md", "src/generators/headshot-brief/index.html", "src/generators/headshot-brief/main.pjs", "src/generators/headshot-brief/src/panel.js",
+  "src/generators/portfolio-intake/README.md", "src/generators/portfolio-intake/index.html", "src/generators/portfolio-intake/main.pjs", "src/generators/portfolio-intake/src/panel.js",
+  "src/generators/phonics-44/README.md", "src/generators/phonics-44/index.html", "src/generators/phonics-44/main.pjs", "src/generators/phonics-44/src/panel.js",
+  "src/generators/presentation-coach/README.md", "src/generators/presentation-coach/index.html", "src/generators/presentation-coach/main.pjs", "src/generators/presentation-coach/src/panel.js",
+  "src/generators/application-board/README.md", "src/generators/application-board/index.html", "src/generators/application-board/main.pjs", "src/generators/application-board/src/panel.js",
+  "src/generators/interview-drill/README.md", "src/generators/interview-drill/index.html", "src/generators/interview-drill/main.pjs", "src/generators/interview-drill/src/panel.js",
+  "src/generators/umbrella-brand/README.md", "src/generators/umbrella-brand/index.html", "src/generators/umbrella-brand/main.pjs", "src/generators/umbrella-brand/src/panel.js",
+  "src/generators/presence-plan/README.md", "src/generators/presence-plan/index.html", "src/generators/presence-plan/main.pjs", "src/generators/presence-plan/src/panel.js",
+  "src/generators/work-credit/README.md", "src/generators/work-credit/index.html", "src/generators/work-credit/main.pjs", "src/generators/work-credit/src/panel.js",
+  "src/generators/idea-lists/README.md", "src/generators/idea-lists/index.html", "src/generators/idea-lists/main.pjs", "src/generators/idea-lists/src/panel.js",
+  "src/sites/README.md", "src/sites/mailala/index.html", "src/sites/mailala/BLUEPRINT.md", "src/sites/mailala/STORY.md", "src/sites/mailala/ARCHITECT-BLUEPRINT.md",
      /* AUDIT 2026-09-24 (fourth time, same lesson, and this is the one that will
         keep biting): the sovereign's Mailala SOUL (src/sites/mailala/SOUL.md) and
         the nine venue photographs he supplied with it (src/sites/mailala/material/)
@@ -3081,6 +5404,13 @@ const SRC_SNAPSHOT = [
   "src/sites/mailala/material/6150204477533786119_121.jpg", "src/sites/mailala/material/6150204477533786120_121.jpg",
   "src/sites/mailala/material/6134195124376899528_121.jpg", "src/sites/mailala/material/6134195124376899530_121.jpg",
   "src/sites/mailala/material/6134195124376899531_121.jpg",
+     /* AUDIT 2026-09-23 (the sync brief): src/MASTERMIND-SYNC-2026-09-23.md was
+        written into the tree by the PhoenixScout mission — the topology as
+        measured, mastermind's git and cloud operations, the one channel that
+        crosses generator origins with no token, and what the rename cost.
+        Registered in the same edit. A file that is not in this list is not in
+        the authority. */
+  "src/MASTERMIND-SYNC-2026-09-23.md",
      /* AUDIT 2026-09-23 (the third time — the rule is stated again because it keeps
         being the thing that goes wrong): the OFFER DESK (src/offer-desk/**) and its
         register (src/offers.js) were written into the tree; they are listed here in
@@ -3091,6 +5421,12 @@ const SRC_SNAPSHOT = [
   "src/offer-desk/src/trades.js", "src/offer-desk/src/bundle.js", "src/offer-desk/src/desk.js",
   "src/offer-desk/src/pulse.js", "src/offer-desk/src/reel.js",
   "src/image-node/src/app.js", "src/image-node/src/cgn-node.js", "src/image-node/src/styles.css", "src/lesson-forge.js", "src/lessons.js",
+  "src/intake.js",
+     /* 2026-09-27, the sovereign's three words — "open the git". src/gitcanon.js reads the
+        canon that answers anonymously (the public monorepo, the Worker source, the raw
+        soul-DNA archive) and names the one branch that is behind a PAT. Registered in the
+        same edit that wrote it. A file that is not in this list is not in the authority. */
+  "src/gitcanon.js",
   "src/lessons/reference/NET-CLASSROOM-MANAGER.html", "src/lessons/reference/NET-Highschool-Careers.html", "src/lessons/reference/NET-Sarcasm-Academy.html", "src/lessons/specs/after-school-club-academy.spec.json", "src/lessons/specs/flower-power-academy.spec.json",
   "src/lessons/specs/materials-lab-academy.spec.json", "src/lessons/specs/world-music-academy.spec.json", "src/lessons/specs/look4-function1-directions.spec.json", "src/lessons/specs/closeup-a1-u2-vocabulary.spec.json",
   "src/marketing/INGEST-LOG.md", "src/marketing/MANIFEST.json", "src/marketing/README.md", "src/pheromone.js", "src/playbooks.js",
@@ -3117,7 +5453,178 @@ const SRC_SNAPSHOT = [
   "src/brand/assets/tep-audit.webp", "src/brand/assets/tep-lazy.webp", "src/brand/assets/tep-math.webp", "src/brand/assets/tge-bucket.webp", "src/brand/assets/tge-hud.webp",
   "src/brand/assets/tge-rule8.webp", "src/brand/assets/tiger-energy.webp", "src/brand/assets/tiger-spectral.webp", "src/brand/assets/tiger.webp", "src/brand/assets/tiger2.webp",
   "src/brand/assets/tigerbg.webp", "src/brand/assets/venn.webp", "src/brand/assets/wave-loud.webp",
+     /* AUDIT 2026-09-25 (fifth time, same lesson — and this time it is a REGISTER, so it would be
+        the worst one to miss): THE ASSET REGISTER was written into the tree —
+        src/sites/mailala/ASSET-MANIFEST.md (the register, human) and src/sites/mailala/
+        ASSET-MANIFEST.json (the register, machine — every asset in the blueprint located,
+        labelled and SHA-256 hashed from its actual bytes, plus all 242 shipped src/ files).
+        Registered in the same edit. A file that is not in this list is not in the authority. */
+  "src/sites/mailala/ASSET-MANIFEST.md", "src/sites/mailala/ASSET-MANIFEST.json",
+     /* AUDIT 2026-09-25 (same edit, same rule): THE SYNC PACKET — the Mailala work addressed to the
+        node (phoenix-rising-ai-solutions-agent99-webapp): every artifact with a URL that answers
+        today and the SHA-256 to check it by, plus the three lanes measured (cloudflare BLOCKED, the
+        mesh BLOCKED AT THE WRITE, the token-free read channel WORKS pull-only). Registered here so
+        /canon sync carries it. A file that is not in this list is not in the authority. */
+  "src/sites/mailala/SYNC-PACKET.md", "src/sites/mailala/SYNC-PACKET.json",
+     /* AUDIT 2026-09-24 (THE FREE WIRE + THE REGISTER PASS): two files written and registered in the
+        same edit. (1) src/freewire.js — control with no credential: the measured lane table, the
+        family nerve (ntfy.sh), and the MUTABLE pointer (keyvalue.immanuel.co) that does the job the
+        platform's editable store refused, so the estate stops being pull-only. (2) src/tools/
+        register-pass.mjs — the census, as code and in the estate at last: ASSET-MANIFEST.md had
+        documented the recipe and called it reproducible, but the pass that produced the register
+        lived in a dead session's scratch space, so a later session could read the recipe and not run
+        it. It is also the instrument that keeps the pointer's numbers honest.
+        A file that is not in this list is not in the authority. */
+  "src/freewire.js", "src/tools/register-pass.mjs",
+     /* AUDIT 2026-09-25 (the brain): src/brain.js — the mastermind's memory (an index of
+        every artifact, file, document, command, soul fragment, op, key slot and lane),
+        the AUTO-SYNC lane that runs by itself (boot + every 5 min: recompute the estate,
+        pull the published manifest, re-hash the delivery, TRY the write lane and record
+        its failure verbatim), the KEY LEDGER (fingerprints only — a secret is never
+        stored or logged), the archive, and image sharing. Wired in the same edit:
+        index.html loads it before app.js; app.js exposes COMMAND_BOOK to it, adds
+        /brain, the brain instrument in the tab bar, and the brain row in /state.
+        A file that is not in this list is not in the authority. */
+  "src/brain.js",
+     /* AUDIT 2026-09-25 (the relay): src/relay.js — THE MASTER SYNC PIPELINE. One ordered
+        chain, each stage refusing to run on a lie from the stage before it: READ the register
+        and the packet → CENSUS every declared file (hash it, rebuild the register's own tree
+        digest from the bytes) → DELIVER the four truth-documents to the host by digest
+        (idempotent: identical bytes are HELD, never re-uploaded) and TRY the mesh write and
+        the cloud, recording each refusal verbatim → VERIFY by pulling the read channel and
+        re-hashing every URL it delivered → INDEX (the brain builds over the estate) → ARCHIVE
+        the run under its own digest. Verdicts are the S2Pipeline's: REAL / HOLLOW / MISSING,
+        plus BLOCKED for a door that is shut — and a run with a shut door is HELD, never
+        COMPLETE. Printed by /relay (and /pipeline sync); run headless by the boot sequence.
+        Wired in the same edit: index.html loads it before app.js; app.js adds /relay, the
+        relay instrument in the tab bar, the relay row in /state, and exports SRC_SNAPSHOT as
+        window.ObiSourceTree so the pipeline can enumerate the estate it is carrying.
+        A file that is not in this list is not in the authority. */
+  "src/relay.js",
+     /* AUDIT 2026-09-24 (the open source market): src/market.js — THE RECON AND THE PLAY.
+        It measures the market this station already occupies with nine real endpoints
+        (GitHub search · npm registry · HuggingFace spaces · Reddit), prints a NUMBER for
+        every channel that answered and the REFUSAL VERBATIM for every one that did not,
+        derives the open and closed seats from those numbers (never asserts them), and
+        carries the play: take the index, the reference implementation and the on-ramp of
+        the market the estate already lives in. Printed by /market (scan · play · state ·
+        log); the recon arms itself after boot. The play, written down, is
+        src/marketing/OPEN-SOURCE-PLAY.md; the ready artefact is
+        src/marketing/awesome-perchance.md (populated from the scan: 271 repositories
+        measured, leader 69 stars, zero indexes — the empty seat). Wired in the same edit:
+        index.html loads it before app.js; app.js adds /market, the market instrument in
+        the tab bar, the market row in /state, and the module flag. A file that is not in
+        this list is not in the authority. */
+  "src/market.js",
+  "src/marketing/OPEN-SOURCE-PLAY.md",
+  "src/marketing/awesome-perchance.md",
+     /* AUDIT 2026-09-24 (the secret sauce): src/secretsauce.js — THE METHOD, GIVEN AWAY
+        FREE (/SecretSauce). The canon command on the other side of the omega gate: it
+        holds the ten best practices (each one already load-bearing in this station's own
+        code), the best-kept secrets (derived from the measured market), and the ladder
+        that starts with best practice and then upgrades. The TRAIN lane builds the
+        ordered corpus — best practice first, then the measurement, then the secrets —
+        hashes it, stores it and hands it over to download; the station cannot fine-tune
+        a model and says so. The FORUMS lane asks Hacker News (Algolia), dev.to, GitHub
+        issues, StackExchange and Reddit live, and keeps every refusal verbatim. Gated by
+        the canon hallmark (sha-256 only, never the plaintext). The canon document it
+        prints is src/canon/SECRET-SAUCE.md. Wired in the same edit: index.html loads it
+        before app.js; app.js adds /SecretSauce (and /sauce) and the command-book row.
+        A file that is not in this list is not in the authority. */
+  "src/secretsauce.js",
+  "src/canon/SECRET-SAUCE.md",
+     /* AUDIT 2026-09-24 (the rubric): src/rubric.js — THE INSTRUMENT THE WORD "EVALUATOR"
+        MEANS. The estate inventory has carried `ana.rubric` as MISSING with the note "the word
+        'evaluator' means this"; this file is that row, built. Criteria with bands; every band
+        must carry a verbatim span from the raw record; the ENGINE locates that span itself and
+        REFUSES any it cannot find (a model that can invent a quote can invent a clock, so the
+        timestamp is read off the transcript's own utterance map and never asked for); where the
+        record holds a number the band is COMPUTED and the model's band is kept as recorded
+        dissent; a band with no verified citation is NOT SCORED — excluded from the total and
+        listed in the omission audit; coverage travels with every total; thresholds are printed
+        with the band; scorecards are append-only and re-verifiable (/rubric verify re-locates
+        every citation against the record as it stands). Printed by /rubric (list · show · new ·
+        score · errors · teach · verify · trend · archive · export · canary); /rubric canary
+        drives the whole pipeline with a canned response and no network, and /doctor runs it.
+        Wired in the same edit: index.html loads it before app.js; app.js adds /rubric (and
+        /score, /assess), the command-book row, the rubric row in /state, the rubric instrument
+        in the tab bar, and the doctor check. A file that is not in this list is not in the
+        authority. */
+  "src/rubric.js",
+     /* AUDIT 2026-09-26 (SIXTH TIME, SAME LESSON — and the register now has teeth:
+        CENSUS is computed from THIS list, so an unregistered file is not merely
+        absent from the backup, it is absent from the count the register publishes).
+        NATURALENGLISHTRAINING.DEV — the English wing's public website, built whole:
+        12 pages, the adaptive placement engine, the local-first lead pipeline, the
+        four JSON data files the business content lives in, and the back-end Worker
+        that receives a submission (complete, NOT deployed — no credential exists in
+        this origin, and none may be written into public source). Registered in the
+        same edit that wrote it, which is the rule obeyed rather than restated a
+        seventh time. A file that is not in this list is not in the census, not in
+        the backup, not in the delivery. */
+  "src/sites/naturalenglishtraining/README.md",
+  "src/sites/naturalenglishtraining/index.html",
+  "src/sites/naturalenglishtraining/method.html",
+  "src/sites/naturalenglishtraining/programs.html",
+  "src/sites/naturalenglishtraining/pricing.html",
+  "src/sites/naturalenglishtraining/placement.html",
+  "src/sites/naturalenglishtraining/book.html",
+  "src/sites/naturalenglishtraining/parents.html",
+  "src/sites/naturalenglishtraining/results.html",
+  "src/sites/naturalenglishtraining/about.html",
+  "src/sites/naturalenglishtraining/teachers.html",
+  "src/sites/naturalenglishtraining/faq.html",
+  "src/sites/naturalenglishtraining/legal.html",
+  "src/sites/naturalenglishtraining/404.html",
+  "src/sites/naturalenglishtraining/robots.txt",
+  "src/sites/naturalenglishtraining/sitemap.xml",
+  "src/sites/naturalenglishtraining/assets/net.css",
+  "src/sites/naturalenglishtraining/assets/net.js",
+  "src/sites/naturalenglishtraining/assets/api.js",
+  "src/sites/naturalenglishtraining/assets/placement.js",
+  "src/sites/naturalenglishtraining/assets/booking.js",
+  "src/sites/naturalenglishtraining/assets/data/programs.json",
+  "src/sites/naturalenglishtraining/assets/data/pricing.json",
+  "src/sites/naturalenglishtraining/assets/data/faq.json",
+  "src/sites/naturalenglishtraining/backend/worker.js",
+  "src/sites/naturalenglishtraining/backend/wrangler.toml",
+  "src/sites/naturalenglishtraining/backend/README.md",
+     /* AUDIT 2026-10-18 (eighth time, same lesson — and this one was the whole
+        boardroom): the 2IC era had written 49 files into the tree without ever
+        registering one — src/boardroom.js, src/boardroom-room.js/.css, all 7 seat
+        laws + 7 memories + room README, the masterminds doctrine, Agent 99 docs,
+        44/444/999, auto.js, deck.js, the research file, one lessons reference and
+        the whole quan site. Every file scanned clean (no secrets, no expletives)
+        before registering. A file that is not in this list is not in the
+        authority. */
+  "src/EMPIRE-MAP.md",
+  "src/44.md", "src/444.md", "src/999.md", "src/COLLECTIVE.md",
+  "src/OMEGA2-phoenix-rising-ai-solutions-agent99-mastermind.md",
+  "src/agent99.md", "src/agent99-guardrails.md", "src/agent99-toolkit.md",
+  "src/auto.js", "src/deck.js",
+  "src/boardroom.js", "src/boardroom-room.js", "src/boardroom-room.css",
+  "src/boardroom/README.md",
+  "src/boardroom/seats/ceo.md", "src/boardroom/seats/architect.md", "src/boardroom/seats/pres.md",
+  "src/boardroom/seats/training.md", "src/boardroom/seats/systems.md", "src/boardroom/seats/fsdev.md",
+  "src/boardroom/seats/atoz.md",
+  "src/boardroom/memory/ceo.md", "src/boardroom/memory/architect.md", "src/boardroom/memory/pres.md",
+  "src/boardroom/memory/training.md", "src/boardroom/memory/systems.md", "src/boardroom/memory/fsdev.md",
+  "src/boardroom/memory/atoz.md",
+  "src/masterminds/README.md", "src/masterminds/edtech.md", "src/masterminds/gaming.md",
+  "src/masterminds/lineup-2026-10-16.md", "src/masterminds/promote.md", "src/masterminds/rename-create-specs.md",
+  "src/research/gemini-free-stack-2026-10-16.md",
+  "src/lessons/reference/NET-Neon-City-Genesis.html",
+  "src/sites/quan/index.html", "src/sites/quan/about.html", "src/sites/quan/connect.html",
+  "src/sites/quan/dist.html", "src/sites/quan/style.css",
+  "src/sites/quan/assets/fine-wine.jpg", "src/sites/quan/assets/fine-wine-2.jpg",
+  "src/sites/quan/assets/natural.jpg", "src/sites/quan/assets/natural-2.jpg",
+  "src/sites/quan/assets/plantie.jpg", "src/sites/quan/assets/plantie-2.jpg",
+  "src/sites/quan/assets/saigon.jpg", "src/sites/quan/assets/saigon-magazine.jpg",
 ];
+/* THE STATION'S OWN DECLARATION OF ITS ESTATE. One list, read live. src/relay.js reads it
+   through this export so the pipeline's census can never drift from the backup's, and so a
+   file that is not in this list is not in the census, the backup, or the delivery. */
+window.ObiSourceTree = SRC_SNAPSHOT;
 /* read one of the station's own files. src/* are served on this origin; main.pjs
    and index.html are the generator's PANELS and are not — they come from the
    platform's own public API (via src/forge.js). Returns null if unreadable. */
@@ -3150,6 +5657,21 @@ async function selfSourceAny(path){
   return await selfSource(path);
 }
 function keySet(obj){ try{ const k = Object.assign({}, JSON.parse(localStorage.getItem("obi_keys")||"{}"), obj); localStorage.setItem("obi_keys", JSON.stringify(k)); return true; }catch(e){ return false; } }
+/* FAIL-CLOSED secret write. A secret is only ever reported STORED when the bytes can be READ
+   BACK. keySet returns false when the browser refuses the write (quota, an evicted or blocked
+   store, a partition that has been reset) and every caller used to ignore that return value —
+   so the station said "stored" over a write that never happened, and the sovereign paid for it
+   on the next reload. This is the same law as every other instrument here: nothing is called
+   stored that was not measured. AUDIT 2026-09-24. */
+function keyStore(obj){
+  if(!keySet(obj)) return { ok:false, why:"the browser refused the write (localStorage threw)" };
+  let k; try{ k = JSON.parse(localStorage.getItem("obi_keys")||"{}"); }catch(e){ return { ok:false, why:"the store could not be read back" }; }
+  for(const s of Object.keys(obj)){
+    const same = (typeof obj[s] === "object") ? (JSON.stringify(k[s]) === JSON.stringify(obj[s])) : (k[s] === obj[s]);
+    if(!same) return { ok:false, why:"the read-back of \u201c" + s + "\u201d did not match what was written" };
+  }
+  return { ok:true };
+}
 function maskTok(t){ if(!t) return "(none)"; return t.slice(0,4) + "…" + t.slice(-4) + " · len " + t.length; }
 async function apiJson(url, opts){
   const r = await root.superFetch(url, opts || {});
@@ -3178,14 +5700,20 @@ async function cmdCloudflare(arg){
   if(op === "token"){
     const t = (parts[1]||"").trim();
     if(!t){ addBubble("ass","Usage: <b>/cf token &lt;API_TOKEN&gt;</b>"); rrlAppend(runNoOf(),"DNA","Obi: [/cf token — no token given]"); return; }
-    keySet({cf:t});
-    addBubble("ass","🔑 Cloudflare token stored locally. Verifying…");
+    const st = keyStore({cf:t});
+    if(!st.ok){
+      addBubble("ass","⛔ <b>NOT STORED.</b> The browser refused to keep the token — " + esc(st.why) + ".<br><span class=\"rfoot\">Nothing was saved, so nothing will be there after a reload. This is reported as a failure on purpose: a secret that is claimed but not held is worse than one that is refused. Try again, or check the store with <b>/keys</b>.</span>");
+      logOp({ kind:"secret", action:"cf token", detail:"WRITE REFUSED — nothing stored", result:"NOT STORED" });
+      rrlAppend(runNoOf(),"DNA","Obi: [/cf token — WRITE REFUSED, nothing stored]");
+      return;
+    }
+    addBubble("ass","🔑 Cloudflare token stored locally <span style=\"opacity:.7\">(written and read back)</span>. Verifying…");
     logOp({ kind:"secret", action:"cf token", detail:"stored in this browser only (value never logged)", result: maskTok(t) });
     const r = await apiJson(CF_BASE, { method:"GET", headers:{ "Authorization":"Bearer "+t } });
     if(r.j && r.j.success && r.j.result && r.j.result.length){
       const acct = r.j.result[0];
-      keySet({cfAcct:acct.id});
-      addBubble("ass", `✅ Cloudflare token valid — account <b>${esc(acct.name||acct.id)}</b> (${esc(acct.id)}) — stored as <b>cfAcct</b>, so every fleet call is addressed through it.<br><span class="rfoot">The token is stored locally as <b>cf</b>. Add the R2 S3 pair with <b>/cf r2 &lt;accessKeyId&gt; &lt;secret&gt;</b> · read the store with <b>/cf r2</b> · <b>/cf status</b>, <b>/cf deploy &lt;name&gt;</b>. Both tokens then go to the canon: <b>/vault seal</b> → <b>/vault push</b> (gated) — sealed, so the repo can hold them in the open.</span>`);
+      const stA = keyStore({cfAcct:acct.id});
+      addBubble("ass", `✅ Cloudflare token valid — account <b>${esc(acct.name||acct.id)}</b> (${esc(acct.id)}) — ${stA.ok ? "stored as <b>cfAcct</b>" : '<b style="color:#ff5a5a">the account id could NOT be stored (' + esc(stA.why) + ') — re-run /cf token</b>'}, so every fleet call is addressed through it.<br><span class="rfoot">The token is stored locally as <b>cf</b>. Add the R2 S3 pair with <b>/cf r2 &lt;accessKeyId&gt; &lt;secret&gt;</b> · read the store with <b>/cf r2</b> · <b>/cf status</b>, <b>/cf deploy &lt;name&gt;</b>. Both tokens then go to the canon: <b>/vault seal</b> → <b>/vault push</b> (gated) — sealed, so the repo can hold them in the open.</span>`);
     } else {
       addBubble("ass", "⚠ Token stored, but verification failed: " + esc((r.j && r.j.errors && r.j.errors[0] && r.j.errors[0].message) || r.txt.slice(0,140)));
     }
@@ -3247,8 +5775,9 @@ async function cmdCloudflare(arg){
          store; this pair is what an S3 client (and the deploy pipeline) signs with.
          Stored locally, then PROVEN by a real SigV4 signature before anything is
          claimed: a pair that cannot list the buckets is reported, not filed. */
-      keySet({ cfR2Key:id, cfR2Secret:sec });
-      addBubble("ass", "🔑 Cloudflare R2 key pair stored locally. Proving it with a signed S3 request…");
+      const stR2 = keyStore({ cfR2Key:id, cfR2Secret:sec });
+      if(!stR2.ok){ addBubble("ass", "⛔ <b>R2 pair NOT STORED.</b> The browser refused the write — " + esc(stR2.why) + ". Nothing was saved."); logOp({ kind:"secret", action:"cf r2 keys", detail:"WRITE REFUSED — nothing stored", result:"NOT STORED" }); return; }
+      addBubble("ass", "🔑 Cloudflare R2 key pair stored locally <span style=\"opacity:.7\">(written and read back)</span>. Proving it with a signed S3 request…");
       logOp({ kind:"secret", action:"cf r2 keys", detail:"R2 access key pair stored in this browser only (values never logged)", result: maskTok(id) });
       const t = (window.ObiVault && window.ObiVault.r2) ? await window.ObiVault.r2() : { ok:false, detail:"src/vault.js is not loaded, so the pair could not be signed for" };
       addBubble("ass", (t.ok ? "✅ " : "⚠ ") + esc(t.detail) + (t.ok
@@ -3286,13 +5815,14 @@ async function cmdGithub(arg){
   if(op === "token"){
     const t = (parts[1]||"").trim();
     if(!t){ addBubble("ass","Usage: <b>/gh token &lt;PAT&gt;</b>"); return; }
-    keySet({gh:t});
-    addBubble("ass","🔑 GitHub token stored locally. Verifying…");
+    const st = keyStore({gh:t});
+    if(!st.ok){ addBubble("ass","⛔ <b>NOT STORED.</b> The browser refused to keep the token — " + esc(st.why) + ". Nothing was saved."); logOp({ kind:"secret", action:"gh token", detail:"WRITE REFUSED — nothing stored", result:"NOT STORED" }); return; }
+    addBubble("ass","🔑 GitHub token stored locally <span style=\"opacity:.7\">(written and read back)</span>. Verifying…");
     logOp({ kind:"secret", action:"gh token", detail:"stored in this browser only (value never logged)", result: maskTok(t) });
     const r = await ghApiJson("https://api.github.com/user", { method:"GET", headers:ghHead() });
     if(r.j && r.j.login){
-      keySet({ghUser:r.j.login});
-      addBubble("ass", `✅ GitHub token valid — <b>${esc(r.j.login)}</b>. Backup with <b>/gh backup</b> or list with <b>/gh status</b>.`);
+      const stU = keyStore({ghUser:r.j.login});
+      addBubble("ass", `✅ GitHub token valid — <b>${esc(r.j.login)}</b>${stU.ok ? "" : ' <b style="color:#ff5a5a">(but the username could not be stored: ' + esc(stU.why) + ')</b>'}. Backup with <b>/gh backup</b> or list with <b>/gh status</b>.`);
     } else {
       addBubble("ass","⚠ " + esc((r.j && r.j.message) || r.txt.slice(0,140)));
     }
@@ -3324,6 +5854,8 @@ async function cmdGithub(arg){
       + "<br>Authority: <b>https://github.com/" + esc(CANON.owner) + "/" + esc(CANON.repo) + "</b> @ " + esc(CANON.branch)
       + (res.commitSha ? " · commit <b>" + esc(res.commitSha.slice(0, 8)) + "</b>" : "")
       + "<br><span class=\"rfoot\">Everything in one place: the session record, the station's sources, the raw chat, and the I-LOG (" + (res.ilogEntries || 0) + " chain entries + the Schema V2 transcript). There is no second repo to keep in sync.</span>"
+      + (res.mirror && res.mirror.removed && res.mirror.removed.length ? "<br><span class=\"rfoot\">🧹 Mirror pruned: <b>" + esc(res.mirror.removed.map(p => p.replace("OPERATIONS/COMMANDSTATION/perchance/", "")).join(", ")) + "</b> — withdrawn from this station, so removed from the branch (the mirror is exact, or it is not a mirror).</span>" : "")
+      + (res.mirror && res.mirror.ok === false ? "<br><span class=\"rfoot\">🧹 Mirror prune skipped: " + esc(res.mirror.why) + ".</span>" : "")
       + (res.errors && res.errors.length ? "<br><span class=\"rfoot\">⚠ " + esc(res.errors.slice(0, 3).join(" · ")) + "</span>" : ""));
     rrlAppend(runNoOf(), "DNA", "Obi: [/gh backup → " + CANON.owner + "/" + CANON.repo + " — " + res.pushed + " files" + (res.commitSha ? " · " + res.commitSha.slice(0, 8) : "") + "]");
     logOp({ kind:"push", action:"gh backup", ok: okB, detail: CANON.owner + "/" + CANON.repo + "@" + CANON.branch + " · " + res.files + " files (chat + sources + I-LOG " + (res.ilogEntries || 0) + ")", result: res.pushed + " pushed · " + res.failed + " failed" + (res.commitSha ? " · commit " + res.commitSha.slice(0, 8) : ""), ref: res.commitSha });
@@ -3469,7 +6001,7 @@ async function cmdGithubTest(){
       same ? "still " + String(shaBefore).slice(0,8) + " before and after — the probe proved write access to the canon's object store while changing nothing about the canon"
            : "⚠ the ref moved: " + String(shaBefore).slice(0,8) + " → " + String(shaAfter).slice(0,8));
   } else {
-    say("CANON WRITE (gated)", "dangling blob probe", "skip", "—", "SKIPPED — PHOENIXOMEGAPROTOCOL is not armed, so nothing was sent. Canon writes need /omega <password>. The station's own commit 95b23ded above is the standing proof this token can write here.");
+    say("CANON WRITE (gated)", "dangling blob probe", "skip", "—", "SKIPPED — PHOENIXOMEGAPROTOCOL is not armed, so nothing was sent. Canon writes need /phoenixomegaprotocol <password>. The station's own commit 95b23ded above is the standing proof this token can write here.");
   }
 
   /* ---- render ---- */
@@ -3486,16 +6018,16 @@ async function cmdGithubTest(){
       + g.rs.map(r => '<b>' + (r.ok === true ? "✓ " : (r.ok === "skip" ? "– " : "✗ HTTP " + r.http + " ")) + esc(r.l) + '</b> — ' + (r.h || esc(r.d))).join("<br>")
       + '</div></div>';
   }
-  html += '<div class="rfoot">Reads prove reach; the gist cycle proves real create/edit/delete off the canon; the canon itself is <b>never modified</b> here — the only canon-write probe is a dangling blob (an object no ref points at, invisible to the tree) and it stays skipped until /omega arms the gate. Fail-closed: a row the token cannot open is reported with GitHub\'s own message, not smoothed over.</div></div>';
+  html += '<div class="rfoot">Reads prove reach; the gist cycle proves real create/edit/delete off the canon; the canon itself is <b>never modified</b> here — the only canon-write probe is a dangling blob (an object no ref points at, invisible to the tree) and it stays skipped until /phoenixomegaprotocol arms the gate. Fail-closed: a row the token cannot open is reported with GitHub\'s own message, not smoothed over.</div></div>';
   addBubble("ass", html);
   logOp({ kind:"op", action:"gh test", ok:opened === scored.length, detail:"capability sweep · " + scopes.length + " scopes · " + rows.length + " real calls to api.github.com", result:opened + "/" + scored.length + " opened" + (armed ? " · canon blob probe ran" : " · canon probe skipped (gate locked)") });
   rrlAppend(runNoOf(), "DNA", "Obi: [/gh test — " + opened + "/" + scored.length + " GitHub capabilities confirmed for @" + (keyGet("ghUser") || "?") + "]");
 }
 
 async function buildRawChat(){
-  const out = { exportedAt: new Date().toISOString(), generator: window.generatorName || "obi", page: location.href, messages: messages.map(m => redactSecrets(m)) };
+  const out = { exportedAt: new Date().toISOString(), generator: window.generatorName || "obi", page: location.href, messages: messages.map(m => scrubWorkSafe(redactSecrets(m))) };
   try{ out.ledger = JSON.parse(localStorage.getItem("obi_sdnad")||"{}"); }catch(e){}
-  try{ if(out.ledger && out.ledger.soul) out.ledger.soul = out.ledger.soul.map(s => Object.assign({}, s, { text: redactSecrets(s.text) })); }catch(e){}
+  try{ if(out.ledger && out.ledger.soul) out.ledger.soul = out.ledger.soul.map(s => Object.assign({}, s, { text: scrubWorkSafe(redactSecrets(s.text)) })); }catch(e){}
   out.runs = [];
   try{
     for(let i=0;i<localStorage.length;i++){
@@ -3503,7 +6035,7 @@ async function buildRawChat(){
       if(k && k.indexOf("obi_rrl_run") === 0){
         try{
           const v = JSON.parse(localStorage.getItem(k)||"null");
-          if(v){ if(v.entries) v.entries = v.entries.map(e => Object.assign({}, e, { text: redactSecrets(e.text) })); out.runs.push(v); }
+          if(v){ if(v.entries) v.entries = v.entries.map(e => Object.assign({}, e, { text: scrubWorkSafe(redactSecrets(e.text)) })); out.runs.push(v); }
         }catch(e){}
       }
     }
@@ -3592,14 +6124,15 @@ async function dgRecover(){
 function showKeys(){
   const k = (()=>{ try{ return JSON.parse(localStorage.getItem("obi_keys")||"{}"); }catch(e){ return {}; } })();
   addBubble("ass", `<div class="rise"><div class="rhead">🔐 /keys — locally stored secrets</div>
-    <div class="rrow"><b>CLOUDFLARE</b><span class="vd">${k.cf ? "stored" : "none"}</span><div class="rd">${maskTok(k.cf)}${k.cf ? " · token `nameless-feather-3545` (full permissions)" : ""}</div></div>
+    <div class="rrow"><b>CLOUDFLARE</b><span class="vd">${k.cf ? "stored" : "none"}</span><div class="rd">${k.cf ? maskTok(k.cf) : "set with /cf token &lt;API_TOKEN&gt; — stored in this browser, then verified against Cloudflare"}</div></div>
     <div class="rrow"><b>CLOUDFLARE ACCOUNT</b><span class="vd">${k.cfAcct ? "stored" : "none"}</span><div class="rd">${k.cfAcct ? esc(k.cfAcct) : "set with /cf token … (the account the token is scoped to)"}</div></div>
     <div class="rrow"><b>CLOUDFLARE R2 (S3)</b><span class="vd">${k.cfR2Key && k.cfR2Secret ? "stored" : "none"}</span><div class="rd">${k.cfR2Key && k.cfR2Secret ? (esc(maskTok(k.cfR2Key)) + (k.cfAcct ? " · https://" + esc(k.cfAcct) + ".r2.cloudflarestorage.com" : "")) : "set with /cf r2 &lt;accessKeyId&gt; &lt;secret&gt; — the S3 key pair for the object store"}</div></div>
     <div class="rrow"><b>GITHUB</b><span class="vd">${k.gh ? "stored" : "none"}</span><div class="rd">${maskTok(k.gh)}${k.ghUser ? " · " + esc(k.ghUser) : ""}</div></div>
     <div class="rrow"><b>DEEPGRAM</b><span class="vd">${k.deepgram ? "stored" : "none"}</span><div class="rd">${maskTok(k.deepgram)}</div></div>
     <div class="rrow"><b>TEXTBOOK PLATFORM · SECONDARY</b><span class="vd">${k.ngl ? "stored" : "none"}</span><div class="rd">${k.ngl ? (esc(k.ngl.user || "?") + " · " + maskTok(k.ngl.password) + (k.ngl.site ? " · " + esc(k.ngl.site) : "")) : "National Geographic Learning (learn.eltngl.com) — the Close-up / New Close Up course. Set with /keys ngl <account> <password>"}</div></div>
     <div class="rrow"><b>TEXTBOOK PLATFORM · PRIMARY</b><span class="vd">${k.nglP ? "stored" : "none"}</span><div class="rd">${k.nglP ? (esc(k.nglP.user || "?") + " · " + maskTok(k.nglP.password) + (k.nglP.site ? " · " + esc(k.nglP.site) : "")) : "National Geographic Learning (learn.eltngl.com) — the Look course, grades 1-5. Set with /keys ngl primary <account> <password>"}</div></div>
-    <div class="rfoot">Stored only in this browser's localStorage (key obi_keys) — never in public source, never captured as soul, never in the I-LOG. Set with /cf token, /gh token, /dg token, /keys ngl [primary] &lt;account&gt; &lt;password&gt;.</div></div>`);
+    <div class="rfoot">Stored only in this browser's localStorage (key <b>obi_keys</b>) — never in public source, never captured as soul, never in the I-LOG. Set with /cf token, /gh token, /dg token, /keys ngl [primary] &lt;account&gt; &lt;password&gt;.<br>
+    <b>WHERE THEY LIVE:</b> this store is bound to the browser AND to the generator's own address (origin <b>${esc(location.origin)}</b>, name <b>${esc(window.generatorName||"?")}</b>). A <b>fork or save-as makes a new address and therefore an EMPTY store</b> — the old secrets stay under the old address and nothing here can reach them. Renaming keeps the address but the station's kv is keyed by name, so kv-backed data (ledgers, clients) reads empty until you rename back. <b>Only the sealed vault survives:</b> <b>/vault seal</b> → <b>/vault push</b> puts them, encrypted, where the sovereign can restore them with <b>/vault recover</b>.</div></div>`);
   rrlAppend(runNoOf(),"DNA","Obi: [keys status shown]");
 }
 
@@ -3610,7 +6143,7 @@ function showKeys(){
    session's perchance operations (RRL, soul ledger, app sources, the I-LOG) back
    into the Canon under OPERATIONS/COMMANDSTATION/. Evidence-first: every card
    shows raw facts. The Canon does not change without Sov100: every write goes
-   through PHOENIXOMEGAPROTOCOL (/omega).
+   through PHOENIXOMEGAPROTOCOL (/phoenixomegaprotocol).
    ========================================================================== */
 const CANON = {
   owner: "Phoenix-Rising-Ai-Solutions",
@@ -3656,9 +6189,13 @@ const CANON_REGISTRY = [
   ["/phoenixrise","release","SCS Stage 1 \u2014 audit the prior DEATH, gate the session, stamp the name",1,"canon"],
   ["/phoenixscout","discovery","SCS Stage 2 \u2014 recon: flag, tag, hand off. Changes nothing. Give it TERMS and it also hunts the canon's own records (SOUL extracts, prompt registers, I-LOGs, DEATH seals) for them and pulls the SOUL back verbatim",1,"canon"],
   ["/phoenixmarch","build","SCS Stage 3 \u2014 territory sweep; confirm the scout the hard way",1,"canon"],
+  ["/forcemarch","build","SCS Stage 3, run OUT OF ORDER on the sovereign\u2019s word \u2014 the sweep re-probes every flagged sector and compares the two readings; the stage artifact is stamped only if a session is open, and it says so when it is not",1,"station"],
   ["/phoenixscholar","report","SCS Stage 4 \u2014 preserve the SOUL; machine-count the RRL",1,"canon"],
+  ["/soulscholar","report","SCS Stage 4, run OUT OF ORDER on the sovereign\u2019s word \u2014 count the RRL, sha-256 each half, index the words, preserve the extract durably in this origin, and put a SEALED form (counts + hashes + index, no verbatim text) on the free wire. Verbatim SOUL is never published by the station on its own",1,"station"],
   ["/phoenixsupply","sync","SCS Stage 5 \u2014 route every artifact; hold the ground",1,"canon"],
+  ["/supplylines","sync","SCS Stage 5, run OUT OF ORDER on the sovereign\u2019s word \u2014 every artifact and where it ACTUALLY is (this origin, the free-wire addresses, the pointer, the nerve); a canon destination is always HELD, never claimed as written",1,"station"],
   ["/phoenixfortify","validate","SCS Stage 6 \u2014 audit every artifact; gate the seal",1,"canon"],
+  ["/phoenixengineer","validate","SCS Stage 6, run OUT OF ORDER on the sovereign\u2019s word \u2014 the canon\u2019s session audit PLUS the station\u2019s own: the published copies are fetched back off the free wire and compared byte for byte with the copies in this origin, the pointer is checked against this register, and the seal on the SOUL is checked by searching the published file for its own words. The SEAL is SHUT unless every artifact is present, passing and identical",1,"station"],
   ["/phoenixdeath","release","SCS Stage 7 \u2014 the 7-point march, seal, handoff",1,"canon"],
   ["/romeprotocol","stability","ROME PROTOCOL \u2014 truth anchoring: SURFACE \u2192 VERIFY \u2192 ANCHOR + the five Watchtowers",1,"canon"],
   ["/pipeline","validate","S2Pipeline \u2014 the execution artifact + the REAL/HOLLOW/MISSING fidelity gate",1,"canon"],
@@ -3680,8 +6217,9 @@ const CANON_REGISTRY = [
   ["/Centurion-Code","validate","Code standards \u2014 NOT built here",0,"canon"],
   ["/canon","sync","Pull doctrine, ping fleet + soul gate \u2014 a station command, not a canon command",1,"station"],
   ["/ilog","sync","I-LOG \u2014 operation record, chain verify, Git anchor (the station's implementation of the record)",1,"station"],
-  ["/omega","security","PHOENIXOMEGAPROTOCOL \u2014 Canon authorization gate (Sov100 password)",1,"proposed"],
+  ["/phoenixomegaprotocol","security","PHOENIXOMEGAPROTOCOL \u2014 Canon authorization gate (Sov100 password)",1,"proposed"],
   ["/vault","security","PrAis Vault \u2014 every key the empire runs on (locate \u00b7 test \u00b7 set \u00b7 seal \u00b7 push)",1,"station"],
+  ["/git","discovery","THE GIT, OPEN \u2014 every part of the canon that answers with no token (the public monorepo, the Worker bundle, the raw soul-DNA archive), the one branch behind a PAT, and the one line that opens it. A station command: the canon has no /git",1,"station"],
   ["/cf","cloud","Cloudflare fleet + R2 \u2014 /cf token \u00b7 /cf status \u00b7 /cf deploy \u00b7 /cf r2",1,"station"],
   ["/offers","station","The free-website offer \u2014 the register of everyone who said yes, the link read for their trade, and the release of THE DROP (/offer release)",1,"station"],
   ["/lesson","build","NET Academy \u2014 the Lesson Creator desk",1,"proposed"],
@@ -3740,7 +6278,7 @@ async function cmdProposed(arg){
   const rows = PROPOSED_G999.map(r => '<div class="rrow' + (r.merged ? "" : " pending") + '"><b>' + esc(r.id) + '</b><span class="vd">' + esc((posOf(r.id) && posOf(r.id).at) || String(r.stage || "SUPPLY")) + '</span><div class="rd"><b>' + esc(r.sys) + ' \u2014 ' + esc(r.title) + '.</b> ' + esc(r.says) + '</div></div>').join("");
   addBubble("ass", '<div class="rise"><div class="rhead">\ud83d\udcdc /proposed \u2014 the staging lane (NOT canon \u00b7 NOT a command)</div>'
     + '<div class="rrow"><b>WHERE THEY ARE REVIEWED</b><span class="vd">THE PIPELINE</span><div class="rd">every idea walks the chain the canon names — <b>RRL → SOUL → DNA → LEDGER → STARMAP → SOULKEYS → S2PIPELINE → REGISTRY_SYNC</b> (CANON/SYSTEM/COLD-START-BOOT.md I.012, read live off the canon branch) — and it becomes law only at the gate. <b>/pipeline</b> puts each one in front of you at its own stage. Not a command. Not canon. It becomes law only when <b>PHOENIXOMEGAPROTOCOL</b> writes it.</div></div>'
-    + '<div class="rrow"><b>STATUS</b><span class="vd">' + PROPOSED_G999.length + ' ITEMS \u00b7 ' + merged + ' MERGED</span><div class="rd">' + (PR ? (PR.onRecord + ' of ' + PR.total + ' on record ' + DOT + ' ' + PR.atSoul + ' still without words ' + DOT + ' ' + PR.due + ' walking the chain ' + DOT + ' ' + PR.merged + ' applied') : 'no session open — every idea is still at the raw record') + '. Staged at <b>OPERATIONS/COMMANDSTATION/DOCTRINE/</b> as a proposal \u2014 the station never rewrites the canon in place.</div></div>'
+    + '<div class="rrow"><b>STATUS</b><span class="vd">' + PROPOSED_G999.length + ' ITEMS \u00b7 ' + merged + ' MERGED</span><div class="rd">' + (PR ? (PR.onRecord + ' of ' + PR.total + ' on record ' + '\u00b7' + ' ' + PR.atSoul + ' still without words ' + '\u00b7' + ' ' + PR.due + ' walking the chain ' + '\u00b7' + ' ' + PR.merged + ' applied') : 'no session open — every idea is still at the raw record') + '. Staged at <b>OPERATIONS/COMMANDSTATION/DOCTRINE/</b> as a proposal \u2014 the station never rewrites the canon in place.</div></div>'
     + rows
     + '<div class="rfoot">Durable copy: <b>src/ProposedG999.md</b> (older doctrine: <b>src/PROPOSED-CANON.md</b>). The review surface is <b>/pipeline</b>, at the stage that carries each one. To make one law: <b>/PhoenixOmegaProtocol &lt;password&gt; :: &lt;the change&gt;</b> — the gate WRITES it to the authority, and the commit is the anchor.</div></div>');
   logOp({ kind:"op", action:"proposed lane (index)", result: PROPOSED_G999.length + " staged \u00b7 " + merged + " merged \u00b7 reviewed on /pipeline" });
@@ -3808,7 +6346,7 @@ async function canonSessionMarkdown(){
   try{
     const rr = loadRRL(runNoOf());
     if(rr && rr.entries && rr.entries.length){
-      for(const line of rr.entries.slice(-40)) L.push("- [" + line.role + "] " + redactSecrets(String(line.text || "")).replace(/\n/g, " "));
+      for(const line of rr.entries.slice(-40)) L.push("- [" + line.role + "] " + scrubWorkSafe(redactSecrets(String(line.text || ""))).replace(/\n/g, " "));
     } else L.push("(no RRL entries yet this run)");
   }catch(e){ L.push("(RRL unavailable: " + e.message + ")"); }
   L.push("");
@@ -3844,7 +6382,7 @@ function doctrineAmendment(){
     "- **Proposed at**: " + new Date().toISOString(),
     "- **On whose instruction**: SOV100 (Michael Hobbs)",
     "- **Status**: PROPOSED — takes effect when Sov100 merges it into the sealed canon (GOSPEL-999 is never rewritten in place here).",
-    "- **Gate**: PHOENIXOMEGAPROTOCOL — this file was pushed with the gate armed (`/omega`), or not at all.",
+    "- **Gate**: PHOENIXOMEGAPROTOCOL — this file was pushed with the gate armed (`/phoenixomegaprotocol`), or not at all.",
     "",
     "## What is being added",
     "",
@@ -3852,7 +6390,7 @@ function doctrineAmendment(){
     "2. **THE I-LOG IS THE RECORD** — every operation is an I-LOG entry (append-only, sha-256 chained); the transcript rides in canon Schema V2 line shape (`content[].data.{text,tool,state}`, SOUL/DNA/REASON per SCS). The VS Code vault (`RRL/`) stays authoritative for incarnations; this station only appends its own sessions beneath `OPERATIONS/COMMANDSTATION/ILOG/`. `OMEGA.002`",
     "3. **ANCHOR, OR IT DID NOT HAPPEN** — every push freezes the head in a commit and records it as an anchor; the unanchored count is always shown, and 'backed up' cannot be claimed while it is above zero. `OMEGA.003`",
     "4. **SEAL, NEVER DELETE** — `/ilog reset` seals and names, it never truncates (I.050). `OMEGA.004`",
-    "5. **PHOENIXOMEGAPROTOCOL** — no Canon change without Sov100's password: `/omega <password>` arms the gate for 15 minutes, never past a reload; only a sha-256 is stored; the password is never logged, captured or exported; 5 failures lock the gate for 10 minutes; every attempt is recorded. `OMEGA.005`",
+    "5. **PHOENIXOMEGAPROTOCOL** — no Canon change without Sov100's password: `/phoenixomegaprotocol <password>` arms the gate for 15 minutes, never past a reload; only a sha-256 is stored; the password is never logged, captured or exported; 5 failures lock the gate for 10 minutes; every attempt is recorded. `OMEGA.005`",
     "6. **SECRETS NEVER ENTER THE RECORD** — credential commands are redacted on the way in and scrubbed from every export. `OMEGA.006`",
     "7. **HONEST LIMITS** — the chain is verified in the sovereign's browser; the commit is the only outside witness, and enrolments/arms/refusals are recorded so nothing happens quietly. `OMEGA.007`",
     "",
@@ -3884,7 +6422,7 @@ function lessonAmendment(){
     "- **Proposed at**: " + new Date().toISOString(),
     "- **On whose instruction**: SOV100 (Michael Hobbs)",
     "- **Status**: PROPOSED — takes effect when Sov100 merges it into the sealed canon (nothing is rewritten in place here).",
-    "- **Gate**: PHOENIXOMEGAPROTOCOL — this file was pushed with the gate armed (`/omega`), or not at all.",
+    "- **Gate**: PHOENIXOMEGAPROTOCOL — this file was pushed with the gate armed (`/phoenixomegaprotocol`), or not at all.",
     "- **Derived from**: an audit of `NET-CLASSROOM-MANAGER.html` (the sovereign's own classroom machine) beside `NET-Sarcasm-Academy.html` and `NET-Highschool-Careers.html`.",
     "",
     "## What is being added",
@@ -3923,6 +6461,29 @@ function lessonAmendment(){
   ].join("\n");
 }
 
+/* THE MIRROR IS EXACT, OR IT IS NOT A MIRROR.
+   The placement doctrine: a document stays in this station only as an exact mirror of
+   the branch, so the branch's perchance/ directory must hold this station's declared
+   files (SRC_SNAPSHOT) and NOTHING ELSE. `gitCommitFiles` adds and updates but cannot
+   remove, so a file withdrawn from the tree (src/TRAIL.md, src/timmy-portal/*) would
+   sit on the branch forever. This reads the branch ONCE, computes the extras (branch
+   paths that are not in SRC_SNAPSHOT), and returns exactly those for removal. Fail
+   closed: no token, an unreadable tree, or a TRUNCATED tree read removes NOTHING. */
+async function canonMirrorExtras(){
+  const P = "OPERATIONS/COMMANDSTATION/perchance/";
+  try{
+    const t = keyGet("gh");
+    if(!t) return { ok:false, why:"no GitHub token — the branch was not read, so nothing was removed", deletes:[] };
+    const r = await ghApiJson(CANON.base + "/git/trees/" + CANON.branch + "?recursive=1", { headers:{ Authorization:"Bearer " + t, "Accept":"application/vnd.github+json" } });
+    if(!(r.j && Array.isArray(r.j.tree))) return { ok:false, why:"the branch tree did not answer (HTTP " + r.status + ") — nothing removed", deletes:[] };
+    if(r.j.truncated) return { ok:false, why:"the branch tree came back truncated — nothing removed (fail closed)", deletes:[] };
+    const have = r.j.tree.filter(x => x.type === "blob" && x.path.indexOf(P) === 0).map(x => x.path.slice(P.length));
+    const declared = new Set(SRC_SNAPSHOT);
+    const deletes = have.filter(p => !declared.has(p)).map(p => P + p);
+    return { ok:true, have:have.length, declared:SRC_SNAPSHOT.length, deletes:deletes };
+  }catch(e){ return { ok:false, why:"the branch could not be read: " + String((e && e.message) || e) + " — nothing removed", deletes:[] }; }
+}
+
 async function canonPushSession(opts){  opts = opts || {};
   if(!keyGet("gh")) return "NO_TOKEN";
   const ts = new Date().toISOString().replace(/[:.]/g,"-").slice(0,23);
@@ -3930,12 +6491,13 @@ async function canonPushSession(opts){  opts = opts || {};
   const runN = run ? run.run : "?";
   const files = {
     ["OPERATIONS/COMMANDSTATION/session-" + ts + "-run" + runN + ".md"]: await canonSessionMarkdown(),
+    "OPERATIONS/COMMANDSTATION/PhoenixOmegaRecovery.md": reconFile(),
     "OPERATIONS/COMMANDSTATION/README.md": "# Command Station\n\nLive reports from the perchance generator. Each `session-*.md` is a `/canon sync` push. App sources snapshotted under `perchance/`. The station's I-LOG (operation chain + canon-schema transcript + anchors) lives under `ILOG/`, and `/gh backup` adds the raw chat under `BACKUP/chat/`.\n"
   };
   /* /gh backup is the whole build: the same push, plus the raw chat record. */
   if(opts.chat){
     try{ files["OPERATIONS/COMMANDSTATION/BACKUP/chat/raw-chat-" + ts + ".json"] = redactSecrets(await buildRawChat()); }catch(e){}
-    files["OPERATIONS/COMMANDSTATION/BACKUP/README.md"] = "# The whole build, one authority\n\nWritten by `/gh backup`: the session record, the station's sources, the raw chat (soul + runs, secrets scrubbed) and the I-LOG — all of it under the ONE authoritative repo (branch `master`). There is no second backup repo: what is not here does not exist on Git.\n";
+    files["OPERATIONS/COMMANDSTATION/BACKUP/README.md"] = "# The whole build, one authority\n\nWritten by `/gh backup`: the session record, the station's sources, the raw chat (soul + runs, secrets and expletives scrubbed — local stores stay verbatim) and the I-LOG — all of it under the ONE authoritative repo (branch `master`). There is no second backup repo: what is not here does not exist on Git.\n";
   }
   if(opts.doctrine){
     /* the doctrine amendment proposed by the sovereign: written here, pushed only
@@ -3969,7 +6531,8 @@ async function canonPushSession(opts){  opts = opts || {};
       files["OPERATIONS/COMMANDSTATION/ILOG/STATUS.md"] = "# I-LOG — status at sync " + ts + "\n\n- head: `" + (st.head || "none") + "` (" + (st.alg || "?") + ")\n- entries: " + st.count + " · segment " + st.seg + " · unanchored before this push: " + st.unanchored + "\n- generator: " + (window.generatorName || "?") + "\n";
     }catch(e){}
   }
-  const snap = await L.gitCommitFiles({ owner: CANON.owner, repo: CANON.repo, branch: CANON.branch, files: files, message: "perchance command station sync " + ts + " · " + Object.keys(files).length + " files" });
+  const mirror = await canonMirrorExtras();
+  const snap = await L.gitCommitFiles({ owner: CANON.owner, repo: CANON.repo, branch: CANON.branch, files: files, deletes: mirror.deletes, message: "perchance command station sync " + ts + " · " + Object.keys(files).length + " files" });
   const filesN = Object.keys(files).length;
   let anchor = null;
   if(snap.commitSha && L){
@@ -3978,7 +6541,7 @@ async function canonPushSession(opts){  opts = opts || {};
       anchor = await L.anchorRecord({ commit: snap.commitSha, branch: CANON.branch, repo: CANON.owner + "/" + CANON.repo, seg: st.seg, seq: st.count, head: st.head, count: st.count, pushed: snap.pushed, failed: snap.failed, path: "OPERATIONS/COMMANDSTATION/ILOG/latest.jsonl" });
     }catch(e){}
   }
-  return { pushed: snap.pushed, failed: snap.failed, commitSha: snap.commitSha, baseSha: snap.baseSha, ts: ts, files: filesN, errors: snap.errors, ilogEntries: ilogEntries, anchor: anchor };
+  return { pushed: snap.pushed, failed: snap.failed, commitSha: snap.commitSha, baseSha: snap.baseSha, ts: ts, files: filesN, errors: snap.errors, ilogEntries: ilogEntries, anchor: anchor, mirror: { ok: mirror.ok, why: mirror.why || null, have: mirror.have, declared: mirror.declared, deletes: mirror.deletes, removed: snap.removed || [] } };
 }
 
 /* ============================================================================
@@ -4003,6 +6566,7 @@ const DOC_PLACEMENT = [
   { here:"src/REPO.md",                      git:"OPERATIONS/COMMANDSTATION/REPO.md",                      kind:"to-canon", why:"the repo map" },
   { here:"src/COSTS.md",                     git:"OPERATIONS/COMMANDSTATION/COSTS.md",                     kind:"to-canon", why:"where the work runs and what it costs" },
   { here:"src/README.md",                    git:"OPERATIONS/COMMANDSTATION/README.md",                    kind:"to-canon", why:"the entry point for whoever comes next" },
+  { here:"src/VAULT-RECOVERY.md",            git:"OPERATIONS/VAULT/RECOVERY.md",                           kind:"to-canon", why:"how to rebuild every key on a machine that has never seen this station — the durable pointer, with no token" },
   { here:"src/PHOENIXCOMMAND-BLUEPRINT.md",  git:"OPERATIONS/COMMANDSTATION/PHOENIXCOMMAND-BLUEPRINT.md",  kind:"to-canon", why:"the recon that founded this station" },
   { here:"src/STUDENT-EVALUATOR-ECOSYSTEM.md",git:"OPERATIONS/COMMANDSTATION/STUDENT-EVALUATOR-ECOSYSTEM.md",kind:"to-canon",why:"the desk's role map" },
   { here:"src/AGENT99-OS.md",                git:"CANON/SYSTEM/AGENT99-OS.md",                             kind:"proposal", why:"names the kernel and the offerings — a CANON file, so it is a proposal, not a copy" },
@@ -4239,7 +6803,7 @@ async function cmdIdea(arg){
     + '<div class="rrow"><b>SOUL</b><span class="vd">✓ VERBATIM</span><div class="rd">“' + esc(t) + '”<br>captured word for word, run ' + esc(String(runNoOf())) + ' — the words are the record, not a summary of them</div></div>'
     + '<div class="rrow"><b>WHERE IT SITS</b><span class="vd">' + esc(where ? where.at : "SOUL") + '</span><div class="rd">' + esc(where ? where.path : "RRL → SOUL → DNA → LEDGER → STARMAP → SOULKEYS → S2PIPELINE → REGISTRY_SYNC → GATE") + '<br>the chain it walks: <b>RRL → SOUL → DNA → LEDGER → STARMAP → SOULKEYS → S2PIPELINE → REGISTRY_SYNC</b>, then the gate. It moves when the record and the session reach each node</div></div>'
     + '<div class="rrow"><b>REVIEWED</b><span class="vd">/pipeline</span><div class="rd">not a command, not canon: <b>/pipeline</b> prints it at its stage, and <b>/proposed</b> is the index</div></div>'
-    + '<div class="rfoot">To make it law: <b>/PhoenixOmegaProtocol &lt;password&gt;</b> then <b>/omega apply &lt;the change&gt;</b> — or both in one breath, <b>/PhoenixOmegaProtocol &lt;password&gt; :: &lt;the change&gt;</b>. The gate writes; a proposal is not a change.</div></div>');
+    + '<div class="rfoot">To make it law: <b>/PhoenixOmegaProtocol &lt;password&gt;</b> then <b>/phoenixomegaprotocol apply &lt;the change&gt;</b> — or both in one breath, <b>/PhoenixOmegaProtocol &lt;password&gt; :: &lt;the change&gt;</b>. The gate writes; a proposal is not a change.</div></div>');
   return row;
 }
 
@@ -4292,6 +6856,22 @@ async function cmdCanon(arg){
   }
   addBubble("ass", '<div class="rise"><div class="rhead">📜 /canon — contacting the authoritative repo…</div><div class="rd">Pulling doctrine from Phoenix-Rising-Ai-Solutions/OB-1--Authoritative- (canon branch)…</div></div>');
   const [docs, workers, soul] = await Promise.all([canonPull(), canonWorkerStatus(), canonSoulCount()]);
+  const pulled = CANON.files.filter(f => docs[f]).length;
+  /* 2026-09-27 — the honest half-truth fix. This card used to print "DOWN" for every doctrine file when the
+     authority returned 404, which reads as "the canon is down". It is not: ONE branch is behind a PAT, and a
+     large part of the canon answers anyone with no token. When nothing can be pulled, say exactly that and
+     hand the reader to /git (src/gitcanon.js), which measures every part of the git live. */
+  if(pulled === 0){
+    addBubble("ass", '<div class="rise"><div class="rhead">📜 /canon — the authority did not answer</div>'
+      + '<div class="rrow"><b>' + esc(CANON.owner + "/" + CANON.repo) + '</b><span class="vd" style="background:#8a1f1f">BEHIND A PAT</span><div class="rd">Every path under <b>' + esc(CANON.doctrineBranch) + '</b> answered <b>404</b> ' + (keyGet("gh") ? "even with the stored token" : "and no GitHub token is stored") + '. GitHub answers <b>404, not 403</b>, to an unauthenticated reader of a private repo — so from here a private repo and a missing one look identical, and this card will not guess which it is.</div></div>'
+      + '<div class="rrow"><b>THIS IS NOT "THE CANON IS DOWN"</b><span class="vd">OPEN GIT</span><div class="rd">A large part of the canon answers anyone right now, with no token: the public monorepo (CANON/, APPS/, OPERATIONS/, ARCHIVE/), the live Worker bundle, and ~100 verbatim soul-DNA chat logs. <b>/git</b> measures and shows all of it — <b>/git repos</b> · <b>/git tree CANON</b> · <b>/git read &lt;path&gt;</b> · <b>/git archive</b> · <b>/git auth</b> for the locked door and the one line that opens it.</div></div>'
+      + '<div class="rrow"><b>SOULGATE</b><span class="vd">' + esc(String(soul)) + '</span><div class="rd">soul-logger — this half still answers</div></div>'
+      + workers.map(w => '<div class="rrow"><b>'+esc(w.name)+'</b><span class="vd">'+(w.ok?"UP":"DOWN")+'</span><div class="rd">'+esc(w.detail||"")+'</div></div>').join("")
+      + '<div class="rfoot">To open the authority: <b>/vault recover &lt;passphrase&gt;</b> (no token, no stored state) or <b>/vault set gh &lt;PAT&gt;</b>. /canon sync · /canon registry · /canon soul · /doctor</div></div>');
+    rrlAppend(runNoOf(), "DNA", "Obi: [/canon — authority 404 (no token); pointed to /git, the open canon]");
+    logOp({ kind:"op", action:"canon", ok:false, result:"authority 404 — no doctrine pulled; /git offered" });
+    return;
+  }
   const docRows = CANON.files.map(f => {
     const c = docs[f];
     const ok = !!c;
@@ -4317,6 +6897,7 @@ async function cmdCanonSync(){
     +'<div class="rrow"><b>RESULT</b><span class="vd">'+(ok?"PUSHED":"FAILED")+'</span><div class="rd">'+res.pushed+' / '+(res.files||"?")+' files'+(res.commitSha ? " · commit <b>"+esc(res.commitSha.slice(0,8))+"</b>" : "")+'</div></div>'
     +'<div class="rrow"><b>I-LOG</b><span class="vd">'+(res.ilogEntries||0)+'</span><div class="rd">operation chain + canon-schema transcript pushed to OPERATIONS/COMMANDSTATION/ILOG/'+(res.anchor ? ' · anchored as <b>'+esc(String(res.anchor.commit).slice(0,8))+'</b>' : "")+'</div></div>'
     +'<div class="rrow"><b>BRANCH</b><span class="vd">'+esc(CANON.branch)+'</span><div class="rd">'+esc(CANON.owner+"/"+CANON.repo)+' · OPERATIONS/COMMANDSTATION/</div></div>'
+    +'<div class="rrow"><b>MIRROR</b><span class="vd">'+esc(res.mirror ? (res.mirror.ok ? (res.mirror.removed.length ? res.mirror.removed.length + " PRUNED" : "EXACT") : "NOT READ") : "?")+'</span><div class="rd">'+(res.mirror ? (res.mirror.ok ? (res.mirror.removed.length ? "removed from the branch: <b>" + esc(res.mirror.removed.map(p => p.replace("OPERATIONS/COMMANDSTATION/perchance/", "")).join(", ")) + "</b> — withdrawn here, so gone there (the mirror is exact)" : "the branch's perchance/ holds exactly this station's declared files (" + res.mirror.declared + " declared, " + res.mirror.have + " on the branch)") : esc("prune skipped: " + res.mirror.why)) : "the branch was not read")+'</div></div>'
     +(res.errors && res.errors.length ? '<div class="rrow"><b>ERRORS</b><span class="vd">'+res.errors.length+'</span><div class="rd">'+esc(res.errors.slice(0,3).join(" · "))+'</div></div>' : "")
     +'<div class="rfoot">'+(ok ? 'View: <b>https://github.com/'+esc(CANON.owner)+'/'+esc(CANON.repo)+'/blob/'+esc(CANON.branch)+'/OPERATIONS/COMMANDSTATION/session-'+esc(res.ts)+'-run'+(currentRun()?currentRun().run:"?")+'.md</b>' : "Base " + esc(String(res.baseSha||"?").slice(0,8)) + " — token scopes or repo write access?")+'</div></div>');
   rrlAppend(runNoOf(),"DNA","Obi: [/canon sync → " + CANON.owner + "/" + CANON.repo + " — " + res.pushed + " files, " + res.failed + " failed]");
@@ -4454,6 +7035,25 @@ async function cmdGateway(){
     +'<div class="rfoot">Your words ride this gateway, captured as Soul DNA first, then routed to the Legion. /queue to see the tunnel live.</div></div>');
   rrlAppend(runNoOf(),"DNA","Obi: [/gateway — tunnel " + tunnel + ", fleet " + canonTunnel + "]");
 }
+/* THE ANCHOR VERDICT — a local "never anchored" is not the same claim as "never
+   anchored on Git". The chain on this origin lost its anchors when the station was
+   renamed (the anchors lived in name-keyed kv), but the authority branch may still
+   hold an anchored chain — a DIFFERENT one, with colliding seq numbers. So when this
+   origin has no anchor, read the branch's own anchors.json and print what it
+   actually holds. Fail closed: an unreadable branch is named as unreadable. */
+async function ilogAnchorVerdict(){
+  try{
+    const L = window.ObiILog;
+    if(!L || !L.remoteAnchors) return { ok:false, why:"src/ilog.js remoteAnchors is not loaded" };
+    return await L.remoteAnchors();
+  }catch(e){ return { ok:false, why:String((e && e.message) || e) }; }
+}
+function ilogAnchorPhrase(r){
+  if(!r || !r.ok) return "the authority branch could not be read" + ((r && r.why) ? " (" + r.why + ")" : "");
+  if(!r.anchors.length) return "the branch holds no anchors either (" + r.branch + ":" + r.path + ")";
+  const list = r.anchors.map(a => "seq " + a.seq + " @" + String(a.commit || "").slice(0, 8)).join(", ");
+  return "the branch holds " + r.anchors.length + " anchor(s): " + list + " — " + (r.verdict || "");
+}
 async function cmdDoctor(){
   const run = currentRun();
   const checks = [];
@@ -4474,13 +7074,13 @@ async function cmdDoctor(){
       const st = await window.ObiILog.stats();
       ilogOk = st.count > 0;
       ilogNote = st.count + " entries · head " + st.headShort + " · kv " + (st.kv ? "ok" : "UNREACHABLE") + (st.mirrorOnly ? " · " + st.mirrorOnly + " mirror-only" : "")
-        + " · " + (st.anchors ? "last anchor " + st.lastAnchor.commitShort + "… · " + st.unanchored + " unanchored" : "NEVER ANCHORED ON GIT");
+        + " · " + (st.anchors ? "last anchor " + st.lastAnchor.commitShort + "… · " + st.unanchored + " unanchored" : "NEVER ANCHORED here — " + ilogAnchorPhrase(await ilogAnchorVerdict()));
     }
   }catch(e){ ilogNote = "I-LOG unreadable: " + e.message; }
   checks.push(["I-LOG", ilogOk, ilogNote]);
   const oEnt = await omegaEntry();
   const oSt = omegaStatusText();
-  checks.push(["OMEGA gate", !!oEnt, oEnt ? ("enrolled (" + (oEnt.alg || "sha-256") + ") · gate " + (oSt.armed ? "ARMED " + oSt.armedMinutesLeft + "m" : "locked") + " · failures " + oSt.fails + "/" + OMEGA_MAX_FAILS) : "no password enrolled in this browser — /omega set <new> <new> (the Canon cannot be written until it is)"]);
+  checks.push(["OMEGA gate", !!oEnt, oEnt ? ("enrolled (" + (oEnt.alg || "sha-256") + ") · gate " + (oSt.armed ? "ARMED " + oSt.armedMinutesLeft + "m" : "locked") + " · failures " + oSt.fails + "/" + OMEGA_MAX_FAILS) : "no password enrolled in this browser — /phoenixomegaprotocol set <new> <new> (the Canon cannot be written until it is)"]);
   try{
     const em = window.ObiVault && window.ObiVault.escrow ? window.ObiVault.escrow() : null;
     checks.push(["Vault escrow", !!(em && em.at), em && em.at
@@ -4488,6 +7088,15 @@ async function cmdDoctor(){
          + (em.recoveryUrl ? " · 1-URL recovery bundle published (passphrase alone rebuilds the vault, no GitHub token needed)" : " · NO recovery bundle — /vault escrow <passphrase> publishes the one URL that needs no token"))
       : "THE PRIVATE KEY EXISTS ONLY IN THIS BROWSER — /vault escrow <passphrase> makes it recoverable (do this)"]);
   }catch(e){}
+  let rubOk = false, rubNote = "src/rubric.js NOT loaded \u2014 the evaluator has no instrument";
+  try{
+    if(window.ObiRubric){
+      const c = await window.ObiRubric.canary();
+      rubOk = c.pass === c.total;
+      rubNote = c.pass + "/" + c.total + " canary checks \u2014 arithmetic beats opinion \u00b7 an invented quote is refused \u00b7 a band with no citation is NOT SCORED \u00b7 the clock is read off the record \u00b7 coverage travels with the total \u00b7 a forged citation is caught by verify";
+    }
+  }catch(e){ rubNote = "the rubric canary threw: " + e.message; }
+  checks.push(["Rubric instrument", rubOk, rubNote]);
   checks.push(["ONE authority", true, CANON.owner + "/" + CANON.repo + "@" + CANON.branch + " · PHOENIXOMEGAPROTOCOL gates every write"]);
   addBubble("ass", '<div class="rise"><div class="rhead">🩺 /doctor — evidence-first checks</div>' + checks.map(c => '<div class="rrow"><b>'+esc(c[0])+'</b><span class="vd">'+(c[1]?"PASS":"GAP")+'</span><div class="rd">'+esc(c[2])+'</div></div>').join("")
     +'<div class="rfoot">Gaps are reported, never hidden. Fleet: ping /status. Canon: /canon. Push: /canon sync.</div></div>');
@@ -4510,9 +7119,15 @@ async function cmdAudit(){
     if(window.ObiILog){
       const st = await window.ObiILog.stats();
       const v = await window.ObiILog.verify();
-      ilogRow = '<div class="rrow"><b>I-LOG</b><span class="vd">' + st.count + '</span><div class="rd">head <b>' + esc(st.headShort) + '</b> · chain ' + (v.ok ? "VERIFIED" : "BROKEN") + ' (' + v.checked + " recomputed) · "
-        + (st.anchors ? "anchored at <b>" + esc(st.lastAnchor.commitShort) + '…</b> · ' + st.unanchored + " unanchored" : '<span class="vd" style="color:#f5a623">NEVER ANCHORED ON GIT</span> — /ilog push') + '</div></div>';
-      if(!st.anchors) gaps.push("the I-LOG has never been anchored on Git (/ilog push)");
+      let anchorTxt;
+      if(st.anchors){ anchorTxt = "anchored at <b>" + esc(st.lastAnchor.commitShort) + '…</b> · ' + st.unanchored + " unanchored"; }
+      else {
+        const rr = await ilogAnchorVerdict();
+        anchorTxt = '<span class="vd" style="color:#f5a623">NEVER ANCHORED here</span> — ' + esc(ilogAnchorPhrase(rr));
+        if(rr && rr.ok && rr.anchors.length) gaps.push("this origin's chain is UNANCHORED and is NOT the branch's anchored chain — " + (rr.verdict || "") + "; the anchors were lost with the rename, and /ilog push re-anchors THIS chain through PHOENIXOMEGAPROTOCOL");
+        else gaps.push("the I-LOG has never been anchored on Git (/ilog push)");
+      }
+      ilogRow = '<div class="rrow"><b>I-LOG</b><span class="vd">' + st.count + '</span><div class="rd">head <b>' + esc(st.headShort) + '</b> · chain ' + (v.ok ? "VERIFIED" : "BROKEN") + ' (' + v.checked + " recomputed) · " + anchorTxt + '</div></div>';
       if(!v.ok) gaps.push("the I-LOG chain does not verify");
     } else gaps.push("src/ilog.js did not load — no operation record");
   }catch(e){ gaps.push("I-LOG unreadable: " + e.message); }
@@ -4850,3 +7465,26 @@ window.addEventListener("unhandledrejection", function(e){
   try{ rrlAppend(runNoOf(), "DNA", "Obi: [unhandled rejection: " + m + "]"); }catch(_){}
   try{ logOp({ kind:"error", action:"unhandled rejection", ok:false, detail: m, result: "caught by the page listener" }); }catch(_){}
 });
+
+/* ------------------------- THE BRAIN ARMS ITSELF -------------------------
+   src/brain.js loads before this file; here it is given the station it is the
+   memory of: build the index from the sources, then start the auto lane (one
+   sync shortly after boot, then every five minutes). A page that cannot read its
+   own register still runs — the failure lands in the card, the tab bar and the
+   I-LOG instead of in silence. */
+setTimeout(function(){
+  try{
+    const B = window.ObiBrain;
+    if(!B) return;
+    B.build().then(function(){
+      B.start();
+      /* then the relay — the master sync pipeline — which needs the index to exist */
+      try{ if(window.ObiRelay && window.ObiRelay.start) window.ObiRelay.start(); }catch(_){}
+      try{ if(window.ObiMarket && window.ObiMarket.start) window.ObiMarket.start(); }catch(_){}
+      try{ updateTabMeta(); }catch(_){}
+      try{ logOp({ kind:"brain", action:"index built", detail: (B.index() ? B.index().entries.length + " entries" : "?") + " · census " + (B.index() ? B.index().census : "?"), result: "the auto lane is armed" }); }catch(_){}
+    }).catch(function(e){
+      try{ logOp({ kind:"brain", action:"index build", ok:false, detail:String((e && e.message) || e), result:"the brain is unindexed — /brain rebuild retries" }); }catch(_){}
+    });
+  }catch(e){}
+}, 3000);

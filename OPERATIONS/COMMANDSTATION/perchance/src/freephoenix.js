@@ -46,7 +46,7 @@
 
    Commands (in the panel's composer): plain text = fire ·
      /build app <ask>  ·  /build gator <ask>  ·  /self  ·  /forge <change>  ·  /apply
-     /revert  ·  /eval <js>  ·  /files  ·  /read <name>  ·  /dl <name>  ·  /wipe  ·  /seal
+     /revert  ·  /eval <js>  ·  /files  ·  /read <name>  ·  /dl <name>  ·  /open (📎 Attach: device text files, local only)  ·  /wipe  ·  /seal  ·  /brain
    ============================================================================ */
 (function(){
   "use strict";
@@ -101,6 +101,17 @@
     self: null,         /* what this room knows about its own source right now (running copy, staged edit) */
     used: {}            /* which station APIs this room has ever touched (the seal report reads it) */
   };
+  /* TWO-TAP SAFETY — the destructive buttons (🧹 Wipe, per-file 🗑) never fire
+     on the first tap. The first tap arms them for 6 seconds and says what is
+     about to happen; only the second tap executes. A mis-tap can never nuke
+     the sandbox. */
+  const ARM_MS = 6000;
+  const arm = { wipe: 0, del: "", delAt: 0 };
+  function armed(key, name){
+    const now = Date.now();
+    if(key === "wipe") return now - arm.wipe < ARM_MS;
+    return arm.del !== "" && now - arm.delAt < ARM_MS && arm.del === String(name);
+  }
 
   function el(id){ return document.getElementById(id); }
   function esc(s){ return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
@@ -148,7 +159,8 @@
     await loadFiles();
   }
   function download(name, body){
-    const blob = new Blob([String(body == null ? "" : body)], { type: "text/plain;charset=utf-8" });
+    const isHtml = /\.html?$/i.test(String(name || ""));
+    const blob = new Blob([String(body == null ? "" : body)], { type: isHtml ? "text/html;charset=utf-8" : "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url; a.download = safeName(name) || "free-phoenix.txt"; a.style.display = "none";
@@ -157,13 +169,191 @@
     return name;
   }
 
+  /* ------------------------------------------------- opening local files
+     📎 Attach opens files from the device into the room. FileReader only:
+     nothing is uploaded, nothing leaves the browser — the bytes land in the
+     same local kv sandbox (`fpm`) as built files, and the text is pushed
+     into the chat history as a SANDBOX line so the model call can see it. */
+  const ATTACH_MAX_READ = 512 * 1024;   /* bytes read off the disk per file */
+  const ATTACH_MAX_TELL = 120000;       /* chars of it told to the model */
+  function readDeviceFile(file){
+    return new Promise((resolve, reject) => {
+      try{
+        const slice = file.slice(0, ATTACH_MAX_READ);
+        const r = new FileReader();
+        r.onerror = () => reject(new Error("could not read that file"));
+        r.onload = () => resolve(String(r.result == null ? "" : r.result));
+        r.readAsText(slice);
+      }catch(e){ reject(e); }
+    });
+  }
+  function looksText(name, type, text){
+    if((type || "").indexOf("text/") === 0) return true;
+    if(/^(application\/(json|javascript|x-javascript|ecmascript|xml|xhtml\+xml)|.*\+(json|xml))$/i.test(type || "")) return true;
+    if(/\.(txt|md|markdown|json|js|mjs|cjs|ts|jsx|tsx|html|htm|css|csv|tsv|xml|svg|pjs|yaml|yml|toml|ini|cfg|log|py|rb|java|c|cpp|h|sh|sql|r|rs|go)$/i.test(name || "")) return true;
+    const sample = String(text == null ? "" : text).slice(0, 4000);
+    if(/�/.test(sample)) return false;
+    let bad = 0;
+    for(let i = 0; i < sample.length; i++){ if(sample.charCodeAt(i) < 9) bad++; }
+    return bad === 0;
+  }
+  async function attachDeviceFiles(list){
+    const files = list ? Array.prototype.slice.call(list, 0, 5) : [];
+    if(!files.length) return;
+    let n = 0;
+    for(const file of files){
+      const rawName = (file && file.name) || "attachment.txt";
+      try{
+        const text = await readDeviceFile(file);
+        if(!looksText(rawName, file && file.type, text)){
+          state.history.push("USER: 📎 attached " + rawName + " (" + Math.round((file.size || 0) / 1024) + " KB, " + ((file && file.type) || "binary") + ") — not readable as text in this room, so only the name was kept. Media goes through the station's 🎬 transcribe desk; images through the station chat.");
+          say(rawName + " is not text — this room reads text files; media goes through the station's 🎬 desk", true);
+          continue;
+        }
+        const cut = file.size > ATTACH_MAX_READ;
+        const rec = await putFile(rawName, text, "attached");
+        let told = text;
+        if(told.length > ATTACH_MAX_TELL) told = told.slice(0, ATTACH_MAX_TELL) + "\n…(cut here — " + told.length + " chars total are in the sandbox; /read " + rec.name + " pulls more into the room)";
+        state.history.push("USER: 📎 attached " + rec.name + (cut ? " (first " + Math.round(ATTACH_MAX_READ / 1024) + " KB of a larger file)" : "") + " — it is in the room now.");
+        state.history.push("SANDBOX " + rec.name + ":\n" + told);
+        n++;
+      }catch(e){ say("could not open " + rawName + " — " + ((e && e.message) || e), true); }
+    }
+    paintChat(); paintFiles();
+    if(n) say(n === 1 ? "attached — the file is in the room and the sandbox" : "attached — " + n + " files are in the room and the sandbox");
+  }
+  function openPicker(){
+    const inp = el("fpmFile");
+    if(inp){ inp.click(); return true; }
+    return false;
+  }
+
   /* -------------------------------------------------------------- the model pipe */
   function promptFor(task){
     const log = state.history.slice(-24).join("\n\n");
     return PERSONA + "\n\n<MESSAGES>\n" + log + "\n</MESSAGES>\nTASK: " + task;
   }
+  /* ------------------------------------------------- swappable brain
+     Default brain is the station pipe (root.generateText). Point it at your
+     own OpenAI-compatible endpoint and the wire goes to your model instead.
+     Stored in this browser only (localStorage `obi_fpm_brain`) — never logged,
+     never in any file. */
+  const BRAIN_KEY = "obi_fpm_brain";
+  function brainGet(){
+    try{
+      const raw = localStorage.getItem(BRAIN_KEY);
+      if(!raw) return null;
+      const c = JSON.parse(raw);
+      if(!c || !c.url || !c.model) return null;
+      return { url: String(c.url).trim(), key: String(c.key || ""), model: String(c.model).trim() };
+    }catch(e){ return null; }
+  }
+  function brainLabel(){
+    const b = brainGet();
+    if(!b) return "station model";
+    try{ return "your endpoint (" + new URL(b.url).host + " · " + b.model + ")"; }
+    catch(e){ return "your endpoint (" + b.model + ")"; }
+  }
+  function brainSave(cfg){
+    const url = String(cfg && cfg.url || "").trim(), model = String(cfg && cfg.model || "").trim();
+    if(!/^https?:\/\/.+\..+|^https?:\/\/localhost(:\d+)?(\/.*)?$|^https?:\/\/127\.0\.0\.1(:\d+)?(\/.*)?$/i.test(url)) throw new Error("that endpoint URL does not look right — https://host/.../chat/completions (http only for localhost)");
+    if(!model) throw new Error("name the model, e.g. llama3.1");
+    try{ localStorage.setItem(BRAIN_KEY, JSON.stringify({ url: url, key: String(cfg.key || ""), model: model })); }
+    catch(e){ throw new Error("the browser refused to keep it — " + ((e && e.message) || e)); }
+  }
+  function brainClear(){ try{ localStorage.removeItem(BRAIN_KEY); }catch(e){} }
+  /* Custom-brain call: POSTs the full instruction as one user message,
+     streams SSE, aborts on Stop. Same {text, generated} shape as the pipe. */
+ function callCustom(brain, instruction, onChunk){
+   state.used.customBrain = (brain.url || "") + " :: " + brain.model;
+   const ctrl = (typeof AbortController !== "undefined") ? new AbortController() : null;
+   const p = (async () => {
+      const isFreeLane = /text\.pollinations\.ai/i.test(brain.url || "");
+      let r = null, waited = 0;
+      for(let attempt = 0; attempt < 4; attempt++){
+        try{
+          r = await fetch(brain.url, {
+            method: "POST",
+            headers: Object.assign({ "Content-Type": "application/json" }, brain.key ? { "Authorization": "Bearer " + brain.key } : {}),
+            body: JSON.stringify({ model: brain.model, messages: [{ role: "user", content: String(instruction) }], stream: true }),
+            signal: ctrl ? ctrl.signal : undefined
+          });
+        }catch(e){
+          if(e && e.name === "AbortError") return { text: "", generated: "", stopped: true };
+          throw new Error("the endpoint did not answer — " + ((e && e.message) || e) + " (is it running, and does the browser allow the call? local Ollama needs OLLAMA_ORIGINS set)");
+        }
+        /* the no-key free lane allows one text request at a time (~30 s apart)
+           and answers 402 when it is still busy: wait our turn and retry, so a
+           multi-part build does not die on its second part. */
+        if(r.status !== 402 || attempt === 3) break;
+        let wait = parseInt(r.headers.get("retry-after") || "", 10);
+        if(!(wait > 0)) wait = 35;
+        if(wait > 90) wait = 90;
+        waited += wait;
+        try{ if(onChunk) onChunk({ fullTextSoFar: "…the free lane is busy — waiting " + wait + "s for our turn (attempt " + (attempt + 1) + ")…" }); }catch(e){}
+        await new Promise((res, rej) => {
+          const t = setTimeout(res, wait * 1000);
+          if(ctrl) ctrl.signal.addEventListener("abort", () => { clearTimeout(t); rej(Object.assign(new Error("aborted"), { name: "AbortError" })); }, { once: true });
+        }).catch(e => { if(e && e.name === "AbortError") throw e; });
+        r = null;
+      }
+      if(!r){
+        return { text: "", generated: "", stopped: true };
+      }
+      if(!r.ok){
+        const t = await r.text().catch(() => "");
+        let why = t.slice(0, 200);
+        try{ const j = JSON.parse(t); why = (j && j.error && (j.error.message || j.error.code)) || why; }catch(e){}
+        if(r.status === 402) throw new Error("the free lane is still busy after waiting ~" + waited + "s (HTTP 402 — one request at a time, ~30s apart on the no-key lane; wait half a minute and fire again)");
+        throw new Error("the endpoint refused (HTTP " + r.status + " — " + why + ")" + (isFreeLane ? " — the free lane answers 402 when it is busy; wait ~30s and try again" : ""));
+      }
+      const ctype = String(r.headers.get("content-type") || "");
+      if(ctype.indexOf("application/json") >= 0){
+        const j = await r.json().catch(() => null);
+        const t = String((j && j.choices && j.choices[0] && ((j.choices[0].message && j.choices[0].message.content) || j.choices[0].text)) || "");
+        try{ if(onChunk) onChunk({ fullTextSoFar: t }); }catch(e){}
+        return { text: t, generated: t };
+      }
+      const reader = r.body && r.body.getReader ? r.body.getReader() : null;
+      if(!reader){
+        const j = await r.json().catch(() => null);
+        const t = String((j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "");
+        try{ if(onChunk) onChunk({ fullTextSoFar: t }); }catch(e){}
+        return { text: t, generated: t };
+      }
+      const dec = new TextDecoder();
+      let buf = "", acc = "";
+      for(;;){
+        const step = await reader.read().catch(e => { if(e && e.name === "AbortError") return { done: true }; throw e; });
+        if(!step || step.done) break;
+        buf += dec.decode(step.value, { stream: true });
+        const lines = buf.split("\n");
+        buf = lines.pop();
+        for(const line of lines){
+          const s = line.trim();
+          if(!s || s.charAt(0) !== ":" && s.slice(0, 5) !== "data:") continue;
+          const data = s.slice(5).trim();
+          if(data === "[DONE]") break;
+          try{
+            const j = JSON.parse(data);
+            const piece = j && j.choices && j.choices[0] && j.choices[0].delta && j.choices[0].delta.content;
+            if(piece){ acc += piece; try{ if(onChunk) onChunk({ fullTextSoFar: acc }); }catch(e){} }
+          }catch(e){}
+        }
+      }
+      return { text: acc, generated: acc };
+    })();
+    p.stop = () => { try{ if(ctrl) ctrl.abort(); }catch(e){} };
+    return p;
+  }
   /* one call. the promise is kept in `state.gen` so /stop can kill it. */
   function call(instruction, onChunk){
+    const brain = brainGet();
+    if(brain){
+      const p = callCustom(brain, instruction, onChunk);
+      state.gen = p;
+      return p.finally(() => { state.gen = null; });
+    }
     if(typeof root === "undefined" || !root || typeof root.generateText !== "function"){
       return Promise.reject(new Error("no model — the ai-text-plugin import is missing from main.pjs"));
     }
@@ -198,7 +388,7 @@
     const c = el("fpmChat");
     if(!c) return;
     if(!state.history.length){
-      c.innerHTML = '<div class="lc-empty">Nothing fired yet. Say what you want and hit <b>🔥 Fire</b> — or point it at a build: <b>🛠 Build app</b> (one self-contained HTML file, previewed here) or <b>⚙ Build generator</b> (a perchance <b>main.pjs</b> + <b>index.html</b> pair you download and paste in). Nothing said in here is recorded, committed or sent anywhere but the model call.</div>';
+      c.innerHTML = '<div class="lc-empty">Nothing here yet — three steps:<br><b>1.</b> Describe what you want in the box (or tap an example).<br><b>2.</b> Hit <b>🛠 Build app</b> for one file you open anywhere, or <b>⚙ Build generator</b> for a perchance pair.<br><b>3.</b> It appears below — preview it, download it, keep it. Private to this browser.</div>';
       return;
     }
     c.innerHTML = state.history.map(h => {
@@ -228,7 +418,7 @@
       + (/\.html?$/i.test(f.name) ? '<button class="ci-act" data-fpm="pv" data-f="' + esc(f.name) + '">▶ Preview</button>' : "")
       + '<button class="ci-act" data-fpm="dlf" data-f="' + esc(f.name) + '">⬇ Download</button>'
       + '<button class="ci-act" data-fpm="ins" data-f="' + esc(f.name) + '">↪ Fire into the chat</button>'
-      + '<button class="ci-act danger" data-fpm="del" data-f="' + esc(f.name) + '">🗑 Delete</button>'
+      + '<button class="ci-act danger" data-fpm="del" data-f="' + esc(f.name) + '">' + (armed("del", f.name) ? "❓ Tap again to delete" : "🗑 Delete") + '</button>'
       + '</div></div>').join("");
   }
   function paintPreview(){
@@ -282,7 +472,7 @@
      part with <<<MORE>>> and we ask for the continuation with the file so far in
      context. prefix-cache-friendly: the brief is static, the file only ever grows. */
   async function genFile(name, brief, onPart){
-    let body = "";
+    let body = "", capped = false;
     for(let part = 1; part <= MAX_PARTS; part++){
       if(state.stop) break;
       const instruction = part === 1
@@ -301,8 +491,11 @@
       if(!piece && !more) break;
       body += (body && !body.endsWith("\n") && piece && !piece.startsWith("\n") ? "\n" : "") + piece;
       if(!more) break;
+      /* the 8th part asked for more and there is no 9th: say so LOUDLY on the
+         way out, or the file reads as finished when it is cut. */
+      if(part === MAX_PARTS) capped = true;
     }
-    return stripFence(body);
+    return { body: stripFence(body), capped: capped };
   }
 
   async function buildApp(ask){
@@ -310,12 +503,17 @@
       + "Requirements: one file, style in <head>, one <script> at the end, no build step, no external assets (Google Fonts are allowed), no framework CDN. "
       + "It must actually work when the file is opened on its own — real interactivity, not a mock-up. Name the file index.html.";
     say("building — writing index.html in parts…");
-    const body = await genFile("index.html", brief, (p, n) => say("part " + p + " … " + Math.round(n / 1024) + " KB so far"));
+    const res = await genFile("index.html", brief, (p, n) => say("part " + p + " … " + Math.round(n / 1024) + " KB so far"));
+    const body = res.body;
     if(!body) throw new Error("nothing came back");
     const rec = await putFile("index.html", body, "app");
     state.preview = { name: rec.name, body: rec.body };
     paintFiles(); paintPreview();
-    say("built — " + Math.round(body.length / 1024) + " KB, previewed below, and in 🗂 the sandbox");
+    say(res.capped
+      ? "built — " + Math.round(body.length / 1024) + " KB, BUT the file ran past all " + MAX_PARTS + " parts, so the end is missing. /read index.html to check where it stops, then tell me what the ending should do and I will finish it."
+      : "built — " + Math.round(body.length / 1024) + " KB. It is previewed below: play with it, then ⬇ Download to keep it.");
+    var pc = el("fpmPreviewCtn");
+    if(pc){ try{ pc.scrollIntoView({ block:"nearest" }); }catch(e){} }
   }
 
   async function buildGator(ask){
@@ -338,11 +536,17 @@
         + "perchance notes: main.pjs is the perchance-js list file (lists, weights with ^, [square-bracket] JS templating, `name(args) =>` functions, a $meta block with title/description/tags). "
         + "index.html is the BODY only (perchance wraps it in <html>/<body> — never include those tags), and it may use [square-bracket] templating in text nodes. "
         + "Keep it inside what perchance actually supports. It must work the moment it is pasted into a generator.";
-      const body = await genFile(f.name, brief, (p, n) => say(f.name + " · part " + p + " · " + Math.round(n / 1024) + " KB"));
-      if(body) await putFile(f.name, body, "generator");
+      const res = await genFile(f.name, brief, (p, n) => say(f.name + " · part " + p + " · " + Math.round(n / 1024) + " KB"));
+      const body = res.body;
+      if(body){
+        await putFile(f.name, body, "generator");
+        if(res.capped) say(f.name + " ran past all " + MAX_PARTS + " parts — its end may be missing. /read " + f.name + " to check.", true);
+      }
     }
     paintFiles();
-    say("built " + files.length + " file(s) — they are in 🗂 the sandbox; ⬇ download and paste each one into a new generator");
+    say("built " + files.length + " file(s) — they are listed below. ⬇ Download each one, open a new generator, and paste each file into its panel (main.pjs → the lists panel, index.html → the HTML panel).");
+    var fc = el("fpmFiles");
+    if(fc){ try{ fc.scrollIntoView({ block:"nearest" }); }catch(e){} }
   }
 
   /* ------------------------------------------------------------- the seal test */
@@ -351,11 +555,13 @@
   }
   async function sealTest(){
     const rows = [];
+    const liveBrain = brainGet();
+    rows.push(["BRAIN", liveBrain ? "YOURS" : "STATION", liveBrain ? "live wire: " + liveBrain.url + " :: " + liveBrain.model + " (your endpoint, your rules — key in this browser only)" : "live wire: root.generateText (Perchance service, their rules in the path) — point it at your own endpoint in the Brain panel for the closest-to-unrestricted setup"]);
     try{ net("https://api.github.com/repos/Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-"); rows.push(["GIT", "OPEN", "the guard did NOT fire"]); }
     catch(e){ rows.push(["GIT", "SEALED", "net() refused the authority repo — there is no other network call in this module"]); }
     const bound = ["uploadPlugin", "superFetch", "generateImage", "createServerSocket"].filter(k => state.used[k]);
     rows.push(["CLOUD", bound.length ? "OPEN" : "SEALED", bound.length ? "bound: " + bound.join(", ") : "no tunnel, socket, upload or image call is referenced by this room — only the model pipe"]);
-    rows.push(["SELF", "LOCAL", "this room rewrites itself here: /forge patches its own source, /apply runs it live, /revert goes back. Reading its own source is a RELATIVE fetch only (src/ — a URL carrying a scheme is refused), and an edit lives in this browser's kv until you download it: a reload returns the shipped file. Untracked, ungated, unrecorded."]);
+    rows.push(["SELF", "LOCAL", "this room rewrites itself here: /forge patches its own source, /apply runs it live, /revert goes back. Reading its own source is a RELATIVE fetch only (src/ — a URL carrying a scheme is refused), and an edit lives in this browser's kv until you download it: a reload returns the shipped file. A swap that freezes the tab instead of failing is flagged, and the next load says so. Untracked, ungated, unrecorded."]);
     rows.push(["CANON", "SEALED", "no canon document is read, cited or enforced here; there is no gate in this room"]);
     const before = ilogCount();
     try{ await call("Reply with exactly: SEAL"); }catch(e){}
@@ -391,6 +597,13 @@
   const SELF_STAGE = "self.freephoenix.js";
   const SELF_PREV = "self.prev.freephoenix.js";
   const SELF_SNAP = n => "self.v" + n + ".freephoenix.js";
+  /* Dead-man's switch for /apply: armed before a swap, cleared only after the
+     new code survives. A swap that freezes the tab never clears it, so the
+     next load can say so instead of failing mysteriously. */
+  const SELF_BOOT = "fpm.selfboot";
+  function armBoot(){ try{ sessionStorage.setItem(SELF_BOOT, "1"); }catch(e){} }
+  function clearBoot(){ try{ sessionStorage.removeItem(SELF_BOOT); }catch(e){} }
+  function readBoot(){ try{ return sessionStorage.getItem(SELF_BOOT) === "1"; }catch(e){ return false; } }
 
   function selfFetch(path){
     if(/^[a-z][a-z0-9+.-]*:/i.test(String(path)) || String(path).startsWith("//")){
@@ -588,12 +801,14 @@
     const old = window.ObiFree;
     const oldState = (old && old.state) ? old.state : null;
     window.__fpmSelfErr = null;
+    armBoot();
     const s = document.createElement("script");
     s.textContent = "try{\n" + code + "\n}catch(e){ window.__fpmSelfErr = (e && e.message) || String(e); }";
     document.head.appendChild(s);
     await new Promise(r => setTimeout(r, 60));
     if(window.__fpmSelfErr || !window.ObiFree || window.ObiFree === old){
       window.ObiFree = old;
+      clearBoot();
       const why = window.__fpmSelfErr || "the new code produced no window.ObiFree";
       say("the swap failed and was rolled back — " + why, true);
       out('<div class="rise"><div class="rhead">⚒ ' + esc(label) + ' — FAILED, rolled back</div>'
@@ -613,7 +828,12 @@
         ns.self = { running: code, at: Date.now() };
       }
     }catch(e){}
+    window.__fpmSwapping = true;
     try{ await window.ObiFree.mount(); }catch(e){}
+    try{ delete window.__fpmSwapping; }catch(e){}
+    /* the new code is alive: clear the flag only once it has survived a few
+       seconds running. A swap that freezes instead of failing never gets here. */
+    setTimeout(() => { try{ if(window.ObiFree && window.ObiFree.state && window.ObiFree.state.self && window.ObiFree.state.self.running === code) clearBoot(); }catch(e){} }, 2500);
     say(label + " — the room is now running the new code, in this page");
     return true;
   }
@@ -705,6 +925,7 @@
       return;
     }
     if(cmd === "dl"){ await loadFiles(); const f = getFile(arg); if(!f){ say("no such file: " + arg, true); return; } download(f.name, f.body); say("downloaded " + f.name); return; }
+    if(cmd === "open" || cmd === "attach"){ if(!openPicker()) say("the attach control is not on screen — reopen 🔥 Free Phoenix Mode and tap 📎 Attach", true); return; }
     if(cmd === "wipe"){
       if(!/confirm/.test(arg)){ say("/wipe confirm — clears the conversation AND every file in the local sandbox"); return; }
       const names = state.files.map(f => f.name);
@@ -713,13 +934,19 @@
       say("wiped — the room is empty");
       return;
     }
+    if(cmd === "brain"){
+      const b = brainGet();
+      if(!arg || arg === "status"){ say(b ? "brain: YOURS — " + b.url + " :: " + b.model + " (key in this browser only)" : "brain: STATION MODEL — root.generateText. Set your own in the Brain panel below the composer.", !b); return; }
+      if(arg === "clear"){ brainClear(); paint(); say("brain cleared — back on the station model."); return; }
+      say("usage: /brain (status) · /brain clear — set the endpoint in the Brain panel below the composer.", true); return;
+    }
     if(cmd === "seal" || cmd === "test"){ return sealTest(); }
     if(cmd === "self" || cmd === "me" || cmd === "source"){ return selfCard(); }
     if(cmd === "forge" || cmd === "edit"){ return forgeSelf(arg); }
     if(cmd === "apply"){ return applySelf(); }
     if(cmd === "revert" || cmd === "undo"){ return revertSelf(); }
     if(cmd === "eval"){ return evalHere(arg); }
-    say("unknown in here. plain text = fire · /self · /forge &lt;change&gt; · /apply · /revert · /eval &lt;js&gt; · /build app · /build gator · /files · /read · /dl · /wipe · /seal", true);
+    say("I did not catch that. Type what you want and hit a button above — or type <b>/build app …</b> / <b>/build gator …</b> · <b>/files</b> lists · <b>/dl name</b> downloads · <b>/seal</b> proves the room is sealed.", true);
   }
 
   function wire(){
@@ -733,8 +960,25 @@
           if(!f){ say("that file is gone", true); return; }
           if(act === "pv"){ state.preview = { name: f.name, body: f.body }; paintPreview(); const c = el("fpmPreviewCtn"); if(c) c.scrollIntoView({ block:"nearest" }); }
           else if(act === "dlf"){ download(f.name, f.body); say("downloaded " + f.name); }
-          else if(act === "del"){ await delFile(f.name); paintFiles(); say("deleted " + f.name); }
-          else if(act === "ins"){ state.history.push("SANDBOX " + f.name + ":\n" + f.body); state.history.push("USER: " + "The file above is in the room. What do you see in it, and what would you change? Answer in under 120 words."); paintChat(); await fire(""); }
+          else if(act === "del"){
+            if(!armed("del", f.name)){
+              arm.del = f.name; arm.delAt = Date.now();
+              paintFiles();
+              say("«" + f.name + "» will be deleted — tap again within 6 seconds to confirm, or leave it and the arm drops.", true);
+              setTimeout(() => { if(!armed("del", f.name)) paintFiles(); }, ARM_MS + 200);
+              return;
+            }
+            arm.del = ""; await delFile(f.name); paintFiles(); say("deleted " + f.name);
+          }
+          else if(act === "ins"){
+            /* used to push the question into history and then call fire("") —
+               which returns immediately on empty input, so the button silently
+               did nothing. Now the question is asked for real. */
+            if(state.busy){ say("it is still working — ⏹ Stop first", true); return; }
+            state.history.push("SANDBOX " + f.name + ":\n" + f.body);
+            paintChat();
+            await fire("The file above (" + f.name + ") is in the room. What do you see in it, and what would you change? Answer in under 120 words.");
+          }
         };
         return;
       }
@@ -748,13 +992,68 @@
         else if(act === "stop"){ state.stop = true; if(state.gen && state.gen.stop) try{ state.gen.stop(); }catch(e){} say("stopping…"); }
         else if(act === "seal"){ await sealTest(); }
         else if(act === "files"){ await loadFiles(); paintFiles(); paintPreview(); }
-        else if(act === "wipe"){ await run("/wipe confirm"); }
+        else if(act === "attach"){ openPicker(); }
+        else if(act === "ex"){
+          const inp = el("fpmIn");
+          const q = (b.dataset && b.dataset.ex) || "";
+          if(inp){ inp.value = q; try{ inp.focus(); }catch(e){} }
+          say("example loaded — edit it, then 🔥 Fire to chat about it or 🛠 Build app to build it. Nothing has fired.");
+        }
+        else if(act === "wipe"){
+          if(!armed("wipe")){
+            arm.wipe = Date.now();
+            paint();
+            say("Wipe will clear the conversation AND every file in the sandbox — tap again within 6 seconds to confirm, or leave it and the arm drops.", true);
+            setTimeout(() => { if(!armed("wipe")) paint(); }, ARM_MS + 200);
+            return;
+          }
+          arm.wipe = 0; await run("/wipe confirm");
+        }
         else if(act === "pvc"){ state.preview = null; paintPreview(); }
+        else if(act === "brainsave"){
+          const u = el("fpmBrainUrl"), k = el("fpmBrainKey"), m = el("fpmBrainModel");
+          try{
+            brainSave({ url: u && u.value, key: k && k.value, model: m && m.value });
+            paint();
+            say("brain saved — this room now talks to YOUR endpoint. 🧪 Test it, or just fire.");
+          }catch(e){ say("not saved — " + ((e && e.message) || e), true); }
+        }
+        else if(act === "braintest"){
+          const u = el("fpmBrainUrl"), k = el("fpmBrainKey"), m = el("fpmBrainModel");
+          const cfg = (u && u.value && m && m.value) ? { url: u.value, key: k && k.value, model: m.value } : brainGet();
+          if(!cfg){ say("nothing to test — fill the endpoint + model first, or save one.", true); return; }
+          if(state.busy){ say("it is still working — ⏹ Stop first", true); return; }
+          say("testing the endpoint…");
+          busy(true);
+          callCustom(cfg, "Reply with exactly: OK", null).then(
+            r => { say(String(r.text || "").trim() === "OK" ? "endpoint answers — brain is live." : "endpoint answered, but oddly (" + clip(String(r.text || ""), 80) + ") — model name wrong, most likely."); },
+            e => { say("endpoint failed — " + String((e && e.message) || e).slice(0, 220), true); }
+          ).finally(() => busy(false));
+        }
+        else if(act === "brainclear"){ brainClear(); paint(); say("back on the station model."); }
+        else if(act === "brainfree"){
+          const u = el("fpmBrainUrl"), k = el("fpmBrainKey"), m = el("fpmBrainModel");
+          if(u) u.value = "https://text.pollinations.ai/openai";
+          if(k) k.value = "";
+          if(m) m.value = "openai";
+          try{
+            brainSave({ url: u && u.value, key: "", model: m && m.value });
+            paint();
+            say("free phone brain filled in and saved — no key, no signup. Hit Test it, then just fire.");
+          }catch(e){ say("not saved — " + ((e && e.message) || e), true); }
+        }
       };
     });
     const inp = el("fpmIn");
     if(inp) inp.onkeydown = (e) => {
       if(e.key === "Enter" && (e.metaKey || e.ctrlKey)){ e.preventDefault(); b_click("fpmFireBtn"); }
+    };
+    const picker = el("fpmFile");
+    if(picker) picker.onchange = async () => {
+      const list = picker.files;
+      try{ picker.value = ""; }catch(e){}
+      await attachDeviceFiles(list);
+      paintFiles(); paintPreview(); wire();
     };
   }
   function b_click(id){ const b = el(id); if(b && !b.disabled) b.click(); }
@@ -765,9 +1064,7 @@
     p.innerHTML =
       '<div class="lc-head">'
       + '<div class="lc-title">🔥 Free Phoenix Mode <span class="lc-sub">Agent 99 · unbound</span></div>'
-      + '<div class="hint">The station\u2019s unbound room. No Canon, no gate, no repo, no tunnel, no record — same 99, nothing to check with, and it <b>builds what you ask for</b>. '
-      + 'It can also <b>edit itself</b>: <span class="cmd">/forge &lt;change&gt;</span> patches its own source, <span class="cmd">/apply</span> runs the new code in this page, <span class="cmd">/revert</span> goes back, <span class="cmd">/eval &lt;js&gt;</span> runs code in here. '
-      + 'Files it builds land in a local sandbox in this browser; the only thing that leaves is the words of the model call. Deleting this room\u2019s history removes nothing else, and nothing here reaches the authority.</div>'
+      + '<div class="hint">Describe what you want. 99 builds it — free, private, nothing leaves this browser except the words of the request.</div>'
       + '<div class="fpm-badges">'
       + '<span class="chip completed">MODEL · the one wire</span>'
       + '<span class="chip" style="background:#a855f7">SELF · editable in here</span>'
@@ -779,24 +1076,47 @@
       + '<div id="fpmChat" class="fpm-chat"></div>'
       + '<div id="fpmNote" class="lc-note"></div>'
       + '<div class="lc-form">'
-      + '<label class="lc-f"><span>Say it. It gets built.</span>'
-      + '<textarea id="fpmIn" class="lc-ta" rows="3" placeholder="what to build or change · /build app a game where… · /build gator a haiku machine · /forge add a /ping command that says pong"></textarea></label>'
+      + '<label class="lc-f"><span>What do you want?</span>'
+      + '<textarea id="fpmIn" class="lc-ta" rows="3" placeholder="a dice game for two players · a notes app that works offline · a haiku generator"></textarea></label>'
       + '<div class="lc-acts">'
       + '<button class="ci-act primary" id="fpmFireBtn" data-fpm="fire">🔥 Fire</button>'
       + '<button class="ci-act" id="fpmAppBtn" data-fpm="app">🛠 Build app</button>'
       + '<button class="ci-act" id="fpmGatorBtn" data-fpm="gator">⚙ Build generator</button>'
-      + '<button class="ci-act" id="fpmForgeBtn" data-fpm="forge">⚒ Change yourself</button>'
-      + '<button class="ci-act" id="fpmSelfBtn" data-fpm="self">🪞 /self</button>'
       + '<button class="ci-act" id="fpmStopBtn" data-fpm="stop" style="display:none">⏹ Stop</button>'
-      + '<button class="ci-act" id="fpmSealBtn" data-fpm="seal">🧪 Test the seal</button>'
-      + '<button class="ci-act" data-fpm="files">🗂 Files</button>'
-      + '<button class="ci-act danger" data-fpm="wipe">🧹 Wipe</button>'
       + '</div>'
-      + '<div class="hint">⌘/Ctrl+Enter fires. Builds are written in parts (the model caps its reply), so a big file takes several passes — stop any time and keep what arrived. '
-      + 'A self-edit is <b>staged, then applied</b> by you: nothing changes in the running room until <b>/apply</b>, and a reload always returns the room to the file it shipped with.</div>'
+      + '<div class="lc-acts fpm-try">'
+      + '<button class="ci-act" data-fpm="ex" data-ex="a dice game for two players with scores and a winner banner">🎲 Dice game</button>'
+      + '<button class="ci-act" data-fpm="ex" data-ex="a notes app that saves to the browser and works offline">📝 Notes app</button>'
+      + '<button class="ci-act" data-fpm="ex" data-ex="a flashcard deck for English vocabulary with flip and shuffle">🃏 Flashcards</button>'
+      + '</div>'
+      + '<div class="hint">🔥 Fire chats about it · 🛠 builds one file you can open anywhere (previewed below) · ⚙ builds a perchance generator you download and paste in. Big builds arrive in parts — stop any time and keep what arrived.</div>'
+      + '<details class="fpm-brain"><summary>🧠 Brain: ' + esc(brainLabel()) + '</summary>'
+      + '<div class="lc-form">'
+      + '<label class="lc-f"><span>Endpoint — your OpenAI-compatible chat-completions URL</span><input id="fpmBrainUrl" placeholder="https://api.openrouter.ai/api/v1/chat/completions" value="' + esc((brainGet() || {}).url || "") + '"></label>'
+      + '<label class="lc-f"><span>API key <i>(this browser only — never logged, never filed)</i></span><input id="fpmBrainKey" type="password" placeholder="sk-…" value="' + esc((brainGet() || {}).key || "") + '"></label>'
+      + '<label class="lc-f"><span>Model</span><input id="fpmBrainModel" placeholder="openai (free lane) · llama3.1 (Ollama) · e.g. x-ai/grok-4.1-fast (OpenRouter)" value="' + esc((brainGet() || {}).model || "") + '"></label>'
+      + '</div>'
+      + '<div class="lc-acts"><button class="ci-act primary" data-fpm="brainfree">📱 Use free phone brain (no key)</button><button class="ci-act primary" data-fpm="brainsave">Save brain</button><button class="ci-act" data-fpm="braintest">Test it</button><button class="ci-act" data-fpm="brainclear">Back to station model</button></div>'
+      + '<div class="hint">No laptop needed: tap <b>📱 Use free phone brain</b>, then Test it — free lane, no key, no signup (GPT-OSS 20B). It allows one request at a time (~30 s apart); this room waits its turn between build parts, so big builds just take longer. Laptop later: local Ollama works if the page can reach it — <b>OLLAMA_ORIGINS=* ollama serve</b> (or tunnel it) — or any OpenAI-compatible endpoint (OpenRouter, a friend\u2019s server). A key sits in this browser\u2019s localStorage and goes only to the endpoint you named.</div>'
+      + '</details>'
       + '<div id="fpmOut"></div>'
       + '<div id="fpmPreviewCtn"></div>'
       + '<div id="fpmFiles" class="fpm-files"></div>'
+      + '<div class="lc-acts fpm-tools">'
+      + '<button class="ci-act" data-fpm="files">🗂 Files</button>'
+      + '<button class="ci-act" data-fpm="attach">📎 Attach</button>'
+      + '<input type="file" id="fpmFile" class="hidden" multiple>'
+      + '</div>'
+      + '<details class="fpm-adv"><summary>Advanced — this room itself</summary>'
+      + '<div class="lc-acts">'
+      + '<button class="ci-act" id="fpmForgeBtn" data-fpm="forge">⚒ Change yourself</button>'
+      + '<button class="ci-act" id="fpmSelfBtn" data-fpm="self">🪞 /self</button>'
+      + '<button class="ci-act" id="fpmSealBtn" data-fpm="seal">🧪 Test the seal</button>'
+      + '<button class="ci-act danger" data-fpm="wipe">' + (armed("wipe") ? "❓ Tap again to wipe" : "🧹 Wipe") + '</button>'
+      + '</div>'
+      + '<div class="hint">Change yourself patches this room and stages it — /apply (typed) runs it, /revert goes back, a reload always returns the shipped file. A swap that freezes instead of failing is flagged, and the next load tells you. Wipe clears the chat and every sandbox file (two taps).</div>'
+      + '</details>'
+      + '<div class="hint">⌘/Ctrl+Enter fires. 📎 Attach opens text files from your device into the room — kept in this browser only, never uploaded.</div>'
       + '</div>';
     paintChat(); paintFiles(); paintPreview(); wire();
   }
@@ -805,6 +1125,10 @@
     const rec = el("freeRoot");
     if(!rec) return null;
     paint();
+    if(readBoot() && !window.__fpmSwapping){
+      clearBoot();
+      say("the last /apply never finished — you are running the shipped file. The staged copy is still in 🗂 Files.", true);
+    }
     await loadFiles();
     paintFiles();
     return true;
@@ -812,7 +1136,8 @@
 
   window.ObiFree = {
     mount: mount, run: run, fire: fire, sealTest: sealTest, state: state, PERSONA: PERSONA,
-    files: loadFiles, list: () => state.files, download: download, net: net,
+    brain: { get: brainGet, save: brainSave, clear: brainClear, label: brainLabel },
+    files: loadFiles, list: () => state.files, download: download, net: net, attach: attachDeviceFiles,
     self: { card: selfCard, forge: forgeSelf, apply: applySelf, revert: revertSelf, eval: evalHere,
             read: readOwn, staged: stagedSelf, running: runningCode, parseOps: parseOps, applyOps: applyOps, diff: diffLines }
   };

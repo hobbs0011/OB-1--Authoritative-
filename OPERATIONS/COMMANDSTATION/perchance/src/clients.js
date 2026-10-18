@@ -265,8 +265,22 @@ async function roster(){
       + (c.id === act ? '' : '<button class="ci-act" data-client="' + e(c.id) + '" data-do="del">✗</button>')
       + '</span></div></div>');
   }
+  /* THE INTAKE VAULT IS NOT THE LEDGER. A prospect who came in through intake sits in
+     its own kv folder and has never been made a client — it owns no students, no
+     classes, no evidence, nothing. The ledger must SAY so rather than let those
+     records look like clients it already carries. Fail closed: if intake cannot be
+     read, the row is omitted rather than guessed. */
+  let intake = [];
+  try{
+    const ks = await root.kv.intake.keys();
+    intake = (ks || []).filter(k => String(k).indexOf("__") !== 0 && !list.some(c => c.id === String(k)));
+  }catch(err){ intake = []; }
+  const intakeRow = intake.length
+    ? '<div class="rrow"><b>INTAKE VAULT</b><span class="vd">' + intake.length + '</span><div class="rd">prospect' + (intake.length === 1 ? "" : "s") + ' with an intake record but <b>no client</b> yet: <b>' + intake.map(e).join(", ") + '</b> — a prospect owns nothing until it is made a client. Bring one in with <b>/client &lt;name&gt;</b>.</div></div>'
+    : "";
   addBubble("ass", '<div class="rise tr-card"><div class="rhead">👤 /clients — the station\'s ledger</div>'
     + '<div class="rrow"><b>CLIENTS</b><span class="vd">' + list.length + '</span><div class="rd">active: <b>' + e(name()) + '</b> — everything you record, file, review or search belongs to the active client alone</div></div>'
+    + intakeRow
     + rows.join("")
     + '<div class="rfoot">Switch or add: <b>/client &lt;name&gt;</b>. A client\'s evidence is isolated — the station will not file a record across clients, and deleting a client never merges its data.</div></div>');
   wire();

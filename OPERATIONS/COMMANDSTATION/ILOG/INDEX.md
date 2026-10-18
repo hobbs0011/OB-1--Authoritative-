@@ -1,6 +1,6 @@
 # I-LOG — perchance command station
 
-Written by the perchance Command Station (https://perchance.org/prais-command-station).
+Written by the perchance Command Station (https://perchance.org/phoenix-ai-solutions-command-mastermind).
 
 ## The ONE authority
 
@@ -11,7 +11,7 @@ I-LOG lands inside it. No mirror may be presented as the canon.
 ## The gate
 
 Nothing here is written to the authority without **PHOENIXOMEGAPROTOCOL**: Sov100's password entered in the
-session (`/omega <password>`, armed for 15 minutes, never past a reload). The password is never stored (only a
+session (`/phoenixomegaprotocol <password>`, armed for 15 minutes, never past a reload). The password is never stored (only a
 sha-256 of it, in the browser's kv), never logged, never captured, never exported. Every attempt — armed,
 refused, failed — is itself an I-LOG entry, so an unarmed attempt leaves a mark.
 

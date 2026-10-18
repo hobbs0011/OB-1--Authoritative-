@@ -345,6 +345,47 @@
     try{ await f.set("anchor:" + a.commit, rec); }catch(e){}
     return rec;
   }
+  /* ------------------------- the branch's own anchors ----------------------
+     This origin's chain and the authority branch's chain can DIVERGE — the
+     station was renamed 2026-09-23, which wiped the name-keyed kv that held the
+     anchors, and a fresh chain opened on this origin minutes later with COLLIDING
+     seq numbers. So "no local anchor" must never be printed as "never anchored on
+     Git": the record may be anchored on the branch even when this origin lost the
+     pointer. This reads the branch's own `anchors.json` (the token, if any, is
+     used only in the Authorization header — never logged, never rendered) and
+     compares each remote anchor's seq against this origin's entry at that seq:
+     same seq + same head = one chain; same seq + different head = two chains
+     sharing numbers, and THAT is what gets printed. Fail closed: no token, or a
+     branch that does not answer, returns ok:false with the reason — nothing is
+     claimed beyond what was read. */
+  async function remoteAnchors(){
+    const out = { ok:false, why:null, branch:REPO.branch, path:ILOG_DIR + "anchors.json", anchors:[], compare:[], sameSeq:[], differSeq:[], verdict:null };
+    if(!ghToken()){ out.why = "no GitHub token in this browser — the authority branch cannot be read"; return out; }
+    try{
+      const r = await ghJson("https://api.github.com/repos/" + REPO.owner + "/" + REPO.repo + "/contents/" + ILOG_DIR + "anchors.json?ref=" + REPO.branch);
+      if(r.status !== 200 || !r.j || !r.j.content){ out.why = "the branch does not answer for " + ILOG_DIR + "anchors.json (HTTP " + r.status + ")"; return out; }
+      let txt = null; try{ txt = decodeURIComponent(escape(atob(String(r.j.content).replace(/\s+/g, "")))); }catch(e){ txt = null; }
+      let arr = null; try{ arr = JSON.parse(txt); }catch(e){}
+      if(!Array.isArray(arr)){ out.why = "the branch's anchors.json did not parse as a list"; return out; }
+      out.anchors = arr; out.ok = true;
+    }catch(e){ out.why = "the branch could not be read: " + String((e && e.message) || e); return out; }
+    try{
+      const all = await allEntries();
+      for(const a of out.anchors){
+        const es = a.seg == null ? 1 : a.seg;
+        const local = all.find(e => e.seq === a.seq && (e.seg || 1) === es);
+        const row = { seq:a.seq, seg:es, commit:short(a.commit), iso:a.iso, remoteHead:String(a.head || "").slice(0, 16), localHead: local ? String(local.hash || "").slice(0, 16) : null, same:null };
+        if(!local) row.same = null;
+        else if(local.hash === a.head){ row.same = true; out.sameSeq.push(a.seq); }
+        else { row.same = false; out.differSeq.push(a.seq); }
+        out.compare.push(row);
+      }
+      out.verdict = !out.anchors.length ? "the branch holds no anchors either"
+        : (out.differSeq.length ? "seq " + out.differSeq.join(", ") + " exist on both and the heads differ — two chains sharing the same numbers"
+        : (out.sameSeq.length === out.anchors.length ? "every anchor's head matches this origin — one chain" : "some heads match, some do not"));
+    }catch(e){ out.verdict = "the local chain could not be compared: " + String((e && e.message) || e); }
+    return out;
+  }
   function coveredBy(e, anchor){
     if(!anchor) return false;
     const as = anchor.seg == null ? 1 : anchor.seg;
@@ -437,7 +478,7 @@
       "## The gate",
       "",
       "Nothing here is written to the authority without **PHOENIXOMEGAPROTOCOL**: Sov100's password entered in the",
-      "session (`/omega <password>`, armed for 15 minutes, never past a reload). The password is never stored (only a",
+      "session (`/phoenixomegaprotocol <password>`, armed for 15 minutes, never past a reload). The password is never stored (only a",
       "sha-256 of it, in the browser's kv), never logged, never captured, never exported. Every attempt — armed,",
       "refused, failed — is itself an I-LOG entry, so an unarmed attempt leaves a mark.",
       "",
@@ -548,23 +589,34 @@
         else { failed++; errors.push(p + " → blob HTTP " + b.status + " " + String((b.j && b.j.message) || "").slice(0, 90)); }
       }catch(e){ failed++; errors.push(p + " → " + e.message); }
     }
-    if(!blobs.length) return { pushed:pushed, failed:failed, commitSha:null, baseSha:baseSha, errors:errors };
+    /* REMOVALS. `base_tree` carries every path the previous commit held, so a file
+       this station has WITHDRAWN would sit on the branch forever — adds and updates
+       alone can never take it back. An entry with `sha:null` removes the path from the
+       new tree. Callers pass the exact paths (o.deletes), computed from a READ of the
+       branch, never guessed; nothing is removed when none are given. */
+    const treeEntries = blobs.slice();
+    const removed = [];
+    for(const p of (o.deletes || [])){
+      if(o.files && Object.prototype.hasOwnProperty.call(o.files, p)) continue;
+      treeEntries.push({ path:p, mode:"100644", type:"blob", sha:null }); removed.push(p);
+    }
+    if(!treeEntries.length) return { pushed:pushed, failed:failed, removed:removed, commitSha:null, baseSha:baseSha, errors:errors };
     try{
-      const tree = await ghJson(base + "/git/trees", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ base_tree: baseSha || undefined, tree: blobs }) });
+      const tree = await ghJson(base + "/git/trees", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ base_tree: baseSha || undefined, tree: treeEntries }) });
       const treeSha = tree.j && tree.j.sha;
-      if(!treeSha){ errors.push("tree HTTP " + tree.status + " " + String((tree.j && tree.j.message) || "").slice(0, 90)); return { pushed:pushed, failed:failed + 1, commitSha:null, baseSha:baseSha, errors:errors }; }
+      if(!treeSha){ errors.push("tree HTTP " + tree.status + " " + String((tree.j && tree.j.message) || "").slice(0, 90)); return { pushed:pushed, failed:failed + 1, removed:removed, commitSha:null, baseSha:baseSha, errors:errors }; }
       const commit = await ghJson(base + "/git/commits", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ message: o.message, tree: treeSha, parents: baseSha ? [baseSha] : [] }) });
       const commitSha = commit.j && commit.j.sha;
-      if(!commitSha){ errors.push("commit HTTP " + commit.status + " " + String((commit.j && commit.j.message) || "").slice(0, 90)); return { pushed:pushed, failed:failed + 1, commitSha:null, baseSha:baseSha, treeSha:treeSha, errors:errors }; }
+      if(!commitSha){ errors.push("commit HTTP " + commit.status + " " + String((commit.j && commit.j.message) || "").slice(0, 90)); return { pushed:pushed, failed:failed + 1, removed:removed, commitSha:null, baseSha:baseSha, treeSha:treeSha, errors:errors }; }
       const ref = await ghJson(base + "/git/refs/heads/" + o.branch, { method:"PATCH", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ sha: commitSha }) });
       if(!(ref.j && ref.j.object && ref.j.object.sha)){
         errors.push("ref move HTTP " + ref.status + " " + String((ref.j && ref.j.message) || "").slice(0, 90));
-        return { pushed:pushed, failed:failed + 1, commitSha:commitSha, baseSha:baseSha, treeSha:treeSha, errors:errors };
+        return { pushed:pushed, failed:failed + 1, removed:removed, commitSha:commitSha, baseSha:baseSha, treeSha:treeSha, errors:errors };
       }
-      return { pushed:pushed, failed:failed, commitSha:commitSha, baseSha:baseSha, treeSha:treeSha, errors:errors };
+      return { pushed:pushed, failed:failed, removed:removed, commitSha:commitSha, baseSha:baseSha, treeSha:treeSha, errors:errors };
     }catch(e){
       errors.push(e.message);
-      return { pushed:pushed, failed:failed + 1, commitSha:null, baseSha:baseSha, errors:errors };
+      return { pushed:pushed, failed:failed + 1, removed:removed, commitSha:null, baseSha:baseSha, errors:errors };
     }
   }
 
@@ -611,7 +663,7 @@
     const row = (k, v2, cls) => '<div class="rrow' + (cls || "") + '"><b>' + E(k) + '</b><span class="vd"></span><div class="rd">' + v2 + '</div></div>';
     let html = '<div class="rise"><div class="rhead">🧾 /ilog — the station\'s operation record</div>';
     html += row("AUTHORITY", "ONE repo: <b>" + E(REPO.owner + "/" + REPO.repo) + "</b>@" + E(REPO.branch) + " · everything under <span class=\"rd\">" + E(ILOG_DIR) + "</span>"
-      + (gate ? ' · gate <b>' + (gate.armed ? "ARMED " + E(gate.minsLeft) + "m" : (gate.enrolled ? "LOCKED — /omega &lt;password&gt;" : "NO PASSWORD ENROLLED — /omega set")) + '</b>' : " · writes require PHOENIXOMEGAPROTOCOL (<b>/omega</b>)"));
+      + (gate ? ' · gate <b>' + (gate.armed ? "ARMED " + E(gate.minsLeft) + "m" : (gate.enrolled ? "LOCKED — /phoenixomegaprotocol &lt;password&gt;" : "NO PASSWORD ENROLLED — /phoenixomegaprotocol set")) + '</b>' : " · writes require PHOENIXOMEGAPROTOCOL (<b>/phoenixomegaprotocol</b>)"));
     html += row("ENTRIES", st.count + " in the chain · <b>" + st.runEntries + "</b> this run · segment " + st.seg + (st.sealed ? " · " + st.sealed + " sealed before " + E(st.sealT ? new Date(st.sealT).toLocaleString() : "?") : ""));
     html += row("CHAIN", "head <b>" + E(st.headShort) + "…</b> · " + E(st.alg || "?") + " · "
       + (v.ok ? '<span class="chip" style="background:#4cd97b">VERIFIED</span> ' + v.checked + " recomputed in " + v.ms + "ms"
@@ -729,7 +781,7 @@
     "",
     "Written by the perchance generator (https://perchance.org/" + genName() + ") on every operation it performs.",
     "It lives under the ONE authoritative repo — " + REPO.owner + "/" + REPO.repo + " (branch " + REPO.branch + ") — and",
-    "nothing is written there without PHOENIXOMEGAPROTOCOL (Sov100's password, armed with /omega; refusals are recorded).",
+    "nothing is written there without PHOENIXOMEGAPROTOCOL (Sov100's password, armed with /phoenixomegaprotocol; refusals are recorded).",
     "Companion of the canon I-LOG (the RRL vault, renamed **I-LOG (Incarnation Log)**, Schema V2 JSONL",
     "`content[].data.{text,tool,state}`, roles/colours per LFG §SCS: 🟣 SOUL · ❤️ DNA · 💛 REASON) which the",
     "VS Code station writes. That vault is on the **`" + VS.branch + "` branch**, not `" + REPO.branch + "`:",
@@ -760,7 +812,7 @@
   window.ObiILog = {
     VERSION: VERSION, KV_FOLDER: KV_FOLDER, LS_KEY: LS_KEY, TAIL: TAIL, REPO: REPO, VS: VS, DIR: ILOG_DIR,
     append: append, entries: entries, all: allEntries, head: head, verify: verify, stats: stats,
-    anchors: anchorList, markdown: markdown, jsonl: jsonl, card: card, push: push, reset: reset,
+    anchors: anchorList, remoteAnchors: remoteAnchors, markdown: markdown, jsonl: jsonl, card: card, push: push, reset: reset,
     anchorRecord: anchorRecord, migrate: migrate, keyOf: keyOf, restore: restoreEntry,
     exportFile: exportFile, gitCommitFiles: gitCommitFiles, ghJson: ghJson, hashOf: hashOf, payloadOf: payloadOf,
     transcriptV2: transcriptV2, v2Jsonl: v2Jsonl, indexMd: indexMd, pull: pull, v2Line: v2Line, COLOUR: COLOUR,

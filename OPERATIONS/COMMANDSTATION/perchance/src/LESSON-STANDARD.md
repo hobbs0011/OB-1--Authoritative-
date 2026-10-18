@@ -7,6 +7,9 @@ the spec, and the validator (`/lesson check`) refuses a lesson that breaks it.
 **The ground truth is the sovereign's own work, kept verbatim in this repo:**
 - `src/lessons/reference/NET-Sarcasm-Academy.html` — *Sarcasm Academy V20 — Ultimate Edition* (23.7 KB)
 - `src/lessons/reference/NET-Highschool-Careers.html` — *Careers Academy Ultra Edition* (14.8 KB)
+- `src/lessons/reference/NET-Neon-City-Genesis.html` — *NEON CITY GENESIS: The Evolution* (40.5 KB) — the Grade-12
+  deck-and-games shape: vocab deck, travel slider, idioms + slang banks, two games, homework. Same brand, different
+  spine from the six-room format — ground truth for taste at senior level, never for validator correctness.
 - `src/lessons/reference/NET-CLASSROOM-MANAGER.html` — *NET Classroom Manager — Ultimate Edition* (79.6 KB) —
   not a lesson: the **classroom-floor machine** the lessons live inside, and the fullest statement of the design
   system and the teaching method. **Part II of this document is derived from it.**

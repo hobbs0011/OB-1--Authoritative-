@@ -24,7 +24,7 @@
 (function(){
   const CONFIG = {
     net: "obi-network",          // network name (must match the anchor's /netjoin)
-    anchorName: "obi",           // generator name of the ANCHOR (who created the hub)
+    anchorName: "phoenix-rising-ai-solutions-agent99-mastermind", // generator name of the ANCHOR (who created the hub)
     role: "worker",              // this node's role in the organism
     ledgerKey: "obi_sdnad",      // local ledger to merge the whole into (optional)
     mirrorKey: "obi_cgn_mirror"  // dedicated mirror key (always written)
