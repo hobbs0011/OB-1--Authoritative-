@@ -38,7 +38,7 @@ jobs:
   # ============================================
   # PRONG 1: hobbs0011 (uses default GITHUB_TOKEN)
   # ============================================
-  deploy-hobbs0011:
+  deploy-hobbs-lab:
     if: ${{ github.event.inputs.enable_legacy_targets == 'true' && github.event.inputs.hobbs_lab_issue != '' }}
     runs-on: ubuntu-latest
     permissions:
