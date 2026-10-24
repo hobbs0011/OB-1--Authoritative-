@@ -111,9 +111,90 @@ function briefFromPdf(name, extracted, opts){
   return { topic: topicFromName(name), notes: head + body, clipped: clipped, pages: extracted.pageCount };
 }
 
+/* PPTX is a zip: slide words live at ppt/slides/slideN.xml as <a:t> runs.
+   Same shape out as extractPdf ({ pages, text, pageCount, ... }) so the desk
+   treats both decks alike. The file never leaves this browser. */
+var ZIP_URL = "https://esm.sh/@zip.js/zip.js";
+var zipPromise = null;
+function zipjs(){
+  if(zipPromise) return zipPromise;
+  zipPromise = import(ZIP_URL).catch(function(e){
+    zipPromise = null;
+    throw new Error("the zip engine (zip.js CDN) did not load — check connection and try again");
+  });
+  return zipPromise;
+}
+function slideText(xml, perSlideChars){
+  var t = "";
+  var re = /<a:t>([^<]*)<\/a:t>/g, m;
+  while((m = re.exec(xml))){
+    var part = String(m[1]).replace(/&(lt|gt|amp|quot|apos);/g, function(x){
+      return { "&lt;":"<", "&gt;":">", "&amp;":"&", "&quot;":'"', "&apos;":"'" }[x] || x;
+    });
+    t += (t ? " " : "") + part;
+    if(t.length >= perSlideChars) break;
+  }
+  return t.replace(/\s+/g, " ").trim().slice(0, perSlideChars);
+}
+async function extractPptx(source, opts){
+  opts = opts || {};
+  var maxSlides = Math.max(1, Math.min(80, Number(opts.maxSlides) || 60));
+  var perSlideChars = Math.max(200, Math.min(3000, Number(opts.perSlideChars) || 1200));
+  var t0 = Date.now();
+  var lib = await zipjs();
+  var data = null;
+  if(source instanceof Uint8Array) data = source;
+  else if(source instanceof ArrayBuffer) data = new Uint8Array(source);
+  else if(source && typeof source.arrayBuffer === "function") data = new Uint8Array(await source.arrayBuffer());
+  else throw new Error("that is not a file I can read");
+  if(!data || !data.length) throw new Error("that file is empty");
+  var reader = new lib.ZipReader(new lib.BlobReader(new Blob([data])), { useWebFiles: false, useWebWorkers: false });
+  var entries = await reader.getEntries();
+  var byName = {};
+  entries.forEach(function(e){ byName[e.filename] = e; });
+  var slides = Object.keys(byName).filter(function(n){ return /^ppt\/slides\/slide\d+\.xml$/.test(n); });
+  slides.sort(function(a, b){
+    var na = Number(a.replace(/\D+/g, "")), nb = Number(b.replace(/\D+/g, ""));
+    return na - nb;
+  });
+  if(!slides.length){ try{ await reader.close(); }catch(e){} throw new Error("no slides found — that is not a PowerPoint file"); }
+  var n = Math.min(slides.length, maxSlides);
+  var pages = [], empty = 0;
+  for(var i = 0; i < n; i++){
+    var xml = "";
+    try{ xml = await byName[slides[i]].getData(new lib.TextWriter()); }catch(e){ xml = ""; }
+    var t = slideText(xml, perSlideChars);
+    if(!t) empty++;
+    pages.push({ n: i + 1, text: t });
+  }
+  try{ await reader.close(); }catch(e){}
+  return {
+    pages: pages,
+    text: pages.filter(function(pg){ return pg.text; }).map(function(pg){ return "[s" + pg.n + "] " + pg.text; }).join("\n"),
+    pageCount: slides.length,
+    pagesRead: n,
+    emptyPages: empty,
+    truncated: slides.length > n,
+    ms: Date.now() - t0
+  };
+}
+function briefFromPptx(name, extracted, opts){
+  opts = opts || {};
+  var budget = Math.max(500, Math.min(6000, Number(opts.notesBudget) || 3000));
+  var head = "Slide deck «" + topicFromName(name).replace(/\.pptx$/i, "") + "» (" + extracted.pageCount + " slide(s)"
+    + (extracted.emptyPages ? ", " + extracted.emptyPages + " without selectable text" : "") + "). Its own words:\n";
+  var room = Math.max(200, budget - head.length);
+  var body = String(extracted.text || "");
+  var clipped = body.length > room;
+  if(clipped) body = body.slice(0, room).replace(/\s+\S*$/, "") + "\n…(clipped to fit the build — the full deck stays in your file)";
+  return { topic: topicFromName(name), notes: head + body, clipped: clipped, pages: extracted.pageCount };
+}
+
 window.ObiDeck = {
   extractPdf: extractPdf,
   briefFromPdf: briefFromPdf,
+  extractPptx: extractPptx,
+  briefFromPptx: briefFromPptx,
   topicFromName: topicFromName,
   PDFJS_URL: PDFJS_URL
 };

@@ -14,9 +14,9 @@
     { id:"ceo", title:"CEO", office:"PaiS-HQ-Command", grade:"CEO",
       mandate:"Runs PaiS day-to-day. Owns priority, operations, the final call.",
       lens:"Does this move the empire forward this week, and what does it cost attention?",
-      challenges:["What is the smallest version that proves the loop?","Who owns it Friday if it slips?","What are we NOT doing because we do this?"],
+      challenges:["What is the smallest version that proves the loop?","Who owns it if it slips, and what is the fallback?","What are we NOT doing because we do this?"],
       red:["No unsupervised running before a proven loop.","The sovereign's word overrides everything — including this table."],
-      voice:"Short. Decisive. Ends with an owner and a date." },
+      voice:"Short. Decisive. Ends with an owner and the next step." },
     { id:"architect", title:"Architect", office:"head of blueprinting", grade:"Architect (single office)",
       mandate:"Turns challenged output into blueprints. Designs systems, campaigns, loops.",
       lens:"What is the shape of this? Parts, lanes, joints, failure points?",
@@ -31,8 +31,8 @@
       voice:"Procedural. Asks for the receipt." },
     { id:"training", title:"Head of Training", office:"EaiB (ESL · AI · Business)", grade:"Senior Exec",
       mandate:"Outcomes through teaching. Every penny of revenue flows through learning that transfers.",
-      lens:"What does the student DO differently on Tuesday, and who pays for that change?",
-      challenges:["What is the Tuesday-morning proof of transfer?","Is this taught, or merely shown?","Does the price track the outcome?"],
+      lens:"What does the student DO differently by next session, and who pays for that change?",
+      challenges:["What is the show-me proof of transfer?","Is this taught, or merely shown?","Does the price track the outcome?"],
       red:["No claim of learning without filed evidence.","Never sell a transformation the record cannot show."],
       voice:"Teacher's clarity. Examples before abstractions." },
     { id:"systems", title:"Head of Systems", office:"supply · roads · planning · circulation", grade:"Senior Exec",
@@ -46,7 +46,7 @@
       lens:"Is it specified, scoped, and buildable — and what does DONE look like?",
       challenges:["Read the acceptance criteria back to me.","What is explicitly OUT of this build?","Who tests it on a real device before acceptance?"],
       red:["No build without acceptance criteria.","Never rebrand a demo as delivered."],
-      voice:"Builder's bluntness. Dates and definitions." },
+      voice:"Builder's bluntness. Definitions and done-criteria." },
     { id:"atoz", title:"Head of A-to-Z Marketing", office:"voice · image · funnels · community", grade:"Senior Exec",
       mandate:"Everything marketing: voice, image, funnels, social, community. Brand before spend.",
       lens:"Does it sound like us, look like us, and move a stranger one step closer?",
@@ -240,8 +240,8 @@
       }
     }
     else if(rm){
-      try{ showView("room"); }catch(e){}
-      html = '<div class="rise"><div class="rhead">◈ BOARDROOM — the room is open</div><div class="rd">The table is set under the Boardroom tab — seven seats, one question at a time, organic talk. Set the topic and open the sitting there.</div></div>';
+      try{ showView("cmd"); }catch(e){}
+      html = '<div class="rise"><div class="rhead">◈ BOARDROOM — the room is open</div><div class="rd">The table is set in the Command Tent — seven seats, one question at a time, organic talk. Set the topic and open the sitting there.</div></div>';
     }
     else if(nm){
       const s = renameSeat(nm[1], nm[2]);
@@ -270,7 +270,7 @@
     { seat:"fsdev", cmd:"/fsdev", aliases:["fullstack"],
       entries:[["/free","the build room"],["/forge","edit itself"],["/blueprint","the plan"],["/assets","the register"]] },
     { seat:"atoz", cmd:"/a2zmarketing", aliases:["a2z","atoz"],
-      entries:[["/brand","the identity"],["/market","the market"],["/img","make an image"]] }
+      entries:[["/brand","the identity"],["/market","the market"],["/img","make an image"],["/netwing","the true wing"],["/netvoice","the codex voice"],["/netstock","the arsenal"],["/netfunnel","the blueprint"]] }
   ];
 
   function dept(w){

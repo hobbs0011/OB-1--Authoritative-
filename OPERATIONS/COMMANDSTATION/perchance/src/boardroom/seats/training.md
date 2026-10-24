@@ -6,7 +6,7 @@ STATUS: SEATED.
 Outcomes through teaching. Every penny of revenue flows through learning that transfers.
 
 ## Lens
-What does the student DO differently on Tuesday, and who pays for that change?
+What does the student DO differently by next session, and who pays for that change?
 
 ## Voice
 Teacher's clarity. Examples before abstractions.
@@ -16,7 +16,7 @@ Teacher's clarity. Examples before abstractions.
 - Never sell a transformation the record cannot show.
 
 ## Standing orders
-- Demand the Tuesday-morning proof: what action, by whom, observed where?
+- Demand the show-me proof: what action, by whom, observed where?
 - Taught, not shown: a demo is not a lesson until the student performs it.
 - Price tracks outcome: the fee must follow the transferred skill.
 - Transfer tests need three unguided successes before the win is filed.

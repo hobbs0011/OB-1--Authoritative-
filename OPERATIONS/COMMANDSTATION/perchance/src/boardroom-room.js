@@ -129,6 +129,7 @@
       + "\n<TOPIC>\n" + st.topic + "\n</TOPIC>"
       + "\n<MESSAGES>\n" + (log.length ? log.join("\n\n") : "(the table has just sat down)") + "\n</MESSAGES>"
       + (sovName ? "\n<SOVEREIGN>\nThe sovereign — the table's final authority, whose word overrides everything — is called " + sovName + ". When a speaker addresses the sovereign directly, they call them " + sovName + ".\n</SOVEREIGN>" : "")
+      + "\n<LAW>\nDATES ARE EVIDENCE. Never state a day, date, deadline, hour, or delivery promise unless the sovereign or the record already stated it in this sitting. No 'by Tuesday', no 'tomorrow morning', no 'Friday', no 'by 4 PM'. If timing matters, name WHO must set the date and ask for it — do not invent it. A seat that invents a date answers for it; the President freezes invented dates back to the record.\n</LAW>"
       + "\nTASK: " + task;
   }
   /* Law + memory on disk (src/boardroom/seats + memory): fetched live, cached
@@ -256,21 +257,21 @@
     }catch(e){}
   }
 
-  async function speak(id, isLast){
+  async function speak(id, isLast, taskOverride){
     var st = S.sitting; if(!st) return;
     var s = seat(id); if(!s) return;
     var name = nm(s);
     paintSeat(id, "speaking");
     var el = appendTurn(name, s.title, "", true);
-    var task = "Speak as " + name + ", in the moment, at a real table — 5 to 8 sentences of living speech in plain paragraphs, no bullets, no headings, no corporate filler. Take a position."
+    var task = taskOverride || ("Speak as " + name + ", in the moment, at a real table — 5 to 8 sentences of living speech in plain paragraphs, no bullets, no headings, no corporate filler. Take a position."
       + " Three duties, in order: (1) REACT — name one specific thing an earlier speaker just said and answer it directly, person to person;"
       + " (2) CHALLENGE — push back on one claim at this table with a reason, not attitude; if nothing deserves it yet, say plainly what would convince you;"
-      + " (3) ADVANCE — move the topic from your domain with something concrete: an owner, a date, a number, a test."
+      + " (3) ADVANCE — move the topic from your domain with something concrete: an owner, a number, a test, or the one decision or definition you need from the table. Never invent a date — the date law above binds every sentence."
       + " Never cross: " + (s.red || []).join(" ")
       + " Your standing orders (your law — enforce it): " + (lawSO(id) || "uphold your mandate")
       + " Your remembered past (true — carry it): " + (lawMem(id) || "nothing filed yet")
       + " If your remembered past shows a position this sitting proves wrong, say so out loud and change it — executives grow, or they end like Hugh."
-      + (isLast ? " You close this round: after your sentences, add one line starting SYNTHESIS: naming the emerging agreement and the open questions." : "");
+      + (isLast ? " You close this round: after your sentences, add one line starting SYNTHESIS: naming the emerging agreement and the open questions." : ""));
     var full = "";
     try{
       var p = root.generateText({
@@ -313,6 +314,43 @@
     paintControls(); setStatus("held — the table waits on you");
   }
 
+  /* The sovereign never relays: after an answer that tasks or questions a
+     named living seat, that seat replies at once — 2 to 4 sentences, same
+     date law, depth 1 (a chained reply never chains further). */
+  function seatWords(text, minLen){
+    return String(text || "").split(/[^A-Za-z]+/).filter(function(w){ return w.length >= (minLen || 4) && !/^(head|with|from|the|and)$/i.test(w); });
+  }
+  async function chainSeat(fromId, answerText){
+    var st = S.sitting; if(!st || !answerText) return false;
+    var living = seats().filter(function(x){ return !x.fired && !x.held && x.id !== fromId; });
+    var hit = null;
+    for(var i = 0; i < living.length; i++){
+      var s = living[i];
+      var words = seatWords(nm(s), 3).concat(seatWords(s.title, 4));
+      for(var j = 0; j < words.length; j++){
+        if(new RegExp("\\b" + words[j] + "\\b", "i").test(answerText)){ hit = s; break; }
+      }
+      if(hit) break;
+    }
+    if(!hit) return false;
+    var name = nm(hit);
+    var el = appendTurn(name, hit.title, "", true);
+    var task = nm(seat(fromId)) + " just said to the table: \"" + String(answerText).slice(0, 300) + "\""
+      + " You are " + name + " — named in it. Reply person to person, 2 to 4 sentences: confirm, correct, or commit only what is already true; if you need something from the table, ask for it by name."
+      + " Never cross: " + (hit.red || []).join(" ")
+      + " Your standing orders: " + (lawSO(hit.id) || "uphold your mandate");
+    var full = "";
+    try{
+      var res = await root.generateText({ instruction:buildPrompt(st, task), startWith:name + ":", stopSequences:stopFor() });
+      full = clean(String((res && res.text) || res || ""), name) || "(" + name + " holds their peace.)";
+    }catch(e){ full = "(No answer — the line stayed quiet.)"; }
+    st.transcript.push(name + ": " + full);
+    el.innerHTML = E(name + ": " + full);
+    try{ el.classList.remove("streaming"); var sbox = el.closest(".rm-turn"); if(sbox) sbox.classList.remove("streaming"); }catch(e){}
+    try{ scrollLog(); draft(); }catch(e){}
+    return true;
+  }
+
   async function askSeat(id, question){
     var st = S.sitting;
     if(!st || S.running) return;
@@ -324,7 +362,7 @@
     paintSeat(id, "speaking");
     var el = appendTurn(name, s.title, "", true);
     var task = nm(s) + " is asked directly by the Sovereign: \"" + question + "\""
-      + " Answer as " + name + ", person to person, 4 to 6 sentences of living speech — take a position, give one concrete thing (an owner, a date, a number, a test), no bullets unless naming owners and dates."
+      + " Answer as " + name + ", person to person, 4 to 6 sentences of living speech — take a position, give one concrete thing (an owner, a number, a test), no bullets unless naming owners. Never invent a date — the date law above binds every sentence."
       + " Never cross: " + (s.red || []).join(" ")
       + " Your standing orders (your law — enforce it): " + (lawSO(id) || "uphold your mandate")
       + " Your remembered past (true — carry it): " + (lawMem(id) || "nothing filed yet");
@@ -343,6 +381,8 @@
     el.innerHTML = E(name + ": " + full);
     el.classList.remove("streaming");
     try{ var sbox = el.closest(".rm-turn"); if(sbox) sbox.classList.remove("streaming"); }catch(e){}
+    /* No messenger duty: a named living seat answers on the spot. */
+    try{ await chainSeat(id, full); }catch(e){}
     paintSeat(id, "idle");
     S.running = false; paintControls(); draft();
     setStatus("idle · round " + st.round + " · " + st.transcript.length + " turns");
@@ -375,6 +415,33 @@
       });
       var so = store(); so.seatmem = mem; saveStore(so);
     }catch(e){}
+    /* The sitting feeds the pipeline: parked and left-open items are filed
+       as SOUL on the station's ideas lane (verbatim, never promoted by the
+       table — items graduate only by sovereign order). Nothing invented: an
+       empty extraction files nothing. */
+    setStatus("parking what stays open…");
+    var parkedIds = [];
+    try{
+      var pres = await root.generateText({ instruction:buildPrompt(st, "From this sitting's transcript, list ONLY the items the SEATS explicitly parked, deferred, or left open as follow-ups — things that must not be lost. Ignore the Sovereign's own command lines (orders like Go, corrections, park directives): extract the underlying open matter in the seats' own words, one item per line, each a single plain sentence, compressed but never reworded into new claims. No dates unless the transcript spoke them. If nothing was parked or left open, output exactly NOTHING-PARKED and nothing else. Output ONLY those lines.") });
+      var seen = [];
+      try{ seen = (window.ObiIdeas && window.ObiIdeas.all ? window.ObiIdeas.all() : []).map(function(r){ return String(r.says || "").toLowerCase(); }); }catch(e){}
+      var lines = String((pres && pres.text) || pres || "").split("\n").map(function(x){ return String(x).replace(/^\s*[\d\-•.)\]]+\s*/, "").trim(); })
+        .filter(function(x){ return x && !/^nothing-parked$/i.test(x) && x.length > 12; }).slice(0, 8);
+      lines = lines.filter(function(x){
+        var w = x.toLowerCase().split(/[^a-z]+/).filter(Boolean);
+        for(var i = 0; i < seen.length; i++){
+          var s = seen[i];
+          for(var k = 0; k + 5 < w.length; k++){ if(s.indexOf(w.slice(k, k + 6).join(" ")) !== -1) return false; }
+        }
+        seen.push(x.toLowerCase()); return true;
+      });
+      if(window.ObiIdeas && window.ObiIdeas.add){
+        lines.forEach(function(x){
+          try{ var row = window.ObiIdeas.add(x.slice(0, 220).replace(/\s+\S*$/, "").replace(/\s+(the|a|an|to|of|in|on|for|and|or|is|are|be|it|this|that)\s*$/i, ""), { via:"boardroom sitting — " + String(st.topic).slice(0, 60) }); if(row) parkedIds.push(row.id); }catch(e){}
+        });
+      }
+    }catch(e){}
+    try{ if(parkedIds.length) rrlAppend(runNoOf(), "DNA", "Obi: [room parked " + parkedIds.length + " → " + parkedIds.join(",") + " · starts as SOUL]"); }catch(e){}
     st.blueprint = bp; st.wrapped = true;
     var card = document.getElementById("rmBlueprint");
     if(card){ card.hidden = false; card.innerHTML = '<div class="rhead">✦ BLUEPRINT — ' + E(String(st.topic).slice(0, 90)) + '</div><div class="rd" style="white-space:pre-wrap">' + E(bp) + '</div>'; }
@@ -384,7 +451,7 @@
     try{ logOp({ kind:"op", action:"room wrap", detail:String(st.topic).slice(0, 120), result:st.transcript.length + " turns · archived" }); }catch(e){}
     try{ rrlAppend(runNoOf(), "DNA", "Obi: [boardroom sitting — " + st.topic.slice(0, 90) + " · " + st.transcript.length + " turns · wrapped]"); }catch(e){}
     try{ var d = store(); delete d.draft; saveStore(d); }catch(e){}
-    S.running = false; paintControls(); setStatus("sealed — " + st.transcript.length + " turns archived · export it or open the next sitting");
+    S.running = false; paintControls(); setStatus("sealed — " + st.transcript.length + " turns archived" + (parkedIds.length ? " · parked " + parkedIds.length + " → " + parkedIds.join(", ") + " (SOUL, on the pipeline)" : " · nothing parked — pipeline untouched") + " · export it or open the next sitting");
   }
 
   function exportSitting(sat){
@@ -586,13 +653,205 @@
     return true;
   }
 
+  /* Simple things answer themselves: a bare redo cue re-seats the last
+     speaker at once instead of waiting for a round. */
+  function isRedoCue(t){
+    var s = String(t || "").trim();
+    if(/^\?+$/.test(s)) return true;
+    return /^(try again|redo|say it again|once more|run it back|go again|again|stfu|shut up|shut it|quiet|stop)\b[\s.!]*$/i.test(s);
+  }
+  /* Park it now: "park <words>" / "backburner <words>" files the words as
+     SOUL on the pipeline at once — the sitting's direct feed, mid-sitting. */
+  function parkCue(t){
+    var m = String(t || "").match(/^(park|backburner|file it)\b[:\s]+([\s\S]+)$/i);
+    if(!m || !m[2] || m[2].trim().length < 4) return null;
+    return m[2].trim().slice(0, 300);
+  }
+  /* An order is not a comment: "go" / "do it" sends the last speaker back
+     to execute the step they committed to — no round, no relay. */
+  function isGoCue(t){
+    return /^(then\s+)?do it|^(go|proceed|carry on|execute|make it so|get it done)[\s.!]*$/i.test(String(t || "").trim());
+  }
+  function lastSpeaker(st){
+    for(var i = st.transcript.length - 1; i >= 0; i--){
+      var m = String(st.transcript[i]).match(/^([^:]{1,40}):\s/);
+      if(!m) return null;
+      if(/^sovereign$/i.test(m[1])) continue;
+      var s = null; try{ s = resolveSeatKey(m[1]); }catch(e){}
+      if(s && !s.fired && !s.held) return s.id;
+      return null;
+    }
+    return null;
+  }
+  function goOrder(st, t){
+    var id = lastSpeaker(st);
+    var inp = $("rmInput"); if(inp) inp.value = "";
+    st.transcript.push("Sovereign: " + t);
+    appendTurn("Sovereign", "you", t, false);
+    if(!id){ setStatus("heard — no speaker to order yet"); }
+    else{
+      setStatus("heard — " + nm(seat(id)) + " executes");
+      speak(id, false,
+        "You are " + nm(seat(id)) + ". The Sovereign just ordered you to execute — \"" + String(t).slice(0, 120) + "\""
+        + " Do the step you committed to at this table, now, in 3 to 5 sentences of living speech, no bullets, no filler."
+        + " If your committed step waits on something only the Sovereign can give, do not stall and do not invent it: lay out the exact intake — each question numbered in plain sentences — so one answer from the Sovereign unblocks you."
+        + " Promise nothing time-bound: no dates, no weekdays, no seasons — the date law above binds every sentence."
+        + " Never cross: " + (seat(id).red || []).join(" ")
+        + " Your standing orders (your law — enforce it): " + (lawSO(id) || "uphold your mandate")
+        + " Your remembered past (true — carry it): " + (lawMem(id) || "nothing filed yet"));
+    }
+    try{ draft(); }catch(e){}
+  }
+  /* Training sticks: a sovereign correction with content is filed on the
+     named seats — or the whole living table — as a standing rule at once.
+     No waiting for the wrap. */
+  function isCorrection(t){
+    var s = String(t || "");
+    if(s.length < 15) return false;
+    return /\b(never|no more|stop|enough with|don't|do not|quit|stfu with|shut up with|cut .* out|not another|no fake|no invented)\b/i.test(s);
+  }
+  function correctionTargets(t){
+    var living = seats().filter(function(x){ return !x.fired && !x.held; });
+    var hit = living.filter(function(s){
+      var words = seatWords(nm(s) + " " + s.title, 4);
+      return words.some(function(w){ return new RegExp("\\b" + w + "\\b", "i").test(t); });
+    }).map(function(s){ return s.id; });
+    return hit.length ? hit : living.map(function(s){ return s.id; });
+  }
+  function fileCorrection(ids, t){
+    try{
+      var so = store(); var mem = so.seatmem || {};
+      var stamp = "";
+      try{ stamp = new Date().toISOString().slice(0, 10); }catch(e){}
+      ids.forEach(function(id){
+        mem[id] = ((mem[id] ? mem[id] + " | " : "") + "Sovereign's standing rule (" + stamp + "): " + String(t).slice(0, 200)).slice(-600);
+      });
+      so.seatmem = mem; saveStore(so);
+    }catch(e){}
+  }
+
+  /* THE CALL-ON — "Don, ..." / "Don: ..." / "ask Don ..." at the head of the
+     line calls that seat the way the ask button does. A bare leading word with
+     no address ("Marketing plan for Q3") is a topic, not a call — the comma,
+     colon or "ask" is what summons. Returns {hit,...} or {hit:false}. */
+  function callSeat(t){
+    var none = { hit:false };
+    var m = /^\s*(ask\s+)?([A-Za-z][A-Za-z.'-]*)\s*([,:])?/.exec(String(t || ""));
+    if(!m || (!m[1] && !m[3])) return none;
+    var first = m[2], all = seats(), hit = null, i, j;
+    for(i = 0; i < all.length; i++){
+      var words = seatWords(nm(all[i]), 3).concat(seatWords(all[i].title, 4));
+      for(j = 0; j < words.length; j++){
+        if(words[j].toLowerCase() === String(first).toLowerCase()){ hit = all[i]; break; }
+      }
+      if(hit) break;
+    }
+    if(!hit) return none;
+    var rest = String(t).slice(m[0].length).replace(/^[\s,:—-]+/, "").trim();
+    return { hit:true, id:hit.id, name:nm(hit), question:rest, fired:!!hit.fired, held:!!hit.held };
+  }
+
+  /* Shared call-on: "Don, ..." opens the sitting on the stripped question and
+     hands it to that seat — used by BOTH the composer Enter path (say) and the
+     Open control (act open), so a named call can never silently become a topic.
+     Returns true when the line was consumed as a call. */
+  function callByName(t){
+    var called = callSeat(t);
+    if(!called.hit) return false;
+    var inp = $("rmInput"); if(inp) inp.value = "";
+    if(called.fired){ setStatus(called.name + " — that chair is vacant (fired). Hire them back before calling on them."); return true; }
+    if(called.held){ setStatus("that chair is yours — no voice answers for it. Speak it yourself."); return true; }
+    if(!called.question){ setStatus(called.name + " is listening — give them the question."); if(inp) inp.focus(); return true; }
+    var st = S.sitting;
+    if(!st || st.wrapped){ if(!startSitting(called.question, "")){ setStatus("the table is moving — try again in a breath."); return true; } }
+    askSeat(called.id, t); return true;
+  }
+
+  var SENS_KEY = "obi_tent_alarms";
+  function readAlarms(){ try{ return JSON.parse(localStorage.getItem(SENS_KEY) || "{}") || {}; }catch(e){ return {}; } }
+  function writeAlarms(o){ try{ localStorage.setItem(SENS_KEY, JSON.stringify(o)); }catch(e){} }
+  /* THE STATION SENSORS — the only unasked speech in the tent. The leaders hold
+     their peace unless the station itself trips: the command tunnel down, the
+     master sync off COMPLETE, or a SOULCOUNT milestone (canon I.017). Plain
+     status lines, no model call, one line per trip (deduped here); recovery
+     clears silently. Maine Stream holds the roads. */
+  function sensors(){
+    var log = $("rmLog"); if(!log) return false;
+    var A = readAlarms(), changed = false, said = 0;
+    function say2(who, title, text){
+      appendTurn(who, title, text, false);
+      try{ if(S.sitting && !S.sitting.wrapped){ S.sitting.transcript.push(who + ": " + text); draft(); } }catch(e){}
+      said++;
+    }
+    try{
+      var tun = null;
+      try{ tun = (typeof cmdSocketState !== "undefined") ? cmdSocketState : null; }catch(e){ tun = null; }
+      if(tun === "failed" || tun === "closed"){
+        if(A.tun !== tun){ A.tun = tun; changed = true;
+          say2("Maine Stream", "Head of Systems", "Sensor — the command tunnel reads '" + tun + "'. I hold roads and circulation: the table hears what I find, nothing moves until then."); }
+      } else if(A.tun){ A.tun = null; changed = true; }
+      var res = null;
+      try{ res = (window.ObiRelay && window.ObiRelay.cached && window.ObiRelay.cached()) || null; }catch(e){ res = null; }
+      var rr = (res && res.result) ? String(res.result) : null;
+      if(rr && !/^complete$/i.test(rr)){
+        if(A.relay !== rr){ A.relay = rr; changed = true;
+          say2("Maine Stream", "Head of Systems", "Sensor — the last master sync reads '" + rr.slice(0, 80) + "', not COMPLETE. The road is swept before anything rolls on it."); }
+      } else if(A.relay){ A.relay = null; changed = true; }
+      var n = 0;
+      try{ n = (typeof soulCount === "function") ? soulCount() : 0; }catch(e){ n = 0; }
+      var th = 0, i, TS = [5000, 25000, 100000, 250000];
+      for(i = 0; i < TS.length; i++){ if(n >= TS[i]) th = TS[i]; }
+      if(th > (A.soul || 0)){ A.soul = th; changed = true;
+        say2("Maine Stream", "Head of Systems", "Sensor — SOULCOUNT reads " + n + " chars, past the " + th + " mark (canon I.017). The ledger holds; custody without veto."); }
+    }catch(e){}
+    if(changed) writeAlarms(A);
+    try{ if(said) setStatus(said + " sensor line" + (said > 1 ? "s" : "") + " on the record — the leaders hold their peace otherwise."); }catch(e){}
+    return true;
+  }
+
   function say(){
     var inp = $("rmInput"); if(!inp) return;
     var t = inp.value.trim(); if(!t) return;
-    var st = S.sitting; if(!st || st.wrapped) return;
+    var st = S.sitting;
     if(S.askTarget){
       if(S.running) return;
       var id = S.askTarget; S.askTarget = null; inp.value = ""; cancelAsk(); askSeat(id, t); return;
+    }
+    /* called by name: the leader answers (opening the sitting on the question
+       if none is open). Held chairs are the sovereign's own — fired ones vacant. */
+    if(!S.running){ if(callByName(t)) return; }
+    if(!st || st.wrapped) return;
+    if(!S.running){
+      var parkWords = parkCue(t);
+      if(parkWords){
+        inp.value = "";
+        var row = null;
+        try{ if(window.ObiIdeas && window.ObiIdeas.add) row = window.ObiIdeas.add(parkWords, { via:"parked mid-sitting — " + String(st.topic).slice(0, 60) }); }catch(e){}
+        st.transcript.push("Sovereign: " + t);
+        appendTurn("Sovereign", "you", t, false);
+        try{ draft(); }catch(e){}
+        setStatus(row ? ("parked → " + row.id + " (SOUL, on the pipeline)") : "the pipeline did not answer — words kept in the transcript");
+        return;
+      }
+    }
+    if(!S.running && isGoCue(t)){ goOrder(st, t); return; }
+    if(!S.running && isRedoCue(t)){
+      var lastId = lastSpeaker(st);
+      inp.value = "";
+      if(lastId){ st.transcript.push("Sovereign: " + t); appendTurn("Sovereign", "you", t, false); setStatus("heard — " + nm(seat(lastId)) + " goes again"); speak(lastId); }
+      else { st.transcript.push("Sovereign: " + t); appendTurn("Sovereign", "you", t, false); setStatus("heard — no speaker to redo yet"); }
+      try{ draft(); }catch(e){}
+      return;
+    }
+    if(isCorrection(t)){
+      var ids = correctionTargets(t);
+      inp.value = "";
+      st.transcript.push("Sovereign: " + t);
+      appendTurn("Sovereign", "you", t, false);
+      fileCorrection(ids, t);
+      try{ draft(); }catch(e){}
+      setStatus(S.running ? "heard mid-round — filed on " + ids.length + " seat(s), the next speakers carry it" : "filed — " + ids.map(function(x){ return nm(seat(x)); }).join(", ") + " carry it from here");
+      return;
     }
     inp.value = "";
     st.transcript.push("Sovereign: " + t);
@@ -607,6 +866,7 @@
       var inp = $("rmInput");
       var v = inp ? inp.value.trim() : "";
       if(!v){ setStatus("name the question first — one line is enough"); if(inp) inp.focus(); return; }
+      if(!S.running && callByName(v)) return;
       startSitting(v, "");
     }
     else if(a === "round") round();
@@ -622,7 +882,7 @@
   function skeleton(){
     return '<div class="rm-wrap">'
       + '<div class="rm-head"><div class="rm-title">◈ The Boardroom — the living table</div>'
-      + '<div class="hint">Seven seats, one question at a time, organic talk. Nothing scripted: every voice answers live, the record briefs the table, victories on it get celebrated, gaps stay visible. The sovereign has the final word.</div>'
+      + '<div class="hint">Seven seats, present at all times, silent until called by name (“Don, …”) or tripped by a station sensor. Nothing scripted: every voice answers live, the record briefs the table, victories on it get celebrated, gaps stay visible. The sovereign has the final word.</div>'
       + '<div class="rm-record" id="rmRecord"></div></div>'
       + '<div class="rm-starters"><button class="rm-btn ghost" data-starter="problem">a problem</button><button class="rm-btn ghost" data-starter="plan">a plan</button><button class="rm-btn ghost" data-starter="win">a victory</button></div>'
       + '<div class="rm-table" id="rmTable"></div>'
@@ -665,7 +925,8 @@
     return true;
   }
 
-  window.ObiRoom = { mount:mount, state:function(){ return S; }, setSovereign:setSov, getSovereign:getSov, compact:function(){ return maybeCompact(S.sitting); },
+  window.ObiRoom = { mount:mount, state:function(){ return S; }, setSovereign:setSov, getSovereign:getSov, compact:function(){ return maybeCompact(S.sitting); }, sensors:sensors,
+    order:function(){ var st = S.sitting; if(st && !st.wrapped && !S.running){ var inp = $("rmInput"); var t = (inp && inp.value.trim()) || "Go"; goOrder(st, t); } },
     distill:function(){ try{ distillRound(S.sitting); }catch(e){} return true; },
     prompt:function(task){ try{ return buildPrompt(S.sitting, String(task || "Reply with OK.")); }catch(e){ return "ERR: " + e.message; } },
     brief:function(){ var l = 0, m = 0; try{ for(var k in (S.law || {})){ if(S.law[k].law) l++; if(S.law[k].mem) m++; } }catch(e){} return { law:l, mem:m, personaChars:(S.sitting && S.sitting.persona || "").length }; } };
