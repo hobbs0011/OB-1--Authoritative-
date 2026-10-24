@@ -1,0 +1,1813 @@
+{
+ "meta": {
+  "what": "pitch-deck cross-reference: every deck slide to its art, every art to its sha-256. Rolls into the website build and the deck exports.",
+  "decks": [
+   "gospel(12)",
+   "codex(16)"
+  ],
+  "nAssets": 168,
+  "nFiles": 171,
+  "orphans": [
+   "src/brand/assets/an4-tiger-cyber.jpg",
+   "src/brand/assets/an4-tiger-breaker.jpg",
+   "src/brand/assets/an4-dna.jpg"
+  ]
+ },
+ "decks": {
+  "gospel": [
+   {
+    "n": 1,
+    "kicker": "PROTOCOL V2.2",
+    "title": "THE ULTIMATE EDGE",
+    "law": "G444.001",
+    "marks": [
+     {
+      "id": "phoenix",
+      "file": "phoenix.webp",
+      "sha": "cfdfb1df4332030d3e48152bd6536d58b3df3089a785b997635db232108c4950",
+      "w": 564,
+      "h": 522,
+      "src": "protocol",
+      "use": "the station's hero image, the deck cover, top of a writeup",
+      "name": "The Phoenix"
+     },
+     {
+      "id": "edge",
+      "file": "edge.webp",
+      "sha": "0d77d7b998bdcde6fc5bfca2832ddadb0ee7dbc5805fbb7b681425ba6e8150cc",
+      "w": 592,
+      "h": 507,
+      "src": "protocol",
+      "use": "the 80-vs-30 claim, coverage charts, progress",
+      "name": "The Edge"
+     }
+    ]
+   },
+   {
+    "n": 2,
+    "kicker": "DIAGNOSIS",
+    "title": "THE GRAMMAR PRISON",
+    "law": "G444.002",
+    "marks": [
+     {
+      "id": "elephant",
+      "file": "elephant.webp",
+      "sha": "baa9c3412bd8cb8c1d4a854c7acee76a961bee090711130e181514276b57c2d4",
+      "w": 564,
+      "h": 399,
+      "src": "protocol",
+      "use": "why the old method failed — diagnosis slides, parent-facing writeups",
+      "name": "The Grammar Prison"
+     }
+    ]
+   },
+   {
+    "n": 3,
+    "kicker": "THE SHIFT",
+    "title": "THE PSYCHOLOGICAL SHIFT",
+    "law": "G444.003",
+    "marks": [
+     {
+      "id": "mouse2",
+      "file": "mouse2.webp",
+      "sha": "45132caf098a02437bc019d79992143510d508bfdb5b608ac3935cce72032e28",
+      "w": 344,
+      "h": 276,
+      "src": "tiger-mode",
+      "use": "alt MOUSE MODE mark — cleaner grid, no chains",
+      "name": "The Mouse (doctrine cut)"
+     },
+     {
+      "id": "cub",
+      "file": "cub.webp",
+      "sha": "f3c43d112cffbd065a2bf5c8ad5bb2dc305414cd492b8bedf6a05ce78c225d31",
+      "w": 248,
+      "h": 276,
+      "src": "protocol",
+      "use": "CUB MODE, the middle rung, 'the habit exists'",
+      "name": "The Cub"
+     },
+     {
+      "id": "tiger2",
+      "file": "tiger2.webp",
+      "sha": "e1e0a3cc1471cc692a2d37fa653752cee768975ba8ee64f45a1e223d4c2fec64",
+      "w": 358,
+      "h": 338,
+      "src": "protocol",
+      "use": "alt TIGER MODE mark — the mode page's own head",
+      "name": "The Tiger (doctrine cut)"
+     }
+    ]
+   },
+   {
+    "n": 4,
+    "kicker": "IMMUTABLE LAW",
+    "title": "LOUD & WRONG",
+    "law": "G444.004",
+    "marks": [
+     {
+      "id": "roar",
+      "file": "roar.webp",
+      "sha": "b06274254840a6cc9dd5fc5bfc80d810572a4b5e13de8a837129e07d89f52ac3",
+      "w": 564,
+      "h": 392,
+      "src": "tiger-mode",
+      "use": "TIGER MODE, the forge, the closing slide, /phoenixomegaprotocol",
+      "name": "The Tiger, Awake"
+     },
+     {
+      "id": "mouse2",
+      "file": "mouse2.webp",
+      "sha": "45132caf098a02437bc019d79992143510d508bfdb5b608ac3935cce72032e28",
+      "w": 344,
+      "h": 276,
+      "src": "tiger-mode",
+      "use": "alt MOUSE MODE mark — cleaner grid, no chains",
+      "name": "The Mouse (doctrine cut)"
+     }
+    ]
+   },
+   {
+    "n": 5,
+    "kicker": "2026",
+    "title": "THE UNFAIR ADVANTAGE",
+    "law": "G444.005",
+    "marks": [
+     {
+      "id": "globe",
+      "file": "globe.webp",
+      "sha": "254f4c7b4ed7e4fe2f35c4a5080eb1bf820e361f61692858baa61520c13d98e6",
+      "w": 248,
+      "h": 261,
+      "src": "protocol",
+      "use": "English as access — the international market, cross-border teams",
+      "name": "The Market"
+     },
+     {
+      "id": "chip",
+      "file": "chip.webp",
+      "sha": "74b14cd11b4d638df861751a27e68c7a0eb2df00ab351bede5dc33484b93018c",
+      "w": 248,
+      "h": 269,
+      "src": "protocol",
+      "use": "the AI half of the unfair advantage",
+      "name": "The Machine"
+     },
+     {
+      "id": "brain2",
+      "file": "brain2.webp",
+      "sha": "6ee72ef921818a12c91d35bbaeeb3397113873f374cba228d075bef60da348d8",
+      "w": 261,
+      "h": 292,
+      "src": "protocol",
+      "use": "alt comprehension mark — the AI-lit brain",
+      "name": "The 60% Rule (doctrine cut)"
+     }
+    ]
+   },
+   {
+    "n": 6,
+    "kicker": "ACQUISITION",
+    "title": "THE 60% RULE",
+    "law": "G444.006",
+    "marks": [
+     {
+      "id": "brain2",
+      "file": "brain2.webp",
+      "sha": "6ee72ef921818a12c91d35bbaeeb3397113873f374cba228d075bef60da348d8",
+      "w": 261,
+      "h": 292,
+      "src": "protocol",
+      "use": "alt comprehension mark — the AI-lit brain",
+      "name": "The 60% Rule (doctrine cut)"
+     },
+     {
+      "id": "infinity",
+      "file": "infinity.webp",
+      "sha": "aa6acdad2ce747598928a2abe3f1138e83e4b2b2f07763c7973856309dc3ce30",
+      "w": 660,
+      "h": 307,
+      "src": "protocol",
+      "use": "the acquisition engine, the 60% rule, any 'inputs feed outputs' idea",
+      "name": "The Loop"
+     }
+    ]
+   },
+   {
+    "n": 7,
+    "kicker": "LIFESTYLE",
+    "title": "THE 45/15 PROTOCOL",
+    "law": "G444.007",
+    "marks": [
+     {
+      "id": "dial45",
+      "file": "dial45.webp",
+      "sha": "9158f349fe15942949511bc80220ac97dd458fd32c22b200bd3bf63166e4f6ed",
+      "w": 633,
+      "h": 361,
+      "src": "protocol",
+      "use": "the daily ratio — lesson pacing, the practice dial",
+      "name": "The 45/15"
+     }
+    ]
+   },
+   {
+    "n": 8,
+    "kicker": "RETENTION",
+    "title": "THE 10-5-5-3 ANATOMY",
+    "law": "G444.008",
+    "marks": [
+     {
+      "id": "bookshelf",
+      "file": "bookshelf.webp",
+      "sha": "380e82af3130d3a4bb0a59ee9214cb84b914e8f35f03cc067abb41c0f0e2d2b0",
+      "w": 454,
+      "h": 492,
+      "src": "tiger-mode",
+      "use": "'we don't teach English, we unlock permission' — the moment of change",
+      "name": "The Breach"
+     }
+    ]
+   },
+   {
+    "n": 9,
+    "kicker": "ACCOUNTABILITY",
+    "title": "THE AI-PET",
+    "law": "G444.009",
+    "marks": [
+     {
+      "id": "phone",
+      "file": "phone.webp",
+      "sha": "066b68bbf28df309f73b2c77245da75b38f74da1009ecd5f58958ce9ebde96f6",
+      "w": 716,
+      "h": 599,
+      "src": "protocol",
+      "use": "spaced repetition, memory decay, Tough Love Mode",
+      "name": "The AI-PET"
+     }
+    ]
+   },
+   {
+    "n": 10,
+    "kicker": "ECOSYSTEM",
+    "title": "ENVIRONMENT BEATS WILLPOWER",
+    "law": "G444.010",
+    "marks": [
+     {
+      "id": "atom",
+      "file": "atom.webp",
+      "sha": "0b908703cfb96d77f5d43e43f525eb123c7401fade9b0bda5b02f6c52533f90b",
+      "w": 720,
+      "h": 475,
+      "src": "protocol",
+      "use": "the buddy system, community, the safe space",
+      "name": "The Ecosystem"
+     }
+    ]
+   },
+   {
+    "n": 11,
+    "kicker": "GUARANTEE",
+    "title": "THE 100% CONFIDENCE GUARANTEE",
+    "law": "G444.011",
+    "marks": [
+     {
+      "id": "confidence",
+      "file": "confidence.webp",
+      "sha": "c5e1dcdbfa006813c9927f314b6bc1ad56dd63acd1de96ca8751ee5665677892",
+      "w": 440,
+      "h": 384,
+      "src": "protocol",
+      "use": "the refund promise, any 'you risk nothing' surface",
+      "name": "The Guarantee"
+     }
+    ]
+   },
+   {
+    "n": 12,
+    "kicker": "BEGIN PROTOCOL",
+    "title": "WAKE UP THE TIGER",
+    "law": "G444.012",
+    "marks": [
+     {
+      "id": "phoenix",
+      "file": "phoenix.webp",
+      "sha": "cfdfb1df4332030d3e48152bd6536d58b3df3089a785b997635db232108c4950",
+      "w": 564,
+      "h": 522,
+      "src": "protocol",
+      "use": "the station's hero image, the deck cover, top of a writeup",
+      "name": "The Phoenix"
+     },
+     {
+      "id": "roar",
+      "file": "roar.webp",
+      "sha": "b06274254840a6cc9dd5fc5bfc80d810572a4b5e13de8a837129e07d89f52ac3",
+      "w": 564,
+      "h": 392,
+      "src": "tiger-mode",
+      "use": "TIGER MODE, the forge, the closing slide, /phoenixomegaprotocol",
+      "name": "The Tiger, Awake"
+     }
+    ]
+   }
+  ],
+  "codex": [
+   {
+    "n": 1,
+    "kicker": "SECURITY CLEARANCE: ULTRA",
+    "title": "THE PHOENIX RISING OPERATIONAL CODEX",
+    "law": null,
+    "marks": [
+     {
+      "id": "phoenix",
+      "file": "phoenix.webp",
+      "sha": "cfdfb1df4332030d3e48152bd6536d58b3df3089a785b997635db232108c4950",
+      "w": 564,
+      "h": 522,
+      "src": "protocol",
+      "use": "the station's hero image, the deck cover, top of a writeup",
+      "name": "The Phoenix"
+     }
+    ]
+   },
+   {
+    "n": 2,
+    "kicker": "2026",
+    "title": "THE UNFAIR ADVANTAGE: DUAL MASTERY",
+    "law": null,
+    "marks": [
+     {
+      "id": "venn",
+      "file": "venn.webp",
+      "sha": "b71120a13ff66fd0a797b68b545d6998266f1586ed3fc3e61c1cc36e0bbcbb95",
+      "w": 596,
+      "h": 388,
+      "use": "positioning, the two-circle claim",
+      "name": "The Sovereign Operator"
+     },
+     {
+      "id": "chip",
+      "file": "chip.webp",
+      "sha": "74b14cd11b4d638df861751a27e68c7a0eb2df00ab351bede5dc33484b93018c",
+      "w": 248,
+      "h": 269,
+      "src": "protocol",
+      "use": "the AI half of the unfair advantage",
+      "name": "The Machine"
+     }
+    ]
+   },
+   {
+    "n": 3,
+    "kicker": "THE MANDATE",
+    "title": "THE WORKER AND THE ARCHITECT",
+    "law": null,
+    "marks": [
+     {
+      "id": "globe",
+      "file": "globe.webp",
+      "sha": "254f4c7b4ed7e4fe2f35c4a5080eb1bf820e361f61692858baa61520c13d98e6",
+      "w": 248,
+      "h": 261,
+      "src": "protocol",
+      "use": "English as access — the international market, cross-border teams",
+      "name": "The Market"
+     }
+    ]
+   },
+   {
+    "n": 4,
+    "kicker": "DIAGNOSIS",
+    "title": "THE 404 BRAIN ERROR",
+    "law": null,
+    "marks": [
+     {
+      "id": "head-jigsaw",
+      "file": "head-jigsaw.webp",
+      "sha": "f94c3ee0b57ea201704a37d0e953d0715dd12f877b5edaa1daaa415f7435e3ed",
+      "w": 292,
+      "h": 360,
+      "src": "marketing",
+      "use": "the 60% rule, the Magic Zone, comprehension over parsing",
+      "name": "The Jigsaw Brain"
+     }
+    ]
+   },
+   {
+    "n": 5,
+    "kicker": "THE OVERRIDE",
+    "title": "THE MECHANICAL FAILURE / THE NATIVE FLOW",
+    "law": null,
+    "marks": [
+     {
+      "id": "flow",
+      "file": "flow.webp",
+      "sha": "37001eca230e41334b1894c0fa8e56c142326af8c6922f4f1319af470150ced0",
+      "w": 674,
+      "h": 100,
+      "src": "tiger-mode",
+      "use": "a strip, not a poster — listen-and-comprehend feeding immediate speech",
+      "name": "The Native Flow"
+     }
+    ]
+   },
+   {
+    "n": 6,
+    "kicker": "ACQUISITION",
+    "title": "THE 60% RULE",
+    "law": null,
+    "marks": [
+     {
+      "id": "brain2",
+      "file": "brain2.webp",
+      "sha": "6ee72ef921818a12c91d35bbaeeb3397113873f374cba228d075bef60da348d8",
+      "w": 261,
+      "h": 292,
+      "src": "protocol",
+      "use": "alt comprehension mark — the AI-lit brain",
+      "name": "The 60% Rule (doctrine cut)"
+     }
+    ]
+   },
+   {
+    "n": 7,
+    "kicker": "LIFESTYLE",
+    "title": "THE 45/15 ARCHITECTURE",
+    "law": null,
+    "marks": [
+     {
+      "id": "dial45",
+      "file": "dial45.webp",
+      "sha": "9158f349fe15942949511bc80220ac97dd458fd32c22b200bd3bf63166e4f6ed",
+      "w": 633,
+      "h": 361,
+      "src": "protocol",
+      "use": "the daily ratio — lesson pacing, the practice dial",
+      "name": "The 45/15"
+     }
+    ]
+   },
+   {
+    "n": 8,
+    "kicker": "CURRICULUM",
+    "title": "THE 10-5-5-3 LESSON ENGINE",
+    "law": null,
+    "marks": [
+     {
+      "id": "bookshelf",
+      "file": "bookshelf.webp",
+      "sha": "380e82af3130d3a4bb0a59ee9214cb84b914e8f35f03cc067abb41c0f0e2d2b0",
+      "w": 454,
+      "h": 492,
+      "src": "tiger-mode",
+      "use": "'we don't teach English, we unlock permission' — the moment of change",
+      "name": "The Breach"
+     }
+    ]
+   },
+   {
+    "n": 9,
+    "kicker": "RETENTION",
+    "title": "HUMAN BIOLOGY IS A LEAKY BUCKET",
+    "law": null,
+    "marks": [
+     {
+      "id": "infinity",
+      "file": "infinity.webp",
+      "sha": "aa6acdad2ce747598928a2abe3f1138e83e4b2b2f07763c7973856309dc3ce30",
+      "w": 660,
+      "h": 307,
+      "src": "protocol",
+      "use": "the acquisition engine, the 60% rule, any 'inputs feed outputs' idea",
+      "name": "The Loop"
+     }
+    ]
+   },
+   {
+    "n": 10,
+    "kicker": "INTERVENTION",
+    "title": "THE STRIKE AT SIXTY",
+    "law": null,
+    "marks": [
+     {
+      "id": "phone",
+      "file": "phone.webp",
+      "sha": "066b68bbf28df309f73b2c77245da75b38f74da1009ecd5f58958ce9ebde96f6",
+      "w": 716,
+      "h": 599,
+      "src": "protocol",
+      "use": "spaced repetition, memory decay, Tough Love Mode",
+      "name": "The AI-PET"
+     }
+    ]
+   },
+   {
+    "n": 11,
+    "kicker": "ACCOUNTABILITY",
+    "title": "THE SYSTEM DOES NOT ACCEPT EXCUSES",
+    "law": null,
+    "marks": [
+     {
+      "id": "confidence",
+      "file": "confidence.webp",
+      "sha": "c5e1dcdbfa006813c9927f314b6bc1ad56dd63acd1de96ca8751ee5665677892",
+      "w": 440,
+      "h": 384,
+      "src": "protocol",
+      "use": "the refund promise, any 'you risk nothing' surface",
+      "name": "The Guarantee"
+     }
+    ]
+   },
+   {
+    "n": 12,
+    "kicker": "THE PROOF",
+    "title": "THE MATH OF THE TIGER",
+    "law": null,
+    "marks": [
+     {
+      "id": "edge",
+      "file": "edge.webp",
+      "sha": "0d77d7b998bdcde6fc5bfca2832ddadb0ee7dbc5805fbb7b681425ba6e8150cc",
+      "w": 592,
+      "h": 507,
+      "src": "protocol",
+      "use": "the 80-vs-30 claim, coverage charts, progress",
+      "name": "The Edge"
+     }
+    ]
+   },
+   {
+    "n": 13,
+    "kicker": "THE ZONE",
+    "title": "LAKEVIEW DEPLOYMENT ZONE",
+    "law": null,
+    "marks": [
+     {
+      "id": "gauge",
+      "file": "gauge.webp",
+      "sha": "c95eaa570bbf097ec945e0498576a7f969cd8238da2aa35ff8db5383d8e1d463",
+      "w": 551,
+      "h": 369,
+      "use": "scores, coverage, the 0-40 / 100 gauge",
+      "name": "The Diagnostic"
+     }
+    ]
+   },
+   {
+    "n": 14,
+    "kicker": "THE FUNNEL",
+    "title": "THE M2 AUTOMATION PIPELINE",
+    "law": null,
+    "marks": [
+     {
+      "id": "gears",
+      "file": "gears.webp",
+      "sha": "3ffbf0e7520082c28f8e1b1e0b66939764aeabe956e5276b9932290906e1bd99",
+      "w": 581,
+      "h": 373,
+      "use": "the loop — any process diagram's head",
+      "name": "The Protocol"
+     }
+    ]
+   },
+   {
+    "n": 15,
+    "kicker": "THE ARCHITECTURE",
+    "title": "THE NET SOVEREIGN ARCHITECTURE",
+    "law": null,
+    "marks": [
+     {
+      "id": "pyramid",
+      "file": "pyramid.webp",
+      "sha": "e8f0711e04a42eba740738e3b81d0623a9fd4641fcb46f2a35acacdf39ed8e28",
+      "w": 471,
+      "h": 487,
+      "use": "hierarchy, curriculum ladders, tier diagrams",
+      "name": "The Four Layers"
+     }
+    ]
+   },
+   {
+    "n": 16,
+    "kicker": "THE OFFER",
+    "title": "STOP GUESSING. START AUDITING.",
+    "law": null,
+    "marks": [
+     {
+      "id": "roar",
+      "file": "roar.webp",
+      "sha": "b06274254840a6cc9dd5fc5bfc80d810572a4b5e13de8a837129e07d89f52ac3",
+      "w": 564,
+      "h": 392,
+      "src": "tiger-mode",
+      "use": "TIGER MODE, the forge, the closing slide, /phoenixomegaprotocol",
+      "name": "The Tiger, Awake"
+     }
+    ]
+   }
+  ]
+ },
+ "byAsset": {
+  "phoenix": {
+   "asset": {
+    "id": "phoenix",
+    "file": "phoenix.webp",
+    "sha": "cfdfb1df4332030d3e48152bd6536d58b3df3089a785b997635db232108c4950",
+    "w": 564,
+    "h": 522,
+    "src": "protocol",
+    "use": "the station's hero image, the deck cover, top of a writeup",
+    "name": "The Phoenix"
+   },
+   "slides": [
+    "gospel #1 THE ULTIMATE EDGE",
+    "gospel #12 WAKE UP THE TIGER",
+    "codex #1 THE PHOENIX RISING OPERATIONAL CODEX"
+   ]
+  },
+  "edge": {
+   "asset": {
+    "id": "edge",
+    "file": "edge.webp",
+    "sha": "0d77d7b998bdcde6fc5bfca2832ddadb0ee7dbc5805fbb7b681425ba6e8150cc",
+    "w": 592,
+    "h": 507,
+    "src": "protocol",
+    "use": "the 80-vs-30 claim, coverage charts, progress",
+    "name": "The Edge"
+   },
+   "slides": [
+    "gospel #1 THE ULTIMATE EDGE",
+    "codex #12 THE MATH OF THE TIGER"
+   ]
+  },
+  "elephant": {
+   "asset": {
+    "id": "elephant",
+    "file": "elephant.webp",
+    "sha": "baa9c3412bd8cb8c1d4a854c7acee76a961bee090711130e181514276b57c2d4",
+    "w": 564,
+    "h": 399,
+    "src": "protocol",
+    "use": "why the old method failed — diagnosis slides, parent-facing writeups",
+    "name": "The Grammar Prison"
+   },
+   "slides": [
+    "gospel #2 THE GRAMMAR PRISON"
+   ]
+  },
+  "mouse2": {
+   "asset": {
+    "id": "mouse2",
+    "file": "mouse2.webp",
+    "sha": "45132caf098a02437bc019d79992143510d508bfdb5b608ac3935cce72032e28",
+    "w": 344,
+    "h": 276,
+    "src": "tiger-mode",
+    "use": "alt MOUSE MODE mark — cleaner grid, no chains",
+    "name": "The Mouse (doctrine cut)"
+   },
+   "slides": [
+    "gospel #3 THE PSYCHOLOGICAL SHIFT",
+    "gospel #4 LOUD & WRONG"
+   ]
+  },
+  "cub": {
+   "asset": {
+    "id": "cub",
+    "file": "cub.webp",
+    "sha": "f3c43d112cffbd065a2bf5c8ad5bb2dc305414cd492b8bedf6a05ce78c225d31",
+    "w": 248,
+    "h": 276,
+    "src": "protocol",
+    "use": "CUB MODE, the middle rung, 'the habit exists'",
+    "name": "The Cub"
+   },
+   "slides": [
+    "gospel #3 THE PSYCHOLOGICAL SHIFT"
+   ]
+  },
+  "tiger2": {
+   "asset": {
+    "id": "tiger2",
+    "file": "tiger2.webp",
+    "sha": "e1e0a3cc1471cc692a2d37fa653752cee768975ba8ee64f45a1e223d4c2fec64",
+    "w": 358,
+    "h": 338,
+    "src": "protocol",
+    "use": "alt TIGER MODE mark — the mode page's own head",
+    "name": "The Tiger (doctrine cut)"
+   },
+   "slides": [
+    "gospel #3 THE PSYCHOLOGICAL SHIFT"
+   ]
+  },
+  "roar": {
+   "asset": {
+    "id": "roar",
+    "file": "roar.webp",
+    "sha": "b06274254840a6cc9dd5fc5bfc80d810572a4b5e13de8a837129e07d89f52ac3",
+    "w": 564,
+    "h": 392,
+    "src": "tiger-mode",
+    "use": "TIGER MODE, the forge, the closing slide, /phoenixomegaprotocol",
+    "name": "The Tiger, Awake"
+   },
+   "slides": [
+    "gospel #4 LOUD & WRONG",
+    "gospel #12 WAKE UP THE TIGER",
+    "codex #16 STOP GUESSING. START AUDITING."
+   ]
+  },
+  "globe": {
+   "asset": {
+    "id": "globe",
+    "file": "globe.webp",
+    "sha": "254f4c7b4ed7e4fe2f35c4a5080eb1bf820e361f61692858baa61520c13d98e6",
+    "w": 248,
+    "h": 261,
+    "src": "protocol",
+    "use": "English as access — the international market, cross-border teams",
+    "name": "The Market"
+   },
+   "slides": [
+    "gospel #5 THE UNFAIR ADVANTAGE",
+    "codex #3 THE WORKER AND THE ARCHITECT"
+   ]
+  },
+  "chip": {
+   "asset": {
+    "id": "chip",
+    "file": "chip.webp",
+    "sha": "74b14cd11b4d638df861751a27e68c7a0eb2df00ab351bede5dc33484b93018c",
+    "w": 248,
+    "h": 269,
+    "src": "protocol",
+    "use": "the AI half of the unfair advantage",
+    "name": "The Machine"
+   },
+   "slides": [
+    "gospel #5 THE UNFAIR ADVANTAGE",
+    "codex #2 THE UNFAIR ADVANTAGE: DUAL MASTERY"
+   ]
+  },
+  "brain2": {
+   "asset": {
+    "id": "brain2",
+    "file": "brain2.webp",
+    "sha": "6ee72ef921818a12c91d35bbaeeb3397113873f374cba228d075bef60da348d8",
+    "w": 261,
+    "h": 292,
+    "src": "protocol",
+    "use": "alt comprehension mark — the AI-lit brain",
+    "name": "The 60% Rule (doctrine cut)"
+   },
+   "slides": [
+    "gospel #5 THE UNFAIR ADVANTAGE",
+    "gospel #6 THE 60% RULE",
+    "codex #6 THE 60% RULE"
+   ]
+  },
+  "infinity": {
+   "asset": {
+    "id": "infinity",
+    "file": "infinity.webp",
+    "sha": "aa6acdad2ce747598928a2abe3f1138e83e4b2b2f07763c7973856309dc3ce30",
+    "w": 660,
+    "h": 307,
+    "src": "protocol",
+    "use": "the acquisition engine, the 60% rule, any 'inputs feed outputs' idea",
+    "name": "The Loop"
+   },
+   "slides": [
+    "gospel #6 THE 60% RULE",
+    "codex #9 HUMAN BIOLOGY IS A LEAKY BUCKET"
+   ]
+  },
+  "dial45": {
+   "asset": {
+    "id": "dial45",
+    "file": "dial45.webp",
+    "sha": "9158f349fe15942949511bc80220ac97dd458fd32c22b200bd3bf63166e4f6ed",
+    "w": 633,
+    "h": 361,
+    "src": "protocol",
+    "use": "the daily ratio — lesson pacing, the practice dial",
+    "name": "The 45/15"
+   },
+   "slides": [
+    "gospel #7 THE 45/15 PROTOCOL",
+    "codex #7 THE 45/15 ARCHITECTURE"
+   ]
+  },
+  "bookshelf": {
+   "asset": {
+    "id": "bookshelf",
+    "file": "bookshelf.webp",
+    "sha": "380e82af3130d3a4bb0a59ee9214cb84b914e8f35f03cc067abb41c0f0e2d2b0",
+    "w": 454,
+    "h": 492,
+    "src": "tiger-mode",
+    "use": "'we don't teach English, we unlock permission' — the moment of change",
+    "name": "The Breach"
+   },
+   "slides": [
+    "gospel #8 THE 10-5-5-3 ANATOMY",
+    "codex #8 THE 10-5-5-3 LESSON ENGINE"
+   ]
+  },
+  "phone": {
+   "asset": {
+    "id": "phone",
+    "file": "phone.webp",
+    "sha": "066b68bbf28df309f73b2c77245da75b38f74da1009ecd5f58958ce9ebde96f6",
+    "w": 716,
+    "h": 599,
+    "src": "protocol",
+    "use": "spaced repetition, memory decay, Tough Love Mode",
+    "name": "The AI-PET"
+   },
+   "slides": [
+    "gospel #9 THE AI-PET",
+    "codex #10 THE STRIKE AT SIXTY"
+   ]
+  },
+  "atom": {
+   "asset": {
+    "id": "atom",
+    "file": "atom.webp",
+    "sha": "0b908703cfb96d77f5d43e43f525eb123c7401fade9b0bda5b02f6c52533f90b",
+    "w": 720,
+    "h": 475,
+    "src": "protocol",
+    "use": "the buddy system, community, the safe space",
+    "name": "The Ecosystem"
+   },
+   "slides": [
+    "gospel #10 ENVIRONMENT BEATS WILLPOWER"
+   ]
+  },
+  "confidence": {
+   "asset": {
+    "id": "confidence",
+    "file": "confidence.webp",
+    "sha": "c5e1dcdbfa006813c9927f314b6bc1ad56dd63acd1de96ca8751ee5665677892",
+    "w": 440,
+    "h": 384,
+    "src": "protocol",
+    "use": "the refund promise, any 'you risk nothing' surface",
+    "name": "The Guarantee"
+   },
+   "slides": [
+    "gospel #11 THE 100% CONFIDENCE GUARANTEE",
+    "codex #11 THE SYSTEM DOES NOT ACCEPT EXCUSES"
+   ]
+  },
+  "venn": {
+   "asset": {
+    "id": "venn",
+    "file": "venn.webp",
+    "sha": "b71120a13ff66fd0a797b68b545d6998266f1586ed3fc3e61c1cc36e0bbcbb95",
+    "w": 596,
+    "h": 388,
+    "use": "positioning, the two-circle claim",
+    "name": "The Sovereign Operator"
+   },
+   "slides": [
+    "codex #2 THE UNFAIR ADVANTAGE: DUAL MASTERY"
+   ]
+  },
+  "head-jigsaw": {
+   "asset": {
+    "id": "head-jigsaw",
+    "file": "head-jigsaw.webp",
+    "sha": "f94c3ee0b57ea201704a37d0e953d0715dd12f877b5edaa1daaa415f7435e3ed",
+    "w": 292,
+    "h": 360,
+    "src": "marketing",
+    "use": "the 60% rule, the Magic Zone, comprehension over parsing",
+    "name": "The Jigsaw Brain"
+   },
+   "slides": [
+    "codex #4 THE 404 BRAIN ERROR"
+   ]
+  },
+  "flow": {
+   "asset": {
+    "id": "flow",
+    "file": "flow.webp",
+    "sha": "37001eca230e41334b1894c0fa8e56c142326af8c6922f4f1319af470150ced0",
+    "w": 674,
+    "h": 100,
+    "src": "tiger-mode",
+    "use": "a strip, not a poster — listen-and-comprehend feeding immediate speech",
+    "name": "The Native Flow"
+   },
+   "slides": [
+    "codex #5 THE MECHANICAL FAILURE / THE NATIVE FLOW"
+   ]
+  },
+  "gauge": {
+   "asset": {
+    "id": "gauge",
+    "file": "gauge.webp",
+    "sha": "c95eaa570bbf097ec945e0498576a7f969cd8238da2aa35ff8db5383d8e1d463",
+    "w": 551,
+    "h": 369,
+    "use": "scores, coverage, the 0-40 / 100 gauge",
+    "name": "The Diagnostic"
+   },
+   "slides": [
+    "codex #13 LAKEVIEW DEPLOYMENT ZONE"
+   ]
+  },
+  "gears": {
+   "asset": {
+    "id": "gears",
+    "file": "gears.webp",
+    "sha": "3ffbf0e7520082c28f8e1b1e0b66939764aeabe956e5276b9932290906e1bd99",
+    "w": 581,
+    "h": 373,
+    "use": "the loop — any process diagram's head",
+    "name": "The Protocol"
+   },
+   "slides": [
+    "codex #14 THE M2 AUTOMATION PIPELINE"
+   ]
+  },
+  "pyramid": {
+   "asset": {
+    "id": "pyramid",
+    "file": "pyramid.webp",
+    "sha": "e8f0711e04a42eba740738e3b81d0623a9fd4641fcb46f2a35acacdf39ed8e28",
+    "w": 471,
+    "h": 487,
+    "use": "hierarchy, curriculum ladders, tier diagrams",
+    "name": "The Four Layers"
+   },
+   "slides": [
+    "codex #15 THE NET SOVEREIGN ARCHITECTURE"
+   ]
+  }
+ },
+ "files": [
+  {
+   "path": "src/brand/assets/an4-dna.jpg",
+   "bytes": 182700,
+   "sha": "6fffea93fd0bd93a3a0452ecdbba8e87ec5f4f2f8536d1013ca49b09711a67f8"
+  },
+  {
+   "path": "src/brand/assets/an4-tiger-breaker.jpg",
+   "bytes": 300952,
+   "sha": "09127895de3c4e7c724f22018e755881a47f5b84c20ff0693ce5264077ce5369"
+  },
+  {
+   "path": "src/brand/assets/an4-tiger-cyber.jpg",
+   "bytes": 173449,
+   "sha": "de56d8e1d9c73c90b0ab0e2bc5ef1a9c1534303f15a0d56efcf44ec4e590354c"
+  },
+  {
+   "path": "src/brand/assets/apex-anatomy.webp",
+   "bytes": 175574,
+   "sha": "d036e14058d50e7f3b113dec84439630f4205b8b7b5ddae045c17cec6da042b2"
+  },
+  {
+   "path": "src/brand/assets/apex-app.png",
+   "bytes": 140179,
+   "sha": "7d36c2bf74c48e6879d0b6567934573c7445b0821644f1ee4b2095196a1e7305"
+  },
+  {
+   "path": "src/brand/assets/apex-ink.webp",
+   "bytes": 166054,
+   "sha": "094a63e1c0f734d406c8636bcd2ece651a81cd42456698311c111109db92a726"
+  },
+  {
+   "path": "src/brand/assets/apex-net.webp",
+   "bytes": 87384,
+   "sha": "515ffc2e4ce9bb0533a01b9924102258dfbdc3cc91bf057a367e00b8d063d799"
+  },
+  {
+   "path": "src/brand/assets/apex.webp",
+   "bytes": 188830,
+   "sha": "ef9f475d7e92168d38915e8048b85d0453f6c3de77163f34d5d5d425e80b0e83"
+  },
+  {
+   "path": "src/brand/assets/art-choose.webp",
+   "bytes": 100732,
+   "sha": "6dae17e3680e43fff87f2ffd71842a297dd3887bd157ff51d299e52b4ee83669"
+  },
+  {
+   "path": "src/brand/assets/art-command.webp",
+   "bytes": 248046,
+   "sha": "4584cbf07711c1bb507049dbfc25a1f7c24d7c6858ed6aedfb747c5fed0ccef4"
+  },
+  {
+   "path": "src/brand/assets/art-duo.webp",
+   "bytes": 265640,
+   "sha": "f5a2b19f3f888c5dbc35777ffddbaf63e14f344b507519106fdf41431c2e8a95"
+  },
+  {
+   "path": "src/brand/assets/art-earwave.webp",
+   "bytes": 40798,
+   "sha": "d14c5e7afcc7997bf7742074185f99ec1a9b8f1cb31a765cf808f2ca05e06929"
+  },
+  {
+   "path": "src/brand/assets/art-emblem.webp",
+   "bytes": 281626,
+   "sha": "743594f519f1191d7499b96c50163fef4f064888c1105b102f21716688826229"
+  },
+  {
+   "path": "src/brand/assets/art-tigerface.webp",
+   "bytes": 251878,
+   "sha": "7a57d60ecb58ce273aae7f7685f128ffbe6ae369440cfa7970a8e20e3a3d32a4"
+  },
+  {
+   "path": "src/brand/assets/art-tigerkid.webp",
+   "bytes": 88576,
+   "sha": "54235e04217eaa872076f0aa86e47fdde0bf2b8bff9bf45fd3c081636070ddf9"
+  },
+  {
+   "path": "src/brand/assets/art-university.webp",
+   "bytes": 292632,
+   "sha": "a32772b10461c0eef69c8519fccdd3ab52e63b3dabd089cd68a22608118263a4"
+  },
+  {
+   "path": "src/brand/assets/atom.webp",
+   "bytes": 134774,
+   "sha": "0b908703cfb96d77f5d43e43f525eb123c7401fade9b0bda5b02f6c52533f90b"
+  },
+  {
+   "path": "src/brand/assets/bookshelf.webp",
+   "bytes": 66342,
+   "sha": "380e82af3130d3a4bb0a59ee9214cb84b914e8f35f03cc067abb41c0f0e2d2b0"
+  },
+  {
+   "path": "src/brand/assets/brain.webp",
+   "bytes": 24422,
+   "sha": "5584d945b4ad80af203eb041b39494e2cb9a5ba77a07cad76d5cc0ba3196d06c"
+  },
+  {
+   "path": "src/brand/assets/brain2.webp",
+   "bytes": 47182,
+   "sha": "6ee72ef921818a12c91d35bbaeeb3397113873f374cba228d075bef60da348d8"
+  },
+  {
+   "path": "src/brand/assets/cdx-acquisition.webp",
+   "bytes": 152484,
+   "sha": "6fdb50a646bdf3349ecbbd9834e9213e80e18a68cf5fc1bf7eff6641cc9ded11"
+  },
+  {
+   "path": "src/brand/assets/cdx-advantage.webp",
+   "bytes": 175020,
+   "sha": "aa6354b4018313b92464a9e400605fafce2f80c508425ed3d31f072b44d82135"
+  },
+  {
+   "path": "src/brand/assets/cdx-aipet.webp",
+   "bytes": 123972,
+   "sha": "a690d755ecf211330c7f6c56c577654c1bc3120233e26e89cc33670a53e1fb49"
+  },
+  {
+   "path": "src/brand/assets/cdx-diagnosis.webp",
+   "bytes": 174168,
+   "sha": "013abb42350ee6d7301cab85e480626d9e874606484a7dcf1937ab66f799a46d"
+  },
+  {
+   "path": "src/brand/assets/cdx-ecosystem.webp",
+   "bytes": 160330,
+   "sha": "cde206d25e2f57e2024df41791f948f2e740a92e57840f2f1d477f6776c53bde"
+  },
+  {
+   "path": "src/brand/assets/cdx-guarantee.webp",
+   "bytes": 173308,
+   "sha": "91bd73ac3b3142970b1f2e5fbbddc8f31255c1c5e6b673263aa3df19feaf9fd6"
+  },
+  {
+   "path": "src/brand/assets/cdx-immutable.webp",
+   "bytes": 193602,
+   "sha": "0b3aa6ba2673f72287bbc005ce355d5842733765ed4c86b63f8f33e3f4be452d"
+  },
+  {
+   "path": "src/brand/assets/cdx-matrix.webp",
+   "bytes": 143944,
+   "sha": "6420509fbd78afbd8e204b82a23a3e2d67d8ace9f9e4b8b230b42f942d09d3c0"
+  },
+  {
+   "path": "src/brand/assets/cdx-retention.webp",
+   "bytes": 113016,
+   "sha": "7e8ea01c8825fcf982b5da3882ebee929609321600a682e57c22595b5eb2687a"
+  },
+  {
+   "path": "src/brand/assets/cdx-shift.webp",
+   "bytes": 155116,
+   "sha": "d100cafbe7f2a544c27d2cf81d59313072f7ba3c883dea3edeb7008858ac5e7d"
+  },
+  {
+   "path": "src/brand/assets/cdx-ultimate.webp",
+   "bytes": 115958,
+   "sha": "30e133fa307337a4f8e3e643922423b7f70e4c9a57afba241d00c36a31c396e1"
+  },
+  {
+   "path": "src/brand/assets/cdx-wake.webp",
+   "bytes": 188504,
+   "sha": "aadb34d771f69a5ad1396dbba8b17425d70099ab9b316e4312500fbb2109498f"
+  },
+  {
+   "path": "src/brand/assets/chip.webp",
+   "bytes": 26244,
+   "sha": "74b14cd11b4d638df861751a27e68c7a0eb2df00ab351bede5dc33484b93018c"
+  },
+  {
+   "path": "src/brand/assets/confidence.webp",
+   "bytes": 68198,
+   "sha": "c5e1dcdbfa006813c9927f314b6bc1ad56dd63acd1de96ca8751ee5665677892"
+  },
+  {
+   "path": "src/brand/assets/cub.webp",
+   "bytes": 26180,
+   "sha": "f3c43d112cffbd065a2bf5c8ad5bb2dc305414cd492b8bedf6a05ce78c225d31"
+  },
+  {
+   "path": "src/brand/assets/dial45.webp",
+   "bytes": 79034,
+   "sha": "9158f349fe15942949511bc80220ac97dd458fd32c22b200bd3bf63166e4f6ed"
+  },
+  {
+   "path": "src/brand/assets/edge.webp",
+   "bytes": 72242,
+   "sha": "0d77d7b998bdcde6fc5bfca2832ddadb0ee7dbc5805fbb7b681425ba6e8150cc"
+  },
+  {
+   "path": "src/brand/assets/elephant.webp",
+   "bytes": 87392,
+   "sha": "baa9c3412bd8cb8c1d4a854c7acee76a961bee090711130e181514276b57c2d4"
+  },
+  {
+   "path": "src/brand/assets/flow.webp",
+   "bytes": 16426,
+   "sha": "37001eca230e41334b1894c0fa8e56c142326af8c6922f4f1319af470150ced0"
+  },
+  {
+   "path": "src/brand/assets/gauge.webp",
+   "bytes": 66140,
+   "sha": "c95eaa570bbf097ec945e0498576a7f969cd8238da2aa35ff8db5383d8e1d463"
+  },
+  {
+   "path": "src/brand/assets/gears-dna.webp",
+   "bytes": 33694,
+   "sha": "16ba7e63f494aed67ce44f32b47bbf7e992832e0c167c51bbcce9812dbd3d99f"
+  },
+  {
+   "path": "src/brand/assets/gears.webp",
+   "bytes": 72626,
+   "sha": "3ffbf0e7520082c28f8e1b1e0b66939764aeabe956e5276b9932290906e1bd99"
+  },
+  {
+   "path": "src/brand/assets/globe.webp",
+   "bytes": 29452,
+   "sha": "254f4c7b4ed7e4fe2f35c4a5080eb1bf820e361f61692858baa61520c13d98e6"
+  },
+  {
+   "path": "src/brand/assets/head-jigsaw.webp",
+   "bytes": 29520,
+   "sha": "f94c3ee0b57ea201704a37d0e953d0715dd12f877b5edaa1daaa415f7435e3ed"
+  },
+  {
+   "path": "src/brand/assets/head-ui.webp",
+   "bytes": 9436,
+   "sha": "299c76d0a7429a5456de6ff8cbf9f8921913c8b683bb4ec174ca2215b8c3947d"
+  },
+  {
+   "path": "src/brand/assets/head.webp",
+   "bytes": 18908,
+   "sha": "683b20432173910f5687021d391e861db6b5cbc3422b88738d86e4f0c068facf"
+  },
+  {
+   "path": "src/brand/assets/infinity.webp",
+   "bytes": 76608,
+   "sha": "aa6acdad2ce747598928a2abe3f1138e83e4b2b2f07763c7973856309dc3ce30"
+  },
+  {
+   "path": "src/brand/assets/laptop.webp",
+   "bytes": 73606,
+   "sha": "a2de6b752926cf201046562927ec8e7303018f4f45cb376bca13fb7631dc9730"
+  },
+  {
+   "path": "src/brand/assets/mkt-60-delay.webp",
+   "bytes": 64294,
+   "sha": "f7eccadfda47a59b91939157a7677d5bf036ac8920005e319e25fe14d6726202"
+  },
+  {
+   "path": "src/brand/assets/mkt-60-input.webp",
+   "bytes": 71302,
+   "sha": "0c1feb1e8f542aac87021789c90352638d4a510e058386e314b7488836285595"
+  },
+  {
+   "path": "src/brand/assets/mkt-aipet.webp",
+   "bytes": 47458,
+   "sha": "f28790fbfb64ae6d5bd3cc4749664ade1e10b7f674901751adbc530625c97e0c"
+  },
+  {
+   "path": "src/brand/assets/mkt-hour.webp",
+   "bytes": 35882,
+   "sha": "ea91c48e3ef60eeaa453771e4bdb8085ce676531fa422132d2b7d604ee4eb929"
+  },
+  {
+   "path": "src/brand/assets/mkt-mouse2tiger.webp",
+   "bytes": 101700,
+   "sha": "a77fc587f871756062599c0eac141d63069731c16a0b63f6c4348181caed2399"
+  },
+  {
+   "path": "src/brand/assets/mkt-permission.webp",
+   "bytes": 59766,
+   "sha": "d71511ca9f3b7d5900a91935a29dbd6d54e087d242eed65e5cb192555fcd02f0"
+  },
+  {
+   "path": "src/brand/assets/mkt-pillars.webp",
+   "bytes": 51148,
+   "sha": "ad8dc7a088d6d913f232a099de38c70fbdefdc18ec8afbdf2c42a5f59ff08c05"
+  },
+  {
+   "path": "src/brand/assets/mkt2-adpipeline.webp",
+   "bytes": 140012,
+   "sha": "2acc9d2d99cc96c10febf1a7b583fd92f29d7f22a3cfb3a3e12226479dbabe6d"
+  },
+  {
+   "path": "src/brand/assets/mkt2-architecture.webp",
+   "bytes": 119746,
+   "sha": "815a3211231ffbcea2a29ae82acfb59af81b8961c692710075caf22ecadfef96"
+  },
+  {
+   "path": "src/brand/assets/mkt2-biology.webp",
+   "bytes": 92170,
+   "sha": "f2cd3de71250195848730b4acd39715cc284cde827c35f85e88632dcc436c342"
+  },
+  {
+   "path": "src/brand/assets/mkt2-failure.webp",
+   "bytes": 125100,
+   "sha": "2858470ece30b474ea07284933be0f658ae99e75a20c38040da9133f1722274f"
+  },
+  {
+   "path": "src/brand/assets/mouse-cage.webp",
+   "bytes": 53690,
+   "sha": "ccbf89c4b3e43aaac2e7407e3fb1c7413220a324b98d60915b7079b3dca9d249"
+  },
+  {
+   "path": "src/brand/assets/mouse-chained.webp",
+   "bytes": 14518,
+   "sha": "129f2d796f3abb038da9a58c6f4ebdf29a9072529b6351977b1b671b7a1281c4"
+  },
+  {
+   "path": "src/brand/assets/mouse.webp",
+   "bytes": 91056,
+   "sha": "d45f32ce100e47908350de9017ad8f5e35e7a748439a1ff1729e28329f0766e8"
+  },
+  {
+   "path": "src/brand/assets/mouse2.webp",
+   "bytes": 28188,
+   "sha": "45132caf098a02437bc019d79992143510d508bfdb5b608ac3935cce72032e28"
+  },
+  {
+   "path": "src/brand/assets/net-4pillars.webp",
+   "bytes": 42332,
+   "sha": "865aea5cd872e3fda138343021f122d5caf72924ea316f413334de6d7d46fa1d"
+  },
+  {
+   "path": "src/brand/assets/net-cdx-01.webp",
+   "bytes": 77760,
+   "sha": "a8b80affe6f7e15c54941f486413e60ea50df72cb76ddf942f2b55c53bd60dd9"
+  },
+  {
+   "path": "src/brand/assets/net-cdx-02.webp",
+   "bytes": 96528,
+   "sha": "6974cb404e3f33a5c82a3986eea957f9dcf50a69e9a8d8bb81d4f33f01359396"
+  },
+  {
+   "path": "src/brand/assets/net-cdx-03.webp",
+   "bytes": 92268,
+   "sha": "280088645167764a2956dd5d491e7b98709b3785439d0043730397983074de06"
+  },
+  {
+   "path": "src/brand/assets/net-cdx-04.webp",
+   "bytes": 80392,
+   "sha": "a1175166d9c24d41787ef74907043f834700d3c0c2f2eb244073a1fed05a750e"
+  },
+  {
+   "path": "src/brand/assets/net-cdx-05.webp",
+   "bytes": 71506,
+   "sha": "5df3d45e35caf15b01082ebad8a5da5b4807cf546841667ed0215b013ce978eb"
+  },
+  {
+   "path": "src/brand/assets/net-cdx-06.webp",
+   "bytes": 105754,
+   "sha": "3b1179bc1a29f805341c7fafe923fc9e58255354435cf6cd76883c3dcc71ce5a"
+  },
+  {
+   "path": "src/brand/assets/net-cdx-07.webp",
+   "bytes": 81224,
+   "sha": "e923219dff767fa3ca361b56f631823953b228e57d816ae28009377d88cc3f66"
+  },
+  {
+   "path": "src/brand/assets/net-cdx-08.webp",
+   "bytes": 91710,
+   "sha": "396c382eabc9592bb8886c3c79e222a81a53009487ed0d7e339885ad74b35c3c"
+  },
+  {
+   "path": "src/brand/assets/net-cdx-09.webp",
+   "bytes": 79170,
+   "sha": "0cdf1afbd8049de5a689edbc712bbd1d713885308a707e626cd29ff2a07bfc45"
+  },
+  {
+   "path": "src/brand/assets/net-cdx-10.webp",
+   "bytes": 88500,
+   "sha": "80f46d8391ec619a8e398febbbff5c3b5ee834d55a73323aa2796c07e1aa6e4f"
+  },
+  {
+   "path": "src/brand/assets/net-cdx-11.webp",
+   "bytes": 128426,
+   "sha": "4dfcbb6700dd40542f7b191a59a945018a6c7fee2e9d2adffad00f7a243fcc8d"
+  },
+  {
+   "path": "src/brand/assets/net-cdx-12.webp",
+   "bytes": 116078,
+   "sha": "2ff9369798b2abed1942cba0a4e8002510decbaa49c6e7696db5a348544be9fc"
+  },
+  {
+   "path": "src/brand/assets/net-cdx-13.webp",
+   "bytes": 71692,
+   "sha": "b6895d1e2288dbf1711a9cae6e03be7542c482f3e23fea457166df5de0d64209"
+  },
+  {
+   "path": "src/brand/assets/net-cdx-14.webp",
+   "bytes": 145082,
+   "sha": "c0b81cba89e074f1cc60f76109a3f31cc9f2988d82719621ef1bf1ae5c2512be"
+  },
+  {
+   "path": "src/brand/assets/net-cdx-15.webp",
+   "bytes": 89190,
+   "sha": "3f6ec904fbd8a3d94f330d4bd6d794cad224fcf6ce9f1944630db35eaa77c3a4"
+  },
+  {
+   "path": "src/brand/assets/net3-1hour.webp",
+   "bytes": 70394,
+   "sha": "dcfc4ef0f55c5a720978ca5c02582268f4b1878917e84263e6cd4944a4a0c293"
+  },
+  {
+   "path": "src/brand/assets/net3-45-15.webp",
+   "bytes": 59568,
+   "sha": "5bd9d1e0607a6ec8734fcb75496e5e88b13baf002c64c045c846ebbd6b9bf1e8"
+  },
+  {
+   "path": "src/brand/assets/net3-60-brain.webp",
+   "bytes": 78626,
+   "sha": "e62610a35d9b9fe8bceb3c4d6f4b1f08db7248e837a72933561c9b1274bcc90c"
+  },
+  {
+   "path": "src/brand/assets/net3-60-input.webp",
+   "bytes": 92394,
+   "sha": "a4f5b8ded14b9e2c33bb115a9d405894d0166fcd8e26cdbe11e40c0f6bbfc525"
+  },
+  {
+   "path": "src/brand/assets/net3-aipet-curve.webp",
+   "bytes": 55540,
+   "sha": "ca442d61ec8f078c727c5e48e6796b0938489f8b7899b2e71dc2cee3cb5ce20f"
+  },
+  {
+   "path": "src/brand/assets/net3-foundations.webp",
+   "bytes": 192750,
+   "sha": "14cdf03ce2d666fd7eb23fc83c4eec2bf255afd7ba11656ae305ebb7a21be217"
+  },
+  {
+   "path": "src/brand/assets/net3-gospel-law.webp",
+   "bytes": 180902,
+   "sha": "a850ba65ca8f98f3b7c5e0bfa0c413c6894e3a354c5423b4f4bf0b68f0ec5af7"
+  },
+  {
+   "path": "src/brand/assets/net3-habit-donut.webp",
+   "bytes": 108548,
+   "sha": "eed79183db6651a0e2dbd3d3b6590a9f3e070fc4ae927c5ecbfe7a633beb3db3"
+  },
+  {
+   "path": "src/brand/assets/net3-master-slide.webp",
+   "bytes": 124334,
+   "sha": "3f186a057dd15cf12c03f82aa38a3312dfdcb7350e82f0fff1375fc3d7319cf2"
+  },
+  {
+   "path": "src/brand/assets/net3-permission.webp",
+   "bytes": 73442,
+   "sha": "9dff944c5b93903f0436725ecbc05a36df2ca95020d45bd78de4789958418d4f"
+  },
+  {
+   "path": "src/brand/assets/net3-prison-table.webp",
+   "bytes": 114922,
+   "sha": "46dfe8e5198b47f0a3de67a8b457e53f6812e1948ec72aea4707853e38f63e45"
+  },
+  {
+   "path": "src/brand/assets/net3-snowman.webp",
+   "bytes": 67208,
+   "sha": "cdce9371684b11b3130fa2e0957b80307084ed4f1851436e5523e1ffda2aafc8"
+  },
+  {
+   "path": "src/brand/assets/net3-three-gears.webp",
+   "bytes": 86606,
+   "sha": "4b5241c32ed5013b282de1df383a862bbd028c593e4ff1c576ea4b7298b72c88"
+  },
+  {
+   "path": "src/brand/assets/net3-tiger-engine.webp",
+   "bytes": 129740,
+   "sha": "ba17ede044ee19c7b70695cffd43efc0d907057a7df0f21e38111f00274132b9"
+  },
+  {
+   "path": "src/brand/assets/net4-gears10553.webp",
+   "bytes": 60702,
+   "sha": "cfcec0fa1b00612ef9e7a7311e1065c9a50d6348bb50865ee85ce319c1dcf12d"
+  },
+  {
+   "path": "src/brand/assets/net4-loudwrong.webp",
+   "bytes": 120258,
+   "sha": "9f5d82ce640cf5a707b884be27bf3aaf0a47f40adf6d4fa36b0e551bb9914c72"
+  },
+  {
+   "path": "src/brand/assets/net4-pressure.webp",
+   "bytes": 102494,
+   "sha": "e4c616b1da5ca480678eac31b487891a107567ebfcd185d8a90af80622b24c99"
+  },
+  {
+   "path": "src/brand/assets/net4-psychshift.webp",
+   "bytes": 101680,
+   "sha": "5785b4ceb96d462da83cab9c7c4d77624ea5c13115a4b95b45a3fee42b75b7c7"
+  },
+  {
+   "path": "src/brand/assets/net5-60ear.webp",
+   "bytes": 120400,
+   "sha": "d8b783ced0cdf585c20db7154738eb28e6ba52be7ba9b253bebf75725b79f7cc"
+  },
+  {
+   "path": "src/brand/assets/net5-advantage.webp",
+   "bytes": 123194,
+   "sha": "191c36ff7fd0a53a2d0ff07495b2276ac9cf2b5cd725eb4d3e3dbb403a0903a5"
+  },
+  {
+   "path": "src/brand/assets/net5-aipet.webp",
+   "bytes": 102116,
+   "sha": "1679305d94f2e4fd063fe5c61b354ba672810d27674458efe0d63b2eb4acda9c"
+  },
+  {
+   "path": "src/brand/assets/net5-cognitive.webp",
+   "bytes": 103534,
+   "sha": "c6bad3b598f2de7ea4aa049fd5749cf1d4c2f6b081673bbf78cfb51dbb43ffe0"
+  },
+  {
+   "path": "src/brand/assets/net5-donut.webp",
+   "bytes": 118148,
+   "sha": "235456ab367cfacdf96fdcc9fdf726775b2fc97d55cf06e022c1601d2dd74f7e"
+  },
+  {
+   "path": "src/brand/assets/net5-forgetcurve.webp",
+   "bytes": 97474,
+   "sha": "69d5624b0ebec4e6bb88543e402478c4594be80eaa581d6d0d1ae27d1b7d9284"
+  },
+  {
+   "path": "src/brand/assets/net5-locked.webp",
+   "bytes": 109158,
+   "sha": "5442298df36fa57ca51824bc7003afc51d1989b3602ac549d01fbf6ac943aa64"
+  },
+  {
+   "path": "src/brand/assets/netd-01.webp",
+   "bytes": 60766,
+   "sha": "ecb0509eb8b0245d5015829821c5cac03f2ba429b8cda8a349b8313ff2f52b10"
+  },
+  {
+   "path": "src/brand/assets/netd-02.webp",
+   "bytes": 128858,
+   "sha": "2ef5d72389dd8585f47a4fff45971bd08c4d3660754d94ffe6762753a1107956"
+  },
+  {
+   "path": "src/brand/assets/netd-03.webp",
+   "bytes": 71702,
+   "sha": "ea8aa4be502312aee2637647b840550b077c0696ef00c97f74c50514eed41b56"
+  },
+  {
+   "path": "src/brand/assets/netd-04.webp",
+   "bytes": 93700,
+   "sha": "5b05550cb5d1983b89b01e8f80f7795b9c9ac4a1ff344a09dd5d38cebac68d45"
+  },
+  {
+   "path": "src/brand/assets/netd-05.webp",
+   "bytes": 75280,
+   "sha": "0cc1f5a0a1d0d123fb58550581a1adfe3eceecbaf109c36d620f9cd6a76412ed"
+  },
+  {
+   "path": "src/brand/assets/netd-06.webp",
+   "bytes": 95220,
+   "sha": "00f50f5368def03e89cfd952213646136afbf9fb709d59b74730201aff90a2cd"
+  },
+  {
+   "path": "src/brand/assets/netd-07.webp",
+   "bytes": 72586,
+   "sha": "3f0bf6fa82d1ea76e54e6dff43beb02fa2e0b83ed8350d61d04b59794ab8d478"
+  },
+  {
+   "path": "src/brand/assets/netd-08.webp",
+   "bytes": 90898,
+   "sha": "c2ff63e3bcb38a11295974b8598063eb69bd060daa86e39819d140e08a487f20"
+  },
+  {
+   "path": "src/brand/assets/netd-09.webp",
+   "bytes": 133446,
+   "sha": "5212fcf525040d367f54083698c1c96efdbdc71c057af4703fc86d24bac2a6a4"
+  },
+  {
+   "path": "src/brand/assets/netd-10.webp",
+   "bytes": 62666,
+   "sha": "399969d1445b86bf6e45eb34cda34d1763d6a43827a0b53854182689d2c275e6"
+  },
+  {
+   "path": "src/brand/assets/netd-11.webp",
+   "bytes": 110598,
+   "sha": "408131211d1d50e1f6cda7c7206c211718e96b5b4d42e5446532160bd648028c"
+  },
+  {
+   "path": "src/brand/assets/netd-12.webp",
+   "bytes": 72448,
+   "sha": "fe9b28da050c6dab20b4f4b9d2191a73c7c8fe827fd19f508763468f2169e02a"
+  },
+  {
+   "path": "src/brand/assets/netd-13.webp",
+   "bytes": 75870,
+   "sha": "68f1cb2014f7ec00d1b4e681b74ff56d4953d7d084d5c0c20ea7a49a1a01c0cd"
+  },
+  {
+   "path": "src/brand/assets/netd-14.webp",
+   "bytes": 167358,
+   "sha": "6bf4c8869a82db928fc9e16388ef647fc49e2bc9ac333f8735c81b26b25d583c"
+  },
+  {
+   "path": "src/brand/assets/netx-coin.webp",
+   "bytes": 18522,
+   "sha": "e93d39e6fbb795fdc64438367382be04cec512577d939cc5935bfda31e24f34e"
+  },
+  {
+   "path": "src/brand/assets/netx-cta.webp",
+   "bytes": 17666,
+   "sha": "12ae1389af825a1249a376884b3c5c24e69dac2eedd1e4cc6e74032f658a4d0f"
+  },
+  {
+   "path": "src/brand/assets/netx-fig80.webp",
+   "bytes": 26974,
+   "sha": "95d1412479e1deb398e9bf9e7d14f4af16ba1f8936567a15082c13599d4bba48"
+  },
+  {
+   "path": "src/brand/assets/netx-ladder.webp",
+   "bytes": 41062,
+   "sha": "c6cb57bc7225fa0081ddc15b6b88d8e3e404015ee80e083d4980fbd216866d79"
+  },
+  {
+   "path": "src/brand/assets/netx-mousecage.webp",
+   "bytes": 84046,
+   "sha": "34973337af1bbe84c496af0299f2bd00ef7abe223b2dd9615218e0942f7308b6"
+  },
+  {
+   "path": "src/brand/assets/netx-roartitle.webp",
+   "bytes": 18260,
+   "sha": "b9b69372dcce6feb561a723e18748a57a122663862ffa2d5406d52b6d9215597"
+  },
+  {
+   "path": "src/brand/assets/netx-tigerhead.webp",
+   "bytes": 78604,
+   "sha": "ddb682180005f4d45e703f9dc51f2997f711020c899d649f5b9289750d3a1e75"
+  },
+  {
+   "path": "src/brand/assets/netx-venn.webp",
+   "bytes": 20264,
+   "sha": "10ac54ee3be2c8c47b0b9fe6855b387bce48bcf8e832e718332d1525b06dd321"
+  },
+  {
+   "path": "src/brand/assets/phoenix.webp",
+   "bytes": 96230,
+   "sha": "cfdfb1df4332030d3e48152bd6536d58b3df3089a785b997635db232108c4950"
+  },
+  {
+   "path": "src/brand/assets/phone.webp",
+   "bytes": 70460,
+   "sha": "066b68bbf28df309f73b2c77245da75b38f74da1009ecd5f58958ce9ebde96f6"
+  },
+  {
+   "path": "src/brand/assets/phone2.webp",
+   "bytes": 36878,
+   "sha": "5dcf571f3ac02cb8ffb8e79fab06ed2bedfb7a98933c6841ed1f57e63b8a2ad6"
+  },
+  {
+   "path": "src/brand/assets/phx-cover.webp",
+   "bytes": 119204,
+   "sha": "4bde5a4f39cf06f10af4cf968d6453d574070a74a6b2a0e2a4a1d94cf71ae0e1"
+  },
+  {
+   "path": "src/brand/assets/phx-lakeview.webp",
+   "bytes": 159532,
+   "sha": "9dfa140fd6ffd2ea5c6313efb1f99a20adc0745fb24f9f71777a535c6e185ebf"
+  },
+  {
+   "path": "src/brand/assets/phx-pipeline.webp",
+   "bytes": 115608,
+   "sha": "e2e0247143bbe898f8910bdc8933ae0a006efe67dd81f69a9ae6d23796823e86"
+  },
+  {
+   "path": "src/brand/assets/phx-stack.webp",
+   "bytes": 154840,
+   "sha": "76ce4309d5141d5eff9b94e1f31bc3f4379a8a89f4a23547f7560e8b0844c8c6"
+  },
+  {
+   "path": "src/brand/assets/pyramid.webp",
+   "bytes": 44806,
+   "sha": "e8f0711e04a42eba740738e3b81d0623a9fd4641fcb46f2a35acacdf39ed8e28"
+  },
+  {
+   "path": "src/brand/assets/roar.webp",
+   "bytes": 84490,
+   "sha": "b06274254840a6cc9dd5fc5bfc80d810572a4b5e13de8a837129e07d89f52ac3"
+  },
+  {
+   "path": "src/brand/assets/run305.webp",
+   "bytes": 93536,
+   "sha": "83324a912878b8b399d2c0c0e6561e4b720a42d788b0f6fec02de64df2dcf9a5"
+  },
+  {
+   "path": "src/brand/assets/shield.webp",
+   "bytes": 79418,
+   "sha": "d26fa236f08748652694c8f54f24e4a688e739093f963a81a1634b45ce0417f4"
+  },
+  {
+   "path": "src/brand/assets/soc-60delay.webp",
+   "bytes": 91570,
+   "sha": "a2f0bf915755341f7ddf31029181f0d03660135d1e382dc2882c586e564832b2"
+  },
+  {
+   "path": "src/brand/assets/soc-60input.webp",
+   "bytes": 99408,
+   "sha": "2b14acd9aa18622b89aba593bcd4ea94ba502e47305c4d2c4beb2265ba998b3d"
+  },
+  {
+   "path": "src/brand/assets/soc-adpipeline.webp",
+   "bytes": 133828,
+   "sha": "c76b40227695cd226013bd230ee7948ca18fc083de6764153618701450160718"
+  },
+  {
+   "path": "src/brand/assets/soc-biological.webp",
+   "bytes": 89324,
+   "sha": "3873b3be24e5a887f09356351c93bd51434c88633b0b41d06a36f27afe4aaf3b"
+  },
+  {
+   "path": "src/brand/assets/soc-blueprint.webp",
+   "bytes": 232128,
+   "sha": "a2e22ba2ac59bdf1bc392f3d5151183ca8bda82742536035eb7637d2e01780a1"
+  },
+  {
+   "path": "src/brand/assets/soc-chains.webp",
+   "bytes": 223226,
+   "sha": "0823e9f1cb3e2b3dffa6ac2a35a31744e8e327806ed8208e075fb1eae5dd4505"
+  },
+  {
+   "path": "src/brand/assets/soc-differentiators.webp",
+   "bytes": 95610,
+   "sha": "181616090d49866a08a716b01070bf4050833c178b6258ae318e5ae258cb986e"
+  },
+  {
+   "path": "src/brand/assets/soc-failure.webp",
+   "bytes": 124024,
+   "sha": "905caafa86013853b12d837b4edbcdacb376eb037f68c0c2edcc2e1e169001bb"
+  },
+  {
+   "path": "src/brand/assets/soc-fluency.webp",
+   "bytes": 117634,
+   "sha": "367edcc2d415b9d80cb4616a508c35042ba18d950bd5ff7df260901ba7f47b3c"
+  },
+  {
+   "path": "src/brand/assets/soc-leaks.webp",
+   "bytes": 68800,
+   "sha": "5bdd24976101863d9a14766da66c92e1b330a30271bc2fa3b0695d73eef7c8a1"
+  },
+  {
+   "path": "src/brand/assets/soc-permission.webp",
+   "bytes": 86856,
+   "sha": "5a35cb15bfc51b025a16cacb533513dcfe7a99fcf7ca52557459700e4816c145"
+  },
+  {
+   "path": "src/brand/assets/soc-reality.webp",
+   "bytes": 158016,
+   "sha": "eb58332c7dab920b7eed0688228fad40fd073990b6f62f8974ee1e219fe8720c"
+  },
+  {
+   "path": "src/brand/assets/soc-rising.webp",
+   "bytes": 222554,
+   "sha": "9d4e9441d1fef772a9af13b0adea36ff4e8e669bf5e4f38a8e73d1818d1880ae"
+  },
+  {
+   "path": "src/brand/assets/soc-summer.webp",
+   "bytes": 179820,
+   "sha": "3422325f20d113734e40477ec1872bc74dd508f8d8b772d2c08a35782b30244d"
+  },
+  {
+   "path": "src/brand/assets/soc-transform.webp",
+   "bytes": 202868,
+   "sha": "ad6c4984b7337cf379bb8413990995c735f57d3caa73a5a9d341dc25ce021621"
+  },
+  {
+   "path": "src/brand/assets/soc-trap.webp",
+   "bytes": 190132,
+   "sha": "8bd0430d36c4230177a1c3e5dbface66c69e3f035584fa3bd1c1fff50444a8fe"
+  },
+  {
+   "path": "src/brand/assets/stp-404.webp",
+   "bytes": 113148,
+   "sha": "5c3361387a8c284411efef3c933f0885364848eae78274f2ce9b2d70b58dcc10"
+  },
+  {
+   "path": "src/brand/assets/stp-close.webp",
+   "bytes": 131496,
+   "sha": "fe459d12feae21e7d8fdde8f0fde2a6ed1f6d3c1e6037437bf00c851f57718e2"
+  },
+  {
+   "path": "src/brand/assets/stp-engine.webp",
+   "bytes": 150848,
+   "sha": "ab34340b2caf2ddb6fd0ff17e5a551a9dcd8874692a1c824173f4991b46cb088"
+  },
+  {
+   "path": "src/brand/assets/stp-override.webp",
+   "bytes": 89802,
+   "sha": "da69bb83aa1ef86a36aa2ef49bdb51f30c91d0bf4bc064ad75f23320361a0935"
+  },
+  {
+   "path": "src/brand/assets/stp-scale.webp",
+   "bytes": 96294,
+   "sha": "53c848f67bc83a104f5fca03c4ffcb27e3684ab81e506bf97671b4d48767988b"
+  },
+  {
+   "path": "src/brand/assets/tep-audit.webp",
+   "bytes": 114818,
+   "sha": "264a0c70dde6706d5926ec82cdedc2970e1abc675b1a9748cb1635d3faf23443"
+  },
+  {
+   "path": "src/brand/assets/tep-lazy.webp",
+   "bytes": 92916,
+   "sha": "2e8671dec442e4b09a6bb045656aa3b1b559f155f9cd91b3ec11359a5cd4210b"
+  },
+  {
+   "path": "src/brand/assets/tep-math.webp",
+   "bytes": 94280,
+   "sha": "187851172de14216092c5a6e70d3ec4eaa9879d3a96fe470ce4b037ed5c258fe"
+  },
+  {
+   "path": "src/brand/assets/tge-bucket.webp",
+   "bytes": 104974,
+   "sha": "54049724fa70d889fae21220701a6fa2f266b9ba662bc1726d0f24e2e7e221f5"
+  },
+  {
+   "path": "src/brand/assets/tge-hud.webp",
+   "bytes": 81612,
+   "sha": "3aa5d78a4bba6f1acac5a52d9e068e6f6c685fefc88bf7dc8c29e16d526b82f8"
+  },
+  {
+   "path": "src/brand/assets/tge-rule8.webp",
+   "bytes": 130776,
+   "sha": "7b7f547d10adfc5453fa75dd5ddbf2f6fb2e3316373608d26c6b424535ff621f"
+  },
+  {
+   "path": "src/brand/assets/tiger-energy.webp",
+   "bytes": 45988,
+   "sha": "a3860be6e8b0f6042c08126af2bc336b03c2fad7cf96e0ebf0e7056093604e87"
+  },
+  {
+   "path": "src/brand/assets/tiger-spectral.webp",
+   "bytes": 42618,
+   "sha": "9ed0b4bb44ae8d23ae2d1508552c462759376b2bc3e47ee21f6b4f510e73d727"
+  },
+  {
+   "path": "src/brand/assets/tiger.webp",
+   "bytes": 109132,
+   "sha": "78c076b0c545f8e7a8571da05a04f9399c658e554fb272cf45be3f72eaea7619"
+  },
+  {
+   "path": "src/brand/assets/tiger2.webp",
+   "bytes": 62816,
+   "sha": "e1e0a3cc1471cc692a2d37fa653752cee768975ba8ee64f45a1e223d4c2fec64"
+  },
+  {
+   "path": "src/brand/assets/tigerbg.webp",
+   "bytes": 226556,
+   "sha": "0761d86e7621bbd4ae30c2d3348ecc3bc46ccf8b4121df0292c6b7bc9f1047f7"
+  },
+  {
+   "path": "src/brand/assets/venn.webp",
+   "bytes": 74604,
+   "sha": "b71120a13ff66fd0a797b68b545d6998266f1586ed3fc3e61c1cc36e0bbcbb95"
+  },
+  {
+   "path": "src/brand/assets/wave-loud.webp",
+   "bytes": 17500,
+   "sha": "16b75b4d05b80596eaba4a6f279fe03576a923e4bf517975b1f519eeed7bf712"
+  }
+ ],
+ "missingMarks": []
+}
