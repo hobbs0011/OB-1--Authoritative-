@@ -55,7 +55,9 @@
     { local:"sovereign", name:"SOVEREIGN_KEY",       svc:"net-pet-ai",  where:"net-pet-ai worker secret",
       why:"the worker's admin routes (X-Admin-Key)" },
     { local:"vaultkey",  name:"SOV100_VAULT_KEY",    svc:"sov100-vault-v0", where:"the vault worker's own gate",
-      why:"the vault itself — every route answers 401 until this is armed; the scheme is in APPS/SOV100-VAULT/README.md" }
+      why:"the vault itself — every route answers 401 until this is armed; the scheme is in APPS/SOV100-VAULT/README.md" },
+    { local:"kilo",      name:"KILO_GATEWAY_JWT",    svc:"Kilo Gateway",  where:"this browser only · set with /vault set kilo <JWT> or /tool key <JWT> (same slot, obi_keys.kilo)",
+      why:"the tool lane — gateway_chat + gateway_models from this browser (free lane first, usage metered). AUDIT 2026-10-24: this was the only working key with no vault slot, no seal and no escrow — a rename wiped it like the rest" }
   ];
   /* the canon's FUTURE KEYS — named here so nothing is invented twice later. */
   const PLANNED = [
@@ -479,6 +481,25 @@
       if(r.status === 200) return { ok:true, detail:"api.deepseek.com accepted the key" };
       return { ok:false, detail:"DeepSeek refused it (HTTP " + r.status + ")" + (r.err ? " — " + r.err : "") };
     },
+    kilo: async v => {
+      /* AUDIT 2026-10-24: /models answers 200 with NO auth (public catalog), so a
+         models call true-passes a fake key. Only inference proves a key. */
+      let cat = "catalog unreachable · ";
+      try{
+        const m = await sf("https://ai-gateway.kilo.ai/api/v1/models", { headers:{ Authorization:"Bearer " + v } });
+        if(m.status === 200){
+          const arr = (m.j && (m.j.data || m.j.models)) || [];
+          const ids = arr.map(x => x.id || x.name).filter(Boolean);
+          cat = "catalog " + ids.length + " model(s), free lane " + ids.filter(id => /free/i.test(id)).length + " (public — proves nothing) · ";
+        }
+      }catch(e){}
+      const r = await sf("https://ai-gateway.kilo.ai/api/v1/chat/completions",
+        { method:"POST", headers:{ "Content-Type":"application/json", Authorization:"Bearer " + v },
+          body:JSON.stringify({ model:"kilo-auto/free", max_tokens:300, messages:[{ role:"user", content:"Reply with exactly: ok" }] }) });
+      if(r.status !== 200) return { ok:false, detail:"Gateway refused the key (HTTP " + r.status + ")" + (r.err ? " — " + r.err : "") + " · " + cat + "nothing sealed on a failed test" };
+      let use = ""; try{ const u = r.j && r.j.usage; if(u && u.total_tokens != null) use = " · " + u.total_tokens + " tokens"; }catch(e){}
+      return { ok:true, detail:"key PROVED by a free-lane chat (kilo-auto/free, room to think — this lane reasons before it answers)" + use + " · " + cat + "L3 = inference answered" };
+    },
     sovereign: async v => {
       const r = await sf(HOSTS.netpet + "/api/admin/roster", { headers:{ "X-Admin-Key": v } });
       if(r.status === 200) return { ok:true, detail:"net-pet-ai admin route opened" };
@@ -533,9 +554,9 @@
           + '<br>A value typed here is masked and is never recorded, captured or logged.</div></div>');
         return;
       }
-      put({ [local]:val });
-      log({ kind:"secret", action:"vault set " + local, detail:"stored in this browser only (value never logged)", result:fp(val) });
-      const t = await testRow(Object.assign({}, r, { local:local }), val);
+      put({ [r.local]:val });
+      log({ kind:"secret", action:"vault set " + r.local, detail:"stored in this browser only (value never logged)", result:fp(val) });
+      const t = await testRow(r, val);
       bubble('<div class="rise"><div class="rhead">🔐 PrAis Vault — ' + E(r.name) + ' stored</div>'
         + '<div class="rrow"><b>' + E(r.svc) + '</b><span class="vd">' + (t.ok ? "VERIFIED" : "FAILED") + '</span><div class="rd">' + E(fp(val)) + ' · ' + E(t.detail) + '</div></div>'
         + (t.ok ? '' : '<div class="rfoot">Fail closed: it is stored locally, but nothing was sealed or pushed while it fails its own test.</div>')
@@ -544,7 +565,9 @@
       return;
     }
     if(op === "forget" || op === "remove" || op === "delete"){
-      const local = (parts[1] || "").toLowerCase();
+      const raw = (parts[1] || "").toLowerCase();
+      const rr = rowOf(raw);
+      const local = rr ? rr.local : (parts[1] || "");
       if(!local || !get(local)){ bubble('🔐 /vault forget &lt;name&gt; — nothing stored under that name.'); return; }
       del(local); delete lastTest[local];
       log({ kind:"secret", action:"vault forget " + local, detail:"removed from this browser", result:local + " gone locally" });
@@ -553,7 +576,7 @@
     }
     if(op === "test"){
       const which = (parts[1] || "all").toLowerCase();
-      const list = NEEDED.filter(r => which === "all" ? !!get(r.local) : r.local === which || r.name.toLowerCase() === which);
+      const list = NEEDED.filter(r => which === "all" ? !!get(r.local) : r.local.toLowerCase() === which || r.name.toLowerCase() === which);
       if(!list.length){ bubble('🔐 /vault test [name|all] — nothing to test: ' + E(which) + ' is not set locally.'); return; }
       bubble('<div class="rise"><div class="rhead">🔐 PrAis Vault — live access tests</div><div class="rd">Calling the real services… (' + list.length + ')</div></div>');
       const lines = [];

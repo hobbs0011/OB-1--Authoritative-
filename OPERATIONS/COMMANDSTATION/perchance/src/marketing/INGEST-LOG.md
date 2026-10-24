@@ -134,6 +134,216 @@ is named in the row below — so the decision can be reversed without re-sending
 
 ---
 
+## BATCH 002 — the true marketing wing (2026-10-21, run 6)
+
+The sovereign's order: *"Time to set up our true marketing wing."* Eleven
+files: `NET_Marketing_Codex_2_.pdf` (15pp, raster, no text layer — read off
+the pixels) + ten phone screenshots (six unique creatives, each doubled).
+ Filed as SOUL (`src/sites/net/SOUL.md`), transcribed (`CODEX.md`,
+`CREATIVES.md`), originals in `src/sites/net/material/`.
+
+Adjudication: the 15 codex pages are compositions (headline fused to art), so
+they ship as STILLS `net-cdx-01..15` (1600px, WebP 0.86, 70–142KB each —
+batch-002 precedent). Of the ten screenshots, nine carry phone status bars,
+nav buttons or filenames in frame → REJECT on the record (a phone screenshot
+is not an asset); the three second-framings additionally lose as duplicates.
+The one clean creative (the light 4-pillar card, no chrome) ships as
+`net-4pillars`. Registered in `src/brand.js` ASSETS (`src:"netwing"`),
+`ASSET_V` 7→8. Documents table below carries per-file verdicts; machine
+record in `MANIFEST.json`.
+
+The words half: first stock distilled into `src/copy.js`, record
+`src/marketing/COPY-ARCHIVE.md` (arsenal, positioning, pillars, ladder,
+avatars, funnel, offers — the business's claims quarantined by lane).
+
+---
+
+## BATCH 003 — Tiger Protocol infographics (2026-10-21, run 6)
+
+The sovereign's orders: *"Continue"* / *"Go."* Thirty-five files: two clean
+PNG infographics + thirty-three `IMG_20260922_*.jpg` phone photos (one
+capture session, 1080x2340 full screenshots and 1080x~600 clean crops).
+
+Adjudication, per the standing rules:
+
+- **SHIP (14):** the two PNGs (`The_NET_Foundations_Overview_1_.png`,
+  `Gospel_444_Immutable_Law_Infographic.png`) + twelve clean crops as
+  `net3-*` stills (1600px cap, WebP 0.86, 54–188KB). A page is an argument,
+  not a sprite.
+- **REJECT — phone screenshot (17):** `..._281, _329, _425, _450, _700,
+  _881, _883, _940, _978, _085, _127, _140, _263, _274, _677, _696, _840`
+  — device chrome in frame (rule 4). Content preserved as WORDS (second
+  stock), reversible from this log.
+- **REJECT — illegible size (3):** `..._783` (338x159), `..._895`
+  (270x239), `..._003` (318x247) — legible at no use size.
+- **REJECT — duplicate (1):** `..._340` — same headline, format and language
+  as `..._325`; the sharper cut ships.
+
+Registered in `src/brand.js` ASSETS (`src:"netwing"`), `ASSET_V` 8→9.
+Machine record in `MANIFEST.json`. Words half: 25 lines of second stock in
+`src/copy.js`, record `COPY-ARCHIVE.md`.
+
+---
+
+## BATCH 004 — Tiger Protocol, second capture session (2026-10-21, run 6)
+
+Twelve files, `IMG_20260922_181446_400` through `..._181447_669`: six tall
+phone screenshots (1080x2340, status bar + share icons + "The Tiger Protocol"
+footer in frame) and six clean crops from the same session. Perceptual hashing
+was attempted and discarded on the record: near-black backgrounds collapse the
+64-bit adjacent-pixel hash (every pair within 0–4 bits), so dedupe was done by
+looking — contact sheets `scratch/batch004-sheet1.png` / `-sheet2.png`, plus
+full-size reads of all six clean crops and all six screenshots for verbatim
+Vietnamese transcription.
+
+Adjudication, per the standing rules:
+
+- **SHIP (4):** `..._088` → `net4-loudwrong` (1080x584, the velocity battle
+  cry, bilingual chains-and-books shatter); `..._204` → `net4-gears10553`
+  (1003x423, the 10-5-5-3 gears over the Jolly Phonics base); `..._400` →
+  `net4-pressure` (1080x576, fluency under pressure + buddy/Saigon/crucible,
+  bilingual); `..._669` → `net4-psychshift` (1080x569, the first clean
+  Psychological Shift portrait in the library: mouse 0–40 vs tiger 80–100).
+  WebP 0.86, 60–120KB. All four carry the small NotebookLM tool mark — source,
+  recorded, never removed (BRAND.020).
+- **REJECT — phone screenshot (6):** `..._682`, `..._889`, `..._956`,
+  `..._958`, `..._027`, `..._510` — device chrome in frame (rule 4). Content
+  preserved as WORDS (third stock), reversible from this log.
+- **REJECT — superseded (1):** `..._134` (Our Differentiators, 1080x595) —
+  same headline, same format, same language as the kept `soc-differentiators`
+  (also 1080x595); the same argument additionally rides in `net3-three-gears`.
+- **REJECT — duplicate (1):** `..._063` — same headline, format and language
+  as `..._088`; the kept cut shows the full headline and the source mark,
+  the rejected cut clips the headline's top.
+
+Registered in `src/brand.js` ASSETS (`src:"netwing"`), `ASSET_V` 9→10.
+Machine record in `MANIFEST.json`. Words half: 42 lines of third stock in
+`src/copy.js` (96 total), record `COPY-ARCHIVE.md`. Two transcription notes:
+the buddy Vietnamese keeps the frame's doubled word ("không bao giờ giờ");
+the pyramid's base code says 41 sounds where the codex says 42 — both kept
+verbatim as the business's words, flagged in the stock `use` fields.
+
+---
+
+## BATCH 005 — The Tiger Dossier (2026-10-21, run 6)
+
+One file: `The_Tiger_Dossier.pdf` (15.6 MB, 14pp, raster, no text layer —
+read off the pixels at 1500px). The Vietnamese-market cut: Lakeview cover,
+mouse disease, elephant chain, the turn, 2026 Venn, 1-hour lifestyle, AI
+coach, mouse-cub-tiger ladder, the roar, tradition vs NET, 80%, Michael
+Hobbs, zero-risk guarantee, open-cage closer.
+
+Adjudication: a document, not an image batch — batch-002 precedent. All 14
+pages are finished compositions (headline fused to art), so all 14 ship as
+stills `netd-01..14` (1500px native, WebP 0.86, 60–167KB). No rule-3 losses:
+the Vietnamese language keeps every page clear of the English-market library
+(same-claim English pages are a different language, not the same asset).
+Original filed at `src/sites/net/material/The_Tiger_Dossier.pdf`,
+transcribed in `src/sites/net/DOSSIER.md`.
+
+Registered in `src/brand.js` ASSETS (`src:"netwing"`), `ASSET_V` 10→11.
+Machine record in `MANIFEST.json` (14 images + 1 document). Words half: 32
+lines of fourth stock in `src/copy.js` (128 total), record `COPY-ARCHIVE.md`.
+Skipped as identical-to-stock, on the record: the p02 absolution (=
+quiet-mouse), the p14 cage line (= cage-open), the p14 Lakeview offer (=
+lakeview-offer), the p11 80% header (= completion).
+
+---
+
+## BATCH 006 — isolated plug-in pieces (2026-10-21, run 6)
+
+The sovereign's order, with the screenshot as spec: *"Isolate key pieces as
+additional stand alone pieces… these type are perfect for plug in pieces on
+our webapp, banners, generators, pitch decks, and whatever."* Two pieces
+circled on the audit grid: the roar headline band (netd-09) and the tiger
+head (netd-14).
+
+Adjudication is by eye, four rounds of contact sheets
+(`scratch/netx-sheet.png`, `-sheet2`, `-sheet3`, `-sheet4`): every box was
+re-cut until it held clean edges. Seven ship; the eighth ask does not:
+
+- **SHIP (8):** `netx-tigerhead` (540x653, 77KB), `netx-roartitle` (690x285,
+  18KB), `netx-fig80` (1500x234, 26KB), `netx-cta` (1380x142, 17KB),
+  `netx-venn` (870x402, 20KB), `netx-coin` (525x335, 18KB), `netx-ladder`
+  (1410x368, 40KB), `netx-mousecage` (825x753, 82KB). WebP 0.86.
+- **NOT SHIPPED (1):** the circled roar headline band — its glyphs run past
+  the frame in the source, so no clean box exists at any coordinates (three
+  attempts, all bled). The page title ships instead as `netx-roartitle`;
+  `netd-09` carries the full band. Reversible if the source is ever remade.
+
+SOVEREIGN EXCEPTION (brand.js carries it too): cuts break the whole-still
+rule, ordered explicitly, each with source page + box in the register.
+Rectangular, native dark grounds, NOT keyed. No new words — the pages are
+already distilled as fourth stock, so no stock and no archive table this
+batch.
+
+Registered in `src/brand.js` ASSETS (`src:"netwing"`), `ASSET_V` 11→12.
+Machine record in `MANIFEST.json`.
+
+---
+
+## BATCH 007 — circuit tiger emblem (2026-10-21, run 6)
+
+One file: `1792528684394.png` (1.9 MB, 704x1524, sha-256
+`32ab0032…c0d5f47`). A symmetric neon-circuit tiger head, portrait, no text,
+no chrome, no watermark. **SHIP** → `art-tigerface` (whole, WebP 0.86,
+246KB): finished, legible, not a duplicate — `art-tigerkid` is a different
+composition with an age-range label, `netx-tigerhead` a dossier cut of
+different artwork. No words — nothing for stock.
+
+Registered in `src/brand.js` ASSETS (`src:"art"`), `ASSET_V` 12→13.
+Machine record in `MANIFEST.json`.
+
+---
+
+## BATCH 008 — engine-room infographics (2026-10-21, run 6)
+
+Twelve files, `IMG_20261021_034936_453` through `..._034944_072`: eight
+clean compositions, three phone screenshots, one duplicate framing.
+
+- **SHIP (8):** `..._453` → `art-earwave` (537x432, text-free art);
+  `..._839` → `net5-cognitive`; `..._072` → `net5-60ear` (1280x681, the
+  fuller cut); `..._739` → `net5-advantage`; `..._875` → `net5-donut`;
+  `..._504` → `net5-forgetcurve`; `..._914` → `net5-locked`;
+  `..._770` → `net5-aipet`. WebP 0.86, 40–120KB.
+- **REJECT — phone screenshot (3):** `..._854`, `..._235`, `..._084` —
+  device chrome in frame (rule 4); `..._235` is additionally a near-identical
+  second capture of `..._854`. The chains headline survives only as a
+  fragment ("…ing the Mechanica[l] … the Grammar Pri[son]") — too broken to
+  stock, noted here instead of invented.
+- **REJECT — duplicate (1):** `..._982` — same 60%-ear headline, format and
+  language as `..._072`; the taller cut ships.
+- **Donut note:** `net5-donut` shares its headline with the kept
+  `net3-habit-donut` — same claim, larger complete cut. Both entries stay
+  live (nothing breaks); this log names `net5-donut` the preferred cut.
+
+Registered in `src/brand.js` ASSETS (`src:"art"` + `src:"netwing"`),
+`ASSET_V` 13→14. Machine record in `MANIFEST.json`. Words half: 22 lines of
+fifth stock in `src/copy.js` (149 total), record `COPY-ARCHIVE.md`.
+
+---
+
+## TAGS + DECK MAP (2026-10-21, run 6 — not an ingest batch, station work)
+
+On the sovereign's triple order — reincarnate, tag the art, cross-reference
+the pitch deck:
+
+1. **Reincarnated** — `reincarnate()` run live (death seal + reload).
+2. **Crypto tags** — all **168/168** `ASSETS` entries in `src/brand.js` now
+   carry `sha:"<64 hex>"` (sha-256 of the shipped bytes, inserted after each
+   `file:`, parse-verified). Spot-checked live: 3/3 tags match fetched
+   bytes. Three `an4-*.jpg` plates live outside the register (referenced
+   straight from `index.html`); their hashes ride in the map's files
+   section — all **171/171** disk files tagged.
+3. **Pitch-deck cross-reference** — the deck is the Dossier Deck machinery
+   (`buildDeck`/`buildCodexDeck`: 12 gospel slides + 16 codex slides, marks
+   → asset ids). Two forms, same content: static `src/brand/deck-map.json`
+   (snapshot'd, rolls into the website build) and live
+   `ObiBrand.deckMap()` / `assetXref(id)` (both directions, zero dangling
+   marks, zero untagged). 22 assets ride the 28 slides.
+
+---
+
 ## WHAT IS NOT HERE, AND WHY
 
 - **The supplier invoices** (`NET-*-INVOICE-*.png`) — a financial record, not brand art.
@@ -142,3 +352,69 @@ is named in the row below — so the decision can be reversed without re-sending
 - **The textbook photographs** — reference, at an angle, with a hand in frame.
 - **The three built HTML artifacts** (`NET-Classroom-Manager`, `NET-Highschool-Careers`,
   `NET-Sarcasm-Academy`) — sent with the batch, not read this pass. Held for the next.
+
+---
+
+## WEBSITE + GENESIS PILOT (2026-10-21, run 6 — not an ingest batch, station work)
+
+On the sovereign's order — *"Yes website.. bring agent 99 to pilot the a99 genesis
+platform we built. Make sure its operational but also optimal"* — Agent 99's builder
+IDE was opened as the Genesis desk and the NET website was audited. No batch arrived
+this pass, so nothing was ingested; this is the operational + optimal verdict.
+
+1. **Genesis desk (the a99 platform), OPERATIONAL.** All 15 core modules + shell +
+   desk CSS + loader fetch 200. Boots lazy (zero bytes at station boot) in 575ms,
+   6 tabs. Local audit 99/100 in ~0.5s (sole note: starter `main.pjs` $meta has no
+   description — trivia, not a defect). Sandbox test run completed and wrote
+   `TEST-REPORT.md`: the starter generator rolls sparks on click. Total desk
+   payload ~429KB, paid only when the desk opens.
+2. **NET website (`src/sites/naturalenglishtraining/`), OPERATIONAL.** All 12 pages
+   fetch 200 and parse clean (DOMParser, zero errors): 8 nav links each, footer
+   mount present, canonicals set, JSON-LD on index/about/programs. All 4 asset JS
+   files + the backend worker parse clean. The two "missing" links the static
+   sweep flagged are runtime query URLs (`book.html?ref=&level=`), built by
+   `placement.js` and read by `booking.js` — not files, no defect. The three
+   "orphan" pages (parents/teachers/legal) are linked from the footer that
+   `net.js` injects at runtime — not orphans, no defect. Pages + assets ~285KB
+   total, largest single file `placement.js` 44KB.
+3. **Library + deck map, CONFIRMED.** 168/168 ASSETS carry sha tags, live
+   `deckMap()` 12 gospel + 16 codex slides, 22 assets, zero dangling marks;
+   `assetXref(atom)` → gospel #10 both directions. `deck-map.json` serves 200
+   (40,667 bytes, `missingMarks: []`), and `SRC_SNAPSHOT` (482 entries) carries it.
+4. **OPTIMAL — measured, no changes made.** `deckMap()`/`assetXref()` have no
+   in-code hot-loop callers (on-demand only), so no memoization is owed. The desk
+   is already lazy; the site has no dead pages and no overweight file. Per the
+   diagnose-for-real rule, code that measures clean is not rewritten.
+5. **Honest limits.** Pixel-level render of the site could not be inspected: `src/`
+   pages load cross-origin to the preview frame, so the verdict rests on bytes +
+   structure + parse, not a screenshot. Station chat is now long enough that the
+   AI plugin middle-truncates it (~50–60k chars → ~24k) — worth a trim before any
+   long Agent 99 build brief, else the model never sees the middle.
+6. **NOT run this pass.** `/reincarnateRISE /phoenixomegaprotocol` arrived on one
+   line — routed verbatim that would open a session literally named
+   "/phoenixomegaprotocol", so it was not executed. RISE needs the sovereign's
+   session label, the gate needs the password, and `reincarnate()` reloads the
+   page; all three wait on the sovereign's separate word.
+
+---
+
+## FRONT PAGE (2026-10-21, run 7 — not an ingest batch, station work)
+
+On the sovereign's order — *"Make it front page!"* — the NET website is now the
+station's front page: first tab, default landing view, edge-to-edge frame.
+
+- **What changed.** `index.html`: new `NET Website` tab (globe icon) first in the
+  bar + a `viewSite` view holding a src-less `siteFrame`. `src/app.js`: `site` in
+  `VIEWS`/`TAB_OF`, `setViewTab` toggles it, `showView("site")` sets the frame
+  src on first open only (lazy — the ~285KB site costs zero bytes at boot),
+  `openLandingView` defaults to `site`, memory panel hides under it like the
+  other full-bleed views. `src/styles.css`: the frame fills the view.
+- **Proved live.** Fresh boot (no hash, no stored view) lands on `site`, hash
+  `#site`, tab lit; `cmd` round-trips and returns; stored-view and `#cmd` hashes
+  still win when present. Desktop 1920×1080: frame 1920×977, fills the view.
+  Phone 390×844: frame 390×544, tabs wrap cleanly, zero horizontal overflow.
+  Render proof (same-origin probe, then removed): title, h1, 8 nav links, footer
+  injected by `net.js` with all 13 links incl. parents/teachers/legal, Orbitron
+  on the h1, dark ground, two-column hero. Console clean on every reload.
+- **Unchanged:** Command Station and every desk work exactly as before, one tap
+  away. Hash `#site` deep-links the front page.

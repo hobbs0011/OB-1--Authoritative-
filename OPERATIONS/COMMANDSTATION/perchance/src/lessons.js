@@ -40,18 +40,37 @@
      STATE classes (empty/selected/correct/wrong on the feedback + choice pills)
      and the writing-task class are part of the contract too. */
   const CLASSES = ["dialogue-block","speaker","chatty-clue","chatty-hint","vocab-list","vocab-item",
-                   "chatty-choices","chatty-feedback","summary-card","write-task","reading","game",
+                   "chatty-choices","chatty-feedback","summary-card","write-task","reading","game","picker","timer",
                    "empty","selected","correct","wrong"];
+  /* THE ICONOGRAPHY ARSENAL (LSN-39) — one registry, every icon intentional.
+     Authors tag any content element with data-icon="key" and the runtime prepends
+     the emoji; the validator warns on unknown keys and on fallback graphics. */
+  const ICONS = {coin:"🪙",die:"🎲",marble:"🔮",card:"🃏",spinner:"🎡",heads:"🙂",tails:"🙃",ticket:"🎫",
+    rain:"🌧",sun:"☀️",cloud:"☁️",fruit:"🍎",apple:"🍎",banana:"🍌",animal:"🐾",shape:"🔷",color:"🎨",
+    red:"🔴",blue:"🔵",green:"🟢",yellow:"🟡",month:"📅",day:"📆",student:"🧑‍🎓",teacher:"🧑‍🏫",school:"🏫",
+    book:"📚",word:"🔤",speak:"🎤",listen:"👂",write:"✍️",read:"📖",play:"🎮",team:"👥",win:"🏆",key:"🔑",
+    star:"⭐",check:"✅",cross:"❌",question:"❓",idea:"💡",time:"⏱️",number:"🔢",letter:"🔡",traffic:"🚦",
+    weather:"⛅",drink:"🥤",club:"🎭",music:"🎵",art:"🎨",math:"🧮",science:"🔬",probability:"🎲",
+    outcome:"🪙",sample:"🗺️",event:"🎯",certain:"🔒",possible:"🌱",impossible:"🚫",chance:"🍀",
+    result:"📝",happen:"⚡",warm:"🔥",spin:"🎡",chat:"💬",scene:"🎬",learn:"📚",test:"🎯",mastery:"🔑",
+    game:"🎮",duel:"⚔️",drill:"🥁",timer:"⏱️",print:"🖨️",sound:"🔊"};
   /* THE GAMES (the lesson's own runtime plays them — no scripts in the content).
-     One element, three game types, driven entirely by data attributes:
+     One element, nine core game types + five arsenal games, driven entirely by data attributes:
        <div class="game" data-game="scramble" data-items="cooker=the machine you cook on;pot=…"></div>
        <div class="game" data-game="match"    data-items="shelf=a flat board on the wall;…"></div>
        <div class="game" data-game="sort"     data-groups="Identity: clothes, food, language | Home: shelf, pot"></div>
      Scramble: the learner clicks letter tiles in order to rebuild each word.
      Match:    click a word, then its meaning — a wrong pair shakes and releases.
      Sort:     click a chip, then the group it belongs to.
-     Every correct answer pays the lesson's own coin reward; nothing is scored twice. */
-  const GAMES = ["scramble","match","sort"];
+     Every correct answer pays the lesson's own coin reward; nothing is scored twice.
+     Order: click the steps back into their true sequence (data-items in true order, tiles shuffled).
+     Odd: spot the one that does not belong (data-items="a;b;c", data-odd="c").
+     Flip: flashcards, click to flip word to meaning (data-items pairs).
+     Battle: two teams wager coins on every answer (data-items pairs, data-teams="A|B"). */
+  /* STORM (tornado port, mechanics adopted from p-serrano/tornado — that repo carries no license file, so mechanics only, code is original): answer a question, then brave the hidden-tile risk board. Grid 4/5/6 via data-grid; specials density 4:{storm 1, swap 2, half 1, double 1} 5:{2,3,2,2} 6:{3,4,3,3}; score tiles pay team points; STORM wipes the picking team, swap trades with the next team, half ceils, double doubles; wrong answers rebound once to the next team. Phases run question -> board-pick -> reveal -> apply -> next team.
+     BOARD (jeopardy port, mechanics adopted from domlet/jeopardy-csv — same no-license situation, mechanics only): data-board with Cat: clue = answer pairs (values auto 100/200/...); current team picks a cell, says the answer out loud, teacher taps Correct (banks value) or Wrong (one rebound, then the cell burns and the answer is shown). */
+  const GAMES = ["scramble","match","sort","order","odd","flip","battle","storm","board","tiles","tornado","memory","dice","reveal","voice"];
+  /* + games-arsenal (src/games-arsenal.js, ported from the Anakin station 2026-10-22): tornado|memory|dice|reveal|voice render THERE (core validator passes them, core runtime leaves them empty); board/order elements carrying data-cards (board) or data-order-without-data-items (order) also yield to it — see initGames. KSU dialects: core spec.outcomes{know,do,understand} vs arsenal method.outcomes{knowledge,skills,understanding} — separate fields, no war. */
   /* the spine (LSN-4) — the four anchors never move */
   const SPINE = [
     { at:0,     graphic:"🏠", label:"Warm-Up", what:"welcome + what you will leave with, as bullets", fixed:true },
@@ -126,6 +145,15 @@
       used.forEach(cl => { if(CLASSES.indexOf(cl) === -1) errors.push(n + ": unknown class \"" + cl + "\" (the vocabulary is fixed)"); });
       const styleAttr = (c.match(/style="([^"]*)"/g) || []);
       styleAttr.forEach(s => { const decl = s.slice(7, -1); if(!/^(margin[^;]*;?\s*)+$/.test(decl)) errors.push(n + ": inline style is only allowed for margin one-offs"); });
+      /* the arsenal is fixed: unknown game kinds, icon keys and coin overrides fail or warn here, never in the classroom */
+      const gkinds = (c.match(/data-game="([^"]*)"/g) || []).map(function(x){ return x.slice(11, -1); });
+      gkinds.forEach(function(k){ if(GAMES.indexOf(k) === -1) errors.push(n + ": unknown game \"" + k + "\" (the arsenal: " + GAMES.join("|") + ")"); });
+      const ikeys = (c.match(/data-icon="([^"]*)"/g) || []).map(function(x){ return x.slice(11, -1); });
+      ikeys.forEach(function(k){ if(!ICONS[k]) warnings.push(n + ": unknown icon \"" + k + "\" (no glyph ships, nothing breaks)"); });
+      const dcs = (c.match(/data-coins="([^"]*)"/g) || []).map(function(x){ return x.slice(12, -1); });
+      dcs.forEach(function(k){ if(!(Number(k) > 0)) warnings.push(n + ": data-coins should be a positive number (found \"" + k + "\")"); });
+      const timers = (c.match(/class=(["'])timer\1/g) || []).length;
+      if(timers && c.indexOf("data-seconds") === -1) warnings.push(n + ": .timer without data-seconds -- defaults to 60");
     });
     const learn = (learnIdx >= 0 ? rooms[learnIdx] : {}) || {}; const learnC = String(learn.content || "");
     const vocab = (learnC.match(/class="vocab-item"/g) || []).length;
@@ -153,6 +181,9 @@
     if(before.indexOf("chatty-clue") === -1) errors.push("no .chatty-clue before the test — Chatty must do the reality check");
     if(before.indexOf("chatty-hint") === -1) errors.push("no .chatty-hint before the test — Chatty must give the transferable rule");
 
+    /* a duel without a game is a poster; every room earns its own face */
+    rooms.forEach(function(r, i){ var lb = labelOf(r); if(/duel|drill|battle|arena/.test(lb) && String((r && r.content) || "").indexOf('class="game"') === -1) errors.push("room " + (i + 1) + ": a " + lb + " room must carry at least one game"); });
+    (function(){ var seen = {}; rooms.forEach(function(r, i){ var g = String((r && r.graphic) || ""); if(!g) return; if(seen[g]) warnings.push("room " + (i + 1) + " repeats the graphic of room " + seen[g] + " (every room earns its own face)"); else seen[g] = i + 1; }); })();
     /* warnings — allowed, but the sovereign should see them */
     const sceneRooms = rooms.slice(1, 3).filter(r => /dialogue-block/.test(String((r && r.content) || ""))).length;
     if(sceneRooms < 1) warnings.push("room 2 has no .dialogue-block — the middle rooms are the scene rooms");
@@ -160,6 +191,8 @@
     const coins = spec.coins || {};
     if(coins.correct != null && !(Number(coins.correct) > 0)) warnings.push("coins.correct should be > 0");
     if(coins.wrong != null && Number(coins.wrong) > Number(coins.correct || 0)) warnings.push("losing more than you gain punishes the learner");
+    /* LESSON.016 / LSN-37 — a lesson is chosen by evidence, and says so on its face */
+    if(!spec.evidence) warnings.push("no evidence named — say which writeup/review chose this lesson (LESSON.016)");
 
     /* LSN-23 / LESSON.001 & .011 — when the spec carries a `method` block it is
        checked; a full session's lesson set carries it (10-5-5-3, three typed games,
@@ -181,6 +214,19 @@
       kinds.forEach((k, i) => { if(["competition","collaboration","creation"].indexOf(k) === -1) warnings.push("method.games[" + i + "] type should be competition | collaboration | creation"); });
       if(kinds.length >= 3 && kinds.every(k => k === kinds[0])) warnings.push("three games of one type — the mix is the method (🔴 adrenaline / 🟢 social proof / 🟣 ownership)");
       if(m.voice != null && !Array.isArray(m.voice)) warnings.push("method.voice should be a list of the sovereign's lines the lesson used");
+    }
+
+        /* KSU outcomes + differentiation (LPG harvest, 2026-10-21, ported from the
+       edtech station — checked only when present; absent is legal (specs built
+       before them still ship). Present-but-malformed is an error: a half-triple
+       trains nothing and a single rope is not differentiation. */
+    if(spec.outcomes != null){
+      const o = spec.outcomes;
+      if(!o || typeof o !== "object" || !o.know || !o.do || !o.understand) errors.push("outcomes must be the full KSU triple (know + do + understand)");
+    }
+    if(spec.differentiation != null){
+      const d = spec.differentiation;
+      if(!d || typeof d !== "object" || !d.support || !d.extend) errors.push("differentiation must carry both ropes (support + extend)");
     }
 
     return { ok: errors.length === 0, errors: errors, warnings: warnings, rooms: rooms.length, vocab: vocab, blocks: blocks, games: games };
@@ -274,6 +320,7 @@
 ".g-score{font-size:.9rem;opacity:.85}",
 ".g-row{margin-bottom:1.1rem}",
 ".g-hint{font-size:.95rem;opacity:.9;margin-bottom:.5rem}",
+".g-life{font-size:.85rem;opacity:.9;margin:.15rem 0 .6rem;color:var(--gold)}",
 ".g-tiles{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.5rem}",
 ".g-tile,.g-slot{font-family:var(--font-ui);font-weight:700;font-size:1.05rem;border-radius:.6rem;padding:.5rem .7rem;min-width:2.3rem;text-align:center}",
 ".g-tile{background:rgba(38,38,60,.9);border:2px solid var(--neon-purple);color:var(--text-primary);cursor:pointer;transition:all .2s}",
@@ -340,8 +387,98 @@
 ".coins-display .hud-room{font-family:var(--hud-mono);font-size:.7rem;color:#cbb6ff;opacity:.9}",
 "@media (max-width:720px){.coins-display .hud-lab,.coins-display .hud-sep{display:none}.hud-hero .hud-sigil{width:48px;height:48px}}",
 "@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}",
-"@media (max-width:720px){.hero-features{grid-template-columns:1fr}.room{padding:2rem 1.5rem}.room-header{gap:1rem}.scene-graphic{width:70px;height:70px;font-size:2.5rem}.coins-display{top:10px;right:10px;font-size:1rem;padding:.6rem 1.2rem}.rooms-container{max-width:99vw;border-radius:0;box-shadow:none}}"
-].join("\n");
+"/* ---- VIETNAMESE GLOSS + TOGGLE (2026-10-20, LSN-33): any English line may carry a subordinate Vietnamese gloss in <span lang=\"vi\"> (no class, no style — the validator only knows classes). body.vi-hide hides every gloss; #viToggle flips it. */",
+"[lang=\"vi\"]{display:block;font-size:.9em;line-height:1.6;opacity:.88;color:#cbb6ff;margin-top:.25rem;font-weight:400}",
+"button [lang=\"vi\"]{font-size:.85em}",
+".room-title [lang=\"vi\"]{font-size:.65rem;font-weight:600;letter-spacing:.02em}",
+"#landing>p[lang=\"vi\"]{font-size:clamp(1rem,2.4vw,1.4rem);text-align:center;margin:-1.5rem 0 2.5rem;max-width:700px;opacity:.85;line-height:1.6;color:#cbb6ff}",
+".feature-card [lang=\"vi\"]{display:block;font-size:.92rem;opacity:.85;margin-top:.5rem;line-height:1.5;color:#cbb6ff}",
+"body.vi-hide [lang=\"vi\"]{display:none!important}",
+"#viToggle{position:fixed;top:20px;left:20px;z-index:1001;background:linear-gradient(180deg,rgba(59,29,92,.9),rgba(15,15,26,.9));border:1px solid rgba(232,197,101,.45);color:var(--gold);font-family:var(--font-ui);font-weight:700;font-size:.9rem;border-radius:999px;padding:.55rem 1.1rem;cursor:pointer;box-shadow:0 0 20px rgba(168,85,247,.35)}",
+"#viToggle.off{opacity:.6}",
+"#viToggle:focus-visible{outline:2px solid var(--gold);outline-offset:2px}",
+"@media (max-width:720px){#viToggle{top:10px;left:10px;font-size:.78rem;padding:.45rem .9rem}}",
+"/* ---- STUDENT PICKER (2026-10-20): a teacher tool, not a scored game. <div class=\"picker\"> is built by the runtime: class-size input (2–99) + SPIN landing on 1..N. */",
+".picker{background:rgba(26,26,38,.75);border:1px solid rgba(168,85,247,.35);border-radius:1.2rem;padding:1.6rem 1.4rem;margin-bottom:1.6rem;box-shadow:0 8px 30px rgba(0,0,0,.35);text-align:center;position:relative}",
+".picker::before{content:'';position:absolute;top:-1px;left:-1px;width:15px;height:15px;border-top:2px solid rgba(232,197,101,.7);border-left:2px solid rgba(232,197,101,.7);pointer-events:none;border-top-left-radius:1.2rem}",
+".picker::after{content:'';position:absolute;bottom:-1px;right:-1px;width:15px;height:15px;border-bottom:2px solid rgba(232,197,101,.7);border-right:2px solid rgba(232,197,101,.7);pointer-events:none;border-bottom-right-radius:1.2rem}",
+".p-wrap{display:flex;flex-direction:column;align-items:center;gap:1rem}",
+".p-lab{font-weight:700;color:var(--gold);display:flex;flex-direction:column;align-items:center;gap:.5rem;font-size:1.05rem}",
+".p-input{font-family:var(--font-ui);font-size:1.4rem;font-weight:700;text-align:center;color:var(--text-primary);background:rgba(15,15,26,.8);border:2px solid var(--neon-purple);border-radius:.8rem;padding:.5rem 1rem;width:7rem}",
+".p-input:focus{outline:2px solid var(--gold);border-color:var(--gold)}",
+".p-display{font-size:4.5rem;font-weight:800;color:var(--gold);text-shadow:0 0 30px rgba(245,158,11,.6);min-height:5.5rem;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}",
+".p-btn{background:linear-gradient(135deg,var(--neon-purple),var(--gold));color:var(--deep-dark);font-weight:800;font-size:1.3rem;border:none;border-radius:999px;padding:.9rem 3rem;cursor:pointer;font-family:var(--font-ui);box-shadow:0 0 30px rgba(168,85,247,.5);transition:all .3s;min-height:44px}",
+".p-btn:hover:not([disabled]){transform:scale(1.06)}",
+".p-btn:disabled{opacity:.6;cursor:wait}",
+".p-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}",
+"/* ---- SPINNER TAB (2026-10-20): fixed tab + dialog overlay so the picker opens from any room. */",
+"#spinTab{position:fixed;left:20px;top:76px;z-index:1001;background:linear-gradient(180deg,rgba(59,29,92,.9),rgba(15,15,26,.9));border:1px solid rgba(232,197,101,.45);color:var(--gold);font-family:var(--font-ui);font-weight:700;font-size:.95rem;border-radius:999px;padding:.6rem 1.2rem;cursor:pointer;box-shadow:0 0 20px rgba(168,85,247,.35)}",
+"#spinTab:hover{transform:scale(1.05)}",
+"#spinTab:focus-visible{outline:2px solid var(--gold);outline-offset:2px}",
+"#spinOverlay{position:fixed;inset:0;z-index:2000;background:rgba(10,10,20,.72);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1.5rem}",
+"#spinOverlay[hidden]{display:none!important}",
+".spin-panel{width:100%;max-width:480px;background:var(--glass-bg);backdrop-filter:blur(12px);border:1px solid rgba(232,197,101,.3);border-radius:1.2rem;padding:1.6rem 1.4rem;position:relative;box-shadow:0 10px 40px rgba(0,0,0,.5),0 0 80px rgba(168,85,247,.25)}",
+".spin-panel .picker{margin-bottom:0}",
+".spin-close{position:absolute;top:.6rem;right:.6rem;background:transparent;border:1px solid var(--glass-border);color:var(--text-primary);border-radius:999px;width:2.6rem;height:2.6rem;font-size:1.1rem;cursor:pointer;font-family:var(--font-ui)}",
+".spin-close:hover{border-color:var(--gold);color:var(--gold)}",
+".spin-close:focus-visible{outline:2px solid var(--gold);outline-offset:2px}",
+"@media (max-width:720px){#spinTab{left:10px;top:62px;font-size:.8rem;padding:.5rem 1rem}}",
+"/* ---- BIG WHEEL (2026-10-20, loud + dramatic): canvas wheel, result flash, confetti. */",
+".wheel{width:min(300px,74vw);height:auto;filter:drop-shadow(0 0 25px rgba(168,85,247,.5))}",
+".p-result{font-size:3.4rem;font-weight:800;color:var(--gold);text-shadow:0 0 30px rgba(245,158,11,.6);min-height:4rem;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}",
+".p-result.win{animation:winPop .7s cubic-bezier(.68,-.55,.265,1.55)}",
+"@keyframes winPop{0%{transform:scale(.4)}55%{transform:scale(1.3)}100%{transform:scale(1)}}",
+".p-called{font-size:1.15rem;font-weight:700;min-height:2rem;line-height:1.5}",
+".cfetti{position:absolute;top:8px;width:8px;height:14px;z-index:6;pointer-events:none;animation:confetti-fall 1.6s ease-in forwards}",
+"@keyframes confetti-fall{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(240px) rotate(540deg);opacity:0}}",
+"@media (max-width:720px){.hero-features{grid-template-columns:1fr}.room{padding:2rem 1.5rem}.room-header{gap:1rem}.scene-graphic{width:70px;height:70px;font-size:2.5rem}.coins-display{top:10px;right:10px;font-size:1rem;padding:.6rem 1.2rem}.rooms-container{max-width:99vw;border-radius:0;box-shadow:none}}",
+"/* ---- STAGE MODE (TV, LSN-34, src/LESSON-DISPLAY.md): on wide screens the lesson fills the room, not a phone column. */",
+"@media (min-width:721px) and (max-width:1099px){.rooms-container{max-width:800px}}",
+"@media (min-width:1100px){",
+".classroom{padding:1.2rem}",
+".rooms-container{max-width:min(1500px,97vw);min-height:calc(100vh - 2.4rem);border-radius:.8rem}",
+".room{padding:3rem 4rem;font-size:1.3rem}",
+".room-title{font-size:2.6rem}",
+".room-label{font-size:1rem}",
+".scene-graphic{width:120px;height:120px;font-size:4.5rem}",
+".dialogue-block,.chatty-clue,.chatty-hint{font-size:1.3rem;line-height:1.8}",
+".vocab-list{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}",
+".vocab-item{font-size:1.3rem}",
+".chatty-choices>div:first-child{font-size:1.4rem}",
+".chatty-choices button{font-size:1.3rem;padding:1.2rem 1.8rem}",
+".chatty-feedback{font-size:1.4rem}",
+".summary-card{font-size:1.3rem}",
+".summary-card strong{font-size:1.8rem}",
+".nav-btn{font-size:1.35rem;padding:1.2rem 2rem}",
+".g-tile,.g-slot{font-size:1.3rem}",
+".g-hint{font-size:1.15rem}",
+".g-item{font-size:1.2rem}",
+".g-bucket{font-size:1.2rem;min-height:6rem}",
+".wheel{width:min(420px,44vw)}",
+".p-result{font-size:4.5rem}",
+".p-called{font-size:1.5rem}",
+".write-task{font-size:1.25rem;min-height:120px}",
+".reading{font-size:1.3rem}",
+".spin-panel{max-width:640px}",
+"/* ---- ARSENAL (Anakin, 10 upgrades): icons, voice, timer, arena, duel, erupt, finale, print. */",
+".game+.game{margin-top:1.2rem;border-top:1px dashed var(--glass-border);padding-top:1.2rem}",
+".g-flip{display:inline-block;margin:.3rem;padding:.7rem 1rem;border-radius:10px;border:1px solid var(--gold);background:rgba(245,158,11,.12);color:var(--text-primary);font-size:1.05rem;cursor:pointer;min-width:7rem}",
+".g-flip.back{background:rgba(168,85,247,.2);border-color:var(--neon-purple)}",
+".g-battle-bar{display:flex;gap:1rem;font-size:1.2rem;font-weight:700;margin-bottom:.6rem;color:var(--gold)}",
+".with-icon{margin-right:.3em}",
+".can-say{cursor:pointer;border-bottom:2px dotted var(--gold)}",
+".t-big{font-size:3rem;font-weight:800;color:var(--gold);text-align:center}",
+"  .storm-board,.board-grid{display:grid;gap:.5rem;margin:.75rem 0}",
+"  .storm-board .g-tile,.board-grid .g-tile{min-height:3rem;font-size:1.05rem}",
+".erupt{position:fixed;z-index:9999;font-size:1.4rem;pointer-events:none;animation:eruptUp 1.1s ease-out forwards}",
+"@keyframes eruptUp{0%{transform:translate(-50%,-50%) scale(.6);opacity:1}100%{transform:translate(-50%,-160px) scale(1.2);opacity:0}}",
+".tierflash{animation:tierFlash .8s ease}",
+"@keyframes tierFlash{0%{box-shadow:0 0 0 0 rgba(245,158,11,.9)}100%{box-shadow:0 0 0 18px rgba(245,158,11,0)}}",
+".room.finale{border:2px solid var(--gold);box-shadow:0 0 60px rgba(245,158,11,.35);animation:finaleBreathe 4s ease-in-out infinite}",
+"@keyframes finaleBreathe{0%,100%{box-shadow:0 0 30px rgba(245,158,11,.25)}50%{box-shadow:0 0 70px rgba(245,158,11,.5)}}",
+"@media (prefers-reduced-motion: reduce){.erupt,.tierflash,.room.finale{animation:none}}",
+"@media print{.landing,#coinsDisplay,#viToggle,#spinTab,#spinOverlay,.nav-btns,.p-btn,.t-go{display:none!important}.classroom{display:block}.room{display:block}}",
+"}"].join("\n");
 
   /* the lesson's own runtime — plain strings, no backticks, so the built file
      stays a self-contained document (LSN-1). */
@@ -353,6 +490,7 @@
 "var START=" + JSON.stringify(Number(c.start) || 0) + ",PER_CORRECT=" + JSON.stringify(Number(c.correct == null ? 10 : c.correct)) + ",PER_WRONG=" + JSON.stringify(Number(c.wrong == null ? 0 : c.wrong)) + ";",
 "var rooms=window.__LESSON_ROOMS__||[];",
 "var currentRoom=0,coins=START;",
+"var writeCache={};",
 "var landing=document.getElementById('landing'),classroom=document.getElementById('classroom'),startBtn=document.getElementById('startBtn'),coinsDisplay=document.getElementById('coinsDisplay'),coinsCount=document.getElementById('coinsCount'),progressFill=document.getElementById('progressFill'),host=document.getElementById('roomsContainer');",
 "var TIERS=[[5000,'LEGEND'],[500,'TIGER'],[200,'CUB'],[0,'MOUSE']];",
 "function tierOf(n){for(var i=0;i<TIERS.length;i++){if(n>=TIERS[i][0])return TIERS[i][1];}return 'MOUSE';}",
@@ -367,12 +505,17 @@
 "  h+=room.content;",
 "  h+='<div class=\"nav-btns\"><button class=\"nav-btn\" data-action=\"prev\"'+(isFirst?' disabled':'')+'><span>\\u2b05\\ufe0f Back</span></button>';",
 "  h+='<button class=\"nav-btn\" data-action=\"'+(isLast?'restart':'next')+'\"><span>'+(isLast?'\\ud83d\\udd04 Restart':'Next \\u27a1\\ufe0f')+'</span></button></div></div>';",
-"  host.innerHTML=h;",
-"  initGames(host);",
+"  host.innerHTML=h;", "  if(isLast){var rm=host.querySelector('.room');if(rm)rm.classList.add('finale');}",
+"  if(isLast){mountReport(host);}",
+"  initGames(host);", "  initIcons(host);", "  initSay(host);", "  initTimers(host);",
+"  host.querySelectorAll('textarea').forEach(function(ta,ix){var k=currentRoom+'_'+ix;if(writeCache[k]!=null)ta.value=writeCache[k];});",
 "  progressFill.style.width=(((currentRoom+1)/rooms.length)*100)+'%';",
 "  var rc=document.getElementById('roomCount');if(rc)rc.textContent=(currentRoom+1)+'/'+rooms.length;",
 "}",
 "startBtn.addEventListener('click',function(){landing.style.display='none';classroom.classList.add('active');coinsDisplay.classList.add('active');render();renderCoins();});",
+"host.addEventListener('input',function(e){",
+"  var t=e.target;if(t&&t.tagName==='TEXTAREA'){var tas=host.querySelectorAll('textarea');for(var i=0;i<tas.length;i++){if(tas[i]===t){writeCache[currentRoom+'_'+i]=t.value;break;}}}",
+"});",
 "host.addEventListener('click',function(e){",
 "  var t=e.target.closest?e.target.closest('button'):null;if(!t)return;",
 "  var action=t.getAttribute('data-action');",
@@ -385,14 +528,29 @@
 "  fbClear();blockReset(block);",
 "  block.querySelectorAll('button').forEach(function(b){b.disabled=true;});",
 "  t.classList.add('selected');",
-"  if(answer==='correct'){t.classList.add('correct');coins+=PER_CORRECT;renderCoins();showFeedback(block.getAttribute('data-correct-feedback')||'\\ud83c\\udf89 Correct!','correct');}",
+"  if(answer==='correct'){t.classList.add('correct');pay(block,PER_CORRECT);eruptXY(e.clientX||0,e.clientY||0,8);showFeedback(block.getAttribute('data-correct-feedback')||'\\ud83c\\udf89 Correct!','correct');}",
 "  else{t.classList.add('wrong');coins=Math.max(0,coins-PER_WRONG);renderCoins();showFeedback(block.getAttribute('data-wrong-feedback')||'\\u274c Not quite \\u2014 read the rule again.','wrong');}",
 "});",
 "/* ------------------------------- the games ------------------------------- */",
 "function gShuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}",
 "function gPairs(s){return String(s==null?'':s).split(';').map(function(p){var k=String(p).split('=');return {a:(k[0]||'').trim(),b:(k.slice(1).join('=')||'').trim()};}).filter(function(p){return p.a&&p.b;});}",
 "function gHead(el,name,total){el.setAttribute('data-total',String(total));el.setAttribute('data-got','0');return '<div class=\\\"g-head\\\"><span class=\\\"g-name\\\">'+name+'</span><span class=\\\"g-score\\\">0 / '+total+' done</span></div>';}",
-"function gDone(el){var got=(Number(el.getAttribute('data-got'))||0)+1;el.setAttribute('data-got',String(got));var s=el.querySelector('.g-score');var total=Number(el.getAttribute('data-total'))||0;if(s)s.textContent=got+' / '+total+' done';if(total&&got>=total&&s)s.className='g-score win';coins+=PER_CORRECT;renderCoins();}",
+"function tone(f,d){try{if(REDUCE)return;var C=window.AudioContext||window.webkitAudioContext;if(!C)return;var c=new C();if(c.state==='suspended')c.resume();var o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=f||880;var t=c.currentTime;g.gain.setValueAtTime(0.12,t);g.gain.exponentialRampToValueAtTime(0.001,t+(d||0.12));o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+(d||0.12)+0.05);}catch(e){}}",
+"function winJingle(){tone(523,.12);setTimeout(function(){tone(659,.12);},110);setTimeout(function(){tone(784,.2);},220);}",
+"function mountReport(host){",
+"  var wins=host.querySelectorAll('.game .g-score.win').length;",
+"  var picks=host.querySelectorAll('.chatty-choices button.selected.correct').length;",
+"  var msg='Report: '+coins+' coins, tier '+tierOf(coins)+', '+(wins+picks)+' wins this run.';",
+"  var rep=document.createElement('div');rep.className='report';rep.setAttribute('role','status');",
+"  rep.innerHTML='<b>End-of-lesson report</b><br>'+msg;",
+"  var b=document.createElement('button');b.type='button';b.className='g-btn ghost';b.textContent='Copy for teacher';",
+"  b.addEventListener('click',function(){var txt=msg+' Lesson: '+document.title;",
+"    function done(ok){b.textContent=ok?'Copied':'Copy failed';tone(ok?784:220,.15);} ",
+"    try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){done(true);},function(){done(false);});}",
+"    else{var ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done(true);}catch(x){done(false);}ta.remove();}}",
+"    catch(x){done(false);}});",
+"  rep.appendChild(document.createElement('br'));rep.appendChild(b);host.appendChild(rep);}",
+"function gDone(el,extra){var got=(Number(el.getAttribute('data-got'))||0)+1;el.setAttribute('data-got',String(got));var s=el.querySelector('.g-score');var total=Number(el.getAttribute('data-total'))||0;if(s)s.textContent=got+' / '+total+' done';if(total&&got>=total&&s)s.className='g-score win';pay(el,PER_CORRECT+(extra||0));eruptEl(el,10);winJingle();}",
 "function gScramble(el){",
 "  var items=gPairs(el.getAttribute('data-items'));",
 "  el.innerHTML=gHead(el,el.getAttribute('data-title')||'🔤 Scramble',items.length)+'<div class=\\\"g-body\\\"></div>';",
@@ -469,14 +627,346 @@
 "  });",
 "  body.appendChild(chips);body.appendChild(buckets);",
 "}",
+"function gPicker(el){",
+"  var max0=Math.max(2,Math.min(50,Number(el.getAttribute('data-max'))||50));",
+"  el._n=max0;el._R=0;",
+"  el.innerHTML='<div class=\\\"g-head\\\"><span class=\\\"g-name\\\">'+(el.getAttribute('data-title')||'\\ud83c\\udfa1 Spinner')+'</span><span class=\\\"g-score\\\">fair picks only</span></div>'",
+"    +'<div class=\\\"p-wrap\\\"><label class=\\\"p-lab\\\">Students in class <span lang=\\\"vi\\\">S\\u0129 s\\u1ed1 l\\u1edbap</span><input class=\\\"p-input\\\" type=\\\"number\\\" min=\\\"2\\\" max=\\\"50\\\"/></label>'",
+"    +'<canvas class=\\\"wheel\\\" width=\\\"300\\\" height=\\\"300\\\" role=\\\"img\\\" aria-label=\\\"Spinning wheel\\\"></canvas>'",
+"    +'<div><button class=\\\"p-btn\\\">SPIN \\ud83c\\udfb2</button></div>'",
+"    +'<div class=\\\"p-result\\\" aria-live=\\\"polite\\\">?</div>'",
+"    +'<div class=\\\"p-called\\\"></div></div>';",
+"  var input=el.querySelector('.p-input'),box=el.querySelector('.p-result'),called=el.querySelector('.p-called'),btn=el.querySelector('.p-btn'),cv=el.querySelector('.wheel');",
+"  input.value=String(max0);",
+"  var reduce=false;try{reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}",
+"  var AC=null;",
+"  function ac(){try{if(!AC){var C=window.AudioContext||window.webkitAudioContext;if(C)AC=new C();}if(AC&&AC.state==='suspended')AC.resume();}catch(e){}return AC;}",
+"  function blip(f,dur,type,vol,when){var c=ac();if(!c)return;try{var o=c.createOscillator(),g=c.createGain();o.type=type||'square';o.frequency.value=f;var t=c.currentTime+(when||0);g.gain.setValueAtTime(vol||0.1,t);g.gain.exponentialRampToValueAtTime(0.001,t+dur);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+dur+0.03);}catch(e){}}",
+"  function fanfare(){blip(523,.16,'triangle',.16,0);blip(659,.16,'triangle',.16,.12);blip(784,.16,'triangle',.16,.24);blip(1047,.34,'triangle',.18,.36);blip(1319,.4,'sine',.1,.55);}",
+"  function draw(){",
+"    if(!cv)return;var ctx=null;try{ctx=cv.getContext('2d');}catch(e){return;}",
+"    var dpr=1;try{dpr=window.devicePixelRatio||1;}catch(e){}",
+"    if(cv.width!==Math.round(300*dpr)){cv.width=Math.round(300*dpr);cv.height=Math.round(300*dpr);}",
+"    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,300,300);",
+"    var m=el._n||max0,seg=Math.PI*2/m,cx=150,cy=150,rad=138;",
+"    ctx.save();ctx.translate(cx,cy);ctx.rotate(el._R||0);",
+"    for(var i=0;i<m;i++){",
+"      ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,rad,i*seg,(i+1)*seg+0.002);ctx.closePath();",
+"      ctx.fillStyle=i%2?'#f59e0b':'#a855f7';ctx.fill();",
+"      ctx.strokeStyle='rgba(15,15,26,.9)';ctx.lineWidth=2;ctx.stroke();",
+"      ctx.save();ctx.rotate(i*seg+seg/2);ctx.textAlign='right';ctx.textBaseline='middle';",
+"      var fs=m>30?9:(m>18?11:14);",
+"      try{ctx.font='700 '+fs+'px Inter,system-ui,sans-serif';}catch(e){}",
+"      ctx.fillStyle=i%2?'#0f0f1a':'#ffffff';",
+"      ctx.fillText(String(i+1),rad-9,0);ctx.restore();",
+"    }",
+"    ctx.restore();",
+"    ctx.beginPath();ctx.moveTo(cx-13,4);ctx.lineTo(cx+13,4);ctx.lineTo(cx,30);ctx.closePath();",
+"    ctx.fillStyle='#e8c565';ctx.fill();ctx.lineWidth=2;ctx.strokeStyle='#0f0f1a';ctx.stroke();",
+"    ctx.beginPath();ctx.arc(cx,cy,27,0,Math.PI*2);ctx.fillStyle='#0f0f1a';ctx.fill();ctx.lineWidth=3;ctx.strokeStyle='#e8c565';ctx.stroke();",
+"    ctx.font='24px serif';ctx.textAlign='center';ctx.textBaseline='middle';",
+"    ctx.fillText('\\ud83c\\udfa1',cx,cy+2);",
+"  }",
+"  function idxAt(R){var m=el._n||max0,seg=Math.PI*2/m;var a=(-Math.PI/2-R)%(Math.PI*2);if(a<0)a+=Math.PI*2;return Math.floor(a/seg)%m;}",
+"  function boom(){if(reduce)return;var cols=['#a855f7','#f59e0b','#22c55e','#ef4444','#e8c565','#ffffff'];for(var k=0;k<36;k++){var s=document.createElement('div');s.className='cfetti';s.style.left=(4+Math.random()*92)+'%';s.style.background=cols[k%cols.length];s.style.animationDelay=(Math.random()*0.35)+'s';el.appendChild(s);}setTimeout(function(){var c=el.querySelectorAll('.cfetti');for(var j=0;j<c.length;j++)c[j].remove();},2600);}",
+"  function land(w){el._R=(el._R||0)%(Math.PI*2);draw();var n=w+1;box.textContent=String(n);box.classList.remove('win');void box.offsetWidth;box.classList.add('win');called.textContent='Student '+n+', you are UP! B\\u1ea1n s\\u1ed1 '+n+', l\\u00ean n\\u00e0o!';fanfare();boom();busy=false;btn.disabled=false;input.disabled=false;}",
+"  var busy=false,raf=null;",
+"  input.addEventListener('change',function(){var m=Math.max(2,Math.min(50,Math.round(Number(input.value)||max0)));input.value=String(m);el._n=m;el._R=0;box.textContent='?';box.classList.remove('win');called.textContent='';draw();});",
+"  btn.addEventListener('click',function(){",
+"    if(busy)return;busy=true;btn.disabled=true;input.disabled=true;ac();",
+"    var m=el._n||max0,seg=Math.PI*2/m;",
+"    var w=Math.floor(Math.random()*m);",
+"    if(reduce){el._R=0;land(w);return;}",
+"    var R0=el._R||0;",
+"    var want=(-Math.PI/2-(w+0.5)*seg)%(Math.PI*2);",
+"    var dR=want-R0%(Math.PI*2);dR=((dR%(Math.PI*2))+Math.PI*2)%(Math.PI*2);",
+"    var turns=5+Math.floor(Math.random()*3);",
+"    var R1=R0+turns*Math.PI*2+dR;",
+"    var t0=null,last=idxAt(R0),dur=4600;",
+"    box.classList.remove('win');called.textContent='';",
+"    function step(t){",
+"      if(t0===null)t0=t;var p=Math.min(1,(t-t0)/dur);",
+"      var e=1-Math.pow(1-p,5);",
+"      el._R=R0+(R1-R0)*e;draw();",
+"      var ix=idxAt(el._R);",
+"      if(ix!==last){last=ix;blip(500+600*(1-p),0.03,'square',0.07,0);}",
+"      if(p<1){raf=requestAnimationFrame(step);}else{land(w);}",
+"    }",
+"    raf=requestAnimationFrame(step);",
+"  });",
+"  draw();",
+"}",
+"var REDUCE=false;try{REDUCE=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}",
+"var LASTTIER='MOUSE';",
+"function pay(el,n){var v=(el&&el.getAttribute&&(Number(el.getAttribute('data-coins'))||0))||n;coins+=v;renderCoins();if(!REDUCE){var t=tierOf(coins);if(t!==LASTTIER){LASTTIER=t;var pill=document.getElementById('coinsDisplay');if(pill){pill.classList.remove('tierflash');void pill.offsetWidth;pill.classList.add('tierflash');}}}return v;}",
+"function eruptXY(x,y,n){if(REDUCE)return;try{var cols=['\\u2b50','\\u2728','\\ud83c\\udf89','\\ud83d\\udcab','\\ud83e\\ude99'];for(var k=0;k<(n||8);k++){var d=document.createElement('div');d.className='erupt';d.textContent=cols[k%cols.length];d.style.left=x+'px';d.style.top=y+'px';document.body.appendChild(d);(function(z){setTimeout(function(){if(z.parentNode)z.parentNode.removeChild(z);},1100);})(d);}}catch(e){}}",
+"function eruptEl(el,n){if(!el)return;try{var r=el.getBoundingClientRect();eruptXY(r.left+r.width/2,r.top,n||8);}catch(e){}}",
+"function initIcons(root){",
+"  var IU=(window.__LESSON_ICONS__||{});",
+"  if(!root||!root.querySelectorAll)return;",
+"  root.querySelectorAll(\u0027[data-icon]\u0027).forEach(function(el){",
+"    var k=el.getAttribute(\u0027data-icon\u0027);if(!k||!IU[k])return;",
+"    if(el.firstChild&&el.firstChild.className===\u0027with-icon\u0027)return;",
+"    var sp=document.createElement(\u0027span\u0027);sp.className=\u0027with-icon\u0027;sp.textContent=IU[k]+\u0027 \u0027;el.insertBefore(sp,el.firstChild);",
+"  });",
+"}",
+"function initSay(root){",
+"  if(!root||!root.querySelectorAll)return;",
+"  root.querySelectorAll(\u0027[data-say]\u0027).forEach(function(el){",
+"    if(el._said)return;el._said=1;el.classList.add(\u0027can-say\u0027);",
+"    el.addEventListener(\u0027click\u0027,function(){",
+"      try{var u=new SpeechSynthesisUtterance(el.getAttribute(\u0027data-say\u0027)||el.textContent||\u0027\u0027);u.lang=\u0027en-GB\u0027;u.rate=0.95;window.speechSynthesis.cancel();window.speechSynthesis.speak(u);}catch(e){}",
+"    });",
+"  });",
+"}",
+"function gTimer(el){",
+"  if(el._t)return;el._t=1;",
+"  var secs=Math.max(5,Math.min(600,Number(el.getAttribute(\u0027data-seconds\u0027))||60));",
+"  el.innerHTML=\u0027<div class=\\\"g-head\\\"><span class=\\\"g-name\\\">\u0027+(el.getAttribute(\u0027data-title\u0027)||\u0027\\u23f1\\ufe0f Timer\u0027)+\u0027</span><span class=\\\"g-score\\\">ready</span></div><div class=\\\"g-body\\\"><div class=\\\"t-big\\\">\u0027+secs+\u0027s</div><button class=\\\"p-btn t-go\\\">GO</button></div>\u0027;",
+"  var big=el.querySelector(\u0027.t-big\u0027),out=el.querySelector(\u0027.g-score\u0027),go=el.querySelector(\u0027.t-go\u0027),left=secs,iv=null;",
+"  function blip(){try{var C=window.AudioContext||window.webkitAudioContext;if(!C)return;var c=new C();var o=c.createOscillator(),g=c.createGain();o.type=\u0027sine\u0027;o.frequency.value=880;var t=c.currentTime;g.gain.setValueAtTime(0.12,t);g.gain.exponentialRampToValueAtTime(0.001,t+0.4);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+0.43);}catch(e){}}",
+"  go.addEventListener(\u0027click\u0027,function(){",
+"    if(iv)return;go.disabled=true;",
+"    iv=setInterval(function(){left--;if(left<=0){clearInterval(iv);iv=null;big.textContent=\u0027DONE\u0027;out.textContent=\u0027time\u0027;if(!REDUCE)blip();go.disabled=false;left=secs;}else{big.textContent=left+\u0027s\u0027;out.textContent=left+\u0027s left\u0027;}},1000);",
+"    out.textContent=left+\u0027s left\u0027;",
+"  });",
+"}",
+"function initTimers(root){",
+"  if(!root||!root.querySelectorAll)return;",
+"  root.querySelectorAll(\u0027.timer\u0027).forEach(function(el){try{gTimer(el);}catch(e){}});",
+"}",
+"function gTiles(el){",
+"  var items=gPairs(el.getAttribute('data-items')||el.getAttribute('data-cards')||'').slice(0,8);",
+"  if(!items.length){el.innerHTML='<div class=\\\"g-note\\\">add data-items to this tiles game</div>';return;}",
+"  el.innerHTML=gHead(el,el.getAttribute('data-title')||'\\ud83c\\udfb2 Tiles — say it, then mark it',items.length)+'<div class=\\\"g-body\\\"></div>';",
+"  var body=el.querySelector('.g-body');var grid=document.createElement('div');grid.className='g-board';grid.setAttribute('role','group');grid.setAttribute('aria-label','face-down tiles');body.appendChild(grid);",
+"  var zone=document.createElement('div');body.appendChild(zone);",
+"  var vals=[10,15,20,10,'DOUBLE',15,10,'\\u2601'];",
+"  var dbl=false;",
+"  items.forEach(function(it,i){var v=vals[i%vals.length];var b=document.createElement('button');b.type='button';b.className='g-tile2';b.innerHTML='?'+'<small>'+(v==='\\u2601'?'storm':('+'+v))+'</small>';b.setAttribute('aria-label','tile '+(i+1)+' — tap to reveal');",
+"    b.addEventListener('click',function(){if(b.disabled)return;b.disabled=true;b.classList.add('used');tone(500+i*60,.1);",
+"      var box=document.createElement('div');box.className='g-qa';var hint=it.b?'<div class=\\\"sup\\\">'+it.b+'</div>':'';",
+"      box.innerHTML='<div class=\\\"q\\\">'+it.a+'</div>'+hint+'<div class=\\\"g-note\\\">Say it OUT LOUD, then mark it.</div><div class=\\\"g-flex\\\"><button class=\\\"g-btn\\\" data-k=\\\"got\\\">Got it</button><button class=\\\"g-btn ghost\\\" data-k=\\\"miss\\\">Missed</button></div>';zone.innerHTML='';zone.appendChild(box);",
+"      box.addEventListener('click',function(ev){var k=ev.target.closest?ev.target.closest('button'):null;if(!k)return;var kind=k.getAttribute('data-k');box.querySelectorAll('button').forEach(function(x){x.disabled=true;});",
+"        if(kind==='got'){if(v==='\\u2601'){coins=Math.max(0,coins-10);renderCoins();tone(180,.3,'sawtooth');box.innerHTML+='<div class=\\\"g-note\\\">Storm — minus 10.</div>';}else if(v==='DOUBLE'){dbl=true;box.innerHTML+='<div class=\\\"g-note\\\">DOUBLE — the next gain counts twice.</div>';tone(880,.15);gDone(el);}else{var extra=dbl?v:0;dbl=false;gDone(el,extra);}}",
+"        else{tone(220,.2,'sawtooth');box.innerHTML+='<div class=\\\"g-note\\\">Missed — read the hint line again.</div>';}box.scrollIntoView&&box.scrollIntoView({block:'nearest'});});});",
+"    grid.appendChild(b);});",
+"}",
+"function gOrder(el){",
+"  var items=gPairs(el.getAttribute(\u0027data-items\u0027));",
+"  el.innerHTML=gHead(el,el.getAttribute(\u0027data-title\u0027)||\u0027\\ud83d\\udd22 Order it\u0027,items.length)+\u0027<div class=\\\"g-body\\\"></div>\u0027;",
+"  var body=el.querySelector(\u0027.g-body\u0027),seq=0,box=document.createElement(\u0027div\u0027);",
+"  box.className=\u0027g-slots\u0027;body.appendChild(box);",
+"  var tiles=document.createElement(\u0027div\u0027);tiles.className=\u0027g-tiles\u0027;body.appendChild(tiles);",
+"  gShuffle(items.slice()).forEach(function(it){",
+"    var t=document.createElement(\u0027button\u0027);t.className=\u0027g-tile\u0027;t.textContent=it.a;",
+"    t.addEventListener(\u0027click\u0027,function(){",
+"      if(t.classList.contains(\u0027used\u0027))return;",
+"      if(it===items[seq]){t.classList.add(\u0027used\u0027);var sp=document.createElement(\u0027span\u0027);sp.className=\u0027g-placed\u0027;sp.textContent=it.a;box.appendChild(sp);seq++;gDone(el);if(seq>=items.length){box.textContent+=\u0027 \\u2713\u0027;}}",
+"      else{el.classList.add(\u0027bad\u0027);setTimeout(function(){el.classList.remove(\u0027bad\u0027);},600);}",
+"    });",
+"    tiles.appendChild(t);",
+"  });",
+"}",
+"function gOdd(el){",
+"  var items=String(el.getAttribute(\u0027data-items\u0027)||\u0027\u0027).split(\u0027;\u0027).map(function(x){return x.trim();}).filter(Boolean);",
+"  var odd=String(el.getAttribute(\u0027data-odd\u0027)||\u0027\u0027).trim();",
+"  el.innerHTML=gHead(el,el.getAttribute(\u0027data-title\u0027)||\u0027\\ud83d\\udc40 Odd one out\u0027,1)+\u0027<div class=\\\"g-body\\\"></div>\u0027;",
+"  var body=el.querySelector(\u0027.g-body\u0027),tiles=document.createElement(\u0027div\u0027);tiles.className=\u0027g-tiles\u0027;body.appendChild(tiles);",
+"  gShuffle(items.slice()).forEach(function(x){",
+"    var t=document.createElement(\u0027button\u0027);t.className=\u0027g-tile\u0027;t.textContent=x;",
+"    t.addEventListener(\u0027click\u0027,function(){",
+"      if(el.getAttribute(\u0027data-got\u0027)===\u00271\u0027)return;",
+"      if(x===odd){t.classList.add(\u0027used\u0027);gDone(el);}",
+"      else{t.classList.add(\u0027bad\u0027);setTimeout(function(){t.classList.remove(\u0027bad\u0027);},600);}",
+"    });",
+"    tiles.appendChild(t);",
+"  });",
+"}",
+"function gFlip(el){",
+"  var items=gPairs(el.getAttribute(\u0027data-items\u0027));",
+"  el.innerHTML=gHead(el,el.getAttribute(\u0027data-title\u0027)||\u0027\\ud83c\\udccf Flip\u0027,items.length)+\u0027<div class=\\\"g-body\\\"></div>\u0027;",
+"  var body=el.querySelector(\u0027.g-body\u0027),seen={};",
+"  items.forEach(function(it){",
+"    var c=document.createElement(\u0027button\u0027);c.className=\u0027g-flip\u0027;c.textContent=it.a;",
+"    c.addEventListener(\u0027click\u0027,function(){",
+"      if(c.classList.contains(\u0027back\u0027)){c.classList.remove(\u0027back\u0027);c.textContent=it.a;}",
+"      else{c.classList.add(\u0027back\u0027);c.textContent=it.b;if(!seen[it.a]){seen[it.a]=1;gDone(el);}}",
+"    });",
+"    body.appendChild(c);",
+"  });",
+"}",
+"function gBattle(el){",
+"  var items=gPairs(el.getAttribute(\u0027data-items\u0027));",
+"  var teams=String(el.getAttribute(\u0027data-teams\u0027)||\u0027A|B\u0027).split(\u0027|\u0027).map(function(x){return x.trim();}).filter(Boolean);",
+"  if(teams.length<2)teams=[teams[0]||\u0027A\u0027,\u0027B\u0027];",
+"  el.innerHTML=gHead(el,el.getAttribute(\u0027data-title\u0027)||\u0027\\u2694\\ufe0f Battle\u0027,items.length)+\u0027<div class=\\\"g-body\\\"></div>\u0027;",
+"  var body=el.querySelector(\u0027.g-body\u0027),score={};teams.forEach(function(tm){score[tm]=0;});",
+"  var bar=document.createElement(\u0027div\u0027);bar.className=\u0027g-battle-bar\u0027;body.appendChild(bar);",
+"  function paint(){bar.innerHTML=teams.map(function(tm){return \u0027<b>\u0027+tm+\u0027</b> \u0027+score[tm];}).join(\u0027 \\u2022 \u0027);}",
+"  paint();",
+"  var turn=0,qi=0,q=document.createElement(\u0027div\u0027);q.className=\u0027g-hint\u0027;body.appendChild(q);",
+"  gLife(el,body);",
+"  var tiles=document.createElement(\u0027div\u0027);tiles.className=\u0027g-tiles\u0027;body.appendChild(tiles);",
+"  function round(){",
+"    if(qi>=items.length){q.textContent=\u0027Battle over.\u0027;return;}",
+"    var it=items[qi],tm=teams[turn%teams.length];",
+"    q.textContent=\u0027Team \u0027+tm+\u0027: \u0027+it.b;",
+"    tiles.innerHTML=\u0027\u0027;",
+"    gShuffle(items.slice()).forEach(function(o){",
+"      var t=document.createElement(\u0027button\u0027);t.className=\u0027g-tile\u0027;t.textContent=o.a;",
+"      t.addEventListener(\u0027click\u0027,function(){",
+"        if(o.a===it.a){score[tm]++;paint();qi++;turn++;gDone(el);round();}",
+"        else{t.classList.add(\u0027bad\u0027);setTimeout(function(){t.classList.remove(\u0027bad\u0027);},600);}",
+"      });",
+"      tiles.appendChild(t);",
+"    });",
+"  }",
+"  round();",
+"}",
+"function gLife(el,body){",
+"  var sup=el.getAttribute('data-support'),ext=el.getAttribute('data-extend');",
+"  if(!sup&&!ext)return;",
+"  var lf=document.createElement('div');lf.className='g-life';",
+"  if(sup){var b1=document.createElement('b');b1.textContent='\ud83d\udedf support: ';lf.appendChild(b1);lf.appendChild(document.createTextNode(sup));}",
+"  if(sup&&ext)lf.appendChild(document.createElement('br'));",
+"  if(ext){var b2=document.createElement('b');b2.textContent='\ud83d\ude80 extend: ';lf.appendChild(b2);lf.appendChild(document.createTextNode(ext));}",
+"  body.appendChild(lf);",
+"}",
+"function gStorm(el){",
+"  var items=gPairs(el.getAttribute('data-items'));",
+"  if(!items.length){el.innerHTML='<div class=\\\"g-name\\\">add data-items pairs first</div>';return;}",
+"  var teams=String(el.getAttribute('data-teams')||'Lions|Tigers').split('|').map(function(x){return x.trim();}).filter(Boolean);",
+"  if(teams.length<2){teams.push(teams[0]==='Lions'?'Tigers':'Lions');}",
+"  var grid=Number(el.getAttribute('data-grid'))||4;if(grid!==4&&grid!==5&&grid!==6)grid=4;",
+"  var dens={4:[1,2,1,1],5:[2,3,2,2],6:[3,4,3,3]}[grid];",
+"  var pool=[5,5,10,10,10,20,20,20,25,25,50];",
+"  el.innerHTML=gHead(el,el.getAttribute('data-title')||'⛈ Storm Board',items.length)+'<div class=\\\"g-body\\\"></div>';",
+"  var body=el.querySelector('.g-body'),score={};teams.forEach(function(tm){score[tm]=0;});",
+"  var bar=document.createElement('div');bar.className='g-battle-bar';body.appendChild(bar);",
+"  function paint(){bar.innerHTML=teams.map(function(tm){return '<b>'+tm+'</b> '+score[tm];}).join(' | ');}",
+"  paint();",
+"  var tiles=[];",
+"  function freshBoard(){tiles=[];var kinds=['storm','swap','half','double'];kinds.forEach(function(k,ix){for(var i2=0;i2<dens[ix];i2++)tiles.push({t:k,v:0,open:false});});var need=grid*grid-tiles.length;for(var j=0;j<need;j++)tiles.push({t:'score',v:pool[j%pool.length],open:false});tiles=gShuffle(tiles);}",
+"  freshBoard();",
+"  var turn=0,qi=0;",
+"  var q=document.createElement('div');q.className='g-hint';body.appendChild(q);",
+"  gLife(el,body);",
+"  var opts=document.createElement('div');opts.className='g-tiles';body.appendChild(opts);",
+"  var sboard=document.createElement('div');sboard.className='storm-board';sboard.style.display='none';sboard.style.gridTemplateColumns='repeat('+grid+',1fr)';body.appendChild(sboard);",
+"  var note=document.createElement('div');note.className='g-hint';body.appendChild(note);",
+"  function round(){",
+"    if(qi>=items.length){q.textContent='Storm over. Final scores above.';opts.innerHTML='';sboard.style.display='none';sboard.innerHTML='';note.textContent='';return;}",
+"    var it=items[qi],tm=teams[turn%teams.length];",
+"    q.textContent='Team '+tm+': '+it.b;note.textContent='';sboard.style.display='none';sboard.innerHTML='';opts.innerHTML='';",
+"    var tried=false;",
+"    gShuffle(items.slice()).forEach(function(o){",
+"      var t=document.createElement('button');t.className='g-tile';t.textContent=o.a;",
+"      t.addEventListener('click',function(){",
+"        if(o.a===it.a){t.classList.add('used');stormPick(tm);}",
+"        else{t.classList.add('bad');setTimeout(function(){t.classList.remove('bad');},600);if(!tried){tried=true;turn++;tm=teams[turn%teams.length];q.textContent='Rebound! Team '+tm+': '+it.b;}}",
+"      });",
+"      opts.appendChild(t);",
+"    });",
+"  }",
+"  function stormPick(tm){",
+"    opts.innerHTML='';q.textContent='Team '+tm+', pick a storm tile!';",
+"    if(!tiles.some(function(tl){return !tl.open;}))freshBoard();",
+"    sboard.style.display='grid';sboard.innerHTML='';",
+"    tiles.forEach(function(tl){",
+"      if(tl.open)return;",
+"      var b=document.createElement('button');b.className='g-tile storm-tile';b.textContent='?';",
+"      b.addEventListener('click',function(){tl.open=true;resolve(tm,tl,b);},{once:true});",
+"      sboard.appendChild(b);",
+"    });",
+"    note.textContent='Points hide behind the tiles. So does the STORM.';",
+"  }",
+"  function resolve(tm,tl,b){",
+"    var msg='';",
+"    if(tl.t==='score'){score[tm]+=tl.v;msg='+'+tl.v+' for '+tm;b.textContent='+'+tl.v;b.classList.add('used');}",
+"    else if(tl.t==='double'){score[tm]*=2;msg=tm+' doubles to '+score[tm];b.textContent='x2';b.classList.add('used');}",
+"    else if(tl.t==='half'){score[tm]=Math.ceil(score[tm]/2);msg=tm+' cut to '+score[tm];b.textContent='half';b.classList.add('used');}",
+"    else if(tl.t==='storm'){score[tm]=0;msg='STORM! '+tm+' is wiped out';b.textContent='STORM';b.classList.add('bad');eruptEl(el,6);}",
+"    else{var oi=(teams.indexOf(tm)+1)%teams.length,other=teams[oi],s=score[tm];score[tm]=score[other];score[other]=s;msg=tm+' swaps scores with '+other;b.textContent='swap';b.classList.add('used');}",
+"    paint();note.textContent=msg;",
+"    gDone(el);qi++;turn++;setTimeout(round,1400);",
+"  }",
+"  round();",
+"}",
+"function gBoard(el){",
+"  var teams=String(el.getAttribute('data-teams')||'Lions|Tigers').split('|').map(function(x){return x.trim();}).filter(Boolean);",
+"  if(teams.length<2){teams.push(teams[0]==='Lions'?'Tigers':'Lions');}",
+"  var cats=String(el.getAttribute('data-board')||'').split('|').map(function(c){var k=c.split(':');return {name:(k[0]||'').trim(),cells:gPairs(k.slice(1).join(':'))};}).filter(function(c){return c.name&&c.cells.length;});",
+"  if(!cats.length){el.innerHTML='<div class=\\\"g-name\\\">add data-board categories first</div>';return;}",
+"  var total=0;cats.forEach(function(c){c.cells=c.cells.map(function(p,ix){total++;return {q:p.a,a:p.b,v:(ix+1)*100,done:false,tried:false,tm:null};});});",
+"  el.innerHTML=gHead(el,el.getAttribute('data-title')||'📋 Category Board',total)+'<div class=\\\"g-body\\\"></div>';",
+"  var body=el.querySelector('.g-body'),score={};teams.forEach(function(tm){score[tm]=0;});",
+"  var bar=document.createElement('div');bar.className='g-battle-bar';body.appendChild(bar);",
+"  function paint(){bar.innerHTML=teams.map(function(tm){return '<b>'+tm+'</b> '+score[tm];}).join(' | ');}",
+"  paint();",
+"  var turn=0;",
+"  var grid=document.createElement('div');grid.className='board-grid';grid.style.gridTemplateColumns='repeat('+cats.length+',1fr)';body.appendChild(grid);",
+"  var q=document.createElement('div');q.className='g-hint';body.appendChild(q);",
+"  gLife(el,body);",
+"  var ctl=document.createElement('div');ctl.className='g-tiles';ctl.style.display='none';body.appendChild(ctl);",
+"  function draw(){",
+"    grid.innerHTML='';",
+"    cats.forEach(function(c){",
+"      var col=document.createElement('div');",
+"      var h=document.createElement('div');h.className='g-hint';h.textContent=c.name;col.appendChild(h);",
+"      c.cells.forEach(function(cell){",
+"        var b=document.createElement('button');b.className='g-tile'+(cell.done?' used':'');b.textContent=cell.done?'---':cell.v;b.disabled=!!cell.done;",
+"        if(!cell.done)b.addEventListener('click',function(){ask(cell);});",
+"        col.appendChild(b);",
+"      });",
+"      grid.appendChild(col);",
+"    });",
+"  }",
+"  function ask(cell){cell.tm=teams[turn%teams.length];cell.tried=false;showQ(cell);}",
+"  function showQ(cell){",
+"    q.textContent='Team '+cell.tm+' for '+cell.v+': '+cell.q;",
+"    ctl.style.display='';ctl.innerHTML='';",
+"    var ok=document.createElement('button');ok.className='p-btn';ok.textContent='Correct';",
+"    var no=document.createElement('button');no.className='p-btn';no.textContent='Wrong';",
+"    ok.addEventListener('click',function(){score[cell.tm]+=cell.v;cell.done=true;after(true,cell.tm+' banks '+cell.v);});",
+"    no.addEventListener('click',function(){",
+"      if(!cell.tried){cell.tried=true;turn++;cell.tm=teams[turn%teams.length];showQ(cell);}",
+"      else{cell.done=true;after(false,'Nobody banks it. Answer: '+cell.a);}",
+"    });",
+"    ctl.appendChild(ok);ctl.appendChild(no);",
+"  }",
+"  function after(win,msg){",
+"    q.textContent=msg;ctl.style.display='none';ctl.innerHTML='';",
+"    var got=Number(el.getAttribute('data-got'))||0;got++;el.setAttribute('data-got',String(got));",
+"    var s=el.querySelector('.g-score');if(s)s.textContent=got+' / '+total+' done';",
+"    if(win){pay(el,PER_CORRECT);eruptEl(el,8);}",
+"    if(got>=total&&s)s.className='g-score win';",
+"    paint();turn++;draw();",
+"  }",
+"  draw();q.textContent='Team '+teams[0]+', pick a cell to start.';",
+"}",
 "function initGames(root){",
 "  if(!root||!root.querySelectorAll)return;",
 "  root.querySelectorAll('.game').forEach(function(el){",
 "    var g=el.getAttribute('data-game');",
-"    try{ if(g==='scramble')gScramble(el); else if(g==='match')gMatch(el); else if(g==='sort')gSort(el); }",
+"    try{ if(g==='scramble')gScramble(el); else if(g==='match')gMatch(el); else if(g==='sort')gSort(el); else if(g==='order'){if(!(el.hasAttribute('data-order')&&!el.hasAttribute('data-items')))gOrder(el);} else if(g==='odd')gOdd(el); else if(g==='flip')gFlip(el); else if(g==='battle')gBattle(el); else if(g==='storm')gStorm(el); else if(g==='board'){if(!el.hasAttribute('data-cards'))gBoard(el);} else if(g==='tiles')gTiles(el); }",
 "    catch(e){ el.innerHTML='<div class=\\\"g-name\\\">this game could not start</div>'; }",
 "  });",
+"  root.querySelectorAll('.picker').forEach(function(el){",
+"    try{ gPicker(el); }",
+"    catch(e){ el.innerHTML='<div class=\\\"g-name\\\">the spinner could not start</div>'; }",
+"  });",
 "}",
+"var viBtn=document.getElementById('viToggle');",
+"function viSet(on){try{document.body.classList.toggle('vi-hide',!on);if(viBtn){viBtn.textContent=on?'\\ud83c\\uddfb\\ud83c\\uddf3 VI: ON':'\\ud83c\\uddfb\\ud83c\\uddf3 VI: OFF';viBtn.setAttribute('aria-pressed',on?'true':'false');if(on){viBtn.classList.remove('off');}else{viBtn.classList.add('off');}}try{if(window.localStorage)window.localStorage.setItem('obi-vi',on?'1':'0');}catch(e){}}catch(e){}}",
+"if(viBtn){viBtn.addEventListener('click',function(){viSet(document.body.classList.contains('vi-hide'));});var viSaved=null;try{viSaved=(window.localStorage?window.localStorage.getItem('obi-vi'):null);}catch(e){}viSet(viSaved!=='0');}",
+"var spinTab=document.getElementById('spinTab'),spinOverlay=document.getElementById('spinOverlay');",
+"function spinOpen(){if(spinOverlay){spinOverlay.hidden=false;var b=spinOverlay.querySelector('.p-btn');if(b)b.focus();}}",
+"function spinClose(){if(spinOverlay){spinOverlay.hidden=true;}if(spinTab)spinTab.focus();}",
+"if(spinTab)spinTab.addEventListener('click',function(){spinOpen();});",
+"if(spinOverlay){spinOverlay.addEventListener('click',function(e){if(e.target===spinOverlay){spinClose();return;}var c=e.target.closest?e.target.closest('[data-spin-close]'):null;if(c)spinClose();});}",
+"document.addEventListener('keydown',function(e){if(e.key==='Escape'&&spinOverlay&&!spinOverlay.hidden)spinClose();});",
+"try{var sp=document.getElementById('spinPicker');if(sp)gPicker(sp);}catch(e){}",
 "window.ObiLesson={go:function(i){currentRoom=i;render();},rooms:rooms};",
 "})();"
     ].join("\n");
@@ -537,6 +1027,7 @@
       spec.topic ? esc(String(spec.topic).toUpperCase()) : null,
       rooms.length + " ROOMS",
       "+" + Number(coinsSpec.correct == null ? 10 : coinsSpec.correct) + " PER CORRECT",
+      spec.evidence ? "EVIDENCE " + esc(String(spec.evidence).slice(0,60).toUpperCase()) : null,
       "STANDARD " + esc(String(STANDARD).replace(/^src\//, ""))
     ].filter(Boolean).join(' <span class="sep">//</span> ');
     const html = [];
@@ -562,10 +1053,12 @@
     html.push('<h1 class="hero-title">' + esc(title) + '</h1>');
     html.push('<div class="hud-bar">' + hudLine + '</div>');
     html.push('<p class="hero-subtitle">' + esc(spec.subtitle || "") + '</p>');
+    if(spec.subtitleVi) html.push('<p lang="vi">' + esc(String(spec.subtitleVi)) + '</p>');
     html.push('<button class="hero-cta" id="startBtn"><span>' + esc(spec.cta || "🚀 Begin") + '</span></button>');
     html.push('<div class="hero-features">');
     feats.forEach(f => {
-      html.push('<div class="feature-card"><div class="feature-icon">' + String(f.icon || "") + '</div><div class="feature-title">' + esc(f.title) + '</div><div class="feature-desc">' + esc(f.desc) + '</div></div>');
+      var fvi = (f && f.vi) ? '<span lang="vi">' + esc(String(f.vi)) + '</span>' : '';
+      html.push('<div class="feature-card"><div class="feature-icon">' + String(f.icon || "") + '</div><div class="feature-title">' + esc(f.title) + '</div><div class="feature-desc">' + esc(f.desc) + '</div>' + fvi + '</div>');
     });
     html.push('</div>');
     html.push('<div class="hud-bar hud-foot">' + hudLine + '</div>');
@@ -576,7 +1069,11 @@
       + '<span class="hud-crest" id="tierCrest">MOUSE</span>'
       + '<span class="hud-coins">🪙 <b id="coinsCount">0</b></span>'
       + '<span class="hud-room" id="roomCount">1/' + rooms.length + '</span></div>');
+    html.push('<button id="viToggle" type="button" aria-pressed="true" title="Show / hide Vietnamese (hiện / ẩn tiếng Việt)">🇻🇳 VI: ON</button>');
+    html.push('<button id="spinTab" type="button" aria-haspopup="dialog" title="Pick a random student (chọn số ngẫu nhiên)">🎡 Spin</button>');
+    html.push('<div id="spinOverlay" hidden><div class="spin-panel" role="dialog" aria-modal="true" aria-label="Student Spinner"><button class="spin-close" type="button" data-spin-close aria-label="Close">✕</button><div class="picker" id="spinPicker" data-max="50" data-title="Student Spinner"></div></div></div>');
     html.push('<div class="classroom" id="classroom"><div class="rooms-container"><div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div><div id="roomsContainer"></div></div></div>');
+    html.push('<script>window.__LESSON_ICONS__=' + JSON.stringify(ICONS) + ';</script>');
     html.push('<script>window.__LESSON_ROOMS__=' + JSON.stringify(rooms).replace(/<\//g, "<\\/") + ';window.__LESSON_STANDARD__=' + JSON.stringify({ standard: "NET Academy Lesson Standard", spec: STANDARD, built: new Date().toISOString(), topic: spec.topic || null }) + ';<\/script>');
     html.push('<script>');
     html.push(runtime(spec.coins));
@@ -610,12 +1107,16 @@
 "{\"topic\":\"…\",\"title\":\"… Academy\",\"logo\":\"one emoji\",\"subtitle\":\"the one-line promise, with a wink\",\"cta\":\"🚀 Begin Your Journey\",",
 " \"features\":[{\"icon\":\"🏠\",\"title\":\"…\",\"desc\":\"…\"},{\"icon\":\"🎯\",\"title\":\"…\",\"desc\":\"…\"},{\"icon\":\"🔑\",\"title\":\"…\",\"desc\":\"…\"}],",
 " \"coins\":{\"start\":0,\"correct\":10,\"wrong\":0},",
+" \"outcomes\":{\"know\":\"…\",\"do\":\"…\",\"understand\":\"…\"},",
+" \"differentiation\":{\"support\":\"…\",\"extend\":\"…\"},",
+ " \"evidence\":\"which class writeup, review or summary chose this lesson, and the gap it showed \u2014 one line\",",
 " \"method\":{\"structure\":\"10-5-5-3\",\"phase\":\"which part of the session this is: Hook|Vocab|Idioms|Slang|Review\",\"games\":[{\"name\":\"…\",\"type\":\"competition|collaboration|creation\",\"why\":\"what it does to the learner, one line\"},{\"name\":\"…\",\"type\":\"…\",\"why\":\"…\"},{\"name\":\"…\",\"type\":\"…\",\"why\":\"…\"}]},",
 " \"storyline\":\"two sentences: who the people are, and what happens in the two scenes\",",
 " \"rooms\":[{\"graphic\":\"🏠\",\"title\":\"The Entrance\"},{\"graphic\":\"…\",\"title\":\"…\"},{\"graphic\":\"📱\",\"title\":\"…\"},{\"graphic\":\"📚\",\"title\":\"…\"},{\"graphic\":\"🎯\",\"title\":\"…\"},{\"graphic\":\"🔑\",\"title\":\"…\"}]}",
 "THE SIX ROOMS, in this order, every time — they are the spine and they never move:",
 "  1 the warm-up (🏠) · 2 the scene where people SPEAK · 3 the same thing in a group chat (📱) · 4 the words (📚) · 5 the test (🎯) · 6 the key (🔑).",
 "Labels are fixed: room 1 is 'Warm-Up', room 4 is exactly 'Learn', room 5 is 'Test', room 6 is 'Mastery'. You only invent the two scene titles.",
+"Outcomes are the KSU triple — one line each: what they leave KNOWING, what they can DO, what they UNDERSTAND. Differentiation is grade-aware (the brief names the age): support is the lifeline for strugglers, extend is the stretch for fast finishers. Both from this lesson’s own material.",
 "\"method\" is the session method — 10 vocab · 5 idioms · 5 slang · 3 games (the 10-5-5-3 sacred structure). Give THREE games built from this lesson's own material, each with a type (competition = adrenaline, collaboration = social proof, creation = ownership) and a one-line mechanism: what the game does to the learner.",
 "The title is a real lesson title (a word or two + 'Academy'), the subtitle is one line that promises something and winks.",
 "The features are three cards: what the learner actually gets. Keep the whole reply under 1200 characters."
@@ -629,13 +1130,24 @@
 "Room 2 — the SPOKEN scene: 3–5 <div class=\"dialogue-block\"> turns between named people, each turn beginning <span class=\"speaker\">Name:</span> and then only the words they actually say. Real school talk, not textbook talk. End the room with exactly one <div class=\"chatty-clue\">🤔 Reality check: …</div> saying what is really happening underneath the words.",
 "Room 3 — the TEXT scene: the same skill, in a group chat. Same dialogue-block markup and named speakers, but short lines with 📱🙄😏 as punctuation. End the room with a <div class=\"chatty-clue\">🤔 Reality check: …</div> AND a <div class=\"chatty-hint\"><strong>Pro Tip:</strong> the transferable rule they can use tomorrow</div>.",
 "Room 4 — Learn: <div class=\"vocab-list\"> holding exactly FIVE <div class=\"vocab-item\"><strong>N. Term:</strong> <span>one line</span></div>, numbered 1 to 5, and they must be the real phrases that were used in the two scenes. A whole NET session carries 10 vocab · 5 idioms · 5 slang · 3 games (the 10-5-5-3 sacred structure) — this room holds the five the scenes actually used, drawn from that session's ten.",
-"Room 5 — Test: one or two <div class=\"chatty-choices\"> blocks. Each one starts with <div><strong>Scenario:</strong> …</div>, has 2–3 <button>s carrying data-answer=\"correct\" (exactly one) or data-answer=\"wrong\", carries data-correct-feedback AND data-wrong-feedback on the block, and ends with <div class=\"chatty-feedback empty\"></div>. The wrong feedback RE-TEACHES the rule — it never just says wrong.",
-"Room 6 — Mastery: <div class=\"summary-card\"><strong>🎓 the reward line</strong><ul> with 4–6 <li><strong>Rule Name:</strong> one-line reason</li></ul></div>, then <div class=\"chatty-hint\"><strong>Level Up:</strong> how to use this outside the classroom</div>."
+"Room 5 — Test: two to four <div class=\"chatty-choices\"> blocks, staged as role-play (a named friend asks, you answer — wrong options are the class's real mistakes). Each one starts with <div><strong>Scenario:</strong> …</div>, has 2–3 <button>s carrying data-answer=\"correct\" (exactly one) or data-answer=\"wrong\", carries data-correct-feedback AND data-wrong-feedback on the block, and ends with <div class=\"chatty-feedback empty\"></div>. The wrong feedback RE-TEACHES the rule — it never just says wrong.",
+"Room 6 — Mastery: <div class=\"summary-card\"><strong>🎓 the reward line</strong><ul> with 4–6 <li><strong>Rule Name:</strong> one-line reason</li></ul></div>, then <div class=\"chatty-hint\"><strong>Level Up:</strong> how to use this outside the classroom</div>, then a write-task AI prompt card: a <textarea class=\"write-task\"> whose placeholder is a worked personal frame (your city, your words) the learner rewrites as themselves."
   ];
   const ROOM_CONTRACT = [
 "You are Agent 99 writing ONE ROOM of a NET ACADEMY lesson (the standard: " + STANDARD + "). You are given the shell, the storyline and the six-room outline below.",
 "You write ONLY the HTML content of the room you are asked for. Output RAW HTML and nothing else: no JSON, no code fences, no prose before or after. Start with '<' and end with '>'.",
-"ALLOWED CLASSES ONLY: dialogue-block, speaker, chatty-clue, chatty-hint, vocab-list, vocab-item, chatty-choices, chatty-feedback, summary-card, and the state classes empty/selected/correct/wrong.",
+"ALLOWED CLASSES ONLY: dialogue-block, speaker, chatty-clue, chatty-hint, vocab-list, vocab-item, chatty-choices, chatty-feedback, summary-card, write-task (a real textarea for writing rooms), reading, game (data-game scramble|match|sort|order|odd|flip|battle|storm|board|tiles|tornado|memory|dice|reveal|voice), picker (the student spinner), and the state classes empty/selected/correct/wrong.",
+"VIETNAMESE GLOSS (LSN-33): after any English sentence you may add <span lang=\"vi\">the Vietnamese</span> — a plain span with lang only, no class, no style. Keep definitions as simple as possible (one short clause + one real example). The lesson toggle shows/hides every gloss at once.",
+"STUDENT PICKER (a teacher tool, never a scored game): <div class=\"picker\" data-max=\"50\" data-title=\"Student Spinner\"></div> — class-size input (2–50) + a big canvas wheel: 4–5 s spin, ticking past every number, fanfare + confetti on the winner. Give it its own early room with a How-to-use hint.",
+"ICONOGRAPHY (LSN-39): tag any element with data-icon=\"key\" (coin, die, ticket, animal, math, chance...) and the runtime prepends the glyph; unknown keys warn, never break the build.",
+"VOICE: tag any line with data-say=\"words to speak\" and the learner taps to hear it (speech synthesis, no files, no network).",
+"TIMER: <div class=\"timer\" data-seconds=\"60\" data-title=\"Decide!\"></div> is a countdown ending in a soft blip; silent under reduced motion.",
+"DATA-COINS: any .game or .chatty-choices may carry data-coins=\"N\" to pay N per correct instead of the lesson rate.",
+"PRINT: the built file prints clean — the open room expanded, chrome and chrome buttons hidden (@media print).",
+"SPINNER TAB: every built lesson also ships a fixed Spin tab + dialog overlay (the same picker, openable from any room) — the picker room teaches it, the tab carries it. No content markup needed for the tab.",
+"STAGE MODE (the TV standard, src/LESSON-DISPLAY.md): lessons present on classroom televisions — content stays short lines and lists (never walls of text) so the wide-screen stage layout reads from the back row.",
+"CELEBRATION (LSN-35): every correct answer erupts — an emoji burst plus a floating +10 coin chip at the click point; a tier-up flashes the coin pill with a burst; the exit room glows (finale). Juice is visual-only, never scored, and sleeps under prefers-reduced-motion.",
+"GAME ARENA: the three games may share one arena room (label Game) instead of three rooms — scramble, match and sort back to back, one coin economy.",
 "No <script>, no <style>, no onclick or any other handler, no inline style except a margin one-off. Plain <p>, <div>, <ul>, <li>, <strong>, <span>, <em>, <button> are all fine.",
 "VOICE: second person present tense · ordinary school life (late to class, a group project, the group chat afterwards) · emoji as punctuation · British English · nothing longer than two sentences — lists carry the volume, never walls of text.",
 "",
@@ -751,10 +1263,29 @@ ROOM_RULES[0], "", ROOM_RULES[1], "", ROOM_RULES[2], "", ROOM_RULES[3], "", ROOM
         else if(ctx.progress) ctx.progress("the shell came back without three typed games — the method block was dropped");
       }
     }catch(e){}
+        /* THE KSU + DIFFERENTIATION (LPG harvest, 2026-10-21, ported from the edtech
+       station — asiln/Lesson-Plan-Generator prompt.txt: well-formed is carried,
+       malformed is dropped, absent is legal; old shells without these fields
+       still compose. */
+    let outcomes = null, differentiation = null;
+    try{
+      const oRaw = shell.outcomes;
+      if(oRaw && typeof oRaw === "object"){
+        const k = String(oRaw.know || "").slice(0, 140), d = String(oRaw.do || oRaw.skills || "").slice(0, 140), u = String(oRaw.understand || "").slice(0, 140);
+        if(k && d && u) outcomes = { know:k, do:d, understand:u };
+        else if(ctx.progress) ctx.progress("the shell came back without a full KSU triple — outcomes dropped");
+      }
+      const dRaw = shell.differentiation;
+      if(dRaw && typeof dRaw === "object"){
+        const sp = String(dRaw.support || "").slice(0, 140), ex = String(dRaw.extend || "").slice(0, 140);
+        if(sp && ex) differentiation = { support:sp, extend:ex };
+        else if(ctx.progress) ctx.progress("the shell came back without both ropes — differentiation dropped");
+      }
+    }catch(e){}
     const spec = { topic: shell.topic || String(topic || "").trim(), title: shell.title, logo: String(shell.logo || "📚").slice(0, 4),
       subtitle: shell.subtitle, cta: shell.cta || "🚀 Begin Your Journey",
       features: (Array.isArray(shell.features) ? shell.features : []).slice(0, 4),
-      coins: shell.coins || { start:0, correct:10, wrong:0 }, method: method, rooms: rooms };
+      coins: shell.coins || { start:0, correct:10, wrong:0 }, outcomes: outcomes, differentiation: differentiation, evidence: shell.evidence ? String(shell.evidence).slice(0, 160) : null, method: method, rooms: rooms };
     return { spec:spec, passes:total, storyline:shell.storyline || null };
   }
 
@@ -1334,13 +1865,13 @@ ROOM_RULES[0], "", ROOM_RULES[1], "", ROOM_RULES[2], "", ROOM_RULES[3], "", ROOM
   async function deckFromFile(file){
     if(!file) return;
     if(!window.ObiDeck){ say("⚠ The deck reader did not load — reload the page and try again."); return; }
-    if(!/\.pdf$/i.test(file.name || "") && file.type !== "application/pdf"){ say("⚠ Only PDF decks for now — «" + file.name + "» is not one."); return; }
+    if(!/\.(pdf|pptx)$/i.test(file.name || "")){ say("⚠ Only PDF and PPTX decks for now — «" + file.name + "» is not one."); return; }
     say("📎 Reading «" + file.name + "» (" + Math.round(file.size / 1024) + " KB) in this browser…");
     var ex;
-    try{ ex = await window.ObiDeck.extractPdf(file); }
-    catch(e){ say("⛔ Could not read that PDF — " + String((e && e.message) || e).slice(0, 200)); return; }
-    if(!ex.text){ say("⚠ That PDF has no selectable text (" + ex.pageCount + " page(s) — scanned images, most likely). Paste the lesson words into the notes by hand, or run it through transcription first."); return; }
-    var b = window.ObiDeck.briefFromPdf(file.name, ex);
+    try{ ex = /\.pptx$/i.test(file.name || "") ? await window.ObiDeck.extractPptx(file) : await window.ObiDeck.extractPdf(file); }
+    catch(e){ say("⛔ Could not read that deck — " + String((e && e.message) || e).slice(0, 200)); return; }
+    if(!ex.text){ say("⚠ That deck has no selectable text (" + ex.pageCount + " page(s) — scanned images, most likely). Paste the lesson words into the notes by hand, or run it through transcription first."); return; }
+    var b = (/\.pptx$/i.test(file.name || "") ? window.ObiDeck.briefFromPptx(file.name, ex) : window.ObiDeck.briefFromPdf(file.name, ex));
     desk.topic = b.topic;
     desk.notes = b.notes;
     log({ kind:"op", action:"lesson deck intake", ok:true, detail:file.name, result:ex.pagesRead + "/" + ex.pageCount + " page(s) · brief filled" });

@@ -3,6 +3,9 @@
    A trail is DERIVED DATA. It is never SOUL. It POINTS at soul (by anchor/seq)
    and it is evictable; the verbatim word stays in the SDNAD ledger untouched.
    deposit() refuses kind "soul" for exactly that reason.
+   KEEPER: Agent 97 (OB1, the ledger-brain audit) tends this ground — read,
+   evaporate, sync. Writers tag their trails (drone/run/session/keeper); the
+   keeper keeps them honest. (Sovereign order 2026-10-21.)
 
    Ground = (key, kind, signal). Keys are coordinates, colon-namespaced:
      route:<routeId>      which road to a destination (llm model, node, provider)
@@ -98,6 +101,7 @@
       t.strength = (t.strength || 0) + weight;
       t.reinforcements = (t.reinforcements || 0) + 1;
       t.reinforced_at = at;
+      if (o.meta) t.meta = o.meta;
       if (o.text){
         t.evidence = (t.evidence || []);
         const q = clean(o.text, MAX_TEXT);

@@ -297,7 +297,7 @@
     if(!P) return { laid:0, byKind:{} };
     const byKind = { positive:0, negative:0, neutral:0 };
     const lay = (key, kind, text) => {
-      try{ P.deposit({ kind, key, signal:"scout", text:(text || "").slice(0, 200), session:ctx.session, run:ctx.run, drone:"PhoenixScout" }); byKind[kind]++; }catch(e){}
+      try{ P.deposit({ kind, key, signal:"scout", text:(text || "").slice(0, 200), session:ctx.session, run:ctx.run, drone:"PhoenixScout", meta:{ keeper:"agent97" } }); byKind[kind]++; }catch(e){}
     };
     for (const r of results){
       const kind = r.verdict === "LIVE" ? "positive" : (r.verdict === "DEAD" || r.verdict === "DRIFT" || r.verdict === "FLAG") ? "negative" : "neutral";
@@ -520,7 +520,7 @@
     if(!targets.length) targets = TERRAIN;
     ctx.scope = every ? "all sectors (the sovereign's word: all)" : (targets.length === TERRAIN.length ? "all sectors (no sector name matched in: " + only + ")" : targets.map(t => t.id).join(", "));
     const P = window.ObiPheromone;
-    if(P) P.deposit({ kind:"neutral", key:"mission:scout", signal:only || "all", text:"scout out — " + targets.map(t => t.id).join(", "), session:ctx.session, run:ctx.run, drone:"PhoenixScout" });
+    if(P) P.deposit({ kind:"neutral", key:"mission:scout", signal:only || "all", text:"scout out — " + targets.map(t => t.id).join(", "), session:ctx.session, run:ctx.run, drone:"PhoenixScout", meta:{ keeper:"agent97" } });
 
     const results = [];
     for (const t of targets){

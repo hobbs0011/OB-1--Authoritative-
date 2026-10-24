@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!-- PAI S GAMING PLATFORM — game 1: tile board (prototype, original code).
+     Ported from the edtech station prototype into the command station tree;
+     PAI S GAMING PLATFORM — — game 1: tile board (prototype, original code).
+     Mechanics OBSERVED from Baamboozle SSR (16 tiles, point values, team play,
+     teacher-operated single screen). No Baamboozle code, assets, questions, or
+     power-up names are used here — tiles, specials, questions and styling are
+     original. Sample bank is SYNTHETIC; real banks come from class transcripts
+     (verbatim-first) and live in kv, never in src/. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NET Arena — Tile Board (prototype)</title>
+<style>
+:root{--sys:#a855f7;--gold:#f59e0b;--ground:#0f0f1a;--ink:#e5e7eb;--dim:#8b94ad}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:1rem}
+h1{font-size:1.2rem;letter-spacing:.04em;margin:.4rem 0 .1em}
+h1 .g{color:var(--gold)}
+.sub{color:var(--dim);font-size:.8rem;margin-bottom:.8rem}
+#teams{display:flex;gap:.8rem;margin-bottom:.8rem;width:min(560px,94vw)}
+.team{flex:1;border:1px solid rgba(168,85,247,.35);border-radius:.7rem;padding:.5rem .8rem;text-align:center;cursor:pointer;background:rgba(26,26,38,.7)}
+.team.active{outline:2px solid var(--gold);background:rgba(59,29,92,.8)}
+.team b{font-size:1.1rem;display:block}
+.team .sc{font-size:1.5rem;color:var(--gold);font-weight:800}
+#board{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;width:min(560px,94vw)}
+.tile{aspect-ratio:1;border-radius:.6rem;border:1px solid rgba(168,85,247,.4);background:linear-gradient(180deg,rgba(59,29,92,.9),rgba(15,15,26,.95));color:var(--ink);font-size:1.6rem;font-weight:800;cursor:pointer}
+.tile:not(:disabled):hover{border-color:var(--gold)}
+.tile:disabled{opacity:.45;cursor:default}
+#msg{min-height:1.6em;margin:.6rem 0;color:var(--gold);font-weight:600;text-align:center}
+#ctl{display:flex;gap:.6rem;margin-top:.4rem}
+button.act{background:linear-gradient(180deg,#7c3aed,#5b21b6);color:#fff;border:1px solid rgba(168,85,247,.6);border-radius:.5rem;padding:.55rem 1.1rem;font-weight:700;cursor:pointer}
+#modal{position:fixed;inset:0;background:rgba(5,5,12,.82);display:none;align-items:center;justify-content:center;padding:1rem;z-index:10}
+#modal.open{display:flex}
+.card{background:#151524;border:1px solid var(--sys);border-radius:.9rem;max-width:520px;width:100%;padding:1.2rem}
+.card .pts{color:var(--gold);font-weight:800;font-size:.85rem;letter-spacing:.1em}
+.card h2{font-size:1.05rem;margin:.4rem 0 .8rem}
+.card .hint{font-size:.8rem;color:var(--dim);margin-top:.6rem}
+.card .row{display:flex;gap:.6rem;margin-top:1rem}
+.card .row button{flex:1;padding:.7rem;border-radius:.5rem;font-weight:800;cursor:pointer;border:1px solid}
+#btnC{background:rgba(20,120,60,.35);border-color:#4cd97b;color:#d6ffe4}
+#btnW{background:rgba(140,30,30,.35);border-color:#ff5a5a;color:#ffd9d9}
+</style>
+</head>
+<body>
+<h1>NET ARENA <span class="g">· tile board</span></h1>
+<div class="sub">prototype 1 · single screen · teacher operates · first to <span id="targetLbl">150</span> takes the round</div>
+<div id="teams">
+  <div class="team active" id="teamA"><b>🐯 Tigers</b><span class="sc" id="scA">0</span></div>
+  <div class="team" id="teamB"><b>🐭 Mice</b><span class="sc" id="scB">0</span></div>
+</div>
+<div id="board"></div>
+<div id="msg">Tap a tile to open it.</div>
+<div id="ctl"><button class="act" id="resetBtn">↺ new round</button></div>
+<div id="modal"><div class="card">
+  <div class="pts" id="mPts"></div>
+  <h2 id="mQ"></h2>
+  <div class="hint" id="mSup"></div>
+  <div class="hint" id="mExt"></div>
+  <div class="row"><button id="btnC">✓ Correct</button><button id="btnW">✗ Wrong</button></div>
+</div></div>
+<script>
+/* Synthetic sample bank. Real banks: {q, answers, support, extend, source}. */
+const BANK=[
+{q:"Ask for directions to the station — no phone allowed. What are the three magic words?",a:["Excuse me, …","Could you tell me…","Go straight, turn left"],support:"Start with 'Excuse me' + eye contact.",extend:"Now do it with a follow-up: '…and how long does it take on foot?'",source:"synthetic sample"},
+{q:"Your friend says 'I am boring' when they mean the lesson is boring. Fix it in one line.",a:["I am bored / The lesson is boring"],support:"-ing describes the thing; -ed describes the feeling.",extend:"Explain it to the room as if they are five.",source:"synthetic sample"},
+{q:"Order food for two in under 20 seconds. Loud voice. Go.",a:["performance, not perfection"],support:"Point + name + number: 'Two pho, please.'",extend:"Add one problem: '…and no ice, thanks.'",source:"synthetic sample"},
+{q:"Translate the delay: you think in Vietnamese, then speak. Name one trick that kills it.",a:["Think in chunks / shadow the speaker / answer before you are ready"],support:"Repeat the last three words you heard, out loud.",extend:"Shadow a 10-second clip with zero pauses.",source:"synthetic sample"},
+{q:"Past simple vs present perfect: 'I ___ (live) here since 2020.' Pick and defend.",a:["have lived"],support:"'since 2020' is unfinished time → perfect.",extend:"Give two more unfinished-time markers.",source:"synthetic sample"},
+{q:"Give one compliment and one disagreement to a teammate — both in English, both kind.",a:["performance"],support:"Compliment the work, disagree with the idea.",extend:"Disagree using '…and…' instead of '…but…'.",source:"synthetic sample"},
+{q:"Describe your morning routine in 5 sentences. No 'very'. Timer: 30 seconds.",a:["performance"],support:"First … Then … After that …",extend:"Retell it backwards.",source:"synthetic sample"},
+{q:"The interview question: 'Tell me about yourself' — give the 20-second version.",a:["name + study/work + one win + where you are headed"],support:"Four beats: who, what, win, where.",extend:"Cut it to 10 seconds without losing the win.",source:"synthetic sample"},
+{q:"Make three sentences with 'already', 'yet', 'still' about this week.",a:["placement shows mastery"],support:"already = done early · yet = not done · still = continuing.",extend:"Say all three with falling intonation.",source:"synthetic sample"},
+{q:"Role-play: return a broken phone to a shop. Clerk disagrees. Hold your ground politely.",a:["performance"],support:"'I understand, and…' keeps the door open.",extend:"The clerk offers 50% — counter once.",source:"synthetic sample"}];
+const TARGET=150;
+const TILES=(()=>{const t=[];const vals=[10,15,20,10,15,20,10,15,20,10,15];
+t.push(...vals.map(v=>({k:'pts',v})));t.push({k:'double'},{k:'double'},{k:'half'},{k:'swap'},{k:'storm'});
+for(let i=t.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[t[i],t[j]]=[t[j],t[i]];}return t;})();
+let scores=[0,0],active=0,qi=0,cur=null,over=false;
+const $=id=>document.getElementById(id);
+const board=$('board'),msg=$('msg');
+TILES.forEach((t,i)=>{const b=document.createElement('button');b.className='tile';b.textContent='?';b.onclick=()=>open(i,b);board.appendChild(b);});
+function teamName(i){return i===0?'Tigers':'Mice';}
+function setActive(i){active=i;$('teamA').classList.toggle('active',i===0);$('teamB').classList.toggle('active',i===1);}
+$('teamA').onclick=()=>setActive(0);$('teamB').onclick=()=>setActive(1);
+function open(i,btn){
+  if(over||btn.disabled)return;
+  btn.disabled=true;btn.style.opacity=.45;
+  cur=TILES[i];
+  const q=BANK[qi%BANK.length];qi++;
+  $('mPts').textContent=cur.k==='pts'?('worth '+cur.v+' pts · '+teamName(active)+' to answer'):(cur.k.toUpperCase()+' tile · '+teamName(active)+' to answer');
+  $('mQ').textContent=q.q;
+  $('mSup').textContent='🛟 support: '+q.support;
+  $('mExt').textContent='🚀 extend: '+q.extend;
+  $('modal').classList.add('open');
+}
+function close(ok){
+  $('modal').classList.remove('open');
+  if(!cur)return;
+  if(ok){
+    let gain=0;
+    if(cur.k==='pts')gain=cur.v;
+    else if(cur.k==='double')gain=30;
+    else if(cur.k==='half')gain=8;
+    else if(cur.k==='swap'){scores[1-active]=Math.max(0,scores[1-active]-15);gain=15;}
+    else if(cur.k==='storm'){scores[active]=Math.max(0,scores[active]-20);gain=0;msg.textContent='⛈ STORM! '+teamName(active)+' lose 20. The room groans.';}
+    if(cur.k!=='storm'){scores[active]+=gain;msg.textContent='+'+gain+' to the '+teamName(active)+'! Tap the other team to hand over, or keep rolling.';}
+  }else{msg.textContent='Wrong — no points. The other team is smiling. Tap a tile.';}
+  $('scA').textContent=scores[0];$('scB').textContent=scores[1];
+  cur=null;
+  if(scores[0]>=TARGET||scores[1]>=TARGET){over=true;const w=scores[0]>scores[1]?'TIGERS':'MICE';
+    msg.textContent='🏆 '+w+' TAKE THE ROUND '+scores[0]+'–'+scores[1]+'! New round?';}
+}
+$('btnC').onclick=()=>close(true);$('btnW').onclick=()=>close(false);
+$('resetBtn').onclick=()=>location.reload();
+</script>
+</body>
+</html>
