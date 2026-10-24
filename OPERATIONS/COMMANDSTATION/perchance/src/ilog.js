@@ -585,6 +585,7 @@
     if(!batches.length) batches.push([]);
     if(!entries.length && !(o.deletes || []).length) return { pushed:0, failed:0, removed:[], commitSha:null, baseSha:baseSha, errors:errors };
     let pushed = 0, failed = 0, cur = baseSha, curTree = baseTree, lastSha = null;
+    const failedPairs = [];
     const removed = [];
     let first = true, part = 0;
     for(const batch of batches){
@@ -593,19 +594,21 @@
       for(const pair of batch){
         const p = pair[0], c = pair[1];
         let done = false;
-        for(let attempt = 0; attempt < 2 && !done; attempt++){
+        for(let attempt = 0; attempt < 3 && !done; attempt++){
           try{
             /* a text file is UTF-8 encoded here; a BINARY file arrives as {__b64} (see
                selfSourceAny in src/app.js) and is sent as-is, so the push does not route an
-               image through a text decode and corrupt it. Second attempt retries a
-               transient refusal (e.g. a one-off 401 on a big blob). */
+               image through a text decode and corrupt it. Refusals back off (10s, 20s):
+               the 401 on the big PDF passed standalone seconds later, so it is the
+               storm, not the file. Unrecovered pairs ride the final sweep below. */
             const body = (c && typeof c === "object" && typeof c.__b64 === "string")
               ? { content: c.__b64, encoding: "base64" }
               : { content: b64(c), encoding: "base64" };
             const b = await ghJson(base + "/git/blobs", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(body) });
             if(b.j && b.j.sha){ blobs.push({ path:p, mode:"100644", type:"blob", sha:b.j.sha }); pushed++; done = true; }
-            else if(attempt === 1){ failed++; errors.push(p + " → blob HTTP " + b.status + " " + String((b.j && b.j.message) || "").slice(0, 90)); }
-          }catch(e){ if(attempt === 1){ failed++; errors.push(p + " → " + e.message); } }
+            else if(attempt < 2){ await new Promise(r => setTimeout(r, (attempt + 1) * 10000)); }
+            else { failedPairs.push(pair); }
+          }catch(e){ if(attempt < 2){ await new Promise(r => setTimeout(r, (attempt + 1) * 10000)); } else { failedPairs.push(pair); } }
         }
       }
       /* REMOVALS ride the first batch. `base_tree` carries every path the previous commit
@@ -632,6 +635,42 @@
         if(!(ref.j && ref.j.object && ref.j.object.sha)){ failed++; errors.push("ref move HTTP " + ref.status + " " + String((ref.j && ref.j.message) || "").slice(0, 90)); continue; }
         cur = commitSha; curTree = treeSha; lastSha = commitSha;
       }catch(e){ failed++; errors.push(e.message); }
+    }
+    /* FINAL SWEEP — leftovers get one more chance after the storm has passed (15s),
+       then land in one small commit. Counts and errors are only written here, so a
+       file recovered in the sweep reads as pushed, not failed. Nothing is ever
+       discarded while a retry can carry it. */
+    if(failedPairs.length){
+      await new Promise(r => setTimeout(r, 15000));
+      const blobs = [];
+      for(const pair of failedPairs){
+        const p = pair[0], c = pair[1];
+        try{
+          const body = (c && typeof c === "object" && typeof c.__b64 === "string")
+            ? { content: c.__b64, encoding: "base64" }
+            : { content: b64(c), encoding: "base64" };
+          const b = await ghJson(base + "/git/blobs", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(body) });
+          if(b.j && b.j.sha){ blobs.push({ path:p, mode:"100644", type:"blob", sha:b.j.sha }); pushed++; }
+          else { failed++; errors.push(p + " → blob HTTP " + b.status + " " + String((b.j && b.j.message) || "").slice(0, 90) + " (after sweep)"); }
+        }catch(e){ failed++; errors.push(p + " → " + e.message + " (after sweep)"); }
+      }
+      if(blobs.length){
+        try{
+          const tree = await ghJson(base + "/git/trees", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(Object.assign({ tree: blobs }, curTree ? { base_tree: curTree } : (baseSha ? { base_tree: baseSha } : {}))) });
+          const treeSha = tree.j && tree.j.sha;
+          if(!treeSha){ failed += blobs.length; errors.push("sweep tree HTTP " + tree.status); }
+          else{
+            const commit = await ghJson(base + "/git/commits", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ message: o.message + " (sweep)", tree: treeSha, parents: cur ? [cur] : [] }) });
+            const commitSha = commit.j && commit.j.sha;
+            if(!commitSha){ failed += blobs.length; errors.push("sweep commit HTTP " + commit.status); }
+            else{
+              const ref = await ghJson(base + "/git/refs/heads/" + o.branch, { method:"PATCH", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ sha: commitSha }) });
+              if(!(ref.j && ref.j.object && ref.j.object.sha)){ failed += blobs.length; errors.push("sweep ref move HTTP " + ref.status); }
+              else { cur = commitSha; curTree = treeSha; lastSha = commitSha; }
+            }
+          }
+        }catch(e){ failed += blobs.length; errors.push("sweep: " + e.message); }
+      }
     }
     return { pushed:pushed, failed:failed, removed:removed, commitSha:lastSha, baseSha:baseSha, treeSha:curTree, errors:errors };
   }
