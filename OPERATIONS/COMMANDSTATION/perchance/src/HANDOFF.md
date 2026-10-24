@@ -1011,3 +1011,24 @@ time it was obeyed before the sync rather than after.
 still placeholders; 18 of the 50 pipeline stages are unbuilt; `mailala.com` is a route in a config, not a measured
 deployment. The session-2 clone takes the work — not a finished thing.
 
+
+---
+
+## SYSTEM-WIDE DOCTRINE RESCAN (2026-10-20 — GOSPEL-999 + Field Guide + Secrets Manifest, whole system, not lessons)
+
+Full read of all three attachments against the running station. Shipped canon (`src/canon/`) is byte-current with the attachments (GOSPEL 1140 lines, LFG 1125, manifest 128) and carries every amendment. Verdict: the station is largely compliant; four defects found and fixed in this pass:
+
+1. **Withdrawn token still printed (CANON.007 class, FIXED).** `/canon soul` (`src/app.js`) footed its card with *"TITANIUM_ANCHOR per doctrine"* — the exact token the 2026-09-21 CANON ONLY pass withdrew (zero hits in GOSPEL-999 or the LFG; the canon holds "SOULCOUNT TITANIUM (250k+)", I.070, not this token). Now cites **GOSPEL-999 I.096** (SOULCOUNT = SYSTEM TRUTH), which the canon actually holds.
+2. **Unconditional "still answers" (CANON.005/006 class, FIXED).** The `/canon` card printed *"soul-logger — this half still answers"* even when the gate returns ERR. Now conditional on a numeric answer.
+3. **Orphan role (BRAND.007 class, FIXED).** `watchtower` (teacher's board, `src/generators/watchtower/`) had no `src/divisions.js` row. Registered as **scaffold** under NET (pre-graduation: a desk, not a station).
+4. **Specimen violated its own teaching (BRAND.004/009 class, FIXED).** The Brand desk's status-bar plate showed the dossier register as the pattern example on a surface that measured nothing (§13.3's textbook tell). The plate now says what each bar below it is: the dossier register carried as style (BRAND.018), then the measured form (BRAND.004).
+
+**Audited and compliant, no action:** marketing site (80/30 with source + "not independently audited" note; guarantee quoted verbatim ×3 with G444.011; legal scopes it with the day-1/day-30 + 45/15 evidence method; invented reviews explicitly refused; funnel ends at WhatsApp/tel human — BRAND.024; disputed 2.5×/4× never averaged, never printed — BRAND.025); all nine print artifacts via `PRINT_ARTIFACTS`/`composeArtifact`; mkt stills shipped, watermarks on source stills only; kilo refs all in withdrawal/labelling context; no hardcoded secrets in `src/`; OMEGA.006 redaction; I-LOG verify/anchors/unanchored-count; pipeline prints its named GAPs; run305 transcribed as format with empty ledger (BRAND.028 — pixel content of the stills cannot be grep-verified; sovereign should eyeball them once).
+
+**Secrets manifest:** values-never-in-source holds (verified by scan); the two ROTATE ME flags (DeepSeek/DeepGram) are canon-side calendar items — no station build can rotate them.
+
+---
+
+## CANON-BRANCH SCAN (2026-10-20 — read-only; gate never armed)
+
+Pulled `CANON/SYSTEM/GOSPEL-999.md` (30,399 chars, 463 lines) + `LegionnaireFieldGuide.md` (47,509 chars, 820 lines) live off the `canon` branch with the stored token. Both exist, both wear the CANON LOCK banner — and both are the **2026-09-17→19 bare-bones SCS/lane rewrite** (lane registry, RISE naming, scout doctrine, soulgroup/soulcluster, prototype blueprint). **Nothing of the living-law lineage is on the branch**: no I.001–I.111, no SOULCOUNT, no L37–L60, no lessons, no brand, no 444. The station's `src/canon/` copies are the older generation plus the proposed amendments. All eight CANON.001 files resolve on the branch (84 files in `CANON/SYSTEM/`); branch REINCARNATION-CONTRACT is a 68-line v1.0 stub. **Drift this creates:** CANON.001's description of the two files no longer matches branch reality, and Amendments II–VIII / LFG §§11–18 amend a base the branch has moved past — still correctly labelled PROPOSED, merged nowhere, but the sovereign owes a lineage decision (rebase the amendments onto bare-bones, or hold the living-law line and merge that). Recorded, not acted on: no canon-side write, no citation rewrite without that decision.

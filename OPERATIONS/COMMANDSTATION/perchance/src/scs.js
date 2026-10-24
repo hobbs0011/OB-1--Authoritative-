@@ -109,18 +109,21 @@
     }
     return rr;
   }
-  function countsFor(runNo){
+  function countsFor(runNo, firstN){
     var rr = rrlOf(runNo);
-    var soul = rr.entries.filter(function(e){ return e.role === "SOUL"; });
-    var dna  = rr.entries.filter(function(e){ return e.role !== "SOUL"; });
-    var reason = rr.entries.filter(function(e){ return e.role === "REASON"; });
+    /* A frozen artifact can only be compared like-for-like: firstN recounts
+       exactly the span some earlier stage covered, ignoring later appends. */
+    var list = (firstN == null) ? rr.entries : rr.entries.slice(0, firstN);
+    var soul = list.filter(function(e){ return e.role === "SOUL"; });
+    var dna  = list.filter(function(e){ return e.role !== "SOUL"; });
+    var reason = list.filter(function(e){ return e.role === "REASON"; });
     var bp = dna.filter(function(e){ return /```/.test(e.text) || String(e.text||"").length >= 1200; });
     return {
       run: runNo, entries: rr.entries.length,
       soul: { count: soul.length, chars: soul.reduce(function(n,e){ return n + String(e.text||"").length; }, 0), turns: soul },
       dna:  { count: dna.length,  chars: dna.reduce(function(n,e){ return n + String(e.text||"").length; }, 0), blueprints: bp.length, turns: dna },
       reason: { count: reason.length },
-      pheromone: { count: rr.entries.filter(function(e){ return e.role === "TOOL"; }).length }
+      pheromone: { count: list.filter(function(e){ return e.role === "TOOL"; }).length }
     };
   }
   function keywordIndex(c){
@@ -327,6 +330,10 @@
     var dnaHash  = await sha256hex(c.dna.turns.map(function(e){ return e.text; }).join("\n"));
     var extract = {
       stage:"SCHOLAR", at: ict(), run: c.run,
+      /* rrlN: how many ledger entries the counts above cover — the ENGINEER
+         match re-takes the counts over exactly this span (L37 keeps appending
+         after this point: the seal line, SUPPLY, FORTIFY itself). */
+      rrlN: c.entries,
       counts: { SOULcount:c.soul.count, SOULchars:c.soul.chars, DNAcount:c.dna.count, DNAchars:c.dna.chars, DNAblueprints:c.dna.blueprints, REASONcount:c.reason.count, PHEROMONEcount:c.pheromone.count },
       soulHash: soulHash, dnaHash: dnaHash,
       keywords: { terms: ki.terms, top: ki.top },
@@ -372,8 +379,17 @@
     chk("no stage below REAL other than DNA-limited halves", !!(sess && need.every(function(k){ var v = sess.stages[k] && sess.stages[k].verdict; return v === "REAL" || (k === "SCHOLAR" && v === "HOLLOW"); })), "HOLLOW only permitted where PERMANENT-LAWS says so");
     chk("session name verbatim in the header", !!(sess && sess.stages.RISE && String(sess.stages.RISE.artifact).indexOf("Session: " + sess.name) !== -1), sess && sess.name);
     var c = countsFor(sess ? sess.run : currentRunNo());
-    chk("SOULcount matches across RRL and SCHOLAR", !!(sess && sess.stages.SCHOLAR && sess.stages.SCHOLAR.artifact.counts.SOULcount === c.soul.count), "RRL=" + c.soul.count);
-    chk("DNAcount matches across RRL and SCHOLAR", !!(sess && sess.stages.SCHOLAR && sess.stages.SCHOLAR.artifact.counts.DNAcount === c.dna.count), "RRL=" + c.dna.count);
+    /* The ledger grows with every command by law (L37: capture everything),
+       so a frozen SCHOLAR artifact can never match the LIVE counts once any
+       later command exists — including the FORTIFY command itself. Recount
+       over exactly the span SCHOLAR covered; later legitimate appends must
+       not fail the match. Without a recorded span, fall back to live counts
+       (fails closed, as before). */
+    var sch = sess && sess.stages.SCHOLAR;
+    var bound = sch && sch.artifact && sch.artifact.rrlN;
+    var cb = (bound == null) ? c : countsFor(sess.run, bound);
+    chk("SOULcount matches across RRL and SCHOLAR", !!(sch && sch.artifact.counts.SOULcount === cb.soul.count), "scholar-span=" + cb.soul.count + " · live=" + c.soul.count);
+    chk("DNAcount matches across RRL and SCHOLAR", !!(sch && sch.artifact.counts.DNAcount === cb.dna.count), "scholar-span=" + cb.dna.count + " · live=" + c.dna.count);
     var fails = checks.filter(function(x){ return x.result === "FAIL"; });
     var pass = !fails.length;
     var art = { stage:"ENGINEER", at: ict(), run: sess && sess.run, checks: checks, pass: pass };

@@ -98,6 +98,13 @@
           does:["the dose and the arithmetic stated plainly, the five beats with a plan per beat, and the topic seeds",
                 "the run log and the reading sheet: six rows 1–5 and the one correction the tutor's own rule allows"],
           needs:["the recording itself, sent after each run"] },
+        { id:"watchtower", name:"The Watchtower", icon:"tower", status:"scaffold", entry:"family",
+          blurb:"The teacher's board: the class-level questions — who is behind, who is ready, what was never taught — answered from the same evidence, with no new data collection and no guessing.",
+          does:["the roster, one line per student: minutes, streak, evidence count, last capture",
+                "the coverage board: what the syllabus asked for vs what the evidence shows was taught — 'not observed' is never rounded up to 'done'",
+                "the who-board: who has not been heard from, who is stuck, who is ready for more"],
+          needs:["its own generator on merit (suggested obi-watchtower) — until then it is a desk, not a station",
+                 "the syllabus side: a pasted table of contents (book + unit list) — ana.curriculum, currently missing"] },
         {
           id:"student-portal", name:"Student Portal", icon:"door", status:"planned",
           group:"STUDENT PORTAL PIPELINE — one generator per part (src/STUDENT-PORTAL-PIPELINE.md)",
@@ -353,14 +360,36 @@
     },
     {
       id:"gaming", name:"Gaming", icon:"gamepad", status:"planned",
-      blurb:"The games division — interactive worlds and simulations. Scaffolds next as its own mastermind generator: PaiS Gaming. This crate stays planned here until that generator opens.",
-      generators:[]
+      blurb:"The games division — interactive worlds and simulations. Scaffolds next as its own mastermind generator: PaiS Gaming. This crate stays planned here until that generator opens. The first playable prototype (tile board) already runs in-tree.",
+      generators:[
+        {
+          id:"games-platform", name:"Games Platform", icon:"gamepad", status:"scaffold",
+          blurb:"The estate's own EdTech gaming platform (blueprint: src/games-platform/BLUEPRINT.md): single-screen classroom games in the Baamboozle shape — 16-tile board, point values, team play — measured from Baamboozle SSR, rebuilt as original code. Game 1 (tile board with Double/Half/Swap/Storm tiles, teacher-marks-Correct/Wrong, support+extend on every question) runs now as src/games-platform/arena.html.",
+          does:["16-tile classroom board, teacher-operated, first to 150 takes the round",
+                "every question carries support (lifeline) + extend (stretch) — the LPG differentiation contract, on the board",
+                "question-bank format shared with lesson blades and the Roblox mirror (bank JSON: q/answers/support/extend/source)",
+                "G444 tokens; synthetic sample bank — real class banks live in kv, never in src/"],
+          needs:["classroom playtests — fix by evidence, not by taste",
+                  "the bank generator: transcript evidence → Q&A bank filed in kv",
+                  "two more arena games from the same bank format (jeopardy-style board, storm variants)",
+                  "paste into its own generator → PaiS Gaming opens (which is why the crate says scaffold, not live)"]
+        }
+      ]
     },
     {
-      id:"webdev", name:"Web Development", icon:"terminal", status:"scaffold",
+      id:"webdev", name:"Web Development", icon:"terminal", status:"live",
       full:"PrAis Web Development",
-      blurb:"The build division — sites, dashboards and internal tools for clients. Its first generator is the Site Builder: a brief goes in, a real site comes out, in the house theme or the client's own colours.",
+      blurb:"The build division — sites, dashboards, internal tools, and the Genesis Generator. Agent 99\u2019s builder IDE is open here as a desk; the Site Builder and Video Node scaffold next to it.",
       generators:[
+        { id:"agent99-builder", name:"Genesis Generator", icon:"hammer", status:"live",
+          entry:"genesis", entryLabel:"Open the builder \u25b8",
+          blurb:"The generator of generators \u2014 the Genesis Generator, Agent 99\u2019s builder IDE as a desk under this roof. Describe what you want in plain English: it writes the files, runs them in a sandbox, audits itself three ways, and hands you the export.",
+          does:["chat \u2192 files \u2192 preview \u2192 export: a whole generator built in one sitting",
+                "three audits plus the instant check: research scout, plan alignment, red-team attack",
+                "every project kept in this browser under kv.genesis, switchable from the pill at the top",
+                "its own source on the self tab \u2014 Agent 99 can improve itself, with automatic fallback to the shipped core"],
+          needs:["a standalone copy lives off-site too (the .zip escape hatch, rebuilt at every seal)"]
+        },
         {
           id:"site-builder", name:"Site Builder", icon:"globe", status:"scaffold",
           blurb:"The hand that puts a page on the web. A brief becomes ONE real, self-contained, responsive HTML site — written in parts, previewed live in a sandboxed frame, downloadable, and wearable in the frozen PrAis tokens or in a client's own colours.",
@@ -440,7 +469,9 @@
        internal, and every role's door is built on them. */
     else if(g.entry === "family" && window.ObiFamily && window.ObiFamily.has(g.id)) h += '<button class="ci-act gen-open" data-family-open="' + e(g.id) + '">Open it here \u25b8</button>';
     else if(g.entry === "lesson") h += '<button class="ci-act gen-open" data-open="' + e(g.id) + '">Build a lesson \u25b8</button>';
+    else if(g.entry === "intake" && g.status === "live") h += '<button class="ci-act gen-open" data-open="' + e(g.id) + '">Open the intake \u25b8</button>';
     else if(g.entry === "brand" && g.status === "live") h += '<button class="ci-act gen-open" data-open="' + e(g.id) + '">' + e(g.entryLabel || "Open the deck \u25b8") + '</button>';
+    else if(g.entry === "genesis" && g.status === "live") h += '<button class="ci-act gen-open" data-open="' + e(g.id) + '">' + e(g.entryLabel || "Open the builder \u25b8") + '</button>';
     else if(g.status === "live" && g.url) h += '<a class="ci-act gen-open" href="' + e(g.url) + '" target="_blank" rel="noopener noreferrer">Open \u25b8</a>';
     if(g.does && g.does.length) h += '<div class="gen-does"><span class="gen-lbl">IT DOES</span>' + g.does.map(x => '• ' + e(x)).join('<br>') + '</div>';
     if(g.needs && g.needs.length) h += '<div class="gen-does">' + '<span class="gen-lbl">STILL NEEDS</span>' + g.needs.map(x => '• ' + e(x)).join('<br>') + '</div>';
@@ -494,7 +525,7 @@
     html += '<div class="gen-foot">' + c.live + ' live · ' + (c.scaffold ? c.scaffold + ' scaffold · ' : '') + c.planned + ' planned across ' + DIVISIONS.length + ' divisions — the registry is <b>src/divisions.js</b>. The machinery behind every piece: <b>/constellation</b>.</div>';
     body.innerHTML = html;
 
-    strip.querySelectorAll(".divbtn").forEach(b => { b.onclick = () => { try{ sessionStorage.setItem("obi_division", b.dataset.div); }catch(err){} mount({ division:b.dataset.div }); if(opts.onDivision) opts.onDivision(b.dataset.div); }; });
+    strip.querySelectorAll(".divbtn").forEach(b => { b.onclick = () => { try{ sessionStorage.setItem("obi_division", b.dataset.div); }catch(err){} /* carry the openers through: a division switch must never disarm the grid (opener buttons went dead on every switch before this line). */ mount({ division:b.dataset.div, onOpen:opts.onOpen, onDivision:opts.onDivision }); if(opts.onDivision) opts.onDivision(b.dataset.div); }; });
     body.querySelectorAll(".gen-open[data-open]").forEach(b => { b.onclick = () => { if(opts.onOpen) opts.onOpen(b.dataset.open); }; });
     if(window.ObiFamily && window.ObiFamily.upgrade){ try{ window.ObiFamily.upgrade(body); }catch(err){} }
     return { division:active, html:html };

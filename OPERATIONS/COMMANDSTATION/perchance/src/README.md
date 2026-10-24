@@ -953,7 +953,7 @@ Every line is transcribed from `CODEX` / `APEX` / `GOSPEL444` in `src/brand.js`,
   is the execution surface, not the label.
 - **Left-aligned, deliberately.** The platform sets `body{text-align:center}`; `#app.net-shell{text-align:left}`
   overrides it, so paragraphs, cards and rows read normally (`#empty` keeps its own centring, as the welcome does).
-- Markup: `#topbar` (brand only — no buttons) + `#tabbar` + `.views > #viewCmd | #viewGen (with #genDesk) | #viewSet`
+- Markup: `#topbar` (brand only — no buttons) + `#tabbar` + `.views > #viewGen (Agent 99 desk + the division grid) | #viewCmd + #viewRoom (the Command Tent: chat + leaders, one face) | #viewSet | #viewSite (the NET site, lazy frame)`
   in `index.html`. Logic: `VIEWS` / `TAB_OF`, `setViewTab()`, `showView()`, `deskOpen()`, `openGenerator()`,
   `mountGenerators()`, `renderSettings()`, `runInStation()`, `updateTabMeta()` in `src/app.js`. Registry:
   `src/divisions.js`. Styles: `#tabbar` / `.tabbtn` / `.view` / `.div-strip` / `.divbtn` / `.gen-grid` / `.gen-card`

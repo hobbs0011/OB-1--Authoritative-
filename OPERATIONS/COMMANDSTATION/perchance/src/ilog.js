@@ -568,56 +568,72 @@
     const base = "https://api.github.com/repos/" + o.owner + "/" + o.repo;
     const errors = [];
     const b64 = c => btoa(unescape(encodeURIComponent(c)));
-    let baseSha = null;
+    /* CHUNK ALWAYS (sovereign order — never discard, never one giant tree). Batches of
+       120 files chain: blobs → tree(base_tree=last) → commit → move ref, each small
+       enough that the API never times out. A 500-file push lands as ~5 commits. */
+    const BATCH = 120;
+    let baseSha = null, baseTree = null;
     try{
       const h = await ghJson(base + "/git/refs/heads/" + o.branch);
       baseSha = (h.j && h.j.object && h.j.object.sha) || null;
       if(!baseSha && h.status !== 404) errors.push("ref read HTTP " + h.status + " " + String((h.j && h.j.message) || "").slice(0, 90));
+      if(baseSha){ try{ const c = await ghJson(base + "/git/commits/" + baseSha); if(c.j && c.j.tree && c.j.tree.sha) baseTree = c.j.tree.sha; }catch(e){} }
     }catch(e){ errors.push("ref read: " + e.message); }
-    const blobs = []; let pushed = 0, failed = 0;
-    for(const pair of Object.entries(o.files || {})){
-      const p = pair[0], c = pair[1];
-      try{
-        /* a text file is UTF-8 encoded here; a BINARY file arrives as {__b64} (see
-           selfSourceAny in src/app.js) and is sent as-is, so the push does not route an
-           image through a text decode and corrupt it. */
-        const body = (c && typeof c === "object" && typeof c.__b64 === "string")
-          ? { content: c.__b64, encoding: "base64" }
-          : { content: b64(c), encoding: "base64" };
-        const b = await ghJson(base + "/git/blobs", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(body) });
-        if(b.j && b.j.sha){ blobs.push({ path:p, mode:"100644", type:"blob", sha:b.j.sha }); pushed++; }
-        else { failed++; errors.push(p + " → blob HTTP " + b.status + " " + String((b.j && b.j.message) || "").slice(0, 90)); }
-      }catch(e){ failed++; errors.push(p + " → " + e.message); }
-    }
-    /* REMOVALS. `base_tree` carries every path the previous commit held, so a file
-       this station has WITHDRAWN would sit on the branch forever — adds and updates
-       alone can never take it back. An entry with `sha:null` removes the path from the
-       new tree. Callers pass the exact paths (o.deletes), computed from a READ of the
-       branch, never guessed; nothing is removed when none are given. */
-    const treeEntries = blobs.slice();
+    const entries = Object.entries(o.files || {});
+    const batches = [];
+    for(let i = 0; i < entries.length; i += BATCH) batches.push(entries.slice(i, i + BATCH));
+    if(!batches.length) batches.push([]);
+    if(!entries.length && !(o.deletes || []).length) return { pushed:0, failed:0, removed:[], commitSha:null, baseSha:baseSha, errors:errors };
+    let pushed = 0, failed = 0, cur = baseSha, curTree = baseTree, lastSha = null;
     const removed = [];
-    for(const p of (o.deletes || [])){
-      if(o.files && Object.prototype.hasOwnProperty.call(o.files, p)) continue;
-      treeEntries.push({ path:p, mode:"100644", type:"blob", sha:null }); removed.push(p);
-    }
-    if(!treeEntries.length) return { pushed:pushed, failed:failed, removed:removed, commitSha:null, baseSha:baseSha, errors:errors };
-    try{
-      const tree = await ghJson(base + "/git/trees", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ base_tree: baseSha || undefined, tree: treeEntries }) });
-      const treeSha = tree.j && tree.j.sha;
-      if(!treeSha){ errors.push("tree HTTP " + tree.status + " " + String((tree.j && tree.j.message) || "").slice(0, 90)); return { pushed:pushed, failed:failed + 1, removed:removed, commitSha:null, baseSha:baseSha, errors:errors }; }
-      const commit = await ghJson(base + "/git/commits", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ message: o.message, tree: treeSha, parents: baseSha ? [baseSha] : [] }) });
-      const commitSha = commit.j && commit.j.sha;
-      if(!commitSha){ errors.push("commit HTTP " + commit.status + " " + String((commit.j && commit.j.message) || "").slice(0, 90)); return { pushed:pushed, failed:failed + 1, removed:removed, commitSha:null, baseSha:baseSha, treeSha:treeSha, errors:errors }; }
-      const ref = await ghJson(base + "/git/refs/heads/" + o.branch, { method:"PATCH", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ sha: commitSha }) });
-      if(!(ref.j && ref.j.object && ref.j.object.sha)){
-        errors.push("ref move HTTP " + ref.status + " " + String((ref.j && ref.j.message) || "").slice(0, 90));
-        return { pushed:pushed, failed:failed + 1, removed:removed, commitSha:commitSha, baseSha:baseSha, treeSha:treeSha, errors:errors };
+    let first = true, part = 0;
+    for(const batch of batches){
+      part++;
+      const blobs = [];
+      for(const pair of batch){
+        const p = pair[0], c = pair[1];
+        let done = false;
+        for(let attempt = 0; attempt < 2 && !done; attempt++){
+          try{
+            /* a text file is UTF-8 encoded here; a BINARY file arrives as {__b64} (see
+               selfSourceAny in src/app.js) and is sent as-is, so the push does not route an
+               image through a text decode and corrupt it. Second attempt retries a
+               transient refusal (e.g. a one-off 401 on a big blob). */
+            const body = (c && typeof c === "object" && typeof c.__b64 === "string")
+              ? { content: c.__b64, encoding: "base64" }
+              : { content: b64(c), encoding: "base64" };
+            const b = await ghJson(base + "/git/blobs", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(body) });
+            if(b.j && b.j.sha){ blobs.push({ path:p, mode:"100644", type:"blob", sha:b.j.sha }); pushed++; done = true; }
+            else if(attempt === 1){ failed++; errors.push(p + " → blob HTTP " + b.status + " " + String((b.j && b.j.message) || "").slice(0, 90)); }
+          }catch(e){ if(attempt === 1){ failed++; errors.push(p + " → " + e.message); } }
+        }
       }
-      return { pushed:pushed, failed:failed, removed:removed, commitSha:commitSha, baseSha:baseSha, treeSha:treeSha, errors:errors };
-    }catch(e){
-      errors.push(e.message);
-      return { pushed:pushed, failed:failed + 1, removed:removed, commitSha:null, baseSha:baseSha, errors:errors };
+      /* REMOVALS ride the first batch. `base_tree` carries every path the previous commit
+         held, so a WITHDRAWN file would sit on the branch forever — an entry with
+         `sha:null` removes it. Callers pass exact paths (o.deletes) from a READ of the
+         branch, never guessed. */
+      const treeEntries = blobs.slice();
+      if(first){
+        first = false;
+        for(const p of (o.deletes || [])){
+          if(o.files && Object.prototype.hasOwnProperty.call(o.files, p)) continue;
+          treeEntries.push({ path:p, mode:"100644", type:"blob", sha:null }); removed.push(p);
+        }
+      }
+      if(!treeEntries.length) continue;
+      try{
+        const tree = await ghJson(base + "/git/trees", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(Object.assign({ tree: treeEntries }, curTree ? { base_tree: curTree } : (baseSha ? { base_tree: baseSha } : {}))) });
+        const treeSha = tree.j && tree.j.sha;
+        if(!treeSha){ failed++; errors.push("tree HTTP " + tree.status + " " + String((tree.j && tree.j.message) || "").slice(0, 90)); continue; }
+        const commit = await ghJson(base + "/git/commits", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ message: o.message + (batches.length > 1 ? " (part " + part + "/" + batches.length + ")" : ""), tree: treeSha, parents: cur ? [cur] : [] }) });
+        const commitSha = commit.j && commit.j.sha;
+        if(!commitSha){ failed++; errors.push("commit HTTP " + commit.status + " " + String((commit.j && commit.j.message) || "").slice(0, 90)); continue; }
+        const ref = await ghJson(base + "/git/refs/heads/" + o.branch, { method:"PATCH", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ sha: commitSha }) });
+        if(!(ref.j && ref.j.object && ref.j.object.sha)){ failed++; errors.push("ref move HTTP " + ref.status + " " + String((ref.j && ref.j.message) || "").slice(0, 90)); continue; }
+        cur = commitSha; curTree = treeSha; lastSha = commitSha;
+      }catch(e){ failed++; errors.push(e.message); }
     }
+    return { pushed:pushed, failed:failed, removed:removed, commitSha:lastSha, baseSha:baseSha, treeSha:curTree, errors:errors };
   }
 
   /* ------------------------------- rendering ------------------------------- */

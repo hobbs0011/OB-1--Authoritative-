@@ -433,14 +433,38 @@
     if(a && a[0] === "{"){ try{ args = JSON.parse(a); }catch(e){} }
     return { name:nm[1], args:args };
   }
+  /* ---------------- the brain: pipe or Kilo Gateway ----------------
+     The loop below thinks by calling a model. Default is the station's own
+     pipe (root.generateText — no key). `/forge brain kilo` points it at the
+     Kilo Gateway instead (window.ObiMcp gateway_chat on the free lane, the
+     key the vault holds) — the station can then be commanded from its own
+     chat with a brain as smart as the one that built it. Receipts land in
+     kv mcp like any other tool call. The brain only thinks: staging needs
+     no gate, landing still does. */
+  function forgeBrain(){ try{ var b = localStorage.getItem("obi_forge_brain"); if(b === "kilo" || b === "pipe") return b; try{ var o = JSON.parse(localStorage.getItem("obi_keys") || "{}"); if(o && o.kilo) return "kilo"; }catch(e2){} return "pipe"; }catch(e){ return "pipe"; } }
+  function forgeBrainSet(b){ b = String(b || "").toLowerCase(); if(b !== "kilo" && b !== "pipe") return null; try{ localStorage.setItem("obi_forge_brain", b); }catch(e){} return b; }
+  async function think(prompt, opts){
+    opts = opts || {};
+    if(forgeBrain() === "kilo"){
+      if(!window.ObiMcp) throw new Error("the tool lane (src/mcp-tools.js) is not loaded — reload the page");
+      const r = await window.ObiMcp.run("gateway_chat", { model: opts.model || "kilo-auto/free", max_tokens: opts.max || 800, prompt: prompt });
+      if(!r.ok) throw new Error("Kilo Gateway refused: " + r.err);
+      const txt = String((r.out && r.out.reply) || "");
+      if(!txt.trim()) throw new Error("the Kilo brain returned nothing");
+      return { text: txt, via: "kilo:" + ((r.out && r.out.model) || "kilo-auto/free"), receipt: r.receipt, usage: (r.out && r.out.usage) || null };
+    }
+    const res = await root.generateText({ instruction: prompt, stopSequences:["\n\n"] });
+    return { text: String(res.generatedText || res.text || ""), via: "pipe" };
+  }
   async function ask(task, opts){
     opts = opts || {};
     const maxSteps = Math.min(12, Math.max(1, opts.maxSteps || 8));
     const card = addBubble("ass", "");
     let transcript = "";
     const steps = [];
+    let brainVia = forgeBrain();
     const render = (head) => {
-      card.innerHTML = '<div class="rise"><div class="rhead">⚒ ' + esc(head) + '</div>'
+      card.innerHTML = '<div class="rise"><div class="rhead">⚒ ' + esc(head) + ' <span style="opacity:.55">· ' + esc(brainVia) + '</span></div>'
         + '<div class="rrow"><b>TASK</b><span class="vd">' + steps.length + "/" + maxSteps + ' steps</span><div class="rd">' + esc(task) + '</div></div>'
         + (steps.length ? steps.map(s => '<div class="rrow"' + (s.ok ? "" : ' bad') + '><b>' + esc(s.name) + '</b><span class="vd">' + (s.ok ? "OK" : "FAIL") + '</span><div class="rd">' + esc(s.note || "").slice(0,220) + '</div></div>').join("") : '<div class="rrow"><b>…</b><span class="vd"></span><div class="rd">reading the station, choosing a tool</div></div>')
         + (stageRows().length ? '<div class="rrow"><b>STAGE</b><span class="vd">' + stageRows().length + ' file(s)</span><div class="rd">' + esc(stageRows().map(r=>r.path).join(", ")) + '</div></div>' : "")
@@ -465,8 +489,10 @@
         + "\n\nWORK SO FAR:\n" + (transcript || "(nothing yet — start with list_files or read_file)") + "\n\nNEXT:";
       let line = "";
       try{
-        const res = await root.generateText({ instruction: prompt, stopSequences:["\n\n"] });
-        line = String(res.generatedText || res.text || "").trim();
+        const th = await think(prompt);
+        line = String(th.text || "").trim();
+        if(!line) throw new Error("the " + th.via + " brain returned nothing");
+        brainVia = th.via + (th.receipt ? " · receipt " + th.receipt : "");
       }catch(e){ transcript += "\n(model error: " + e.message + ")"; break; }
       let name = null, args = null;
       const call = parseCall(line);
@@ -518,9 +544,9 @@
       }
     }
     const summary = answer || ("(step budget reached) last result: " + lastResult.slice(0, 300));
-    logOp({ kind:"op", action:"forge ask", detail:task.slice(0,180), result:steps.length + " steps · " + (stageRows().length ? stageRows().length + " staged" : "nothing staged") });
+    logOp({ kind:"op", action:"forge ask", detail:task.slice(0,180), result:steps.length + " steps · " + brainVia + " · " + (stageRows().length ? stageRows().length + " staged" : "nothing staged") });
     try{ window.ObiBg && window.ObiBg.release(); }catch(e){}
-    return { steps:steps, staged:stageRows(), summary:summary };
+    return { steps:steps, staged:stageRows(), summary:summary, brain:brainVia };
   }
 
   /* ---------- cards ---------- */
@@ -628,6 +654,7 @@
       if(!rest){ addBubble("ass", "Usage: <b>/forge do &lt;instruction&gt;</b> — Obi reads its own source, stages the change, and reports. Writing to the authority is gated. Example: <b>/forge do add a /uptime command that reports how long this session has run</b>"); return; }
       const r = await ask(rest, { maxSteps: 8 });
       addBubble("ass", '<div class="rise"><div class="rhead">⚒ /forge do — result</div>'
+        + '<div class="rrow"><b>BRAIN</b><span class="vd">' + esc(r.brain || "?") + '</span><div class="rd">what the loop thought with</div></div>'
         + '<div class="rrow"><b>STEPS</b><span class="vd">' + r.steps.length + '</span><div class="rd">' + esc(r.steps.map(s=>s.name + (s.ok?"✓":"✗")).join(" → ")) + '</div></div>'
         + '<div class="rrow"><b>SUMMARY</b><span class="vd"></span><div class="rd">' + esc(r.summary).slice(0,900) + '</div></div>'
         + (r.staged.length ? '<div class="rrow"><b>STAGED</b><span class="vd">' + r.staged.length + ' file(s)</span><div class="rd">' + esc(r.staged.map(s=>s.path).join(", ")) + ' — <b>/forge diff</b> · <b>/forge apply</b> (gated)</div></div>' : "")
@@ -655,7 +682,25 @@
       logOp({ kind:"op", action:"forge selftest", ok: rows.every(r=>r.ok), detail:rows.length + " primitives", result:rows.filter(r=>r.ok).length + "/" + rows.length + " pass" });
       return;
     }
-    if(op){ addBubble("ass", "Unknown /forge sub-command. <b>/forge</b> (status) · tools · read · search · diff · apply · hotswap · eval · export · version · history · set · do · discard · selftest"); return; }
+    if(op === "brain"){
+      const b = (rest || "").toLowerCase();
+      if(!b){
+        const cur = forgeBrain();
+        let kiloNote = "no Kilo key in this browser — /tool key <JWT> (or /vault set kilo) first";
+        try{ const o = JSON.parse(localStorage.getItem("obi_keys") || "{}"); if(o.kilo) kiloNote = "Kilo key held in this browser"; }catch(e){}
+        addBubble("ass", '<div class="rise"><div class="rhead">🧠 /forge brain — ' + esc(cur) + '</div>'
+          + '<div class="rrow"><b>PIPE</b><span class="vd">platform</span><div class="rd">the station\'s own model pipe — default, no key needed</div></div>'
+          + '<div class="rrow"><b>KILO</b><span class="vd">gateway</span><div class="rd">the Kilo Gateway via /tool (kilo-auto/free) — ' + esc(kiloNote) + '</div></div>'
+          + '<div class="rfoot">Switch with <b>/forge brain kilo</b> or <b>/forge brain pipe</b>. The brain only thinks — staging still needs no gate, landing still does.</div></div>');
+        return;
+      }
+      const set = forgeBrainSet(b);
+      if(!set){ addBubble("ass", "Usage: <b>/forge brain kilo|pipe</b>."); return; }
+      addBubble("ass", "🧠 forge brain → <b>" + esc(set) + "</b>" + (set === "kilo" ? " — /forge do now thinks with the Kilo Gateway (receipts in kv mcp)." : " — /forge do now thinks with the station pipe.") + " The stage, the diff and the gate are unchanged.");
+      logOp({ kind:"op", action:"forge brain", detail:"switched to " + set, result:"/forge do thinks with " + set });
+      return;
+    }
+    if(op){ addBubble("ass", "Unknown /forge sub-command. <b>/forge</b> (status) · tools · read · search · diff · apply · hotswap · eval · export · version · history · set · do · discard · brain · selftest"); return; }
     addBubble("ass", await statusCard());
     logOp({ kind:"op", action:"forge", detail:"status card rendered", result:"shown in the chat" });
   }
@@ -665,7 +710,7 @@
     read: read, gitRead: gitRead, fetchText: fetchText, panelSource: panelSource, manifest: manifest, hashText: hashText, diff: diff,
     stageSet: stageSet, stageRows: stageRows, stageTotal: stageTotal, stageClear: stageClear, stage: () => stage,
     propose: propose, apply: apply, hotSwap: hotSwap, evalSelf: evalSelf, exportSelf: exportSelf,
-    runTool: runTool, ask: ask, toolsCard: toolsCard, statusCard: statusCard, cmd: cmd,
+    runTool: runTool, ask: ask, think: think, brain: forgeBrain, setBrain: forgeBrainSet, toolsCard: toolsCard, statusCard: statusCard, cmd: cmd,
     run: cmd
   };
 })();

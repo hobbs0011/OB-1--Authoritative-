@@ -200,6 +200,14 @@ phrase). Found 2026-09-22 in the first grade-6 lesson, which had to be rebuilt.
 `REFUSING POLITELY — no, with a reason` wraps to three lines and looks like a defect. Bucket labels are **one word**
 (`INVITING`, `ACCEPTING`, `REFUSING`) and the gloss goes in a `.chatty-hint` above the game.
 
+**THE PICKER (a teacher tool, not a game).** `<div class="picker" data-max="50"
+data-title="Student Spinner"></div>` — the teacher types the class size (2–50, default 50) and SPIN
+fires a big canvas wheel: 5–7 full turns, a tick for every number it passes, then fanfare, confetti
+and the winner's number held big (instant silent pick under `prefers-reduced-motion`, result announced
+via `aria-live`). It pays no coins and needs no choice
+blocks; it lives in its own early room with a How-to-use hint, so anyone can be called on — fairly
+and loud. Added 2026-10-20.
+
 ## FEEDBACK IS TEXT, AND A ROOM OWNS ONE FEEDBACK LINE
 
 **Amendment, 2026-09-22** (learned by rebuilding a lesson that got it wrong). The runtime prints
@@ -347,7 +355,7 @@ already refuses `wrong > correct`).
 **LSN-16 — THE VOICE IS THE SOVEREIGN'S.** Second person, present tense, imperative, short. Caps and repetition are
 *weight*, not shouting. The doctrine the lessons teach in passing: *loud and wrong beats silent and correct* ·
 *silence is the enemy, not mistakes* · *volume plus velocity is greater than grammar* · *interest is competence* ·
-*a lesson that fails perfectly beats one that succeeds by accident*. Banned: hedging, apology, corporate register,
+*a lesson that fails perfectly beats one that succeeds by accident* · *I'm not going to tell you you're wrong. I'm going to show you what sounds better*. Banned: hedging, apology, corporate register,
 sarcasm aimed *at* the learner, "and you're wrong" without the rule. One **voice card** (the sovereign's own lines,
 rotating) is allowed on the landing; the exit card is the natural second home for one line of it.
 
@@ -529,6 +537,198 @@ title print the chrome covers, = breach.
 | **Legionnaire Field Guide** → *§12 LESSON AUTHORSHIP*, *§13 THE BRAND*, *§14 THE DOCTRINE*, *§15 THE PRINT ROOM*, *§16 THE MARKETING REGISTER* and *§17 THE MARKETING HIERARCHY AND THE RUN READOUT* | the operational laws, the failure modes, the checklists |
 | `src/brand.js` (`/brand`, `window.ObiBrand`) | the system itself — palette, 115 icons, 64 shipped assets (31 marks · 5 variants · 28 stills), 9 vector emblems, 4 beds, the HUD chrome, GOSPEL 444, the MARKET register, the CODEX, the doctrine deck, the codex deck, the print room (9 artifacts / 31 pages), the desk |
 | `src/lessons/reference/NET-CLASSROOM-MANAGER.html` | the specimen, verbatim — the same rule as Part I: where this document and that file disagree about *taste*, the file wins |
+| the authority order (Field Guide §12.1) | the files win on taste · the manager owns method + machine · this document norms · the engine enforces — and where engine and document disagree, one of them is wrong |
 
 *Part II written 2026-09-21 from an audit of `NET-CLASSROOM-MANAGER.html`, at the sovereign's instruction — so that
 every future agent builds lessons that are his, not merely correct.*
+**LSN-33 — EVERY ENGLISH LINE MAY CARRY VIETNAMESE, UNDER ONE SWITCH** *(added 2026-10-20, at the
+sovereign's instruction: simplest possible definitions + toggleable Vietnamese).*
+Definitions are written as simply as possible — one short clause plus one real example — and any
+learner-facing English line may carry a subordinate Vietnamese gloss in a plain
+`<span lang="vi">…</span>` (no class, no style; the validator only knows classes, so the gloss passes
+the check untouched). The built file styles the gloss small and subordinate (English leads, never
+competes — LSN-31) and ships a fixed `#viToggle` pill (🇻🇳 VI: ON/OFF, top-left, persisted in
+localStorage) that hides or shows every gloss at once via `body.vi-hide`. Quiz feedback attributes are
+plain text and game tiles test English, so those two stay bilingual-or-English by nature — the gloss
+lives in the lines around them.
+GATE: with VI off, the lesson reads as pure English; with VI on, no English line a learner must act
+on stands without its Vietnamese. ALARM: a second toggle, a gloss carrying the headline, or
+Vietnamese hard-coded where the switch cannot reach it without reason = breach.
+
+**LSN-34 — A LESSON FILLS THE ROOM, NOT A PHONE COLUMN** *(added 2026-10-20, from
+the sovereign: the box is annoying on the classroom television. Recorded with the screen
+recording of the lesson on TV, and normed in `src/LESSON-DISPLAY.md`, which every build
+references.)*
+A lesson presents on a television read from the back row, not only on a phone: at
+1100 px and wider the card opens to the viewport (up to 1500 px / 97 vw, near full
+viewport height), type scales to sofa distance, the vocab vault sets in two columns,
+and tiles, buttons and the wheel grow with it. Content does its half — short lines
+and lists, the acting line first, items that read one-to-a-line so the two-column
+vault scans. The sofa check (1920×1080, every room legible at half-size screenshot,
+no long scrolls) runs before any lesson ships.
+GATE: on a TV the lesson is a stage, not a floating column. ALARM: body text the back
+row cannot read, or a room that only works scrolled inside a small box, = breach.
+
+**LSN-35 — EVERY CORRECT ANSWER ERUPTS** *(added 2026-10-20, pulled from the
+Nationality Academy lesson `853bbpai3c`, Grade 5 Unit 3 Lesson 2 — the most celebratory
+lesson built, and the standard now demands its juice.)*
+A correct answer is a small explosion **at the click point**: an emoji burst (gold
+🎉⭐💛, never random clutter) plus a shockwave ring, and a floating `+10 🪙` coin chip
+that rises and fades. Every game completion erupts the same way at the game, the
+start button bursts the lesson open, and a tier-up flashes the coin pill with a burst
+at the purse itself (the renderer tracks the last tier — a higher crest is an event,
+not a paint). The progress bar carries a travelling glow knob; the exit room runs in
+`finale` — the summary card breathes gold and the key graphic spins, slow. All of it
+is visual-only (coins still move exactly once, in the economy), and all of it sleeps
+under `prefers-reduced-motion`.
+GATE: a correct click anywhere in the lesson is answered with light and motion at the
+finger. ALARM: a silent correct answer, a tier-up nobody notices, or motion that fires
+under reduced-motion = breach.
+
+**LSN-36 — THE LANDING EARNS THE CLICK, AND ROOMS OPEN WITH A RITUAL** *(added
+2026-10-20, from the same Nationality lesson.)*
+The landing is stagecraft, not a form: the CTA sweeps a shine every few seconds, a
+keyword ticker marquees the lesson's own words beneath it (pausing on hover, fading at
+both edges), and the feature cards wear a gold top-rule with their icons overlapping
+the card edge. Inside, the scene graphic leans in (tilted, halo ring pulsing outward,
+a spark where it lands) and ambient floaters drift behind the card, blurred and dim —
+atmosphere that never competes. Rooms open with a ritual, not a menu: the entrance
+leads with Chatty's voice and the class's freeze rule (3 Claps = Freeze), and its
+leave-behinds are a checklist, not prose. The three games may share one Game Arena
+instead of three rooms. Practice runs up to four blocks, staged as role-play with the
+class's real mistakes as the wrong options. The exit hands over an AI prompt card: a
+write-task whose placeholder is a worked personal frame the learner rewrites as
+themselves.
+GATE: the landing moves before anything is clicked, and room one sounds like the
+classroom it will teach. ALARM: a static landing, an entrance that lists instead of
+gathering, or an exit with nowhere to write = breach.
+
+**LSN-37 — NO EVIDENCE-FREE LESSONS** *(added 2026-10-20, scanned from GOSPEL-999
+LESSON.016 + Field Guide §12: the desk's 🧭 Plan layer already works this way — the law
+now says so.)*
+A lesson is chosen for a gap the class's evidence shows — a writeup, a review, a
+summary — never invented from nothing in the chat. The spec names its chooser in one
+line (`evidence`: which writeup/review/summary, and the gap), and the built file's
+status line carries it, so the class can trace the lesson back to its own mouth. The
+validator warns when the evidence is unnamed. A topic dreamed up mid-chat is a draft
+until evidence adopts it.
+GATE: every shipped lesson points at the evidence that chose it. ALARM: a lesson
+presented as planned with nothing behind it = breach.
+
+**LSN-38 — PROVENANCE ON THE FACE** *(added 2026-10-20, scanned from GOSPEL-999
+Amendment VIII, CANON.002/006/007/008 — translated for lessons.)*
+A lesson says what it is on its own face: the status line names the topic, the room
+count, the coin rate, the standard — and now the evidence (LSN-37) and the spec id.
+Every number on a card is measured from the build, never remembered. No model, vendor
+or agent is ever credited on a learner surface — authority is the sovereign's, then
+the standard's. And no COMPLETE with a HOLLOW: warnings print on the build card, and
+"shipped" means check-ok plus the library record (plus the commit, where the canon
+receives it). Station-invented bits say STATION on their face.
+GATE: face, numbers and record agree, and the record exists. ALARM: "done" with no
+record, a warning swallowed, or an unsourced authority named = breach.
+
+**LSN-39 — EVERY ELEMENT MAY WEAR AN ICON, FROM ONE ARSENAL** *(added 2026-10-21,
+Anakin's ten: the iconography arsenal — registry exists in the engine, runtime +
+validator now enforce it.)*
+Any content element may carry `data-icon="key"` and the runtime prepends the
+arsenal glyph (coin, die, ticket, animal, math, chance — sixty keys, one
+registry, no emoji picked by hand per lesson). Unknown keys warn in validation
+and ship nothing; a missing glyph never breaks a build.
+GATE: icons come from the arsenal or nowhere. ALARM: hand-picked emoji doing a
+registry key's job = breach.
+
+**LSN-40 — THE GAMES ARSENAL IS SEVEN, AND A DUEL IS A GAME OR IT IS A POSTER**
+*(added 2026-10-21, Anakin's ten: scramble, match, sort, order, odd, flip,
+battle — the four new ones now run, not just named.)*
+Order rebuilds a true sequence, odd spots the intruder (`data-odd`), flip turns
+flashcards, battle runs two teams off a wager board (`data-teams`). Games may
+share one arena room back to back under one coin economy — and any room labelled
+Duel, Drill, Battle or Arena must carry at least one game, or the validator
+refuses it. Every room keeps its own face: repeated graphics warn.
+GATE: seven run, duels play. ALARM: a hollow game kind, or a duel with nothing
+to play = breach.
+
+**LSN-41 — THE LESSON SPEAKS, TIMES ITSELF, PAYS BY THE BLOCK, AND PRINTS**
+*(added 2026-10-21, Anakin's ten: voice, timer, per-block coins, juice runtime,
+print pack.)*
+`data-say` speaks (speech synthesis, no files, no network — tap to hear);
+`.timer[data-seconds]` counts down and ends in one soft blip, silent under
+reduced motion. Any game or choice block may carry `data-coins="N"` to pay its
+own rate instead of the lesson rate. Correct answers erupt where they land
+(emoji burst + floating chip, tier-up flash on the purse, breathing-gold finale
+on the exit) — juice only, never score, asleep under reduced motion. And the
+built file prints: the open room expanded, chrome hidden.
+GATE: speak, time, pay, erupt, print — all run from markup, no scripts.
+ALARM: a `data-say` that stays silent, a timer that never ends, or coins that
+ignore their own block = breach.
+
+**LSN-42 — THE STORM BOARD: ANSWER, THEN BRAVE THE TILES** *(added
+2026-10-21, Hobbs ALOT+MMM adoption: hidden-tile risk board ported from the
+honest team game p-serrano/tornado — mechanics adopted, code original.)*
+`data-game="storm"` runs teams through question → board-pick → reveal →
+apply. `data-grid="4|5|6"` sets the tile field; the special density follows
+the adopted rules (4:{storm 1, swap 2, half 1, double 1}, 5:{2,3,2,2},
+6:{3,4,3,3}); the rest are score tiles paying team points. STORM wipes the
+picking team, swap trades with the next team, half ceils, double doubles. A
+wrong answer rebounds once to the next team. One round per question pair;
+the board persists across rounds and rebuilds when empty.
+GATE: answer first, tiles second, every special resolves. ALARM: a storm
+that never lands, or a rebound that never comes = breach.
+
+**LSN-43 — THE CATEGORY BOARD: PICK A CELL, SAY IT OUT LOUD** *(added
+2026-10-21, Hobbs ALOT+MMM adoption: CSV-clue + team-box + reveal-modal loop
+ported from the honest classroom game domlet/jeopardy-csv — mechanics
+adopted, code original.)*
+`data-game="board"` with `data-board="Cat: clue = answer; clue2 = answer2 |
+Cat2: ..."` builds the value grid (100/200/... per clue down each column).
+The current team picks a cell and says the answer out loud; the teacher taps
+Correct (banks the value) or Wrong — one rebound to the next team, then the
+cell burns and the answer is shown. Team points on the bar, coins at the
+lesson rate per banked cell.
+GATE: pick, say, judge, bank. ALARM: a cell with no judge, or points with no
+saying = breach.
+
+**LSN-44 — THE SHELL CARRIES KSU + BOTH ROPES** *(added 2026-10-21, LPG
+harvest ported from the edtech station — asiln/Lesson-Plan-Generator
+prompt.txt: KSU outcomes, support/extend differentiation.)* The shell contract
+demands "outcomes" (know + do + understand, one line each) and
+"differentiation" (support + extend, from the lesson's own material). The
+validator checks them only when present — absent is legal, half-triple and
+single-rope are errors. Compose carries well-formed fields into the spec and
+drops malformed ones with a progress note, never a dead build.
+GATE: full triple or absent, both ropes or absent. ALARM: a half-triple that
+trains nothing, or a single rope called differentiation = breach.
+
+**LSN-45 — GAME LIFELINES: SUPPORT + EXTEND ON THE BOARD** *(added
+2026-10-21, merged from the estate gaming platform: every arena question
+carries a lifeline and a stretch.)* Team games (battle, storm, board) accept
+data-support (the lifeline for strugglers) and data-extend (the stretch for
+fast finishers) — the runtime renders both under every question.
+GATE: ropes present on team games, silent when absent. ALARM: lifelines that
+never show, or show on games that never ask = breach.
+
+**LSN-46 — THE ARSENAL LAW: CORE OWNS IDS, FORMAT DECIDES HANDS** *(added
+2026-10-22, merged from the Anakin station: games-arsenal 1.0.0 +
+lesson-arsenal 1.1.0.)* Core validates all fourteen game ids; it renders its
+nine and leaves arsenal formats empty. Board/order elements carrying
+data-cards (board) or data-order-without-data-items (order) yield to the
+arsenal; the arsenal never touches a non-empty element. Two KSU dialects
+coexist (core spec.outcomes know/do/understand, arsenal
+method.outcomes knowledge/skills/understanding) — separate fields, no war.
+GATE: every id renders exactly once, by exactly one runtime. ALARM: double
+render, or a template format its renderer cannot read = breach.
+
+**LSN-47 — TILES: THE SOLO RISK GAME** *(added 2026-10-22, mechanics honed
+on the Anakin station, lineage LSN-33…36.)* Core owns a tenth game: tiles —
+face-down risk tiles (10/15/20 + DOUBLE + STORM), say-aloud Got/Missed,
+DOUBLE arms the next gain, STORM costs 10. Solo recall where board/storm
+are team-moderated; same pay/audio/coin economy. GATE: tiles renders in
+core, never in the arsenal. ALARM: a tile that pays without an answer.
+
+**LSN-48 — REPORT AND JINGLE: THE LAST ROOM REMEMBERS** *(added 2026-10-22,
+mechanics honed on the Anakin station, lineage LSN-35.)* The last room
+mounts an end-of-lesson report (coins, tier, wins this run) with copy-for-
+teacher (clipboard, fallback included); every correct answer plays the
+three-note win jingle (silent under reduced-motion). GATE: report on the
+last room only, jingle on correct only. ALARM: a report that appears mid-
+lesson, or audio before the first gesture.

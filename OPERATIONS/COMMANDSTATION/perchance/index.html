@@ -197,9 +197,23 @@ function allowSend(conn){
   e.t.push(now); sendLog.set(k, e);
   return true;
 }
+/* MISSION SECURE-SERVER (2026-10-22): act() paths had NO rate limit — every
+   claim/complete/fail runs readRecs()+rewriteAll() (full state rewrite), so an
+   open act verb is a write-amplification target. Separate bucket, 60/min per
+   net[3]: legit drone flow is ~3 acts per command, bursts stay green. */
+const actLog = new Map();
+function allowAct(conn){
+  const k = String((conn && conn.net && conn.net[3]) || 0), now = Date.now();
+  const e = actLog.get(k) || { t: [] };
+  e.t = e.t.filter(x => now - x < 60000);
+  if (e.t.length >= 60) return false;
+  e.t.push(now); actLog.set(k, e);
+  return true;
+}
 function publish(t, m){ try { pubsub.publish(t, m); } catch(e){} }
 function act(conn, data, status, result){
   let p = {}; try { p = JSON.parse(data); } catch(e){ return JSON.stringify({ok:false,error:"bad json"}); }
+  if (!allowAct(conn)) return JSON.stringify({ok:false,error:"rate limited — slow down, sovereign"});
   const id = Number(p.commandId);
   if (!isFinite(id)) return JSON.stringify({ok:false,error:"bad commandId"});
   const recs = readRecs();
@@ -228,8 +242,8 @@ self.rpc = {
     if (!text) return JSON.stringify({ok:false,error:"empty command"});
     if (!allowSend(ctx.conn)) return JSON.stringify({ok:false,error:"rate limited — slow down, sovereign"});
     const id = nextId();
-    const meta = { run: p.run||0, session: String(p.session||"") };
-    const rec = { id, text, source: String(p.source||"magic chat"), session: meta.session, run: meta.run,
+    const meta = { run: p.run||0, session: String(p.session||"").slice(0,80) };
+    const rec = { id, text, source: String(p.source||"magic chat").slice(0,40), session: meta.session, run: meta.run,
       status: "pending", claimed_by: null, result: null, created_at: Date.now(), translation: translate(text, meta) };
     try { appendRec(rec); } catch(e){ return JSON.stringify({ok:false,error:String(e.message||e)}); }
     publish("cmdq", JSON.stringify({id, status:"pending", count: u32(12)}));
@@ -267,9 +281,11 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
   </div>
 
   <div id="tabbar">
-    <button class="tabbtn on" id="tabCmdBtn" data-view="cmd" data-icon="cmd" data-icon-pos="before" title="The command station — speak, and the empire listens"> Command Station</button>
-    <button class="tabbtn" id="tabRoomBtn" data-view="room" data-icon="users" data-icon-pos="before" title="The boardroom — sit around the table and talk it through"> Boardroom</button>
+    <button class="tabbtn on" id="tabAgentBtn" data-view="agent99" data-icon="hammer" data-icon-pos="before" title="Agent 99 — the builder. The front page."> Agent 99</button>
+    <button class="tabbtn" id="tabCmdBtn" data-view="cmd" data-icon="cmd" data-icon-pos="before" title="The Command Tent — the leaders sit here, silent until called on"> Command Tent</button>
     <button class="tabbtn" id="tabGenBtn" data-view="gen" data-icon="grid" data-icon-pos="before" title="Phoenix Generators — the divisions of PrAis, and the generators in each"> Phoenix Generators</button>
+    <button class="tabbtn" id="tabSiteBtn" data-view="site" data-icon="globe" data-icon-pos="before" title="NET Website — the public site, served from this station"> NET Website</button>
+    <button class="tabbtn" id="tabRoomBtn" data-view="room" data-icon="users" data-icon-pos="before" title="Boardroom (now inside the Command Tent)" hidden> Boardroom</button>
     <button class="tabbtn" id="tabSetBtn" data-view="settings" data-icon="gear" data-icon-pos="before" title="Voice, the command shelf, the ledger, the instruments, reincarnate"> Settings</button>
     <span class="tabfill"></span>
     <span id="tabMeta" class="tabmeta"></span>
@@ -285,7 +301,11 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
   </div>
 
   <div class="views">
-    <div id="viewCmd" class="view">
+    <div id="viewSite" class="view hidden">
+      <iframe id="siteFrame" title="NET Website — Natural English Training" data-src="src/sites/naturalenglishtraining/index.html"></iframe>
+    </div>
+
+    <div id="viewCmd" class="view hidden">
       <div id="messages">
         <div id="empty">
           <div class="lp">
@@ -310,6 +330,32 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
                 <img src="src/brand/assets/phx-cover.webp" alt="The Phoenix Rising Operational Codex — the codename, the clearance line, the tiger heads" width="1200" height="670">
                 <figcaption>The Phoenix Rising Operational Codex &middot; strategy &amp; architecture</figcaption>
               </figure>
+            </section>
+
+            <section class="lp-band lp-strand">
+              <div>
+                <div class="lp-num">✦ &middot; The living strand</div>
+                <h2>The phoenix, flowing</h2>
+                <p class="lp-lead">The DNA stream is mark #1 and it is <b>alive</b>: purple is phoenix fire, gold is tiger fire, both flowing inside one strand with embers rising through the rungs. <b>Hover</b> to feed it. <b>Click</b> — left for tiger, right for phoenix — or fire a surge below.</p>
+                <div class="an4-surge-row">
+                  <button class="an4-btn gold" data-an4-surge="tiger">🐯 TIGER SURGE</button>
+                  <button class="an4-btn purple" data-an4-surge="phoenix">🔥 PHOENIX SURGE</button>
+                  <button class="an4-btn" data-an4-surge="dna">🧬 FULL STRAND</button>
+                </div>
+                <div class="an4-surge-label" id="an4SurgeLabel">🧬 the strand is live — purple = phoenix · gold = tiger</div>
+              </div>
+              <div>
+                <div class="an4-canvas-wrap">
+                  <canvas id="an4DnaCanvas" width="420" height="520" aria-label="Live DNA stream — purple phoenix fire and gold tiger fire in one double helix"></canvas>
+                  <div class="an4-hud"><span class="an4-tag">THE LIVING STRAND</span><span class="an4-tag an4-live"><i></i>LIVE</span></div>
+                  <div class="an4-cap">PURPLE = PHOENIX · GOLD = TIGER · ONE STRAND</div>
+                </div>
+                <div class="an4-thumbs">
+                  <figure class="an4-thumb"><img loading="lazy" decoding="async" src="src/brand/assets/an4-tiger-breaker.jpg" alt="The chain-breaker — gold and purple fire"><figcaption>🐯 chain-breaker</figcaption></figure>
+                  <figure class="an4-thumb"><img loading="lazy" decoding="async" src="src/brand/assets/an4-tiger-cyber.jpg" alt="The cyber roar"><figcaption>🔥 cyber roar</figcaption></figure>
+                  <figure class="an4-thumb"><img loading="lazy" decoding="async" src="src/brand/assets/an4-dna.jpg" alt="The DNA stream"><figcaption>🧬 the strand</figcaption></figure>
+                </div>
+              </div>
             </section>
 
             <div class="lp-proof">
@@ -398,6 +444,9 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
             </section>
 
             <div class="lp-strip">
+              <img src="src/brand/assets/an4-tiger-breaker.jpg" alt="An4 — the chain-breaker">
+              <img loading="lazy" decoding="async" src="src/brand/assets/an4-tiger-cyber.jpg" alt="An4 — the cyber roar">
+              <img loading="lazy" decoding="async" src="src/brand/assets/an4-dna.jpg" alt="An4 — the DNA stream">
               <img src="src/brand/assets/apex.webp" alt="The PrAis Apex">
               <img loading="lazy" decoding="async" src="src/brand/assets/phoenix.webp" alt="The Phoenix">
               <img loading="lazy" decoding="async" src="src/brand/assets/roar.webp" alt="The Tiger, Awake">
@@ -488,7 +537,7 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
       <div id="roomWrap"></div>
     </div>
 
-    <div id="viewGen" class="view hidden">
+    <div id="viewGen" class="view">
       <div id="genWrap">
         <div class="ev-head">
           <div class="ev-title">◈ Phoenix Generators</div>
@@ -542,6 +591,12 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
             <span class="desk-tag" data-icon="record" data-icon-pos="before"> The Intake · NET</span>
           </div>
           <div id="intakePanel"></div>
+        </div>
+        <div id="genesisDesk" class="hidden">
+          <div class="desk-bar">
+            <button class="ci-act" id="genesisBackBtn">← All WEB DEVELOPMENT generators</button>
+            <span class="desk-tag">✦ Genesis Generator · WEB DEVELOPMENT</span>
+          </div>
         </div>
       </div>
     </div>
@@ -620,6 +675,7 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
 </div>
 
 <script src="src/savewatch.js"></script>
+<script src="src/an4.js"></script>
 <script src="src/auto.js"></script>
 <script src="src/pheromone.js"></script>
 <script src="src/playbooks.js"></script>
@@ -665,6 +721,7 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
 <script src="src/brain.js"></script>
 <script src="src/relay.js"></script>
 <script src="src/market.js"></script>
+<script src="src/copy.js"></script>
 <script src="src/secretsauce.js"></script>
 <!-- the rubric instrument: criteria with bands, and every band CITED from the raw
      record — the engine locates each quote itself, reads the timestamp off the
@@ -686,7 +743,14 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
 <script src="src/vault.js"></script>
 <script src="src/deck.js"></script>
 <script src="src/lessons.js"></script>
+<script src="src/games-arsenal.js"></script>
+<script src="src/lesson-arsenal.js"></script>
 <script src="src/lesson-forge.js"></script>
 <script src="src/intake.js"></script>
 <script src="src/gitcanon.js"></script>
 <script src="src/freephoenix.js"></script>
+<script src="src/pushpull.js"></script>
+<script src="src/roam.js"></script>
+<script src="src/gamedivision.js"></script>
+<script src="src/archive.js"></script>
+<script src="src/mcp-tools.js"></script>

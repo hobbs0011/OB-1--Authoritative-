@@ -159,7 +159,7 @@ clients are namespaces, not accounts (the evaluator inventory's `pl.auth` stays 
   confirm-gated.
 - Implemented as `VIEWS` / `TAB_OF` / `showView()` / `setViewTab()` / `deskOpen()` / `openGenerator()` /
   `mountGenerators()` / `renderSettings()` / `readVoicePref()` / `setVoice()` (`src/app.js`), the
-  `#tabbar` + `.views > #viewCmd | #viewGen(#genDesk) | #viewSet` markup (`index.html`), `src/divisions.js`, and the
+  `#tabbar` + `.views > #viewGen (Agent 99 desk + the grid) | #viewCmd + #viewRoom (the Command Tent) | #viewSet | #viewSite` markup (`index.html`), `src/divisions.js`, and the
   `.div-strip` / `.divbtn` / `.gen-grid` / `.gen-card` / `.set-row` / `.set-instr` / `.chip` styles
   (`src/styles.css`). Verified live at 1440×900 and 390×844 (see the I-LOG (`/ilog`)).
 
