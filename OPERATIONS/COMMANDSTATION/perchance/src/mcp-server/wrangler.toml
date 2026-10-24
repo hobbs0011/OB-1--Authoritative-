@@ -1,0 +1,8 @@
+name = "pais-mcp-cloud"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+[vars]
+GATEWAY_BASE = "https://ai-gateway.kilo.ai/api/v1"
+# KILO_KEY is NOT a var — set it as a secret:
+#   wrangler secret put KILO_KEY
