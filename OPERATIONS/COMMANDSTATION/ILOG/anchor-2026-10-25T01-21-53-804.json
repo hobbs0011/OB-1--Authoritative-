@@ -1,0 +1,106 @@
+{
+  "ts": "2026-10-25T01-21-53-804",
+  "generator": "phoenix-ai-solutions-command-mastermind",
+  "head": {
+    "seg": 1,
+    "count": 2053,
+    "hash": "198bf5f65c722ca82033729b52cd21ff173261516b7b9dbc8450bab60ada6386",
+    "prevHash": "50baf46cc2fb401208fb2510bfa0157a4f12f00ea4b1f5079202790f43b04f17",
+    "headSeq": 2053,
+    "t": 1792891199078,
+    "iso": "2026-10-25T01:19:59.078Z",
+    "alg": "sha-256",
+    "sealedCount": 0,
+    "sealT": null
+  },
+  "verify": {
+    "ok": false,
+    "checked": 2030,
+    "breaks": [
+      {
+        "seq": 24,
+        "seg": 1,
+        "link": "broken",
+        "hash": "ok",
+        "alg": "sha-256"
+      },
+      {
+        "seq": 220,
+        "seg": 1,
+        "link": "ok",
+        "hash": "mismatch",
+        "alg": "sha-256"
+      },
+      {
+        "seq": 221,
+        "seg": 1,
+        "link": "ok",
+        "hash": "mismatch",
+        "alg": "sha-256"
+      },
+      {
+        "seq": 222,
+        "seg": 1,
+        "link": "ok",
+        "hash": "mismatch",
+        "alg": "sha-256"
+      },
+      {
+        "seq": 223,
+        "seg": 1,
+        "link": "ok",
+        "hash": "mismatch",
+        "alg": "sha-256"
+      },
+      {
+        "seq": 225,
+        "seg": 1,
+        "link": "ok",
+        "hash": "mismatch",
+        "alg": "sha-256"
+      },
+      {
+        "seq": 226,
+        "seg": 1,
+        "link": "ok",
+        "hash": "mismatch",
+        "alg": "sha-256"
+      },
+      {
+        "seq": 227,
+        "seg": 1,
+        "link": "ok",
+        "hash": "mismatch",
+        "alg": "sha-256"
+      }
+    ]
+  },
+  "entries": 2030,
+  "kinds": {
+    "brain": 356,
+    "op": 605,
+    "boot": 378,
+    "cmd": 175,
+    "soul": 165,
+    "tunnel": 30,
+    "reply": 22,
+    "scs": 106,
+    "scout": 12,
+    "secret": 44,
+    "omega": 8,
+    "push": 4,
+    "sync": 72,
+    "market": 21,
+    "ops": 4,
+    "error": 28
+  },
+  "anchors": [
+    {
+      "commit": "8d73ded532d9338084b923eae37bb33113d267a9",
+      "iso": "2026-10-24T20:11:02.429Z",
+      "seq": 1797,
+      "seg": 1,
+      "head": "d1d07ee410e8c2feea798f739da768528ab5b2243e1f7ee4b55de1ecf1ee5b77"
+    }
+  ]
+}
