@@ -127,3 +127,4 @@ Cloudflare cron appends one line per firing. Each line is a receipt: it ran with
 - 2026-10-25T15:53:34.282Z · run · kilo-gateway:kilo-auto/free · SELFUPGRADE leg 1/10 PASS CLI‑Help — `kilo gen --help | grep -q us Reply with ex → logged · 3533ms
 - 2026-10-25T15:54:08.551Z · run · kilo-gateway:kilo-auto/free · SELFUPGRADE START researching kilo Reply with exactly: logged → logged · 3846ms
 - 2026-10-25T15:55:31.744Z · run · kilo-gateway:kilo-auto/free · SELFUPGRADE leg 1/10 SKIP CLI‑Help — `kilo gen --help | grep -q us Reply with ex → logged · 2280ms
+- 2026-10-25T15:59:35.295Z · run · kilo-gateway:kilo-auto/free · SELFUPGRADE leg 3/10 PASS Lint‑Guard — `kilo lint run --output jso Reply with ex → logged · 4333ms
