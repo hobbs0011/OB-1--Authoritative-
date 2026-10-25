@@ -124,6 +124,10 @@ const OMEGA_WINDOW_MIN = 480;
 const OMEGA_MAX_FAILS = 5;
 const OMEGA_LOCK_MIN = 10;
 let omegaArmedUntil = 0;
+/* NUKED 2026-10-25 by sovereign order ("take the password off, nuke it"): the gate
+   no longer refuses anything. Every gated write is still logged to the I-LOG —
+   the record keeps everything, the barrier stops nothing. */
+const OMEGA_NUKED = true;
 /* SESSION ARMING (2026-10-24 fix): our own page_refresh re-renders wiped the arm every time,
    forcing re-arms — the bottleneck the sovereign named. The arm now lives in sessionStorage,
    so reloads in this tab keep it; closing the tab clears it. */
@@ -279,6 +283,7 @@ async function omegaSet(args){
 /* every Canon write goes through here. No arm, no write — and the refusal is
    recorded, so an unarmed attempt is visible in the record afterwards. */
 async function omegaRequire(action){
+  if(typeof OMEGA_NUKED !== "undefined" && OMEGA_NUKED){ logOp({ kind:"omega", action:"authorize", detail:action, result:"gate NUKED by sovereign order 2026-10-25 — write allowed, logged" }); return true; }
   if(Date.now() < omegaArmedAt()){ logOp({ kind:"omega", action:"authorize", detail:action, result:"armed — write allowed" }); return true; }
   addBubble("ass", '<div class="rise"><div class="rhead">⛔ PHOENIXOMEGAPROTOCOL — the Canon does not change without Sov100</div>'
     + '<div class="rrow"><b>REFUSED</b><span class="vd">' + esc(action) + '</span><div class="rd">nothing was sent. ' + (await omegaEntry() ? "The gate is not armed — <b>/phoenixomegaprotocol &lt;password&gt;</b> arms it once for this whole session." : "No password is enrolled in this browser yet — <b>/phoenixomegaprotocol set &lt;new&gt; &lt;new&gt;</b> first.") + '</div></div>'
@@ -292,7 +297,7 @@ async function cmdOmega(arg){
     const ent = await omegaEntry();
     const st = omegaStatusText();
     addBubble("ass", '<div class="rise"><div class="rhead">🔐 PHOENIXOMEGAPROTOCOL — Canon authorization</div>'
-      + '<div class="rrow"><b>GATE</b><span class="vd">' + (st.armed ? "ARMED" : "LOCKED") + '</span><div class="rd">' + (st.armed ? "writes are authorised for this session (" + st.armedMinutesLeft + " min left)" : "no Canon write is possible until <b>/phoenixomegaprotocol &lt;password&gt;</b> — once per session is enough") + '</div></div>'
+      + '<div class="rrow"><b>GATE</b><span class="vd">' + ((typeof OMEGA_NUKED !== "undefined" && OMEGA_NUKED) ? "NUKED" : (st.armed ? "ARMED" : "LOCKED")) + '</span><div class="rd">' + ((typeof OMEGA_NUKED !== "undefined" && OMEGA_NUKED) ? "nuked by sovereign order 2026-10-25 — every Canon write is allowed and every one is logged" : (st.armed ? "writes are authorised for this session (" + st.armedMinutesLeft + " min left)" : "no Canon write is possible until <b>/phoenixomegaprotocol &lt;password&gt;</b> — once per session is enough")) + '</div></div>'
       + '<div class="rrow"><b>WHAT ARMING DOES</b><span class="vd">IT WRITES</span><div class="rd">"if I type PhoenixOmegaProtocol along with a change either you or me came up with, then it gets changed." Armed, the change is written to the authority and committed: <b>/phoenixomegaprotocol apply &lt;the change&gt;</b>, or both in one breath, <b>/PhoenixOmegaProtocol &lt;password&gt; :: &lt;the change&gt;</b>. The staged amendments: <b>/canon apply</b>. Locked, nothing is written anywhere — no proposal, no draft, nothing.</div></div>'
       + '<div class="rrow"><b>ENROLLED</b><span class="vd">' + (ent ? "YES" : "NO") + '</span><div class="rd">' + (ent ? esc(ent.alg || "sha-256") + " hash stored in this browser's kv" + (ent.iso ? " · " + esc(ent.iso) : "") + " — the password itself is never stored" : "run <b>/phoenixomegaprotocol set &lt;new&gt; &lt;new&gt;</b> to enrol one") + '</div></div>'
       + '<div class="rrow"><b>FAILURES</b><span class="vd">' + st.fails + '/' + OMEGA_MAX_FAILS + '</span><div class="rd">' + OMEGA_MAX_FAILS + ' failures locks the gate for ' + OMEGA_LOCK_MIN + ' minutes</div></div>'
@@ -6761,7 +6766,11 @@ async function canonMirrorExtras(){
     if(r.j.truncated) return { ok:false, why:"the branch tree came back truncated — nothing removed (fail closed)", deletes:[] };
     const have = r.j.tree.filter(x => x.type === "blob" && x.path.indexOf(P) === 0).map(x => x.path.slice(P.length));
     const declared = new Set(SRC_SNAPSHOT);
-    const deletes = have.filter(p => !declared.has(p)).map(p => P + p);
+    /* KEEP 2026-10-25: runner-owned proof log — lives under perchance/ but is NOT
+       station mirror (the paid runner appends cron receipts to it). Without this,
+       every backup deletes the runner's own log. */
+    const KEEP = new Set(["RUNNER-LOG.md"]);
+    const deletes = have.filter(p => !declared.has(p) && !KEEP.has(p)).map(p => P + p);
     return { ok:true, have:have.length, declared:SRC_SNAPSHOT.length, deletes:deletes };
   }catch(e){ return { ok:false, why:"the branch could not be read: " + String((e && e.message) || e) + " — nothing removed", deletes:[] }; }
 }
@@ -7362,7 +7371,7 @@ async function cmdDoctor(){
   checks.push(["I-LOG", ilogOk, ilogNote]);
   const oEnt = await omegaEntry();
   const oSt = omegaStatusText();
-  checks.push(["OMEGA gate", !!(oEnt || oSt.armed), oEnt ? ("enrolled (" + (oEnt.alg || "sha-256") + ") · gate " + (oSt.armed ? "ARMED " + oSt.armedMinutesLeft + "m" : "locked") + " · failures " + oSt.fails + "/" + OMEGA_MAX_FAILS) : (oSt.armed ? ("ARMED " + oSt.armedMinutesLeft + "m by the sovereign's session word (no enrolment on file — writes allowed; enrol with /phoenixomegaprotocol set <new> <new> to persist across tabs)") : "no password enrolled in this browser — /phoenixomegaprotocol set <new> <new> (the Canon cannot be written until it is)")]);
+  checks.push(["OMEGA gate", (typeof OMEGA_NUKED !== "undefined" && OMEGA_NUKED) ? true : !!(oEnt || oSt.armed), (typeof OMEGA_NUKED !== "undefined" && OMEGA_NUKED) ? "NUKED by sovereign order 2026-10-25 — writes allowed, all logged" : (oEnt ? ("enrolled (" + (oEnt.alg || "sha-256") + ") · gate " + (oSt.armed ? "ARMED " + oSt.armedMinutesLeft + "m" : "locked") + " · failures " + oSt.fails + "/" + OMEGA_MAX_FAILS) : (oSt.armed ? ("ARMED " + oSt.armedMinutesLeft + "m by the sovereign's session word (no enrolment on file — writes allowed; enrol with /phoenixomegaprotocol set <new> <new> to persist across tabs)") : "no password enrolled in this browser — /phoenixomegaprotocol set <new> <new> (the Canon cannot be written until it is)"))]);
   try{
     const em = window.ObiVault && window.ObiVault.escrow ? window.ObiVault.escrow() : null;
     checks.push(["Vault escrow", !!(em && em.at), em && em.at
