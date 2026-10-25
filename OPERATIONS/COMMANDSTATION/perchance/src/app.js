@@ -80,8 +80,42 @@ const run = openRun();
    gap (it shows up in /state and /doctor as NOT loaded) rather than a crash or a
    silent hole in the record. */
 function logOp(o){
+  try{ breatheIn(o); }catch(e){}
   try{ if(typeof ilog === "function") return ilog(o); }catch(e){}
   return null;
+}
+
+/* ---- BREATHE — automatic DNA + pheromone capture ("like breathing") --------
+   Inhale: every operation already funnels through logOp() (see above), so one
+   hook here breathes for the whole station — no per-callsite wiring.
+   Doctrine walls: machine observations file as DNA only. Verbatim human words
+   are SOUL and enter ONLY via captureSoul — breatheIn NEVER writes SOUL
+   (kinds "reply"/"soul" are skipped: replies breathe on their own path,
+   soul has its own lane, and deposit() throws on kind:"soul" anyway).
+   Verification outcomes also deposit pheromones: positive on confirm
+   (ok !== false), negative on refute. Budgets per run: 200 DNA lines, 50
+   deposits. Overflow compresses into ONE summary line (the cough reflex) —
+   never floods, never silently drops. */
+const BREATH_DNA_MAX = 200, BREATH_TRAIL_MAX = 50;
+const __breath = { run: null, dna: 0, trails: 0, overflow: 0 };
+function breatheIn(o, opts){
+  const dry = !!(opts && opts.dry);
+  const runNo = (typeof runNoOf === "function" ? runNoOf() : 0) || 0;
+  if(__breath.run !== runNo){ __breath.run = runNo; __breath.dna = 0; __breath.trails = 0; __breath.overflow = 0; }
+  const kind = String((o && o.kind) || "op");
+  if(kind === "reply" || kind === "soul") return dry ? { skipped: "own-path" } : null;
+  const ok = !(o && o.ok === false);
+  const detail = String((o && (o.detail || o.result)) || "").slice(0, 200);
+  if(!detail) return dry ? { skipped: "empty" } : null;
+  const plan = { dna: __breath.dna < BREATH_DNA_MAX, trail: __breath.trails < BREATH_TRAIL_MAX,
+    trailKind: ok ? "positive" : "negative",
+    key: "route:" + String((o && o.action) || kind).slice(0, 60).replace(/\s+/g, "-") };
+  if(dry) return plan;
+  if(plan.dna){ try{ rrlAppend(runNo, "DNA", "Obi: [breath · " + kind + "/" + String((o && o.action) || "") + " · " + detail + "]"); __breath.dna++; }catch(e){} }
+  else if(!__breath.overflow){ try{ rrlAppend(runNo, "DNA", "Obi: [breath overflow — further observations this run compress here]"); }catch(e){} __breath.overflow++; }
+  else { __breath.overflow++; }
+  if(plan.trail){ try{ if(window.ObiPheromone) window.ObiPheromone.deposit({ kind: plan.trailKind, key: plan.key, signal: "breath", text: detail, drone: "Breath", run: runNo }); __breath.trails++; }catch(e){} }
+  return plan;
 }
 function cmdNameOf(text){  const t = String(text == null ? "" : text).trim();
   const m = t.match(/^\/([A-Za-z0-9_-]+)/);
