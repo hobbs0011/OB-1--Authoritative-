@@ -641,18 +641,22 @@
        file recovered in the sweep reads as pushed, not failed. Nothing is ever
        discarded while a retry can carry it. */
     if(failedPairs.length){
-      await new Promise(r => setTimeout(r, 15000));
       const blobs = [];
+      const waits = [15000, 30000, 60000];
       for(const pair of failedPairs){
         const p = pair[0], c = pair[1];
-        try{
-          const body = (c && typeof c === "object" && typeof c.__b64 === "string")
-            ? { content: c.__b64, encoding: "base64" }
-            : { content: b64(c), encoding: "base64" };
-          const b = await ghJson(base + "/git/blobs", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(body) });
-          if(b.j && b.j.sha){ blobs.push({ path:p, mode:"100644", type:"blob", sha:b.j.sha }); pushed++; }
-          else { failed++; errors.push(p + " → blob HTTP " + b.status + " " + String((b.j && b.j.message) || "").slice(0, 90) + " (after sweep)"); }
-        }catch(e){ failed++; errors.push(p + " → " + e.message + " (after sweep)"); }
+        let done = false;
+        for(let a = 0; a < 3 && !done; a++){
+          await new Promise(r => setTimeout(r, waits[a]));
+          try{
+            const body = (c && typeof c === "object" && typeof c.__b64 === "string")
+              ? { content: c.__b64, encoding: "base64" }
+              : { content: b64(c), encoding: "base64" };
+            const b = await ghJson(base + "/git/blobs", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(body) });
+            if(b.j && b.j.sha){ blobs.push({ path:p, mode:"100644", type:"blob", sha:b.j.sha }); pushed++; done = true; }
+            else if(a === 2){ failed++; errors.push(p + " → blob HTTP " + b.status + " " + String((b.j && b.j.message) || "").slice(0, 90) + " (after 3-attempt sweep)"); }
+          }catch(e){ if(a === 2){ failed++; errors.push(p + " → " + e.message + " (after 3-attempt sweep)"); } }
+        }
       }
       if(blobs.length){
         try{

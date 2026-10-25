@@ -441,11 +441,55 @@
      chat with a brain as smart as the one that built it. Receipts land in
      kv mcp like any other tool call. The brain only thinks: staging needs
      no gate, landing still does. */
-  function forgeBrain(){ try{ var b = localStorage.getItem("obi_forge_brain"); if(b === "kilo" || b === "pipe") return b; try{ var o = JSON.parse(localStorage.getItem("obi_keys") || "{}"); if(o && o.kilo) return "kilo"; }catch(e2){} return "pipe"; }catch(e){ return "pipe"; } }
-  function forgeBrainSet(b){ b = String(b || "").toLowerCase(); if(b !== "kilo" && b !== "pipe") return null; try{ localStorage.setItem("obi_forge_brain", b); }catch(e){} return b; }
+  const OR_MODELS = { flash: "deepseek/deepseek-v4-flash", pro: "deepseek/deepseek-v4-pro" };
+  function forgeBrain(){ try{ var b = localStorage.getItem("obi_forge_brain"); if(b === "kilo" || b === "pipe" || b === "flash" || b === "pro") return b; try{ var o = JSON.parse(localStorage.getItem("obi_keys") || "{}"); if(o && o.openrouter) return "flash"; if(o && o.kilo) return "kilo"; }catch(e2){} return "pipe"; }catch(e){ return "pipe"; } }
+  function forgeBrainSet(b){ b = String(b || "").toLowerCase(); if(b !== "kilo" && b !== "pipe" && b !== "flash" && b !== "pro") return null; try{ localStorage.setItem("obi_forge_brain", b); }catch(e){} return b; }
+
+  /* ---------- scheduled pulse — unattended proof (2026-10-24).
+     A tiny Flash inference on a FIXED prompt (prefix-cache friendly, ~$0.00001) every N
+     minutes, gated by the /auto master switch so command #10's resting OFF still stops
+     everything. Persists across reloads via localStorage; every firing writes a kv-mcp
+     receipt + an I-LOG entry. That paper trail IS the proof it ran with nobody active. */
+  const SCHED_KEY = "obi_forge_sched";
+  let schedTimer = null, pulsing = false;
+  function schedGet(){ try{ return JSON.parse(localStorage.getItem(SCHED_KEY) || "null") || { on:false, everyMin:5, lastRun:0 }; }catch(e){ return { on:false, everyMin:5, lastRun:0 }; } }
+  function schedSet(s){ try{ localStorage.setItem(SCHED_KEY, JSON.stringify(s)); }catch(e){} }
+  async function pulse(){
+    if(pulsing) return null;
+    if(!window.ObiAuto || !window.ObiAuto.canAuto()) return null;
+    if(!window.ObiMcp) return null;
+    pulsing = true;
+    try{
+      const r = await window.ObiBg.guard("forge-pulse", function(){ return window.ObiMcp.run("openrouter_chat", { model: OR_MODELS.flash, max_tokens: 60, prompt: "Reply with exactly: pulse ok" }); });
+      try{ logOp({ kind:"op", action:"forge pulse", detail:"scheduled unattended inference", result: r.ok ? ("ok - receipt " + r.receipt + " - " + r.ms + "ms") : ("FAIL - " + r.err) }); }catch(e){}
+      return r;
+    }finally{ pulsing = false; }
+  }
+  function schedTick(){
+    try{
+      const s = schedGet();
+      if(!s.on) return;
+      if(!window.ObiAuto || !window.ObiAuto.canAuto()) return;
+      if(Date.now() - (s.lastRun || 0) < (s.everyMin || 5) * 60000) return;
+      s.lastRun = Date.now(); schedSet(s);
+      pulse();
+    }catch(e){}
+  }
+  function schedEnsure(){ if(!schedTimer){ try{ schedTimer = setInterval(schedTick, 30000); }catch(e){} } }
+  schedEnsure();
   async function think(prompt, opts){
     opts = opts || {};
-    if(forgeBrain() === "kilo"){
+    const br0 = forgeBrain();
+    if(br0 === "flash" || br0 === "pro"){
+      if(!window.ObiMcp) throw new Error("the tool lane (src/mcp-tools.js) is not loaded — reload the page");
+      const model = opts.model || OR_MODELS[br0];
+      const r = await window.ObiMcp.run("openrouter_chat", { model: model, max_tokens: opts.max || 2500, prompt: prompt });
+      if(!r.ok) throw new Error("OpenRouter refused: " + r.err);
+      const txt = String((r.out && r.out.reply) || "");
+      if(!txt.trim()) throw new Error("the " + br0 + " brain returned nothing");
+      return { text: txt, via: br0 + ":" + ((r.out && r.out.model) || model), receipt: r.receipt, usage: (r.out && r.out.usage) || null };
+    }
+    if(br0 === "kilo"){
       if(!window.ObiMcp) throw new Error("the tool lane (src/mcp-tools.js) is not loaded — reload the page");
       const r = await window.ObiMcp.run("gateway_chat", { model: opts.model || "kilo-auto/free", max_tokens: opts.max || 800, prompt: prompt });
       if(!r.ok) throw new Error("Kilo Gateway refused: " + r.err);
@@ -687,20 +731,78 @@
       if(!b){
         const cur = forgeBrain();
         let kiloNote = "no Kilo key in this browser — /tool key <JWT> (or /vault set kilo) first";
-        try{ const o = JSON.parse(localStorage.getItem("obi_keys") || "{}"); if(o.kilo) kiloNote = "Kilo key held in this browser"; }catch(e){}
+        let orNote = "no OpenRouter key in this browser — /tool key <sk-or-…> first";
+        try{ const o = JSON.parse(localStorage.getItem("obi_keys") || "{}"); if(o.kilo) kiloNote = "Kilo key held in this browser"; if(o.openrouter) orNote = "OpenRouter key held — Flash/Pro ready"; }catch(e){}
         addBubble("ass", '<div class="rise"><div class="rhead">🧠 /forge brain — ' + esc(cur) + '</div>'
           + '<div class="rrow"><b>PIPE</b><span class="vd">platform</span><div class="rd">the station\'s own model pipe — default, no key needed</div></div>'
           + '<div class="rrow"><b>KILO</b><span class="vd">gateway</span><div class="rd">the Kilo Gateway via /tool (kilo-auto/free) — ' + esc(kiloNote) + '</div></div>'
-          + '<div class="rfoot">Switch with <b>/forge brain kilo</b> or <b>/forge brain pipe</b>. The brain only thinks — staging still needs no gate, landing still does.</div></div>');
+          + '<div class="rrow"><b>FLASH</b><span class="vd">openrouter</span><div class="rd">DeepSeek Flash via OpenRouter — ' + esc(orNote) + '</div></div>'
+          + '<div class="rrow"><b>PRO</b><span class="vd">openrouter</span><div class="rd">DeepSeek Pro via OpenRouter (audits, deep work) — ' + esc(orNote) + '</div></div>'
+          + '<div class="rfoot">Switch with <b>/forge brain flash|pro|kilo|pipe</b>. The brain only thinks — staging still needs no gate, landing still does.</div></div>');
         return;
       }
       const set = forgeBrainSet(b);
-      if(!set){ addBubble("ass", "Usage: <b>/forge brain kilo|pipe</b>."); return; }
-      addBubble("ass", "🧠 forge brain → <b>" + esc(set) + "</b>" + (set === "kilo" ? " — /forge do now thinks with the Kilo Gateway (receipts in kv mcp)." : " — /forge do now thinks with the station pipe.") + " The stage, the diff and the gate are unchanged.");
+      if(!set){ addBubble("ass", "Usage: <b>/forge brain flash|pro|kilo|pipe</b>."); return; }
+      addBubble("ass", "🧠 forge brain → <b>" + esc(set) + "</b>" + (set === "flash" ? " — /forge do now thinks with DeepSeek Flash via OpenRouter (receipts carry cost)." : set === "pro" ? " — /forge do now thinks with DeepSeek Pro via OpenRouter (audits, deep work)." : set === "kilo" ? " — /forge do now thinks with the Kilo Gateway (receipts in kv mcp)." : " — /forge do now thinks with the station pipe.") + " The stage, the diff and the gate are unchanged.");
       logOp({ kind:"op", action:"forge brain", detail:"switched to " + set, result:"/forge do thinks with " + set });
       return;
     }
-    if(op){ addBubble("ass", "Unknown /forge sub-command. <b>/forge</b> (status) · tools · read · search · diff · apply · hotswap · eval · export · version · history · set · do · discard · brain · selftest"); return; }
+    if(op === "schedule"){
+      const sp = (rest || "").toLowerCase().split(/\s+/).filter(Boolean);
+      const sub = sp[0] || "status";
+      if(sub === "on"){
+        const mins = Math.max(1, Math.min(120, parseInt(sp[1], 10) || 5));
+        const sc = schedGet(); sc.on = true; sc.everyMin = mins; schedSet(sc); schedEnsure();
+        try{ if(window.ObiAuto) window.ObiAuto.setAuto(true); }catch(e){}
+        addBubble("ass", "⏰ forge pulse <b>on</b> — a tiny Flash inference every <b>" + mins + " min</b> (receipts in kv mcp). Gated by <b>/auto</b> (turned on with it); <b>/auto off</b> stops it. Persisted across reloads.");
+        logOp({ kind:"op", action:"forge schedule", detail:"pulse on every " + mins + " min", result:"scheduled + /auto on" });
+        return;
+      }
+      if(sub === "off"){
+        const sc2 = schedGet(); sc2.on = false; schedSet(sc2);
+        addBubble("ass", "⏰ forge pulse <b>off</b> — nothing will fire on its own. (/auto left as-is.)");
+        logOp({ kind:"op", action:"forge schedule", detail:"pulse off", result:"stopped" });
+        return;
+      }
+      if(sub === "status" || sub === ""){
+        const st = schedGet();
+        const ago = st.lastRun ? Math.round((Date.now() - st.lastRun) / 1000) + "s ago" : "never";
+        const au = (window.ObiAuto && window.ObiAuto.read) ? window.ObiAuto.read() : "?";
+        addBubble("ass", '<div class="rise"><div class="rhead">⏰ /forge schedule — ' + (st.on ? "ON" : "OFF") + '</div><div class="rrow"><b>PULSE</b><span class="vd">every ' + st.everyMin + ' min</span><div class="rd">last firing: ' + ago + ' · master switch /auto: <b>' + au + '</b></div></div><div class="rfoot">Usage: <b>/forge schedule on [minutes]</b> · <b>off</b> · <b>status</b>. Each firing = one tiny Flash inference + receipt + I-LOG entry.</div></div>');
+        return;
+      }
+      addBubble("ass", "Usage: <b>/forge schedule on [minutes]</b> · <b>off</b> · <b>status</b>.");
+      return;
+    }
+    if(op === "runner"){
+      const sub = (rest || "").toLowerCase();
+      const urlKey = "obi_runner_url";
+      if(sub.startsWith("url")){
+        const u = rest.slice(3).trim().replace(/\s.*$/, "");
+        if(!u || !/^https?:\/\//i.test(u)){ addBubble("ass", "Usage: <b>/forge runner url &lt;https://pais-mcp-cloud.…workers.dev&gt;</b> — remembers where the deployed runner lives in this browser."); return; }
+        try{ localStorage.setItem(urlKey, u.replace(/\/+$/, "")); }catch(e){}
+        addBubble("ass", "🏠 runner URL remembered — <b>" + esc(u) + "</b>. <b>/forge runner check</b> pings it."); return;
+      }
+      if(sub === "check"){
+        let base = null; try{ base = localStorage.getItem(urlKey); }catch(e){}
+        if(!base){ addBubble("ass", "No runner URL remembered — <b>/forge runner url &lt;…&gt;</b> first (it comes from <b>wrangler deploy</b> on the command machine). The project is staged at <b>src/mcp-server/</b> with cron <b>*/10 * * * *</b>."); return; }
+        addBubble("ass", "📡 pinging <b>" + esc(base) + "/health</b>…");
+        try{
+          const r = await root.superFetch(base.replace(/\/+$/, "") + "/health");
+          const j = await r.json();
+          addBubble("ass", '<div class="rise"><div class="rhead">📡 /forge runner check — ' + (j.ok ? "ALIVE" : "DOWN") + '</div><div class="rrow"><b>HEALTH</b><span class="vd">' + esc(base) + '</span><div class="rd" style="white-space:pre-wrap;font-family:ui-monospace,monospace;font-size:11px">' + esc(JSON.stringify(j, null, 1)).slice(0, 900) + '</div></div><div class="rfoot">keys here are booleans only — never the secrets themselves.</div></div>');
+        }catch(e){ addBubble("ass", "⚠ runner check failed: " + esc(e.message)); }
+        return;
+      }
+      let base2 = null; try{ base2 = localStorage.getItem(urlKey); }catch(e){}
+      addBubble("ass", '<div class="rise"><div class="rhead">🌙 /forge runner — the closed-browser pulse</div>'
+        + '<div class="rrow"><b>WHAT</b><span class="vd">CF cron */10</span><div class="rd">Cloudflare fires the Worker every 10 min whether any browser exists or not — one tiny Flash inference + a receipt line in canonical <b>RUNNER-LOG.md</b>. Staged at <b>src/mcp-server/</b> (worker.js + wrangler.toml + DEPLOY.md).</div></div>'
+        + '<div class="rrow"><b>DEPLOYED</b><span class="vd">' + (base2 ? "remembered" : "not yet") + '</span><div class="rd">' + (base2 ? esc(base2) + ' · <b>/forge runner check</b> pings it' : 'no URL remembered — deploy needs <b>wrangler</b> on the command machine (blocked in this browser), then <b>/forge runner url &lt;…&gt;</b>') + '</div></div>'
+        + '<div class="rrow"><b>IN-PAGE</b><span class="vd">/forge schedule</span><div class="rd">the open-browser twin — same 10 min, same receipts. The log names the source (cron vs manual vs page), so both can run without confusion.</div></div>'
+        + '<div class="rfoot"><b>/forge runner url &lt;…&gt;</b> · <b>/forge runner check</b> · deploy recipe in <b>src/mcp-server/DEPLOY.md</b>.</div></div>');
+      return;
+    }
+    if(op){ addBubble("ass", "Unknown /forge sub-command. <b>/forge</b> (status) · tools · read · search · diff · apply · hotswap · eval · export · version · history · set · do · discard · brain · schedule · runner · selftest"); return; }
     addBubble("ass", await statusCard());
     logOp({ kind:"op", action:"forge", detail:"status card rendered", result:"shown in the chat" });
   }
@@ -710,7 +812,7 @@
     read: read, gitRead: gitRead, fetchText: fetchText, panelSource: panelSource, manifest: manifest, hashText: hashText, diff: diff,
     stageSet: stageSet, stageRows: stageRows, stageTotal: stageTotal, stageClear: stageClear, stage: () => stage,
     propose: propose, apply: apply, hotSwap: hotSwap, evalSelf: evalSelf, exportSelf: exportSelf,
-    runTool: runTool, ask: ask, think: think, brain: forgeBrain, setBrain: forgeBrainSet, toolsCard: toolsCard, statusCard: statusCard, cmd: cmd,
+    runTool: runTool, ask: ask, think: think, brain: forgeBrain, setBrain: forgeBrainSet, toolsCard: toolsCard, statusCard: statusCard, cmd: cmd, schedGet: schedGet, pulse: pulse,
     run: cmd
   };
 })();

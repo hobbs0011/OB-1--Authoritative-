@@ -188,6 +188,7 @@ function redactSecrets(s){
     .replace(/(\/vault\s+(?:set|add)\s+\S+\s+)\S+/gi, "$1[REDACTED]")
     .replace(/(\/keys\s+ngl\s+\S+\s+)\S+/gi, "$1[REDACTED]")
     .replace(/(\/tool\s+key\s+)\S+/gi, "$1[REDACTED]")
+    .replace(/\bsk-or-v1-[A-Za-z0-9]{16,}\b/g, "[REDACTED_OPENROUTER_KEY]")
     .replace(/(\/vault\s+(?:escrow|recover|restore)\s+)[\s\S]*$/gim, "$1[REDACTED]");
 }
 /* WORKSAFE EXPORT (2026-10-18, sovereign order: no not-safe-for-work content
@@ -5970,6 +5971,34 @@ async function cmdCloudflare(arg){
       addBubble("ass", "⚠ Token stored, but verification failed: " + esc((r.j && r.j.errors && r.j.errors[0] && r.j.errors[0].message) || r.txt.slice(0,140)));
     }
     rrlAppend(runNoOf(),"DNA","Obi: [/cf token — " + (r.j && r.j.success ? "verified" : "failed") + "]");
+    return;
+  }
+  /* SECOND Cloudflare account (e.g. the Paid one) — stored as cfB/cfAcctB and
+     NEVER touching the primary cf/cfAcct the whole fleet runs on. Used for
+     one-off deploys to the other account (the runner moved there for the Paid
+     cron cap). Verified the same way: written, read back, account resolved. */
+  if(op === "token2"){
+    const t = (parts[1]||"").trim();
+    if(!t){ addBubble("ass","Usage: <b>/cf token2 &lt;API_TOKEN&gt;</b> — a token from the OTHER Cloudflare account (the one holding Workers Paid). Stored as <b>cfB</b>; the primary fleet token is untouched."); return; }
+    const st = keyStore({cfB:t});
+    if(!st.ok){
+      addBubble("ass","⛔ <b>NOT STORED.</b> The browser refused the write — " + esc(st.why) + ". Nothing was saved.");
+      logOp({ kind:"secret", action:"cf token2", detail:"WRITE REFUSED — nothing stored", result:"NOT STORED" });
+      return;
+    }
+    addBubble("ass","🔑 Second Cloudflare token stored locally as <b>cfB</b> (primary <b>cf</b> untouched). Verifying…");
+    logOp({ kind:"secret", action:"cf token2", detail:"stored in this browser only (value never logged)", result: maskTok(t) });
+    const r = await apiJson(CF_BASE, { method:"GET", headers:{ "Authorization":"Bearer "+t } });
+    if(r.j && r.j.success && r.j.result && r.j.result.length){
+      const prim = keyGet("cfAcct");
+      const other = r.j.result.filter(a => a.id !== prim);
+      const acct = (other[0] || r.j.result[0]);
+      const stA = keyStore({cfAcctB:acct.id});
+      addBubble("ass", `✅ Second account: <b>${esc(acct.name||acct.id)}</b> (${esc(acct.id)}) — ${stA.ok ? "stored as <b>cfAcctB</b>" : '<b style="color:#ff5a5a">could NOT be stored (' + esc(stA.why) + ') — re-run /cf token2</b>'}` + (acct.id === prim ? '<br><span class="rfoot">⚠ That is the SAME account the primary token already points at — token2 is for the other one.</span>' : '<br><span class="rfoot">Primary fleet still on the first account. Deploys to this one use cfB/cfAcctB explicitly.</span>'));
+    } else {
+      addBubble("ass", "⚠ Token stored, but verification failed: " + esc((r.j && r.j.errors && r.j.errors[0] && r.j.errors[0].message) || r.txt.slice(0,140)));
+    }
+    rrlAppend(runNoOf(),"DNA","Obi: [/cf token2 — " + (r.j && r.j.success ? "verified" : "failed") + "]");
     return;
   }
   const t = keyGet("cf");
