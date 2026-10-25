@@ -6803,7 +6803,10 @@ async function canonMirrorExtras(){
     /* KEEP 2026-10-25: runner-owned proof log — lives under perchance/ but is NOT
        station mirror (the paid runner appends cron receipts to it). Without this,
        every backup deletes the runner's own log. */
-    const KEEP = new Set(["RUNNER-LOG.md"]);
+    /* KEEP 2026-10-25 ~15:0x: station-filed artifacts the mirror pruned 14:5x —
+       STATUS-BRIEF (Kilo-written, filed direct to git, not via workspace) and the
+       Tiger Dossier PDF (swept in via blob API, source lives private). */
+    const KEEP = new Set(["RUNNER-LOG.md", "STATUS-BRIEF-20261025.md", "src/sites/net/material/The_Tiger_Dossier.pdf"]);
     const deletes = have.filter(p => !declared.has(p) && !KEEP.has(p)).map(p => P + p);
     return { ok:true, have:have.length, declared:SRC_SNAPSHOT.length, deletes:deletes };
   }catch(e){ return { ok:false, why:"the branch could not be read: " + String((e && e.message) || e) + " — nothing removed", deletes:[] }; }
