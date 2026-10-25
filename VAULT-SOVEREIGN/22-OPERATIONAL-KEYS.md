@@ -3,6 +3,7 @@
 **Vault:** VAULT-SOVEREIGN
 **Deposited:** 2026-10-25 (sovereign order, chat)
 **Classification:** SECRET / OPERATIONAL
+**Cloudflare account:** mrmichaelhobbs1234@gmail.com (paid, sovereign-stated)
 
 ## OpenRouter
 
@@ -16,11 +17,11 @@ Key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbnYiOiJwcm9kdWN0aW9uIiwia2lsb1VzZX
 
 Token: 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
 
-## Cloudflare API token (FREE acct)
+## Cloudflare API token (PAID acct 8717...)
 
-Token: cfat_wiUHY6lutCLXIzuiR7c2PCKsxTk6zTx9Eeww2w4Q368ac164
-Account ID (free): 3c7b1766bd8fdc9e01211d2b390315ea
-Paid account ID (runner host): 8717160562faa73b9eebb0a51f988785 — no token held in this browser
+Token: cfat_6mOcNoNRlcEy872MrqKqMBaX2QZkVkEGSpHsTOJcf8d5e360
+Account ID: 8717160562faa73b9eebb0a51f988785
+Note: prior free-acct token 401s since ~11:2x — replaced by sovereign order
 
 ## Runner
 
