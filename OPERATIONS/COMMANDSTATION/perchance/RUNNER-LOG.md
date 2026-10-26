@@ -252,3 +252,4 @@ Cloudflare cron appends one line per firing. Each line is a receipt: it ran with
 - 2026-10-26T09:48:48.775Z · run · kilo-gateway:kilo-auto/free · SELFUPGRADE ABORT no-plan Reply with exactly: logged → logged · 3252ms
 - 2026-10-26T09:51:05.417Z · cron:*/10 * * * * · openrouter:deepseek/deepseek-v4-flash · pulse ok · 2194ms · 14tok
 - 2026-10-26T09:53:11.325Z · run · kilo-gateway:kilo-auto/free · SELFUPGRADE START researching kilo Reply with exactly: logged → logged · 5818ms
+- 2026-10-26T09:53:18.588Z · run · kilo-gateway:kilo-auto/free · SELFUPGRADE RETRY plan-in-halves Reply with exactly: logged → logged · 3664ms
