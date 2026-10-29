@@ -36,7 +36,11 @@
      therefore means the anti-bot gate has lifted for this page, which is exactly
      the fact the mesh has been waiting on. So the probe is not busywork: it is
      the measurement, and its content is the measurement's own record. */
-  const HEARTBEAT = "obi-brain-heartbeat";
+  /* ROTATED 2026-10-25: the first heartbeat name was claimed by another origin
+     (edit_key_required — this browser can never write it, so the write lane read
+     BLOCKED forever). Heartbeats are write-only liveness proofs, so claiming a
+     fresh name is additive and safe; the old file simply goes stale. */
+  const HEARTBEAT = "obi-brain-heartbeat-2";
   const SLOTS = ["cf", "cfAcct", "gh", "dg", "cfR2Key", "cfR2Secret", "nglUser", "nglPass"];
 
   const hex = b => Array.from(new Uint8Array(b)).map(x => x.toString(16).padStart(2, "0")).join("");
