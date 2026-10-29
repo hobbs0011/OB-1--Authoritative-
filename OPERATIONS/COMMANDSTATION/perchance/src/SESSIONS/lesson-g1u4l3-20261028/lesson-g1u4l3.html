@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta viewport="width=device-width, initial-scale=1">
+<style>
+:root {
+  --neon-purple: #a855f7;
+  --gold: #f59e0b;
+  --deep-dark: #0f0f1a;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--deep-dark);
+  color: var(--neon-purple);
+}
+.dialogue-block {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid var(--gold);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 8px;
+}
+</style>
+</head>
+<body>
+<div class="dialogue-block">
+  <p class="speaker">Dd</p>
+  <p>Dd is for dance. Say it with me: dance, dino, dot.</p>
+  <p><button data-answer="true">Begin Your Journey</button></p>
+</div>
+<div class="vocab-list">
+  <div class="vocab-item">dance</div>
+  <div class="vocab-item">dino</div>
+  <div class="vocab-item">dot</div>
+</div>
+
+<div id="progress"><div id="bar"></div></div>
+<div id="rooms"></div>
+<div id="coin">🪙 <span>0</span> coins</div>
+<script>
+const rooms = ["Room 1", "Room 2", "Room 3"];
+let coin = 0;
+document.addEventListener("click", function (e) {
+  const b = e.target.closest("[data-answer]");
+  if (!b || b.getAttribute("data-done") === "1") return;
+  b.setAttribute("data-done", "1");
+  if (b.getAttribute("data-answer") === "true") {
+    coin += 10;
+    document.querySelector("#coin span").textContent = coin;
+  }
+  b.classList.add("chatty-feedback");
+  const box = b.closest(".chatty-choices");
+  if (box) {
+    const f = box.querySelector("p.chatty-feedback");
+    if (f) f.removeAttribute("hidden");
+  }
+});
+</script>
+
+<div class="dialogue-block">
+  <p class="speaker">Warm-Up: Dd is our letter.</p>
+  <p>You say /d/. Meet dance, dino, dot.</p>
+</div>
+<p class="chatty-hint">Every word today starts with /d/. If it starts with /d/, it is ours.</p>
+<div class="chatty-choices">
+  <p>Tap the dance.</p>
+  <button data-answer="true">dance</button>
+  <button data-answer="false">dino</button>
+  <button data-answer="false">dot</button>
+</div>
+
+<div class="dialogue-block">
+  <p><span class="speaker">Ms Hoa:</span> Minh, show us your dance.</p>
+  <p><span class="speaker">Minh:</span> I dance and I draw a dino with a dot.</p>
+  <p><span class="speaker">Anh:</span> I see the dino. I see the dot. We dance.</p>
+</div>
+<p class="chatty-clue">Ms Hoa asked for Dd words, and the class gave her dance, dino, dot.</p>
+
+<div class="dialogue-block">
+  <p class="speaker">Minh texts: "I drew a dino and a dot."</p>
+</div>
+<p class="chatty-hint">You see a dino and a dot. You can dance with the dino.</p>
+<div class="vocab-list">
+  <div class="vocab-item">dance</div>
+  <div class="vocab-item">dino</div>
+  <div class="vocab-item">dot</div>
+</div>
+<div class="summary-card">Great job spotting the dino, dot, and dance!</div>
+
+<div class="dialogue-block speaker">
+  <p class="chatty-clue">You can see the dance, dino, and dot.</p>
+  <p class="chatty-hint">You will love each one.</p>
+  <p class="chatty-clue">The lamp glows softly as a story prop.</p>
+</div>
+
+<div class="vocab-list">
+  <ol>
+    <li class="vocab-item">dance</li>
+    <li class="vocab-item">dino</li>
+    <li class="vocab-item">dot</li>
+    <li class="vocab-item">dance</li>
+  </ol>
+</div>
+
+<div class="chatty-choices">
+  <p>Tap the dance.</p>
+  <button data-answer="true">dance</button>
+  <button data-answer="false">dino</button>
+  <button data-answer="false">dot</button>
+  <p class="chatty-feedback" hidden>Dance starts with /d/. You found it.</p>
+</div>
+<div class="chatty-choices">
+  <p>Tap the dot.</p>
+  <button data-answer="false">dance</button>
+  <button data-answer="false">dino</button>
+  <button data-answer="true">dot</button>
+  <p class="chatty-feedback" hidden>Dot starts with /d/. Plus 10 coins.</p>
+</div>
+
+<div class="summary-card">
+  <p>You are a Dd Detective.</p>
+  <p>Our chant: <strong>Dance, dino, dot! /d/ /d/ /d/!</strong></p>
+  <p>Chant it again tomorrow. Dance, dino, dot!</p>
+  <button data-answer="true">Chant along</button>
+</div>
+
+</body></html>

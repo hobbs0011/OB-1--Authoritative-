@@ -1,0 +1,86 @@
+name: Roblox Place Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      universeId:
+        description: 'Roblox Universe ID'
+        required: true
+        default: '9945984154'
+      placeId:
+        description: 'Roblox Place ID'
+        required: true
+        default: '83007032761005'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Rojo
+        run: |
+          curl -sL -o rojo.zip https://github.com/rojo-rbx/rojo/releases/download/v7.6.1/rojo-7.6.1-linux-x86_64.zip
+          mkdir -p "$HOME/.local/bin"
+          unzip -o rojo.zip -d "$HOME/.local/bin"
+          chmod +x "$HOME/.local/bin/rojo"
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Build place file
+        run: |
+          echo "Building .rbxl from default.project.json..."
+          rojo build default.project.json -o build.rbxl
+          ls -lh build.rbxl
+          echo "Build complete."
+
+      - name: Publish to Roblox via Open Cloud
+        env:
+          ROBLOX_API_KEY: ${{ secrets.ROBLOX_API_KEY }}
+          UNIVERSE_ID: ${{ github.event.inputs.universeId }}
+          PLACE_ID: ${{ github.event.inputs.placeId }}
+        run: |
+          if [ -z "$UNIVERSE_ID" ] || [ -z "$PLACE_ID" ]; then
+            echo "::error::universeId or placeId is blank. Fail-closed."
+            exit 1
+          fi
+
+          if [ -z "$ROBLOX_API_KEY" ]; then
+            echo "::error::ROBLOX_API_KEY secret is not set. Fail-closed."
+            exit 1
+          fi
+
+          echo "Publishing to Universe ${UNIVERSE_ID}, Place ${PLACE_ID}..."
+
+          MAX_RETRIES=3
+          RETRY_DELAY=30
+
+          for ATTEMPT in $(seq 1 "$MAX_RETRIES"); do
+            echo "Attempt ${ATTEMPT} of ${MAX_RETRIES}..."
+
+            HTTP_STATUS=$(curl -s -o response.json -w "%{http_code}" \
+              -X POST \
+              "https://apis.roblox.com/universes/v1/${UNIVERSE_ID}/places/${PLACE_ID}/versions?versionType=Published" \
+              -H "x-api-key: ${ROBLOX_API_KEY}" \
+              -H "Content-Type: application/octet-stream" \
+              --data-binary @build.rbxl)
+
+            echo "HTTP Status: ${HTTP_STATUS}"
+            cat response.json
+
+            if [ "$HTTP_STATUS" = "200" ]; then
+              echo "DEPLOYED — Place version published successfully."
+              break
+            elif [ "$HTTP_STATUS" = "409" ]; then
+              if [ "$ATTEMPT" -lt "$MAX_RETRIES" ]; then
+                echo "Server busy (HTTP 409). Waiting ${RETRY_DELAY}s before retry..."
+                sleep "$RETRY_DELAY"
+              else
+                echo "::error::DEPLOY FAILED — server still busy after ${MAX_RETRIES} attempts (HTTP 409)."
+                exit 1
+              fi
+            else
+              echo "::error::DEPLOY FAILED with HTTP ${HTTP_STATUS}"
+              exit 1
+            fi
+          done

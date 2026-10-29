@@ -1,0 +1,22 @@
+<div id="progress"><div id="bar"></div></div>
+<div id="rooms"></div>
+<div id="coin">🪙 <span>0</span> coins</div>
+<script>
+const rooms = ["Room 1", "Room 2", "Room 3"];
+let coin = 0;
+document.addEventListener("click", function (e) {
+  const b = e.target.closest("[data-answer]");
+  if (!b || b.getAttribute("data-done") === "1") return;
+  b.setAttribute("data-done", "1");
+  if (b.getAttribute("data-answer") === "true") {
+    coin += 10;
+    document.querySelector("#coin span").textContent = coin;
+  }
+  b.classList.add("chatty-feedback");
+  const box = b.closest(".chatty-choices");
+  if (box) {
+    const f = box.querySelector("p.chatty-feedback");
+    if (f) f.removeAttribute("hidden");
+  }
+});
+</script>

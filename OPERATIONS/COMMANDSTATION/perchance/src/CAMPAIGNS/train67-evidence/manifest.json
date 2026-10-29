@@ -1,0 +1,172 @@
+{
+ "generated": "2026-10-29T10:15:54.963Z",
+ "source": "public mirror tree @ccdb36b + 4 raw pulls (MonetizationServer, ServerGateway, UnifiedClient.client, ReceiptRouter)",
+ "files": [
+  {
+   "path": "UnifiedServer.lua",
+   "bytes": 16909,
+   "sha256": "cf0702220b0ad728aa1c9f9347e5139fe1f3a51f613ce93cfdf10b06afb2e250"
+  },
+  {
+   "path": "CombatSystem.lua",
+   "bytes": 28917,
+   "sha256": "5b3313cf8bb30c00fb033807c69540964054a0ac90bb0926b420044e6ed678bf"
+  },
+  {
+   "path": "UnifiedClient.lua",
+   "bytes": 12385,
+   "sha256": "1c4955cb06310b1f327073a6461e6ed2bc89f7bf68b4b863f331a2d9e595d9ec"
+  },
+  {
+   "path": "ServerGateway.lua",
+   "bytes": 12192,
+   "sha256": "1a1848837656e4339ec8c8c8abd2d1269606c2f45b588426592890318d610d58"
+  },
+  {
+   "path": "MonetizationServer.lua",
+   "bytes": 9425,
+   "sha256": "38d3cc17d087afc362e8d0c403d4eabf243ab488f46137aecaf84ec49ca5eaaf"
+  },
+  {
+   "path": "ReceiptRouter.lua",
+   "bytes": 25869,
+   "sha256": "bc3c801f125078d379679962d98ea6823db4029f92b70f1b5fd4947195059f0b"
+  },
+  {
+   "path": "GamePassConfig.lua",
+   "bytes": 14701,
+   "sha256": "573f5111f4d7a99192c0060dc85f9d4970bd77bf30f6d261326ebaecd581807c"
+  },
+  {
+   "path": "DevProductsConfig.lua",
+   "bytes": 10264,
+   "sha256": "c8e078409baee8a935b4187082f70bf2d1a4ff954e95304d4b8037b2b2657867"
+  },
+  {
+   "path": "QuestionBank.lua",
+   "bytes": 36122,
+   "sha256": "7eebc5e05baa1dd56179acade578f77bd5ffc077f23f1c7859183e27d516b8a2"
+  },
+  {
+   "path": "QuestionBankV2.lua",
+   "bytes": 22702,
+   "sha256": "18470a19cd3b59848f9c9e0f97b36460ff007a025bd2ce7cad90871dfc911b36"
+  },
+  {
+   "path": "Mouse_A.lua",
+   "bytes": 22012,
+   "sha256": "d2702a7eea51b6a493f96c19dfa37ba47184e2953176955b3004d80e5e0a2279"
+  },
+  {
+   "path": "EnemyData.lua",
+   "bytes": 14088,
+   "sha256": "cfecf4689507663cd8d96887b56497fccfa0a4150eb48e7af2e05699cee0a8a6"
+  },
+  {
+   "path": "default.project.json",
+   "bytes": 6003,
+   "sha256": "83b77274310722e9ce6a0cd41a499e0d3996840aed18f0d11d8c1b0132426a23"
+  },
+  {
+   "path": "deploy.yml",
+   "bytes": 2903,
+   "sha256": "f4ec3640f0b5b698818a0de064a652296415d8d69bb1145b9d7fbe08f624b6f2"
+  },
+  {
+   "path": "GO-NO-GO.md",
+   "bytes": 2588,
+   "sha256": "9609bb257733d437180443cb338d26ba8b7dd9351aa753c2db82256c91f84e77"
+  },
+  {
+   "path": "LAUNCH-STATUS-FINAL.md",
+   "bytes": 9306,
+   "sha256": "960e3253d30701e216b525c23779a439cc1ca82e11f1e6ee4dbb21d356042318"
+  },
+  {
+   "path": "GAME-BIBLE-DEPLOY-STATUS-FINAL.md",
+   "bytes": 3691,
+   "sha256": "e0c36788d3bbfcb728e1271e10f13990046eb7897b1cef416008c3478500fd1b"
+  },
+  {
+   "path": "ENGLISH-POWERUP-SPEC.md",
+   "bytes": 7192,
+   "sha256": "88b935b235d20203432adc1e175741ba9de6f53257ab9c02be8c2883e9e2cfcb"
+  },
+  {
+   "path": "README.md",
+   "bytes": 9480,
+   "sha256": "f4791d2165fc981499ea86143ae6d76ce3767c8b571fc78015b13f2f5774b710"
+  },
+  {
+   "path": "omega-text.txt",
+   "bytes": 4716,
+   "sha256": "93cca4206a38a2ae476e78d3de99891c1a72528046b1e35b6bb456ddc7952afa"
+  }
+ ],
+ "codeFilesInTree": 51,
+ "codeFiles": [
+  "CANON/TRAIN-67/CODE",
+  "CANON/TRAIN-67/CODE/AnalyticsService.lua",
+  "CANON/TRAIN-67/CODE/AnomalyDetector.lua",
+  "CANON/TRAIN-67/CODE/BattlePass.lua",
+  "CANON/TRAIN-67/CODE/ChallengeManager.lua",
+  "CANON/TRAIN-67/CODE/ClientBridge.lua",
+  "CANON/TRAIN-67/CODE/CodexClient.lua",
+  "CANON/TRAIN-67/CODE/CodexData.lua",
+  "CANON/TRAIN-67/CODE/CombatRewardsManager.lua",
+  "CANON/TRAIN-67/CODE/CombatSystem.lua",
+  "CANON/TRAIN-67/CODE/CosmeticController.lua",
+  "CANON/TRAIN-67/CODE/DailyRewards.lua",
+  "CANON/TRAIN-67/CODE/DataStoreV2.lua",
+  "CANON/TRAIN-67/CODE/DayScaling.lua",
+  "CANON/TRAIN-67/CODE/DevProductsConfig.lua",
+  "CANON/TRAIN-67/CODE/EconomyManager.lua",
+  "CANON/TRAIN-67/CODE/EloManager.lua",
+  "CANON/TRAIN-67/CODE/EnemyData.lua",
+  "CANON/TRAIN-67/CODE/EnemyFactory.lua",
+  "CANON/TRAIN-67/CODE/EnglishRewardsManager.lua",
+  "CANON/TRAIN-67/CODE/FTUEController.lua",
+  "CANON/TRAIN-67/CODE/FTUEManager.lua",
+  "CANON/TRAIN-67/CODE/FTUEWiring.lua",
+  "CANON/TRAIN-67/CODE/GachaManager.lua",
+  "CANON/TRAIN-67/CODE/GameMain_PHASE1_REVISED.lua",
+  "CANON/TRAIN-67/CODE/GamePassConfig.lua",
+  "CANON/TRAIN-67/CODE/GuildManager.lua",
+  "CANON/TRAIN-67/CODE/HUDController_PHASE1_REVISED.lua",
+  "CANON/TRAIN-67/CODE/HUDController_v2.lua",
+  "CANON/TRAIN-67/CODE/LeaderboardManager.lua",
+  "CANON/TRAIN-67/CODE/LedgerSchema.lua",
+  "CANON/TRAIN-67/CODE/MainServer_v2.lua",
+  "CANON/TRAIN-67/CODE/MobileInputController.lua",
+  "CANON/TRAIN-67/CODE/MonetizationOrchestrator.lua",
+  "CANON/TRAIN-67/CODE/MonetizationServer.lua",
+  "CANON/TRAIN-67/CODE/PrestigeManager.lua",
+  "CANON/TRAIN-67/CODE/QuestionBank.lua",
+  "CANON/TRAIN-67/CODE/QuestionBankV2.lua",
+  "CANON/TRAIN-67/CODE/QuestionChunks",
+  "CANON/TRAIN-67/CODE/QuestionChunks/Mouse_A.lua",
+  "CANON/TRAIN-67/CODE/ReceiptRouter.lua",
+  "CANON/TRAIN-67/CODE/ReferralSystem.lua",
+  "CANON/TRAIN-67/CODE/RewardBridge.lua",
+  "CANON/TRAIN-67/CODE/SecurityLayer.lua",
+  "CANON/TRAIN-67/CODE/ServerGateway.lua",
+  "CANON/TRAIN-67/CODE/TradeManager.lua",
+  "CANON/TRAIN-67/CODE/UnifiedClient.client.lua",
+  "CANON/TRAIN-67/CODE/UnifiedServer.server.lua",
+  "CANON/TRAIN-67/CODE/WaveManager.lua",
+  "CANON/TRAIN-67/CODE/WeaponData.lua",
+  "CANON/TRAIN-67/CODE/WorldBoss.lua"
+ ],
+ "measured": {
+  "bootEntries": 29,
+  "bootRequired": 6,
+  "questionIds": 130,
+  "tier1Hits": 41,
+  "note_tier1": "40 mouse rows + 'for tier = 1, 5' loop in GetStats — NO stray, tier math 40/30/20/20/20=130 exact"
+ },
+ "excluded": [
+  "tree.json (1734161B — list extracted above)",
+  "Omega-Archive.html (lore page, not baseline)",
+  "RAW-0704.md (278987B session recapture, not baseline)"
+ ]
+}

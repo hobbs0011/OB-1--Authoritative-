@@ -1,0 +1,32 @@
+{
+  "lane": "free (active)",
+  "note": "CORRECTED 2026-10-29 per user: quota gap is KEY SHAPE, not credits. Box key is a gateway API-token JWT (apiTokenPepper shape, exp 2031); direct Kilo client uses user-session auth with ~20x the free allowance. Balanced/402 is irrelevant — the path is a fresh key from the user's own Kilo account + live free rotation, not funding.",
+  "catalogAt": "2026-10-29T04:0xZ",
+  "total": 388,
+  "freeCount": 16,
+  "free": [
+    "kilo-auto/free",
+    "nvidia/nemotron-3.5-super-vl:free",
+    "reflection/beam-free",
+    "stealth/glyph-cluster",
+    "recursive/flint-v1.0:free",
+    "xingchen-agi/xing4.0-29b-a4b:free",
+    "dots-studio/dots-3-note-preview:free",
+    "liquid/lfm-2.5-2.6b:free",
+    "nvidia/nemotron-3.5-lightning:free",
+    "poolside/laguna-s-2.1:free",
+    "poolside/laguna-xs-2.1:free",
+    "cohere/north-mini-code:free",
+    "nvidia/nemotron-3.5-content-safety:free",
+    "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+    "openrouter/free"
+  ],
+  "autoFreeRoutes": [
+    "dots-studio/dots-3-note-preview:free",
+    "nvidia/nemotron-3.5-super-vl:free",
+    "reflection/beam-free",
+    "stealth/glyph-cluster"
+  ],
+  "next": "Go (between keeper runs): seed LD11v6 + keepalive-LD11; optional key swap: user pastes fresh kilo.ai key, place to /root/.kilo_key blind (backup old), no relaunch needed mid-file (driver reads key at start only — restart picks it up)."
+}
