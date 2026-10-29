@@ -2,7 +2,19 @@ name = "pais-mcp-cloud"
 main = "worker.js"
 compatibility_date = "2026-01-01"
 
+# The closed-browser runner: Cloudflare fires `scheduled()` on this cadence
+# whether any browser exists or not. Same 10 minutes as the in-page pulse.
+[triggers]
+crons = ["*/10 * * * *"]
+
 [vars]
 GATEWAY_BASE = "https://ai-gateway.kilo.ai/api/v1"
-# KILO_KEY is NOT a var — set it as a secret:
+OR_BASE = "https://openrouter.ai/api/v1"
+GH_REPO = "Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-"
+GH_BRANCH = "master"
+RUNNER_LOG_PATH = "OPERATIONS/COMMANDSTATION/perchance/RUNNER-LOG.md"
+# OPENROUTER_KEY, KILO_KEY, GH_TOKEN, RUNNER_KEY are NOT vars — they are secrets:
+#   wrangler secret put OPENROUTER_KEY
 #   wrangler secret put KILO_KEY
+#   wrangler secret put GH_TOKEN
+#   wrangler secret put RUNNER_KEY

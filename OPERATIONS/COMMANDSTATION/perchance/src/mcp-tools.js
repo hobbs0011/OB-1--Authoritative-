@@ -21,8 +21,11 @@
 "use strict";
 var GATE = "https://ai-gateway.kilo.ai/api/v1";
 var DEF_MODEL = "kilo-auto/free";
+var OR_BASE = "https://openrouter.ai/api/v1";
+var DEF_OR_MODEL = "deepseek/deepseek-v4-flash";
 function folder(){ try{ return (root && root.kv) ? (root.kv.mcp || null) : null; }catch(e){ return null; } }
-function kiloKey(){ try{ return keyGet("kilo") || null; }catch(e){ return null; } }
+  function kiloKey(){ try{ return keyGet("kilo") || null; }catch(e){ return null; } }
+  function orKey(){ try{ return keyGet("openrouter") || null; }catch(e){ return null; } }
 function head(s, n){ s = String(s == null ? "" : s); return s.length > n ? s.slice(0, n) + "…" : s; }
 async function gw(path, opts){
   var o = opts || {};
@@ -41,7 +44,7 @@ async function runChat(a){
   var prompt = String((a && (a.prompt || a.text)) || "");
   if(!prompt.trim()) throw new Error("empty prompt");
   var model = (a && a.model) || DEF_MODEL;
-  var max_tokens = Math.min(parseInt((a && a.max_tokens) || "300", 10) || 300, 2000);
+  var max_tokens = Math.min(Math.max(parseInt((a && a.max_tokens) || "1000", 10) || 1000, 300), 2000); // floor 300: Kilo chat never starves the model — tiny budgets truncate replies (proven 2026-10-25)
   var r = await gw("/chat/completions", { key: k, method: "POST", json: true,
     body: JSON.stringify({ model: model, max_tokens: max_tokens, messages: [{ role: "user", content: prompt }] }) });
   if(r.status !== 200) throw new Error("gateway HTTP " + r.status + " — " + head(r.txt, 160));
@@ -57,12 +60,55 @@ async function runModels(){
   var ids = arr.map(function(m){ return m.id || m.name; }).filter(Boolean);
   return { count: ids.length, free: ids.filter(function(id){ return /free/i.test(id); }), sample: ids.slice(0, 8) };
 }
+async function orAuth(key){
+  var r = await root.superFetch(OR_BASE + "/auth/key", { headers: { "Authorization": "Bearer " + key } });
+  var txt = await r.text();
+  var j = null; try{ j = JSON.parse(txt); }catch(e){}
+  return { status: r.status, j: j, txt: txt };
+}
+async function runOrChat(a){
+  var k = orKey();
+  if(!k) throw new Error("no OpenRouter key in this browser — paste it with /tool key <sk-or-…> (stored locally, never logged)");
+  var prompt = String((a && (a.prompt || a.text)) || "");
+  if(!prompt.trim()) throw new Error("empty prompt");
+  var model = (a && a.model) || DEF_OR_MODEL;
+  var max_tokens = Math.min(parseInt((a && a.max_tokens) || "1500", 10) || 1500, 8000);
+  var body = { model: model, max_tokens: max_tokens, messages: [{ role: "user", content: prompt }] };
+  var r = await root.superFetch(OR_BASE + "/chat/completions", {
+    method: "POST", headers: Object.assign({ "Authorization": "Bearer " + k }, { "Content-Type": "application/json", "HTTP-Referer": "https://perchance.org", "X-Title": "PaiS-HQ-Command" }),
+    body: JSON.stringify(body) });
+  var txt = await r.text();
+  var j = null; try{ j = JSON.parse(txt); }catch(e){}
+  if(r.status !== 200) throw new Error("openrouter HTTP " + r.status + " — " + head(txt, 160));
+  var m = (j && j.choices && j.choices[0] && j.choices[0].message) || {};
+  var reply = String(m.content || "");
+  if(!reply.trim()) throw new Error("the model returned nothing (reasoning-only cut? raise max_tokens)");
+  return { model: model, reply: reply, usage: (j && j.usage) || null };
+}
 function downWhy(reason){ return async function(){ throw new Error("DOWN — " + reason); }; }
+async function runCloudMcp(a){
+  var base = null; try{ base = localStorage.getItem("obi_runner_url"); }catch(e){}
+  if(!base) throw new Error("no runner URL remembered in this browser — /forge runner url <https://pais-mcp-cloud.…workers.dev> first");
+  var tool = String((a && (a.tool || a.name)) || "");
+  var args = (a && (a.arguments || a.args)) || {};
+  if(!tool) throw new Error("usage: /tool run cloud_mcp '{\"tool\":\"openrouter_chat\",\"arguments\":{\"prompt\":\"…\"}}'");
+  if(typeof args === "string"){ try{ args = JSON.parse(args); }catch(e){ throw new Error("arguments must be a JSON object"); } }
+  var id = "c" + Date.now().toString(36);
+  var r = await root.superFetch(String(base).replace(/\/+$/, "") + "/mcp", { method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ jsonrpc: "2.0", id: id, method: "tools/call", params: { name: tool, arguments: args } }) });
+  var txt = await r.text();
+  var j = null; try{ j = JSON.parse(txt); }catch(e){ throw new Error("cloud runner HTTP " + r.status + " — " + head(txt, 120)); }
+  if(!j) throw new Error("cloud runner HTTP " + r.status);
+  if(j.error) throw new Error("cloud: " + String(j.error.message || JSON.stringify(j.error)).slice(0, 160));
+  var res = j.result || {};
+  return { via: "cloud_mcp", content: res.content, meta: res._meta || null };
+}
 var TOOLS = [
   { name: "gateway_chat", lane: "LIVE", desc: "chat completion via the Kilo Gateway (free lane first, usage metered)", run: runChat },
   { name: "gateway_models", lane: "LIVE", desc: "live model catalog: count + free lane + sample", run: runModels },
+  { name: "openrouter_chat", lane: "LIVE", desc: "chat via OpenRouter (DeepSeek Flash default, Pro on request — metered, receipts carry cost)", run: runOrChat },
   { name: "edtech_build", lane: "DOWN", desc: "lesson build on the edtech desk", down: "no remote endpoint yet — the edtech desk has no callable lane; staged as tools/call edtech_build in src/mcp-server/worker.js for deploy day", run: downWhy("no remote endpoint yet — the edtech desk has no callable lane") },
-  { name: "cloud_mcp", lane: "DOWN", desc: "the Worker MCP endpoint itself (tools/list + tools/call over HTTP)", down: "not deployed — needs /cf token, BLOCKED in this browser; project staged at src/mcp-server/", run: downWhy("not deployed — needs /cf token, BLOCKED in this browser") }
+  { name: "cloud_mcp", lane: "LIVE", desc: "the deployed runner's MCP over HTTPS (proxied tools/call) — the closed-browser brain, callable from here", run: runCloudMcp }
 ];
 async function saveReceipt(rec){
   try{ var f = folder(); if(f) await f.set(rec.id, rec); }catch(e){}
@@ -97,12 +143,14 @@ async function toolRun(name, args){
 function laneBadge(t){ return t.lane === "LIVE" ? "LIVE" : "DOWN"; }
 function card(){
   var k = kiloKey();
+  var ok = orKey();
   var rows = TOOLS.map(function(t){
     return '<div class="rrow"><b>' + esc(t.name) + '</b><span class="vd">' + t.lane + '</span><div class="rd">' + esc(t.desc) + (t.down ? ' — <i>' + esc(t.down) + '</i>' : '') + '</div></div>';
   }).join("");
   addBubble("ass", '<div class="rise"><div class="rhead">🔧 Tool lane — remote hands, called from here</div>'
     + rows
     + '<div class="rrow"><b>KILO KEY</b><span class="vd">' + (k ? "held" : "missing") + '</span><div class="rd">' + (k ? esc(maskTok(k)) + ' — this browser only' : 'set with <b>/tool key &lt;JWT&gt;</b>') + '</div></div>'
+    + '<div class="rrow"><b>OPENROUTER KEY</b><span class="vd">' + (ok ? "held" : "missing") + '</span><div class="rd">' + (ok ? esc(maskTok(ok)) + ' — this browser only · DeepSeek via <b>openrouter_chat</b>' : 'set with <b>/tool key &lt;sk-or-…&gt;</b>') + '</div></div>'
     + '<div class="rfoot">Use: <b>/tool list</b> · <b>/tool run &lt;name&gt; &lt;prompt-or-JSON&gt;</b> · <b>/tool key &lt;JWT&gt;|clear|test</b> · <b>/tool log [n]</b> · alias <b>/mcp</b>. Receipts in kv folder <b>mcp</b>.</div></div>');
 }
 async function cmd(arg){
@@ -122,27 +170,48 @@ async function cmd(arg){
     var verb = (sub[0] || "").toLowerCase();
     if(!verb){ addBubble("ass", "Usage: <b>/tool key &lt;JWT&gt;</b> · <b>/tool key clear</b> · <b>/tool key test</b> — stored in this browser only (obi_keys.kilo), never logged, never filed. Same slot as <b>/vault set kilo &lt;JWT&gt;</b> (sealed + recoverable)."); return; }
     if(verb === "clear"){
-      try{ var o = JSON.parse(localStorage.getItem("obi_keys") || "{}"); delete o.kilo; localStorage.setItem("obi_keys", JSON.stringify(o)); }catch(e){}
-      addBubble("ass", "🔒 Kilo key removed from this browser.");
-      logOp({ kind: "secret", action: "tool key clear", detail: "credential removed (kilo)", result: "deleted from localStorage" });
+      var which = (sub[1] || "all").toLowerCase();
+      try{ var o = JSON.parse(localStorage.getItem("obi_keys") || "{}"); if(which === "or" || which === "openrouter") delete o.openrouter; if(which === "kilo" || which === "all") delete o.kilo; localStorage.setItem("obi_keys", JSON.stringify(o)); }catch(e){}
+      addBubble("ass", "🔒 Key removed from this browser (" + esc(which) + ").");
+      logOp({ kind: "secret", action: "tool key clear", detail: "credential removed (" + which + ")", result: "deleted from localStorage" });
       return;
     }
     if(verb === "test"){
-      var kk = kiloKey();
-      if(!kk){ addBubble("ass", "No Kilo key stored. <b>/tool key &lt;JWT&gt;</b> first."); return; }
-      addBubble("ass", "🔑 Testing the held key — a 5-token free-lane chat (the /models catalog is public, so only inference proves a key)…");
-      try{
-        var out = await runModels();
-        var proof = await toolRun("gateway_chat", { model:"kilo-auto/free", max_tokens:300, prompt:"Reply with exactly: ok" });
-        if(!proof.ok) throw new Error(proof.err);
-        var pu = (proof.out && proof.out.usage && proof.out.usage.total_tokens != null) ? " · " + proof.out.usage.total_tokens + " tokens" : "";
-        addBubble("ass", "✅ Key live — proved by inference on <b>kilo-auto/free</b>" + pu + " · catalog <b>" + out.count + "</b> models, free lane " + out.free.length + " (" + esc(out.free.slice(0, 4).join(", ")) + (out.free.length > 4 ? "…" : "") + ").<br><span class=\"rfoot\">" + esc(maskTok(kk)) + " · this browser only · receipt " + esc(proof.receipt) + "</span>");
-        rrlAppend(runNoOf(), "DNA", "Obi: [/tool key test — proved by inference, " + out.count + " models]");
-      }catch(e){ addBubble("ass", "⚠ Key held but the Gateway refused proof: " + esc(String((e && e.message) || e).slice(0, 200))); }
+      var kk = kiloKey(), oo = orKey();
+      if(!kk && !oo){ addBubble("ass", "No key stored. <b>/tool key &lt;JWT&gt;</b> or <b>/tool key &lt;sk-or-…&gt;</b> first."); return; }
+      if(kk){
+        addBubble("ass", "🔑 Testing the Kilo key — a free-lane chat (the /models catalog is public, so only inference proves a key)…");
+        try{
+          var out = await runModels();
+          var proof = await toolRun("gateway_chat", { model:"kilo-auto/free", max_tokens:300, prompt:"Reply with exactly: ok" });
+          if(!proof.ok) throw new Error(proof.err);
+          var pu = (proof.out && proof.out.usage && proof.out.usage.total_tokens != null) ? " · " + proof.out.usage.total_tokens + " tokens" : "";
+          addBubble("ass", "✅ Kilo live — proved by inference on <b>kilo-auto/free</b>" + pu + " · catalog <b>" + out.count + "</b> models, free lane " + out.free.length + ".<br><span class=\"rfoot\">" + esc(maskTok(kk)) + " · this browser only · receipt " + esc(proof.receipt) + "</span>");
+          rrlAppend(runNoOf(), "DNA", "Obi: [/tool key test kilo — proved by inference, " + out.count + " models]");
+        }catch(e){ addBubble("ass", "⚠ Kilo key held but the Gateway refused proof: " + esc(String((e && e.message) || e).slice(0, 200))); }
+      }
+      if(oo){
+        addBubble("ass", "🔑 Testing the OpenRouter key — no-cost auth check (no inference)…");
+        try{
+          var chk = await orAuth(oo);
+          if(chk.status !== 200) throw new Error("openrouter HTTP " + chk.status);
+          var lbl = (chk.j && chk.j.data && chk.j.data.label) || "key ok";
+          addBubble("ass", "✅ OpenRouter live — <b>" + esc(lbl) + "</b> · DeepSeek Flash/Pro ready via <b>openrouter_chat</b>.<br><span class=\"rfoot\">" + esc(maskTok(oo)) + " · this browser only</span>");
+          rrlAppend(runNoOf(), "DNA", "Obi: [/tool key test openrouter — auth ok]");
+        }catch(e){ addBubble("ass", "⚠ OpenRouter key held but refused: " + esc(String((e && e.message) || e).slice(0, 200))); }
+      }
       return;
     }
     var jwt = sub.join(" ");
-    if(!/^eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(jwt)){ addBubble("ass", "⛔ That does not look like a Kilo JWT (eyJ…...…). Nothing stored."); return; }
+    if(/^sk-or-v1-[A-Za-z0-9]+$/.test(jwt)){
+      var st2 = keyStore({ openrouter: jwt });
+      if(!st2.ok){ addBubble("ass", "⛔ <b>NOT STORED.</b> " + esc(st2.why) + ". Nothing was saved."); return; }
+      addBubble("ass", "🔑 OpenRouter key stored locally <span style=\"opacity:.7\">(written and read back)</span> — " + esc(maskTok(jwt)) + ".<br><span class=\"rfoot\">Held in this browser only; never in public source, never soul, never the I-LOG. <b>openrouter_chat</b> drives DeepSeek Flash by default, Pro on request. <b>/tool key test</b> to verify · <b>/tool key clear or</b> to remove.</span>");
+      logOp({ kind:"secret", action:"tool key", detail:"openrouter stored in this browser only (value never logged)", result:maskTok(jwt) });
+      rrlAppend(runNoOf(), "DNA", "Obi: [/tool key openrouter stored]");
+      return;
+    }
+    if(!/^eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(jwt)){ addBubble("ass", "⛔ That looks like neither a Kilo JWT (eyJ…...…) nor an OpenRouter key (sk-or-v1-…). Nothing stored."); return; }
     var st = keyStore({ kilo: jwt });
     if(!st.ok){ addBubble("ass", "⛔ <b>NOT STORED.</b> " + esc(st.why) + ". Nothing was saved."); return; }
     addBubble("ass", "🔑 Kilo key stored locally <span style=\"opacity:.7\">(written and read back)</span> — " + esc(maskTok(jwt)) + ".<br><span class=\"rfoot\">Held in this browser only; never in public source, never soul, never the I-LOG. <b>/tool key test</b> to verify · <b>/tool key clear</b> to remove.</span>");
@@ -166,6 +235,9 @@ async function cmd(arg){
     var o = res.out || {};
     if(name === "gateway_chat"){
       addBubble("ass", '<div class="rise"><div class="rhead">🔧 gateway_chat · ' + esc(o.model || "") + '</div><div class="rd">' + esc(o.reply || "(empty)") + '</div><div class="rfoot">receipt ' + esc(res.receipt) + ' · ' + res.ms + ' ms' + (o.usage ? ' · ' + esc(JSON.stringify(o.usage)) : '') + ' · kv folder <b>mcp</b></div></div>');
+    }else if(name === "openrouter_chat"){
+      var cost = (o.usage && o.usage.cost != null) ? "cost $" + Number(o.usage.cost).toFixed(6) + " · " : "", oReply = String(o.reply || "(empty)");
+      addBubble("ass", '<div class="rise"><div class="rhead">OPENROUTER · ' + esc(o.model || "") + '</div><div class="rd">' + esc(oReply) + '</div><div class="rfoot">receipt ' + esc(res.receipt) + ' · ' + res.ms + ' ms · ' + esc(cost) + 'kv folder <b>mcp</b></div></div>');
     }else if(name === "gateway_models"){
       addBubble("ass", '<div class="rise"><div class="rhead">🔧 gateway_models · ' + o.count + ' models</div><div class="rrow"><b>FREE LANE</b><span class="vd">' + o.free.length + '</span><div class="rd">' + esc(o.free.slice(0, 10).join(", ")) + (o.free.length > 10 ? "…" : "") + '</div></div><div class="rrow"><b>SAMPLE</b><span class="vd">8</span><div class="rd">' + esc((o.sample || []).join(", ")) + '</div></div><div class="rfoot">receipt ' + esc(res.receipt) + ' · ' + res.ms + ' ms</div></div>');
     }else{
