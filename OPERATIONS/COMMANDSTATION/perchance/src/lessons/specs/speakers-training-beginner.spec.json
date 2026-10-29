@@ -1,0 +1,185 @@
+{
+ "title": "Giving and Receiving Complaints",
+ "logo": "🎤",
+ "subtitle": "Things break, you speak up — 10 complaint words, one loud lesson 🗣️",
+ "cta": "🎤 Start Speaking",
+ "topic": "Beginner · Giving and receiving complaints (Fluency Plus U4L5 complaints + U3L6 presenting; ad situations become complaint scenes), 10 key words, 18 pages incl. writing spares",
+ "evidence": "School-assigned topics (not reinvented): Fluency Plus U4L3/U4L5 + Friends Plus U3L6, 120+ slides read in full; v6: complaint-first vocab, plausible test traps, warnings panel; v7: end writing rooms; v8: open-ended writing (trick-your-friend, mini-dialogue, 10-word script); v9: tap-a-word fullscreen vocab focus for TV; Pro self-audit Tmvt6u3fj applied where it didn't fight the brief",
+ "features": [
+  {
+   "icon": "👆",
+   "title": "Warm-Up Reveals",
+   "desc": "Three tap-to-reveal cards, zero multiple choice: no problem, weekend plans, see-you-later to Peter (any answer works) — pure communication, not the lesson."
+  },
+  {
+   "icon": "🗣️",
+   "title": "10 Complaint Words",
+   "desc": "Excuse me, apologize, complaint, please, problem, wrong, broken, late, rude, noisy — every word lives in a scene, a game, and the key."
+  },
+  {
+   "icon": "✍️",
+   "title": "Writing Spares",
+   "desc": "Five pen-and-notebook rooms (copy + fix-the-order + fix-my-mistakes + mini-dialogue + 10-word script) that stretch a fast lesson or fill the end without new teaching."
+  },
+  {
+   "icon": "🎭",
+   "title": "Six Games, Four Voices",
+   "desc": "Reveal, hear-and-type, mystery box, word builder, magic pairs, sort, flash review — lion, mouse, race car, turtle."
+  }
+ ],
+ "outcomes": {
+  "know": "Ten complaint words: excuse me, apologize, complaint, please, problem, wrong, broken, late, rude, noisy.",
+  "understand": "Every complaint is three bricks (Excuse me + thing + wrong word); presenting is praise with the same words.",
+  "do": "Complain politely, tell openers from problem words, and present a product in three lines — out loud, in four voices."
+ },
+ "coins": {
+  "correct": 10,
+  "start": 0,
+  "wrong": 0
+ },
+ "method": {
+  "phase": "Vocab → Speaking (school topics: U4 complaints + U3 presenting; ad situations become complaint scenes)",
+  "structure": "10-5-5-3",
+  "games": [
+   {
+    "name": "Tap to Reveal",
+    "type": "collaboration",
+    "why": "zero-choice warm-up — the answer pops up, the mouth repeats, no wrong answers exist yet"
+   },
+   {
+    "name": "Hear It, Type It",
+    "type": "competition",
+    "why": "ear-before-mouth on five short complaint words"
+   },
+   {
+    "name": "The Mystery Box",
+    "type": "collaboration",
+    "why": "situational recall — every wrong answer is a real student mistake (wrong word, missing opener, word salad)"
+   },
+   {
+    "name": "Word Builder",
+    "type": "competition",
+    "why": "letter-by-letter retrieval with the Vietnamese hint as the cue, said aloud tile by tile"
+   },
+   {
+    "name": "Magic Pairs + Sort",
+    "type": "creation",
+    "why": "mother-tongue anchoring, then the whole lesson sorted: open politely, name the problem, describe it"
+   }
+  ]
+ },
+ "differentiation": {
+  "extend": "Fast finishers perform the Mystery Box scenes and the phone presentation for the class in all four voices.",
+  "support": "Strugglers keep VI:ON and tap every speaker button — the three-brick frame fills itself: Excuse me! + My ___ is ___."
+ },
+ "rooms": [
+  {
+   "graphic": "🏠",
+   "title": "Warm Up: Three Hellos",
+   "label": "Warm-Up",
+   "content": "<p>Three questions. Tap each card — the answer pops up. Say it loud. This is everyday talking, NOT the lesson: weekend plans and goodbye never come back. (Only \"no problem\" comes back — in Room 2.)<span lang=\"vi\">Ba câu hỏi. Chạm từng thẻ — đáp án hiện ra. Nói to lên. Đây là nói chuyện hàng ngày, KHÔNG phải bài học.</span></p><div class=\"game\" data-game=\"flip\" data-title=\"👆 Tap to Reveal\" data-items=\"What can you say to 'I am sorry' AND 'thank you'?=No problem! One answer for both.;What are your plans for the weekend?=My plans for the weekend are playing football. (Your turn: My plans are ___);Peter says: 'See you later!' What can YOU say back?=Anything is OK! Bye! / Bye-bye! / See you! / Take care! / See you later, Peter!\"></div><div class=\"chatty-hint\"><strong>Warm-up is everyday talking:</strong> no problem, weekend plans, goodbye — just talking. The lesson starts in Room 2.<span lang=\"vi\">Khởi động chỉ là nói chuyện hàng ngày. Bài học bắt đầu từ Phòng 2.</span></div>"
+  },
+  {
+   "graphic": "🎬",
+   "title": "Excuse Me! My Pizza Is Cold",
+   "label": "Scene",
+   "content": "<p>Listen first — tap every line, repeat after it. A customer complains, the staff fixes it.<span lang=\"vi\">Nghe trước — chạm từng câu, nhắc lại theo. Khách than phiền, nhân viên sửa.</span></p><div class=\"dialogue-block\" data-say=\"Excuse me! My pizza is cold!\"><span class=\"speaker\">Lan:</span> <strong data-say=\"Excuse me!\">Excuse me!</strong> My pizza is <strong data-say=\"Cold!\">cold!</strong> 🍕🥶<span lang=\"vi\">Xin lỗi! Pizza của mình lạnh ngắt!</span></div><div class=\"dialogue-block\" data-say=\"No problem! A new pizza for you!\"><span class=\"speaker\">Tom:</span> <strong data-say=\"No problem!\">No problem!</strong> A new pizza for you! 🍕🔥<span lang=\"vi\">Không sao! Pizza mới cho bạn đây!</span></div><div class=\"dialogue-block\" data-say=\"Excuse me! This shirt is too small!\"><span class=\"speaker\">Lan:</span> <strong data-say=\"Excuse me!\">Excuse me!</strong> This shirt is too <strong data-say=\"Small!\">small!</strong> 👕😅<span lang=\"vi\">Xin lỗi! Áo này nhỏ quá!</span></div><div class=\"dialogue-block\" data-say=\"No problem! A bigger shirt for you!\"><span class=\"speaker\">Tom:</span> <strong data-say=\"No problem!\">No problem!</strong> A bigger shirt for you! 👕✨<span lang=\"vi\">Không sao! Áo lớn hơn cho bạn đây!</span></div><div class=\"chatty-clue\">🤔 Reality check: every complaint here is three bricks — Excuse me! + the thing + the wrong word. Cold pizza. Small shirt. Same shape, every time.<span lang=\"vi\">Mọi câu than phiền đều có 3 viên gạch — Excuse me! + món đồ + từ sai. Pizza lạnh. Áo nhỏ. Lúc nào cũng cùng một khuôn.</span></div><div class=\"chatty-hint\"><strong>Three bricks:</strong> Excuse me! + My ___ is ___ . / Please + fix it. That frame carries every complaint in this lesson.<span lang=\"vi\">Ba viên gạch: Excuse me! + My ___ is ___. / Please + sửa giùm. Một khuôn dùng cho mọi câu than phiền.</span></div>"
+  },
+  {
+   "graphic": "📚",
+   "title": "The 10 Words (1): Openers",
+   "label": "Learn",
+   "content": "<p>Five opener words first. Tap each one to hear it. Say it 3 times: whisper, normal, LOUD. 🗣️<span lang=\"vi\">Năm từ mở đầu trước. Chạm từng từ để nghe. Nói 3 lần: thầm, bình thường, THẬT TO.</span></p><div class=\"vocab-list\"><div class=\"vocab-item\"><strong>1. excuse me</strong> <span data-say=\"Excuse me!\">🔊</span> <span>🙇 you open every complaint — <em>Excuse me! My pizza is cold!</em></span><span lang=\"vi\">xin lỗi — mở đầu mọi câu than phiền</span></div><div class=\"vocab-item\"><strong>2. apologize</strong> <span data-say=\"I apologize!\">🔊</span> <span>📝 a big, polite sorry — <em>I apologize for the mistake!</em></span><span lang=\"vi\">xin lỗi (trang trọng, lịch sự)</span></div><div class=\"vocab-item\"><strong>3. complaint</strong> <span data-say=\"Complaint!\">🔊</span> <span>📢 the problem, said out loud — <em>I have a complaint about my bus!</em></span><span lang=\"vi\">lời than phiền</span></div><div class=\"vocab-item\"><strong>4. please</strong> <span data-say=\"Please!\">🔊</span> <span>🌷 you ask for the fix — <em>Please change it!</em></span><span lang=\"vi\">làm ơn (khi xin sửa)</span></div><div class=\"vocab-item\"><strong>5. problem</strong> <span data-say=\"Problem!\">🔊</span> <span>⚠️ something is wrong — <em>What is the problem?</em></span><span lang=\"vi\">vấn đề</span></div></div><div class=\"chatty-hint\"><strong>Three voices rule:</strong> whisper it, say it, SHOUT it. A word you have shouted is a word you keep. Five today, five more in Room 7 — ten total.<span lang=\"vi\">Quy tắc 3 giọng: nói thầm, nói thường, HÉT lên. Hôm nay 5 từ, Phòng 7 thêm 5 từ nữa — tổng cộng 10.</span></div>"
+  },
+  {
+   "graphic": "🎧",
+   "title": "Game 1 — Hear It, Type It",
+   "label": "Game 1",
+   "content": "<p>How to win: tap 🔊 Hear it, listen, type the word. Short words only — your ears already know them.<span lang=\"vi\">Cách thắng: chạm 🔊 để nghe, rồi gõ từ đó. Toàn từ ngắn — tai bạn đã biết rồi.</span></p><div class=\"chatty-hint\"><strong>Ear before mouth:</strong> if you can hear the difference between <em>late</em> and <em>broken</em>, your mouth is already halfway there.<span lang=\"vi\">Tai nghe được thì miệng nói được: phân biệt được <em>late</em> và <em>broken</em> là thắng một nửa.</span></div><div class=\"game\" data-game=\"voice\" data-title=\"🎧 Hear It, Type It\" data-items=\"please=🌷 please change it;problem=⚠️ what is the problem;wrong=❌ wrong number;broken=📱 my phone is broken;late=🚌 my bus is late\"></div>"
+  },
+  {
+   "graphic": "📦",
+   "title": "Game 2 — The Mystery Box",
+   "label": "Test",
+   "content": "<p>Three boxes. Open each one, read the scene, pick what YOU would say. Three bricks: Excuse me! + thing + wrong word. Careful — the wrong answers are real student mistakes, not jokes.<span lang=\"vi\">Ba hộp. Mở từng hộp, đọc tình huống, chọn câu BẠN sẽ nói. Nhớ 3 viên gạch. Cẩn thận — đáp án sai là lỗi học sinh thật hay mắc, không phải đùa.</span></p><div class=\"chatty-choices\" data-correct-feedback=\"🎉 Three bricks: Excuse me + pizza + cold. The waiter can fix that.\" data-wrong-feedback=\"❌ Check every brick. 'Hot' is the wrong wrong-word — and one answer has no opener at all. Which one has all three bricks?\"><div><strong>Box 1 — Cold pizza:</strong> Your pizza arrives cold. What do you say?</div><button data-answer=\"correct\">Excuse me! My pizza is cold!</button><button data-answer=\"wrong\">Excuse me! My pizza is hot!</button><button data-answer=\"wrong\">My pizza is cold!</button></div><div class=\"chatty-choices\" data-correct-feedback=\"🎉 Small shirt, three bricks, done. New shirt coming.\" data-wrong-feedback=\"❌ 'Big' names the wrong problem — and one answer is word salad with no sentence. Build it: Excuse me + thing + wrong word.\"><div><strong>Box 2 — Small shirt:</strong> Your new shirt is too small. What do you say?</div><button data-answer=\"wrong\">Excuse me! This shirt is big!</button><button data-answer=\"correct\">Excuse me! This shirt is small!</button><button data-answer=\"wrong\">Shirt small, excuse me please!</button></div><div class=\"chatty-choices\" data-correct-feedback=\"🎉 Late bus, three bricks. The driver understands.\" data-wrong-feedback=\"❌ 'Noisy' is a different problem — today the bus is LATE. And one answer is word salad. Sorry + thing + wrong word — which one?\"><div><strong>Box 3 — Late bus:</strong> Your bus is 30 minutes late. What do you say?</div><button data-answer=\"wrong\">Excuse me! My bus is noisy!</button><button data-answer=\"wrong\">My bus late, excuse me please!</button><button data-answer=\"correct\">Excuse me! My bus is late!</button></div><div class=\"chatty-feedback empty\" aria-live=\"polite\"></div>"
+  },
+  {
+   "graphic": "🔤",
+   "title": "Game 3 — Word Builder",
+   "label": "Game 2",
+   "content": "<p>How to win: read the Vietnamese hint under each row, then tap the letter tiles in order. Wrong letters shake and clear themselves.<span lang=\"vi\">Cách thắng: đọc gợi ý tiếng Việt dưới mỗi hàng, rồi chạm các chữ cái theo thứ tự. Chữ sai sẽ rung và tự xóa.</span></p><div class=\"chatty-hint\"><strong>Say as you build:</strong> every tile you tap, say the letter out loud. L-A-T-E, late!<span lang=\"vi\">Vừa xếp vừa nói: chạm chữ nào, đọc to chữ đó. L-A-T-E, late!</span></div><div class=\"game\" data-game=\"scramble\" data-title=\"🔤 Word Builder\" data-items=\"complaint=📢 lời than phiền;wrong=❌ sai, nhầm;broken=📱 hỏng;late=🚌 muộn, trễ;rude=😠 thô lỗ, bất lịch sự;noisy=🔊 ồn ào\"></div>"
+  },
+  {
+   "graphic": "📢",
+   "title": "The 10 Words (2): Problem Words",
+   "label": "Words 2",
+   "content": "<p>Five problem words — the words that name what is wrong. Tap, listen, SHOUT. 📢<span lang=\"vi\">Năm từ chỉ vấn đề — từ gọi tên cái sai. Chạm, nghe, HÉT.</span></p><div class=\"vocab-list\"><div class=\"vocab-item\"><strong>6. wrong</strong> <span data-say=\"Wrong!\">🔊</span> <span>❌ not the right one — <em>Wrong size! Wrong bus!</em></span><span lang=\"vi\">sai, nhầm (không đúng)</span></div><div class=\"vocab-item\"><strong>7. broken</strong> <span data-say=\"Broken!\">🔊</span> <span>📱 it does not work — <em>My phone is broken!</em></span><span lang=\"vi\">hỏng (không dùng được)</span></div><div class=\"vocab-item\"><strong>8. late</strong> <span data-say=\"Late!\">🔊</span> <span>🚌 not on time — <em>My bus is late!</em></span><span lang=\"vi\">muộn, trễ (không đúng giờ)</span></div><div class=\"vocab-item\"><strong>9. rude</strong> <span data-say=\"Rude!\">🔊</span> <span>😠 not polite — <em>The waiter is rude!</em></span><span lang=\"vi\">thô lỗ, bất lịch sự</span></div><div class=\"vocab-item\"><strong>10. noisy</strong> <span data-say=\"Noisy!\">🔊</span> <span>🔊 too loud — <em>My bus is noisy!</em></span><span lang=\"vi\">ồn ào (quá ồn)</span></div></div><div class=\"chatty-hint\"><strong>You know all 10 now:</strong> Rooms 3 + 7 = your complaint words. On 3-2-1, the WHOLE class shouts each word! 📢<span lang=\"vi\">Giờ bạn biết cả 10 từ: Phòng 3 + Phòng 7 = từ than phiền của bạn. Đếm 3-2-1, CẢ LỚP hét to từng từ!</span></div>"
+  },
+  {
+   "graphic": "🎤",
+   "title": "Show and Tell: My Phone",
+   "label": "Scene 2",
+   "content": "<p>Now you PRESENT — like the Friends Plus lesson. Tap, listen, repeat. Hold up your hand like a phone. 📱<span lang=\"vi\">Giờ bạn THUYẾT TRÌNH — như bài Friends Plus. Chạm, nghe, nhắc lại. Giơ tay lên như cầm điện thoại.</span></p><div class=\"dialogue-block\" data-say=\"Look at my new phone!\"><span class=\"speaker\">Minh:</span> <strong data-say=\"Look!\">Look</strong> at my <strong data-say=\"New!\">new</strong> phone! 📱✨<span lang=\"vi\">Nhìn điện thoại mới của mình nè!</span></div><div class=\"dialogue-block\" data-say=\"It is small and good!\"><span class=\"speaker\">Minh:</span> It is <strong data-say=\"Small!\">small</strong> and <strong data-say=\"Good!\">good!</strong> 👍<span lang=\"vi\">Nó nhỏ và tốt!</span></div><div class=\"chatty-hint\"><strong>Now you:</strong> turn to your friend — present YOUR phone in 3 lines (Look / Good / Thank you). 1 minute. GO! 🏃<span lang=\"vi\">Giờ tới bạn: quay sang bạn bên cạnh — thuyết trình về điện thoại CỦA BẠN bằng 3 câu. 1 phút. BẮT ĐẦU!</span></div><div class=\"dialogue-block\" data-say=\"Thank you!\"><span class=\"speaker\">Minh:</span> <strong data-say=\"Thank you!\">Thank you!</strong> 🙏<span lang=\"vi\">Cảm ơn các bạn!</span></div><div class=\"chatty-clue\">🤔 Reality check: a presentation is three lines — LOOK (show it), GOOD (praise it), THANK YOU (close it). Say it 🦁 LOUD like a lion, then 🐭 soft like a mouse.<span lang=\"vi\">Thuyết trình chỉ có 3 câu — LOOK (chỉ), GOOD (khen), THANK YOU (kết). Nói như sư tử, rồi nói như chuột.</span></div><div class=\"chatty-hint\"><strong>Presenting + complaining are twins:</strong> \"It is small and good!\" (praise) vs \"Excuse me! It is small!\" (complaint). Same words, opposite day.<span lang=\"vi\">Thuyết trình và than phiền là anh em sinh đôi: \"It is small and good!\" (khen) vs \"Excuse me! It is small!\" (chê). Cùng từ, ngược nghĩa.</span></div>"
+  },
+  {
+   "graphic": "🔗",
+   "title": "Game 4 — Magic Pairs",
+   "label": "Game 3",
+   "content": "<p>How to win: click an English word on the left, then its Vietnamese heart on the right. Six pairs — openers meet problem words. When a pair matches, the WHOLE class shouts the English word! 🗣️<span lang=\"vi\">Cách thắng: chạm từ tiếng Anh bên trái, rồi chạm nghĩa tiếng Việt bên phải. Khi một cặp khớp, CẢ LỚP hét to từ tiếng Anh!</span></p><div class=\"chatty-hint\"><strong>Mother-tongue anchor:</strong> every English word sleeps next to its Vietnamese twin tonight.<span lang=\"vi\">Mỗi từ tiếng Anh ngủ cạnh người anh em tiếng Việt của nó tối nay.</span></div><div class=\"game\" data-game=\"match\" data-title=\"🔗 Magic Pairs\" data-items=\"excuse me=xin lỗi — excuse me!;apologize=xin lỗi trang trọng — I apologize!;complaint=lời than phiền — complaint!;please=làm ơn — please!;rude=thô lỗ, bất lịch sự — rude!;noisy=ồn ào — noisy!\"></div>"
+  },
+  {
+   "graphic": "🗂️",
+   "title": "Game 5 — Sort It Out",
+   "label": "Game 4",
+   "content": "<p>How to win: click a word, then the box it belongs to. Say the word OUT LOUD as you drop it in! Openers? Problem names? Describing words? Six words, three boxes.<span lang=\"vi\">Cách thắng: chạm từ, thả vào hộp đúng — và NÓI TO từ đó lên khi thả! Từ mở đầu? Từ gọi tên? Từ miêu tả?</span></p><div class=\"game\" data-game=\"sort\" data-title=\"📦 When Do You Say It?\" data-groups=\"SAY FIRST: please, apologize | NAME THE PROBLEM: complaint, problem | DESCRIBE IT: wrong, broken\"></div><div class=\"chatty-hint\"><strong>The whole lesson in one game:</strong> open politely, name the problem, describe it. If you can sort it, you understood it.<span lang=\"vi\">Cả bài trong một game: mở đầu lịch sự, gọi tên vấn đề, miêu tả nó. Xếp đúng là hiểu bài.</span></div>"
+  },
+  {
+   "graphic": "✍️",
+   "title": "Writing Spare 1 — Copy It",
+   "label": "Writing 1",
+   "content": "<p>Too fast? Slow down with the pen. ✍️ Copy the line 3 times in your notebook — neat letters, then read each copy OUT LOUD.<span lang=\"vi\">Học nhanh quá? Chậm lại với cây bút. Chép câu này 3 lần vào vở — chữ đẹp, rồi đọc TO từng lần chép.</span></p><div class=\"chatty-hint\"><strong>Copy line:</strong> Excuse me! My pizza is cold!<span lang=\"vi\">Câu chép: Excuse me! My pizza is cold!</span></div><div class=\"chatty-hint\"><strong>Now fill YOUR line (write-task):</strong> pick cold / small / late / broken and finish it.<textarea class=\"write-task\" id=\"speaker-fill\" placeholder=\"Excuse me! My ___ is ___.\"></textarea></div>"
+  },
+  {
+   "graphic": "✏️",
+   "title": "Writing Spare 2 — Fix the Order",
+   "label": "Writing 2",
+   "content": "<p>Words in a mess! Put them in order, then write the clean sentence in your notebook. 📝<span lang=\"vi\">Từ lộn xộn! Xếp lại cho đúng, rồi viết câu sạch vào vở.</span></p><div class=\"chatty-hint\"><strong>1.</strong> cold / pizza / my / is → ?<br><strong>2.</strong> apologize / do / I → ?<br><strong>3.</strong> late / bus / my / is → ?<br><strong>Do number 1 together aloud first</strong> — then write.<span lang=\"vi\">Câu 1 cả lớp làm chung thật to trước — rồi mới viết. Viết 3 câu đúng vào vở, rồi đọc to từng câu.</span></div><div class=\"chatty-hint\"><strong>Write your 3 fixed sentences here:</strong><textarea class=\"write-task\" id=\"speaker-order\" placeholder=\"1. ___ 2. ___ 3. ___\"></textarea></div>"
+  },
+  {
+   "graphic": "🎭",
+   "title": "Say It With Feeling",
+   "label": "Game 5",
+   "content": "<p>Four voices live in you. Say <strong data-say=\"Excuse me! My pizza is cold!\">Excuse me! My pizza is cold!</strong> and <strong data-say=\"Look at my new phone!\">Look at my new phone!</strong> in EVERY voice: 🦁 LOUD like a lion · 🐭 soft like a mouse · 🏎️ fast like a race car · 🐢 slow like a turtle.<span lang=\"vi\">Bốn giọng đều ở trong bạn. Nói hai câu — một câu chê, một câu khoe — bằng MỌI giọng.</span></p><div class=\"timer\" data-seconds=\"60\"></div><div class=\"chatty-choices\" data-correct-feedback=\"🎉 Four voices, ten words, three bricks. Your mouth did the whole lesson.\" data-wrong-feedback=\"❌ One more round — lion first, then mouse. You are closer than you think.\"><div><strong>Did you say both lines in all four voices?</strong></div><button data-answer=\"correct\">Yes — lion, mouse, race car, turtle!</button><button data-answer=\"wrong\">Not yet — one more round!</button></div>"
+  },
+  {
+   "graphic": "🃏",
+   "title": "Flash Review",
+   "label": "Game 6",
+   "content": "<p>Tap each card — say what you see BEFORE it flips. No peeking! Six cards, whole lesson, one minute. 🃏<span lang=\"vi\">Chạm từng thẻ — nói trước khi thẻ lật. Cấm nhìn trộm! Sáu thẻ, cả bài, một phút.</span></p><div class=\"game\" data-game=\"flip\" data-title=\"🃏 Say It First!\" data-items=\"🍕🥶 cold pizza!=Excuse me! My pizza is cold!;👕😅 small shirt!=Excuse me! This shirt is small!;🚌💨 late bus!=Excuse me! My bus is late!;😠🍜 rude waiter!=Excuse me! That is rude!;🔊🚌 noisy bus!=Excuse me! It is noisy!;📱✨ new phone!=Look at my new phone!\"></div>"
+  },
+  {
+   "graphic": "🩹",
+   "title": "Writing Spare 3 — Fix My Mistakes",
+   "label": "Writing 3",
+   "content": "<p>Four sentences are BROKEN — real mistakes, not jokes. For each one: (a) name the broken brick — opener? thing? wrong word? order? (b) write it clean in your notebook. Slow work, neat letters. 🐢<span lang=\"vi\">Bốn câu bị SAI — lỗi thật, không phải đùa. Với mỗi câu: (a) gọi tên viên gạch hỏng — mở đầu? món đồ? từ sai? thứ tự? (b) viết lại cho đúng vào vở. Viết chậm, chữ đẹp.</span></p><div class=\"chatty-hint\"><strong>Frame first:</strong> Excuse me! + My ___ is ___ . / Please + fix it.<span lang=\"vi\">Nhớ khuôn: Excuse me! + My ___ is ___. / Please + sửa giùm.</span></div><div class=\"chatty-hint\"><strong>1.</strong> \"Excuse me! My pizza is hot!\" — the pizza is COLD. Fix one word.<br><strong>2.</strong> \"My bus is late!\" — good words, NO opener. Add it.<br><strong>3.</strong> \"Shirt small, excuse me please!\" — word salad! Write it clean.<br><strong>4.</strong> \"Excuse me! My bus is rude!\" — wrong problem word. The bus is LATE, not rude. Fix it.<br><strong>Do number 1 together aloud first</strong> — then write all 4 in your notebook: the fixed line + the broken brick's name.<span lang=\"vi\">Câu 1 cả lớp làm chung thật to trước — rồi mới viết. Viết 4 câu đúng + tên viên gạch hỏng vào vở, rồi đọc to từng câu.</span></div><div class=\"chatty-hint\"><strong>Write your 4 fixed sentences here:</strong><textarea class=\"write-task\" id=\"speaker-fix\" placeholder=\"1. ___ (brick: ___) 2. ___ (brick: ___) 3. ___ 4. ___\"></textarea></div><div class=\"chatty-hint\"><strong>Now trick your friend ✍️:</strong> write 2 NEW broken complaints of your own — any thing, any broken brick. Swap notebooks: your friend fixes yours, you fix theirs. Who caught every broken brick?<span lang=\"vi\">Giờ gài bẫy bạn: tự viết 2 câu sai MỚI — món gì cũng được, hỏng viên nào cũng được. Đổi vở: bạn sửa của bạn, bạn sửa của bạn. Ai bắt được mọi viên gạch hỏng?</span><textarea class=\"write-task\" id=\"speaker-trick\" placeholder=\"My 2 traps for my friend: 1. ___ 2. ___\"></textarea></div>"
+  },
+  {
+   "graphic": "✉️",
+   "title": "Writing Spare 4 — My Complaint Letter",
+   "label": "Writing 4",
+   "content": "<p>Now YOU write. Fill the letter, then write your OWN mini-dialogue — 4–6 lines. Slow pen, neat letters, then perform it LOUD with your friend. ✉️<span lang=\"vi\">Giờ BẠN viết. Điền lá thư, rồi viết đoạn hội thoại CỦA BẠN — 4–6 câu. Viết chậm, chữ đẹp, rồi diễn THẬT TO với bạn.</span></p><div class=\"chatty-hint\"><strong>Fill the letter (word bank: Excuse · phone · broken · Please):</strong><br>Dear shop, ___ me!<br>My ___ is ___.<br>___ change it, please!<br>Thank you!<span lang=\"vi\">Điền lá thư (ngân hàng từ: Excuse · phone · broken · Please).</span></div><div class=\"chatty-hint\"><strong>Now YOUR turn — a mini-dialogue (write-task):</strong> pick a NEW thing — not pizza! A broken phone? A noisy room? A late bus? A rude waiter? A cold drink? Small shoes? Write 4–6 lines: YOU complain in 3 bricks, STAFF answers (apologize + fix). Then perform it with your friend — one is the customer, one is the staff.<span lang=\"vi\">Giờ tới bạn — đoạn hội thoại ngắn: chọn món MỚI — không phải pizza! Viết 4–6 câu: BẠN than phiền (3 viên gạch), NHÂN VIÊN đáp (xin lỗi + sửa). Rồi diễn với bạn — một người là khách, một là nhân viên.</span><textarea class=\"write-task\" id=\"speaker-letter\" placeholder=\"You: Excuse me! My ___ is ___. Staff: I apologize! ___\"></textarea></div>"
+  },
+  {
+   "graphic": "📜",
+   "title": "Writing Spare 5 — My 10-Word Script",
+   "label": "Writing 5",
+   "content": "<p>The big one. Write your OWN complaint play using ALL 10 words. Any thing, any story — your script, your stage. Slow pen, big finish — 10 minutes. 🎬<span lang=\"vi\">Bài lớn. Viết vở kịch than phiền CỦA BẠN dùng CẢ 10 từ. Món gì, chuyện gì cũng được — kịch của bạn, sân khấu của bạn. Viết chậm, kết lớn — 10 phút.</span></p><div class=\"chatty-hint\"><strong>Tick all 10 as you write:</strong> excuse me · apologize · complaint · please · problem · wrong · broken · late · rude · noisy<span lang=\"vi\">Đánh dấu từng từ khi viết xong.</span></div><div class=\"chatty-hint\"><strong>Steps:</strong> 1) Pick ONE thing — not pizza! Broken phone? Noisy room? Late bus? Rude waiter? Cold drink? Small shoes? 2) Two roles: CUSTOMER complains (excuse me, complaint, problem, wrong, broken, late, rude, noisy) + STAFF fixes (apologize, please). 3) Write 8–12 lines in your notebook. 4) Perform it with your friend — one reads the customer, one reads the staff. Loud and wrong beats silent and correct.<span lang=\"vi\">Các bước: 1) Chọn MỘT món — không phải pizza! 2) Hai vai: KHÁCH than phiền + NHÂN VIÊN sửa. 3) Viết 8–12 câu vào vở. 4) Diễn với bạn — một người đọc vai khách, một đọc vai nhân viên. Nói to và sai còn hơn im lặng.</span></div><div class=\"chatty-hint\"><strong>Write your script here:</strong><textarea class=\"write-task\" id=\"speaker-script\" placeholder=\"Customer: Excuse me! ... Staff: I apologize! ... (use all 10 words!)\"></textarea></div>"
+  },
+  {
+   "graphic": "🔑",
+   "title": "The Key",
+   "label": "Mastery",
+   "content": "<div class=\"summary-card\"><strong>🎓 You can complain in English</strong><ul><li><strong>Complaints (U4L5):</strong> excuse me, apologize, complaint, please, problem, wrong, broken, late, rude, noisy — three bricks: Excuse me! + My ___ is ___.</li><li><strong>Openers vs problems:</strong> excuse me / please / apologize open it; wrong / broken / late / rude / noisy name it.</li><li><strong>Presenting (U3L6):</strong> LOOK + GOOD + THANK YOU — loud like a lion, soft like a mouse.</li><li><strong>Warm-up gave you:</strong> no problem, weekend plans, goodbye — everyday talk.</li><li><strong>Say it loud:</strong> loud and wrong beats silent and correct.</li></ul></div><div class=\"chatty-hint\"><strong>Level Up:</strong> tonight, find one broken, late, cold, or noisy thing at home. Point at it and say the full line. If someone understands you, your key works.<span lang=\"vi\">Tối nay, tìm một thứ hỏng, trễ, lạnh hoặc ồn ở nhà. Chỉ vào đó và nói cả câu.</span></div><div class=\"chatty-hint\"><strong>Copy one line (homework):</strong><textarea class=\"write-task\" id=\"speaker-lines\" placeholder=\"Copy this line 3 times: Excuse me! My pizza is cold!\"></textarea></div><div class=\"chatty-choices\" data-correct-feedback=\"🎉 The shop hears English. Walk out loud.\" data-wrong-feedback=\"❌ Hot pizza needs no complaint! Three bricks: Excuse me + thing + wrong word. Tap Room 3 once more, then come back.\"><div><strong>Exit ticket:</strong> the pizza is cold. You look at the waiter and say — ?</div><button data-answer=\"correct\">Excuse me! My pizza is cold!</button><button data-answer=\"wrong\">Excuse me! My pizza is hot!</button></div><div class=\"chatty-feedback empty\" aria-live=\"polite\"></div>"
+  }
+ ]
+}
