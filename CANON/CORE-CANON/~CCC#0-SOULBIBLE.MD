@@ -171,4 +171,12 @@ Stage: SOULBIBLE append-only, Appendix B — Indexing
 Timestamp: 2026-10-31T03:14 UTC
 Sovereign: SOV100 Michael Hobbs
 
+### Entry A.12 — Call this Soul Sabotage
+
+Call this Soul Sabotage.
+
+Stage: SOULBIBLE append-only, Entry A.12
+Timestamp: 2026-10-31T03:15 UTC
+Sovereign: SOV100 Michael Hobbs
+
 **DO NOT EDIT.** This is SOV100's verbatim soul. Append-only by sovereign authority.
