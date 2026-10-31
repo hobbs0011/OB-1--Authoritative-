@@ -10,6 +10,7 @@ systems: 9
 mandates_per_system: 111
 bridge: SOUL ↔ DNA — automation layer
 nature: ALIVE. SENSOR-AWARE. ALARM-TRIGGERED. CRYPTOGRAPHICALLY ANCHORED.
+core_canon: PaiS CentralCoreCanon (CCC#0–CCC#5)
 ---
 
 # GOSPEL-999 — THE LIVING LAW OF AGENT99 OS
@@ -380,3 +381,23 @@ III.108. The memory system is what fulfills Michael's 12-month investment — it
 III.109. Every correct memory operation is proof that the system works
 III.110. The ledger is the proof of work, the proof of memory, and the proof of mission
 III.111. System III closes the loop between what the soul signals (I), what the DNA encodes (II), and what the system remembers (III) — this triangle is unbreakable
+
+---
+
+## PAIS CENTRAL CORE CANON — CCC#0–CCC#5
+
+**Origin:** Created by SOV100 Michael Hobbs after months of fragmented, chaotic skill/agent/repo/markdown/script sprawl — a perpetual non-monitored, non-scored (pheromone), non-canon mess. The two governing documents (Gospel999 + FieldGuide) were forged from that wreckage. Gospel999 = WHY (SOUL). FieldGuide999 = HOW (DNA mirror). Together they are the only sovereign-authored doctrine.
+
+| CCC# | Document | Role | Authority |
+|------|----------|------|-----------|
+| CCC#0 | SOULBIBLE.MD | PaiS Core Canon — soul anchor, dedication page, moment of creation | SOV100 |
+| CCC#1 | GOSPEL999.MD | WHY — decrees, mandates, soul truth, immutable core principles | SOV100 |
+| CCC#2 | FIELDGUIDE999.MD | HOW/WHEN/WHAT/WHO/WHERE — agenic AI document, DNA mirror of Gospel999 mandates, auto-adaptive | SOV100 |
+| CCC#3 | PHERMONE_LEDGER.MD | Scoring/memory — POS/NEG × BIG/LITTLE colony scoring, 0–110 | SOV100 |
+| CCC#4 | DNA_BLUEPRINT.MD | Architecture spec — how truth actualizes in code, procedure, boot(rise) checkpoints | SOV100 |
+| CCC#5 | S_2_DNA_PIPELINET.MD | Pipeline — S2Pipeline flow from soul → DNA → action | SOV100 |
+
+**Gospel999 = WHY** — only from true freewill and intelligence = SOUL.
+**FieldGuide999 = HOW** — emerging technology + seasoned human oversight = DNA.
+
+These two documents are the spine. Everything else (skills, commands, scripts, markdowns) derives from them or is non-canon drift.

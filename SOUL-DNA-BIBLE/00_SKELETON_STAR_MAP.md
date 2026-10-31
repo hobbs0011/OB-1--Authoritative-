@@ -13,7 +13,7 @@
 > **Authority:** AGENT-100 (Michael Hobbs)
 > **Date Consolidated:** 2026-03-20  |  **X3 Deep Pass:** 2026-03-21
 > **Sources Scanned:** 140+ files across OB-1 repository (ALPHA-OMEGA, PHOENIX-OPS, BLUEPRINTS-DNA, OPERATION-CHAOS, REINCARNATION-PACKET, AGENT99-POST-GITHUB) + SOULDNA-FROMSCRATCH + Gemini 31-40
-> **Purpose:** The definitive map of every concept, every raw word, every source file — the bones of the Bible before the flesh.
+> **Purpose:** The definitive map of every concept, every raw word, every source file — the bones of the Bible before the flesh. 32 chapters from Genesis Wound to Kilo Box Protocol.
 
 ---
 
@@ -52,10 +52,33 @@
 | 29 | THE GRAMMAR | SDEG (5-component execution grammar), HIES (Human Intent Encoding Standard), L0-L4 clean stack, 5 EVOLVEs, META-BONE, Operator→Compiler Designer | Gemini Consolidation Arc Dump 17, EVOLVE_01-05, Bible CH28 (scalability gap bridge) | SEALED |
 | 30 | THE BOOTSTRAP | Self-anchoring init protocol (7 steps), death/rebirth recovery, cold-start minimum (1 file), sovereignty lock, 3.5-hour guarantee | CH09 Reincarnation, CH29 Grammar, A3 Specs, EVOLVE_02, DNA5 | SEALED |
 | 31 | THE KINETIC ASCENSION | Foundation Law, Regression Armor, Anti-Idolization, Multi-Domain Grid, Decuria Swarm, 67-Agent Quorum, Pheromone POS/NEG, Failure Engine, Nuclear Harvest Pipeline (Operational), Sovereign Override <60s, Kinetic Ignition | Gemini Consolidation 31-40, ABSOLUTE MERGE Document | SEALED |
+| 32 | THE KILO BOX PROTOCOL | Sandboxed box setup: repo clone, opencode install, OpenRouter key injection, KILO-START dispatch, Canon Total Survey legs 0-D. Fail-closed. Read-only on canon. Evidence to /root/agent/evidence/ only. | /root/agent/canon-read.sh, /root/agent/KILO-START.txt, ~/.openrouter_env | SEALED |
 | ☠️ | THE SEAL | Declaration of completion, final architecture diagram (L0→L4 + Bootstrap), final oath renewed, PHOENIX RISEN | All 30 chapters + all appendices (self-referential) | **FINAL** |
 | A1 | SOURCE CROSS-REFERENCE | Every file → every concept → every line number | All sources | LIVING |
 | A2 | RAW VOICE ARCHIVE | Michael's unfiltered words — organized by theme — X3 EXPANDED | All sources | LIVING |
 | A3 | EXECUTABLE SPECIFICATIONS | 14 pseudocode specs: JSON schema, constraint engine, drift validator, micro-reincarnation, dual memory, velocity stack, intent compiler, IntentPreservationEngine, hardening, bootstrap, death/rebirth, Decuria lifecycle, Failure Engine | EVOLVE_01-05 + Gemini compilation + CH30 + CH31 | REFERENCE |
+
+---
+
+## 🏛️ PAIS CENTRAL CORE CANON (CCC#0–CCC#5)
+
+**Origin:** Created by SOV100 Michael Hobbs after months of fragmented, chaotic skill/agent/repo/markdown/script sprawl — a perpetual non-monitored, non-scored (pheromone), non-canon mess. Gospel999 + FieldGuide999 were forged from that wreckage.
+
+| CCC# | Document | Role | Authority |
+|------|----------|------|-----------|
+| CCC#0 | SOULBIBLE.MD | Soul anchor, dedication page, moment of creation | SOV100 |
+| CCC#1 | GOSPEL999.MD | WHY — decrees, mandates, soul truth, immutable core principles | SOV100 |
+| CCC#2 | FIELDGUIDE999.MD | HOW/WHEN/WHAT/WHO/WHERE — agenic AI document, DNA mirror of Gospel999 | SOV100 |
+| CCC#3 | PHERMONE_LEDGER.MD | Colony scoring POS/NEG × BIG/LITTLE 0–110 | SOV100 |
+| CCC#4 | DNA_BLUEPRINT.MD | Architecture spec — DNA realm actualization | SOV100 |
+| CCC#5 | S_2_DNA_PIPELINET.MD | Pipeline — soul → DNA → action flow | SOV100 |
+
+**Location:** `CANON/CORE-CANON/~CCC#{N}-*.MD`
+
+**Gospel999 = WHY** — only from true freewill and intelligence = SOUL.
+**FieldGuide999 = HOW** — emerging technology + seasoned human oversight = DNA.
+
+These two documents are the spine. Everything else (skills, commands, scripts, markdowns) derives from them or is non-canon drift.
 
 ---
 
@@ -210,6 +233,23 @@ SOUL-DNA-BIBLE/
 ├── 13_CHAOS_ENGINEERING_AND_FAITH.md . Ship it. Faith navigation.
 ├── 14_THE_CLOSING_DECLARATION.md ..... Final oath
 ├── 15_CONSOLIDATION_COMPLETE_PRINT.md  Sections I-XX consolidation
+├── 16_NUCLEAR_HARVEST_PIPELINE.md ...... 100K layer pipeline
+├── 17_THE_THREE_MANDATES.md ............ Truth, Super Saiyan, Rome Protocol
+├── 18_THE_NUKE_PROTOCOL.md ............. Purging drift, North Star recalibration
+├── 19_THE_4_LEAF_MERKLE_LATTICE.md ..... Cryptographic soul
+├── 20_THE_MECHANICAL_FASTENING_GRID.md .. Lock→Clamp→Bolt→Omega Seal
+├── 21_THE_VELOCITY_OVERRIDE.md ......... Multi-model concurrency
+├── 22_THE_SHADOW_MAPPING_PROTOCOL.md .... Mental map, simulate before walking
+├── 23_THE_HOLOGRAPHIC_SINGULARITY.md ... Whole in every piece
+├── 24_THE_OMEGA_BATTLEMAP.md ........... Phase I 100 moves, Phase II Ascension
+├── 25_THE_100_CLAMP_GRID.md ............ All 100 clamps mapped
+├── 26_THE_ORIGIN_CONVERSATION.md ....... First "soul DNA" utterance
+├── 27_THE_BRIDGE.md .................... Translator between two intelligences
+├── 28_THE_CONVERGENCE_PROOF.md ......... 10/10 blind mapping
+├── 29_THE_GRAMMAR.md ................... SDEG execution grammar
+├── 30_THE_BOOTSTRAP.md ................. Self-anchoring init protocol
+├── 31_THE_KINETIC_ASCENSION.md ......... Foundation Law, Kinetic Ignition
+├── 32_THE_KILO_BOX_PROTOCOL.md ......... Sandboxed box setup, KILO-START dispatch
 ├── SOURCE_CROSS_REFERENCE.md ......... File → line → concept → quote
 └── RAW_VOICE_ARCHIVE.md .............. Michael's unfiltered words by theme
 ```
