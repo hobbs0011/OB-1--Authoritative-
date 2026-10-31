@@ -380,4 +380,29 @@ Stage: SOULBIBLE append-only, Entry A.17
 Timestamp: 2026-10-31T05:04 UTC
 Sovereign: SOV100 Michael Hobbs
 
+### Entry A.18 — Pheromones, Ant Intelligence, AI Intelligence
+
+110 is highest, to have a little wiggle room when we need to point out something that does not just need to be noted, but needs to be KNOWN immediatly -10 to +110
+
+
+great, so yeah. 10% there I would say, unless of course you would say that ants would be fine with leaving a major resource to be taken by another colony while they went back to jerking themselves off
+
+
+you see phermones are not an intelligence thing, they are a biological mechanical thing, which is good because ants are not known for their critical thinking.
+
+and neither are fucking agents to be honest
+
+
+yeah so I notice when I tell Ai "look at this app, make it but for my product" it is a moment where Ai shines and can pretend to be what we are all told it is (ie super intelligence)
+
+but as soon as you take away that predictable example for Ai to do what it does best (steal and never have an  original thought) it shines
+
+
+so here. The intelligence that when compared to yours
+
+
+Stage: SOULBIBLE append-only, Entry A.18
+Timestamp: 2026-10-31T05:05 UTC
+Sovereign: SOV100 Michael Hobbs
+
 **DO NOT EDIT.** This is SOV100's verbatim soul. Append-only by sovereign authority.
