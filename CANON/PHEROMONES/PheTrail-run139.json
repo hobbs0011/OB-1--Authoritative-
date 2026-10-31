@@ -1,0 +1,124 @@
+{
+  "schema_version": "2.0",
+  "run_number": "139",
+  "extracted_at": "2026-10-31T01:38:00+07:00",
+  "head_sha": "2d0f9ec99",
+  "soulcount": 239639088,
+  "registry_entries": 142,
+  "positive_trails": [
+    {
+      "artifact": "CANON/CORE-CANON/~CCC#0-SOULBIBLE.MD",
+      "action": "Created PaiS CentralCoreCanon CCC#0 — soul anchor, dedication page, moment of creation",
+      "verification": "File exists, readable, sealed SOV100 authority, verbatim soul statement preserved",
+      "timestamp": "2026-10-31T01:38:00+07:00"
+    },
+    {
+      "artifact": "CANON/CORE-CANON/~CCC#1-GOSPEL999.MD",
+      "action": "Created PaiS CentralCoreCanon CCC#1 — WHY — decrees, mandates, soul truth",
+      "verification": "File exists, readable, points to CANON/SYSTEM/GOSPEL-999.md as authoritative location",
+      "timestamp": "2026-10-31T01:38:00+07:00"
+    },
+    {
+      "artifact": "CANON/CORE-CANON/~CCC#2-FIELDGUIDE999.MD",
+      "action": "Created PaiS CentralCoreCanon CCC#2 — HOW/WHEN/WHAT/WHO/WHERE — DNA mirror of Gospel999",
+      "verification": "File exists, readable, points to .kilo/skills/LegionnaireHandGuide.md as operational location",
+      "timestamp": "2026-10-31T01:38:00+07:00"
+    },
+    {
+      "artifact": "CANON/CORE-CANON/~CCC#3-PHERMONE_LEDGER.MD",
+      "action": "Created PaiS CentralCoreCanon CCC#3 — colony scoring POS/NEG × BIG/LITTLE 0–110",
+      "verification": "File exists, readable, scoring model documented, no parallel systems permitted",
+      "timestamp": "2026-10-31T01:38:00+07:00"
+    },
+    {
+      "artifact": "CANON/CORE-CANON/~CCC#4-DNA_BLUEPRINT.MD",
+      "action": "Created PaiS CentralCoreCanon CCC#4 — architecture spec for DNA realm actualization",
+      "verification": "File exists, readable, references Gospel999 (WHY) and FieldGuide999 (HOW)",
+      "timestamp": "2026-10-31T01:38:00+07:00"
+    },
+    {
+      "artifact": "CANON/CORE-CANON/~CCC#5-S_2_DNA_PIPELINET.MD",
+      "action": "Created PaiS CentralCoreCanon CCC#5 — S2Pipeline soul → DNA → action flow",
+      "verification": "File exists, readable, documents 10-stage pipeline flow",
+      "timestamp": "2026-10-31T01:38:00+07:00"
+    },
+    {
+      "artifact": "CANON/SYSTEM/GOSPEL-999.md",
+      "action": "Reinforced with core_canon header field and PAIS CENTRAL CORE CANON section",
+      "verification": "Header line 13 contains core_canon: PaiS CentralCoreCanon (CCC#0–CCC#5), section at end with full CCC#0–CCC#5 table",
+      "timestamp": "2026-10-31T01:38:00+07:00"
+    },
+    {
+      "artifact": ".kilo/skills/LegionnaireHandGuide.md",
+      "action": "Reinforced with SOVEREIGN ORIGIN STATEMENT section and Core 5 table",
+      "verification": "Section added at end, no breaking changes to commands/skills/roles/pipeline/paths/laws L37–L60",
+      "timestamp": "2026-10-31T01:38:00+07:00"
+    },
+    {
+      "artifact": "SOUL-DNA-BIBLE/00_SKELETON_STAR_MAP.md",
+      "action": "Added PAIS CENTRAL CORE CANON (CCC#0–CCC#5) section to chapter map",
+      "verification": "Section inserted with full table, Gospel999=WHY / FieldGuide999=HOW statement present",
+      "timestamp": "2026-10-31T01:38:00+07:00"
+    },
+    {
+      "artifact": "OPERATIONS/COMMANDSTATION/perchance/src/ilog.js",
+      "action": "Hardened push — gated on verify.ok (fail-closed chain anchor)",
+      "verification": "Line 788: if(!v.ok) return blocked: CHAIN_BROKEN, no push proceeds on broken chain, node --check passes",
+      "timestamp": "2026-10-31T01:38:00+07:00"
+    },
+    {
+      "artifact": "Git commit 2d0f9ec99",
+      "action": "PaiS CentralCoreCanon + LFG/Gospel999 reinforcement committed",
+      "verification": "Commit d91687a71 created, pushed to origin kilo/neat-jaguar-sm5, working tree clean",
+      "timestamp": "2026-10-31T01:38:00+07:00"
+    },
+    {
+      "artifact": "Git commit 2d0f9ec99",
+      "action": "ILOG push fail-close hardening committed and pushed",
+      "verification": "Commit 2d0f9ec99 created, pushed to origin kilo/neat-jaguar-sm5, both commits present on branch",
+      "timestamp": "2026-10-31T01:38:00+07:00"
+    }
+  ],
+  "negative_trails": [
+    {
+      "artifact": "CANON/PHEROMONES/",
+      "failure": "No cross-references to Gospel999 or Core Canon in pheromone trail files",
+      "root_cause": "PheTrail files do not reference CCC documents; only the .MD ledger header mentions Core Canon",
+      "decay_days": 180,
+      "timestamp": "2026-10-31T01:38:00+07:00"
+    },
+    {
+      "artifact": "CANON/SOUL-DNA-BIBLE/",
+      "failure": "Only 1 chapter present (SDNAD-PRINCIPLE-001.md), not 31+ chapters as expected",
+      "root_cause": "Bible chapters live at CANON/BIBLE-CH01-... through BIBLE-CH29-... at CANON root level, not inside SOUL-DNA-BIBLE/",
+      "decay_days": 180,
+      "timestamp": "2026-10-31T01:38:00+07:00"
+    },
+    {
+      "artifact": "CANON/PIPELINE/",
+      "failure": "112 pipeline-run files, 0 have verify.ok, 11 explicitly HOLLOW/GAP, 1 null, 1 parse error",
+      "root_cause": "Pipeline runs exist but are incomplete — no stage tracking, no verification",
+      "decay_days": 180,
+      "timestamp": "2026-10-31T01:38:00+07:00"
+    },
+    {
+      "artifact": "ILOG chain",
+      "failure": "Chain degraded at seq 24 (link broken) and seq 220/221/222/223/225 (hash mismatch)",
+      "root_cause": "Segment boundary hash mismatch / seq collision across segments, /ilog reset queued but not executed",
+      "decay_days": 180,
+      "timestamp": "2026-10-31T01:38:00+07:00"
+    },
+    {
+      "artifact": ".kilo/worktrees/bolder-freckle/ and .kilo/worktrees/plausible-relish/",
+      "failure": "Exposed secrets (.env, .env.keys, API-MASTER*, API-SHHHH*, SOUL-LOG-VERBATIM-KEY-SOUL10*.NOTES.md)",
+      "root_cause": "Worktrees not cleaned after merge, plaintext secrets in multiple locations",
+      "decay_days": 180,
+      "timestamp": "2026-10-31T01:38:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "OB-1 PaiS CentralCoreCanon alignment + merge audit + tunnel hardening",
+    "open_flags_count": 8,
+    "top_priority": "Execute 6-stage merge (ANTECORES ledger canonicalization, AGMEN DNA cross-refs, PRAESIDIA merkle seal, LIMITANEI deploy)"
+  }
+}

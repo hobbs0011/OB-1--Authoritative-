@@ -96,7 +96,6 @@ async function brainOnce(env, prompt, model, max_tokens) {
   out.ms = Date.now() - t0;
   return out;
 }
-
 function b64encode(s) {
   const bytes = new TextEncoder().encode(s);
   let bin = "";
@@ -109,6 +108,7 @@ function b64decode(b64) {
   for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
   return new TextDecoder().decode(bytes);
 }
+
 /* Durable receipt: one appended line in the canonical RUNNER-LOG.md. Without
    GH_TOKEN the pulse still runs — the receipt just lives in the Worker log. */
 async function logToGitHub(env, line) {
@@ -130,14 +130,70 @@ async function logToGitHub(env, line) {
   return { logged: true };
 }
 
+/* Pheromone breath: each pulse deposits a trail file in CANON/PHEROMONES/ so the
+   system has continuous signs of life — automatic breathing without a browser.
+   Contract 1.2: schema_version 2.0, run_number zero-padded, head_sha, soulcount,
+   registry_entries, positive_trails, negative_trails, state_markers. */
+async function depositPheromone(env, source) {
+  if (!env.GH_TOKEN) return { logged: false, why: "no GH_TOKEN secret" };
+  const R = repoOf(env);
+  if (!R) return { logged: false, why: "no GH_REPO var" };
+
+  /* Determine run number from git: last death commit + 1 (git-authoritative, not lexical sort). */
+  const headRes = await fetch("https://api.github.com/repos/" + R.owner + "/" + R.repo + "/commits?sha=" + encodeURIComponent(R.branch) + "&per_page=1", { headers: h });
+  let headSha = "unknown";
+  if (headRes.ok) { const hj = await headRes.json(); if (hj[0]) headSha = hj[0].sha.slice(0, 7); }
+
+  const deathRes = await fetch("https://api.github.com/repos/" + R.owner + "/" + R.repo + "/commits?sha=" + encodeURIComponent(R.branch) + "&per_page=50", { headers: h });
+  let priorRun = 0;
+  if (deathRes.ok) {
+    const commits = await deathRes.json();
+    for (const c of commits) {
+      const m = (c.commit.message || "");
+      const dm = m.match(/death:\s*Run\s*(\d+)/i);
+      if (dm) { priorRun = parseInt(dm[1], 10); break; }
+    }
+  }
+  const run = priorRun + 1;
+  const runPad = String(run).padStart(3, "0");
+
+  const at = new Date().toISOString();
+  const trail = {
+    schema_version: "2.0",
+    run_number: String(run).padStart(3, "0"),
+    extracted_at: at,
+    head_sha: headSha,
+    soulcount: null,
+    registry_entries: null,
+    positive_trails: [{
+      artifact: "CANON/PHEROMONES/PheTrail-run" + runPad + ".json",
+      action: "automatic breath deposit — cron pulse " + source,
+      verification: "valid JSON, schema_version 2.0, written via runner lung",
+      timestamp: at
+    }],
+    negative_trails: [],
+    state_markers: {
+      active_mission: "automatic pheromone breathing — closed-browser runner",
+      open_flags_count: null,
+      top_priority: "keep the breath alive"
+    }
+  };
+  const path = R.logPath.replace("RUNNER-LOG.md", "PHEROMONES/PheTrail-run" + runPad + ".json");
+  const url = "https://api.github.com/repos/" + R.owner + "/" + R.repo + "/contents/" + encodeURIComponent(path) + "?ref=" + encodeURIComponent(R.branch);
+  const put = await fetch(url, { method: "PUT", headers: h, body: JSON.stringify({ message: "runner breath " + at, content: b64encode(JSON.stringify(trail, null, 2)), branch: R.branch }) });
+  if (!put.ok && put.status !== 201 && put.status !== 200) return { logged: false, why: "pheromone write HTTP " + put.status };
+  return { logged: true, run: run, path: path };
+}
+
 async function doPulse(env, source) {
   const at = new Date().toISOString();
   try {
     const out = await brainOnce(env, PULSE_PROMPT, PULSE_MODEL, PULSE_MAX_TOKENS);
     const line = "- " + at + " · " + source + " · " + out.via + ":" + out.model + " · " + out.text.trim().slice(0, 40).replace(/\s+/g, " ") + " · " + out.ms + "ms" + (out.usage && out.usage.total_tokens != null ? " · " + out.usage.total_tokens + "tok" : "");
     const log = await logToGitHub(env, line);
-    console.log("[runner-pulse]", line, log.logged ? "(logged)" : "(" + log.why + ")");
-    return { ok: true, at, source, reply: out.text.trim().slice(0, 120), via: out.via, model: out.model, ms: out.ms, usage: out.usage || null, logged: log.logged, logWhy: log.logged ? null : log.why };
+    const breath = await depositPheromone(env, source);
+    console.log("[runner-pulse]", line, log.logged ? "(logged)" : "(" + log.why + ")", breath.logged ? ("breath:run" + breath.run) : ("breath:" + breath.why));
+    return { ok: true, at, source, reply: out.text.trim().slice(0, 120), via: out.via, model: out.model, ms: out.ms, usage: out.usage || null, logged: log.logged, logWhy: log.logged ? null : log.why, breath: breath.logged ? { run: breath.run, path: breath.path } : { error: breath.why } };
   } catch (e) {
     console.log("[runner-pulse]", at, source, "FAILED:", (e && e.message) || e);
     return { ok: false, at, source, error: String((e && e.message) || e).slice(0, 300) };
