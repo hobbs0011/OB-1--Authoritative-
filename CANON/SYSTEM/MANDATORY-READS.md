@@ -146,5 +146,5 @@ Invoke-RestMethod "$DEV/api/deepgram-token?studentId=$SID&mode=phonics" | Conver
 2. Run `pwsh SCRIPTS/context-bundle.ps1` and verify the new doc appears in output
 3. That's it — all protocols pull from this registry automatically
 
-DO NOT add the doc path to CLAUDE.md, reincarnateRise.md, reincarnatedeath.md, or .kilo/DISPATCH.md separately.
+DO NOT add the doc path to CLAUDE.md, reincarnateRise.md, reincarnatedeath.md, or CANON/SYSTEM/Deploy.Agent99.md separately.
 One registry. One update. Everywhere covered.
