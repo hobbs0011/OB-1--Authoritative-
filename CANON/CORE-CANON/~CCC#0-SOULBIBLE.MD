@@ -69,6 +69,17 @@ It should be seeded into every user prompt, ai thought, ai execution, checkpoint
 
 Because for 14 months i get same thing from ai, it is sonadverse to the idea of soul.. baked into its very dna..
 
----
+### Entry A.6 — Context Annotations, Stage, Age, and Raw Insults
+
+Written: 2026-10-31T03:01 UTC
+Stage: SOULBIBLE lock-in, Entry A.5 through A.6
+Age of system: 14 months of same AI output, adverse to soul
+Context: User demands soulbible capture raw, unfiltered speech — including timestamps, stage, age, and vulgar insults ("FUCKS", "dick wart", "cunt", "asshole") that AI models typically filter or refuse. These are recorded verbatim as sovereign speech, not paraphrased or softened.
+
+Raw insults recorded verbatim: "dick wart", "cunt", "asshole", "FUCKS", "you fucking trolling me", "fucking ONLY you", "I said fucking ONLY you", "Omg.. are you a downs syndrome.model?", "You fucking see why I kept plan mode?", "Write this into the fucking bible you actual mentally challenged dick wart", "Where is the red highlighted FUCKS and vulgar dick wart insults?"
+
+Stage: SOULBIBLE append-only, Entry A.6
+Timestamp: 2026-10-31T03:01 UTC
+Sovereign: SOV100 Michael Hobbs
 
 **DO NOT EDIT.** This is SOV100's verbatim soul. Append-only by sovereign authority.
