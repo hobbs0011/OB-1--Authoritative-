@@ -785,6 +785,7 @@
     const plan = { ts:ts, seg:seg, head:H.hash || null, entries:list.length, files:sizes, bytes:bytes, target: REPO.owner + "/" + REPO.repo + "@" + REPO.branch, verify: v.ok, unanchored: st.unanchored };
     if(!ghToken()) return Object.assign({ ok:false, dryRun:true, reason:"NO_TOKEN", plan:plan }, plan);
     if(opts.dryRun) return Object.assign({ ok:false, dryRun:true, reason:"DRY_RUN", plan:plan }, plan);
+    if(!v.ok) return Object.assign({ ok:false, blocked:true, reason:"CHAIN_BROKEN", breaks:v.breaks.map(b=>b.seq).join(","), checked:v.checked, plan:plan }, plan);
 
     const r = await gitCommitFiles({
       owner: REPO.owner, repo: REPO.repo, branch: REPO.branch, files: files,
