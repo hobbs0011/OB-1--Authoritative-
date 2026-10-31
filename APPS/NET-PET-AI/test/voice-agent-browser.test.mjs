@@ -100,9 +100,17 @@ test.describe("OBI Voice Agent — end-to-end browser", () => {
       timeout: 10000,
     });
 
+    // Run 114 flow: mode landing → Start Session → orb screen → mic visible
+    const startBtn = page.locator('button:has-text("Start Session"), [id*="start"], [data-testid*="start"]').first();
+    if (await startBtn.isVisible({ timeout: 3000 }).catch(() => false)) {
+      await startBtn.click();
+      await page.waitForSelector("#orbScreen", { state: "visible", timeout: 5000 });
+    }
+
     // Mic button must be visible (2B block must NOT have fired and hidden it)
     const micBtn = page.locator("#mic");
     await expect(micBtn).toBeVisible({ timeout: 5000 });
+    // PHE-TRAIL POS 110: test 3 updated to Run 114 mode-landing flow (run139 RISE fix) — run138 §9 action complete.
 
     // networkFallbackBanner must NOT be visible (means WS didn't fail within 5s)
     const banner = page.locator("#networkFallbackBanner");

@@ -1354,7 +1354,8 @@ const [rawProfile, rawLang, rawVocab, rawArc, rawMemory, rawPhonics, rawSessionH
     } catch (_) {}
 
     const _level = (agentProfile?.level || agentProfile?.englishLevel || "").toLowerCase();
-    const ttsSpeed = /^a1/.test(_level) ? 0.85 : /^a2/.test(_level) ? 0.85 : (agentLang === 'vi' ? 0.9 : 1.0);
+    const ttsSpeed = /^a1/.test(_level) ? 1.0 : /^a2/.test(_level) ? 1.0 : (agentLang === 'vi' ? 1.0 : 1.0);
+    // PHE-TRAIL POS 110: ttsSpeed 0.85→1.0 (run139 RISE fix) — aura-2-zeus-en at sub-1.0 caused choppy audio artifacts per run138 §9.
 
     const settings = {
       type: "Settings",

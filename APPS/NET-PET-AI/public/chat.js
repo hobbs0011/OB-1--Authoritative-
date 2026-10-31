@@ -1137,7 +1137,13 @@ async function openVoiceAgent() {
                 navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
               navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true } })
                 .then(s => { pendingMicStream = s; })
-                .catch(() => {});
+                .catch(err => {
+                  const isDenied = err?.name === 'NotAllowedError' || /Permission denied/i.test(err?.message || '');
+                  setMicStatus(isDenied
+                    ? "Mic blocked — allow microphone in Safari settings, then tap to retry"
+                    : "Tap to start", false);
+                });
+                // PHE-TRAIL POS 110: mic-denied no longer silent-swallowed (run139 RISE fix) — run138 §9 action complete.
             }
           }
         }, delay);

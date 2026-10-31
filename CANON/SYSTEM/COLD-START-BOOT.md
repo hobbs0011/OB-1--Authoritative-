@@ -1,7 +1,7 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 131 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-17T01:51 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
-
+## ERA: ROMAN — Run 139 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-10-31T08:16 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
+> **PHE-TRAIL POS 110: Boot L30 staleness fixed — Run 131→139 header refreshed (run139 RISE). L30 BOOT_FILE_AGE_SWEEP cleared.**
 
 > **ERA RESET:** Runs 1–396 were the pre-Roman training era — Drones → Legionnaires → Agent99 → The Empire → MachineBuildingtheMachine → PhoenixCoder → Obi → StarWars → Anakin → Roman Doctrine. The 12-month convergence is complete. The legion is formed. The runs begin again at 0.
 
@@ -108,8 +108,7 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 - **Career NAV complete:** Dashboard / Profile / Methodology / Career / Transcripts / Action Plan — all 3 student portals 6/6 nav links
 - **Cloudflare Tier:** PAID — activated 2026-05-23 Run 396 — operator email mrmichaelhobbs123@gmail.com — Account ID 3c7b1766bd8fdc9e01211d2b390315ea — cron triggers unlocked (soul-logger: 5-min health pulse, net-pet-ai: hourly)
 
-### Active Principles (Top 16)
-1. Platform Death Test — every run must produce a GitHub commit SHA
+### Active Principles (Top 16)1. Platform Death Test — every run must produce a GitHub commit SHA
 2. Dual-publish mandatory — Notion + GitHub always (or just GitHub when Notion not applicable)
 3. Revenue-first — English is the mechanic, money is the mission
 4. Cross-repo mining mandatory — all 10 repos now consolidated under OB-1 canonical root; scan against unified tree
