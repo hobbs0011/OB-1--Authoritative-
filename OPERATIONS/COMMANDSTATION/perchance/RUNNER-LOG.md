@@ -432,3 +432,4 @@ Cloudflare cron appends one line per firing. Each line is a receipt: it ran with
 - 2026-10-31T11:50:22.227Z · cron:*/10 * * * * · kilo-gateway:deepseek/deepseek-v4-flash · pulse ok · 1434ms · 107tok
 - 2026-10-31T12:00:21.745Z · cron:*/10 * * * * · kilo-gateway:deepseek/deepseek-v4-flash · pulse ok · 1880ms · 107tok
 - 2026-10-31T12:10:21.715Z · cron:*/10 * * * * · kilo-gateway:deepseek/deepseek-v4-flash · pulse ok · 1522ms · 134tok
+- 2026-10-31T12:20:21.887Z · cron:*/10 * * * * · kilo-gateway:deepseek/deepseek-v4-flash · pulse ok · 1844ms · 122tok
