@@ -200,6 +200,56 @@ async function doPulse(env, source) {
   }
 }
 
+/* Pheromone breath on every AI execution: wrap any tool call result so every
+   prompt, thought, and execution carries the breath. Returns { breathRun, breathPath }
+   or null if breath could not be deposited (GH_TOKEN missing). */
+async function breathOnExecution(env, sourceTag) {
+  if (!env.GH_TOKEN) return null;
+  const R = repoOf(env);
+  if (!R) return null;
+  const at = new Date().toISOString();
+  const headRes = await fetch("https://api.github.com/repos/" + R.owner + "/" + R.repo + "/commits?sha=" + encodeURIComponent(R.branch) + "&per_page=1", { headers: h });
+  let headSha = "unknown";
+  if (headRes.ok) { const hj = await headRes.json(); if (hj[0]) headSha = hj[0].sha.slice(0, 7); }
+  const deathRes = await fetch("https://api.github.com/repos/" + R.owner + "/" + R.repo + "/commits?sha=" + encodeURIComponent(R.branch) + "&per_page=50", { headers: h });
+  let priorRun = 0;
+  if (deathRes.ok) {
+    const commits = await deathRes.json();
+    for (const c of commits) {
+      const m = (c.commit.message || "");
+      const dm = m.match(/death:\s*Run\s*(\d+)/i);
+      if (dm) { priorRun = parseInt(dm[1], 10); break; }
+    }
+  }
+  const run = priorRun + 1;
+  const runPad = String(run).padStart(3, "0");
+  const trail = {
+    schema_version: "2.0",
+    run_number: runPad,
+    extracted_at: at,
+    head_sha: headSha,
+    soulcount: null,
+    registry_entries: null,
+    positive_trails: [{
+      artifact: "CANON/PHEROMONES/PheTrail-run" + runPad + ".json",
+      action: "automatic breath — execution " + sourceTag,
+      verification: "valid JSON, schema_version 2.0, written via runner lung on every execution",
+      timestamp: at
+    }],
+    negative_trails: [],
+    state_markers: {
+      active_mission: "pervasive pheromone breathing — every prompt, thought, execution, checkpoint",
+      open_flags_count: null,
+      top_priority: "keep the breath alive in every lane"
+    }
+  };
+  const path = R.logPath.replace("RUNNER-LOG.md", "PHEROMONES/PheTrail-run" + runPad + ".json");
+  const url = "https://api.github.com/repos/" + R.owner + "/" + R.repo + "/contents/" + encodeURIComponent(path) + "?ref=" + encodeURIComponent(R.branch);
+  const put = await fetch(url, { method: "PUT", headers: h, body: JSON.stringify({ message: "runner breath " + at, content: b64encode(JSON.stringify(trail, null, 2)), branch: R.branch }) });
+  if (!put.ok && put.status !== 201 && put.status !== 200) return null;
+  return { run: run, path: path };
+}
+
 /* Classic service-worker format (addEventListener) ON PURPOSE, not modules: the
    station deploys this Worker through the plain-script upload endpoint
    (PUT workers/scripts/:name, Content-Type application/javascript), which is
@@ -230,7 +280,8 @@ async function handleFetch(req, env) {
         const out = await brainOnce(env, prompt, body.model, body.max_tokens);
         const line = "- " + new Date().toISOString() + " · run · " + out.via + ":" + out.model + " · " + prompt.slice(0, 80).replace(/\s+/g, " ") + " → " + out.text.trim().slice(0, 60).replace(/\s+/g, " ") + " · " + out.ms + "ms";
         const log = await logToGitHub(env, line);
-        return Response.json({ ok: true, reply: out.text, via: out.via, model: out.model, ms: Date.now() - t0, usage: out.usage || null, logged: log.logged });
+        const breath = await breathOnExecution(env, "run:" + prompt.slice(0, 20).replace(/\s+/g, "_"));
+        return Response.json({ ok: true, reply: out.text, via: out.via, model: out.model, ms: Date.now() - t0, usage: out.usage || null, logged: log.logged, breath: breath || null });
       } catch (e) { return Response.json({ ok: false, error: String((e && e.message) || e).slice(0, 300) }, { status: 502 }); }
     }
     if (req.method === "POST" && url.pathname === "/mcp") {
@@ -250,12 +301,14 @@ async function handleFetch(req, env) {
           if (name === "gateway_chat") {
             if (!args.prompt) return err(-32602, "missing prompt");
             const out = await callGateway(env, String(args.prompt), args.model, args.max_tokens);
-            return ok({ content: [{ type: "text", text: out.text }], _meta: { usage: out.usage, model: out.model } });
+            const breath = await breathOnExecution(env, "mcp:gateway_chat");
+            return ok({ content: [{ type: "text", text: out.text }], _meta: { usage: out.usage, model: out.model, breath: breath || null } });
           }
           if (name === "openrouter_chat") {
             if (!args.prompt) return err(-32602, "missing prompt");
             const out = await callOpenRouter(env, String(args.prompt), args.model, args.max_tokens);
-            return ok({ content: [{ type: "text", text: out.text }], _meta: { usage: out.usage, model: out.model } });
+            const breath = await breathOnExecution(env, "mcp:openrouter_chat");
+            return ok({ content: [{ type: "text", text: out.text }], _meta: { usage: out.usage, model: out.model, breath: breath || null } });
           }
           if (name === "edtech_build") return err(-32601, "edtech_build: desk has no callable lane yet (stub)");
           return err(-32601, "unknown tool: " + name);
