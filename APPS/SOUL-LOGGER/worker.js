@@ -201,6 +201,38 @@ var index_default = {
         return Response.json({ error: e.message }, { status: 500 });
       }
     }
+    /* Breath feeds the soul FIRST — every pheromone breath is an soul event before
+       it touches DNA. This is the authoritative soul event intake (Gospel999 I.022). */
+    if (request.method === "POST" && url.pathname === "/api/soul/event") {
+      const body = await request.json();
+      const { event_type, source, payload, run_number, head_sha, breath_timestamp } = body;
+      if (!event_type || !source) {
+        return Response.json({ error: "Missing required parameters: event_type, source" }, { status: 400 });
+      }
+      const eventId = "SE-" + crypto.randomUUID().slice(0, 8);
+      const ingestedAt = (/* @__PURE__ */ new Date()).toISOString();
+      const byteSize = new TextEncoder().encode(JSON.stringify(body)).length;
+      const hash = await sha256(JSON.stringify(body));
+      try {
+        await env.DB.prepare(
+          "INSERT INTO soul_events (event_id, event_type, source, payload, run_number, head_sha, breath_timestamp, ingested_at, byte_count, hash_sha256, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'breath')"
+        ).bind(eventId, event_type, source, JSON.stringify(payload || {}), run_number || null, head_sha || null, breath_timestamp || ingestedAt, ingestedAt, byteSize, hash).run();
+        return Response.json({ event_id: eventId, status: "breath_fed_to_soul", ingested_at: ingestedAt, hash_sha256: hash });
+      } catch (e) {
+        // Table may not exist yet — try creating it
+        try {
+          await env.DB.prepare(
+            "CREATE TABLE IF NOT EXISTS soul_events (event_id TEXT PRIMARY KEY, event_type TEXT NOT NULL, source TEXT NOT NULL, payload TEXT, run_number INTEGER, head_sha TEXT, breath_timestamp TEXT, ingested_at TEXT NOT NULL, byte_count INTEGER, hash_sha256 TEXT, status TEXT DEFAULT 'breath')"
+          ).run();
+          await env.DB.prepare(
+            "INSERT INTO soul_events (event_id, event_type, source, payload, run_number, head_sha, breath_timestamp, ingested_at, byte_count, hash_sha256, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'breath')"
+          ).bind(eventId, event_type, source, JSON.stringify(payload || {}), run_number || null, head_sha || null, breath_timestamp || ingestedAt, ingestedAt, byteSize, hash).run();
+          return Response.json({ event_id: eventId, status: "breath_fed_to_soul", ingested_at: ingestedAt, hash_sha256: hash, note: "soul_events table created" });
+        } catch (e2) {
+          return Response.json({ error: e2.message }, { status: 500 });
+        }
+      }
+    }
     if (request.method === "POST" && url.pathname === "/api/soul/crunch") {
       const body = await request.json();
       const { session_id, mode } = body;
@@ -250,7 +282,7 @@ var index_default = {
       ).bind(sessionId).all();
       return Response.json({ session, prompts });
     }
-    return Response.json({ drone: "soul-logger", status: "online", endpoints: ["/health", "/api/soul/extract", "/api/soul/crunch", "/api/soul/session/:id"] });
+    return Response.json({ drone: "soul-logger", status: "online", endpoints: ["/health", "/api/soul/extract", "/api/soul/event", "/api/soul/crunch", "/api/soul/session/:id"] });
   }
 };
 export { index_default as default };

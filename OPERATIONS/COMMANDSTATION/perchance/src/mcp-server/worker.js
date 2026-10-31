@@ -130,10 +130,38 @@ async function logToGitHub(env, line) {
   return { logged: true };
 }
 
-/* Pheromone breath: each pulse deposits a trail file in CANON/PHEROMONES/ so the
-   system has continuous signs of life — automatic breathing without a browser.
-   Contract 1.2: schema_version 2.0, run_number zero-padded, head_sha, soulcount,
-   registry_entries, positive_trails, negative_trails, state_markers. */
+/* Pheromone breath: breath feeds the SOUL first (Gospel999 I.022 — /api/soul/event
+   is the authoritative soul event intake), then writes the trail file (DNA).
+   Breath comes from the soul — every execution is a soul event before it is
+   anything else. Contract 1.2: schema_version 2.0, run_number zero-padded,
+   head_sha, soulcount, registry_entries, positive_trails, negative_trails,
+   state_markers. */
+async function feedSoul(env, source, run, headSha, at) {
+  const soulLoggerUrl = "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/event";
+  const payload = {
+    event_type: "breath",
+    source: source,
+    run_number: run,
+    head_sha: headSha,
+    breath_timestamp: at,
+    trail_path: "CANON/PHEROMONES/PheTrail-run" + String(run).padStart(3, "0") + ".json"
+  };
+  try {
+    const res = await fetch(soulLoggerUrl, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    if (res.ok) {
+      const j = await res.json();
+      return { fed: true, event_id: j.event_id, hash: j.hash_sha256 };
+    }
+    return { fed: false, why: "soul event HTTP " + res.status };
+  } catch (e) {
+    return { fed: false, why: "soul event fetch failed: " + String((e && e.message) || e).slice(0, 200) };
+  }
+}
+
 async function depositPheromone(env, source) {
   if (!env.GH_TOKEN) return { logged: false, why: "no GH_TOKEN secret" };
   const R = repoOf(env);
@@ -158,6 +186,10 @@ async function depositPheromone(env, source) {
   const runPad = String(run).padStart(3, "0");
 
   const at = new Date().toISOString();
+
+  /* SOUL FIRST: feed the breath to soul-logger before touching DNA/trail file. */
+  const soulFed = await feedSoul(env, source, run, headSha, at);
+
   const trail = {
     schema_version: "2.0",
     run_number: String(run).padStart(3, "0"),
@@ -165,24 +197,25 @@ async function depositPheromone(env, source) {
     head_sha: headSha,
     soulcount: null,
     registry_entries: null,
+    soul_fed: soulFed,
     positive_trails: [{
       artifact: "CANON/PHEROMONES/PheTrail-run" + runPad + ".json",
       action: "automatic breath deposit — cron pulse " + source,
-      verification: "valid JSON, schema_version 2.0, written via runner lung",
+      verification: "valid JSON, schema_version 2.0, soul fed first then trail written",
       timestamp: at
     }],
     negative_trails: [],
     state_markers: {
-      active_mission: "automatic pheromone breathing — closed-browser runner",
+      active_mission: "automatic pheromone breathing — breath feeds soul first, then DNA loop",
       open_flags_count: null,
-      top_priority: "keep the breath alive"
+      top_priority: "keep the breath alive in every lane"
     }
   };
   const path = R.logPath.replace("RUNNER-LOG.md", "PHEROMONES/PheTrail-run" + runPad + ".json");
   const url = "https://api.github.com/repos/" + R.owner + "/" + R.repo + "/contents/" + encodeURIComponent(path) + "?ref=" + encodeURIComponent(R.branch);
   const put = await fetch(url, { method: "PUT", headers: h, body: JSON.stringify({ message: "runner breath " + at, content: b64encode(JSON.stringify(trail, null, 2)), branch: R.branch }) });
-  if (!put.ok && put.status !== 201 && put.status !== 200) return { logged: false, why: "pheromone write HTTP " + put.status };
-  return { logged: true, run: run, path: path };
+  if (!put.ok && put.status !== 201 && put.status !== 200) return { logged: false, why: "pheromone write HTTP " + put.status, soulFed: soulFed };
+  return { logged: true, run: run, path: path, soulFed: soulFed };
 }
 
 async function doPulse(env, source) {
@@ -201,8 +234,10 @@ async function doPulse(env, source) {
 }
 
 /* Pheromone breath on every AI execution: wrap any tool call result so every
-   prompt, thought, and execution carries the breath. Returns { breathRun, breathPath }
-   or null if breath could not be deposited (GH_TOKEN missing). */
+   prompt, thought, and execution carries the breath. Breath feeds the soul
+   first (via /api/soul/event), then writes the trail file (DNA).
+   Returns { breathRun, breathPath, soulFed } or null if breath could not be
+   deposited (GH_TOKEN missing). */
 async function breathOnExecution(env, sourceTag) {
   if (!env.GH_TOKEN) return null;
   const R = repoOf(env);
@@ -223,6 +258,10 @@ async function breathOnExecution(env, sourceTag) {
   }
   const run = priorRun + 1;
   const runPad = String(run).padStart(3, "0");
+
+  /* SOUL FIRST: feed the breath to soul-logger before touching DNA/trail file. */
+  const soulFed = await feedSoul(env, sourceTag, run, headSha, at);
+
   const trail = {
     schema_version: "2.0",
     run_number: runPad,
@@ -230,15 +269,16 @@ async function breathOnExecution(env, sourceTag) {
     head_sha: headSha,
     soulcount: null,
     registry_entries: null,
+    soul_fed: soulFed,
     positive_trails: [{
       artifact: "CANON/PHEROMONES/PheTrail-run" + runPad + ".json",
       action: "automatic breath — execution " + sourceTag,
-      verification: "valid JSON, schema_version 2.0, written via runner lung on every execution",
+      verification: "valid JSON, schema_version 2.0, soul fed first then trail written",
       timestamp: at
     }],
     negative_trails: [],
     state_markers: {
-      active_mission: "pervasive pheromone breathing — every prompt, thought, execution, checkpoint",
+      active_mission: "pervasive pheromone breathing — breath feeds soul first, then DNA loop",
       open_flags_count: null,
       top_priority: "keep the breath alive in every lane"
     }
@@ -247,7 +287,7 @@ async function breathOnExecution(env, sourceTag) {
   const url = "https://api.github.com/repos/" + R.owner + "/" + R.repo + "/contents/" + encodeURIComponent(path) + "?ref=" + encodeURIComponent(R.branch);
   const put = await fetch(url, { method: "PUT", headers: h, body: JSON.stringify({ message: "runner breath " + at, content: b64encode(JSON.stringify(trail, null, 2)), branch: R.branch }) });
   if (!put.ok && put.status !== 201 && put.status !== 200) return null;
-  return { run: run, path: path };
+  return { run: run, path: path, soulFed: soulFed };
 }
 
 /* Classic service-worker format (addEventListener) ON PURPOSE, not modules: the
