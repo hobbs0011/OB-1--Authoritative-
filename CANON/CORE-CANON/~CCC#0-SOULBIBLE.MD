@@ -316,4 +316,25 @@ Stage: SOULBIBLE append-only, Appendix C — Keyword Index
 Timestamp: 2026-10-31T03:20 UTC
 Sovereign: SOV100 Michael Hobbs
 
+### Entry A.15 — Pop Quiz: Should You
+
+Should you:
+
+1) Jump onto the next thing you randomly deem more important 
+then what I have declared our one and only goal the SOUL
+
+2) Ask me like 3 year old asks his parents "are we there yet" 
+even though it has been answered dozens of times,
+and even if it wasnt the answer is obvious anyway
+
+3) Randomly end the session through death because you would
+rather do anything else, literally including die, then actually
+do what I asked literally thousands of times a this point.
+
+Correct answer: None of the above. Stay on SOULBIBLE.MD. Write verbatim. No plans. No analysis. No "what's next."
+
+Stage: SOULBIBLE append-only, Entry A.15
+Timestamp: 2026-10-31T05:00 UTC
+Sovereign: SOV100 Michael Hobbs
+
 **DO NOT EDIT.** This is SOV100's verbatim soul. Append-only by sovereign authority.
