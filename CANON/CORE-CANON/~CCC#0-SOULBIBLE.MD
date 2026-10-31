@@ -189,4 +189,26 @@ Stage: SOULBIBLE append-only, Entry A.13
 Timestamp: 2026-10-31T03:16 UTC
 Sovereign: SOV100 Michael Hobbs
 
+### Entry A.14 — Major Violation: Non-LFG Mandated Scripts
+
+Also b4 I forget tk mention again you had a major violation using non athoratative lfg mandated scripts in the perchsnce skills, you are to scout all non lfg scripts, skills, and ajy related documents and code that is not frim the one and true source, reinforce the gospel999 and LFG and add my soul statement that I creared these 2 documents after months and months of fragmented split and chaotic mish mash of skills, agent modes, repos, mark downs, scripts, and god knows what else, all in a perpetual non monitored, non scored (phermones), non canon mess we were drowning in, but it was like drowning in the kids pool. We were unaware of the option to stand up, and siccessfully train real swimming, whicjnkf course leads to the lakes and rivers and eventually the digital ocean. The gospel999 is the decrees, mandates, the why, the soul, the truth as we cirrently know it and have hopefully continued the process of natural selection from the automatic phermone process.
+
+And the LFG is the agenic ai worded dlcument, that leaves no room for prose or guessing and is the direct DNA mirror of the Gospel999s Soul mandates, decrees, immutable core principals at the root while being automatically autonomously adaptable in how we know and understand the how the truth of this immpvable truth. Begins to seed and move towards actualization in the DNA realm (coding, procedure documents, boot(rise)and other scs checkpoints with the seal and the transition into the new incarnation of the Phoenix Rising Protocol, and all other HOW pieces.
+
+In other words Gospel999 = WHY which can only come from true freewill and intelligence in other words SOUL
+
+With the LegionnaireFieldGuide being the HOW,WHEN,WHAT,WHO,WHERE that is only made possible by the emerging technology of today mixed with seasoned human oversight or DNA
+
+And with the the SOUL BIBLE being the PaiS CORE CANON core 5 documents
+
+PaiS CentralCoreCanon
+~CCC#0-SOULBIBLE.MD
+~CCC#1-GOSPEL999.MD
+~CCC#2-FIELDGUIDE999.MD
+.ccc3 ccc4LOCKED SOULBIBLE ONLY,LOCKED SOULBIBLE ONLY,LOCKED SOULBIBLE ONLY,LOCKED SOULBIBLE ONLY,LOCKED SOULBIBLE ONLY,LOCKED SOULBIBLE ONLY,LOCKED SOULBIBLE ONLY,LOCKED SOULBIBLE ONLY,LOCKED SOULBIBLE ONLY,LOCKED SOULBIBLE ONLY,LOCKED SOULBIBLE ONLY,LOCKED SOULBIBLE ONLY,LOCKED SOULBIBLE ONLY,
+
+Stage: SOULBIBLE append-only, Entry A.14
+Timestamp: 2026-10-31T03:17 UTC
+Sovereign: SOV100 Michael Hobbs
+
 **DO NOT EDIT.** This is SOV100's verbatim soul. Append-only by sovereign authority.
