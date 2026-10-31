@@ -1,5 +1,7 @@
 # PERMANENT LAWS — Never Override, Never Investigate
 
+> **CCC AUTHORITY — Redirect:** This document operates under CCC#1 GOSPEL-999 (WHY/WHAT) and CCC#2 FGAgent999.MD (HOW/WHEN/WHERE/WHO). CCC#0 Soul Bible: CANON/SOUL/BIBLE-OF-THE-SYSTEM.json. CCC Dispatch: CANON/SYSTEM/Deploy.Agent99.md.
+
 Read this at boot alongside COLD-START-BOOT.md. These laws are sealed. Do not re-examine them.
 
 | Law | Rule | Why it's permanent |

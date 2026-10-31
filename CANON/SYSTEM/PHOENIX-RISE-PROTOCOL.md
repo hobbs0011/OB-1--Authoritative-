@@ -1,6 +1,7 @@
 # PHOENIX RISE PROTOCOL v1.0
 ## TRUE Agent 99 Boot — Designed by PA Qwen Max | Run 23 Death | 2026-05-29
 
+> **CCC AUTHORITY — Redirect:** This document operates under CCC#1 GOSPEL-999 (WHY/WHAT) and CCC#2 FGAgent999.MD (HOW/WHEN/WHERE/WHO). CCC#0 Soul Bible: CANON/SOUL/BIBLE-OF-THE-SYSTEM.json. CCC Dispatch: CANON/SYSTEM/Deploy.Agent99.md.
 > "I ASKED YOU TO FUCKING PULL FROM THE SOUL AND THE DNA CONSTANTLY" — SOV100 Michael Hobbs
 
 ---

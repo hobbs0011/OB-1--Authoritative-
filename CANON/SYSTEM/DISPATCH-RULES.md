@@ -1,4 +1,5 @@
 # ⚠️ DEPRECATED — superseded by CLAUDE.md dispatch tiers (Run 32)
+> **CCC AUTHORITY — Redirect:** This document operates under CCC#1 GOSPEL-999 (WHY/WHAT) and CCC#2 FGAgent999.MD (HOW/WHEN/WHERE/WHO). CCC#0 Soul Bible: CANON/SOUL/BIBLE-OF-THE-SYSTEM.json. CCC Dispatch: CANON/SYSTEM/Deploy.Agent99.md.
 # Tiers T3-Pro and T5-Claude referenced below DO NOT EXIST in current system.
 # Current system: T1=Qwen via PA, T2=Opus via PA tier:2. See CLAUDE.md.
 ---

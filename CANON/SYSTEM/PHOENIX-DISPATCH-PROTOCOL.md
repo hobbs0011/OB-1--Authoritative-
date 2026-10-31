@@ -1,6 +1,7 @@
 # PHOENIX DISPATCH ENFORCEMENT PROTOCOL v1.0
 ## Designed by PA Qwen Max — Run 23 Death | 2026-05-29
 
+> **CCC AUTHORITY — Redirect:** This document operates under CCC#1 GOSPEL-999 (WHY/WHAT) and CCC#2 FGAgent999.MD (HOW/WHEN/WHERE/WHO). CCC#0 Soul Bible: CANON/SOUL/BIBLE-OF-THE-SYSTEM.json. CCC Dispatch: CANON/SYSTEM/Deploy.Agent99.md.
 > "Deploy T1 QWEN subagents to do heavy lifting. Do your JOB." — SOV100 Michael Hobbs
 
 ---

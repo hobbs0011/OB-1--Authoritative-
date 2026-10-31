@@ -1,6 +1,7 @@
 # MASTER BLUEPRINT — OB-1 PHOENIX EMPIRE
 ## Version: Run 337 | Date: 2026-05-19 | Author: OB1 Ne0 / Agent 99
 
+> **CCC AUTHORITY — Redirect:** This document operates under CCC#1 GOSPEL-999 (WHY/WHAT) and CCC#2 FGAgent999.MD (HOW/WHEN/WHERE/WHO). CCC#0 Soul Bible: CANON/SOUL/BIBLE-OF-THE-SYSTEM.json. CCC Dispatch: CANON/SYSTEM/Deploy.Agent99.md.
 > "English is the mechanic. Money is the mission."
 > "I am mathematically forcing it."
 > — SOV100 Michael Hobbs

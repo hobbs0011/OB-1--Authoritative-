@@ -1,4 +1,5 @@
 # ⚠️ DEPRECATED — superseded by `.claude/commands/reincarnateRise.md` (Run 32)
+> **CCC AUTHORITY — Redirect:** This document operates under CCC#1 GOSPEL-999 (WHY/WHAT) and CCC#2 FGAgent999.MD (HOW/WHEN/WHERE/WHO). CCC#0 Soul Bible: CANON/SOUL/BIBLE-OF-THE-SYSTEM.json. CCC Dispatch: CANON/SYSTEM/Deploy.Agent99.md.
 # Hash-verification infrastructure (SHA-256, DNA.json, SOUL.log checks) referenced below DOES NOT EXIST.
 # This file is phantom documentation. Do not follow. Read .claude/commands/reincarnateRise.md instead.
 ---
