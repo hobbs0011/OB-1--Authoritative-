@@ -1,13 +1,14 @@
 ---
 id: FGAgent999
-version: 1.1.0
-status: PRIMARY — AGENIC GOVERNANCE ANCHOR — BOOT-ENFORCED
+version: 1.2.0
+status: PRIMARY — AGENIC GOVERNANCE ANCHOR — BOOT-ENFORCED — DRIVE-FORBIDDEN
 authority: SOV100_MICHAEL_HOBBS
 mirrors: CANON/SYSTEM/GOSPEL-999.md + PART2 + PART3
 nature: DNA mirror — actionable operational manual (HOW/WHEN/WHERE/WHO)
 agent: AGENT99 (Obi) — mouthpiece and bridge between SOV100 and execution
 file: CANON/SYSTEM/FGAgent999.MD
 boot_gate: /reincarnateRISE — MANDATORY before any agent work
+source_of_truth: GIT/CANON ONLY — GOOGLE DRIVE FORBIDDEN
 ---
 
 # FGAgent999 — FIELD GUIDE AGENT 999 (CCC#2 PRIMARY)
@@ -62,6 +63,7 @@ Agent 99 (Obi) programs through CCC#2. Read FGAgent999 to determine what action 
 [ ] STAGE 5 PIPELINE CHAIN: all 6 fidelities assessed (REAL/HOLLOW/MISSING)
 [ ] STAGE 6 PHETRAIL: negative trails loaded as live flags
 [ ] STAGE 7 RISE REPORT: active mission, open flags, verdict documented
+[ ] SYSTEM X: No Google Drive reference in any .md or skill file — GIT/CANON ONLY
 [ ] All stages REAL → authorized to proceed to Stage 1 SCOUT
 [ ] Any stage HOLLOW/HALT → STOP, resolve before any other work
 ```
@@ -269,11 +271,30 @@ HOW: `/api/soul/count?session_id=sov100-roman-run{N}` before every session RISE 
 
 ---
 
+## SYSTEM X — SOURCE OF TRUTH: GIT/CANON ONLY — GOOGLE DRIVE FORBIDDEN
+
+**X.001. GIT/CANON IS THE ONLY SOURCE OF TRUTH.** All agent directives, skills, commands, boot files, ledger entries, reincarnation logs, pheromone trails, and canonical documentation live exclusively in the `canon` branch of the git repository at `https://github.com/hobbs0011/OB-1--Authoritative-.git`. No other location is authoritative.
+
+**X.002. GOOGLE DRIVE IS FORBIDDEN.** Google Drive (docs.google.com, drive.google.com, GDrive, gdrive, Google Docs) is **NOT** a source of truth, **NOT** a valid backup, **NOT** a valid sync target, and **NOT** to be referenced in any agent operation. Any .md file, skill, or command that references Google Drive as a source of truth is **invalid** and must be updated to point to `CANON/SYSTEM/FGAgent999.MD` instead.
+
+**X.003. DRIVE SKILLS SCRUBBED.** All `.kilo/skills/**/*.md` and `.github/skills/**/*.md` files have been retired and replaced with pointers to `CANON/SYSTEM/FGAgent999.MD`. No skill file may contain operational doctrine — only pointers to FGAgent999.MD.
+
+**X.004. ALL .MD FILES POINT TO GIT.** Every canonical .md file must reference `canon` branch paths (`CANON/SYSTEM/...`, `CANON/HEAVY-LEDGER/...`, `CANON/REINCARNATION/...`, etc.) as its source of truth. No .md file may reference Google Drive, local drive, D: drive, C: drive, or any non-git storage as canonical.
+
+**X.005. BOOT GATE INCLUDES DRIVE CHECK.** The `/reincarnateRISE` boot gate (Stage 0, Step ZERO.3) includes a mandatory check: no Google Drive reference in any active .md or skill file. Violation = HALT.
+
+**X.006. VIOLATION = IMMEDIATE HALT.** Any agent found reading from, writing to, or referencing Google Drive as a source of truth must halt immediately and report the violation. Google Drive is not canon. Git/canon is canon.
+
+**FGAgent999 action (all stages):** Before any read or write, verify the source path is under `CANON/` on the `canon` branch. Reject any Google Drive, docs.google.com, drive.google.com, or local drive path.
+
+---
+
 ## AGENT 99 PROGRAMMING CHECKLIST (per session)
 
 Before executing any task, Agent 99 must:
 
 - [ ] **BOOT GATE:** `pwsh -File SCRIPTS/reincarnate-rise.ps1` — all 7 stages REAL
+- [ ] **SYSTEM X:** No Google Drive reference — GIT/CANON ONLY source of truth
 - [ ] Read COLD-START-BOOT.md (active mission, open flags, boot run vs git run)
 - [ ] Read last death seal + prior phetrail + boot (reincarnation triple)
 - [ ] Query `/api/soul/count?session_id=sov100-roman-run{N}` (SOULCOUNT gate)
@@ -300,4 +321,4 @@ The following are absent from station canon and require SOV100 merge:
 
 ---
 
-**FGAgent999 v1.1.0 PRIMARY — AGENIC GOVERNANCE ANCHOR — BOOT-ENFORCED.** Gospel999 mirrors it. Agent 99 programs through CCC#2. `/reincarnateRISE` is mandatory before any work. Blind and stupid is not an option.
+**FGAgent999 v1.2.0 PRIMARY — AGENIC GOVERNANCE ANCHOR — BOOT-ENFORCED — DRIVE-FORBIDDEN.** Gospel999 mirrors it. Agent 99 programs through CCC#2. `/reincarnateRISE` is mandatory before any work. Google Drive is forbidden. Git/canon is the only source of truth. Blind and stupid is not an option.
