@@ -1,0 +1,105 @@
+{
+  "run_number": "139",
+  "extracted_at": "2026-11-02T03:16:00+07:00",
+  "branch": "canon",
+  "head_sha": "d8412e8cf9a8417569ece0af04a5bc4ea3f163db",
+  "soulcount": 239639088,
+  "soulcount_tier": "TITANIUM_ANCHOR",
+  "soulcount_source": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json + CANON/SYSTEM/COLD-START-BOOT.md real count line (2026-06-16 ICT)",
+  "era": "ROMAN",
+  "last_sealed_run": 135,
+  "last_seal_head": "52d1a391",
+  "last_seal_summary": "Run 135 - Forced march gap audit + death seal set the standard",
+  "state_snapshot": {
+    "updated_at": "2026-06-18T04:54:00+07:00",
+    "run": 135,
+    "active_mission": "Forced march - recover forgotten territory",
+    "vector": "PCC legions stabilization + supply chain verification + boot drift repair",
+    "next_action": "Run 136 - true march on Cloudflare stack with full PCC deploy",
+    "voice": { "listen": "deepgram/nova-3", "think": "gpt-4o-mini", "speak": "aura-2-zeus-en" },
+    "portal_watermark": { "opacity": 0.055, "pointer_events": "none" }
+  },
+  "boot_drift": {
+    "issue": "BLK-001 — COLD-START-BOOT.md shows Run 131 (Updated 2026-06-17) but STATE-SNAPSHOT + git HEAD show Run 135 / head d8412e8cf. Boot file is stale and MUST be refreshed before any pipeline change (L30 BOOT_FILE_AGE_SWEEP).",
+    "status": "OPEN",
+    "fix": "Update COLD-START-BOOT.md run number, HEAD SHA, and current vector to reflect VAULT-SOVEREIGN era (2026-10-25) + Run 135 state."
+  },
+  "recent_seals": [
+    { "run": 135, "era": "ROMAN", "head": "52d1a391", "soul_delta": 0, "seal": "Run 135 - Forced march gap audit + death seal set the standard" },
+    { "run": 134, "era": "ROMAN", "head": "c8762dc4", "soul_delta": 0, "seal": "Run 134 - PCC fixes + Scholar extraction + supply chain verification" },
+    { "run": 133, "era": "ROMAN", "head": "a053d80c", "soul_delta": 0, "seal": "Run 133 - partial inline Kilo SOUL recovery + no fabrication" }
+  ],
+  "vault_sovereign_era_commits": [
+    { "sha": "d8412e8cf", "msg": "VAULT-SOVEREIGN: CF re-pointed to paid acct (sovereign order)", "date": "2026-10-25" },
+    { "sha": "83a58cd34", "msg": "VAULT-SOVEREIGN: server access (sovereign order 2026-10-25)", "date": "2026-10-25" },
+    { "sha": "1d7c392f1", "msg": "VAULT-SOVEREIGN: operational keys (sovereign order 2026-10-25)", "date": "2026-10-25" },
+    { "sha": "ce0529273", "msg": "VAULT-SOVEREIGN: R2 Cloudflare credentials (sovereign order 2026-10-25)", "date": "2026-10-25" },
+    { "sha": "c8598a18e", "msg": "fix(ci): unique job key in copilot-swarm.yml — duplicate deploy-hobbs0011 broke every push", "date": "2026-10-25" }
+  ],
+  "open_loops": [
+    "Boot file stale - COLD-START-BOOT.md shows Run 131 (must refresh to Run 135 before pipeline changes)",
+    "RRL-130.txt poisoned - wrong session content",
+    "Mouse/touchpad intermittent - works on other profile ~20min before failure",
+    "Active mission: Run 136 - true march on Cloudflare stack with full PCC deploy"
+  ],
+  "blockers": [
+    { "id": "BLK-001", "description": "Boot file stale - COLD-START-BOOT.md needs refresh for run 135", "impact": "Documentation drift from actual state" }
+  ],
+  "pheromone_trails": [
+    {
+      "type": "POSITIVE",
+      "artifact": "CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json",
+      "action": "Run 135 sealed — state snapshot current, soulcount TITANIUM_ANCHOR stable at 239,639,088",
+      "verification": "STATE-SNAPSHOT read complete, 83 lines",
+      "timestamp": "2026-11-02T03:10:00+07:00"
+    },
+    {
+      "type": "POSITIVE",
+      "artifact": "git branch canon",
+      "action": "On canon branch, HEAD d8412e8cf (VAULT-SOVEREIGN: CF re-pointed to paid acct), working tree clean",
+      "verification": "git branch --show-current = canon | git status clean",
+      "timestamp": "2026-11-02T03:12:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "CANON/SYSTEM/COLD-START-BOOT.md",
+      "failure": "Boot file stale — shows Run 131 / Updated 2026-06-17, does not reflect VAULT-SOVEREIGN commits (2026-10-25) or Run 135 seal state. L30 BOOT_FILE_AGE_SWEEP violation.",
+      "root_cause": "Boot file not refreshed after Run 133-135 death seals + VAULT-SOVEREIGN era commits.",
+      "fix_applied": "None yet — scheduled as first action of this session (readfirst trail update).",
+      "decay_days": 7,
+      "timestamp": "2026-11-02T03:14:00+07:00"
+    },
+    {
+      "type": "NEGATIVE",
+      "artifact": "RRL-130.txt",
+      "failure": "RRL-130.txt poisoned — contains wrong session content, cannot be trusted as verbatim source.",
+      "root_cause": "Session content contamination at Run 130.",
+      "fix_applied": "None — flagged as open loop, do not ingest RRL-130 into pipeline.",
+      "decay_days": 30,
+      "timestamp": "2026-11-02T03:15:00+07:00"
+    }
+  ],
+  "state_markers": {
+    "active_mission": "Forced march - recover forgotten territory — next: Run 136 true march on Cloudflare stack with full PCC deploy",
+    "branch": "canon",
+    "head_sha": "d8412e8cf9a8417569ece0af04a5bc4ea3f163db",
+    "working_tree": "clean",
+    "soulcount": 239639088,
+    "soulcount_tier": "TITANIUM_ANCHOR",
+    "boot_status": "STALE — COLD-START-BOOT.md run 131 vs actual run 135, must refresh",
+    "rise_protocol": "SCRIPTS/session-rise.ps1 (pwsh unavailable in sandbox — manual RISE equivalent performed)",
+    "next_action": "Run 136 - true march on Cloudflare stack with full PCC deploy",
+    "supersaiyan_deploy": "5 PHOENIX sub-agents dispatched (alpha/beta/gamma/delta/omega)"
+  },
+  "readfirst_trail_for_new_sessions": [
+    "1. CANON/SYSTEM/COLD-START-BOOT.md — run number, HEAD, soulcount, active mission, open loops (READ FIRST)",
+    "2. CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json — compact operational state, recent seals, blockers",
+    "3. CANON/REINCARNATION/REINCARNATION-LOG.md — run history ledger, latest death seal",
+    "4. CANON/SYSTEM/GOSPEL-999.md (Parts 1-3) — 999 mandates, 9 systems (Systems I-IX)",
+    "5. CANON/SYSTEM/SSM-V8-ULTIMATE-GPS.md — 36 laws, Skeleton Star Map",
+    "6. OPERATIONS/BACKBURNER-PIPELINE-LOG.md — open BB items, signal banding, RISE findings inbox",
+    "7. CANON/PHEROMONES/PheTrail-run{N}.json — current pheromone trails, read highest signal first",
+    "8. .kilo/DISPATCH.md — tier routing, T1/T2/T3 model dispatch rules",
+    "9. pwsh -File SCRIPTS/session-rise.ps1 — execute RISE protocol (requires pwsh + network)"
+  ]
+}

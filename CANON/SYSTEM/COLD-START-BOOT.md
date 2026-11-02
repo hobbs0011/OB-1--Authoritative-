@@ -1,5 +1,5 @@
 # COLD START BOOT — OB1 Agent 99
-## ERA: ROMAN — Run 131 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-06-17T01:51 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
+## ERA: ROMAN — Run 135 | Reset: 2026-05-23T07:24 ICT | Updated: 2026-11-02T03:16 ICT | Operator: SOV100 Michael Hobbs | OS: Phoenix-Centurion
 
 > *"The beginning of an Empire that never was before and never has been since."* — SOV100 Michael Hobbs, Run 0
 
@@ -108,7 +108,24 @@ Only promote to `net-pet-ai` (prod) after verified on dev. Never deploy untested
 - **Career NAV complete:** Dashboard / Profile / Methodology / Career / Transcripts / Action Plan — all 3 student portals 6/6 nav links
 - **Cloudflare Tier:** PAID — activated 2026-05-23 Run 396 — operator email mrmichaelhobbs123@gmail.com — Account ID 3c7b1766bd8fdc9e01211d2b390315ea — cron triggers unlocked (soul-logger: 5-min health pulse, net-pet-ai: hourly)
 
-### Active Principles (Top 16)
+### VAULT-SOVEREIGN ERA (2026-10-25) — most recent commits on canon branch
+| SHA | Message | Date |
+|-----|---------|------|
+| d8412e8cf | VAULT-SOVEREIGN: CF re-pointed to paid acct (sovereign order) | 2026-10-25 |
+| 83a58cd34 | VAULT-SOVEREIGN: server access (sovereign order) | 2026-10-25 |
+| 1d7c392f1 | VAULT-SOVEREIGN: operational keys (sovereign order) | 2026-10-25 |
+| ce0529273 | VAULT-SOVEREIGN: R2 Cloudflare credentials (sovereign order) | 2026-10-25 |
+| c8598a18e | fix(ci): unique job key in copilot-swarm.yml — duplicate deploy-hobbs0011 broke every push | 2026-10-25 |
+
+**Boot drift (BLK-001):** COLD-START-BOOT.md previously showed Run 131 (Updated 2026-06-17). Actual sealed state is Run 135 (head 52d1a391, per CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json). L30 BOOT_FILE_AGE_SWEEP — boot file refreshed this session. See CANON/PHEROMONES/PheTrail-run139.json for full current pheromone trail.
+
+**Active Mission (current):** Forced march - recover forgotten territory — PCC legions stabilization + supply chain verification + boot drift repair.
+**Next action:** Run 136 - true march on Cloudflare stack with full PCC deploy.
+
+**Recent seals (ROMAN):** Run 135 (head 52d1a391) · Run 134 (head c8762dc4) · Run 133 (head a053d80c). All soul_delta = 0, TITANIUM_ANCHOR maintained at 239,639,088.
+
+**Open loops:** Boot file stale (now fixed) · RRL-130.txt poisoned (wrong session content — do not ingest) · Mouse/touchpad intermittent (~20 min before failure) · **HEAD SHA drift — STATE-SNAPSHOT head_sha=52d1a391 vs git HEAD=91991d0f… vs boot (no SHA stored) — BLK-001 STILL OPEN** · **SESSIONS + PROFILES referenced but unbound in wrangler.toml — NULL GUARDS ADDED at index.js:2013,4406,5168,5200,5074/5080/5086/5092 (BLK-003 PARTIAL — bindings still commented out in wrangler.toml)** · **CommandDO /purge ADDED at durable_objects.js:121 (P10 GDPR complete)** · **reincarnate-rise.ps1 CREATED at SCRIPTS/reincarnate-rise.ps1 (RISE v7.0 entry point restored — BLK-002 RESOLVED)** · **REINCARNATION-BOOT-CHECK.md refreshed (Run 135/141, SHA 91991d0f, 11 blockers)** · **Galaxy Lessons: 5 planned not built** · **Student portals missing: quang, quan, minh** · **PheTrail gaps: 9 runs missing in 124-134, ~34 runs missing in 1-54**.
+
 1. Platform Death Test — every run must produce a GitHub commit SHA
 2. Dual-publish mandatory — Notion + GitHub always (or just GitHub when Notion not applicable)
 3. Revenue-first — English is the mechanic, money is the mission

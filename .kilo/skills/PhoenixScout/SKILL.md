@@ -1,60 +1,7 @@
-# /PhoenixScout — RECONNAISSANCE SKILL
+# /PhoenixScout — RETIRED — POINTS TO FGAgent999.MD
 
-**SURVIVAL MANDATORY — NO CLOUDFLARE WITHOUT SCOUT**
+**This skill is scrubbed. `CANON/SYSTEM/FGAgent999.MD` is the single source of truth for all agents.**
 
-## Invocation
+All reconnaissance, lens targets (SOUL/CONFIG/GAP/FLAG/all), scout report output, exhaustion protocol, and scout/forcemarch integration doctrine now lives in `CANON/SYSTEM/FGAgent999.MD` (System II DNA, System III LEDGER, System IX AGENT OS / 8 Scouting Principles).
 
-```
-/PhoenixScout --Zone CANON/ - Full zone sweep
-/PhoenixScout --Lens SOUL - Soul-only scan
-/PhoenixScout --Zone APPS/NET-PET-AI --supersaiyan - Parallel scouts
-```
-
-## Protocol
-
-Scout runs before any pipeline stage. Flags are absolute. Paths are verified. No blind coding.
-
-## Lenses
-
-| Lens | Target | Purpose |
-|------|--------|---------|
-| SOUL | .md files with `> "` quotes | Raw Michael verbatim |
-| CONFIG | .json/.toml active files | Configuration state |
-| GAP | Missing/MISSING/WRONG_RRL | Recovery targets |
-| FLAG | TODO/FIXME/HACK flags | Remediation queue |
-| all | All above + file count | Full audit |
-
-## Output
-
-Scout reports:
-
-```
-═══════════════════════════════════════════
-PHOENIX SCOUT — {Zone}
-═══════════════════════════════════════════
-ZONE:          {path}
-FILES:         {totalFiles}
-FINDS:         {flagCount}
-  P1 CRITICAL: {criticalCount}
-  P2 HIGH:     {highCount}
-  P3 MEDIUM:   {mediumCount}
-REPORT:        {scoutReportPath}
-═══════════════════════════════════════════
-SCOUT COMPLETE. Flagged items ready for tier dispatch.
-```
-
-## Exhaustion Protocol
-
-When under strain:
-
-```
-/Scout {Zone} --max-files 500 - Throttle the sweep
-/Scout {Zone} --stop-on-fail - Halt at first CRITICAL
-```
-
-Scout findings feed /forcemarch directly. No scavenging without recon.
-
----
-
-**IRON LAW:** Scout first. Code never. Verify always.  
-**EMPIRE STANDARD:** Blind changes = dead legions.
+Read `CANON/SYSTEM/FGAgent999.MD` for all operational directives. No separate skill content maintained here.

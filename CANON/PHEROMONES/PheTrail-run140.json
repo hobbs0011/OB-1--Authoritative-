@@ -1,0 +1,116 @@
+{
+  "run_number": "140",
+  "extracted_at": "2026-11-02T03:40:00+07:00",
+  "branch": "canon",
+  "head_sha_git": "d8412e8cf9a8417569ece0af04a5bc4ea3f163db",
+  "soulcount": 239639088,
+  "soulcount_tier": "TITANIUM_ANCHOR",
+  "era": "ROMAN",
+  "last_sealed_run": 135,
+  "last_seal_head": "52d1a391",
+  "state_snapshot_run": 135,
+  "active_mission": "Forced march - recover forgotten territory — PCC legions stabilization + supply chain verification + boot drift repair",
+  "next_action": "Run 136 - true march on Cloudflare stack with full PCC deploy",
+  "head_sha_drift": {
+    "issue": "PHOENIX-ALPHA found git HEAD = 91991d0f, whereas session read earlier showed d8412e8cf. STATE-SNAPSHOT head_sha = 52d1a391. All three disagree — head-SHA drift confirmed across snapshot/boot/git. Must resolve authoritative HEAD before any pipeline change.",
+    "status": "OPEN",
+    "action": "Run `git log -1 --format=%H` and `git rev-parse HEAD` to confirm authoritative HEAD; sync STATE-SNAPSHOT.json head_sha + COLD-START-BOOT.md."
+  },
+  "phoenix_sweep_results": {
+    "PHOENIX-ALPHA_HEAVY_LEDGER": {
+      "verdict": "FAIL",
+      "hl_file_count": 572,
+      "numeric_only_naming": 477,
+      "slug_naming": 95,
+      "phantom_slots": { "HL-127": "absent-documented", "HL-128": "absent-documented", "HL-131": "absent-documented", "HL-132": "absent-documented", "HL-136": "absent-documented", "HL-137": "absent-documented" },
+      "phantom_gaps_unexpected": 0,
+      "last_3_seals_present": true,
+      "head_sha_check": "FAIL — STATE-SNAPSHOT 52d1a391 ≠ git HEAD (91991d0f per agent / d8412e8cf per session)",
+      "ledger_index_stale": "indexes HL-037→HL-239 only; disk holds HL files to HL-715",
+      "verdict_detail": "Phantom slots all documented (OK); recent_seals files all present (OK); head-SHA drift FAIL; ledger-index stale FAIL"
+    },
+    "PHOENIX-BETA_NET_PET_AI": {
+      "verdict": "FAIL",
+      "wrangler_bindings": { "D1_SOUL_DB": "bound", "KV_RATELIMIT": "bound", "KV_NET_PET_KV": "bound", "KV_STUDENT_MEMORY": "bound", "DO_PETS": "bound", "DO_LEDGER": "bound", "DO_MEMORY": "bound", "DO_COMMANDS": "bound", "QUEUE_net_pet_notifications": "bound" },
+      "commented_out_bindings": { "SESSIONS_SessionDO": "commented out + class stripped (v7 migration)", "PROFILES_ProfileDO": "commented out + class stripped (v7 migration)" },
+      "router_routes": 18,
+      "health_version_endpoints": "present",
+      "p6_quota": "wired on /api/deepgram-token + /api/chat",
+      "p7_idempotency": "wired on /api/payment/confirm + /api/waitlist + /api/referral/register",
+      "voice_sim_path_law": "GET /api/deepgram-token is the voice path (no /api/chat voice sim); mode param not validated — minor gap",
+      "durable_objects": { "LedgerDO": { "exists": true, "purge": true }, "PetDO": { "exists": true, "purge": true }, "MemoryDO": { "exists": true, "purge": true }, "CommandDO": { "exists": true, "purge": false } },
+      "unbound_bindings_crash_risk": { "SESSIONS": { "risk": "HIGH", "notes": "referenced in zalo.js, growth-engine.js, index.js deep health with no null check" }, "PROFILES": { "risk": "MEDIUM", "notes": "index.js:4405 unguarded env.PROFILES.get(...)" } },
+      "test_files": 43,
+      "verdict_detail": "SESSIONS/PROFILES referenced but unbound (HIGH crash risk); CommandDO missing /purge (P10 GDPR gap)"
+    },
+    "PHOENIX-GAMMA_VAULT_CLUSTER": {
+      "verdict": "PASS",
+      "vaults_present": 10,
+      "vaults_missing": 0,
+      "empty_vaults": 0,
+      "total_files": 237,
+      "discrepancy_note": "MASTER-BLUEPRINT §6 and VAULT-ZONE-INDEX.md claim 253 files; actual on-disk = 237 (sum matches exactly). 253 is stale/typo."
+    },
+    "PHOENIX-DELTA_SITE_NET_STUDENT_GALAXY": {
+      "verdict": "PASS_with_notes",
+      "site_entries": 11,
+      "net_students_entries": 14,
+      "galaxy_lessons_built": 9,
+      "galaxy_lessons_planned_missing": 5,
+      "student_portals_present": 4,
+      "student_portals_missing": { "quang-portal.html": "MISSING", "quan-portal.html": "MISSING", "minh-portal.html": "MISSING" },
+      "portal_truncation": "resolved (BB-04 mai-tram, BB-05 quy now full)",
+      "post_mortem_template": "present at NET-STUDENTS/CLASS-POST-MORTEM-TEMPLATE.md (path mismatch in REINCARNATION-BOOT-CHECKLIST.md:67)"
+    },
+    "PHOENIX-OMEGA_META_REINCARNATION": {
+      "verdict": "FAIL",
+      "scripts_count": 109,
+      "reincarnate_rise_ps1": "MISSING — referenced by backburner but does not exist in SCRIPTS/; only session-rise.ps1 exists",
+      "reincarnate_death_ps1": "present",
+      "rise_contract_version": "v6.1",
+      "death_contract_version": "v7.0",
+      "rise_stages": 10,
+      "death_stages": 12,
+      "boot_check_last_run": "Run 302 (2026-04-14) — STALE vs current run 135",
+      "boot_check_last_sha": "0c61d5f — STALE vs actual HEAD",
+      "reincarnation_log_latest": "Run 105 (ROMAN, 2026-06-09) — HOLLOW ARCHIVE REPROCESSING",
+      "death_protocol_v2": "DEPRECATED — superseded by .claude/commands/reincarnatedeath.md; references phantom scripts (check_rrl.sh, verify_handoff.sh) that do not exist",
+      "verdict_detail": "reincarnate-rise.ps1 missing (critical); boot-check stale; log latest entry HOLLOW; death-protocol-v2 deprecated with phantom refs"
+    }
+  },
+  "new_open_loops": [
+    "HEAD SHA drift — STATE-SNAPSHOT/boot/git all disagree; resolve authoritative HEAD before pipeline changes",
+    "SESSIONS + PROFILES referenced but unbound in wrangler.toml — unguarded .get() crash paths (HIGH risk)",
+    "CommandDO missing /purge endpoint — P10 GDPR erasure incomplete",
+    "reincarnate-rise.ps1 MISSING — backburner references it, only session-rise.ps1 exists",
+    "CANON/SYSTEM/REINCARNATION-BOOT-CHECK.md stale — Run 302 / SHA 0c61d5f, needs refresh to run 135",
+    "REINCARNATION-LOG.md latest entry Run 105 marked HOLLOW",
+    "Galaxy Lessons: 5 planned lessons not built",
+    "Student portals missing: quang, quan, minh",
+    "RRL-130.txt poisoned — wrong session content, do not ingest"
+  ],
+  "blockers": [
+    { "id": "BLK-001", "description": "Boot file / STATE-SNAPSHOT / git HEAD three-way drift", "impact": "Cannot trust HEAD for pipeline changes", "status": "OPEN" },
+    { "id": "BLK-002", "description": "reincarnate-rise.ps1 missing — RISE entry point absent", "impact": "Cannot execute RISE protocol without pwsh + the script", "status": "OPEN" },
+    { "id": "BLK-003", "description": "SESSIONS/PROFILES unbound bindings crash risk", "impact": "TypeError at runtime if invoked", "status": "OPEN" }
+  ],
+  "state_markers": {
+    "branch": "canon",
+    "working_tree": "clean",
+    "soulcount": 239639088,
+    "soulcount_tier": "TITANIUM_ANCHOR",
+    "supersaiyan_deploy": "5 PHOENIX sub-agents (alpha/beta/gamma/delta/omega) — all returned",
+    "pheromone_trails_written": ["PheTrail-run138.json", "PheTrail-run139.json", "PheTrail-run140.json"],
+    "readfirst_trail_for_new_sessions": [
+      "1. CANON/SYSTEM/COLD-START-BOOT.md — run number, HEAD, soulcount, active mission, open loops (READ FIRST)",
+      "2. CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json — compact operational state, recent seals, blockers",
+      "3. CANON/REINCARNATION/REINCARNATION-LOG.md — run history ledger, latest death seal",
+      "4. CANON/SYSTEM/GOSPEL-999.md (Parts 1-3) — 999 mandates, 9 systems (Systems I-IX)",
+      "5. CANON/SYSTEM/SSM-V8-ULTIMATE-GPS.md — 36 laws, Skeleton Star Map",
+      "6. OPERATIONS/BACKBURNER-PIPELINE-LOG.md — open BB items, signal banding, RISE findings inbox",
+      "7. CANON/PHEROMONES/PheTrail-run{N}.json — current pheromone trails, read highest run number first",
+      "8. .kilo/DISPATCH.md — tier routing, T1/T2/T3 model dispatch rules",
+      "9. pwsh -File SCRIPTS/session-rise.ps1 — execute RISE protocol (requires pwsh + network; reincarnate-rise.ps1 MISSING)"
+    ]
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "run_number": "141",
+  "extracted_at": "2026-11-02T03:45:00+07:00",
+  "branch": "canon",
+  "head_sha_git": "91991d0f3f1bab1fce4e32a34a743586a2000716",
+  "head_sha_state_snapshot": "52d1a391",
+  "head_sha_boot": "not_stored",
+  "soulcount": 239639088,
+  "soulcount_tier": "TITANIUM_ANCHOR",
+  "era": "ROMAN",
+  "last_sealed_run": 135,
+  "last_seal_head": "52d1a391",
+  "active_mission": "Forced march - recover forgotten territory — PCC legions stabilization + supply chain verification + boot drift repair",
+  "next_action": "Run 136 - true march on Cloudflare stack with full PCC deploy",
+  "session_type": "FORCE_MARCH_SCOUTING (10 sub-agents deployed)",
+  "pheromone_trail_inventory": {
+    "total_files": 47,
+    "earliest_run": 16,
+    "latest_run": 140,
+    "runs_present_124_to_134": [126, 127],
+    "true_gaps_124_to_134": [124, 125, 128, 129, 130, 131, 132, 133, 134],
+    "missing_low_range_1_to_54": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 42, 50, 51, 54, 55],
+    "note": "Run 41 exists as PheTrail-41.json (non-standard name); Run 24B exists as PheTrail-24b.json"
+  },
+  "blockers": [
+    {
+      "id": "BLK-001",
+      "description": "HEAD SHA three-way drift — STATE-SNAPSHOT head_sha=52d1a391, git HEAD=91991d0f…, boot file stores no SHA",
+      "impact": "Cannot trust authoritative HEAD for pipeline changes",
+      "status": "OPEN",
+      "evidence": "STATE-SNAPSHOT.json line 11 vs git log -1 = 91991d0f3f1bab1fce4e32a34a743586a2000716"
+    },
+    {
+      "id": "BLK-002",
+      "description": "reincarnate-rise.ps1 MISSING — RISE entry point absent from SCRIPTS/",
+      "impact": "Cannot execute canonical RISE protocol without pwsh + the script",
+      "status": "OPEN",
+      "evidence": "Glob SCRIPTS/reincarnate-rise.ps1 = ABSENT; only session-rise.ps1 (57 lines, Steps 0/0.5/1/2/4, no Step 3) and reincarnate-death.ps1 exist"
+    },
+    {
+      "id": "BLK-003",
+      "description": "SESSIONS/PROFILES unbound in wrangler.toml but referenced unguarded in index.js",
+      "impact": "Runtime TypeError crash risk at 4+ unguarded sites",
+      "status": "OPEN",
+      "evidence": "wrangler.toml lines 36-42 commented out; index.js lines 2013, 4405, 5168, 5193, 5074/5080/5086/5092 unguarded env.SESSIONS/env.PROFILES.get(); CommandDO missing /purge"
+    }
+  ],
+  "open_loops_consolidated": [
+    "HEAD SHA drift (BLK-001)",
+    "SESSIONS/PROFILES unbound crash risk (BLK-003)",
+    "CommandDO missing /purge (P10 GDPR gap)",
+    "reincarnate-rise.ps1 missing (BLK-002)",
+    "REINCARNATION-BOOT-CHECK.md stale — Run 302 / SHA 0c61d5f, last check 2026-04-14",
+    "REINCARNATION-LOG.md latest entry Run 105 marked HOLLOW (no seal)",
+    "RRL-130.txt poisoned — wrong session content, do not ingest",
+    "Galaxy Lessons: 5 planned not built",
+    "Student portals missing: quang, quan, minh",
+    "Mouse/touchpad intermittent (~20 min before failure)",
+    "PheTrail gaps: 9 runs missing in 124-134, ~34 runs missing in 1-54"
+  ],
+  "phoenix_force_sweep_results": {
+    "PHOENIX-FORCE-1_GAPS_124_134": "9 pheromone trails missing (124,125,128,129,130,131,132,133,134); HL-128 absent (phantom slot), HL-124/125/129/130/134 present; pipeline-run130/132/134 absent; death seals present for all 6 target runs",
+    "PHOENIX-FORCE-2_LOW_RANGE_54_1": "47 total pheromone files; earliest run 16; runs 1-10 all absent; run054/run055 both absent (confirmed gap); runs 50-51 absent; run52/53 present",
+    "PHOENIX-FORCE-3_BLOCKERS": "BLK-001 HEAD drift confirmed; BLK-002 reincarnate-rise.ps1 missing confirmed; BLK-003 SESSIONS/PROFILES unbound + CommandDO no /purge confirmed; REINCARNATION-LOG latest Run 105 HOLLOW; REINCARNATION-BOOT-CHECK stale Run 302",
+    "PHOENIX-FORCE_4_RISE_DEATH_PROTOCOL": "RISE v6.1 / DEATH v7.0 contract; session-rise.ps1 present (Steps 0/0.5/1/2/4); reincarnateRise-REWRITTEN stages 0-9 (stop gates 0,5,9); reincarnateDeath-REWRITTEN stages 1-12 (stop gate 11); DISPATCH.md T1=Qwen 3.7 Max, T2=Claude Opus 4.7; pre-code gate = STUDENT-PORTAL-DEV.md + deepgram edge cases §2",
+    "PHOENIX-FORCE-5_BOOT_VERIFY": "COLD-START-BOOT.md edits landed (Run 135, Updated 2026-11-02, VAULT-SOVEREIGN section added, all 8 open loops present); MASTER-SYNC.md ABSENT under CANON/SYSTEM/; STATE-SNAPSHOT.json ABSENT under CANON/SYSTEM/; BACKBURNER has no RISE FINDINGS INBOX section; connection-graph 49 nodes (39 LIVE/7 ORPHAN/1 DANGLING/2 GHOST); cf-resource-index 4 ORPHAN KV + 1 ORPHAN D1"
+  },
+  "readfirst_trail_for_new_sessions": [
+    "1. CANON/SYSTEM/COLD-START-BOOT.md — run number, HEAD, soulcount, active mission, open loops (READ FIRST)",
+    "2. CANON/HEAVY-LEDGER/STATE-SNAPSHOT.json — compact operational state, recent seals, blockers (NOT CANON/SYSTEM/STATE-SNAPSHOT.json — that path is absent)",
+    "3. CANON/REINCARNATION/REINCARNATION-LOG.md — run history ledger, latest death seal",
+    "4. CANON/SYSTEM/GOSPEL-999.md (Parts 1-3) — 999 mandates, 9 systems (Systems I-IX)",
+    "5. CANON/SYSTEM/SSM-V8-ULTIMATE-GPS.md — 36 laws, Skeleton Star Map",
+    "6. OPERATIONS/BACKBURNER-PIPELINE-LOG.md — open BB items, signal banding",
+    "7. CANON/PHEROMONES/PheTrail-run{N}.json — current pheromone trails, read highest run number first (run140 = latest)",
+    "8. .kilo/DISPATCH.md — tier routing, T1/T2 model dispatch rules, pre-code gate",
+    "9. pwsh -File SCRIPTS/session-rise.ps1 — execute RISE protocol (requires pwsh + network; reincarnate-rise.ps1 MISSING)"
+  ],
+  "state_markers": {
+    "branch": "canon",
+    "working_tree": "clean",
+    "soulcount": 239639088,
+    "soulcount_tier": "TITANIUM_ANCHOR",
+    "force_march_complete": true,
+    "sub_agents_deployed": 10,
+    "all_returned": true,
+    "pheromone_trails_written": ["PheTrail-run138.json", "PheTrail-run139.json", "PheTrail-run140.json", "PheTrail-run141.json"],
+    "next_action": "Run 136 - true march on Cloudflare stack with full PCC deploy",
+    "blocker_count": 3,
+    "open_loop_count": 11
+  }
+}

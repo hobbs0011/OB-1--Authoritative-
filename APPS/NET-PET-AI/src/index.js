@@ -2010,6 +2010,7 @@ if (lastSessionNotes) settings.agent.think.prompt += "\n\n" + lastSessionNotes;
     const idCheck = validateStudentId(studentId);
     if (!idCheck.valid) return json({ error: idCheck.error }, 400);
     const limit = parseInt(url.searchParams.get("limit") || "20");
+    if (!env.SESSIONS) return json({ error: "SESSIONS binding unavailable" }, 503);
     const stub = env.SESSIONS.get(env.SESSIONS.idFromName(`events-${studentId}`));
     const res = await stub.fetch(new Request(`https://do/events/recent?limit=${limit}`));
     return res;
@@ -4402,6 +4403,7 @@ async function handleMemoryGet(studentId, env, request) {
 
 async function handleProgress(studentId, env) {
   if (!studentId) return json({ error: "studentId required" }, 400);
+  if (!env.PROFILES) return json({ error: "PROFILES binding unavailable" }, 503);
   const profileStub = env.PROFILES.get(env.PROFILES.idFromName(studentId));
   const progressRes = await profileStub.fetch(new Request("https://do/progress"));
   const progressData = await progressRes.json();
@@ -5071,24 +5073,28 @@ async function handleLeadCapture(body, env) {
 
 async function handleClassStart(body, env) {
   if (!body.classId) return json({ error: "classId required" }, 400);
+  if (!env.SESSIONS) return json({ error: "SESSIONS binding unavailable" }, 503);
   const stub = env.SESSIONS.get(env.SESSIONS.idFromName(`class-${body.classId}`));
   return stub.fetch(new Request("https://do/class/start", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }));
 }
 
 async function handleClassEvent(body, env) {
   if (!body.classId) return json({ error: "classId required" }, 400);
+  if (!env.SESSIONS) return json({ error: "SESSIONS binding unavailable" }, 503);
   const stub = env.SESSIONS.get(env.SESSIONS.idFromName(`class-${body.classId}`));
   return stub.fetch(new Request("https://do/class/event", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }));
 }
 
 async function handleClassSession(classId, totalStudents, env) {
   if (!classId) return json({ error: "classId required" }, 400);
+  if (!env.SESSIONS) return json({ error: "SESSIONS binding unavailable" }, 503);
   const stub = env.SESSIONS.get(env.SESSIONS.idFromName(`class-${classId}`));
   return stub.fetch(new Request(`https://do/class/session?totalStudents=${totalStudents}`));
 }
 
 async function handleClassReport(classId, totalStudents, env) {
   if (!classId) return json({ error: "classId required" }, 400);
+  if (!env.SESSIONS) return json({ error: "SESSIONS binding unavailable" }, 503);
   const stub = env.SESSIONS.get(env.SESSIONS.idFromName(`class-${classId}`));
   return stub.fetch(new Request(`https://do/class/report?totalStudents=${totalStudents}`));
 }
@@ -5165,6 +5171,7 @@ async function handleScheduleSet(body, env) {
   if (!idCheck.valid) return json({ error: idCheck.error }, 400);
   if (!body.schedule) return json({ error: "schedule required (object with days, time)" }, 400);
 
+  if (!env.PROFILES) return json({ error: "PROFILES binding unavailable" }, 503);
   const profileStub = env.PROFILES.get(env.PROFILES.idFromName(body.studentId));
   await profileStub.fetch(new Request("https://do/schedule/set", {
     method: "POST",
@@ -5190,6 +5197,7 @@ async function handleScheduleConfirm(body, env) {
   const idCheck = validateStudentId(body.studentId);
   if (!idCheck.valid) return json({ error: idCheck.error }, 400);
 
+  if (!env.PROFILES) return json({ error: "PROFILES binding unavailable" }, 503);
   const profileStub = env.PROFILES.get(env.PROFILES.idFromName(body.studentId));
   await profileStub.fetch(new Request("https://do/schedule/confirm", {
     method: "POST",

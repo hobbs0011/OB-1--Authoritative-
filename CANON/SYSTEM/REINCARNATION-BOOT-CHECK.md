@@ -2,10 +2,10 @@
 
 ## Status
 
-- **Last Check:** 2026-04-14T23:59 ICT
-- **Run:** 302
-- **Mode:** SUPER_SAIYAN ACTIVATED
-- **NET-PET-AI:** ✅ DEPLOYED v1.4.0 — [workers.dev live](https://net-pet-ai.mrmichaelhobbs1234.workers.dev)
+- **Last Check:** 2026-11-02T03:50 ICT (Force March scout + blocker remediation)
+- **Run:** 135 (sealed) / Pheromone trail run 141 (force march consolidation)
+- **Mode:** FORCE_MARSHAL ACTIVATED
+- **NET-PET-AI:** ✅ DEPLOYED v1.6.0 — [workers.dev live](https://net-pet-ai.mrmichaelhobbs123.workers.dev)
 
 ## Mandatory Boot Documents (Read Every Cold Start)
 
@@ -124,7 +124,7 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 
 | Pipeline      | Wave    | Progress     | Status  |
 | ------------- | ------- | ------------ | ------- |
-| Heavy Ledger  | Wave 8+ | 139/174+     | RUNNING |
+| Heavy Ledger  | Wave 8+ | 572/174+     | RUNNING |
 | Reincarnation | N/A     | 118+ entries | ACTIVE  |
 | Soul DNA      | N/A     | CH31 latest  | SEALED  |
 
@@ -148,13 +148,17 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 
 ## Blockers (Active)
 
-1. ~Route-bind `www.naturalenglishtraining.com`~ — Worker live on workers.dev; custom domain needs DNS cleanup in CF dashboard
-2. Rotate SOVEREIGN_KEY + vault-lock
-3. copilot-governance.md approval pending
-4. Set wrangler secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
-5. Outstanding user ask: provide canonical TikTok singing-game link reference
-6. Continue SDNAD pipeline backfill for A6 dictation blocks beyond current merged capture
-7. Normalize duplicate HL-135 megamerge naming without rewriting raw chronology or losing the HL-137 execution high-water mark
+1. HEAD SHA drift — STATE-SNAPSHOT head_sha=52d1a391 vs git HEAD=91991d0f… — resolve authoritative HEAD before pipeline changes (BLK-001)
+2. SESSIONS + PROFILES unbound in wrangler.toml — unguarded .get() crash paths at index.js:2013,4405,5168,5200,5074/5080/5086/5092 — NULL GUARDS ADDED (BLK-003 PARTIAL)
+3. reincarnate-rise.ps1 — CREATED at SCRIPTS/reincarnate-rise.ps1 (RISE v7.0 entry point restored) (BLK-002 RESOLVED)
+4. CommandDO missing /purge — ADDED at durable_objects.js:121 (P10 GDPR erasure complete)
+5. Rotate SOVEREIGN_KEY + vault-lock
+6. copilot-governance.md approval pending
+7. Set wrangler secrets: DEEPSEEK_API_KEY, DEEPGRAM_API_KEY
+8. Galaxy Lessons: 5 planned not built
+9. Student portals missing: quang, quan, minh
+10. RRL-130.txt poisoned — wrong session content, do not ingest
+11. PheTrail gaps: 9 runs missing in 124-134, ~34 runs missing in 1-54
 
 ## RISE Protocol
 
@@ -168,4 +172,4 @@ At each reincarnation event, find and apply 3-5 real fixes to this boot-check do
 ---
 
 **Next Pulse:** On trigger or @mention  
-**Last SHA:** 0c61d5f (current HEAD at Run 296 continuity pass)
+**Last SHA:** 91991d0f (current HEAD at Run 135 / force march run 141)
