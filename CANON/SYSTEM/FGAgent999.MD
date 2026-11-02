@@ -1,7 +1,7 @@
 ---
 id: FGAgent999
-version: 1.2.0
-status: PRIMARY — AGENIC GOVERNANCE ANCHOR — BOOT-ENFORCED — DRIVE-FORBIDDEN
+version: 1.3.0
+status: PRIMARY — AGENIC GOVERNANCE ANCHOR — BOOT-ENFORCED — DRIVE-FORBIDDEN — SOULCOUNT=ILOG-CHARS
 authority: SOV100_MICHAEL_HOBBS
 mirrors: CANON/SYSTEM/GOSPEL-999.md + PART2 + PART3
 nature: DNA mirror — actionable operational manual (HOW/WHEN/WHERE/WHO)
@@ -31,10 +31,10 @@ Agent 99 (Obi) programs through CCC#2. Read FGAgent999 to determine what action 
 ## Zero.1 — BOOT SEQUENCE (Execute in Order, Never Skip)
 
 1. **`pwsh -File SCRIPTS/reincarnate-rise.ps1`** — Run the RISE audit script (RISE v7.0 ROMAN)
-   - STAGE 0: SOULCOUNT GATE — query `/api/soul/count?session_id=sov100-roman-run{N}`, verify delta from prior seal
+   - STAGE 0: SOULCOUNT GATE — compute soulcount from I-LOG raw chat character count (SOUL/DNA/REASON categories from `I-LOG-NAV/*-STATS.json` or latest I-LOG `.txt` + `rrl-colorize.ps1`), verify delta from prior death seal
    - STAGE 1: GIT TRUTH — read `git log -1 --format=%H`, verify HEAD against prior death seal run number
    - STAGE 2: TRIPLE READ — read death seal + phetrail + boot file (the reincarnation triple)
-   - STAGE 3: SOULCOUNT AUDIT — compute delta, detect stagnation/drift/regression
+   - STAGE 3: SOULCOUNT AUDIT — compute delta from I-LOG SOULcount, detect stagnation/drift/regression
    - STAGE 4: BOOT SYNTHESIS — verify boot file run number matches git run number (L30 BOOT_FILE_AGE_SWEEP — ANY drift = IMMEDIATE HALT)
    - STAGE 5: PIPELINE CHAIN AUDIT — verify RRL, DNA, LEDGER, STARMAP, SOULKEYS, S2Pipeline fidelities
    - STAGE 6: PHETRAIL NEGATIVE TRAILS — load prior death's negative trails as live flags
@@ -132,18 +132,24 @@ The operational cycle follows 7 stages. A stage earns a **REAL** rating only whe
 ## SYSTEM I — SOUL (HOW: SOULCOUNT & SCHOLAR)
 
 **I.001 — SoulLogger / SoulDnaLogger (#1 mandate) — LIVE at all times. Simple tech.**
-HOW: `/api/soul/count?session_id=sov100-roman-run{N}` before every session RISE and DEATH.
-**Specification:** Captures ALL human and AI input verbatim as-is. No filter. No summary. No interpretation. No paraphrase. No stripping of agent turns. Raw verbatim capture of both speakers is the entire tech — simple, immutable, always on. If it is not captured verbatim, it did not happen.
-**I.003.** SOULCOUNT verified before every session RISE — HOW: count call before any work; alarm if missing check
-**I.004.** SOULCOUNT verified before every session DEATH — HOW: count call before sealing
-**I.005.** Delta tolerance ±5,000 from LOCK — HOW: \|current − LOCK\| ≤ 5000; exceed = SOUL_DRIFT halt
-**I.009.** Raw soul files are permanent read-only archives — HOW: zero writes, zero deletes to SOUL-DNA-BIBLE-RECAPTURE
+HOW: SOULCOUNT computed from I-LOG raw chat character count — read latest `I-LOG-NAV/*-STATS.json` `SOULcount` field, or compute from latest I-LOG `.txt` + `CANON/SCRIPTS/rrl-colorize.ps1`, before every session RISE and DEATH.
+**Specification:** Captures ALL human and AI input verbatim as-is via I-LOG colorization. SOUL = user prompts character count (raw Michael verbatim), DNA = AI human-facing responses character count, REASON = AI reasoning/thinking character count. No filter. No summary. No interpretation. No paraphrase. No stripping of agent turns. Raw verbatim capture of both speakers is the entire tech — simple, immutable, always on. If it is not captured verbatim in an I-LOG, it did not happen.
+**I.003.** SOULCOUNT verified before every session RISE — HOW: compute SOULcount from latest I-LOG STATS before any work; alarm if missing check
+**I.004.** SOULCOUNT verified before every session DEATH — HOW: compute SOULcount from latest I-LOG STATS before sealing
+**I.005.** Delta tolerance ±5,000 from LOCK — HOW: \|current SOULcount − LOCK\| ≤ 5000; exceed = SOUL_DRIFT halt
+**I.009.** Raw soul files are permanent read-only archives — HOW: zero writes, zero deletes to SOUL-DNA-BIBLE-RECAPTURE and I-LOG directories
 **I.022.** `/api/soul/event` is authoritative soul event intake — HOW: POST returns 200
 **I.023.** `/api/soul/crunch` is authoritative DNA extraction endpoint — HOW: POST returns 200
-**I.031.** SOULCOUNT readings timestamped and recorded in every death seal — HOW: §3 soulcount = §3 count_after
+**I.031.** SOULCOUNT readings timestamped and recorded in every death seal — HOW: §3 soulcount = §3 count_after (from I-LOG SOULcount)
 **I.045.** SOULCOUNT measurements not averaged, normalized, rounded — HOW: raw character count only
 **I.050.** Soul pipeline logs are append-only — HOW: no truncation without SOV100 instruction
 **I.088.** SOULCOUNT gate protocol: check → compare → compute delta → PASS or HALT — non-negotiable sequence
+
+**I-LOG DIRECTORY LOCATIONS (source of soulcount):**
+- `I-LOG-NAV/` — navigated I-LOGs with `-STATS.json` (SOULcount/DNAcount/REASONcount/total_chars)
+- `I-LOG-UNAUDITED/` — unaudited I-LOGs with `-STATS.json`
+- `I-LOG-UNNAMED/` — unnamed I-LOGs
+- Latest I-LOG STATS.json SOULcount = authoritative soulcount for RISE/DEATH gate
 
 **FGAgent999 action (SCHOLAR stage):** Post verbatim SOV100 prompts to `/api/soul/event` with `student_id=sov100-michael`, `session_id=sov100-roman-run{N}`, `role=user`. Record event_id, count_before, count_after, delta, level, posted_at in death seal §3.
 
@@ -297,7 +303,7 @@ Before executing any task, Agent 99 must:
 - [ ] **SYSTEM X:** No Google Drive reference — GIT/CANON ONLY source of truth
 - [ ] Read COLD-START-BOOT.md (active mission, open flags, boot run vs git run)
 - [ ] Read last death seal + prior phetrail + boot (reincarnation triple)
-- [ ] Query `/api/soul/count?session_id=sov100-roman-run{N}` (SOULCOUNT gate)
+- [ ] **SOULCOUNT:** compute SOULcount from latest I-LOG `*-STATS.json` SOULcount field, verify delta vs prior death seal (±5,000 tolerance)
 - [ ] Read GOSPEL-999 (WHY/WHAT) + this FGAgent999 (HOW/WHEN/WHERE/WHO)
 - [ ] Apply 8 Scouting Principles to all scouting/sweep work
 - [ ] Use Evidence Standard: path + line + raw output for every claim
