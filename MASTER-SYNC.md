@@ -80,3 +80,6 @@
 **Run:** 318
 **HEAD:** ea669ac
 **Status:** RI
+
+### Rise Script (v8.0)
+`SCRIPTS/session-rise.ps1` — single canonical rise script. Field-guide SDNAD Stage 0 REPRINT+FOOTNOTE gate, sovereign-word capture → `CANON/BIBLE-CH{XX}-{tag}.md`, machine-verified counts, cross-validated SOULCOUNT (L32), HEAD authority `git log -1` (L29), fail-closed on hollow. Run every cold start before code work.
