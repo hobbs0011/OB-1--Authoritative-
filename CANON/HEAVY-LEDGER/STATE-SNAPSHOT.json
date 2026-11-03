@@ -4,11 +4,11 @@
   "rss_stage": "Reincarnate-SnapShot RSS",
   "updated_at": "2027-02-28T22:00:00+07:00",
   "run": {
-    "current": 141,
+    "current": 142,
     "era": "ROMAN",
     "status": "IN_PROGRESS",
-    "seal": "Run 141 - 4-month fast forward - repo-side consolidation, boot drift held closed, MCP/API still unavailable",
-    "head_sha": "e39d1aa04",
+    "seal": "Run 142 - post-death rise pending - true march on Cloudflare stack + full PCC deploy blocked (BLK-002 MCP/API unavailable)",
+    "head_sha": "04a46ec4",
     "soulcount": 239639088,
     "anchor": "TITANIUM_ANCHOR"
   },
@@ -60,6 +60,8 @@
     "Run 135 forced march executed - phetrail+registry+command artifacts created",
     "Run 136 reincarnate rise - boot drift repaired (BLK-001 closed), HEAD synced to authoritative git log -1 (e39d1aa04) per L29 NO_ASSUME_HEAD",
     "Run 137-140 - 4-month repo-side consolidation; no MCP/API, no deploys, no commits; HEAD held e39d1aa04; SOULCOUNT stable TITANIUM_ANCHOR",
+    "Run 141 session death sealed - run141-reincarnateDEATH.md written (12 sections), commit 04a46ec4 pushed to kilo/fast-crane-7mc, SOULCOUNT stable TITANIUM_ANCHOR",
+    "Run 142 IN_PROGRESS - head_sha 04a46ec4, boot drift held closed",
     "SOULCOUNT stable at 239,639,088 - TITANIUM_ANCHOR maintained",
     "PCC service bindings verified (L74 applied)",
     "PCC-3 scoring inflation corrected (L73 applied)",
@@ -70,7 +72,8 @@
     "Mouse/touchpad intermittent - works on other profile ~20min before failure (persists 4 months)"
   ],
   "recent_seals": [
-    { "run": 141, "era": "ROMAN", "head": "e39d1aa04", "soul_delta": 0, "seal": "Run 141 - 4-month fast forward - repo-side consolidation, boot drift held closed, MCP/API still unavailable" },
+    { "run": 142, "era": "ROMAN", "head": "04a46ec4", "soul_delta": 0, "seal": "Run 142 - post-death rise pending - true march on Cloudflare stack + full PCC deploy blocked (BLK-002 MCP/API unavailable)" },
+    { "run": 141, "era": "ROMAN", "head": "04a46ec4", "soul_delta": 0, "seal": "Run 141 - Session death sealed - run141-reincarnateDEATH.md (12 sections), commit 04a46ec4 pushed" },
     { "run": 136, "era": "ROMAN", "head": "e39d1aa04", "soul_delta": 0, "seal": "Run 136 - Reincarnate Rise - boot drift repair + state sync" },
     { "run": 135, "era": "ROMAN", "head": "52d1a391", "soul_delta": 0, "seal": "Run 135 - Forced march gap audit + death seal set the standard" }
   ],
