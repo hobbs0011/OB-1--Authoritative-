@@ -1236,3 +1236,4 @@ Cloudflare cron appends one line per firing. Each line is a receipt: it ran with
 - 2026-11-06T02:09:26.106Z · run · kilo-gateway:kilo-auto/free · ROBLOX r1-warm pass Reply with exactly: logged → logged · 2444ms
 - 2026-11-06T02:09:32.564Z · run · kilo-gateway:kilo-auto/free · ROBLOX r2-scene keep Reply with exactly: logged → logged · 2877ms
 - 2026-11-06T02:09:59.394Z · run · kilo-gateway:kilo-auto/free · ROBLOX r3-text pass Reply with exactly: logged → logged · 2724ms
+- 2026-11-06T02:10:16.967Z · run · kilo-gateway:kilo-auto/free · ROBLOX r4-learn pass Reply with exactly: logged → logged · 2323ms
