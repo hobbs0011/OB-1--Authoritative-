@@ -198,7 +198,7 @@ function omegaStatusText(){
 function isSecretInput(text){
   const t = String(text || "").trim().toLowerCase();
   if(t.startsWith("/omega") || t.startsWith("/omegaprotocol") || t.startsWith("/phoenixomegaprotocol") || t.startsWith("/phoenixrisingprotocol") || t.startsWith("/phoenixrising")) return true;
-  if(/^\/vault\s+(set|add|escrow|recover|restore)\b/.test(t)) return true;
+  if(/^\/vault\s+(set|add|escrow|recover|restore|export|import)\b/.test(t)) return true;
   if(/^\/keys\s+ngl\s+\S+\s+\S/.test(t)) return true;   /* a textbook-platform credential */
   if(/^\/tool\s+key(\s|$)/i.test(t)) return true;   /* the Kilo Gateway key */
   const m = t.match(/^\/(cf|gh|dg)\s+(\S+)/);
@@ -227,7 +227,7 @@ function redactSecrets(s){
     .replace(/(\/keys\s+ngl\s+\S+\s+)\S+/gi, "$1[REDACTED]")
     .replace(/(\/tool\s+key\s+)\S+/gi, "$1[REDACTED]")
     .replace(/\bsk-or-v1-[A-Za-z0-9]{16,}\b/g, "[REDACTED_OPENROUTER_KEY]")
-    .replace(/(\/vault\s+(?:escrow|recover|restore)\s+)[\s\S]*$/gim, "$1[REDACTED]");
+    .replace(/(\/vault\s+(?:escrow|recover|restore|export|import)\s+)[\s\S]*$/gim, "$1[REDACTED]");
 }
 /* WORKSAFE EXPORT (2026-10-18, sovereign order: no not-safe-for-work content
    leaves the browser for GitHub). Expletives out of the GitHub-bound copies
