@@ -1137,3 +1137,61 @@ which is CANON.002 applied to itself.
 - **This amendment is unmerged.** `PROPOSED_G999` carries it as `merged:false`, like every other amendment here.
 
 **A SCRIPT IS EITHER SOURCED TO THE CANON OR IT IS WITHDRAWN. THERE IS NO THIRD STATE.**
+
+---
+
+### ADDENDUM 2026-10-30 — AGENTIC PROCEDURE SYNC (SOV100 direct order)
+
+Sealed mandates above untouched. This entry records the live operating procedure —
+GOSPEL is the law (WHY/WHAT), LFG is the execution of the law (HOW), AUTHREPOSYNCH
+is the coordination surface (corpus + open loops + HQ Kilo sync). All three stay
+synchronized; neither law nor execution alone is sufficient.
+
+Current procedure, field-proven 2026-10-30:
+- Read lane: `git_read` via runner MCP (`pais-mcp-cloud` `/mcp`, name exactly
+  `git_read`, key from box `/root/.runner_env` var `KEY`, allowlist
+  `OPERATIONS/COMMANDSTATION/` only, 200KB cap). Write lane: `phone_drop`
+  (keyless, tag-sanitized, one file per drop). Both verified live.
+- Canon survey: pin head SHA, recursive tree, Leg B chunks of 600, skip bodies
+  over 400KB (mark GIANT), binary-by-extension (no fetch), text head 160 chars.
+  Sequential evals only — parallel page_evals abort. After any page reload:
+  `page_refresh` before resuming. Chunks land in `scratch/canon-legB-*.json`.
+- Scoring is the colony's own: POS/NEG × BIG/LITTLE, 0–110, route by strength,
+  starve-don't-debate. NEG guidepost standing 2026-10-30: never mint a parallel
+  scoring system when the colony already has one.
+- Authority repo: `hobbs0011/OB-1--Authoritative-`, master, public. Campaign doc:
+  `OPERATIONS/COMMANDSTATION/PHONE-DROPS/campaign-canon-total-survey-2026-10-30T05-30-40.md`.
+
+---
+
+### ADDENDUM 2026-10-30 — SOV100 DIRECT ORDER (station-side; sealed mandates above untouched)
+
+**1. VIOLATION LOGGED.** The agent worked from non-authoritative scripts in the harness skills instead of the LFG-mandated canon scripts — the 7 SCS commands in `CANON/SYSTEM/`, LFG §SCS: *"Canonical commands only. These are the only scripts the system is allowed to run. No exceptions."* Station engine stands cleared: no live `.kilo/` reads (false scripts withdrawn 2026-09-21; remaining `.kilo` hits are labeled history, none executed). The failure was the agent's lane, not the engine's. Standing procedure: **canon scripts first, harness skills as hands only.**
+
+**2. REINFORCEMENT.** GOSPEL-999 is the WHY. LFG is the HOW. The canon branch (`canon`: `CANON/SYSTEM/GOSPEL-999.md`, verified live 2026-10-30 at 463 lines, plus LFG at 820 lines) is the one and only source. A script is either sourced to the canon or withdrawn — no third state (CANON.001–.010). Nothing sealed above is changed by this entry: it is ADDED, station-side, and rides `/canon doctrine`.
+
+**3. SOUL STATEMENT — SOV100 VERBATIM (typos preserved, never tidied):**
+
+> I creared these 2 documents after months and months of fragmented split and chaotic mish mash of skills, agent modes, repos, mark downs, scripts, and god knows what else, all in a perpetual non monitored, non scored (phermones), non canon mess we were drowning in, but it was like drowning in the kids pool. We were unaware of the option to stand up, and siccessfully train real swimming, whicjnkf course leads to the lakes and rivers and eventually the digital ocean.
+>
+> The gospel999 is the decrees, mandates, the why, the soul, the truth as we cirrently know it and have hopefully continued the process of natural selection from the automatic phermone process.
+>
+> And the LFG is the agenic ai worded dlcument, that leaves no room for prose or guessing and is the direct DNA mirror of the Gospel999s Soul mandates, decrees, immutable core principals at the root while being automatically autonomously adaptable in how we know and understand the how the truth of this immpvable truth. Begins to seed and move towards actualization in the DNA realm (coding, procedure documents, boot(rise)and other scs checkpoints with the seal and the transition into the new incarnation of the Phoenix Rising Protocol, and all other HOW pieces.
+>
+> In other words Gospel999 = WHY which can only come from true freewill and intelligence in other words SOUL
+>
+> With the LegionnaireFieldGuide being the HOW,WHEN,WHAT,WHO,WHERE that is only made possible by the emerging technology of today mixed with seasoned human oversight or DNA
+>
+> And with the the SOUL BIBLE being the PaiS CORE CANON core 5 documents
+
+**4. PAI S CORE CANON INDEX (filed exactly as given):**
+
+> PaiS CentralCoreCanon
+> ~CCC#0-SOUL.BIBLE.MD
+> ~CCC#1-GOSPEL.999.MD
+> ~CCC#2-FIELDGUIDE.999.MD
+> ~CCC#3-PHERMONE.LEDGER.MD
+> ~CCC#4-DNA.BLUEPRINT.MD
+> ~CCC#5-S.2.DNA.PIPELINET.MD
+
+*(DNA voice, not soul: six lines numbered #0–#5, filed under the spoken name "core 5" — kept as spoken.)*

@@ -2838,6 +2838,14 @@ async function send(){
   /* THE TOOL LANE (src/mcp-tools.js) — remote hands, called from here. /tool
      (alias /mcp). Key-bearing input (/tool key <JWT>) is answered but never
      recorded: no soul capture, masked bubble — the same rule as /cf, /gh. */
+  if(lower === "/gl" || lower.startsWith("/gl ")){
+    var glArg = text.replace(/^\/gl\s*/i, "").trim();
+    messages.push("User: " + text); captureSoul(text);
+    addBubble("user", esc(text));
+    if(!window.ObiGlBoot){ addBubble("ass", "⚠ <b>src/gl-boot.js</b> didn't load — reload the page."); return; }
+    await runCmd(() => window.ObiGlBoot.cmd(glArg), { stallMs: 300000 });
+    return;
+  }
   if(lower === "/tool" || lower.startsWith("/tool ") || lower === "/mcp" || lower.startsWith("/mcp ")){
     var toolArg = lower.startsWith("/tool") ? text.replace(/^\/tool\s*/i, "").trim() : text.replace(/^\/mcp\s*/i, "").trim();
     if(!secretIn){ messages.push("User: " + text); captureSoul(text); }

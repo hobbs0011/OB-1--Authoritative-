@@ -1122,3 +1122,37 @@ on its own face — this section included. (`CANON.010`)
 **ONLY USE CANON. NO INVENTED SCRIPT STANDS IN FOR A CANON ONE.**
 
 **RISE.**
+
+---
+
+### ADDENDUM 2026-10-30 — SOV100 DIRECT ORDER (station-side; sealed law above untouched)
+
+**1. VIOLATION LOGGED.** The agent worked from non-authoritative scripts in the harness skills instead of the canon scripts this book mandates — LFG §SCS: *"Canonical commands only. These are the only scripts the system is allowed to run. No exceptions."* (`/phoenixRISE /phoenixSCOUT /phoenixMARCH /phoenixSCHOLAR /phoenixSUPPLY /phoenixFORTIFY /phoenixDEATH`, each bound to its `CANON/SYSTEM/*.md` file). Station engine stands cleared (no live `.kilo/` reads; false scripts withdrawn 2026-09-21). Standing procedure: **canon scripts first, harness skills as hands only.** This book is the HOW, WHEN, WHAT, WHO, WHERE — written so no prose or guessing fits between the words. The HOW is only possible through today's emerging technology mixed with seasoned human oversight: that mixture is the DNA.
+
+**2. REINFORCEMENT.** The canon branch (`canon`: `CANON/SYSTEM/LegionnaireFieldGuide.md`, verified live 2026-10-30 at 820 lines, with GOSPEL-999 at 463 lines) is the one and only source. Nothing sealed above is changed by this entry: it is ADDED, station-side, and rides `/canon doctrine`.
+
+**3. SOUL STATEMENT — SOV100 VERBATIM (typos preserved, never tidied):**
+
+> I creared these 2 documents after months and months of fragmented split and chaotic mish mash of skills, agent modes, repos, mark downs, scripts, and god knows what else, all in a perpetual non monitored, non scored (phermones), non canon mess we were drowning in, but it was like drowning in the kids pool. We were unaware of the option to stand up, and siccessfully train real swimming, whicjnkf course leads to the lakes and rivers and eventually the digital ocean.
+>
+> The gospel999 is the decrees, mandates, the why, the soul, the truth as we cirrently know it and have hopefully continued the process of natural selection from the automatic phermone process.
+>
+> And the LFG is the agenic ai worded dlcument, that leaves no room for prose or guessing and is the direct DNA mirror of the Gospel999s Soul mandates, decrees, immutable core principals at the root while being automatically autonomously adaptable in how we know and understand the how the truth of this immpvable truth. Begins to seed and move towards actualization in the DNA realm (coding, procedure documents, boot(rise)and other scs checkpoints with the seal and the transition into the new incarnation of the Phoenix Rising Protocol, and all other HOW pieces.
+>
+> In other words Gospel999 = WHY which can only come from true freewill and intelligence in other words SOUL
+>
+> With the LegionnaireFieldGuide being the HOW,WHEN,WHAT,WHO,WHERE that is only made possible by the emerging technology of today mixed with seasoned human oversight or DNA
+>
+> And with the the SOUL BIBLE being the PaiS CORE CANON core 5 documents
+
+**4. PAI S CORE CANON INDEX (filed exactly as given):**
+
+> PaiS CentralCoreCanon
+> ~CCC#0-SOUL.BIBLE.MD
+> ~CCC#1-GOSPEL.999.MD
+> ~CCC#2-FIELDGUIDE.999.MD
+> ~CCC#3-PHERMONE.LEDGER.MD
+> ~CCC#4-DNA.BLUEPRINT.MD
+> ~CCC#5-S.2.DNA.PIPELINET.MD
+
+*(DNA voice, not soul: six lines numbered #0–#5, filed under the spoken name "core 5" — kept as spoken.)*
