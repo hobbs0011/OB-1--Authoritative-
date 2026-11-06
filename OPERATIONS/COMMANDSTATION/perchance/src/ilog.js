@@ -587,7 +587,7 @@
     let pushed = 0, failed = 0, cur = baseSha, curTree = baseTree, lastSha = null;
     const failedPairs = [];
     const removed = [];
-    let first = true, part = 0;
+    let part = 0, deletesApplied = false;
     for(const batch of batches){
       part++;
       const blobs = [];
@@ -616,14 +616,24 @@
          `sha:null` removes it. Callers pass exact paths (o.deletes) from a READ of the
          branch, never guessed. */
       const treeEntries = blobs.slice();
-      if(first){
-        first = false;
+      if(!deletesApplied){
         for(const p of (o.deletes || [])){
           if(o.files && Object.prototype.hasOwnProperty.call(o.files, p)) continue;
           treeEntries.push({ path:p, mode:"100644", type:"blob", sha:null }); removed.push(p);
         }
       }
       if(!treeEntries.length) continue;
+      /* M10 REBASE (2026-11-06): the runner pulses every 10 min, so the ref can
+         move under a multi-batch drive. Re-read the ref per batch; if it moved,
+         continue on the live head instead of dying on a 422 for every part after. */
+      try{
+        const live = await ghJson(base + "/git/refs/heads/" + o.branch);
+        const liveSha = live.j && live.j.object && live.j.object.sha;
+        if(liveSha && liveSha !== cur){
+          cur = liveSha;
+          try{ const lc = await ghJson(base + "/git/commits/" + liveSha); if(lc.j && lc.j.tree && lc.j.tree.sha) curTree = lc.j.tree.sha; }catch(e){}
+        }
+      }catch(e){}
       try{
         const tree = await ghJson(base + "/git/trees", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(Object.assign({ tree: treeEntries }, curTree ? { base_tree: curTree } : (baseSha ? { base_tree: baseSha } : {}))) });
         const treeSha = tree.j && tree.j.sha;
@@ -633,7 +643,7 @@
         if(!commitSha){ failed++; errors.push("commit HTTP " + commit.status + " " + String((commit.j && commit.j.message) || "").slice(0, 90)); continue; }
         const ref = await ghJson(base + "/git/refs/heads/" + o.branch, { method:"PATCH", headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ sha: commitSha }) });
         if(!(ref.j && ref.j.object && ref.j.object.sha)){ failed++; errors.push("ref move HTTP " + ref.status + " " + String((ref.j && ref.j.message) || "").slice(0, 90)); continue; }
-        cur = commitSha; curTree = treeSha; lastSha = commitSha;
+        cur = commitSha; curTree = treeSha; lastSha = commitSha; deletesApplied = true;
       }catch(e){ failed++; errors.push(e.message); }
     }
     /* FINAL SWEEP — leftovers get one more chance after the storm has passed (15s),
@@ -660,6 +670,14 @@
       }
       if(blobs.length){
         try{
+          try{
+            const live = await ghJson(base + "/git/refs/heads/" + o.branch);
+            const liveSha = live.j && live.j.object && live.j.object.sha;
+            if(liveSha && liveSha !== cur){
+              cur = liveSha;
+              try{ const lc = await ghJson(base + "/git/commits/" + liveSha); if(lc.j && lc.j.tree && lc.j.tree.sha) curTree = lc.j.tree.sha; }catch(e){}
+            }
+          }catch(e){}
           const tree = await ghJson(base + "/git/trees", { method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(Object.assign({ tree: blobs }, curTree ? { base_tree: curTree } : (baseSha ? { base_tree: baseSha } : {}))) });
           const treeSha = tree.j && tree.j.sha;
           if(!treeSha){ failed += blobs.length; errors.push("sweep tree HTTP " + tree.status); }
