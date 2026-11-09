@@ -21,8 +21,10 @@
 Page URLs: `https://www.roblox.com/games/<placeId>/...` (verified by title match each).
 Raw: `scratch/market/raw/games-all9-roproxy.json`, `game-doors-roproxy.json`, `page-*.html`.
 
-NOT measured (no ID resolved, see refusals.md): 99 Nights in the Forest, Steal a Brainrot,
+NOT measured at campaign time (no ID resolved, see refusals.md): 99 Nights in the Forest, Steal a Brainrot,
 Piggy, Evade, Zombie Uprising — rows withheld, never zero-filled.
+UPDATE 2026-10-30: 4 of 5 resolved (station lane) — see `ids-resolved-20261030.md`.
+Only Evade still withheld.
 
 Read: 8/10 updated within 48h of measurement; NDS 6 weeks stale; Jailbreak pivoting to
 anti-cheat per its own description. BedWars ships weekly (every Friday, in-description).

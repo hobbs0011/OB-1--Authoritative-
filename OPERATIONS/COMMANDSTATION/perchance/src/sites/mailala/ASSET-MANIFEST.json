@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-28T10:13:22.840Z",
+  "generated": "2026-11-04T12:16:26.294Z",
   "authority": {
     "chain": "Sov100 (sovereign · agent100 in the field) → the mastermind (architect, who bridges) → Obi (this station, which executes)",
     "sovereign": "Sov100 / agent100",
@@ -14,9 +14,9 @@
     "videos": 4,
     "fonts": 10,
     "bytesOfPhotographs": 1923108,
-    "estateFiles": 343,
-    "estateBytes": 20579828,
-    "treeDigest": "9acbc758fbe4666419580d69ead5e7b90ea59859e2d3c2b0eaa150525c35bcdd",
+    "estateFiles": 598,
+    "estateBytes": 61440985,
+    "treeDigest": "ac6f1e85d42840466878e52a323fedf1a0171f326a0840229d212b1b9f3790cd",
     "verifiableInPage": 29,
     "estateExcluded": [
       "src/sites/mailala/ASSET-MANIFEST.md",
@@ -38,7 +38,7 @@
       "dynamic": false,
       "proven": "hosted copy byte-identical to the shipped original (verified 2026-09-25)",
       "note": "the sovereign's own photograph; the id in the filename is the provenance",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "M-02",
@@ -54,7 +54,7 @@
       "dynamic": false,
       "proven": "hosted copy byte-identical to the shipped original (verified 2026-09-25)",
       "note": "the sovereign's own photograph; the id in the filename is the provenance",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "M-03",
@@ -70,7 +70,7 @@
       "dynamic": false,
       "proven": "hosted copy byte-identical to the shipped original (verified 2026-09-25)",
       "note": "the sovereign's own photograph; the id in the filename is the provenance",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "M-04",
@@ -86,7 +86,7 @@
       "dynamic": false,
       "proven": "hosted copy byte-identical to the shipped original (verified 2026-09-25)",
       "note": "the sovereign's own photograph; the id in the filename is the provenance",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "M-05",
@@ -102,7 +102,7 @@
       "dynamic": false,
       "proven": "hosted copy byte-identical to the shipped original (verified 2026-09-25)",
       "note": "the sovereign's own photograph; the id in the filename is the provenance",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "M-06",
@@ -118,7 +118,7 @@
       "dynamic": false,
       "proven": "hosted copy byte-identical to the shipped original (verified 2026-09-25)",
       "note": "the sovereign's own photograph; the id in the filename is the provenance",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "M-07",
@@ -134,7 +134,7 @@
       "dynamic": false,
       "proven": "hosted copy byte-identical to the shipped original (verified 2026-09-25)",
       "note": "the sovereign's own photograph; the id in the filename is the provenance",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "M-08",
@@ -150,7 +150,7 @@
       "dynamic": false,
       "proven": "hosted copy byte-identical to the shipped original (verified 2026-09-25)",
       "note": "the sovereign's own photograph; the id in the filename is the provenance",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "M-09",
@@ -166,7 +166,7 @@
       "dynamic": false,
       "proven": "hosted copy byte-identical to the shipped original (verified 2026-09-25)",
       "note": "the sovereign's own photograph; the id in the filename is the provenance",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "V-01",
@@ -421,7 +421,7 @@
       "fetchable": true,
       "dynamic": false,
       "note": "the ship — this is what deploy means",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "DOC-02",
@@ -435,7 +435,7 @@
       "fetchable": true,
       "dynamic": false,
       "note": "the intent; never edited",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "DOC-03",
@@ -449,7 +449,7 @@
       "fetchable": true,
       "dynamic": false,
       "note": "the story, with timecodes and the honest gaps",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "DOC-04",
@@ -463,7 +463,7 @@
       "fetchable": true,
       "dynamic": false,
       "note": "final copy; §7 records the dark turn",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "DOC-05",
@@ -477,7 +477,7 @@
       "fetchable": true,
       "dynamic": false,
       "note": "the layers; §4b is this register",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "DOC-06",
@@ -491,7 +491,7 @@
       "fetchable": true,
       "dynamic": false,
       "note": "provenance from the Video wing",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "DOC-07",
@@ -505,35 +505,35 @@
       "fetchable": true,
       "dynamic": false,
       "note": "the shelf's own index",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "PH-01",
       "label": "the station's perchance panel — main.pjs",
       "kind": "document",
       "slot": "main.pjs",
-      "bytes": 1855,
-      "sha256": "85c65cd45ef11354dbf377aae8ddb548e98e2c9933de467dea76397068ade0aa",
+      "bytes": 2166,
+      "sha256": "7136dc1423e166ec9df23206c3fe981b7e34b8aff8394ce509fb5dbfad4553e2",
       "local": "main.pjs",
       "url": null,
       "fetchable": false,
       "dynamic": false,
       "note": "not on this origin: served by the platform API (see src/forge.js selfSource)",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "PH-02",
       "label": "the station's perchance panel — index.html",
       "kind": "document",
       "slot": "index.html",
-      "bytes": 43171,
-      "sha256": "af7071eaaf3f7457d3d46372dad089abba4e675b86e6a2e2d605702c8025e810",
+      "bytes": 50589,
+      "sha256": "006b3a9249c97fb725f0d207c470ce0e522436264fc74a0c970e7fe6c13868fd",
       "local": "index.html",
       "url": null,
       "fetchable": false,
       "dynamic": false,
       "note": "same",
-      "rehashed": "2026-09-28T10:13:22.840Z"
+      "rehashed": "2026-11-04T12:16:26.294Z"
     },
     {
       "id": "EV-01",
@@ -697,14 +697,204 @@
     }
   ],
   "estate": {
-    "count": 343,
-    "bytes": 20579828,
-    "treeDigestSha256": "9acbc758fbe4666419580d69ead5e7b90ea59859e2d3c2b0eaa150525c35bcdd",
+    "count": 598,
+    "bytes": 61440985,
+    "treeDigestSha256": "ac6f1e85d42840466878e52a323fedf1a0171f326a0840229d212b1b9f3790cd",
     "files": [
+      {
+        "path": "src/44.md",
+        "bytes": 692,
+        "sha256": "e7e7914f38102f8ef88e2099c38a25951723f220458c09fb191866e96547560e"
+      },
+      {
+        "path": "src/444.md",
+        "bytes": 652,
+        "sha256": "97d35ce7b4be54f3f263cbb44a0454925b55a429d175d714767deac32977bfc4"
+      },
+      {
+        "path": "src/999.md",
+        "bytes": 715,
+        "sha256": "65c49f9c8b1c9df56aee19b40837281144f1932a2d84996efbab4434ec83d050"
+      },
       {
         "path": "src/AGENT99-OS.md",
         "bytes": 18664,
         "sha256": "54f1fecdd2fa61fff777397675de60e34e6ef70c3b859f7f7a869e807dc841fc"
+      },
+      {
+        "path": "src/BACKBURNER-LANES.md",
+        "bytes": 2917,
+        "sha256": "8cf60cbaab7e8346b510635d5017ff7b276f5aaef57b0fc7135596aa6bea04d4"
+      },
+      {
+        "path": "src/Backburner.md",
+        "bytes": 28076,
+        "sha256": "00eba84ca0872ab5b023c0203b0058aef78264d65af78e214b81a850032fc164"
+      },
+      {
+        "path": "src/CAMPAIGNS/market-evidence/3d-character-gen.md",
+        "bytes": 5179,
+        "sha256": "3256d56263fb8f2f9ece6ed2729f543ba5fe5286dd32ffd1c37df2c26809c812"
+      },
+      {
+        "path": "src/CAMPAIGNS/market-evidence/comparables.md",
+        "bytes": 2709,
+        "sha256": "b94adc6750bc4b53ad0c7bc5436b2fdabe3a6032bdae55a23b15ab5a13e0b787"
+      },
+      {
+        "path": "src/CAMPAIGNS/market-evidence/manifest.json",
+        "bytes": 4605,
+        "sha256": "415e67af1834d49ffdf925c33f0622d29f691aa922d300f9efac76f3606c54f1"
+      },
+      {
+        "path": "src/CAMPAIGNS/market-evidence/money-meta.md",
+        "bytes": 2946,
+        "sha256": "0394f8c31a56053c73b28b58253f6f7fc0c5d22e94cdc7f55a384c3e6c8e035e"
+      },
+      {
+        "path": "src/CAMPAIGNS/market-evidence/refusals.md",
+        "bytes": 2787,
+        "sha256": "ac0a9d201638b031c2ea0e81a1034cf1f53ffcf7b976f556b4cdd854c763070c"
+      },
+      {
+        "path": "src/CAMPAIGNS/market-evidence/retention-meta.md",
+        "bytes": 2386,
+        "sha256": "adfbf7feb3beeb69ee28b98dc927438084c9f845ec3fb900979d3333e5318eae"
+      },
+      {
+        "path": "src/CAMPAIGNS/market-evidence/seats.md",
+        "bytes": 1619,
+        "sha256": "6871bc757b837674f734ef37ff94539a72ec6508eadd467132e3c8b8ca09bbb4"
+      },
+      {
+        "path": "src/CAMPAIGNS/market-evidence/slang-freshness.md",
+        "bytes": 1532,
+        "sha256": "88bbee566885eb439a31a3a98ec48d1f89576fdf63543f2f27260a44e0621ae3"
+      },
+      {
+        "path": "src/CAMPAIGNS/market-research.md",
+        "bytes": 6504,
+        "sha256": "83dddadd485aebcd9279b04c2dda00ff45fdc680d006d1537c1bd8eef93dd88c"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/ASSET-MARCH-01.md",
+        "bytes": 2055,
+        "sha256": "4ff38f040dbc6eeda02a2c77f758e0aefb2225fedd3abe918b3ca9a10ace4cc6"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/CombatSystem.lua",
+        "bytes": 28917,
+        "sha256": "5b3313cf8bb30c00fb033807c69540964054a0ac90bb0926b420044e6ed678bf"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/DevProductsConfig.lua",
+        "bytes": 10264,
+        "sha256": "c8e078409baee8a935b4187082f70bf2d1a4ff954e95304d4b8037b2b2657867"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/ENGLISH-POWERUP-SPEC.md",
+        "bytes": 7192,
+        "sha256": "88b935b235d20203432adc1e175741ba9de6f53257ab9c02be8c2883e9e2cfcb"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/EnemyData.lua",
+        "bytes": 14088,
+        "sha256": "cfecf4689507663cd8d96887b56497fccfa0a4150eb48e7af2e05699cee0a8a6"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/GAME-BIBLE-DEPLOY-STATUS-FINAL.md",
+        "bytes": 3691,
+        "sha256": "e0c36788d3bbfcb728e1271e10f13990046eb7897b1cef416008c3478500fd1b"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/GO-NO-GO.md",
+        "bytes": 2588,
+        "sha256": "9609bb257733d437180443cb338d26ba8b7dd9351aa753c2db82256c91f84e77"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/GamePassConfig.lua",
+        "bytes": 14701,
+        "sha256": "573f5111f4d7a99192c0060dc85f9d4970bd77bf30f6d261326ebaecd581807c"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/LAUNCH-STATUS-FINAL.md",
+        "bytes": 9306,
+        "sha256": "960e3253d30701e216b525c23779a439cc1ca82e11f1e6ee4dbb21d356042318"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/MonetizationServer.lua",
+        "bytes": 9425,
+        "sha256": "38d3cc17d087afc362e8d0c403d4eabf243ab488f46137aecaf84ec49ca5eaaf"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/Mouse_A.lua",
+        "bytes": 22012,
+        "sha256": "d2702a7eea51b6a493f96c19dfa37ba47184e2953176955b3004d80e5e0a2279"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/QuestionBank.lua",
+        "bytes": 36122,
+        "sha256": "7eebc5e05baa1dd56179acade578f77bd5ffc077f23f1c7859183e27d516b8a2"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/QuestionBankV2.lua",
+        "bytes": 22702,
+        "sha256": "18470a19cd3b59848f9c9e0f97b36460ff007a025bd2ce7cad90871dfc911b36"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/README.md",
+        "bytes": 9480,
+        "sha256": "f4791d2165fc981499ea86143ae6d76ce3767c8b571fc78015b13f2f5774b710"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/ReceiptRouter.lua",
+        "bytes": 25869,
+        "sha256": "bc3c801f125078d379679962d98ea6823db4029f92b70f1b5fd4947195059f0b"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/ServerGateway.lua",
+        "bytes": 12192,
+        "sha256": "1a1848837656e4339ec8c8c8abd2d1269606c2f45b588426592890318d610d58"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/UnifiedClient.lua",
+        "bytes": 12385,
+        "sha256": "1c4955cb06310b1f327073a6461e6ed2bc89f7bf68b4b863f331a2d9e595d9ec"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/UnifiedServer.lua",
+        "bytes": 16909,
+        "sha256": "cf0702220b0ad728aa1c9f9347e5139fe1f3a51f613ce93cfdf10b06afb2e250"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/default.project.json",
+        "bytes": 6003,
+        "sha256": "83b77274310722e9ce6a0cd41a499e0d3996840aed18f0d11d8c1b0132426a23"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/deploy.yml",
+        "bytes": 2903,
+        "sha256": "f4ec3640f0b5b698818a0de064a652296415d8d69bb1145b9d7fbe08f624b6f2"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/manifest.json",
+        "bytes": 5671,
+        "sha256": "1dbdea459b272583400f24739aefaff794ea21dc5c4695fc39a46d09f0337921"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67-evidence/omega-text.txt",
+        "bytes": 4716,
+        "sha256": "93cca4206a38a2ae476e78d3de99891c1a72528046b1e35b6bb456ddc7952afa"
+      },
+      {
+        "path": "src/CAMPAIGNS/train67.md",
+        "bytes": 8286,
+        "sha256": "927eacb855ff3b5854795101a2b76875d609bbc0a2aefbef276307073002501d"
+      },
+      {
+        "path": "src/COLLECTIVE.md",
+        "bytes": 8178,
+        "sha256": "9ea512c0824cb98712c7b4bd4a658c0303fbf71e9bec1c62e33d8cb9cf03f1f7"
       },
       {
         "path": "src/COSTS.md",
@@ -712,19 +902,89 @@
         "sha256": "5ca0b2d04c95f10033b0db728af89e2de6dd320b0a2b6dfed67c8fd8fc77bc95"
       },
       {
+        "path": "src/DOCTRINE-COPIES/BUDGETS.md",
+        "bytes": 1114,
+        "sha256": "cdab7a654cd521745ab9d4cb32bf15068621e4a5a295cd66aef3397087dfd2e0"
+      },
+      {
+        "path": "src/DOCTRINE-COPIES/DEPRECATION-POLICY.md",
+        "bytes": 848,
+        "sha256": "7e7957e30a616dbabddebdc2c53b86d35578b6a864b8c0321536715f0ffa5313"
+      },
+      {
+        "path": "src/DOCTRINE-COPIES/EVAL-FRAMEWORK.md",
+        "bytes": 1468,
+        "sha256": "38c7a5f35759968efca80bebd58ef525cde384d6a857893868db9ad0ae42e622"
+      },
+      {
+        "path": "src/DOCTRINE-COPIES/INCIDENT-RUNBOOK.md",
+        "bytes": 1532,
+        "sha256": "6f53f9863a33897deec01203f04c1b0cf33dcfd37078cde869f25b3d51f79f54"
+      },
+      {
+        "path": "src/DOCTRINE-COPIES/LFG-EVAL-STEP.md",
+        "bytes": 618,
+        "sha256": "5051df9929b1564bfd82e33b17ab67456e4befd01b4d0da22d905affe7376fa7"
+      },
+      {
+        "path": "src/DOCTRINE-COPIES/MODEL-REGISTRY.md",
+        "bytes": 1149,
+        "sha256": "d6cb8243611363fc96bb1654c1c57defad29be797a303d21fdff57cf18da734d"
+      },
+      {
+        "path": "src/DOCTRINE-COPIES/PERMISSIONS-CAGE.md",
+        "bytes": 2966,
+        "sha256": "a0b33d14a4ba73372a6d17121ea9a7995427aca3a58e3d5443d4f0a6351af9f2"
+      },
+      {
+        "path": "src/DOCTRINE-COPIES/PROPOSED_FILES.md",
+        "bytes": 1779,
+        "sha256": "22b0cffcf2710b376450f4074bd23ec75e20f5a04ed685ae3b0e678debb5a795"
+      },
+      {
+        "path": "src/DOCTRINE-COPIES/SDNAD-GATE.md",
+        "bytes": 818,
+        "sha256": "e5d8c4228c2fa6d86bfb941c92f0cffcaaa2572742f4d1e437e2cf893e262085"
+      },
+      {
+        "path": "src/DOCTRINE-COPIES/SECRET-HANDLING.md",
+        "bytes": 1167,
+        "sha256": "261ce3d17c22431b1d15e114919c2c772f3ec1aa10bfdca7bb368150396c5829"
+      },
+      {
+        "path": "src/DOCTRINE-COPIES/SSM-NAMESPACE-BRIDGE.md",
+        "bytes": 836,
+        "sha256": "a8e7b7b45da0d175b6eca4773026d84f20f9e534980f978af5db6648dc201ee0"
+      },
+      {
+        "path": "src/DOCTRINE-COPIES/VERSION-POLICY.md",
+        "bytes": 841,
+        "sha256": "4943002f22a44f72977a641cf780cdfb0d23821addfe4cecf525461c24a35aa3"
+      },
+      {
+        "path": "src/EMPIRE-MAP.md",
+        "bytes": 3029,
+        "sha256": "120f21840a7bc453d3b222dc545be74c12ce1620c6a213c1a531aec2d07b4004"
+      },
+      {
         "path": "src/HANDOFF.md",
-        "bytes": 155356,
-        "sha256": "23cad0f7eb5eb953e1ec834ce786b0486ac37be2ce5f48fab3b27e8ac62bca30"
+        "bytes": 160215,
+        "sha256": "805015811f2cc193a825a24443c94917bcf6220eeca374912416427308ec70d4"
       },
       {
         "path": "src/LESSON-STANDARD.md",
-        "bytes": 45485,
-        "sha256": "1cca8442d7597a18435a727257f2e78b6720a6714965ecd270de008fd323cef0"
+        "bytes": 59602,
+        "sha256": "c90de87b17c9e62876688552b530abbbf78853add0387ba1caafa5fbf07c34a2"
       },
       {
         "path": "src/MASTERMIND-SYNC-2026-09-23.md",
-        "bytes": 19249,
-        "sha256": "8cd74a48ebb9ad1b8c605f1258e09373e86319809d9fcb03a4b7fe3122b31a25"
+        "bytes": 22161,
+        "sha256": "0e95c603a04f1210a449ce50bf70b57c33a4834f8275b7a8ebb8504a92175da5"
+      },
+      {
+        "path": "src/OMEGA2-phoenix-rising-ai-solutions-agent99-mastermind.md",
+        "bytes": 4031,
+        "sha256": "333950b407cac80d856501d18d1e59b15fd75e2c67bb7a3eecc4b4560276b721"
       },
       {
         "path": "src/PHOENIXCOMMAND-BLUEPRINT.md",
@@ -733,8 +993,8 @@
       },
       {
         "path": "src/PROPOSED-CANON.md",
-        "bytes": 8795,
-        "sha256": "90795d1483c2bcef74ae0c145679ec942840e6c403bcd32bf7b8d1bafad7a642"
+        "bytes": 15209,
+        "sha256": "58665b8a2d564c57fafa8b6888e9c843580fd568526795edc5b8994dddd3c812"
       },
       {
         "path": "src/ProposedG999.md",
@@ -743,8 +1003,8 @@
       },
       {
         "path": "src/README.md",
-        "bytes": 188477,
-        "sha256": "cec9242fde06f17d31a10a7d01aaab677e792274c956deffaa61f0032ca2d093"
+        "bytes": 188782,
+        "sha256": "12f3cc1042bf433bac7358fa8e4d0d39c567485d095ad0825d3b7934d26febfe"
       },
       {
         "path": "src/REPO.md",
@@ -752,9 +1012,279 @@
         "sha256": "5064b9a4242b5201f47ee8b1f91e056e0c067453632e0f4e4ce95cb615e88f43"
       },
       {
+        "path": "src/SESSIONS/STAGE-PROTOCOL.md",
+        "bytes": 596,
+        "sha256": "38fe5244e89b95fd858d66fc9cff57ecd0dacc697876b8569e7dd8097ca9be12"
+      },
+      {
+        "path": "src/SESSIONS/browser-memory-20261029/PUSH-URLS.json",
+        "bytes": 1983,
+        "sha256": "403dc2ddfbb4f0217d632c7f7fb0828d955c08ba6676462a03f89913a01ef79c"
+      },
+      {
+        "path": "src/SESSIONS/browser-memory-20261029/kv_ilog.json",
+        "bytes": 1426718,
+        "sha256": "8c40fd4ad442da1115236584ce7763ad1a1a348793227b64b541e60234afbed4"
+      },
+      {
+        "path": "src/SESSIONS/browser-memory-20261029/kv_mcp.json",
+        "bytes": 321518,
+        "sha256": "9336acce90719214c04660f7004f75edc4eab2dc38630377bdc571e8f1f55ef7"
+      },
+      {
+        "path": "src/SESSIONS/browser-memory-20261029/kv_rest.json",
+        "bytes": 3379597,
+        "sha256": "990e921e5bed1f3d682c2dc746e48ec4cb2b18a1e2c7cd98bd399b2573dacb1c"
+      },
+      {
+        "path": "src/SESSIONS/browser-memory-20261029/kv_scout_scholar.json",
+        "bytes": 459824,
+        "sha256": "e494d6a6fcb6a579dcb6f35b065ee7984978c78a561399328492eb93917fb4e2"
+      },
+      {
+        "path": "src/SESSIONS/browser-memory-20261029/manifest-batch2.json",
+        "bytes": 1064,
+        "sha256": "6538b4fa9af76de2b23d69617ccc7d64759bd2b0ec44c856d27105b87a143a02"
+      },
+      {
+        "path": "src/SESSIONS/browser-memory-20261029/manifest.json",
+        "bytes": 1266,
+        "sha256": "944b845d82873952cf1cc5be23fd46a09794a877ce9ee38cfd27cdc1960fac23"
+      },
+      {
+        "path": "src/SESSIONS/browser-memory-20261029/obi_ilog_full.jsonl.json",
+        "bytes": 1367799,
+        "sha256": "caa20c82368a94170d07faeb7fe618c28a54a83aba351df0aa4e516eaa5186c7"
+      },
+      {
+        "path": "src/SESSIONS/browser-memory-20261029/obi_misc_local.json",
+        "bytes": 305704,
+        "sha256": "5e53b32afb651efb9912c5b7701986641f268772611d52b81aa0499eaed71bf3"
+      },
+      {
+        "path": "src/SESSIONS/browser-memory-20261029/obi_rrl_backburner_ideas.json",
+        "bytes": 256040,
+        "sha256": "5772e2c98520fdecbf382966795cec7a53a35da07d4b85df3bab461b398e8a49"
+      },
+      {
+        "path": "src/SESSIONS/browser-memory-20261029/obi_scs.json",
+        "bytes": 1636046,
+        "sha256": "985f1e6063e0ff8c87c5adb22edc5f0759e90426b03bc9e00c835473c308192e"
+      },
+      {
+        "path": "src/SESSIONS/browser-memory-20261029/obi_sdnad.json",
+        "bytes": 145224,
+        "sha256": "ae4b3fb63729ece3a40c1306d2ad0023b5cfcc3c5075a49b2302b36a334065f7"
+      },
+      {
         "path": "src/SESSIONS/handoff-from-mastermind.md",
         "bytes": 33196,
         "sha256": "6fd262a721e5052b4956485e1a7582c141a78ec977cbec2350d65501586177e5"
+      },
+      {
+        "path": "src/SESSIONS/lesson-g1u4l3-20261028/LESSON-REPORT.md",
+        "bytes": 143,
+        "sha256": "2e29fb24087922c106f305b7fc42917084d08b7a0cd17374e8cc97f4fe93a8b9"
+      },
+      {
+        "path": "src/SESSIONS/lesson-g1u4l3-20261028/LESSON-STATE.json",
+        "bytes": 186,
+        "sha256": "e5d8969bb727406b9fa075d9cd5b86575f0f800e8b260f8cda50ced403083aaf"
+      },
+      {
+        "path": "src/SESSIONS/lesson-g1u4l3-20261028/LESSON-SUMMARY.json",
+        "bytes": 829,
+        "sha256": "f2f959149a0a18b95939552b93bbfae4b808ca7f83ccde0ae3084266f106d249"
+      },
+      {
+        "path": "src/SESSIONS/lesson-g1u4l3-20261028/keepalive-LD6.sh",
+        "bytes": 689,
+        "sha256": "cd33eb55f460e09224935f7884ccde9b777549c81c5274b6108e94ff1cc4e74f"
+      },
+      {
+        "path": "src/SESSIONS/lesson-g1u4l3-20261028/keepalive-LD9.sh",
+        "bytes": 1096,
+        "sha256": "e47e4a49b419b55aab123c9c60a3725231c282ad55dfde9ecf587bd1fce98034"
+      },
+      {
+        "path": "src/SESSIONS/lesson-g1u4l3-20261028/lesson-driver-LD10.mjs",
+        "bytes": 10494,
+        "sha256": "e025d4d62ec01c5df0b40f8de3392e87c13ffa8630ac13b1b5335946657c1cea"
+      },
+      {
+        "path": "src/SESSIONS/lesson-g1u4l3-20261028/lesson-driver-LD6.mjs",
+        "bytes": 9287,
+        "sha256": "89b11c6c1bf9b0a3fa40dfd4e229feb0aae2e4a3c58f3338059a284fe0807817"
+      },
+      {
+        "path": "src/SESSIONS/lesson-g1u4l3-20261028/lesson-driver-LD7.mjs",
+        "bytes": 9936,
+        "sha256": "5edf4efaa6f04a9193bb96aa017a5b0470458169d5b716f11e30ba49367e8f27"
+      },
+      {
+        "path": "src/SESSIONS/lesson-g1u4l3-20261028/lesson-g1u4l3.html",
+        "bytes": 3918,
+        "sha256": "0e17c6f2a5e101c0c291e36d12b44788ca1dc7e71f3d96e43bd3f875407de4a1"
+      },
+      {
+        "path": "src/SESSIONS/lesson-g1u4l3-20261028/s1a-shell.html",
+        "bytes": 793,
+        "sha256": "da14defc78b10fb3774ca49d08f7275570d7d4c64cb7d6e0c3bd392f0278a8d4"
+      },
+      {
+        "path": "src/SESSIONS/lesson-g1u4l3-20261028/s1b-shell.html",
+        "bytes": 713,
+        "sha256": "a86b106eeba9a8a7dac364912961eb4a310f2e8ed5f11042e4ef4ef8760d5571"
+      },
+      {
+        "path": "src/SESSIONS/lesson-g1u4l3-20261028/s2-r1.html",
+        "bytes": 420,
+        "sha256": "67ade0e2f061f43587512075a76f9d151298f172c15f0448c469ca6aa19a6748"
+      },
+      {
+        "path": "src/SESSIONS/lesson-g1u4l3-20261028/s3-r2.html",
+        "bytes": 369,
+        "sha256": "529739a4073abe9243b3139ac83d1cc0d51dc8d586255c4a229e3d86625ca641"
+      },
+      {
+        "path": "src/SESSIONS/lesson-g1u4l3-20261028/s4-r3.html",
+        "bytes": 525,
+        "sha256": "aec32cf6eef8ca24f1ccf5cbb5136fb6fbfdd1e49356aae8d72aaf6fc175d6a8"
+      },
+      {
+        "path": "src/SESSIONS/lesson-g1u4l3-20261028/s5-r4.html",
+        "bytes": 688,
+        "sha256": "a522012dec59305b4021b156588d95207d714d58b2981a52235ba42f2b19a792"
+      },
+      {
+        "path": "src/SESSIONS/lesson-g1u4l3-20261028/s6-r5.html",
+        "bytes": 533,
+        "sha256": "b2c22acf88d29cd7fb151428fa545ce0f4b5c534b3eeee4a95f2a0951350a1c2"
+      },
+      {
+        "path": "src/SESSIONS/lesson-g1u4l3-20261028/s7-r6.html",
+        "bytes": 237,
+        "sha256": "ca288f5b7d5bbeb0fa2192b8562bf2d580ddfde22e57276cff179db6a0b8bbaa"
+      },
+      {
+        "path": "src/SESSIONS/roblox-grade9-kilo/keepalive-LD11-auto.sh",
+        "bytes": 1595,
+        "sha256": "3972e550af7eab332e7a505f9d005362de32abacdd366a89de2b77946509953e"
+      },
+      {
+        "path": "src/SESSIONS/roblox-grade9-kilo/keepalive-LD11.sh",
+        "bytes": 928,
+        "sha256": "087566de21b75e1f540759e920a7e3d73f55f5f8750cb2a65f1141b83804a68c"
+      },
+      {
+        "path": "src/SESSIONS/roblox-grade9-kilo/lane-full.json",
+        "bytes": 1469,
+        "sha256": "1d58e2078e4f8a1c15e8deb24dd66db1f1ec98c483701335301105eac90c0f24"
+      },
+      {
+        "path": "src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11.mjs",
+        "bytes": 10169,
+        "sha256": "1e2f83f75c3b910292d7b8b54e929841398914e91b2d8a99e0e92125be93672c"
+      },
+      {
+        "path": "src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v10-gated.mjs",
+        "bytes": 18017,
+        "sha256": "45f8a40f487cc8e19f5a69a83dbf2da3c019db96c6bbe0e4ad6f1855c55da3b5"
+      },
+      {
+        "path": "src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v11-audit.mjs",
+        "bytes": 18038,
+        "sha256": "e32482c41706aae0a41aa5b7f02a24e9681ab8ca1bdd2b8201419ec7f81bcf18"
+      },
+      {
+        "path": "src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v12-flip.mjs",
+        "bytes": 18704,
+        "sha256": "dc7ef763fa67b1b49d006f53ac087efd1fc16d848081e82389b6ca77fc65c984"
+      },
+      {
+        "path": "src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v2.mjs",
+        "bytes": 10089,
+        "sha256": "6b893fbe0a0fe3052459c2093b5ce72c1fe7f1488e560a4f172698dea114ec42"
+      },
+      {
+        "path": "src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v3.mjs",
+        "bytes": 12825,
+        "sha256": "625cbeb12c6123fd088d2339c411c4c40d793f56a22267d75bc052dd43d61ba0"
+      },
+      {
+        "path": "src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v4-loosened-r9.mjs",
+        "bytes": 12813,
+        "sha256": "151be637a06a44330c9c6089d34afef3567ce7e18793207b2522b52b6633d24d"
+      },
+      {
+        "path": "src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v5-envflip.mjs",
+        "bytes": 13131,
+        "sha256": "2c0fed20fd4d9ece868e5482f3c62794a6b55d2a05cf45c2d8948eb188d99986"
+      },
+      {
+        "path": "src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v6-livefree.mjs",
+        "bytes": 13653,
+        "sha256": "ce962cad8b0272614c30ae4f540d12e1742d72a96caf147fec5b27d3628bd3ab"
+      },
+      {
+        "path": "src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v7-hb-breaker.mjs",
+        "bytes": 14210,
+        "sha256": "d8bc4385725d44b6840b518b6f8e654b03d33167ad0d18ab290d51c83aa2d48e"
+      },
+      {
+        "path": "src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v8-resume.mjs",
+        "bytes": 15662,
+        "sha256": "8e473d9d129d6ae85a1467f2bbd84d8355e9c971b2e590ee79f73e7e304461d9"
+      },
+      {
+        "path": "src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v9-or-fallback.mjs",
+        "bytes": 17042,
+        "sha256": "3a81861ebc087f184f963b39d1a7945566898d8701a5eaefa1ba27880c12b71b"
+      },
+      {
+        "path": "src/SESSIONS/roblox-grade9-kilo/roblox-brief.txt",
+        "bytes": 538,
+        "sha256": "e85f5a4ed0cb068d9ebe627d1aed86eb28510deef60eec04fa8b21e6832e41d3"
+      },
+      {
+        "path": "src/SESSIONS/water-grade5-cycle/keepalive-WATER-auto.sh",
+        "bytes": 1604,
+        "sha256": "d15d8c51bf588329b9860974d09882634d0a21626daa24f53aba9886744001eb"
+      },
+      {
+        "path": "src/SESSIONS/water-grade5-cycle/keepalive-WATER.sh",
+        "bytes": 862,
+        "sha256": "e0eecdc0829b008887850584d737d5e1efdb2180c3bc644d8ff6bdff56d8e9be"
+      },
+      {
+        "path": "src/SESSIONS/water-grade5-cycle/lesson-driver-LD12-water.mjs",
+        "bytes": 15724,
+        "sha256": "396a6345493d626e7fd58303e0eedbd1fe4670fd2b2be6c0730d917c70a8e7b1"
+      },
+      {
+        "path": "src/SESSIONS/water-grade5-cycle/lesson-driver-LD12v10-gated.mjs",
+        "bytes": 18084,
+        "sha256": "dcbaa9e9ad178cd75f553eb5f801940b0c17c1e028463a7ef25882adaa90f65f"
+      },
+      {
+        "path": "src/SESSIONS/water-grade5-cycle/lesson-driver-LD12v11-audit.mjs",
+        "bytes": 18105,
+        "sha256": "f9de762310e7f6aeae82147c46b77db7da65b03b79a2f2c3538d9d76059b1624"
+      },
+      {
+        "path": "src/SESSIONS/water-grade5-cycle/lesson-driver-LD12v12-flip.mjs",
+        "bytes": 18771,
+        "sha256": "13a83fbd2cb53281bf4ea1a27e0b8344e8b47077a68fff655a1152cb93c1922f"
+      },
+      {
+        "path": "src/SESSIONS/water-grade5-cycle/lesson-driver-LD12v9-or-fallback.mjs",
+        "bytes": 17109,
+        "sha256": "289c847575822ff9a70b3842f20be8b66b81cb4ee9fc8106205cf631de9ad551"
+      },
+      {
+        "path": "src/SESSIONS/water-grade5-cycle/water-brief.txt",
+        "bytes": 404,
+        "sha256": "21664bbe43a6b9a8f68667119bfb0cbd24d8201b4f5c18d2bd301423e2032fbf"
       },
       {
         "path": "src/SOUL-VERBATIM-PORTALS-MAGIC-CHAT.md",
@@ -763,8 +1293,8 @@
       },
       {
         "path": "src/SPEC.md",
-        "bytes": 20421,
-        "sha256": "e4f6ba8d6a01be0773033a0b3da04f00dc9aaf31ed8d343167cbeef1ce0bd13f"
+        "bytes": 20481,
+        "sha256": "eed79fff36602d30e40d228b1ebcdf8dff17cc0d736c55c04362d34e9de8eeb0"
       },
       {
         "path": "src/STUDENT-EVALUATOR-ECOSYSTEM.md",
@@ -777,14 +1307,39 @@
         "sha256": "75d3309974a45dee9b3b325b27ddddfa091602b95a0eed5bf6543235335d7e04"
       },
       {
+        "path": "src/SYNCH.md",
+        "bytes": 26684,
+        "sha256": "ef6f77dcf2e6e988d206fc82005c987880b8609693ca7e3184e4679c1ae278c7"
+      },
+      {
         "path": "src/VAULT-RECOVERY.md",
         "bytes": 4467,
         "sha256": "6a9ca901ec0207dd0c166eb5b177af90a305fd736e3ed25303c8c1f362505e7c"
       },
       {
+        "path": "src/agent99-guardrails.md",
+        "bytes": 2166,
+        "sha256": "ac43d292e967b9f2ef80442f319d288a4346b5e6696c0084b8546cec3a432a96"
+      },
+      {
+        "path": "src/agent99-toolkit.md",
+        "bytes": 2313,
+        "sha256": "e6f6760d8fcb6c73c6a962aad9c4644f8ab04d190d442a613fa7e1431547438d"
+      },
+      {
+        "path": "src/agent99.md",
+        "bytes": 4841,
+        "sha256": "ebc3f0d06c4c312ad84552f5961995fde39c21cfa197db24eed35c0c5044cbdc"
+      },
+      {
         "path": "src/app.js",
-        "bytes": 623985,
-        "sha256": "1e3d670f1e6936d293874857e7bb9ef7cee714ffd914fc0dbfb4a71d6580b35f"
+        "bytes": 681726,
+        "sha256": "0d356e4b95ee6438e32ad239dbd1d9bbcf5be94f607343dbc1809583d59c0164"
+      },
+      {
+        "path": "src/archive.js",
+        "bytes": 28256,
+        "sha256": "c67fe3d6a7b34d5c9b973755d1cff85f50d48b239d8fa6bb4756d6afab2fa1a8"
       },
       {
         "path": "src/audio-split.js",
@@ -792,19 +1347,114 @@
         "sha256": "03a64ab16899d908cc2a137c36d59cbfc0223c55f13efb5db9ecd07c68aa3679"
       },
       {
+        "path": "src/auto.js",
+        "bytes": 3320,
+        "sha256": "5aa7cb470c639f7c5a41f42b4f9485e3d03e77a23e7d93fb53d65d5fe0589d66"
+      },
+      {
         "path": "src/background.js",
         "bytes": 17118,
         "sha256": "9f83d2c65b57d2c40439e3d1f209c9652f1e70337f8b2571528fc5a046c9086e"
       },
       {
+        "path": "src/boardroom-room.css",
+        "bytes": 4621,
+        "sha256": "24816eb9b1972a40b606ce9947a44b4a8ac58687fdf0353e2c6207b1126fa5a0"
+      },
+      {
+        "path": "src/boardroom-room.js",
+        "bytes": 54678,
+        "sha256": "87c62a9b029329e68e154f25bd4e489594d2debb591b8e79b8569a234287b903"
+      },
+      {
+        "path": "src/boardroom.js",
+        "bytes": 23322,
+        "sha256": "f02dc0b8982b14340ef1ebafb8e16295407db1c33763f2ed62b2818ab0e48f65"
+      },
+      {
+        "path": "src/boardroom/README.md",
+        "bytes": 1279,
+        "sha256": "f8bcc8e814977e157046fe4d71cd1ab62a27e5034d34f5b5441c11456b4c706d"
+      },
+      {
+        "path": "src/boardroom/memory/architect.md",
+        "bytes": 994,
+        "sha256": "11f3b9228ff21244794111432bb6ac544d2a41150a1772ee59b095bd37ad8bb9"
+      },
+      {
+        "path": "src/boardroom/memory/atoz.md",
+        "bytes": 908,
+        "sha256": "8bfa8be579fe8df72c8c2ac352dfc0c4265a2708831e3c01577994910457e12a"
+      },
+      {
+        "path": "src/boardroom/memory/ceo.md",
+        "bytes": 1041,
+        "sha256": "409622b5243abafce6222ad81305fc8ffccf633cd49e5051104cdc0a8cc666ed"
+      },
+      {
+        "path": "src/boardroom/memory/fsdev.md",
+        "bytes": 605,
+        "sha256": "701a90c5146ea3aa60088e690db12e91f6f1d7734ce8743c5ea82a8fcb5ade74"
+      },
+      {
+        "path": "src/boardroom/memory/pres.md",
+        "bytes": 855,
+        "sha256": "8603f42a0c848424425c6a2264a5aaa2fed93a66780d39fa3972715284f0deab"
+      },
+      {
+        "path": "src/boardroom/memory/systems.md",
+        "bytes": 959,
+        "sha256": "45f0d5bd5afbd4885d49b176412a0789057812e36cabc8ce9ea27556a7103ad9"
+      },
+      {
+        "path": "src/boardroom/memory/training.md",
+        "bytes": 877,
+        "sha256": "d8f8ad9647a4010c04766b90c177a727987991e56258f816ea16b982d5abb84c"
+      },
+      {
+        "path": "src/boardroom/seats/architect.md",
+        "bytes": 1571,
+        "sha256": "669ff85b173210786f2e98ace5fc34185caf7ef8032d79efcee36acc8efe4714"
+      },
+      {
+        "path": "src/boardroom/seats/atoz.md",
+        "bytes": 1597,
+        "sha256": "dc470e0241949f0c0c66ba71790a840be359756f1df9396ce73ec990a2b92519"
+      },
+      {
+        "path": "src/boardroom/seats/ceo.md",
+        "bytes": 2098,
+        "sha256": "059017a09e7923320c4b05e34277cdc5b4c5f8786b7fa66b88071ea38c7ce7c6"
+      },
+      {
+        "path": "src/boardroom/seats/fsdev.md",
+        "bytes": 1613,
+        "sha256": "56d55357463f9123931f3c9337955d885e34a4ff2d1af147de894e38a7d00fc1"
+      },
+      {
+        "path": "src/boardroom/seats/pres.md",
+        "bytes": 1762,
+        "sha256": "abb222b52d167874f770a89d44ddb83e72baf2d7fa0ede6940589948b27f00b8"
+      },
+      {
+        "path": "src/boardroom/seats/systems.md",
+        "bytes": 1645,
+        "sha256": "83ed4b51624b51981acb7d784060310df0952c4ecd4c7abbfb9159d1b1276698"
+      },
+      {
+        "path": "src/boardroom/seats/training.md",
+        "bytes": 1621,
+        "sha256": "f21bafc68de8e56bbeebe67dd5bb18206b4d3dad250767a5f146b8d6ec1f6d25"
+      },
+      {
         "path": "src/brain.js",
-        "bytes": 27091,
-        "sha256": "71713cf620c70b81ba8534ad49da078b3ebf9a2a5a0389c6a3062566c4f10590"
+        "bytes": 27729,
+        "sha256": "719616e57de16fadc3212695ffa10ec387b775b0f8398f32efc8f0390edcb2c1"
       },
       {
         "path": "src/brand.js",
-        "bytes": 292098,
-        "sha256": "66946da5ced08f2fb560f3610666bf901c27a8126f8fc57de04727ec2399f36b"
+        "bytes": 326183,
+        "sha256": "a51954ebce351161594123a81abe560ad5681fd8257de7a69a43b1406381920c"
       },
       {
         "path": "src/brand/assets/apex-anatomy.webp",
@@ -847,9 +1497,19 @@
         "sha256": "f5a2b19f3f888c5dbc35777ffddbaf63e14f344b507519106fdf41431c2e8a95"
       },
       {
+        "path": "src/brand/assets/art-earwave.webp",
+        "bytes": 40798,
+        "sha256": "d14c5e7afcc7997bf7742074185f99ec1a9b8f1cb31a765cf808f2ca05e06929"
+      },
+      {
         "path": "src/brand/assets/art-emblem.webp",
         "bytes": 281626,
         "sha256": "743594f519f1191d7499b96c50163fef4f064888c1105b102f21716688826229"
+      },
+      {
+        "path": "src/brand/assets/art-tigerface.webp",
+        "bytes": 251878,
+        "sha256": "7a57d60ecb58ce273aae7f7685f128ffbe6ae369440cfa7970a8e20e3a3d32a4"
       },
       {
         "path": "src/brand/assets/art-tigerkid.webp",
@@ -1097,6 +1757,321 @@
         "sha256": "45132caf098a02437bc019d79992143510d508bfdb5b608ac3935cce72032e28"
       },
       {
+        "path": "src/brand/assets/net-4pillars.webp",
+        "bytes": 42332,
+        "sha256": "865aea5cd872e3fda138343021f122d5caf72924ea316f413334de6d7d46fa1d"
+      },
+      {
+        "path": "src/brand/assets/net-cdx-01.webp",
+        "bytes": 77760,
+        "sha256": "a8b80affe6f7e15c54941f486413e60ea50df72cb76ddf942f2b55c53bd60dd9"
+      },
+      {
+        "path": "src/brand/assets/net-cdx-02.webp",
+        "bytes": 96528,
+        "sha256": "6974cb404e3f33a5c82a3986eea957f9dcf50a69e9a8d8bb81d4f33f01359396"
+      },
+      {
+        "path": "src/brand/assets/net-cdx-03.webp",
+        "bytes": 92268,
+        "sha256": "280088645167764a2956dd5d491e7b98709b3785439d0043730397983074de06"
+      },
+      {
+        "path": "src/brand/assets/net-cdx-04.webp",
+        "bytes": 80392,
+        "sha256": "a1175166d9c24d41787ef74907043f834700d3c0c2f2eb244073a1fed05a750e"
+      },
+      {
+        "path": "src/brand/assets/net-cdx-05.webp",
+        "bytes": 71506,
+        "sha256": "5df3d45e35caf15b01082ebad8a5da5b4807cf546841667ed0215b013ce978eb"
+      },
+      {
+        "path": "src/brand/assets/net-cdx-06.webp",
+        "bytes": 105754,
+        "sha256": "3b1179bc1a29f805341c7fafe923fc9e58255354435cf6cd76883c3dcc71ce5a"
+      },
+      {
+        "path": "src/brand/assets/net-cdx-07.webp",
+        "bytes": 81224,
+        "sha256": "e923219dff767fa3ca361b56f631823953b228e57d816ae28009377d88cc3f66"
+      },
+      {
+        "path": "src/brand/assets/net-cdx-08.webp",
+        "bytes": 91710,
+        "sha256": "396c382eabc9592bb8886c3c79e222a81a53009487ed0d7e339885ad74b35c3c"
+      },
+      {
+        "path": "src/brand/assets/net-cdx-09.webp",
+        "bytes": 79170,
+        "sha256": "0cdf1afbd8049de5a689edbc712bbd1d713885308a707e626cd29ff2a07bfc45"
+      },
+      {
+        "path": "src/brand/assets/net-cdx-10.webp",
+        "bytes": 88500,
+        "sha256": "80f46d8391ec619a8e398febbbff5c3b5ee834d55a73323aa2796c07e1aa6e4f"
+      },
+      {
+        "path": "src/brand/assets/net-cdx-11.webp",
+        "bytes": 128426,
+        "sha256": "4dfcbb6700dd40542f7b191a59a945018a6c7fee2e9d2adffad00f7a243fcc8d"
+      },
+      {
+        "path": "src/brand/assets/net-cdx-12.webp",
+        "bytes": 116078,
+        "sha256": "2ff9369798b2abed1942cba0a4e8002510decbaa49c6e7696db5a348544be9fc"
+      },
+      {
+        "path": "src/brand/assets/net-cdx-13.webp",
+        "bytes": 71692,
+        "sha256": "b6895d1e2288dbf1711a9cae6e03be7542c482f3e23fea457166df5de0d64209"
+      },
+      {
+        "path": "src/brand/assets/net-cdx-14.webp",
+        "bytes": 145082,
+        "sha256": "c0b81cba89e074f1cc60f76109a3f31cc9f2988d82719621ef1bf1ae5c2512be"
+      },
+      {
+        "path": "src/brand/assets/net-cdx-15.webp",
+        "bytes": 89190,
+        "sha256": "3f6ec904fbd8a3d94f330d4bd6d794cad224fcf6ce9f1944630db35eaa77c3a4"
+      },
+      {
+        "path": "src/brand/assets/net3-1hour.webp",
+        "bytes": 70394,
+        "sha256": "dcfc4ef0f55c5a720978ca5c02582268f4b1878917e84263e6cd4944a4a0c293"
+      },
+      {
+        "path": "src/brand/assets/net3-45-15.webp",
+        "bytes": 59568,
+        "sha256": "5bd9d1e0607a6ec8734fcb75496e5e88b13baf002c64c045c846ebbd6b9bf1e8"
+      },
+      {
+        "path": "src/brand/assets/net3-60-brain.webp",
+        "bytes": 78626,
+        "sha256": "e62610a35d9b9fe8bceb3c4d6f4b1f08db7248e837a72933561c9b1274bcc90c"
+      },
+      {
+        "path": "src/brand/assets/net3-60-input.webp",
+        "bytes": 92394,
+        "sha256": "a4f5b8ded14b9e2c33bb115a9d405894d0166fcd8e26cdbe11e40c0f6bbfc525"
+      },
+      {
+        "path": "src/brand/assets/net3-aipet-curve.webp",
+        "bytes": 55540,
+        "sha256": "ca442d61ec8f078c727c5e48e6796b0938489f8b7899b2e71dc2cee3cb5ce20f"
+      },
+      {
+        "path": "src/brand/assets/net3-foundations.webp",
+        "bytes": 192750,
+        "sha256": "14cdf03ce2d666fd7eb23fc83c4eec2bf255afd7ba11656ae305ebb7a21be217"
+      },
+      {
+        "path": "src/brand/assets/net3-gospel-law.webp",
+        "bytes": 180902,
+        "sha256": "a850ba65ca8f98f3b7c5e0bfa0c413c6894e3a354c5423b4f4bf0b68f0ec5af7"
+      },
+      {
+        "path": "src/brand/assets/net3-habit-donut.webp",
+        "bytes": 108548,
+        "sha256": "eed79183db6651a0e2dbd3d3b6590a9f3e070fc4ae927c5ecbfe7a633beb3db3"
+      },
+      {
+        "path": "src/brand/assets/net3-master-slide.webp",
+        "bytes": 124334,
+        "sha256": "3f186a057dd15cf12c03f82aa38a3312dfdcb7350e82f0fff1375fc3d7319cf2"
+      },
+      {
+        "path": "src/brand/assets/net3-permission.webp",
+        "bytes": 73442,
+        "sha256": "9dff944c5b93903f0436725ecbc05a36df2ca95020d45bd78de4789958418d4f"
+      },
+      {
+        "path": "src/brand/assets/net3-prison-table.webp",
+        "bytes": 114922,
+        "sha256": "46dfe8e5198b47f0a3de67a8b457e53f6812e1948ec72aea4707853e38f63e45"
+      },
+      {
+        "path": "src/brand/assets/net3-snowman.webp",
+        "bytes": 67208,
+        "sha256": "cdce9371684b11b3130fa2e0957b80307084ed4f1851436e5523e1ffda2aafc8"
+      },
+      {
+        "path": "src/brand/assets/net3-three-gears.webp",
+        "bytes": 86606,
+        "sha256": "4b5241c32ed5013b282de1df383a862bbd028c593e4ff1c576ea4b7298b72c88"
+      },
+      {
+        "path": "src/brand/assets/net3-tiger-engine.webp",
+        "bytes": 129740,
+        "sha256": "ba17ede044ee19c7b70695cffd43efc0d907057a7df0f21e38111f00274132b9"
+      },
+      {
+        "path": "src/brand/assets/net4-gears10553.webp",
+        "bytes": 60702,
+        "sha256": "cfcec0fa1b00612ef9e7a7311e1065c9a50d6348bb50865ee85ce319c1dcf12d"
+      },
+      {
+        "path": "src/brand/assets/net4-loudwrong.webp",
+        "bytes": 120258,
+        "sha256": "9f5d82ce640cf5a707b884be27bf3aaf0a47f40adf6d4fa36b0e551bb9914c72"
+      },
+      {
+        "path": "src/brand/assets/net4-pressure.webp",
+        "bytes": 102494,
+        "sha256": "e4c616b1da5ca480678eac31b487891a107567ebfcd185d8a90af80622b24c99"
+      },
+      {
+        "path": "src/brand/assets/net4-psychshift.webp",
+        "bytes": 101680,
+        "sha256": "5785b4ceb96d462da83cab9c7c4d77624ea5c13115a4b95b45a3fee42b75b7c7"
+      },
+      {
+        "path": "src/brand/assets/net5-60ear.webp",
+        "bytes": 120400,
+        "sha256": "d8b783ced0cdf585c20db7154738eb28e6ba52be7ba9b253bebf75725b79f7cc"
+      },
+      {
+        "path": "src/brand/assets/net5-advantage.webp",
+        "bytes": 123194,
+        "sha256": "191c36ff7fd0a53a2d0ff07495b2276ac9cf2b5cd725eb4d3e3dbb403a0903a5"
+      },
+      {
+        "path": "src/brand/assets/net5-aipet.webp",
+        "bytes": 102116,
+        "sha256": "1679305d94f2e4fd063fe5c61b354ba672810d27674458efe0d63b2eb4acda9c"
+      },
+      {
+        "path": "src/brand/assets/net5-cognitive.webp",
+        "bytes": 103534,
+        "sha256": "c6bad3b598f2de7ea4aa049fd5749cf1d4c2f6b081673bbf78cfb51dbb43ffe0"
+      },
+      {
+        "path": "src/brand/assets/net5-donut.webp",
+        "bytes": 118148,
+        "sha256": "235456ab367cfacdf96fdcc9fdf726775b2fc97d55cf06e022c1601d2dd74f7e"
+      },
+      {
+        "path": "src/brand/assets/net5-forgetcurve.webp",
+        "bytes": 97474,
+        "sha256": "69d5624b0ebec4e6bb88543e402478c4594be80eaa581d6d0d1ae27d1b7d9284"
+      },
+      {
+        "path": "src/brand/assets/net5-locked.webp",
+        "bytes": 109158,
+        "sha256": "5442298df36fa57ca51824bc7003afc51d1989b3602ac549d01fbf6ac943aa64"
+      },
+      {
+        "path": "src/brand/assets/netd-01.webp",
+        "bytes": 60766,
+        "sha256": "ecb0509eb8b0245d5015829821c5cac03f2ba429b8cda8a349b8313ff2f52b10"
+      },
+      {
+        "path": "src/brand/assets/netd-02.webp",
+        "bytes": 128858,
+        "sha256": "2ef5d72389dd8585f47a4fff45971bd08c4d3660754d94ffe6762753a1107956"
+      },
+      {
+        "path": "src/brand/assets/netd-03.webp",
+        "bytes": 71702,
+        "sha256": "ea8aa4be502312aee2637647b840550b077c0696ef00c97f74c50514eed41b56"
+      },
+      {
+        "path": "src/brand/assets/netd-04.webp",
+        "bytes": 93700,
+        "sha256": "5b05550cb5d1983b89b01e8f80f7795b9c9ac4a1ff344a09dd5d38cebac68d45"
+      },
+      {
+        "path": "src/brand/assets/netd-05.webp",
+        "bytes": 75280,
+        "sha256": "0cc1f5a0a1d0d123fb58550581a1adfe3eceecbaf109c36d620f9cd6a76412ed"
+      },
+      {
+        "path": "src/brand/assets/netd-06.webp",
+        "bytes": 95220,
+        "sha256": "00f50f5368def03e89cfd952213646136afbf9fb709d59b74730201aff90a2cd"
+      },
+      {
+        "path": "src/brand/assets/netd-07.webp",
+        "bytes": 72586,
+        "sha256": "3f0bf6fa82d1ea76e54e6dff43beb02fa2e0b83ed8350d61d04b59794ab8d478"
+      },
+      {
+        "path": "src/brand/assets/netd-08.webp",
+        "bytes": 90898,
+        "sha256": "c2ff63e3bcb38a11295974b8598063eb69bd060daa86e39819d140e08a487f20"
+      },
+      {
+        "path": "src/brand/assets/netd-09.webp",
+        "bytes": 133446,
+        "sha256": "5212fcf525040d367f54083698c1c96efdbdc71c057af4703fc86d24bac2a6a4"
+      },
+      {
+        "path": "src/brand/assets/netd-10.webp",
+        "bytes": 62666,
+        "sha256": "399969d1445b86bf6e45eb34cda34d1763d6a43827a0b53854182689d2c275e6"
+      },
+      {
+        "path": "src/brand/assets/netd-11.webp",
+        "bytes": 110598,
+        "sha256": "408131211d1d50e1f6cda7c7206c211718e96b5b4d42e5446532160bd648028c"
+      },
+      {
+        "path": "src/brand/assets/netd-12.webp",
+        "bytes": 72448,
+        "sha256": "fe9b28da050c6dab20b4f4b9d2191a73c7c8fe827fd19f508763468f2169e02a"
+      },
+      {
+        "path": "src/brand/assets/netd-13.webp",
+        "bytes": 75870,
+        "sha256": "68f1cb2014f7ec00d1b4e681b74ff56d4953d7d084d5c0c20ea7a49a1a01c0cd"
+      },
+      {
+        "path": "src/brand/assets/netd-14.webp",
+        "bytes": 167358,
+        "sha256": "6bf4c8869a82db928fc9e16388ef647fc49e2bc9ac333f8735c81b26b25d583c"
+      },
+      {
+        "path": "src/brand/assets/netx-coin.webp",
+        "bytes": 18522,
+        "sha256": "e93d39e6fbb795fdc64438367382be04cec512577d939cc5935bfda31e24f34e"
+      },
+      {
+        "path": "src/brand/assets/netx-cta.webp",
+        "bytes": 17666,
+        "sha256": "12ae1389af825a1249a376884b3c5c24e69dac2eedd1e4cc6e74032f658a4d0f"
+      },
+      {
+        "path": "src/brand/assets/netx-fig80.webp",
+        "bytes": 26974,
+        "sha256": "95d1412479e1deb398e9bf9e7d14f4af16ba1f8936567a15082c13599d4bba48"
+      },
+      {
+        "path": "src/brand/assets/netx-ladder.webp",
+        "bytes": 41062,
+        "sha256": "c6cb57bc7225fa0081ddc15b6b88d8e3e404015ee80e083d4980fbd216866d79"
+      },
+      {
+        "path": "src/brand/assets/netx-mousecage.webp",
+        "bytes": 84046,
+        "sha256": "34973337af1bbe84c496af0299f2bd00ef7abe223b2dd9615218e0942f7308b6"
+      },
+      {
+        "path": "src/brand/assets/netx-roartitle.webp",
+        "bytes": 18260,
+        "sha256": "b9b69372dcce6feb561a723e18748a57a122663862ffa2d5406d52b6d9215597"
+      },
+      {
+        "path": "src/brand/assets/netx-tigerhead.webp",
+        "bytes": 78604,
+        "sha256": "ddb682180005f4d45e703f9dc51f2997f711020c899d649f5b9289750d3a1e75"
+      },
+      {
+        "path": "src/brand/assets/netx-venn.webp",
+        "bytes": 20264,
+        "sha256": "10ac54ee3be2c8c47b0b9fe6855b387bce48bcf8e832e718332d1525b06dd321"
+      },
+      {
         "path": "src/brand/assets/phoenix.webp",
         "bytes": 96230,
         "sha256": "cfdfb1df4332030d3e48152bd6536d58b3df3089a785b997635db232108c4950"
@@ -1322,14 +2297,19 @@
         "sha256": "16b75b4d05b80596eaba4a6f279fe03576a923e4bf517975b1f519eeed7bf712"
       },
       {
+        "path": "src/brand/deck-map.json",
+        "bytes": 50141,
+        "sha256": "4b525c9fdf4d746f79ba3733951deb7862af4867ded97f5745334d550d9f35e1"
+      },
+      {
         "path": "src/canon/GOSPEL-999.md",
-        "bytes": 97379,
-        "sha256": "1ab2b8a6146429ae6aa0c7a11b59c714a57803901713c8edc369695375ec43b3"
+        "bytes": 101904,
+        "sha256": "3b852b2c1fffcd906391a051e0606f0de4a9dfa710cbdff0cde631c467cddfc5"
       },
       {
         "path": "src/canon/LEGIONNAIRE-FIELD-GUIDE.md",
-        "bytes": 76255,
-        "sha256": "50592248d517a59d960c228f6f9d16af048361b29333b9896a076fce5b802596"
+        "bytes": 79472,
+        "sha256": "98d784b12f547489a3e1aa71132c529dee6f8d1dc7e466c11f79f228d0df09ef"
       },
       {
         "path": "src/canon/NET-PET-AI-SECRETS-MANIFEST.md",
@@ -1343,13 +2323,13 @@
       },
       {
         "path": "src/cgn-node.js",
-        "bytes": 7115,
-        "sha256": "b3acb90f71c1aac5cac2bad205c967298746520919de7645185d69bd382b16c0"
+        "bytes": 7148,
+        "sha256": "4135c769225dafa69e33f010ea73cfb682e6067e27a6363c05543017ec1d1248"
       },
       {
         "path": "src/cgn.js",
-        "bytes": 14879,
-        "sha256": "3b4eee57c20e3176e1d64f91e4ea843c3318870374a86df31d8076e1678ba1f4"
+        "bytes": 15057,
+        "sha256": "0c81ac208ff3e71c18fcdeee7901bdab63332b26d9ee12fa2abeff466005d9ec"
       },
       {
         "path": "src/clients.js",
@@ -1410,6 +2390,11 @@
         "path": "src/constellation.js",
         "bytes": 33257,
         "sha256": "1c4c247db2175719b5bcd25096ece2ebfecaa0d3ddb18c539dec2c850518cd29"
+      },
+      {
+        "path": "src/copy.js",
+        "bytes": 30723,
+        "sha256": "afee7fa9bfc39aa3c25e6837ef6c3a93d1ff337433f55254e399016b55293608"
       },
       {
         "path": "src/curriculum.js",
@@ -1477,9 +2462,14 @@
         "sha256": "9eea11356c557524646826d846011a3d8a1693fd73dfc60f51ecd65af21a5078"
       },
       {
+        "path": "src/deck.js",
+        "bytes": 9000,
+        "sha256": "483fe9a82bb8e001beaba692079915c253cbd2153533f589eafd84c97d01212a"
+      },
+      {
         "path": "src/divisions.js",
-        "bytes": 49517,
-        "sha256": "60b30151f5be1c89e5ae9e63f73e58e1e71fc195e2b045a87ce031dfe3239c24"
+        "bytes": 55350,
+        "sha256": "702a987139a61f068be40a938a45a6acea33808cb502537eddb73885e154cda5"
       },
       {
         "path": "src/ecosystem.js",
@@ -1493,18 +2483,38 @@
       },
       {
         "path": "src/forge.js",
-        "bytes": 55316,
-        "sha256": "ab160e3961d69624dd8f69469efda185ec16abb4afa123621f4c6fcf5f871fcd"
+        "bytes": 67773,
+        "sha256": "f5660fda395a44b6d13e422197b3b991fc7b3fc028c6dac65c426dd866973eb0"
       },
       {
         "path": "src/freephoenix.js",
-        "bytes": 50928,
-        "sha256": "f5d8170b4d571013cdc5b8404338b62951b936a980ce0793cebca1b829bdfc00"
+        "bytes": 71457,
+        "sha256": "dae7e1c408190dccc82b236b0472c20d0e16d72537d238fe44b8331cad6d7543"
       },
       {
         "path": "src/freewire.js",
         "bytes": 31205,
         "sha256": "dfb645a6e967902deb604468155cfdf0fa621204afe30cc6058bf8ec1aa6ab3a"
+      },
+      {
+        "path": "src/gamedivision.js",
+        "bytes": 48620,
+        "sha256": "9d20fc5c9eb251dbb1b8cba6fe89e955f1b9204f797c1c90a560b22377796a03"
+      },
+      {
+        "path": "src/games-arsenal.js",
+        "bytes": 30698,
+        "sha256": "20a91ac6e7b0d0512036d26420d99de18ea535ead4b8661a2bd57924ac4e1d3c"
+      },
+      {
+        "path": "src/games-platform/BLUEPRINT.md",
+        "bytes": 4569,
+        "sha256": "e95e47d84fbaab12008ec5562b8798bfabc4b6f9b2b23f806e8ba6611097aba5"
+      },
+      {
+        "path": "src/games-platform/arena.html",
+        "bytes": 9118,
+        "sha256": "32b5d416676646401d7a046d5efca60a1c6d68ba4779550730961b2a7ced744a"
       },
       {
         "path": "src/generators/README.md",
@@ -1823,8 +2833,8 @@
       },
       {
         "path": "src/generators/site-builder/src/cgn-node.js",
-        "bytes": 7171,
-        "sha256": "4dab27364cd01acfc0fa04a7259aad31b22b88b794b466c8a665ea9aab740ce8"
+        "bytes": 7204,
+        "sha256": "43a7bb33eec2409c46de5fb8c03bc24d1ef8c754c19d5a83b71b4e5a4fc4e597"
       },
       {
         "path": "src/generators/site-builder/src/styles.css",
@@ -1888,8 +2898,8 @@
       },
       {
         "path": "src/generators/video-node/src/cgn-node.js",
-        "bytes": 7171,
-        "sha256": "257af4e930bd8223ad92f51471ecf71395dc98b9fbc10188f0914f91b2a2d538"
+        "bytes": 7204,
+        "sha256": "9681e96724f377ebb397dd89b5230c861d24ad5a4066c615217fb1673fc41634"
       },
       {
         "path": "src/generators/video-node/src/drop.js",
@@ -1953,8 +2963,8 @@
       },
       {
         "path": "src/ilog.js",
-        "bytes": 50748,
-        "sha256": "1eec9d2d2b1dd13d81b5faaafaa396b7b56ea34ce78c135eb0df832568a630c4"
+        "bytes": 54542,
+        "sha256": "c96ff13923a85e560353745700244f675ef3c6cab074a2f618a88291dbd02ce7"
       },
       {
         "path": "src/image-node/README.md",
@@ -1978,8 +2988,8 @@
       },
       {
         "path": "src/image-node/src/cgn-node.js",
-        "bytes": 7114,
-        "sha256": "70451178afeedc6f61caf783faa61e78d2fbe7dbc68aae4fda340cbef8cc6237"
+        "bytes": 7147,
+        "sha256": "c273709bebfcc33f4d3fa7b3185a029a813cd4c2cb233a68ef69279a2ff0229f"
       },
       {
         "path": "src/image-node/src/styles.css",
@@ -1992,14 +3002,34 @@
         "sha256": "d0c2adb35731a60a072c4d374370ac2fdbb61ebb2fb08e819c5f019f2a0de473"
       },
       {
+        "path": "src/lesson-arsenal.js",
+        "bytes": 26466,
+        "sha256": "68bd91eee745c5b5b1a78276137b18987cd57eeb7c2793077a17fa8cb6ff514f"
+      },
+      {
         "path": "src/lesson-forge.js",
         "bytes": 26686,
         "sha256": "a153ee5b403e52b6af7abbb6d227886bda926d89055fdc4713bfa2d7febcac59"
       },
       {
         "path": "src/lessons.js",
-        "bytes": 114314,
-        "sha256": "afbfb2ba3a85b8ef50f8e0288be8e990bdd02c197e87fefdc20c307bcdc745d8"
+        "bytes": 166764,
+        "sha256": "96af3889f825bac70cded68125885dfece66e264b700cf47dcfe3510824cc386"
+      },
+      {
+        "path": "src/lessons/fluency-plus-9-unit-3-lesson-7-sample-space-events.html",
+        "bytes": 73753,
+        "sha256": "9473097dd8efdfb9c8f15db70204d273ce545169971562479438e1354198eec6"
+      },
+      {
+        "path": "src/lessons/friends-plus-6-unit-3-lesson-1-wild-life-vocabulary.html",
+        "bytes": 71720,
+        "sha256": "3b595b270b69e65c2f502be5373ec7089f9c03023ed483a094a3bcecfad8d250"
+      },
+      {
+        "path": "src/lessons/friends-plus-6-unit-3-lesson-1-zoo-animals-new-words.html",
+        "bytes": 78283,
+        "sha256": "d5ab812352f7bd9a518810ad5726554952a87f17152fa2d56b8b2eb43a3bd45f"
       },
       {
         "path": "src/lessons/reference/NET-CLASSROOM-MANAGER.html",
@@ -2012,9 +3042,24 @@
         "sha256": "9e0f424c03c7189e9ea3c926473c554f7a959edfda152dfb98e54123b34b9d19"
       },
       {
+        "path": "src/lessons/reference/NET-Neon-City-Genesis.html",
+        "bytes": 40898,
+        "sha256": "e92b0ed0b05a70d8a4fc424c35eb770713b9bedf6bb78cdff5257def7d8f3bc1"
+      },
+      {
         "path": "src/lessons/reference/NET-Sarcasm-Academy.html",
         "bytes": 23693,
         "sha256": "e1ed37b1c901298a0fec234328e878ab03c6b7eb71c9f910e64cd350a8ef3464"
+      },
+      {
+        "path": "src/lessons/roblox-grade9-play-smart-stay-safe.html",
+        "bytes": 115769,
+        "sha256": "68ae0f2a7081dd66a7424056ba71841403f3e4ba3d2939be2a9fea3453911f5d"
+      },
+      {
+        "path": "src/lessons/speakers-training-say-it-loud.html",
+        "bytes": 140724,
+        "sha256": "892625f38864b64c87ea41df49657e622bc15e8943f2fc5f867d4fd80d7aff9e"
       },
       {
         "path": "src/lessons/specs/after-school-club-academy.spec.json",
@@ -2032,6 +3077,11 @@
         "sha256": "893ce6eb1e9cb0e8ead8f65ac560a2b1c8b5e6ec8feda404f46f489684b6e443"
       },
       {
+        "path": "src/lessons/specs/fp9-u3-l7-v2.spec.json",
+        "bytes": 41075,
+        "sha256": "92313032927290b866e7716551eff39004ca8d171a82c6d6628a97d42b5d7f51"
+      },
+      {
         "path": "src/lessons/specs/look4-function1-directions.spec.json",
         "bytes": 17112,
         "sha256": "c3f043969922e12714e7dfdb94c1ddc8e43fde7543a4b49005399cbadd0cdd44"
@@ -2042,24 +3092,44 @@
         "sha256": "639932e2265e554a662c7ea3ee235c16e87f8d0644b7c05b860497fdb588f5c0"
       },
       {
+        "path": "src/lessons/specs/roblox-grade9-safety.spec.json",
+        "bytes": 12741,
+        "sha256": "1f8f00c58692f707189f06991526cdfc357c8d9d444eab2ae7617cc4da285d7f"
+      },
+      {
+        "path": "src/lessons/specs/speakers-training-beginner.spec.json",
+        "bytes": 29628,
+        "sha256": "d854bd7ec2608321de5abd38257847b61a18f8edbd934a512e02f0b3fb57d69b"
+      },
+      {
         "path": "src/lessons/specs/world-music-academy.spec.json",
         "bytes": 19132,
         "sha256": "7a788ed7f6ca8edaf4193bc04714136a077034bad9a692bf1b5ec2050eb5710d"
       },
       {
+        "path": "src/market-campaign-scout.js",
+        "bytes": 3111,
+        "sha256": "35b09e88b380e0fe08bc0fcd28971a3b458f7bdb0b0b382b3fdba1777c9107a7"
+      },
+      {
         "path": "src/market.js",
-        "bytes": 27493,
-        "sha256": "f8469042fcba88b8d086e1b65d5777fc47d3a816a2f4446adebfd0e52dd30608"
+        "bytes": 27712,
+        "sha256": "7e71b7161ad534b660d223e0c322209b2e77ed2b20081fd4124395b7ca4a056e"
+      },
+      {
+        "path": "src/marketing/COPY-ARCHIVE.md",
+        "bytes": 9336,
+        "sha256": "6548b35d21f45db9c99cd58db9b908784a2b5032b203e39452dc3d3dcfe1e083"
       },
       {
         "path": "src/marketing/INGEST-LOG.md",
-        "bytes": 18579,
-        "sha256": "9d25d9c6c214555dbf01ce7b9f13cca0cec066cf7a561aa28a3a78d037b2e491"
+        "bytes": 33843,
+        "sha256": "90a8760b1cc174fe3d34949fc3ab9125b44a77cd80a32593111d2f8985f0ef79"
       },
       {
         "path": "src/marketing/MANIFEST.json",
-        "bytes": 55286,
-        "sha256": "5d1ed394d2315a9ed5e075946b7d8451dbaea868c29c35ea280cb7bb6a0cddef"
+        "bytes": 97026,
+        "sha256": "ac96ba6f9ba1561d6f97de96e637076bd2170a23357d02f7797b16a3c8948d27"
       },
       {
         "path": "src/marketing/OPEN-SOURCE-PLAY.md",
@@ -2083,8 +3153,63 @@
       },
       {
         "path": "src/masterlink.js",
-        "bytes": 27460,
-        "sha256": "e39bed8cf35013c23008b77c957da75149212607f806c7b4f7774ecd57e8336c"
+        "bytes": 30351,
+        "sha256": "c7d8b61fed1c4d5697d0244d93da53431664863ac3786a056bfb7e17abd29335"
+      },
+      {
+        "path": "src/masterminds/README.md",
+        "bytes": 537,
+        "sha256": "e37ecfd1fca313d6c8924b6051c51cf435fef71f91c95a776038229d399dc17f"
+      },
+      {
+        "path": "src/masterminds/edtech.md",
+        "bytes": 524,
+        "sha256": "3b10087ed450e7e16c3a06bd9fbe3928d760caf4ea1c98b1ae19ddde26245fb6"
+      },
+      {
+        "path": "src/masterminds/gaming.md",
+        "bytes": 1652,
+        "sha256": "f44a2c173bfafba1b139ed8ad747770a8b252f86a0a01ccdab8360b58cdb6deb"
+      },
+      {
+        "path": "src/masterminds/lineup-2026-10-16.md",
+        "bytes": 15238,
+        "sha256": "54825debf78b924fb56b06a0eea712b4ae23c0f7ce5501f5caa7c6fac8330106"
+      },
+      {
+        "path": "src/masterminds/promote.md",
+        "bytes": 1252,
+        "sha256": "bfa94fd22b177a728f083db258a366d3e1ce5d8d68e52a7dd7b7b9912869f00d"
+      },
+      {
+        "path": "src/masterminds/rename-create-specs.md",
+        "bytes": 1643,
+        "sha256": "9188a4821c4bd25fab81a15e2968ec7b7eae5f42fdd1c1e4f800669390b4a1b3"
+      },
+      {
+        "path": "src/mcp-server/DEPLOY.md",
+        "bytes": 4290,
+        "sha256": "ba9b10e1d601af279cc8551df8dc0299ba92ce5a65aa8f5a30b6ba98a346e607"
+      },
+      {
+        "path": "src/mcp-server/package.json",
+        "bytes": 124,
+        "sha256": "1761573e6642ee00f01d647b5de1087ea50e82a42fe7c42a08b4bc7d55f16a2e"
+      },
+      {
+        "path": "src/mcp-server/worker.js",
+        "bytes": 19933,
+        "sha256": "c8651878043ae58b0cca7c8a6a6d7dd3cf4ea7a11256c91ca5e81f38da5a3671"
+      },
+      {
+        "path": "src/mcp-server/wrangler.toml",
+        "bytes": 741,
+        "sha256": "32ced8fda5c0026fb30d6027700e8bfc95bd018b4cfc4f3521a8b9ebfcecea72"
+      },
+      {
+        "path": "src/mcp-tools.js",
+        "bytes": 19715,
+        "sha256": "c8147686d6ea0ea4a3cb2bf6774dafb6361e4bae7bdbe4cb191ae1bba2011a3f"
       },
       {
         "path": "src/offer-desk/README.md",
@@ -2133,8 +3258,8 @@
       },
       {
         "path": "src/pheromone.js",
-        "bytes": 12000,
-        "sha256": "dcb21400f889c3d50eb2953c3bc24ecc1806771102ce42515ba62142e6c0d1b2"
+        "bytes": 12249,
+        "sha256": "65be63ebb12c5f5666b462f3b2277aba4b3959ecbb9eafb91e6e5c422658b7e9"
       },
       {
         "path": "src/playbooks.js",
@@ -2143,13 +3268,23 @@
       },
       {
         "path": "src/relay.js",
-        "bytes": 40340,
-        "sha256": "ea7d84605de2d3cbe2832adaed93e444f75715f2a766ece81073ddc358ad33a5"
+        "bytes": 40558,
+        "sha256": "879c9edbe725d77ddea5d36dc5e70bcacd3da34f41867831b468552dc2bf134e"
+      },
+      {
+        "path": "src/research/gemini-free-stack-2026-10-16.md",
+        "bytes": 4766,
+        "sha256": "f01eeb0dc486415ad91e3990f5d01848036ea96e2b08b90adeda58561ae512c8"
       },
       {
         "path": "src/review.js",
         "bytes": 40678,
         "sha256": "e234c705eb42afb451e73a973eeb13c3f5b56f7cae4dfe73c75294d3abd3bcb8"
+      },
+      {
+        "path": "src/roam.js",
+        "bytes": 17399,
+        "sha256": "1249a26abf16bf17fecb4532661ce0cb0aa66ef375d0720f754f6c15229b539b"
       },
       {
         "path": "src/rubric.js",
@@ -2163,13 +3298,13 @@
       },
       {
         "path": "src/scout.js",
-        "bytes": 42021,
-        "sha256": "6818b74dd74453891572691570aa4fb3667f179aff80845ec9aca7727cb1583f"
+        "bytes": 42075,
+        "sha256": "3e1fdfa4cfc7f2c701a10eafecf6bd5456512adf11b03a26f87bdc911abedade"
       },
       {
         "path": "src/scs.js",
-        "bytes": 83231,
-        "sha256": "585477410fcab4129b31e150bfde2a7268c016d840ed3c775ef1ac96329c716d"
+        "bytes": 84283,
+        "sha256": "0c099a20d9b3014c4ada8cda2b2202a736348594cacd25bcc729e26f91d8ca90"
       },
       {
         "path": "src/secretsauce.js",
@@ -2392,9 +3527,144 @@
         "sha256": "215d5cb58056a9508e8fec6a2e7de01eea5ddf43808a430f1396b00925e930b6"
       },
       {
+        "path": "src/sites/net/CODEX.md",
+        "bytes": 6573,
+        "sha256": "7a0747c5419754ef0b82db83a3eb0af6c2f15631b5b4906f67c1b17fad1a5dfc"
+      },
+      {
+        "path": "src/sites/net/CREATIVES.md",
+        "bytes": 4695,
+        "sha256": "5e37d8949e4e1373b4b3ef5e1a6b11b631973636b25495df5512b77719ba3948"
+      },
+      {
+        "path": "src/sites/net/HANDOFF.md",
+        "bytes": 2534,
+        "sha256": "e0be9e68662eccbaaf962bda792850dc9b555180e8e19331c1eeb86a69b6357b"
+      },
+      {
+        "path": "src/sites/net/SOUL.md",
+        "bytes": 1598,
+        "sha256": "8bb9b6d05f12b084191aafca25acd80e58bf3f754ac3d79ff348a65acdf39f4e"
+      },
+      {
+        "path": "src/sites/net/material/NET_Marketing_Codex_2_.pdf",
+        "bytes": 17134520,
+        "sha256": "c74eea55e3261b1c35aa934a4f625fb91e031184e361260e4db029460435f760"
+      },
+      {
+        "path": "src/sites/net/material/Screenshot_20261021_000058_Notebook.jpg",
+        "bytes": 734339,
+        "sha256": "28471ed78622e08fcb7f69814c10556134a3edcd4cb4a3c3cce77271fcaaf902"
+      },
+      {
+        "path": "src/sites/net/material/Screenshot_20261021_000058_Notebook_2.jpg",
+        "bytes": 308851,
+        "sha256": "fdbdf26863d3f551fdd03e22be116fdc96860b054f2733a18e1cbaf05b63bb1c"
+      },
+      {
+        "path": "src/sites/net/material/Screenshot_20261021_000128_Notebook.jpg",
+        "bytes": 349857,
+        "sha256": "7089497cc7c4d14961d14cebc418ca3cb5604d88c95bd248d96a790eca744f50"
+      },
+      {
+        "path": "src/sites/net/material/Screenshot_20261021_000128_Notebook_2.jpg",
+        "bytes": 97405,
+        "sha256": "336fe5be00cb17e52dab36c03dfc5757f26d6d32f14b6fff6b103f18ad92b61b"
+      },
+      {
+        "path": "src/sites/net/material/Screenshot_20261021_000212_Notebook.jpg",
+        "bytes": 732699,
+        "sha256": "a2f0aa79882f139c1302fdae2bcbd0e5721bec32ff1dff40909a63d8852eda55"
+      },
+      {
+        "path": "src/sites/net/material/Screenshot_20261021_000212_Notebook_2.jpg",
+        "bytes": 329205,
+        "sha256": "6b2c319518078fe35a14e597a2c26a1e692c770e617b1f73dffbf0fb6b71d1ea"
+      },
+      {
+        "path": "src/sites/net/material/Screenshot_20261021_000338_Notebook.jpg",
+        "bytes": 799844,
+        "sha256": "fdab0946ede67ec2f3b3e87bda52761d57ac8a94ef707a992dc972b6a005e96c"
+      },
+      {
+        "path": "src/sites/net/material/Screenshot_20261021_000400_Notebook.jpg",
+        "bytes": 848817,
+        "sha256": "2bec26ee3d6290851bba66bc9fa3ef4775a599f9285c533059b864aac4f763c2"
+      },
+      {
+        "path": "src/sites/net/material/Screenshot_20261021_000400_Notebook_2.jpg",
+        "bytes": 374621,
+        "sha256": "0a63531d41c529777b320b735330b79232890beefa2d82135d3271953fc1bd07"
+      },
+      {
+        "path": "src/sites/net/material/Screenshot_20261021_003116_Notebook.jpg",
+        "bytes": 782063,
+        "sha256": "ae5d73a5dafa8912ada754f2eb3e6ca51e780285851a0589568e4ae9bf401078"
+      },
+      {
+        "path": "src/sites/quan/about.html",
+        "bytes": 2844,
+        "sha256": "4b711154ee21906e9a0810e2891e30291240d5a9cfe59e283e1b625ba5980477"
+      },
+      {
+        "path": "src/sites/quan/assets/fine-wine-2.jpg",
+        "bytes": 173119,
+        "sha256": "46161645d02e5d906d33a6b136b2d6eb46417c3c224a7ab1ead032147055d68a"
+      },
+      {
+        "path": "src/sites/quan/assets/fine-wine.jpg",
+        "bytes": 131045,
+        "sha256": "199e852314f8c080cc3e2c6312c5849c693c7296c2785685e12ac9ba7ba95eee"
+      },
+      {
+        "path": "src/sites/quan/assets/natural-2.jpg",
+        "bytes": 106898,
+        "sha256": "bc35f9683d3220cec4147da1c09e4dc2ff30c3fcc4d240da269ca7982a85ca81"
+      },
+      {
+        "path": "src/sites/quan/assets/natural.jpg",
+        "bytes": 169588,
+        "sha256": "5c0af78224833b416fc8da5df4ba3ce5773c23493214fc6ff9393f61989321cb"
+      },
+      {
+        "path": "src/sites/quan/assets/plantie-2.jpg",
+        "bytes": 110328,
+        "sha256": "9b2bc4a0698bf3df60a33fc3d8c7bd5e207a3d74a5cf6acafae43a5e837f87ba"
+      },
+      {
+        "path": "src/sites/quan/assets/plantie.jpg",
+        "bytes": 120098,
+        "sha256": "e0e73af0af3573d833fafe2b1b4a038aa628c611847184dcf53b04e1aa4522ad"
+      },
+      {
+        "path": "src/sites/quan/assets/saigon-magazine.jpg",
+        "bytes": 153816,
+        "sha256": "bfc3ef32f8a0bef920b4da16339e151d3db24112d1582454926a980b7bad78ad"
+      },
+      {
+        "path": "src/sites/quan/connect.html",
+        "bytes": 2722,
+        "sha256": "7eea7888a588a86284c9bd990fd18c21894beeaa9f15f20300f01c43c21f880b"
+      },
+      {
+        "path": "src/sites/quan/dist.html",
+        "bytes": 23124,
+        "sha256": "b377481b7b3c47aa547edc8eac54d7f4bbae6bdb5020663102e346db4ee25fd3"
+      },
+      {
+        "path": "src/sites/quan/index.html",
+        "bytes": 9387,
+        "sha256": "32fe35ac51a181a509ca1dbc178b6d23675c830475c1d61f942efc8249e220d0"
+      },
+      {
+        "path": "src/sites/quan/style.css",
+        "bytes": 11446,
+        "sha256": "30d72c7a2f2ff0597e61e8532bb8a47efac1ad1168ce939c332ca9e48adea026"
+      },
+      {
         "path": "src/styles.css",
-        "bytes": 49435,
-        "sha256": "403ddded186826e58a9aed09dc08a14c141348efdb24e7400062e33f841441f0"
+        "bytes": 56369,
+        "sha256": "69184ea1f2375276fab39da2e1a68b8ceee2518341879f0beb188b12c5b911ac"
       },
       {
         "path": "src/summary.js",
@@ -2407,36 +3677,81 @@
         "sha256": "d0cb9cce7a53a951622666cb1a155a0dc08b5e3c423438155febe842393c254a"
       },
       {
+        "path": "src/train67-campaign-scout.js",
+        "bytes": 4192,
+        "sha256": "52bc520b418d156e74fbd09d9d93541a9d709ae1e48f277b237a235713f3e853"
+      },
+      {
         "path": "src/transcribe.js",
         "bytes": 84421,
         "sha256": "c8897bed0e71ff1b7e551092c221bc1ef66831acc3416b7e047b6e0b1fd12a3e"
       },
       {
         "path": "src/vault.js",
-        "bytes": 84177,
-        "sha256": "4e9eb1e5fa866063dba66414235efefc473fa3dbce586681331c90e78633de4d"
+        "bytes": 86261,
+        "sha256": "18cace6d613115bc6bfa3e7c4696831a0e11cdd7809c88f0b4155dbc2ab6bf65"
       }
     ],
     "byTopLevel": {
+      "src/44.md": {
+        "files": 1,
+        "bytes": 692
+      },
+      "src/444.md": {
+        "files": 1,
+        "bytes": 652
+      },
+      "src/999.md": {
+        "files": 1,
+        "bytes": 715
+      },
       "src/AGENT99-OS.md": {
         "files": 1,
         "bytes": 18664
+      },
+      "src/BACKBURNER-LANES.md": {
+        "files": 1,
+        "bytes": 2917
+      },
+      "src/Backburner.md": {
+        "files": 1,
+        "bytes": 28076
+      },
+      "src/CAMPAIGNS/**": {
+        "files": 32,
+        "bytes": 317744
+      },
+      "src/COLLECTIVE.md": {
+        "files": 1,
+        "bytes": 8178
       },
       "src/COSTS.md": {
         "files": 1,
         "bytes": 8810
       },
+      "src/DOCTRINE-COPIES/**": {
+        "files": 12,
+        "bytes": 15136
+      },
+      "src/EMPIRE-MAP.md": {
+        "files": 1,
+        "bytes": 3029
+      },
       "src/HANDOFF.md": {
         "files": 1,
-        "bytes": 155356
+        "bytes": 160215
       },
       "src/LESSON-STANDARD.md": {
         "files": 1,
-        "bytes": 45485
+        "bytes": 59602
       },
       "src/MASTERMIND-SYNC-2026-09-23.md": {
         "files": 1,
-        "bytes": 19249
+        "bytes": 22161
+      },
+      "src/OMEGA2-phoenix-rising-ai-solutions-agent99-mastermind.md": {
+        "files": 1,
+        "bytes": 4031
       },
       "src/PHOENIXCOMMAND-BLUEPRINT.md": {
         "files": 1,
@@ -2444,7 +3759,7 @@
       },
       "src/PROPOSED-CANON.md": {
         "files": 1,
-        "bytes": 8795
+        "bytes": 15209
       },
       "src/ProposedG999.md": {
         "files": 1,
@@ -2452,15 +3767,15 @@
       },
       "src/README.md": {
         "files": 1,
-        "bytes": 188477
+        "bytes": 188782
       },
       "src/REPO.md": {
         "files": 1,
         "bytes": 9153
       },
       "src/SESSIONS/**": {
-        "files": 1,
-        "bytes": 33196
+        "files": 55,
+        "bytes": 9646977
       },
       "src/SOUL-VERBATIM-PORTALS-MAGIC-CHAT.md": {
         "files": 1,
@@ -2468,7 +3783,7 @@
       },
       "src/SPEC.md": {
         "files": 1,
-        "bytes": 20421
+        "bytes": 20481
       },
       "src/STUDENT-EVALUATOR-ECOSYSTEM.md": {
         "files": 1,
@@ -2478,45 +3793,85 @@
         "files": 1,
         "bytes": 14614
       },
+      "src/SYNCH.md": {
+        "files": 1,
+        "bytes": 26684
+      },
       "src/VAULT-RECOVERY.md": {
         "files": 1,
         "bytes": 4467
       },
+      "src/agent99-guardrails.md": {
+        "files": 1,
+        "bytes": 2166
+      },
+      "src/agent99-toolkit.md": {
+        "files": 1,
+        "bytes": 2313
+      },
+      "src/agent99.md": {
+        "files": 1,
+        "bytes": 4841
+      },
       "src/app.js": {
         "files": 1,
-        "bytes": 623985
+        "bytes": 681726
+      },
+      "src/archive.js": {
+        "files": 1,
+        "bytes": 28256
       },
       "src/audio-split.js": {
         "files": 1,
         "bytes": 25255
       },
+      "src/auto.js": {
+        "files": 1,
+        "bytes": 3320
+      },
       "src/background.js": {
         "files": 1,
         "bytes": 17118
       },
+      "src/boardroom-room.css": {
+        "files": 1,
+        "bytes": 4621
+      },
+      "src/boardroom-room.js": {
+        "files": 1,
+        "bytes": 54678
+      },
+      "src/boardroom.js": {
+        "files": 1,
+        "bytes": 23322
+      },
+      "src/boardroom/**": {
+        "files": 15,
+        "bytes": 19425
+      },
       "src/brain.js": {
         "files": 1,
-        "bytes": 27091
+        "bytes": 27729
       },
       "src/brand.js": {
         "files": 1,
-        "bytes": 292098
+        "bytes": 326183
       },
       "src/brand/**": {
-        "files": 103,
-        "bytes": 11210129
+        "files": 169,
+        "bytes": 17221484
       },
       "src/canon/**": {
         "files": 4,
-        "bytes": 188134
+        "bytes": 195876
       },
       "src/cgn-node.js": {
         "files": 1,
-        "bytes": 7115
+        "bytes": 7148
       },
       "src/cgn.js": {
         "files": 1,
-        "bytes": 14879
+        "bytes": 15057
       },
       "src/clients.js": {
         "files": 1,
@@ -2530,6 +3885,10 @@
         "files": 1,
         "bytes": 33257
       },
+      "src/copy.js": {
+        "files": 1,
+        "bytes": 30723
+      },
       "src/curriculum.js": {
         "files": 1,
         "bytes": 77098
@@ -2538,9 +3897,13 @@
         "files": 12,
         "bytes": 1515989
       },
+      "src/deck.js": {
+        "files": 1,
+        "bytes": 9000
+      },
       "src/divisions.js": {
         "files": 1,
-        "bytes": 49517
+        "bytes": 55350
       },
       "src/ecosystem.js": {
         "files": 1,
@@ -2552,19 +3915,31 @@
       },
       "src/forge.js": {
         "files": 1,
-        "bytes": 55316
+        "bytes": 67773
       },
       "src/freephoenix.js": {
         "files": 1,
-        "bytes": 50928
+        "bytes": 71457
       },
       "src/freewire.js": {
         "files": 1,
         "bytes": 31205
       },
+      "src/gamedivision.js": {
+        "files": 1,
+        "bytes": 48620
+      },
+      "src/games-arsenal.js": {
+        "files": 1,
+        "bytes": 30698
+      },
+      "src/games-platform/**": {
+        "files": 2,
+        "bytes": 13687
+      },
       "src/generators/**": {
         "files": 88,
-        "bytes": 1650012
+        "bytes": 1650078
       },
       "src/gitcanon.js": {
         "files": 1,
@@ -2572,15 +3947,19 @@
       },
       "src/ilog.js": {
         "files": 1,
-        "bytes": 50748
+        "bytes": 54542
       },
       "src/image-node/**": {
         "files": 6,
-        "bytes": 24792
+        "bytes": 24825
       },
       "src/intake.js": {
         "files": 1,
         "bytes": 88869
+      },
+      "src/lesson-arsenal.js": {
+        "files": 1,
+        "bytes": 26466
       },
       "src/lesson-forge.js": {
         "files": 1,
@@ -2588,19 +3967,23 @@
       },
       "src/lessons.js": {
         "files": 1,
-        "bytes": 114314
+        "bytes": 166764
       },
       "src/lessons/**": {
-        "files": 9,
-        "bytes": 220678
+        "files": 18,
+        "bytes": 825269
+      },
+      "src/market-campaign-scout.js": {
+        "files": 1,
+        "bytes": 3111
       },
       "src/market.js": {
         "files": 1,
-        "bytes": 27493
+        "bytes": 27712
       },
       "src/marketing/**": {
-        "files": 5,
-        "bytes": 100368
+        "files": 6,
+        "bytes": 166708
       },
       "src/master-link.json": {
         "files": 1,
@@ -2608,7 +3991,19 @@
       },
       "src/masterlink.js": {
         "files": 1,
-        "bytes": 27460
+        "bytes": 30351
+      },
+      "src/masterminds/**": {
+        "files": 6,
+        "bytes": 20846
+      },
+      "src/mcp-server/**": {
+        "files": 4,
+        "bytes": 25088
+      },
+      "src/mcp-tools.js": {
+        "files": 1,
+        "bytes": 19715
       },
       "src/offer-desk/**": {
         "files": 8,
@@ -2620,7 +4015,7 @@
       },
       "src/pheromone.js": {
         "files": 1,
-        "bytes": 12000
+        "bytes": 12249
       },
       "src/playbooks.js": {
         "files": 1,
@@ -2628,11 +4023,19 @@
       },
       "src/relay.js": {
         "files": 1,
-        "bytes": 40340
+        "bytes": 40558
+      },
+      "src/research/**": {
+        "files": 1,
+        "bytes": 4766
       },
       "src/review.js": {
         "files": 1,
         "bytes": 40678
+      },
+      "src/roam.js": {
+        "files": 1,
+        "bytes": 17399
       },
       "src/rubric.js": {
         "files": 1,
@@ -2644,23 +4047,23 @@
       },
       "src/scout.js": {
         "files": 1,
-        "bytes": 42021
+        "bytes": 42075
       },
       "src/scs.js": {
         "files": 1,
-        "bytes": 83231
+        "bytes": 84283
       },
       "src/secretsauce.js": {
         "files": 1,
         "bytes": 24556
       },
       "src/sites/**": {
-        "files": 43,
-        "bytes": 2369440
+        "files": 70,
+        "bytes": 25891476
       },
       "src/styles.css": {
         "files": 1,
-        "bytes": 49435
+        "bytes": 56369
       },
       "src/summary.js": {
         "files": 1,
@@ -2670,13 +4073,17 @@
         "files": 1,
         "bytes": 29582
       },
+      "src/train67-campaign-scout.js": {
+        "files": 1,
+        "bytes": 4192
+      },
       "src/transcribe.js": {
         "files": 1,
         "bytes": 84421
       },
       "src/vault.js": {
         "files": 1,
-        "bytes": 84177
+        "bytes": 86261
       }
     },
     "excludes": [
@@ -2714,8 +4121,8 @@
   "self": {
     "md": {
       "path": "src/sites/mailala/ASSET-MANIFEST.md",
-      "sha256": "1ecd1ca52b09045811f10f7ee3dbe3e8ad1cca2a87895a0b9ca201b3d1160730",
-      "bytes": 20533
+      "sha256": "112139f9b2028d63958c3206472ad1c81c2f86439a2dc37b160d873965194c87",
+      "bytes": 21793
     },
     "json": {
       "path": "src/sites/mailala/ASSET-MANIFEST.json",
@@ -2725,8 +4132,8 @@
   },
   "fontIds": "F-01 the CSS · F-02…F-10 the nine WOFF2 faces, in the order the linked CSS lists them",
   "revision": {
-    "at": "2026-09-28T10:13:22.840Z",
-    "of": "2026-09-28",
-    "why": "MECHANICAL, measured by the pass: 343 → 343 files, 20,579,453 → 20,579,828 B, tree a962262fc21795b7 → 9acbc758fbe46664 · nothing added · CHANGED src/app.js · nothing removed · 0 asset row(s) re-hashed, 34 unchanged. RATIONALE (the caller's own words): 2026-09-28 — THE FULL REINCARNATION, and the one defect it exposed: the canon's own STAGES table (src/scs.js · GOSPEL-999 §SYSTEM I) names Stage 6's command `/phoenixFORTIFY`, but only `/phoenixengineer` was routed — the station printed a command that answered 'Unknown command', so the loop could not be sealed through the name the station itself advertises. `/phoenixFORTIFY` and `/fortify` now reach ENGINEER. No audit, verdict or gate was changed: the loop was run through the station's own commands and measured — RISE/SCOUT/MARCH/SCHOLAR/SUPPLY/ENGINEER/DEATH all REAL, the seal IMPRESSED on Incarnate-5-Cycle, and the S2Pipeline still prints its GAP with every missing artifact named (6-AI TRUTH unbuilt, DO-SQLITE not the canon's stone fort, COMITATENSES never launched, DNA without blueprints)."
+    "at": "2026-11-04T12:16:26.294Z",
+    "of": "2026-11-04",
+    "why": "MECHANICAL, measured by the pass: 343 → 598 files, 20,579,828 → 61,440,985 B, tree 9acbc758fbe46664 → ac6f1e85d4284046 · ADDED src/44.md, src/444.md, src/999.md, src/BACKBURNER-LANES.md, src/Backburner.md, src/CAMPAIGNS/market-evidence/3d-character-gen.md, src/CAMPAIGNS/market-evidence/comparables.md, src/CAMPAIGNS/market-evidence/manifest.json, src/CAMPAIGNS/market-evidence/money-meta.md, src/CAMPAIGNS/market-evidence/refusals.md, src/CAMPAIGNS/market-evidence/retention-meta.md, src/CAMPAIGNS/market-evidence/seats.md, src/CAMPAIGNS/market-evidence/slang-freshness.md, src/CAMPAIGNS/market-research.md, src/CAMPAIGNS/train67-evidence/ASSET-MARCH-01.md, src/CAMPAIGNS/train67-evidence/CombatSystem.lua, src/CAMPAIGNS/train67-evidence/DevProductsConfig.lua, src/CAMPAIGNS/train67-evidence/ENGLISH-POWERUP-SPEC.md, src/CAMPAIGNS/train67-evidence/EnemyData.lua, src/CAMPAIGNS/train67-evidence/GAME-BIBLE-DEPLOY-STATUS-FINAL.md, src/CAMPAIGNS/train67-evidence/GO-NO-GO.md, src/CAMPAIGNS/train67-evidence/GamePassConfig.lua, src/CAMPAIGNS/train67-evidence/LAUNCH-STATUS-FINAL.md, src/CAMPAIGNS/train67-evidence/MonetizationServer.lua, src/CAMPAIGNS/train67-evidence/Mouse_A.lua, src/CAMPAIGNS/train67-evidence/QuestionBank.lua, src/CAMPAIGNS/train67-evidence/QuestionBankV2.lua, src/CAMPAIGNS/train67-evidence/README.md, src/CAMPAIGNS/train67-evidence/ReceiptRouter.lua, src/CAMPAIGNS/train67-evidence/ServerGateway.lua, src/CAMPAIGNS/train67-evidence/UnifiedClient.lua, src/CAMPAIGNS/train67-evidence/UnifiedServer.lua, src/CAMPAIGNS/train67-evidence/default.project.json, src/CAMPAIGNS/train67-evidence/deploy.yml, src/CAMPAIGNS/train67-evidence/manifest.json, src/CAMPAIGNS/train67-evidence/omega-text.txt, src/CAMPAIGNS/train67.md, src/COLLECTIVE.md, src/DOCTRINE-COPIES/BUDGETS.md, src/DOCTRINE-COPIES/DEPRECATION-POLICY.md, src/DOCTRINE-COPIES/EVAL-FRAMEWORK.md, src/DOCTRINE-COPIES/INCIDENT-RUNBOOK.md, src/DOCTRINE-COPIES/LFG-EVAL-STEP.md, src/DOCTRINE-COPIES/MODEL-REGISTRY.md, src/DOCTRINE-COPIES/PERMISSIONS-CAGE.md, src/DOCTRINE-COPIES/PROPOSED_FILES.md, src/DOCTRINE-COPIES/SDNAD-GATE.md, src/DOCTRINE-COPIES/SECRET-HANDLING.md, src/DOCTRINE-COPIES/SSM-NAMESPACE-BRIDGE.md, src/DOCTRINE-COPIES/VERSION-POLICY.md, src/EMPIRE-MAP.md, src/OMEGA2-phoenix-rising-ai-solutions-agent99-mastermind.md, src/SESSIONS/STAGE-PROTOCOL.md, src/SESSIONS/browser-memory-20261029/PUSH-URLS.json, src/SESSIONS/browser-memory-20261029/kv_ilog.json, src/SESSIONS/browser-memory-20261029/kv_mcp.json, src/SESSIONS/browser-memory-20261029/kv_rest.json, src/SESSIONS/browser-memory-20261029/kv_scout_scholar.json, src/SESSIONS/browser-memory-20261029/manifest-batch2.json, src/SESSIONS/browser-memory-20261029/manifest.json, src/SESSIONS/browser-memory-20261029/obi_ilog_full.jsonl.json, src/SESSIONS/browser-memory-20261029/obi_misc_local.json, src/SESSIONS/browser-memory-20261029/obi_rrl_backburner_ideas.json, src/SESSIONS/browser-memory-20261029/obi_scs.json, src/SESSIONS/browser-memory-20261029/obi_sdnad.json, src/SESSIONS/lesson-g1u4l3-20261028/LESSON-REPORT.md, src/SESSIONS/lesson-g1u4l3-20261028/LESSON-STATE.json, src/SESSIONS/lesson-g1u4l3-20261028/LESSON-SUMMARY.json, src/SESSIONS/lesson-g1u4l3-20261028/keepalive-LD6.sh, src/SESSIONS/lesson-g1u4l3-20261028/keepalive-LD9.sh, src/SESSIONS/lesson-g1u4l3-20261028/lesson-driver-LD10.mjs, src/SESSIONS/lesson-g1u4l3-20261028/lesson-driver-LD6.mjs, src/SESSIONS/lesson-g1u4l3-20261028/lesson-driver-LD7.mjs, src/SESSIONS/lesson-g1u4l3-20261028/lesson-g1u4l3.html, src/SESSIONS/lesson-g1u4l3-20261028/s1a-shell.html, src/SESSIONS/lesson-g1u4l3-20261028/s1b-shell.html, src/SESSIONS/lesson-g1u4l3-20261028/s2-r1.html, src/SESSIONS/lesson-g1u4l3-20261028/s3-r2.html, src/SESSIONS/lesson-g1u4l3-20261028/s4-r3.html, src/SESSIONS/lesson-g1u4l3-20261028/s5-r4.html, src/SESSIONS/lesson-g1u4l3-20261028/s6-r5.html, src/SESSIONS/lesson-g1u4l3-20261028/s7-r6.html, src/SESSIONS/roblox-grade9-kilo/keepalive-LD11-auto.sh, src/SESSIONS/roblox-grade9-kilo/keepalive-LD11.sh, src/SESSIONS/roblox-grade9-kilo/lane-full.json, src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11.mjs, src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v10-gated.mjs, src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v11-audit.mjs, src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v12-flip.mjs, src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v2.mjs, src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v3.mjs, src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v4-loosened-r9.mjs, src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v5-envflip.mjs, src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v6-livefree.mjs, src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v7-hb-breaker.mjs, src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v8-resume.mjs, src/SESSIONS/roblox-grade9-kilo/lesson-driver-LD11v9-or-fallback.mjs, src/SESSIONS/roblox-grade9-kilo/roblox-brief.txt, src/SESSIONS/water-grade5-cycle/keepalive-WATER-auto.sh, src/SESSIONS/water-grade5-cycle/keepalive-WATER.sh, src/SESSIONS/water-grade5-cycle/lesson-driver-LD12-water.mjs, src/SESSIONS/water-grade5-cycle/lesson-driver-LD12v10-gated.mjs, src/SESSIONS/water-grade5-cycle/lesson-driver-LD12v11-audit.mjs, src/SESSIONS/water-grade5-cycle/lesson-driver-LD12v12-flip.mjs, src/SESSIONS/water-grade5-cycle/lesson-driver-LD12v9-or-fallback.mjs, src/SESSIONS/water-grade5-cycle/water-brief.txt, src/SYNCH.md, src/agent99-guardrails.md, src/agent99-toolkit.md, src/agent99.md, src/archive.js, src/auto.js, src/boardroom-room.css, src/boardroom-room.js, src/boardroom.js, src/boardroom/README.md, src/boardroom/memory/architect.md, src/boardroom/memory/atoz.md, src/boardroom/memory/ceo.md, src/boardroom/memory/fsdev.md, src/boardroom/memory/pres.md, src/boardroom/memory/systems.md, src/boardroom/memory/training.md, src/boardroom/seats/architect.md, src/boardroom/seats/atoz.md, src/boardroom/seats/ceo.md, src/boardroom/seats/fsdev.md, src/boardroom/seats/pres.md, src/boardroom/seats/systems.md, src/boardroom/seats/training.md, src/brand/assets/art-earwave.webp, src/brand/assets/art-tigerface.webp, src/brand/assets/net-4pillars.webp, src/brand/assets/net-cdx-01.webp, src/brand/assets/net-cdx-02.webp, src/brand/assets/net-cdx-03.webp, src/brand/assets/net-cdx-04.webp, src/brand/assets/net-cdx-05.webp, src/brand/assets/net-cdx-06.webp, src/brand/assets/net-cdx-07.webp, src/brand/assets/net-cdx-08.webp, src/brand/assets/net-cdx-09.webp, src/brand/assets/net-cdx-10.webp, src/brand/assets/net-cdx-11.webp, src/brand/assets/net-cdx-12.webp, src/brand/assets/net-cdx-13.webp, src/brand/assets/net-cdx-14.webp, src/brand/assets/net-cdx-15.webp, src/brand/assets/net3-1hour.webp, src/brand/assets/net3-45-15.webp, src/brand/assets/net3-60-brain.webp, src/brand/assets/net3-60-input.webp, src/brand/assets/net3-aipet-curve.webp, src/brand/assets/net3-foundations.webp, src/brand/assets/net3-gospel-law.webp, src/brand/assets/net3-habit-donut.webp, src/brand/assets/net3-master-slide.webp, src/brand/assets/net3-permission.webp, src/brand/assets/net3-prison-table.webp, src/brand/assets/net3-snowman.webp, src/brand/assets/net3-three-gears.webp, src/brand/assets/net3-tiger-engine.webp, src/brand/assets/net4-gears10553.webp, src/brand/assets/net4-loudwrong.webp, src/brand/assets/net4-pressure.webp, src/brand/assets/net4-psychshift.webp, src/brand/assets/net5-60ear.webp, src/brand/assets/net5-advantage.webp, src/brand/assets/net5-aipet.webp, src/brand/assets/net5-cognitive.webp, src/brand/assets/net5-donut.webp, src/brand/assets/net5-forgetcurve.webp, src/brand/assets/net5-locked.webp, src/brand/assets/netd-01.webp, src/brand/assets/netd-02.webp, src/brand/assets/netd-03.webp, src/brand/assets/netd-04.webp, src/brand/assets/netd-05.webp, src/brand/assets/netd-06.webp, src/brand/assets/netd-07.webp, src/brand/assets/netd-08.webp, src/brand/assets/netd-09.webp, src/brand/assets/netd-10.webp, src/brand/assets/netd-11.webp, src/brand/assets/netd-12.webp, src/brand/assets/netd-13.webp, src/brand/assets/netd-14.webp, src/brand/assets/netx-coin.webp, src/brand/assets/netx-cta.webp, src/brand/assets/netx-fig80.webp, src/brand/assets/netx-ladder.webp, src/brand/assets/netx-mousecage.webp, src/brand/assets/netx-roartitle.webp, src/brand/assets/netx-tigerhead.webp, src/brand/assets/netx-venn.webp, src/brand/deck-map.json, src/copy.js, src/deck.js, src/gamedivision.js, src/games-arsenal.js, src/games-platform/BLUEPRINT.md, src/games-platform/arena.html, src/lesson-arsenal.js, src/lessons/fluency-plus-9-unit-3-lesson-7-sample-space-events.html, src/lessons/friends-plus-6-unit-3-lesson-1-wild-life-vocabulary.html, src/lessons/friends-plus-6-unit-3-lesson-1-zoo-animals-new-words.html, src/lessons/reference/NET-Neon-City-Genesis.html, src/lessons/roblox-grade9-play-smart-stay-safe.html, src/lessons/speakers-training-say-it-loud.html, src/lessons/specs/fp9-u3-l7-v2.spec.json, src/lessons/specs/roblox-grade9-safety.spec.json, src/lessons/specs/speakers-training-beginner.spec.json, src/market-campaign-scout.js, src/marketing/COPY-ARCHIVE.md, src/masterminds/README.md, src/masterminds/edtech.md, src/masterminds/gaming.md, src/masterminds/lineup-2026-10-16.md, src/masterminds/promote.md, src/masterminds/rename-create-specs.md, src/mcp-server/DEPLOY.md, src/mcp-server/package.json, src/mcp-server/worker.js, src/mcp-server/wrangler.toml, src/mcp-tools.js, src/research/gemini-free-stack-2026-10-16.md, src/roam.js, src/sites/net/CODEX.md, src/sites/net/CREATIVES.md, src/sites/net/HANDOFF.md, src/sites/net/SOUL.md, src/sites/net/material/NET_Marketing_Codex_2_.pdf, src/sites/net/material/Screenshot_20261021_000058_Notebook.jpg, src/sites/net/material/Screenshot_20261021_000058_Notebook_2.jpg, src/sites/net/material/Screenshot_20261021_000128_Notebook.jpg, src/sites/net/material/Screenshot_20261021_000128_Notebook_2.jpg, src/sites/net/material/Screenshot_20261021_000212_Notebook.jpg, src/sites/net/material/Screenshot_20261021_000212_Notebook_2.jpg, src/sites/net/material/Screenshot_20261021_000338_Notebook.jpg, src/sites/net/material/Screenshot_20261021_000400_Notebook.jpg, src/sites/net/material/Screenshot_20261021_000400_Notebook_2.jpg, src/sites/net/material/Screenshot_20261021_003116_Notebook.jpg, src/sites/quan/about.html, src/sites/quan/assets/fine-wine-2.jpg, src/sites/quan/assets/fine-wine.jpg, src/sites/quan/assets/natural-2.jpg, src/sites/quan/assets/natural.jpg, src/sites/quan/assets/plantie-2.jpg, src/sites/quan/assets/plantie.jpg, src/sites/quan/assets/saigon-magazine.jpg, src/sites/quan/connect.html, src/sites/quan/dist.html, src/sites/quan/index.html, src/sites/quan/style.css, src/train67-campaign-scout.js · CHANGED src/HANDOFF.md, src/LESSON-STANDARD.md, src/MASTERMIND-SYNC-2026-09-23.md, src/PROPOSED-CANON.md, src/README.md, src/SPEC.md, src/app.js, src/brain.js, src/brand.js, src/canon/GOSPEL-999.md, src/canon/LEGIONNAIRE-FIELD-GUIDE.md, src/cgn-node.js, src/cgn.js, src/divisions.js, src/forge.js, src/freephoenix.js, src/generators/site-builder/src/cgn-node.js, src/generators/video-node/src/cgn-node.js, src/ilog.js, src/image-node/src/cgn-node.js, src/lessons.js, src/market.js, src/marketing/INGEST-LOG.md, src/marketing/MANIFEST.json, src/masterlink.js, src/pheromone.js, src/relay.js, src/scout.js, src/scs.js, src/styles.css, src/vault.js · nothing removed · 2 asset row(s) re-hashed, 32 unchanged. RATIONALE (the caller's own words): step-0 vitals restore i-45: register stale since 2026-09-28 (31 changed, 255 unregistered per relay CENSUS HOLLOW); re-run to make CENSUS REAL before backlog lands"
   }
 }

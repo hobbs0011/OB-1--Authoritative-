@@ -1,30 +1,4 @@
-# I-LOG â€” the Command Station's operation record
-
-Written by the perchance generator (https://perchance.org/phoenix-ai-solutions-command-mastermind) on every operation it performs.
-It lives under the ONE authoritative repo â€” Phoenix-Rising-Ai-Solutions/OB-1--Authoritative- (branch master) â€” and
-nothing is written there without PHOENIXOMEGAPROTOCOL (Sov100's password, armed with /phoenixomegaprotocol; refusals are recorded).
-Companion of the canon I-LOG (the RRL vault, renamed **I-LOG (Incarnation Log)**, Schema V2 JSONL
-`content[].data.{text,tool,state}`, roles/colours per LFG Â§SCS: ğŸŸ£ SOUL Â· â¤ï¸ DNA Â· ğŸ’› REASON) which the
-VS Code station writes. That vault is on the **`canon` branch**, not `master`:
-`I-LOG-UNAUDITED/I-LOG-Incarnate-<N>-<topic>.txt` (+ `-COLORIZED.md` + `-STATS.json`), `RRL/`
-with its own INDEX.md, and the living pointer `PastLives/RRL-CURRENT.txt`. `rrl-*.jsonl` in this directory is this
-station's transcript in that same line shape; the operation chain below is the tamper-evident record of
-the stations' own actions. `/ilog pull` reads both branches back.
-
-Each line of `ilog-*.jsonl` is one entry:
-
-```json
-{ "v":1, "seg":1, "seq":1, "t":1758400000000, "iso":"2026-09-21T21:05:56.000Z", "run":1, "kind":"cmd",
-  "action":"ilog", "detail":"/ilog push", "result":"â€¦", "ok":true, "ms":12, "ref":null,
-  "prev":"â€¦", "hash":"â€¦", "alg":"sha-256", "stored":"kv" }
-```
-
-- `hash` = sha-256 over `JSON.stringify([v, seg, seq, t, run, kind, action, detail, result, ok, ms, ref, prev])`
-  where `ok` is 1/0 and `prev` is the previous entry's `hash` (chain). `stored`/`err`/anchors are outside the hash.
-- `seg` increments only on an explicit seal (`/ilog reset`), which never deletes: the sealed entries stay in the log.
-- `anchor-*.json` + `STATUS.md` are written at push time and name the head that was anchored by the commit.
-
-To verify a downloaded file: recompute the hash chain in order and compare to each `hash` field; then compare the
-chain head against the newest `anchor-*.json`. A commit is the only witness outside the browser.
-
-INDEX.md in this directory carries the same schema notes in whichever direction a reader arrives.
+ ³†¶‚¢išÔ­jØ¨Ê)z¶­Š‰ëyÊ+ujâ¶×§o+az—«r§qèêÚ¶Šá¶Úlÿú^­ÈZÇ¨®é†‡§‹¢²‰n¶*'±Ê&™©İ™«-z¹¢Ú'z÷«ÊŠ^­«b¢x­¥êß¢¹¬"Ùb½ë.×«¶4F®¶+ŠÖ­Š÷«zš†‡§‹b²)à$¨–ëb¢{?8@ºØh®+Z¶+Şn¶§rš²×«jwg¢Øb¬Â¸­µéí…êŞÂ+a¢ëOá!sŒ`DäÎâÒ¢ıtÒÊZ²Ì(­Ö«™çpŠØ¦,h™è¦º-¡Ê%­çî±©lj·«yÊ+uçB¢jZ*'¡ûayÆ§¢r8kayK½«¥¶·§jg ³†"w®v­Š‰Ë¢œ…éšWbR8ÒÜ¢{^×Zµ«^ÆÛh¢[-j×«¢W¬ıÊ%¢êì¥êËd‚I#”,3@D@8Ü!‰Èm…åR
+‡^²Ö­Š‰ğ®+^±8Z¶ö®–Ø¬¢{ayÆ§¢vëjw!‹fjË^¬‚ÎC@P2?È,áˆÆ««^6Ú)‰Ëq·à,äHd@æwä“4£²‰ÑD¿ğŠØb¶Ê0œƒCyjwm…éb¾)à¦ˆ§µêÏjËKŠ÷¬ıK	DQÔíÆÚë–;(X§¶¬v*ŞrÚ+Ê+-†+,µ«b¢{-­©ìr¸©¶)í…«ljg¥Šw¬…ª^¶¨¥êÚ¶*'r¢·¥£¬¶­jj^­ëâuéí­ç(­Ú¶¬µ«b¢{(Âvœ¶*'³ø¥¢
+n–ZŞiÛ¢Ø[­©Ü…ëiÉiÈeŠw¨~)h‚;(X¬¢wÚòÊ'¿[ƒ[«[uïŸ8ÓM4ÓM4ŠÊ6Ón´÷mSÛ]9ç­4ÑšîŸY"×&u§-Š‰â–ˆzÖ¢—ø¥¢
+n²Ş²ém¢Kk¹é¬×jŞ~{¥–šŞ¾¬…©`²¶ç«-¢·’øZ²

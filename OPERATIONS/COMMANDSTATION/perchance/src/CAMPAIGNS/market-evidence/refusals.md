@@ -26,3 +26,11 @@ CCU/visits/favorites/maxPlayers/updated/genre per game) + game-page JSON-LD
   99 Nights 7954620867 → 404; Arsenal 2860904294 → 404; `steal-a-brainrot.fandom.com`
   → wiki does not exist; TSB fandom Gamepasses page → 200 but EMPTY (rev 0).
   Unresolved, rows withheld: 99 Nights, Steal a Brainrot, Piggy, Evade, Zombie Uprising.
+
+## 2026-10-30 — 4 of 5 resolved via public index + first-party confirm (station lane)
+- Rolimon's games index → place IDs (top-by-visits disambiguation, copycats rejected);
+  `games.roblox.com/v1/games?universeIds=` confirms universe + creator; page titles match.
+  Filed: `market-evidence/ids-resolved-20261030.md`.
+- Evade still withheld (only "Evade Testing" test place on the index).
+- `…/game-passes` still 404 on BOTH hosts for all 4 confirmed universes — Leg C
+  needs a logged-in session (phone browser lane). Rolimon's pass data is AJAX-only.

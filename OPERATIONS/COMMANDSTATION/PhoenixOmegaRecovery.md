@@ -1,63 +1,2 @@
-# Phoenix Omega Recovery
-
-Every reconciliation of the empire's shelves, marked down for the final sort-through.
-Newest last. A row is true because the browser that wrote it counted it.
-
-## 1 â€” 2026-10-18T06:14:16.332Z
-
-- what: seed â€” first shelf census (this browser)
-- keys: 16 data keys Â· 0.59 MB
-- sittings: 8
-- seats with memory: 6
-- note: backup file minted and handed over; gh+cf verified, R2 refused; other browsers pending import; final sort-through open
-
-## 2 â€” 2026-10-18T06:21:40.077Z
-
-- what: push â€” /gh backup under direct sovereign order (no gate password enrolled; logged, not hidden)
-- keys: 410/410 files Â· 0 failed
-- commit: 4f5ecf829557
-- note: session record + all sources (incl. 58 newly registered) + raw chat (scrubbed) + I-LOG (409) + PhoenixOmegaRecovery.md itself; mirror pruned 3 withdrawn paths
-
-## 3 â€” 2026-10-18T06:55:46.886Z
-
-- what: recommit â€” post-Save, with NSFW transfer rule + recovery coordination
-- keys: 410/410 files Â· 0 failed
-- commit: fd71826dc1d9
-- note:  Backup/Import now scrubs crude lines both ways (counted); PhoenixOmegaRecovery.md re-rendered; shelf census for the device merge
-
-## 4 â€” 2026-10-19T21:01:13.447Z
-
-- what: import
-- keys: 13/13 (data keys; 5 device keys kept live)
-- sittings: 8
-- seats with memory: 6
-- from: HQ v5 merged backup (A56 phone import)
-- note: soul 43 (37 command + 6 anakin) Â· SCS 3 (2 sealed) Â· RRL 4 incl anakin_run1 Â· ilog 423/c4efcd Â· pre-import snapshot kept in chat
-
-## 5 â€” 2026-10-19T21:19:14.103Z
-
-- what: ilog-repair
-- keys: kv wiped 14/14 Â· replayed 374/400
-- from: HQ v5 (A56)
-- note: seqs 24..423 verified Â· 1..23 digest-only Â· adopted seq 424
-
-## 6 â€” 2026-10-19T21:23:56.120Z
-
-- what: ilog-repair-2
-- keys: direct-set 26/26 scrubbed entries (220,221,222,223,225,226,227,230,231,232,233,236,242,243,244,265,273,274,275,285,286,287,289,290,291,390)
-- from: HQ v5 (A56)
-- note: links verify Â· own-hash mismatches = Oct-18 bundle redaction of burned tokens, content otherwise byte-faithful
-
-## 7 â€” 2026-10-19T21:29:08.473Z
-
-- what: pull
-- keys: soul +0 â†’ 44 | SCS +0 Â· sealed-upgraded 0 Â· kept 3 | boardroom +0 sittings | I-LOG kept local 427 Â· file 423/c4efcd534ce6 recorded | kept local: obi_playbook_supply, obi_recon, obi_client, obi_pheromones, obi_clients_adopted
-- from: HQ v5 merge (command 2026-10-18 + anakin soul 6 + RRL anakin_run1); built for A56 phone import into phoenix-ai-solutions
-- note: soul +0 Â· kept local 427 Â· file 423/c4efcd534ce6 recorded
-
-## 8 â€” 2026-10-19T21:29:27.020Z
-
-- what: push
-- keys: 14 keys
-- from: phoenix-ai-solutions-command-mastermind
-- note: soul 45 Â· ilog 430 Â· lane uploads (48 h)
+>ž,N™èEç(½êò÷«Ê·œ¢w"–&­Š‰è~Ø^zjb­ë,…éozÉš®GvŒ'~Ší…çâ©l¢»m†º.‚^Áë-•«-º0ŠËk¹æÞq«¬zØ^nº0±êí…«p®‹^Š×(º{^v+uÛMº×M|ONµã^·ßfp…«lyç_Š»-²¥}Ç§²ë-†+®Œ,z¹ÊÍzu«Z‘ì¬ÓŸLÈ­¶)à³ËjÛ0ŠØfzj+Ë©èµæÚrK©~)^š)íyÖ§v§uçh½êà‡ç½êâ~'GjÞ~ëv‹az¶ë£®Ê^Ø§‚)©¢»_Šv¥²Ší¶èºh¥éöÛMº×M|ON¶×4ï¶p…«iºÈ‚ÚrK©ºw^­Ø«yËl¢÷«z('¢·^®z j×©jË0¢·^žº%•çe¢vz-†']zyÊÎ5Óþ5Ñø¥zÍj)^uÊ&š+x—œÍ½çžç¢×¬zË"¢zÞrŠÝù©e²‹«që"Éyòw°—*Þ‚+-z·ú¶°r­±Êîm·ø‚Î=øøhzx±:g iœ¢÷«Êgb¶Ç¥~h«®Šé®éÞw|"¶kk	éjØlßm6ë]5ñ=:çž:óÎ™Â­­ç(šh­¦‹-I«ÞÂ+a5!V¶¶§±÷«®é^ú·œ¢÷«ÉÊ(­Ø§jØ¨žG²³tÿt~)^³GÚŠWr‰¦Š×Ýï_6é×5wÙèµàZrK©ü‰©¢»g£®æìr»zX§zÆè¶ÊÇ(º{^tøhzx±:g iœ¢÷«Êgkz·§uêÞvÈ^•÷žË¬~Ší…ç^¾'™êà{´Û­t×Ôö×MußŽ;gZ¶)©¢»d{+5ßýwu«Z‘ì¬å×¯‰Ç¤{+$z›eŠ÷¬ŠÛbž<±æ­³­†g¦¢¼º~º&ù™êàyÖÚrK©ž©†‰ÞŠjh®Ùèµë(º^7ß·(šf§wîš©" ’ßkjWEøŠw%jv¤ŠzîŸX¥¢6ß÷8y÷¦·¢šš+¶ÉÚ¦Èh¶G©¶)Ü…«yÛMº×M}Omu÷^5Óvp…«b–ˆ+z–¢®G²²KðŠ—×õâ·©•¬žw~øÿ4~º&ùž§¢×¬z«6ã·½êâ~'×mÝŠ¬¶‰åÉ§h¦×±ê¸ÛŽ¶ÓnµÓ_SÛ]·ç­vÑœ!jØ¥¢
+Þ¥¨«ÚG²±Ø«yËlzÝºÿn¬r»›mç^žÚâzÍ¶ÓmµÛm¶Û}¶çmºÛnößM·×möÛ}öß­¸Ûn7ÛŽ6ë»ßnøÛ¾vó¼ëo;ÛÏv÷M½×t~º&ùž§¢×¥Šy,½êâ*0ž¬†h¬™«\…ë

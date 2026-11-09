@@ -19,7 +19,17 @@
 
    The vault NEVER prints a secret — it prints a fingerprint (first4…last4 · len).
    Fail closed: a value that fails its own test is reported, never dressed up.
-   ========================================================================== */
+    ========================================================================== */
+    /* HARDENING 2026-11-06 (the vault wipe) — the standing wound this file now guards:
+      the agent once read "scrap the links" (NotebookLM links) as "purge every
+      credential" and wiped the whole browser store by hand, bypassing every
+      command below. So: (1) there is deliberately NO mass-wipe operation anywhere
+      in this file — any op shaped like one is refused outright; (2) /vault forget
+      is one slot per call AND two-step (arm in page memory, repeat the name back
+      with CONFIRM — a reload disarms it); (3) /vault export gives the sovereign a
+      passphrase-locked copy THEY hold, so no future wipe is unrecoverable.
+      The process half of the same fix lives in src/BOOT.md
+      (DESTRUCTIVE-ORDER PROTOCOL). */
 (function(){
   "use strict";
 
@@ -82,6 +92,9 @@
   function E(s){ return (typeof window.esc === "function") ? window.esc(s) : String(s == null ? "" : s); }
   function log(o){ try{ if(typeof window.logOp === "function") window.logOp(o); }catch(e){} }
   function dna(line){ try{ if(typeof window.rrlAppend === "function") window.rrlAppend(window.runNoOf ? window.runNoOf() : null, "DNA", line); }catch(e){} }
+  /* HARDENING 2026-11-06: two-step-forget arming lives ONLY in page memory —
+     never localStorage — so a reload disarms a half-finished forget. Fail closed. */
+  let pendingForget = null;
 
   /* ---------------------------------------------------------------------------
      THE ESCROW — so the crown jewel is never a single point of failure.
@@ -543,6 +556,14 @@
   async function cmd(arg){
     const parts = String(arg || "").trim().split(/\s+/);
     const op = (parts[0] || "status").toLowerCase();
+    /* HARDENING 2026-11-06: there is no mass-wipe operation in this vault, by
+       design — and none may be smuggled in later. Anything shaped like "forget
+       everything" is refused and pointed at per-slot forget. */
+    if(/^(wipe|dropall|clearall|resetall|purge|forgetall|removeall|deleteall|clear|reset)$/.test(op)){
+      bubble('⛔ There is no wipe-everything operation in this vault — deliberately (2026-11-06: one ambiguous order once purged the whole store). Remove slots <b>one at a time</b> with <b>/vault forget &lt;name&gt;</b> (two-step, confirmed).');
+      log({ kind:"secret", action:"vault mass-wipe refused", detail:"op=" + op, result:"refused" });
+      return;
+    }
 
     if(op === "set" || op === "add"){
       const local = (parts[1] || "").toLowerCase();
@@ -566,12 +587,86 @@
     }
     if(op === "forget" || op === "remove" || op === "delete"){
       const raw = (parts[1] || "").toLowerCase();
+      const extra = parts.slice(2).join(" ").trim();
+      /* HARDENING 2026-11-06 (the vault wipe): forget is ONE slot per call —
+         anything shaped like several names, or a bare CONFIRM without the name
+         repeated, is refused outright. Ambiguity deletes nothing. */
+      if(!raw || (extra && !/^confirm\s+\S+$/i.test(extra))){
+        bubble('🔐 <b>/vault forget</b> takes exactly one slot: <b>/vault forget &lt;name&gt;</b> — then repeat it back to confirm. Names: ' + NEEDED.map(x => x.local).join(", "));
+        return;
+      }
       const rr = rowOf(raw);
-      const local = rr ? rr.local : (parts[1] || "");
-      if(!local || !get(local)){ bubble('🔐 /vault forget &lt;name&gt; — nothing stored under that name.'); return; }
+      const local = rr ? rr.local : raw;
+      if(!local || !get(local)){ pendingForget = null; bubble('🔐 /vault forget &lt;name&gt; — nothing stored under that name.'); return; }
+      /* TWO-STEP: the first call only arms (page memory — a reload disarms it).
+         Nothing is deleted until the exact name comes back with CONFIRM. */
+      if(!extra){
+        pendingForget = local;
+        log({ kind:"secret", action:"vault forget armed for " + local, detail:"nothing deleted yet", result:"awaiting CONFIRM " + local });
+        dna("Obi: [/vault forget " + local + " — armed, awaiting CONFIRM]");
+        bubble('🔐 Forget <b>' + E(local) + '</b>? <b>Nothing is deleted yet.</b> To proceed, type <b>/vault forget ' + E(local) + ' CONFIRM ' + E(local) + '</b> — the name twice, on purpose. Anything else cancels.');
+        return;
+      }
+      const cn = extra.replace(/^confirm\s+/i, "").trim().toLowerCase();
+      if(cn !== local || pendingForget !== local){
+        pendingForget = null;
+        bubble('🔐 Not confirmed — the names did not match. <b>Nothing was deleted.</b> Start over with <b>/vault forget &lt;name&gt;</b>.');
+        return;
+      }
+      pendingForget = null;
       del(local); delete lastTest[local];
-      log({ kind:"secret", action:"vault forget " + local, detail:"removed from this browser", result:local + " gone locally" });
+      log({ kind:"secret", action:"vault forget " + local, detail:"removed from this browser (two-step confirmed)", result:local + " gone locally" });
+      dna("Obi: [/vault forget " + local + " — two-step confirmed, removed locally]");
       bubble('🔐 <b>' + E(local) + '</b> removed from this browser. (The sealed copy on the canon, if any, is untouched — /vault push rewrites it from local.)');
+      return;
+    }
+    /* HARDENING 2026-11-06: the user-held copy. /vault export encrypts the WHOLE
+       L1 store (AES-256-GCM, passphrase ≥16 chars, never stored/logged/sent) and
+       prints ONE ciphertext block to keep in a password manager. /vault import
+       restores it. Either direction fails closed; values are never printed. */
+    if(op === "export"){
+      const pass = parts.slice(1).join(" ").trim();
+      if(pass.length < 16){ bubble('⛔ <b>/vault export</b> needs a passphrase of at least <b>16 characters</b>: <b>/vault export &lt;passphrase&gt;</b>. It encrypts every key in this browser — a short phrase on a saved copy would become the weakest link. Nothing was exported.'); return; }
+      if(!subtle()){ bubble('⚠ This browser cannot derive keys (crypto.subtle is unavailable) — the export fails closed.'); return; }
+      try{
+        const salt = new Uint8Array(16); crypto.getRandomValues(salt);
+        const iv = new Uint8Array(12); crypto.getRandomValues(iv);
+        const key = await deriveKey(pass, salt, ESCROW_ITER);
+        const plain = new TextEncoder().encode(JSON.stringify(all()));
+        const ct = new Uint8Array(await subtle().encrypt({ name:"AES-GCM", iv:iv }, key, plain));
+        const ctb64 = b64u(ct);
+        const doc = { v:1, alg:"PBKDF2-SHA256-310k/AES-256-GCM", iter:ESCROW_ITER, salt:b64u(salt), iv:b64u(iv), ct:ctb64, at:new Date().toISOString(), slots:Object.keys(all()) };
+        const out = JSON.stringify(doc);
+        const fph = (await sha256hex(ctb64)).slice(0, 16);
+        bubble('<div class="rise"><div class="rhead">🔐 PrAis Vault — user-held copy</div>'
+          + '<div class="rrow"><b>CIPHERTEXT</b><span class="vd">SAVE THIS</span><div class="rd rd-mono">' + E(out) + '</div></div>'
+          + '<div class="rrow"><b>CHECK</b><span class="vd">' + E(fph) + '</span><div class="rd">' + doc.slots.length + ' slot(s): ' + E(doc.slots.join(", ") || "(empty store)") + ' · restore with <b>/vault import &lt;passphrase&gt; &lt;paste&gt;</b></div></div>'
+          + '<div class="rfoot">Keep it in your password manager — treat the saved copy like a password. It is useless without the passphrase, which lives only in your head. Nothing was sent anywhere.</div></div>', { meta:"SECRET" });
+        log({ kind:"secret", action:"vault export", detail:"user-held ciphertext (" + doc.slots.length + " slots, fp " + fph + ")", result:"shown to the sovereign" });
+        dna("Obi: [/vault export — user-held copy issued (" + doc.slots.length + " slots)]");
+      }catch(e){ bubble('⚠ The export could not be built: ' + E(String((e && e.message) || e)) + '. Nothing left this browser.'); }
+      return;
+    }
+    if(op === "import"){
+      const pass = (parts[1] || "").trim();
+      const blob = parts.slice(2).join("");
+      if(pass.length < 16 || !blob){ bubble('🔐 The shape is <b>/vault import &lt;passphrase&gt; &lt;paste-the-ciphertext&gt;</b> (the paste is one block, no spaces). Nothing was changed.'); return; }
+      let doc; try{ doc = JSON.parse(blob); }catch(e){ bubble('🔐 That paste is not a vault export block. Nothing was changed.'); return; }
+      if(!doc || doc.v !== 1 || !doc.salt || !doc.iv || !doc.ct){ bubble('🔐 That paste is not a vault export block. Nothing was changed.'); return; }
+      if(!subtle()){ bubble('⚠ This browser cannot derive keys — the import fails closed.'); return; }
+      try{
+        const key = await deriveKey(pass, unb64u(doc.salt), doc.iter || ESCROW_ITER);
+        const plain = await subtle().decrypt({ name:"AES-GCM", iv:unb64u(doc.iv) }, key, unb64u(doc.ct));
+        const obj = JSON.parse(new TextDecoder().decode(plain));
+        if(!obj || typeof obj !== "object" || Array.isArray(obj)) throw new Error("payload");
+        const clean = {}; for(const k of Object.keys(obj)){ if(typeof obj[k] === "string" && obj[k]) clean[k] = obj[k]; }
+        if(!Object.keys(clean).length){ bubble('🔐 The block opened, but it holds no usable slots. Nothing was changed.'); return; }
+        put(clean);
+        const fph = (await sha256hex(String(doc.ct))).slice(0, 16);
+        bubble('🔐 Restored <b>' + Object.keys(clean).length + '</b> slot(s): ' + E(Object.keys(clean).join(", ")) + ' · block fp ' + E(fph) + '. Run <b>/vault test all</b> to prove them live.');
+        log({ kind:"secret", action:"vault import", detail:"restored " + Object.keys(clean).length + " slots (values never logged)", result:Object.keys(clean).join(",") });
+        dna("Obi: [/vault import — " + Object.keys(clean).length + " slots restored]");
+      }catch(e){ bubble('🔐 Wrong passphrase or a damaged block — nothing was changed, nothing was logged.'); }
       return;
     }
     if(op === "test"){
@@ -1022,7 +1117,7 @@
       + (sealedBlob() ? '<div class="rrow"><b>SEALED HERE</b><span class="vd">' + (sealedBlob().n || "?") + ' SECRET</span><div class="rd">' + E(sealedBlob().text.length) + ' chars ciphertext · ready for <b>/vault push</b></div></div>' : "")
       + '<div class="rrow"><b>L3 LIVE</b><span class="vd">' + Object.keys(lastTest).length + ' TESTED</span><div class="rd">' + (Object.keys(lastTest).length ? E(Object.keys(lastTest).map(k => k + ":" + (lastTest[k].ok ? "ok" : "no")).join(" · ")) : "nothing tested yet this session") + '</div></div>'
       + '<div class="rrow"><b>GATE</b><span class="vd">' + (armed() ? "ARMED" : "LOCKED") + '</span><div class="rd">canon writes need PHOENIXOMEGAPROTOCOL (/phoenixomegaprotocol) · ' + (armed() ? "writes authorised" : "seal is free, push is gated") + '</div></div>'
-      + '<div class="rfoot"><b>/vault locate</b> (where the vault already is on git) · <b>/vault test [name|all]</b> (real calls) · <b>/vault set &lt;name&gt; &lt;value&gt;</b> · <b>/vault key</b> · <b>/vault seal</b> · <b>/vault push</b> · <b>/vault pull</b> · <b>/vault escrow &lt;passphrase&gt;</b> (make the private key recoverable) · <b>/vault recover &lt;passphrase&gt; [url]</b> · <b>/vault manifest</b>'
+      + '<div class="rfoot"><b>/vault locate</b> (where the vault already is on git) · <b>/vault test [name|all]</b> (real calls) · <b>/vault set &lt;name&gt; &lt;value&gt;</b> · <b>/vault key</b> · <b>/vault seal</b> · <b>/vault push</b> · <b>/vault pull</b> · <b>/vault escrow &lt;passphrase&gt;</b> (make the private key recoverable) · <b>/vault recover &lt;passphrase&gt; [url]</b> · <b>/vault manifest</b> · <b>/vault export &lt;passphrase&gt;</b> (your own recoverable copy — HARDENING 2026-11-06)'
       + '</div></div>';
   }
 

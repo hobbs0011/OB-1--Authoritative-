@@ -14,7 +14,7 @@
      GET  /health          — { ok, tools, cron, hasKeys (booleans only) }
      GET  /pulse?key=...  — manual pulse (needs RUNNER_KEY when set)
      POST /mcp            — initialize, tools/list, tools/call (gateway_chat,
-                            openrouter_chat, edtech_build-stub)
+                            openrouter_chat, edtech_build-stub, phone_drop, git_read)
      POST /run            — { key, prompt?, model?, max_tokens? } → one model
                             call + durable log line (needs RUNNER_KEY when set)
 
@@ -40,8 +40,10 @@ const PULSE_MAX_TOKENS = 60;
 const TOOL_DEFS = [
   { name: "gateway_chat", description: "Chat completion via the Kilo Gateway (free lane first, usage metered)", inputSchema: { type: "object", properties: { model: { type: "string" }, prompt: { type: "string" }, max_tokens: { type: "integer" } }, required: ["prompt"] } },
   { name: "openrouter_chat", description: "Chat via OpenRouter (DeepSeek Flash default, metered)", inputSchema: { type: "object", properties: { model: { type: "string" }, prompt: { type: "string" }, max_tokens: { type: "integer" } }, required: ["prompt"] } },
-  { name: "edtech_build", description: "Lesson build on the edtech desk (stub until the desk exposes a callable lane)", inputSchema: { type: "object", properties: { spec: { type: "object" } } } }
-];
+  { name: "edtech_build", description: "Lesson build on the edtech desk (stub until the desk exposes a callable lane)", inputSchema: { type: "object", properties: { spec: { type: "object" } } } },
+  { name: "phone_drop", description: "Inbox from the phone lane: store a report where the station reads it (git PHONE-DROPS). Args: tag (short id, lowercase letters/numbers/hyphens, max 40 chars), text (the report, max 50000 chars). Returns the git path it landed at.", inputSchema: { type: "object", properties: { tag: { type: "string" }, text: { type: "string" } }, required: ["tag", "text"] } },
+  { name: "git_read", description: "Read-only git lane for the box agent: read a file from OPERATIONS/COMMANDSTATION/ on master. Args: key (the RUNNER_KEY, box-held, never in chat), path (must start with OPERATIONS/COMMANDSTATION/; OPERATIONS/VAULT/ and secrets are refused), ref (default master). Max 200KB, text decoded. Returns {path, bytes, text}.", inputSchema: { type: "object", properties: { key: { type: "string" }, path: { type: "string" }, ref: { type: "string" } }, required: ["key", "path"] } }
+]; /* v0.4.0: +git_read (box read lane, keyed, allowlisted; Pro consult attempted x2, lane returned empty both times — proceeded on least-privilege judgment, logged) */
 
 function repoOf(env) {
   const full = String(env.GH_REPO || "Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-").trim();
@@ -108,6 +110,63 @@ function b64decode(b64) {
   const bytes = new Uint8Array(bin.length);
   for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
   return new TextDecoder().decode(bytes);
+}
+/* One file write to git (create-only, unique path per call — no read-modify-write,
+   so concurrent drops never collide). Used by the phone_drop inbox. */
+async function putFileToGitHub(env, path, text, message) {
+  const R = repoOf(env);
+  if (!R || !env.GH_TOKEN) return { ok: false, why: !R ? "no GH_REPO var" : "no GH_TOKEN secret" };
+  const url = "https://api.github.com/repos/" + R.owner + "/" + R.repo + "/contents/" + path + "?ref=" + encodeURIComponent(R.branch);
+  const h = { "authorization": "Bearer " + env.GH_TOKEN, "accept": "application/vnd.github+json", "content-type": "application/json", "user-agent": "pais-runner/1.0" };
+  let cur = null;
+  try {
+    const g = await fetch(url, { headers: h });
+    if (g.status === 200) { const j = await g.json(); cur = j.sha; }
+    else if (g.status !== 404) return { ok: false, why: "read HTTP " + g.status };
+  } catch (e) { return { ok: false, why: "read failed: " + e.message }; }
+  const body = { message: message, content: b64encode(text), branch: R.branch };
+  if (cur) body.sha = cur;
+  try {
+    const put = await fetch(url, { method: "PUT", headers: h, body: JSON.stringify(body) });
+    if (!put.ok && put.status !== 201 && put.status !== 200) return { ok: false, why: "write HTTP " + put.status };
+  } catch (e) { return { ok: false, why: "write failed: " + e.message }; }
+  return { ok: true, path: path };
+}
+/* Keyed read lane for the box agent. The key is the RUNNER_KEY worker secret —
+   box-held (placed by the sovereign's own hands, never in chat/source), same
+   guard as /run. The path allowlist is the real confinement: only
+   OPERATIONS/COMMANDSTATION/ on the requested ref, VAULT and dot-paths refused,
+   200KB cap so a runaway read can't bleed the lane. */
+async function gitRead(env, key, path, ref) {
+  if (!env.RUNNER_KEY) return { ok: false, why: "no RUNNER_KEY secret set — lane closed" };
+  if (key !== env.RUNNER_KEY) return { ok: false, why: "bad or missing key" };
+  path = String(path || "").replace(/^\/+/, "");
+  if (!/^OPERATIONS\/COMMANDSTATION\//.test(path)) return { ok: false, why: "path outside OPERATIONS/COMMANDSTATION/" };
+  if (/\/VAULT\//.test(path) || /(^|\/)\./.test(path)) return { ok: false, why: "vault and dot-paths are refused" };
+  const R = repoOf(env);
+  if (!R || !env.GH_TOKEN) return { ok: false, why: "git not configured" };
+  const url = "https://api.github.com/repos/" + R.owner + "/" + R.repo + "/contents/" + path + "?ref=" + encodeURIComponent(String(ref || R.branch));
+  try {
+    const g = await fetch(url, { headers: { "authorization": "Bearer " + env.GH_TOKEN, "accept": "application/vnd.github+json", "user-agent": "pais-mcp-cloud/0.4.0" } });
+    if (g.status === 404) return { ok: false, why: "not found at " + path };
+    if (!g.ok) return { ok: false, why: "git HTTP " + g.status };
+    const j = await g.json();
+    if (!j || j.type !== "file" || typeof j.content !== "string") return { ok: false, why: "not a file: " + path };
+    if ((j.size || 0) > 200000) return { ok: false, why: "file too big (" + j.size + " bytes, max 200000)" };
+    return { ok: true, path: path, bytes: j.size || 0, text: b64decode(j.content) };
+  } catch (e) { return { ok: false, why: "read failed: " + String((e && e.message) || e).slice(0, 80) }; }
+}
+/* The phone inbox: tag-sanitized, size-bounded, one file per drop. Keyless like
+   the other /mcp tools (the tag+size bounds are the guard; the repo is private). */
+async function phoneDrop(env, tag, text) {
+  tag = String(tag || "").toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-").slice(0, 40) || "untagged";
+  text = String(text == null ? "" : text);
+  if (!text.trim()) return { ok: false, why: "empty text — nothing stored" };
+  if (text.length > 50000) return { ok: false, why: "text too long (" + text.length + " chars, max 50000) — split it and drop each part" };
+  const ts = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
+  const path = "OPERATIONS/COMMANDSTATION/PHONE-DROPS/" + tag + "-" + ts + ".md";
+  const body = "# phone drop — " + tag + "\n\n@" + ts + "Z via pais-mcp-cloud phone_drop\n\n" + text.replace(/\s+$/, "") + "\n";
+  return await putFileToGitHub(env, path, body, "phone drop " + tag + " " + ts);
 }
 /* Durable receipt: one appended line in the canonical RUNNER-LOG.md. Without
    GH_TOKEN the pulse still runs — the receipt just lives in the Worker log. */
@@ -184,7 +243,7 @@ async function handleFetch(req, env) {
       const ok = (result) => Response.json({ jsonrpc: "2.0", id, result });
       const err = (code, message) => Response.json({ jsonrpc: "2.0", id, error: { code, message } }, { status: 200 });
       if (body.method === "initialize")
-        return ok({ protocolVersion: "2024-11-05", capabilities: { tools: {} }, serverInfo: { name: "pais-mcp-cloud", version: "0.2.0" } });
+        return ok({ protocolVersion: "2024-11-05", capabilities: { tools: {} }, serverInfo: { name: "pais-mcp-cloud", version: "0.4.0" } });
       if (body.method === "notifications/initialized") return new Response(null, { status: 202 });
       if (body.method === "tools/list") return ok({ tools: TOOL_DEFS });
       if (body.method === "tools/call") {
@@ -202,6 +261,16 @@ async function handleFetch(req, env) {
             return ok({ content: [{ type: "text", text: out.text }], _meta: { usage: out.usage, model: out.model } });
           }
           if (name === "edtech_build") return err(-32601, "edtech_build: desk has no callable lane yet (stub)");
+          if (name === "phone_drop") {
+            const d = await phoneDrop(env, args.tag, args.text);
+            if (!d.ok) return err(-32000, "phone_drop failed: " + d.why);
+            return ok({ content: [{ type: "text", text: "stored at " + d.path }] });
+          }
+          if (name === "git_read") {
+            const g = await gitRead(env, args.key, args.path, args.ref);
+            if (!g.ok) return err(-32000, "git_read failed: " + g.why);
+            return ok({ content: [{ type: "text", text: g.text }], _meta: { path: g.path, bytes: g.bytes } });
+          }
           return err(-32601, "unknown tool: " + name);
         } catch (e) { return ok({ content: [{ type: "text", text: "error: " + String((e && e.message) || e).slice(0, 300) }], isError: true }); }
       }

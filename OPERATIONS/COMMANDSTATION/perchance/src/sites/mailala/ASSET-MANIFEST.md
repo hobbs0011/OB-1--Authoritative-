@@ -88,8 +88,8 @@ The page ships **no font bytes** — it links Google Fonts — and the CSS it re
 | DOC-05 | `src/sites/mailala/ARCHITECT-BLUEPRINT.md` | the architecture | 24,659 | `251ca1e861ea7f0dcd736d5c33f269801cacc9a19c2af9944f3cbae6ebeec1a5` |
 | DOC-06 | `src/sites/mailala/HANDOFF.md` | the wing's handover | 7,807 | `c119e68017ae0b2ee3afc3f6764dfba27492a8ff0255ea68f7171ed1c2476e4b` |
 | DOC-07 | `src/sites/README.md` | the sites shelf | 6,963 | `6d01cc9f4b53bece8dcac9c49bf15bdd010edd69e75361c7ef12c747e152421a` |
-| PH-01 | `main.pjs` | main.pjs | 1,855 | `85c65cd45ef11354dbf377aae8ddb548e98e2c9933de467dea76397068ade0aa` |
-| PH-02 | `index.html` | index.html | 43,171 | `af7071eaaf3f7457d3d46372dad089abba4e675b86e6a2e2d605702c8025e810` |
+| PH-01 | `main.pjs` | main.pjs | 2,166 | `7136dc1423e166ec9df23206c3fe981b7e34b8aff8394ce509fb5dbfad4553e2` |
+| PH-02 | `index.html` | index.html | 50,589 | `006b3a9249c97fb725f0d207c470ce0e522436264fc74a0c970e7fe6c13868fd` |
 | EV-01 | `scratch/mailala-live.html` |  | 70,835 | `13360cf9a83cd9b192f37163f9ab86aff87941efe9f9e6c2d028867df8d1e8c5` |
 
 ## F · Ephemeral working assets (`scratch/` — hashed, not shipped, not free of the session)
@@ -110,77 +110,110 @@ The page ships **no font bytes** — it links Google Fonts — and the CSS it re
 
 ## G · The estate — every shipped file under `src/`
 
-**343 files · 20,579,828 B (20,097 KB) · tree digest `9acbc758fbe4666419580d69ead5e7b90ea59859e2d3c2b0eaa150525c35bcdd`**
+**598 files · 61,440,985 B (60,001 KB) · tree digest `ac6f1e85d42840466878e52a323fedf1a0171f326a0840229d212b1b9f3790cd`**
 
 The tree digest is SHA-256 over the sorted `<path> <sha256>` lines of every file listed in the machine copy — **the census leaves out the four delivery documents** (the register pair and the sync packet), because a self-describing document cannot be enumerated inside itself.
 
 | area | files | bytes |
 |---|---|---|
+| `src/44.md` | 1 | 692 |
+| `src/444.md` | 1 | 652 |
+| `src/999.md` | 1 | 715 |
 | `src/AGENT99-OS.md` | 1 | 18,664 |
+| `src/BACKBURNER-LANES.md` | 1 | 2,917 |
+| `src/Backburner.md` | 1 | 28,076 |
+| `src/CAMPAIGNS/**` | 32 | 317,744 |
+| `src/COLLECTIVE.md` | 1 | 8,178 |
 | `src/COSTS.md` | 1 | 8,810 |
-| `src/HANDOFF.md` | 1 | 155,356 |
-| `src/LESSON-STANDARD.md` | 1 | 45,485 |
-| `src/MASTERMIND-SYNC-2026-09-23.md` | 1 | 19,249 |
+| `src/DOCTRINE-COPIES/**` | 12 | 15,136 |
+| `src/EMPIRE-MAP.md` | 1 | 3,029 |
+| `src/HANDOFF.md` | 1 | 160,215 |
+| `src/LESSON-STANDARD.md` | 1 | 59,602 |
+| `src/MASTERMIND-SYNC-2026-09-23.md` | 1 | 22,161 |
+| `src/OMEGA2-phoenix-rising-ai-solutions-agent99-mastermind.md` | 1 | 4,031 |
 | `src/PHOENIXCOMMAND-BLUEPRINT.md` | 1 | 23,364 |
-| `src/PROPOSED-CANON.md` | 1 | 8,795 |
+| `src/PROPOSED-CANON.md` | 1 | 15,209 |
 | `src/ProposedG999.md` | 1 | 49,764 |
-| `src/README.md` | 1 | 188,477 |
+| `src/README.md` | 1 | 188,782 |
 | `src/REPO.md` | 1 | 9,153 |
-| `src/SESSIONS/**` | 1 | 33,196 |
+| `src/SESSIONS/**` | 55 | 9,646,977 |
 | `src/SOUL-VERBATIM-PORTALS-MAGIC-CHAT.md` | 1 | 13,943 |
-| `src/SPEC.md` | 1 | 20,421 |
+| `src/SPEC.md` | 1 | 20,481 |
 | `src/STUDENT-EVALUATOR-ECOSYSTEM.md` | 1 | 28,561 |
 | `src/STUDENT-PORTAL-PIPELINE.md` | 1 | 14,614 |
+| `src/SYNCH.md` | 1 | 26,684 |
 | `src/VAULT-RECOVERY.md` | 1 | 4,467 |
-| `src/app.js` | 1 | 623,985 |
+| `src/agent99-guardrails.md` | 1 | 2,166 |
+| `src/agent99-toolkit.md` | 1 | 2,313 |
+| `src/agent99.md` | 1 | 4,841 |
+| `src/app.js` | 1 | 681,726 |
+| `src/archive.js` | 1 | 28,256 |
 | `src/audio-split.js` | 1 | 25,255 |
+| `src/auto.js` | 1 | 3,320 |
 | `src/background.js` | 1 | 17,118 |
-| `src/brain.js` | 1 | 27,091 |
-| `src/brand.js` | 1 | 292,098 |
-| `src/brand/**` | 103 | 11,210,129 |
-| `src/canon/**` | 4 | 188,134 |
-| `src/cgn-node.js` | 1 | 7,115 |
-| `src/cgn.js` | 1 | 14,879 |
+| `src/boardroom-room.css` | 1 | 4,621 |
+| `src/boardroom-room.js` | 1 | 54,678 |
+| `src/boardroom.js` | 1 | 23,322 |
+| `src/boardroom/**` | 15 | 19,425 |
+| `src/brain.js` | 1 | 27,729 |
+| `src/brand.js` | 1 | 326,183 |
+| `src/brand/**` | 169 | 17,221,484 |
+| `src/canon/**` | 4 | 195,876 |
+| `src/cgn-node.js` | 1 | 7,148 |
+| `src/cgn.js` | 1 | 15,057 |
 | `src/clients.js` | 1 | 15,979 |
 | `src/cloudflare/**` | 10 | 73,047 |
 | `src/constellation.js` | 1 | 33,257 |
+| `src/copy.js` | 1 | 30,723 |
 | `src/curriculum.js` | 1 | 77,098 |
 | `src/curriculum/**` | 12 | 1,515,989 |
-| `src/divisions.js` | 1 | 49,517 |
+| `src/deck.js` | 1 | 9,000 |
+| `src/divisions.js` | 1 | 55,350 |
 | `src/ecosystem.js` | 1 | 22,898 |
 | `src/family.js` | 1 | 12,294 |
-| `src/forge.js` | 1 | 55,316 |
-| `src/freephoenix.js` | 1 | 50,928 |
+| `src/forge.js` | 1 | 67,773 |
+| `src/freephoenix.js` | 1 | 71,457 |
 | `src/freewire.js` | 1 | 31,205 |
-| `src/generators/**` | 88 | 1,650,012 |
+| `src/gamedivision.js` | 1 | 48,620 |
+| `src/games-arsenal.js` | 1 | 30,698 |
+| `src/games-platform/**` | 2 | 13,687 |
+| `src/generators/**` | 88 | 1,650,078 |
 | `src/gitcanon.js` | 1 | 33,223 |
-| `src/ilog.js` | 1 | 50,748 |
-| `src/image-node/**` | 6 | 24,792 |
+| `src/ilog.js` | 1 | 54,542 |
+| `src/image-node/**` | 6 | 24,825 |
 | `src/intake.js` | 1 | 88,869 |
+| `src/lesson-arsenal.js` | 1 | 26,466 |
 | `src/lesson-forge.js` | 1 | 26,686 |
-| `src/lessons.js` | 1 | 114,314 |
-| `src/lessons/**` | 9 | 220,678 |
-| `src/market.js` | 1 | 27,493 |
-| `src/marketing/**` | 5 | 100,368 |
+| `src/lessons.js` | 1 | 166,764 |
+| `src/lessons/**` | 18 | 825,269 |
+| `src/market-campaign-scout.js` | 1 | 3,111 |
+| `src/market.js` | 1 | 27,712 |
+| `src/marketing/**` | 6 | 166,708 |
 | `src/master-link.json` | 1 | 3,323 |
-| `src/masterlink.js` | 1 | 27,460 |
+| `src/masterlink.js` | 1 | 30,351 |
+| `src/masterminds/**` | 6 | 20,846 |
+| `src/mcp-server/**` | 4 | 25,088 |
+| `src/mcp-tools.js` | 1 | 19,715 |
 | `src/offer-desk/**` | 8 | 203,253 |
 | `src/offers.js` | 1 | 40,934 |
-| `src/pheromone.js` | 1 | 12,000 |
+| `src/pheromone.js` | 1 | 12,249 |
 | `src/playbooks.js` | 1 | 18,647 |
-| `src/relay.js` | 1 | 40,340 |
+| `src/relay.js` | 1 | 40,558 |
+| `src/research/**` | 1 | 4,766 |
 | `src/review.js` | 1 | 40,678 |
+| `src/roam.js` | 1 | 17,399 |
 | `src/rubric.js` | 1 | 70,546 |
 | `src/savewatch.js` | 1 | 14,535 |
-| `src/scout.js` | 1 | 42,021 |
-| `src/scs.js` | 1 | 83,231 |
+| `src/scout.js` | 1 | 42,075 |
+| `src/scs.js` | 1 | 84,283 |
 | `src/secretsauce.js` | 1 | 24,556 |
-| `src/sites/**` | 43 | 2,369,440 |
-| `src/styles.css` | 1 | 49,435 |
+| `src/sites/**` | 70 | 25,891,476 |
+| `src/styles.css` | 1 | 56,369 |
 | `src/summary.js` | 1 | 18,415 |
 | `src/tools/**` | 1 | 29,582 |
+| `src/train67-campaign-scout.js` | 1 | 4,192 |
 | `src/transcribe.js` | 1 | 84,421 |
-| `src/vault.js` | 1 | 84,177 |
+| `src/vault.js` | 1 | 86,261 |
 
 ## H · NOT hashed, and exactly why (nothing is left silently missing)
 

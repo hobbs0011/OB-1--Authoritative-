@@ -3,6 +3,7 @@
 ## 1. WHO/WHAT
 - Station: this Perchance generator (Obi command station). Canon: `canon` branch doctrine (GOSPEL-999, LFG, S2Pipeline); this workspace is the station's record. No canon writes from here — canon push = PHOENIXOMEGAPROTOCOL + sovereign.
 - Sovereign's standing rules: free lane carries; no spend / no email / no connects without explicit order; skills never live inside Kilo/Claw (pointer docs only); no sealed-content edits; secrets never in chat/source/ILOG (vault = src/SESSIONS + git vault files, blind).
+- DESTRUCTIVE-ORDER PROTOCOL (standing, from the 2026-11-06 vault wipe — agent read "scrap the links" as "purge everything"): any IRREVERSIBLE order (forget/wipe/delete keys, revoke, scrap, drop, purge, clear storage, rewrite canon) = 1) restate targets ITEM BY ITEM with exact names, 2) state what SURVIVES, 3) take NO action until the sovereign confirms EACH item explicitly. One ambiguous sentence is NEVER enough. No mass-wipe path may exist in station code (vault.js enforces refusal). A pending destructive arm never survives reload — re-confirm after any refresh.
 
 ## 2. LAST SEALED STATE (verify live, don't trust blind)
 - SCS: Incarnate-47-Autonomy-Stack sealed (run 22/23 — confirm via `ObiSCS.state()` tail). Prior: Incarnate-46-TrueBoot-Prep sealed run 22.
