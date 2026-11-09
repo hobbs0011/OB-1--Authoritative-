@@ -572,7 +572,7 @@ async function release(){
 
   const sub = await cfFetch(CF_BASE + acct + "/workers/subdomain", { method:"GET", headers:{ Authorization:"Bearer " + t } });
   const subj = cfParse(sub);
-  const suffix = (subj && subj.success && subj.result && subj.result.subdomain) || "mrmichaelhobbs123";
+  const suffix = (subj && subj.success && subj.result && subj.result.subdomain) || "mrmichaelhobbs1234";
   const url = "https://" + RELEASE.name + "." + suffix + ".workers.dev";
 
   /* every path of this host answers with the page, and it may be read from

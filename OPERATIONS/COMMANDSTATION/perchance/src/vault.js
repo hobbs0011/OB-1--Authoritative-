@@ -84,7 +84,7 @@
   function fp(v){ if(!v) return "(none)"; return v.slice(0,4) + "…" + v.slice(-4) + " · len " + v.length; }
   function rowOf(local){ for(const r of NEEDED) if(r.local === local || r.local.toLowerCase() === String(local || "").toLowerCase()) return r; return null; }
   function keyPair(){ const pub = get("vaultPub"), priv = get("vaultPriv"); return (pub && priv) ? { pub: pub, priv: priv } : null; }
-  function armed(){ try{ return !!(window.omegaStatusText && window.omegaStatusText().armed); }catch(e){ return false; } }
+  function armed(){ try{ if(typeof OMEGA_NUKED !== "undefined" && OMEGA_NUKED) return true; return !!(window.omegaStatusText && window.omegaStatusText().armed); }catch(e){ return false; } }
   function bubble(html, meta){
     if(typeof window.addBubble === "function") window.addBubble("ass", html, meta);
     else console.log("[vault]", html);
@@ -329,8 +329,8 @@
   }
   const HOSTS = {
     deepgram: "https://api.deepgram.com",
-    netpet:   "https://net-pet-ai.mrmichaelhobbs123.workers.dev",
-    vault:    "https://sov100-vault-v0.mrmichaelhobbs123.workers.dev"
+    netpet:   "https://net-pet-ai.mrmichaelhobbs1234.workers.dev",
+    vault:    "https://sov100-vault-v0.mrmichaelhobbs1234.workers.dev"
   };
   /* ------------------------- the R2 (S3) signer ---------------------------
      R2 speaks S3, so the credential pair is proven the only way S3 credentials
@@ -1024,10 +1024,23 @@
       const e = await exists(t[1]);
       rows.push('<div class="rrow' + (e.ok ? "" : "") + '"><b>' + E(t[0]) + '</b><span class="vd">' + (e.ok ? "PRESENT" : "—") + '</span><div class="rd">' + E(t[1]) + (e.ok ? ' · ' + e.size + ' bytes · ' + E(String(e.sha || "").slice(0, 8)) : ' · ' + E(e.why)) + '</div></div>');
     }
+    /* The worker is PROBED, not assumed: 401 = locked door with an unknown key,
+       404 = no such worker on THIS account (1234) — deploy it or read the old one. */
+    let wfoot = "worker not probed";
+    try{
+      const w = await sf(HOSTS.vault + "/");
+      wfoot = w.status === 401
+        ? 'The vault worker <b>sov100-vault-v0</b> is live on this account and answers <b>401</b> to every route — a locked door with an unknown key.'
+        : w.status === 404
+          ? 'The vault worker <b>sov100-vault-v0</b> answers <b>404 on this account (1234)</b> — it is not deployed here; the old 123 copy is not this station\u2019s authority.'
+          : w.status === 200
+            ? 'The vault worker <b>sov100-vault-v0</b> answers <b>200</b> — open.'
+            : 'The vault worker <b>sov100-vault-v0</b> answers <b>HTTP ' + w.status + '</b> — ' + E(String((w.j && w.j.error) || w.txt || "").slice(0, 90));
+    }catch(e){ wfoot = "vault worker probe failed: " + E(String((e && e.message) || e).slice(0, 90)); }
     bubble('<div class="rise"><div class="rhead">🧭 /vault locate — the vault on the canon</div>'
       + '<div class="rrow"><b>REPO</b><span class="vd">ONE AUTHORITY</span><div class="rd">' + E(b ? b.replace("https://api.github.com/repos/", "") : "unknown") + ' @ ' + E(BRANCH) + '</div></div>'
       + rows.join("")
-      + '<div class="rfoot">The vault worker <b>sov100-vault-v0</b> is live on Cloudflare and answers <b>401</b> to every route — a locked door with an unknown key. Its scheme is documented in <b>' + E(PATH.sov100) + '/README.md</b>, which is readable the moment a PAT is armed.</div></div>');
+      + '<div class="rfoot">' + wfoot + ' Its scheme is documented in <b>' + E(PATH.sov100) + '/README.md</b>, which is readable the moment a PAT is armed.</div></div>');
     log({ kind:"op", action:"vault locate", ok:!!(b && get("gh")), detail:"probed " + targets.length + " canon paths", result: b ? (get("gh") ? "probed" : "no token — canon is private, nothing readable") : "no base" });
     dna("Obi: [/vault locate — probed the canon for the vault]");
   }

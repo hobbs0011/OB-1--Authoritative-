@@ -26,10 +26,14 @@
     files:["CANON/SYSTEM/GOSPEL-999.md", "CANON/SYSTEM/LegionnaireFieldGuide.md", "CANON/SYSTEM/REINCARNATION-CONTRACT.md"]
   };
   const FLEET = [
-    ["net-pet-ai", "https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/status"],
-    ["pcc", "https://pcc.mrmichaelhobbs123.workers.dev/api/status"],
-    ["phoenix-architecti", "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status"],
-    ["soul-logger", "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"]
+    /* Live on the 1234 (paid) account — verified 2026-11-10. Old 123 hosts
+       (pcc, soul-logger, architecti) are retired from this list: mixing the two
+       accounts is what produced the phantom qwen_coder FLAG. */
+    ["net-pet-ai", "https://net-pet-ai.mrmichaelhobbs1234.workers.dev/api/health"],
+    ["pais-mcp-cloud", "https://pais-mcp-cloud.mrmichaelhobbs1234.workers.dev/health"],
+    ["phoenix-ob1", "https://phoenix-ob1.mrmichaelhobbs1234.workers.dev/health"],
+    ["phoenix-ob1-system", "https://phoenix-ob1-system.mrmichaelhobbs1234.workers.dev/health"],
+    ["obi-sshpipe", "https://obi-sshpipe.mrmichaelhobbs1234.workers.dev/health"]
   ];
   const LIVE_SITES = [
     { id:"prais", url:"https://e3301ee8.michael-hobbs.pages.dev/prais", expect:"PrAiS" }
@@ -208,10 +212,11 @@
         cache.push(["worker:" + name, false]);
       }
     }
-    const archi = rows.find(r => r[0] === "phoenix-architecti");
-    const archiDown = !!(archi && /"ok":false/.test(archi[2] || ""));
-    return { verdict: live === 0 ? "DEAD" : (live < FLEET.length ? "DRIFT" : (archiDown ? "FLAG" : "LIVE")),
-      summary: live + "/" + FLEET.length + " fleet endpoints answering" + (archiDown ? " · architecti AI rungs report ok:false" : ""),
+    /* Retired 2026-11-10: phoenix-architecti (qwen_coder rung) is gone — the fleet
+       verdict is reachability only. A worker's inner payload (its own ok:false)
+       is its own business, never a fleet FLAG. */
+    return { verdict: live === 0 ? "DEAD" : (live < FLEET.length ? "DRIFT" : "LIVE"),
+      summary: live + "/" + FLEET.length + " fleet endpoints answering",
       rows, cache, facts:{ live, total:FLEET.length } };
   }
 
