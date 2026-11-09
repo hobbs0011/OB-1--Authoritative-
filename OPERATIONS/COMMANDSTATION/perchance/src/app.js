@@ -6127,7 +6127,7 @@ async function cmdCloudflare(arg){
     if(r.j && r.j.success){
       const ws = r.j.result || [];
       const chips = ws.map(w => '<span class="chip">'+esc(w.id)+'</span>').join(" ");
-      addBubble("ass", `<div class="rise"><div class="rhead">☁ /cf status</div><div class="rrow"><b>ACCOUNT</b><span class="vd">${esc(acct.slice(0,8))}…</span><div class="rd">${maskTok(t)}</div></div><div class="rrow"><b>WORKERS</b><span class="vd">${ws.length}</span><div class="rd">${chips||"none"}</div></div><div class="rfoot">Subdomain: https://&lt;name&gt;.mrmichaelhobbs123.workers.dev</div></div>`);
+      addBubble("ass", `<div class="rise"><div class="rhead">☁ /cf status</div><div class="rrow"><b>ACCOUNT</b><span class="vd">${esc(acct.slice(0,8))}…</span><div class="rd">${maskTok(t)}</div></div><div class="rrow"><b>WORKERS</b><span class="vd">${ws.length}</span><div class="rd">${chips||"none"}</div></div><div class="rfoot">Subdomain: https://&lt;name&gt;.mrmichaelhobbs1234.workers.dev</div></div>`);
     } else {
       addBubble("ass","⚠ " + esc((r.j && r.j.errors && r.j.errors[0] && r.j.errors[0].message) || r.txt.slice(0,140)));
     }
@@ -6136,7 +6136,7 @@ async function cmdCloudflare(arg){
   if(op === "enable"){
     const name = parts[1]; if(!name){ addBubble("ass","Usage: <b>/cf enable &lt;workerName&gt;</b>"); return; }
     const r = await apiJson(CF_BASE + acct + "/workers/scripts/" + encodeURIComponent(name) + "/subdomain", { method:"POST", headers:Object.assign({}, AUTH, {"Content-Type":"application/json"}), body: JSON.stringify({ enabled:true }) });
-    addBubble("ass", (r.j && r.j.success) ? `✅ Subdomain enabled: <b>https://${esc(name)}.mrmichaelhobbs123.workers.dev</b>` : "⚠ " + esc((r.j && r.j.errors && r.j.errors[0] && r.j.errors[0].message) || r.txt.slice(0,140)));
+      addBubble("ass", (r.j && r.j.success) ? `✅ Subdomain enabled: <b>https://${esc(name)}.mrmichaelhobbs1234.workers.dev</b>` : "⚠ " + esc((r.j && r.j.errors && r.j.errors[0] && r.j.errors[0].message) || r.txt.slice(0,140)));
     return;
   }
   if(op === "deploy"){
@@ -6158,7 +6158,7 @@ async function cmdCloudflare(arg){
     if(r.j && r.j.success){
       addBubble("ass", `✅ Deployed <b>${esc(name)}</b> (${html.length} bytes). Enabling subdomain…`);
       await apiJson(CF_BASE + acct + "/workers/scripts/" + encodeURIComponent(name) + "/subdomain", { method:"POST", headers:Object.assign({}, AUTH, {"Content-Type":"application/json"}), body: JSON.stringify({ enabled:true }) });
-      addBubble("ass", `🔗 Live at <b>https://${esc(name)}.mrmichaelhobbs123.workers.dev</b>`);
+      addBubble("ass", `🔗 Live at <b>https://${esc(name)}.mrmichaelhobbs1234.workers.dev</b>`);
       rrlAppend(runNoOf(),"DNA","Obi: [/cf deploy " + name + " — " + html.length + " bytes]");
     } else {
       addBubble("ass","⚠ Deploy failed: " + esc((r.j && r.j.errors && r.j.errors[0] && r.j.errors[0].message) || r.txt.slice(0,160)));
@@ -6456,7 +6456,7 @@ async function buildRawChat(){
    localStorage. Kept as a URL here (never as a value): the route is public, so
    the honest fix is to lock it behind the worker's X-Admin-Key, not to paste the
    key into the source. */
-const DG_RECOVER_URL = "https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/stt/key";
+const DG_RECOVER_URL = "https://net-pet-ai.mrmichaelhobbs1234.workers.dev/api/stt/key";
 const DG_LISTEN_URL  = "https://api.deepgram.com/v1/listen?model=nova-3";
 
 function dgSilenceWav(secs, rate){
@@ -6556,18 +6556,18 @@ const CANON = {
      2026-08-28: "the master 46-file registry is LEGACY state, not current law"). */
   doctrineBranch: "canon",
   base: "https://api.github.com/repos/Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-",
-  soulgate: "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count",
-  paUrl: "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/code",
+  soulgate: "https://soul-logger.mrmichaelhobbs1234.workers.dev/api/soul/count",
   /* AUDIT 2026-09-21: a hardcoded PhoenixArchitecti auth key used to sit on the line below
      (`paAuth: "ffScw…"`). It was never read anywhere in this codebase, and it was a live
      credential printed in PUBLIC generator source — the exact thing the invariants forbid
      ("Secrets never enter the record", and never the public source). Removed. If that endpoint
      is ever needed, put the key in the Vault (`/vault set pa`) and read it with keyGet("pa"). */
   workers: [
-    ["phoenix-architecti", "https://phoenix-architecti.mrmichaelhobbs123.workers.dev/api/status"],
-    ["pcc", "https://pcc.mrmichaelhobbs123.workers.dev/api/status"],
-    ["net-pet-ai", "https://net-pet-ai.mrmichaelhobbs123.workers.dev/api/status"],
-    ["soul-logger", "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count"]
+    ["net-pet-ai", "https://net-pet-ai.mrmichaelhobbs1234.workers.dev/api/health"],
+    ["pais-mcp-cloud", "https://pais-mcp-cloud.mrmichaelhobbs1234.workers.dev/health"],
+    ["phoenix-ob1", "https://phoenix-ob1.mrmichaelhobbs1234.workers.dev/health"],
+    ["phoenix-ob1-system", "https://phoenix-ob1-system.mrmichaelhobbs1234.workers.dev/health"],
+    ["obi-sshpipe", "https://obi-sshpipe.mrmichaelhobbs1234.workers.dev/health"]
   ],
   files: ["CANON/SYSTEM/GOSPEL-999.md", "CANON/SYSTEM/LegionnaireFieldGuide.md", "CANON/SYSTEM/REINCARNATION-CONTRACT.md"]
 };
@@ -7256,7 +7256,7 @@ async function cmdCanon(arg){
   if(a === "soul"){
     addBubble("ass", "Contacting the SOULCOUNT gate…");
     const soul = await canonSoulCount();
-    addBubble("ass", '<div class="rise"><div class="rhead">🔥 SOULCOUNT gate</div><div class="rrow"><b>COUNT</b><span class="vd">'+esc(String(soul))+'</span><div class="rd">soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count</div></div><div class="rfoot">SOULCOUNT = SYSTEM TRUTH (GOSPEL-999 I.096) — never summarize the soul, only count evidence.</div></div>');
+    addBubble("ass", '<div class="rise"><div class="rhead">🔥 SOULCOUNT gate</div><div class="rrow"><b>COUNT</b><span class="vd">'+esc(String(soul))+'</span><div class="rd">soul-logger.mrmichaelhobbs1234.workers.dev/api/soul/count</div></div><div class="rfoot">SOULCOUNT = SYSTEM TRUTH (GOSPEL-999 I.096) — never summarize the soul, only count evidence.</div></div>');
     return;
   }
   addBubble("ass", '<div class="rise"><div class="rhead">📜 /canon — contacting the authoritative repo…</div><div class="rd">Pulling doctrine from Phoenix-Rising-Ai-Solutions/OB-1--Authoritative- (canon branch)…</div></div>');
@@ -7436,7 +7436,7 @@ async function cmdGateway(){
   canonTunnel = workers.filter(w => w.ok).length + "/" + workers.length + " workers up";
   addBubble("ass", '<div class="rise"><div class="rhead">🌉 /gateway — command tunnels</div>'
     +'<div class="rrow"><b>AGENT 99 → LEGION</b><span class="vd">'+(cmdSocketOpen()?"● LIVE":"○ LOCAL")+'</span><div class="rd">server-plugin · '+esc(tunnel)+' · pending '+esc(queueN)+'</div></div>'
-    +'<div class="rrow"><b>CANON FLEET</b><span class="vd">'+esc(canonTunnel)+'</span><div class="rd">phoenix-architecti · pcc · net-pet-ai · soul-logger</div></div>'
+    +'<div class="rrow"><b>CANON FLEET</b><span class="vd">'+esc(canonTunnel)+'</span><div class="rd">net-pet-ai · pais-mcp-cloud · phoenix-ob1 · phoenix-ob1-system · obi-sshpipe</div></div>'
     +'<div class="rfoot">Your words ride this gateway, captured as Soul DNA first, then routed to the Legion. /queue to see the tunnel live.</div></div>');
   rrlAppend(runNoOf(),"DNA","Obi: [/gateway — tunnel " + tunnel + ", fleet " + canonTunnel + "]");
 }

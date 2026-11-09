@@ -254,7 +254,7 @@
     {
       id: "svc.soul", family: "services", kind: "worker", role: "vault",
       name: "soul-logger — the authoritative vault", status: "live",
-      url: "https://soul-logger.mrmichaelhobbs123.workers.dev/api/soul/count",
+      url: "https://soul-logger.mrmichaelhobbs1234.workers.dev/api/soul/count",
       expect: "session_id",
       tagline: "the one place the raw words are counted, per session, by law",
       iface: { commands: [], endpoints: ["GET /health", "GET /api/soul/count?session_id=", "POST /api/soul/extract"] },
