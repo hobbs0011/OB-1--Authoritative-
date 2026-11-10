@@ -7,6 +7,7 @@
 
 ## 2. LAST SEALED STATE (verify live, don't trust blind)
 - SCS: Incarnate-47-Autonomy-Stack sealed (run 22/23 — confirm via `ObiSCS.state()` tail). Prior: Incarnate-46-TrueBoot-Prep sealed run 22.
+- 2026-11-09: run 23 sealed (Incarnate-48-Reboot-Reseal); backup commit e13d1b1c (632 files, master HEAD, worker lane — reload-proof); gh PAT present in browser vault (verified hobbs0011, Contents write OK); Merkle verifier live (src/merkle-rollup.js); vault hardening live (two-step forget, export/import, no mass-wipe, DESTRUCTIVE-ORDER PROTOCOL).
 - Backburner: BB-KILOCLAW-02 (verdict: KiloClaw DELISTED, replacement map, full-tab scout), BB-LOOP-KILO-01 (box loop: keepalive-LD11 + driver-LD11v8, Grade-9 Roblox lesson, remaining r1/r3/r4/r7 at last check).
 - Runner: https://pais-mcp-cloud.mrmichaelhobbs1234.workers.dev — /health 200 expected (cron */10, keys 4/4). Tools: gateway_chat, openrouter_chat, phone_drop, git_read.
 - Box: GreenCloud 203.55.176.6, root, Termius sovereign-side. Bridge rebuild: RELAY_KEY re-read from obi-sshpipe worker settings (plain_text binding, never chat); seed = scratch/ssh/obi-sentinel (PEM armor: strip, b64, LAST 32B; raw DER: slice(-32)); stage via page, then DELETE staging files.
