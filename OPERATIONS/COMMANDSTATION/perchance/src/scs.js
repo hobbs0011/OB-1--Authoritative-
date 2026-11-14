@@ -379,17 +379,18 @@
     chk("no stage below REAL other than DNA-limited halves", !!(sess && need.every(function(k){ var v = sess.stages[k] && sess.stages[k].verdict; return v === "REAL" || (k === "SCHOLAR" && v === "HOLLOW"); })), "HOLLOW only permitted where PERMANENT-LAWS says so");
     chk("session name verbatim in the header", !!(sess && sess.stages.RISE && String(sess.stages.RISE.artifact).indexOf("Session: " + sess.name) !== -1), sess && sess.name);
     var c = countsFor(sess ? sess.run : currentRunNo());
-    /* The ledger grows with every command by law (L37: capture everything),
-       so a frozen SCHOLAR artifact can never match the LIVE counts once any
-       later command exists — including the FORTIFY command itself. Recount
-       over exactly the span SCHOLAR covered; later legitimate appends must
-       not fail the match. Without a recorded span, fall back to live counts
-       (fails closed, as before). */
+    /* DIR-INC55-SCS-FIX-03: like-for-like means the SAME series SCHOLAR measured.
+       Stages 2-4 all count the active run, so the span recount must run over
+       sch.artifact.run — the run SCHOLAR froze (== runNoOf() at stamp time) — not
+       the session's birth run. Recounting a frozen foreign run can never converge
+       (55: SCHOLAR 69/32 on run 28 vs recount 30/71 on run 26). Without a recorded
+       SCHOLAR run, fall back to the active run (fails closed, as before). */
     var sch = sess && sess.stages.SCHOLAR;
     var bound = sch && sch.artifact && sch.artifact.rrlN;
-    var cb = (bound == null) ? c : countsFor(sess.run, bound);
-    chk("SOULcount matches across RRL and SCHOLAR", !!(sch && sch.artifact.counts.SOULcount === cb.soul.count), "scholar-span=" + cb.soul.count + " · live=" + c.soul.count);
-    chk("DNAcount matches across RRL and SCHOLAR", !!(sch && sch.artifact.counts.DNAcount === cb.dna.count), "scholar-span=" + cb.dna.count + " · live=" + c.dna.count);
+    var spanRun = (sch && sch.artifact && sch.artifact.run != null) ? sch.artifact.run : currentRunNo();
+    var cb = (bound == null) ? countsFor(spanRun) : countsFor(spanRun, bound);
+    chk("SOULcount matches across RRL and SCHOLAR", !!(sch && sch.artifact.counts.SOULcount === cb.soul.count), "scholar-span(run " + spanRun + ")=" + cb.soul.count + " · live-run" + (sess ? sess.run : currentRunNo()) + "=" + c.soul.count);
+    chk("DNAcount matches across RRL and SCHOLAR", !!(sch && sch.artifact.counts.DNAcount === cb.dna.count), "scholar-span(run " + spanRun + ")=" + cb.dna.count + " · live-run" + (sess ? sess.run : currentRunNo()) + "=" + c.dna.count);
     var fails = checks.filter(function(x){ return x.result === "FAIL"; });
     var pass = !fails.length;
     var art = { stage:"ENGINEER", at: ict(), run: sess && sess.run, checks: checks, pass: pass };

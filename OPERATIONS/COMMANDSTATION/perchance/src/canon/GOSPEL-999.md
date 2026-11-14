@@ -1195,3 +1195,17 @@ Current procedure, field-proven 2026-10-30:
 > ~CCC#5-S.2.DNA.PIPELINET.MD
 
 *(DNA voice, not soul: six lines numbered #0–#5, filed under the spoken name "core 5" — kept as spoken.)*
+
+---
+
+## AMENDMENT IX — THE X10 MANDATES (2026-11-11, station-proven)
+
+> **status:** AMENDED — written by the perchance Command Station from the X10 campaign (89 files, 10 shard syntheses, 2 deepseek rollups Tmwc6c13n/Tmwc6cejd), appended 2026-11-11 after SOV100 revoked the canon-write gate by direct order. Sealed mandates above untouched. Provisional numbering (`X10.`) — final numbers are Sov100's to assign, so nothing sealed is renumbered.
+
+**X10.001. GRAFT THE RUN27 ORPHANS.** 167 RRL entries in run27 have zero sessions behind them (rollup-B: RED orphan). No seal, no unseal, no DEATH rides on run27 until every orphan entry is grafted to a session or formally documented as un graftable. GATE: run27 entries all session-linked. ALARM: run27 cited as coverage = breach.
+
+**X10.002. RESOLVE THE RUN26→27 COUNT DEFECT BEFORE SEAL.** SCHOLAR counts currentRunNo 27 while ENGINEER/SUPPLY recount sess.run 26. The defect is measured and named; sealing over it bakes the split into the chain. GATE: scholar and engineer agree on the run number. ALARM: a seal with the defect open = breach.
+
+**X10.003. TRIAGE ILOG SEG1 BEFORE UNSEAL.** ILOG verifies BROKEN (checked 6665, 8 breaks capped: seq24 link plus 220–223 and 225–227 hash mismatch), seg2 clean. An unseal over a broken seg1 presents a broken chain as whole. GATE: `/ilog verify` clean or the breaks formally triaged. ALARM: unseal over untriaged breaks = breach.
+
+**X10.004. MEASURE THE ABSENT RUNS.** Runs 21/23/24/25 exist nowhere — no sessions, no RRL. Absence is not evidence of nothing; it is the worst coverage gap on the board (rollup-B). GATE: each absent run measured or formally declared unmeasurable. ALARM: a coverage claim that skips the absent runs = breach.

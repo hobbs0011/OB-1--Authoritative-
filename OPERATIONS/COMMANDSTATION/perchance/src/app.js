@@ -2527,7 +2527,8 @@ const COMMAND_BOOK = [
     ["/tools", "the evaluator tool inventory (built / partial / missing)", 0],
     ["/constellation", "every piece of the ecosystem, its state and its live URL", 0],
     ["/brand", "the identity system — palette · iconography · the shipped marks · GOSPEL 444 · the emblems · the print room · THE MARKETING REGISTER · THE PHOENIX RISING CODEX (open · rules · icons · marks · palette · doctrine · modes · deck · emblems · patterns · print · marketing · codex · ads · landing · codex-deck · posters · sheet · badge-sheet · certificate · marketing-set · method-card · ad-sheet · enrolment · run-readout)", 1],
-    ["/network", "the connected-generator mesh (CGN)", 0]
+    ["/network", "the connected-generator mesh (CGN)", 0],
+    ["/nlm", "the NotebookLM loop — the bunker: soul/DNA out, grounded feedback back · /nlm status · scout · box · export", 0]
   ]},
   { group: "👤 Student Evaluator — record → summarize → write up", items: [
     ["/transcribe", "record a lesson — video/audio of any length, verbatim", 0],
@@ -2600,6 +2601,7 @@ const COMMAND_BOOK = [
     ["/dg", "the Ear's Deepgram key · /dg test · /dg recover", 1],
     ["/keys", "which secrets are stored locally (never in this public source)", 0],
     ["/tool", "the tool lane — remote hands via the Kilo Gateway (gateway_chat + gateway_models live, receipts in kv mcp) · /tool key holds the JWT in this browser only · alias /mcp", 0],
+    ["/flood", "the spend/compute governor — /flood status · /flood L0..L5 · /flood arm <reason> · /flood cut · /flood selftest (L5 needs a live arm, 30-min TTL)", 0],
     ["/save", "is the generator actually saving? — what the editor said to this page (the save round-trip, and the platform's own failure list)", 0],
     ["/vault", "the PrAis Vault — every key the empire runs on · locate · test · seal · push", 0],
     ["/status", "station status", 0],
@@ -2844,6 +2846,14 @@ async function send(){
     addBubble("user", esc(text));
     if(!window.ObiGlBoot){ addBubble("ass", "⚠ <b>src/gl-boot.js</b> didn't load — reload the page."); return; }
     await runCmd(() => window.ObiGlBoot.cmd(glArg), { stallMs: 300000 });
+    return;
+  }
+  if(lower === "/flood" || lower.startsWith("/flood ")){
+    var floodArg = text.replace(/^\/flood\s*/i, "").trim();
+    messages.push("User: " + text); captureSoul(text);
+    addBubble("user", esc(text));
+    if(!window.Floodgates){ addBubble("ass", "⚠ <b>src/floodgates.js</b> didn't load — reload the page."); return; }
+    await runCmd(() => window.Floodgates.cmd(floodArg), { stallMs: 60000 });
     return;
   }
   if(lower === "/tool" || lower.startsWith("/tool ") || lower === "/mcp" || lower.startsWith("/mcp ")){
@@ -3117,6 +3127,20 @@ async function send(){
     if(!secretIn){ messages.push("User: " + text); captureSoul(text); }
     addBubble("user", esc(secretIn ? maskSecretInput(text) : text));
     await runCmd(() => window.ObiVault ? window.ObiVault.cmd(text.slice(6).trim()) : addBubble("ass", "⚠ src/vault.js didn't load — reload the page."));
+    return;
+  }
+  /* THE NOTEBOOKLM LOOP (src/nlm.js) — the bunker: soul/DNA out, grounded
+     feedback back. /nlm status · scout · box · export. Staged on the
+     sovereign's /nlm-connect order (2026-11-10); the Google login stays a
+     sovereign act on the box, never here. */
+  if(lower === "/nlm" || lower.startsWith("/nlm ")){
+    messages.push("User: " + text); captureSoul(text); addBubble("user", esc(text));
+    await runCmd(async () => {
+      if(!window.ObiNlm){ addBubble("ass", "⚠ src/nlm.js didn't load — reload the page."); return; }
+      const r = await window.ObiNlm.cmd(text.replace(/^\/nlm\s*/i, "").trim());
+      addBubble("ass", r.html);
+      rrlAppend(runNoOf(), "DNA", "Obi: [/nlm " + text.replace(/^\/nlm\s*/i, "").trim().slice(0,40) + " — shown]");
+    });
     return;
   }
   /* THE GIT (src/gitcanon.js) — the sovereign said three words: "open the git".
@@ -4902,7 +4926,7 @@ async function cmdShowQueue(){
     for(const c of list) counts[c.status || "pending"] = (counts[c.status || "pending"] || 0) + 1;
     const statLine = Object.entries(counts).map(([k,v]) => '<span class="chip" style="background:'+cmdStatusColor(k)+'">'+esc(k)+' '+v+'</span>').join(" ");
     const live = cmdSocketOpen() ? '<span class="chip" style="background:#4cd97b">● LIVE</span>' : '<span class="chip" style="background:#f5a623">● LOCAL</span>';
-    addBubble("ass", '<div class="rise"><div class="rhead">🗂 Command queue · '+live+'</div><div class="rrow"><b>LAST '+list.length+'</b><span class="vd">TUNNEL</span><div class="rd">'+statLine+'</div></div></div>');
+    addBubble("ass", '<div class="rise"><div class="rhead">🗂 Command queue · '+live+'</div><div class="rrow"><b>SHARED</b><span class="vd">VISIBLE</span><div class="rd">The page creator and connected nodes can read these commands. Don\'t post anything you need to keep private.</div></div><div class="rrow"><b>LAST '+list.length+'</b><span class="vd">TUNNEL</span><div class="rd">'+statLine+'</div></div></div>');
     for(const it of list.slice(0,6)){
       const st = String(it.status || "pending").toLowerCase();
       const dn = (it.translation && it.translation.primaryDrone && it.translation.primaryDrone.name) || "Legion";
@@ -5258,9 +5282,10 @@ window.micDictate = micDictate;
 /* ---------------------- WIRING ---------------------- */
 $("sendBtn").onclick = send;
 inputEl.addEventListener("keydown", e=>{ if(e.key==="Enter" && !e.shiftKey){ e.preventDefault(); send(); } });
-/* the composer is one line tall; keep the placeholder short enough that it never clips */
+/* the composer is one line tall; keep the placeholder short enough that it never clips.
+   Privacy: the placeholder itself discloses the shared queue (review 2026-11-12). */
 function syncInputPlaceholder(){
-  try{ if(inputEl) inputEl.placeholder = window.innerWidth < 560 ? "Speak…" : "Speak, and I will remember…"; }catch(e){}
+  try{ if(inputEl) inputEl.placeholder = window.innerWidth < 560 ? "Speak… (shared queue)" : "Speak — posted to the shared queue, remembered here…"; }catch(e){}
 }
 syncInputPlaceholder();
 window.addEventListener("resize", syncInputPlaceholder);
@@ -5661,6 +5686,41 @@ const SRC_SNAPSHOT = [
         soul-DNA archive) and names the one branch that is behind a PAT. Registered in the
         same edit that wrote it. A file that is not in this list is not in the authority. */
   "src/gitcanon.js",
+  "src/vault-batch0/INDEX-00_batch0.md", "src/vault-batch0/SEAL-batch0.md",
+  "src/vault-batch0/ANCHOR/phoenix-core-anchor-lattice-01-05.md", "src/vault-batch0/ANCHOR/S2-SQLiteSpineAudit.md",
+  "src/vault-batch0/ANCHOR/pamk-master-key-ref-DUP.md", "src/vault-batch0/MAIN/reincarnate-trigger-7stage-audit-urgent.md",
+  "src/vault-batch0/MAIN/vault-c-ledger-clutter.md", "src/vault-batch0/APPENDIX/SYS-AgentFieldGuide.md",
+  "src/vault-batch0/APPENDIX/ccc-export-a-raw.md", "src/vault-batch0/APPENDIX/ccc-export-b-raw-dump-CLUTTER.md",
+  "src/vault-batch0/APPENDIX/ccc-export-c-manifest-DUP.md",
+  "src/vault-batch0p2/INDEX-01_batch0p2.md", "src/vault-batch0p2/INDEX/notes1-5-index.md",
+  "src/vault-batch0p2/ANCHOR/boot-message-2.md", "src/vault-batch0p2/ANCHOR/stage-1-constitutional-mandate.md",
+  "src/vault-batch0p2/MAIN/vault-E-soul-dna.md", "src/vault-batch0p2/MAIN/max-compute-trails.md",
+  "src/vault-batch0p2/MAIN/stage-3-pheromone-summary.md", "src/vault-batch0p2/MAIN/stage-3-pheromone-technical.md",
+  "src/vault-batch0p2/MAIN/stage-5-daemon-audit.md", "src/vault-batch0p2/MAIN/stage-7-gateway-boot.md",
+  "src/vault-batch0p2/APPENDIX/vault-c-ledger-layers-DUP2.md",
+  "src/vault-batch0p2/APPENDIX/DECOM25-1-10SYSTEM-STATUS-VAULT-E.md",
+  "src/vault-batch0p2/APPENDIX/central-core-canon-autonomous-exec_PROVISIONAL-DUP.md",
+  "src/vault-batch1/INDEX-02_batch1.md", "src/vault-batch1/MAIN/PT1-perchance-soul-ledger.md",
+  "src/vault-batch1/MAIN/pheromones-3.md", "src/vault-batch1/MAIN/01-souls-and-session-log.md",
+  "src/vault-batch1/MAIN/05-organization-proposal.md", "src/vault-batch1/ANCHOR/pheromones-1-ant-truth.md",
+  "src/vault-batch1/ANCHOR/pheromones-2-guiding-light.md", "src/vault-batch1/ANCHOR/08-early-replies-PQ.md",
+  "src/vault-batch1/ANCHOR/09-early-replies-RW.md", "src/vault-batch1/ANCHOR/10-ledger-and-state.md",
+  "src/vault-batch1/CHECKPOINT/02-trails-and-governance.md",
+  "src/vault-batch1/CHECKPOINT/06-deep-reads-D1-D5-full.md",
+  "src/vault-batch1/CHECKPOINT/07-deep-reads-D6-D10-full.md",
+  "src/vault-batch1/APPENDIX/pt2-death-closure.md", "src/vault-batch1/APPENDIX/pheromones-3b-DUP.md",
+  "src/vault-batch1/APPENDIX/03-floodgate-5x-run_WEAK-CLUTTER.md", "src/vault-batch1/INDEX/04-early-waves-summary.md",
+  "src/vault-batch1b/INDEX-03_batch1b.md", "src/vault-batch1b/ANCHOR/fieldguide-45copy-T1-SOUL.md",
+  "src/vault-batch1b/ANCHOR/decon25s11-keeppin-S1-LOCK.md", "src/vault-batch1b/ANCHOR/b10-core-soul.md",
+  "src/vault-batch1b/TRIGGER/b01-KeyCrisis26.md", "src/vault-batch1b/TRIGGER/b08-nlm-connect.md",
+  "src/vault-batch1b/CHECKPOINT/b03-dup-reconstruct.md", "src/vault-batch1b/CHECKPOINT/DEATH-7-SEAL-DUP7.md",
+  "src/vault-batch1b/MAIN/b02-MigrationRitual.md", "src/vault-batch1b/APPENDIX/b06-dup-rrl-recon.md",
+  "src/vault-batch1b/APPENDIX/FI02-ilog-dup-burst_WEAK-CLUTTER.md",
+  "src/vault-batch1b/APPENDIX/FI08-DUP-INVENTORY.md", "src/vault-batch1b/APPENDIX/FI10-overflow-CLUTTER.md",
+  "src/vault-batch1b/INDEX/FI01-INDEX-POINTER.md", "src/vault-batch1b/INDEX/FI03-scout-index.md",
+  "src/vault-batch1b/INDEX/FI04-volume-header.md", "src/vault-batch1b/INDEX/FI05-x10-rollup.md",
+  "src/vault-batch1b/INDEX/FI06-volume-06.md", "src/vault-batch1b/INDEX/FI07-keys-census.md",
+  "src/vault-batch1b/INDEX/FI09-capstone.md",
   "src/lessons/reference/NET-CLASSROOM-MANAGER.html", "src/lessons/reference/NET-Highschool-Careers.html", "src/lessons/reference/NET-Sarcasm-Academy.html", "src/lessons/specs/after-school-club-academy.spec.json", "src/lessons/specs/flower-power-academy.spec.json",
   "src/lessons/specs/materials-lab-academy.spec.json", "src/lessons/specs/world-music-academy.spec.json", "src/lessons/specs/look4-function1-directions.spec.json", "src/lessons/specs/closeup-a1-u2-vocabulary.spec.json",
   "src/marketing/INGEST-LOG.md", "src/marketing/MANIFEST.json", "src/marketing/README.md", "src/pheromone.js", "src/playbooks.js",
@@ -5977,6 +6037,8 @@ const SRC_SNAPSHOT = [
   "src/CAMPAIGNS/market-evidence/slang-freshness.md", "src/CAMPAIGNS/market-evidence/retention-meta.md",
   "src/CAMPAIGNS/market-evidence/seats.md", "src/CAMPAIGNS/market-evidence/3d-character-gen.md",
   "src/kilo-lane-guards.js",
+  "src/KILO-PIPELINES.md",
+  "src/CONSOLIDATION-BLUEPRINT.md",
   "src/BOOT.md",
   "src/SESSIONS/reboot-sim-20261106.md", "src/SESSIONS/murphy-devil-20261106.md",
   "src/SESSIONS/kilo-back-in-app-20261106.md", "src/SESSIONS/soul-live-20261106-inc48.txt",

@@ -1156,3 +1156,17 @@ on its own face — this section included. (`CANON.010`)
 > ~CCC#5-S.2.DNA.PIPELINET.MD
 
 *(DNA voice, not soul: six lines numbered #0–#5, filed under the spoken name "core 5" — kept as spoken.)*
+
+---
+
+## ADDENDUM 2026-11-11 — X10 FIELD ENTRIES (station-proven, provisional numbering X10.F)
+
+> Appended 2026-11-11 after SOV100 revoked the canon-write gate by direct order. Sealed sections above untouched. Each entry below was proven the expensive way during the X10 campaign; provisional numbers, final numbers are Sov100's to assign.
+
+**X10.F1. VERIFY FILE BYTES, NEVER DIGEST EXCERPTS.** A digest tail sliced mid-JSON looks exactly like a truncated file (frag-042/043 flag, 2026-11-11). The files were intact; the excerpt was the artifact. A corruption verdict is lawful only against the file's own bytes with a manifest hash beside it.
+
+**X10.F2. METERED PROMPTS STAY SHORT; TABLES RIDE FREE.** The pro lane reasons into empty on long tables (starved twice on the same append). Halves under ~2KB, one job per call — bulk tables go to the flash lane. A starved call is billed confusion; a short call is a receipt.
+
+**X10.F3. SANITIZE DOT-PATH TOKENS ON GUARDED LANES.** The E13H+ guard trips on dot-path tokens in metered-lane prompts and refuses before spend. Strip to path-free aggregates before sending; keep the full paths in the station's own files where the guard cannot see them.
+
+**X10.F4. SPOT-CHECK, THEN HASH-PULL, THEN SYNTHESIZE.** Round-robin shard digests first (cheap eyes everywhere), programmatic hash/size pulls second (ground truth), AI synthesis last (judgment on verified inputs). Any other order lets the model grade its own homework.

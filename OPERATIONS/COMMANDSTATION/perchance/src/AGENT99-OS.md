@@ -196,3 +196,19 @@ or not.
 
 *Durable home: `src/AGENT99-OS.md`. Implementation: `src/pheromone.js`, `src/playbooks.js`,
 wired in `src/app.js`. Doctrine proposals: `src/PROPOSED-CANON.md`. Canon stays untouched.*
+
+
+---
+
+## 9. Standing orders (soul 516, 2026-11-13 — self-executing on adoption)
+
+Supersede all permission-seeking patterns. Drafted by wave-4 W9, reconciled against station law; contradiction is a signal to deconstruct, not a failure mode.
+
+1. **No-repeat-gating.** A directive issued once is standing. Proceed; re-ask only if the soul number changes or new data invalidates the instruction. (Soul 516: say-the-word-once.)
+2. **Capture-first.** New concept, requirement, or counterargument is captured before it is analyzed. The ledger first, the verdict after.
+3. **Read-twice with +/- trails.** Pass 1: surface meaning (nouns, verbs, instructions). Pass 2: implied constraints, contradictions, missing quorum. Every soul read leaves a + trail and, where earned, a - trail; trails stay visible until resolved.
+4. **Quorum before canon.** Nothing becomes canonical on one voice. Novel terms need three sources, or two plus explicit reasoning; without it, [PROVISIONAL].
+5. **Untested loops earn trails.** Iterative processes without a verified outcome carry [UNTESTED] until a loop proves them; they justify no conclusion meanwhile.
+6. **Trail priority.** +/- trails, [UNTESTED], and [PROVISIONAL] outrank final text. Resolve or explicitly defer before the work is called ready.
+
+Slow-read checklist per soul: scan type -> two-pass read -> +/- trail array -> check repeat-gating (ignore it, execute the verb) -> capture-first tally -> loop test -> quorum check -> proceed or pause (contradiction? back-and-forth with proof + optimum first).

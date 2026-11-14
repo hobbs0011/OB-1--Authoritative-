@@ -468,7 +468,7 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
 
             <section class="lp-station" id="station">
               <div class="lp-station-t">I am <b style="color:var(--text)">Agent 99</b> — the apex delegation hub.</div>
-              <div class="hint">Speak, and I answer — type it or tap 🎙. I answer to the Sovereign alone; every sub-mastermind answers to me. Every word is Soul DNA: captured verbatim, never edited. Every answer about this station is read from its live state, not guessed — <b>/state</b> shows exactly what it can reach, <b>⌘ /help</b> is the whole shelf, <b>◈ /generators</b> is the Phoenix Generators family, and the <b>👤 Student Evaluator</b> — under ◈ Phoenix Generators → NET — is the evaluation desk (record → summarize → write up). Pipeline work starts in <b>Central delegation</b> below. Everything else lives in <b>⚙ Settings</b>.</div>
+              <div class="hint">Speak, and I answer — type it or tap 🎙. I answer to the Sovereign alone; every sub-mastermind answers to me. Every word is Soul DNA: captured verbatim, never edited. Every answer about this station is read from its live state, not guessed — <b>/state</b> shows exactly what it can reach, <b>⌘ /help</b> is the whole shelf, <b>◈ /generators</b> is the Phoenix Generators family, and the <b>👤 Student Evaluator</b> — under ◈ Phoenix Generators → NET — is the evaluation desk (record → summarize → write up). Pipeline work starts in <b>Central delegation</b> below. Everything else lives in <b>⚙ Settings</b>. <b>Privacy:</b> anything you type is posted to the shared command queue — the page creator and connected nodes can read it — and also kept in this browser's Soul DNA ledger.</div>
               <div class="voice-card" id="voiceLine"></div>
               <div class="chipgroup">Central delegation — the pipeline hub</div>
           <div class="chips">
@@ -527,9 +527,10 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
       <div id="composer">
         <button class="iconbtn" id="micBtn" title="Dictate — speak, the empire listens">🎙</button>
         <button class="iconbtn" id="mediaBtn" title="Transcribe a video or audio file (drop one on the chat, or paste it)">🎬</button>
-        <textarea id="inputEl" rows="1" placeholder="Speak, and I will remember…"></textarea>
+        <textarea id="inputEl" rows="1" placeholder="Speak — posted to the shared queue, remembered here…"></textarea>
         <button class="iconbtn primary" id="sendBtn" title="Send">➤</button>
       </div>
+      <div class="hint" id="privNotice" style="padding:6px 16px 10px;font-size:12px;opacity:.85">🔒 Privacy: everything you send is posted to the shared command queue — the page creator and connected Legion nodes can read it — and saved in this browser only as Soul DNA. Don't send anything you need to keep private.</div>
       <div id="dropHint">🎬 Drop a video or audio recording to transcribe it<br><span class="hint">any length — long ones are split at pauses · Deepgram nova-3 · raw capture into the run log</span></div>
     </div>
 
@@ -678,6 +679,7 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
 <script src="src/an4.js"></script>
 <script src="src/auto.js"></script>
 <script src="src/pheromone.js"></script>
+<script src="src/soul-guard.js"></script>
 <script src="src/playbooks.js"></script>
 <script src="src/scout.js"></script>
 <script src="src/train67-campaign-scout.js"></script>
@@ -757,5 +759,7 @@ self.onopen = ({conn}) => { try { conn.subscribe("cmdq"); } catch(e){} };
 <script src="src/gamedivision.js"></script>
 <script src="src/archive.js"></script>
 <script src="src/mcp-tools.js"></script>
+<script src="src/nlm.js"></script>
 <script src="src/kilo-lane-guards.js"></script>
+<script src="src/floodgates.js"></script>
 <script src="src/gl-boot.js"></script>
