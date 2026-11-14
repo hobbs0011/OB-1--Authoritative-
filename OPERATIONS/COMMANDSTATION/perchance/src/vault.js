@@ -68,6 +68,9 @@
       why:"the vault itself — every route answers 401 until this is armed; the scheme is in APPS/SOV100-VAULT/README.md" },
     { local:"kilo",      name:"KILO_GATEWAY_JWT",    svc:"Kilo Gateway",  where:"this browser only · set with /vault set kilo <JWT> or /tool key <JWT> (same slot, obi_keys.kilo)",
       why:"the tool lane — gateway_chat + gateway_models from this browser (free lane first, usage metered). AUDIT 2026-10-24: this was the only working key with no vault slot, no seal and no escrow — a rename wiped it like the rest" }
+    ,
+    { local:"openrouter",name:"OPENROUTER_API_KEY",  svc:"OpenRouter",    where:"this browser only · set with /tool key <sk-or-v1-…> (same slot, obi_keys.openrouter)",
+      why:"the audit lane — DeepSeek Pro re-audits via openrouter_chat (metered, receipts carry cost). Added 2026-11-11: lived outside the manifest until the first Pro audit; now a first-class row so /vault seal covers it" }
   ];
   /* the canon's FUTURE KEYS — named here so nothing is invented twice later. */
   const PLANNED = [
