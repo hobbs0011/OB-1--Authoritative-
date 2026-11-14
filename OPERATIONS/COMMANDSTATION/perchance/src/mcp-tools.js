@@ -27,6 +27,16 @@ function folder(){ try{ return (root && root.kv) ? (root.kv.mcp || null) : null;
   function kiloKey(){ try{ return keyGet("kilo") || null; }catch(e){ return null; } }
   function orKey(){ try{ return keyGet("openrouter") || null; }catch(e){ return null; } }
 function head(s, n){ s = String(s == null ? "" : s); return s.length > n ? s.slice(0, n) + "…" : s; }
+function dotGuard(text){
+  try{
+    var G = (typeof window !== "undefined" && window.KiloGuards) ? window.KiloGuards : null;
+    if(!G || !G.promptBlocked) return;
+    var b = G.promptBlocked(text);
+    if(b && b.blocked && b.blocked.length){
+      throw new Error("dot path refused (" + b.blocked.slice(0, 3).join(", ") + ") — not an explicit canon pointer. Canon flows: CANON/SYSTEM/GOSPEL-999.md + LegionnaireFieldGuide.md + .github/skills/legionnaire-field-guide/SKILL.md only.");
+    }
+  }catch(e){ if(/dot path refused/.test(String((e && e.message) || e))) throw e; }
+}
 async function gw(path, opts){
   var o = opts || {};
   var r = await root.superFetch(GATE + path, {
@@ -39,10 +49,11 @@ async function gw(path, opts){
   return { status: r.status, j: j, txt: txt };
 }
 async function runChat(a){
-  var k = kiloKey();
-  if(!k) throw new Error("no Kilo key in this browser — /tool key <JWT> first");
   var prompt = String((a && (a.prompt || a.text)) || "");
   if(!prompt.trim()) throw new Error("empty prompt");
+  dotGuard(prompt);
+  var k = kiloKey();
+  if(!k) throw new Error("no Kilo key in this browser — /tool key <JWT> first");
   var model = (a && a.model) || DEF_MODEL;
   var max_tokens = Math.min(Math.max(parseInt((a && a.max_tokens) || "1000", 10) || 1000, 300), 2000); // floor 300: Kilo chat never starves the model — tiny budgets truncate replies (proven 2026-10-25)
   var r = await gw("/chat/completions", { key: k, method: "POST", json: true,
@@ -67,10 +78,11 @@ async function orAuth(key){
   return { status: r.status, j: j, txt: txt };
 }
 async function runOrChat(a){
-  var k = orKey();
-  if(!k) throw new Error("no OpenRouter key in this browser — paste it with /tool key <sk-or-…> (stored locally, never logged)");
   var prompt = String((a && (a.prompt || a.text)) || "");
   if(!prompt.trim()) throw new Error("empty prompt");
+  dotGuard(prompt);
+  var k = orKey();
+  if(!k) throw new Error("no OpenRouter key in this browser — paste it with /tool key <sk-or-…> (stored locally, never logged)");
   var model = (a && a.model) || DEF_OR_MODEL;
   var max_tokens = Math.min(parseInt((a && a.max_tokens) || "1500", 10) || 1500, 8000);
   var body = { model: model, max_tokens: max_tokens, messages: [{ role: "user", content: prompt }] };
@@ -93,6 +105,7 @@ async function runCloudMcp(a){
   var args = (a && (a.arguments || a.args)) || {};
   if(!tool) throw new Error("usage: /tool run cloud_mcp '{\"tool\":\"openrouter_chat\",\"arguments\":{\"prompt\":\"…\"}}'");
   if(typeof args === "string"){ try{ args = JSON.parse(args); }catch(e){ throw new Error("arguments must be a JSON object"); } }
+  try{ dotGuard(JSON.stringify(args)); }catch(e){ if(/dot path refused/.test(String((e && e.message) || e))) throw e; }
   var id = "c" + Date.now().toString(36);
   var r = await root.superFetch(String(base).replace(/\/+$/, "") + "/mcp", { method: "POST", headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ jsonrpc: "2.0", id: id, method: "tools/call", params: { name: tool, arguments: args } }) });
@@ -103,10 +116,19 @@ async function runCloudMcp(a){
   var res = j.result || {};
   return { via: "cloud_mcp", content: res.content, meta: res._meta || null };
 }
+async function runPhoneDrop(a){
+  var tag = String((a && (a.tag)) || "");
+  var text = String((a && (a.text || a.prompt)) || "");
+  if(!tag.trim() || !text.trim()) throw new Error("usage: /tool run phone_drop '{\"tag\":\"scout-probe\",\"text\":\"hello\"}' — tag short id, text the report (50KB max)");
+  tag = tag.toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/-+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40) || "untagged";
+  if(text.length > 50000) throw new Error("drop too big (" + text.length + "ch > 50000) — split it");
+  return await runCloudMcp({ tool: "phone_drop", arguments: { tag: tag, text: text } });
+}
 var TOOLS = [
   { name: "gateway_chat", lane: "LIVE", desc: "chat completion via the Kilo Gateway (free lane first, usage metered)", run: runChat },
   { name: "gateway_models", lane: "LIVE", desc: "live model catalog: count + free lane + sample", run: runModels },
   { name: "openrouter_chat", lane: "LIVE", desc: "chat via OpenRouter (DeepSeek Flash default, Pro on request — metered, receipts carry cost)", run: runOrChat },
+  { name: "phone_drop", lane: "LIVE", desc: "keyless inbox to git PHONE-DROPS via the deployed runner (tag sanitized, 50KB cap, path locked server-side)", run: runPhoneDrop },
   { name: "edtech_build", lane: "DOWN", desc: "lesson build on the edtech desk", down: "no remote endpoint yet — the edtech desk has no callable lane; staged as tools/call edtech_build in src/mcp-server/worker.js for deploy day", run: downWhy("no remote endpoint yet — the edtech desk has no callable lane") },
   { name: "cloud_mcp", lane: "LIVE", desc: "the deployed runner's MCP over HTTPS (proxied tools/call) — the closed-browser brain, callable from here", run: runCloudMcp }
 ];
@@ -127,16 +149,34 @@ async function toolRun(name, args){
   for(i = 0; i < TOOLS.length; i++) if(TOOLS[i].name === name) t = TOOLS[i];
   var at = Date.now();
   if(!t) return { ok: false, err: "unknown tool — /tool list" };
-  if(t.lane !== "LIVE"){ var rec0 = { id: "T" + at.toString(36), at: at, tool: name, ms: 0, ok: false, err: t.down }; await saveReceipt(rec0); return { ok: false, err: t.down, receipt: rec0.id }; }
+  /* FLOODGATES — admission control before any metered call. A governor error
+     never bricks the lane (allow + counted bypass); a policy breach refuses. */
+  if(window.Floodgates){
+    try{
+      var g = window.Floodgates.check(name, args || {});
+      if(!g.ok){
+        var recR = { id: "T" + at.toString(36), at: at, tool: name, ms: 0, ok: false, err: "floodgate: " + g.why, args: argsSummary(args) };
+        await saveReceipt(recR);
+        try{ window.Floodgates.record(recR); }catch(e){}
+        return { ok: false, err: "floodgate: " + g.why };
+      }
+    }catch(e){
+      try{ var bs = JSON.parse(localStorage.getItem("obi_flood") || "{}"); bs.bypass = (bs.bypass || 0) + 1; localStorage.setItem("obi_flood", JSON.stringify(bs)); }catch(e2){}
+    }
+  }
+  if(t.lane !== "LIVE"){ var rec0 = { id: "T" + at.toString(36), at: at, tool: name, ms: 0, ok: false, err: t.down }; await saveReceipt(rec0); try{ if(window.Floodgates) window.Floodgates.record(rec0); }catch(e){} return { ok: false, err: t.down, receipt: rec0.id }; }
   var t0 = Date.now();
   try{
     var out = await t.run(args || {});
     var rec = { id: "T" + at.toString(36), at: at, tool: name, ms: Date.now() - t0, ok: true, args: argsSummary(args), out: out };
     await saveReceipt(rec);
+    try{ if(window.Floodgates) window.Floodgates.record(rec); }catch(e){}
     return { ok: true, receipt: rec.id, ms: rec.ms, out: out };
   }catch(e){
     var msg = String((e && e.message) || e).slice(0, 300);
-    await saveReceipt({ id: "T" + at.toString(36), at: at, tool: name, ms: Date.now() - t0, ok: false, err: msg, args: argsSummary(args) });
+    var recE = { id: "T" + at.toString(36), at: at, tool: name, ms: Date.now() - t0, ok: false, err: msg, args: argsSummary(args) };
+    await saveReceipt(recE);
+    try{ if(window.Floodgates) window.Floodgates.record(recE); }catch(e2){}
     return { ok: false, err: msg };
   }
 }
