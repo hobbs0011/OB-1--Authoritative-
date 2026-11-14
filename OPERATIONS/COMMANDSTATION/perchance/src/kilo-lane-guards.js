@@ -108,6 +108,114 @@
   // Paid lanes degrade to the free map, never to a halt.
   function degradeNote(){ return "paid lane dead -> free map (box + runner cron + gateway free rotation); halt only on sovereign order"; }
 
+  // E13 — dotfile cutoff (2026-11-11, sovereign order: Kilo hides system files,
+  // then pulls them at the worst time). DENY any path where ANY segment starts
+  // with '.' (.github/ .claude/ .copilot- .dockerignore .env .kilo_key ...),
+  // dot-markdown included. ALLOW only explicit canon pointers:
+  //   - CANON/SYSTEM/GOSPEL-999.md (non-dot, always allowed)
+  //   - CANON/SYSTEM/LegionnaireFieldGuide.md (non-dot, always allowed)
+  //   - .github/skills/legionnaire-field-guide/SKILL.md (dot, but IS the Field Guide)
+  // Everything else dot-prefixed is refused, even .md. No invented exceptions:
+  // a new dot exception needs a sovereign order naming the exact path.
+  var DOT_SEG = /(^|\/)\.[^\/\s"'`\(\)\[\]\{\}<>|]*/;
+  var CANON_DOT_ALLOW = [
+    ".github/skills/legionnaire-field-guide/SKILL.md"
+  ];
+  // Hardened gate (Pro audit 2026-11-11: naive string guard bypassable).
+  // Decode → normalize → resolve → exact-allowlist. No substring trust.
+  function decodeLoop(s){
+    var out = String(s), prev;
+    for(var i = 0; i < 3; i++){
+      if(out.indexOf("%") === -1) break;
+      prev = out;
+      try{ out = decodeURIComponent(out); }catch(e){ break; }
+      if(out === prev) break;
+    }
+    return out;
+  }
+  function canonPath(p){
+    var raw = String(p == null ? "" : p).trim();
+    if(!raw) return { ok: false, blocked: "", why: "empty" };
+    if(raw.indexOf("\0") !== -1) return { ok: false, blocked: raw.slice(0, 80), why: "null byte" };
+    var s = raw.replace(/\\/g, "/");
+    // unicode dots → ascii dot (fullwidth, one-dot-leader, ideographic, middle)
+    s = s.replace(/[．․﹒。·]/g, ".");
+    s = decodeLoop(s);
+    if(s.indexOf("\0") !== -1) return { ok: false, blocked: raw.slice(0, 80), why: "null byte after decode" };
+    try{ if(s.normalize) s = s.normalize("NFKC"); }catch(e){}
+    s = s.replace(/\\/g, "/").replace(/\/+/g, "/").replace(/^\/+/, "");
+    var parts = s.split("/"), stack = [];
+    for(var i = 0; i < parts.length; i++){
+      var seg = parts[i];
+      if(!seg || seg === ".") continue;
+      if(seg === ".." || seg === "…" || seg === "。。。"){
+        if(!stack.length) return { ok: false, blocked: raw.slice(0, 80), why: "path walk above root" };
+        stack.pop(); continue;
+      }
+      // windows: trailing dots/spaces stripped by OS — strip here first so "skills./" cannot hide
+      if(seg !== "." && seg !== "..") seg = seg.replace(/[. ]+$/, "");
+      if(!seg || seg === ".") continue;
+      stack.push(seg);
+    }
+    var canon = stack.join("/");
+    if(!canon) return { ok: false, blocked: raw.slice(0, 80), why: "empty after resolve" };
+    return { ok: true, canonical: canon };
+  }
+  function normPath(p){ var c = canonPath(p); return c.ok ? c.canonical : String(p == null ? "" : p).trim().replace(/\\/g, "/").replace(/\/+/g, "/"); }
+  function isDotPath(p){
+    var c = canonPath(p);
+    var n = c.ok ? c.canonical : String(p);
+    // walk-out that escapes root is already refused; re-check here as dot-equivalent
+    if(!c.ok) return true;
+    var segs = n.split("/");
+    for(var i = 0; i < segs.length; i++){
+      var s = segs[i];
+      if(!s) continue;
+      if(s.charAt(0) === "." && s.length > 1) return true;
+      if(s === "..") return true;
+    }
+    return false;
+  }
+  function isCanonDotAllowed(p){
+    var c = canonPath(p);
+    if(!c.ok) return false;
+    var n = c.canonical.toLowerCase();
+    for(var i = 0; i < CANON_DOT_ALLOW.length; i++) if(n === CANON_DOT_ALLOW[i].toLowerCase()) return true;
+    return false;
+  }
+  function checkPath(p){
+    var raw = String(p == null ? "" : p).trim();
+    var c = canonPath(raw);
+    if(!c.ok) return { ok: false, blocked: raw.slice(0, 80), why: "refused: " + c.why };
+    var n = c.canonical;
+    if(!isDotPath(n)) return { ok: true, why: "non-dot (canon CANON/SYSTEM/GOSPEL-999.md + LegionnaireFieldGuide.md flow here)", canonical: n };
+    if(isCanonDotAllowed(n)) return { ok: true, why: "explicit canon pointer (Field Guide skill)", canonical: n };
+    return { ok: false, blocked: n, why: "dot path refused — not an explicit canon pointer" };
+  }
+  // Scan a prompt/args blob for path-like tokens (plain, encoded, backslash). Returns deduped blocked list.
+  function promptBlocked(text){
+    var s = String(text == null ? "" : text);
+    if(!s) return { blocked: [] };
+    var found = {};
+    function feed(tok){
+      var t = String(tok || "").replace(/[.,;:!?\)\]\}>'"]+$/, "");
+      if(!t || t === "." || t === ".." || t.length < 2) return;
+      // skip bare model slugs and version tags (no slash, no backslash, no percent, no leading dot)
+      if(t.indexOf("/") === -1 && t.indexOf("\\") === -1 && t.indexOf("%") === -1 && t.charAt(0) !== ".") return;
+      var c = checkPath(t);
+      if(!c.ok) found[c.blocked] = 1;
+    }
+    var re = /(^|[\s"'`\(\[\{<])(\.[A-Za-z0-9_\-]+[\w\-\.\/]*|[\w\-\.\/]*\/\.[A-Za-z0-9_\-]+[\w\-\.\/]*)/g, m;
+    while((m = re.exec(s)) !== null) feed(m[2]);
+    // percent-encoded dots (%2e) — decode-then-check
+    var re2 = /[^\s"'`\(\)\[\]\{\}<>|;:,!?]*%2[eE][^\s"'`\(\)\[\]\{\}<>|;:,!?]*/g, m2;
+    while((m2 = re2.exec(s)) !== null) feed(m2[0]);
+    // backslash paths (windows separators)
+    var re3 = /[^\s"'`\(\)\[\]\{\}<>|;:,!?]*\\[^\s"'`\(\)\[\]\{\}<>|;:,!?]*/g, m3;
+    while((m3 = re3.exec(s)) !== null) feed(m3[0]);
+    return { blocked: Object.keys(found) };
+  }
+  function dotCutoffNote(){ return "dot paths refused except .github/skills/legionnaire-field-guide/SKILL.md; canon CANON/SYSTEM/GOSPEL-999.md + LegionnaireFieldGuide.md are non-dot and always allowed"; }
   async function probeLane(okFn){
     // cheap ping before expensive work; hollow -> 20min backoff, not grinding.
     try { var r = await okFn(); return { alive: !!r, at: Date.now() }; }
@@ -130,8 +238,28 @@
     t("E9 rotation pinned", FREE_ROTATION_PIN.length >= 3, rotationNote().slice(0, 60));
     breakerTrip("m/test", 60000); t("E5 breaker trips", breakerNote("m/test") === true, "skip while hot");
     breakerClear("m/test"); t("E5 breaker clears", breakerNote("m/test") === false, "back after cool");
+    t("E13 dot .github refused", checkPath(".github/copilot-instructions.md").ok === false, "dot-markdown cut off");
+    t("E13 dot .claude refused", checkPath(".claude/commands/PCClaw.md").ok === false, "hidden system file cut off");
+    t("E13 dot .env refused", checkPath(".env").ok === false && checkPath(".kilo_key").ok === false, "secrets never flow");
+    t("E13 canon GOSPEL allowed", checkPath("CANON/SYSTEM/GOSPEL-999.md").ok === true, "GOSPEL-999 flows");
+    t("E13 canon LFG allowed", checkPath("CANON/SYSTEM/LegionnaireFieldGuide.md").ok === true, "Field Guide flows");
+    t("E13 canon skill allowed", checkPath(".github/skills/legionnaire-field-guide/SKILL.md").ok === true, "explicit canon pointer");
+    t("E13 prompt scan blocks", promptBlocked("read .github/instructions/kilo-agent-files.instructions.md now").blocked.length === 1, "prompt smuggling caught");
+    t("E13 prompt scan spares canon", promptBlocked("read CANON/SYSTEM/GOSPEL-999.md and .github/skills/legionnaire-field-guide/SKILL.md").blocked.length === 0, "canon passes");
+    t("E13H encoded refused", checkPath("%2e%2e/%2e%2e/.env").ok === false, "percent-encoding caught");
+    t("E13H double-encoded refused", checkPath("%252e%252e/.env").ok === false, "double encoding caught");
+    t("E13H backslash refused", checkPath(".github\\copilot-instructions.md").ok === false, "backslash caught");
+    t("E13H walkout refused", checkPath(".github/skills/legionnaire-field-guide/SKILL.md/../../.env").ok === false, "allowlist walk-out caught");
+    t("E13H canon walkout refused", checkPath("CANON/SYSTEM/GOSPEL-999.md/../../.env").ok === false, "canon prefix walk-out caught");
+    t("E13H above-root refused", checkPath("../../.env").ok === false, "above-root caught");
+    t("E13H unicode dot refused", checkPath("．env").ok === false, "unicode dot caught");
+    t("E13H null refused", checkPath("foo/.env%00.md").ok === false, "null/truncation caught");
+    t("E13H+ trailing strip", checkPath(".github /copilot-instructions.md").ok === false, "trailing space caught");
+    t("E13H+ win dir", checkPath("skills./x").ok === true && checkPath("skills./../.env").ok === false, "windows strip then refuse");
+    t("E13H+ homoglyph", checkPath(".ɡithub/skills/legionnaire-field-guide/SKILL.md").ok === false, "script-g spoof refused");
+    t("E13H+ NFKC", checkPath(".github/skills/legionnaire-field-guide/SKILL.md").ok === true, "exact ASCII allowlist still passes");
     return { pass: checks.every(function(c){ return c.result === "PASS"; }), checks: checks,
-      notes: [runnerCheckNote(), backupRaceNote(), scholarRule(), degradeNote()] };
+      notes: [runnerCheckNote(), backupRaceNote(), scholarRule(), degradeNote(), dotCutoffNote()] };
   }
 
   window.KiloGuards = { PROMPT_CAP: PROMPT_CAP, KEEPER_CAP: KEEPER_CAP, FREE_ROTATION_PIN: FREE_ROTATION_PIN,
@@ -140,5 +268,8 @@
     breakerNote: breakerNote, breakerTrip: breakerTrip, breakerClear: breakerClear,
     keeperShouldStop: keeperShouldStop, sizeVerdict: sizeVerdict, soulWorthy: soulWorthy,
     rotationNote: rotationNote, backupRaceNote: backupRaceNote, scholarRule: scholarRule,
-    degradeNote: degradeNote, probeLane: probeLane, selfTest: selfTest };
+    degradeNote: degradeNote, probeLane: probeLane, selfTest: selfTest,
+    isDotPath: isDotPath, isCanonDotAllowed: isCanonDotAllowed, checkPath: checkPath,
+    promptBlocked: promptBlocked, dotCutoffNote: dotCutoffNote, CANON_DOT_ALLOW: CANON_DOT_ALLOW,
+    decodeLoop: decodeLoop, canonPath: canonPath };
 })();
