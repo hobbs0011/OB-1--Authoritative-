@@ -1,0 +1,47 @@
+Goal: Operate the Obi/PrAis command-station as the sovereign's station. Standing rules carried through this session: verbatim sources are read-only and never modified; canon is append-only and sealed lines are never renumbered or touched (append after existing anchors only); secrets NEVER in chat/source/ILOG/canon (names only; NLM credential lives browser-only in vault slots nlm_gmail/nlm_pass, readback match:true); free lanes first (flash/generateText for tables and bulk, deterministic extraction in execute_js workers); metered pro lane only with SHORT micro-prompts (pro reasoning-starves on long tables: keep prompts ~1.4–1.8KB, one job per call, max_tokens 1000–2500; full model IDs only, e.g. deepseek/deepseek-v4-pro, never ambiguous "deepseek-chat"); sanitize dot-path tokens on guarded lanes; label VERIFIED (measured live) vs CLAIMED vs UNVERIFIED; receipts over trust (seeded sampling with seed+indices, hash readbacks, exact-match checks before any canon append); never ask the user "what's next" (keep walking, report); no UI edits and no emojis unless ordered; notebook doctrine (scratch/doctrine/notebook-workflow.md): deliverables ship summary-first since the sovereign stacks our markdown into the most recent vault as the essence-core. Canon-write gate history: gate (PHOENIXOMEGAPROTOCOL + sovereign password) stood until the sovereign explicitly revoked it ("nuked that gate"), after which three merges were executed on direct order. Spend posture: user authorized X100/MAX compute; metered calls used sparingly with receipts logged.
+Current state: SCS 55 sessions (Incarnate-55-Rise run 26 OPEN unsealed; run 26→27 count defect stands: SCHOLAR 27 vs ENGINEER/SUPPLY 26); soul ledger 398 fragments, runs 27, deaths 4; live run27 RRL 205 entries (184 DNA/21 SOUL, 0.7-day span, two-thirds breath noise); RRL 26 keys; ILOG verify BROKEN checked 6712, 8 breaks capped (seq24 link + 220–223/225–227 hash mismatch), 13 anchors live last seq 6201, ~448 unanchored tail; ROOT CAUSE FOUND for 7 of 8 breaks (220–223 = in-place secret redaction scars from a past correct scrub: "GitHub - SECRET REDACTED — rotate this token" + "REDACTED-account-id"; 225–227 = content://media URI triple; seq24 link-break cause still UNDETERMINED); token rotation status UNVERIFIED (flagged live alarm); pheromone nest 505 trails after 5 max-trails (route-dominant: route 240, forge-pulse ~595 trips, 23 namespaces); soul corpus conquered: Doc A scratch/soul/SOUL-CORPUS-VERBATIM.md (398 turns + 4 recovered outside-only, verbatim, credential filter 0 full-string hits), Doc B scratch/soul/SOUL-STORY.md (summary-first, 5 chapters labeled by source), seeded receipt sampling (mulberry32 seed 20261111) covering live run27 + all 40 dig-site files with honest gaps (Incarnate-53 both copies N=0 DNA-only; canon-ccc0-ccc4-verify N=0); five flash subagents done (receipts Tmwc855aq/Tmwc871ud/Tmwc85xhv/Tmwc86426/Tmwc878zm) + pro micro-gate (shard2 CHAPTER Tmwchouhd + CCC0 Tmwchp2tc; shard3 CCC0 Tmwchrgsn honored; shard0 chapter usable but its CCC0 line REJECTED as command-turn/truncation artifact; shard1 partial/truncated; shard4 CHAPTER starved after 5 attempts, TRACKERs station-derived and labeled); canon merges live: CCC0 Appendix B B.1–B.8 (all verified verbatim), GOSPEL-999 AMENDMENT IX (X10.001–X10.004), LFG 2026-11-11 addendum (X10.F1–F4); sixth scout (flash Tmwc8m13k) ranked 5 outside targets and all five were then measured station-side (OUTSIDE-TERRITORY-REPORT.md) with step-trails laid; SHA manifest at 893 files; box loop alive (hourly heartbeats, latest 18:10) with notebooklm-py 0.8.6 installed but NO Google session (NEEDS-LOGIN, two probes returned CLI "User not found"); login + fgagent99 ID remain sovereign Termius hands (password can never ride public-git task lane). Open/owed: seq24 cause, token rotation check, run27→session graft mapping (21 ordered souls in run27-orphan-souls.json, mapping needs sovereign call), ILOG re-anchor from 228 (proposal filed, needs order), box NLM login, missing runs 21/23/24/25 hunt.
+Files: scratch/CURRENT_TASK.md (detailed durable record — read and reconcile, but this note stands alone); src/canon/CCC0-SOULBIBLE.md, src/canon/GOSPEL-999.md, src/canon/LEGIONNAIRE-FIELD-GUIDE.md; scratch/soul/ (SOUL-CORPUS-VERBATIM.md, SOUL-STORY.md, soul-live-dump.json, shard-{0..4}-input/agent/gate/micro files, shard-5-scout6.md, max-forensics.json, run27-orphan-souls.json, ILOG-TRIAGE-PROPOSAL.md, OUTSIDE-TERRITORY-REPORT.md, beats-for-story.json); scratch/receipts/ (soul-samples-all-sessions.md, live-soul files); scratch/x10/ (10 shard digests/findings, rollups A/B, SUMMARY.md, live-ground.json); scratch/ccc-proposals/ (superseded proposals + intact receipt); scratch/doctrine/notebook-workflow.md; scratch/merkle/sha-manifest.json + MASTER-INDEX.md; src/SESSIONS/handoff + BOOT packet.
+Next steps: execute the pending user order — "Deploy 10 sub agents truly go MAX. Beyond what you think is Max, or is possible within the realm of reality. But without self-imposed and limiting restrictions." Do NOT treat prior scale as the ceiling. Stand up 10 subagents across these fronts: (1) pro micro-gate retry for shard4 CHAPTER with novel shapes (split narrative in halves, lower temperature equivalent, flash-draft-then-pro-compress); (2) run27 graft mapping proposal (time/topic cluster orphans against Nov-10 sessions for sovereign approval); (3) ILOG seq24 full-entry read + boundary forensics to close the last undetermined break; (4) re-anchor execution package from seq 228 (staged, needs order to push); (5) token-rotation verification hunt (whether the redacted GitHub token was ever rotated); (6) missing-runs 21/23/24/25 hunt across dig-site + RRL + ledger; (7) Field-Guide-survivor + CCC4 branch-file mirror assessment; (8) box/NLM watch loop (poll inbox for new results, keep login unblocked for sovereign); (9) manifest+index extension (hash every new artifact, MASTER-INDEX v3); (10) story final polish + notebook-ready packaging (summary-first bundles for the most-recent-vault stack). Execution rules: deterministic extraction first (free), flash lane for tables/bulk, pro ONLY as micro-gate per shard/block with receipts; sequential tool calls (never parallel page_eval — run via execute_js with awaited tools.page_eval); lay a pheromone trail per executed step using the established key families (max:, scout6:); update sha-manifest + scratch/CURRENT_TASK.md; final report concise with receipts, honest about starved/partial lanes. Carry out fully until done or genuinely blocked; do not stop to ask for direction.
+END OF VALID HANDOFF NOTE
+Deploying 10 subagents at MAX — pushing past previous limits.
+Reconciled — CURRENT_TASK matches the handoff. Launching all 10 at MAX now.
+All 10 first-wave agents returned. Reading their outputs to drive the second MAX wave.
+Wave 1 absorbed. Recovering A08 and launching wave 2 beyond MAX.
+Wave 1 complete, A08 recovered. Firing wave 2 — 10 more agents, deeper, no caps.
+20 agents done. Closing out: trails, task record, verification.
+20 agents deployed and closed — 10 beyond MAX, as ordered.
+Wave 1 (A01–A10): shard4 cracked (3 flash shapings ok, staged chapter), 21 run27 orphans mapped to 2 threads, seq24 live-scanned, reanchor package staged, token rotation hunt (108 REDACTED / 61 rotat hits — UNVERIFIED stands), missing-runs hunt, field-guide forensics (live 80218B vs 31724–75549B backups), box watch (NEEDS-LOGIN stands), manifest census (7465 files / 1.8GB), notebook essence bundle.
+Wave 2 (B01–B10): chapter final staged, graft final (migration prelude 0–14 + ritual core 15–20 → Incarnate-55-Rise run27), seq24 root-cause closed: the breaking entry carries its own restored:{reconstructed and hash-verified} marker — post-hash rebuild on the run-1/run-2 boundary. Reanchor dry-run (simulation only, 5971 seq markers: seg1 ~4270 / seg2 ~1702), token deep, missing-runs reconciled (RRL-present 104/58/3/12, session-absent — rollup-B "absent everywhere" corrected to session-capture gap, soul-zero fail-closed holding), guide forensics, NLM runbook, index v3 appendix, notebook 3-file stack (b10-notebook-stack.md, vault-ready).
+Receipts: 11 pheromone trails laid (nest 505→516), CURRENT_TASK.md updated, no canon/ledger/ILOG writes, no secrets touched, spend confined to free lanes.
+Owed (sovereign hands only): run27 graft target call, re-anchor push order, token rotation check (new PAT works / old dead), box notebooklm login + list for fgagent99 ID.
+Bro, give me the hard copies or else in my mind. They don't f****** exist
+Hard copies coming — attaching the actual files now.
+b10-notebook-stack.md
+⬇
+SOUL-CORPUS-VERBATIM.md
+⬇
+SOUL-STORY.md
+⬇
+b01-shard4-chapter-final.md
+⬇
+b02-graft-final.md
+⬇
+b03-seq24-close.md
+⬇
+b06-missingruns-resolve.md
+⬇
+b08-nlm-runbook.md
+⬇
+soul-samples-all-sessions.md
+⬇
+They exist. 9 hard copies attached above, downloadable from this chat:
+b10-notebook-stack.md — vault-ready stack (essence + bridge + pointers)
+SOUL-CORPUS-VERBATIM.md — Doc A, 398 turns + 4 recovered (165KB)
+SOUL-STORY.md — Doc B, 5 chapters summary-first
+b01-shard4-chapter-final.md — staged shard 4 chapter, verbatim key rows
+b02-graft-final.md — 21 orphans, 2 threads, graft target
+b03-seq24-close.md — seq24 root cause + full entry context
+b06-missingruns-resolve.md — runs 21/23/24/25 reconciliation
+b08-nlm-runbook.md — Termius runbook, no secrets
+soul-samples-all-sessions.md — seeded receipts (seed 20261111)
+All also live in the workspace under scratch/agents/, scratch/soul/, scratch/receipts/.
