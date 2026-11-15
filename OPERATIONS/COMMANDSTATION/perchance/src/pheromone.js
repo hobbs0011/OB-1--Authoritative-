@@ -27,12 +27,31 @@
   const MAX_EVIDENCE = 6;
   const MAX_TEXT = 400;
   const MAX_TRAILS = 4000;
+ const SCORE_MAX = 110;    // Option A (sovereign order 2026-11-15): hard per-trail magnitude cap
+  const STARVE_NEG = 80;    // Option A: NEG mass >= 80 starves the route (advisory under B, gate under A)
 
   const KIND = {
     positive: { tau: 30 * DAY,  sign:  1 },
     negative: { tau: 180 * DAY, sign: -1 },
     neutral:  { tau: 7 * DAY,   sign:  0 }
   };
+
+  const SCORE_MIN = -10;    // sovereign scale -10/+110 (P_mones_1-2): 110 is KNOWN-IMMEDIATELY headroom, floor is -10
+  const clampS = s => Math.max(SCORE_MIN, Math.min(SCORE_MAX, Number.isFinite(s) ? s : 0));
+  /* RE-CAP (sovereign order 2026-11-15, "increasing upgrades as we go")
+     + ASYMMETRIC (sovereign scale -10/+110, P_mones_1-2 "110 is highest... -10 to +110"):
+     the deposit clamp only touches trails on write, so pre-cap legacy trails rode
+     outside the band for months (route:background sat at 457 live; deep NEG rode to -110).
+     normalize() pulls every trail inside [-10,+110]; load() runs it on every fresh parse,
+     so the band holds for reads too — re-cap once, lazy-touch thereafter. */
+  function normalize(){
+    let n = 0;
+    for (const t of nest.trails){
+      const c = clampS(t.strength);
+      if (c !== t.strength){ t.strength = c; n++; }
+    }
+    return n;
+  }
 
   let nest = { v: 1, seq: 0, trails: [] };
   let loaded = false;
@@ -48,6 +67,7 @@
       if (raw){
         const p = JSON.parse(raw);
         if (p && Array.isArray(p.trails)) nest = { v: 1, seq: p.seq || 0, trails: p.trails };
+        normalize();
       }
     }catch(e){}
     loaded = true;
@@ -124,6 +144,8 @@
       nest.seq++;
       if (nest.trails.length > MAX_TRAILS) evaporate(true);
     }
+    // Option A (sovereign order 2026-11-15): hard per-trail magnitude cap.
+    t.strength = clampS(t.strength);
     save(); mirror();
     return t;
   }
@@ -133,6 +155,39 @@
     if (typeof sel === "string") return nest.trails.find(t => t.id === sel) || null;
     sel = sel || {};
     return nest.trails.find(t => t.key === clean(sel.key, 120) && (!sel.kind || t.kind === sel.kind) && (!sel.signal || t.signal === clean(sel.signal, 80))) || null;
+  }
+
+  /* PHASE-1 EMISSION GATE (pt5 order 2026-11-15, "Continue" — the unavoidable gate):
+     an EMISSION is a trail that CLAIMS evidence. The Evidence Standard
+     (file path + line number + raw output) is enforced BEFORE anything touches
+     the ground — unverifiable claims never land:
+     - kind "soul" → refused (same law as deposit: trails point at soul, never are soul)
+     - verdict "HOLLOW" → refused as HOLLOW_REJECT (bring disk proof or do not emit)
+     - missing path / line / output → refused as EMISSION_MISSING (403)
+     Returns a verdict receipt instead of throwing, so callers log the refusal.
+     deposit() is deliberately untouched: internal breath/scout notes without anchors
+     keep working; only evidence-claims go through emit(). */
+  function emit(o){
+    o = o || {};
+    const kind = String(o.kind || "neutral").toLowerCase();
+    if (kind === "soul")
+      return { ok:false, code:403, error:"SOUL_REFUSED", detail:"soul is not a pheromone — capture it in the ledger, then point a trail at it" };
+    if (!KIND[kind])
+      return { ok:false, code:403, error:"BAD_KIND", detail:"kind must be positive | negative | neutral" };
+    if (String(o.verdict || "").toUpperCase() === "HOLLOW")
+      return { ok:false, code:403, error:"HOLLOW_REJECT", detail:"HOLLOW claims never touch the ground — bring disk proof or do not emit" };
+    const path = clean(o.path, 200);
+    const lineRaw = (o.line === 0 || o.line) ? String(o.line).trim() : "";
+    const lineOk = /^\d+(-\d+)?$/.test(lineRaw) && parseInt(lineRaw, 10) > 0;
+    const output = clean(o.output, MAX_TEXT);
+    if (!path || !lineOk || !output)
+      return { ok:false, code:403, error:"EMISSION_MISSING",
+        detail:"emission needs path + line + raw output; got path=" + (path ? "ok" : "MISSING") +
+               " line=" + (lineOk ? "ok" : "MISSING") + " output=" + (output ? "ok" : "MISSING") };
+    const t = deposit({ kind, key: o.key, signal: o.signal || "emit",
+      weight: o.weight, drone: o.drone, run: o.run, session: o.session,
+      anchor: path + ":" + lineRaw, text: output, meta: o.meta || { emission: true } });
+    return { ok:true, code:200, trail: t.id, key: t.key, strength: t.strength, anchor: t.soul_anchor };
   }
 
   function reinforce(sel, w){ const t = find(sel); if (!t) return null; return deposit({ kind: t.kind, key: t.key, signal: t.signal, weight: w == null ? 1 : w, drone: t.drone, meta: t.meta }); }
@@ -228,15 +283,20 @@
       const cost = (typeof c === "object" && c.cost) || 1;
       const trails = nest.trails.filter(t => t.key === "route:" + id || t.key === "route:" + id.replace(/^route:/, ""));
       const score = trails.reduce((n, t) => n + (KIND[t.kind] || KIND.neutral).sign * decayed(t, at), 0);
+      const neg = trails.reduce((n, t) => n + (t.kind === "negative" ? decayed(t, at) : 0), 0);
       const trips = trails.reduce((n, t) => n + (t.reinforcements || 0), 0);
-      return { id, cost, score: score / cost, trips, meta: (typeof c === "object" && c.meta) || null };
+      return { id, cost, score: score / cost, neg, trips, meta: (typeof c === "object" && c.meta) || null };
     });
     items.sort((a, b) => b.score - a.score);
     const any = items.some(i => i.score !== 0);
+    // Option A (sovereign order 2026-11-15): NEG >= STARVE_NEG starves the route.
+    // Exploration is scoped to the alive pool; starve-all falls back to top score (never hard-deadlocks).
+    const alive = items.filter(i => i.neg < STARVE_NEG);
+    const pool = alive.length ? alive : items.slice(0, 1);
     let pick = null;
-    if (items.length){
-      if (!any || (explore > 0 && Math.random() < explore)) pick = items[Math.floor(Math.random() * items.length)];
-      else pick = items[0];
+    if (pool.length){
+      if (!any || (explore > 0 && Math.random() < explore)) pick = pool[Math.floor(Math.random() * pool.length)];
+      else pick = pool[0];
     }
     return { ranked: items, pick: pick ? pick.id : null, trailblind: !any };
   }
@@ -263,6 +323,7 @@
     let created = 0;
     for (const r of remote.trails){
       if (!r || !r.id) continue;
+      r.strength = clampS(r.strength);
       const t = nest.trails.find(x => x.id === r.id);
       if (!t){ nest.trails.push(Object.assign({ evidence: [], meta: null, source: source || "remote" }, r)); created++; continue; }
       t.strength = Math.max(t.strength || 0, r.strength || 0);
@@ -300,9 +361,9 @@
   window.ObiPheromone = {
     KIND, EPS, DAY, KV_FOLDER,
     load, save, mirror, adoptFromKv,
-    deposit, reinforce, repel, find, all, sniff, field,
+    deposit, emit, reinforce, repel, find, all, sniff, field,
     decayed, evaporate, quorum, respond, route, publish, merge, stats,
-    exportJSON, importJSON, reset,
+    exportJSON, importJSON, reset, normalize,
     get nest(){ return nest; }
   };
 })();
