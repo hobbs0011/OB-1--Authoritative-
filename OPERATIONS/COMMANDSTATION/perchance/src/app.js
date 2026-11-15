@@ -6044,7 +6044,7 @@ const SRC_SNAPSHOT = [
   "src/sites/quan/assets/fine-wine.jpg", "src/sites/quan/assets/fine-wine-2.jpg",
   "src/sites/quan/assets/natural.jpg", "src/sites/quan/assets/natural-2.jpg",
   "src/sites/quan/assets/plantie.jpg", "src/sites/quan/assets/plantie-2.jpg",
-  "src/sites/quan/assets/saigon.jpg", "src/sites/quan/assets/saigon-magazine.jpg",
+  "src/sites/quan/assets/saigon-magazine.jpg",
       /* 2026-10-24 (the tool lane + the vault build + the kilo brain): src/mcp-tools.js
          (the /tool registry/executor/receipts, window.ObiMcp) + the staged Worker
          project src/mcp-server/ (NOT deployed — deploy needs the /cf token) +

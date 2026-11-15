@@ -15,6 +15,7 @@
      GET  /pulse?key=...  — manual pulse (needs RUNNER_KEY when set)
      POST /mcp            — initialize, tools/list, tools/call (gateway_chat,
                             openrouter_chat, edtech_build-stub, phone_drop, git_read)
+     POST /canon-push     - batch git write (CANON_PUSH_KEY secret)
      POST /run            — { key, prompt?, model?, max_tokens? } → one model
                             call + durable log line (needs RUNNER_KEY when set)
 
@@ -43,7 +44,7 @@ const TOOL_DEFS = [
   { name: "edtech_build", description: "Lesson build on the edtech desk (stub until the desk exposes a callable lane)", inputSchema: { type: "object", properties: { spec: { type: "object" } } } },
   { name: "phone_drop", description: "Inbox from the phone lane: store a report where the station reads it (git PHONE-DROPS). Args: tag (short id, lowercase letters/numbers/hyphens, max 40 chars), text (the report, max 50000 chars). Returns the git path it landed at.", inputSchema: { type: "object", properties: { tag: { type: "string" }, text: { type: "string" } }, required: ["tag", "text"] } },
   { name: "git_read", description: "Read-only git lane for the box agent: read a file from OPERATIONS/COMMANDSTATION/ on master. Args: key (the RUNNER_KEY, box-held, never in chat), path (must start with OPERATIONS/COMMANDSTATION/; OPERATIONS/VAULT/ and secrets are refused), ref (default master). Max 200KB, text decoded. Returns {path, bytes, text}.", inputSchema: { type: "object", properties: { key: { type: "string" }, path: { type: "string" }, ref: { type: "string" } }, required: ["key", "path"] } }
-]; /* v0.4.0: +git_read (box read lane, keyed, allowlisted; Pro consult attempted x2, lane returned empty both times — proceeded on least-privilege judgment, logged) */
+]; /* v0.5.0: +/canon-push (server-side batch git write, CANON_PUSH_KEY secret) - v0.4.0: +git_read (box read lane, keyed, allowlisted; Pro consult attempted x2, lane returned empty both times — proceeded on least-privilege judgment, logged) */
 
 function repoOf(env) {
   const full = String(env.GH_REPO || "Phoenix-Rising-Ai-Solutions/OB-1--Authoritative-").trim();
@@ -131,6 +132,60 @@ async function putFileToGitHub(env, path, text, message) {
     if (!put.ok && put.status !== 201 && put.status !== 200) return { ok: false, why: "write HTTP " + put.status };
   } catch (e) { return { ok: false, why: "write failed: " + e.message }; }
   return { ok: true, path: path };
+}
+
+/* Bulk canon push - server-side git write for the station's /canon sync tail.
+   POST /canon-push { key, message, files:{path:b64}, deletes?:[path] }.
+   Guarded by the CANON_PUSH_KEY worker secret (set via the secrets API, never
+   in code/source). Data API (blobs -> tree -> commit -> ref) so a batch lands
+   as ONE commit. v0.5.0 ADDITIVE - no existing route touched. */
+async function canonPush(env, key, message, files, deletes) {
+  if (!env.CANON_PUSH_KEY) return { ok: false, why: "no CANON_PUSH_KEY secret set - lane closed" };
+  if (!key || key !== env.CANON_PUSH_KEY) return { ok: false, why: "bad key" };
+  const R = repoOf(env);
+  if (!R || !env.GH_TOKEN) return { ok: false, why: "git not configured" };
+  const paths = Object.keys(files || {});
+  if (!paths.length && !(deletes && deletes.length)) return { ok: false, why: "no files" };
+  if (paths.length > 120) return { ok: false, why: "too many files (" + paths.length + ", max 120 per call)" };
+  const h = { "authorization": "Bearer " + env.GH_TOKEN, "accept": "application/vnd.github+json", "content-type": "application/json", "user-agent": "pais-mcp-cloud/0.5.0" };
+  const base = "https://api.github.com/repos/" + R.owner + "/" + R.repo;
+  const errors = [];
+  let baseSha = null, baseTree = null;
+  try {
+    const ref = await fetch(base + "/git/refs/heads/" + R.branch, { headers: h });
+    const rj = await ref.json();
+    baseSha = rj && rj.object && rj.object.sha;
+    if (baseSha) { const c = await fetch(base + "/git/commits/" + baseSha, { headers: h }); const cj = await c.json(); if (cj && cj.tree) baseTree = cj.tree.sha; }
+  } catch (e) { return { ok: false, why: "ref read failed" }; }
+  if (!baseSha) return { ok: false, why: "no base ref" };
+  const treeEntries = [];
+  let pushed = 0;
+  for (const p of paths) {
+    try {
+      const b = await fetch(base + "/git/blobs", { method: "POST", headers: h, body: JSON.stringify({ content: String(files[p]), encoding: "base64" }) });
+      const bj = await b.json();
+      if (bj && bj.sha) { treeEntries.push({ path: p, mode: "100644", type: "blob", sha: bj.sha }); pushed++; }
+      else errors.push(p + " blob HTTP " + b.status);
+    } catch (e) { errors.push(p + " " + String(e).slice(0, 60)); }
+  }
+  for (const p of (deletes || [])) treeEntries.push({ path: p, mode: "100644", type: "blob", sha: null });
+  if (!treeEntries.length) return { ok: false, pushed: 0, failed: paths.length, errors };
+  try {
+    const live2 = await fetch(base + "/git/refs/heads/" + R.branch, { headers: h });
+    const lj = await live2.json();
+    const liveSha = lj && lj.object && lj.object.sha;
+    if (liveSha && liveSha !== baseSha) { baseSha = liveSha; const lc = await fetch(base + "/git/commits/" + liveSha, { headers: h }); const lcc = await lc.json(); if (lcc && lcc.tree) baseTree = lcc.tree.sha; }
+    const t = await fetch(base + "/git/trees", { method: "POST", headers: h, body: JSON.stringify(Object.assign({ tree: treeEntries }, baseTree ? { base_tree: baseTree } : {})) });
+    const tj = await t.json();
+    if (!tj || !tj.sha) return { ok: false, pushed, failed: paths.length - pushed, errors: errors.concat(["tree HTTP " + t.status]) };
+    const c = await fetch(base + "/git/commits", { method: "POST", headers: h, body: JSON.stringify({ message: String(message || "canon push via pais-mcp-cloud").slice(0, 200), tree: tj.sha, parents: [baseSha] }) });
+    const cj = await c.json();
+    if (!cj || !cj.sha) return { ok: false, pushed, failed: paths.length - pushed, errors: errors.concat(["commit HTTP " + c.status]) };
+    const u = await fetch(base + "/git/refs/heads/" + R.branch, { method: "PATCH", headers: h, body: JSON.stringify({ sha: cj.sha }) });
+    const uj = await u.json();
+    if (!uj || !uj.object) return { ok: false, pushed, failed: paths.length - pushed, errors: errors.concat(["ref HTTP " + u.status]), commitSha: cj.sha };
+    return { ok: errors.length === 0, pushed, failed: paths.length - pushed, commitSha: cj.sha, errors };
+  } catch (e) { return { ok: false, pushed, failed: paths.length - pushed, errors: errors.concat([String(e).slice(0, 100)]) }; }
 }
 /* Keyed read lane for the box agent. The key is the RUNNER_KEY worker secret —
    box-held (placed by the sovereign's own hands, never in chat/source), same
@@ -275,6 +330,12 @@ async function handleFetch(req, env) {
         } catch (e) { return ok({ content: [{ type: "text", text: "error: " + String((e && e.message) || e).slice(0, 300) }], isError: true }); }
       }
       return err(-32601, "unknown method: " + body.method);
+    }
+        if (req.method === "POST" && url.pathname === "/canon-push") {
+      let body = null;
+      try { body = await req.json(); } catch (e) { return Response.json({ ok: false, error: "parse error" }, { status: 400 }); }
+      const r = await canonPush(env, body.key, body.message, body.files, body.deletes);
+      return Response.json(r, { status: r.ok ? 200 : 500 });
     }
     return new Response("pais-mcp-cloud+runner — POST /mcp · POST /run · GET /pulse · GET /health", { status: 404 });
 }
