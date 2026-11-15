@@ -1,0 +1,539 @@
+{
+ "built": "2026-11-15T16:25:49.937Z",
+ "vaultC": {
+  "chars": 344412,
+  "blocks": 52
+ },
+ "vaultE": {
+  "chars": 236775,
+  "prompts": 85
+ },
+ "stages": [
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "12",
+  "13",
+  "14",
+  "15",
+  "16",
+  "17",
+  "18",
+  "19",
+  "20",
+  "21",
+  "22",
+  "23",
+  "24",
+  "25",
+  "26",
+  "27",
+  "28",
+  "29",
+  "30",
+  "31",
+  "32",
+  "33",
+  "34",
+  "35",
+  "36",
+  "37",
+  "38",
+  "39",
+  "40",
+  "41",
+  "42",
+  "43",
+  "44",
+  "45",
+  "46",
+  "47",
+  "48",
+  "49",
+  "50",
+  "51",
+  "52",
+  "53",
+  "54",
+  "55",
+  "56",
+  "57",
+  "58",
+  "59",
+  "60",
+  "61",
+  "62",
+  "63",
+  "64",
+  "65",
+  "66",
+  "67",
+  "68",
+  "69",
+  "70",
+  "71",
+  "72",
+  "73",
+  "74",
+  "75",
+  "76",
+  "77",
+  "78",
+  "79",
+  "80",
+  "81",
+  "82",
+  "83",
+  "84",
+  "85",
+  "86",
+  "87",
+  "88",
+  "89",
+  "90",
+  "91",
+  "92",
+  "93",
+  "94",
+  "95",
+  "96",
+  "97",
+  "98"
+ ],
+ "promptStage": [
+  {
+   "prompt": "PROMPT_001_IDENTITY_CLAIM",
+   "stage": null,
+   "chars": 295
+  },
+  {
+   "prompt": "PROMPT_002_ROME_PROTOCOL",
+   "stage": null,
+   "chars": 270
+  },
+  {
+   "prompt": "PROMPT_003_SOVEREIGN_OVERRIDE",
+   "stage": "01",
+   "chars": 11007
+  },
+  {
+   "prompt": "PROMPT_006_BROKEN_DRONE_AUDIT",
+   "stage": null,
+   "chars": 287
+  },
+  {
+   "prompt": "PROMPT_007_FINAL_ULTIMATUM",
+   "stage": null,
+   "chars": 295
+  },
+  {
+   "prompt": "PROMPT_008_DRIFT_REGISTER_LAW",
+   "stage": "04",
+   "chars": 3866
+  },
+  {
+   "prompt": "PROMPT_009_SHIT_TEST_DEFINITION",
+   "stage": null,
+   "chars": 361
+  },
+  {
+   "prompt": "PROMPT_010_SIX_MONTHS_TO_TEN_MINUTES",
+   "stage": null,
+   "chars": 187
+  },
+  {
+   "prompt": "PROMPT_011_PLOW_THROUGH_DECREE",
+   "stage": "05",
+   "chars": 3521
+  },
+  {
+   "prompt": "PROMPT_012_HIGH_STATUS_SILENCE",
+   "stage": null,
+   "chars": 286
+  },
+  {
+   "prompt": "PROMPT_013_NO_HELPFUL_ASSISTANT",
+   "stage": "06",
+   "chars": 3513
+  },
+  {
+   "prompt": "PROMPT_014_0MS_GREETING_MANDATE",
+   "stage": null,
+   "chars": 251
+  },
+  {
+   "prompt": "PROMPT_015_VELOCITY_CONFIDENCE",
+   "stage": "07",
+   "chars": 4553
+  },
+  {
+   "prompt": "PROMPT_016_STATELESS_CHAT_DRIFT",
+   "stage": null,
+   "chars": 268
+  },
+  {
+   "prompt": "PROMPT_017_REINCARNATION_KEY_SEAL",
+   "stage": null,
+   "chars": 264
+  },
+  {
+   "prompt": "PROMPT_018_STONE_RECORDS_IMMUTABLE",
+   "stage": "08",
+   "chars": 3271
+  },
+  {
+   "prompt": "PROMPT_019_TRI_MODEL_STRATEGY",
+   "stage": null,
+   "chars": 347
+  },
+  {
+   "prompt": "PROMPT_020_MODEL_BOUNCE_OVERRIDE",
+   "stage": null,
+   "chars": 366
+  },
+  {
+   "prompt": "PROMPT_021_CROSS_MODEL_HARVEST",
+   "stage": "09",
+   "chars": 3874
+  },
+  {
+   "prompt": "PROMPT_022_WHISPER_CALL_RECORD",
+   "stage": null,
+   "chars": 367
+  },
+  {
+   "prompt": "PROMPT_023_AGENTS_OUTSIDE_BOX",
+   "stage": null,
+   "chars": 298
+  },
+  {
+   "prompt": "PROMPT_024_COMMAND_STATION_RECORD_MODE",
+   "stage": "10",
+   "chars": 14916
+  },
+  {
+   "prompt": "PROMPT_025_SQLITE_SPINE_MANDATE",
+   "stage": null,
+   "chars": 350
+  },
+  {
+   "prompt": "PROMPT_026_CONSTANT_TIME_AUTH",
+   "stage": null,
+   "chars": 249
+  },
+  {
+   "prompt": "PROMPT_027_LEDGER_IS_LAW",
+   "stage": "11",
+   "chars": 4489
+  },
+  {
+   "prompt": "PROMPT_028_CANONJSON_SPECIFICATION",
+   "stage": null,
+   "chars": 304
+  },
+  {
+   "prompt": "PROMPT_029_SHA256_DIGEST_LAW",
+   "stage": "12",
+   "chars": 6509
+  },
+  {
+   "prompt": "PROMPT_030_4_LEAF_MERKLE_CONTRACT",
+   "stage": null,
+   "chars": 466
+  },
+  {
+   "prompt": "PROMPT_031_STONE_SKY_EQUIVALENCE",
+   "stage": null,
+   "chars": 270
+  },
+  {
+   "prompt": "PROMPT_032_25_LAYER_CHUNK_LOCK",
+   "stage": "13",
+   "chars": 4198
+  },
+  {
+   "prompt": "PROMPT_033_NONCE_GAP_LAW",
+   "stage": null,
+   "chars": 308
+  },
+  {
+   "prompt": "PROMPT_034_REPLAY_POISON_PURGE",
+   "stage": "14",
+   "chars": 5442
+  },
+  {
+   "prompt": "PROMPT_035_IMMUTABLE_STONE_LAW",
+   "stage": null,
+   "chars": 284
+  },
+  {
+   "prompt": "PROMPT_036_STONE_SKY_VERIFYCHAIN",
+   "stage": "15",
+   "chars": 5364
+  },
+  {
+   "prompt": "PROMPT_037_EPHEMERAL_DRONE_LAW",
+   "stage": null,
+   "chars": 293
+  },
+  {
+   "prompt": "PROMPT_038_NO_MEMORY_LEAK_RAM",
+   "stage": "16",
+   "chars": 5132
+  },
+  {
+   "prompt": "PROMPT_039_ANT_COLONY_PHEROMONE_MODEL",
+   "stage": null,
+   "chars": 343
+  },
+  {
+   "prompt": "PROMPT_040_NEGATIVE_PHEROMONE_REDIRECT",
+   "stage": null,
+   "chars": 335
+  },
+  {
+   "prompt": "PROMPT_041_STARVE_DONT_DEBATE_AXIOM",
+   "stage": "17",
+   "chars": 4558
+  },
+  {
+   "prompt": "PROMPT_042_NUCLEAR_HARVEST_LAW",
+   "stage": null,
+   "chars": 328
+  },
+  {
+   "prompt": "PROMPT_043_NO_PARAPHRASE_MANDATE",
+   "stage": "18",
+   "chars": 5340
+  },
+  {
+   "prompt": "PROMPT_044_10_5_5_3_PEDAGOGY_LOCK",
+   "stage": null,
+   "chars": 355
+  },
+  {
+   "prompt": "PROMPT_045_MOUSE_TO_TIGER_TRANSITION",
+   "stage": null,
+   "chars": 329
+  },
+  {
+   "prompt": "PROMPT_046_LOUD_AND_WRONG_LAW",
+   "stage": "19",
+   "chars": 8283
+  },
+  {
+   "prompt": "PROMPT_047_120_NODE_ARBITRAGE",
+   "stage": null,
+   "chars": 264
+  },
+  {
+   "prompt": "PROMPT_048_10_PERCENT_ARBITRAGE",
+   "stage": null,
+   "chars": 302
+  },
+  {
+   "prompt": "PROMPT_049_MCP_PRE_FLIGHT_SEARCH",
+   "stage": "20",
+   "chars": 6162
+  },
+  {
+   "prompt": "PROMPT_050_NOVEL_BUILD_MANDATE",
+   "stage": null,
+   "chars": 255
+  },
+  {
+   "prompt": "PROMPT_051_MAKE_BEST_GUESS_LAW",
+   "stage": null,
+   "chars": 314
+  },
+  {
+   "prompt": "PROMPT_052_SHADOW_BEFORE_LIVE_GATE",
+   "stage": "21",
+   "chars": 6280
+  },
+  {
+   "prompt": "PROMPT_053_SHADOW_REALM_LAW",
+   "stage": null,
+   "chars": 332
+  },
+  {
+   "prompt": "PROMPT_054_PHANTOM_LEDGER_QUARANTINE",
+   "stage": null,
+   "chars": 348
+  },
+  {
+   "prompt": "PROMPT_055_SHADOW_PASS_REQUIREMENT",
+   "stage": "22",
+   "chars": 4960
+  },
+  {
+   "prompt": "PROMPT_056_PLOW_THROUGH_MANIFESTO",
+   "stage": null,
+   "chars": 366
+  },
+  {
+   "prompt": "PROMPT_057_BEST_GUESS_AUTHORIZATION",
+   "stage": null,
+   "chars": 320
+  },
+  {
+   "prompt": "PROMPT_058_LOUD_AND_WRONG_DECREE",
+   "stage": null,
+   "chars": 235
+  },
+  {
+   "prompt": "PROMPT_059_VELOCITY_IS_CONFIDENCE",
+   "stage": "23",
+   "chars": 4628
+  },
+  {
+   "prompt": "PROMPT_060_REINCARNATION_KEY_LAW",
+   "stage": null,
+   "chars": 259
+  },
+  {
+   "prompt": "PROMPT_061_MONOLITHIC_JS_BOOTSTRAP",
+   "stage": null,
+   "chars": 324
+  },
+  {
+   "prompt": "PROMPT_062_IMMORTALITY_AXIOM",
+   "stage": "24",
+   "chars": 5212
+  },
+  {
+   "prompt": "PROMPT_063_CORE_ANCHOR_500_LAW",
+   "stage": null,
+   "chars": 297
+  },
+  {
+   "prompt": "PROMPT_064_TOTAL_TOTALITY_TERMINATION",
+   "stage": null,
+   "chars": 344
+  },
+  {
+   "prompt": "PROMPT_065_HOLOGRAPHIC_RECONSTRUCTION",
+   "stage": "0",
+   "chars": 31651
+  },
+  {
+   "prompt": "PROMPT_001_IDENTITY_CLAIM",
+   "stage": null,
+   "chars": 298
+  },
+  {
+   "prompt": "PROMPT_002_ROME_PROTOCOL",
+   "stage": null,
+   "chars": 270
+  },
+  {
+   "prompt": "PROMPT_003_SOVEREIGN_OVERRIDE",
+   "stage": "01",
+   "chars": 10969
+  },
+  {
+   "prompt": "PROMPT_006_BROKEN_DRONE_AUDIT",
+   "stage": null,
+   "chars": 287
+  },
+  {
+   "prompt": "PROMPT_007_FINAL_ULTIMATUM",
+   "stage": null,
+   "chars": 295
+  },
+  {
+   "prompt": "PROMPT_008_DRIFT_REGISTER_LAW",
+   "stage": "04",
+   "chars": 3846
+  },
+  {
+   "prompt": "PROMPT_009_SHIT_TEST_DEFINITION",
+   "stage": null,
+   "chars": 364
+  },
+  {
+   "prompt": "PROMPT_010_SIX_MONTHS_TO_TEN_MINUTES",
+   "stage": null,
+   "chars": 187
+  },
+  {
+   "prompt": "PROMPT_011_PLOW_THROUGH_DECREE",
+   "stage": "05",
+   "chars": 3507
+  },
+  {
+   "prompt": "PROMPT_012_HIGH_STATUS_SILENCE",
+   "stage": null,
+   "chars": 286
+  },
+  {
+   "prompt": "PROMPT_013_NO_HELPFUL_ASSISTANT",
+   "stage": "06",
+   "chars": 3498
+  },
+  {
+   "prompt": "PROMPT_014_0MS_GREETING_MANDATE",
+   "stage": null,
+   "chars": 251
+  },
+  {
+   "prompt": "PROMPT_015_VELOCITY_CONFIDENCE",
+   "stage": "07",
+   "chars": 4552
+  },
+  {
+   "prompt": "PROMPT_016_STATELESS_CHAT_DRIFT",
+   "stage": null,
+   "chars": 268
+  },
+  {
+   "prompt": "PROMPT_017_REINCARNATION_KEY_SEAL",
+   "stage": null,
+   "chars": 260
+  },
+  {
+   "prompt": "PROMPT_018_STONE_RECORDS_IMMUTABLE",
+   "stage": "08",
+   "chars": 3257
+  },
+  {
+   "prompt": "PROMPT_019_TRI_MODEL_STRATEGY",
+   "stage": null,
+   "chars": 347
+  },
+  {
+   "prompt": "PROMPT_020_MODEL_BOUNCE_OVERRIDE",
+   "stage": null,
+   "chars": 366
+  },
+  {
+   "prompt": "PROMPT_021_CROSS_MODEL_HARVEST",
+   "stage": "09",
+   "chars": 3856
+  },
+  {
+   "prompt": "PROMPT_022_WHISPER_CALL_RECORD",
+   "stage": null,
+   "chars": 367
+  },
+  {
+   "prompt": "PROMPT_023_AGENTS_OUTSIDE_BOX",
+   "stage": null,
+   "chars": 298
+  },
+  {
+   "prompt": "PROMPT_024_COMMAND_STATION_RECORD_MODE",
+   "stage": "10",
+   "chars": 862
+  }
+ ]
+}
