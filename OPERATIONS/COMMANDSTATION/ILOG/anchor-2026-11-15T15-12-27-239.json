@@ -1,0 +1,219 @@
+{
+  "ts": "2026-11-15T15-12-27-239",
+  "generator": "phoenix-ai-solutions-command-mastermind",
+  "head": {
+    "seg": 2,
+    "count": 4131,
+    "hash": "645aca6ddfddf26c508f74fe86e8fea82c8a277bca6b1a0558badadc41a47771",
+    "prevHash": "c93ed5c2c64c4a2103d5869fb6f4edfd8d904d17d4e3a85e7b2cc72e2f87c272",
+    "headSeq": 4131,
+    "t": 1794755533286,
+    "iso": "2026-11-15T15:12:13.286Z",
+    "alg": "sha-256",
+    "sealedCount": 4257,
+    "sealT": 1793427346247
+  },
+  "verify": {
+    "ok": false,
+    "checked": 8388,
+    "breaks": [
+      {
+        "seq": 24,
+        "seg": 1,
+        "link": "broken",
+        "hash": "ok",
+        "alg": "sha-256"
+      },
+      {
+        "seq": 220,
+        "seg": 1,
+        "link": "ok",
+        "hash": "mismatch",
+        "alg": "sha-256"
+      },
+      {
+        "seq": 221,
+        "seg": 1,
+        "link": "ok",
+        "hash": "mismatch",
+        "alg": "sha-256"
+      },
+      {
+        "seq": 222,
+        "seg": 1,
+        "link": "ok",
+        "hash": "mismatch",
+        "alg": "sha-256"
+      },
+      {
+        "seq": 223,
+        "seg": 1,
+        "link": "ok",
+        "hash": "mismatch",
+        "alg": "sha-256"
+      },
+      {
+        "seq": 225,
+        "seg": 1,
+        "link": "ok",
+        "hash": "mismatch",
+        "alg": "sha-256"
+      },
+      {
+        "seq": 226,
+        "seg": 1,
+        "link": "ok",
+        "hash": "mismatch",
+        "alg": "sha-256"
+      },
+      {
+        "seq": 227,
+        "seg": 1,
+        "link": "ok",
+        "hash": "mismatch",
+        "alg": "sha-256"
+      }
+    ]
+  },
+  "entries": 8388,
+  "kinds": {
+    "brain": 833,
+    "op": 2207,
+    "boot": 873,
+    "cmd": 254,
+    "soul": 686,
+    "tunnel": 39,
+    "reply": 22,
+    "scs": 422,
+    "scout": 43,
+    "secret": 88,
+    "omega": 34,
+    "push": 21,
+    "sync": 2228,
+    "market": 496,
+    "ops": 19,
+    "error": 29,
+    "archive": 1,
+    "backburner": 7,
+    "audit": 7,
+    "mission": 7,
+    "verify": 4,
+    "test": 2,
+    "pipeline": 3,
+    "handoff": 1,
+    "reincarnate": 1,
+    "correction": 2,
+    "lesson": 1,
+    "seal": 1,
+    "relay": 1,
+    "flood": 46,
+    "warn": 10
+  },
+  "anchors": [
+    {
+      "commit": "8d73ded532d9338084b923eae37bb33113d267a9",
+      "iso": "2026-10-24T20:11:02.429Z",
+      "seq": 1797,
+      "seg": 1,
+      "head": "d1d07ee410e8c2feea798f739da768528ab5b2243e1f7ee4b55de1ecf1ee5b77"
+    },
+    {
+      "commit": "bfc3b8a89d03aeb81f1d028f7de0332221c7db3f",
+      "iso": "2026-10-25T01:22:09.003Z",
+      "seq": 2053,
+      "seg": 1,
+      "head": "198bf5f65c722ca82033729b52cd21ff173261516b7b9dbc8450bab60ada6386"
+    },
+    {
+      "commit": "51228d035278fe24e35a5362b8277feeee1d9a18",
+      "iso": "2026-10-25T01:34:59.147Z",
+      "seq": 2036,
+      "seg": 1,
+      "head": "253e8c9139f4b8871c1d19c9f1ffee286da0c9980710ddc5de6c937833ee0637"
+    },
+    {
+      "commit": "20cb88f618cb01757536f5df392f7920337694a9",
+      "iso": "2026-10-25T01:42:33.400Z",
+      "seq": 2038,
+      "seg": 1,
+      "head": "cac04052caceaa63fb0dd47d37558db744eb9ffb6c3dc06e4156aa986f612b66"
+    },
+    {
+      "commit": "78851aefecd114fa3d391973c508a5938865e526",
+      "iso": "2026-10-25T11:53:02.244Z",
+      "seq": 2565,
+      "seg": 1,
+      "head": "103b7f5928efeb351a10c974c2c794f38f0a7d4b90f582ca86c29c5259fc1b53"
+    },
+    {
+      "commit": "9ddc6d5ebbcb0543e98ea627c38ae13c5f2ee142",
+      "iso": "2026-10-25T12:06:36.101Z",
+      "seq": 2570,
+      "seg": 1,
+      "head": "8accb5950c92ca160d5cd2466f4318234980c2d7f00fcc9c32a9e733b24afc02"
+    },
+    {
+      "commit": "c4d8a2ec5cc81b5a38df81ceb7cb8f63d07686cd",
+      "iso": "2026-10-25T14:53:23.647Z",
+      "seq": 2710,
+      "seg": 1,
+      "head": "865762405f58838ae5c2455a4128ad8ea6990cf07dfdb2fc9fc7a9e108a9efaa"
+    },
+    {
+      "commit": "c8cd5ec9d9c33bf9dedb85492ca9bd36a657e838",
+      "iso": "2026-10-25T16:31:36.728Z",
+      "seq": 2786,
+      "seg": 1,
+      "head": "7068a2c7bdb33127d83696ff1c2156091c3971f9357451fc3150574fed985cc8"
+    },
+    {
+      "commit": "7872ea22133732d8ed0df7fc2500d66156231b47",
+      "iso": "2026-10-25T16:43:42.994Z",
+      "seq": 2794,
+      "seg": 1,
+      "head": "4bc0127f69fdbd32c2ad5b113f1e721880899b843221f4d168054fb55cbee5df"
+    },
+    {
+      "commit": "0f255f9f3be665b015275bbc27ff89b6bda0b9ef",
+      "iso": "2026-10-29T15:11:02.355Z",
+      "seq": 3513,
+      "seg": 1,
+      "head": "870f0ab42418e3ac6834065ebcdd2e902657879d8b83e95bec33705e2f130b21"
+    },
+    {
+      "commit": "92a8e67ae9496fd66c38989a58f0d0f039d87ff8",
+      "iso": "2026-10-29T17:35:53.103Z",
+      "seq": 3533,
+      "seg": 1,
+      "head": "ca8a7fd0b48c329cba6d48881fe80c0125bde5ca7497d2b853222b4dbceb1e9b"
+    },
+    {
+      "commit": "ce11e4f4482af61de80b941211762a0b81cabbf1",
+      "iso": "2026-10-29T17:51:40.990Z",
+      "seq": 3544,
+      "seg": 1,
+      "head": "bd2187861dc59382ca4869ac97fa4f56ad8072e7872367cc66863d3a6107bffc"
+    },
+    {
+      "commit": "97c714aad38cb6d3ea22b10e95b4c3e1bef8220c",
+      "iso": "2026-11-10T00:06:17.394Z",
+      "seq": 6201,
+      "seg": 2,
+      "head": "0c846903529817bd7a94c51cd93b268f28da1deca27a4b33b6588859dc1e588f"
+    },
+    {
+      "commit": "87526efbb03d1b61ed9c8393e8e860ea45f80435",
+      "iso": "2026-11-14T21:19:21.740Z",
+      "seq": 7621,
+      "seg": 2,
+      "head": "da3075e7e275d6c8eaa36f446bdadc0ec254e4cbae053764d9c6731a1f02f3fe"
+    },
+    {
+      "commit": "fe8409217ba5f6ccb4f9b6bde30756b7f2bb5ac5",
+      "iso": "2026-11-15T11:32:54.753Z",
+      "seq": 8355,
+      "seg": 2,
+      "head": "e8cbdf1a1bc786710774df628c9fd708599180cf7f5ba0526fe73bbfcd7f2931"
+    }
+  ]
+}
