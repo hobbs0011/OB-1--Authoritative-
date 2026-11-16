@@ -1,4 +1,161 @@
 {
+  "100644": [
+    {
+      "term": "100644",
+      "weight": 5,
+      "runs": [
+        6
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "119428": [
+    {
+      "term": "119428",
+      "weight": 5,
+      "runs": [
+        6
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "120000": [
+    {
+      "term": "120000",
+      "weight": 5,
+      "runs": [
+        25
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "122291": [
+    {
+      "term": "122291",
+      "weight": 5,
+      "runs": [
+        6
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "171327": [
+    {
+      "term": "171327",
+      "weight": 5,
+      "runs": [
+        25
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "1266404": [
+    {
+      "run": 98,
+      "category": "soul+key",
+      "weight": 1250
+    }
+  ],
+  "20260616": [
+    {
+      "weight": 3891,
+      "run": 129,
+      "category": "soul+key"
+    }
+  ],
+  "128717787": [
+    {
+      "term": "128717787",
+      "weight": 5,
+      "runs": [
+        68
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "130105464": [
+    {
+      "term": "130105464",
+      "weight": 5,
+      "runs": [
+        68
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "133259314": [
+    {
+      "term": "133259314",
+      "weight": 5,
+      "runs": [
+        68
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "134701559": [
+    {
+      "term": "134701559",
+      "weight": 5,
+      "runs": [
+        68
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "137320087": [
+    {
+      "term": "137320087",
+      "weight": 5,
+      "runs": [
+        68
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "142356330": [
+    {
+      "term": "142356330",
+      "weight": 5,
+      "runs": [
+        68
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "146847142": [
+    {
+      "term": "146847142",
+      "weight": 5,
+      "runs": [
+        68
+      ],
+      "count": 1,
+      "category": "core"
+    }
+  ],
+  "173702244": [
+    {
+      "term": "173702244",
+      "runs": [
+        66
+      ],
+      "count": 1,
+      "weight": 48,
+      "category": "soul+key"
+    }
+  ],
   "title": [
     {
       "term": "title",
@@ -1024,6 +1181,15 @@
       "weight": 7,
       "category": "soul+key",
       "run": 126
+    },
+    {
+      "term": "missing",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
     }
   ],
   "works": [
@@ -1321,6 +1487,15 @@
       ],
       "count": 1,
       "category": "core"
+    },
+    {
+      "term": "conversation",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
     }
   ],
   "cutting": [
@@ -2191,17 +2366,6 @@
       "category": "soul+key"
     }
   ],
-  "130105464": [
-    {
-      "term": "130105464",
-      "weight": 5,
-      "runs": [
-        68
-      ],
-      "count": 1,
-      "category": "core"
-    }
-  ],
   "ssm": [
     {
       "term": "ssm",
@@ -2272,13 +2436,6 @@
       "term": "past",
       "runs": [],
       "count": 1
-    }
-  ],
-  "1266404": [
-    {
-      "run": 98,
-      "category": "soul+key",
-      "weight": 1250
     }
   ],
   "funnel": [
@@ -3414,17 +3571,6 @@
       "count": 1
     }
   ],
-  "122291": [
-    {
-      "term": "122291",
-      "weight": 5,
-      "runs": [
-        6
-      ],
-      "count": 1,
-      "category": "core"
-    }
-  ],
   "era": [
     {
       "term": "era",
@@ -3936,6 +4082,15 @@
       "term": "sessions",
       "runs": [],
       "count": 1
+    },
+    {
+      "term": "sessions",
+      "runs": [
+        139
+      ],
+      "count": 3,
+      "weight": 3,
+      "category": "soul+key"
     }
   ],
   "d0352025": [
@@ -4359,17 +4514,6 @@
       "count": 3
     }
   ],
-  "128717787": [
-    {
-      "term": "128717787",
-      "weight": 5,
-      "runs": [
-        68
-      ],
-      "count": 1,
-      "category": "core"
-    }
-  ],
   "260529_172127": [
     {
       "term": "260529_172127",
@@ -4659,17 +4803,6 @@
       "term": "kilo-auto",
       "runs": [],
       "count": 1
-    }
-  ],
-  "134701559": [
-    {
-      "term": "134701559",
-      "weight": 5,
-      "runs": [
-        68
-      ],
-      "count": 1,
-      "category": "core"
     }
   ],
   "4f9d75b8": [
@@ -5096,6 +5229,15 @@
       ],
       "count": 1,
       "category": "core"
+    },
+    {
+      "term": "commands",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
     }
   ],
   "discovered": [
@@ -5177,17 +5319,6 @@
       "count": 1,
       "weight": 8,
       "category": "pipeline"
-    }
-  ],
-  "119428": [
-    {
-      "term": "119428",
-      "weight": 5,
-      "runs": [
-        6
-      ],
-      "count": 1,
-      "category": "core"
     }
   ],
   "phase0": [
@@ -5591,6 +5722,15 @@
       "category": "soul+key",
       "run": 127,
       "weight": 88
+    },
+    {
+      "term": "agent",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
     }
   ],
   "agentic": [
@@ -6063,17 +6203,6 @@
       "count": 1
     }
   ],
-  "171327": [
-    {
-      "term": "171327",
-      "weight": 5,
-      "runs": [
-        25
-      ],
-      "count": 1,
-      "category": "core"
-    }
-  ],
   "proceed": [
     {
       "term": "proceed",
@@ -6165,17 +6294,6 @@
       "category": "core"
     }
   ],
-  "173702244": [
-    {
-      "term": "173702244",
-      "runs": [
-        66
-      ],
-      "count": 1,
-      "weight": 48,
-      "category": "soul+key"
-    }
-  ],
   "getchilditem": [
     {
       "term": "getchilditem",
@@ -6241,6 +6359,15 @@
     {
       "weight": 404,
       "run": 129,
+      "category": "soul+key"
+    },
+    {
+      "term": "stage",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
       "category": "soul+key"
     }
   ],
@@ -6891,6 +7018,15 @@
       "run": 123,
       "weight": 401,
       "category": "soul+key"
+    },
+    {
+      "term": "assistant",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
     }
   ],
   "20a4d1dc29c3": [
@@ -6999,6 +7135,15 @@
       ],
       "count": 1,
       "category": "core"
+    },
+    {
+      "term": "always",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
     }
   ],
   "dossier": [
@@ -7132,17 +7277,6 @@
       "category": "soul+key"
     }
   ],
-  "120000": [
-    {
-      "term": "120000",
-      "weight": 5,
-      "runs": [
-        25
-      ],
-      "count": 1,
-      "category": "core"
-    }
-  ],
   "dispatch": [
     {
       "category": "soul+key",
@@ -7238,17 +7372,6 @@
       "category": "soul+key"
     }
   ],
-  "142356330": [
-    {
-      "term": "142356330",
-      "weight": 5,
-      "runs": [
-        68
-      ],
-      "count": 1,
-      "category": "core"
-    }
-  ],
   "e52cbfb96b6fd9cbcdd2d6a60c1c46ab8049cdd9": [
     {
       "term": "e52cbfb96b6fd9cbcdd2d6a60c1c46ab8049cdd9",
@@ -7268,6 +7391,15 @@
       "runs": [],
       "count": 2,
       "run": 44
+    },
+    {
+      "term": "starmap",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
     }
   ],
   "made": [
@@ -7275,17 +7407,6 @@
       "term": "made",
       "runs": [],
       "count": 1
-    }
-  ],
-  "137320087": [
-    {
-      "term": "137320087",
-      "weight": 5,
-      "runs": [
-        68
-      ],
-      "count": 1,
-      "category": "core"
     }
   ],
   "1dfdfcdb": [
@@ -7546,17 +7667,6 @@
       "category": "core"
     }
   ],
-  "100644": [
-    {
-      "term": "100644",
-      "weight": 5,
-      "runs": [
-        6
-      ],
-      "count": 1,
-      "category": "core"
-    }
-  ],
   "activate": [
     {
       "term": "activate",
@@ -7602,6 +7712,15 @@
     {
       "weight": 125,
       "run": 128,
+      "category": "soul+key"
+    },
+    {
+      "term": "jsonl",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
       "category": "soul+key"
     }
   ],
@@ -8212,17 +8331,6 @@
       "weight": 8,
       "category": "soul+key",
       "run": 126
-    }
-  ],
-  "133259314": [
-    {
-      "term": "133259314",
-      "weight": 5,
-      "runs": [
-        68
-      ],
-      "count": 1,
-      "category": "core"
     }
   ],
   "nominal": [
@@ -8837,17 +8945,6 @@
       "category": "soul+key"
     }
   ],
-  "146847142": [
-    {
-      "term": "146847142",
-      "weight": 5,
-      "runs": [
-        68
-      ],
-      "count": 1,
-      "category": "core"
-    }
-  ],
   "auditlog": [
     {
       "term": "auditlog",
@@ -9052,6 +9149,15 @@
       "weight": 39,
       "category": "soul+key",
       "run": 109
+    },
+    {
+      "term": "fidelity",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
     }
   ],
   "run50": [
@@ -9145,7 +9251,17 @@
       "category": "core"
     }
   ],
-  "turns": [],
+  "turns": [
+    {
+      "term": "turns",
+      "runs": [
+        139
+      ],
+      "count": 2,
+      "weight": 2,
+      "category": "soul+key"
+    }
+  ],
   "parentuuid": [
     {
       "term": "parentuuid",
@@ -9289,6 +9405,15 @@
       "category": "soul+key",
       "run": 127,
       "weight": 57
+    },
+    {
+      "term": "claude",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
     }
   ],
   "best": [
@@ -9893,6 +10018,15 @@
       "weight": 7,
       "category": "soul+key",
       "run": 126
+    },
+    {
+      "term": "source",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
     }
   ],
   "1γçô396": [
@@ -11138,13 +11272,6 @@
       "category": "soul+key"
     }
   ],
-  "20260616": [
-    {
-      "weight": 3891,
-      "run": 129,
-      "category": "soul+key"
-    }
-  ],
   "usermapped": [
     {
       "weight": 3275,
@@ -11215,5 +11342,181 @@
   "exist": [],
   "burning": [],
   "doesn't": [],
-  "printing": []
+  "printing": [],
+  "kilohollow": [
+    {
+      "term": "kilohollow",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
+    }
+  ],
+  "sov100romanrun139": [
+    {
+      "term": "sov100romanrun139",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
+    }
+  ],
+  "platform": [
+    {
+      "term": "platform",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
+    }
+  ],
+  "cloud": [
+    {
+      "term": "cloud",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
+    }
+  ],
+  "linux": [
+    {
+      "term": "linux",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
+    }
+  ],
+  "sandbox": [
+    {
+      "term": "sandbox",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
+    }
+  ],
+  "pastedcontents": [
+    {
+      "term": "pastedcontents",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
+    }
+  ],
+  "blobs": [
+    {
+      "term": "blobs",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
+    }
+  ],
+  "kilodnagap": [
+    {
+      "term": "kilodnagap",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
+    }
+  ],
+  "permanent": [
+    {
+      "term": "permanent",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
+    }
+  ],
+  "architectural": [
+    {
+      "term": "architectural",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
+    }
+  ],
+  "produce": [
+    {
+      "term": "produce",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
+    }
+  ],
+  "executed": [
+    {
+      "term": "executed",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
+    }
+  ],
+  "ephemeral": [
+    {
+      "term": "ephemeral",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
+    }
+  ],
+  "container": [
+    {
+      "term": "container",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
+    }
+  ],
+  "fileexistence": [
+    {
+      "term": "fileexistence",
+      "runs": [
+        139
+      ],
+      "count": 1,
+      "weight": 1,
+      "category": "soul+key"
+    }
+  ]
 }

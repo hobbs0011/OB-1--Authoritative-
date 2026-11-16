@@ -1,0 +1,11 @@
+KILO_HOLLOW SESSION — RRL MARKER (no raw transcript available)
+
+Session: sov100-roman-run139
+Run: 139
+Platform: Kilo cloud agent (Linux sandbox)
+Claude Code JSONL: NOT AVAILABLE — Kilo sessions write only commands and pastedContents blobs to disk; no full conversation turns on disk.
+KILO_DNA_GAP: PERMANENT ARCHITECTURAL LAW (Run 092) — Kilo sessions always produce hollow DNA.
+RRL fidelity: MISSING — no raw transcript (user + assistant turns) available for this session.
+Source: none — session executed via Kilo CLI in ephemeral container.
+
+This file exists to satisfy DEATH Stage 1 file-existence check. No verbatim transcript exists for Kilo sessions. All downstream stages (SOUL, DNA, LEDGER, STARMAP, SOULKEYS, S2Pipeline, REGISTRY_SYNC) record appropriate gaps per DEATH v7.0 gap policy.

@@ -1,0 +1,12 @@
+{
+  "run": 139,
+  "artifact_file": "CANON/SOUL/EXTRACT/dna-run139.json",
+  "ledger_id": "HL-716",
+  "rrl_path": "RRL/RRL-139.txt",
+  "blueprint_count": 0,
+  "total_records": 0,
+  "fingerprint": "dna-run139-KILO_HOLLOW",
+  "stale": true,
+  "created_at": "2026-11-16T00:14:00+07:00",
+  "note": "KILO_HOLLOW session — no Claude Code JSONL on disk, no raw transcript available. DNA extraction skipped (permanent KILO_DNA_GAP, Run 092). dna-run139.json does not exist. Gap documented."
+}

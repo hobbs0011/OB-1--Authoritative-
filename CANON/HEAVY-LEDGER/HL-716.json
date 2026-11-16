@@ -1,0 +1,15 @@
+{
+  "hl_id": "HL-716",
+  "session_id": "sov100-roman-run139",
+  "rrl_source": "RRL/RRL-139.txt",
+  "char_count": 796,
+  "byte_count": 806,
+  "soul_hash": "35d34af42d2f6a0d24cc962e395fd533856b321e519a7d549d4aaa96c5df605e",
+  "dna_hash": "DNA_GAP",
+  "dna_blueprint_count": 0,
+  "merkle_parent": "GAP_LEDGER_715",
+  "merkle_hash": "a985bb31326a3394566461480f45c7df166ac8ff858e01786ca15b3110f21cef",
+  "sealed_at": "2026-11-16T00:14:17.000Z",
+  "sov100": true,
+  "run": 139
+}

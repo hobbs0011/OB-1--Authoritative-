@@ -1,0 +1,78 @@
+{
+  "run": 139,
+  "ledger_id": "HL-716",
+  "merkle_short": "a985bb31326a3394566461480f45c7df",
+  "starmap_file": "starmap-run139.json",
+  "keywords_file": "rfkw-run139.txt",
+  "keywords_used": [
+    "sessions",
+    "turns",
+    "kilohollow",
+    "sov100romanrun139",
+    "platform",
+    "cloud",
+    "agent",
+    "linux",
+    "sandbox",
+    "claude",
+    "jsonl",
+    "commands",
+    "pastedcontents",
+    "blobs",
+    "conversation",
+    "kilodnagap",
+    "permanent",
+    "architectural",
+    "always",
+    "produce",
+    "fidelity",
+    "missing",
+    "assistant",
+    "source",
+    "executed",
+    "ephemeral",
+    "container",
+    "stage",
+    "fileexistence",
+    "starmap"
+  ],
+  "pieces_synced": 4,
+  "pieces": [
+    {
+      "id": "ART-1780548336708-NKVP",
+      "title": "Codex — The Drone Swarm & PowerShell",
+      "url": "codex_preview/page-12.png",
+      "keywords": [
+        "claude"
+      ],
+      "title_hit": false,
+      "notes_patch_intent": "[run079 | HL-495 |  | kw:claude] [run084 | HL-521 | 9074702DFB399B82 | kw:claude | sm:starmap-run084.json] [run096 | HL-562 | 0AAD156FF7C3F7FB | kw:claude] [run123 | HL-703 | 3aef09ad7e661e1a | kw:claude | sm:starmap-run123.json] [run127 | HL-707 | 9EE1E1243495852E | kw:claude | sm:starmap-run127.json] [run143 | HL-719 | B1367A601A238D6F | kw:claude | sm:starmap-run143.json] [run139 | HL-716 | a985bb31326a3394566461480f45c7df | kw:claude | sm:starmap-run139.json]"
+    },
+    {
+      "id": "ART-1780547160670-TBAE",
+      "title": "WAKE UP THE TIGER",
+      "url": null,
+      "keywords": [],
+      "title_hit": true,
+      "notes_patch_intent": "WAKE UP THE TIGER. We do not sell English lessons. We sell a new identity. SYSTEM STATUS: OPERATIONAL. DIAGNOSTIC: INITIATED. PROTOCOL: GOSPEL 444 // ZERO DRIFT. INPUT PERFECT. OUTPUT 404 ERROR. You read flawlessly. You write perfect professional emails. Your vocabulary is elite. The meeting starts. You freeze. You pre-apologize. You whisper. You have the power of an adult professional, but your mind is held captive by the Elephant Chain of childhood conditioning. You are not broken. Your method was. The Translate-in-Head Delay. LISTEN (1 second) -> TRANSLATE TO VN (5 seconds) -> TRANSLATE TO ENG (5 seconds) -> SNOWMAN FREEZE: GEARS JAMMED. It is scientifically impossible to translate from Vietnamese to English in your head and actively listen at the same time. The Monkey Mind uses 80% of your RAM panicking. By the time you formulate a sentence, the boardroom has moved on. The Disease: Traditional Grammar Prison. THE FALSE LAW: Grammar First = Fear First. THE BACKWARD BIOLOGY: Read -> Write -> Speak (Creates the Zombie Robot Voice). THE SYMPTOM: MOUSE MODE. Score 0-40. Characterized by hesitation, whispering, and the constant apology reflex. Standard centers used a red pen to punish mistakes. They taught you it is safer to be Quiet and Right than to risk speaking. [run073|HL-468|e3b0c44298fc1c14|kw:|sm:starmap-run73.json] [run079 | HL-490 | 90F933D34C8BA2ED | kw: | sm:starmap-run079.json] [run096 | HL-562 | 0AAD156FF7C3F7FB | kw:] [run099 | HL-626 | 4B0851131A0487AE | kw: | sm:starmap-run099.json] [run102 | HL-657 | 34C71A3E61E80104 | kw: | sm:starmap-run102.json] [103 | HL-659 | 77139A80DD910715 | kw: | sm:starmap-run103.json] [104 | HL-663 | CB776CECA5B9B9AB | kw: | sm:starmap-run104.json] [run109|HL-680|AE23A9D5906B6EF9|kw:] [run114 | HL-693 | 490486544D8A5B80 | kw:] [run116 | HL-696 | 437ED3A078B9D070 | kw: | sm:starmap-run116.json] [run119 | HL-698 | B7785F3A747440A3 | kw: | sm:starmap-run119.json] [run124 | HL-704 | 3A1E5DF1D7CD5A87 | kw: | sm:starmap-run124.json] [run125|HL-705|5345D4C6E28E488B|kw:] [run126 | HL-706 | 37F16FDA6079553A | kw:] [run127 | HL-707 | 9EE1E1243495852E | kw: | sm:starmap-run127.json] [run128 | HL-708 | 42A21DA8C52DFACC | kw:] [run151 | HL-728 | A83DD0717FE5CC14 | kw: | sm:starmap-run151.json] [run157 | HL-7286 | 6F1C032ED4DD0388 | kw: | sm:starmap-run157.json] [run161 | HL-7288 | 5729A6E80EF838BE | kw: | sm:starmap-run161.json] [run162 | HL-7289 | B7C8976E7D8A2C23 | kw: | sm:starmap-run162.json] [run164 | HL-7291 | 8BB711550259D38F | kw: | sm:starmap-run164.json] [run166 | HL-7293 | 496486FD3E624D90 | kw: | sm:starmap-run166.json] [run168 | HL-7294 | 9245CACF0B4B15FE | kw: | sm:starmap-run168.json] [run171 | HL-7295 | 5EAC8F7500CF840D | kw: | sm:starmap-run171.json] [run165 | HL-7304 | B446BF7DE3F5CCB1 | kw: | sm:starmap-run165.json] [run175 | HL-7307 | FBE83FA81170A7F4 | kw: | sm:starmap-run175.json] [run176 | HL-7308 | 4CD37F5A3203E99A | kw: | sm:starmap-run176.json] [run177 | HL-7309 | 4F200DE44182E075 | kw: | sm:starmap-run177.json] [run178 | HL-7310 | 74F61802BC337810 | kw: | sm:starmap-run178.json] [run180 | HL-7312 | EC6BDFC1C0E7F505 | kw: | sm:starmap-run180.json] [run181 | HL-7313 | 745D4C8CDF657E26 | kw: | sm:starmap-run181.json] [run182 | HL-7314 | 969E5D6CB479F774 | kw: | sm:starmap-run182.json] [run183 | HL-7315 | 54B570E1B174CFB1 | kw: | sm:starmap-run183.json] [run139 | HL-716 | a985bb31326a3394566461480f45c7df | kw: | sm:starmap-run139.json]"
+    },
+    {
+      "id": "ART-1780547001008-30ZF",
+      "title": "The Obsolete Model",
+      "url": null,
+      "keywords": [],
+      "title_hit": true,
+      "notes_patch_intent": "The document discusses the obsolescence of traditional expertise and the necessity of becoming a 'Sovereign Operator' by 2026. It contrasts the 'Worker' model (relying on experience, manual work, and timid communication) with the 'Architect' model (commanding AI to multiply output and communicating fluently). Key concepts include overcoming mental blocks, avoiding the 'Grammar Prison,' and using context over dictionaries to become a 'Tiger' rather than a translator. [run073|HL-468|e3b0c44298fc1c14|kw:english|sm:starmap-run73.json] [run079 | HL-490 | 90F933D34C8BA2ED | kw: | sm:starmap-run079.json] [run084 | HL-521 | 9074702DFB399B82 | kw:worker,context | sm:starmap-run084.json] [run096 | HL-562 | 0AAD156FF7C3F7FB | kw:context] [run098 | HL-621 | 8279E9AFDC8AFF54 | kw:context | sm:starmap-run098.json] [run099 | HL-626 | 4B0851131A0487AE | kw:english,context | sm:starmap-run099.json] [run101|HL-||kw:english,context] [run102 | HL-657 | 34C71A3E61E80104 | kw:english,context | sm:starmap-run102.json] [103 | HL-659 | 77139A80DD910715 | kw:english,context | sm:starmap-run103.json] [104 | HL-663 | CB776CECA5B9B9AB | kw:english,context | sm:starmap-run104.json] [run116 | HL-696 | 437ED3A078B9D070 | kw:context | sm:starmap-run116.json] [run124 | HL-704 | 3A1E5DF1D7CD5A87 | kw:worker | sm:starmap-run124.json] [run125|HL-705|5345D4C6E28E488B|kw:worker] [run126 | HL-706 | 37F16FDA6079553A | kw:worker] [run151 | HL-728 | A83DD0717FE5CC14 | kw: | sm:starmap-run151.json] [run157 | HL-7286 | 6F1C032ED4DD0388 | kw: | sm:starmap-run157.json] [run161 | HL-7288 | 5729A6E80EF838BE | kw: | sm:starmap-run161.json] [run162 | HL-7289 | B7C8976E7D8A2C23 | kw: | sm:starmap-run162.json] [run164 | HL-7291 | 8BB711550259D38F | kw: | sm:starmap-run164.json] [run166 | HL-7293 | 496486FD3E624D90 | kw: | sm:starmap-run166.json] [run168 | HL-7294 | 9245CACF0B4B15FE | kw: | sm:starmap-run168.json] [run171 | HL-7295 | 5EAC8F7500CF840D | kw: | sm:starmap-run171.json] [run165 | HL-7304 | B446BF7DE3F5CCB1 | kw: | sm:starmap-run165.json] [run175 | HL-7307 | FBE83FA81170A7F4 | kw: | sm:starmap-run175.json] [run176 | HL-7308 | 4CD37F5A3203E99A | kw: | sm:starmap-run176.json] [run177 | HL-7309 | 4F200DE44182E075 | kw:worker | sm:starmap-run177.json] [run178 | HL-7310 | 74F61802BC337810 | kw: | sm:starmap-run178.json] [run180 | HL-7312 | EC6BDFC1C0E7F505 | kw: | sm:starmap-run180.json] [run181 | HL-7313 | 745D4C8CDF657E26 | kw: | sm:starmap-run181.json] [run182 | HL-7314 | 969E5D6CB479F774 | kw: | sm:starmap-run182.json] [run183 | HL-7315 | 54B570E1B174CFB1 | kw: | sm:starmap-run183.json] [run139 | HL-716 | a985bb31326a3394566461480f45c7df | kw: | sm:starmap-run139.json]"
+    },
+    {
+      "id": "ART-1780502471217-V612",
+      "title": "The Empire Blueprint",
+      "url": null,
+      "keywords": [],
+      "title_hit": true,
+      "notes_patch_intent": "Founding declaration. Run 61 soul quote. North star. [run073|HL-468|e3b0c44298fc1c14|kw:phoenix|sm:starmap-run73.json] [run119 | HL-698 | B7785F3A747440A3 | kw: | sm:starmap-run119.json] [run123 | HL-703 | 3aef09ad7e661e1a | kw:phoenix | sm:starmap-run123.json] [run151 | HL-728 | A83DD0717FE5CC14 | kw: | sm:starmap-run151.json] [run157 | HL-7286 | 6F1C032ED4DD0388 | kw: | sm:starmap-run157.json] [run161 | HL-7288 | 5729A6E80EF838BE | kw: | sm:starmap-run161.json] [run162 | HL-7289 | B7C8976E7D8A2C23 | kw: | sm:starmap-run162.json] [run164 | HL-7291 | 8BB711550259D38F | kw: | sm:starmap-run164.json] [run166 | HL-7293 | 496486FD3E624D90 | kw: | sm:starmap-run166.json] [run168 | HL-7294 | 9245CACF0B4B15FE | kw: | sm:starmap-run168.json] [run171 | HL-7295 | 5EAC8F7500CF840D | kw: | sm:starmap-run171.json] [run165 | HL-7304 | B446BF7DE3F5CCB1 | kw: | sm:starmap-run165.json] [run175 | HL-7307 | FBE83FA81170A7F4 | kw: | sm:starmap-run175.json] [run176 | HL-7308 | 4CD37F5A3203E99A | kw: | sm:starmap-run176.json] [run177 | HL-7309 | 4F200DE44182E075 | kw: | sm:starmap-run177.json] [run178 | HL-7310 | 74F61802BC337810 | kw: | sm:starmap-run178.json] [run180 | HL-7312 | EC6BDFC1C0E7F505 | kw: | sm:starmap-run180.json] [run181 | HL-7313 | 745D4C8CDF657E26 | kw: | sm:starmap-run181.json] [run182 | HL-7314 | 969E5D6CB479F774 | kw: | sm:starmap-run182.json] [run183 | HL-7315 | 54B570E1B174CFB1 | kw: | sm:starmap-run183.json] [run139 | HL-716 | a985bb31326a3394566461480f45c7df | kw: | sm:starmap-run139.json]"
+    }
+  ],
+  "executed_at": "2026-11-16T00:15:14.000Z",
+  "registry_error": null
+}
